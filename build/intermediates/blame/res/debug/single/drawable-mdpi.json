@@ -1,155 +1,151 @@
 [
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_light.9.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_edit.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_preview_order_edit.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_photos.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_photos.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_logo192.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_logo192.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_delete.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_preview_order_delete.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\calendar_days.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\calendar_days.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\topbar.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\topbar.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_focused_holo.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\reorder.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\reorder.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_off.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\cal_left_arrow_off.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_longpressed_holo.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_longpressed_holo.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_on.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\cal_left_arrow_on.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_longpressed_holo.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_longpressed_holo.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\line.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\line.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_off.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\cal_right_arrow_off.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\logo.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\logo.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_drawer.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_drawer.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_on.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\cal_left_arrow_on.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_drawer.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_drawer.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_off.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\cal_left_arrow_off.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_off.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\cal_right_arrow_off.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_logo192.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_logo192.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ok.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\email.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\email.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_home.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_home.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_whats_hot.png",
@@ -164,12 +160,8 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_launcher.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_on.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\cal_right_arrow_on.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png",
@@ -180,532 +172,40 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ok1.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\splash.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\splash.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_focused_holo.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_off.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\cal_right_arrow_off.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_communities.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_communities.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\calendar_days.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\calendar_days.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\splash.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\splash.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_on.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\cal_right_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\background_item.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\background_item.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\line.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\line.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_photos.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_photos.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\logo.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\logo.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_switch_track_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\reorder.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\reorder.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_whats_hot.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_whats_hot.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_off.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\cal_right_arrow_off.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok1.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ok1.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok1.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ok1.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_pages.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_pages.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\splash.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\splash.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_whats_hot.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_whats_hot.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\sms.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\sms.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_off.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\cal_left_arrow_off.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_photos.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_photos.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ok.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\logo.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\logo.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_pages.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_pages.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ok.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\calendar_days.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\calendar_days.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_logo192.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_logo192.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_on.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\cal_right_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\reorder.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\reorder.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\calendar_days.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\calendar_days.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_light.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_people.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_people.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\topbar.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\topbar.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_off.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\cal_left_arrow_off.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\reorder.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\reorder.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_drawer.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_drawer.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\email.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\email.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_photos.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_photos.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_on.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\cal_left_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\topbar.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\topbar.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_whats_hot.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_whats_hot.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\background_item.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\background_item.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_on.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\cal_right_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_drawer.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_drawer.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_focused_holo.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ab_share_pack_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_communities.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_communities.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\sms.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\sms.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ok.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_photos.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_photos.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\sms.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\sms.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_longpressed_holo.9.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_longpressed_holo.9.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_delete.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_preview_order_delete.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\background_item.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\background_item.9.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_spinner_mtrl_am_alpha.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_people.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_people.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\calendar_days.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\calendar_days.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_pages.png",
@@ -720,40 +220,28 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\splash.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_commit_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_longpressed_holo.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_longpressed_holo.9.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_edit.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_preview_order_edit.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_edit.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_preview_order_edit.png"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\line.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\line.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png",
@@ -762,249 +250,5 @@
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_clear_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_right_arrow_on.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\cal_right_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_share_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_people.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_people.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_pressed_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok1.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ok1.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_edit.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_preview_order_edit.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\line.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\line.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_launcher.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\topbar.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\topbar.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_focused_holo.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_drawer.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_drawer.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\reorder.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\reorder.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_cab_background_top_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\logo.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\logo.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_on.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\cal_left_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_communities.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_communities.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_home.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_home.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_pages.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_pages.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\sms.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\sms.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_people.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_people.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_delete.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_preview_order_delete.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_divider_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ok.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ok.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_selector_disabled_holo_light.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_home.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\ic_home.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_home.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_home.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\topbar.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\topbar.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\cal_left_arrow_on.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\cal_left_arrow_on.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_popup_background_mtrl_mult.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_preview_order_delete.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\drawable-mdpi\\ic_preview_order_delete.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_go_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\background_item.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\background_item.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_people.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\ic_people.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_search_api_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\background_item.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\drawable-mdpi\\background_item.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_list_focused_holo.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_list_focused_holo.9.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_logo192.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\ic_logo192.png"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\line.png",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\drawable-mdpi\\line.png"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\email.png",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\drawable-mdpi\\email.png"
     }
 ]

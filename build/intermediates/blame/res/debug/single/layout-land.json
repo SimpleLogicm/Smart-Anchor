@@ -1,34 +1,10 @@
 [
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-land\\action_bar.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\layout-land\\action_bar.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-land\\activity_maps.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\layout-land\\activity_maps.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-land\\action_bar.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\layout-land\\action_bar.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout-land\\activity_maps.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout-land\\activity_maps.xml"
     },
     {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-land\\activity_maps.xml",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\layout-land\\activity_maps.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout-land\\action_bar.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout-land\\action_bar.xml"
-    },
-    {
-        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-land\\action_bar.xml",
-        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\layout-land\\action_bar.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-land\\activity_maps.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\layout-land\\activity_maps.xml"
     }
 ]

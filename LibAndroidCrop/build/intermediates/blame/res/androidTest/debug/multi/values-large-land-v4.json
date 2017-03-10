@@ -1,29 +1,5 @@
 [
     {
-        "outputFile": "E:\\Metal\\Metal_14-02-17\\Metal\\LibAndroidCrop\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-large-land-v4\\values-large-land-v4.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 47,
-                    "endOffset": 98
-                },
-                "from": {
-                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\LibAndroidCrop\\build\\intermediates\\bundles\\debug\\res\\values-large-land-v4\\values-large-land-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 47,
-                        "endOffset": 98
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-large-land-v4\\values-large-land-v4.xml",
         "map": [
             {
@@ -36,54 +12,6 @@
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\bundles\\debug\\res\\values-large-land-v4\\values-large-land-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 47,
-                        "endOffset": 98
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\LibAndroidCrop\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-large-land-v4\\values-large-land-v4.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 47,
-                    "endOffset": 98
-                },
-                "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\LibAndroidCrop\\build\\intermediates\\bundles\\debug\\res\\values-large-land-v4\\values-large-land-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 47,
-                        "endOffset": 98
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\LibAndroidCrop\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-large-land-v4\\values-large-land-v4.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 47,
-                    "endOffset": 98
-                },
-                "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\LibAndroidCrop\\build\\intermediates\\bundles\\debug\\res\\values-large-land-v4\\values-large-land-v4.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

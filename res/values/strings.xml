@@ -3,14 +3,15 @@
 
     <!--<string name="service_domain">http://4a4ac53a.ngrok.io/metal/api/v1/</string>-->
 
-    <string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>
+    <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 
-    <!--<string name="service_domain">http://125.22.54.155/metal/api/v1/</string>-->
+    <string name="service_domain">http://125.22.54.155/metal/api/v1/</string>
     <!--<string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>-->
     <!--<string name="service_domain">http://150.242.140.105:8003/metal/api/v1/</string>-->
 
     <!--<string name="service_domain">http://85e8e2df.ngrok.io/polycab/api/v1/</string>-->
-    <string name="app_name">METAL</string>
+    <string name="app_name">Smart Anchor</string>
+    <string name="app_name_anchor">Smart Anchor</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="drawer_open">Slider Menu Opened</string>

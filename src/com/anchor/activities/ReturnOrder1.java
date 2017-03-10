@@ -1032,7 +1032,10 @@ public class ReturnOrder1 extends BaseActivity {
 			    }
 			    if(event.getAction() == MotionEvent.ACTION_DOWN)
 			    {
-					mpplayer.stop();
+                    if(Global_Data.app_sound==false)
+                    {
+                        mpplayer.stop();
+                    }
 					//down event
 			    	 b.setBackgroundColor(Color.parseColor("#910505"));
 						// TODO Auto-generated method stub
@@ -1889,7 +1892,10 @@ public class ReturnOrder1 extends BaseActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			onBackPressed();
-			mpplayer.stop();
+            if(Global_Data.app_sound==false)
+            {
+                mpplayer.stop();
+            }
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -1900,7 +1906,10 @@ public class ReturnOrder1 extends BaseActivity {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		//super.onBackPressed();
-		
+        if(Global_Data.app_sound==false)
+        {
+            mpplayer.stop();
+        }
 		 Global_Data.GLOVEL_LONG_DESC = ""; 
 		 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
 		 Global_Data.GLOVEL_ITEM_MRP = "";

@@ -931,7 +931,11 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                 }
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
-                    mpplayer.stop();
+                    if(Global_Data.app_sound==false)
+                    {
+                        mpplayer.stop();
+                    }
+
                     //down event
                     b.setBackgroundColor(Color.parseColor("#910505"));
 
@@ -1269,7 +1273,10 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                mpplayer.stop();
+                if(Global_Data.app_sound==false)
+                {
+                    mpplayer.stop();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -1280,7 +1287,10 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
     public void onBackPressed() {
         // TODO Auto-generated method stub
         //super.onBackPressed();
-
+        if(Global_Data.app_sound==false)
+        {
+            mpplayer.stop();
+        }
         Intent intentn = new Intent(getApplicationContext(), Previous_orderNew_S2.class);
         startActivity(intentn);
         finish();
