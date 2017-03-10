@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight=".12"
+            android:text="Cancel"
+            android:layout_marginLeft="2dp"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight=".12"
+            android:text="Clear"
+            android:layout_marginLeft="2dp"
+            android:textColor="#FFFFFF"/>
+
+
+
+        <ImageView
+            android:id="@+id/get_icon"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight=".12"
+            android:text=""
+            android:src="@drawable/cam_iconn"
+            android:background="#414042"
+            android:layout_marginLeft="2dp"
+
+            />
+
+        <Button
+            android:id="@+id/getsign"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight=".12"
+            android:text="Continue"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:textColor="#FFFFFF"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout245"
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/order_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select Category"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="4dp"
+            android:inputType="textPersonName"
+            android:paddingTop="10dp" >
+        </Spinner>
+    </LinearLayout>>
+
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+
+
+        <TableRow
+            android:id="@+id/tableRow1de1"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" >
+
+            <TextView
+                android:id="@+id/details1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="10sp"
+                android:text="Detail 1"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/order_detail1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_weight="1"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                 >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRowde2"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" >
+
+            <TextView
+                android:id="@+id/details2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="10sp"
+                android:text="Detail 2"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/order_detail2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" >
+
+            <TextView
+                android:id="@+id/textView2655"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="10sp"
+                android:text="Name  "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/yourName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:imeOptions="actionDone"
+                android:singleLine="true"
+                >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" >
+
+            <TextView
+                android:id="@+id/textView2fhfg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="30"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Please Sign below ..."
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"/>
+
+</LinearLayout>

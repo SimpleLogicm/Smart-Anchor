@@ -1,0 +1,122 @@
+[
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_tab_indicator_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_switch_thumb_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_top_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\ic_launcher.png",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\src\\main\\res\\drawable\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\ic_launcher.png",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\src\\main\\res\\drawable\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_textfield_search_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_top_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_edit_text_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_check_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_radio_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_radio_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_textfield_search_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_btn_check_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_light.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_switch_thumb_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_tab_indicator_material.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_edit_text_material.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_edit_text_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_light.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\drawable\\abc_item_background_holo_light.xml"
+    }
+]

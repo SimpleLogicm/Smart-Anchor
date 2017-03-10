@@ -1,0 +1,189 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/containerNewOrder"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+     <!--<TextView-->
+        <!--android:id="@+id/txtWelcomeUser"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="Today's Target : Rs 1270.00"-->
+        <!--android:textColor="#FFFFFF"-->
+      	<!--android:background="#BDBDBD"-->
+       <!--android:gravity="center"-->
+    <!--android:textSize="15sp"  >-->
+    <!--</TextView>-->
+
+    <Spinner
+        android:id="@+id/spnCategory"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Select Category"
+        android:inputType="textPersonName"
+        android:layout_marginTop="20dp"
+        android:paddingTop="10dp" >
+    </Spinner>
+
+    <EditText
+        android:id="@+id/spnProduct"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:gravity="top"
+        android:editable="false"
+        android:layout_marginTop="10dp"
+        android:hint="Item Description"
+        android:background="@android:drawable/editbox_background_normal"
+        android:paddingTop="10dp" />
+
+    <Spinner
+        android:id="@+id/spnProductSpec"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Select Product Specification"
+        android:inputType="textPassword"
+        android:visibility="gone"
+        android:paddingTop="10dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+         >
+
+        <TextView
+            android:id="@+id/textRP"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#414042"
+            android:text="RP"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/editTextRP"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:id="@+id/textRPddfg"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#414042"
+            android:text="MRP"
+            android:gravity="center"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/editTextMRP"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" 
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextQuantity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Quantity"
+        android:inputType="number"
+        android:paddingTop="10dp" >
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spnScheme"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Scheme"
+        android:paddingTop="10dp" />
+
+ <!--    <TextView
+        android:id="@+id/txtDeleiveryQuantity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="Delivery Quantity"
+        android:paddingTop="10dp"
+        android:textSize="17dp" >
+    </TextView>
+--> 
+    
+     <EditText
+        android:id="@+id/txtDeleiveryQuantity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        android:textSize="17dp" >
+    </EditText>
+  
+     <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Total Price : "
+        android:paddingTop="10dp"
+        android:textSize="17dp" >
+    </TextView>
+    
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/buttonAddMOre"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                
+                android:text="Add"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/buttonPreviewOrder"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Preview Order"
+                android:textColor="#FFFFFF"
+                 android:layout_marginLeft="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

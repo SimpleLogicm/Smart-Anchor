@@ -1,0 +1,370 @@
+-injars 'E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\transforms\jarMerging\debug\jars\1\1f\combined.jar'
+-outjars 'E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\multi-dex\debug\componentClasses.jar'
+
+-libraryjars 'E:\android_stdio_bundle\SDK\build-tools\22.0.0\lib\shrinkedAndroid.jar'
+
+-forceprocessing
+-dontoptimize
+-dontobfuscate
+-dontusemixedcaseclassnames
+-dontpreverify
+-dontnote **
+-dontwarn **
+-printconfiguration 'E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\multi-dex\debug\components.flags'
+
+
+-keep class com.anchor.App.AppController {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep class com.anchor.activities.SplashScreenActivity {
+    <init>();
+}
+
+-keep class com.soundcloud.android.crop.CropImageActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.LoginActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Video_Main_List {
+    <init>();
+}
+
+-keep class com.anchor.activities.VIDEO_DIALOG {
+    <init>();
+}
+
+-keep class com.anchor.activities.Stock_options {
+    <init>();
+}
+
+-keep class com.anchor.activities.Stock_Product_Options {
+    <init>();
+}
+
+-keep class com.anchor.activities.MainActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.BasicMapDemoActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Test {
+    <init>();
+}
+
+-keep class com.anchor.activities.PreviousOrderActivity_New {
+    <init>();
+}
+
+-keep class com.anchor.activities.NewOrderActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.EditSwipeOrderItems {
+    <init>();
+}
+
+-keep class com.anchor.activities.NoOrderActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.CaptureSignature {
+    <init>();
+}
+
+-keep class com.anchor.activities.ReturnOrderActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.PreviousOrderActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.PreviewOrderSwipeActivity {
+    <init>();
+}
+
+-keep class com.anchor.slidingmenu.CalendarAct {
+    <init>();
+}
+
+-keep class com.anchor.activities.Calendar_Event {
+    <init>();
+}
+
+-keep class com.anchor.activities.List_Events {
+    <init>();
+}
+
+-keep class com.anchor.activities.Customer_Service {
+    <init>();
+}
+
+-keep class com.anchor.activities.Customer_Feed {
+    <init>();
+}
+
+-keep class com.anchor.activities.Customer_Stock {
+    <init>();
+}
+
+-keep class com.anchor.activities.Today_Tabber {
+    <init>();
+}
+
+-keep class com.anchor.activities.Expenses {
+    <init>();
+}
+
+-keep class com.anchor.activities.Target {
+    <init>();
+}
+
+-keep class com.anchor.activities.Schedule {
+    <init>();
+}
+
+-keep class com.anchor.activities.Schedule1 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Schedule2 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Order {
+    <init>();
+}
+
+-keep class com.anchor.activities.Sales_Dash {
+    <init>();
+}
+
+-keep class com.anchor.activities.Filter_List {
+    <init>();
+}
+
+-keep class com.anchor.activities.ExpandFilter {
+    <init>();
+}
+
+-keep class com.anchor.activities.Invoice_filterList {
+    <init>();
+}
+
+-keep class com.anchor.activities.New_filterList {
+    <init>();
+}
+
+-keep class com.anchor.activities.Address_activity {
+    <init>();
+}
+
+-keep class com.anchor.activities.AndroidGPSTrackingActivity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Nearest_Customer {
+    <init>();
+}
+
+-keep class com.anchor.activities.Item_Edit_Activity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Sound_Act {
+    <init>();
+}
+
+-keep class com.anchor.activities.Calender_ReadonlyView {
+    <init>();
+}
+
+-keep class com.anchor.activities.Status_Act {
+    <init>();
+}
+
+-keep class com.anchor.activities.Status_Activity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Previous_Order {
+    <init>();
+}
+
+-keep class com.anchor.activities.ReturnOrder_Customer {
+    <init>();
+}
+
+-keep class com.anchor.activities.Previous_returnOrder {
+    <init>();
+}
+
+-keep class com.anchor.activities.ReturnOrder1 {
+    <init>();
+}
+
+-keep class com.anchor.activities.ReturnOrder2 {
+    <init>();
+}
+
+-keep class com.anchor.activities.ReturnOrder3 {
+    <init>();
+}
+
+-keep class com.anchor.activities.ReturnEditItem {
+    <init>();
+}
+
+-keep class com.anchor.activities.Pricing_Main {
+    <init>();
+}
+
+-keep class com.anchor.activities.Stock_Main {
+    <init>();
+}
+
+-keep class com.anchor.activities.Expended_List_Main {
+    <init>();
+}
+
+-keep class com.anchor.activities.Youtube_Player_Activity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Schedule_List {
+    <init>();
+}
+
+-keep class com.anchor.activities.Image_Gellary {
+    <init>();
+}
+
+-keep class com.anchor.activities.AllOrders_Sync {
+    <init>();
+}
+
+-keep class com.anchor.activities.Previous_orderNew_S1 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Previous_orderNew_S2 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Previous_orderNew_S3 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Previous_Item_Edit_Activity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Survey_Main {
+    <init>();
+}
+
+-keep class com.anchor.activities.Survey_Home {
+    <init>();
+}
+
+-keep class com.anchor.activities.Marketing {
+    <init>();
+}
+
+-keep class com.anchor.activities.Contact_Us {
+    <init>();
+}
+
+-keep class com.anchor.activities.About_Metal {
+    <init>();
+}
+
+-keep class com.anchor.activities.SDcard_imageMain {
+    <init>();
+}
+
+-keep class com.anchor.activities.SDcard_VideoMain {
+    <init>();
+}
+
+-keep class com.anchor.activities.Target_REYC_Main {
+    <init>();
+}
+
+-keep class com.anchor.activities.Target_REYCLE {
+    <init>();
+}
+
+-keep class com.anchor.activities.Webview_Activity {
+    <init>();
+}
+
+-keep class com.anchor.activities.Customer_info_main {
+    <init>();
+}
+
+-keep class com.anchor.activities.Target_Summary1 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Target_Summary2 {
+    <init>();
+}
+
+-keep class com.anchor.activities.Expended_list_demo {
+    <init>();
+}
+
+-keep class com.anchor.activities.Sound_Setting {
+    <init>();
+}
+
+-keep class com.anchor.activities.AutoStart {
+    <init>();
+}
+
+-keep class com.anchor.activities.MyService {
+    <init>();
+}
+
+-keep class com.google.android.gms.common.api.GoogleApiActivity {
+    <init>();
+}
+
+-keep class com.google.android.gms.auth.api.signin.internal.SignInHubActivity {
+    <init>();
+}
+
+-keep class com.google.android.gms.auth.api.signin.RevocationBoundService {
+    <init>();
+}
+
+-keep public class * extends android.app.Instrumentation {
+    <init>();
+}
+
+-keep public class * extends android.app.Application {
+    <init>();
+    void attachBaseContext(android.content.Context);
+}
+
+-keep public class * extends android.app.backup.BackupAgent {
+    <init>();
+}
+
+-keep public class * extends java.lang.annotation.Annotation {
+    <fields>;
+    <methods>;
+}
+
+-keep class com.android.tools.fd.** {
+    <fields>;
+    <methods>;
+}

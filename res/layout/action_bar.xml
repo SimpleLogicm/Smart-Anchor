@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/contacts_action_bar"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+ android:background="#8A0808"
+android:padding="1dip" >
+
+<!-- ListRow Left side Thumbnail image -->
+
+<!-- <LinearLayout -->
+<!--     android:id="@+id/thumbnail" -->
+<!--     android:layout_width="wrap_content" -->
+<!--     android:layout_height="wrap_content" -->
+<!--     android:layout_marginRight="5dip" -->
+<!--     android:padding="3dip" -->
+<!--     android:gravity="center" > -->
+
+<!--     <ImageView -->
+<!--         android:id="@+id/home_image" -->
+<!--         android:contentDescription="@string/app_name" -->
+<!--         android:layout_width="44dp" -->
+<!--         android:layout_height="44dp" -->
+<!--         android:src="@drawable/logo" /> -->
+<!-- </LinearLayout> -->
+
+<LinearLayout
+    android:id="@+id/thumbnaill"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/screenname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="68dp"
+        android:text="Order Booking"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:typeface="sans" />
+
+ <TextView
+     android:id="@+id/todaysTarget"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginLeft="40dip"
+     android:text=""
+     android:textColor="#FFFFFF"
+     android:textSize="14sp"
+     android:typeface="sans" />
+ 
+</LinearLayout>
+
+ <ImageView
+        android:id="@+id/Header_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>  

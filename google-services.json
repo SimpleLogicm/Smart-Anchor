@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "579768033340",
+    "firebase_url": "https://salesappofflineoldpolycabversi.firebaseio.com",
+    "project_id": "salesappofflineoldpolycabversi",
+    "storage_bucket": "salesappofflineoldpolycabversi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579768033340:android:02283fb870c398e5",
+        "android_client_info": {
+          "package_name": "com.simplelogic.activities"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579768033340-dnc4inq0a6otb4j6aior8si8uhhiilui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simplelogic.activities",
+            "certificate_hash": "B82FB48D46AF5AAA1173CF3CA13BC6D232B78A1C"
+          }
+        },
+        {
+          "client_id": "579768033340-skl45s38dg4umuvf5fmoc11tgv7glje9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8ejsbEDC7eCRdyBeryIjJQ4LE6pMpvFs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579768033340-skl45s38dg4umuvf5fmoc11tgv7glje9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

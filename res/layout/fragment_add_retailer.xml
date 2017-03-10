@@ -1,0 +1,254 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+          <!--<TextView-->
+        <!--android:id="@+id/txtWelcomeUser"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="Today's Target : Rs 1270.00"-->
+      <!---->
+       <!---->
+        <!--android:textColor="#FFFFFF"-->
+      	 <!--android:background="#BDBDBD"-->
+       <!--android:gravity="center"-->
+    <!--android:textSize="15sp"  >-->
+    <!--</TextView>-->
+        
+
+    <EditText
+        android:id="@+id/editTextRetailerName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Retailer Name"
+        android:inputType="textPersonName"
+        android:paddingTop="10dp" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextStoreName"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Store Name"
+        android:inputType="textPersonName"
+        android:paddingTop="10dp" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Address"
+        android:inputType="textPersonName"
+        android:paddingTop="10dp" >
+    </EditText>
+    
+     <EditText
+        android:id="@+id/editTextStreet"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Street"
+        android:inputType="textPersonName"
+        android:paddingTop="10dp" >
+          </EditText>
+          
+      <EditText
+        android:id="@+id/editTextLandMark"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="LandMark"
+        android:inputType="textPersonName"
+        android:paddingTop="10dp" >
+          </EditText>
+          
+         <Spinner
+        android:id="@+id/spnBeat"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Select Beat"
+        android:inputType="textPassword"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp" 
+        />
+         
+  
+
+   <Spinner
+        android:id="@+id/spnCity"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Select City"
+        android:inputType="textPassword"
+        android:paddingTop="5dp" 
+        android:layout_marginTop="5dp"/>
+
+
+    <Spinner
+        android:id="@+id/spnState"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Select State"
+        android:inputType="textPassword"
+        android:paddingTop="5dp" 
+        android:layout_marginTop="5dp"/>
+
+    
+    <EditText
+        android:id="@+id/editTextPin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="PIN"
+        android:inputType="number"
+        android:digits="0123456789" 
+          android:maxLength="6"
+        android:paddingTop="10dp" >
+    </EditText>
+    
+    
+<!--       <EditText -->
+<!--         android:id="@+id/editTextContactP1" -->
+<!--         android:layout_width="250dp" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:hint="Contact Person" -->
+<!--         android:inputType="textPersonName" -->
+<!--         android:paddingTop="10dp" > -->
+<!--     </EditText> -->
+    
+    <EditText
+        android:id="@+id/editTextContatNo1"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Contact Mobile Number"
+        android:maxLength="10"
+         android:inputType="number"
+        android:digits="0123456789" 
+        android:paddingTop="10dp" >
+    </EditText>
+    
+<!--      <EditText -->
+<!--         android:id="@+id/editTextContactP2" -->
+<!--         android:layout_width="250dp" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:hint="Contact Person2" -->
+<!--         android:inputType="textPersonName" -->
+<!--         android:paddingTop="10dp" > -->
+<!--     </EditText> -->
+    
+<!--     <EditText -->
+<!--         android:id="@+id/editTextContatNo2" -->
+<!--         android:layout_width="250dp" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:hint="Contact Number" -->
+<!--         android:inputType="phone" -->
+<!--         android:paddingTop="10dp" > -->
+<!--     </EditText> -->
+    
+<!--      <EditText -->
+<!--         android:id="@+id/editTextContactP3" -->
+<!--         android:layout_width="250dp" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:hint="Contact Person3" -->
+<!--         android:inputType="textPersonName" -->
+<!--         android:paddingTop="10dp" > -->
+<!--     </EditText> -->
+    
+<!--     <EditText -->
+<!--         android:id="@+id/editTextContatNo3" -->
+<!--         android:layout_width="250dp" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_gravity="center" -->
+<!--         android:hint="Contact Number" -->
+<!--         android:inputType="phone" -->
+<!--         android:paddingTop="10dp" > -->
+<!--     </EditText> -->
+     
+     <EditText
+        android:id="@+id/editTextContatMail"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Contact Email ID"
+        android:inputType="textEmailAddress"
+        android:paddingTop="10dp" >
+    </EditText>
+    
+      <EditText
+        android:id="@+id/editTextContatVatINId"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="VATIN"
+      android:maxLength="11"
+      android:inputType="number"
+      android:digits="0123456789"
+
+          android:paddingTop="10dp" >
+    </EditText>
+    
+     
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom"
+        android:orientation="vertical" 
+        android:layout_marginBottom="10dp">
+
+      
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:layout_marginTop="5dp" >
+
+            <Button
+                android:id="@+id/buttonAddRetailerSave"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+               
+                android:text="Save"
+                 android:background="#414042"
+                
+        android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/buttonAddRetailerCancel"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+               
+                android:text="Cancel" 
+                 android:background="#414042"
+                  android:layout_marginLeft="10dp"
+        android:textColor="#FFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</ScrollView>

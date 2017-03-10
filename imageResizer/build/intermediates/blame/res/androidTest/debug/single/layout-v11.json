@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout-v11\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout-v11\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout-v11\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\imageResizer\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v11\\abc_screen_content_include.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout-v11\\abc_screen_content_include.xml"
+    }
+]

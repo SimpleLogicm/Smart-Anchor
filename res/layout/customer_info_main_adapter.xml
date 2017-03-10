@@ -1,0 +1,177 @@
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="1dp"
+        >
+
+        <TextView
+            android:id="@+id/c_name"
+            android:layout_width="match_parent"
+            android:layout_marginTop="0dp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:background="@color/bkg_card"
+            android:text=""
+            android:layout_marginBottom="2.5dp"
+            android:padding="6dp"
+            android:textColor="@android:color/white"
+            android:textSize="16dp"/>
+
+    <RelativeLayout
+        android:id="@+id/l2"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="1dp"
+        >
+
+        <TextView
+        android:id="@+id/c_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center_vertical"
+        android:textSize="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"/>
+
+
+        <TextView
+            android:id="@+id/c_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_below="@id/c_name2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+
+        <TextView
+            android:id="@+id/c_beat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_below="@id/c_address"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+
+        <TextView
+            android:id="@+id/c_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_below="@id/c_beat_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/c_credit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_below="@id/c_city_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/c_ammount1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_below="@id/c_credit_profile"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/c_ammount2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:layout_below="@id/c_ammount1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+
+        <TextView
+            android:id="@+id/c_latlon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/c_mobile_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center_vertical"
+            android:textSize="12dp"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_below="@+id/c_ammount2"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="15dp"
+            >
+
+            <ImageView
+                android:layout_marginTop="15dp"
+                android:src="@drawable/callnew"
+                android:layout_marginRight="15dp"
+                android:layout_width="45dp"
+                android:layout_height="55dp"
+                android:textColor="@color/white"
+                android:id="@+id/c_call"
+                />
+
+            <ImageView
+                android:src="@drawable/locationnew"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:id="@+id/c_location"
+                />
+
+        </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+</android.support.v7.widget.CardView>

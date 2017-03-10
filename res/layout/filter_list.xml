@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" >
+
+        <LinearLayout
+            android:id="@+id/brand_subcategaries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+           <!--   <Button
+                android:id="@+id/subcat1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="HDC" />
+
+            <Button
+                android:id="@+id/subcat2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="LDCF" />
+
+            <Button
+                android:id="@+id/subcat3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="LDCW" />
+
+            <Button
+                android:id="@+id/subcat4"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="X" />
+            
+            <Button
+                android:id="@+id/subcat5"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="XYZ" />
+                
+                -->
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/search_filter"
+        android:layout_width="match_parent"
+         android:hint="Search"
+        android:inputType="text"
+        android:singleLine="true"
+        android:layout_height="wrap_content"
+         >
+    </EditText>
+     <!-- <Button
+         android:id="@+id/filter_btn"
+                android:layout_width="87dp"
+                android:layout_height="wrap_content"
+                android:text="Filter" /> -->
+    
+    </LinearLayout>
+
+     <ListView
+         android:id="@+id/list_all"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" >
+     </ListView>
+
+</LinearLayout>

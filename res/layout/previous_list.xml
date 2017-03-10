@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+     <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="38dp"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentLeft="true"
+       android:background="#dcdcdc"
+       android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="37" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="ORDER ID"
+                android:textColor="#111111"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+
+       
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="42" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CUSTOMER"
+                android:textColor="#111111"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+   <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" 
+        android:background="#111111">
+    </RelativeLayout>
+    
+    
+    
+      <com.anchor.swipelistview.SwipeListView
+            android:id="@+id/prev_list"
+            android:listSelector="#00000000"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            swipe:swipeFrontView="@+id/front"
+            swipe:swipeBackView="@+id/back"
+            swipe:swipeDrawableChecked="@drawable/choice_selected"
+            swipe:swipeDrawableUnchecked="@drawable/choice_unselected"
+            swipe:swipeCloseAllItemsWhenMoveList="true"
+            swipe:swipeMode="both"
+            />
+      
+</LinearLayout>

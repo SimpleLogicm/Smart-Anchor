@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-xlarge-v4\\calendar_event.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\layout-xlarge\\calendar_event.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-xlarge-v4\\calendar_event.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\layout-xlarge\\calendar_event.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\layout-xlarge-v4\\calendar_event.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\layout-xlarge\\calendar_event.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout-xlarge-v4\\calendar_event.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout-xlarge\\calendar_event.xml"
+    }
+]

@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\Metal\\imageResizer\\unspecified\\res\\menu\\activity_main.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\splash_screen.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\menu\\splash_screen.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\menu_album.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\menu\\menu_album.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\menu\\menu_choice_items.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\menu\\menu_choice_items.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\menu_choice_items.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\menu\\menu_choice_items.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\menu\\menu_album.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\menu\\menu_album.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\imageResizer\\unspecified\\res\\menu\\activity_main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\splash_screen.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\menu\\splash_screen.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\Metal\\imageResizer\\unspecified\\res\\menu\\activity_main.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\menu_choice_items.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\menu\\menu_choice_items.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\splash_screen.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\menu\\splash_screen.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\activity_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\Metal\\imageResizer\\unspecified\\res\\menu\\activity_main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\menu_album.xml",
+        "source": "E:\\Metal\\Metal_14-02-17\\Metal\\res\\menu\\menu_album.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\menu_album.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\menu\\menu_album.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\menu\\splash_screen.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\menu\\splash_screen.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\res\\merged\\debug\\menu\\menu_choice_items.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\res\\menu\\menu_choice_items.xml"
+    }
+]

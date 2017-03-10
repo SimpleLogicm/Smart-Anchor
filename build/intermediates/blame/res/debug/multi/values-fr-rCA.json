@@ -1,0 +1,2682 @@
+[
+    {
+        "outputFile": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 110,
+                    "endOffset": 211
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 110,
+                        "endOffset": 162
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 216,
+                    "endColumn": 107,
+                    "endOffset": 319
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 167,
+                        "endColumn": 107,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 324,
+                    "endColumn": 122,
+                    "endOffset": 442
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 122,
+                        "endOffset": 393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 447,
+                    "endColumn": 114,
+                    "endOffset": 557
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 398,
+                        "endColumn": 114,
+                        "endOffset": 508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 562,
+                    "endColumn": 110,
+                    "endOffset": 668
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 513,
+                        "endColumn": 110,
+                        "endOffset": 619
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 673,
+                    "endColumn": 86,
+                    "endOffset": 755
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 624,
+                        "endColumn": 86,
+                        "endOffset": 706
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 760,
+                    "endColumn": 115,
+                    "endOffset": 871
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 711,
+                        "endColumn": 115,
+                        "endOffset": 822
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 876,
+                    "endColumn": 129,
+                    "endOffset": 1001
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 827,
+                        "endColumn": 129,
+                        "endOffset": 952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 1006,
+                    "endColumn": 109,
+                    "endOffset": 1111
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 957,
+                        "endColumn": 109,
+                        "endOffset": 1062
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 1116,
+                    "endColumn": 111,
+                    "endOffset": 1223
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1067,
+                        "endColumn": 111,
+                        "endOffset": 1174
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 1228,
+                    "endColumn": 102,
+                    "endOffset": 1326
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1179,
+                        "endColumn": 102,
+                        "endOffset": 1277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1331,
+                    "endColumn": 110,
+                    "endOffset": 1437
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1282,
+                        "endColumn": 110,
+                        "endOffset": 1388
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1442,
+                    "endColumn": 106,
+                    "endOffset": 1544
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1393,
+                        "endColumn": 106,
+                        "endOffset": 1495
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1549,
+                    "endColumn": 106,
+                    "endOffset": 1651
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1500,
+                        "endColumn": 106,
+                        "endOffset": 1602
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1656,
+                    "endColumn": 121,
+                    "endOffset": 1773
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1607,
+                        "endColumn": 121,
+                        "endOffset": 1724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1778,
+                    "endColumn": 107,
+                    "endOffset": 1881
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 333,
+                        "endColumn": 107,
+                        "endOffset": 436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1886,
+                    "endColumn": 211,
+                    "endOffset": 2093
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 441,
+                        "endColumn": 211,
+                        "endOffset": 648
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 2098,
+                    "endColumn": 131,
+                    "endOffset": 2225
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 653,
+                        "endColumn": 131,
+                        "endOffset": 780
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 2230,
+                    "endColumn": 135,
+                    "endOffset": 2361
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 785,
+                        "endColumn": 135,
+                        "endOffset": 916
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2366,
+                    "endColumn": 236,
+                    "endOffset": 2598
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 921,
+                        "endColumn": 236,
+                        "endOffset": 1153
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 2603,
+                    "endColumn": 236,
+                    "endOffset": 2835
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1158,
+                        "endColumn": 236,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2840,
+                    "endColumn": 134,
+                    "endOffset": 2970
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 134,
+                        "endOffset": 1525
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2975,
+                    "endColumn": 141,
+                    "endOffset": 3112
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 1530,
+                        "endColumn": 141,
+                        "endOffset": 1667
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 3117,
+                    "endColumn": 290,
+                    "endOffset": 3403
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 335,
+                        "endColumn": 290,
+                        "endOffset": 621
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 3408,
+                    "endColumn": 282,
+                    "endOffset": 3686
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1672,
+                        "endColumn": 282,
+                        "endOffset": 1950
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 3691,
+                    "endColumn": 123,
+                    "endOffset": 3810
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1955,
+                        "endColumn": 123,
+                        "endOffset": 2074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 3815,
+                    "endColumn": 113,
+                    "endOffset": 3924
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 2079,
+                        "endColumn": 113,
+                        "endOffset": 2188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 3929,
+                    "endColumn": 215,
+                    "endOffset": 4140
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 2193,
+                        "endColumn": 215,
+                        "endOffset": 2404
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 4145,
+                    "endColumn": 137,
+                    "endOffset": 4278
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 2409,
+                        "endColumn": 137,
+                        "endOffset": 2542
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 4283,
+                    "endColumn": 218,
+                    "endOffset": 4497
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 2547,
+                        "endColumn": 218,
+                        "endOffset": 2761
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 4502,
+                    "endColumn": 137,
+                    "endOffset": 4635
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 2766,
+                        "endColumn": 137,
+                        "endOffset": 2899
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 4640,
+                    "endColumn": 208,
+                    "endOffset": 4844
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 2904,
+                        "endColumn": 208,
+                        "endOffset": 3108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 4849,
+                    "endColumn": 102,
+                    "endOffset": 4947
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 3113,
+                        "endColumn": 102,
+                        "endOffset": 3211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 4952,
+                    "endColumn": 93,
+                    "endOffset": 5041
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 3216,
+                        "endColumn": 93,
+                        "endOffset": 3305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 5046,
+                    "endColumn": 112,
+                    "endOffset": 5154
+                },
+                "from": {
+                    "file": "E:\\Metal\\Metal_14-02-17\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 3310,
+                        "endColumn": 112,
+                        "endOffset": 3418
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 110,
+                    "endOffset": 211
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 110,
+                        "endOffset": 162
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 216,
+                    "endColumn": 107,
+                    "endOffset": 319
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 167,
+                        "endColumn": 107,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 324,
+                    "endColumn": 122,
+                    "endOffset": 442
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 122,
+                        "endOffset": 393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 447,
+                    "endColumn": 114,
+                    "endOffset": 557
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 398,
+                        "endColumn": 114,
+                        "endOffset": 508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 562,
+                    "endColumn": 110,
+                    "endOffset": 668
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 513,
+                        "endColumn": 110,
+                        "endOffset": 619
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 673,
+                    "endColumn": 86,
+                    "endOffset": 755
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 624,
+                        "endColumn": 86,
+                        "endOffset": 706
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 760,
+                    "endColumn": 115,
+                    "endOffset": 871
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 711,
+                        "endColumn": 115,
+                        "endOffset": 822
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 876,
+                    "endColumn": 129,
+                    "endOffset": 1001
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 827,
+                        "endColumn": 129,
+                        "endOffset": 952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 1006,
+                    "endColumn": 109,
+                    "endOffset": 1111
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 957,
+                        "endColumn": 109,
+                        "endOffset": 1062
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 1116,
+                    "endColumn": 111,
+                    "endOffset": 1223
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1067,
+                        "endColumn": 111,
+                        "endOffset": 1174
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 1228,
+                    "endColumn": 102,
+                    "endOffset": 1326
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1179,
+                        "endColumn": 102,
+                        "endOffset": 1277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1331,
+                    "endColumn": 110,
+                    "endOffset": 1437
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1282,
+                        "endColumn": 110,
+                        "endOffset": 1388
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1442,
+                    "endColumn": 106,
+                    "endOffset": 1544
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1393,
+                        "endColumn": 106,
+                        "endOffset": 1495
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1549,
+                    "endColumn": 106,
+                    "endOffset": 1651
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1500,
+                        "endColumn": 106,
+                        "endOffset": 1602
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1656,
+                    "endColumn": 121,
+                    "endOffset": 1773
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1607,
+                        "endColumn": 121,
+                        "endOffset": 1724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1778,
+                    "endColumn": 107,
+                    "endOffset": 1881
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 333,
+                        "endColumn": 107,
+                        "endOffset": 436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1886,
+                    "endColumn": 211,
+                    "endOffset": 2093
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 441,
+                        "endColumn": 211,
+                        "endOffset": 648
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 2098,
+                    "endColumn": 131,
+                    "endOffset": 2225
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 653,
+                        "endColumn": 131,
+                        "endOffset": 780
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 2230,
+                    "endColumn": 135,
+                    "endOffset": 2361
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 785,
+                        "endColumn": 135,
+                        "endOffset": 916
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2366,
+                    "endColumn": 236,
+                    "endOffset": 2598
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 921,
+                        "endColumn": 236,
+                        "endOffset": 1153
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 2603,
+                    "endColumn": 236,
+                    "endOffset": 2835
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1158,
+                        "endColumn": 236,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2840,
+                    "endColumn": 134,
+                    "endOffset": 2970
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 134,
+                        "endOffset": 1525
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2975,
+                    "endColumn": 141,
+                    "endOffset": 3112
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 1530,
+                        "endColumn": 141,
+                        "endOffset": 1667
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 3117,
+                    "endColumn": 290,
+                    "endOffset": 3403
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 335,
+                        "endColumn": 290,
+                        "endOffset": 621
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 3408,
+                    "endColumn": 282,
+                    "endOffset": 3686
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1672,
+                        "endColumn": 282,
+                        "endOffset": 1950
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 3691,
+                    "endColumn": 123,
+                    "endOffset": 3810
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1955,
+                        "endColumn": 123,
+                        "endOffset": 2074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 3815,
+                    "endColumn": 113,
+                    "endOffset": 3924
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 2079,
+                        "endColumn": 113,
+                        "endOffset": 2188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 3929,
+                    "endColumn": 215,
+                    "endOffset": 4140
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 2193,
+                        "endColumn": 215,
+                        "endOffset": 2404
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 4145,
+                    "endColumn": 137,
+                    "endOffset": 4278
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 2409,
+                        "endColumn": 137,
+                        "endOffset": 2542
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 4283,
+                    "endColumn": 218,
+                    "endOffset": 4497
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 2547,
+                        "endColumn": 218,
+                        "endOffset": 2761
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 4502,
+                    "endColumn": 137,
+                    "endOffset": 4635
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 2766,
+                        "endColumn": 137,
+                        "endOffset": 2899
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 4640,
+                    "endColumn": 208,
+                    "endOffset": 4844
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 2904,
+                        "endColumn": 208,
+                        "endOffset": 3108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 4849,
+                    "endColumn": 102,
+                    "endOffset": 4947
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 3113,
+                        "endColumn": 102,
+                        "endOffset": 3211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 4952,
+                    "endColumn": 93,
+                    "endOffset": 5041
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 3216,
+                        "endColumn": 93,
+                        "endOffset": 3305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 5046,
+                    "endColumn": 112,
+                    "endOffset": 5154
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 3310,
+                        "endColumn": 112,
+                        "endOffset": 3418
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 110,
+                    "endOffset": 211
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 110,
+                        "endOffset": 162
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 216,
+                    "endColumn": 107,
+                    "endOffset": 319
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 167,
+                        "endColumn": 107,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 324,
+                    "endColumn": 122,
+                    "endOffset": 442
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 122,
+                        "endOffset": 393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 447,
+                    "endColumn": 114,
+                    "endOffset": 557
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 398,
+                        "endColumn": 114,
+                        "endOffset": 508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 562,
+                    "endColumn": 110,
+                    "endOffset": 668
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 513,
+                        "endColumn": 110,
+                        "endOffset": 619
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 673,
+                    "endColumn": 86,
+                    "endOffset": 755
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 624,
+                        "endColumn": 86,
+                        "endOffset": 706
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 760,
+                    "endColumn": 115,
+                    "endOffset": 871
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 711,
+                        "endColumn": 115,
+                        "endOffset": 822
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 876,
+                    "endColumn": 129,
+                    "endOffset": 1001
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 827,
+                        "endColumn": 129,
+                        "endOffset": 952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 1006,
+                    "endColumn": 109,
+                    "endOffset": 1111
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 957,
+                        "endColumn": 109,
+                        "endOffset": 1062
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 1116,
+                    "endColumn": 111,
+                    "endOffset": 1223
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1067,
+                        "endColumn": 111,
+                        "endOffset": 1174
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 1228,
+                    "endColumn": 102,
+                    "endOffset": 1326
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1179,
+                        "endColumn": 102,
+                        "endOffset": 1277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1331,
+                    "endColumn": 110,
+                    "endOffset": 1437
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1282,
+                        "endColumn": 110,
+                        "endOffset": 1388
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1442,
+                    "endColumn": 106,
+                    "endOffset": 1544
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1393,
+                        "endColumn": 106,
+                        "endOffset": 1495
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1549,
+                    "endColumn": 106,
+                    "endOffset": 1651
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1500,
+                        "endColumn": 106,
+                        "endOffset": 1602
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1656,
+                    "endColumn": 121,
+                    "endOffset": 1773
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1607,
+                        "endColumn": 121,
+                        "endOffset": 1724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1778,
+                    "endColumn": 107,
+                    "endOffset": 1881
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 333,
+                        "endColumn": 107,
+                        "endOffset": 436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1886,
+                    "endColumn": 211,
+                    "endOffset": 2093
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 441,
+                        "endColumn": 211,
+                        "endOffset": 648
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 2098,
+                    "endColumn": 131,
+                    "endOffset": 2225
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 653,
+                        "endColumn": 131,
+                        "endOffset": 780
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 2230,
+                    "endColumn": 135,
+                    "endOffset": 2361
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 785,
+                        "endColumn": 135,
+                        "endOffset": 916
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2366,
+                    "endColumn": 236,
+                    "endOffset": 2598
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 921,
+                        "endColumn": 236,
+                        "endOffset": 1153
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 2603,
+                    "endColumn": 236,
+                    "endOffset": 2835
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1158,
+                        "endColumn": 236,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2840,
+                    "endColumn": 134,
+                    "endOffset": 2970
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 134,
+                        "endOffset": 1525
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2975,
+                    "endColumn": 141,
+                    "endOffset": 3112
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 1530,
+                        "endColumn": 141,
+                        "endOffset": 1667
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 3117,
+                    "endColumn": 290,
+                    "endOffset": 3403
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 335,
+                        "endColumn": 290,
+                        "endOffset": 621
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 3408,
+                    "endColumn": 282,
+                    "endOffset": 3686
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1672,
+                        "endColumn": 282,
+                        "endOffset": 1950
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 3691,
+                    "endColumn": 123,
+                    "endOffset": 3810
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1955,
+                        "endColumn": 123,
+                        "endOffset": 2074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 3815,
+                    "endColumn": 113,
+                    "endOffset": 3924
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 2079,
+                        "endColumn": 113,
+                        "endOffset": 2188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 3929,
+                    "endColumn": 215,
+                    "endOffset": 4140
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 2193,
+                        "endColumn": 215,
+                        "endOffset": 2404
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 4145,
+                    "endColumn": 137,
+                    "endOffset": 4278
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 2409,
+                        "endColumn": 137,
+                        "endOffset": 2542
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 4283,
+                    "endColumn": 218,
+                    "endOffset": 4497
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 2547,
+                        "endColumn": 218,
+                        "endOffset": 2761
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 4502,
+                    "endColumn": 137,
+                    "endOffset": 4635
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 2766,
+                        "endColumn": 137,
+                        "endOffset": 2899
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 4640,
+                    "endColumn": 208,
+                    "endOffset": 4844
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 2904,
+                        "endColumn": 208,
+                        "endOffset": 3108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 4849,
+                    "endColumn": 102,
+                    "endOffset": 4947
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 3113,
+                        "endColumn": 102,
+                        "endOffset": 3211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 4952,
+                    "endColumn": 93,
+                    "endOffset": 5041
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 3216,
+                        "endColumn": 93,
+                        "endOffset": 3305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 5046,
+                    "endColumn": 112,
+                    "endOffset": 5154
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 3310,
+                        "endColumn": 112,
+                        "endOffset": 3418
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 110,
+                    "endOffset": 211
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 110,
+                        "endOffset": 162
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 216,
+                    "endColumn": 107,
+                    "endOffset": 319
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 167,
+                        "endColumn": 107,
+                        "endOffset": 270
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 324,
+                    "endColumn": 122,
+                    "endOffset": 442
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 275,
+                        "endColumn": 122,
+                        "endOffset": 393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 447,
+                    "endColumn": 114,
+                    "endOffset": 557
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 398,
+                        "endColumn": 114,
+                        "endOffset": 508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 562,
+                    "endColumn": 110,
+                    "endOffset": 668
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 513,
+                        "endColumn": 110,
+                        "endOffset": 619
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 673,
+                    "endColumn": 86,
+                    "endOffset": 755
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 624,
+                        "endColumn": 86,
+                        "endOffset": 706
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 760,
+                    "endColumn": 115,
+                    "endOffset": 871
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 711,
+                        "endColumn": 115,
+                        "endOffset": 822
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 876,
+                    "endColumn": 129,
+                    "endOffset": 1001
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 827,
+                        "endColumn": 129,
+                        "endOffset": 952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 1006,
+                    "endColumn": 109,
+                    "endOffset": 1111
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 957,
+                        "endColumn": 109,
+                        "endOffset": 1062
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 1116,
+                    "endColumn": 111,
+                    "endOffset": 1223
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1067,
+                        "endColumn": 111,
+                        "endOffset": 1174
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 1228,
+                    "endColumn": 102,
+                    "endOffset": 1326
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1179,
+                        "endColumn": 102,
+                        "endOffset": 1277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 1331,
+                    "endColumn": 110,
+                    "endOffset": 1437
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1282,
+                        "endColumn": 110,
+                        "endOffset": 1388
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1442,
+                    "endColumn": 106,
+                    "endOffset": 1544
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1393,
+                        "endColumn": 106,
+                        "endOffset": 1495
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1549,
+                    "endColumn": 106,
+                    "endOffset": 1651
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1500,
+                        "endColumn": 106,
+                        "endOffset": 1602
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1656,
+                    "endColumn": 121,
+                    "endOffset": 1773
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1607,
+                        "endColumn": 121,
+                        "endOffset": 1724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1778,
+                    "endColumn": 107,
+                    "endOffset": 1881
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 333,
+                        "endColumn": 107,
+                        "endOffset": 436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1886,
+                    "endColumn": 211,
+                    "endOffset": 2093
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 441,
+                        "endColumn": 211,
+                        "endOffset": 648
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 2098,
+                    "endColumn": 131,
+                    "endOffset": 2225
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 653,
+                        "endColumn": 131,
+                        "endOffset": 780
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 2230,
+                    "endColumn": 135,
+                    "endOffset": 2361
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 785,
+                        "endColumn": 135,
+                        "endOffset": 916
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 2366,
+                    "endColumn": 236,
+                    "endOffset": 2598
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 921,
+                        "endColumn": 236,
+                        "endOffset": 1153
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 2603,
+                    "endColumn": 236,
+                    "endOffset": 2835
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 1158,
+                        "endColumn": 236,
+                        "endOffset": 1390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2840,
+                    "endColumn": 134,
+                    "endOffset": 2970
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 1395,
+                        "endColumn": 134,
+                        "endOffset": 1525
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2975,
+                    "endColumn": 141,
+                    "endOffset": 3112
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 1530,
+                        "endColumn": 141,
+                        "endOffset": 1667
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 3117,
+                    "endColumn": 290,
+                    "endOffset": 3403
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 335,
+                        "endColumn": 290,
+                        "endOffset": 621
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 3408,
+                    "endColumn": 282,
+                    "endOffset": 3686
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1672,
+                        "endColumn": 282,
+                        "endOffset": 1950
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 3691,
+                    "endColumn": 123,
+                    "endOffset": 3810
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1955,
+                        "endColumn": 123,
+                        "endOffset": 2074
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 3815,
+                    "endColumn": 113,
+                    "endOffset": 3924
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 2079,
+                        "endColumn": 113,
+                        "endOffset": 2188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 3929,
+                    "endColumn": 215,
+                    "endOffset": 4140
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 2193,
+                        "endColumn": 215,
+                        "endOffset": 2404
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 4145,
+                    "endColumn": 137,
+                    "endOffset": 4278
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 2409,
+                        "endColumn": 137,
+                        "endOffset": 2542
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 4283,
+                    "endColumn": 218,
+                    "endOffset": 4497
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 2547,
+                        "endColumn": 218,
+                        "endOffset": 2761
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 4502,
+                    "endColumn": 137,
+                    "endOffset": 4635
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 2766,
+                        "endColumn": 137,
+                        "endOffset": 2899
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 4640,
+                    "endColumn": 208,
+                    "endOffset": 4844
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 2904,
+                        "endColumn": 208,
+                        "endOffset": 3108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 4849,
+                    "endColumn": 102,
+                    "endOffset": 4947
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 3113,
+                        "endColumn": 102,
+                        "endOffset": 3211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 4952,
+                    "endColumn": 93,
+                    "endOffset": 5041
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 3216,
+                        "endColumn": 93,
+                        "endOffset": 3305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 5046,
+                    "endColumn": 112,
+                    "endOffset": 5154
+                },
+                "from": {
+                    "file": "E:\\Vinod\\android_studio_metal\\metal_new\\Metal\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-fr-rCA\\values.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 3310,
+                        "endColumn": 112,
+                        "endOffset": 3418
+                    }
+                }
+            }
+        ]
+    }
+]

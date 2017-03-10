@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.simplelogic.activities"
+    android:versionCode="2"
+    android:versionName="2.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="22" />
+    
+     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-feature android:name="android.hardware.camera" > </uses-feature> 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />     
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    
+      <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+     
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+ 
+ 
+    <!-- Network State Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+   
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    
+    <supports-screens
+    android:smallScreens="true"
+    android:normalScreens="true"
+    android:largeScreens="true"
+    android:resizeable="true"
+    android:anyDensity="true">
+</supports-screens>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/mlogo"
+        android:largeHeap="true"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.anchor.activities.SplashScreenActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
+           
+              <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+          
+        </activity>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity"
+             android:label="@string/app_name" 
+            android:screenOrientation="portrait" />
+        
+        <activity android:name="com.anchor.activities.UploadActivity"
+             android:label="@string/app_name" 
+            android:screenOrientation="portrait" />
+         
+        
+          <activity
+            android:name="com.anchor.activities.LoginActivity"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait"
+             android:theme="@android:style/Theme.NoTitleBar"
+             
+            >
+            </activity> 
+            <activity
+            android:name="com.anchor.activities.VIDEO_DIALOG"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="portrait"
+             
+             
+            >   
+           
+        </activity>
+<!--         <activity -->
+<!--             android:name="com.simplelogic.activities.MenuScreenActivity" -->
+<!--             android:label="@string/app_name" > -->
+           
+<!--         </activity> -->
+        
+          <activity
+            android:name="com.anchor.activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+             
+             </activity>
+               
+          <activity
+            android:name="com.anchor.activities.Test"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+                   
+        </activity>
+        
+           <activity
+            android:name="com.anchor.activities.Home"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+          
+        <activity
+            android:name="com.anchor.activities.PreviousOrderActivity_New"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+               </activity>
+              
+         <activity
+            android:name="info.androidhive.camerafileupload.UploadActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name="com.anchor.activities.NewOrderActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+               </activity>
+               
+          <activity
+            android:name="com.anchor.fragments.EditOrderItems"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+               </activity>
+               
+            <activity
+            android:name="com.anchor.activities.EditSwipeOrderItems"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+               </activity>
+              
+               <activity
+            android:name="com.anchor.activities.NoOrderActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+               </activity>
+             
+            <activity
+            android:name="com.anchor.fragments.PreviewOrderActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+             </activity>
+             
+            
+             <activity
+            android:name="com.anchor.activities.CaptureSignature"
+            android:label="@string/app_name">
+             </activity>
+             
+             
+               <activity
+            android:name="com.anchor.activities.ReturnOrderActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+             </activity>
+          
+            <activity
+            android:name="com.anchor.activities.PreviousOrderActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+        
+            <activity
+            android:name="com.anchor.activities.PreviewOrderSwipeActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+                
+            <activity
+            android:name="com.anchor.activities.CalendarFragment"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+                
+            <activity
+            android:name="com.anchor.slidingmenu.CalendarAct"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Calendar_Event"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.List_Events"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+                <activity
+            android:name="com.anchor.activities.Customer_Service"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+                 <activity
+            android:name="com.anchor.activities.Customer_Feed"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Customer_Stock"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Today_Tabber"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Expenses"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Target"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Schedule"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Schedule1"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.Schedule2"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+             <activity
+            android:name="com.anchor.activities.Order"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+             <activity
+            android:name="com.anchor.activities.Sales_Dash"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+             <activity
+            android:name="com.anchor.activities.Filter_List"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+            </activity>
+                
+            <activity
+            android:name="com.anchor.activities.ExpandFilter"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+            </activity>
+            
+             <activity
+            android:name="com.anchor.activities.Invoice_filterList"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+            </activity>
+            
+            <activity
+            android:name="com.anchor.activities.New_filterList"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+            </activity>
+                       
+               <activity
+            android:name="com.anchor.activities.Address_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            </activity>
+            
+           <activity
+            android:name="com.anchor.activities.AndroidGPSTrackingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+           </activity>
+           <activity
+            android:name="com.anchor.activities.Nearest_Customer"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+            <activity
+            android:name="com.anchor.activities.Item_Edit_Activity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Dialog"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+            <activity
+            android:name="com.anchor.activities.Status_Act"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+           <activity
+            android:name="com.anchor.activities.Status_Activity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+           <activity
+            android:name="com.anchor.activities.Previous_Order"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+            <activity
+            android:name="com.anchor.activities.ReturnOrder_Customer"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+             <activity
+            android:name="com.anchor.activities.Previous_returnOrder"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+           <activity
+            android:name="com.anchor.activities.ReturnOrder1"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+           <activity
+            android:name="com.anchor.activities.ReturnOrder2"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+           </activity>
+           
+         <activity
+            android:name="com.anchor.activities.ReturnOrder3"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+         </activity>
+         
+         <activity
+            android:name="com.anchor.activities.ReturnEditItem"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" 
+            android:screenOrientation="portrait" >
+         </activity>
+        
+           
+             <receiver android:name=".AutoStart">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:name=".MyService"> </service>
+           
+             <!--<service android:name=".LocationService" />
+             
+                <receiver android:name="SendLocation">
+              <intent-filter>
+		        <action android:name="android.intent.action.BOOT_COMPLETED">
+		        </action>
+		     </intent-filter>
+  
+         </receiver>
+            
+            <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>-->
+      
+    </application>
+   
+</manifest>

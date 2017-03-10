@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="DIALOG BOX"
+        android:textColor="#111111"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="7dp"
+        android:background="#111111" >
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="#dcdcdc"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1.00" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="DESCRIPTION"
+                android:textColor="#111111"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1.00" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="AMOUNT"
+                android:textColor="#111111"
+                android:textSize="14dp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+   
+<!-- <ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"> -->
+    
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#111111" >
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+         >
+        
+    <com.anchor.swipelistview.SwipeListView
+        android:id="@+id/list_statusclick"
+        android:layout_width="fill_parent"
+        android:layout_height="315dp"
+        android:listSelector="#00000000"
+        swipe:swipeBackView="@+id/back"
+        swipe:swipeCloseAllItemsWhenMoveList="true"
+        swipe:swipeDrawableChecked="@drawable/choice_selected"
+        swipe:swipeDrawableUnchecked="@drawable/choice_unselected"
+        swipe:swipeFrontView="@+id/front"
+        swipe:swipeMode="both" />
+
+    
+
+        <Button
+            android:id="@+id/butapprove_listclick"
+            android:layout_width="150dp"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@+id/butback_listclick"
+            android:layout_alignParentRight="true"
+            android:background="#414042"
+            android:text="SUBMIT FOR APPROVAL"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="2dp"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/butback_listclick"
+            android:layout_width="145dp"
+            android:layout_height="38dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#414042"
+            android:text="BACK"
+            android:layout_marginLeft="2dp"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp" />
+
+        <Button
+            android:id="@+id/but_addmore_click"
+            android:layout_width="150dp"
+            android:layout_height="38dp"
+            android:layout_above="@+id/butapprove_listclick"
+            android:layout_centerHorizontal="true"
+            android:background="#414042"
+            android:text="ADD MORE"
+            android:layout_marginBottom="7dp"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
+
+        <Spinner
+            android:id="@+id/spinner_addmore"
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/list_statusclick"
+            android:layout_centerHorizontal="true"
+            android:text="ADD MORE"
+            
+            android:textSize="13dp" />
+
+    </RelativeLayout>
+<!--</ScrollView>-->
+</LinearLayout>
