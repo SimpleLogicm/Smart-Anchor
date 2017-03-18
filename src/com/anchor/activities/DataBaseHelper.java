@@ -4669,7 +4669,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
-    public List<Local_Data> HSS_DescriptionITEM2_BYNAMENEW(String category_name,String product_name) {
+    public List<Local_Data> HSS_DescriptionITEM2_BYNAMENEW(String category_name,String product_name,String product_variant) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
         //String selectQuery = "SELECT sub_category FROM " + TABLE_ITEM_MASTER + "";
@@ -4679,8 +4679,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
       //  Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price,mrp,name FROM item_master WHERE primary_category = ? AND sub_category = ?",
-                new String[] {category_name,product_name});
+        Cursor cursor = db.rawQuery("select retail_price,mrp,name FROM item_master WHERE primary_category = ? AND sub_category = ? AND product_variant = ?",
+                new String[] {category_name,product_name,product_variant});
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

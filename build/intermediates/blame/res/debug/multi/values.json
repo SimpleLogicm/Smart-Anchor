@@ -5386,17 +5386,17 @@
                     "startLine": 390,
                     "startColumn": 4,
                     "startOffset": 37736,
-                    "endColumn": 77,
-                    "endOffset": 37809
+                    "endColumn": 84,
+                    "endOffset": 37816
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
                     "position": {
-                        "startLine": 7,
+                        "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 246,
-                        "endColumn": 77,
-                        "endOffset": 319
+                        "startOffset": 151,
+                        "endColumn": 84,
+                        "endOffset": 231
                     }
                 }
             },
@@ -5404,9 +5404,9 @@
                 "to": {
                     "startLine": 391,
                     "startColumn": 4,
-                    "startOffset": 37814,
+                    "startOffset": 37821,
                     "endColumn": 60,
-                    "endOffset": 37870
+                    "endOffset": 37877
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\imageResizer\\unspecified\\res\\values\\values.xml",
@@ -5423,9 +5423,9 @@
                 "to": {
                     "startLine": 392,
                     "startColumn": 4,
-                    "startOffset": 37875,
+                    "startOffset": 37882,
                     "endColumn": 62,
-                    "endOffset": 37933
+                    "endOffset": 37940
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5442,9 +5442,9 @@
                 "to": {
                     "startLine": 393,
                     "startColumn": 4,
-                    "startOffset": 37938,
+                    "startOffset": 37945,
                     "endColumn": 81,
-                    "endOffset": 38015
+                    "endOffset": 38022
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5461,9 +5461,9 @@
                 "to": {
                     "startLine": 394,
                     "startColumn": 4,
-                    "startOffset": 38020,
+                    "startOffset": 38027,
                     "endColumn": 86,
-                    "endOffset": 38102
+                    "endOffset": 38109
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5480,9 +5480,9 @@
                 "to": {
                     "startLine": 395,
                     "startColumn": 4,
-                    "startOffset": 38107,
+                    "startOffset": 38114,
                     "endColumn": 86,
-                    "endOffset": 38189
+                    "endOffset": 38196
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5499,9 +5499,9 @@
                 "to": {
                     "startLine": 396,
                     "startColumn": 4,
-                    "startOffset": 38194,
+                    "startOffset": 38201,
                     "endColumn": 86,
-                    "endOffset": 38276
+                    "endOffset": 38283
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5518,9 +5518,9 @@
                 "to": {
                     "startLine": 397,
                     "startColumn": 4,
-                    "startOffset": 38281,
+                    "startOffset": 38288,
                     "endColumn": 80,
-                    "endOffset": 38357
+                    "endOffset": 38364
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5537,9 +5537,9 @@
                 "to": {
                     "startLine": 398,
                     "startColumn": 4,
-                    "startOffset": 38362,
+                    "startOffset": 38369,
                     "endColumn": 49,
-                    "endOffset": 38407
+                    "endOffset": 38414
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\strings.xml",
@@ -5556,10 +5556,10 @@
                 "to": {
                     "startLine": 399,
                     "startColumn": 4,
-                    "startOffset": 38412,
+                    "startOffset": 38419,
                     "endLine": 405,
                     "endColumn": 12,
-                    "endOffset": 38698
+                    "endOffset": 38705
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\styles.xml",
@@ -5577,10 +5577,10 @@
                 "to": {
                     "startLine": 406,
                     "startColumn": 4,
-                    "startOffset": 38703,
+                    "startOffset": 38710,
                     "endLine": 408,
                     "endColumn": 12,
-                    "endOffset": 38858
+                    "endOffset": 38865
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\styles.xml",
@@ -5598,10 +5598,10 @@
                 "to": {
                     "startLine": 409,
                     "startColumn": 4,
-                    "startOffset": 38863,
+                    "startOffset": 38870,
                     "endLine": 415,
                     "endColumn": 12,
-                    "endOffset": 39335
+                    "endOffset": 39342
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5619,10 +5619,10 @@
                 "to": {
                     "startLine": 416,
                     "startColumn": 4,
-                    "startOffset": 39340,
+                    "startOffset": 39347,
                     "endLine": 419,
                     "endColumn": 12,
-                    "endOffset": 39557
+                    "endOffset": 39564
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5640,10 +5640,10 @@
                 "to": {
                     "startLine": 420,
                     "startColumn": 4,
-                    "startOffset": 39562,
+                    "startOffset": 39569,
                     "endLine": 423,
                     "endColumn": 12,
-                    "endOffset": 39779
+                    "endOffset": 39786
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5661,10 +5661,10 @@
                 "to": {
                     "startLine": 424,
                     "startColumn": 4,
-                    "startOffset": 39784,
+                    "startOffset": 39791,
                     "endLine": 428,
                     "endColumn": 12,
-                    "endOffset": 40047
+                    "endOffset": 40054
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5682,10 +5682,10 @@
                 "to": {
                     "startLine": 429,
                     "startColumn": 4,
-                    "startOffset": 40052,
+                    "startOffset": 40059,
                     "endLine": 432,
                     "endColumn": 12,
-                    "endOffset": 40274
+                    "endOffset": 40281
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5703,10 +5703,10 @@
                 "to": {
                     "startLine": 433,
                     "startColumn": 4,
-                    "startOffset": 40279,
+                    "startOffset": 40286,
                     "endLine": 436,
                     "endColumn": 12,
-                    "endOffset": 40504
+                    "endOffset": 40511
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5724,10 +5724,10 @@
                 "to": {
                     "startLine": 437,
                     "startColumn": 4,
-                    "startOffset": 40509,
+                    "startOffset": 40516,
                     "endLine": 440,
                     "endColumn": 12,
-                    "endOffset": 40734
+                    "endOffset": 40741
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5745,10 +5745,10 @@
                 "to": {
                     "startLine": 441,
                     "startColumn": 4,
-                    "startOffset": 40739,
+                    "startOffset": 40746,
                     "endLine": 444,
                     "endColumn": 12,
-                    "endOffset": 40964
+                    "endOffset": 40971
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5766,10 +5766,10 @@
                 "to": {
                     "startLine": 445,
                     "startColumn": 4,
-                    "startOffset": 40969,
+                    "startOffset": 40976,
                     "endLine": 448,
                     "endColumn": 12,
-                    "endOffset": 41194
+                    "endOffset": 41201
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5787,10 +5787,10 @@
                 "to": {
                     "startLine": 449,
                     "startColumn": 4,
-                    "startOffset": 41199,
+                    "startOffset": 41206,
                     "endLine": 452,
                     "endColumn": 12,
-                    "endOffset": 41421
+                    "endOffset": 41428
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5808,10 +5808,10 @@
                 "to": {
                     "startLine": 453,
                     "startColumn": 4,
-                    "startOffset": 41426,
+                    "startOffset": 41433,
                     "endLine": 456,
                     "endColumn": 12,
-                    "endOffset": 41660
+                    "endOffset": 41667
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5829,10 +5829,10 @@
                 "to": {
                     "startLine": 457,
                     "startColumn": 4,
-                    "startOffset": 41665,
+                    "startOffset": 41672,
                     "endLine": 460,
                     "endColumn": 12,
-                    "endOffset": 41886
+                    "endOffset": 41893
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5850,10 +5850,10 @@
                 "to": {
                     "startLine": 461,
                     "startColumn": 4,
-                    "startOffset": 41891,
+                    "startOffset": 41898,
                     "endLine": 464,
                     "endColumn": 12,
-                    "endOffset": 42131
+                    "endOffset": 42138
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5871,9 +5871,9 @@
                 "to": {
                     "startLine": 465,
                     "startColumn": 4,
-                    "startOffset": 42136,
+                    "startOffset": 42143,
                     "endColumn": 117,
-                    "endOffset": 42249
+                    "endOffset": 42256
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5890,9 +5890,9 @@
                 "to": {
                     "startLine": 466,
                     "startColumn": 4,
-                    "startOffset": 42254,
+                    "startOffset": 42261,
                     "endColumn": 117,
-                    "endOffset": 42367
+                    "endOffset": 42374
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5909,10 +5909,10 @@
                 "to": {
                     "startLine": 467,
                     "startColumn": 4,
-                    "startOffset": 42372,
+                    "startOffset": 42379,
                     "endLine": 470,
                     "endColumn": 12,
-                    "endOffset": 42597
+                    "endOffset": 42604
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5930,10 +5930,10 @@
                 "to": {
                     "startLine": 471,
                     "startColumn": 4,
-                    "startOffset": 42602,
+                    "startOffset": 42609,
                     "endLine": 474,
                     "endColumn": 12,
-                    "endOffset": 42845
+                    "endOffset": 42852
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5951,10 +5951,10 @@
                 "to": {
                     "startLine": 475,
                     "startColumn": 4,
-                    "startOffset": 42850,
+                    "startOffset": 42857,
                     "endLine": 478,
                     "endColumn": 12,
-                    "endOffset": 43064
+                    "endOffset": 43071
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5972,10 +5972,10 @@
                 "to": {
                     "startLine": 479,
                     "startColumn": 4,
-                    "startOffset": 43069,
+                    "startOffset": 43076,
                     "endLine": 483,
                     "endColumn": 12,
-                    "endOffset": 43347
+                    "endOffset": 43354
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -5993,10 +5993,10 @@
                 "to": {
                     "startLine": 484,
                     "startColumn": 4,
-                    "startOffset": 43352,
+                    "startOffset": 43359,
                     "endLine": 487,
                     "endColumn": 12,
-                    "endOffset": 43555
+                    "endOffset": 43562
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6014,10 +6014,10 @@
                 "to": {
                     "startLine": 488,
                     "startColumn": 4,
-                    "startOffset": 43560,
+                    "startOffset": 43567,
                     "endLine": 490,
                     "endColumn": 12,
-                    "endOffset": 43686
+                    "endOffset": 43693
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6035,10 +6035,10 @@
                 "to": {
                     "startLine": 491,
                     "startColumn": 4,
-                    "startOffset": 43691,
+                    "startOffset": 43698,
                     "endLine": 494,
                     "endColumn": 12,
-                    "endOffset": 43913
+                    "endOffset": 43920
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6056,10 +6056,10 @@
                 "to": {
                     "startLine": 495,
                     "startColumn": 4,
-                    "startOffset": 43918,
+                    "startOffset": 43925,
                     "endLine": 498,
                     "endColumn": 12,
-                    "endOffset": 44159
+                    "endOffset": 44166
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6077,10 +6077,10 @@
                 "to": {
                     "startLine": 499,
                     "startColumn": 4,
-                    "startOffset": 44164,
+                    "startOffset": 44171,
                     "endLine": 502,
                     "endColumn": 12,
-                    "endOffset": 44384
+                    "endOffset": 44391
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6098,10 +6098,10 @@
                 "to": {
                     "startLine": 503,
                     "startColumn": 4,
-                    "startOffset": 44389,
+                    "startOffset": 44396,
                     "endLine": 506,
                     "endColumn": 12,
-                    "endOffset": 44633
+                    "endOffset": 44640
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6119,10 +6119,10 @@
                 "to": {
                     "startLine": 507,
                     "startColumn": 4,
-                    "startOffset": 44638,
+                    "startOffset": 44645,
                     "endLine": 510,
                     "endColumn": 12,
-                    "endOffset": 44854
+                    "endOffset": 44861
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6140,10 +6140,10 @@
                 "to": {
                     "startLine": 511,
                     "startColumn": 4,
-                    "startOffset": 44859,
+                    "startOffset": 44866,
                     "endLine": 514,
                     "endColumn": 12,
-                    "endOffset": 45099
+                    "endOffset": 45106
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6161,10 +6161,10 @@
                 "to": {
                     "startLine": 515,
                     "startColumn": 4,
-                    "startOffset": 45104,
+                    "startOffset": 45111,
                     "endLine": 519,
                     "endColumn": 12,
-                    "endOffset": 45394
+                    "endOffset": 45401
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6182,10 +6182,10 @@
                 "to": {
                     "startLine": 520,
                     "startColumn": 4,
-                    "startOffset": 45399,
+                    "startOffset": 45406,
                     "endLine": 522,
                     "endColumn": 12,
-                    "endOffset": 45616
+                    "endOffset": 45623
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6203,10 +6203,10 @@
                 "to": {
                     "startLine": 523,
                     "startColumn": 4,
-                    "startOffset": 45621,
+                    "startOffset": 45628,
                     "endLine": 525,
                     "endColumn": 12,
-                    "endOffset": 45854
+                    "endOffset": 45861
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6224,10 +6224,10 @@
                 "to": {
                     "startLine": 526,
                     "startColumn": 4,
-                    "startOffset": 45859,
+                    "startOffset": 45866,
                     "endLine": 528,
                     "endColumn": 12,
-                    "endOffset": 46068
+                    "endOffset": 46075
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6245,10 +6245,10 @@
                 "to": {
                     "startLine": 529,
                     "startColumn": 4,
-                    "startOffset": 46073,
+                    "startOffset": 46080,
                     "endLine": 531,
                     "endColumn": 12,
-                    "endOffset": 46298
+                    "endOffset": 46305
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6266,10 +6266,10 @@
                 "to": {
                     "startLine": 532,
                     "startColumn": 4,
-                    "startOffset": 46303,
+                    "startOffset": 46310,
                     "endLine": 534,
                     "endColumn": 12,
-                    "endOffset": 46521
+                    "endOffset": 46528
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6287,10 +6287,10 @@
                 "to": {
                     "startLine": 535,
                     "startColumn": 4,
-                    "startOffset": 46526,
+                    "startOffset": 46533,
                     "endLine": 537,
                     "endColumn": 12,
-                    "endOffset": 46736
+                    "endOffset": 46743
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6308,10 +6308,10 @@
                 "to": {
                     "startLine": 538,
                     "startColumn": 4,
-                    "startOffset": 46741,
+                    "startOffset": 46748,
                     "endLine": 540,
                     "endColumn": 12,
-                    "endOffset": 46944
+                    "endOffset": 46951
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6329,9 +6329,9 @@
                 "to": {
                     "startLine": 541,
                     "startColumn": 4,
-                    "startOffset": 46949,
+                    "startOffset": 46956,
                     "endColumn": 111,
-                    "endOffset": 47056
+                    "endOffset": 47063
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6348,9 +6348,9 @@
                 "to": {
                     "startLine": 542,
                     "startColumn": 4,
-                    "startOffset": 47061,
+                    "startOffset": 47068,
                     "endColumn": 111,
-                    "endOffset": 47168
+                    "endOffset": 47175
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6367,9 +6367,9 @@
                 "to": {
                     "startLine": 543,
                     "startColumn": 4,
-                    "startOffset": 47173,
+                    "startOffset": 47180,
                     "endColumn": 104,
-                    "endOffset": 47273
+                    "endOffset": 47280
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6386,10 +6386,10 @@
                 "to": {
                     "startLine": 544,
                     "startColumn": 4,
-                    "startOffset": 47278,
+                    "startOffset": 47285,
                     "endLine": 546,
                     "endColumn": 12,
-                    "endOffset": 47487
+                    "endOffset": 47494
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6407,9 +6407,9 @@
                 "to": {
                     "startLine": 547,
                     "startColumn": 4,
-                    "startOffset": 47492,
+                    "startOffset": 47499,
                     "endColumn": 133,
-                    "endOffset": 47621
+                    "endOffset": 47628
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6426,9 +6426,9 @@
                 "to": {
                     "startLine": 548,
                     "startColumn": 4,
-                    "startOffset": 47626,
+                    "startOffset": 47633,
                     "endColumn": 127,
-                    "endOffset": 47749
+                    "endOffset": 47756
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6445,9 +6445,9 @@
                 "to": {
                     "startLine": 549,
                     "startColumn": 4,
-                    "startOffset": 47754,
+                    "startOffset": 47761,
                     "endColumn": 73,
-                    "endOffset": 47823
+                    "endOffset": 47830
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6464,10 +6464,10 @@
                 "to": {
                     "startLine": 550,
                     "startColumn": 4,
-                    "startOffset": 47828,
+                    "startOffset": 47835,
                     "endLine": 553,
                     "endColumn": 12,
-                    "endOffset": 48076
+                    "endOffset": 48083
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6485,9 +6485,9 @@
                 "to": {
                     "startLine": 554,
                     "startColumn": 4,
-                    "startOffset": 48081,
+                    "startOffset": 48088,
                     "endColumn": 87,
-                    "endOffset": 48164
+                    "endOffset": 48171
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6504,10 +6504,10 @@
                 "to": {
                     "startLine": 555,
                     "startColumn": 4,
-                    "startOffset": 48169,
+                    "startOffset": 48176,
                     "endLine": 560,
                     "endColumn": 12,
-                    "endOffset": 48566
+                    "endOffset": 48573
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6525,9 +6525,9 @@
                 "to": {
                     "startLine": 561,
                     "startColumn": 4,
-                    "startOffset": 48571,
+                    "startOffset": 48578,
                     "endColumn": 81,
-                    "endOffset": 48648
+                    "endOffset": 48655
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6544,9 +6544,9 @@
                 "to": {
                     "startLine": 562,
                     "startColumn": 4,
-                    "startOffset": 48653,
+                    "startOffset": 48660,
                     "endColumn": 85,
-                    "endOffset": 48734
+                    "endOffset": 48741
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6563,10 +6563,10 @@
                 "to": {
                     "startLine": 563,
                     "startColumn": 4,
-                    "startOffset": 48739,
+                    "startOffset": 48746,
                     "endLine": 572,
                     "endColumn": 12,
-                    "endOffset": 49350
+                    "endOffset": 49357
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6584,9 +6584,9 @@
                 "to": {
                     "startLine": 573,
                     "startColumn": 4,
-                    "startOffset": 49355,
+                    "startOffset": 49362,
                     "endColumn": 90,
-                    "endOffset": 49441
+                    "endOffset": 49448
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6603,10 +6603,10 @@
                 "to": {
                     "startLine": 574,
                     "startColumn": 4,
-                    "startOffset": 49446,
+                    "startOffset": 49453,
                     "endLine": 579,
                     "endColumn": 12,
-                    "endOffset": 49849
+                    "endOffset": 49856
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6624,9 +6624,9 @@
                 "to": {
                     "startLine": 580,
                     "startColumn": 4,
-                    "startOffset": 49854,
+                    "startOffset": 49861,
                     "endColumn": 93,
-                    "endOffset": 49943
+                    "endOffset": 49950
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6643,9 +6643,9 @@
                 "to": {
                     "startLine": 581,
                     "startColumn": 4,
-                    "startOffset": 49948,
+                    "startOffset": 49955,
                     "endColumn": 57,
-                    "endOffset": 50001
+                    "endOffset": 50008
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6662,10 +6662,10 @@
                 "to": {
                     "startLine": 582,
                     "startColumn": 4,
-                    "startOffset": 50006,
+                    "startOffset": 50013,
                     "endLine": 584,
                     "endColumn": 12,
-                    "endOffset": 50149
+                    "endOffset": 50156
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6683,10 +6683,10 @@
                 "to": {
                     "startLine": 585,
                     "startColumn": 4,
-                    "startOffset": 50154,
+                    "startOffset": 50161,
                     "endLine": 617,
                     "endColumn": 12,
-                    "endOffset": 52642
+                    "endOffset": 52649
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6704,10 +6704,10 @@
                 "to": {
                     "startLine": 618,
                     "startColumn": 4,
-                    "startOffset": 52647,
+                    "startOffset": 52654,
                     "endLine": 620,
                     "endColumn": 12,
-                    "endOffset": 52795
+                    "endOffset": 52802
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6725,10 +6725,10 @@
                 "to": {
                     "startLine": 621,
                     "startColumn": 4,
-                    "startOffset": 52800,
+                    "startOffset": 52807,
                     "endLine": 652,
                     "endColumn": 12,
-                    "endOffset": 55400
+                    "endOffset": 55407
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6746,10 +6746,10 @@
                 "to": {
                     "startLine": 653,
                     "startColumn": 4,
-                    "startOffset": 55405,
+                    "startOffset": 55412,
                     "endLine": 751,
                     "endColumn": 12,
-                    "endOffset": 62143
+                    "endOffset": 62150
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6767,10 +6767,10 @@
                 "to": {
                     "startLine": 752,
                     "startColumn": 4,
-                    "startOffset": 62148,
+                    "startOffset": 62155,
                     "endLine": 847,
                     "endColumn": 12,
-                    "endOffset": 68765
+                    "endOffset": 68772
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6788,10 +6788,10 @@
                 "to": {
                     "startLine": 848,
                     "startColumn": 4,
-                    "startOffset": 68770,
+                    "startOffset": 68777,
                     "endLine": 946,
                     "endColumn": 12,
-                    "endOffset": 75604
+                    "endOffset": 75611
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6809,10 +6809,10 @@
                 "to": {
                     "startLine": 947,
                     "startColumn": 4,
-                    "startOffset": 75609,
+                    "startOffset": 75616,
                     "endLine": 961,
                     "endColumn": 12,
-                    "endOffset": 76543
+                    "endOffset": 76550
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6830,10 +6830,10 @@
                 "to": {
                     "startLine": 962,
                     "startColumn": 4,
-                    "startOffset": 76548,
+                    "startOffset": 76555,
                     "endLine": 966,
                     "endColumn": 12,
-                    "endOffset": 76799
+                    "endOffset": 76806
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6851,10 +6851,10 @@
                 "to": {
                     "startLine": 967,
                     "startColumn": 4,
-                    "startOffset": 76804,
+                    "startOffset": 76811,
                     "endLine": 971,
                     "endColumn": 12,
-                    "endOffset": 77035
+                    "endOffset": 77042
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6872,10 +6872,10 @@
                 "to": {
                     "startLine": 972,
                     "startColumn": 4,
-                    "startOffset": 77040,
+                    "startOffset": 77047,
                     "endLine": 981,
                     "endColumn": 12,
-                    "endOffset": 77582
+                    "endOffset": 77589
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6893,10 +6893,10 @@
                 "to": {
                     "startLine": 982,
                     "startColumn": 4,
-                    "startOffset": 77587,
+                    "startOffset": 77594,
                     "endLine": 990,
                     "endColumn": 12,
-                    "endOffset": 78076
+                    "endOffset": 78083
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6914,10 +6914,10 @@
                 "to": {
                     "startLine": 991,
                     "startColumn": 4,
-                    "startOffset": 78081,
+                    "startOffset": 78088,
                     "endLine": 1001,
                     "endColumn": 12,
-                    "endOffset": 78749
+                    "endOffset": 78756
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6935,10 +6935,10 @@
                 "to": {
                     "startLine": 1002,
                     "startColumn": 4,
-                    "startOffset": 78754,
+                    "startOffset": 78761,
                     "endLine": 1004,
                     "endColumn": 12,
-                    "endOffset": 78914
+                    "endOffset": 78921
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6956,10 +6956,10 @@
                 "to": {
                     "startLine": 1005,
                     "startColumn": 4,
-                    "startOffset": 78919,
+                    "startOffset": 78926,
                     "endLine": 1011,
                     "endColumn": 12,
-                    "endOffset": 79442
+                    "endOffset": 79449
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6977,10 +6977,10 @@
                 "to": {
                     "startLine": 1012,
                     "startColumn": 4,
-                    "startOffset": 79447,
+                    "startOffset": 79454,
                     "endLine": 1019,
                     "endColumn": 12,
-                    "endOffset": 80006
+                    "endOffset": 80013
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -6998,10 +6998,10 @@
                 "to": {
                     "startLine": 1020,
                     "startColumn": 4,
-                    "startOffset": 80011,
+                    "startOffset": 80018,
                     "endLine": 1026,
                     "endColumn": 12,
-                    "endOffset": 80380
+                    "endOffset": 80387
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7019,10 +7019,10 @@
                 "to": {
                     "startLine": 1027,
                     "startColumn": 4,
-                    "startOffset": 80385,
+                    "startOffset": 80392,
                     "endLine": 1031,
                     "endColumn": 12,
-                    "endOffset": 80750
+                    "endOffset": 80757
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7040,10 +7040,10 @@
                 "to": {
                     "startLine": 1032,
                     "startColumn": 4,
-                    "startOffset": 80755,
+                    "startOffset": 80762,
                     "endLine": 1038,
                     "endColumn": 12,
-                    "endOffset": 81241
+                    "endOffset": 81248
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7061,10 +7061,10 @@
                 "to": {
                     "startLine": 1039,
                     "startColumn": 4,
-                    "startOffset": 81246,
+                    "startOffset": 81253,
                     "endLine": 1048,
                     "endColumn": 12,
-                    "endOffset": 81718
+                    "endOffset": 81725
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7082,10 +7082,10 @@
                 "to": {
                     "startLine": 1049,
                     "startColumn": 4,
-                    "startOffset": 81723,
+                    "startOffset": 81730,
                     "endLine": 1054,
                     "endColumn": 12,
-                    "endOffset": 82071
+                    "endOffset": 82078
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7103,10 +7103,10 @@
                 "to": {
                     "startLine": 1055,
                     "startColumn": 4,
-                    "startOffset": 82076,
+                    "startOffset": 82083,
                     "endLine": 1059,
                     "endColumn": 12,
-                    "endOffset": 82398
+                    "endOffset": 82405
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7124,10 +7124,10 @@
                 "to": {
                     "startLine": 1060,
                     "startColumn": 4,
-                    "startOffset": 82403,
+                    "startOffset": 82410,
                     "endLine": 1063,
                     "endColumn": 12,
-                    "endOffset": 82704
+                    "endOffset": 82711
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7145,10 +7145,10 @@
                 "to": {
                     "startLine": 1064,
                     "startColumn": 4,
-                    "startOffset": 82709,
+                    "startOffset": 82716,
                     "endLine": 1068,
                     "endColumn": 12,
-                    "endOffset": 82966
+                    "endOffset": 82973
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7166,9 +7166,9 @@
                 "to": {
                     "startLine": 1069,
                     "startColumn": 4,
-                    "startOffset": 82971,
+                    "startOffset": 82978,
                     "endColumn": 112,
-                    "endOffset": 83079
+                    "endOffset": 83086
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7185,9 +7185,9 @@
                 "to": {
                     "startLine": 1070,
                     "startColumn": 4,
-                    "startOffset": 83084,
+                    "startOffset": 83091,
                     "endColumn": 114,
-                    "endOffset": 83194
+                    "endOffset": 83201
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7204,10 +7204,10 @@
                 "to": {
                     "startLine": 1071,
                     "startColumn": 4,
-                    "startOffset": 83199,
+                    "startOffset": 83206,
                     "endLine": 1073,
                     "endColumn": 12,
-                    "endOffset": 83433
+                    "endOffset": 83440
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7225,10 +7225,10 @@
                 "to": {
                     "startLine": 1074,
                     "startColumn": 4,
-                    "startOffset": 83438,
+                    "startOffset": 83445,
                     "endLine": 1076,
                     "endColumn": 12,
-                    "endOffset": 83644
+                    "endOffset": 83651
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7246,10 +7246,10 @@
                 "to": {
                     "startLine": 1077,
                     "startColumn": 4,
-                    "startOffset": 83649,
+                    "startOffset": 83656,
                     "endLine": 1079,
                     "endColumn": 12,
-                    "endOffset": 83861
+                    "endOffset": 83868
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7267,10 +7267,10 @@
                 "to": {
                     "startLine": 1080,
                     "startColumn": 4,
-                    "startOffset": 83866,
+                    "startOffset": 83873,
                     "endLine": 1082,
                     "endColumn": 12,
-                    "endOffset": 84079
+                    "endOffset": 84086
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7288,9 +7288,9 @@
                 "to": {
                     "startLine": 1083,
                     "startColumn": 4,
-                    "startOffset": 84084,
+                    "startOffset": 84091,
                     "endColumn": 106,
-                    "endOffset": 84186
+                    "endOffset": 84193
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7307,10 +7307,10 @@
                 "to": {
                     "startLine": 1084,
                     "startColumn": 4,
-                    "startOffset": 84191,
+                    "startOffset": 84198,
                     "endLine": 1087,
                     "endColumn": 12,
-                    "endOffset": 84379
+                    "endOffset": 84386
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7328,10 +7328,10 @@
                 "to": {
                     "startLine": 1088,
                     "startColumn": 4,
-                    "startOffset": 84384,
+                    "startOffset": 84391,
                     "endLine": 1094,
                     "endColumn": 12,
-                    "endOffset": 84834
+                    "endOffset": 84841
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7349,10 +7349,10 @@
                 "to": {
                     "startLine": 1095,
                     "startColumn": 4,
-                    "startOffset": 84839,
+                    "startOffset": 84846,
                     "endLine": 1098,
                     "endColumn": 12,
-                    "endOffset": 85074
+                    "endOffset": 85081
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7370,10 +7370,10 @@
                 "to": {
                     "startLine": 1099,
                     "startColumn": 4,
-                    "startOffset": 85079,
+                    "startOffset": 85086,
                     "endLine": 1102,
                     "endColumn": 12,
-                    "endOffset": 85333
+                    "endOffset": 85340
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7391,9 +7391,9 @@
                 "to": {
                     "startLine": 1103,
                     "startColumn": 4,
-                    "startOffset": 85338,
+                    "startOffset": 85345,
                     "endColumn": 100,
-                    "endOffset": 85434
+                    "endOffset": 85441
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7410,10 +7410,10 @@
                 "to": {
                     "startLine": 1104,
                     "startColumn": 4,
-                    "startOffset": 85439,
+                    "startOffset": 85446,
                     "endLine": 1107,
                     "endColumn": 12,
-                    "endOffset": 85621
+                    "endOffset": 85628
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7431,9 +7431,9 @@
                 "to": {
                     "startLine": 1108,
                     "startColumn": 4,
-                    "startOffset": 85626,
+                    "startOffset": 85633,
                     "endColumn": 89,
-                    "endOffset": 85711
+                    "endOffset": 85718
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7450,10 +7450,10 @@
                 "to": {
                     "startLine": 1109,
                     "startColumn": 4,
-                    "startOffset": 85716,
+                    "startOffset": 85723,
                     "endLine": 1114,
                     "endColumn": 12,
-                    "endOffset": 86155
+                    "endOffset": 86162
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7471,9 +7471,9 @@
                 "to": {
                     "startLine": 1115,
                     "startColumn": 4,
-                    "startOffset": 86160,
+                    "startOffset": 86167,
                     "endColumn": 111,
-                    "endOffset": 86267
+                    "endOffset": 86274
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7490,10 +7490,10 @@
                 "to": {
                     "startLine": 1116,
                     "startColumn": 4,
-                    "startOffset": 86272,
+                    "startOffset": 86279,
                     "endLine": 1126,
                     "endColumn": 12,
-                    "endOffset": 87072
+                    "endOffset": 87079
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7511,10 +7511,10 @@
                 "to": {
                     "startLine": 1127,
                     "startColumn": 4,
-                    "startOffset": 87077,
+                    "startOffset": 87084,
                     "endLine": 1131,
                     "endColumn": 12,
-                    "endOffset": 87402
+                    "endOffset": 87409
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7532,10 +7532,10 @@
                 "to": {
                     "startLine": 1132,
                     "startColumn": 4,
-                    "startOffset": 87407,
+                    "startOffset": 87414,
                     "endLine": 1145,
                     "endColumn": 12,
-                    "endOffset": 88321
+                    "endOffset": 88328
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7553,10 +7553,10 @@
                 "to": {
                     "startLine": 1146,
                     "startColumn": 4,
-                    "startOffset": 88326,
+                    "startOffset": 88333,
                     "endLine": 1155,
                     "endColumn": 12,
-                    "endOffset": 88987
+                    "endOffset": 88994
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7574,10 +7574,10 @@
                 "to": {
                     "startLine": 1156,
                     "startColumn": 4,
-                    "startOffset": 88992,
+                    "startOffset": 88999,
                     "endLine": 1160,
                     "endColumn": 12,
-                    "endOffset": 89272
+                    "endOffset": 89279
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7595,10 +7595,10 @@
                 "to": {
                     "startLine": 1161,
                     "startColumn": 4,
-                    "startOffset": 89277,
+                    "startOffset": 89284,
                     "endLine": 1168,
                     "endColumn": 12,
-                    "endOffset": 89738
+                    "endOffset": 89745
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\cardview-v7\\21.0.3\\res\\values\\values.xml",
@@ -7616,10 +7616,10 @@
                 "to": {
                     "startLine": 1169,
                     "startColumn": 4,
-                    "startOffset": 89743,
+                    "startOffset": 89750,
                     "endLine": 1171,
                     "endColumn": 12,
-                    "endOffset": 89864
+                    "endOffset": 89871
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\cardview-v7\\21.0.3\\res\\values\\values.xml",
@@ -7637,10 +7637,10 @@
                 "to": {
                     "startLine": 1172,
                     "startColumn": 4,
-                    "startOffset": 89869,
+                    "startOffset": 89876,
                     "endLine": 1174,
                     "endColumn": 12,
-                    "endOffset": 89992
+                    "endOffset": 89999
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\cardview-v7\\21.0.3\\res\\values\\values.xml",
@@ -7658,9 +7658,9 @@
                 "to": {
                     "startLine": 1175,
                     "startColumn": 4,
-                    "startOffset": 89997,
+                    "startOffset": 90004,
                     "endColumn": 24,
-                    "endOffset": 90017
+                    "endOffset": 90024
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\values\\values.xml",
@@ -7677,10 +7677,10 @@
                 "to": {
                     "startLine": 1176,
                     "startColumn": 4,
-                    "startOffset": 90022,
+                    "startOffset": 90029,
                     "endLine": 1181,
                     "endColumn": 12,
-                    "endOffset": 90320
+                    "endOffset": 90327
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\values\\values.xml",
@@ -7698,10 +7698,10 @@
                 "to": {
                     "startLine": 1182,
                     "startColumn": 4,
-                    "startOffset": 90325,
+                    "startOffset": 90332,
                     "endLine": 1192,
                     "endColumn": 12,
-                    "endOffset": 90930
+                    "endOffset": 90937
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\values\\values.xml",
@@ -7719,10 +7719,10 @@
                 "to": {
                     "startLine": 1193,
                     "startColumn": 4,
-                    "startOffset": 90935,
+                    "startOffset": 90942,
                     "endLine": 1196,
                     "endColumn": 12,
-                    "endOffset": 91128
+                    "endOffset": 91135
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\values\\values.xml",
@@ -7740,10 +7740,10 @@
                 "to": {
                     "startLine": 1197,
                     "startColumn": 4,
-                    "startOffset": 91133,
+                    "startOffset": 91140,
                     "endLine": 1200,
                     "endColumn": 12,
-                    "endOffset": 91320
+                    "endOffset": 91327
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\values\\values.xml",
@@ -7761,10 +7761,10 @@
                 "to": {
                     "startLine": 1201,
                     "startColumn": 4,
-                    "startOffset": 91325,
+                    "startOffset": 91332,
                     "endLine": 1209,
                     "endColumn": 12,
-                    "endOffset": 91857
+                    "endOffset": 91864
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\values\\values.xml",
@@ -7782,10 +7782,10 @@
                 "to": {
                     "startLine": 1210,
                     "startColumn": 4,
-                    "startOffset": 91862,
+                    "startOffset": 91869,
                     "endLine": 1215,
                     "endColumn": 12,
-                    "endOffset": 92159
+                    "endOffset": 92166
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\styles.xml",
@@ -7803,10 +7803,10 @@
                 "to": {
                     "startLine": 1216,
                     "startColumn": 4,
-                    "startOffset": 92164,
+                    "startOffset": 92171,
                     "endLine": 1218,
                     "endColumn": 12,
-                    "endOffset": 92263
+                    "endOffset": 92270
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\styles.xml",
@@ -7824,10 +7824,10 @@
                 "to": {
                     "startLine": 1219,
                     "startColumn": 4,
-                    "startOffset": 92268,
+                    "startOffset": 92275,
                     "endLine": 1259,
                     "endColumn": 12,
-                    "endOffset": 95442
+                    "endOffset": 95449
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7845,10 +7845,10 @@
                 "to": {
                     "startLine": 1260,
                     "startColumn": 4,
-                    "startOffset": 95447,
+                    "startOffset": 95454,
                     "endLine": 1300,
                     "endColumn": 12,
-                    "endOffset": 98635
+                    "endOffset": 98642
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7866,10 +7866,10 @@
                 "to": {
                     "startLine": 1301,
                     "startColumn": 4,
-                    "startOffset": 98640,
+                    "startOffset": 98647,
                     "endLine": 1342,
                     "endColumn": 12,
-                    "endOffset": 101954
+                    "endOffset": 101961
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7887,9 +7887,9 @@
                 "to": {
                     "startLine": 1343,
                     "startColumn": 4,
-                    "startOffset": 101959,
+                    "startOffset": 101966,
                     "endColumn": 86,
-                    "endOffset": 102041
+                    "endOffset": 102048
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7906,10 +7906,10 @@
                 "to": {
                     "startLine": 1344,
                     "startColumn": 4,
-                    "startOffset": 102046,
+                    "startOffset": 102053,
                     "endLine": 1347,
                     "endColumn": 12,
-                    "endOffset": 102270
+                    "endOffset": 102277
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7927,10 +7927,10 @@
                 "to": {
                     "startLine": 1348,
                     "startColumn": 4,
-                    "startOffset": 102275,
+                    "startOffset": 102282,
                     "endLine": 1351,
                     "endColumn": 12,
-                    "endOffset": 102519
+                    "endOffset": 102526
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7948,10 +7948,10 @@
                 "to": {
                     "startLine": 1352,
                     "startColumn": 4,
-                    "startOffset": 102524,
+                    "startOffset": 102531,
                     "endLine": 1355,
                     "endColumn": 12,
-                    "endOffset": 102760
+                    "endOffset": 102767
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7969,10 +7969,10 @@
                 "to": {
                     "startLine": 1356,
                     "startColumn": 4,
-                    "startOffset": 102765,
+                    "startOffset": 102772,
                     "endLine": 1358,
                     "endColumn": 12,
-                    "endOffset": 102912
+                    "endOffset": 102919
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -7990,10 +7990,10 @@
                 "to": {
                     "startLine": 1359,
                     "startColumn": 4,
-                    "startOffset": 102917,
+                    "startOffset": 102924,
                     "endLine": 1361,
                     "endColumn": 12,
-                    "endOffset": 103083
+                    "endOffset": 103090
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8011,10 +8011,10 @@
                 "to": {
                     "startLine": 1362,
                     "startColumn": 4,
-                    "startOffset": 103088,
+                    "startOffset": 103095,
                     "endLine": 1364,
                     "endColumn": 12,
-                    "endOffset": 103250
+                    "endOffset": 103257
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8032,10 +8032,10 @@
                 "to": {
                     "startLine": 1365,
                     "startColumn": 4,
-                    "startOffset": 103255,
+                    "startOffset": 103262,
                     "endLine": 1368,
                     "endColumn": 12,
-                    "endOffset": 103493
+                    "endOffset": 103500
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8053,10 +8053,10 @@
                 "to": {
                     "startLine": 1369,
                     "startColumn": 4,
-                    "startOffset": 103498,
+                    "startOffset": 103505,
                     "endLine": 1371,
                     "endColumn": 12,
-                    "endOffset": 103663
+                    "endOffset": 103670
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8074,10 +8074,10 @@
                 "to": {
                     "startLine": 1372,
                     "startColumn": 4,
-                    "startOffset": 103668,
+                    "startOffset": 103675,
                     "endLine": 1374,
                     "endColumn": 12,
-                    "endOffset": 103836
+                    "endOffset": 103843
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8095,10 +8095,10 @@
                 "to": {
                     "startLine": 1375,
                     "startColumn": 4,
-                    "startOffset": 103841,
+                    "startOffset": 103848,
                     "endLine": 1377,
                     "endColumn": 12,
-                    "endOffset": 104007
+                    "endOffset": 104014
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8116,10 +8116,10 @@
                 "to": {
                     "startLine": 1378,
                     "startColumn": 4,
-                    "startOffset": 104012,
+                    "startOffset": 104019,
                     "endLine": 1381,
                     "endColumn": 12,
-                    "endOffset": 104281
+                    "endOffset": 104288
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8137,10 +8137,10 @@
                 "to": {
                     "startLine": 1382,
                     "startColumn": 4,
-                    "startOffset": 104286,
+                    "startOffset": 104293,
                     "endLine": 1384,
                     "endColumn": 12,
-                    "endOffset": 104480
+                    "endOffset": 104487
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8158,9 +8158,9 @@
                 "to": {
                     "startLine": 1385,
                     "startColumn": 4,
-                    "startOffset": 104485,
+                    "startOffset": 104492,
                     "endColumn": 83,
-                    "endOffset": 104564
+                    "endOffset": 104571
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8177,9 +8177,9 @@
                 "to": {
                     "startLine": 1386,
                     "startColumn": 4,
-                    "startOffset": 104569,
+                    "startOffset": 104576,
                     "endColumn": 95,
-                    "endOffset": 104660
+                    "endOffset": 104667
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8196,9 +8196,9 @@
                 "to": {
                     "startLine": 1387,
                     "startColumn": 4,
-                    "startOffset": 104665,
+                    "startOffset": 104672,
                     "endColumn": 95,
-                    "endOffset": 104756
+                    "endOffset": 104763
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8215,9 +8215,9 @@
                 "to": {
                     "startLine": 1388,
                     "startColumn": 4,
-                    "startOffset": 104761,
+                    "startOffset": 104768,
                     "endColumn": 97,
-                    "endOffset": 104854
+                    "endOffset": 104861
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8234,9 +8234,9 @@
                 "to": {
                     "startLine": 1389,
                     "startColumn": 4,
-                    "startOffset": 104859,
+                    "startOffset": 104866,
                     "endColumn": 99,
-                    "endOffset": 104954
+                    "endOffset": 104961
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8253,9 +8253,9 @@
                 "to": {
                     "startLine": 1390,
                     "startColumn": 4,
-                    "startOffset": 104959,
+                    "startOffset": 104966,
                     "endColumn": 101,
-                    "endOffset": 105056
+                    "endOffset": 105063
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8272,9 +8272,9 @@
                 "to": {
                     "startLine": 1391,
                     "startColumn": 4,
-                    "startOffset": 105061,
+                    "startOffset": 105068,
                     "endColumn": 101,
-                    "endOffset": 105158
+                    "endOffset": 105165
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8291,9 +8291,9 @@
                 "to": {
                     "startLine": 1392,
                     "startColumn": 4,
-                    "startOffset": 105163,
+                    "startOffset": 105170,
                     "endColumn": 101,
-                    "endOffset": 105260
+                    "endOffset": 105267
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8310,9 +8310,9 @@
                 "to": {
                     "startLine": 1393,
                     "startColumn": 4,
-                    "startOffset": 105265,
+                    "startOffset": 105272,
                     "endColumn": 101,
-                    "endOffset": 105362
+                    "endOffset": 105369
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8329,9 +8329,9 @@
                 "to": {
                     "startLine": 1394,
                     "startColumn": 4,
-                    "startOffset": 105367,
+                    "startOffset": 105374,
                     "endColumn": 101,
-                    "endOffset": 105464
+                    "endOffset": 105471
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8348,9 +8348,9 @@
                 "to": {
                     "startLine": 1395,
                     "startColumn": 4,
-                    "startOffset": 105469,
+                    "startOffset": 105476,
                     "endColumn": 99,
-                    "endOffset": 105564
+                    "endOffset": 105571
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8367,9 +8367,9 @@
                 "to": {
                     "startLine": 1396,
                     "startColumn": 4,
-                    "startOffset": 105569,
+                    "startOffset": 105576,
                     "endColumn": 95,
-                    "endOffset": 105660
+                    "endOffset": 105667
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8386,9 +8386,9 @@
                 "to": {
                     "startLine": 1397,
                     "startColumn": 4,
-                    "startOffset": 105665,
+                    "startOffset": 105672,
                     "endColumn": 111,
-                    "endOffset": 105772
+                    "endOffset": 105779
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8405,9 +8405,9 @@
                 "to": {
                     "startLine": 1398,
                     "startColumn": 4,
-                    "startOffset": 105777,
+                    "startOffset": 105784,
                     "endColumn": 128,
-                    "endOffset": 105901
+                    "endOffset": 105908
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8424,9 +8424,9 @@
                 "to": {
                     "startLine": 1399,
                     "startColumn": 4,
-                    "startOffset": 105906,
+                    "startOffset": 105913,
                     "endColumn": 122,
-                    "endOffset": 106024
+                    "endOffset": 106031
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8443,9 +8443,9 @@
                 "to": {
                     "startLine": 1400,
                     "startColumn": 4,
-                    "startOffset": 106029,
+                    "startOffset": 106036,
                     "endColumn": 141,
-                    "endOffset": 106166
+                    "endOffset": 106173
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8462,9 +8462,9 @@
                 "to": {
                     "startLine": 1401,
                     "startColumn": 4,
-                    "startOffset": 106171,
+                    "startOffset": 106178,
                     "endColumn": 141,
-                    "endOffset": 106308
+                    "endOffset": 106315
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8481,9 +8481,9 @@
                 "to": {
                     "startLine": 1402,
                     "startColumn": 4,
-                    "startOffset": 106313,
+                    "startOffset": 106320,
                     "endColumn": 97,
-                    "endOffset": 106406
+                    "endOffset": 106413
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8500,9 +8500,9 @@
                 "to": {
                     "startLine": 1403,
                     "startColumn": 4,
-                    "startOffset": 106411,
+                    "startOffset": 106418,
                     "endColumn": 113,
-                    "endOffset": 106520
+                    "endOffset": 106527
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8519,9 +8519,9 @@
                 "to": {
                     "startLine": 1404,
                     "startColumn": 4,
-                    "startOffset": 106525,
+                    "startOffset": 106532,
                     "endColumn": 93,
-                    "endOffset": 106614
+                    "endOffset": 106621
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8538,9 +8538,9 @@
                 "to": {
                     "startLine": 1405,
                     "startColumn": 4,
-                    "startOffset": 106619,
+                    "startOffset": 106626,
                     "endColumn": 127,
-                    "endOffset": 106742
+                    "endOffset": 106749
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8557,9 +8557,9 @@
                 "to": {
                     "startLine": 1406,
                     "startColumn": 4,
-                    "startOffset": 106747,
+                    "startOffset": 106754,
                     "endColumn": 121,
-                    "endOffset": 106864
+                    "endOffset": 106871
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8576,9 +8576,9 @@
                 "to": {
                     "startLine": 1407,
                     "startColumn": 4,
-                    "startOffset": 106869,
+                    "startOffset": 106876,
                     "endColumn": 95,
-                    "endOffset": 106960
+                    "endOffset": 106967
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8595,9 +8595,9 @@
                 "to": {
                     "startLine": 1408,
                     "startColumn": 4,
-                    "startOffset": 106965,
+                    "startOffset": 106972,
                     "endColumn": 111,
-                    "endOffset": 107072
+                    "endOffset": 107079
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8614,9 +8614,9 @@
                 "to": {
                     "startLine": 1409,
                     "startColumn": 4,
-                    "startOffset": 107077,
+                    "startOffset": 107084,
                     "endColumn": 99,
-                    "endOffset": 107172
+                    "endOffset": 107179
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8633,9 +8633,9 @@
                 "to": {
                     "startLine": 1410,
                     "startColumn": 4,
-                    "startOffset": 107177,
+                    "startOffset": 107184,
                     "endColumn": 115,
-                    "endOffset": 107288
+                    "endOffset": 107295
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8652,9 +8652,9 @@
                 "to": {
                     "startLine": 1411,
                     "startColumn": 4,
-                    "startOffset": 107293,
+                    "startOffset": 107300,
                     "endColumn": 95,
-                    "endOffset": 107384
+                    "endOffset": 107391
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8671,9 +8671,9 @@
                 "to": {
                     "startLine": 1412,
                     "startColumn": 4,
-                    "startOffset": 107389,
+                    "startOffset": 107396,
                     "endColumn": 111,
-                    "endOffset": 107496
+                    "endOffset": 107503
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8690,9 +8690,9 @@
                 "to": {
                     "startLine": 1413,
                     "startColumn": 4,
-                    "startOffset": 107501,
+                    "startOffset": 107508,
                     "endColumn": 127,
-                    "endOffset": 107624
+                    "endOffset": 107631
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8709,9 +8709,9 @@
                 "to": {
                     "startLine": 1414,
                     "startColumn": 4,
-                    "startOffset": 107629,
+                    "startOffset": 107636,
                     "endColumn": 135,
-                    "endOffset": 107760
+                    "endOffset": 107767
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8728,9 +8728,9 @@
                 "to": {
                     "startLine": 1415,
                     "startColumn": 4,
-                    "startOffset": 107765,
+                    "startOffset": 107772,
                     "endColumn": 151,
-                    "endOffset": 107912
+                    "endOffset": 107919
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8747,9 +8747,9 @@
                 "to": {
                     "startLine": 1416,
                     "startColumn": 4,
-                    "startOffset": 107917,
+                    "startOffset": 107924,
                     "endColumn": 129,
-                    "endOffset": 108042
+                    "endOffset": 108049
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8766,9 +8766,9 @@
                 "to": {
                     "startLine": 1417,
                     "startColumn": 4,
-                    "startOffset": 108047,
+                    "startOffset": 108054,
                     "endColumn": 145,
-                    "endOffset": 108188
+                    "endOffset": 108195
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8785,9 +8785,9 @@
                 "to": {
                     "startLine": 1418,
                     "startColumn": 4,
-                    "startOffset": 108193,
+                    "startOffset": 108200,
                     "endColumn": 137,
-                    "endOffset": 108326
+                    "endOffset": 108333
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8804,9 +8804,9 @@
                 "to": {
                     "startLine": 1419,
                     "startColumn": 4,
-                    "startOffset": 108331,
+                    "startOffset": 108338,
                     "endColumn": 140,
-                    "endOffset": 108467
+                    "endOffset": 108474
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8823,9 +8823,9 @@
                 "to": {
                     "startLine": 1420,
                     "startColumn": 4,
-                    "startOffset": 108472,
+                    "startOffset": 108479,
                     "endColumn": 131,
-                    "endOffset": 108599
+                    "endOffset": 108606
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8842,9 +8842,9 @@
                 "to": {
                     "startLine": 1421,
                     "startColumn": 4,
-                    "startOffset": 108604,
+                    "startOffset": 108611,
                     "endColumn": 134,
-                    "endOffset": 108734
+                    "endOffset": 108741
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8861,9 +8861,9 @@
                 "to": {
                     "startLine": 1422,
                     "startColumn": 4,
-                    "startOffset": 108739,
+                    "startOffset": 108746,
                     "endColumn": 123,
-                    "endOffset": 108858
+                    "endOffset": 108865
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8880,9 +8880,9 @@
                 "to": {
                     "startLine": 1423,
                     "startColumn": 4,
-                    "startOffset": 108863,
+                    "startOffset": 108870,
                     "endColumn": 129,
-                    "endOffset": 108988
+                    "endOffset": 108995
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8899,9 +8899,9 @@
                 "to": {
                     "startLine": 1424,
                     "startColumn": 4,
-                    "startOffset": 108993,
+                    "startOffset": 109000,
                     "endColumn": 129,
-                    "endOffset": 109118
+                    "endOffset": 109125
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8918,9 +8918,9 @@
                 "to": {
                     "startLine": 1425,
                     "startColumn": 4,
-                    "startOffset": 109123,
+                    "startOffset": 109130,
                     "endColumn": 111,
-                    "endOffset": 109230
+                    "endOffset": 109237
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8937,9 +8937,9 @@
                 "to": {
                     "startLine": 1426,
                     "startColumn": 4,
-                    "startOffset": 109235,
+                    "startOffset": 109242,
                     "endColumn": 133,
-                    "endOffset": 109364
+                    "endOffset": 109371
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8956,9 +8956,9 @@
                 "to": {
                     "startLine": 1427,
                     "startColumn": 4,
-                    "startOffset": 109369,
+                    "startOffset": 109376,
                     "endColumn": 131,
-                    "endOffset": 109496
+                    "endOffset": 109503
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8975,9 +8975,9 @@
                 "to": {
                     "startLine": 1428,
                     "startColumn": 4,
-                    "startOffset": 109501,
+                    "startOffset": 109508,
                     "endColumn": 125,
-                    "endOffset": 109622
+                    "endOffset": 109629
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -8994,9 +8994,9 @@
                 "to": {
                     "startLine": 1429,
                     "startColumn": 4,
-                    "startOffset": 109627,
+                    "startOffset": 109634,
                     "endColumn": 65,
-                    "endOffset": 109688
+                    "endOffset": 109695
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9013,9 +9013,9 @@
                 "to": {
                     "startLine": 1430,
                     "startColumn": 4,
-                    "startOffset": 109693,
+                    "startOffset": 109700,
                     "endColumn": 89,
-                    "endOffset": 109778
+                    "endOffset": 109785
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9032,9 +9032,9 @@
                 "to": {
                     "startLine": 1431,
                     "startColumn": 4,
-                    "startOffset": 109783,
+                    "startOffset": 109790,
                     "endColumn": 79,
-                    "endOffset": 109858
+                    "endOffset": 109865
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9051,9 +9051,9 @@
                 "to": {
                     "startLine": 1432,
                     "startColumn": 4,
-                    "startOffset": 109863,
+                    "startOffset": 109870,
                     "endColumn": 97,
-                    "endOffset": 109956
+                    "endOffset": 109963
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9070,9 +9070,9 @@
                 "to": {
                     "startLine": 1433,
                     "startColumn": 4,
-                    "startOffset": 109961,
+                    "startOffset": 109968,
                     "endColumn": 77,
-                    "endOffset": 110034
+                    "endOffset": 110041
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9089,9 +9089,9 @@
                 "to": {
                     "startLine": 1434,
                     "startColumn": 4,
-                    "startOffset": 110039,
+                    "startOffset": 110046,
                     "endColumn": 105,
-                    "endOffset": 110140
+                    "endOffset": 110147
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9108,9 +9108,9 @@
                 "to": {
                     "startLine": 1435,
                     "startColumn": 4,
-                    "startOffset": 110145,
+                    "startOffset": 110152,
                     "endColumn": 91,
-                    "endOffset": 110232
+                    "endOffset": 110239
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9127,9 +9127,9 @@
                 "to": {
                     "startLine": 1436,
                     "startColumn": 4,
-                    "startOffset": 110237,
+                    "startOffset": 110244,
                     "endColumn": 109,
-                    "endOffset": 110342
+                    "endOffset": 110349
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9146,10 +9146,10 @@
                 "to": {
                     "startLine": 1437,
                     "startColumn": 4,
-                    "startOffset": 110347,
+                    "startOffset": 110354,
                     "endLine": 1440,
                     "endColumn": 12,
-                    "endOffset": 110513
+                    "endOffset": 110520
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9167,10 +9167,10 @@
                 "to": {
                     "startLine": 1441,
                     "startColumn": 4,
-                    "startOffset": 110518,
+                    "startOffset": 110525,
                     "endLine": 1444,
                     "endColumn": 12,
-                    "endOffset": 110678
+                    "endOffset": 110685
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9188,9 +9188,9 @@
                 "to": {
                     "startLine": 1445,
                     "startColumn": 4,
-                    "startOffset": 110683,
+                    "startOffset": 110690,
                     "endColumn": 79,
-                    "endOffset": 110758
+                    "endOffset": 110765
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9207,9 +9207,9 @@
                 "to": {
                     "startLine": 1446,
                     "startColumn": 4,
-                    "startOffset": 110763,
+                    "startOffset": 110770,
                     "endColumn": 99,
-                    "endOffset": 110858
+                    "endOffset": 110865
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9226,9 +9226,9 @@
                 "to": {
                     "startLine": 1447,
                     "startColumn": 4,
-                    "startOffset": 110863,
+                    "startOffset": 110870,
                     "endColumn": 89,
-                    "endOffset": 110948
+                    "endOffset": 110955
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9245,9 +9245,9 @@
                 "to": {
                     "startLine": 1448,
                     "startColumn": 4,
-                    "startOffset": 110953,
+                    "startOffset": 110960,
                     "endColumn": 109,
-                    "endOffset": 111058
+                    "endOffset": 111065
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9264,9 +9264,9 @@
                 "to": {
                     "startLine": 1449,
                     "startColumn": 4,
-                    "startOffset": 111063,
+                    "startOffset": 111070,
                     "endColumn": 91,
-                    "endOffset": 111150
+                    "endOffset": 111157
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9283,9 +9283,9 @@
                 "to": {
                     "startLine": 1450,
                     "startColumn": 4,
-                    "startOffset": 111155,
+                    "startOffset": 111162,
                     "endColumn": 87,
-                    "endOffset": 111238
+                    "endOffset": 111245
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9302,9 +9302,9 @@
                 "to": {
                     "startLine": 1451,
                     "startColumn": 4,
-                    "startOffset": 111243,
+                    "startOffset": 111250,
                     "endColumn": 99,
-                    "endOffset": 111338
+                    "endOffset": 111345
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9321,9 +9321,9 @@
                 "to": {
                     "startLine": 1452,
                     "startColumn": 4,
-                    "startOffset": 111343,
+                    "startOffset": 111350,
                     "endColumn": 101,
-                    "endOffset": 111440
+                    "endOffset": 111447
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9340,9 +9340,9 @@
                 "to": {
                     "startLine": 1453,
                     "startColumn": 4,
-                    "startOffset": 111445,
+                    "startOffset": 111452,
                     "endColumn": 103,
-                    "endOffset": 111544
+                    "endOffset": 111551
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9359,9 +9359,9 @@
                 "to": {
                     "startLine": 1454,
                     "startColumn": 4,
-                    "startOffset": 111549,
+                    "startOffset": 111556,
                     "endColumn": 103,
-                    "endOffset": 111648
+                    "endOffset": 111655
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9378,9 +9378,9 @@
                 "to": {
                     "startLine": 1455,
                     "startColumn": 4,
-                    "startOffset": 111653,
+                    "startOffset": 111660,
                     "endColumn": 93,
-                    "endOffset": 111742
+                    "endOffset": 111749
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9397,9 +9397,9 @@
                 "to": {
                     "startLine": 1456,
                     "startColumn": 4,
-                    "startOffset": 111747,
+                    "startOffset": 111754,
                     "endColumn": 119,
-                    "endOffset": 111862
+                    "endOffset": 111869
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9416,9 +9416,9 @@
                 "to": {
                     "startLine": 1457,
                     "startColumn": 4,
-                    "startOffset": 111867,
+                    "startOffset": 111874,
                     "endColumn": 117,
-                    "endOffset": 111980
+                    "endOffset": 111987
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9435,9 +9435,9 @@
                 "to": {
                     "startLine": 1458,
                     "startColumn": 4,
-                    "startOffset": 111985,
+                    "startOffset": 111992,
                     "endColumn": 89,
-                    "endOffset": 112070
+                    "endOffset": 112077
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9454,9 +9454,9 @@
                 "to": {
                     "startLine": 1459,
                     "startColumn": 4,
-                    "startOffset": 112075,
+                    "startOffset": 112082,
                     "endColumn": 107,
-                    "endOffset": 112178
+                    "endOffset": 112185
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9473,9 +9473,9 @@
                 "to": {
                     "startLine": 1460,
                     "startColumn": 4,
-                    "startOffset": 112183,
+                    "startOffset": 112190,
                     "endColumn": 109,
-                    "endOffset": 112288
+                    "endOffset": 112295
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9492,9 +9492,9 @@
                 "to": {
                     "startLine": 1461,
                     "startColumn": 4,
-                    "startOffset": 112293,
+                    "startOffset": 112300,
                     "endColumn": 111,
-                    "endOffset": 112400
+                    "endOffset": 112407
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9511,10 +9511,10 @@
                 "to": {
                     "startLine": 1462,
                     "startColumn": 4,
-                    "startOffset": 112405,
+                    "startOffset": 112412,
                     "endLine": 1464,
                     "endColumn": 12,
-                    "endOffset": 112575
+                    "endOffset": 112582
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9532,9 +9532,9 @@
                 "to": {
                     "startLine": 1465,
                     "startColumn": 4,
-                    "startOffset": 112580,
+                    "startOffset": 112587,
                     "endColumn": 115,
-                    "endOffset": 112691
+                    "endOffset": 112698
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9551,9 +9551,9 @@
                 "to": {
                     "startLine": 1466,
                     "startColumn": 4,
-                    "startOffset": 112696,
+                    "startOffset": 112703,
                     "endColumn": 85,
-                    "endOffset": 112777
+                    "endOffset": 112784
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9570,9 +9570,9 @@
                 "to": {
                     "startLine": 1467,
                     "startColumn": 4,
-                    "startOffset": 112782,
+                    "startOffset": 112789,
                     "endColumn": 99,
-                    "endOffset": 112877
+                    "endOffset": 112884
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9589,9 +9589,9 @@
                 "to": {
                     "startLine": 1468,
                     "startColumn": 4,
-                    "startOffset": 112882,
+                    "startOffset": 112889,
                     "endColumn": 111,
-                    "endOffset": 112989
+                    "endOffset": 112996
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9608,9 +9608,9 @@
                 "to": {
                     "startLine": 1469,
                     "startColumn": 4,
-                    "startOffset": 112994,
+                    "startOffset": 113001,
                     "endColumn": 66,
-                    "endOffset": 113056
+                    "endOffset": 113063
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9627,9 +9627,9 @@
                 "to": {
                     "startLine": 1470,
                     "startColumn": 4,
-                    "startOffset": 113061,
+                    "startOffset": 113068,
                     "endColumn": 113,
-                    "endOffset": 113170
+                    "endOffset": 113177
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9646,9 +9646,9 @@
                 "to": {
                     "startLine": 1471,
                     "startColumn": 4,
-                    "startOffset": 113175,
+                    "startOffset": 113182,
                     "endColumn": 67,
-                    "endOffset": 113238
+                    "endOffset": 113245
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9665,9 +9665,9 @@
                 "to": {
                     "startLine": 1472,
                     "startColumn": 4,
-                    "startOffset": 113243,
+                    "startOffset": 113250,
                     "endColumn": 115,
-                    "endOffset": 113354
+                    "endOffset": 113361
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9684,9 +9684,9 @@
                 "to": {
                     "startLine": 1473,
                     "startColumn": 4,
-                    "startOffset": 113359,
+                    "startOffset": 113366,
                     "endColumn": 131,
-                    "endOffset": 113486
+                    "endOffset": 113493
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9703,9 +9703,9 @@
                 "to": {
                     "startLine": 1474,
                     "startColumn": 4,
-                    "startOffset": 113491,
+                    "startOffset": 113498,
                     "endColumn": 115,
-                    "endOffset": 113602
+                    "endOffset": 113609
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9722,9 +9722,9 @@
                 "to": {
                     "startLine": 1475,
                     "startColumn": 4,
-                    "startOffset": 113607,
+                    "startOffset": 113614,
                     "endColumn": 68,
-                    "endOffset": 113671
+                    "endOffset": 113678
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9741,9 +9741,9 @@
                 "to": {
                     "startLine": 1476,
                     "startColumn": 4,
-                    "startOffset": 113676,
+                    "startOffset": 113683,
                     "endColumn": 94,
-                    "endOffset": 113766
+                    "endOffset": 113773
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9760,9 +9760,9 @@
                 "to": {
                     "startLine": 1477,
                     "startColumn": 4,
-                    "startOffset": 113771,
+                    "startOffset": 113778,
                     "endColumn": 114,
-                    "endOffset": 113881
+                    "endOffset": 113888
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9779,9 +9779,9 @@
                 "to": {
                     "startLine": 1478,
                     "startColumn": 4,
-                    "startOffset": 113886,
+                    "startOffset": 113893,
                     "endColumn": 112,
-                    "endOffset": 113994
+                    "endOffset": 114001
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9798,9 +9798,9 @@
                 "to": {
                     "startLine": 1479,
                     "startColumn": 4,
-                    "startOffset": 113999,
+                    "startOffset": 114006,
                     "endColumn": 98,
-                    "endOffset": 114093
+                    "endOffset": 114100
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9817,9 +9817,9 @@
                 "to": {
                     "startLine": 1480,
                     "startColumn": 4,
-                    "startOffset": 114098,
+                    "startOffset": 114105,
                     "endColumn": 119,
-                    "endOffset": 114213
+                    "endOffset": 114220
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9836,9 +9836,9 @@
                 "to": {
                     "startLine": 1481,
                     "startColumn": 4,
-                    "startOffset": 114218,
+                    "startOffset": 114225,
                     "endColumn": 121,
-                    "endOffset": 114335
+                    "endOffset": 114342
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9855,9 +9855,9 @@
                 "to": {
                     "startLine": 1482,
                     "startColumn": 4,
-                    "startOffset": 114340,
+                    "startOffset": 114347,
                     "endColumn": 110,
-                    "endOffset": 114446
+                    "endOffset": 114453
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9874,9 +9874,9 @@
                 "to": {
                     "startLine": 1483,
                     "startColumn": 4,
-                    "startOffset": 114451,
+                    "startOffset": 114458,
                     "endColumn": 100,
-                    "endOffset": 114547
+                    "endOffset": 114554
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9893,9 +9893,9 @@
                 "to": {
                     "startLine": 1484,
                     "startColumn": 4,
-                    "startOffset": 114552,
+                    "startOffset": 114559,
                     "endColumn": 104,
-                    "endOffset": 114652
+                    "endOffset": 114659
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9912,9 +9912,9 @@
                 "to": {
                     "startLine": 1485,
                     "startColumn": 4,
-                    "startOffset": 114657,
+                    "startOffset": 114664,
                     "endColumn": 99,
-                    "endOffset": 114752
+                    "endOffset": 114759
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9931,9 +9931,9 @@
                 "to": {
                     "startLine": 1486,
                     "startColumn": 4,
-                    "startOffset": 114757,
+                    "startOffset": 114764,
                     "endColumn": 117,
-                    "endOffset": 114870
+                    "endOffset": 114877
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9950,9 +9950,9 @@
                 "to": {
                     "startLine": 1487,
                     "startColumn": 4,
-                    "startOffset": 114875,
+                    "startOffset": 114882,
                     "endColumn": 90,
-                    "endOffset": 114961
+                    "endOffset": 114968
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9969,9 +9969,9 @@
                 "to": {
                     "startLine": 1488,
                     "startColumn": 4,
-                    "startOffset": 114966,
+                    "startOffset": 114973,
                     "endColumn": 122,
-                    "endOffset": 115084
+                    "endOffset": 115091
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -9988,9 +9988,9 @@
                 "to": {
                     "startLine": 1489,
                     "startColumn": 4,
-                    "startOffset": 115089,
+                    "startOffset": 115096,
                     "endColumn": 99,
-                    "endOffset": 115184
+                    "endOffset": 115191
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10007,9 +10007,9 @@
                 "to": {
                     "startLine": 1490,
                     "startColumn": 4,
-                    "startOffset": 115189,
+                    "startOffset": 115196,
                     "endColumn": 103,
-                    "endOffset": 115288
+                    "endOffset": 115295
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10026,9 +10026,9 @@
                 "to": {
                     "startLine": 1491,
                     "startColumn": 4,
-                    "startOffset": 115293,
+                    "startOffset": 115300,
                     "endColumn": 95,
-                    "endOffset": 115384
+                    "endOffset": 115391
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10045,9 +10045,9 @@
                 "to": {
                     "startLine": 1492,
                     "startColumn": 4,
-                    "startOffset": 115389,
+                    "startOffset": 115396,
                     "endColumn": 87,
-                    "endOffset": 115472
+                    "endOffset": 115479
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10064,9 +10064,9 @@
                 "to": {
                     "startLine": 1493,
                     "startColumn": 4,
-                    "startOffset": 115477,
+                    "startOffset": 115484,
                     "endColumn": 105,
-                    "endOffset": 115578
+                    "endOffset": 115585
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10083,9 +10083,9 @@
                 "to": {
                     "startLine": 1494,
                     "startColumn": 4,
-                    "startOffset": 115583,
+                    "startOffset": 115590,
                     "endColumn": 91,
-                    "endOffset": 115670
+                    "endOffset": 115677
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10102,9 +10102,9 @@
                 "to": {
                     "startLine": 1495,
                     "startColumn": 4,
-                    "startOffset": 115675,
+                    "startOffset": 115682,
                     "endColumn": 91,
-                    "endOffset": 115762
+                    "endOffset": 115769
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10121,9 +10121,9 @@
                 "to": {
                     "startLine": 1496,
                     "startColumn": 4,
-                    "startOffset": 115767,
+                    "startOffset": 115774,
                     "endColumn": 113,
-                    "endOffset": 115876
+                    "endOffset": 115883
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10140,9 +10140,9 @@
                 "to": {
                     "startLine": 1497,
                     "startColumn": 4,
-                    "startOffset": 115881,
+                    "startOffset": 115888,
                     "endColumn": 89,
-                    "endOffset": 115966
+                    "endOffset": 115973
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10159,9 +10159,9 @@
                 "to": {
                     "startLine": 1498,
                     "startColumn": 4,
-                    "startOffset": 115971,
+                    "startOffset": 115978,
                     "endColumn": 83,
-                    "endOffset": 116050
+                    "endOffset": 116057
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10178,9 +10178,9 @@
                 "to": {
                     "startLine": 1499,
                     "startColumn": 4,
-                    "startOffset": 116055,
+                    "startOffset": 116062,
                     "endColumn": 53,
-                    "endOffset": 116104
+                    "endOffset": 116111
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10197,9 +10197,9 @@
                 "to": {
                     "startLine": 1500,
                     "startColumn": 4,
-                    "startOffset": 116109,
+                    "startOffset": 116116,
                     "endColumn": 121,
-                    "endOffset": 116226
+                    "endOffset": 116233
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10216,9 +10216,9 @@
                 "to": {
                     "startLine": 1501,
                     "startColumn": 4,
-                    "startOffset": 116231,
+                    "startOffset": 116238,
                     "endColumn": 83,
-                    "endOffset": 116310
+                    "endOffset": 116317
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10235,9 +10235,9 @@
                 "to": {
                     "startLine": 1502,
                     "startColumn": 4,
-                    "startOffset": 116315,
+                    "startOffset": 116322,
                     "endColumn": 119,
-                    "endOffset": 116430
+                    "endOffset": 116437
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values\\values.xml",
@@ -10254,10 +10254,10 @@
                 "to": {
                     "startLine": 1503,
                     "startColumn": 4,
-                    "startOffset": 116435,
+                    "startOffset": 116442,
                     "endLine": 1507,
                     "endColumn": 12,
-                    "endOffset": 116682
+                    "endOffset": 116689
                 },
                 "from": {
                     "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\values\\styles_calendar_events.xml",

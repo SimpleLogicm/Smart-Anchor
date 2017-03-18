@@ -481,9 +481,9 @@ public class Pricing_Main extends BaseActivity {
                         }
 
 
-                        List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_BYNAMENEW(spnCategory.getSelectedItem().toString().trim(), parent.getItemAtPosition(pos).toString().trim());
+                        List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_BYNAMENEW(spnCategory.getSelectedItem().toString().trim(), parent.getItemAtPosition(pos).toString().trim(),Product_Variant.getText().toString().trim());
 
-                        if(contacts3.size() <= 0)
+                        if(contacts3.size() <= 0 && !Product_Variant.getText().toString().trim().equalsIgnoreCase(""))
                         {
                            // Toast.makeText(Pricing_Main.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
