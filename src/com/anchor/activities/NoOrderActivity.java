@@ -141,8 +141,7 @@ public class NoOrderActivity extends BaseActivity {
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(true);
-        
-		
+
 		 reasonsMap=new HashMap<String, String>();
 		 listReasons = new ArrayList<String>();
 		 //myDbHelper = new DatabaseHandler(getApplicationContext());
@@ -515,8 +514,7 @@ public class NoOrderActivity extends BaseActivity {
 			dataAdapter.notifyDataSetChanged();
 			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	      	spinner1.setAdapter(dataAdapter);
-			
-			
+
 		}
 	}
 	
@@ -568,8 +566,8 @@ public class NoOrderActivity extends BaseActivity {
 					
 						  for (Local_Data cn : contacts) 
 				          {
-				        	  
-							//Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
+
+							  //Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();\
 							  reason_code = cn.getreason_code();
 				        		  
 				          }

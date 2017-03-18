@@ -45,15 +45,15 @@
         android:name="com.anchor.App.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@drawable/anchor_logo"
-        android:label="@string/app_name_anchor"
+        android:icon="@drawable/mlogo"
+        android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name="com.anchor.activities.SplashScreenActivity"
-            android:label="@string/app_name_anchor"
+            android:name=".SplashScreenActivity"
+            android:label="@string/app_name"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar">
@@ -70,34 +70,34 @@
 
         <!--
             <activity android:name="com.simplelogic.activities.UploadActivity"
-             android:label="@string/app_name" 
+             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         -->
 
         <activity
-            android:name="com.anchor.activities.LoginActivity"
-            android:label="@string/app_name_anchor"
+            android:name=".LoginActivity"
+            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="com.anchor.activities.Video_Main_List"
-            android:label="@string/app_name_anchor"
+            android:name=".Video_Main_List"
+            android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.VIDEO_DIALOG"
+            android:name=".VIDEO_DIALOG"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
 
         <activity
-            android:name="com.anchor.activities.Stock_options"
+            android:name=".Stock_options"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             />
 
         <activity
-            android:name="com.anchor.activities.Stock_Product_Options"
+            android:name=".Stock_Product_Options"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog" />
@@ -110,15 +110,15 @@
         <!-- </activity> -->
 
         <activity
-            android:name="com.anchor.activities.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.BasicMapDemoActivity"
+            android:name=".BasicMapDemoActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Test"
+            android:name=".Test"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
@@ -131,7 +131,7 @@
         -->
 
         <activity
-            android:name="com.anchor.activities.PreviousOrderActivity_New"
+            android:name=".PreviousOrderActivity_New"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
@@ -143,7 +143,7 @@
         -->
 
         <activity
-            android:name="com.anchor.activities.NewOrderActivity"
+            android:name=".NewOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
@@ -155,11 +155,11 @@
                </activity>
         -->
         <activity
-            android:name="com.anchor.activities.EditSwipeOrderItems"
+            android:name=".EditSwipeOrderItems"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.NoOrderActivity"
+            android:name=".NoOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
@@ -171,18 +171,18 @@
              </activity>
         -->
         <activity
-            android:name="com.anchor.activities.CaptureSignature"
+            android:name=".CaptureSignature"
             android:label="@string/app_name" />
         <activity
-            android:name="com.anchor.activities.ReturnOrderActivity"
+            android:name=".ReturnOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.PreviousOrderActivity"
+            android:name=".PreviousOrderActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.PreviewOrderSwipeActivity"
+            android:name=".PreviewOrderSwipeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
@@ -198,214 +198,214 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Calendar_Event"
+            android:name=".Calendar_Event"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.List_Events"
+            android:name=".List_Events"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Customer_Service"
+            android:name=".Customer_Service"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Customer_Feed"
+            android:name=".Customer_Feed"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Customer_Stock"
+            android:name=".Customer_Stock"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Today_Tabber"
+            android:name=".Today_Tabber"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Expenses"
+            android:name=".Expenses"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Target"
+            android:name=".Target"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Schedule"
+            android:name=".Schedule"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Schedule1"
+            android:name=".Schedule1"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Schedule2"
+            android:name=".Schedule2"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Order"
+            android:name=".Order"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Sales_Dash"
+            android:name=".Sales_Dash"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Filter_List"
+            android:name=".Filter_List"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.ExpandFilter"
+            android:name=".ExpandFilter"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Invoice_filterList"
+            android:name=".Invoice_filterList"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.New_filterList"
+            android:name=".New_filterList"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Address_activity"
+            android:name=".Address_activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.AndroidGPSTrackingActivity"
+            android:name=".AndroidGPSTrackingActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.anchor.activities.Nearest_Customer"
+            android:name=".Nearest_Customer"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Item_Edit_Activity"
+            android:name=".Item_Edit_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Sound_Act"
+            android:name=".Sound_Act"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Calender_ReadonlyView"
+            android:name=".Calender_ReadonlyView"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Status_Act"
+            android:name=".Status_Act"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Status_Activity"
+            android:name=".Status_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Previous_Order"
+            android:name=".Previous_Order"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.ReturnOrder_Customer"
+            android:name=".ReturnOrder_Customer"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Previous_returnOrder"
+            android:name=".Previous_returnOrder"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.ReturnOrder1"
+            android:name=".ReturnOrder1"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.ReturnOrder2"
+            android:name=".ReturnOrder2"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.ReturnOrder3"
+            android:name=".ReturnOrder3"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.ReturnEditItem"
+            android:name=".ReturnEditItem"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Pricing_Main"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-
-        <activity
-            android:name="com.anchor.activities.Stock_Main"
+            android:name=".Pricing_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Expended_List_Main"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.anchor.activities.Youtube_Player_Activity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.anchor.activities.Schedule_List"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.anchor.activities.Image_Gellary"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.anchor.activities.AllOrders_Sync"
+            android:name=".Stock_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Previous_orderNew_S1"
+            android:name=".Expended_List_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Previous_orderNew_S2"
+            android:name=".Youtube_Player_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.anchor.activities.Previous_orderNew_S3"
+            android:name=".Schedule_List"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Image_Gellary"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".AllOrders_Sync"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Previous_Item_Edit_Activity"
+            android:name=".Previous_orderNew_S1"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Previous_orderNew_S2"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Previous_orderNew_S3"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Previous_Item_Edit_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -413,7 +413,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Survey_Main"
+            android:name=".Survey_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -421,7 +421,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Survey_Home"
+            android:name=".Survey_Home"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -429,7 +429,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Marketing"
+            android:name=".Marketing"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -437,7 +437,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Contact_Us"
+            android:name=".Contact_Us"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -445,7 +445,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.About_Metal"
+            android:name=".About_Metal"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -453,7 +453,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.SDcard_imageMain"
+            android:name=".SDcard_imageMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -461,7 +461,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.SDcard_VideoMain"
+            android:name=".SDcard_VideoMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -469,7 +469,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Target_REYC_Main"
+            android:name=".Target_REYC_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -477,7 +477,7 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Target_REYCLE"
+            android:name=".Target_REYCLE"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -485,52 +485,58 @@
         </activity>
 
         <activity
-            android:name="com.anchor.activities.Webview_Activity"
+            android:name=".Webview_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
 
 
         <activity
-            android:name="com.anchor.activities.Customer_info_main"
+            android:name=".Customer_info_main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Target_Summary1"
+            android:name=".Target_Summary1"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Target_Summary2"
+            android:name=".Target_Summary2"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Expended_list_demo"
+            android:name=".Expended_list_demo"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="com.anchor.activities.Sound_Setting"
+            android:name=".Forget_Pwd"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Sound_Setting"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
 
         </activity>
 
-        <receiver android:name="com.anchor.activities.AutoStart">
+        <receiver android:name=".AutoStart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name="com.anchor.activities.MyService"
+            android:name=".MyService"
             android:enabled="true" />
 
         <!--
@@ -548,7 +554,8 @@
         -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />
+            android:value="AIzaSyCQiNuWCD99Pxsdzxq1eKA7Iat8ElwoqwQ" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

@@ -10,7 +10,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:src="@drawable/anchor_logo" />
+        android:src="@drawable/metal_m" />
 
     <TextView
         android:id="@+id/textView2"
@@ -21,7 +21,7 @@
         android:textColor="#8B0000"
         android:textStyle="bold"
         android:layout_marginTop="15dp"
-        android:text="Smart Anchor" />
+        android:text="METAL" />
 
     <EditText
         android:id="@+id/editText1"

@@ -255,7 +255,6 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 		       mActionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
-	
 	public  void View_NearestCustomer(String address,String latitude,String longitude)
     {
 
@@ -681,7 +680,7 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 			}
 			else
 			{
-				Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse("http://maps.google.com/maps?saddr="+Global_Data.GLOvel_LATITUDE+","+Global_Data.GLOvel_LONGITUDE+"&daddr="+locationAddress+""));
 				startActivity(intent);
 			}

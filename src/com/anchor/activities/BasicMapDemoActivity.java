@@ -122,10 +122,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
     @Override
     public void onConnected(Bundle bundle) {
-
         try
         {
-
 
        // Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
@@ -136,7 +134,6 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
-
 
             markerOptions.title("Current Position");
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
@@ -151,8 +148,6 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }catch(Exception ex){ex.printStackTrace();}
-
-
     }
 
     @Override
@@ -203,7 +198,6 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
                 }
             }
-
 
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = mGoogleMap.addMarker(markerOptions);

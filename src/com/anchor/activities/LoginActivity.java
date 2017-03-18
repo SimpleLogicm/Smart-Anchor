@@ -13,12 +13,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.multidex.MultiDex;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
@@ -60,6 +63,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.text.DateFormat;
+import java.util.TimeZone;
 
 import cpm.simplelogic.helper.BCrypt;
 import cpm.simplelogic.helper.CheckNullValue;
@@ -69,7 +74,7 @@ public class LoginActivity extends Activity{
 	ProgressDialog progress;
 	private Bitmap bitmap = null;
 	Handler h;
-	String devid, usr_name, pwd;
+	String devid, usr_name, pwd, usr_email;
 	ArrayList<HashMap<String, String>> arraylist1, arraylist2;
 	ConnectivityManager cn;
 	NetworkInfo nf;
@@ -88,7 +93,7 @@ public class LoginActivity extends Activity{
 	TelephonyManager manager;
 	String simSerial="f8a0f77d096fddc3",firstName="",lastName="";
 	User u;
-	String current_date;
+	String current_date, usremail;
 	Bitmap blob_data_logo;
 	LoginDataBaseAdapter loginDataBaseAdapter;
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
@@ -113,6 +118,23 @@ public class LoginActivity extends Activity{
 	   blob_data_logo = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 	   logo_img.setImageBitmap(blob_data_logo);
     }
+
+		SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+		pref_devid.getString("reg_devid", "");
+		devid = pref_devid.getString("reg_devid", "");
+
+		if (devid.length() > 0) {
+			link_fpwd.setVisibility(View.VISIBLE);
+		} else {
+			link_fpwd.setVisibility(View.GONE);
+		}
+
+		link_fpwd.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(LoginActivity.this, Forget_Pwd.class));
+			}
+		});
 
 		//getBitmapFromURL("http://developersfound.com/me.png");
 
@@ -164,7 +186,7 @@ public class LoginActivity extends Activity{
         
            cn=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
            nf=cn.getActiveNetworkInfo();
-   
+
 		  TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
 		  Global_Data.imei_no = tm.getDeviceId();
 
@@ -176,8 +198,8 @@ public class LoginActivity extends Activity{
 //				editText1.setText("Alex");
 //				editText2.setText("alex12345");
 
-//		editText1.setText("vinod123");
-//		editText2.setText("vinod12345");
+		editText1.setText("sujit123");
+		editText2.setText("sujit12345");
 
 				PackageInfo pInfo = null;
 				try {
@@ -203,6 +225,7 @@ public class LoginActivity extends Activity{
 //		// Check if enabled and if not send user to the GPS settings
 //		if (!enabled) {
 //			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+
 //			startActivity(intent);
 //		}
 
@@ -218,10 +241,56 @@ public class LoginActivity extends Activity{
 	   	        	System.out.println("Local Values:-"+Global_Data.local_user+","+Global_Data.local_pwd);
 	   	        	//Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
 	   	        	                             }
-         
-     	        //manager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+		//manager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 				//int simState=manager.getSimState();
-	   	          
+
+//		SharedPreferences pref_usrnm = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//		usr_email=pref_usrnm.getString("login_email", "");
+//
+//		if(devid.length()>0)
+//		{
+//			link_fpwd.setVisibility(View.VISIBLE);
+//		}else{
+//			link_fpwd.setVisibility(View.GONE);
+//		}
+
+//		link_fpwd.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View view)
+//			{
+//				if (isInternetPresent)
+//				{
+//
+//				}
+//				else
+//				{
+//					// Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+//					Toast toast = Toast.makeText(LoginActivity.this,"You don't have internet connection.", Toast.LENGTH_LONG);
+//					toast.setGravity(Gravity.CENTER, 0, 0);
+//					toast.show();
+//				}
+//
+////				Boolean compare_computed = BCrypt.checkpw(usr_name, pwd);
+////				//Boolean compare_computed = BCrypt.checkpw(test_passwd, test_hash);
+////				String s = String.valueOf(compare_computed);
+////
+//////				String phoneNo = textPhoneNo.getText().toString();
+//////				String sms = "Your Password is "+password;
+////
+////				try {
+////					SmsManager smsManager = SmsManager.getDefault();
+////					//smsManager.sendTextMessage(phoneNo, null, sms, null, null);
+////					Toast.makeText(getApplicationContext(), "SMS Sent!",
+////							Toast.LENGTH_LONG).show();
+////				} catch (Exception e) {
+////					Toast.makeText(getApplicationContext(),
+////							"SMS faild, please try again later!",
+////							Toast.LENGTH_LONG).show();
+////					e.printStackTrace();
+////				}
+//			}
+//		});
+
 	   	       buttonReg.setOnClickListener(new OnClickListener() {
 		   	         public void onClick(View view) 
 		   	         {
@@ -785,9 +854,9 @@ public class LoginActivity extends Activity{
 			       // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 			        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 				    startActivity(i);
-				
-				  Intent j=new Intent(getApplicationContext(),LocationServices.class);
-			        startService(j);
+
+				Intent j = new Intent(getApplicationContext(), LocationServices.class);
+				startService(j);
 			        
 				//Toast.makeText(getApplicationContext(), "Login Successful", 1000).show();
 				/*SendLatLongAsyncTask sendLatLongAsyncTask=new SendLatLongAsyncTask(LoginActivity.this);
@@ -879,6 +948,21 @@ public class LoginActivity extends Activity{
 				final String Device_id =  tm.getDeviceId();
 	            String domain = getResources().getString(R.string.service_domain);
 
+				SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+				SharedPreferences.Editor edit = pref.edit();
+				edit.putString("reg_devid", Device_id);
+				edit.commit();
+
+				SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+				pref_devid.getString("reg_devid", "");
+				devid = pref_devid.getString("reg_devid", "");
+
+				if (devid.length() > 0) {
+					link_fpwd.setVisibility(View.VISIBLE);
+				} else {
+					link_fpwd.setVisibility(View.GONE);
+				}
+
 //	            Global_Val global_Val = new Global_Val();
 //	            if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
 //	                domain = getResources().getString(R.string.service_domain);
@@ -942,7 +1026,6 @@ public class LoginActivity extends Activity{
 								{
 									Log.d("users", "users" + users.toString());
 
-
 									for (int i = 0; i < users.length(); i++) {
 
 										JSONObject jsonObject = users.getJSONObject(i);
@@ -964,30 +1047,18 @@ public class LoginActivity extends Activity{
 										loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
 												jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
 												"", Device_id, "", jsonObject.getString("address"), "", "", "", "", "");
-
 									}
 
 									//Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
-//									SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//									pref_devid.getString("login_devid", "");
-//									String devid=pref_devid.getString("login_devid", "");
-//
-//									if(devid.length()>0)
-//									{
-//										link_fpwd.setVisibility(View.VISIBLE);
-//									}else{
-//										link_fpwd.setVisibility(View.GONE);
-//									}
+
 
 									Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
 									toast.setGravity(Gravity.CENTER, 0, 0);
 									toast.show();
-
 									dialog.dismiss();
 								}
 //	                          	                            //finish();
 							}
-
 
 	                        // }
 

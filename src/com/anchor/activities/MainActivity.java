@@ -453,9 +453,6 @@ public class MainActivity extends BaseActivity {
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 			}
-
-
-
 			fragment = new Home();
 			fragmentPoistion=2;
 			break;

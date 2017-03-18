@@ -955,19 +955,11 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                             });
                             //NewOrderFragment.this.startActivity(i);
 
-
-
-
-
-
                     return true;
                 }
                 return false;
             }
         });
-
-
-
 
         spnCategory.setOnItemSelectedListener(new OnItemSelectedListener() {
 

@@ -1,5 +1,13 @@
 [
     {
+        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__tile.png",
+        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__tile.png"
+    },
+    {
+        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__divider.9.png",
+        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__divider.9.png"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__divider.9.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__divider.9.png"
     },
@@ -8,8 +16,16 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__ic_cancel.png"
     },
     {
+        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__ic_done.png",
+        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__ic_done.png"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__tile.png",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__tile.png"
+    },
+    {
+        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__ic_cancel.png",
+        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\drawable-xhdpi\\crop__ic_cancel.png"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\crop__ic_done.png",

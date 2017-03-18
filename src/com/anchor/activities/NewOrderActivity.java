@@ -40,6 +40,7 @@ import com.anchor.model.Category;
 import com.anchor.model.Product;
 import com.anchor.model.Scheme;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -894,10 +895,7 @@ public class NewOrderActivity extends BaseActivity {
 			    }
 			    if(event.getAction() == MotionEvent.ACTION_DOWN)
 			    {
-					if(Global_Data.app_sound==false)
-					{
-						mpplayer.stop();
-					}
+					mpplayer.stop();
 					//down event
 			    	 b.setBackgroundColor(Color.parseColor("#910505"));
 						// TODO Auto-generated method stub
@@ -1202,11 +1200,7 @@ public class NewOrderActivity extends BaseActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			onBackPressed();
-			if(Global_Data.app_sound==false)
-			{
-				mpplayer.stop();
-			}
-
+			mpplayer.stop();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -1217,10 +1211,7 @@ public class NewOrderActivity extends BaseActivity {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		//super.onBackPressed();
-		if(Global_Data.app_sound==false)
-		{
-			mpplayer.stop();
-		}
+
 		 Global_Data.GLOVEL_LONG_DESC = "";
 		 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
 		 Global_Data.GLOVEL_ITEM_MRP = "";

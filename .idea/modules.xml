@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ANCHOR.iml" filepath="$PROJECT_DIR$/ANCHOR.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ANCHOR_METAL.iml" filepath="$PROJECT_DIR$/ANCHOR_METAL.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibAndroidCrop/LibAndroidCrop.iml" filepath="$PROJECT_DIR$/LibAndroidCrop/LibAndroidCrop.iml" />
       <module fileurl="file://$PROJECT_DIR$/cropping/cropping.iml" filepath="$PROJECT_DIR$/cropping/cropping.iml" />
       <module fileurl="file://$PROJECT_DIR$/imageResizer/imageResizer.iml" filepath="$PROJECT_DIR$/imageResizer/imageResizer.iml" />

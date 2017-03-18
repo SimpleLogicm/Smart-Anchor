@@ -931,7 +931,6 @@ public class Order extends Activity implements OnItemSelectedListener {
 		 else if
 		 (city_spinner.getSelectedItem().toString().equalsIgnoreCase("Select City"))
 		 {
-		
 		 Toast toast = Toast.makeText(Order.this,"Please Select Beat",
 		 Toast.LENGTH_SHORT);
 		 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -2668,6 +2667,9 @@ public class Order extends Activity implements OnItemSelectedListener {
 						if(response.has("message"))
 						{
 							response_result = response.getString("message");
+							Toast toast = Toast.makeText(Order.this, "Device Not Found", Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
 						}
 						else
 						{

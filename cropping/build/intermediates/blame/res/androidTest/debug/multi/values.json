@@ -2,5 +2,9 @@
     {
         "outputFile": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\cropping\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": []
+    },
+    {
+        "outputFile": "E:\\Anchor\\ANCHOR_METAL\\cropping\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": []
     }
 ]
