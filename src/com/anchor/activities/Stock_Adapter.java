@@ -62,6 +62,10 @@ public class Stock_Adapter extends RecyclerView.Adapter<Stock_Adapter.ContactVie
                 contactViewHolder.ss_name.setVisibility(View.GONE);
                // contactViewHolder.product_header2.setVisibility(View.GONE);
             }
+            else
+            {
+                contactViewHolder.ss_name.setVisibility(View.VISIBLE );
+            }
 
 
         }

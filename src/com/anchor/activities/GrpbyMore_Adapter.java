@@ -66,6 +66,11 @@ public class GrpbyMore_Adapter extends RecyclerView.Adapter<GrpbyMore_Adapter.Co
                         contactViewHolder.dfgnew.setVisibility(View.GONE);
                         contactViewHolder.product_header2.setVisibility(View.GONE);
                     }
+                    else
+                    {
+                        contactViewHolder.dfgnew.setVisibility(View.VISIBLE);
+                        contactViewHolder.product_header2.setVisibility(View.VISIBLE);
+                    }
 
 
                 }
