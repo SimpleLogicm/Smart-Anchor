@@ -58,6 +58,8 @@ import cpm.simplelogic.helper.Stock_Info;
 
 public class Stock_Main extends BaseActivity {
 
+    int warehouse_flagnew = 0;
+    int product_flagnew = 0;
     int check=0;
     int check_product=0;
     int check_ProductSpec=0;
@@ -252,7 +254,7 @@ public class Stock_Main extends BaseActivity {
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                         //autoCompleteTextView1.setText("");
-                       // product_list.showDropDown();
+                        // product_list.showDropDown();
 
                         Global_Data.Stock_product_flag = "";
                         Global_Data.Stock_product_flag_value_check = "";
@@ -334,7 +336,7 @@ public class Stock_Main extends BaseActivity {
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                         //autoCompleteTextView1.setText("");
-                       // warehouse_list.showDropDown();
+                        // warehouse_list.showDropDown();
                         Global_Data.Stock_warehouse_flag = "";
                         Global_Data.Stock_warehouse_flag_value_check = "";
                         Intent i=new Intent(Stock_Main.this, Stock_options.class);
@@ -446,7 +448,7 @@ public class Stock_Main extends BaseActivity {
                 Stock_Main.this.runOnUiThread(new Runnable() {
                     public void run() {
 
-                       // dialog.dismiss();
+                        // dialog.dismiss();
                         ++a;
                         Toast toast = Toast.makeText(Stock_Main.this, "Sorry Products Record Not Found.", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -467,7 +469,7 @@ public class Stock_Main extends BaseActivity {
 
                 Stock_Main.this.runOnUiThread(new Runnable() {
                     public void run() {
-                       // dialog.dismiss();
+                        // dialog.dismiss();
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Stock_Main.this, android.R.layout.simple_spinner_dropdown_item,
                                 All_Product);
                         product_list.setThreshold(1);// will start working from
@@ -487,7 +489,7 @@ public class Stock_Main extends BaseActivity {
 
                 Stock_Main.this.runOnUiThread(new Runnable() {
                     public void run() {
-                      //  dialog.dismiss();
+                        //  dialog.dismiss();
                         ++a;
                         Toast toast = Toast.makeText(Stock_Main.this, "Sorry Warehouses Record Not Found.", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -574,14 +576,16 @@ public class Stock_Main extends BaseActivity {
         recList.setVisibility(View.INVISIBLE);
 
         result.clear();
-       // loginDataBaseAdapter=new LoginDataBaseAdapter(Target_Summary2.this);
-      //  loginDataBaseAdapter=loginDataBaseAdapter.open();
+        // loginDataBaseAdapter=new LoginDataBaseAdapter(Target_Summary2.this);
+        //  loginDataBaseAdapter=loginDataBaseAdapter.open();
         dialog = new ProgressDialog(Stock_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Warehouse Details Sync....");
         dialog.setTitle("Sales App");
         dialog.setCancelable(false);
         dialog.show();
 
+        warehouse_flagnew = 0;
+        product_flagnew = 0;
         String warehouse_flag = "";
         String product_flag = "";
         String city_state[];
@@ -658,11 +662,21 @@ public class Stock_Main extends BaseActivity {
             {
                 List<Local_Data> w_namen = dbvoc.getwarehouseByname(warehouse_list.getText().toString().trim());
 
-                for (Local_Data wn : w_namen)
+                if(w_namen.size() > 0)
                 {
+                    warehouse_flagnew = 0;
+                    for (Local_Data wn : w_namen)
+                    {
 
-                    warehouse_code = wn.getWare_code();
+                        warehouse_code = wn.getWare_code();
+                    }
                 }
+                else
+                {
+                    warehouse_flagnew = 1;
+                }
+
+
                 state_code = "";
                 city_code = "";
 
@@ -700,8 +714,8 @@ public class Stock_Main extends BaseActivity {
 //                for (Local_Data cn : c_namen)
 //                {
 
-                    caategory_code = caategory_name;
-              //  }
+                caategory_code = caategory_name;
+                //  }
 
                 sub_caategory_code = "";
                 product_code = "";
@@ -729,11 +743,20 @@ public class Stock_Main extends BaseActivity {
             {
                 List<Local_Data> c_namen = dbvoc.PRODUCT_ID(product_list.getText().toString().trim());
 
-                for (Local_Data cn : c_namen)
+                if(c_namen.size() > 0)
                 {
+                    product_flagnew = 0;
+                    for (Local_Data cn : c_namen)
+                    {
 
-                    product_code = cn.getItem_Code();
+                        product_code = cn.getItem_Code();
+                    }
                 }
+                else
+                {
+                    product_flagnew = 1;
+                }
+
                 caategory_code = "";
                 sub_caategory_code = "";
 
@@ -747,305 +770,288 @@ public class Stock_Main extends BaseActivity {
             product_code = "";
         }
 
-        try
-        {
-
-            String  domain = getResources().getString(R.string.service_domain);
-
-            Log.i("volley", "domain: " + domain);
-            Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            String service_url = "";
-
-            service_url = domain+"wh_stocks/send_stocks?imei_no="+device_id+"&warehouse_code="+warehouse_code+"&product_code="+product_code+"&state_code="+state_code+"&city_code="+city_code+"&primary_category="+ URLEncoder.encode(caategory_code, "UTF-8")+"&sub_category="+ URLEncoder.encode(sub_caategory_code, "UTF-8");
+        if(warehouse_flagnew == 0 && product_flagnew == 0) {
+            try {
 
 
+                String domain = getResources().getString(R.string.service_domain);
 
-            Log.i("target url", "target url " + service_url);
+                Log.i("volley", "domain: " + domain);
+                Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
+                String service_url = "";
 
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(service_url,null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.i("volley", "response: " + response);
-                    //  Log.i("volley", "response reg Length: " + response.length());
+                service_url = domain + "wh_stocks/send_stocks?imei_no=" + device_id + "&warehouse_code=" + warehouse_code + "&product_code=" + product_code + "&state_code=" + state_code + "&city_code=" + city_code + "&primary_category=" + URLEncoder.encode(caategory_code, "UTF-8") + "&sub_category=" + URLEncoder.encode(sub_caategory_code, "UTF-8");
 
 
-                    try{
+                Log.i("target url", "target url " + service_url);
 
-                        String response_result = "";
-                        if(response.has("result"))
-                        {
-                            response_result = response.getString("result");
-                        }
-                        else
-                        {
-                            response_result = "data";
-                        }
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(service_url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("volley", "response: " + response);
+                        //  Log.i("volley", "response reg Length: " + response.length());
 
 
-                        if(response_result.equalsIgnoreCase("User doesn't exist")) {
+                        try {
 
-                            // Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG).show();
-
-                            dialog.dismiss();
-                            Toast toast = Toast.makeText(Stock_Main.this, response_result, Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-
-                            Intent i=new Intent(Stock_Main.this, Pricing_Main.class);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                            finish();
-
-                        }
-                        else
-                        if(response_result.equalsIgnoreCase("Please provide all the data")) {
-
-                            // Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG).show();
-
-                            dialog.dismiss();
-                            Toast toast = Toast.makeText(Stock_Main.this, response_result, Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-
-                            Intent i=new Intent(Stock_Main.this, Pricing_Main.class);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                            finish();
-
-                        }
-                        else {
-
-                            JSONArray stocks = response.getJSONArray("stocks");
+                            String response_result = "";
+                            if (response.has("result")) {
+                                response_result = response.getString("result");
+                            } else {
+                                response_result = "data";
+                            }
 
 
-                            Log.i("volley", "response stocks Length: " + stocks.length());
+                            if (response_result.equalsIgnoreCase("User doesn't exist")) {
 
-                            Log.d("stocks", "stocks" + stocks.toString());
+                                // Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG).show();
 
-                            if(stocks.length() <= 0)
-                            {
                                 dialog.dismiss();
-                                //Toast.makeText(getActivity(), "Target not found.", Toast.LENGTH_LONG).show();
-
-                                Toast toast = Toast.makeText(Stock_Main.this, "Warehouse Data Not Found.", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(Stock_Main.this, response_result, Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
-//                                Intent i=new Intent(Stock_Main.this, Pricing_Main.class);
-//                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(i);
-//                                finish();
-                            }
-                            else
-                            {
+                                Intent i = new Intent(Stock_Main.this, Pricing_Main.class);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(i);
+                                finish();
 
-                                View view = Stock_Main.this.getCurrentFocus();
-                                if (view != null) {
-                                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                                }
+                            } else if (response_result.equalsIgnoreCase("Please provide all the data")) {
 
-                                ware_result_button.setVisibility(View.GONE);
-                                recList.setVisibility(View.VISIBLE);
-                                for (int i = 0; i < stocks.length(); i++) {
+                                // Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG).show();
 
-                                    JSONObject jsonObject = stocks.getJSONObject(i);
+                                dialog.dismiss();
+                                Toast toast = Toast.makeText(Stock_Main.this, response_result, Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                                Intent i = new Intent(Stock_Main.this, Pricing_Main.class);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(i);
+                                finish();
+
+                            } else {
+
+                                JSONArray stocks = response.getJSONArray("stocks");
 
 
-                                    Stock_Info ci = new Stock_Info();
+                                Log.i("volley", "response stocks Length: " + stocks.length());
 
-                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_primary_category").toString()))
-                                        {
-                                            String product_category = String.valueOf(Html.fromHtml("<b>" +"PRODUCT : "+ "</b>")+jsonObject.getString("product_primary_category").toString());
-                                            if(!jsonObject.getString("product_sub_category").equalsIgnoreCase("null") && !jsonObject.getString("product_sub_category").equalsIgnoreCase(null) & !jsonObject.getString("product_sub_category").equalsIgnoreCase("") & !jsonObject.getString("product_sub_category").equalsIgnoreCase(" "))
-                                            {
-                                                product_category += " - " + jsonObject.getString("product_sub_category").toString();;
+                                Log.d("stocks", "stocks" + stocks.toString());
+
+                                if (stocks.length() <= 0) {
+                                    dialog.dismiss();
+                                    //Toast.makeText(getActivity(), "Target not found.", Toast.LENGTH_LONG).show();
+
+                                    Toast toast = Toast.makeText(Stock_Main.this, "Warehouse Data Not Found.", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+                                    //                                Intent i=new Intent(Stock_Main.this, Pricing_Main.class);
+                                    //                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    //                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    //                                startActivity(i);
+                                    //                                finish();
+                                } else {
+
+                                    View view = Stock_Main.this.getCurrentFocus();
+                                    if (view != null) {
+                                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                                    }
+
+                                    ware_result_button.setVisibility(View.GONE);
+                                    recList.setVisibility(View.VISIBLE);
+                                    for (int i = 0; i < stocks.length(); i++) {
+
+                                        JSONObject jsonObject = stocks.getJSONObject(i);
+
+
+                                        Stock_Info ci = new Stock_Info();
+
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_primary_category").toString())) {
+                                            String product_category = String.valueOf(Html.fromHtml("<b>" + "PRODUCT : " + "</b>") + jsonObject.getString("product_primary_category").toString());
+                                            if (!jsonObject.getString("product_sub_category").equalsIgnoreCase("null") && !jsonObject.getString("product_sub_category").equalsIgnoreCase(null) & !jsonObject.getString("product_sub_category").equalsIgnoreCase("") & !jsonObject.getString("product_sub_category").equalsIgnoreCase(" ")) {
+                                                product_category += " - " + jsonObject.getString("product_sub_category").toString();
+                                                ;
                                             }
 
-                                            if(!jsonObject.getString("product_variant").equalsIgnoreCase("null") && !jsonObject.getString("product_variant").equalsIgnoreCase(null) & !jsonObject.getString("product_variant").equalsIgnoreCase("") & !jsonObject.getString("product_variant").equalsIgnoreCase(" "))
-                                            {
-                                                product_category += " - " + jsonObject.getString("product_variant").toString();;
+                                            if (!jsonObject.getString("product_variant").equalsIgnoreCase("null") && !jsonObject.getString("product_variant").equalsIgnoreCase(null) & !jsonObject.getString("product_variant").equalsIgnoreCase("") & !jsonObject.getString("product_variant").equalsIgnoreCase(" ")) {
+                                                product_category += " - " + jsonObject.getString("product_variant").toString();
+                                                ;
                                             }
 
-                                            if(!jsonObject.getString("product_name").equalsIgnoreCase("null") && !jsonObject.getString("product_name").equalsIgnoreCase(null) & !jsonObject.getString("product_name").equalsIgnoreCase("") & !jsonObject.getString("product_name").equalsIgnoreCase(" "))
-                                            {
-                                                product_category += " - " + jsonObject.getString("product_name").toString();;
+                                            if (!jsonObject.getString("product_name").equalsIgnoreCase("null") && !jsonObject.getString("product_name").equalsIgnoreCase(null) & !jsonObject.getString("product_name").equalsIgnoreCase("") & !jsonObject.getString("product_name").equalsIgnoreCase(" ")) {
+                                                product_category += " - " + jsonObject.getString("product_name").toString();
+                                                ;
                                             }
 
 
                                             ci.ss_product = product_category;
-                                        }
-                                        else
-                                        {
-                                            ci.ss_product = String.valueOf(Html.fromHtml("<b>" +"PRODUCT : "+ "</b>")+"");
+                                        } else {
+                                            ci.ss_product = String.valueOf(Html.fromHtml("<b>" + "PRODUCT : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_rp").toString()))
-                                        {
-                                            ci.ss_RP =  String.valueOf(Html.fromHtml("<b>" +"RP : "+ "</b>")+jsonObject.getString("product_rp").toString());
-                                        }
-                                        else
-                                        {
-                                            ci.ss_RP = String.valueOf(Html.fromHtml("<b>" +"RP : "+ "</b>")+"");
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_rp").toString())) {
+                                            ci.ss_RP = String.valueOf(Html.fromHtml("<b>" + "RP : " + "</b>") + jsonObject.getString("product_rp").toString());
+                                        } else {
+                                            ci.ss_RP = String.valueOf(Html.fromHtml("<b>" + "RP : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_mrp").toString()))
-                                        {
-                                            ci.ss_MRP = String.valueOf(Html.fromHtml("<b>" +"MRP : "+ "</b>")+jsonObject.getString("product_mrp").toString());
-                                        }
-                                        else
-                                        {
-                                            ci.ss_MRP = String.valueOf(Html.fromHtml("<b>" +"MRP : "+ "</b>")+"");
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_mrp").toString())) {
+                                            ci.ss_MRP = String.valueOf(Html.fromHtml("<b>" + "MRP : " + "</b>") + jsonObject.getString("product_mrp").toString());
+                                        } else {
+                                            ci.ss_MRP = String.valueOf(Html.fromHtml("<b>" + "MRP : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_name").toString()))
-                                        {
-                                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_type").toString()))
-                                            {
-                                                ci.ss_name = jsonObject.getString("wh_type").toString()+" - "+jsonObject.getString("wh_name").toString();
-                                            }
-                                            else
-                                            {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_name").toString())) {
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_type").toString())) {
+                                                ci.ss_name = jsonObject.getString("wh_type").toString() + " - " + jsonObject.getString("wh_name").toString();
+                                            } else {
                                                 ci.ss_name = jsonObject.getString("wh_name").toString();
                                             }
 
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             ci.ss_name = "";
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_address").toString()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_address").toString())) {
 
-                                            ci.ss_address = String.valueOf(Html.fromHtml("<b>" +"ADDRESS : "+ "</b>")+jsonObject.getString("wh_address").toString());
+                                            ci.ss_address = String.valueOf(Html.fromHtml("<b>" + "ADDRESS : " + "</b>") + jsonObject.getString("wh_address").toString());
 
-                                        }
-                                        else
-                                        {
-                                            ci.ss_address = String.valueOf(Html.fromHtml("<b>" +"ADDRESS : "+ "</b>")+"");
+                                        } else {
+                                            ci.ss_address = String.valueOf(Html.fromHtml("<b>" + "ADDRESS : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("gross_stock").toString()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("gross_stock").toString())) {
 
-                                            ci.ss_grossstock = String.valueOf(Html.fromHtml("<b>" +"GROSS STOCK : "+ "</b>")+jsonObject.getString("gross_stock").toString());
+                                            ci.ss_grossstock = String.valueOf(Html.fromHtml("<b>" + "GROSS STOCK : " + "</b>") + jsonObject.getString("gross_stock").toString());
 
-                                        }
-                                        else
-                                        {
-                                            ci.ss_grossstock = String.valueOf(Html.fromHtml("<b>" +"GROSS STOCK : "+ "</b>")+"");
+                                        } else {
+                                            ci.ss_grossstock = String.valueOf(Html.fromHtml("<b>" + "GROSS STOCK : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("sellable_stock").toString()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("sellable_stock").toString())) {
 
-                                            ci.ss_sellable = String.valueOf(Html.fromHtml("<b>" +"SELLABLE : "+ "</b>")+jsonObject.getString("sellable_stock").toString());
+                                            ci.ss_sellable = String.valueOf(Html.fromHtml("<b>" + "SELLABLE : " + "</b>") + jsonObject.getString("sellable_stock").toString());
 
-                                        }
-                                        else
-                                        {
-                                            ci.ss_sellable =  String.valueOf(Html.fromHtml("<b>" +"SELLABLE : "+ "</b>")+"");
+                                        } else {
+                                            ci.ss_sellable = String.valueOf(Html.fromHtml("<b>" + "SELLABLE : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("updated_at").toString()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("updated_at").toString())) {
 
-                                            ci.updated_at =  String.valueOf(Html.fromHtml("<b>" +"UPDATED : "+ "</b>")+jsonObject.getString("updated_at").toString());
+                                            ci.updated_at = String.valueOf(Html.fromHtml("<b>" + "UPDATED : " + "</b>") + jsonObject.getString("updated_at").toString());
 
-                                        }
-                                        else
-                                        {
-                                            ci.updated_at = String.valueOf(Html.fromHtml("<b>" +"UPDATED : "+ "</b>")+"");
+                                        } else {
+                                            ci.updated_at = String.valueOf(Html.fromHtml("<b>" + "UPDATED : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_city_name").toString()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_city_name").toString())) {
 
-                                            ci.city =  String.valueOf(Html.fromHtml("<b>" +"CITY : "+ "</b>")+jsonObject.getString("wh_city_name").toString());
+                                            ci.city = String.valueOf(Html.fromHtml("<b>" + "CITY : " + "</b>") + jsonObject.getString("wh_city_name").toString());
 
-                                        }
-                                        else
-                                        {
-                                            ci.city = String.valueOf(Html.fromHtml("<b>" +"CITY : "+ "</b>")+"");
+                                        } else {
+                                            ci.city = String.valueOf(Html.fromHtml("<b>" + "CITY : " + "</b>") + "");
                                         }
 
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_state_name").toString()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_state_name").toString())) {
 
-                                            ci.state =  String.valueOf(Html.fromHtml("<b>" +"STATE : "+ "</b>")+jsonObject.getString("wh_state_name").toString());
+                                            ci.state = String.valueOf(Html.fromHtml("<b>" + "STATE : " + "</b>") + jsonObject.getString("wh_state_name").toString());
 
-                                        }
-                                        else
-                                        {
-                                            ci.state = String.valueOf(Html.fromHtml("<b>" +"STATE : "+ "</b>")+"");
+                                        } else {
+                                            ci.state = String.valueOf(Html.fromHtml("<b>" + "STATE : " + "</b>") + "");
                                         }
 
-                                    result.add(ci);
+                                        result.add(ci);
 
+                                    }
+
+                                    Stock_Adapter ca = new Stock_Adapter(result, Stock_Main.this);
+                                    recList.setAdapter(ca);
+                                    // ca.notifyDataSetChanged();
+                                    //recList.setRecycledViewPool();
+
+
+                                    dialog.dismiss();
                                 }
 
-                                Stock_Adapter ca = new Stock_Adapter(result,Stock_Main.this);
-                                recList.setAdapter(ca);
-                                // ca.notifyDataSetChanged();
-                                //recList.setRecycledViewPool();
-
-
                                 dialog.dismiss();
+
+                                //finish();
+
                             }
 
+
+                            // }
+
+                            // output.setText(data);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                             dialog.dismiss();
-
-                            //finish();
-
                         }
 
 
-                        // }
+                        dialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("volley", "error: " + error);
 
-                        // output.setText(data);
-                    }catch(JSONException e){e.printStackTrace(); dialog.dismiss(); }
+                        Toast toast = Toast.makeText(Stock_Main.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+
+                        dialog.dismiss();
+
+                        Intent i = new Intent(Stock_Main.this, Pricing_Main.class);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+
+                    }
+                });
+
+                RequestQueue requestQueue = Volley.newRequestQueue(Stock_Main.this);
+                // queue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false);
+                int socketTimeout = 200000;//30 seconds - change to what you want
+                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                jsObjRequest.setRetryPolicy(policy);
+                requestQueue.add(jsObjRequest);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                dialog.dismiss();
 
 
-                    dialog.dismiss();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i("volley", "error: " + error);
+            }
 
-                    Toast toast = Toast.makeText(Stock_Main.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-
-                    dialog.dismiss();
-
-                    Intent i=new Intent(Stock_Main.this, Pricing_Main.class);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    finish();
-
-                }
-            });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(Stock_Main.this);
-            // queue.add(jsObjRequest);
-            jsObjRequest.setShouldCache(false);
-            int socketTimeout = 200000;//30 seconds - change to what you want
-            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            jsObjRequest.setRetryPolicy(policy);
-            requestQueue.add(jsObjRequest);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        else
+        {
             dialog.dismiss();
+            if(warehouse_flagnew == 1 ) {
 
+                warehouse_list.setText("");
+                Toast toast = Toast.makeText(Stock_Main.this,"Please Enter Valid Warehouse Name.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+            else
+            if(product_flagnew == 1 ) {
 
+                product_list.setText("");
+                Toast toast = Toast.makeText(Stock_Main.this,"Please Enter Valid Product Name.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+
+            }
 
         }
     }
