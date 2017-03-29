@@ -100,21 +100,21 @@ public class Pricing_Main extends BaseActivity {
             }
         });
 
-        //Reading all
-        List<Local_Data> contacts1 = dbvoc.HSS_DescriptionITEM();
-        results1.add("Select Category");
-        for (Local_Data cn : contacts1)
-        {
-            if(!cn.getStateName().equalsIgnoreCase("") && !cn.getStateName().equalsIgnoreCase(" "))
-            {
-                String str_categ = ""+cn.getStateName();
-                results1.add(str_categ);
-            }
-        }
-
-        dataAdapterCategory = new ArrayAdapter<String>(this, R.layout.spinner_item, results1);
-        dataAdapterCategory.setDropDownViewResource(R.layout.spinner_item);
-        spnCategory.setAdapter(dataAdapterCategory);
+//        //Reading all
+//        List<Local_Data> contacts1 = dbvoc.HSS_DescriptionITEM();
+//        results1.add("Select Category");
+//        for (Local_Data cn : contacts1)
+//        {
+//            if(!cn.getStateName().equalsIgnoreCase("") && !cn.getStateName().equalsIgnoreCase(" "))
+//            {
+//                String str_categ = ""+cn.getStateName();
+//                results1.add(str_categ);
+//            }
+//        }
+//
+//        dataAdapterCategory = new ArrayAdapter<String>(this, R.layout.spinner_item, results1);
+//        dataAdapterCategory.setDropDownViewResource(R.layout.spinner_item);
+//        spnCategory.setAdapter(dataAdapterCategory);
 
 //        results.add("Select Product");
 //
@@ -441,9 +441,16 @@ public class Pricing_Main extends BaseActivity {
                     if (parent.getItemAtPosition(pos).toString()
                             .equalsIgnoreCase("Select Product"))
                     {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Pricing_Main.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                result_product);
+                        Product_Variant.setThreshold(1);// will start working from
+                        // first character
+                        Product_Variant.setAdapter(adapter);// setting the adapter
+                        // data into the
+                        // AutoCompleteTextView
                         Product_Variant.setTextColor(Color.BLACK);
                         Product_Variant.setText("");
-                        //Toast.makeText(getApplicationContext(), "Please Select Product", Toast.LENGTH_LONG).show();
                         recList.setVisibility(View.INVISIBLE);
 
                     }
@@ -485,11 +492,15 @@ public class Pricing_Main extends BaseActivity {
 
                         if(contacts3.size() <= 0 && !Product_Variant.getText().toString().trim().equalsIgnoreCase(""))
                         {
-                           // Toast.makeText(Pricing_Main.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(Pricing_Main.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                            Toast toast = Toast.makeText(getApplicationContext(),  "Sorry No Record Found.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+//                            Toast toast = Toast.makeText(getApplicationContext(),  "Sorry No Record Found.", Toast.LENGTH_LONG);
+//                            toast.setGravity(Gravity.CENTER, 0, 0);
+//                            toast.show();
+
+                            Product_Variant.setTextColor(Color.BLACK);
+                            Product_Variant.setText("");
+                            //Toast.makeText(getApplicationContext(), "Please Select Product", Toast.LENGTH_LONG).show();
 
                             recList.setVisibility(View.INVISIBLE);
                         }

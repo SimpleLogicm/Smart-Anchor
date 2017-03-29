@@ -128,7 +128,7 @@ MERGED from [com.mcxiaoke.volley:library-aar:1.0.0] E:\Vinod\android_studio_meta
 	android:allowBackup
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:46:9-35
 	android:icon
-		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:48:9-39
+		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:48:9-45
 	android:largeHeap
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:50:9-33
 	android:theme

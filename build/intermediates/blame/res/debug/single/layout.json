@@ -52,12 +52,12 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\youtube_player.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\txt_nearestlist.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\txt_nearestlist.xml"
-    },
-    {
         "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\ap_demo.xml",
         "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\ap_demo.xml"
+    },
+    {
+        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\txt_nearestlist.xml",
+        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\txt_nearestlist.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\adr_dialog.xml",
@@ -68,12 +68,12 @@
         "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target.xml"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\item_invoicedetail_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\item_invoicedetail_list.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule2.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule2.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\item_invoicedetail_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\item_invoicedetail_list.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\exchild_item.xml",

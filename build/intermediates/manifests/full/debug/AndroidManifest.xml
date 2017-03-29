@@ -47,7 +47,7 @@
         android:name="com.anchor.App.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@drawable/mlogo"
+        android:icon="@drawable/anchor_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
