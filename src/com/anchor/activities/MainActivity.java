@@ -16,6 +16,7 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -31,12 +32,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.anchor.animation.ActivitySwitcher;
 import com.anchor.service.LocationServices;
@@ -54,6 +62,9 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
+	String device_id;
+	String response_result = "";
+	static String final_response = "";
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
@@ -284,7 +295,7 @@ public class MainActivity extends BaseActivity {
 				invalidateOptionsMenu();
 			}
 		};
-		
+
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
@@ -504,69 +515,150 @@ public class MainActivity extends BaseActivity {
 	   	break;
 		case 5:
 
-		isInternetPresent = cd.isConnectingToInternet();
+			isInternetPresent = cd.isConnectingToInternet();
 
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
-		alertDialog.setTitle("Schedule");
-		alertDialog.setMessage("If you want to view schedule offline, Please click Offline button");
-		alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Online",new DialogInterface.OnClickListener() {
+			AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+			alertDialog.setTitle("Schedule");
+			alertDialog.setMessage("If you want to view schedule offline, Please click Offline button");
+			alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Online",new DialogInterface.OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-				if (isInternetPresent)
-				{
-					getScheduleDataFORALLCUSTOMERS();
+				@Override
+				public void onClick(DialogInterface dialog1, int which) {
+					dialog1.cancel();
+					if (isInternetPresent)
+					{
+						//getScheduleDataFORALLCUSTOMERS();
+
+						TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+						String device_id = telephonyManager.getDeviceId();
+						//calendarn = Calendar.getInstance();
+						//year = calendarn.get(Calendar.YEAR);
+						loginDataBaseAdapter=new LoginDataBaseAdapter(MainActivity.this);
+						loginDataBaseAdapter=loginDataBaseAdapter.open();
+						dialog = new ProgressDialog(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+						dialog.setMessage("Please Wait Schedule Sync....");
+						dialog.setTitle("Sales App");
+						dialog.setCancelable(false);
+						dialog.show();
+
+						String  domain = getResources().getString(R.string.service_domain);
+
+						Log.i("volley", "domain: " + domain);
+						Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
+						Log.i("target url", "target url " + domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL);
+
+						StringRequest jsObjRequest = null;
+
+					 jsObjRequest = new StringRequest(domain+"delivery_schedules/send_all_schedules?imei_no="+"358187071078870"+"&email="+"vinod.raghuwanshi@simplelogic.in", new Response.Listener<String>() {
+
+
+//						jsObjRequest = new StringRequest(domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL, new Response.Listener<String>() {
+
+							@Override
+							public void onResponse(String response) {
+								Log.i("volley", "response: " + response);
+								final_response = response;
+
+								new scheduleoperation().execute(response);
+
+							}
+						},
+								new Response.ErrorListener() {
+									@Override
+									public void onErrorResponse(VolleyError error) {
+										dialog.dismiss();
+										//Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+										if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+											Toast.makeText(getApplicationContext(),
+													"Network Error",
+													Toast.LENGTH_LONG).show();
+										} else if (error instanceof AuthFailureError) {
+											Toast.makeText(getApplicationContext(),
+													"Server AuthFailureError  Error",
+													Toast.LENGTH_LONG).show();
+										} else if (error instanceof ServerError) {
+											Toast.makeText(getApplicationContext(),
+													"Server   Error",
+													Toast.LENGTH_LONG).show();
+										} else if (error instanceof NetworkError) {
+											Toast.makeText(getApplicationContext(),
+													"Network   Error",
+													Toast.LENGTH_LONG).show();
+										} else if (error instanceof ParseError) {
+											Toast.makeText(getApplicationContext(),
+													"ParseError   Error",
+													Toast.LENGTH_LONG).show();
+										}
+										else
+										{
+											Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+										}
+										dialog.dismiss();
+										// finish();
+									}
+								});
+
+						RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+						int socketTimeout = 300000;//30 seconds - change to what you want
+						RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+						jsObjRequest.setRetryPolicy(policy);
+						// requestQueue.se
+						//requestQueue.add(jsObjRequest);
+						jsObjRequest.setShouldCache(false);
+						requestQueue.getCache().clear();
+						requestQueue.add(jsObjRequest);
+
+
+
+
+					}
+					else
+					{
+
+						//Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+						Toast toast = Toast.makeText(MainActivity.this,"You don't have internet connection.", Toast.LENGTH_LONG);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+					}
 
 
 				}
-				else
-				{
+			});
 
-					//Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-					Toast toast = Toast.makeText(MainActivity.this,"You don't have internet connection.", Toast.LENGTH_LONG);
-					toast.setGravity(Gravity.CENTER, 0, 0);
-					toast.show();
+			alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Offline",new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog1, int which) {
+
+					List<Local_Data> contacts3 = dbvoc.getSchedule_ListAll();
+
+					if (contacts3.size() <= 0) {
+						//Toast.makeText(Order.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+
+						Toast toast = Toast.makeText(MainActivity.this, "Sorry No Record Found.", Toast.LENGTH_LONG);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+
+					}
+					else
+					{
+						Global_Data.Schedule_FLAG = "ALLCUSTOMER";
+						Intent intent = new Intent(getApplicationContext(),
+								Schedule_List.class);
+						startActivity(intent);
+						finish();
+						overridePendingTransition(R.anim.slide_in_right,
+								R.anim.slide_out_left);
+					}
+
+					dialog1.cancel();
+
 				}
-
-
-			}
-		});
-
-		alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Offline",new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-
-				List<Local_Data> contacts3 = dbvoc.getSchedule_ListAll();
-
-				if (contacts3.size() <= 0) {
-					//Toast.makeText(Order.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-					Toast toast = Toast.makeText(MainActivity.this, "Sorry No Record Found.", Toast.LENGTH_LONG);
-					toast.setGravity(Gravity.CENTER, 0, 0);
-					toast.show();
-
-				}
-				else
-				{
-					Global_Data.Schedule_FLAG = "ALLCUSTOMER";
-					Intent intent = new Intent(getApplicationContext(),
-							Schedule_List.class);
-					startActivity(intent);
-					finish();
-					overridePendingTransition(R.anim.slide_in_right,
-							R.anim.slide_out_left);
-				}
-
-				dialog.cancel();
-
-			}
-		});
-		alertDialog.show();
-		fragment = new Home();
-		break;
-
+			});
+			alertDialog.show();
+			fragment = new Home();
+			break;
 			case 6:
 				Intent conaa = new Intent(MainActivity.this, Sound_Setting.class);
 				startActivity(conaa);
@@ -809,13 +901,6 @@ public class MainActivity extends BaseActivity {
 
 					try{
 
-
-						//   for (int a = 0; a < response.length(); a++) {
-
-//	                        JSONObject person = (JSONObject) response.getJSONArray(response);
-						//
-						//   String name = response.getString("result44");
-
 						String response_result = "";
 						if(response.has("result"))
 						{
@@ -980,6 +1065,177 @@ public class MainActivity extends BaseActivity {
 
 
 		}
+	}
+
+	private  class  scheduleoperation extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... responsenew) {
+
+
+			try {
+				JSONObject response = new JSONObject(final_response);
+				if (response.has("result")) {
+					response_result = response.getString("result");
+				} else {
+					response_result = "data";
+				}
+
+
+				if (response_result.equalsIgnoreCase("Schedule doesn't exist")) {
+
+
+					//Toast.makeText(Order.this, response_result, Toast.LENGTH_LONG).show();
+
+					MainActivity.this.runOnUiThread(new Runnable() {
+						public void run() {
+
+
+							dialog.dismiss();
+							//Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
+
+							Toast toast = Toast.makeText(MainActivity.this, response_result, Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
+						}
+					});
+
+
+				} else {
+
+					//dbvoc.getDeleteTable("delivery_products");
+					//dbvoc.getDeleteTable("delivery_schedules");
+					//dbvoc.getDeleteTable("credit_profile");
+					dbvoc.getDeletedelivery_schedulesAll();
+					dbvoc.getDeletedelivery_productsAll();
+					dbvoc.getDeletecredit_limitsAll();
+
+					JSONArray delivery_products = response.getJSONArray("delivery_products");
+					JSONArray delivery_schedules = response.getJSONArray("delivery_schedules");
+					JSONArray credit_profile = response.getJSONArray("credit_profiles");
+
+
+					Log.i("volley", "response reg delivery_products Length: " + delivery_products.length());
+					Log.i("volley", "response reg delivery_schedules Length: " + delivery_schedules.length());
+					Log.i("volley", "response reg credit_profile Length: " + credit_profile.length());
+
+					Log.d("volley", "delivery_products" + delivery_products.toString());
+					Log.d("volley", "delivery_schedules" + delivery_schedules.toString());
+					Log.d("volley", "credit_profile" + credit_profile.toString());
+
+					//
+					if (delivery_schedules.length() <= 0) {
+
+						MainActivity.this.runOnUiThread(new Runnable() {
+							public void run() {
+
+								dialog.dismiss();
+								//Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
+
+								Toast toast = Toast.makeText(MainActivity.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG);
+								toast.setGravity(Gravity.CENTER, 0, 0);
+								toast.show();
+							}
+						});
+					} else {
+						for (int i = 0; i < delivery_products.length(); i++) {
+
+							JSONObject jsonObject = delivery_products.getJSONObject(i);
+
+							loginDataBaseAdapter.insertDeliveryProducts("", jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("order_quantity"), jsonObject.getString("delivered_quantity"), jsonObject.getString("truck_number"), jsonObject.getString("transporter_details"), "", "", jsonObject.getString("product_name") + "" + "" + "");
+
+
+						}
+
+						for (int i = 0; i < delivery_schedules.length(); i++) {
+
+							JSONObject jsonObject = delivery_schedules.getJSONObject(i);
+
+							loginDataBaseAdapter.insertDeliverySchedule("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", jsonObject.getString("user_email"), jsonObject.getString("dispatch_date"), jsonObject.getString("delivery_date"), jsonObject.getString("order_amount"), jsonObject.getString("accepted_payment_mode"), "", jsonObject.getString("collected_amount"), jsonObject.getString("outstanding_amount"), "", "", jsonObject.getString("customer_address"));
+
+
+						}
+
+
+						for (int i = 0; i < credit_profile.length(); i++) {
+
+							JSONObject jsonObject = credit_profile.getJSONObject(i);
+
+							loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
+
+
+						}
+
+						MainActivity.this.runOnUiThread(new Runnable() {
+							public void run() {
+
+								Global_Data.Schedule_FLAG = "ALLCUSTOMER";
+								Intent intent = new Intent(MainActivity.this, Schedule_List.class);
+								startActivity(intent);
+								overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+								finish();
+								dialog.dismiss();
+							}
+						});
+
+					}
+
+					MainActivity.this.runOnUiThread(new Runnable() {
+						public void run() {
+
+							dialog.dismiss();
+						}
+					});
+					//	dialog.dismiss();
+
+					//finish();
+
+				}
+
+
+				// }
+
+				// output.setText(data);
+			} catch (JSONException e) {
+				e.printStackTrace();
+
+
+				MainActivity.this.runOnUiThread(new Runnable() {
+					public void run() {
+
+						dialog.dismiss();
+					}
+				});
+
+			}
+
+
+			MainActivity.this.runOnUiThread(new Runnable() {
+				public void run() {
+
+					dialog.dismiss();
+				}
+			});
+
+			return "Executed";
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+
+			MainActivity.this.runOnUiThread(new Runnable() {
+				public void run() {
+					dialog.dismiss();
+				}
+			});
+
+
+		}
+
+		@Override
+		protected void onPreExecute() {}
+
+		@Override
+		protected void onProgressUpdate(Void... values) {}
 	}
 
 	public void getScheduleDataFORALLCUSTOMERS()

@@ -193,9 +193,8 @@ public class LoginActivity extends Activity{
 //				editText1.setText("Alex");
 //				editText2.setText("alex12345");
 
-//		editText1.setText("sujit123");
-//		editText2.setText("sujit12345");
-
+//     	editText1.setText("tejal");
+//		editText2.setText("tejal12345");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);

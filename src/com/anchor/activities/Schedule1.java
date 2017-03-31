@@ -81,12 +81,12 @@ public class Schedule1 extends Activity{
 		dataArrayList=new ArrayList<HashMap<String, String>>();
 		
 		// for credit limit vinod
-		List<Local_Data> contactsR = dbvoc.getRetailer(RE_TEXT);      
-        for (Local_Data cn : contactsR) 
-        {
-      	     
-       	  RE_ID = cn.get_Retailer_id();
-        }
+//		List<Local_Data> contactsR = dbvoc.getRetailer(RE_TEXT);
+//        for (Local_Data cn : contactsR)
+//        {
+//
+//       	  RE_ID = cn.get_Retailer_id();
+//        }
         
         if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOvel_CUSTOMER_ID))
         {
