@@ -62,6 +62,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
+	private RequestQueue requestQueue;
 	String device_id;
 	String response_result = "";
 	static String final_response = "";
@@ -1050,8 +1051,13 @@ public class MainActivity extends BaseActivity {
 				}
 			});
 
-			RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+			//RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 			// queue.add(jsObjRequest);
+
+			if (requestQueue == null) {
+				requestQueue = Volley.newRequestQueue(MainActivity.this);
+				Log.d("new error","Setting a new request queue");
+			}
 			jsObjRequest.setShouldCache(false);
 			int socketTimeout = 200000;//30 seconds - change to what you want
 			RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
