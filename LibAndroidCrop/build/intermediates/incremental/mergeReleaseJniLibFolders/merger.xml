@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\Anchor\ANCHOR_METAL\LibAndroidCrop\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="E:\Anchor\ANCHOR_METAL\LibAndroidCrop\build-types\release\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\LibAndroidCrop\src\main\jniLibs"/></dataSet><dataSet config="release"><source path="E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\LibAndroidCrop\build-types\release\jniLibs"/></dataSet></merger>

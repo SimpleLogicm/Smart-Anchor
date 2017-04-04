@@ -4,14 +4,6 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\res\\drawable\\crop__selectable_background.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\release\\drawable\\crop__texture.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\drawable\\crop__texture.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\release\\drawable\\crop__selectable_background.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\drawable\\crop__selectable_background.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\res\\merged\\release\\drawable\\crop__texture.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\res\\drawable\\crop__texture.xml"
     }

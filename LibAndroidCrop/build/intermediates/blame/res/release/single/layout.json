@@ -1,13 +1,5 @@
 [
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\release\\layout\\crop__activity_crop.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\layout\\crop__activity_crop.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\build\\intermediates\\res\\merged\\release\\layout\\crop__layout_done_cancel.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\LibAndroidCrop\\res\\layout\\crop__layout_done_cancel.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\res\\merged\\release\\layout\\crop__layout_done_cancel.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\res\\layout\\crop__layout_done_cancel.xml"
     },

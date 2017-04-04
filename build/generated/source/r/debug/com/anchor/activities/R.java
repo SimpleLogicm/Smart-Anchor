@@ -3011,8 +3011,15 @@ containing a value of this type.
     public static final class style {
         /**  API 11 theme customizations can go here. 
  API 14 theme customizations can go here. 
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
          */
         public static final int AppBaseTheme=0x7f0a0002;
+        /**  All customizations that are NOT specific to a particular API-level can go here. 
+         */
         public static final int AppTheme=0x7f0a0066;
         public static final int Base_TextAppearance_AppCompat=0x7f0a0028;
         public static final int Base_TextAppearance_AppCompat_Body1=0x7f0a0029;
