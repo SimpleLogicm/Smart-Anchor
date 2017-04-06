@@ -13,6 +13,8 @@ public class ContactInfo {
     public String order_number;
     public String location;
 
+    public String Cust_Code;
+
 
     public static final String NAME_PREFIX = "CODE";
     public static final String SURNAME_PREFIX = "product_variant";

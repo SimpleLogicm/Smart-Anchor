@@ -711,8 +711,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 							alertDialog.setTitle(schedulestr);
 							alertDialog.setMessage("If you want to view " + schedulestr + " offline, Please click Offline button");
 						}else{
-							alertDialog.setTitle("Schedule");
-							alertDialog.setMessage("If you want to view Schedule offline, Please click Offline button");
+							alertDialog.setTitle(schedulestr);
+							alertDialog.setMessage("If you want to view " + schedulestr + " offline, Please click Offline button");
 						}
 							alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Online",new DialogInterface.OnClickListener() {
 

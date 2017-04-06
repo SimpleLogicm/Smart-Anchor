@@ -1126,7 +1126,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public void getDeletecredit_limits(String customer_id) {
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "DELETE FROM " +TABLE_CREDIT_LIMITS+ " WHERE customer_id " + " ='"+ customer_id + "'";
+        String selectQuery = "DELETE FROM " +TABLE_CREDIT_PROFILE+ " WHERE customer_id " + " ='"+ customer_id + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
@@ -1137,7 +1137,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public void getDeletecredit_limitsAll() {
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "DELETE FROM " +TABLE_CREDIT_LIMITS ;
+        String selectQuery = "DELETE FROM " +TABLE_CREDIT_PROFILE ;
 
         SQLiteDatabase db= this.getWritableDatabase();
 
@@ -3058,7 +3058,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getSchedule_List(String customer_id) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT order_id,delivery_date FROM " + TABLE_DELIVERY_SCHEDULES + " WHERE customer_id = '" + customer_id + "'";
+        String selectQuery1 = "SELECT order_id,delivery_date,customer_id FROM " + TABLE_DELIVERY_SCHEDULES + " WHERE customer_id = '" + customer_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -3069,6 +3069,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 Local_Data contact = new Local_Data();
                 contact.set_shedule_order_id(cursor.getString(0));
                 contact.set_shedule_delivery_date(cursor.getString(1));
+                contact.setCust_Code(cursor.getString(2));
                 //contact.setAddress(cursor.getString(2));
                 //contact.setPwd(cursor.getString(2));
                 //contact.setImei(cursor.getString(3));
@@ -3087,7 +3088,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getSchedule_ListAll() {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT order_id,delivery_date,c_address FROM " + TABLE_DELIVERY_SCHEDULES ;
+        String selectQuery1 = "SELECT order_id,delivery_date,c_address,customer_id FROM " + TABLE_DELIVERY_SCHEDULES ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -3099,6 +3100,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.set_shedule_order_id(cursor.getString(0));
                 contact.set_shedule_delivery_date(cursor.getString(1));
                 contact.setADDRESS(cursor.getString(2));
+                contact.setCust_Code(cursor.getString(3));
                 //contact.setAddress(cursor.getString(2));
                 //contact.setPwd(cursor.getString(2));
                 //contact.setImei(cursor.getString(3));

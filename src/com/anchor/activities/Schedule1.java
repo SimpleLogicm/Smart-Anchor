@@ -40,6 +40,7 @@ public class Schedule1 extends Activity{
 	private String Order_ID;
 	List<String> Product_List = new ArrayList<String>();
 	List<String> Product_List_NEW = new ArrayList<String>();
+	String customer_id = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -48,8 +49,18 @@ public class Schedule1 extends Activity{
 		
 		Intent i = getIntent(); 
 		//String name = i.getStringExtra("retialer");
-		order_id_get = i.getStringExtra("order_id");
-		RE_TEXT = i.getStringExtra("RE_TEXT");
+		try
+		{
+			order_id_get = i.getStringExtra("order_id");
+			RE_TEXT = i.getStringExtra("RE_TEXT");
+			customer_id = i.getStringExtra("customer_id");
+		}
+		catch(Exception ex){ex.printStackTrace();}
+
+		if(!(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOvel_CUSTOMER_ID)))
+		{
+			Global_Data.GLOvel_CUSTOMER_ID = customer_id;
+		}
 		
 		//Toast.makeText(getApplicationContext(), order_id_get,Toast.LENGTH_SHORT).show();
 		Order_ID = order_id_get;
@@ -143,7 +154,7 @@ public class Schedule1 extends Activity{
 
 
 
-			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.get_delivery_product_transporter_details()))
+			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.get_stocks_product_name()))
 			{
 				map.put(TAG_PRODUCT, cn.get_stocks_product_name());
 			}

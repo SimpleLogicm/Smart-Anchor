@@ -57,11 +57,15 @@ public class Schedule_List extends BaseActivity {
         setContentView(R.layout.schedule_list);
 
 
+
+
         recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
+
+        Global_Data.GLOvel_CUSTOMER_ID = "";
 
 
         SharedPreferences spf = Schedule_List.this.getSharedPreferences("SimpleLogic", 0);
@@ -134,6 +138,7 @@ public class Schedule_List extends BaseActivity {
                     ContactInfo ci = new ContactInfo();
                     ci.date1 = cn.get_shedule_delivery_date();
                     ci.order_number = cn.get_shedule_order_id();
+                    ci.Cust_Code = Global_Data.GLOvel_CUSTOMER_ID;
                     ci.location = Global_Data.customer_Address;
 
                     result.add(ci);
@@ -169,6 +174,7 @@ public class Schedule_List extends BaseActivity {
                     ci.date1 = cn.get_shedule_delivery_date();
                     ci.order_number = cn.get_shedule_order_id();
                     ci.location = cn.getADDRESS();
+                    ci.Cust_Code = cn.getCust_Code();
 
                     result.add(ci);
                 }
