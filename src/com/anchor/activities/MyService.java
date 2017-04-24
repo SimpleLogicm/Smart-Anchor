@@ -372,7 +372,9 @@ public class MyService extends Service implements LocationListener{
 
 					isInternetPresent = cd.isConnectingToInternet();
 
-					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22)
+					List<Local_Data> background = dbvoc.getBACKGROUND_SERVICE_CHECK_DATA();
+
+					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && background.size() <= 0)
 					{
 						//Reading all
 						List<Local_Data> contacts = dbvoc.getemaIL();
@@ -402,6 +404,8 @@ public class MyService extends Service implements LocationListener{
 								results.add(g.getdatetime1());
 								PICTURE.put(picture);
 
+								loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(g.getlatitude(),g.getlongitude(),g.getdatetime1());
+
 							}
 						}
 						else
@@ -417,6 +421,9 @@ public class MyService extends Service implements LocationListener{
 							//picture.put("address", "");
 							picture.put("location_date", dateFormat.format(date));
 							PICTURE.put(picture);
+
+							loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE,dateFormat.format(date));
+
 						}
 
 
@@ -480,6 +487,8 @@ public class MyService extends Service implements LocationListener{
 											results.clear();
 										}
 
+										dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
+
 										//dbvoc.getDeleteTable("geo_data");
 										Log.d("LOC RESULT","LOC RESULT"+response_result);
 										LocationAddress locationAddress = new LocationAddress();
@@ -500,7 +509,9 @@ public class MyService extends Service implements LocationListener{
 
 									// output.setText(data);
 								}catch(JSONException e) {
+									dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 									e.printStackTrace();
+
 									//dialog.dismiss();
 									//finish();
 								}
@@ -512,6 +523,8 @@ public class MyService extends Service implements LocationListener{
 							@Override
 							public void onErrorResponse(VolleyError error) {
 								//Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+								dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 
 								if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 

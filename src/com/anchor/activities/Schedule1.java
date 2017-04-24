@@ -230,6 +230,12 @@ public class Schedule1 extends Activity{
 		 but_invoice.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+
+					if(!(Global_Data.Schedule_FLAG.equalsIgnoreCase("CUSTOMER")))
+					{
+						Global_Data.GLOvel_CUSTOMER_ID = "";
+					}
+
 					Intent intent = new Intent(Schedule1.this, Schedule_List.class);
 					startActivity(intent);
 					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -318,6 +324,10 @@ public class Schedule1 extends Activity{
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		//super.onBackPressed();
+		if(!(Global_Data.Schedule_FLAG.equalsIgnoreCase("CUSTOMER")))
+		{
+			Global_Data.GLOvel_CUSTOMER_ID = "";
+		}
 		Intent intent = new Intent(Schedule1.this, Schedule_List.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

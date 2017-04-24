@@ -1143,6 +1143,8 @@ public class MainActivity extends BaseActivity {
 							}
 						});
 					} else {
+
+						Global_Data.GLOvel_CUSTOMER_ID = "";
 						for (int i = 0; i < delivery_products.length(); i++) {
 
 							JSONObject jsonObject = delivery_products.getJSONObject(i);

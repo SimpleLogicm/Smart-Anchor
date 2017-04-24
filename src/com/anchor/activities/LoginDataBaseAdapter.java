@@ -256,6 +256,10 @@ public class LoginDataBaseAdapter
 	static final String DATABASE_CREATE_WAREHOUSE = "CREATE TABLE IF NOT EXISTS "+"warehouse"+
 			"( " +"ID"+" integer primary key autoincrement,"+ "project_id text, code text, type text, name text, " +
 			"address text, city text, state text, latlong text, status text, detail1 text, detail2 text, detail3 text);";
+
+	static final String DATABASE_CREATE_BACKGROUND_SERVICE_CHECK = "CREATE TABLE IF NOT EXISTS "+"background_service_check"+
+			"( " +"ID"+" integer primary key autoincrement,"+ "latitude text, longitude text," +
+			"location_date text);";
 		
 //		static final String DATABASE_CREATE_ORDER_PRODUCTS = "create table "+"order_products"+
 //              "( " +"ID"+" integer primary key autoincrement,"+ "code text, name text, primary_category text, sub_category text, " +
@@ -3380,6 +3384,20 @@ public class LoginDataBaseAdapter
 
 		// Insert the row into your table
 		db.insert("order_category", null, newValues);
+	}
+
+	public void insert_ACKGROUND_SERVICE_CHECK(String latitude,String longitude,String location_date)
+	{
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("latitude", latitude);
+		newValues.put("longitude", longitude);
+		newValues.put("location_date", location_date);
+
+
+
+		// Insert the row into your table
+		db.insert("background_service_check", null, newValues);
 	}
 		
 }

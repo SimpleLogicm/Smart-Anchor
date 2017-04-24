@@ -95,6 +95,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
          private static final String TABLE_L1_CONTACT= "L1_Contact";
          private static final String TABLE_ORDER_CATEGORY= "order_category";
+         private static final String TABLE_BACKGROUND_SERVICE_CHECK= "background_service_check";
 		 
 	    static SQLiteDatabase db;
 		// Contacts Table Columns names
@@ -206,12 +207,13 @@ public class DataBaseHelper extends SQLiteOpenHelper
             _db.execSQL(LoginDataBaseAdapter.DATABASE_SURVEY_QUESTIONS);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_SURVEY_ANSWERS);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_DISTRIBUTORBEAT);
-           _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_L1_CONTACT);
-          _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_ITEMSCHEME_NEW);
-        _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_LABEL_CHANGES);
-        _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_WAREHOUSE);
-        _db.execSQL(LoginDataBaseAdapter.DATABASE_ORDER_CATEGORY);
-	}
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_L1_CONTACT);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_ITEMSCHEME_NEW);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_LABEL_CHANGES);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_WAREHOUSE);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_ORDER_CATEGORY);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_BACKGROUND_SERVICE_CHECK);
+            }
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase _db, int _oldVersion, int _newVersion) 
@@ -575,6 +577,31 @@ public class DataBaseHelper extends SQLiteOpenHelper
         }
         
         db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getBACKGROUND_SERVICE_CHECK_DATA() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT  latitude,longitude FROM " + TABLE_BACKGROUND_SERVICE_CHECK ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setlatitude(cursor.getString(0));
+                contact.setlongitude(cursor.getString(1));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+
         // return contact list?
         return contactList1;
     }
@@ -1094,6 +1121,16 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery = "DELETE FROM " +TABLE_DELIVERY_SCHEDULES;
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+    }
+
+    public void getDeleteBACKGROUND_SERVICE_CHECK() {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " +TABLE_BACKGROUND_SERVICE_CHECK;
 
         SQLiteDatabase db= this.getWritableDatabase();
 

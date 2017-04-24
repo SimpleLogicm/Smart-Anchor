@@ -65,7 +65,7 @@ public class Schedule_List extends BaseActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        Global_Data.GLOvel_CUSTOMER_ID = "";
+
 
 
         SharedPreferences spf = Schedule_List.this.getSharedPreferences("SimpleLogic", 0);
@@ -224,6 +224,7 @@ public class Schedule_List extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+
 
         if(Global_Data.Schedule_FLAG.equalsIgnoreCase("CUSTOMER"))
         {
