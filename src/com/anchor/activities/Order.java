@@ -2667,9 +2667,9 @@ public class Order extends Activity implements OnItemSelectedListener {
 						if(response.has("message"))
 						{
 							response_result = response.getString("message");
-							Toast toast = Toast.makeText(Order.this, "Device Not Found", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
+//							Toast toast = Toast.makeText(Order.this, "Device Not Found", Toast.LENGTH_LONG);
+//							toast.setGravity(Gravity.CENTER, 0, 0);
+//							toast.show();
 						}
 						else
 						{
