@@ -266,6 +266,8 @@ public class Stock_options extends Activity implements OnItemSelectedListener {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_spinner_dropdown_item,
                         list_cities);
+                city_spinner.setEnabled(true);
+                beat_spinner.setEnabled(true);
 
             } else {
 
@@ -317,6 +319,11 @@ public class Stock_options extends Activity implements OnItemSelectedListener {
                     {
                         city_spinner.setEnabled(false);
                         beat_spinner.setEnabled(false);
+                    }
+                    else
+                    {
+                        city_spinner.setEnabled(true);
+                        beat_spinner.setEnabled(true);
                     }
 
                 }
