@@ -1,79 +1,63 @@
 [
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\return_order_home.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\return_order_home.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_fullscreen_view.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_fullscreen_view.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\survey_layout_adapter.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\survey_layout_adapter.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock_adapter.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock_adapter.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\list_group.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\list_group.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_info_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_info_main.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\new_order_new.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\new_order_new.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\survey_layout_adapter.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\survey_layout_adapter.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_home.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_home.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\order_upload_dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\order_upload_dialog.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule1.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule1.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\prev_text.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\prev_text.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule_list.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\claim_list_view.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\claim_list_view.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_row.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_row.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\nearest_cu_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\nearest_cu_adapter.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\reycle_target_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\reycle_target_main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\youtube_player.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\youtube_player.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\ap_demo.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\ap_demo.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\txt_nearestlist.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\txt_nearestlist.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\animation.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\animation.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\adr_dialog.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\adr_dialog.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\item_invoicedetail_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\item_invoicedetail_list.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule2.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule2.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\item_invoicedetail_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\item_invoicedetail_list.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\exchild_item.xml",
@@ -81,47 +65,59 @@
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\sales_dash.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\sales_dash.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\claim_list_view.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\claim_list_view.xml"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\contact_us.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\contact_us.xml"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_add_retailer.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_add_retailer.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_radio.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_show_location.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_show_location.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\schedule_list.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_expanded_menu_layout.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\new_order_new.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\new_order_new.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\txt_nearestlist.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\txt_nearestlist.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s1.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_previous_order_new_s1.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_clicktxt.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_clicktxt.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\spinner_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\spinner_item.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_whats_hot.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_whats_hot.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_community.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_community.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\checkboxlistdialog.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\checkboxlistdialog.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\returnpre_text.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\returnpre_text.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_search_view.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\signature.xml",
@@ -140,670 +136,6 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_itemn.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_info_main_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_info_main_adapter.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target_list.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_serve.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_serve.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\gallery_thumbnail.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\gallery_thumbnail.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\gallary.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\gallary.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_title_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_menu_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\content_main.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_achtext.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule_achtext.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\order_syncs.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\order_syncs.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\video_view.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\video_view.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\order_syncs.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\order_syncs.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\calender_readonlylayout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\calender_readonlylayout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_click.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_click.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_grpby_txt.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_grpby_txt.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\previous_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\previous_list.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\pricing_adapter.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\pricing_adapter.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\list_groupn.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\list_groupn.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_list_txt.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_list_txt.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\test.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\test.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\follow_tabbg.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\follow_tabbg.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\status_list_txt.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\status_list_txt.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_checkbox.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\no_order.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\no_order.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_list_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\schedule_list_adapter.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s3.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_previous_order_new_s3.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\survey_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\survey_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\order_new.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\order_new.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\child_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\child_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\image_fullscreen_preview.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\image_fullscreen_preview.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\item_invoicedetail_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\item_invoicedetail_list.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\forget_pwd.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\forget_pwd.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_simple_dropdown_hint.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_simple_dropdown_hint.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_customer.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\returnorder_customer.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\return_order1.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\return_order1.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\content_main.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_info_main.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_info_main.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock_product_options.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock_product_options.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\calender_readonlylayout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\calender_readonlylayout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\update_dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\update_dialog.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_summary2.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_summary2.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\distributor_dilogue.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\distributor_dilogue.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\row.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\row.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\summary2_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\summary2_adapter.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sound_setting.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\sound_setting.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\schedule2.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\schedule2.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\status_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\status_list.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_include.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view_include.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\previous_edit_product_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\previous_edit_product_item.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\filter_expand.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\filter_expand.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_list.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_signature.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\returnorder_signature.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_neworder.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_neworder.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_menu.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\spinner_item.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\spinner_item.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_whats_hot.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_whats_hot.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_fullscreen_view.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_fullscreen_view.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\update_dialog_edit.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\update_dialog_edit.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\list_itemn.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\list_itemn.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\cal_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\cal_list.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_sync.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_sync.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\calendar_event.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\calendar_event.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_title_item.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_splash_screen.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_splash_screen.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\pac_return_order.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\pac_return_order.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\previous_edit_product_item.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\previous_edit_product_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s2.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new_s2.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\exchild_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\exchild_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_image_slider.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_image_slider.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\expenses.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\expenses.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\expended_demo.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\expended_demo.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\ANCHOR_METAL\\imageResizer\\unspecified\\res\\layout\\activity_main.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\drawer_list_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\drawer_list_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock_options.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock_options.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\screen_gridcell.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\screen_gridcell.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_feed.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_feed.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\swipe_list_view_activity.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\swipe_list_view_activity.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\login.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\login.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\onclick_dialog.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\onclick_dialog.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\schedule.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\schedule.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\calendar_event.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\calendar_event.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\order_new.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\order_new.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\row.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\row.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\previousorder.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\previousorder.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_neworder.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_neworder.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sales_dash.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\sales_dash.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_info_main_adapter.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_info_main_adapter.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\return_order_home.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\return_order_home.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_dialog.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_dialog.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\stock.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\stock.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\crop__activity_crop.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\layout\\crop__activity_crop.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_mode_close_item_material.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_list_adapter.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule_list_adapter.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_list.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\new_filterlist.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\new_filterlist.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_prelist.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\returnorder_prelist.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\gallery_thumbnail.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\gallery_thumbnail.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\address_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\address_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\contact_us.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\contact_us.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\return_order_signature.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\return_order_signature.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_group.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_group.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\crop__layout_done_cancel.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\LibAndroidCrop\\unspecified\\res\\layout\\crop__layout_done_cancel.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_logout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_logout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\pricing_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\pricing_adapter.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\nearest_custlist.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\nearest_custlist.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_logout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_logout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_preview.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_preview.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_reyc_main.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target_reyc_main.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\onclick_dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\onclick_dialog.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_popup_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\list_events.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\list_events.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\list_row.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\list_row.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\youtube_player.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\youtube_player.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\new_filterlist.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\new_filterlist.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\address_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\address_layout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_marketing.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_marketing.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\survey_home_activity.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\survey_home_activity.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\ap_demo.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\ap_demo.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\survey_home_activity.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\survey_home_activity.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s3.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new_s3.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\sdcard_medialist.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\sdcard_medialist.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_item.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_item.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\stock_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\stock_adapter.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_search_view.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule1.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule1.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_list.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule_list.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_row.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_row.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\reycle_target_main.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\reycle_target_main.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\animation.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\animation.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\dialog.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\filtertxt.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\filtertxt.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_calendar.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_calendar.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\contact_us.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\contact_us.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_show_location.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_show_location.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\new_order_new.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\new_order_new.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_home.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_home.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_clicktxt.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_clicktxt.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_whats_hot.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_whats_hot.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_community.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_community.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\checkboxlistdialog.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\checkboxlistdialog.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_image_view.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_image_view.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\support_simple_spinner_dropdown_item.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_icon.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_search_view.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\return_order1.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\return_order1.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\cal_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\cal_list.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sound_act.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\sound_act.xml"
     },
@@ -816,68 +148,92 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_events.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\expen_group_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\expen_group_item.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\update_dialog_edit.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\update_dialog_edit.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target_list.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_serve.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_serve.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\distributor_dilogue.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\distributor_dilogue.xml"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_mode_bar.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\gallery_thumbnail.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\gallery_thumbnail.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_bar_title_item.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\video_view.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\video_view.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_video_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_video_main.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_reyc_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_reyc_main.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sdcard_images_main.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\sdcard_images_main.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\sound_setting.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\sound_setting.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_achtext.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule_achtext.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_marketing.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_marketing.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\order_syncs.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\order_syncs.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\status_dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\status_dialog.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\calender_readonlylayout.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\calender_readonlylayout.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_simple.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_click.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_click.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\previous_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\previous_list.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\pricing_adapter.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\pricing_adapter.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\update_dialog.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\update_dialog.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\filter_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\filter_list.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_list_txt.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_list_txt.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\test.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\test.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\filter_list.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\filter_list.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\previous_orderedit_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\previous_orderedit_adapter.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\pricing.xml",
@@ -892,48 +248,48 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\today_tab.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\previous_list.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\previous_list.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\no_order.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\no_order.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_serve.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_serve.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\survey_layout.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\survey_layout.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_media.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_media.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\animation.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\animation.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\image_fullscreen_preview.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\image_fullscreen_preview.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\survey_layout_adapter.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\survey_layout_adapter.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\forget_pwd.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\forget_pwd.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_customer.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\returnorder_customer.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\targetadapterview.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\targetadapterview.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_simple_dropdown_hint.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_simple_dropdown_hint.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\reycle_target_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\reycle_target_main.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\status_click.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\status_click.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\return_order1.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\return_order1.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\expended_demo.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\expended_demo.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\content_main.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_prelist.xml",
@@ -944,8 +300,12 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\expen_group_item.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\login.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\login.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_info_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_info_main.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock_product_options.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock_product_options.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\expenses.xml",
@@ -953,83 +313,47 @@
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_bar_up_container.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\about_metal.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\about_metal.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\child_item.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\child_item.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\screen_gridcell.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\screen_gridcell.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_achtxt.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target_achtxt.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\forget_pwd.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\forget_pwd.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\edit_product.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\edit_product.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\test.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\test.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_screen_simple.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_screen_simple.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_video_main.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_video_main.xml"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sound_setting.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\sound_setting.xml"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\order_upload_dialog.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\order_upload_dialog.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\webview_activity.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\webview_activity.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\status_clicktxt.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\status_clicktxt.xml"
-    },
-    {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\layout_fullscreen_image.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\layout_fullscreen_image.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\filter_expand.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\filter_expand.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\pricing.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\pricing.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\layout_fullscreen_image.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\layout_fullscreen_image.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\follow_tabbg.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\follow_tabbg.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_community.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_community.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\sound_act.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\sound_act.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_include.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_activity_chooser_view_include.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\summary2_adapter.xml",
@@ -1044,16 +368,20 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_address_dialog.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\signature.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\signature.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_list.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\checkboxlistdialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\checkboxlistdialog.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_signature.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\returnorder_signature.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_image_slider.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_image_slider.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_neworder.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_neworder.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\spinner_item.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\spinner_item.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_sumary1.xml",
@@ -1064,32 +392,28 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_feed.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\layout_fullscreen_image.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\layout_fullscreen_image.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\list_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\list_item.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_checkbox.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_simple_dropdown_hint.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_simple_dropdown_hint.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\cal_list.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\cal_list.xml"
     },
     {
-        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\prev_text.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\prev_text.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_sync.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_sync.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_menu.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_menu.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_sync.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_sync.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\prev_text.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\prev_text.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\calendar_event.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\calendar_event.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sdcard_medialist.xml",
@@ -1100,20 +424,12 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\targetadapterview.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_media.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_media.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\action_bar.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\action_bar.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_expanded_menu_layout.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\group_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\group_item.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_expanded_menu_layout.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_image_view.xml",
@@ -1121,19 +437,15 @@
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_radio.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\returnorder_signature.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\returnorder_signature.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\crop__layout_done_cancel.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\ANCHOR_METAL\\LibAndroidCrop\\unspecified\\res\\layout\\crop__layout_done_cancel.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\drawer_list_item.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\drawer_list_item.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\previous_edit_product_item.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\previous_edit_product_item.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\edit_product.xml",
@@ -1144,48 +456,48 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new_s1.xml"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s2.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new_s2.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_image_slider.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_image_slider.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target.xml"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\filtertxt.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\filtertxt.xml"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock_options.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock_options.xml"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view_list_item.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\schedule1.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\schedule1.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\return_order_signature.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\return_order_signature.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\dialog.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\dialog.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\image_fullscreen_preview.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\image_fullscreen_preview.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\screen_gridcell.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\screen_gridcell.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\login.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\login.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_previous_order_new.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\onclick_dialog.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\onclick_dialog.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_show_location.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_show_location.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\package_row.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\package_row.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_address_dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_address_dialog.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\group_item.xml",
@@ -1193,7 +505,7 @@
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\nearest_custlist.xml",
@@ -1204,36 +516,56 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\about_metal.xml"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\order_new.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\order_new.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\row.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\row.xml"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\gallary.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\gallary.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_achtxt.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_achtxt.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\sales_dash.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\sales_dash.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\returnpre_text.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\returnpre_text.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_info_main_adapter.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_info_main_adapter.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\customer_claims.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\customer_claims.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\today_tab.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\today_tab.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\return_order_home.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\return_order_home.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\survey_layout.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\survey_layout.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\status_dialog.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\status_dialog.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\adr_dialog.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\adr_dialog.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\crop__activity_crop.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\bundles\\default\\res\\layout\\crop__activity_crop.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_add_retailer.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_add_retailer.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\stock.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\stock.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_list_adapter.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\schedule_list_adapter.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\previous_orderedit_adapter.xml",
@@ -1244,16 +576,20 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_splash_screen.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\schedule_achtext.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\schedule_achtext.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\return_order_signature.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\return_order_signature.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_include.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_activity_chooser_view_include.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_group.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_group.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\stock_product_options.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\stock_product_options.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\crop__layout_done_cancel.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\LibAndroidCrop\\build\\intermediates\\bundles\\default\\res\\layout\\crop__layout_done_cancel.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_logout.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_logout.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_grpby_txt.xml",
@@ -1261,83 +597,67 @@
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\layout\\abc_list_menu_item_icon.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_list_menu_item_icon.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_groupn.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_groupn.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\customer_claims.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\customer_claims.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_preview.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\fragment_preview.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_card.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target_card.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\action_bar.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\action_bar.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\sdcard_images_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\sdcard_images_main.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\main.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\edit_product_item.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\edit_product_item.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_preview.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\fragment_preview.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\ANCHOR\\imageResizer\\unspecified\\res\\layout\\activity_main.xml"
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\bundles\\default\\res\\layout\\activity_main.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\stock_options.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\stock_options.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\target_reyc_main.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\target_reyc_main.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\crop__activity_crop.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\ANCHOR_METAL\\LibAndroidCrop\\unspecified\\res\\layout\\crop__activity_crop.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_card.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_card.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\package_row.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\package_row.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\target_sumary1.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\target_sumary1.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\new_filterlist.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\new_filterlist.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\return_order2.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\return_order2.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\address_layout.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\address_layout.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s2.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_previous_order_new_s2.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_marketing.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_marketing.xml"
+    },
+    {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\ap_demo.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\ap_demo.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\nearest_cu_adapter.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\nearest_cu_adapter.xml"
     },
     {
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\survey_home_activity.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\survey_home_activity.xml"
+    },
+    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\previousorder.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\previousorder.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\no_order.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\no_order.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\activity_previous_order_new_s3.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\activity_previous_order_new_s3.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\swipe_list_view_activity.xml",
@@ -1360,11 +680,7 @@
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\ex_main.xml"
     },
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\activity_upload.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\activity_upload.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout\\ex_main.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout\\ex_main.xml"
+        "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout\\list_item.xml",
+        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout\\list_item.xml"
     }
 ]

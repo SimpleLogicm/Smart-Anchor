@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -19,6 +20,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -35,19 +37,20 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
-import com.anchor.webservice.ConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 //import org.apache.http.HttpEntity;
@@ -63,6 +66,7 @@ public class MyService extends Service implements LocationListener{
 
 	LoginDataBaseAdapter loginDataBaseAdapter;
 	ArrayList<String> results = new ArrayList<String>();
+	String user_name  = "";
 
 	int timeOfDay;
 
@@ -120,6 +124,20 @@ public class MyService extends Service implements LocationListener{
 		// Query the database and show alarm if it applies
 		//	Prefs = new PreferencesHelper(this);
 		sp= this.getSharedPreferences("SimpleLogic", 0);
+
+		try
+		{
+			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL","")))){
+				user_name = sp.getString("USER_EMAIL","");
+			}
+			else
+			{
+				user_name =  Global_Data.GLOvel_USER_EMAIL;
+			}
+		}catch(Exception ex){ex.printStackTrace();}
+
+
+
 		cd = new ConnectionDetector(this);
 
 		latitude = 0.0;
@@ -190,7 +208,26 @@ public class MyService extends Service implements LocationListener{
 						editor.commit();
 
 						if(timeOfDay >= 7 && timeOfDay <= 22){
-							loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+
+							isInternetPresent = cd.isConnectingToInternet();
+
+							if(isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(latitude))){
+
+								if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))){
+									String address = addressn(latitude,longitude);
+									loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),address,dateFormat.format(date),"","");
+								}
+								else
+								{
+									loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+								}
+							}
+							else
+							{
+								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+							}
+
+
 						}
 
 
@@ -218,7 +255,24 @@ public class MyService extends Service implements LocationListener{
 					longitude = Double.valueOf(Global_Data.GLOvel_LONGITUDE);
 
 					if(timeOfDay >= 7 && timeOfDay <= 22){
-						loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+
+						isInternetPresent = cd.isConnectingToInternet();
+
+						if(isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(latitude))){
+
+							if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))){
+								String address = addressn(latitude,longitude);
+								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),address,dateFormat.format(date),"","");
+							}
+							else
+							{
+								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+							}
+						}
+						else
+						{
+							loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+						}
 					}
 
 				}
@@ -248,7 +302,23 @@ public class MyService extends Service implements LocationListener{
 
 							editor.commit();
 							if(timeOfDay >= 7 && timeOfDay <= 22){
-								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+								isInternetPresent = cd.isConnectingToInternet();
+
+								if(isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(latitude))){
+
+									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))){
+										String address = addressn(latitude,longitude);
+										loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),address,dateFormat.format(date),"","");
+									}
+									else
+									{
+										loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+									}
+								}
+								else
+								{
+									loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+								}
 							}
 
 //							LocationAddress locationAddress = new LocationAddress();
@@ -290,12 +360,28 @@ public class MyService extends Service implements LocationListener{
 					editor.commit();
 
 					if(timeOfDay >= 7 && timeOfDay <= 22){
-						loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+						isInternetPresent = cd.isConnectingToInternet();
+
+						if(isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(latitude))){
+
+							if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))){
+								String address = addressn(latitude,longitude);
+								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),address,dateFormat.format(date),"","");
+							}
+							else
+							{
+								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+							}
+						}
+						else
+						{
+							loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude),String.valueOf(longitude),"",dateFormat.format(date),"","");
+						}
 					}
 //
-					LocationAddress locationAddress = new LocationAddress();
-					locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
-							getApplicationContext(), new GeocoderHandler());
+//					LocationAddress locationAddress = new LocationAddress();
+//					locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
+//							getApplicationContext(), new GeocoderHandler());
 				}
 			}
 
@@ -399,7 +485,22 @@ public class MyService extends Service implements LocationListener{
 								JSONObject picture = new JSONObject();
 								picture.put("latitude",g.getlatitude());
 								picture.put("longitude", g.getlongitude());
-								//picture.put("address", g.getAddress());
+
+								try
+								{
+									if(isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(g.getAddress()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(g.getlatitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(g.getlongitude())))
+									{
+										String address = addressn(Double.valueOf(g.getlatitude()),Double.valueOf(g.getlongitude()));
+										picture.put("address", address);
+									}
+									else
+									{
+										picture.put("address", g.getAddress());
+									}
+								}catch (Exception ex){ex.printStackTrace();}
+
+
+
 								picture.put("location_date", g.getdatetime1());
 								results.add(g.getdatetime1());
 								PICTURE.put(picture);
@@ -418,7 +519,17 @@ public class MyService extends Service implements LocationListener{
 							JSONObject picture = new JSONObject();
 							picture.put("latitude",Global_Data.GLOvel_LATITUDE);
 							picture.put("longitude", Global_Data.GLOvel_LONGITUDE);
-							//picture.put("address", "");
+
+							if(isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE)))
+							{
+								String address = addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
+								picture.put("address", address);
+							}
+							else
+							{
+								picture.put("address", "");
+							}
+
 							picture.put("location_date", dateFormat.format(date));
 							PICTURE.put(picture);
 
@@ -430,7 +541,7 @@ public class MyService extends Service implements LocationListener{
 
 						product_value_n.put("user_location_histories", PICTURE);
 						product_value_n.put("imei_no", Global_Data.device_id);
-						product_value_n.put("email", Global_Data.GLOvel_USER_EMAIL);
+						product_value_n.put("email", user_name);
 						Log.d("user_location_histories",product_value_n.toString());
 
 
@@ -677,4 +788,36 @@ public class MyService extends Service implements LocationListener{
 //    public void onConnectionFailed(ConnectionResult connectionResult) {
 //
 //    }
+
+	public String addressn(Double lat, Double longi)
+	{
+		Geocoder geocoder;
+		List<Address> addresses;
+		geocoder = new Geocoder(this,Locale.getDefault());
+		StringBuilder sb = new StringBuilder();
+		sb.append("");
+
+		try {
+			addresses = geocoder.getFromLocation(latitude, longitude, 1);
+			String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+			sb.append(address).append(" ");
+			String city = addresses.get(0).getLocality();
+			sb.append(city).append(" ");
+			String state = addresses.get(0).getAdminArea();
+			sb.append(state).append(" ");
+			String country = addresses.get(0).getCountryName();
+			sb.append(country).append(" ");
+			String postalCode = addresses.get(0).getPostalCode();
+			sb.append(postalCode).append(" ");
+			String knownName = addresses.get(0).getFeatureName();
+			//sb.append(knownName).append(" ");
+			// Here 1 represent max location result to returned, by documents it recommended 1 to 5
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+       return sb.toString();
+	}
+
+
 }

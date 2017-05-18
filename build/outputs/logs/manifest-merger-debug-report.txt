@@ -19,7 +19,7 @@ ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:9:5-67
-MERGED from [com.google.android.gms:play-services-maps:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\AndroidManifest.xml:21:5-66
+MERGED from [com.google.android.gms:play-services-maps:9.4.0] C:\Users\admin\.android\build-cache\0690c58039fd4ec5740abd50a3a1ccc66c93befb\output\AndroidManifest.xml:21:5-66
 	android:name
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:9:22-64
 supports-screens
@@ -36,7 +36,7 @@ ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:12:9-34
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:18:5-79
-MERGED from [com.google.android.gms:play-services-maps:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\AndroidManifest.xml:20:5-78
+MERGED from [com.google.android.gms:play-services-maps:9.4.0] C:\Users\admin\.android\build-cache\0690c58039fd4ec5740abd50a3a1ccc66c93befb\output\AndroidManifest.xml:20:5-78
 	android:name
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:18:22-76
 uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
@@ -57,7 +57,7 @@ ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:22:22-72
 uses-feature#0x00020000
 ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:24:5-26:35
-MERGED from [com.google.android.gms:play-services-maps:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\AndroidManifest.xml:22:5-24:33
+MERGED from [com.google.android.gms:play-services-maps:9.4.0] C:\Users\admin\.android\build-cache\0690c58039fd4ec5740abd50a3a1ccc66c93befb\output\AndroidManifest.xml:22:5-24:33
 	android:glEsVersion
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:25:9-41
 	android:required
@@ -108,17 +108,17 @@ ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:42:22-68
 application
 ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:44:5-563:19
-MERGED from [com.android.support:appcompat-v7:21.0.3] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\AndroidManifest.xml:16:5-19
-MERGED from [com.android.support:support-v4:24.0.0-beta1] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-beta1\AndroidManifest.xml:25:5-20
-MERGED from [ANCHOR:LibAndroidCrop:unspecified] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\ANCHOR\LibAndroidCrop\unspecified\AndroidManifest.xml:9:5-47
-MERGED from [com.google.android.gms:play-services-maps:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\AndroidManifest.xml:19:5-23:19
-MERGED from [com.google.android.gms:play-services-basement:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\AndroidManifest.xml:20:5-24:19
-MERGED from [com.google.android.gms:play-services-tasks:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-location:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\9.4.0\AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:20:5-32:19
-MERGED from [com.android.support:cardview-v7:21.0.3] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\cardview-v7\21.0.3\AndroidManifest.xml:16:5-19
-MERGED from [com.mcxiaoke.volley:library-aar:1.0.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.mcxiaoke.volley\library-aar\1.0.0\AndroidManifest.xml:5:5-19
+MERGED from [com.android.support:appcompat-v7:21.0.3] C:\Users\admin\.android\build-cache\c29fa810695569943275ce4b4bd4b83d33cae3f0\output\AndroidManifest.xml:16:5-19
+MERGED from [ANCHOR:LibAndroidCrop:unspecified] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\LibAndroidCrop\build\intermediates\bundles\default\AndroidManifest.xml:9:5-47
+MERGED from [com.google.android.gms:play-services-maps:9.4.0] C:\Users\admin\.android\build-cache\0690c58039fd4ec5740abd50a3a1ccc66c93befb\output\AndroidManifest.xml:27:5-20
+MERGED from [com.google.android.gms:play-services-location:9.4.0] C:\Users\admin\.android\build-cache\7addcb2439b26de957bc9ef01e384a2c8efcf2f0\output\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:20:5-32:19
+MERGED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\admin\.android\build-cache\61747711a4c54574ff92312eee255f0373066fe1\output\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-tasks:9.4.0] C:\Users\admin\.android\build-cache\f9f14c3e50cbeb649caabc36087d3454e0a05f34\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\admin\.android\build-cache\71d80bebf1f410297ad5939f75fbfd96df1a3c12\output\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:cardview-v7:21.0.3] C:\Users\admin\.android\build-cache\16d9f360e49048256f5f30f69278ad61c5ffbfd7\output\AndroidManifest.xml:16:5-19
+MERGED from [com.android.support:support-v4:24.0.0-beta1] C:\Users\admin\.android\build-cache\ad7ed381fce7428bc06822d97da4ee4398cb088a\output\AndroidManifest.xml:25:5-20
+MERGED from [com.mcxiaoke.volley:library-aar:1.0.0] C:\Users\admin\.android\build-cache\a1ebece997cbe2aca07951280dcc6467b6f51c9a\output\AndroidManifest.xml:5:5-19
 	android:label
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:49:9-41
 	android:supportsRtl
@@ -903,59 +903,59 @@ ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:556:13-62
 meta-data#com.google.android.gms.version
 ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:559:9-561:69
-MERGED from [com.google.android.gms:play-services-basement:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\admin\.android\build-cache\71d80bebf1f410297ad5939f75fbfd96df1a3c12\output\AndroidManifest.xml:21:9-23:69
 	android:value
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:561:13-66
 	android:name
 		ADDED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml:560:13-58
 uses-sdk
 INJECTED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:multidex:1.0.1] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
-MERGED from [ANCHOR:imageResizer:unspecified] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\ANCHOR\imageResizer\unspecified\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:appcompat-v7:21.0.3] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\AndroidManifest.xml:15:5-42
-MERGED from [com.android.support:support-v4:24.0.0-beta1] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-beta1\AndroidManifest.xml:21:5-23:54
-MERGED from [ANCHOR:LibAndroidCrop:unspecified] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\ANCHOR\LibAndroidCrop\unspecified\AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.android.gms:play-services-maps:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.4.0\AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-tasks:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-location:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\9.4.0\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:18:5-43
-MERGED from [com.google.android.gms:play-services-auth-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\9.4.0\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:recyclerview-v7:24.0.0-beta1] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.0.0-beta1\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:cardview-v7:21.0.3] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\cardview-v7\21.0.3\AndroidManifest.xml:15:5-42
-MERGED from [com.mcxiaoke.volley:library-aar:1.0.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.mcxiaoke.volley\library-aar\1.0.0\AndroidManifest.xml:3:5-72
+MERGED from [com.android.support:multidex:1.0.1] C:\Users\admin\.android\build-cache\7432f2130d9bdfaa782c0da0ca13207c52c83dc6\output\AndroidManifest.xml:18:5-42
+MERGED from [ANCHOR:imageResizer:unspecified] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\imageResizer\build\intermediates\bundles\default\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:appcompat-v7:21.0.3] C:\Users\admin\.android\build-cache\c29fa810695569943275ce4b4bd4b83d33cae3f0\output\AndroidManifest.xml:15:5-42
+MERGED from [ANCHOR:LibAndroidCrop:unspecified] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\LibAndroidCrop\build\intermediates\bundles\default\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-maps:9.4.0] C:\Users\admin\.android\build-cache\0690c58039fd4ec5740abd50a3a1ccc66c93befb\output\AndroidManifest.xml:26:5-42
+MERGED from [com.google.android.gms:play-services-location:9.4.0] C:\Users\admin\.android\build-cache\7addcb2439b26de957bc9ef01e384a2c8efcf2f0\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-auth-base:9.4.0] C:\Users\admin\.android\build-cache\300fac80e507cf325368e740aecf6f8901fb3b52\output\AndroidManifest.xml:5:5-43
+MERGED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\admin\.android\build-cache\61747711a4c54574ff92312eee255f0373066fe1\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-tasks:9.4.0] C:\Users\admin\.android\build-cache\f9f14c3e50cbeb649caabc36087d3454e0a05f34\output\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\admin\.android\build-cache\71d80bebf1f410297ad5939f75fbfd96df1a3c12\output\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:recyclerview-v7:24.0.0-beta1] C:\Users\admin\.android\build-cache\9415dd054e6fb71ed5d8a3edea6957c5a0adabb6\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:21.0.3] C:\Users\admin\.android\build-cache\16d9f360e49048256f5f30f69278ad61c5ffbfd7\output\AndroidManifest.xml:15:5-42
+MERGED from [com.android.support:support-v4:24.0.0-beta1] C:\Users\admin\.android\build-cache\ad7ed381fce7428bc06822d97da4ee4398cb088a\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.mcxiaoke.volley:library-aar:1.0.0] C:\Users\admin\.android\build-cache\a1ebece997cbe2aca07951280dcc6467b6f51c9a\output\AndroidManifest.xml:3:5-72
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:24.0.0-beta1] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-beta1\AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:support-v4:24.0.0-beta1] C:\Users\admin\.android\build-cache\ad7ed381fce7428bc06822d97da4ee4398cb088a\output\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
 		INJECTED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		INJECTED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
 		INJECTED from E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\AndroidManifest.xml
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\AndroidManifest.xml:20:9-22:45
-	android:exported
-		ADDED from [com.google.android.gms:play-services-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\AndroidManifest.xml:22:19-43
-	android:theme
-		ADDED from [com.google.android.gms:play-services-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\AndroidManifest.xml:21:19-78
-	android:name
-		ADDED from [com.google.android.gms:play-services-base:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\AndroidManifest.xml:20:19-85
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
-ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:21:9-24:46
+ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:21:9-24:46
 	android:excludeFromRecents
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:23:19-52
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:23:19-52
 	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:24:19-43
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:24:19-43
 	android:theme
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:22:19-78
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:22:19-78
 	android:name
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:21:19-68
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:21:19-68
 service#com.google.android.gms.auth.api.signin.RevocationBoundService
-ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:28:9-31:110
+ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:28:9-31:110
 	android:exported
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:30:13-36
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:30:13-36
 	android:permission
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:31:13-107
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:31:13-107
 	android:name
-		ADDED from [com.google.android.gms:play-services-auth:9.4.0] E:\Vinod\android_studio_metal\ANCHOR_METAL\ANCHOR\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\9.4.0\AndroidManifest.xml:29:13-58
+		ADDED from [com.google.android.gms:play-services-auth:9.4.0] C:\Users\admin\.android\build-cache\4f4e85eccec00d0626f35e76eca14c99061b5d94\output\AndroidManifest.xml:29:13-58
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\admin\.android\build-cache\61747711a4c54574ff92312eee255f0373066fe1\output\AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\admin\.android\build-cache\61747711a4c54574ff92312eee255f0373066fe1\output\AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\admin\.android\build-cache\61747711a4c54574ff92312eee255f0373066fe1\output\AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\admin\.android\build-cache\61747711a4c54574ff92312eee255f0373066fe1\output\AndroidManifest.xml:20:19-85

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="play-services-tasks-9.4.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.4.0/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.4.0/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/f9f14c3e50cbeb649caabc36087d3454e0a05f34/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/f9f14c3e50cbeb649caabc36087d3454e0a05f34/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

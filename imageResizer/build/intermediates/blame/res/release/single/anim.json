@@ -1,50 +1,26 @@
 [
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_out_top.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_out_top.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_out.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_fade_out.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\anim\\abc_slide_out_top.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_in_top.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_in_top.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\anim\\abc_slide_in_top.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_out.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_fade_out.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\anim\\abc_fade_out.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_in.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_in_top.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_in_top.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_fade_in.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_out_top.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_out_top.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_in_bottom.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_out_bottom.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_out_bottom.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\anim\\abc_fade_in.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_in_bottom.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_in_bottom.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\res\\merged\\release\\anim\\abc_slide_out_bottom.xml",
-        "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\imageResizer\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\anim\\abc_slide_out_bottom.xml"
+        "source": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\anim\\abc_slide_out_bottom.xml"
     }
 ]

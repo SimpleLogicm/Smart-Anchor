@@ -13,7 +13,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 {
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
-		static final int DATABASE_VERSION = 3;
+		static final int DATABASE_VERSION = 4;
 		public static final int VERSION = 1;
 		// Contacts table name
 	    

@@ -1,18 +1,10 @@
 [
     {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout-land\\activity_maps.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout-land\\activity_maps.xml"
-    },
-    {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout-land\\activity_maps.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout-land\\activity_maps.xml"
     },
     {
         "merged": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\res\\merged\\debug\\layout-land\\action_bar.xml",
         "source": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\res\\layout-land\\action_bar.xml"
-    },
-    {
-        "merged": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\res\\merged\\debug\\layout-land\\action_bar.xml",
-        "source": "E:\\Anchor\\ANCHOR_METAL\\res\\layout-land\\action_bar.xml"
     }
 ]

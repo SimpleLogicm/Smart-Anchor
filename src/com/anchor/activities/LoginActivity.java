@@ -193,8 +193,8 @@ public class LoginActivity extends Activity{
 //				editText1.setText("vinod123");
 //				editText2.setText("vinod12345");
 
-                editText1.setText("tejal");
-                editText2.setText("tejal12345");
+//                editText1.setText("vinod123");
+//                editText2.setText("password");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -1112,7 +1112,7 @@ public class LoginActivity extends Activity{
 
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
-					editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
+					editor.putString("USER_EMAIL", cn.getuser_email());
 
 					editor.commit();
 

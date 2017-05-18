@@ -1,675 +1,5 @@
 [
     {
-        "outputFile": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rGB\\values-en-rGB.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 105,
-                    "endColumn": 103,
-                    "endOffset": 204
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 56,
-                        "endColumn": 103,
-                        "endOffset": 155
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 209,
-                    "endColumn": 107,
-                    "endOffset": 312
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 160,
-                        "endColumn": 107,
-                        "endOffset": 263
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 317,
-                    "endColumn": 122,
-                    "endOffset": 435
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 268,
-                        "endColumn": 122,
-                        "endOffset": 386
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 5,
-                    "startColumn": 4,
-                    "startOffset": 440,
-                    "endColumn": 99,
-                    "endOffset": 535
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 391,
-                        "endColumn": 99,
-                        "endOffset": 486
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 6,
-                    "startColumn": 4,
-                    "startOffset": 540,
-                    "endColumn": 107,
-                    "endOffset": 643
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 491,
-                        "endColumn": 107,
-                        "endOffset": 594
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 7,
-                    "startColumn": 4,
-                    "startOffset": 648,
-                    "endColumn": 83,
-                    "endOffset": 727
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 8,
-                        "startColumn": 4,
-                        "startOffset": 599,
-                        "endColumn": 83,
-                        "endOffset": 678
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 8,
-                    "startColumn": 4,
-                    "startOffset": 732,
-                    "endColumn": 99,
-                    "endOffset": 827
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 9,
-                        "startColumn": 4,
-                        "startOffset": 683,
-                        "endColumn": 99,
-                        "endOffset": 778
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 9,
-                    "startColumn": 4,
-                    "startOffset": 832,
-                    "endColumn": 114,
-                    "endOffset": 942
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 10,
-                        "startColumn": 4,
-                        "startOffset": 783,
-                        "endColumn": 114,
-                        "endOffset": 893
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 10,
-                    "startColumn": 4,
-                    "startOffset": 947,
-                    "endColumn": 102,
-                    "endOffset": 1045
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 11,
-                        "startColumn": 4,
-                        "startOffset": 898,
-                        "endColumn": 102,
-                        "endOffset": 996
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 11,
-                    "startColumn": 4,
-                    "startOffset": 1050,
-                    "endColumn": 103,
-                    "endOffset": 1149
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 12,
-                        "startColumn": 4,
-                        "startOffset": 1001,
-                        "endColumn": 103,
-                        "endOffset": 1100
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 12,
-                    "startColumn": 4,
-                    "startOffset": 1154,
-                    "endColumn": 98,
-                    "endOffset": 1248
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 13,
-                        "startColumn": 4,
-                        "startOffset": 1105,
-                        "endColumn": 98,
-                        "endOffset": 1199
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 13,
-                    "startColumn": 4,
-                    "startOffset": 1253,
-                    "endColumn": 104,
-                    "endOffset": 1353
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 14,
-                        "startColumn": 4,
-                        "startOffset": 1204,
-                        "endColumn": 104,
-                        "endOffset": 1304
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 14,
-                    "startColumn": 4,
-                    "startOffset": 1358,
-                    "endColumn": 102,
-                    "endOffset": 1456
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 1309,
-                        "endColumn": 102,
-                        "endOffset": 1407
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 15,
-                    "startColumn": 4,
-                    "startOffset": 1461,
-                    "endColumn": 103,
-                    "endOffset": 1560
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 16,
-                        "startColumn": 4,
-                        "startOffset": 1412,
-                        "endColumn": 103,
-                        "endOffset": 1511
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 16,
-                    "startColumn": 4,
-                    "startOffset": 1565,
-                    "endColumn": 118,
-                    "endOffset": 1679
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 17,
-                        "startColumn": 4,
-                        "startOffset": 1516,
-                        "endColumn": 118,
-                        "endOffset": 1630
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 17,
-                    "startColumn": 4,
-                    "startOffset": 1684,
-                    "endColumn": 106,
-                    "endOffset": 1786
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 333,
-                        "endColumn": 106,
-                        "endOffset": 435
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 18,
-                    "startColumn": 4,
-                    "startOffset": 1791,
-                    "endColumn": 183,
-                    "endOffset": 1970
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 440,
-                        "endColumn": 183,
-                        "endOffset": 619
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 19,
-                    "startColumn": 4,
-                    "startOffset": 1975,
-                    "endColumn": 126,
-                    "endOffset": 2097
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 624,
-                        "endColumn": 126,
-                        "endOffset": 746
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 20,
-                    "startColumn": 4,
-                    "startOffset": 2102,
-                    "endColumn": 125,
-                    "endOffset": 2223
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 751,
-                        "endColumn": 125,
-                        "endOffset": 872
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 21,
-                    "startColumn": 4,
-                    "startOffset": 2228,
-                    "endColumn": 214,
-                    "endOffset": 2438
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 8,
-                        "startColumn": 4,
-                        "startOffset": 877,
-                        "endColumn": 214,
-                        "endOffset": 1087
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 22,
-                    "startColumn": 4,
-                    "startOffset": 2443,
-                    "endColumn": 216,
-                    "endOffset": 2655
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 9,
-                        "startColumn": 4,
-                        "startOffset": 1092,
-                        "endColumn": 216,
-                        "endOffset": 1304
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 23,
-                    "startColumn": 4,
-                    "startOffset": 2660,
-                    "endColumn": 124,
-                    "endOffset": 2780
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 10,
-                        "startColumn": 4,
-                        "startOffset": 1309,
-                        "endColumn": 124,
-                        "endOffset": 1429
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 24,
-                    "startColumn": 4,
-                    "startOffset": 2785,
-                    "endColumn": 131,
-                    "endOffset": 2912
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 11,
-                        "startColumn": 4,
-                        "startOffset": 1434,
-                        "endColumn": 131,
-                        "endOffset": 1561
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 25,
-                    "startColumn": 4,
-                    "startOffset": 2917,
-                    "endColumn": 248,
-                    "endOffset": 3161
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 335,
-                        "endColumn": 248,
-                        "endOffset": 579
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 26,
-                    "startColumn": 4,
-                    "startOffset": 3166,
-                    "endColumn": 248,
-                    "endOffset": 3410
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 12,
-                        "startColumn": 4,
-                        "startOffset": 1566,
-                        "endColumn": 248,
-                        "endOffset": 1810
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 27,
-                    "startColumn": 4,
-                    "startOffset": 3415,
-                    "endColumn": 123,
-                    "endOffset": 3534
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 13,
-                        "startColumn": 4,
-                        "startOffset": 1815,
-                        "endColumn": 123,
-                        "endOffset": 1934
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 28,
-                    "startColumn": 4,
-                    "startOffset": 3539,
-                    "endColumn": 106,
-                    "endOffset": 3641
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 14,
-                        "startColumn": 4,
-                        "startOffset": 1939,
-                        "endColumn": 106,
-                        "endOffset": 2041
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 29,
-                    "startColumn": 4,
-                    "startOffset": 3646,
-                    "endColumn": 182,
-                    "endOffset": 3824
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 2046,
-                        "endColumn": 182,
-                        "endOffset": 2224
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 30,
-                    "startColumn": 4,
-                    "startOffset": 3829,
-                    "endColumn": 126,
-                    "endOffset": 3951
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 16,
-                        "startColumn": 4,
-                        "startOffset": 2229,
-                        "endColumn": 126,
-                        "endOffset": 2351
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 31,
-                    "startColumn": 4,
-                    "startOffset": 3956,
-                    "endColumn": 204,
-                    "endOffset": 4156
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 17,
-                        "startColumn": 4,
-                        "startOffset": 2356,
-                        "endColumn": 204,
-                        "endOffset": 2556
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 32,
-                    "startColumn": 4,
-                    "startOffset": 4161,
-                    "endColumn": 134,
-                    "endOffset": 4291
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 18,
-                        "startColumn": 4,
-                        "startOffset": 2561,
-                        "endColumn": 134,
-                        "endOffset": 2691
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 33,
-                    "startColumn": 4,
-                    "startOffset": 4296,
-                    "endColumn": 177,
-                    "endOffset": 4469
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 19,
-                        "startColumn": 4,
-                        "startOffset": 2696,
-                        "endColumn": 177,
-                        "endOffset": 2869
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 34,
-                    "startColumn": 4,
-                    "startOffset": 4474,
-                    "endColumn": 92,
-                    "endOffset": 4562
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 20,
-                        "startColumn": 4,
-                        "startOffset": 2874,
-                        "endColumn": 92,
-                        "endOffset": 2962
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 35,
-                    "startColumn": 4,
-                    "startOffset": 4567,
-                    "endColumn": 91,
-                    "endOffset": 4654
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 21,
-                        "startColumn": 4,
-                        "startOffset": 2967,
-                        "endColumn": 91,
-                        "endOffset": 3054
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 36,
-                    "startColumn": 4,
-                    "startOffset": 4659,
-                    "endColumn": 107,
-                    "endOffset": 4762
-                },
-                "from": {
-                    "file": "E:\\Anchor\\ANCHOR_METAL\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 3059,
-                        "endColumn": 107,
-                        "endOffset": 3162
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rGB\\values-en-rGB.xml",
         "map": [
             {
@@ -681,7 +11,7 @@
                     "endOffset": 204
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -700,7 +30,7 @@
                     "endOffset": 312
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -719,7 +49,7 @@
                     "endOffset": 435
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -738,7 +68,7 @@
                     "endOffset": 535
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -757,7 +87,7 @@
                     "endOffset": 643
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -776,7 +106,7 @@
                     "endOffset": 727
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -795,7 +125,7 @@
                     "endOffset": 827
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -814,7 +144,7 @@
                     "endOffset": 942
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -833,7 +163,7 @@
                     "endOffset": 1045
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -852,7 +182,7 @@
                     "endOffset": 1149
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -871,7 +201,7 @@
                     "endOffset": 1248
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -890,7 +220,7 @@
                     "endOffset": 1353
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -909,7 +239,7 @@
                     "endOffset": 1456
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
@@ -928,7 +258,7 @@
                     "endOffset": 1560
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -947,7 +277,7 @@
                     "endOffset": 1679
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\c29fa810695569943275ce4b4bd4b83d33cae3f0\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
@@ -966,7 +296,7 @@
                     "endOffset": 1786
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -985,7 +315,7 @@
                     "endOffset": 1970
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -1004,7 +334,7 @@
                     "endOffset": 2097
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -1023,7 +353,7 @@
                     "endOffset": 2223
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -1042,7 +372,7 @@
                     "endOffset": 2438
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -1061,7 +391,7 @@
                     "endOffset": 2655
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -1080,7 +410,7 @@
                     "endOffset": 2780
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -1099,7 +429,7 @@
                     "endOffset": 2912
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -1118,7 +448,7 @@
                     "endOffset": 3161
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-basement\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\71d80bebf1f410297ad5939f75fbfd96df1a3c12\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -1137,7 +467,7 @@
                     "endOffset": 3410
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -1156,7 +486,7 @@
                     "endOffset": 3534
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -1175,7 +505,7 @@
                     "endOffset": 3641
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -1194,7 +524,7 @@
                     "endOffset": 3824
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
@@ -1213,7 +543,7 @@
                     "endOffset": 3951
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -1232,7 +562,7 @@
                     "endOffset": 4156
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
@@ -1251,7 +581,7 @@
                     "endOffset": 4291
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
@@ -1270,7 +600,7 @@
                     "endOffset": 4469
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -1289,7 +619,7 @@
                     "endOffset": 4562
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -1308,7 +638,7 @@
                     "endOffset": 4654
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
@@ -1327,7 +657,7 @@
                     "endOffset": 4762
                 },
                 "from": {
-                    "file": "E:\\Vinod\\android_studio_metal\\ANCHOR_METAL\\ANCHOR\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-base\\9.4.0\\res\\values-en-rGB\\values.xml",
+                    "file": "C:\\Users\\admin\\.android\\build-cache\\61747711a4c54574ff92312eee255f0373066fe1\\output\\res\\values-en-rGB\\values.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
