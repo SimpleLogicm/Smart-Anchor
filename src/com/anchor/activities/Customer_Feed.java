@@ -106,7 +106,10 @@ import java.util.Locale;
 public class Customer_Feed extends Activity implements OnItemSelectedListener,MediaScannerConnection.MediaScannerConnectionClient {
 	private static final String TAG = Customer_Feed.class.getSimpleName();
 
-	public String[] allFiles;
+	Bitmap Glovel_bitmap;
+
+	Drawable Glovel_Drawable;
+    public String[] allFiles;
 	String video_code = "";
 	String RE_ID = "";
 	String filename = "";
@@ -514,7 +517,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 					try {
 						if (Uri.fromFile(new File(fileUri.getPath())) != null) {
 							db = imageview.getDrawable();
+							Glovel_Drawable = imageview.getDrawable();
 							imageview.setImageDrawable(null);
+							//Glovel_Drawable = imageview.getDrawable();
 							//Crop.pickImage(Customer_Feed.this);
 							Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
 							Crop.of(Uri.fromFile(new File(fileUri.getPath())), Uri.fromFile(new File(fileUri.getPath()))).asSquare().start(Customer_Feed.this);
@@ -540,7 +545,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 					try {
 						if (Uri.fromFile(new File(picturePath)) != null) {
 							db = imageview.getDrawable();
+							Glovel_Drawable = imageview.getDrawable();
 							imageview.setImageDrawable(null);
+
 							//Crop.pickImage(Customer_Feed.this);
 							Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
 							Crop.of(Uri.fromFile(new File(picturePath)), Uri.fromFile(new File(picturePath))).asSquare().start(Customer_Feed.this);
@@ -845,8 +852,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 											Long randomPIN = System.currentTimeMillis();
 											String PINString = String.valueOf(randomPIN);
 
-											loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
-													"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_Image_Path,PINString);
+											loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_Image_Path,PINString);
 
 											Intent intent = new Intent(Customer_Feed.this, Order.class);
 											startActivity(intent);
@@ -1580,7 +1586,29 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 		if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
 			beginCrop(data.getData());
 		} else if (requestCode == Crop.REQUEST_CROP) {
-			handleCrop(resultCode, data,data.getData());
+
+            try
+            {
+                if(data == null)
+                {
+					imageview.setVisibility(View.VISIBLE);
+                    imageview.setImageDrawable(Glovel_Drawable);
+                   // imageview.setTag(Glovel_bitmap);
+                    //imageviewr.setImageBitmap(Glovel_bitmap);
+                }
+                else
+                {
+                    handleCrop(resultCode, data,data.getData());
+                }
+            }catch(Exception ex){ex.printStackTrace();
+				imageview.setVisibility(View.VISIBLE);
+                imageview.setImageDrawable(Glovel_Drawable);
+               // imageview.setTag(Glovel_bitmap);
+               // imageviewr.setImageBitmap(Glovel_bitmap);
+
+            }
+
+
 		}
 
 		if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
@@ -2033,6 +2061,8 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			imageview.setTag(bitmap);
 			imageviewr.setImageBitmap(bitmap);
 
+            Glovel_bitmap = bitmap;
+
 			new MediaperationBackGround().execute(bitmap);
 
 		} catch (NullPointerException e) {
@@ -2098,6 +2128,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
     	if(resultCode == 0)
     	{
     		//db
+
     		imageview.setImageDrawable(imageviewr.getDrawable());
     		videoPreview.setVisibility(View.GONE);
         	media_layout.setVisibility(View.GONE);
@@ -2106,6 +2137,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
     	}
         if (resultCode == RESULT_OK) {
         	imageview.setImageURI(Crop.getOutput(result));
+			imageviewr.setImageURI(Crop.getOutput(result));
 
         	videoPreview.setVisibility(View.GONE);
         	media_layout.setVisibility(View.GONE);

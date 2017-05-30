@@ -1826,21 +1826,29 @@ public class DataBaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery1, null);
 
-        Cursor cursor = db.rawQuery("select * from customer_master WHERE CUSTOMER_NAME = ? AND CUSTOMER_SHOPNAME = ?",
-                new String[] {Customer_name,shope_name});
+        Cursor cursor = null;
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setCust_Code(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+             cursor = db.rawQuery("select * from customer_master WHERE CUSTOMER_NAME = ? AND CUSTOMER_SHOPNAME = ?",
+                    new String[] {Customer_name,shope_name});
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setCust_Code(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if(cursor != null)
+                cursor.close();
         }
 
         //db.close();

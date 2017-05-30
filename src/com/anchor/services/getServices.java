@@ -20,6 +20,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.activities.AllOrders_Sync;
+import com.anchor.activities.AppLocationManager;
+import com.anchor.activities.Check_Null_Value;
+import com.anchor.activities.DataBaseHelper;
+import com.anchor.activities.Global_Data;
+import com.anchor.activities.Local_Data;
+import com.anchor.activities.LoginDataBaseAdapter;
+import com.anchor.activities.MainActivity;
+import com.anchor.activities.Order;
+import com.anchor.activities.PlayService_Location;
+import com.anchor.activities.R;
+import com.anchor.activities.Youtube_Player_Activity;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -35,20 +47,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import com.anchor.activities.AllOrders_Sync;
-import com.anchor.activities.AppLocationManager;
-import com.anchor.activities.Check_Null_Value;
-import com.anchor.activities.DataBaseHelper;
-import com.anchor.activities.Forget_Pwd;
-import com.anchor.activities.Global_Data;
-import com.anchor.activities.Local_Data;
-import com.anchor.activities.LoginDataBaseAdapter;
-import com.anchor.activities.MainActivity;
-import com.anchor.activities.Order;
-import com.anchor.activities.PlayService_Location;
-import com.anchor.activities.R;
-import com.anchor.activities.Youtube_Player_Activity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -1472,13 +1470,14 @@ public class getServices {
                 product_value.put("order_number", cn.get_category_code());
 
                 Order_number = cn.get_category_code();
+                customer_id = cn.get_category_id();
                 // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                 // product_value.put("order_take_by", "");
-                product_value.put("customer_code", Global_Data.GLOvel_CUSTOMER_ID);
+                product_value.put("customer_code", customer_id);
 
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
-                customer_id = cn.get_category_id();
+
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
                 product_value.put("signature_path", cn.getSignature_image());

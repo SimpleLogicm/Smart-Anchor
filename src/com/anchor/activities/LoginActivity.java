@@ -190,8 +190,8 @@ public class LoginActivity extends Activity{
 				buttonReg=(Button) findViewById(R.id.buttonReg);
 				editText1=(EditText) findViewById(R.id.editText1);
 				editText2=(EditText) findViewById(R.id.editText2);
-//				editText1.setText("vinod123");
-//				editText2.setText("vinod12345");
+//				editText1.setText("swatiyamgar");
+//				editText2.setText("swati12345");
 
 //                editText1.setText("vinod123");
 //                editText2.setText("password");
@@ -319,6 +319,14 @@ public class LoginActivity extends Activity{
 	   	       buttonLogin.setOnClickListener(new OnClickListener() {
 	   	         public void onClick(View view) {
 
+					 gps = new GPSTracker(LoginActivity.this);
+					 if(!gps.canGetLocation()){
+//						 Toast toast = Toast.makeText(LoginActivity.this,"Your GPS is off,Please on it.", Toast.LENGTH_LONG);
+//						 toast.setGravity(Gravity.CENTER, 0, 0);
+//						 toast.show();
+						 gps.showSettingsAlertnew();
+					 }
+					 else
 					 if (CheckNullValue.findNullValue(editText1.getText().toString().trim()) == true) {
 	                   // Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_SHORT).show();
 
