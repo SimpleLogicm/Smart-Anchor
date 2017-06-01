@@ -36,6 +36,7 @@ public class Schedule_List_Adapter extends RecyclerView.Adapter<Schedule_List_Ad
         ContactInfo ci = contactList.get(i);
         contactViewHolder.vName.setText("Order Number : " + ci.order_number);
         contactViewHolder.vSurname.setText("Location : " + ci.location);
+        contactViewHolder.customers_id.setText("Customer Code : " + ci.Cust_Code);
         //contactViewHolder.vEmail.setText(ci.order_number);
         //contactViewHolder.txtmrp.setText(ci.location);
         contactViewHolder.vTitle.setText(" "+ci.date1);
@@ -60,7 +61,7 @@ public class Schedule_List_Adapter extends RecyclerView.Adapter<Schedule_List_Ad
         protected TextView vSurname;
         protected TextView vEmail;
         protected TextView vTitle;
-        protected TextView txtmrp,cche_id;
+        protected TextView txtmrp,cche_id,customers_id;
 
         public ContactViewHolder(View v) {
             super(v);
@@ -71,6 +72,8 @@ public class Schedule_List_Adapter extends RecyclerView.Adapter<Schedule_List_Ad
            vTitle = (TextView) v.findViewById(R.id.title);
 
             cche_id = (TextView) v.findViewById(R.id.cche_id);
+
+            customers_id = (TextView) v.findViewById(R.id.customers_id);
             //txtmrp = (TextView) v.findViewById(R.id.txtmrp);
 
             v.setOnClickListener(this);

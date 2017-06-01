@@ -550,7 +550,7 @@ public class MainActivity extends BaseActivity {
 
 						StringRequest jsObjRequest = null;
 
-					 jsObjRequest = new StringRequest(domain+"delivery_schedules/send_all_schedules?imei_no="+"358187071078870"+"&email="+"vinod.raghuwanshi@simplelogic.in", new Response.Listener<String>() {
+					 jsObjRequest = new StringRequest(domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL, new Response.Listener<String>() {
 
 
 //						jsObjRequest = new StringRequest(domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL, new Response.Listener<String>() {
