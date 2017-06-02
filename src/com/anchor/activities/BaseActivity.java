@@ -15,7 +15,7 @@ public class BaseActivity extends Activity {
 	
 	//public static final long DISCONNECT_TIMEOUT = 72000; //  == > 1 min
 	
-	public static final long DISCONNECT_TIMEOUT = 1080000; //  == > 15 mins
+	public static final long DISCONNECT_TIMEOUT = 1080000; //  == > 18 mins
 
   
     private Handler disconnectHandler = new Handler(){
