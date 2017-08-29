@@ -29,6 +29,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.activities.NEAREST_CU_Adapter.customButtonListener;
+import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -43,8 +45,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.anchor.activities.NEAREST_CU_Adapter.customButtonListener;
-import com.anchor.webservice.ConnectionDetector;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -62,8 +62,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import cpm.simplelogic.helper.GeocodingLocation;
 
 
 public class Nearest_Customer extends Activity implements customButtonListener {
@@ -141,32 +139,32 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 		//}
 
 		dataArrayList=new ArrayList<HashMap<String, String>>();
-		listnearcust.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                //String contactId = (TextView) view.findViewById(R.id.label);
-            	 String value = (String)parent.getItemAtPosition(position); 
-                // Toast.makeText(getApplicationContext(),value,Toast.LENGTH_LONG).show();
-//            	 	
-//            	 List<Local_Data> contacts1 = dbvoc.getCustomerAddress(value.toString().trim());
-////			        
-//            	 for (Local_Data cn : contacts1) 
-// 		        {
-// 		      	 
-// 		      	  //product_value.add(cn.getVariant()+" "+cn.getStateName());
-// 		      	//  product_value.add(cn.getVariant()+" "+"ITEM NUMBER " + cn.getImei());
-//            		 customer_address = cn.getStateName().trim();
-// 		            
-// 		        }
-//			      
-//            	  getListViewnew(value.toString().trim(),customer_address);
-//			      
-			    }
-
-        });
+//		listnearcust.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                //String contactId = (TextView) view.findViewById(R.id.label);
+//            	 String value = (String)parent.getItemAtPosition(position);
+//                // Toast.makeText(getApplicationContext(),value,Toast.LENGTH_LONG).show();
+////
+////            	 List<Local_Data> contacts1 = dbvoc.getCustomerAddress(value.toString().trim());
+//////
+////            	 for (Local_Data cn : contacts1)
+//// 		        {
+////
+//// 		      	  //product_value.add(cn.getVariant()+" "+cn.getStateName());
+//// 		      	//  product_value.add(cn.getVariant()+" "+"ITEM NUMBER " + cn.getImei());
+////            		 customer_address = cn.getStateName().trim();
+////
+//// 		        }
+////
+////            	  getListViewnew(value.toString().trim(),customer_address);
+////
+//			    }
+//
+//        });
 		
 //		searchResults=new ArrayList<String>(product_value);
 //		adapter = new ArrayAdapter<String>(Nearest_Customer.this, R.layout.filtertxt, Cable1Array);
@@ -560,12 +558,25 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 
 				if (isInternetPresent) {
 
-						Toast.makeText(Nearest_Customer.this, "Wait..", Toast.LENGTH_SHORT).show();
-						GeocodingLocation locationAddress = new GeocodingLocation();
-						locationAddress.getAddressFromLocation(value1,
-								Nearest_Customer.this, new GeocoderHandler());
+//						Toast.makeText(Nearest_Customer.this, "Wait..", Toast.LENGTH_SHORT).show();
+//						GeocodingLocation locationAddress = new GeocodingLocation();
+//						locationAddress.getAddressFromLocation(value1,
+//								Nearest_Customer.this, new GeocoderHandler());
 
-						// Toast.makeText((Activity)view.getContext(), "Customer location not found.", Toast.LENGTH_SHORT).show();
+					try {
+						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(value1)) {
+							Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+									Uri.parse("http://maps.google.com/maps?saddr=" + Global_Data.GLOvel_LATITUDE + "," + Global_Data.GLOvel_LONGITUDE + "&daddr=" + value1 + ""));
+							startActivity(intent);
+						} else {
+							Toast.makeText(Nearest_Customer.this, "Address not found", Toast.LENGTH_SHORT).show();
+						}
+
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+
+
 
 				} else {
 					Toast toast = Toast.makeText(Nearest_Customer.this, "You don't have internet connection.", Toast.LENGTH_LONG);

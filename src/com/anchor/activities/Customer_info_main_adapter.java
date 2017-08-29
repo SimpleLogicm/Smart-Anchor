@@ -26,7 +26,6 @@ import com.anchor.webservice.ConnectionDetector;
 import java.util.List;
 
 import cpm.simplelogic.helper.Customer_Info;
-import cpm.simplelogic.helper.GeocodingLocation;
 
 public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_info_main_adapter.ContactViewHolder> {
 
@@ -123,18 +122,39 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
 
                 if (isInternetPresent) {
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latlong) && !(latlong.equalsIgnoreCase("0.0,0.0")) && !(latlong.equalsIgnoreCase(","))) {
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(address)) {
+                                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                        Uri.parse("http://maps.google.com/maps?saddr=" + Global_Data.GLOvel_LATITUDE + "," + Global_Data.GLOvel_LONGITUDE + "&daddr=" + address + ""));
+                                ((Activity) view.getContext()).startActivity(intent);
+                            } else {
+                                Toast.makeText(mcontext, "Address not found", Toast.LENGTH_SHORT).show();
+                            }
 
-                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                Uri.parse("http://maps.google.com/maps?saddr=" + Global_Data.GLOvel_LATITUDE + "," + Global_Data.GLOvel_LONGITUDE + "&daddr=" + latlong + ""));
-                        ((Activity) view.getContext()).startActivity(intent);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
 
                     } else {
-                        Toast.makeText(mcontext, "Wait..", Toast.LENGTH_SHORT).show();
-                        GeocodingLocation locationAddress = new GeocodingLocation();
-                        locationAddress.getAddressFromLocation(address,
-                                (Activity) view.getContext(), new GeocoderHandler());
+//                        Toast.makeText(mcontext, "Wait..", Toast.LENGTH_SHORT).show();
+//                        GeocodingLocation locationAddress = new GeocodingLocation();
+//                        locationAddress.getAddressFromLocation(address,
+//                                (Activity) view.getContext(), new GeocoderHandler());
 
-                        // Toast.makeText((Activity)view.getContext(), "Customer location not found.", Toast.LENGTH_SHORT).show();
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(address)) {
+                                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                        Uri.parse("http://maps.google.com/maps?saddr=" + Global_Data.GLOvel_LATITUDE + "," + Global_Data.GLOvel_LONGITUDE + "&daddr=" + address + ""));
+                                ((Activity) view.getContext()).startActivity(intent);
+                            } else {
+                                Toast.makeText(mcontext, "Address not found", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+
+
                     }
                 } else {
                     Toast toast = Toast.makeText((Activity) view.getContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
