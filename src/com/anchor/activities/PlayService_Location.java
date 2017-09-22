@@ -214,7 +214,7 @@ public class PlayService_Location implements LocationListener {
         Global_Data.GLOvel_LATITUDE = String.valueOf(location.getLatitude());
         Global_Data.GLOvel_LONGITUDE = String.valueOf(location.getLongitude());
 
-      //  Toast.makeText(c_context, "NEW LOCATION RECEIVED", Toast.LENGTH_LONG).show();
+        //  Toast.makeText(c_context, "NEW LOCATION RECEIVED", Toast.LENGTH_LONG).show();
         //Toast.makeText(c_context, "LOCATION"+getFusedLatitude()+" "+getFusedLongitude(), Toast.LENGTH_LONG).show();
 
         //Log.d("NEW LOCATION RECEIVED","NEW LOCATION RECEIVED");

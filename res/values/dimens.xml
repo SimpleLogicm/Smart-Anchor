@@ -7,6 +7,8 @@
     <dimen name="activity_vertical_margin">8dp</dimen>
 
 
+    <dimen name="text_size_header">20dp</dimen>
+    <dimen name="text_content_size">18dp</dimen>
     <dimen name="activity_vertical_marginn">16dp</dimen>
 
     <dimen name="item_offset">10dp</dimen>

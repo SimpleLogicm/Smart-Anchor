@@ -1,7 +1,7 @@
 package com.anchor.activities;
 
 public class Local_Data {
-	String cust_mob;
+    String cust_mob;
     String curr_date;
     String LEGACY_CUSTOMER_CODE;
     String sync_time ;
@@ -13,21 +13,21 @@ public class Local_Data {
     String var_label;
     String new_label;
     String Signature_image;
-	String CUSTOMER_NAME;
-	String CUSTOMER_SHOPNAME;
-	String ADDRESS;
-	String STREET;
-	String LANDMARK;
-	String PIN_CODE;
-	String LANDLINE_NO;
-	String MOBILE_NO;
-	String EMAIL_ADDRESS;
-	String STATUS;
-	String STATE_ID;
-	String CITY_ID;
-	String BEAT_ID;
-	String vatin;
-	String email;
+    String CUSTOMER_NAME;
+    String CUSTOMER_SHOPNAME;
+    String ADDRESS;
+    String STREET;
+    String LANDMARK;
+    String PIN_CODE;
+    String LANDLINE_NO;
+    String MOBILE_NO;
+    String EMAIL_ADDRESS;
+    String STATUS;
+    String STATE_ID;
+    String CITY_ID;
+    String BEAT_ID;
+    String vatin;
+    String email;
 
     String calender_id;
     String calender_type;
@@ -35,29 +35,29 @@ public class Local_Data {
     String to_date;
     String calender_details;
     String latlon;
+    String namemap, city_codemap, state_codemap, Latitude, Longitude;
 
 
-	
-	String prod_name;
-	String reason_name;
-	String reason_code;
-	String c_name;
-	String rrp;
-	String item_code;
-	String cust_code;
-	String product_name;
-	String productid;
-	String user_email;
-	String PURPOSE_ADDRESS;
-	String order_number;
-	String ordamount;
-	String orderstatusid;
-	String orderid;
-	String qtyy;
-	String amount;
-	String price;
-	String rp;
-	int _id;
+    String prod_name;
+    String reason_name;
+    String reason_code;
+    String c_name;
+    String rrp;
+    String item_code;
+    String cust_code;
+    String product_name;
+    String productid;
+    String user_email;
+    String PURPOSE_ADDRESS;
+    String order_number;
+    String ordamount;
+    String orderstatusid;
+    String orderid;
+    String qtyy;
+    String amount;
+    String price;
+    String rp;
+    int _id;
     String username;
     String password;
     String imei_no;
@@ -82,7 +82,7 @@ public class Local_Data {
     String Target_Text;
     String Target_Achieved;
     String Target_Quarter;
-    
+
     String travel_from;
     String travel_to;
     String travel_date;
@@ -90,13 +90,13 @@ public class Local_Data {
     String travel_cost;
     String travel_text;
     String Retailer_id;
-    
+
     String category_id;
     String category_code;
     String category_desc;
     String category_status;
     String category_ids;
-    
+
     String product_code;
     String product_desc;
     String product_status;
@@ -113,21 +113,21 @@ public class Local_Data {
     String stocks_product_name;
     String stocks_product_quantity;
     String stocks_product_text;
-    
+
     String PackSizes_variant_id;
     String PackSizes_desc;
     String PackSizes_product_unit;
     String PackSizes_product_pack_size;
     String PackSizes_status;
     String PackSizes_ids;
-    
+
     String RR,MRP,Dstr;
-    
+
     String shedule_order_id,shedule_depatch_date,shedule_delivery_date,shedule_order_amount,shedule_payment_mode,shedule_outstanding_amount;
     String delivery_product_id,delivery_product_order_quantity,delivery_product_delivered_quality,delivery_product_transporter_details;
-    
+
     String credit_limit;
-    String Address;
+    //String Address;
 
     String Ammount_overdue;
 
@@ -174,10 +174,117 @@ public class Local_Data {
     String sche_discription;
     String ware_name;
     String sub_categ;
-    String img_ordersign;
-    String order_type_name;
+    String img_ordersign, name, punched_button, current_date_only;
+    String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id;
+
+
+    public String getCurrent_date_only() {
+        return current_date_only;
+    }
+
+    public void setCurrent_date_only(String current_date_only) {
+        this.current_date_only = current_date_only;
+    }
+
+    public String getServer_flag() {
+        return server_flag;
+    }
+
+    public void setServer_flag(String server_flag) {
+        this.server_flag = server_flag;
+    }
+
+    String server_flag;
+
+
+    public String getUser_id() {
+
+        return User_id;
+    }
+
+    public void setUser_id(String user_id) {
+        User_id = user_id;
+    }
+
+    public String getPunched_button() {
+        return punched_button;
+    }
+
+    public void setPunched_button(String punched_button) {
+        this.punched_button = punched_button;
+    }
+
+    public String getPunched_at_address() {
+        return punched_at_address;
+    }
+
+    public void setPunched_at_address(String punched_at_address) {
+        this.punched_at_address = punched_at_address;
+    }
+
+    String Address;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public String getPunched_at_longitude() {
+
+        return punched_at_longitude;
+    }
+
+    public void setPunched_at_longitude(String punched_at_longitude) {
+        this.punched_at_longitude = punched_at_longitude;
+    }
+
+    public String getPunched_at_latitude() {
+
+        return punched_at_latitude;
+    }
+
+    public void setPunched_at_latitude(String punched_at_latitude) {
+        this.punched_at_latitude = punched_at_latitude;
+    }
+
+    public String getPunched_on() {
+
+        return punched_on;
+    }
+
+    public void setPunched_on(String punched_on) {
+        this.punched_on = punched_on;
+    }
+
+    String punched_at_address;
+
+
+    public String getTrack_mov_action() {
+        return track_mov_action;
+    }
+
+    public void setTrack_mov_action(String track_mov_action) {
+        this.track_mov_action = track_mov_action;
+    }
+
     String order_detail1;
     String order_detail2;
+    String track_mov_action;
+    String track_mov_datetime, Snippet;
+
+
+
+    public String getTrack_mov_datetime() {
+        return track_mov_datetime;
+    }
+
+    public void setTrack_mov_datetime(String track_mov_datetime) {
+        this.track_mov_datetime = track_mov_datetime;
+    }
 
     public String getCur_date() {
         return curr_date;
@@ -458,76 +565,76 @@ public class Local_Data {
 
     // Empty constructor
     public Local_Data(){
-         
+
     }
-    
- // constructor
+
+    // constructor
     public Local_Data(String username, String password, String imei_no, String project_id, String user_id, String client_id, String cur_date,
-    		String cur_time,String dstr,String RR, String MRP,String claims,String claims_amoun, String complaints , String media_type,String media_url,String media_disc,String Target_Year,String Target_Month){
-    	
-    	 this.username = username;
-         this.password = password;
-         this.imei_no = imei_no;
-         this.project_id = project_id;
-         this.user_id = user_id;
-         this.client_id = client_id;
-         this.cur_date = cur_time;
-         this.cur_time = cur_time;
-         this.state_name = state_name;
-         this.city_name = city_name;
-         this.Dstr = dstr;
-         this.claims = claims;
-         this.claims_amount = claims_amount;
-         this.complaints = complaints;
-         this.media_type = media_type;
-         this.media_url = media_url;
-         this.media_disc = media_disc;
-         this.Target_Year = Target_Year;
-         this.Target_Month = Target_Month;
-         this.Target_Text = Target_Text;
-         this.Target_Achieved = Target_Achieved;
-         this.Target_Quarter = Target_Quarter;
-        
-         this.travel_from = travel_from;
-         this.travel_to =  travel_to;
-         this.travel_date = travel_date;
-         this.travel_mode = travel_mode;
-         this.travel_cost = travel_cost;
-         this.travel_text = travel_text;
-         this.Retailer_id = Retailer_id;
-        
-         this.category_id = category_id;
-         this.category_code =  category_code;
-         this.category_desc =  category_desc;
-         this.category_status = category_status;
-         this.category_ids =  category_ids;
-        
-         this.product_code = product_code;
-         this.product_desc = product_desc;
-         this.product_status =  product_status;
-         this.product_ids =  product_ids;
-        
-         this.variants_code = variants_code;
-         this.variants_desc = variants_desc;
-         this.variants_MRP =  variants_MRP;
-         this.variants_retail_price = variants_retail_price;
-         this.variants_product_unit = variants_product_unit;
-         this.variants_status = variants_status;
-         this.variants_ids =  variants_ids;
-        
-        
-         this.stocks_product_name = stocks_product_name;
-         this.stocks_product_quantity = stocks_product_quantity;
-         this.stocks_product_text = stocks_product_text;
-        
-         this.PackSizes_variant_id =  PackSizes_variant_id;
-         this.PackSizes_desc =  PackSizes_desc;
-         this.PackSizes_product_unit = PackSizes_product_unit;
-         this.PackSizes_product_pack_size = PackSizes_product_pack_size;
-         this.PackSizes_status =  PackSizes_status;
-         this.PackSizes_ids =  PackSizes_ids;
-         this.RR = RR;
-         this.MRP = MRP;
+                      String cur_time,String dstr,String RR, String MRP,String claims,String claims_amoun, String complaints , String media_type,String media_url,String media_disc,String Target_Year,String Target_Month){
+
+        this.username = username;
+        this.password = password;
+        this.imei_no = imei_no;
+        this.project_id = project_id;
+        this.user_id = user_id;
+        this.client_id = client_id;
+        this.cur_date = cur_time;
+        this.cur_time = cur_time;
+        this.state_name = state_name;
+        this.city_name = city_name;
+        this.Dstr = dstr;
+        this.claims = claims;
+        this.claims_amount = claims_amount;
+        this.complaints = complaints;
+        this.media_type = media_type;
+        this.media_url = media_url;
+        this.media_disc = media_disc;
+        this.Target_Year = Target_Year;
+        this.Target_Month = Target_Month;
+        this.Target_Text = Target_Text;
+        this.Target_Achieved = Target_Achieved;
+        this.Target_Quarter = Target_Quarter;
+
+        this.travel_from = travel_from;
+        this.travel_to =  travel_to;
+        this.travel_date = travel_date;
+        this.travel_mode = travel_mode;
+        this.travel_cost = travel_cost;
+        this.travel_text = travel_text;
+        this.Retailer_id = Retailer_id;
+
+        this.category_id = category_id;
+        this.category_code =  category_code;
+        this.category_desc =  category_desc;
+        this.category_status = category_status;
+        this.category_ids =  category_ids;
+
+        this.product_code = product_code;
+        this.product_desc = product_desc;
+        this.product_status =  product_status;
+        this.product_ids =  product_ids;
+
+        this.variants_code = variants_code;
+        this.variants_desc = variants_desc;
+        this.variants_MRP =  variants_MRP;
+        this.variants_retail_price = variants_retail_price;
+        this.variants_product_unit = variants_product_unit;
+        this.variants_status = variants_status;
+        this.variants_ids =  variants_ids;
+
+
+        this.stocks_product_name = stocks_product_name;
+        this.stocks_product_quantity = stocks_product_quantity;
+        this.stocks_product_text = stocks_product_text;
+
+        this.PackSizes_variant_id =  PackSizes_variant_id;
+        this.PackSizes_desc =  PackSizes_desc;
+        this.PackSizes_product_unit = PackSizes_product_unit;
+        this.PackSizes_product_pack_size = PackSizes_product_pack_size;
+        this.PackSizes_status =  PackSizes_status;
+        this.PackSizes_ids =  PackSizes_ids;
+        this.RR = RR;
+        this.MRP = MRP;
     }
 
 
@@ -701,6 +808,31 @@ public class Local_Data {
         this.customer_choice = customer_choice;
     }
 
+    //for beat map
+
+    public String getNamemap() {
+        return namemap;
+    }
+
+    public void setNamemap(String nm) {
+        namemap = nm;
+    }
+
+    public String getCitycodemap() {
+        return city_codemap;
+    }
+
+    public void setCitycodemap(String cc) {
+        city_codemap = cc;
+    }
+
+    public String getStatecodemap() {
+        return state_codemap;
+    }
+
+    public void setStatecodemap(String sc) {
+        state_codemap = sc;
+    }
 
     // getting option_1
     public String getoption_1(){
@@ -713,11 +845,11 @@ public class Local_Data {
     }
 
 
-   // getting order DISTRIBUTER_ID
+    // getting order DISTRIBUTER_ID
     public String getDISTRIBUTER_ID(){
         return this.DISTRIBUTER_ID;
     }
-     
+
     // setting DISTRIBUTER_ID
     public void setDISTRIBUTER_ID(String DISTRIBUTER_ID){
         this.DISTRIBUTER_ID = DISTRIBUTER_ID;
@@ -769,6 +901,30 @@ public class Local_Data {
         return this.longitude;
     }
 
+    public String getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        Latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
+    }
+
+    public String getSnippet() {
+        return Snippet;
+    }
+
+    public void setSnippet(String snippet) {
+        Snippet = snippet;
+    }
+
     // setting longitude
     public void setlongitude(String longitude){
         this.longitude = longitude;
@@ -813,6 +969,7 @@ public class Local_Data {
     public void setAmmount_overdue(String Ammount_overdue){
         this.Ammount_overdue = Ammount_overdue;
     }
+
 
     // getting order Address
     public String getAddress(){
@@ -933,91 +1090,91 @@ public class Local_Data {
     public void setuser_email(String user_email){
         this.user_email = user_email;
     }
-    
- // getting order PURPOSE_ADDRESS
+
+    // getting order PURPOSE_ADDRESS
     public String getPURPOSE_ADDRESS(){
         return this.PURPOSE_ADDRESS;
     }
-     
+
     // setting PURPOSE_ADDRESS
     public void setPURPOSE_ADDRESS(String PURPOSE_ADDRESS){
         this.PURPOSE_ADDRESS = PURPOSE_ADDRESS;
-    }  
-    
-  // getting order status
+    }
+
+    // getting order status
     public String getOrderAmount(){
         return this.ordamount;
     }
-     
+
     // setting order status
     public void setOrderAmount(String ordamnt){
         this.ordamount = ordamnt;
-    }  
-    
- // getting order_number
+    }
+
+    // getting order_number
     public String getorder_number(){
         return this.order_number;
     }
-     
+
     // setting order_number
     public void setorder_number(String order_number){
         this.order_number = order_number;
-    }  
- // getting order_id
+    }
+    // getting order_id
     public String getOrderId(){
         return this.orderid;
     }
-     
+
     // setting order_id
     public void setOrderId(String ordrid){
         this.orderid = ordrid;
     }
-    
-    
- // getting product_id
+
+
+    // getting product_id
     public String getProductId(){
         return this.productid;
     }
-     
+
     // setting product_id
     public void setProductId(String prdctid){
         this.productid = prdctid;
     }
-    
+
     // getting qty
     public String getQty(){
         return this.qtyy;
     }
-     
+
     // setting qty
     public void setQty(String qty){
         this.qtyy = qty;
-    }  
-    
+    }
+
     // getting price
     public String getPrice(){
         return this.price;
     }
-     
+
     // setting price
     public void setPrice(String prce){
         this.price = prce;
-    }  
-    
- // getting amount
+    }
+
+    // getting amount
     public String getAmount(){
         return this.amount;
     }
-     
+
     // setting amount
     public void setAmount(String amnt){
         this.amount = amnt;
-    } 
-  //getting customer_address
+    }
+    //getting customer_address
     public String get_custadr(){
         return this.cust_adr;
     }
-     
+
     // setting customer_address
     public void set_custadr(String custadr ){
         this.cust_adr = custadr;
@@ -1026,978 +1183,982 @@ public class Local_Data {
     public int getID(){
         return this._id;
     }
-     
+
     // setting id
     public void setID(int id){
         this._id = id;
     }
-    
+
     // getting rr
     public String getRR(){
         return this.RR;
     }
-     
+
     // setting rr
     public void setRR(String rr){
         this.RR = rr;
     }
-    
+
     // getting mrp
     public String getMRP(){
         return this.MRP;
     }
-     
+
     // setting mrp
     public void setMRP(String mrp){
         this.MRP = mrp;
     }
-    
+
     // getting distributor
     public String getDstr(){
         return this.Dstr;
     }
-     
-    // setting distributor 
+
+    // setting distributor
     public void setDistr(String dstr){
         this.Dstr = dstr;
     }
-    
- // getting username
+
+    // getting username
     public String getUser(){
         return this.username;
     }
-     
+
     // setting username
     public void setUser(String user){
         this.username = user;
     }
-    
- // getting current date
+
+    // getting current date
     public String getC_Date(){
         return this.cur_date;
     }
-     
+
     // setting current date
     public void setC_Date(String c_date){
         this.cur_date = c_date;
     }
-    
- // getting current Description
+
+    // getting current Description
     public String get_Description(){
         return this.description;
     }
-     
+
     // setting current Description
     public void set_Description(String description ){
         this.description = description;
     }
-    
- // getting current Description
+
+    // getting current Description
     public String get_Claims(){
         return this.claims;
     }
-     
+
     // setting current Description
     public void set_Claims(String claims ){
         this.claims = claims;
     }
-    
+
     // getting current Description
     public String get_Claims_amount(){
         return this.claims_amount;
     }
-     
+
     // setting current Description
     public void set_Claims_amount(String claims_amount ){
         this.claims_amount = claims_amount;
     }
-    
-  // getting current Description
+
+    // getting current Description
     public String get_complaints(){
         return this.complaints;
     }
-     
+
     // setting current Description
     public void set_complaints(String complaints ){
         this.complaints = complaints;
     }
-    
+
     //getting current Media type
     public String get_mediaType(){
         return this.media_type;
     }
-     
+
     // setting current Media type
     public void set_mediaType(String media_type ){
         this.media_type = media_type;
     }
-    
-  //getting current Media url
+
+    //getting current Media url
     public String get_mediaUrl(){
         return this.media_url;
     }
-     
+
     // setting current Media url
     public void set_mediaUrl(String media_url ){
         this.media_url = media_url;
     }
-    
-  //getting current Media disc
+
+    //getting current Media disc
     public String get_mediaDisc(){
         return this.media_disc;
     }
-     
+
     // setting current Media url
     public void set_mediaDisc(String media_disc ){
         this.media_disc = media_disc;
     }
-    
+
     //getting current Target Year
     public String get_Target_Year(){
         return this.Target_Year;
     }
-     
+
     // setting current Target Year
     public void set_Target_Year(String Target_Year ){
         this.Target_Year = Target_Year;
     }
-    
-  //getting current Target Month
+
+    //getting current Target Month
     public String get_Target_Month(){
         return this.Target_Month;
     }
-     
+
     // setting current Target Month
     public void set_Target_Month(String Target_Month ){
         this.Target_Month = Target_Month;
     }
-    
-  //getting current Target Text
+
+    //getting current Target Text
     public String get_Target_Text(){
         return this.Target_Text;
     }
-     
+
     // setting current Target Text
     public void set_Target_Text(String Target_Text ){
         this.Target_Text = Target_Text;
     }
-    
-  //getting current Target Achieved
+
+    //getting current Target Achieved
     public String get_Target_Achieved(){
         return this.Target_Achieved;
     }
-     
+
     // setting current Target Achieved
     public void set_Target_Achieved(String Target_Achieved ){
         this.Target_Achieved = Target_Achieved;
     }
-    
-  //getting current Target Quarter
+
+    //getting current Target Quarter
     public String get_Target_Quarter(){
         return this.Target_Quarter;
     }
-     
+
     // setting current Target Quarter
     public void set_Target_Quarter(String Target_Quarter ){
         this.Target_Quarter = Target_Quarter;
     }
-    
+
     //getting current travel from
     public String get_travel_from(){
         return this.travel_from;
     }
-     
+
     // setting current travel from
     public void set_travel_from(String travel_from ){
         this.travel_from = travel_from;
     }
-    
-   //getting current travel to
+
+    //getting current travel to
     public String get_travel_to(){
         return this.travel_to;
     }
-     
+
     // setting current travel to
     public void set_travel_to(String travel_to ){
         this.travel_to = travel_to;
     }
-    
+
     //getting current travel date
     public String get_travel_date(){
         return this.travel_date;
     }
-     
+
     // setting current travel date
     public void set_travel_date(String travel_date ){
         this.travel_date = travel_date;
     }
-    
-   //getting current travel mode
+
+    //getting current travel mode
     public String get_travel_mode(){
         return this.travel_mode;
     }
-     
+
     // setting current travel mode
     public void set_travel_mode(String travel_mode ){
         this.travel_mode = travel_mode;
     }
-    
-   //getting current travel cost
+
+    //getting current travel cost
     public String get_travel_cost(){
         return this.travel_cost;
     }
-     
+
     // setting current travel cost
     public void set_travel_cost(String travel_cost ){
         this.travel_cost = travel_cost;
     }
-    
-  //getting current Retailer id
+
+    //getting current Retailer id
     public String get_Retailer_id(){
         return this.Retailer_id;
     }
-     
+
     // setting current Retailer id
     public void set_Retailer_id(String Retailer_id ){
         this.Retailer_id = Retailer_id;
     }
-    
+
     //getting current travel text
     public String get_travel_text(){
         return this.travel_text;
     }
-     
+
     // setting current travel text
     public void set_travel_text(String travel_text ){
         this.travel_text = travel_text;
     }
-    
-    
-   //getting current category_id
+
+
+    //getting current category_id
     public String get_category_id(){
         return this.category_id;
     }
-     
+
     // setting current category_id
     public void set_category_id(String category_id ){
         this.category_id = category_id;
     }
-    
-   //getting current category_code
+
+    //getting current category_code
     public String get_category_code(){
         return this.category_code;
     }
-     
+
     // setting current category_code
     public void set_category_code(String category_code ){
         this.category_code = category_code;
     }
-    
-   //getting current category_desc
+
+    //getting current category_desc
     public String get_category_desc(){
         return this.category_desc;
     }
-     
+
     // setting current category_desc
     public void set_ccategory_desc(String category_desc ){
         this.category_desc = category_desc;
     }
-    
-   //getting current category_status
+
+    //getting current category_status
     public String get_category_status(){
         return this.category_desc;
     }
-     
+
     // setting current category_status
     public void set_category_status(String category_status ){
         this.category_status = category_status;
     }
-    
-   //getting current category_ids
+
+    //getting current category_ids
     public String get_category_ids(){
         return this.category_ids;
     }
-     
+
     // setting current category_ids
     public void set_category_ids(String category_ids ){
         this.category_ids = category_ids;
     }
-    
-   //getting current product_code
+
+    //getting current product_code
     public String get_product_code(){
         return this.product_code;
     }
-     
+
     // setting current product_code
     public void set_product_code(String product_desc ){
         this.product_code = product_code;
     }
-    
-    
+
+
     //getting current product_desc
     public String get_product_desc(){
         return this.product_desc;
     }
-     
+
     // setting current product_desc
     public void set_product_desc(String product_desc ){
         this.product_desc = product_desc;
     }
-    
+
     //getting current product_status
     public String get_product_status(){
         return this.product_status;
     }
-     
+
     // setting current product_desc
     public void set_product_status(String product_status ){
         this.product_status = product_status;
     }
-    
-    
-   //getting current product_status
+
+
+    //getting current product_status
     public String get_product_ids(){
         return this.product_ids;
     }
-     
+
     // setting current product_desc
     public void set_product_ids(String product_ids ){
         this.product_ids = product_ids;
     }
-    
-   //getting current variants_code
+
+    //getting current variants_code
     public String get_variants_code(){
         return this.variants_code;
     }
-     
+
     // setting current variants_code
     public void set_variants_code(String variants_code ){
         this.variants_code = variants_code;
     }
-    
+
     //getting current variants_desc
     public String get_variants_desc(){
         return this.variants_desc;
     }
-     
+
     // setting current variants_desc
     public void set_variants_desc(String variants_desc ){
         this.variants_desc = variants_desc;
     }
-    
-    
-   //getting current variants_MRP
+
+
+    //getting current variants_MRP
     public String get_variants_MRP(){
         return this.variants_MRP;
     }
-     
+
     // setting current variants_MRP
     public void set_variants_MRP(String variants_MRP ){
         this.variants_MRP = variants_MRP;
     }
-    
+
     //getting current variants_retail_price
     public String get_variants_retail_price(){
         return this.variants_retail_price;
     }
-     
+
     // setting current variants_retail_price
     public void set_variants_retail_price(String variants_retail_price ){
         this.variants_retail_price = variants_retail_price;
     }
-    
-    
-   //getting current variants_product_unit
+
+
+    //getting current variants_product_unit
     public String get_variants_product_unit(){
         return this.variants_product_unit;
     }
-     
+
     // setting current variants_product_unit
     public void set_variants_product_unit(String variants_product_unit ){
         this.variants_product_unit = variants_product_unit;
     }
-    
+
     //getting current variants_status
     public String get_variants_status(){
         return this.variants_status;
     }
-     
+
     // setting current variants_status
     public void set_variants_status(String variants_status ){
         this.variants_status = variants_status;
     }
-    
-    
-   //getting current variants_ids
+
+
+    //getting current variants_ids
     public String get_variants_ids(){
         return this.variants_ids;
     }
-     
+
     // setting current variants_ids
     public void set_variants_ids(String variants_ids ){
         this.variants_ids = variants_ids;
     }
-    
-    
-   //getting current stocks_product_name
+
+
+    //getting current stocks_product_name
     public String get_stocks_product_name(){
         return this.stocks_product_name;
     }
-     
+
     // setting current stocks_product_name
     public void set_stocks_product_name(String stocks_product_name ){
         this.stocks_product_name = stocks_product_name;
     }
-    
-    
-   //getting current stocks_product_quantity
+
+
+    //getting current stocks_product_quantity
     public String get_stocks_product_quantity(){
         return this.stocks_product_quantity;
     }
-     
+
     // setting current stocks_product_quantity
     public void set_stocks_product_quantity(String stocks_product_quantity ){
         this.stocks_product_quantity = stocks_product_quantity;
     }
-    
-    
-   //getting current stocks_product_text
+
+
+    //getting current stocks_product_text
     public String get_stocks_product_text(){
         return this.stocks_product_text;
     }
-     
+
     // setting current stocks_product_text
     public void set_stocks_product_text(String stocks_product_text ){
         this.stocks_product_text = stocks_product_text;
     }
-    
-   //getting current PackSizes_variant_id
+
+    //getting current PackSizes_variant_id
     public String get_PackSizes_variant_id(){
         return this.PackSizes_variant_id;
     }
-     
+
     // setting current PackSizes_variant_id
     public void set_PackSizes_variant_id(String PackSizes_variant_id ){
         this.PackSizes_variant_id = PackSizes_variant_id;
     }
-    
-   //getting current PackSizes_desc
+
+    //getting current PackSizes_desc
     public String get_PackSizes_desc(){
         return this.PackSizes_desc;
     }
-     
+
     // setting current PackSizes_desc
     public void set_PackSizes_desc(String PackSizes_desc ){
         this.PackSizes_desc = PackSizes_desc;
     }
-    
+
     //getting current PackSizes_product_unit
     public String get_PackSizes_product_unit(){
         return this.PackSizes_product_unit;
     }
-     
+
     // setting current PackSizes_product_unit
     public void set_PackSizes_product_unit(String PackSizes_product_unit ){
         this.PackSizes_product_unit = PackSizes_product_unit;
     }
-    
-   //getting current PackSizes_product_pack_size
+
+    //getting current PackSizes_product_pack_size
     public String get_PackSizes_product_pack_size(){
         return this.PackSizes_product_pack_size;
     }
-     
+
     // setting current PackSizes_product_pack_size
     public void set_PackSizes_product_pack_size(String PackSizes_product_pack_size ){
         this.PackSizes_product_pack_size = PackSizes_product_pack_size;
     }
-    
-   //getting current PackSizes_status
+
+    //getting current PackSizes_status
     public String get_PackSizes_status(){
         return this.PackSizes_status;
     }
-     
+
     // setting current PackSizes_status
     public void set_PackSizes_status(String PackSizes_status ){
         this.PackSizes_status = PackSizes_status;
     }
-    
+
     //getting current PackSizes_ids
     public String get_PackSizes_ids(){
         return this.PackSizes_ids;
     }
-     
+
     // setting current PackSizes_ids
     public void set_PackSizes_ids(String PackSizes_ids ){
         this.PackSizes_ids = PackSizes_ids;
     }
-    
-   //getting current shedule_order_id
+
+    //getting current shedule_order_id
     public String get_shedule_order_id(){
         return this.shedule_order_id;
     }
-     
+
     // setting current shedule_order_id
     public void set_shedule_order_id(String shedule_order_id ){
         this.shedule_order_id = shedule_order_id;
     }
-    
-   //getting current shedule_depatch_date
+
+    //getting current shedule_depatch_date
     public String get_shedule_depatch_date(){
         return this.shedule_depatch_date;
     }
-     
+
     // setting current shedule_depatch_date
     public void set_shedule_depatch_date(String shedule_depatch_date ){
         this.shedule_depatch_date = shedule_depatch_date;
     }
-    
-    
-   //getting current shedule_delivery_date
+
+
+    //getting current shedule_delivery_date
     public String get_shedule_delivery_date(){
         return this.shedule_delivery_date;
     }
-     
+
     // setting current shedule_delivery_date
     public void set_shedule_delivery_date(String shedule_delivery_date ){
         this.shedule_delivery_date = shedule_delivery_date;
     }
-    
-    
-   //getting current shedule_order_amount
+
+
+    //getting current shedule_order_amount
     public String get_shedule_order_amount(){
         return this.shedule_order_amount;
     }
-     
+
     // setting current shedule_order_amount
     public void set_shedule_order_amount(String shedule_order_amount ){
         this.shedule_order_amount = shedule_order_amount;
     }
-    
-    
-   //getting current shedule_payment_mode
+
+
+    //getting current shedule_payment_mode
     public String get_shedule_payment_mode(){
         return this.shedule_payment_mode;
     }
-     
+
     // setting current shedule_payment_mode
     public void set_shedule_payment_mode(String shedule_payment_mode ){
         this.shedule_payment_mode = shedule_payment_mode;
     }
-    
-    
+
+
     //getting current shedule_outstanding_amount
     public String get_shedule_outstanding_amount(){
         return this.shedule_outstanding_amount;
     }
-     
+
     // setting current shedule_outstanding_amount
     public void set_shedule_outstanding_amount(String shedule_outstanding_amount ){
         this.shedule_outstanding_amount = shedule_outstanding_amount;
     }
-    
+
     //getting current delivery_product_id
     public String get_delivery_product_id(){
         return this.delivery_product_id;
     }
-     
+
     // setting current delivery_product_id
     public void set_delivery_product_id(String delivery_product_id ){
         this.delivery_product_id = delivery_product_id;
     }
-    
-    
-   //getting current delivery_product_order_quantity
+
+
+    //getting current delivery_product_order_quantity
     public String get_delivery_product_order_quantity(){
         return this.delivery_product_order_quantity;
     }
-     
+
     // setting current delivery_product_order_quantity
     public void set_delivery_product_order_quantity(String delivery_product_order_quantity ){
         this.delivery_product_order_quantity = delivery_product_order_quantity;
     }
-    
-    
-   //getting current delivery_product_delivered_quality
+
+
+    //getting current delivery_product_delivered_quality
     public String get_delivery_product_delivered_quality(){
         return this.delivery_product_delivered_quality;
     }
-     
+
     // setting current delivery_product_delivered_quality
     public void set_delivery_product_delivered_quality(String delivery_product_delivered_quality ){
         this.delivery_product_delivered_quality = delivery_product_delivered_quality;
     }
-    
-    
+
+
     //getting current delivery_product_transporter_details
     public String get_delivery_product_transporter_details(){
         return this.delivery_product_transporter_details;
     }
-     
+
     // setting current delivery_product_transporter_details
     public void set_delivery_product_transporter_details(String delivery_product_transporter_details ){
         this.delivery_product_transporter_details = delivery_product_transporter_details;
     }
 
-  //getting current credit_limit
+    //getting current credit_limit
     public String get_credit_limit(){
         return this.credit_limit;
     }
-     
+
     // setting current credit_limit
     public void set_credit_limit(String credit_limit ){
         this.credit_limit = credit_limit;
     }
-    
-    
-    
+
+
+
     // getting password
     public String getPwd(){
         return this.password;
     }
-    
+
     // setting password
     public void setPwd(String pwd){
         this.password = pwd;
     }
-    
+
     // getting imei
     public String getImei(){
         return this.imei_no;
     }
-     
+
     // setting imei
     public void setImei(String imei){
         this.imei_no = imei;
     }
-    
+
     // getting product status
     public String getProductStatus(){
         return this.prod_stat;
     }
-     
+
     // setting product status
     public void setProductStatus(String prod_stat){
         this.prod_stat = prod_stat;
     }
-    
- // getting regid
+
+    // getting regid
     public String getRegid(){
         return this.regid;
     }
-     
+
     // setting regid
     public void setRegid(String regid){
         this.regid = regid;
     }
-    
- // getting regid
+
+    // getting regid
     public String getStateName(){
         return this.state_name;
     }
-     
+
     // setting regid
     public void setStateName(String state_nm){
         this.state_name = state_nm;
     }
-    
-  // getting regid
+
+    // getting regid
     public String getCityName(){
         return this.city_name;
     }
-     
+
     // setting city_id
     public void setcity_id(String city_id){
         this.city_id = city_id;
     }
-    
- // getting city_id
+
+    // getting city_id
     public String getcity_id(){
         return this.city_id;
     }
-     
+
     // setting regid
     public void setCityName(String city_nm){
         this.city_name = city_nm;
     }
-    
- // getting city_id
+
+    // getting city_id
     public String getbeat_id(){
         return this.beat_id;
     }
-     
+
     // setting regid
     public void setBeatName(String beat_nm){
         this.beat_name = beat_nm;
-    }    
-    
+    }
+
+    public String getBeatName() {
+        return this.beat_name;
+    }
+
     // getting category
     public String getCategory(){
         return this.category;
     }
-     
+
     // setting category
     public void setCategory(String categ){
         this.category = categ;
     }
-    
- // getting category
+
+    // getting category
     public String getProduct(){
         return this.product;
     }
-     
+
     // setting category
     public void setProduct(String product){
         this.product = product;
     }
-    
+
     // getting category
     public String getVariant(){
         return this.variant;
     }
-     
+
     // setting category
     public void setVariant(String variant){
         this.variant = variant;
     }
-    
+
     public String getOrderStatus(){
         return this.orderstatusid;
     }
-     
+
     // setting order status
     public void setOrderStatus(String ordstat){
         this.orderstatusid = ordstat;
-    }  
-    
+    }
+
     public String getProduct_nm(){
         return this.product_name;
     }
-     
+
     // setting order status
     public void setProduct_nm(String pname){
         this.product_name = pname;
-    }  
-    
-    
+    }
+
+
     public String getRP(){
         return this.rp;
     }
-     
+
     // setting order status
     public void setRP(String rr){
         this.rp = rr;
-    }  
-    
+    }
+
     public String getCust_Code(){
         return this.cust_code;
     }
-     
+
     // setting order status
     public void setCust_Code(String code){
         this.cust_code = code;
-    }  
-    
+    }
+
     public String getItem_Code(){
         return this.item_code;
     }
-     
+
     // setting order status
     public void setItem_Code(String icode){
         this.item_code = icode;
-    } 
-    
+    }
+
     public String getRRP(){
         return this.rrp;
     }
-     
+
     // setting order status
     public void setRRP(String rp){
         this.rrp = rp;
-    } 
-    
+    }
+
     public String getProdname(){
         return this.prod_name;
     }
-     
+
     // setting order status
     public void setProdname(String prdnm){
         this.prod_name = prdnm;
     }
-    
+
     public String getc_name(){
         return this.c_name;
     }
-     
+
     // setting order status
     public void setc_name(String c_name){
         this.c_name = c_name;
     }
-    
+
     public String getreason_name(){
         return this.reason_name;
     }
-     
+
     // setting reason_name
     public void setreason_name(String reason_name){
         this.reason_name = reason_name;
     }
-    
+
     public String getreason_code(){
         return this.reason_code;
     }
-     
+
     // setting reason_code
     public void setreason_code(String reason_code){
         this.reason_code = reason_code;
     }
-    
+
     //LEGACY_CUSTOMER_CODE GET
     public String getLEGACY_CUSTOMER_CODE(){
         return this.LEGACY_CUSTOMER_CODE;
     }
-     
+
     // setting LEGACY_CUSTOMER_CODE SET
     public void setLEGACY_CUSTOMER_CODE(String LEGACY_CUSTOMER_CODE){
         this.LEGACY_CUSTOMER_CODE = LEGACY_CUSTOMER_CODE;
     }
-    
-  //CUSTOMER_NAME GET
+
+    //CUSTOMER_NAME GET
     public String getCUSTOMER_NAME(){
         return this.CUSTOMER_NAME;
     }
-     
+
     // setting CUSTOMER_NAME SET
     public void setCUSTOMER_NAME(String CUSTOMER_NAME){
         this.CUSTOMER_NAME = CUSTOMER_NAME;
     }
-    
-  //CUSTOMER_SHOPNAME GET
+
+    //CUSTOMER_SHOPNAME GET
     public String getCUSTOMER_SHOPNAME(){
         return this.CUSTOMER_SHOPNAME;
     }
-     
+
     // setting CUSTOMER_SHOPNAME SET
     public void setCUSTOMER_SHOPNAME(String CUSTOMER_SHOPNAME){
         this.CUSTOMER_SHOPNAME = CUSTOMER_SHOPNAME;
     }
-    
-    
-  //ADDRESS GET
+
+
+    //ADDRESS GET
     public String getADDRESS(){
         return this.ADDRESS;
     }
-     
+
     // setting ADDRESS SET
     public void setADDRESS(String ADDRESS){
         this.ADDRESS = ADDRESS;
     }
-    
+
     //STREET GET
     public String getSTREET(){
         return this.STREET;
     }
-     
+
     // setting STREET SET
     public void setSTREET(String STREET){
         this.STREET = STREET;
     }
-    
+
     //LANDMARK GET
     public String getLANDMARK(){
         return this.LANDMARK;
     }
-     
+
     // setting LANDMARK SET
     public void setLANDMARK(String LANDMARK){
         this.LANDMARK = LANDMARK;
     }
-    
-   //PIN_CODE GET
+
+    //PIN_CODE GET
     public String getPIN_CODE(){
         return this.PIN_CODE;
     }
-     
+
     // setting PIN_CODE SET
     public void setPIN_CODE(String PIN_CODE){
         this.PIN_CODE = PIN_CODE;
     }
-    
+
     //MOBILE_NO GET
     public String getMOBILE_NO(){
         return this.MOBILE_NO;
     }
-     
+
     // setting MOBILE_NO SET
     public void setMOBILE_NO(String MOBILE_NO){
         this.MOBILE_NO   = MOBILE_NO;
     }
-    
-  //EMAIL_ADDRESS GET
+
+    //EMAIL_ADDRESS GET
     public String getEMAIL_ADDRESS(){
         return this.EMAIL_ADDRESS;
     }
-     
+
     // setting EMAIL_ADDRESS SET
     public void setEMAIL_ADDRESS(String EMAIL_ADDRESS){
         this.EMAIL_ADDRESS   = EMAIL_ADDRESS;
     }
-    
-    
-   //STATUS GET
+
+
+    //STATUS GET
     public String getSTATUS(){
         return this.STATUS;
     }
-     
+
     // setting STATUS SET
     public void setSTATUS(String STATUS){
         this.STATUS   = STATUS;
     }
-    
+
     //STATE_ID GET
     public String getSTATE_ID(){
         return this.STATE_ID;
     }
-     
+
     // setting STATE_ID SET
     public void setSTATE_ID(String STATE_ID){
         this.STATE_ID   = STATE_ID;
     }
-    
-  //CITY_ID GET
+
+    //CITY_ID GET
     public String getCITY_ID(){
         return this.CITY_ID;
     }
-     
+
     // setting CITY_ID SET
     public void setCITY_ID(String CITY_ID){
         this.CITY_ID   = CITY_ID;
     }
-    
-   //BEAT_ID GET
+
+    //BEAT_ID GET
     public String getBEAT_ID(){
         return this.BEAT_ID;
     }
-     
+
     // setting BEAT_ID SET
     public void setBEAT_ID(String BEAT_ID){
         this.BEAT_ID   = BEAT_ID;
     }
-    
-  //vatin GET
+
+    //vatin GET
     public String getvatin(){
         return this.vatin;
     }
-     
+
     // setting vatin SET
     public void setvatin(String vatin){
         this.vatin   = vatin;
     }
-    
-  //email GET
+
+    //email GET
     public String getemail(){
         return this.email;
     }
-     
+
     // setting email SET
     public void setemail(String email){
         this.email   = email;

@@ -12,5 +12,21 @@ public class Check_Null_Value {
 	   {
 		   return false;
 	   }
-	}  
+	}
+
+	public static boolean isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(final String string) {
+		if (string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null") && !string.equalsIgnoreCase("") && !string.equalsIgnoreCase(" ") && !string.equalsIgnoreCase("0") && !string.equalsIgnoreCase("0.0")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(final String string) {
+		if (string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null") && !string.equalsIgnoreCase("0")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

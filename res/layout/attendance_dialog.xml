@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#242424"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp">
+
+    <TextView
+        android:id="@+id/inh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_background_color"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/text_size_header"
+        android:layout_marginTop="20dp"
+        android:text="IN DETAILS" />
+
+
+    <TextView
+        android:id="@+id/att_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/inh"
+        android:textColor="@color/text_background_color"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="20dp"
+        android:text="Order Filter" />
+
+    <TextView
+        android:id="@+id/att_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/att_time"
+        android:textColor="@color/text_background_color"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="20dp"
+        android:text="Order " />
+
+
+    <Button
+        android:id="@+id/atok"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="OK"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="17sp" />
+
+
+</RelativeLayout>

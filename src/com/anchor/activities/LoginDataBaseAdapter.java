@@ -261,23 +261,7 @@ public class LoginDataBaseAdapter
 			"( " +"ID"+" integer primary key autoincrement,"+ "latitude text, longitude text," +
 			"location_date text);";
 		
-//		static final String DATABASE_CREATE_ORDER_PRODUCTS = "create table "+"order_products"+
-//              "( " +"ID"+" integer primary key autoincrement,"+ "code text, name text, primary_category text, sub_category text, " +
-//              		"product_variant text, retail_price text, mrp text, qualifying_qty text, free_qty text, status text);";
-		
-//		static final String DATABASE_CREATE_CUST_MASTER = "create table "+"customer_master"+
-//                "( " +"ID"+" integer primary key autoincrement,"+ "LEGACY_CUSTOMER_CODE text,LEGACY_ACCOUNT_CODE text," +
-//                		"CUSTOMER_NAME text,CUSTOMER_CATEGORY text,CUSTOMER_TYPE text,CUSTOMER_NUMBER text,ACCOUNT_DESC text," +
-//                		"ATTRIBUTE3 text,EMAIL_ADDRESS text,ADDRESS1 text, ADDRESS2 text,ADDRESS3 text,ADDRESS4 text,PIN_CODE text,CITY text,BEAT text, STATE text," +
-//                		"COUNTRY text,DISTRICT text,REGION text,PURPOSE_ADDRESS text,LEGACY_SITE_CODE text,PARTY_SITE_NUMBER text," + 
-//						"RECEIVABLE_ACCOUNT text, BILL_AGAINST_SHIP_TO text, INDUSTRY_TYPE text, TYPE_OF_FIRM text, OPERATING_UNIT text," + 
-//						"PAYMENT_TERMS text, PROFILE_CLASS text, PRIMARY_FLAG text, COLLECTOR text, CREDIT_LIMIT text, CREDIT_CLASSIFICATION text,"+
-//						"CREDIT_CHECK text, BUSINESS_VERTICAL_DFF text, CREDIT_HOLD text, SALES_PERSON text, PRICE_LIST text,"+ 
-//						"DEFAULT_WAREHOUSE text, SHIP_LOCATION_NAME text, LOCATION_NAME_IC text, ITEM_CTG_LIST text, EXEMPT text, RANGE text,"+
-//						"DIVISION text, REGISTRATION_NO text, ZONE text, REGION_1 text, CIRCLE text, COLLECTORATE text, EC_CODE text,"+
-//						"ASSESSABLE_PRICE text, CST_REG_NO text, LST_REG_NO text, ASSESSABLE_VALUE text, VAT_REG_NO text, SERVICE_TAX_REGNO text,"+
-//						"PAN_NO text, CONFIRM_PAN text, TAN_NO text, CREATED_BY_MODULE text, CREATION_DATE text,ship_to_email_address text,customer_id text);";
-		
+
 		
 		static final String DATABASE_CREATE_CUST_MASTER = "CREATE TABLE IF NOT EXISTS "+"customer_master"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "LEGACY_CUSTOMER_CODE text," +
@@ -326,6 +310,13 @@ public class LoginDataBaseAdapter
 
 	static final String DATABASE_ORDER_CATEGORY= "CREATE TABLE IF NOT EXISTS "+"order_category"+
 			"( " +"ID"+" integer primary key autoincrement,"+ "Code text,Name text, Description text, Details1 text, Details2 text,Details3 text,Created_at text,Updated_at text,Created_by text,Updated_by text);";
+
+	static final String DATABASE_CREATE_ATTENDENCE_F = "CREATE TABLE IF NOT EXISTS " + "attendence_f" +
+			"( " + "ID" + " integer primary key autoincrement," + "name text);";
+
+	static final String DATABASE_ATTENDANCE_DATA = "CREATE TABLE IF NOT EXISTS " + "attendance" +
+			"( " + "ID" + " integer primary key autoincrement," + "user_id text, punched_on text, punched_at_latitude text, punched_at_longitude text, punched_button text, conference_id text,vertical_id text,punched_at_address text,server_flag text,current_date_only text);";
+
 //		//new product and customer for Girnar Monday Demo
 //		static final String DATABASE_CREATE_NEWCUSTOMER = "create table "+"new_customers"+
 //             "( " +"ID"+" integer primary key autoincrement,"+ "code text, name text, shop_name text," +
@@ -3398,6 +3389,34 @@ public class LoginDataBaseAdapter
 
 		// Insert the row into your table
 		db.insert("background_service_check", null, newValues);
+	}
+
+	public void insertattendence_flag(String name) {
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("name", name);
+
+
+		db.insert("attendence_f", null, newValues);
+
+	}
+
+	public void insert_attendance_data(String user_id, String punched_on, String punched_at_latitude, String punched_at_longitude, String punched_button, String punched_at_address, String server_flag, String current_date_only) {
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("user_id", user_id);
+		newValues.put("punched_on", punched_on);
+		newValues.put("punched_at_latitude", punched_at_latitude);
+		newValues.put("punched_at_longitude", punched_at_longitude);
+		newValues.put("punched_button", punched_button);
+//		newValues.put("conference_id", conference_id);
+//		newValues.put("vertical_id", vertical_id);
+		newValues.put("punched_at_address", punched_at_address);
+		newValues.put("server_flag", server_flag);
+		newValues.put("current_date_only", current_date_only);
+
+		// Insert the row into your table
+		db.insert("attendance", null, newValues);
 	}
 		
 }

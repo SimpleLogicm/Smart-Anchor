@@ -93,9 +93,11 @@ public class DataBaseHelper extends SQLiteOpenHelper
         private static final String TABLE_DISTRIBUTORBEAT= "distributor_beats";
         private static final String TABLE_WAREHOUSE= "warehouse";
 
-         private static final String TABLE_L1_CONTACT= "L1_Contact";
-         private static final String TABLE_ORDER_CATEGORY= "order_category";
-         private static final String TABLE_BACKGROUND_SERVICE_CHECK= "background_service_check";
+        private static final String TABLE_L1_CONTACT= "L1_Contact";
+        private static final String TABLE_ORDER_CATEGORY= "order_category";
+        private static final String TABLE_BACKGROUND_SERVICE_CHECK= "background_service_check";
+        private static final String TABLE_ATTENDANCE_DATA = "attendance";
+        private static final String TABLE_CREATE_ATTENDENCE_F = "attendence_f";
 		 
 	    static SQLiteDatabase db;
 		// Contacts Table Columns names
@@ -213,6 +215,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_WAREHOUSE);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_ORDER_CATEGORY);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_BACKGROUND_SERVICE_CHECK);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_ATTENDENCE_F);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_ATTENDANCE_DATA);
             }
 	
 	@Override
@@ -6538,31 +6542,131 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // return contact list?
         return contactList14;
     }
-    
-    
-    
-// // Getting reg data
-//    public List<Local_Data> getRegdata() {
-//        List<Local_Data> contactList2 = new ArrayList<Local_Data>();
-//        // Select All Query
-//        String selectQuery = "SELECT  * FROM " + TABLE_REGISTRATION;
-// 
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-// 
-//        // looping through all rows and adding to list
-//        if (cursor.moveToLast()) {
-//            do {
-//                Local_Data contact = new Local_Data();
-//                contact.setRegid(cursor.getString(2));
-//                
-//                // Adding contact to list
-//                contactList2.add(contact);
-//            } while (cursor.moveToNext());
-//        }
-// 
-//        // return contact list?
-//        return contactList2;
-//    }
+
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllAttendance_Data() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT user_id,punched_on,punched_at_latitude,punched_at_longitude,punched_button,punched_at_address,server_flag,current_date_only FROM " + TABLE_ATTENDANCE_DATA + " ORDER BY punched_at_address";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+//		Cursor cursor = db.rawQuery("SELECT code,name FROM " + TABLE_USERS  + " GROUP BY name ORDER BY name",
+//				new String[] { });
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setUser_id(cursor.getString(0));
+                contact.setPunched_on(cursor.getString(1));
+                contact.setPunched_at_latitude(cursor.getString(2));
+                contact.setPunched_at_longitude(cursor.getString(3));
+                contact.setPunched_button(cursor.getString(4));
+
+                contact.setPunched_at_address(cursor.getString(5));
+                contact.setServer_flag(cursor.getString(6));
+                contact.setCurrent_date_only(cursor.getString(7));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllAttendance_Data_bydate(String current_date) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        Cursor cursor = db.rawQuery("SELECT user_id,punched_on,punched_at_latitude,punched_at_longitude,punched_button,punched_at_address,server_flag,current_date_only FROM attendance WHERE current_date_only = ?;",
+                new String[]{current_date});
+
+
+        //Cursor cursor = db.rawQuery(selectQuery1, null);
+
+//		Cursor cursor = db.rawQuery("SELECT code,name FROM " + TABLE_USERS  + " GROUP BY name ORDER BY name",
+//				new String[] { });
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setUser_id(cursor.getString(0));
+                contact.setPunched_on(cursor.getString(1));
+                contact.setPunched_at_latitude(cursor.getString(2));
+                contact.setPunched_at_longitude(cursor.getString(3));
+                contact.setPunched_button(cursor.getString(4));
+                contact.setPunched_at_address(cursor.getString(5));
+                contact.setServer_flag(cursor.getString(6));
+                contact.setCurrent_date_only(cursor.getString(7));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public void getDeleteattendance_da(String c_date) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " + TABLE_ATTENDANCE_DATA + " WHERE punched_on = '" + c_date + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllAttendanceF_Data() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT name FROM " + TABLE_CREATE_ATTENDENCE_F + " ORDER BY name";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+//		Cursor cursor = db.rawQuery("SELECT code,name FROM " + TABLE_USERS  + " GROUP BY name ORDER BY name",
+//				new String[] { });
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setName(cursor.getString(0));
+
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public void getDeleteattendance_daten(String c_date, String in_out_flag) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " + TABLE_ATTENDANCE_DATA + " WHERE punched_on = '" + c_date + "'" + " AND punched_button" + " ='" + in_out_flag + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+    }
+
     
 }

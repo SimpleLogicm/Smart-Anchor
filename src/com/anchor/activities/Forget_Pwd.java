@@ -15,10 +15,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +28,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
-import java.util.List;
 
 /**
  * Created by sujit on 3/8/2017.
@@ -200,93 +196,7 @@ public class Forget_Pwd extends Activity {
                             }
                         }
 
-//                                for (int i = 0; i < users.length(); i++) {
-//
-//                                    JSONObject jsonObject = users.getJSONObject(i);
-//
-//                                    SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                                    SharedPreferences.Editor edit = pref.edit();
-//                                    edit.putString("login_usernm", jsonObject.getString("user_name"));
-//                                    edit.putString("login_pwd", jsonObject.getString("encrypted_password"));
-//                                    edit.putString("login_dtofjn", jsonObject.getString("date_of_joining"));
-//                                    edit.putString("login_mobno", jsonObject.getString("mob_no"));
-//                                    edit.putString("login_email", jsonObject.getString("email"));
-//                                    edit.putString("login_repto", jsonObject.getString("reporting_to"));
-//                                    edit.putString("login_firstnm", jsonObject.getString("first_name"));
-//                                    edit.putString("login_lastnm", jsonObject.getString("last_name"));
-//                                    edit.putString("login_devid", Device_id);
-//                                    edit.putString("login_adrs", jsonObject.getString("address"));
-//                                    edit.commit();
-//
 
-//                                    loginDataBaseAdapter.updaEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
-//                                            jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
-//                                            "", Device_id, "", jsonObject.getString("address"), "", "", "", "", "");
-//                                }
-
-
-//                            String response_result = "";
-//                            if (response_result.equalsIgnoreCase("Device not found.")) {
-//
-//                                // Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-//
-//                                Toast toast = Toast.makeText(Forget_Pwd.this, response_result, Toast.LENGTH_LONG);
-//                                toast.setGravity(Gravity.CENTER, 0, 0);
-//                                toast.show();
-//
-//                            } else {
-//                                Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
-//                                //dbvoc.getDeleteTable("USERS");
-//
-////                                JSONArray users = response.getJSONArray("users");
-//////
-////                                Log.i("volley", "response reg users Length: " + users.length());
-////
-////                                if (users.length() <= 0) {
-////                                    dialog.dismiss();
-////                                    //Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_SHORT).show();
-////                                    Toast toast = Toast.makeText(Forget_Pwd.this, "User not found, Please contact with it team.", Toast.LENGTH_LONG);
-////                                    toast.setGravity(Gravity.CENTER, 0, 0);
-////                                    toast.show();
-////                                } else {
-//////                                    Log.d("users", "users" + users.toString());
-//////
-//////
-//////                                    for (int i = 0; i < users.length(); i++) {
-//////
-//////                                        JSONObject jsonObject = users.getJSONObject(i);
-//////
-//////                                        SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//////                                        SharedPreferences.Editor edit = pref.edit();
-//////                                        edit.putString("login_usernm", jsonObject.getString("user_name"));
-//////                                        edit.putString("login_pwd", jsonObject.getString("encrypted_password"));
-//////
-//////                                        edit.commit();
-//////
-////////                                loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
-////////                                        jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
-////////                                        "", Device_id, "", jsonObject.getString("address"), "", "", "", "", "");
-//////                                    }
-////
-////                                    //Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
-////
-////
-////                                    Toast toast = Toast.makeText(Forget_Pwd.this, "Register successfully.", Toast.LENGTH_LONG);
-////                                    toast.setGravity(Gravity.CENTER, 0, 0);
-////                                    toast.show();
-////                                    dialog.dismiss();
-////                                }
-//	                          	                            //finish();
-//                            }
-
-                        // }
-
-                        // output.setText(data);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            dialog.dismiss();
-//                            finish();
-//                        }
 
 
                         dialog.dismiss();
