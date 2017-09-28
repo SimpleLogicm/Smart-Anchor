@@ -78,6 +78,8 @@ import java.util.Locale;
 
 import cpm.simplelogic.helper.ConnectionDetector;
 
+import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
+
 public class BasicMapDemoActivity extends FragmentActivity implements
         OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -540,15 +542,48 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                             String region_code = returnAddress.getCountryCode();
                             String zipcode = returnAddress.getPostalCode();
                             str = new StringBuilder();
-                            str.append(addresses.get(0).getAddressLine(1) + " " + addresses.get(0).getAddressLine(2) + " ");
-                            str.append(localityString + " ");
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0))+" ");
+                            if(!(str.indexOf(addresses.get(0).getLocality()) > 0))
+                            {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality())+" ");
+                            }
+
+                            if(!(str.indexOf(addresses.get(0).getAdminArea()) > 0))
+                            {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea())+" ");
+                            }
+
+                            if(!(str.indexOf(addresses.get(0).getCountryName()) > 0))
+                            {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName())+" ");
+                            }
+
+                            if(!(str.indexOf(addresses.get(0).getPostalCode()) > 0))
+                            {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode())+" ");
+                            }
+
+                            str.append("\n");
+
+                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str.toString()))
+                            {
+                                Global_Data.address =  str.toString();
+                            }
 
                             //prefManager.setAddress(str.toString());
 //                    str.append(city + " ");
 //                    str.append(region_code + " ");
 //                    str.append(zipcode + " ");
 //                    yourtextfieldname.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() +", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
-                            markerOptions.title(str.toString());
+                            if(str.equals(Global_Data.address))
+                            {
+                                markerOptions.title(str.toString());
+                            }
+                            else
+                            {
+                                markerOptions.title(Global_Data.address);
+                            }
+
                             //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
                         }
                     }

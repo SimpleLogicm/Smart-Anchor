@@ -453,18 +453,18 @@ public class MainActivity extends BaseActivity {
 			
 		case 2:
 
-			isInternetPresent = cd.isConnectingToInternet();
-			if (isInternetPresent)
-			{
+//			isInternetPresent = cd.isConnectingToInternet();
+//			if (isInternetPresent)
+//			{
 				Intent map = new Intent(MainActivity.this,BasicMapDemoActivity.class);
 				startActivity(map);
-			}
-			else
-			{
-				Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.", Toast.LENGTH_LONG);
-				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
-			}
+//			}
+//			else
+//			{
+//				Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.", Toast.LENGTH_LONG);
+//				toast.setGravity(Gravity.CENTER, 0, 0);
+//				toast.show();
+//			}
 			fragment = new Home();
 			fragmentPoistion=2;
 			break;

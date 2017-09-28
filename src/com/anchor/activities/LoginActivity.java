@@ -190,8 +190,8 @@ public class LoginActivity extends Activity{
 				buttonReg=(Button) findViewById(R.id.buttonReg);
 				editText1=(EditText) findViewById(R.id.editText1);
 				editText2=(EditText) findViewById(R.id.editText2);
-//				editText1.setText("swatiyamgar");
-//				editText2.setText("swati12345");
+				editText1.setText("Jaya.p");
+				editText2.setText("jaya12345");
 
 //                editText1.setText("vinod123");
 //                editText2.setText("password");
@@ -207,8 +207,8 @@ public class LoginActivity extends Activity{
 
 			    SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
 		        SharedPreferences.Editor editor=spf.edit();        
-		        editor.putString("UserID", "admin");
-		        editor.putString("pwd", "test");
+		       // editor.putString("UserID", "admin");
+		       // editor.putString("pwd", "test");
 		       // editor.putFloat("Target", 5000);
 		        //editor.putString("SimID", simSerial);
 		        editor.commit();

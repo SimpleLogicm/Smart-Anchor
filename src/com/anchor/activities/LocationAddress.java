@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
+
 public class LocationAddress {
     private static final String TAG = "LocationAddress";
 
@@ -30,12 +32,33 @@ public class LocationAddress {
                     if (addressList != null && addressList.size() > 0) {
                         Address address = addressList.get(0);
                         StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
-                            sb.append(address.getAddressLine(i)).append("\n");
+//                        for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+//                            sb.append(address.getAddressLine(i)).append("\n");
+//                        }
+                        sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addressList.get(0).getAddressLine(0))+" ");
+                        if(!(sb.indexOf(addressList.get(0).getLocality()) > 0))
+                        {
+                            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addressList.get(0).getLocality())+" ");
                         }
-                        sb.append(address.getLocality()).append("\n");
+
+                        if(!(sb.indexOf(addressList.get(0).getAdminArea()) > 0))
+                        {
+                            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addressList.get(0).getAdminArea())+" ");
+                        }
+
+                        if(!(sb.indexOf(addressList.get(0).getCountryName()) > 0))
+                        {
+                            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addressList.get(0).getCountryName())+" ");
+                        }
+
+                        if(!(sb.indexOf(addressList.get(0).getPostalCode()) > 0))
+                        {
+                            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addressList.get(0).getPostalCode())+" ");
+                        }
+
+                        sb.append("\n");
                         //sb.append(address.getPostalCode()).append("\n");
-                        sb.append(address.getCountryName());
+                        //sb.append(address.getCountryName());
                         result = sb.toString();
                     }
                 } catch (IOException e) {
