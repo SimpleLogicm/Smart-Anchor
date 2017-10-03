@@ -519,6 +519,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             lat = location.getLatitude();
             longi = location.getLongitude();
 
+            Global_Data.GLOvel_LATITUDE = String.valueOf(lat);
+            Global_Data.GLOvel_LONGITUDE = String.valueOf(longi);
+
 //            prefManager.setLATITUDE(String.valueOf(lat));
 //            prefManager.setLONGITUDE(String.valueOf(longi));
 
@@ -696,6 +699,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         TextView inh = (TextView) dialognew.findViewById(R.id.inh);
         TextView att_time = (TextView) dialognew.findViewById(R.id.att_time);
         TextView att_address = (TextView) dialognew.findViewById(R.id.att_address);
+        TextView att_lat = (TextView) dialognew.findViewById(R.id.att_lat);
+        TextView att_long = (TextView) dialognew.findViewById(R.id.att_long);
         Button atok = (Button) dialognew.findViewById(R.id.atok);
 
 
@@ -708,6 +713,14 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             inh.setText("OUT DETAILS");
         } else {
             inh.setText("IN DETAILS");
+        }
+
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
+            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
+        }
+
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
         }
 
 
