@@ -56,7 +56,7 @@ public class LocationAddress {
                             sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addressList.get(0).getPostalCode())+" ");
                         }
 
-                        sb.append("\n");
+                       // sb.append("\n");
                         //sb.append(address.getPostalCode()).append("\n");
                         //sb.append(address.getCountryName());
                         result = sb.toString();

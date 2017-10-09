@@ -53,6 +53,8 @@ import java.util.Locale;
 
 import cpm.simplelogic.helper.ConnectionDetector;
 
+import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
+
 
 //import org.apache.http.HttpEntity;
 //import org.apache.http.HttpResponse;
@@ -479,10 +481,17 @@ public class MyService extends Service implements LocationListener{
 									if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(g.getAddress()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(g.getlatitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(g.getlongitude()))) {
 										//String address = addressn(Double.valueOf(g.getlatitude()),Double.valueOf(g.getlongitude()));
 
-										LocationAddress locationAddress = new LocationAddress();
-										LocationAddress.getAddressFromLocation(Double.valueOf(g.getlatitude()), Double.valueOf(g.getlongitude()),
-												getApplicationContext(), new GeocoderHandler());
-										picture.put("address", Global_Data.address);
+										try
+										{
+											LocationAddress locationAddress = new LocationAddress();
+											LocationAddress.getAddressFromLocation(Double.valueOf(g.getlatitude()), Double.valueOf(g.getlongitude()),
+													getApplicationContext(), new GeocoderHandler());
+											picture.put("address", Global_Data.address);
+										}catch(Exception ex){
+											ex.printStackTrace();
+											addressn(Double.valueOf(g.getlatitude()),Double.valueOf(g.getlongitude()));
+											picture.put("address", Global_Data.address);
+										}
 									} else {
 										picture.put("address", g.getAddress());
 									}
@@ -512,12 +521,17 @@ public class MyService extends Service implements LocationListener{
 
 									try {
 										if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_address()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_latitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_longitude()))) {
-											//String address = addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
-
-											LocationAddress locationAddress = new LocationAddress();
-											LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
-													getApplicationContext(), new GeocoderHandler());
-											at_json.put("punched_at_address", Global_Data.address);
+											try
+											{
+												LocationAddress locationAddress = new LocationAddress();
+												LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
+														getApplicationContext(), new GeocoderHandler());
+												at_json.put("punched_at_address", Global_Data.address);
+											}catch(Exception ex){
+												ex.printStackTrace();
+												addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
+												at_json.put("punched_at_address", Global_Data.address);
+											}
 										} else {
 											at_json.put("punched_at_address", a.getPunched_at_address());
 										}
@@ -545,12 +559,17 @@ public class MyService extends Service implements LocationListener{
 							picture.put("longitude", Global_Data.GLOvel_LONGITUDE);
 
 							if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE))) {
-								//String address = addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
-
-								LocationAddress locationAddress = new LocationAddress();
-								LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
-										getApplicationContext(), new GeocoderHandler());
-								picture.put("address", Global_Data.address);
+								try
+								{
+									LocationAddress locationAddress = new LocationAddress();
+									LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+											getApplicationContext(), new GeocoderHandler());
+									picture.put("address", Global_Data.address);
+								}catch(Exception ex){
+									ex.printStackTrace();
+									addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
+									picture.put("address", Global_Data.address);
+								}
 							} else {
 								picture.put("address", "");
 							}
@@ -570,13 +589,17 @@ public class MyService extends Service implements LocationListener{
 
 									try {
 										if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_address()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_latitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_longitude()))) {
-											//String address = addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
-
-											LocationAddress locationAddress = new LocationAddress();
-											LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
-													getApplicationContext(), new GeocoderHandler());
-
-											at_json.put("punched_at_address", Global_Data.address);
+											try
+											{
+												LocationAddress locationAddress = new LocationAddress();
+												LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
+														getApplicationContext(), new GeocoderHandler());
+												at_json.put("punched_at_address", Global_Data.address);
+											}catch(Exception ex){
+												ex.printStackTrace();
+												addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
+												at_json.put("punched_at_address", Global_Data.address);
+											}
 										} else {
 											at_json.put("punched_at_address", a.getPunched_at_address());
 										}
@@ -845,19 +868,29 @@ public class MyService extends Service implements LocationListener{
 
 		try {
 			addresses = geocoder.getFromLocation(latitude, longitude, 1);
-			String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-			sb.append(address).append(" ");
-			String city = addresses.get(0).getLocality();
-			sb.append(city).append(" ");
-			String state = addresses.get(0).getAdminArea();
-			sb.append(state).append(" ");
-			String country = addresses.get(0).getCountryName();
-			sb.append(country).append(" ");
-			String postalCode = addresses.get(0).getPostalCode();
-			sb.append(postalCode).append(" ");
-			String knownName = addresses.get(0).getFeatureName();
-			//sb.append(knownName).append(" ");
-			// Here 1 represent max location result to returned, by documents it recommended 1 to 5
+			sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0))+" ");
+			if(!(sb.indexOf(addresses.get(0).getLocality()) > 0))
+			{
+				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality())+" ");
+			}
+
+			if(!(sb.indexOf(addresses.get(0).getAdminArea()) > 0))
+			{
+				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea())+" ");
+			}
+
+			if(!(sb.indexOf(addresses.get(0).getCountryName()) > 0))
+			{
+				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName())+" ");
+			}
+
+			if(!(sb.indexOf(addresses.get(0).getPostalCode()) > 0))
+			{
+				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode())+" ");
+			}
+			//String knownName = addresses.get(0).getFeatureName();
+
+			Global_Data.address = sb.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
