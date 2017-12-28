@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class Global_Data {
 
-    private int mMessageSentParts;
-    private int mMessageSentTotalParts;
-    private int mMessageSentCount;
+    public static String Varient_value_add_flag = "";
+    public static String Search_Category_name = "";
+    public static String Search_Product_name = "";
     public static Boolean app_sound = false;
     public static String New_Label="";
     public static String Var_Label="";

@@ -40,7 +40,6 @@ import com.anchor.model.Category;
 import com.anchor.model.Product;
 import com.anchor.model.Scheme;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,6 +109,10 @@ public class NewOrderActivity extends BaseActivity {
 
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.new_order_new);
+
+		Global_Data.Search_Category_name = "";
+
+		Global_Data.Search_Product_name = "";
 
 		// create a instance of SQLite Database
 	     loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -198,76 +201,83 @@ public class NewOrderActivity extends BaseActivity {
 			 @Override
 			  public void onItemClick(AdapterView<?> parent, View arg1, int pos,
 									long id) {
-				//Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
+				 //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
 
-				Global_Data.hideSoftKeyboard(NewOrderActivity.this);
-				editTextQuantity.setFocusableInTouchMode(true);
-				editTextQuantity.setEnabled(true);
+				 Global_Data.hideSoftKeyboard(NewOrderActivity.this);
 
-				List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
-				//results2.add("Select Variant");
-				for (Local_Data cn1 : cont) {
-					String str_var = ""+cn1.getStateName();
-					str_var1 = ""+cn1.getMRP();
-					String str_var2 = ""+cn1.get_Description();
-					String str_var3 = ""+cn1.get_Claims();
-					Global_Data.amnt= ""+cn1.get_Description();
-					Global_Data.amnt1= ""+cn1.get_Claims();
-					product_code = cn1.getCode();
+				 if (Product_Variant.getText().toString().trim().equalsIgnoreCase("Multiselect")) {
+					 Intent intent = new Intent(getApplicationContext(), ProductAll_Varients.class);
+					 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+					 //startActivityForResult(intent,SIGNATURE_ACTIVITY);
+					 NewOrderActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+					 startActivity(intent);
+				 } else {
+				 editTextQuantity.setFocusableInTouchMode(true);
+				 editTextQuantity.setEnabled(true);
 
-					categ_name = cn1.getCategory();
-					subcateg_name = cn1.getSubcateg();
+				 List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
+				 //results2.add("Select Variant");
+				 for (Local_Data cn1 : cont) {
+					 String str_var = "" + cn1.getStateName();
+					 str_var1 = "" + cn1.getMRP();
+					 String str_var2 = "" + cn1.get_Description();
+					 String str_var3 = "" + cn1.get_Claims();
+					 Global_Data.amnt = "" + cn1.get_Description();
+					 Global_Data.amnt1 = "" + cn1.get_Claims();
+					 product_code = cn1.getCode();
 
-					editTextRP.setText(str_var);
-					editTextMRP.setText(str_var1);
-					txtPrice.setText("Total Price : "+"");
+					 categ_name = cn1.getCategory();
+					 subcateg_name = cn1.getSubcateg();
 
-					if (editTextQuantity.getText().toString().length() != 0) {
-						if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null")  && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-						{
-							long final_mrp = (Long.valueOf(editTextMRP.getText().toString()))*(Long.valueOf(editTextQuantity.getText().toString().trim()));
-							txtPrice.setText("Total Price : "+final_mrp);
-							price = String.valueOf(final_mrp);
+					 editTextRP.setText(str_var);
+					 editTextMRP.setText(str_var1);
+					 txtPrice.setText("Total Price : " + "");
 
-							// txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-						}
-						else
-						{
-							if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null")  && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-							{
-								// Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-								// txtPrice.setText("Total Price : "+final_mrp);
-								// price = String.valueOf(final_mrp);
-								//txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-							}
-						}
-					}
-				}
+					 if (editTextQuantity.getText().toString().length() != 0) {
+						 if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
+							 long final_mrp = (Long.valueOf(editTextMRP.getText().toString())) * (Long.valueOf(editTextQuantity.getText().toString().trim()));
+							 txtPrice.setText("Total Price : " + final_mrp);
+							 price = String.valueOf(final_mrp);
 
-				adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				spnCategory.setAdapter(adapter_state1);
-				//spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
+							 // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+						 } else {
+							 if (!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
+								 // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
+								 // txtPrice.setText("Total Price : "+final_mrp);
+								 // price = String.valueOf(final_mrp);
+								 //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+							 }
+						 }
+					 }
+				 }
 
-				adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-				spnProduct.setAdapter(adapter_state2);
-				//spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
+				 adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				 spnCategory.setAdapter(adapter_state1);
+				 //spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
 
+				 adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+				 spnProduct.setAdapter(adapter_state2);
+				 //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
 
 
-				if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)){
-					int spinnerPosition = adapter_state1.getPosition(categ_name);
-					spnCategory.setSelection(spinnerPosition);
-				}
+				 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)) {
+					 int spinnerPosition = adapter_state1.getPosition(categ_name);
+					 spnCategory.setSelection(spinnerPosition);
+				 }
 
-					Scheme_array.clear();
-				    Scheme_array.add("Select Scheme");
+				 Scheme_array.clear();
+				 Scheme_array.add("Select Scheme");
 
-					List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(product_code.trim());
-					//results2.add("Select Variant");
-					for (Local_Data s : scheme_name) {
-						Scheme_array.add(s.getSche_disname());
-						scheme_namen = s.getSche_disname().toString();
-					}
+				 List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(product_code.trim());
+				 //results2.add("Select Variant");
+				 for (Local_Data s : scheme_name) {
+					 Scheme_array.add(s.getSche_disname());
+					 scheme_namen = s.getSche_disname().toString();
+				 }
+
+				  //editTextQuantity.setFocusableInTouchMode(true);
+
+			  }
 
 //					Discount_Adapter = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, Scheme_array);
 //					Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
@@ -464,6 +474,7 @@ public class NewOrderActivity extends BaseActivity {
 							 //List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_ID(Global_Data.GLOVEL_PRODUCT_ID);
 								 List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_BYNAME(spnCategory.getSelectedItem().toString().trim(),parent.getItemAtPosition(pos).toString().trim());
 							// results2.add("Select Variant");
+							 results2.add("Multiselect");
 							 for (Local_Data cn : contacts3)
 							 {
 							 str_variant = ""+cn.getStateName();
@@ -471,6 +482,10 @@ public class NewOrderActivity extends BaseActivity {
 							 results2.add(str_variant);
 
 							 }
+
+								 Global_Data.Search_Category_name = spnCategory.getSelectedItem().toString().trim();
+
+								 Global_Data.Search_Product_name = parent.getItemAtPosition(pos).toString().trim();
 
 								 ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewOrderActivity.this,android.R.layout.simple_spinner_dropdown_item,results2);
 								 Product_Variant.setThreshold(1);// will start working from
@@ -1215,6 +1230,9 @@ public class NewOrderActivity extends BaseActivity {
 		 Global_Data.GLOVEL_LONG_DESC = "";
 		 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
 		 Global_Data.GLOVEL_ITEM_MRP = "";
+		Global_Data.Search_Category_name = "";
+
+		Global_Data.Search_Product_name = "";
 		// Global_Data.productList.clear();
 
 		 if(Global_Data.PREVIOUS_ORDER_BACK_FLAG.equalsIgnoreCase("TRUE"))

@@ -1,0 +1,122 @@
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    card_view:cardCornerRadius="4dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+
+        >
+
+        <LinearLayout
+            android:id="@+id/abc"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/grey_secondry"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Productnamerpmrp"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@color/grey_secondry"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text=""
+                android:textColor="@android:color/black"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/mrpvnew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:text="MRP "
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/productquantityp"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/abc"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/squareedittext"
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="ENTER QUANTITY"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="9"
+            android:padding="5dp"
+
+
+            android:text=""
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/totalpricep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/productquantityp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+
+            android:layout_toRightOf="@+id/productquantityp"
+            android:text="PRICE : "
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/pidp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.36"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text=""
+            android:textSize="17dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/mrpv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.40"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textSize="17dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/rpv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.40"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textSize="17dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

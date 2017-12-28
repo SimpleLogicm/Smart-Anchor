@@ -595,6 +595,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 }
 
             }
+            else
+            {
+                Global_Data.address = "";
+            }
 
 
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));

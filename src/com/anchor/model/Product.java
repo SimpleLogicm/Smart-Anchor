@@ -18,10 +18,10 @@ public class Product implements Parcelable {
 	}
 	
 	
-	public Product(String category,String subcategory, String productName, String productSpec,
-			String productQuantity, String productDeleiveryQuantity,
-			String productScheme, String productrp, String productmrp,
-			String producttotalPrice) {
+	public Product(String category, String subcategory, String productName, String productSpec,
+                   String productQuantity, String productDeleiveryQuantity,
+                   String productScheme, String productrp, String productmrp,
+                   String producttotalPrice) {
 		super();
 		this.category = category;
 		this.subcategory = subcategory;
@@ -91,10 +91,10 @@ public class Product implements Parcelable {
 
 	
 	public Product(String category, String productName, String productSpec,
-			String productQuantity, String productDeleiveryQuantity,
-			String productScheme, String productrp, String productmrp,
-			String producttotalPrice, int categoryID, int productID,
-			int schemeID) {
+                   String productQuantity, String productDeleiveryQuantity,
+                   String productScheme, String productrp, String productmrp,
+                   String producttotalPrice, int categoryID, int productID,
+                   int schemeID) {
 		super();
 		this.category = category;
 		this.productName = productName;
@@ -244,7 +244,7 @@ public class Product implements Parcelable {
 		dest.writeInt(schemeID);
 	}
 
-	public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+	public static final Creator CREATOR = new Creator() {
 		public Product createFromParcel(Parcel in) {
 			return new Product(in);
 		}

@@ -190,11 +190,12 @@ public class LoginActivity extends Activity{
 				buttonReg=(Button) findViewById(R.id.buttonReg);
 				editText1=(EditText) findViewById(R.id.editText1);
 				editText2=(EditText) findViewById(R.id.editText2);
-//				editText1.setText("Jaya.p");
-//				editText2.setText("jaya12345");
 
-                editText1.setText("swatiyamgar");
-                editText2.setText("swati12345");
+				editText1.setText("Jaya");
+				editText2.setText("jaya12345");
+
+//                editText1.setText("swatiyamgar");
+//                editText2.setText("swati12345");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);

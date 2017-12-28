@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -19,6 +20,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,12 +34,12 @@ import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -109,7 +111,7 @@ public class CaptureSignature extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.signature);
         
@@ -147,8 +149,8 @@ public class CaptureSignature extends BaseActivity {
         order_detail2 = (EditText) findViewById(R.id.order_detail2);
         get_icon = (ImageView) findViewById(R.id.get_icon);
         order_type = (Spinner) findViewById(R.id.order_type);
-        details1 = (TextView) findViewById(R.id.details1);
-        details2 = (TextView) findViewById(R.id.details2);
+        //details1 = (TextView) findViewById(R.id.details1);
+       // details2 = (TextView) findViewById(R.id.details2);
         //order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
         //get_icon.setBackgroundColor(Color.parseColor("#414042"));
         Intent i=getIntent();
@@ -165,9 +167,9 @@ public class CaptureSignature extends BaseActivity {
 
         if(detail1str.length()>0)
         {
-            details1.setText(detail1str);
+            order_detail1.setHint(detail1str);
         }else{
-               details1.setText("Detail 1");
+            order_detail1.setText("Detail 1");
         }
 
         InputFilter[] Textfilters = new InputFilter[1];
@@ -283,9 +285,9 @@ public class CaptureSignature extends BaseActivity {
 
         if(detail2str.length()>0)
         {
-            details2.setText(detail2str);
+            order_detail2.setHint(detail2str);
         }else{
-            details2.setText("Detail 2");
+            order_detail2.setText("Detail 2");
         }
 
     	SharedPreferences sp1 = CaptureSignature.this
@@ -594,6 +596,50 @@ public class CaptureSignature extends BaseActivity {
 				return false;
 			}
 		});
+
+        ActionBar mActionBar = getActionBar();
+        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+        // mActionBar.setDisplayShowHomeEnabled(false);
+        // mActionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+        mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
+
+        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+        // SharedPreferences sp = CaptureSignature.this.getSharedPreferences("SimpleLogic", 0);
+
+//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+//        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+//		}
+        try {
+            int target = (int) Math.round(sp.getFloat("Target", 0));
+            int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+            Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+            if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+                int age = (int) Math.round(age_float);
+
+                todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+            } else {
+                int age = (int) Math.round(age_float);
+
+                todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
+//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+            todaysTarget.setText("Today's Target Acheived");
+        }
+
+        mActionBar.setCustomView(mCustomView);
+        mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
 
     }
  
