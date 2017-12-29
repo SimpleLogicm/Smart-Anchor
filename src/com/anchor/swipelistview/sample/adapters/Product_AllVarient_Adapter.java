@@ -102,6 +102,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             holder.productquantity = (EditText) convertView.findViewById(R.id.productquantityp);
             holder.totalprice = (TextView) convertView.findViewById(R.id.totalpricep);
             holder.mrpv = (TextView) convertView.findViewById(R.id.mrpv);
+            holder.mrpvs = (TextView) convertView.findViewById(R.id.mrpvs);
             holder.mrpvnew = (TextView) convertView.findViewById(R.id.mrpvnew);
             holder.rpv = (TextView) convertView.findViewById(R.id.rpv);
             // holder.rpvnew = (TextView) convertView.findViewById(R.id.rpvnew);
@@ -127,7 +128,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
         holder.mrpv.setText(getData.get(TAG_PRICE));
         holder.rpv.setText(getData.get(TAG_RP));
 
-        holder.mrpvnew.setText("[MRP] : " + getData.get(TAG_PRICE) + "\n" + "[RP] : " + getData.get(TAG_RP));
+        holder.mrpvnew.setText("[MRP] : " + getData.get(TAG_PRICE));
+        holder.mrpvs.setText("[RP] : " + getData.get(TAG_RP));
         //holder.rpvnew.setText("RP : " + getData.get(TAG_RP));
 
         holder.productquantity.setText(list1.get(position), TextView.BufferType.EDITABLE);
@@ -188,7 +190,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     }
 
     static class ViewHolder {
-        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew;
+        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs;
         EditText productquantity;
         TextView totalprice;
         public MutableWatcher1 mWatcher1;

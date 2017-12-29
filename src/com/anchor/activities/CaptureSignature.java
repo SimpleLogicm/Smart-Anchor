@@ -98,12 +98,14 @@ public class CaptureSignature extends BaseActivity {
     int userID,cityID,beatID,retailerID,distID;
     TextView details1,details2;
     Calendar myCalendar;
+    TextView txtWelcomeUser;
     //private String uniqueId;
     private EditText yourName,order_detail1,order_detail2;
-    Spinner order_type;
-    ArrayAdapter<String> dataAdapter_order_type;
+    Spinner order_type,shipment_pri;
+    ArrayAdapter<String> dataAdapter_order_type,dataAdapter_shipment_pri;
     List<String> list_order_type;
     private ArrayList<String> results_order_type = new ArrayList<String>();
+    private ArrayList<String> results_shipment_pri = new ArrayList<String>();
     float totalPrice;
 	public String order="",retailer_mobile="",retailer_emailID="",dist_mobile="",dist_emailID="",retailer_code="",ret_Name="";
  
@@ -130,7 +132,8 @@ public class CaptureSignature extends BaseActivity {
         //uniqueId = serailNo+"_"+getTodaysDate() + "_" + getCurrentTime();
         //current = uniqueId + ".png";
         //mypath= new File(directory,current);
- 
+
+        txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
         mContent = (LinearLayout) findViewById(R.id.linearLayout);
         mSignature = new signature(this, null);
         mSignature.setBackgroundColor(Color.WHITE);
@@ -149,6 +152,7 @@ public class CaptureSignature extends BaseActivity {
         order_detail2 = (EditText) findViewById(R.id.order_detail2);
         get_icon = (ImageView) findViewById(R.id.get_icon);
         order_type = (Spinner) findViewById(R.id.order_type);
+        shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
         //details1 = (TextView) findViewById(R.id.details1);
        // details2 = (TextView) findViewById(R.id.details2);
         //order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -162,6 +166,18 @@ public class CaptureSignature extends BaseActivity {
 //		}
 
         // for label change
+
+        String user_name = "";
+        if(!Global_Data.USER_FIRST_NAME.equalsIgnoreCase("null"))
+        {
+            user_name = Global_Data.USER_FIRST_NAME.trim();
+            if(!Global_Data.USER_LAST_NAME.equalsIgnoreCase("null"))
+            {
+                user_name +=  " " + Global_Data.USER_LAST_NAME.trim();
+            }
+        }
+
+        txtWelcomeUser.setText(user_name+": 023");
         SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
         detail1str=spf1.getString("var_detail1", "");
 
@@ -320,6 +336,18 @@ public class CaptureSignature extends BaseActivity {
         dataAdapter_order_type = new ArrayAdapter<String>(this, R.layout.spinner_item, results_order_type);
         dataAdapter_order_type.setDropDownViewResource(R.layout.spinner_item);
         order_type.setAdapter(dataAdapter_order_type);
+
+        results_shipment_pri.clear();
+
+        results_shipment_pri.add("Shipment Priority");
+        results_shipment_pri.add("High");
+        results_shipment_pri.add("Standard");
+        results_shipment_pri.add("Low");
+
+        dataAdapter_shipment_pri = new ArrayAdapter<String>(this, R.layout.spinner_item, results_shipment_pri);
+        dataAdapter_shipment_pri.setDropDownViewResource(R.layout.spinner_item);
+        shipment_pri.setAdapter(dataAdapter_shipment_pri);
+
 
         String cc_code = "";
 

@@ -13,7 +13,7 @@
         android:label="Tests for com.svenkapudija.imageresizer.test"
         android:targetPackage="com.svenkapudija.imageresizer.test" />
 
-    <application>
+    <application android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
     </application>
 

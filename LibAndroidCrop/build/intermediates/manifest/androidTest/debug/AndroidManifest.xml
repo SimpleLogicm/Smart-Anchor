@@ -13,7 +13,9 @@
         android:label="Tests for com.soundcloud.android.crop.test"
         android:targetPackage="com.soundcloud.android.crop.test" />
 
-    <application android:allowBackup="true" >
+    <application
+        android:allowBackup="true"
+        android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
     </application>
 
