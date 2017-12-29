@@ -34,12 +34,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.anchor.animation.ActivitySwitcher;
 import com.anchor.model.Category;
 import com.anchor.model.Product;
 import com.anchor.model.Scheme;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,8 +58,9 @@ public class NewOrderActivity extends BaseActivity {
 	String scheme_code = "";
 	String scheme_namen = "";
 	LoginDataBaseAdapter loginDataBaseAdapter;
+	TextView txtWelcomeUser;
 
-	Spinner spnCategory, spnProductSpec, spnScheme, spnProduct;
+	Spinner spnCategory, spnProductSpec, spnScheme, spnProduct, spnBu, spnBusinessDiv;
 	TextView editTextRP, editTextMRP, txtPrice, txtDeleiveryQuantity, txt_rp;
 	EditText txtDeleiveryQuantity1;
 	static int quantity = 0, deleiveryQuantity = 0;
@@ -74,7 +73,7 @@ public class NewOrderActivity extends BaseActivity {
 	Button buttonAddMOre, buttonPreviewOrder;
 	AutoCompleteTextView autoCompleteTextView1;
 	//ArrayList<DatabaseModel> dataCategories,dataVarients;
-	ArrayAdapter<String> dataAdapterCategory,dataAdapterProductSpec,dataAdapterProduct;
+	ArrayAdapter<String> dataAdapterCategory,dataAdapterProductSpec,dataAdapterProduct,dataAdapterBu,dataAdapterBd;
 	//ArrayList productList = new ArrayList();
 	 List<String> listProduct,listProductSpec;
 	 List<String> listScheme;
@@ -87,8 +86,10 @@ public class NewOrderActivity extends BaseActivity {
 	 private ArrayList<String> results = new ArrayList<String>();
 	 private ArrayList<String> results1 = new ArrayList<String>();
 	 private ArrayList<String> results2 = new ArrayList<String>();
-	private ArrayList<String> result_product = new ArrayList<String>();
+	 private ArrayList<String> result_product = new ArrayList<String>();
 	 private ArrayList<String> Scheme_array = new ArrayList<String>();
+     private ArrayList<String> result_bu = new ArrayList<String>();
+	 private ArrayList<String> result_bussiness = new ArrayList<String>();
 
 	 ArrayAdapter<String> adapter_state1;
 	 ArrayAdapter<String> adapter_state2;
@@ -126,15 +127,20 @@ public class NewOrderActivity extends BaseActivity {
 			//spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
 		    Product_Variant = (AutoCompleteTextView) findViewById(R.id.Product_Variant);
 			spnScheme = (Spinner) findViewById(R.id.spnScheme1);
+		    spnBu = (Spinner) findViewById(R.id.spnBu);
+		    spnBusinessDiv = (Spinner) findViewById(R.id.spnBusinessDiv);
 
 			editTextRP = (TextView) findViewById(R.id.editTextRP);
 			editTextMRP = (TextView) findViewById(R.id.editTextMRP);
 		    txt_rp = (TextView) findViewById(R.id.textRP);
 			editTextQuantity = (EditText) findViewById(R.id.editTextQuantity1);
-		mpplayer = new MediaPlayer();
+		    txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
+
+		    mpplayer = new MediaPlayer();
 		// for label RP change
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
 		String rpstr=spf1.getString("var_rp", "");
+
 		if(rpstr.length()>0)
 		{
 			txt_rp.setText(rpstr);
@@ -142,11 +148,39 @@ public class NewOrderActivity extends BaseActivity {
 			txt_rp.setText("RP");
 		}
 
+		String user_name = "";
+		if(!Global_Data.USER_FIRST_NAME.equalsIgnoreCase("null"))
+		{
+			user_name = Global_Data.USER_FIRST_NAME.trim();
+			if(!Global_Data.USER_LAST_NAME.equalsIgnoreCase("null"))
+			{
+				user_name +=  " " + Global_Data.USER_LAST_NAME.trim();
+			}
+		}
+
+		txtWelcomeUser.setText(user_name+":023");
+
 		SharedPreferences sound = NewOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
 		Global_Data.sound_file = sound.getString("var_addsound", "");
 
 		SharedPreferences spf12 = NewOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
 		Global_Data.app_sound = spf12.getBoolean("var_addmore", false);
+
+		//for BU
+		result_bu.clear();
+		result_bu.add("Select BU");
+
+		dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
+		dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+		spnBu.setAdapter(dataAdapterBu);
+
+		//for Business Division
+		result_bussiness.clear();
+		result_bussiness.add("Select Business Division");
+
+		dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+		dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+		spnBusinessDiv.setAdapter(dataAdapterBd);
 
 		Scheme_array.clear();
 		Scheme_array.add("Select Scheme");
@@ -154,6 +188,7 @@ public class NewOrderActivity extends BaseActivity {
 		Discount_Adapter = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, Scheme_array);
 		Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
 		spnScheme.setAdapter(Discount_Adapter);
+
 
 		results2.clear();
 		List<Local_Data> contacts2 = dbvoc.getAllVariant();
@@ -365,7 +400,7 @@ public class NewOrderActivity extends BaseActivity {
 
 	      //Reading all
 	         List<Local_Data> contacts1 = dbvoc.HSS_DescriptionITEM();
-	         results1.add("Select Category");
+	         results1.add("Select Business Category");
 	          for (Local_Data cn : contacts1)
 	          {
 	        	  if(!cn.getStateName().equalsIgnoreCase("") && !cn.getStateName().equalsIgnoreCase(" "))
@@ -389,7 +424,7 @@ public class NewOrderActivity extends BaseActivity {
 				}
 
 
-		          results.add("Select Product");
+		          results.add("Select Brand");
 		          adapter_state2 = new ArrayAdapter<String>(this, R.layout.spinner_item, results);
 		          adapter_state2.setDropDownViewResource(R.layout.spinner_item);
 				  spnProduct.setAdapter(adapter_state2);
@@ -408,7 +443,7 @@ public class NewOrderActivity extends BaseActivity {
 //				this, R.layout.spinner_item, listScheme);
 
 		final List<String> listCategory = new ArrayList<String>();
-		listCategory.add("Select Category");
+		listCategory.add("Select Business Category");
 
 		  adapter_state1 = new ArrayAdapter<String>(this,R.layout.spinner_item, results1);
 
@@ -427,20 +462,20 @@ public class NewOrderActivity extends BaseActivity {
 					   if(check_product>1)
 					   {
 
-						   if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) {
+						   if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Business Category")) {
 
 							//Toast.makeText(getApplicationContext(), "Please Select Category", Toast.LENGTH_LONG).show();
 
 							 categ_name = "";
 							 subcateg_name = "";
-							 Toast toast = Toast.makeText(getApplicationContext(),"Please Select Category",Toast.LENGTH_LONG);
+							 Toast toast = Toast.makeText(getApplicationContext(),"Please Select Business Category",Toast.LENGTH_LONG);
 							 toast.setGravity(Gravity.CENTER, 0, 0);
 							 toast.show();
 
 						 }
 					    else
 					     if (parent.getItemAtPosition(pos).toString()
-								.equalsIgnoreCase("Select Product"))
+								.equalsIgnoreCase("Select Brand"))
 					     {
 
 							 categ_name = "";
@@ -615,14 +650,14 @@ public class NewOrderActivity extends BaseActivity {
 						toast.show();
 					}
 					*/
-					if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) {
-						Toast toast = Toast.makeText(NewOrderActivity.this,"Please Select Category", Toast.LENGTH_SHORT);
+					if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Business Category")) {
+						Toast toast = Toast.makeText(NewOrderActivity.this,"Please Select Business Category", Toast.LENGTH_SHORT);
 						toast.setGravity(Gravity.CENTER, 0, 0);
 						toast.show();
 					}
 
-					else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) {
-							Toast toast = Toast.makeText(NewOrderActivity.this,"Please Select Product", Toast.LENGTH_SHORT);
+					else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Brand")) {
+							Toast toast = Toast.makeText(NewOrderActivity.this,"Please Select Brand", Toast.LENGTH_SHORT);
 							toast.setGravity(Gravity.CENTER, 0, 0);
 							toast.show();
 						}
@@ -837,10 +872,10 @@ public class NewOrderActivity extends BaseActivity {
 									check_ProductSpec = 0;
 									editTextQuantity.setText("");
 									editTextQuantity.setEnabled(false);
-									spnCategory.setSelection(adapter_state1.getPosition("Select Category"));
+									spnCategory.setSelection(adapter_state1.getPosition("Select Business Category"));
 									// spnProductSpec.setSelection(adapter_state3.getPosition("Select Variant"));
 									Product_Variant.setText("");
-									spnProduct.setSelection(adapter_state2.getPosition("Select Product"));
+									spnProduct.setSelection(adapter_state2.getPosition("Select Brand"));
 									spnScheme.setSelection(Discount_Adapter.getPosition("Select Scheme"));
 //									spnScheme.setEnabled(false);
 									editTextMRP.setText("");
@@ -1011,13 +1046,13 @@ public class NewOrderActivity extends BaseActivity {
 //                 if (Global_Data.GLOVEL_CATEGORY_SELECTION.equalsIgnoreCase(""))
 //                 {	 
 					if (parent.getItemAtPosition(pos).toString()
-							.equalsIgnoreCase("Select Category")) {
+							.equalsIgnoreCase("Select Business Category")) {
 
 						categ_name = "";
 						subcateg_name = "";
 
 						results.clear();
-						results.add("Select Product");
+						results.add("Select Brand");
 						adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
 				        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
 						spnProduct.setAdapter(adapter_state2);
@@ -1042,7 +1077,7 @@ public class NewOrderActivity extends BaseActivity {
 						Product_Variant.setTextColor(Color.BLACK);
 						Product_Variant.setText("");
 
-						Toast toast = Toast.makeText(NewOrderActivity.this, "Please Select Category", Toast.LENGTH_LONG);
+						Toast toast = Toast.makeText(NewOrderActivity.this, "Please Select Business Category", Toast.LENGTH_LONG);
 						toast.setGravity(Gravity.CENTER, 0, 0);
 						toast.show();
 
@@ -1071,7 +1106,7 @@ public class NewOrderActivity extends BaseActivity {
 				          	results.clear();
 							 //List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_ID(Global_Data.GLOVEL_CATEGORY_ID);
 						    List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_category_name(parent.getItemAtPosition(pos).toString().trim());
-					         results.add("Select Product");
+					         results.add("Select Brand");
 					          for (Local_Data cn : contacts22) {
 					        	String str_product = ""+cn.getStateName();
 					        	//Global_Data.local_pwd = ""+cn.getPwd();

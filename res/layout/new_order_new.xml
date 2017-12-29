@@ -3,13 +3,27 @@
     android:layout_height="fill_parent"
     android:fillViewport="true"
     android:orientation="vertical" >
+
 <LinearLayout
      android:id="@+id/containerNewOrder"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    
-     <!--<TextView-->
+
+    <TextView
+        android:id="@+id/txtWelcomeUser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:background="#BDBDBD"
+        android:gravity="center"
+        android:textSize="15sp"  >
+    </TextView>
+
+
+    <!--<TextView-->
         <!--android:id="@+id/txtWelcomeUser"-->
         <!--android:layout_width="fill_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -24,11 +38,33 @@
     <!--</TextView>-->
 
     <Spinner
+        android:id="@+id/spnBu"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Select BU"
+        android:layout_marginTop="50dp"
+        android:inputType="textPersonName"
+        android:paddingTop="10dp" >
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/spnBusinessDiv"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:hint="Select Business Division"
+        android:inputType="textPassword"
+        android:paddingTop="10dp" />
+
+    <Spinner
         android:id="@+id/spnCategory"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="Select Category"
+        android:layout_marginTop="20dp"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
     </Spinner>
@@ -38,7 +74,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:hint="Select Product"
         android:inputType="textPassword"
         android:paddingTop="10dp" />
@@ -67,15 +103,13 @@
         android:completionThreshold="1"
         android:imeOptions="actionDone"
         android:ems="10"
+        android:visibility="gone"
         android:singleLine="true"
         android:textSize="15dp"
         android:drawableRight="@drawable/search_icon"
         android:hint="Search Variant" >
         <requestFocus />
     </AutoCompleteTextView>
-
-
-
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -84,6 +118,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal"
         android:paddingTop="10dp"
          >
@@ -131,6 +166,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:maxLength="9"
+        android:visibility="gone"
         android:hint="Quantity"
         android:inputType="number"
         android:paddingTop="10dp" >
@@ -138,7 +174,7 @@
 
      <Spinner
         android:id="@+id/spnScheme1"
-
+        android:visibility="gone"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -169,6 +205,7 @@
         android:layout_marginTop="10dp"
         android:text="Total Price : "
         android:paddingTop="10dp"
+         android:visibility="gone"
         android:textSize="17dp" >
     </TextView>
     
@@ -184,6 +221,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="horizontal" >
 
             <Button

@@ -150,7 +150,6 @@ public class Home extends Fragment {
         order.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
 				List<Local_Data> contacts = dbvoc.checkCustomer();
 				if(contacts.size() <= 0)
 		        {

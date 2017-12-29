@@ -84,7 +84,7 @@ public class LoginActivity extends Activity{
 	InputStream inputStream;
 	SessionManager session;
 	Button buttonLogin,buttonReg;
-	EditText editText1,editText2;
+	EditText editText1,editText2,emp_code;
 	TelephonyManager manager;
 	String simSerial="f8a0f77d096fddc3",firstName="",lastName="";
 	User u;
@@ -190,9 +190,13 @@ public class LoginActivity extends Activity{
 				buttonReg=(Button) findViewById(R.id.buttonReg);
 				editText1=(EditText) findViewById(R.id.editText1);
 				editText2=(EditText) findViewById(R.id.editText2);
+		        emp_code=(EditText) findViewById(R.id.emp_code);
 
-				editText1.setText("Jaya");
-				editText2.setText("jaya12345");
+//				editText1.setText("Jaya");
+//				editText2.setText("jaya12345");
+
+		editText1.setText("sujit");
+		editText2.setText("sujit12345");
 
 //                editText1.setText("swatiyamgar");
 //                editText2.setText("swati12345");

@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="14dp"
         android:src="@drawable/anchor_logo" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:textSize="15dp"
         android:textColor="#8B0000"
         android:textStyle="bold"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:text="Smart Anchor" />
 
     <EditText
@@ -43,6 +43,15 @@
         android:fontFamily="sans-serif"
         android:hint="Password"
         android:inputType="textPassword"
+        android:paddingTop="15dp" />
+
+    <EditText
+        android:id="@+id/emp_code"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Employee Code"
         android:paddingTop="15dp" />
 
     <TextView
@@ -92,7 +101,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical" >
 
         <TextView

@@ -26,6 +26,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 	ConnectionDetector cd;
 	Boolean isInternetPresent = false;
 	TextView schedule_txt,textView1sf;
+	TextView txtWelcomeUser;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) { 
@@ -41,8 +42,19 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		C_profile = (ImageView) findViewById(R.id.C_profile);
 		schedule_txt = (TextView) findViewById(R.id.schedule_txt);
 		textView1sf = (TextView) findViewById(R.id.textView1sf);
-
+		txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
 		cd = new ConnectionDetector(getApplicationContext());
+		String user_name = "";
+		if(!Global_Data.USER_FIRST_NAME.equalsIgnoreCase("null"))
+		{
+			user_name = Global_Data.USER_FIRST_NAME.trim();
+			if(!Global_Data.USER_LAST_NAME.equalsIgnoreCase("null"))
+			{
+				user_name +=  " " + Global_Data.USER_LAST_NAME.trim();
+			}
+		}
+
+		txtWelcomeUser.setText(user_name+":023");
 
 		// for label change
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
