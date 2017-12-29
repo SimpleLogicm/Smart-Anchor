@@ -69,6 +69,7 @@ public class LoginActivity extends Activity{
 	ProgressDialog progress;
 	private Bitmap bitmap = null;
 	Handler h;
+	public static final String Code = "codeKey";
 	String devid, usr_name, pwd, usr_email;
 	ArrayList<HashMap<String, String>> arraylist1, arraylist2;
 	ConnectivityManager cn;
@@ -93,6 +94,8 @@ public class LoginActivity extends Activity{
 	LoginDataBaseAdapter loginDataBaseAdapter;
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
     ImageView logo_img;
+	SharedPreferences sharedpreferences;
+	public static final String mypreference = "mypref";
 
 	@SuppressLint("InlinedApi")
 	@Override
@@ -191,6 +194,12 @@ public class LoginActivity extends Activity{
 				editText1=(EditText) findViewById(R.id.editText1);
 				editText2=(EditText) findViewById(R.id.editText2);
 		        emp_code=(EditText) findViewById(R.id.emp_code);
+
+		sharedpreferences = getSharedPreferences(mypreference,
+				Context.MODE_PRIVATE);
+		if (sharedpreferences.contains(Code)) {
+			emp_code.setText(sharedpreferences.getString(Code, ""));
+		}
 
 //				editText1.setText("Jaya");
 //				editText2.setText("jaya12345");
@@ -348,6 +357,15 @@ public class LoginActivity extends Activity{
 						toast.setGravity(Gravity.CENTER, 0, 0);
 						toast.show();
 	                }
+					else
+					if(CheckNullValue.findNullValue(emp_code.getText().toString().trim()) == true)
+					{
+						// Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+
+						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Employee Code", Toast.LENGTH_LONG);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+					}
 	                else
 	                {
 //	                    if(switchCompat.isChecked())
@@ -1108,6 +1126,12 @@ public class LoginActivity extends Activity{
 	        dialog.setCancelable(false);
 	        dialog.show();
 
+		String empl_code=emp_code.getText().toString();
+
+		SharedPreferences.Editor editor = sharedpreferences.edit();
+		editor.putString(Code, empl_code);
+		editor.commit();
+
 			new LOGINOperation().execute(username,passwordnew);
 	    }
 
@@ -1126,7 +1150,6 @@ public class LoginActivity extends Activity{
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
 					editor.putString("USER_EMAIL", cn.getuser_email());
-
 					editor.commit();
 
 					Global_Data.GLOvel_USER_EMAIL = cn.getuser_email();
