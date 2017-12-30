@@ -6848,5 +6848,39 @@ public class DataBaseHelper extends SQLiteOpenHelper
         db.endTransaction();
     }
 
+
+
+
+    public boolean isColumnExists(String table, String column) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("PRAGMA table_info("+ table +")", null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                if (column.equalsIgnoreCase(name)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void alter_Columns(String table_name,String column_name) {
+
+        String selectQuery = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransactionNonExclusive();
+
+        selectQuery = "ALTER TABLE "
+                + table_name + " ADD COLUMN " + column_name + " TEXT;";
+
+        db.execSQL(selectQuery);
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+
     
 }

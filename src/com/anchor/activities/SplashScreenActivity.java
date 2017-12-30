@@ -4,18 +4,29 @@ package com.anchor.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import java.util.List;
+
 public class SplashScreenActivity extends Activity {
 
+	DataBaseHelper dbvoc = new DataBaseHelper(this);
 	ImageView splash_logo;
 	Bitmap blob_data_logo;
+	static SQLiteDatabase db;
+	LoginDataBaseAdapter loginDataBaseAdapter;
+	int ver_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +37,9 @@ public class SplashScreenActivity extends Activity {
 
 		splash_logo=(ImageView)findViewById(R.id.splash_logo);
 
+		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
+		loginDataBaseAdapter=loginDataBaseAdapter.open();
+
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
 		String logostr=spf1.getString("splash_data", "");
 
@@ -34,6 +48,31 @@ public class SplashScreenActivity extends Activity {
 			blob_data_logo = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 			splash_logo.setImageBitmap(blob_data_logo);
 		}
+
+		PackageInfo pinfo = null;
+		try {
+			pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		int versionCode = pinfo.versionCode;
+		String versionName = pinfo.versionName;
+
+// Reading all
+		List<Local_Data> contacts1 = dbvoc.getVersioninfo();
+//results1.add("Select State");
+		for (Local_Data cn : contacts1) {
+			ver_code = cn.getVersioncode();
+			String ver_name = "" + cn.getVersionname();
+
+		}
+
+		if (versionCode > ver_code) {
+			loginDataBaseAdapter.insertVersionInfo(versionCode, versionName);
+		}
+
+		 check_Columns_IsExist();
 
         //startService(new Intent(getBaseContext(), LocationService.class));
         
@@ -133,5 +172,58 @@ public class SplashScreenActivity extends Activity {
     	finish();
     	System.exit(0);
     }
+
+ public void check_Columns_IsExist()
+ {
+	 boolean column_check = dbvoc.isColumnExists("orders","shipmet_priority");
+	 if(!column_check)
+	 {
+		 try {
+			 dbvoc.alter_Columns("orders","shipmet_priority");
+		 } catch (SQLiteException ex) {
+			 Log.w("Alter Table", "Altering " + "orders" + ": " + ex.getMessage());
+		 }
+	 }
+
+	 boolean column_check_item = dbvoc.isColumnExists("item_master","b_unit");
+	 if(!column_check_item)
+	 {
+		 try {
+			 dbvoc.alter_Columns("item_master","b_unit");
+		 } catch (SQLiteException ex) {
+			 Log.w("Alter Table", "Altering " + "item_master" + ": " + ex.getMessage());
+		 }
+	 }
+
+	 boolean column_check_itemn = dbvoc.isColumnExists("item_master","b_division");
+	 if(!column_check_itemn)
+	 {
+		 try {
+			 dbvoc.alter_Columns("item_master","b_division");
+		 } catch (SQLiteException ex) {
+			 Log.w("Alter Table", "Altering " + "item_master" + ": " + ex.getMessage());
+		 }
+	 }
+
+	 boolean column_check_itemnn = dbvoc.isColumnExists("item_master","sq");
+	 if(!column_check_itemnn)
+	 {
+		 try {
+			 dbvoc.alter_Columns("item_master","sq");
+		 } catch (SQLiteException ex) {
+			 Log.w("Alter Table", "Altering " + "item_master" + ": " + ex.getMessage());
+		 }
+	 }
+
+	 boolean column_check_itemnnn = dbvoc.isColumnExists("item_master","mq");
+	 if(!column_check_itemnnn)
+	 {
+		 try {
+			 dbvoc.alter_Columns("item_master","mq");
+		 } catch (SQLiteException ex) {
+			 Log.w("Alter Table", "Altering " + "item_master" + ": " + ex.getMessage());
+		 }
+	 }
+ }
     
 }
