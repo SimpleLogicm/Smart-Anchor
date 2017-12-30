@@ -198,7 +198,8 @@ public class LoginActivity extends Activity{
 		sharedpreferences = getSharedPreferences(mypreference,
 				Context.MODE_PRIVATE);
 		if (sharedpreferences.contains(Code)) {
-			emp_code.setText(sharedpreferences.getString(Code, ""));
+			Global_Data.emp_code=sharedpreferences.getString(Code, "");
+			emp_code.setText(Global_Data.emp_code);
 		}
 
 //				editText1.setText("Jaya");
