@@ -74,7 +74,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
 		 private static final String TABLE_ITEM_MASTER = "item_master";
 		 private static final String TABLE_CUSTOMER_MASTER = "customer_master";
          private static final String TABLE_LABEL_CHANGES = "label_chnages";
-        private static final String TABLE_ORDER_DETAILS = "order_details";
+         private static final String TABLE_ORDER_DETAILS = "order_details";
+         private static final String TABLE_VERSION_INFO = "version_info";
 		 
 		 private static final String DATABASE_CREATE_ORDERSTATUS = "status_master";
 		 
@@ -205,7 +206,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
             _db.execSQL(LoginDataBaseAdapter.DATABASE_USER_EMAIL);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_GEO_DATA);
-
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_VERSION_INFO);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_SURVEY_QUESTIONS);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_SURVEY_ANSWERS);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_DISTRIBUTORBEAT);
@@ -243,6 +244,34 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // Create a new one.
 			onCreate(_db);
 	}
+
+    // Getting VersionInfo
+    public List<Local_Data> getVersioninfo() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT * FROM " + TABLE_VERSION_INFO + "";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setVersioncode(cursor.getInt(1));
+                contact.setVersionname(cursor.getString(2));
+
+                // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+
 
     // Getting All Account Data
     public List<Local_Data> getAllLabels() {

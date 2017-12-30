@@ -133,7 +133,7 @@ public class Home extends Fragment {
 			}
 		}
 
-		txtWelcomeUser.setText(user_name);
+		txtWelcomeUser.setText(user_name+" : "+Global_Data.emp_code);
 
 		loginDataBaseAdapter=new LoginDataBaseAdapter(getActivity());
 		loginDataBaseAdapter=loginDataBaseAdapter.open();

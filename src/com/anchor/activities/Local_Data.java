@@ -1,6 +1,8 @@
 package com.anchor.activities;
 
 public class Local_Data {
+    int version_code;
+    String version_name;
     String cust_mob;
     String curr_date;
     String LEGACY_CUSTOMER_CODE;
@@ -2191,5 +2193,24 @@ public class Local_Data {
         this.var_label = varlab_acc;
     }
 
+    //getting version code
+    public int getVersioncode() {
+        return this.version_code;
+    }
+
+    //setting version code
+    public void setVersioncode(int ver_code){
+        this.version_code=ver_code;
+    }
+
+    //getting version name
+    public String getVersionname(){
+        return  this.version_name;
+    }
+
+    //setting version name
+    public void setVersionname(String version_name){
+        this.version_name=version_name;
+    }
 
 }

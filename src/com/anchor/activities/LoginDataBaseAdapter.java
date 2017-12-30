@@ -317,6 +317,9 @@ public class LoginDataBaseAdapter
 	static final String DATABASE_ATTENDANCE_DATA = "CREATE TABLE IF NOT EXISTS " + "attendance" +
 			"( " + "ID" + " integer primary key autoincrement," + "user_id text, punched_on text, punched_at_latitude text, punched_at_longitude text, punched_button text, conference_id text,vertical_id text,punched_at_address text,server_flag text,current_date_only text);";
 
+	static final String DATABASE_VERSION_INFO = "CREATE TABLE IF NOT EXISTS " + "version_info" +
+			"( " + "ID" + " integer primary key autoincrement," + "version_code text, version_name text);";
+
 //		//new product and customer for Girnar Monday Demo
 //		static final String DATABASE_CREATE_NEWCUSTOMER = "create table "+"new_customers"+
 //             "( " +"ID"+" integer primary key autoincrement,"+ "code text, name text, shop_name text," +
@@ -410,18 +413,13 @@ public class LoginDataBaseAdapter
 		db.insert("label_chnages", null, newValues);
 	}
 
-        
-        
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
+	public void insertVersionInfo(int version_code, String version_name) {
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("version_code", version_code);
+		newValues.put("version_name", version_name);
+		db.insert("version_info", null, newValues);
+	}
         
         public void insertEntry(String username, String password, String doj, String mob_no, String email_id, String report_to,
 								String first_name, String last_name, String status, String create_by, String modified, String project_id, String company_id,
@@ -971,7 +969,7 @@ public class LoginDataBaseAdapter
 			newValues.put("details4", details4);
 			newValues.put("details5", details5);
 			newValues.put("order_category", order_category_id);
-			
+
 			// Insert the row into your table
 			db.insert("orders", null, newValues);
 		}

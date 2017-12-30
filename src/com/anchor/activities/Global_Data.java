@@ -22,6 +22,7 @@ public class Global_Data {
     public static String editable="";
     public static String mandatory="";
     public static String allow="";
+    public static String emp_code="";
 
     public static String Stock_warehouse_flag="";
     public static String Stock_product_flag="";

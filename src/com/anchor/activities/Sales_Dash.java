@@ -54,7 +54,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			}
 		}
 
-		txtWelcomeUser.setText(user_name+":023");
+		txtWelcomeUser.setText(user_name+" : "+Global_Data.emp_code);
 
 		// for label change
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
