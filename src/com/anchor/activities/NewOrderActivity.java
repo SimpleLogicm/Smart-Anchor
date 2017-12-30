@@ -522,13 +522,19 @@ public class NewOrderActivity extends BaseActivity {
 
 								 Global_Data.Search_Product_name = parent.getItemAtPosition(pos).toString().trim();
 
-								 ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewOrderActivity.this,android.R.layout.simple_spinner_dropdown_item,results2);
-								 Product_Variant.setThreshold(1);// will start working from
-								 // first character
-								 Product_Variant.setAdapter(adapter);// setting the adapter
-								 // data into the
-								 // AutoCompleteTextView
-								 Product_Variant.setTextColor(Color.BLACK);
+								 Intent intent = new Intent(getApplicationContext(), ProductAll_Varients.class);
+								 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+								 //startActivityForResult(intent,SIGNATURE_ACTIVITY);
+								 NewOrderActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+								 startActivity(intent);
+
+//								 ArrayAdapter<String> adapter = new ArrayAdapter<String>(NewOrderActivity.this,android.R.layout.simple_spinner_dropdown_item,results2);
+//								 Product_Variant.setThreshold(1);// will start working from
+//								 // first character
+//								 Product_Variant.setAdapter(adapter);// setting the adapter
+//								 // data into the
+//								 // AutoCompleteTextView
+//								 Product_Variant.setTextColor(Color.BLACK);
 
 
 						  }

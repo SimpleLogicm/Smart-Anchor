@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +13,19 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,6 +44,7 @@ import cpm.simplelogic.helper.ConnectionDetector;
 
 public class ProductAll_Varients extends Activity {
 
+    int pp = 0;
     String q_check = "";
     ProgressDialog dialog;
     String str;
@@ -50,6 +59,7 @@ public class ProductAll_Varients extends Activity {
     private ArrayList<String> p_rp = new ArrayList<String>();
     private ArrayList<String> p_q = new ArrayList<String>();
     private ArrayList<String> p_price = new ArrayList<String>();
+    private ArrayList<String> resultsvarient = new ArrayList<String>();
 
 
     ConnectionDetector cd;
@@ -75,7 +85,7 @@ public class ProductAll_Varients extends Activity {
     String statusOrderActivity = "";
     Button  buttonPreviewAddMOre, buttonPreviewHome, addmorenews;
     public static final int SIGNATURE_ACTIVITY = 1;
-
+    AutoCompleteTextView Product_Variant;
 
 
 
@@ -100,6 +110,7 @@ public class ProductAll_Varients extends Activity {
         addmorenews = (Button) findViewById(R.id.addmorenews);
         swipeListView = (ListView) findViewById(R.id.example_lv_list);
         swipeListView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+        Product_Variant = (AutoCompleteTextView) findViewById(R.id.newProduct_varient);
         map = new HashMap<String, String>();
 
         //txttotalPreview.setText("Total		:		"+"");
@@ -152,6 +163,133 @@ public class ProductAll_Varients extends Activity {
         mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setHomeButtonEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(true);
+
+        Product_Variant.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (Product_Variant.getRight() - Product_Variant.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                        View view = ProductAll_Varients.this.getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                        //autoCompleteTextView1.setText("");
+                        Product_Variant.showDropDown();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        Product_Variant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos,
+                                    long id) {
+                //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
+
+                Global_Data.hideSoftKeyboard(ProductAll_Varients.this);
+
+                List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_Category_name, Global_Data.Search_Product_name,Product_Variant.getText().toString().trim());
+
+                if (cont1.size() <= 0) {
+                    // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+
+                    ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                            Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+                } else {
+                    SwipeList.clear();
+                    list1.clear();
+                    list2.clear();
+                    pp=0;
+                    for (Local_Data cnt1 : cont1) {
+                        HashMap<String, String> mapp = new HashMap<String, String>();
+                        mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
+                        mapp.put(TAG_QTY, "");
+                        mapp.put(TAG_PRICE, cnt1.getMRP());
+                        mapp.put(TAG_RP, cnt1.getStateName());
+                        mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                        Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+
+
+
+                        List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+
+                        if (contactsn.size() > 0) {
+                            for (Local_Data cn : contactsn) {
+
+                                list1.add(cn.get_delivery_product_order_quantity());
+                                list2.add("PRICE : " + cn.getAmount());
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                    pp += Double.valueOf(cn.getAmount());
+                                }
+                            }
+                        } else {
+                            list1.add("");
+                            list2.add("");
+                        }
+
+                        SwipeList.add(mapp);
+                    }
+
+                    ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            swipeListView.setItemsCanFocus(true);
+
+                            adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+
+                            swipeListView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                            txttotalPreview.setText("Total : " + pp);
+
+                        }
+                    });
+
+
+
+                }
+
+
+            }
+        });
+
+        Product_Variant.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(Product_Variant.getText().toString().trim().length() == 0) {
+                    new VarientASN().execute();
+
+                }
+
+            }
+        });
 
 
         dialog = new ProgressDialog(ProductAll_Varients.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
@@ -302,40 +440,40 @@ public class ProductAll_Varients extends Activity {
 
                 if (!Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
 
-                    if (p_id.isEmpty()) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
-                        alertDialog.setTitle("Warning");
-                        alertDialog.setMessage("Are you sure you want to preview order without saving current list items?");
-                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Global_Data.GLOVEL_LONG_DESC = "";
-                                Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-                                Global_Data.GLOVEL_ITEM_MRP = "";
-                                Global_Data.Search_Category_name = "";
-
-                                Global_Data.Search_Product_name = "";
-
-                                Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                startActivity(i);
-                                finish();
-                            }
-                        });
-
-                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-
-
-                        alertDialog.show();
-                    } else {
+//                    if (p_id.isEmpty()) {
+//                        AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+//                        alertDialog.setTitle("Warning");
+//                        alertDialog.setMessage("Are you sure you want to preview order without saving current list items?");
+//                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                Global_Data.GLOVEL_LONG_DESC = "";
+//                                Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+//                                Global_Data.GLOVEL_ITEM_MRP = "";
+//                                Global_Data.Search_Category_name = "";
+//
+//                                Global_Data.Search_Product_name = "";
+//
+//                                Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
+//                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                                startActivity(i);
+//                                finish();
+//                            }
+//                        });
+//
+//                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//
+//
+//                        alertDialog.show();
+//                    } else {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
@@ -347,7 +485,7 @@ public class ProductAll_Varients extends Activity {
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         startActivity(i);
                         finish();
-                    }
+                 //   }
 
 
                     //NewOrderFragment.this.startActivity(i);
@@ -395,6 +533,9 @@ public class ProductAll_Varients extends Activity {
                         });
 
                     } else {
+                        resultsvarient.clear();
+                        SwipeList.clear();
+                        pp=0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
                             mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
@@ -404,7 +545,9 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                             Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
-                            List<Local_Data> contactsn = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+                            resultsvarient.add(cnt1.getProduct_variant());
+
+                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 
 
                             if (contactsn.size() > 0) {
@@ -412,6 +555,9 @@ public class ProductAll_Varients extends Activity {
 
                                     list1.add(cn.get_delivery_product_order_quantity());
                                     list2.add("PRICE : " + cn.getAmount());
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                        pp += Double.valueOf(cn.getAmount());
+                                    }
                                 }
                             } else {
                                 list1.add("");
@@ -428,6 +574,15 @@ public class ProductAll_Varients extends Activity {
                                 adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
+
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductAll_Varients.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+								 Product_Variant.setThreshold(1);// will start working from
+								 // first character
+								 Product_Variant.setAdapter(adapter);// setting the adapter
+								 // data into the
+								 // AutoCompleteTextView
+								 Product_Variant.setTextColor(Color.BLACK);
+                                txttotalPreview.setText("Total : " + pp);
 
 
                             }
@@ -458,6 +613,9 @@ public class ProductAll_Varients extends Activity {
                         });
 
                     } else {
+                        resultsvarient.clear();
+                        SwipeList.clear();
+                        pp=0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
                             mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm() + " RP : " + cnt1.getStateName() + " MRP : " + cnt1.getMRP());
@@ -466,13 +624,16 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                             Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
-                            List<Local_Data> contactsn = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 
                             if (contactsn.size() > 0) {
                                 for (Local_Data cn : contactsn) {
 
                                     list1.add(cn.get_delivery_product_order_quantity());
                                     list2.add("PRICE : " + cn.getAmount());
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                        pp += Double.valueOf(cn.getAmount());
+                                    }
                                 }
                             } else {
                                 list1.add("");
@@ -489,6 +650,7 @@ public class ProductAll_Varients extends Activity {
                                 adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
+                                txttotalPreview.setText("Total : " + pp);
 
 
                             }
@@ -639,7 +801,12 @@ public class ProductAll_Varients extends Activity {
                         ex.printStackTrace();
                     }
 
-                    loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.Glovel_BEAT_ID, "", "", "", "", "", "", "");
+                    List<Local_Data> checkq = dbvoc.checkOrderExist(Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLObalOrder_id);
+
+                    if (checkq.size() <= 0) {
+                        loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.Glovel_BEAT_ID, "", "", "", "", "", "", "");
+                    }
+
                 }
 
 
