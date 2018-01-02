@@ -256,7 +256,7 @@ public class getServices {
 	                                  loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"),jsonObject.getString("name"), jsonObject.getString("primary_category"),
 	                                		  jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"), 
 	                                		  jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-	                                		  jsonObject.getString("free_qty"), jsonObject.getString("status"));
+	                                		  jsonObject.getString("free_qty"), jsonObject.getString("status"),"","","","");
 
 	                                  // loginDataBaseAdapter.insertEntryITEM_MASTER(String Item_Number,	String Unit_Rate, String Organization_Code,	String Organization_Name, String Lot_Control, String Lot_Status, String	Inspection_Required, String Lot_Divisible,	String UOM, String Inventory_Type,	String Business_Vertical, String Primary_Category,	String Primary_Sub_Category, String Secondary_Category,	String Secondary_Sub_Category, String Description,	String Long_Description, String Size1, String Size2, String Voltage_Watts_Amps,	String IS_Code, String Colour,	String Invoice_Description1, String Invoice_Description2, String Old_Item_Code,	String Metal_Aluminum_Wt, String Metal_Copper_Wt, String Metal_Lead_Wt, String Packing_Quantity, String Packing_UOM, String Specification_Code,	String HSS_Code,String HSS_Description,	String Product_OD, String Product_Weight, String Bending_Radius, String Flange,	String Traverse, String Barrel,	String Drum_Carrying_Capacity,String Drum_Type, String Drum_Category,	String PLANNER_CODE,String PLANNING_MAKE_BUY_CODE,String WIP_SUPPLY_TYPE,String DEFAULT_LOT_STATUS_ID, String DEFAULT_LOT_STATUS, String LOT_PREFIX,	String START_AUTO_LOT_NUMBER, String EXPENSE_ACCOUNT, String COST_OF_SALES_ACCOUNT,	String SALES_ACCOUNT, String UNIT_WEIGHT, String UNIT_VOLUME, String UNIT_LENGTH, String UNIT_WIDTH,String UNIT_HEIGHT);	
 	                              }
@@ -4277,7 +4277,7 @@ public class getServices {
                                 loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"),jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                         jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                         jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                        jsonObject.getString("free_qty"), jsonObject.getString("status"));
+                                        jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"),jsonObject.getString("business_category"),jsonObject.getString("standard_qty"),jsonObject.getString("master_qty"));
 
 
 
@@ -4297,7 +4297,7 @@ public class getServices {
                                     loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"),jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                             jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                             jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                            jsonObject.getString("free_qty"), jsonObject.getString("status"));
+                                            jsonObject.getString("free_qty"), jsonObject.getString("status"),jsonObject.getString("business_unit"),jsonObject.getString("business_category"),jsonObject.getString("standard_qty"),jsonObject.getString("master_qty"));
                                 }
 
                             }

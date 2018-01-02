@@ -529,7 +529,7 @@ public class CaptureSignature extends BaseActivity {
                                         out.flush();
                                         out.close();
                                         uploadImage = getStringImage(bitmap);
-                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name, order_type_code);
+                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name, order_type_code,shipment_pri.getSelectedItem().toString());
                                         mSignature.clear();
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -699,6 +699,13 @@ public class CaptureSignature extends BaseActivity {
                     errorMessage = errorMessage + "Please Enter "+detail2str;
                     error = true;
                 }
+            }
+
+            if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
+            {
+
+                    errorMessage = errorMessage + "Please Select Shipment Priority";
+                    error = true;
             }
         }
 

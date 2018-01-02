@@ -58,23 +58,49 @@ public class SplashScreenActivity extends Activity {
 
 		int versionCode = pinfo.versionCode;
 		String versionName = pinfo.versionName;
+		int version_seven_check = 0;
+		int version_c_check = 0;
 
 // Reading all
 		List<Local_Data> contacts1 = dbvoc.getVersioninfo();
 //results1.add("Select State");
-		for (Local_Data cn : contacts1) {
-			ver_code = cn.getVersioncode();
-			String ver_name = "" + cn.getVersionname();
-
-		}
-
-		if (versionCode > ver_code) {
+		if(contacts1.size() <=0)
+		{
 			loginDataBaseAdapter.insertVersionInfo(versionCode, versionName);
 		}
+		else
+		{
 
-		 check_Columns_IsExist();
+			for (Local_Data cn : contacts1) {
+				ver_code = cn.getVersioncode();
+				String ver_name = "" + cn.getVersionname();
 
-        //startService(new Intent(getBaseContext(), LocationService.class));
+				if(ver_code == 7)
+				{
+					version_seven_check = 1;
+				}
+
+				if(ver_code == versionCode)
+				{
+					version_c_check = 1;
+				}
+			}
+
+			if(version_seven_check != 1)
+			{
+				check_Columns_IsExist();
+			}
+
+			if(version_c_check != 1)
+			{
+				loginDataBaseAdapter.insertVersionInfo(versionCode, versionName);
+			}
+
+		}
+
+
+
+		//startService(new Intent(getBaseContext(), LocationService.class));
         
        
 
@@ -195,11 +221,11 @@ public class SplashScreenActivity extends Activity {
 		 }
 	 }
 
-	 boolean column_check_itemn = dbvoc.isColumnExists("item_master","b_division");
+	 boolean column_check_itemn = dbvoc.isColumnExists("item_master","b_business_c");
 	 if(!column_check_itemn)
 	 {
 		 try {
-			 dbvoc.alter_Columns("item_master","b_division");
+			 dbvoc.alter_Columns("item_master","b_business_c");
 		 } catch (SQLiteException ex) {
 			 Log.w("Alter Table", "Altering " + "item_master" + ": " + ex.getMessage());
 		 }

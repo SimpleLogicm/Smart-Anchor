@@ -497,7 +497,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
                                         out.flush();
                                         out.close();
                                         uploadImage =  getStringImage(bitmap);
-                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage,Global_Data.GLObalOrder_id,order_detail1_text,order_detail2_text,order_type_name,order_type_code);
+                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage,Global_Data.GLObalOrder_id,order_detail1_text,order_detail2_text,order_type_name,order_type_code,"");
                                         mSignature.clear();
                                     } catch (Exception e) {
                                         e.printStackTrace();

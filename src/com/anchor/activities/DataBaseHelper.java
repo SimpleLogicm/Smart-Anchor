@@ -13,7 +13,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 {
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
-		static final int DATABASE_VERSION = 4;
+		static final int DATABASE_VERSION = 6;
 		public static final int VERSION = 1;
 		// Contacts table name
 	    
@@ -6316,9 +6316,9 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
 
-    public void updateORDER_SIGNATURENEW(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_category)
+    public void updateORDER_SIGNATURENEW(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_category,String shipment_pri)
     {
-        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "order_category = '"  +  order_category + "'" + " WHERE order_id = '" +  order_id    + "'";
+        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "order_category = '"  +  order_category + "'" + "shipment_pri = '"  +  shipment_pri + "'" + " WHERE order_id = '" +  order_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
