@@ -38,6 +38,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     static final String TAG_RP = "RP";
     static final String TAG_AMOUNT = "amount";
     static final String TAG_ITEM_NUMBER = "item_number";
+    static final String TAG_ITEM_SQ = "SQ";
+    static final String TAG_ITEM_MQ = "MQ";
     HashMap<String, String> getData = new HashMap<String, String>();
     private ArrayList<HashMap<String, String>> dataAray;
     HashMap<String, String> dataIthjem;
@@ -105,6 +107,11 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             holder.mrpvs = (TextView) convertView.findViewById(R.id.mrpvs);
             holder.mrpvnew = (TextView) convertView.findViewById(R.id.mrpvnew);
             holder.rpv = (TextView) convertView.findViewById(R.id.rpv);
+            holder.PSQ = (TextView) convertView.findViewById(R.id.PSQ);
+            holder.PMQ = (TextView) convertView.findViewById(R.id.PMQ);
+            holder.PSQVALUE = (TextView) convertView.findViewById(R.id.PSQVALUE);
+            holder.PMQVALUE = (TextView) convertView.findViewById(R.id.PMQVALUE);
+            holder.quantity_error = (TextView) convertView.findViewById(R.id.quantity_error);
             // holder.rpvnew = (TextView) convertView.findViewById(R.id.rpvnew);
 
             convertView.setTag(holder);
@@ -130,6 +137,11 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
         holder.mrpvnew.setText("[MRP] : " + getData.get(TAG_PRICE));
         holder.mrpvs.setText("[RP] : " + getData.get(TAG_RP));
+
+        holder.PSQ.setText("SQ : " + getData.get(TAG_ITEM_SQ));
+        holder.PMQ.setText("MQ : " + getData.get(TAG_ITEM_MQ));
+        holder.PSQVALUE.setText(getData.get(TAG_ITEM_SQ));
+        holder.PMQVALUE.setText(getData.get(TAG_ITEM_MQ));
         //holder.rpvnew.setText("RP : " + getData.get(TAG_RP));
 
         holder.productquantity.setText(list1.get(position), TextView.BufferType.EDITABLE);
@@ -168,8 +180,36 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.mrpv.getText().toString())) {
                     edit.put("string", s.toString());
 
-                    Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.mrpv.getText().toString());
-                    holder.totalprice.setText("PRICE : " + String.valueOf(value));
+                    try
+                    {
+                        int SQMO_Validator = Integer.parseInt(holder.productquantity.getText().toString())%Integer.parseInt(holder.PSQVALUE.getText().toString());
+                        if(SQMO_Validator == 0)
+                        {
+                            Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.mrpv.getText().toString());
+                            holder.totalprice.setText("PRICE : " + String.valueOf(value));
+                            holder.quantity_error.setText("");
+                        }
+                        else
+                        {
+                            if(holder.productquantity.getText().toString().trim().equalsIgnoreCase("") || holder.productquantity.getText().toString().equalsIgnoreCase("0"))
+                            {
+                                holder.totalprice.setText("");
+                                holder.quantity_error.setText("");
+                            }
+                            else
+                            {
+                                holder.totalprice.setText("");
+                                holder.quantity_error.setText("Enter Value Not A Multiple Of Item SQ Value.");
+                            }
+
+                          //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }catch (Exception exception){
+                        exception.printStackTrace();
+                    }
+
 
                     // Global_Data.itemmap.put(holder.pidp.getText().toString(),)
 
@@ -178,6 +218,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                     //ProductAll_Varients.updateSum(sum);
                 } else {
                     holder.totalprice.setText("");
+                    holder.quantity_error.setText("");
                 }
 
 
@@ -191,6 +232,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
     static class ViewHolder {
         TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs;
+        TextView PSQ,PMQ,PSQVALUE,PMQVALUE,quantity_error;
         EditText productquantity;
         TextView totalprice;
         public MutableWatcher1 mWatcher1;

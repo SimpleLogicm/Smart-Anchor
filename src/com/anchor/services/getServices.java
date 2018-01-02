@@ -3357,12 +3357,12 @@ public class getServices {
                     Final_Flag_N = "";
                 }
 
-                if(Final_Flag_N.equalsIgnoreCase(""))
-                {
-                    Toast.makeText(context, "No record found for sync.", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-                else {
+//                if(Final_Flag_N.equalsIgnoreCase(""))
+//                {
+//                    Toast.makeText(context, "No record found for sync.", Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                }
+//                else {
 
                     // product_imei.put(Global_Data.device_id);
                      // product_value_n.put("customers", order);
@@ -3377,6 +3377,7 @@ public class getServices {
                  product_value_n.put("stocks", COMPS);
                 // product_value_n.put("customer_service_media", PICTURE);
                 product_value_n.put("imei_no", Global_Data.device_id);
+               // product_value_n.put("employee_code", Global_Data.emp_code);
 
                // Log.d("customers",product_value_n.toString());
 
@@ -3604,7 +3605,7 @@ public class getServices {
                     jsObjRequest.setShouldCache(false);
                     requestQueue.getCache().clear();
                     requestQueue.add(jsObjRequest);
-                }
+                //}
             }catch(Exception e)
             {
                 e.printStackTrace();

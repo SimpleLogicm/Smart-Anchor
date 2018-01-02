@@ -2,6 +2,7 @@ package com.anchor.activities;
 
 public class Local_Data {
     int version_code;
+    String SQ,MQ;
     String version_name;
     String cust_mob;
     String curr_date;
@@ -178,6 +179,22 @@ public class Local_Data {
     String sub_categ;
     String img_ordersign, name, punched_button, current_date_only;
     String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant;
+
+    public String getSQ() {
+        return SQ;
+    }
+
+    public void setSQ(String SQ) {
+        this.SQ = SQ;
+    }
+
+    public String getMQ() {
+        return MQ;
+    }
+
+    public void setMQ(String MQ) {
+        this.MQ = MQ;
+    }
 
     public String getProduct_variant() {
         return product_variant;

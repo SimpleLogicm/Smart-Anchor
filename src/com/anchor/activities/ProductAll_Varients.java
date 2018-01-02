@@ -80,6 +80,9 @@ public class ProductAll_Varients extends Activity {
     static final String TAG_RP = "RP";
     static final String TAG_AMOUNT = "amount";
     static final String TAG_ITEM_NUMBER = "item_number";
+    static final String TAG_ITEM_SQ = "SQ";
+    static final String TAG_ITEM_MQ = "MQ";
+
     ImageView imgView;
     static float totalPrice;
     String statusOrderActivity = "";
@@ -228,6 +231,8 @@ public class ProductAll_Varients extends Activity {
                         mapp.put(TAG_PRICE, cnt1.getMRP());
                         mapp.put(TAG_RP, cnt1.getStateName());
                         mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                        mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
+                        mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                         Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
 
@@ -543,6 +548,8 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_PRICE, cnt1.getMRP());
                             mapp.put(TAG_RP, cnt1.getStateName());
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                            mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
+                            mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             resultsvarient.add(cnt1.getProduct_variant());
@@ -622,6 +629,8 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_QTY, "");
                             mapp.put(TAG_PRICE, cnt1.getMRP());
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                            mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
+                            mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());

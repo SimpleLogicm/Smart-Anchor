@@ -6750,7 +6750,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant FROM item_master WHERE primary_category = ? AND sub_category = ? GROUP BY product_variant",
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE primary_category = ? AND sub_category = ? GROUP BY product_variant",
                 new String[]{category_name, product_name});
 
 
@@ -6767,6 +6767,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setCategory(cursor.getString(6));
                 contact.setSubcateg(cursor.getString(7));
                 contact.setProduct_variant(cursor.getString(8));
+                contact.setSQ(cursor.getString(9));
+                contact.setMQ(cursor.getString(10));
                 // Adding contact to list
                 contactList14.add(contact);
             } while (cursor.moveToNext());
@@ -6781,7 +6783,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category FROM item_master WHERE primary_category = ? AND sub_category = ? AND product_variant = ? GROUP BY name",
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,sq,mq FROM item_master WHERE primary_category = ? AND sub_category = ? AND product_variant = ? GROUP BY name",
                 new String[]{primary_category,sub_category,product_name});
 
 
@@ -6797,6 +6799,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setCode(cursor.getString(5));
                 contact.setCategory(cursor.getString(6));
                 contact.setSubcateg(cursor.getString(7));
+                contact.setSQ(cursor.getString(8));
+                contact.setMQ(cursor.getString(9));
                 // Adding contact to list
                 contactList14.add(contact);
             } while (cursor.moveToNext());
@@ -6811,7 +6815,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category FROM item_master;",
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,sq,mq FROM item_master;",
                 new String[]{});
 
 
@@ -6827,6 +6831,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setCode(cursor.getString(5));
                 contact.setCategory(cursor.getString(6));
                 contact.setSubcateg(cursor.getString(7));
+                contact.setSQ(cursor.getString(8));
+                contact.setMQ(cursor.getString(9));
                 // Adding contact to list
                 contactList14.add(contact);
             } while (cursor.moveToNext());
