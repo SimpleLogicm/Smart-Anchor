@@ -2,6 +2,7 @@ package com.anchor.activities;
 
 public class Local_Data {
     int version_code;
+    String b_unit;
     String SQ,MQ;
     String version_name;
     String cust_mob;
@@ -2228,6 +2229,16 @@ public class Local_Data {
     //setting version name
     public void setVersionname(String version_name){
         this.version_name=version_name;
+    }
+
+    //getting b_unit
+    public String getBunit(){
+        return  this.b_unit;
+    }
+
+    //setting b_unit
+    public void setBunit(String bunit){
+        this.b_unit=bunit;
     }
 
 }

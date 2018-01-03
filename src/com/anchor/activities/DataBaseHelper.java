@@ -271,7 +271,89 @@ public class DataBaseHelper extends SQLiteOpenHelper
         return contactList1;
     }
 
+    // Getting All Local_Data
+    public List<Local_Data> getAllB_Unit() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT DISTINCT b_unit FROM " + TABLE_ITEM_MASTER;
 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setBunit(cursor.getString(0));
+                //contact.setPwd(cursor.getString(2));
+                //contact.setImei(cursor.getString(3));
+
+                // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getBdivByBunit(String State_ID) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT  primary_category FROM " + TABLE_ITEM_MASTER + " WHERE code = '" +  State_ID + "'" + " GROUP BY name ORDER BY name";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setCityName(cursor.getString(0));
+                //contact.setPwd(cursor.getString(2));
+                //contact.setImei(cursor.getString(3));
+
+                // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getBunit_id(String bunit) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT code FROM " + TABLE_ITEM_MASTER + " WHERE b_unit = '" +  bunit + "'" ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        Cursor cursor = db.rawQuery("select code FROM item_master WHERE b_unit = ? GROUP BY name ORDER BY name",
+                new String[] { bunit });
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setSTATE_ID(cursor.getString(0));
+                //contact.setPwd(cursor.getString(2));
+                //contact.setImei(cursor.getString(3));
+
+                // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
 
     // Getting All Account Data
     public List<Local_Data> getAllLabels() {

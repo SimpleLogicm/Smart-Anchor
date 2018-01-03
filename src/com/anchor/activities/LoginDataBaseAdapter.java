@@ -1347,8 +1347,7 @@ public class LoginDataBaseAdapter
 			newValues.put("achieved", achieved);
 			newValues.put("created_at", create_at);
 			newValues.put("updated_at", update_at);
-			
-			
+
 			// Insert the row into your table
 			db.insert("targets", null, newValues);
 		}
