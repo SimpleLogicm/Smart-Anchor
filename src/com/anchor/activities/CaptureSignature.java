@@ -701,12 +701,14 @@ public class CaptureSignature extends BaseActivity {
                 }
             }
 
-            if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
-            {
 
-                    errorMessage = errorMessage + "Please Select Shipment Priority";
-                    error = true;
-            }
+        }
+        else
+        if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
+        {
+
+            errorMessage = errorMessage + "Please Select Shipment Priority";
+            error = true;
         }
 
 //        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true"))){

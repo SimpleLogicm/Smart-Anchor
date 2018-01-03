@@ -1017,8 +1017,9 @@ public class getServices {
              product_value.put("details2", cn.getOrder_detail2());
              product_value.put("details3", cn.getOrder_detail3());
              product_value.put("order_category_code", cn.getOrder_category_type());
-             product_value.put("signature_path", cn.getSignature_image());
+             product_value.put("shipment_priority", cn.getshipment_pri());
              product_value.put("order_image_string", cn.getimg_ordersign());
+             product_value.put("signature_path", cn.getSignature_image());
              customer_id = cn.get_category_id();
             // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
             // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
@@ -1409,8 +1410,10 @@ public class getServices {
 
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
+                product_value.put("shipment_priority", cn.getshipment_pri());
                 product_value.put("signature_path", cn.getSignature_image());
                 product_value.put("order_image_string", cn.getimg_ordersign());
+
 
                 if(cn.get_shedule_payment_mode().equalsIgnoreCase("Secondary Sales / Retail Sales"))
                 {
@@ -3377,7 +3380,8 @@ public class getServices {
                  product_value_n.put("stocks", COMPS);
                 // product_value_n.put("customer_service_media", PICTURE);
                 product_value_n.put("imei_no", Global_Data.device_id);
-               // product_value_n.put("employee_code", Global_Data.emp_code);
+                product_value_n.put("emp_code", Global_Data.emp_code);
+                product_value_n.put("email", Global_Data.GLOvel_USER_EMAIL);
 
                // Log.d("customers",product_value_n.toString());
 
@@ -3385,10 +3389,7 @@ public class getServices {
 
                     //Log.d("expenses_travels",product_value_n.toString());
 
-//
-//
-//				 //product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
-//				// product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
+
 
                     Log.d("domain","domain"+domain+"uploads/upload_masters_data");
 //

@@ -140,10 +140,7 @@ public class Home extends Fragment {
 
 		Global_Data.CUSTOMER_SERVICE_FLAG = "";
         
-        City city1 = new City("Mumbai", "2", "N", "6", "CC002");
-        City city2 = new City("Banglore", "5", "P", "12", "CD006");
-        dataCities.add(city1);
-        dataCities.add(city2);
+
         dbvoc = new DataBaseHelper(getActivity());
         cd = new ConnectionDetector(getActivity());
 

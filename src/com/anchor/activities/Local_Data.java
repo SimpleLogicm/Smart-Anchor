@@ -179,7 +179,32 @@ public class Local_Data {
     String ware_name;
     String sub_categ;
     String img_ordersign, name, punched_button, current_date_only;
-    String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant;
+    String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant,shipment_pri,business_category,primary_category;
+
+    public String getprimary_category() {
+        return primary_category;
+    }
+
+    public void setprimary_category(String primary_category) {
+        this.primary_category = primary_category;
+    }
+
+    public String getbusiness_category() {
+        return business_category;
+    }
+
+    public void setbusiness_category(String business_category) {
+        this.business_category = business_category;
+    }
+
+    public String getshipment_pri() {
+        return shipment_pri;
+    }
+
+    public void setshipment_pri(String shipment_pri) {
+        this.shipment_pri = shipment_pri;
+    }
+
 
     public String getSQ() {
         return SQ;

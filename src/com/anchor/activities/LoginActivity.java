@@ -205,11 +205,8 @@ public class LoginActivity extends Activity{
 //				editText1.setText("Jaya");
 //				editText2.setText("jaya12345");
 //
-				editText1.setText("sujit");
-				editText2.setText("sujit12345");
-
-//				editText1.setText("swatiyamgar");
-//				editText2.setText("password");
+		        editText1.setText("swatiyamgar");
+				editText2.setText("swati12345");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -1128,7 +1125,7 @@ public class LoginActivity extends Activity{
 	        dialog.show();
 
 		String empl_code=emp_code.getText().toString();
-
+		Global_Data.emp_code = emp_code.getText().toString();
 		SharedPreferences.Editor editor = sharedpreferences.edit();
 		editor.putString(Code, empl_code);
 		editor.commit();

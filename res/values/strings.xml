@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="service_domain">http://7e55a2b3.ngrok.io/metal/api/v1/</string>
+    <string name="service_domain">http://598a7748.ngrok.io/metal/api/v1/</string>
 
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 

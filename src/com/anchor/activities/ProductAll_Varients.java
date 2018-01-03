@@ -200,7 +200,7 @@ public class ProductAll_Varients extends Activity {
 
                 Global_Data.hideSoftKeyboard(ProductAll_Varients.this);
 
-                List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_Category_name, Global_Data.Search_Product_name,Product_Variant.getText().toString().trim());
+                List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
 
                 if (cont1.size() <= 0) {
                     // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -322,9 +322,10 @@ public class ProductAll_Varients extends Activity {
                     Global_Data.GLOVEL_LONG_DESC = "";
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
+                    Global_Data.Search_business_unit_name = "";
                     Global_Data.Search_Category_name = "";
-
-                    Global_Data.Search_Product_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
 
                     Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -367,9 +368,10 @@ public class ProductAll_Varients extends Activity {
                                 Global_Data.GLOVEL_LONG_DESC = "";
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
+                                Global_Data.Search_business_unit_name = "";
                                 Global_Data.Search_Category_name = "";
-
-                                Global_Data.Search_Product_name = "";
+                                Global_Data.Search_BusinessCategory_name = "";
+                                Global_Data.Search_brand_name = "";
 
                                 Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -392,9 +394,10 @@ public class ProductAll_Varients extends Activity {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
+                        Global_Data.Search_business_unit_name = "";
                         Global_Data.Search_Category_name = "";
-
-                        Global_Data.Search_Product_name = "";
+                        Global_Data.Search_BusinessCategory_name = "";
+                        Global_Data.Search_brand_name = "";
 
                         Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -482,9 +485,10 @@ public class ProductAll_Varients extends Activity {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
+                        Global_Data.Search_business_unit_name = "";
                         Global_Data.Search_Category_name = "";
-
-                        Global_Data.Search_Product_name = "";
+                        Global_Data.Search_BusinessCategory_name = "";
+                        Global_Data.Search_brand_name = "";
 
                         Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -516,9 +520,9 @@ public class ProductAll_Varients extends Activity {
             try {
 
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Product_name)) {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
 
-                    List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_Category_name, Global_Data.Search_Product_name);
+                    List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
 
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -735,7 +739,7 @@ public class ProductAll_Varients extends Activity {
                             String productquantity_val = productquantity.getText().toString();
                             String totalprice_val = totalprice.getText().toString();
 
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(productquantity_val)) {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(productquantity_val) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(totalprice_val)) {
                                 p_id.add(pidpval);
                                 p_name.add(Productnamerpmrpval);
                                 p_mrp.add(mrpv_val);
@@ -993,9 +997,10 @@ public class ProductAll_Varients extends Activity {
                     Global_Data.GLOVEL_LONG_DESC = "";
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
+                    Global_Data.Search_business_unit_name = "";
                     Global_Data.Search_Category_name = "";
-
-                    Global_Data.Search_Product_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
 
                     Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -1019,9 +1024,10 @@ public class ProductAll_Varients extends Activity {
             Global_Data.GLOVEL_LONG_DESC = "";
             Global_Data.GLOVEL_CATEGORY_SELECTION = "";
             Global_Data.GLOVEL_ITEM_MRP = "";
+            Global_Data.Search_business_unit_name = "";
             Global_Data.Search_Category_name = "";
-
-            Global_Data.Search_Product_name = "";
+            Global_Data.Search_BusinessCategory_name = "";
+            Global_Data.Search_brand_name = "";
 
             Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

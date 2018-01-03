@@ -12,7 +12,10 @@ import java.util.Map;
 public class Global_Data {
 
     public static String Varient_value_add_flag = "";
+    public static String Search_business_unit_name = "";
     public static String Search_Category_name = "";
+    public static String Search_BusinessCategory_name = "";
+    public static String Search_brand_name = "";
     public static String Search_Product_name = "";
     public static Boolean app_sound = false;
     public static String New_Label="";

@@ -299,10 +299,10 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting All Local_Data
-    public List<Local_Data> getBdivByBunit(String State_ID) {
+    public List<Local_Data> getBdivByBunit(String BUSINESS_UNIT) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT  primary_category FROM " + TABLE_ITEM_MASTER + " WHERE code = '" +  State_ID + "'" + " GROUP BY name ORDER BY name";
+        String selectQuery1 = "SELECT DISTINCT primary_category FROM " + TABLE_ITEM_MASTER + " WHERE b_unit = '" +  BUSINESS_UNIT + "'" + " GROUP BY name ORDER BY name";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -311,7 +311,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         if (cursor.moveToFirst()) {
             do {
                 Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
+                contact.setprimary_category(cursor.getString(0));
                 //contact.setPwd(cursor.getString(2));
                 //contact.setImei(cursor.getString(3));
 
@@ -4858,6 +4858,52 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // return contact list?
         return contactList14;
     }
+
+    // Getting product data
+    public List<Local_Data> getBusinee_category_Name(String business_unit,String primary_categore) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        Cursor cursor = db.rawQuery("select DISTINCT b_business_c FROM item_master WHERE b_unit = ? AND primary_category = ?",
+                new String[] {business_unit,primary_categore});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setbusiness_category(cursor.getString(0));
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Local_Data> getBusinee_subcategory_Name(String business_unit,String primary_categore,String business_category) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        Cursor cursor = db.rawQuery("select DISTINCT sub_category FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ?",
+                new String[] {business_unit,primary_categore,business_category});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setSubcateg(cursor.getString(0));
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
     
     
     // Getting product data
@@ -5456,7 +5502,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetOrders(String order_type,String order_id) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT order_id,customer_name,order_type,customer_id,signature_path,distributor_id,latitude,longitude,getsign_img,details1,details2,details3,order_category FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
+        String selectQuery = "SELECT order_id,customer_name,order_type,customer_id,signature_path,distributor_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -5478,6 +5524,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_detail2(cursor.getString(10));
                 contact.setOrder_detail3(cursor.getString(11));
                 contact.setOrder_category_type(cursor.getString(12));
+                contact.setshipment_pri(cursor.getString(13));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
@@ -5623,7 +5670,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetAllOrders(String order_type) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'";
+        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -5646,6 +5693,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_detail2(cursor.getString(11));
                 contact.setOrder_detail3(cursor.getString(12));
                 contact.setOrder_category_type(cursor.getString(13));
+                contact.setshipment_pri(cursor.getString(14));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
@@ -6400,7 +6448,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     public void updateORDER_SIGNATURENEW(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_category,String shipment_pri)
     {
-        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "order_category = '"  +  order_category + "'" + "shipment_pri = '"  +  shipment_pri + "'" + " WHERE order_id = '" +  order_id    + "'";
+        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "order_category = '"  +  order_category + "'," + "shipmet_priority = '"  +  shipment_pri + "'" + " WHERE order_id = '" +  order_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
@@ -6827,13 +6875,13 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
-    public List<Local_Data> getProductvarientbycategoryandproduct(String category_name, String product_name) {
+    public List<Local_Data> getProductvarientbycategoryandproduct(String business_unit, String primary_category, String business_category, String sub_category) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE primary_category = ? AND sub_category = ? GROUP BY product_variant",
-                new String[]{category_name, product_name});
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY product_variant",
+                new String[]{business_unit, primary_category,business_category,sub_category});
 
 
         // looping through all rows and adding to list
@@ -6860,13 +6908,13 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
-    public List<Local_Data> getProductvarientbyname(String primary_category,String sub_category,String product_name) {
+    public List<Local_Data> getProductvarientbyname(String business_unit, String primary_category, String business_category, String sub_category) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,sq,mq FROM item_master WHERE primary_category = ? AND sub_category = ? AND product_variant = ? GROUP BY name",
-                new String[]{primary_category,sub_category,product_name});
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,sq,mq FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY name",
+                new String[]{business_unit, primary_category,business_category,sub_category});
 
 
         // looping through all rows and adding to list
