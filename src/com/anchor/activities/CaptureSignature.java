@@ -177,7 +177,7 @@ public class CaptureSignature extends BaseActivity {
             }
         }
 
-        txtWelcomeUser.setText(user_name+": 023");
+        txtWelcomeUser.setText(user_name+" : "+Global_Data.emp_code);
         SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
         detail1str=spf1.getString("var_detail1", "");
 
@@ -267,9 +267,12 @@ public class CaptureSignature extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
-                        new DatePickerDialog(CaptureSignature.this, date, myCalendar
+                        DatePickerDialog picker = new DatePickerDialog(CaptureSignature.this, date, myCalendar
                                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                                myCalendar.get(Calendar.DAY_OF_MONTH));
+                        picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                        picker.show();
+
                     }
                 });
 

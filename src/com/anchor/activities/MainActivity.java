@@ -1043,9 +1043,9 @@ public class MainActivity extends BaseActivity {
 				public void onErrorResponse(VolleyError error) {
 					Log.i("volley", "error: " + error);
 					//Toast.makeText(MainActivity.this, "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
-					Toast toast = Toast.makeText(MainActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
-					toast.setGravity(Gravity.CENTER, 0, 0);
-					toast.show();
+//					Toast toast = Toast.makeText(MainActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+//					toast.setGravity(Gravity.CENTER, 0, 0);
+//					toast.show();
 					dialog.dismiss();
 
 				}
@@ -1059,7 +1059,7 @@ public class MainActivity extends BaseActivity {
 				Log.d("new error","Setting a new request queue");
 			}
 			jsObjRequest.setShouldCache(false);
-			int socketTimeout = 200000;//30 seconds - change to what you want
+			int socketTimeout = 050000;//30 seconds - change to what you want
 			RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
 			jsObjRequest.setRetryPolicy(policy);
 			requestQueue.add(jsObjRequest);
