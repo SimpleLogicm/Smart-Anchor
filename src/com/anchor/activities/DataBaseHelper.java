@@ -6267,6 +6267,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.set_product_status(cursor.getString(8));
                 contact.setRP(cursor.getString(9));
                 contact.setSche_code(cursor.getString(10));
+
                 
                 // Adding contact to list
                 contactList14.add(contact);
@@ -6900,6 +6901,30 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setSQ(cursor.getString(9));
                 contact.setMQ(cursor.getString(10));
                 // Adding contact to list
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Local_Data> getSL_BYPRODUCT_Id(String P_ID) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Cursor cursor = db.rawQuery("select sq FROM item_master WHERE code = ? GROUP BY code",
+                new String[]{P_ID});
+
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+
+                contact.setSQ(cursor.getString(0));
+
                 contactList14.add(contact);
             } while (cursor.moveToNext());
         }

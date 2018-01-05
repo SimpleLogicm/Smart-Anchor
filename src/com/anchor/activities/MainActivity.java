@@ -943,83 +943,84 @@ public class MainActivity extends BaseActivity {
 
 							Log.d("States", "targets" + targets.toString());
 
-							//
-							for (int i = 0; i < targets.length(); i++) {
+							if (targets.length() > 0) {
+								for (int i = 0; i < targets.length(); i++) {
 
-								JSONObject jsonObject = targets.getJSONObject(i);
+									JSONObject jsonObject = targets.getJSONObject(i);
 
 //	                                loginDataBaseAdapter.insertTargets(jsonObject.getString("code"),"", jsonObject.getString("user_id"),
 //	                                		 jsonObject.getString("year"), jsonObject.getString("month"), jsonObject.getString("target"),
 //	                                		 jsonObject.getString("achieved"), jsonObject.getString("created_at"), jsonObject.getString("update_at"));
-								loginDataBaseAdapter.insertTargets("","", "",
-										jsonObject.getString("year"), jsonObject.getString("month"), jsonObject.getString("target"),
-										jsonObject.getString("achieved"), "", "");
+									loginDataBaseAdapter.insertTargets("", "", "",
+											jsonObject.getString("year"), jsonObject.getString("month"), jsonObject.getString("target"),
+											jsonObject.getString("achieved"), "", "");
 
-								if(jsonObject.getString("year").equalsIgnoreCase(String.valueOf(year)))
-								{
-									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString()))
-									{
-										if(!jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" "))
-										{
-											t_total +=Float.valueOf(jsonObject.getString("target").toString());
-										}
-										else
-										{
-											t_total +=Float.valueOf("0.0");
+									if (jsonObject.getString("year").equalsIgnoreCase(String.valueOf(year))) {
+										if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString())) {
+											if (!jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" ")) {
+												t_total += Float.valueOf(jsonObject.getString("target").toString());
+											} else {
+												t_total += Float.valueOf("0.0");
+											}
+
 										}
 
-									}
-
-									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString()))
-									{
+										if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString())) {
 
 
-										if(!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" "))
-										{
-											achived_total +=Float.valueOf(jsonObject.getString("achieved").toString());
-										}
-										else
-										{
-											achived_total +=Float.valueOf("0.0");
+											if (!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" ")) {
+												achived_total += Float.valueOf(jsonObject.getString("achieved").toString());
+											} else {
+												achived_total += Float.valueOf("0.0");
+											}
 										}
 									}
+
 								}
 
+
+								SharedPreferences spf = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
+								SharedPreferences.Editor editor = spf.edit();
+								//editor.putString("UserID", "admin");
+								//editor.putString("pwd", "test");
+								editor.putFloat("Target", t_total);
+								editor.putFloat("Achived", achived_total);
+								//editor.putString("SimID", simSerial);
+								editor.commit();
+
+								try {
+									int target = (int) Math.round(t_total);
+									int achieved = (int) Math.round(achived_total);
+									Float age_float = (achived_total / t_total) * 100;
+
+									//int age = (int) Math.round(age_float);
+
+									//	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+
+									if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+										int age = (int) Math.round(age_float);
+
+										todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+									} else {
+										int age = (int) Math.round(age_float);
+
+										todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+									}
+
+								} catch (Exception ex) {
+									ex.printStackTrace();
+								}
+							} else {
+								SharedPreferences spf = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
+								SharedPreferences.Editor editor = spf.edit();
+								//editor.putString("UserID", "admin");
+								//editor.putString("pwd", "test");
+								editor.putFloat("Target", 0);
+								editor.putFloat("Achived", 0);
+								//editor.putString("SimID", simSerial);
+								editor.commit();
+								todaysTarget.setText("T/A : Rs " + String.format("0" + "/" + "0" + " [" + "0") + "%" + "]");
 							}
-
-
-							SharedPreferences spf=MainActivity.this.getSharedPreferences("SimpleLogic",0);
-							SharedPreferences.Editor editor=spf.edit();
-							//editor.putString("UserID", "admin");
-							//editor.putString("pwd", "test");
-							editor.putFloat("Target", t_total);
-							editor.putFloat("Achived", achived_total);
-							//editor.putString("SimID", simSerial);
-							editor.commit();
-
-							try
-							{
-								int target  = (int) Math.round(t_total);
-								int achieved  = (int) Math.round(achived_total);
-								Float age_float = (achived_total/t_total)*100;
-
-								//int age = (int) Math.round(age_float);
-
-							//	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-
-								if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-								{
-									int age = (int) Math.round(age_float);
-
-									todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-								}else
-								{
-									int age = (int) Math.round(age_float);
-
-									todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-								}
-
-							}catch(Exception ex){ex.printStackTrace();}
 
 
 							//todaysTarget.setText("T/A : Rs "+t_total+"/"+achived_total);

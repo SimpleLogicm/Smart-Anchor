@@ -986,40 +986,76 @@ public class ProductAll_Varients extends Activity {
     public void onBackPressed() {
 
         if (p_id.isEmpty()) {
-            AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
-            alertDialog.setTitle("Warning");
-            alertDialog.setMessage("Are you sure you want to back?");
-            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            View parentView = null;
+            int flag = 0;
+            for (int i = 0; i < swipeListView.getCount(); i++)
+            {
 
-                    Global_Data.GLOVEL_LONG_DESC = "";
-                    Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-                    Global_Data.GLOVEL_ITEM_MRP = "";
-                    Global_Data.Search_business_unit_name = "";
-                    Global_Data.Search_Category_name = "";
-                    Global_Data.Search_BusinessCategory_name = "";
-                    Global_Data.Search_brand_name = "";
-
-                    Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    finish();
+                parentView = getViewByPosition(i, swipeListView);
+                EditText productquantity = (EditText) parentView.findViewById(R.id.productquantityp);
+                String productquantity_val = productquantity.getText().toString();
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(productquantity_val))
+                {
+                    flag = 1;
+                    break;
                 }
-            });
+            }
 
-            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            if(flag == 1)
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+                alertDialog.setTitle("Warning");
+                alertDialog.setMessage("Are you sure you want to discard the entered quantity?");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Global_Data.GLOVEL_LONG_DESC = "";
+                        Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                        Global_Data.GLOVEL_ITEM_MRP = "";
+                        Global_Data.Search_business_unit_name = "";
+                        Global_Data.Search_Category_name = "";
+                        Global_Data.Search_BusinessCategory_name = "";
+                        Global_Data.Search_brand_name = "";
+
+                        Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
+                        finish();
+                    }
+                });
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
 
-            alertDialog.show();
+                alertDialog.show();
+            }
+            else
+            {
+                Global_Data.GLOVEL_LONG_DESC = "";
+                Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                Global_Data.GLOVEL_ITEM_MRP = "";
+                Global_Data.Search_business_unit_name = "";
+                Global_Data.Search_Category_name = "";
+                Global_Data.Search_BusinessCategory_name = "";
+                Global_Data.Search_brand_name = "";
+
+                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+            }
+
         } else {
             Global_Data.GLOVEL_LONG_DESC = "";
             Global_Data.GLOVEL_CATEGORY_SELECTION = "";

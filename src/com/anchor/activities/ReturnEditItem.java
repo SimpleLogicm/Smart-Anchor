@@ -828,9 +828,12 @@ public class ReturnEditItem extends BaseActivity {
 //			    	  else
 //			    	  {
 					  if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") &&  !editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase(null)) {
-						  long final_mrp = (Long.valueOf(editTextMRP.getText().toString())) * (Long.valueOf(editTextQuantity.getText().toString().trim()));
-						  txtPrice.setText("Total Price : " + final_mrp);
-						  price = String.valueOf(final_mrp);
+						  try
+						  {
+							  Double final_mrp = Double.valueOf(editTextMRP.getText().toString()) * Double.valueOf(editTextQuantity.getText().toString().trim());
+							  txtPrice.setText("Total Price : "+final_mrp);
+							  price = String.valueOf(final_mrp);
+						  }catch(Exception ex){ex.printStackTrace();}
 						  //}
 					  }
 					  else

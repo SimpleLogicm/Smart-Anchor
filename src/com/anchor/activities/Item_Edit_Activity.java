@@ -81,6 +81,7 @@ public class Item_Edit_Activity extends BaseActivity {
 	ArrayList<Category> dataCategories = new ArrayList<Category>();
 	ArrayList<Product> dataProducts = new ArrayList<Product>();
 	ArrayList<Scheme> dataScheme = new ArrayList<Scheme>();
+	TextView t_error;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,7 @@ public class Item_Edit_Activity extends BaseActivity {
 		txtDeleiveryQuantity1 = (EditText) findViewById(R.id.txtDeleiveryQuantity);
 
 		txt_rp = (TextView) findViewById(R.id.textRP);
+		t_error = (TextView) findViewById(R.id.t_error);
 		// for label RP change
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
 		String rpstr=spf1.getString("var_rp", "");
@@ -864,20 +866,42 @@ public class Item_Edit_Activity extends BaseActivity {
 //			    	  {
 					  if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") &&  !editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase(null))
 					  {
-						  long final_mrp = (Long.valueOf(editTextMRP.getText().toString()))*(Long.valueOf(editTextQuantity.getText().toString().trim()));
-						  txtPrice.setText("Total Price : "+final_mrp);
-						  price = String.valueOf(final_mrp);
+
+					  	try
+						{
+							int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim())%Integer.parseInt(Global_Data.item_SL);
+							if(SQMO_Validator == 0)
+							{
+								Double final_mrp = Double.valueOf(editTextMRP.getText().toString()) * Double.valueOf(editTextQuantity.getText().toString().trim());
+								txtPrice.setText("Total Price : "+final_mrp);
+								price = String.valueOf(final_mrp);
+								t_error.setText("");
+							}
+							else
+							{
+								txtPrice.setText("Total Price : "+"");
+								price = "";
+								t_error.setText("Enter Value Not A Multiple Of Item SQ Value.");
+							}
+
+						}catch(Exception ex){ex.printStackTrace();}
+
 					  }
 					  else
 					  {
 						  txtPrice.setText("Total Price : " + "");
 						  price = String.valueOf("0");
+						  t_error.setText("");
 					  }
 
 			    	  //}
 			    		  
 			    	  
 			      }
+			      else
+				  {
+					  t_error.setText("");
+				  }
 			        //Field2.setText("");
 			   }
 			  });

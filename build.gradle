@@ -5,11 +5,21 @@ allprojects {
 }
 repositories {
     mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
 }
 
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+    repositories {
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 }
 apply plugin: 'com.android.application'
@@ -39,7 +49,7 @@ dependencies {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     dexOptions {
         jumboMode = true
@@ -59,6 +69,7 @@ android {
 
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }

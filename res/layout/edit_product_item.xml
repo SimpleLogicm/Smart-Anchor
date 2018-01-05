@@ -99,12 +99,23 @@
         android:paddingTop="10dp" >
     </EditText>
 
+    <TextView
+        android:id="@+id/t_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textColor="#ea0707"
+        android:hint=""
+
+      />
+
     <Spinner
         android:id="@+id/spnScheme"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:hint="Scheme"
 
         android:paddingTop="10dp" />
