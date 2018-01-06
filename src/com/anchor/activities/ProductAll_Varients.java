@@ -200,78 +200,83 @@ public class ProductAll_Varients extends Activity {
 
                 Global_Data.hideSoftKeyboard(ProductAll_Varients.this);
 
-                List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
+                try
+                {
+                    List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
 
-                if (cont1.size() <= 0) {
-                    // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+                    if (cont1.size() <= 0) {
+                        // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                    ProductAll_Varients.this.runOnUiThread(new Runnable() {
-                        public void run() {
-                            Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
 
-                            Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                            finish();
-                        }
-                    });
-
-                } else {
-                    SwipeList.clear();
-                    list1.clear();
-                    list2.clear();
-                    pp=0;
-                    for (Local_Data cnt1 : cont1) {
-                        HashMap<String, String> mapp = new HashMap<String, String>();
-                        mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
-                        mapp.put(TAG_QTY, "");
-                        mapp.put(TAG_PRICE, cnt1.getMRP());
-                        mapp.put(TAG_RP, cnt1.getStateName());
-                        mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-                        mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-                        mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-                        Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
-
-
-                        List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-
-                        if (contactsn.size() > 0) {
-                            for (Local_Data cn : contactsn) {
-
-                                list1.add(cn.get_delivery_product_order_quantity());
-                                list2.add("PRICE : " + cn.getAmount());
-                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-                                    pp += Double.valueOf(cn.getAmount());
-                                }
+                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(i);
+                                finish();
                             }
-                        } else {
-                            list1.add("");
-                            list2.add("");
+                        });
+
+                    } else {
+                        SwipeList.clear();
+                        list1.clear();
+                        list2.clear();
+                        pp=0;
+                        for (Local_Data cnt1 : cont1) {
+                            HashMap<String, String> mapp = new HashMap<String, String>();
+                            mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
+                            mapp.put(TAG_QTY, "");
+                            mapp.put(TAG_PRICE, cnt1.getMRP());
+                            mapp.put(TAG_RP, cnt1.getStateName());
+                            mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                            mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
+                            mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                            Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+
+
+
+                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+
+                            if (contactsn.size() > 0) {
+                                for (Local_Data cn : contactsn) {
+
+                                    list1.add(cn.get_delivery_product_order_quantity());
+                                    list2.add("PRICE : " + cn.getAmount());
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                        pp += Double.valueOf(cn.getAmount());
+                                    }
+                                }
+                            } else {
+                                list1.add("");
+                                list2.add("");
+                            }
+
+                            SwipeList.add(mapp);
                         }
 
-                        SwipeList.add(mapp);
+                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                            public void run() {
+                                swipeListView.setItemsCanFocus(true);
+
+                                adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+
+                                swipeListView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                txttotalPreview.setText("Total : " + pp);
+
+                            }
+                        });
+
+
+
                     }
-
-                    ProductAll_Varients.this.runOnUiThread(new Runnable() {
-                        public void run() {
-                            swipeListView.setItemsCanFocus(true);
-
-                            adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
-
-                            swipeListView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                            txttotalPreview.setText("Total : " + pp);
-
-                        }
-                    });
+                }catch (Exception ex){ex.printStackTrace();}
 
 
-
-                }
 
 
             }
@@ -989,59 +994,9 @@ public class ProductAll_Varients extends Activity {
 
             View parentView = null;
             int flag = 0;
-            for (int i = 0; i < swipeListView.getCount(); i++)
+
+            if(swipeListView.getCount() > 20)
             {
-
-                parentView = getViewByPosition(i, swipeListView);
-                EditText productquantity = (EditText) parentView.findViewById(R.id.productquantityp);
-                String productquantity_val = productquantity.getText().toString();
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(productquantity_val))
-                {
-                    flag = 1;
-                    break;
-                }
-            }
-
-            if(flag == 1)
-            {
-                AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
-                alertDialog.setTitle("Warning");
-                alertDialog.setMessage("Are you sure you want to discard the entered quantity?");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Global_Data.GLOVEL_LONG_DESC = "";
-                        Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-                        Global_Data.GLOVEL_ITEM_MRP = "";
-                        Global_Data.Search_business_unit_name = "";
-                        Global_Data.Search_Category_name = "";
-                        Global_Data.Search_BusinessCategory_name = "";
-                        Global_Data.Search_brand_name = "";
-
-                        Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
-                        finish();
-                    }
-                });
-
-                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-
-                alertDialog.show();
-            }
-            else
-            {
-                Global_Data.GLOVEL_LONG_DESC = "";
                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                 Global_Data.GLOVEL_ITEM_MRP = "";
                 Global_Data.Search_business_unit_name = "";
@@ -1055,6 +1010,75 @@ public class ProductAll_Varients extends Activity {
                 startActivity(i);
                 finish();
             }
+            else{
+                for (int i = 0; i < swipeListView.getCount(); i++)
+                {
+
+                    parentView = getViewByPosition(i, swipeListView);
+                    EditText productquantity = (EditText) parentView.findViewById(R.id.productquantityp);
+                    String productquantity_val = productquantity.getText().toString();
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(productquantity_val))
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+
+                if(flag == 1)
+                {
+                    AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+                    alertDialog.setTitle("Warning");
+                    alertDialog.setMessage("Are you sure you want to discard the entered quantity?");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            Global_Data.GLOVEL_LONG_DESC = "";
+                            Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                            Global_Data.GLOVEL_ITEM_MRP = "";
+                            Global_Data.Search_business_unit_name = "";
+                            Global_Data.Search_Category_name = "";
+                            Global_Data.Search_BusinessCategory_name = "";
+                            Global_Data.Search_brand_name = "";
+
+                            Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+
+                    alertDialog.show();
+                }
+                else
+                {
+                    Global_Data.GLOVEL_LONG_DESC = "";
+                    Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                    Global_Data.GLOVEL_ITEM_MRP = "";
+                    Global_Data.Search_business_unit_name = "";
+                    Global_Data.Search_Category_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
+
+                    Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    finish();
+                }
+            }
+
 
         } else {
             Global_Data.GLOVEL_LONG_DESC = "";

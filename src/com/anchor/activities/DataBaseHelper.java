@@ -5818,16 +5818,22 @@ public class DataBaseHelper extends SQLiteOpenHelper
         String selectQuery = "SELECT total_qty,amount FROM " + TABLE_ORDER_PRODUCTS + " WHERE order_id"+ " ='"+ order_id + "'" + " AND item_number"+ " ='"+ item_number + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_delivery_product_order_quantity(cursor.getString(0));
-                contact.setAmount(cursor.getString(1));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        Cursor cursor = null;
+        try {
+            cursor =  db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_delivery_product_order_quantity(cursor.getString(0));
+                    contact.setAmount(cursor.getString(1));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+
+            if(cursor != null)
+                cursor.close();
         }
         // return contact list?
         return contactList14;
@@ -5889,24 +5895,35 @@ public class DataBaseHelper extends SQLiteOpenHelper
         String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name FROM " + TABLE_ORDER_PRODUCTS + " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
+
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
+
+                    // Adding contact to list
+
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if(cursor != null)
+                cursor.close();
+        }
+
+       // Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setProductId(cursor.getString(0));
-                contact.setQty(cursor.getString(1));
-                contact.setPrice(cursor.getString(2));
-                contact.setAmount(cursor.getString(3)); 
-                contact.set_category_ids(cursor.getString(4)); 
-                contact.setProduct_nm(cursor.getString(5)); 
-                
-                // Adding contact to list
-                
-                contactList.add(contact);
-            } while (cursor.moveToNext());
-        }
+
 
         // return contact list?
         return contactList;
@@ -6933,13 +6950,13 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
-    public List<Local_Data> getProductvarientbyname(String business_unit, String primary_category, String business_category, String sub_category) {
+    public List<Local_Data> getProductvarientbyname(String business_unit, String primary_category, String business_category, String sub_category,String varient) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,sq,mq FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY name",
-                new String[]{business_unit, primary_category,business_category,sub_category});
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,sq,mq FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? AND product_variant = ? GROUP BY name",
+                new String[]{business_unit, primary_category,business_category,sub_category,varient});
 
 
         // looping through all rows and adding to list
