@@ -118,6 +118,7 @@ public class NewOrderActivity extends BaseActivity {
 		Global_Data.Search_Category_name = "";
 		Global_Data.Search_BusinessCategory_name = "";
 		Global_Data.Search_brand_name = "";
+		Global_Data.Order_hashmap.clear();
 
 		// create a instance of SQLite Database
 	     loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -650,6 +651,7 @@ public class NewOrderActivity extends BaseActivity {
 								  Global_Data.Search_BusinessCategory_name = spnCategory.getSelectedItem().toString().trim();
 								  Global_Data.Search_brand_name = parent.getItemAtPosition(pos).toString().trim();
 
+								  Global_Data.Order_hashmap.clear();
 								 Intent intent = new Intent(getApplicationContext(), ProductAll_Varients.class);
 								 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 								 //startActivityForResult(intent,SIGNATURE_ACTIVITY);

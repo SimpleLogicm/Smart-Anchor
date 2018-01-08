@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.anchor.activities.Check_Null_Value;
 import com.anchor.activities.DataBaseHelper;
+import com.anchor.activities.Global_Data;
+import com.anchor.activities.ProductAll_Varients;
 import com.anchor.activities.R;
 
 import java.util.ArrayList;
@@ -188,6 +190,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                             Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.mrpv.getText().toString());
                             holder.totalprice.setText("PRICE : " + String.valueOf(value));
                             holder.quantity_error.setText("");
+                        Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() +"pq" + String.valueOf(value)+"pprice"+holder.Productnamerpmrp.getText().toString()+"pmrp"+holder.mrpv.getText().toString()+"prp"+holder.rpv.getText().toString());
+
                         }
                         else
                         {
@@ -198,11 +202,16 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                             }
                             else
                             {
+
+
                                 holder.totalprice.setText("");
                                 holder.quantity_error.setText("Enter Value Not A Multiple Of Item SQ Value.");
                             }
 
-                          //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
+                            Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+
+
+                            //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
                         }
 
 
@@ -219,6 +228,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                 } else {
                     holder.totalprice.setText("");
                     holder.quantity_error.setText("");
+                    Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+
                 }
 
 
