@@ -3,7 +3,7 @@
     android:id="@+id/card_view"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="140dp"
     card_view:cardCornerRadius="4dp"
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="5dp"
@@ -32,10 +32,21 @@
             android:layout_toEndOf="@+id/pidp" />
 
         <TextView
-            android:id="@+id/mrpvnew"
+            android:id="@+id/pcode_new"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Productnamerpmrp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentLeft="true"
+            android:text="CODE : "
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/mrpvnew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pcode_new"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="6dp"
             android:layout_alignParentLeft="true"
@@ -81,6 +92,7 @@
             android:layout_below="@id/PSQ"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
+
             android:layout_alignParentLeft="true"
             android:text="Scheme Name"
             android:textSize="12dp" />
@@ -115,6 +127,7 @@
             android:layout_below="@+id/productquantityp"
             android:layout_alignStart="@+id/productquantityp"
             android:text=""
+            android:layout_alignBaseline="@+id/PMQ"
             android:layout_marginTop="5dp"
             android:textColor="#ea0707"
             android:textSize="12dp"

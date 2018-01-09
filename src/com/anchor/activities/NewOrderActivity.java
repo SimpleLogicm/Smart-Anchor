@@ -1336,7 +1336,7 @@ public class NewOrderActivity extends BaseActivity {
 
 					AlertDialog alertDialog = new AlertDialog.Builder(NewOrderActivity.this).create(); //Read Update
 				    alertDialog.setTitle("Warning");
-				    alertDialog.setMessage(" Are you sure you want to back without order sync.?");
+				    alertDialog.setMessage("Are you sure you want to go back without order sync.?");
 				    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
 						@Override

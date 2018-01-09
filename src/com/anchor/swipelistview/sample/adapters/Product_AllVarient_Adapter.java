@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.anchor.activities.Check_Null_Value;
 import com.anchor.activities.DataBaseHelper;
 import com.anchor.activities.Global_Data;
-import com.anchor.activities.ProductAll_Varients;
 import com.anchor.activities.R;
 
 import java.util.ArrayList;
@@ -103,6 +102,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             holder.mWatcher2 = new MutableWatcher2();
             holder.Productnamerpmrp = (TextView) convertView.findViewById(R.id.Productnamerpmrp);
             holder.pidp = (TextView) convertView.findViewById(R.id.pidp);
+            holder.pcode_new = (TextView) convertView.findViewById(R.id.pcode_new);
             holder.productquantity = (EditText) convertView.findViewById(R.id.productquantityp);
             holder.totalprice = (TextView) convertView.findViewById(R.id.totalpricep);
             holder.mrpv = (TextView) convertView.findViewById(R.id.mrpv);
@@ -134,6 +134,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
         holder.Productnamerpmrp.setText(getData.get(TAG_ITEMNAME));
         holder.pidp.setText(getData.get(TAG_ITEM_NUMBER));
+        holder.pcode_new.setText("CODE : "+getData.get(TAG_ITEM_NUMBER));
         holder.mrpv.setText(getData.get(TAG_PRICE));
         holder.rpv.setText(getData.get(TAG_RP));
 
@@ -205,7 +206,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
 
                                 holder.totalprice.setText("");
-                                holder.quantity_error.setText("Enter Value Not A Multiple Of Item SQ Value.");
+                                holder.quantity_error.setText("Entered Value Not A Multiple Of Item SQ Value.");
                             }
 
                             Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
@@ -245,7 +246,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
         TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs;
         TextView PSQ,PMQ,PSQVALUE,PMQVALUE,quantity_error;
         EditText productquantity;
-        TextView totalprice;
+        TextView totalprice,pcode_new;
         public MutableWatcher1 mWatcher1;
         public MutableWatcher2 mWatcher2;
 

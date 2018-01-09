@@ -441,12 +441,23 @@ public class Item_Edit_Activity extends BaseActivity {
 //						toast.setGravity(Gravity.CENTER, 0, 0);
 //						toast.show();
 //					}
-				
+
+					int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim())%Integer.parseInt(Global_Data.item_SL);
+
 				   if (editTextQuantity.getText().toString().length() == 0) {
 						Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please enter Quantity", Toast.LENGTH_SHORT);
 						toast.setGravity(Gravity.CENTER, 0, 0);
 						toast.show();
 					}
+					else
+					if(SQMO_Validator != 0)
+					{
+						Toast toast = Toast.makeText(Item_Edit_Activity.this,"Entered Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_SHORT);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+						editTextQuantity.setText("");
+					}
+
 					
 //					else if (spnScheme.getSelectedItem().toString().equalsIgnoreCase("Select Discount Type")) {
 //						Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please Select Discount Type", Toast.LENGTH_SHORT);
@@ -881,7 +892,7 @@ public class Item_Edit_Activity extends BaseActivity {
 							{
 								txtPrice.setText("Total Price : "+"");
 								price = "";
-								t_error.setText("Enter Value Not A Multiple Of Item SQ Value.");
+								t_error.setText("Entered Value Not A Multiple Of Item SQ Value.");
 							}
 
 						}catch(Exception ex){ex.printStackTrace();}

@@ -27,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -815,7 +814,7 @@ public class ProductAll_Varients extends Activity {
                                         String key_value_array[] = String.valueOf(value).split("pq");
                                         String key_value_price_array[] = key_value_array[1].split("pprice");
                                         String key_value_pname_array[] = key_value_price_array[1].split("pmrp");
-                                        String key_value_pmrp_array[] = key_value_price_array[1].split("prp");
+                                        String key_value_pmrp_array[] = key_value_pname_array[1].split("prp");
 
                                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(key_value_price_array[0])) {
                                             q_check = "yes";
@@ -929,6 +928,8 @@ public class ProductAll_Varients extends Activity {
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
                                 loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
+
+                               // Log.d("pPRIZE","Pprize"+ p_price.get(k));
                             }
 
 
