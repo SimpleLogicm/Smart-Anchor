@@ -28,8 +28,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -229,22 +227,7 @@ public class Pricing_Main extends BaseActivity {
 
         //recList.setVisibility(View.INVISIBLE);
 
-        results2.clear();
-        List<Local_Data> contacts2 = dbvoc.getAllVariant();
-        for (Local_Data cn : contacts2) {
-            results2.add(cn.getStateName());
-            result_product.add(cn.getStateName());
-        }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                results2);
-        Product_Variant.setThreshold(1);// will start working from
-        // first character
-        Product_Variant.setAdapter(adapter);// setting the adapter
-        // data into the
-        // AutoCompleteTextView
-        Product_Variant.setTextColor(Color.BLACK);
 
         Product_Variant.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -433,65 +416,15 @@ public class Pricing_Main extends BaseActivity {
                 //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
 
                 Global_Data.hideSoftKeyboard(Pricing_Main.this);
-//                editTextQuantity.setFocusableInTouchMode(true);
-//                editTextQuantity.setEnabled(true);
 
-//                List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
-//                //results2.add("Select Variant");
-//                for (Local_Data cn1 : cont) {
-//                    String str_var = "" + cn1.getStateName();
-//                    //str_var1 = ""+cn1.getMRP();
-//                    String str_var2 = "" + cn1.get_Description();
-//                    String str_var3 = "" + cn1.get_Claims();
-//                    Global_Data.amnt = "" + cn1.get_Description();
-//                    Global_Data.amnt1 = "" + cn1.get_Claims();
-//                    product_code = cn1.getCode();
-//
-//                    categ_name = cn1.getCategory();
-//                    subcateg_name = cn1.getSubcateg();
-//
-////                    editTextRP.setText(str_var);
-////                    editTextMRP.setText(str_var1);
-////                    txtPrice.setText("Total Price : "+"");
-////
-////                    if (editTextQuantity.getText().toString().length() != 0) {
-////                        if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null")  && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-////                        {
-////                            long final_mrp = (Long.valueOf(editTextMRP.getText().toString()))*(Long.valueOf(editTextQuantity.getText().toString().trim()));
-////                            txtPrice.setText("Total Price : "+final_mrp);
-////                            price = String.valueOf(final_mrp);
-////
-////                            // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-////                        }
-////                        else
-////                        {
-////                            if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null")  && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-////                            {
-////                                // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-////                                // txtPrice.setText("Total Price : "+final_mrp);
-////                                // price = String.valueOf(final_mrp);
-////                                //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-////                            }
-////                        }
-////                    }
+//                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)) {
+//                    int spinnerPosition = adapter_state1.getPosition(categ_name);
+//                    spnCategory.setSelection(spinnerPosition);
 //                }
 
-//                adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spnCategory.setAdapter(adapter_state1);
-//                //spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
-//
-//                adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spnProduct.setAdapter(adapter_state2);
-                //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnBu.getSelectedItem().toString())&& Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnBusinessDiv.getSelectedItem().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnCategory.getSelectedItem().toString())&& Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnProduct.getSelectedItem().toString())) {
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)) {
-                    int spinnerPosition = adapter_state1.getPosition(categ_name);
-                    spnCategory.setSelection(spinnerPosition);
-                }
-
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
-
-                    List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
+                    List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(spnBu.getSelectedItem().toString(), spnBusinessDiv.getSelectedItem().toString(), spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString());
 
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -502,7 +435,7 @@ public class Pricing_Main extends BaseActivity {
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
-                                Intent i = new Intent(Pricing_Main.this, NewOrderActivity.class);
+                                Intent i = new Intent(Pricing_Main.this, MainActivity.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
@@ -511,54 +444,24 @@ public class Pricing_Main extends BaseActivity {
                         });
 
                     } else {
-                        resultsvarient.clear();
-                        SwipeList.clear();
+
                         // pp=0;
+                        result.clear();
                         for (Local_Data cnt1 : cont1) {
 
 
                             result = new ArrayList<ContactInfo>();
-                            //for (Local_Data cn : contacts3) {
+//for (Local_Data cn : contacts3) {
 
                             ContactInfo ci = new ContactInfo();
-                            ci.name = cnt1.get_product_desc();
-                            ci.rp = cnt1.getRP();
+                            ci.name = cnt1.getProduct_nm();
+                            ci.rp = cnt1.getStateName();
                             ci.mrp = cnt1.getMRP();
+                            //ci.mrp = cnt1.getMRP();
 
                             result.add(ci);
 
 
-
-//                                    HashMap<String, String> mapp = new HashMap<String, String>();
-//                                    mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
-//                                    mapp.put(TAG_QTY, "");
-//                                    mapp.put(TAG_PRICE, cnt1.getMRP());
-//                                    mapp.put(TAG_RP, cnt1.getStateName());
-//                                    mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-//                                    mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-//                                    mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-//                                    Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
-                            resultsvarient.add(cnt1.getProduct_variant());
-
-//                                    List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-//
-//
-//                                    if (contactsn.size() > 0) {
-//                                        for (Local_Data cn : contactsn) {
-//
-//                                            list1.add(cn.get_delivery_product_order_quantity());
-//                                            list2.add("PRICE : " + cn.getAmount());
-//                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-//                                                pp += Double.valueOf(cn.getAmount());
-//                                            }
-//                                        }
-//                                    } else {
-//                                        list1.add("");
-//                                        list2.add("");
-//                                    }
-
-                            // SwipeList.add(mapp);
                         }
 
                         Pricing_Main.this.runOnUiThread(new Runnable() {
@@ -569,7 +472,7 @@ public class Pricing_Main extends BaseActivity {
                                 recList.setAdapter(ca);
                                 ca.notifyDataSetChanged();
 
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Pricing_Main.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Pricing_Main.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
                                 Product_Variant.setThreshold(1);// will start working from
                                 // first character
                                 Product_Variant.setAdapter(adapter);// setting the adapter
@@ -583,94 +486,8 @@ public class Pricing_Main extends BaseActivity {
                         });
 
 
-
                     }
-                } else {
-
-                    List<Local_Data> cont1 = dbvoc.getProductvarient();
-
-                    if (cont1.size() <= 0) {
-                        // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-                        Pricing_Main.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast toast = Toast.makeText(Pricing_Main.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-
-                                Intent i = new Intent(Pricing_Main.this, NewOrderActivity.class);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-                                finish();
-                            }
-                        });
-
-                    } else {
-                        resultsvarient.clear();
-                        SwipeList.clear();
-                        //pp=0;
-                        for (Local_Data cnt1 : cont1) {
-
-
-                            result = new ArrayList<ContactInfo>();
-                            //for (Local_Data cn : contacts3) {
-
-                            ContactInfo ci = new ContactInfo();
-                            ci.name = cnt1.get_product_desc();
-                            ci.rp = cnt1.getRP();
-                            ci.mrp = cnt1.getMRP();
-
-                            result.add(ci);
-
-//
-//                                    HashMap<String, String> mapp = new HashMap<String, String>();
-//                                    mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm() + " RP : " + cnt1.getStateName() + " MRP : " + cnt1.getMRP());
-//                                    mapp.put(TAG_QTY, "");
-//                                    mapp.put(TAG_PRICE, cnt1.getMRP());
-//                                    mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-//                                    mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-//                                    mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-//                                    Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
-//                                    List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-//
-//                                    if (contactsn.size() > 0) {
-//                                        for (Local_Data cn : contactsn) {
-//
-//                                            list1.add(cn.get_delivery_product_order_quantity());
-//                                            list2.add("PRICE : " + cn.getAmount());
-//                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-//                                                pp += Double.valueOf(cn.getAmount());
-//                                            }
-//                                        }
-//                                    } else {
-//                                        list1.add("");
-//                                        list2.add("");
-//                                    }
-
-                            //SwipeList.add(mapp);
-                        }
-
-                        Pricing_Main.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                // recList.setItemsCanFocus(true);
-//
-                                ContactAdapter ca = new ContactAdapter(Pricing_Main.this, result);
-                                recList.setAdapter(ca);
-                                ca.notifyDataSetChanged();
-                                //txttotalPreview.setText("Total : " + pp);
-
-
-                            }
-                        });
-
-
-
-                    }
-
                 }
-
 
             }
         });

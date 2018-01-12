@@ -208,18 +208,6 @@ public class Home extends Fragment {
 			@Override
 			public void onClick(View v) {
 
-				//sendSMSMessage();
-
-//				if (MobNumber != null) {
-//
-//					for (int i = 0; i < MobNumber.size(); i++) {
-						String message ="sfsdf";
-						//String tempMobileNumber = MobNumber.get(i).toString();
-						String tempMobileNumber = "8454858739";
-						//sendSMS(tempMobileNumber, message);
-					//}
-
-
 				Intent intent = new Intent(getActivity(), Pricing_Main.class);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
