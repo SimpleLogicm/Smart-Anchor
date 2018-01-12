@@ -17,7 +17,7 @@ public class LoginDataBaseAdapter
 		                    "( " +"ID"+" integer primary key autoincrement,"+ "username  text,password text," +
 		                    		"date_of_joining text,mob_no text,email_id text,reporting_to text,first_name text," +
 		                    		"last_name text,status text,created_by text,modified_by text,project_id text,company_id text,role_id text," +
-				"device_id text,state_id text,city_id text,created_at text,updated_at text,ids text, cur_date text, login_count text);";
+				"device_id text,state_id text,city_id text,created_at text,updated_at text,ids text, cur_date text, login_count text,emp_code text);";
 						
 		static final String DATABASE_CREATE_TASKS = "CREATE TABLE IF NOT EXISTS "+"tasks"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "from_date  text,to_date text," +
@@ -423,7 +423,7 @@ public class LoginDataBaseAdapter
         
         public void insertEntry(String username, String password, String doj, String mob_no, String email_id, String report_to,
 								String first_name, String last_name, String status, String create_by, String modified, String project_id, String company_id,
-								String role_id, String device_id, String state_id, String city, String create_at, String update_at, String id, String cur_date, String login_count)
+								String role_id, String device_id, String state_id, String city, String create_at, String update_at, String id, String cur_date, String login_count,String emp_code)
 		{
 	       ContentValues newValues = new ContentValues();
 			// Assign values for each row.
@@ -451,6 +451,7 @@ public class LoginDataBaseAdapter
 			newValues.put("ids", id);
 			newValues.put("cur_date", cur_date);
 			newValues.put("login_count", login_count);
+			newValues.put("emp_code", emp_code);
 			
 			// Insert the row into your table
 			db.insert("users", null, newValues);

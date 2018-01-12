@@ -4036,6 +4036,8 @@ public class getServices {
 
                         JSONArray Order_Category = json.getJSONArray("order_categories");
 
+                        JSONArray users_emp = json.getJSONArray("users");
+
                         dbvoc.getDeleteTable("cities");
                         dbvoc.getDeleteTable("states");
                         dbvoc.getDeleteTable("beats");
@@ -4235,6 +4237,13 @@ public class getServices {
                             }
                         }
 
+
+                        for (int i = 0; i < users_emp.length(); i++) {
+
+                            JSONObject jsonObject = users_emp.getJSONObject(i);
+                            dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"),jsonObject.getString("email"));
+
+                        }
                         for (int i = 0; i < l1_contacts.length(); i++) {
                             dbvoc.getDeleteTable("L1_Contact");
 

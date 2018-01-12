@@ -151,6 +151,7 @@ public class Previous_orderNew_S2 extends BaseActivity {
         }
 
 //
+        String Product_id = "";
         if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
         {
             List<Local_Data> cont1 = dbvoc.getItemNamePrevious_Order(Global_Data.Previous_Order_ServiceOrder_ID);
@@ -160,6 +161,13 @@ public class Previous_orderNew_S2 extends BaseActivity {
                 mapp.put(TAG_QTY, cnt1.getQty());
                 mapp.put(TAG_PRICE, cnt1.getPrice());
                 mapp.put(TAG_ITEM_NUMBER, cnt1.get_category_ids());
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnt1.get_category_ids()))
+                {
+                    Product_id = cnt1.get_category_ids();
+                }
+
+
                 Log.d("ITEM_NUMBER N", "ITEM_NUMBER N"+cnt1.get_category_ids());
                 str += cnt1.getAmount();
                 Amount_tp.add(cnt1.getAmount());
@@ -167,6 +175,19 @@ public class Previous_orderNew_S2 extends BaseActivity {
                 //Toast.makeText(NewOrderActivity.this, "Login:"+Global_Data.order_id,Toast.LENGTH_SHORT).show();
                 SwipeList.add(mapp);
             }
+
+            try
+            {
+                List<Local_Data> contact_bu = dbvoc.getB_Unit_byproduct_id(Product_id);
+                for (Local_Data cn : contact_bu) {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getBunit())) {
+                        Global_Data.Search_business_unit_name = cn.getBunit();
+                    }
+                }
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+
             Double sum = 0.0;
             for(int m=0; m<Amount_tp.size(); m++)
             {

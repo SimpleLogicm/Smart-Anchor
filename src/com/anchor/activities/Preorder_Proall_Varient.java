@@ -43,7 +43,7 @@ import java.util.List;
 
 import cpm.simplelogic.helper.ConnectionDetector;
 
-public class ProductAll_Varients extends Activity {
+public class Preorder_Proall_Varient extends Activity {
 
     int pp = 0;
     String q_check = "";
@@ -122,7 +122,7 @@ public class ProductAll_Varients extends Activity {
         SwipeList = new ArrayList<HashMap<String, String>>();
 
 
-        SharedPreferences spf = ProductAll_Varients.this.getSharedPreferences("SimpleLogic", 0);
+        SharedPreferences spf = Preorder_Proall_Varient.this.getSharedPreferences("SimpleLogic", 0);
         SharedPreferences.Editor editor = spf.edit();
         editor.putString("order", "new");
         editor.commit();
@@ -139,7 +139,7 @@ public class ProductAll_Varients extends Activity {
         mTitleTextView.setText("Product List");
 
         TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = ProductAll_Varients.this.getSharedPreferences("SimpleLogic", 0);
+        SharedPreferences sp = Preorder_Proall_Varient.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
@@ -179,7 +179,7 @@ public class ProductAll_Varients extends Activity {
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     if(event.getRawX() >= (Product_Variant.getRight() - Product_Variant.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
-                        View view = ProductAll_Varients.this.getCurrentFocus();
+                        View view = Preorder_Proall_Varient.this.getCurrentFocus();
                         if (view != null) {
                             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -199,7 +199,7 @@ public class ProductAll_Varients extends Activity {
                                     long id) {
                 //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
 
-                Global_Data.hideSoftKeyboard(ProductAll_Varients.this);
+                Global_Data.hideSoftKeyboard(Preorder_Proall_Varient.this);
 
                 q_check = "";
                 Global_Data.Order_hashmap.clear();
@@ -217,13 +217,13 @@ public class ProductAll_Varients extends Activity {
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(Preorder_Proall_Varient.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
-                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
@@ -268,11 +268,11 @@ public class ProductAll_Varients extends Activity {
                             SwipeList.add(mapp);
                         }
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+                                adapter = new Product_AllVarient_Adapter(Preorder_Proall_Varient.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -312,7 +312,7 @@ public class ProductAll_Varients extends Activity {
         });
 
 
-        dialog = new ProgressDialog(ProductAll_Varients.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        dialog = new ProgressDialog(Preorder_Proall_Varient.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Customer Loading....");
         dialog.setTitle("Metal App");
         dialog.setCancelable(false);
@@ -338,12 +338,12 @@ public class ProductAll_Varients extends Activity {
                     Global_Data.GLOVEL_LONG_DESC = "";
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
-                   // Global_Data.Search_business_unit_name = "";
+                    // Global_Data.Search_business_unit_name = "";
                     Global_Data.Search_Category_name = "";
                     Global_Data.Search_BusinessCategory_name = "";
                     Global_Data.Search_brand_name = "";
 
-                    Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                    Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
@@ -373,7 +373,7 @@ public class ProductAll_Varients extends Activity {
                 if (!Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
 
                     if (Global_Data.Order_hashmap.size() > 0) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+                        AlertDialog alertDialog = new AlertDialog.Builder(Preorder_Proall_Varient.this).create(); //Read Update
                         alertDialog.setTitle("Warning");
                         alertDialog.setMessage("Are you sure you want to Add more items without saving current list items?");
                         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
@@ -384,7 +384,7 @@ public class ProductAll_Varients extends Activity {
                                 Global_Data.GLOVEL_LONG_DESC = "";
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
-                               // Global_Data.Search_business_unit_name = "";
+                                // Global_Data.Search_business_unit_name = "";
                                 Global_Data.Search_Category_name = "";
                                 Global_Data.Search_BusinessCategory_name = "";
                                 Global_Data.Search_brand_name = "";
@@ -396,7 +396,7 @@ public class ProductAll_Varients extends Activity {
                                 p_rp.clear();
                                 Global_Data.Order_hashmap.clear();
 
-                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 startActivity(i);
                                 finish();
@@ -417,7 +417,7 @@ public class ProductAll_Varients extends Activity {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
-                       // Global_Data.Search_business_unit_name = "";
+                        // Global_Data.Search_business_unit_name = "";
                         Global_Data.Search_Category_name = "";
                         Global_Data.Search_BusinessCategory_name = "";
                         Global_Data.Search_brand_name = "";
@@ -429,7 +429,7 @@ public class ProductAll_Varients extends Activity {
                         p_rp.clear();
                         Global_Data.Order_hashmap.clear();
 
-                        Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                        Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         startActivity(i);
                         finish();
@@ -440,7 +440,7 @@ public class ProductAll_Varients extends Activity {
                 } else {
 
                     if (Global_Data.Order_hashmap.size() > 0) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+                        AlertDialog alertDialog = new AlertDialog.Builder(Preorder_Proall_Varient.this).create(); //Read Update
                         alertDialog.setTitle("Warning");
                         alertDialog.setMessage("Are you sure you want to Add more items without saving current list items?");
                         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
@@ -451,7 +451,7 @@ public class ProductAll_Varients extends Activity {
                                 Global_Data.GLOVEL_LONG_DESC = "";
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
-                             //   Global_Data.Search_business_unit_name = "";
+                                //   Global_Data.Search_business_unit_name = "";
                                 Global_Data.Search_Category_name = "";
                                 Global_Data.Search_BusinessCategory_name = "";
                                 Global_Data.Search_brand_name = "";
@@ -465,7 +465,7 @@ public class ProductAll_Varients extends Activity {
 
 
 
-                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 startActivity(i);
                                 finish();
@@ -489,7 +489,7 @@ public class ProductAll_Varients extends Activity {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
-                      //  Global_Data.Search_business_unit_name = "";
+                        //  Global_Data.Search_business_unit_name = "";
                         Global_Data.Search_Category_name = "";
                         Global_Data.Search_BusinessCategory_name = "";
                         Global_Data.Search_brand_name = "";
@@ -503,7 +503,7 @@ public class ProductAll_Varients extends Activity {
 
 
 
-                        Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                        Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         startActivity(i);
                         finish();
@@ -523,7 +523,7 @@ public class ProductAll_Varients extends Activity {
                 if (!Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
 
 //                    if (p_id.isEmpty()) {
-//                        AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+//                        AlertDialog alertDialog = new AlertDialog.Builder(Preorder_Proall_Varient.this).create(); //Read Update
 //                        alertDialog.setTitle("Warning");
 //                        alertDialog.setMessage("Are you sure you want to preview order without saving current list items?");
 //                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
@@ -538,7 +538,7 @@ public class ProductAll_Varients extends Activity {
 //
 //                                Global_Data.Search_Product_name = "";
 //
-//                                Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
+//                                Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S2.class);
 //                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //                                startActivity(i);
 //                                finish();
@@ -556,19 +556,19 @@ public class ProductAll_Varients extends Activity {
 //
 //                        alertDialog.show();
 //                    } else {
-                        Global_Data.GLOVEL_LONG_DESC = "";
-                        Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-                        Global_Data.GLOVEL_ITEM_MRP = "";
-                     //   Global_Data.Search_business_unit_name = "";
-                        Global_Data.Search_Category_name = "";
-                        Global_Data.Search_BusinessCategory_name = "";
-                        Global_Data.Search_brand_name = "";
+                    Global_Data.GLOVEL_LONG_DESC = "";
+                    Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                    Global_Data.GLOVEL_ITEM_MRP = "";
+                    //   Global_Data.Search_business_unit_name = "";
+                    Global_Data.Search_Category_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
 
-                        Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        startActivity(i);
-                        finish();
-                 //   }
+                    Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S2.class);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    startActivity(i);
+                    finish();
+                    //   }
 
 
                     //NewOrderFragment.this.startActivity(i);
@@ -601,13 +601,13 @@ public class ProductAll_Varients extends Activity {
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(Preorder_Proall_Varient.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
-                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
@@ -654,21 +654,21 @@ public class ProductAll_Varients extends Activity {
                             SwipeList.add(mapp);
                         }
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+                                adapter = new Product_AllVarient_Adapter(Preorder_Proall_Varient.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
 
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductAll_Varients.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
-								 Product_Variant.setThreshold(1);// will start working from
-								 // first character
-								 Product_Variant.setAdapter(adapter);// setting the adapter
-								 // data into the
-								 // AutoCompleteTextView
-								 Product_Variant.setTextColor(Color.BLACK);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Preorder_Proall_Varient.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+                                Product_Variant.setThreshold(1);// will start working from
+                                // first character
+                                Product_Variant.setAdapter(adapter);// setting the adapter
+                                // data into the
+                                // AutoCompleteTextView
+                                Product_Variant.setTextColor(Color.BLACK);
                                 txttotalPreview.setText("Total : " + pp);
 
 
@@ -685,13 +685,13 @@ public class ProductAll_Varients extends Activity {
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(Preorder_Proall_Varient.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
-                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
@@ -732,11 +732,11 @@ public class ProductAll_Varients extends Activity {
                             SwipeList.add(mapp);
                         }
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                        Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+                                adapter = new Product_AllVarient_Adapter(Preorder_Proall_Varient.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
                                 txttotalPreview.setText("Total : " + pp);
@@ -768,7 +768,7 @@ public class ProductAll_Varients extends Activity {
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
             //dialog.dismiss();
-            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+            Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                 public void run() {
                     dialog.dismiss();
                 }
@@ -794,7 +794,7 @@ public class ProductAll_Varients extends Activity {
 
             try {
 
-                ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                     public void run() {
                         View parentView = null;
 
@@ -861,39 +861,46 @@ public class ProductAll_Varients extends Activity {
 
                 Long randomPIN = System.currentTimeMillis();
                 String PINString = String.valueOf(randomPIN);
-                if (Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
-                    if (Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales")) {
-                        Global_Data.GLObalOrder_id = "Ord" + PINString;
-                        Global_Data.GLOvel_GORDER_ID = "Ord" + PINString;
-                    } else {
-                        Global_Data.GLObalOrder_id = "QNO" + PINString;
-                        Global_Data.GLOvel_GORDER_ID = "QNO" + PINString;
-                    }
+                if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
+                {
+                    Global_Data.Previous_Order_UpdateOrder_ID = "Ord"+PINString;
 
-                    try {
-                        AppLocationManager appLocationManager = new AppLocationManager(ProductAll_Varients.this);
-                        Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
-                        Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
-                        PlayService_Location PlayServiceManager = new PlayService_Location(ProductAll_Varients.this);
+                    Global_Data.GLObalOrder_id = "Ord"+PINString;
+                    Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
+                    // Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
 
-                        if (PlayServiceManager.checkPlayServices(ProductAll_Varients.this)) {
-                            Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
+                    dbvoc.getDeleteTable("previous_orders");
 
-                        } else if (!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)) {
+                    try
+                    {
+                        AppLocationManager appLocationManager = new AppLocationManager(Preorder_Proall_Varient.this);
+                        Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+                        Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                        PlayService_Location PlayServiceManager = new PlayService_Location(Preorder_Proall_Varient.this);
+
+                        if(PlayServiceManager.checkPlayServices(Preorder_Proall_Varient.this))
+                        {
+                            Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+                        }
+                        else
+                        if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+                        {
                             Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
                             Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
                         }
 
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    }catch(Exception ex){ex.printStackTrace();}
+
+                    loginDataBaseAdapter.insertOrders("",  Global_Data.Previous_Order_UpdateOrder_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "",Global_Data.order_retailer,Global_Data.order_state,Global_Data.order_city,Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","");
+
+                    List<Local_Data> cont1 = dbvoc.getItemNamePrevious_OrderCheck(Global_Data.Previous_Order_ServiceOrder_ID,Global_Data.GLOvel_ITEM_NUMBER);
+                    for (Local_Data cnt1 : cont1) {
+
+                        loginDataBaseAdapter.insertOrderProducts("", "", Global_Data.GLOvel_GORDER_ID, "","","","", "",cnt1.getSche_code().trim(), " ", "",cnt1.getQty().trim(),cnt1.getRP().trim(),cnt1.getPrice().trim(), cnt1.getAmount().trim(), "", "",Global_Data.order_retailer," ",cnt1.get_category_ids()," ",cnt1.getProduct_nm());
                     }
 
-                    List<Local_Data> checkq = dbvoc.checkOrderExist(Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLObalOrder_id);
-
-                    if (checkq.size() <= 0) {
-                        loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.Glovel_BEAT_ID, "", "", "", "", "", "", "","");
-                    }
-
+                    dbvoc.getDeleteTable("previous_order_products");
                 }
 
 
@@ -930,8 +937,6 @@ public class ProductAll_Varients extends Activity {
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
                                 loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
-
-                               // Log.d("pPRIZE","Pprize"+ p_price.get(k));
                             }
 
 
@@ -966,14 +971,13 @@ public class ProductAll_Varients extends Activity {
                     p_rp.clear();
                     // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                    ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                    Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast toast = Toast.makeText(ProductAll_Varients.this, "All item delete, Please add new item in order.", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(Preorder_Proall_Varient.this, "All item delete, Please add new item in order.", Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                            Product_Variant.setText("");
 
-                            Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                            Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(i);
@@ -990,19 +994,18 @@ public class ProductAll_Varients extends Activity {
                     txttotalPreview.setText("Total : " + pp);
                     q_check = "";
                     Global_Data.Order_hashmap.clear();
-
-                    if(!Product_Variant.getText().toString().equalsIgnoreCase(""))
-                    {
-                        Product_Variant.setText("");
-                    }
-
                     p_id.clear();
                     p_q.clear();
                     p_price.clear();
                     p_name.clear();
                     p_mrp.clear();
                     p_rp.clear();
-                    Toast toast = Toast.makeText(ProductAll_Varients.this, "Items add successfully", Toast.LENGTH_LONG);
+
+                    if(!Product_Variant.getText().toString().equalsIgnoreCase(""))
+                    {
+                        Product_Variant.setText("");
+                    }
+                    Toast toast = Toast.makeText(Preorder_Proall_Varient.this, "Items add successfully", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
@@ -1027,7 +1030,7 @@ public class ProductAll_Varients extends Activity {
             }
 
 
-            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+            Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                 public void run() {
                     dialog.dismiss();
                 }
@@ -1039,7 +1042,7 @@ public class ProductAll_Varients extends Activity {
         protected void onPreExecute() {
 
 
-            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+            Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                 public void run() {
 
 
@@ -1099,7 +1102,7 @@ public class ProductAll_Varients extends Activity {
 
         if (Global_Data.Order_hashmap.size() > 0) {
 
-            AlertDialog alertDialog = new AlertDialog.Builder(ProductAll_Varients.this).create(); //Read Update
+            AlertDialog alertDialog = new AlertDialog.Builder(Preorder_Proall_Varient.this).create(); //Read Update
             alertDialog.setTitle("Warning");
             alertDialog.setMessage("Are you sure you want to discard the entered quantity?");
             alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
@@ -1110,7 +1113,7 @@ public class ProductAll_Varients extends Activity {
                     Global_Data.GLOVEL_LONG_DESC = "";
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
-                  //  Global_Data.Search_business_unit_name = "";
+                    //  Global_Data.Search_business_unit_name = "";
                     Global_Data.Search_Category_name = "";
                     Global_Data.Search_BusinessCategory_name = "";
                     Global_Data.Search_brand_name = "";
@@ -1122,7 +1125,7 @@ public class ProductAll_Varients extends Activity {
                     p_rp.clear();
                     Global_Data.Order_hashmap.clear();
 
-                    Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                    Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
@@ -1146,7 +1149,7 @@ public class ProductAll_Varients extends Activity {
             Global_Data.GLOVEL_LONG_DESC = "";
             Global_Data.GLOVEL_CATEGORY_SELECTION = "";
             Global_Data.GLOVEL_ITEM_MRP = "";
-           // Global_Data.Search_business_unit_name = "";
+            // Global_Data.Search_business_unit_name = "";
             Global_Data.Search_Category_name = "";
             Global_Data.Search_BusinessCategory_name = "";
             Global_Data.Search_brand_name = "";
@@ -1158,7 +1161,7 @@ public class ProductAll_Varients extends Activity {
             p_rp.clear();
             Global_Data.Order_hashmap.clear();
 
-            Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+            Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

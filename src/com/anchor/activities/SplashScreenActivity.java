@@ -250,6 +250,16 @@ public class SplashScreenActivity extends Activity {
 			 Log.w("Alter Table", "Altering " + "item_master" + ": " + ex.getMessage());
 		 }
 	 }
+
+	 boolean column_check_user_emp_code= dbvoc.isColumnExists("users","emp_code");
+	 if(!column_check_user_emp_code)
+	 {
+		 try {
+			 dbvoc.alter_Columns("users","emp_code");
+		 } catch (SQLiteException ex) {
+			 Log.w("Alter Table", "Altering " + "users" + ": " + ex.getMessage());
+		 }
+	 }
  }
     
 }

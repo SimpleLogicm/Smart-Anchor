@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -40,24 +41,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelectedListener{
+public class Previous_orderNew_S1 extends BaseActivity {
     int check=0;
-    String categ_name,subcateg_name;
+    int checkb=0;
+    int checkd=0;
+    MediaPlayer mpplayer;
     int check_product=0;
     int check_ProductSpec=0;
-    String product_code = "";
-    String scheme_code = "";
-    String scheme_namen = "";
     String CategoriesSpinner = "";
+    String str_var1;
+    String S_ID;
+    AutoCompleteTextView Product_Variant;
+    String categ_name,subcateg_name;
     String ProductSpinner = "";
     String price = "";
     String str_variant;
+    String product_code = "";
+    String scheme_code = "";
+    String scheme_namen = "";
     LoginDataBaseAdapter loginDataBaseAdapter;
+    TextView txtWelcomeUser;
 
-    AutoCompleteTextView Product_Variant;
-
-    Spinner spnCategory, spnProductSpec, spnScheme, spnProduct;
-    TextView editTextRP, editTextMRP, txtPrice, txtDeleiveryQuantity,txt_rp;
+    Spinner spnCategory, spnProductSpec, spnScheme, spnProduct, spnBu, spnBusinessDiv;
+    TextView editTextRP, editTextMRP, txtPrice, txtDeleiveryQuantity, txt_rp;
     EditText txtDeleiveryQuantity1;
     static int quantity = 0, deleiveryQuantity = 0;
     static float rp, mrp, totalprice,totalprice1,totalprc_scheme, productprice;
@@ -67,9 +73,9 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
             productDeleiveryQuantity, productScheme, productrp, productmrp,
             producttotalPrice;
     Button buttonAddMOre, buttonPreviewOrder;
-
+    AutoCompleteTextView autoCompleteTextView1;
     //ArrayList<DatabaseModel> dataCategories,dataVarients;
-    ArrayAdapter<String> dataAdapterCategory,dataAdapterProductSpec,dataAdapterProduct;
+    ArrayAdapter<String> dataAdapterCategory,dataAdapterProductSpec,dataAdapterProduct,dataAdapterBu,dataAdapterBd;
     //ArrayList productList = new ArrayList();
     List<String> listProduct,listProductSpec;
     List<String> listScheme;
@@ -78,16 +84,20 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
     static int categoryID,productID,schemeID;
     HashMap<String, String> categoriesMap,productsMap;
     int dbschemeID;
+
     private ArrayList<String> results = new ArrayList<String>();
     private ArrayList<String> results1 = new ArrayList<String>();
     private ArrayList<String> results2 = new ArrayList<String>();
-    private ArrayList<String> Scheme_array = new ArrayList<String>();
     private ArrayList<String> result_product = new ArrayList<String>();
+    private ArrayList<String> Scheme_array = new ArrayList<String>();
+    private ArrayList<String> result_bu = new ArrayList<String>();
+    private ArrayList<String> result_bussiness = new ArrayList<String>();
+
     ArrayAdapter<String> adapter_state1;
     ArrayAdapter<String> adapter_state2;
     ArrayAdapter<String> adapter_state3;
     ArrayAdapter<String> Discount_Adapter;
-    MediaPlayer mpplayer;
+
     SimpleCursorAdapter cursorAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
 
@@ -99,8 +109,16 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_previous_order_new_s1);
-        mpplayer = new MediaPlayer();
+
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        setContentView(R.layout.new_order_new);
+
+      //  Global_Data.Search_business_unit_name = "";
+        Global_Data.Search_Category_name = "";
+        Global_Data.Search_BusinessCategory_name = "";
+        Global_Data.Search_brand_name = "";
+        Global_Data.Order_hashmap.clear();
+
         // create a instance of SQLite Database
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
@@ -111,24 +129,125 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         spnCategory = (Spinner) findViewById(R.id.spnCategory);
         spnProduct = (Spinner) findViewById(R.id.spnProduct);
         //spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
-        spnScheme = (Spinner) findViewById(R.id.spnScheme1);
         Product_Variant = (AutoCompleteTextView) findViewById(R.id.Product_Variant);
+        spnScheme = (Spinner) findViewById(R.id.spnScheme1);
+        spnBu = (Spinner) findViewById(R.id.spnBu);
+        spnBusinessDiv = (Spinner) findViewById(R.id.spnBusinessDiv);
+
         editTextRP = (TextView) findViewById(R.id.editTextRP);
         editTextMRP = (TextView) findViewById(R.id.editTextMRP);
-
-        editTextQuantity = (EditText) findViewById(R.id.editTextQuantity1);
-
         txt_rp = (TextView) findViewById(R.id.textRP);
+        editTextQuantity = (EditText) findViewById(R.id.editTextQuantity1);
+        txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
+
+        mpplayer = new MediaPlayer();
         // for label RP change
         SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
         String rpstr=spf1.getString("var_rp", "");
-        txt_rp.setText(rpstr);
+
+        if(rpstr.length()>0)
+        {
+            txt_rp.setText(rpstr);
+        }else{
+            txt_rp.setText("RP");
+        }
+
+        String user_name = "";
+        if(!Global_Data.USER_FIRST_NAME.equalsIgnoreCase("null"))
+        {
+            user_name = Global_Data.USER_FIRST_NAME.trim();
+            if(!Global_Data.USER_LAST_NAME.equalsIgnoreCase("null"))
+            {
+                user_name +=  " " + Global_Data.USER_LAST_NAME.trim();
+            }
+        }
+
+        txtWelcomeUser.setText(user_name+" : "+Global_Data.emp_code);
+
+        SharedPreferences sound = Previous_orderNew_S1.this.getSharedPreferences("SimpleLogic", 0);
+        Global_Data.sound_file = sound.getString("var_addsound", "");
 
         SharedPreferences spf12 = Previous_orderNew_S1.this.getSharedPreferences("SimpleLogic", 0);
         Global_Data.app_sound = spf12.getBoolean("var_addmore", false);
 
-        SharedPreferences sound = Previous_orderNew_S1.this.getSharedPreferences("SimpleLogic", 0);
-        Global_Data.sound_file = sound.getString("var_addsound", "");
+        //for BU
+        result_bu.clear();
+        //result_bu.add("Select BU");
+
+
+        // Reading all
+        try
+        {
+            if(!Global_Data.Search_business_unit_name.equalsIgnoreCase("") &&  !Global_Data.GLObalOrder_id.equalsIgnoreCase(""))
+            {
+                String str_bunit = "";
+                result_bu.clear();
+                List<Local_Data> contact_bu = dbvoc.getB_Unit_byName(Global_Data.Search_business_unit_name);
+                result_bu.add("Select BU");
+                for (Local_Data cn : contact_bu) {
+                    str_bunit = "" + cn.getBunit();
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+                        result_bu.add(str_bunit);
+                    }
+                }
+
+                dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
+                dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+                spnBu.setAdapter(dataAdapterBu);
+
+                if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit) && !result_bu.isEmpty())
+                {
+                    spnBu.setSelection(result_bu.indexOf(str_bunit));
+                }
+
+            }
+            else
+            {
+                result_bu.clear();
+                List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
+                result_bu.add("Select BU");
+                for (Local_Data cn : contact_bu) {
+                    String str_bunit = "" + cn.getBunit();
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+                        result_bu.add(str_bunit);
+                    }
+                }
+
+                dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
+                dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+                spnBu.setAdapter(dataAdapterBu);
+            }
+        }catch(Exception ex){ex.printStackTrace();}
+
+        dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
+        dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+        spnBu.setAdapter(dataAdapterBu);
+
+        results1.clear();
+        results1.add("Select Business Category");
+
+        adapter_state1 = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, results1);
+        adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+        spnCategory.setAdapter(adapter_state1);
+
+        result_bussiness.clear();
+        result_bussiness.add("Select Bussiness Division");
+        dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bussiness);
+        dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+        spnBusinessDiv.setAdapter(dataAdapterBd);
+
+        results.clear();
+        results.add("Select Brand");
+        adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
+        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
+        spnProduct.setAdapter(adapter_state2);
+
+        Scheme_array.clear();
+        Scheme_array.add("Select Scheme");
+
+        Discount_Adapter = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, Scheme_array);
+        Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
+        spnScheme.setAdapter(Discount_Adapter);
 
         results2.clear();
         List<Local_Data> contacts2 = dbvoc.getAllVariant();
@@ -136,6 +255,7 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
             results2.add(cn.getStateName());
             result_product.add(cn.getStateName());
         }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 results2);
@@ -171,15 +291,7 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
             }
         });
 
-        Scheme_array.clear();
-        Scheme_array.add("Select Scheme");
-
-        Discount_Adapter = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, Scheme_array);
-        Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
-        spnScheme.setAdapter(Discount_Adapter);
-
         Product_Variant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos,
                                     long id) {
@@ -187,77 +299,89 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
 
                 Global_Data.hideSoftKeyboard(Previous_orderNew_S1.this);
 
-                editTextQuantity.setFocusableInTouchMode(true);
-                editTextQuantity.setEnabled(true);
+                if (Product_Variant.getText().toString().trim().equalsIgnoreCase("Multiselect")) {
+                    Intent intent = new Intent(getApplicationContext(), ProductAll_Varients.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    //startActivityForResult(intent,SIGNATURE_ACTIVITY);
+                    Previous_orderNew_S1.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    startActivity(intent);
+                } else {
+                    editTextQuantity.setFocusableInTouchMode(true);
+                    editTextQuantity.setEnabled(true);
 
-                List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
-                //results2.add("Select Variant");
-                for (Local_Data cn1 : cont) {
-                    String str_var = ""+cn1.getStateName();
-                    String str_var1 = ""+cn1.getMRP();
-                    String str_var2 = ""+cn1.get_Description();
-                    String str_var3 = ""+cn1.get_Claims();
-                    Global_Data.amnt= ""+cn1.get_Description();
-                    Global_Data.amnt1= ""+cn1.get_Claims();
-                    product_code = cn1.getCode();
+                    List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
+                    //results2.add("Select Variant");
+                    for (Local_Data cn1 : cont) {
+                        String str_var = "" + cn1.getStateName();
+                        str_var1 = "" + cn1.getMRP();
+                        String str_var2 = "" + cn1.get_Description();
+                        String str_var3 = "" + cn1.get_Claims();
+                        Global_Data.amnt = "" + cn1.get_Description();
+                        Global_Data.amnt1 = "" + cn1.get_Claims();
+                        product_code = cn1.getCode();
 
-                    editTextRP.setText(str_var);
-                    editTextMRP.setText(str_var1);
+                        categ_name = cn1.getCategory();
+                        subcateg_name = cn1.getSubcateg();
 
-                    categ_name = cn1.getCategory();
-                    subcateg_name = cn1.getSubcateg();
+                        editTextRP.setText(str_var);
+                        editTextMRP.setText(str_var1);
+                        txtPrice.setText("Total Price : " + "");
 
-                    txtPrice.setText("Total Price : "+"");
+                        if (editTextQuantity.getText().toString().length() != 0) {
+                            if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
+                                long final_mrp = (Long.valueOf(editTextMRP.getText().toString())) * (Long.valueOf(editTextQuantity.getText().toString().trim()));
+                                txtPrice.setText("Total Price : " + final_mrp);
+                                price = String.valueOf(final_mrp);
 
-                    if (editTextQuantity.getText().toString().length() != 0) {
-                        if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null")  && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-                        {
-                            long final_mrp = (Long.valueOf(editTextMRP.getText().toString()))*(Long.valueOf(editTextQuantity.getText().toString().trim()));
-                            txtPrice.setText("Total Price : "+final_mrp);
-                            price = String.valueOf(final_mrp);
-
-                            // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                        }
-                        else
-                        {
-                            if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null")  && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-                            {
-                                // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-                                // txtPrice.setText("Total Price : "+final_mrp);
-                                // price = String.valueOf(final_mrp);
-                                //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+                                // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+                            } else {
+                                if (!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
+                                    // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
+                                    // txtPrice.setText("Total Price : "+final_mrp);
+                                    // price = String.valueOf(final_mrp);
+                                    //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+                                }
                             }
                         }
                     }
+
+                    adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spnCategory.setAdapter(adapter_state1);
+                    //spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
+
+                    adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spnProduct.setAdapter(adapter_state2);
+                    //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
+
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)) {
+                        int spinnerPosition = adapter_state1.getPosition(categ_name);
+                        spnCategory.setSelection(spinnerPosition);
+                    }
+
+                    Scheme_array.clear();
+                    Scheme_array.add("Select Scheme");
+
+                    List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(product_code.trim());
+                    //results2.add("Select Variant");
+                    for (Local_Data s : scheme_name) {
+                        Scheme_array.add(s.getSche_disname());
+                        scheme_namen = s.getSche_disname().toString();
+                    }
+
+                    //editTextQuantity.setFocusableInTouchMode(true);
+
                 }
 
-                adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spnCategory.setAdapter(adapter_state1);
-                //spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
+//					Discount_Adapter = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, Scheme_array);
+//					Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
+//					spnScheme.setAdapter(Discount_Adapter);
+//
+//				if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(scheme_namen)){
+//					int spinnerPosition = Discount_Adapter.getPosition(scheme_namen);
+//					spnScheme.setSelection(spinnerPosition);
+//				}
 
-                adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spnProduct.setAdapter(adapter_state2);
-                //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
-
-                if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)){
-                    int spinnerPosition = adapter_state1.getPosition(categ_name);
-                    spnCategory.setSelection(spinnerPosition);
-                }
-
-                Scheme_array.clear();
-                Scheme_array.add("Select Scheme");
-
-                List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(product_code.trim());
-                //results2.add("Select Variant");
-                for (Local_Data s : scheme_name) {
-                    Scheme_array.add(s.getSche_disname());
-                    scheme_namen = s.getSche_disname().toString();
-                }
-
-
-                Discount_Adapter = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, Scheme_array);
-                Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
-                spnScheme.setAdapter(Discount_Adapter);
             }
         });
 
@@ -266,19 +390,18 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
             public void afterTextChanged(Editable s) {
 
 
-
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-//                listScheme.clear();
-//                listScheme.add("Select Scheme");
-//
-//                dataAdapterScheme.notifyDataSetChanged();
-//                dataAdapterScheme.setDropDownViewResource(R.layout.spinner_item);
-//                spnScheme.setAdapter(dataAdapterScheme);
+                //listScheme.clear();
+                //listScheme.add("Select Scheme");
+
+                //dataAdapterScheme.notifyDataSetChanged();
+                //dataAdapterScheme.setDropDownViewResource(R.layout.spinner_item);
+                //spnScheme.setAdapter(dataAdapterScheme);
                 rp = 0.00f;
                 mrp = 0.00f;
                 productprice = rp;
@@ -292,12 +415,9 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
             }
         });
 
-
         editTextQuantity.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
-
-
 
             }
 
@@ -319,11 +439,8 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                     txtPrice.setText("Total Price : "+"");
                     //price = String.valueOf(" ");
                 }
-
             }
         });
-
-
         Global_Data.GLOVEL_SubCategory_Button = "";
 
 //		//Reading all
@@ -340,80 +457,9 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         editor.putString("order", "new");
         editor.commit();
 
-        //Reading all
-        List<Local_Data> contacts1 = dbvoc.HSS_DescriptionITEM();
-        results1.add("Select Category");
-        for (Local_Data cn : contacts1)
-        {
-            if(!cn.getStateName().equalsIgnoreCase("") && !cn.getStateName().equalsIgnoreCase(" "))
-            {
-                String str_categ = ""+cn.getStateName();
-                results1.add(str_categ);
-            }
-        }
-
-        //Reading all
-//		         List<Local_Data> contacts2 = dbvoc.HSS_DescriptionITEM1();
-        results.add("Select Product");
-//		          for (Local_Data cn : contacts2) {
-//		        	String str_product = ""+cn.getStateName();
-//		        	//Global_Data.local_pwd = ""+cn.getPwd();
-//
-//		        	results.add(str_product);
-//		        	System.out.println("Local Values:-"+Global_Data.local_user);
-//		        	//Toast.makeText(LoginActivity.this, "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
-//		        	                             }
-//
-        adapter_state2 = new ArrayAdapter<String>(this, R.layout.spinner_item, results);
-        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
-        spnProduct.setAdapter(adapter_state2);
-
-
-        //Reading all
-        // List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2();
-        //results2.add("Select Variant");
-//			          for (Local_Data cn : contacts3) {
-//			        	str_variant = ""+cn.getStateName();
-//			        	//Global_Data.local_pwd = ""+cn.getPwd();
-//
-//			        	results2.add(str_variant);
-//			        	//System.out.println("Local Values:-"+Global_Data.local_user);
-//			        	//Toast.makeText(LoginActivity.this, "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
-//
-//
-//			        	                             }
 
 
 
-//        adapter_state3 = new ArrayAdapter<String>(this, R.layout.spinner_item, results2);
-//        adapter_state3.setDropDownViewResource(R.layout.spinner_item);
-//        spnProductSpec.setAdapter(adapter_state3);
-
-
-//					  List<Local_Data> cont = dbvoc.getProductByCat(str_variant);
-//				         //results2.add("Select Variant");
-//				          for (Local_Data cn1 : cont) {
-//				        	String str_var = ""+cn1.get_Claims();
-//				            String str_var1 = ""+cn1.getCategory();
-//
-//				            editTextRP.setText(str_var);
-//				            editTextMRP.setText(str_var1);
-//
-//				            //Global_Data.local_pwd = ""+cn.getPwd();
-//
-//				        	//results2.add(str_variant);
-//				        	//System.out.println("Local Values:-"+Global_Data.local_user);
-//				        	//Toast.makeText(LoginActivity.this, "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
-//
-//
-//
-//				        	                             }
-
-
-
-//        TextView welcomeUser=(TextView)findViewById(R.id.txtWelcomeUser);
-//        //question_value.setTypeface(null,Typeface.BOLD);
-//        welcomeUser.setText(spf.getString("FirstName", "")+" "+ spf.getString("LastName", ""));
 
 
         listProduct = new ArrayList<String>();
@@ -424,56 +470,163 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         dataAdapterProductSpec = new ArrayAdapter<String>(
                 this, R.layout.spinner_item, listProductSpec);
 
-        listScheme = new ArrayList<String>();
-        dataAdapterScheme = new ArrayAdapter<String>(
-                this, R.layout.spinner_item, listScheme);
 
-        final List<String> listCategory = new ArrayList<String>();
-        listCategory.add("Select Category");
+        spnBu.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View arg1,
+                                       int pos, long arg3) {
+//					// TODO Auto-generated method stub
 
-        adapter_state1 = new ArrayAdapter<String>(this,R.layout.spinner_item, results1);
-//		  adapter_state2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, results);
-//		  adapter_state3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, results2);
+                checkb=checkb+1;
+                if(checkb>1) {
+                    if (parent.getItemAtPosition(pos).toString().equalsIgnoreCase("Select BU")) {
+                        result_bussiness.clear();
+                        result_bussiness.add("Select Bussiness Division");
+                        dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bussiness);
+                        dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+                        spnBusinessDiv.setAdapter(dataAdapterBd);
 
-//		  Discount_list.add("Select Discount Type");
-//		  Discount_list.add("Rupees");
-//		  Discount_list.add("Percentage");
-//
-//		  Discount_Adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Discount_list);
-//		  Discount_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//		  spnScheme.setAdapter(Discount_Adapter);
+                        results1.clear();
+                        results1.add("Select Business Category");
 
-//		  adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		  city_spinner.setAdapter(adapter_state1);
-//		  city_spinner.setOnItemSelectedListener(this);
-//
-//		  adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		  beat_spinner.setAdapter(adapter_state2);
-//		  beat_spinner.setOnItemSelectedListener(this);
-//
-//		  adapter_state3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		  retail_spinner.setAdapter(adapter_state3);
-//		  retail_spinner.setOnItemSelectedListener(this);
+                        adapter_state1 = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, results1);
+                        adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+                        spnCategory.setAdapter(adapter_state1);
 
-//		  txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
-//		  if(Global_Data.GLOVEL_LONG_DESC != "")
-//		  {
-//			  spnProduct.setText(Global_Data.GLOVEL_LONG_DESC);
-//			  editTextQuantity.setFocusable(true) ;
-//			  editTextMRP.setText(Global_Data.GLOVEL_ITEM_MRP);
-//			  spnScheme.setEnabled(true);
-//			  txtPrice.setText("Total Price : "+Global_Data.GLOVEL_ITEM_MRP);
+                        results.clear();
+                        results.add("Select Brand");
+                        adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
+                        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
+                        spnProduct.setAdapter(adapter_state2);
+
+//					adapter_state1 = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, results1);
+//					adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+//					spnCategory.setAdapter(adapter_state1);
 //
-//		  }
-//		  else
-//		  {
-//			  editTextQuantity.setFocusable(false) ;
-//			  editTextMRP.setText("");
-//			  spnScheme.setEnabled(false);
-//		  }
+//				    adapter_state2 = new ArrayAdapter<String>(this, R.layout.spinner_item, results);
+//					adapter_state2.setDropDownViewResource(R.layout.spinner_item);
+//					spnProduct.setAdapter(adapter_state2);
+
+
+                    } else {
+
+                        String items = parent.getItemAtPosition(pos).toString();
+                        //String C_ID = "";
+                        Log.i("Selected item : ", items);
+
+                        Log.i("Selected item : ", items);
+
+//				List<Local_Data> contacts = dbvoc.getBunit_id(items);
+//				for (Local_Data cn : contacts) {
 //
+//					S_ID = cn.getSTATE_ID();
+//
+//				}
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
+                            result_bussiness.clear();
+                            result_bussiness.add("Select Bussiness Division");
+
+//					results_beat.clear();
+//					results_beat.add("Select Beat");
+                            List<Local_Data> contacts2 = dbvoc.getBdivByBunit(items);
+                            for (Local_Data cn : contacts2) {
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
+                                    result_bussiness.add(cn.getprimary_category());
+                                }
+
+                            }
+
+                            dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bussiness);
+                            dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+                            spnBusinessDiv.setAdapter(dataAdapterBd);
+
+
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        spnBusinessDiv.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View arg1,
+                                       int pos, long arg3) {
+//					// TODO Auto-generated method stub
+
+                checkd=checkd+1;
+                if(checkd>1) {
+                    if (parent.getItemAtPosition(pos).toString().equalsIgnoreCase("Select BU")) {
+                        results1.clear();
+                        results1.add("Select Business Category");
+
+                        adapter_state1 = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, results1);
+                        adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+                        spnCategory.setAdapter(adapter_state1);
+
+                        results.clear();
+                        results.add("Select Brand");
+                        adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
+                        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
+                        spnProduct.setAdapter(adapter_state2);
+
+
+                    } else {
+
+                        String items = parent.getItemAtPosition(pos).toString();
+                        //String C_ID = "";
+                        Log.i("Selected item : ", items);
+
+                        Log.i("Selected item : ", items);
+
+//				List<Local_Data> contacts = dbvoc.getBunit_id(items);
+//				for (Local_Data cn : contacts) {
+//
+//					S_ID = cn.getSTATE_ID();
+//
+//				}
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
+
+                            results1.clear();
+                            results1.add("Select Business Category");
+                            List<Local_Data> contacts2 = dbvoc.getBusinee_category_Name(spnBu.getSelectedItem().toString(), items);
+                            for (Local_Data cn : contacts2) {
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getbusiness_category())) {
+                                    String str_categ = "" + cn.getbusiness_category();
+                                    results1.add(str_categ);
+                                }
+                            }
+
+                            adapter_state1 = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, results1);
+                            adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+                            spnCategory.setAdapter(adapter_state1);
+
+
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+
+
         spnProduct.setOnItemSelectedListener(new OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View arg1,
                                        int pos, long arg3) {
@@ -484,36 +637,25 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                     txtPrice.setText("Total Price : "+"");
                 }
 
-//					 Toast.makeText(parent.getContext(),
-//					 "OnItemSelectedListener : " +
-//					 parent.getItemAtPosition(pos).toString(),Toast.LENGTH_SHORT).show();
-//					editTextQuantity.setFocusableInTouchMode(false);
-//					editTextQuantity.setEnabled(false);
-//
-//					txtPrice.setText("Total Price : ");
                 check_product=check_product+1;
                 if(check_product>1)
                 {
-                    if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category"))
-                    {
+
+                    if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Business Category")) {
 
                         //Toast.makeText(getApplicationContext(), "Please Select Category", Toast.LENGTH_LONG).show();
 
                         categ_name = "";
                         subcateg_name = "";
-                        Toast toast = Toast.makeText(getApplicationContext(),"Please Select Category",Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+//							 Toast toast = Toast.makeText(getApplicationContext(),"Please Select Business Category",Toast.LENGTH_LONG);
+//							 toast.setGravity(Gravity.CENTER, 0, 0);
+//							 toast.show();
+
                     }
                     else
                     if (parent.getItemAtPosition(pos).toString()
-                            .equalsIgnoreCase("Select Product"))
+                            .equalsIgnoreCase("Select Brand"))
                     {
-//					    	 	results2.clear();
-//								results2.add("Select Variant");
-//								adapter_state3 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results2);
-//						        adapter_state3.setDropDownViewResource(R.layout.spinner_item);
-//								spnProductSpec.setAdapter(adapter_state3);
 
                         categ_name = "";
                         subcateg_name = "";
@@ -530,51 +672,26 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                         // AutoCompleteTextView
                         Product_Variant.setTextColor(Color.BLACK);
                         Product_Variant.setText("");
-
-                        //Toast.makeText(getApplicationContext(), "Please Select Product", Toast.LENGTH_LONG).show();
-
                     }
                     else
                     {
-
                         results2.clear();
 
-                        List<Local_Data> contacts33 = dbvoc.HSS_DescriptionITEM1_IDD(parent.getItemAtPosition(pos).toString().trim());
-                        for (Local_Data cn : contacts33)
-                        {
-                            Global_Data.GLOVEL_PRODUCT_ID = cn.getCust_Code();
-                        }
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(parent.getItemAtPosition(pos).toString().trim())) {
 
-                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOVEL_PRODUCT_ID)) {
+                            Global_Data.Search_business_unit_name = spnBu.getSelectedItem().toString().trim();
+                            Global_Data.Search_Category_name = spnBusinessDiv.getSelectedItem().toString().trim();
+                            Global_Data.Search_BusinessCategory_name = spnCategory.getSelectedItem().toString().trim();
+                            Global_Data.Search_brand_name = parent.getItemAtPosition(pos).toString().trim();
 
-                            //List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_ID(Global_Data.GLOVEL_PRODUCT_ID);
-                            List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_BYNAME(spnCategory.getSelectedItem().toString().trim(),parent.getItemAtPosition(pos).toString().trim());
-                            // results2.add("Select Variant");
-                            for (Local_Data cn : contacts3)
-                            {
-                                str_variant = ""+cn.getStateName();
-                                //Global_Data.local_pwd = ""+cn.getPwd();
+                            Global_Data.Order_hashmap.clear();
+                            Intent intent = new Intent(getApplicationContext(), Preorder_Proall_Varient.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            //startActivityForResult(intent,SIGNATURE_ACTIVITY);
+                            Previous_orderNew_S1.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            startActivity(intent);
 
-                                results2.add(str_variant);
-                                //System.out.println("Local Values:-"+Global_Data.local_user);
-                                //Toast.makeText(LoginActivity.this, "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
-
-
-                            }
-
-
-
-//							 adapter_state3 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results2);
-//							 adapter_state3.setDropDownViewResource(R.layout.spinner_item);
-//							 spnProductSpec.setAdapter(adapter_state3);
-
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Previous_orderNew_S1.this,android.R.layout.simple_spinner_dropdown_item,results2);
-                            Product_Variant.setThreshold(1);// will start working from
-                            // first character
-                            Product_Variant.setAdapter(adapter);// setting the adapter
-                            // data into the
-                            // AutoCompleteTextView
-                            Product_Variant.setTextColor(Color.BLACK);
+//
 
 
                         }
@@ -594,23 +711,6 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
 
             }
         });
-
-
-        for(int i = 0 ; i < dataCategories.size();i++){
-            listCategory.add(dataCategories.get(i).getDesc());
-        }
-
-        dataAdapterCategory = new ArrayAdapter<String>(this, R.layout.spinner_item, results1);
-        dataAdapterCategory.setDropDownViewResource(R.layout.spinner_item);
-        spnCategory.setAdapter(adapter_state1);
-
-        if (!Global_Data.GLOVEL_CATEGORY_SELECTION.equalsIgnoreCase(""))
-        {
-            Log.d("Globel cat", "in");
-            spnCategory.setSelection(adapter_state1.getPosition(Global_Data.GLOVEL_CATEGORY_SELECTION));
-            Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-
-        }
 
         Intent i = getIntent();
         String name = i.getStringExtra("retialer");
@@ -695,6 +795,7 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                 }
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
+                    mpplayer = new MediaPlayer();
                     //down event
                     b.setBackgroundColor(Color.parseColor("#910505"));
 
@@ -712,14 +813,14 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
 						toast.show();
 					}
 					*/
-                    if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) {
-                        Toast toast = Toast.makeText(Previous_orderNew_S1.this,"Please Select Category", Toast.LENGTH_SHORT);
+                    if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Business Category")) {
+                        Toast toast = Toast.makeText(Previous_orderNew_S1.this,"Please Select Business Category", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
 
-                    else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) {
-                        Toast toast = Toast.makeText(Previous_orderNew_S1.this,"Please Select Product", Toast.LENGTH_SHORT);
+                    else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Brand")) {
+                        Toast toast = Toast.makeText(Previous_orderNew_S1.this,"Please Select Brand", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
@@ -758,7 +859,7 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                             scheme_code = "";
                         }
 
-//
+
                         Global_Data.order_category = spnCategory.getSelectedItem().toString();
                         //Global_Data.order_product = spnProduct.getSelectedItem().toString();
                         // Global_Data.order_variant = spnProductSpec.getSelectedItem().toString();
@@ -768,14 +869,24 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
 
                         String item_name = "";
                         List<Local_Data> contacts1 = dbvoc.getItemCode(spnCategory.getSelectedItem().toString().trim(),spnProduct.getSelectedItem().toString().trim(),Product_Variant.getText().toString().trim());
-                        for (Local_Data cn1 : contacts1)
+
+                        if(contacts1.size() <= 0)
                         {
-
-                            Global_Data.item_code = cn1.getItem_Code();
-                            Global_Data.GLOvel_ITEM_NUMBER = cn1.getItem_Code();
-                            item_name = cn1.getProdname();
-
+                            Toast toast = Toast.makeText(Previous_orderNew_S1.this,
+                                    "Variant Not Found", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
                         }
+                        else {
+
+
+                            for (Local_Data cn1 : contacts1) {
+
+                                Global_Data.item_code = cn1.getItem_Code();
+                                Global_Data.GLOvel_ITEM_NUMBER = cn1.getItem_Code();
+                                item_name = cn1.getProdname();
+
+                            }
 
 //				   	          if(Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales"))
 //							  {
@@ -783,130 +894,196 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
 //							   dbvoc.getDeleteTableorderproduct_bycustomer_PRE(Global_Data.order_retailer.trim(),"Secondary Sales / Retail Sales");
 //							  }
 
+                            if (Global_Data.GLOVEL_ORDER_REJECT_FLAG.equalsIgnoreCase("TRUE")) {
+                                List<Local_Data> contactsn = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLObalOrder_id, Global_Data.GLOvel_ITEM_NUMBER);
 
-
-
-
-                            Long randomPIN = System.currentTimeMillis();
-                            String PINString = String.valueOf(randomPIN);
-                            Global_Data.variant_rr="";
-                            Global_Data.variant_mrp=editTextMRP.getText().toString();
-                            Global_Data.order_qty=editTextQuantity.getText().toString();
-                            String strAmount=String.valueOf(Global_Data.order_amount);
-
-                            if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
-                            {
-                                Global_Data.Previous_Order_UpdateOrder_ID = "Ord"+PINString;
-
-                                Global_Data.GLObalOrder_id = "Ord"+PINString;
-                                Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
-                                   // Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
-
-                                dbvoc.getDeleteTable("previous_orders");
-
-                                try
-                                {
-                                    AppLocationManager appLocationManager = new AppLocationManager(Previous_orderNew_S1.this);
-                                    Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-                                    Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-                                    PlayService_Location PlayServiceManager = new PlayService_Location(Previous_orderNew_S1.this);
-
-                                    if(PlayServiceManager.checkPlayServices(Previous_orderNew_S1.this))
-                                    {
-                                        Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-                                    }
-                                    else
-                                    if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-                                    {
-                                        Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-                                        Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-                                    }
-
-                                }catch(Exception ex){ex.printStackTrace();}
-
-                                loginDataBaseAdapter.insertOrders("",  Global_Data.Previous_Order_UpdateOrder_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "",Global_Data.order_retailer,Global_Data.order_state,Global_Data.order_city,Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","");
-
-                                List<Local_Data> cont1 = dbvoc.getItemNamePrevious_OrderCheck(Global_Data.Previous_Order_ServiceOrder_ID,Global_Data.GLOvel_ITEM_NUMBER);
-                                for (Local_Data cnt1 : cont1) {
-
-                                    loginDataBaseAdapter.insertOrderProducts("", "", Global_Data.GLOvel_GORDER_ID, "","","","", "",cnt1.getSche_code().trim(), " ", "",cnt1.getQty().trim(),cnt1.getRP().trim(),cnt1.getPrice().trim(), cnt1.getAmount().trim(), "", "",Global_Data.order_retailer," ",cnt1.get_category_ids()," ",cnt1.getProduct_nm());
-                                }
-
-                                dbvoc.getDeleteTable("previous_order_products");
-                            }
-
-//                        List<Local_Data> contactsn = dbvoc.GetPREVIOUSOrders_BY_ORDER_ID(Global_Data.Previous_Order_UpdateOrder_ID,Global_Data.GLOvel_ITEM_NUMBER);
-//
-//                            if(contactsn.size() > 0)
-//                            {
-//                                Toast.makeText(Previous_orderNew_S1.this, "You already have a this item in your order", Toast.LENGTH_SHORT).show();
-//                            }
-//                            else
-//                            {
-
-
-                        List<Local_Data> check_order_product = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLOvel_GORDER_ID,Global_Data.item_code);
-
-                        if(check_order_product.size() > 0)
-                        {
-                            Toast.makeText(Previous_orderNew_S1.this, "You already have a this item in your order", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            if (Global_Data.app_sound == true) {
-                                mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, R.raw.cheer_8k);
-                                mpplayer.stop();
-                            } else {
-                                if (Global_Data.sound_file.length() > 0) {
-                                    //Toast.makeText(NewOrderActivity.this, "sndfile:"+Global_Data.sound_file, Toast.LENGTH_SHORT).show();
-                                    //mpplayer = new MediaPlayer();
-                                    try {
-                                        if (mpplayer.isPlaying()) {
-                                            mpplayer.reset();
-                                        }
-                                        mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/Audio/" + Global_Data.sound_file));
-////                                    mp.start();
-                                        //mMediaPlayer.setDataSource(filename);
-                                        mpplayer.start();
-                                        mpplayer.prepare();
-                                    } catch (Exception e) {
-
-                                    }
-
+                                if (contactsn.size() > 0) {
+                                    //	Toast.makeText(NewOrderActivity.this, "You already add this item in order", Toast.LENGTH_SHORT).show();
+                                    Toast toast = Toast.makeText(Previous_orderNew_S1.this, "You already add this item in order", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
                                 } else {
-                                    mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, R.raw.cheer_8k);
-                                    mpplayer.start();
+                                    //Toast.makeText(getApplicationContext(), "Item add successfully", Toast.LENGTH_LONG).show();
+                                    if (Global_Data.app_sound == true) {
+                                        mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, R.raw.cheer_8k);
+                                        mpplayer.stop();
+                                    } else {
+                                        if (Global_Data.sound_file.length() > 0) {
+                                            //Toast.makeText(NewOrderActivity.this, "sndfile:"+Global_Data.sound_file, Toast.LENGTH_SHORT).show();
+                                            //mpplayer = new MediaPlayer();
+                                            try {
+                                                if (mpplayer.isPlaying()) {
+                                                    mpplayer.reset();
+                                                }
+                                                mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/Audio/" + Global_Data.sound_file));
+////                                    mp.start();
+                                                //mMediaPlayer.setDataSource(filename);
+                                                mpplayer.start();
+                                                mpplayer.prepare();
+                                            } catch (Exception e) {
+
+                                            }
+
+                                        } else {
+                                            mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, R.raw.cheer_8k);
+                                            mpplayer.start();
+                                        }
+                                    }
+
+                                    Toast toast = Toast.makeText(Previous_orderNew_S1.this,"Item add successfully", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+//									  loginDataBaseAdapter.insertOrderProducts("", "",  Global_Data.GLObalOrder_id, "", spnCategory.getSelectedItem().toString() , spnProduct.getText().toString() , Global_Data.order_variant , " " , spnScheme.getSelectedItem().toString() , " ", "", editTextQuantity.getText().toString() , Global_Data.variant_rr,editTextMRP.getText().toString(), price, "", "",Global_Data.order_retailer,discount_amount,Global_Data.GLOvel_ITEM_NUMBER,discount_type);//Reading all
+
+                                    loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLObalOrder_id, "", spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString(), Global_Data.order_variant, " ",scheme_code, " ", "", editTextQuantity.getText().toString(), editTextRP.getText().toString().trim(), Global_Data.variant_mrp, price, "", "", Global_Data.order_retailer, " ", Global_Data.GLOvel_ITEM_NUMBER, " ", item_name);
+                                }
+                            } else {
+
+
+                                Long randomPIN = System.currentTimeMillis();
+                                String PINString = String.valueOf(randomPIN);
+                                Global_Data.variant_rr = "";
+                                Global_Data.variant_mrp = editTextMRP.getText().toString();
+                                Global_Data.order_qty = editTextQuantity.getText().toString();
+                                String strAmount = String.valueOf(Global_Data.order_amount);
+
+                                if (Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
+                                    if (Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales")) {
+                                        Global_Data.GLObalOrder_id = "Ord" + PINString;
+                                        Global_Data.GLOvel_GORDER_ID = "Ord" + PINString;
+                                    } else {
+                                        Global_Data.GLObalOrder_id = "QNO" + PINString;
+                                        Global_Data.GLOvel_GORDER_ID = "QNO" + PINString;
+                                    }
+
+                                    try
+                                    {
+                                        AppLocationManager appLocationManager = new AppLocationManager(Previous_orderNew_S1.this);
+                                        Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+                                        Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                                        PlayService_Location PlayServiceManager = new PlayService_Location(Previous_orderNew_S1.this);
+
+                                        if(PlayServiceManager.checkPlayServices(Previous_orderNew_S1.this))
+                                        {
+                                            Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+                                        }
+                                        else
+                                        if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+                                        {
+                                            Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+                                            Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+                                        }
+
+                                    }catch(Exception ex){ex.printStackTrace();}
+
+                                    loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","");
+                                }
+
+                                //loginDataBaseAdapter.insertOrders("", "", Global_Data.order_retailer, "", Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "");
+
+                                //loginDataBaseAdapter.insertOrderProducts("", "", "0"+PINString, "", Global_Data.order_category , Global_Data.order_product , Global_Data.order_variant , " " , spnScheme.getSelectedItem().toString() , " ", "", Global_Data.order_qty , Global_Data.variant_rr, Global_Data.variant_mrp, strAmount, "", "",Global_Data.order_retailer);//Reading all
+
+                                List<Local_Data> contactsn = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLObalOrder_id, Global_Data.GLOvel_ITEM_NUMBER);
+
+                                if (contactsn.size() > 0) {
+                                    //Toast.makeText(NewOrderActivity.this, "You already add this item in order", Toast.LENGTH_SHORT).show();
+
+                                    Toast toast = Toast.makeText(Previous_orderNew_S1.this, "You already add this item in order", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                } else {
+                                    loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString(), Global_Data.order_variant, " ",scheme_code, " ", "", editTextQuantity.getText().toString(), editTextRP.getText().toString().trim(), Global_Data.variant_mrp, price, "", "", Global_Data.order_retailer, " ", Global_Data.item_code, " ", item_name);//Reading all
+
+                                    //Toast.makeText(getApplicationContext(), "Item add successfully", Toast.LENGTH_LONG).show();
+
+                                    if (Global_Data.app_sound == true) {
+                                        mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, R.raw.cheer_8k);
+                                        mpplayer.stop();
+                                    } else {
+                                        if (Global_Data.sound_file.length() > 0) {
+                                            //Toast.makeText(NewOrderActivity.this, "sndfile:"+Global_Data.sound_file, Toast.LENGTH_SHORT).show();
+                                            //mpplayer = new MediaPlayer();
+                                            try {
+                                                if (mpplayer.isPlaying()) {
+                                                    mpplayer.reset();
+                                                }
+                                                mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/Audio/" + Global_Data.sound_file));
+////                                    mp.start();
+                                                //mMediaPlayer.setDataSource(filename);
+                                                mpplayer.start();
+                                                mpplayer.prepare();
+                                            } catch (Exception e) {
+
+                                            }
+
+                                        } else {
+                                            mpplayer = MediaPlayer.create(Previous_orderNew_S1.this, R.raw.cheer_8k);
+                                            mpplayer.start();
+                                        }
+                                    }
+                                    //mpplayer.start();
+                                    Toast toast = Toast.makeText(Previous_orderNew_S1.this, "Item add successfully", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    //loginDataBaseAdapter.insertOrderProducts("", "",  Global_Data.GLOvel_GORDER_ID, "", spnCategory.getSelectedItem().toString() , spnProduct.getText().toString() , Global_Data.order_variant , " " , spnScheme.getSelectedItem().toString() , " ", "", editTextQuantity.getText().toString() , Global_Data.variant_rr,editTextMRP.getText().toString(), price, "", "",Global_Data.order_retailer,discount_amount,Global_Data.GLOvel_ITEM_NUMBER,discount_type);//Reading all
                                 }
                             }
 
-                            loginDataBaseAdapter.insertOrderProducts(" ", " ",  Global_Data.GLOvel_GORDER_ID, "", spnCategory.getSelectedItem().toString() , spnProduct.getSelectedItem().toString() , Global_Data.order_variant , " " , scheme_code , " ", "", editTextQuantity.getText().toString() ,editTextRP.getText().toString().trim(), Global_Data.variant_mrp, price, "", "",Global_Data.order_retailer," ",Global_Data.item_code," ",item_name);//Reading all
-                            Toast toast = Toast.makeText(getApplicationContext(), "Item add successfully", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                            check = 0;
+                            check_product = 0;
+                            check_ProductSpec = 0;
+                            editTextQuantity.setText("");
+                            editTextQuantity.setEnabled(false);
+                            spnCategory.setSelection(adapter_state1.getPosition("Select Business Category"));
+                            // spnProductSpec.setSelection(adapter_state3.getPosition("Select Variant"));
+                            Product_Variant.setText("");
+                            spnProduct.setSelection(adapter_state2.getPosition("Select Brand"));
+                            spnScheme.setSelection(Discount_Adapter.getPosition("Select Scheme"));
+//									spnScheme.setEnabled(false);
+                            editTextMRP.setText("");
+                            txtPrice.setText("");
+                            editTextRP.setText("");
+
                         }
+                        // spnProduct.setText("");
 
-                                //Toast.makeText(getApplicationContext(), "Item add successfully", Toast.LENGTH_LONG).show();
-
-                           // }
-
-                        check = 0;
-                        check_product=0;
-                        check_ProductSpec=0;
-                        editTextQuantity.setText("");
-                        editTextQuantity.setEnabled(false);
-                        spnCategory.setSelection(adapter_state1.getPosition("Select Category"));
-                        // spnProductSpec.setSelection(adapter_state3.getPosition("Select Variant"));
-                        Product_Variant.setText("");
-                        spnProduct.setSelection(adapter_state2.getPosition("Select Product"));
-                        spnScheme.setSelection(Discount_Adapter.getPosition("Select Scheme"));
-                      //  spnScheme.setEnabled(false);
-                        editTextMRP.setText("");
-                        txtPrice.setText("");
-                        editTextRP.setText("");
-
+//							spnCategory.setAdapter(adapter_state1);
+//
+//							listProduct.clear();
+//							listProduct.add("Select Product");
+//
+//							dataAdapterProduct.notifyDataSetChanged();
+//							dataAdapterProduct
+//									.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//							//spnProduct.setAdapter(adapter_state2);
+//
+//							listProductSpec.clear();
+//							listProductSpec.add("Select Variant");
+//							dataAdapterProductSpec.notifyDataSetChanged();
+//							dataAdapterProductSpec
+//									.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//							spnProductSpec.setAdapter(adapter_state3);
+//
+//							listScheme.clear();
+//							listScheme.add("Select Scheme");
+//
+//							dataAdapterScheme.notifyDataSetChanged();
+//							dataAdapterScheme
+//									.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//							spnScheme.setAdapter(dataAdapterScheme);
+//
+//							editTextRP.setText("" + rp);
+//							editTextMRP.setText("" + mrp);
+//							txtPrice.setText("Total Price : ");
+//							rp = 0.00f;
+//							mrp = 0.00f;
+//							totalprice = 0.00f;
+//							deleiveryQuantity = 0;
+//							editTextQuantity.setText("");
+                        //txtDeleiveryQuantity.setText("Delivery Quantity :");
                         return true;
-
+                        //}
                     }
 
                     return true;
@@ -931,20 +1108,36 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                 }
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
-                    if(Global_Data.app_sound==false)
-                    {
-                        mpplayer.stop();
-                    }
-
+                    mpplayer.stop();
                     //down event
                     b.setBackgroundColor(Color.parseColor("#910505"));
-
+                    // TODO Auto-generated method stub
+                    if(Global_Data.GLOVEL_ORDER_REJECT_FLAG.equalsIgnoreCase("TRUE"))
+                    {
+                        Intent i=new Intent(Previous_orderNew_S1.this, Status_Activity.class);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        startActivity(i);
+                        finish();
+                    }
+                    else
+                    {
+                        if (!Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
+									/*final Intent i = new Intent(getApplicationContext(),
+											PreviewOrderActivity.class);*/
                             final Intent i = new Intent(getApplicationContext(),
-                                    Previous_orderNew_S2.class);
+                                    PreviewOrderSwipeActivity.class);
                             i.putParcelableArrayListExtra("productsList", Global_Data.productList);
                             i.putExtra("new","new");
                             SharedPreferences sp = Previous_orderNew_S1.this
                                     .getSharedPreferences("SimpleLogic", 0);
+
+                            i.putExtra("retialer",
+                                    "" + sp.getString("RetailerName", ""));
+                            //i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Global_Data.GLOVEL_LONG_DESC = "";
+                            Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                            Global_Data.GLOVEL_ITEM_MRP = "";
+
                             i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             ActivitySwitcher.animationOut(findViewById(R.id.containerNewOrder), getWindowManager(), new ActivitySwitcher.AnimationFinishedListener() {
                                 @Override
@@ -954,6 +1147,18 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                                 }
                             });
                             //NewOrderFragment.this.startActivity(i);
+                        }
+
+                        else {
+                            //Toast.makeText(getBaseContext(), "No Items Added", Toast.LENGTH_SHORT).show();
+
+                            Toast toast = Toast.makeText(getApplicationContext(),"No Items Added", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                    }
+
+
 
                     return true;
                 }
@@ -962,21 +1167,11 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         });
 
         spnCategory.setOnItemSelectedListener(new OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View arg1,
                                        int pos, long arg3) {
-//				// TODO Auto-generated method stub
 
 
-
-//				// Toast.makeText(parent.getContext(),
-//				// "OnItemSelectedListener : " +
-//				// parent.getItemAtPosition(pos).toString(),Toast.LENGTH_SHORT).show();
-//				editTextQuantity.setFocusableInTouchMode(false);
-//				editTextQuantity.setEnabled(false);
-//				txtPrice.setText("Total Price : ");
-//
                 Global_Data.GLOVEL_ITEM_MRP = "";
 
 //				category = parent.getItemAtPosition(pos).toString();
@@ -985,62 +1180,25 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                 check=check+1;
                 if(check>1)
                 {
-
-                    // editTextQuantity.setText("");
-
-                    if(!(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(subcateg_name))){
-                        txtPrice.setText("Total Price : "+"");
-                    }
-
-
-//				if (!Global_Data.GLOVEL_CATEGORY_SELECTION.equalsIgnoreCase(""))
-//				{
-//					Log.d("Globel categary selection", "in");
-//					spnCategory.setSelection(adapter_state1.getPosition(Global_Data.GLOVEL_CATEGORY_SELECTION));
-//
-//
-//				}
-//				else
-//				{
-//                 if (Global_Data.GLOVEL_CATEGORY_SELECTION.equalsIgnoreCase(""))
-//                 {
                     if (parent.getItemAtPosition(pos).toString()
-                            .equalsIgnoreCase("Select Category")) {
+                            .equalsIgnoreCase("Select Business Category")) {
 
                         categ_name = "";
                         subcateg_name = "";
 
                         results.clear();
-                        results.add("Select Product");
+                        results.add("Select Brand");
                         adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
                         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
                         spnProduct.setAdapter(adapter_state2);
-                        //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
 
-//						results2.clear();
-//						results2.add("Select Variant");
-//						adapter_state3 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results2);
-//				        adapter_state3.setDropDownViewResource(R.layout.spinner_item);
-//						spnProductSpec.setAdapter(adapter_state3);
 
                         results2.clear();
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Previous_orderNew_S1.this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                result_product);
-                        Product_Variant.setThreshold(1);// will start working from
-                        // first character
-                        Product_Variant.setAdapter(adapter);// setting the adapter
-                        // data into the
-                        // AutoCompleteTextView
-                        Product_Variant.setTextColor(Color.BLACK);
-                        Product_Variant.setText("");
 
-                        //Toast.makeText(getApplicationContext(), "Please Select Category", Toast.LENGTH_LONG).show();
-
-                        Toast toast = Toast.makeText(Previous_orderNew_S1.this, "Please Select Category", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+//						Toast toast = Toast.makeText(NewOrderActivity.this, "Please Select Business Category", Toast.LENGTH_LONG);
+//						toast.setGravity(Gravity.CENTER, 0, 0);
+//						toast.show();
 
                     }
                     else
@@ -1050,66 +1208,32 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                         //Intent intent = new Intent(getApplicationContext(), Filter_List.class);
                         Global_Data.GLOVEL_CATEGORY_NAME = parent.getItemAtPosition(pos).toString();
 
-                        List<Local_Data> contacts2 = dbvoc.HSS_DescriptionITEM_ID(parent.getItemAtPosition(pos).toString().trim());
-                        //results.add("Select Product");
-                        for (Local_Data cn : contacts2)
-                        {
-                            Global_Data.GLOVEL_CATEGORY_ID = cn.getCust_Code();
-
-
-                            //Global_Data.local_pwd = ""+cn.getPwd();
-
-                            //results.add(str_product);
-                            //System.out.println("Local Values:-"+Global_Data.local_user);
-                            //Toast.makeText(LoginActivity.this, "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
-                        }
 
                         results.clear();
                         //List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_ID(Global_Data.GLOVEL_CATEGORY_ID);
-                        List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_category_name(parent.getItemAtPosition(pos).toString().trim());
-                        results.add("Select Product");
+                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_Name(spnBu.getSelectedItem().toString(),spnBusinessDiv.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
+                        results.add("Select Brand");
                         for (Local_Data cn : contacts22) {
-                            String str_product = ""+cn.getStateName();
-                            //Global_Data.local_pwd = ""+cn.getPwd();
 
-                            results.add(str_product);
-                            System.out.println("Local Values:-"+Global_Data.local_user);
-                            //Toast.makeText(LoginActivity.this, "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSubcateg())) {
+
+                                String str_product = ""+cn.getSubcateg();
+                                //Global_Data.local_pwd = ""+cn.getPwd();
+
+                                results.add(str_product);
+                                System.out.println("Local Values:-"+Global_Data.local_user);
+                            }
+
+
                         }
 
                         adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
                         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
                         spnProduct.setAdapter(adapter_state2);
-                        // spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
-
-                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(subcateg_name)){
-                            int spinnerPosition = adapter_state2.getPosition(subcateg_name);
-                            spnProduct.setSelection(spinnerPosition);
-                        }
-                        //startActivity(intent);
-                        //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     }
-//                 }
-//                 else
-//                 {
-//                	 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-//                 }
 
-
-                    //}
                 }
-//
-//				else {
-//
-//					//categoryID = Integer.parseInt(categoriesMap.get(""+parent.getSelectedItemId()));
-//					categoryID =dataCategories.get(pos-1).getId();
-//					CategoriesSpinner = parent.getItemAtPosition(pos).toString();
-//					LoadProductsAsyncTask loadProductsAsyncTask=new LoadProductsAsyncTask(NewOrderActivity.this);
-//					loadProductsAsyncTask.execute();
-//
-//				}
-
             }
 
             @Override
@@ -1133,30 +1257,34 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                                       int before, int count) {
                 if(s.length() != 0)
                 {
+                    try
+                    {
+                        if (editTextQuantity.getText().toString().length() != 0) {
 
-                    if (editTextQuantity.getText().toString().length() != 0) {
-
-                        if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null")  && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
-                        {
-                            double final_mrp = (Double.valueOf(editTextMRP.getText().toString()))*(Double.valueOf(editTextQuantity.getText().toString().trim()));
-                            txtPrice.setText("Total Price : "+final_mrp);
-                            price = String.valueOf(final_mrp);
-
-                            // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                        }
-                        else
-                        {
-                            if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null")  && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
+                            if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null")  && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
                             {
-                                // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-                                // txtPrice.setText("Total Price : "+final_mrp);
-                                // price = String.valueOf(final_mrp);
-                                //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                            }
+                                double final_mrp = (Double.valueOf(editTextMRP.getText().toString()))*(Double.valueOf(editTextQuantity.getText().toString().trim()));
+                                txtPrice.setText("Total Price : "+final_mrp);
+                                price = String.valueOf(final_mrp);
 
-                        }
+                                // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+                            }
+                            else
+                            {
+                                if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null")  && !editTextMRP.getText().toString().equalsIgnoreCase("0.0"))
+                                {
+                                    // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
+                                    // txtPrice.setText("Total Price : "+final_mrp);
+                                    // price = String.valueOf(final_mrp);
+                                    //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+                                }
+
+                            }
 //
-                    }}
+                        }
+
+                    }catch(Exception ex){ex.printStackTrace();}
+                }
 
 
                 //Field2.setText("");
@@ -1164,77 +1292,10 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         });
 
 
-        //editTextQuantity.setFocusable(false) ;
 
 
-//
-//		txtDeleiveryQuantity1.addTextChangedListener(new TextWatcher() {
-//
-//			   @Override
-//			   public void afterTextChanged(Editable s) {}
-//
-//			   @Override
-//			   public void beforeTextChanged(CharSequence s, int start,
-//			     int count, int after) {
-//			   }
-//
-//			   @Override
-//			   public void onTextChanged(CharSequence s, int start,
-//			     int before, int count) {
-//			      if(s.length() != 0)
-//			      {
-//			    	  if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null"))
-//			    	  {
-//
-//
-//			    			  if(spnScheme.getSelectedItem().toString().equalsIgnoreCase("Rupees"))
-//					    	  {
-//					    		  int final_mrp = (Integer.parseInt(editTextMRP.getText().toString()))*(Integer.parseInt(editTextQuantity.getText().toString()));
-//					    		 // int final_discount = (Integer.parseInt(String.valueOf(s)))*(Integer.parseInt(editTextQuantity.getText().toString()));
-//					    		  int final_discount = Integer.parseInt(String.valueOf(s));
-//					    		  // int price1 = (Integer.parseInt(editTextMRP.getText().toString()))-(Integer.parseInt((String.valueOf(s))));
-//					    		  int price1 = (final_mrp)-(final_discount);
-//					    		  txtPrice.setText("Total Price : "+price1);
-//					    		  price = String.valueOf(price1);
-//					    	  }
-//					    	  else
-//				    		  if(spnScheme.getSelectedItem().toString().equalsIgnoreCase("Percentage"))
-//					    	  {
-//				    			  if(Integer.parseInt(String.valueOf(s)) >=100)
-//					    		  {
-//				   	        		   Toast toast = Toast.makeText(getApplicationContext(),"Discount not more than 99",1000);
-//				   	        		 toast.setGravity(Gravity.CENTER, 0, 0);
-//									   toast.show();
-//
-//					    		  }
-//				    			  else
-//				    			  {
-//				    				  Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()))*(Float.valueOf(editTextQuantity.getText().toString()));
-//					    			   int final_discount = Integer.parseInt(String.valueOf(s));
-//					    			   // Float final_discount = (Float.valueOf((String.valueOf(s))))*(Float.valueOf(editTextQuantity.getText().toString()));
-//			//		    			   Float per_value = (Float.valueOf((editTextMRP.getText().toString())))*(Float.valueOf((String.valueOf(s))))/(100);
-//			//		    			   Float price1 = (Float.valueOf(editTextMRP.getText().toString()))-(per_value);
-//
-//					    			   Float per_value = (final_mrp)*(Float.valueOf((final_discount)))/(100);
-//					    			   Float price1 = (final_mrp)-(per_value);
-//
-//						    		  txtPrice.setText("Total Price : "+price1);
-//						    		  price = String.valueOf(price1);
-//				    			  }
-//
-//					    	  }
-//
-//
-//
-//			    	  }
-//
-//
-//			      }
-//
-//
-//			        //Field2.setText("");
-//			   }
-//			  });
+
+
 
         spnScheme.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -1242,14 +1303,20 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                                        int pos, long arg3) {
                 // TODO Auto-generated method stub
                 productScheme = parent.getItemAtPosition(pos).toString();
-               // Toast.makeText(Previous_orderNew_S1.this, "click appear.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(NewOrderActivity.this, "click appear.", Toast.LENGTH_SHORT).show();
                 if (parent.getItemAtPosition(pos).toString()
                         .equalsIgnoreCase("Select Scheme")) {
+
+
 
                 }
                 else{
 
+
+
+
                 }
+
             }
 
             @Override
@@ -1257,18 +1324,18 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
                 // TODO Auto-generated method stub
 
             }
+
         });
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                if(Global_Data.app_sound==false)
-                {
-                    mpplayer.stop();
-                }
+                mpplayer.stop();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -1279,13 +1346,20 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
     public void onBackPressed() {
         // TODO Auto-generated method stub
         //super.onBackPressed();
-        if(Global_Data.app_sound==false)
-        {
-            mpplayer.stop();
-        }
-        Intent intentn = new Intent(getApplicationContext(), Previous_orderNew_S2.class);
-        startActivity(intentn);
+
+        Global_Data.GLOVEL_LONG_DESC = "";
+        Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+        Global_Data.GLOVEL_ITEM_MRP = "";
+        Global_Data.Search_business_unit_name = "";
+        Global_Data.Search_Category_name = "";
+        Global_Data.Search_BusinessCategory_name = "";
+        Global_Data.Search_brand_name = "";
+
+        Intent i=new Intent(Previous_orderNew_S1.this, Previous_orderNew_S2.class);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        startActivity(i);
         finish();
+
 
     }
 
@@ -1297,131 +1371,5 @@ public class Previous_orderNew_S1 extends BaseActivity implements OnItemSelected
         buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));
     }
 
-
-
-
-
-
-
-
-
-
-    @Override
-    public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        // TODO Auto-generated method stub
-
-        Spinner spinner = (Spinner) arg0;
-
-        if (spinner.getId() == R.id.spnCategory) {
-
-            if (arg0.getItemAtPosition(arg2).toString()
-                    .equalsIgnoreCase("Select Category")) {
-
-                results.clear();
-                results.add("Select Product");
-                results2.clear();
-                results2.add("Select Variant");
-
-
-
-                adapter_state2 = new ArrayAdapter<String>(this,
-                        R.layout.spinner_item, results);
-                adapter_state2.setDropDownViewResource(R.layout.spinner_item);
-                spnProduct.setAdapter(adapter_state2);
-                spnProduct.setOnItemSelectedListener(this);
-
-//				list_cities.add("");
-//				list_cities.clear();
-//				// String []customer_array = {"Apple", "Banana", "Cherry",
-//				// "Date", "Grape", "Kiwi", "Mango", "Pear"};
-//				ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//						android.R.layout.simple_spinner_dropdown_item,
-//						list_cities);
-//				autoCompleteTextView1.setThreshold(1);// will start working from
-//														// first character
-//				autoCompleteTextView1.setAdapter(adapter);// setting the adapter
-//															// data into the
-//															// AutoCompleteTextView
-//				autoCompleteTextView1.setTextColor(Color.BLACK);
-//				autoCompleteTextView1.setText("");
-
-                // adapter_state3 = new
-                // ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,
-                // results2);
-                // adapter_state3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                // retail_spinner.setAdapter(adapter_state3);
-                // retail_spinner.setOnItemSelectedListener(this);
-            } else {
-
-                String items = spnCategory.getSelectedItem().toString();
-                String C_ID = "";
-                Log.i("Selected item : ", items);
-
-                // List<Local_Data> contacts =
-                // dbvoc.getBeats_CITYID(state_spinner.getSelectedItem().toString());
-                // for (Local_Data cn : contacts)
-                // {
-                //
-                // C_ID = cn.getStateName();
-                // //CAT_ID = cn.getStateName();
-                // //F_CITY_ID = cn.getStateName();
-                // //F_BEAT_ID = cn.get_category_id();
-                // }
-
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
-//					results.clear();
-//					results.add("Select Product");
-
-                    results2.clear();
-                    results2.add("Select Variant");
-                    List<Local_Data> contacts2 = dbvoc.getProductByCat(items);
-                    for (Local_Data cn : contacts2) {
-
-                        results.add(cn.getStateName());
-                        Global_Data.pname=cn.getProduct_nm();
-                        //Toast.makeText(Previous_orderNew_S1.this,"val:"+Global_Data.pname,Toast.LENGTH_SHORT).show();
-
-                        Toast toast = Toast.makeText(Previous_orderNew_S1.this,"val:"+Global_Data.pname,Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }
-                    adapter_state2 = new ArrayAdapter<String>(Previous_orderNew_S1.this,
-                            R.layout.spinner_item, results);
-                    adapter_state2
-                            .setDropDownViewResource(R.layout.spinner_item);
-                    spnProduct.setAdapter(adapter_state2);
-
-//					adapter_state1 = new ArrayAdapter<String>(NewOrderActivity.this,
-//							android.R.layout.simple_spinner_item, results_beat);
-//					adapter_state1
-//							.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//					spnProductSpec.setAdapter(adapter_state1);
-
-                }
-
-//				if (!Global_Data.GLOvel_CITY_n.equalsIgnoreCase("")) {
-//					spnProduct.setSelection(adapter_state2
-//							.getPosition(Global_Data.GLOvel_CITY_n
-//									.toUpperCase()));
-//				} else if (!Global_Data.GLOvel_CITY.equalsIgnoreCase("")) {
-//					spnProductSpec
-//							.setSelection(adapter_state2
-//									.getPosition(Global_Data.GLOvel_CITY
-//											.toUpperCase()));
-//				}
-            }
-        }
-
-
-//
-//
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> arg0) {
-        // TODO Auto-generated method stub
-
-    }
 
 }

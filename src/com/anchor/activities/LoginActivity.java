@@ -195,15 +195,15 @@ public class LoginActivity extends Activity{
 				editText2=(EditText) findViewById(R.id.editText2);
 		        emp_code=(EditText) findViewById(R.id.emp_code);
 
-		sharedpreferences = getSharedPreferences(mypreference,
+		sharedpreferences = getSharedPreferences("SimpleLogic",
 				Context.MODE_PRIVATE);
 		if (sharedpreferences.contains(Code)) {
 			Global_Data.emp_code=sharedpreferences.getString(Code, "");
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//				editText1.setText("tejal");
-//				editText2.setText("tejal12345");
+				editText1.setText("swatiyamgar");
+				editText2.setText("password");
 //
 //		        editText1.setText("aakash");
 //				editText2.setText("aakash12345");
@@ -355,15 +355,15 @@ public class LoginActivity extends Activity{
 						toast.setGravity(Gravity.CENTER, 0, 0);
 						toast.show();
 	                }
-					else
-					if(CheckNullValue.findNullValue(emp_code.getText().toString().trim()) == true)
-					{
-						// Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
-
-						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Employee Code", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-					}
+//					else
+//					if(CheckNullValue.findNullValue(emp_code.getText().toString().trim()) == true)
+//					{
+//						// Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+//
+//						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Employee Code", Toast.LENGTH_LONG);
+//						toast.setGravity(Gravity.CENTER, 0, 0);
+//						toast.show();
+//					}
 	                else
 	                {
 //	                    if(switchCompat.isChecked())
@@ -1069,7 +1069,7 @@ public class LoginActivity extends Activity{
 
 										loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
 												jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
-												"", Device_id, "", jsonObject.getString("address"), "", "", "", "", "");
+												"", Device_id, "", jsonObject.getString("address"), "", "", "", "", "",jsonObject.getString("emp_code"));
 									}
 
 									//Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
@@ -1124,11 +1124,7 @@ public class LoginActivity extends Activity{
 	        dialog.setCancelable(false);
 	        dialog.show();
 
-		String empl_code=emp_code.getText().toString();
-		Global_Data.emp_code = emp_code.getText().toString();
-		SharedPreferences.Editor editor = sharedpreferences.edit();
-		editor.putString(Code, empl_code);
-		editor.commit();
+
 
 			new LOGINOperation().execute(username,passwordnew);
 	    }
@@ -1142,13 +1138,14 @@ public class LoginActivity extends Activity{
 
 			if(contacts2.size() > 0)
 			{
+				int emp_code_flag = 0;
 				for (Local_Data cn : contacts2) {
 					String str_beat = "" + cn.getUser();
 
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
 					editor.putString("USER_EMAIL", cn.getuser_email());
-					editor.commit();
+					//editor.commit();
 
 					Global_Data.GLOvel_USER_EMAIL = cn.getuser_email();
 					Global_Data.GLOVEL_USER_ID = cn.get_shedule_order_id();
@@ -1156,81 +1153,99 @@ public class LoginActivity extends Activity{
 					Global_Data.USER_FIRST_NAME = cn.getfirst_name();
 					Global_Data.USER_LAST_NAME = cn.getlast_name();
 
-					List<Local_Data> cont = dbvoc.getManager_mobile(Global_Data.customer_reportingTo);
+					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getEmp_code())) {
+						String empl_code=cn.getEmp_code();
+						Global_Data.emp_code =empl_code;
 
-					if(cont.size() <= 0)
-					{
-						Global_Data.cus_MAnager_mobile = "";
-					}
-					else
-					{
-						for (Local_Data cnn : cont) {
+						LoginActivity.this.runOnUiThread(new Runnable() {
+							public void run() {
+								emp_code.setText(Global_Data.emp_code);
 
-							if(!cnn.getMOBILE_NO().equalsIgnoreCase(null) && !cnn.getMOBILE_NO().equalsIgnoreCase("null") && !cnn.getMOBILE_NO().equalsIgnoreCase("") && !cnn.getMOBILE_NO().equalsIgnoreCase(" "))
-							{
-								Global_Data.cus_MAnager_mobile = cnn.getMOBILE_NO();
-								Global_Data.USER_MANAGER_NAME = cnn.getfirst_name() + " " + cnn.getlast_name();
 							}
-							else
-							{
-								Global_Data.cus_MAnager_mobile = "";
+						});
+
+						emp_code_flag =1;
+						editor.putString(Code, Global_Data.emp_code );
+						editor.commit();
+					}
+
+					if(emp_code_flag == 1)
+					{
+						List<Local_Data> cont = dbvoc.getManager_mobile(Global_Data.customer_reportingTo);
+
+						if(cont.size() <= 0)
+						{
+							Global_Data.cus_MAnager_mobile = "";
+						}
+						else
+						{
+							for (Local_Data cnn : cont) {
+
+								if(!cnn.getMOBILE_NO().equalsIgnoreCase(null) && !cnn.getMOBILE_NO().equalsIgnoreCase("null") && !cnn.getMOBILE_NO().equalsIgnoreCase("") && !cnn.getMOBILE_NO().equalsIgnoreCase(" "))
+								{
+									Global_Data.cus_MAnager_mobile = cnn.getMOBILE_NO();
+									Global_Data.USER_MANAGER_NAME = cnn.getfirst_name() + " " + cnn.getlast_name();
+								}
+								else
+								{
+									Global_Data.cus_MAnager_mobile = "";
+								}
 							}
 						}
-					}
 
-					Log.d("user email", "user email"+cn.getuser_email());
-					Log.d("user id", "user id"+cn.get_shedule_order_id());
+						Log.d("user email", "user email"+cn.getuser_email());
+						Log.d("user id", "user id"+cn.get_shedule_order_id());
 
-					dbvoc.getDeleteTable("user_email");
+						dbvoc.getDeleteTable("user_email");
 
-					loginDataBaseAdapter.insert_user_email(cn.getuser_email());
-					//Global_Data.local_pwd = ""+cn.getPwd();
+						loginDataBaseAdapter.insert_user_email(cn.getuser_email());
+						//Global_Data.local_pwd = ""+cn.getPwd();
 
-					//String test_passwd = "password";
-					//String test_hash = "$2a$10$qvO88dxBtHvZ2jAeyhLuMenX97XRxspL4zV3DAU.3ZQyeexZxBu86";
+						//String test_passwd = "password";
+						//String test_hash = "$2a$10$qvO88dxBtHvZ2jAeyhLuMenX97XRxspL4zV3DAU.3ZQyeexZxBu86";
 
-					try {
-						if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getPwd()))
-						{
-							Boolean compare_computed = BCrypt.checkpw(response[1], cn.getPwd());
-							//Boolean compare_computed = BCrypt.checkpw(test_passwd, test_hash);
-							String s = String.valueOf(compare_computed);
+						try {
+							if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getPwd()))
+							{
+								Boolean compare_computed = BCrypt.checkpw(response[1], cn.getPwd());
+								//Boolean compare_computed = BCrypt.checkpw(test_passwd, test_hash);
+								String s = String.valueOf(compare_computed);
 
-							Log.d("check authente", "value" + s);
+								Log.d("check authente", "value" + s);
 
-							if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("TRUE")) {
+								if (s.equalsIgnoreCase("true") || s.equalsIgnoreCase("TRUE")) {
 
-								loginDataBaseAdapter.open();
+									loginDataBaseAdapter.open();
 
-								LoginActivity.this.runOnUiThread(new Runnable() {
-									public void run() {
-										dialog.dismiss();
-										editText1.setText("");
-										editText2.setText("");
-									}
-								});
+									LoginActivity.this.runOnUiThread(new Runnable() {
+										public void run() {
+											dialog.dismiss();
+											editText1.setText("");
+											editText2.setText("");
+										}
+									});
 
 //								        dialog.dismiss();
 //        								startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //										overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //										finish();
 
-								List<Local_Data> conta = dbvoc.getDateBY_Device(Global_Data.imei_no);
-								for (Local_Data cn1 : conta) {
-									current_date = cn1.getCur_date();
-									//current_date="28/02/2017";
-								}
+									List<Local_Data> conta = dbvoc.getDateBY_Device(Global_Data.imei_no);
+									for (Local_Data cn1 : conta) {
+										current_date = cn1.getCur_date();
+										//current_date="28/02/2017";
+									}
 
-								if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date)) {
-									SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-									Date date1 = sdf.parse(current_date);
+									if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date)) {
+										SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+										Date date1 = sdf.parse(current_date);
 
-									Calendar c = Calendar.getInstance();
-									SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-									String formattedDate = df.format(c.getTime());
-									Date to_ddd = df.parse(formattedDate);
+										Calendar c = Calendar.getInstance();
+										SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+										String formattedDate = df.format(c.getTime());
+										Date to_ddd = df.parse(formattedDate);
 
-									if (to_ddd.compareTo(date1) < 0) {
+										if (to_ddd.compareTo(date1) < 0) {
 //												Toast.makeText(LoginActivity.this, "to_ddd is after date1", Toast.LENGTH_SHORT).show();
 //											loginDataBaseAdapter.insertEntry("", "", "", "", "", "",
 //													"", "","", "", "", "", "",
@@ -1239,17 +1254,56 @@ public class LoginActivity extends Activity{
 //											startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //											overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //											finish();
+											isInternetPresent = cd.isConnectingToInternet();
+											if (isInternetPresent) {
+												SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+												loginDataBaseAdapter.updateEntry(pref.getString("login_usernm", ""), pref.getString("login_pwd", ""), pref.getString("login_dtofjn", ""), pref.getString("login_mobno", ""), pref.getString("login_email", ""), pref.getString("login_repto", ""),
+														pref.getString("login_firstnm", ""), pref.getString("login_lastnm", ""), "", "", "", "", "",
+														"", pref.getString("login_devid", ""), "", pref.getString("login_adrs", ""), "", "", "", formattedDate, "1");
+
+//													loginDataBaseAdapter.insertEntry("", "", "", "", "", "",
+//															"", "","", "", "", "", "",
+//															"", "", "", "","","","",formattedDate,"1");
+
+												LoginActivity.this.runOnUiThread(new Runnable() {
+													public void run() {
+														getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
+													}
+												});
+											} else {
+												LoginActivity.this.runOnUiThread(new Runnable() {
+													public void run() {
+														Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+														toast.setGravity(Gravity.CENTER, 0, 0);
+														toast.show();
+													}
+												});
+
+											}
+										} else {
+											dialog.dismiss();
+											startActivity(new Intent(LoginActivity.this, MainActivity.class));
+											overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+											finish();
+										}
+//									  }catch (ParseException e)
+//									   {
+//										 e.printStackTrace();
+//									   }
+									} else {
 										isInternetPresent = cd.isConnectingToInternet();
+
+										Calendar c = Calendar.getInstance();
+										SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+										String formattedDate = df.format(c.getTime());
+
 										if (isInternetPresent) {
 											SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
 											loginDataBaseAdapter.updateEntry(pref.getString("login_usernm", ""), pref.getString("login_pwd", ""), pref.getString("login_dtofjn", ""), pref.getString("login_mobno", ""), pref.getString("login_email", ""), pref.getString("login_repto", ""),
 													pref.getString("login_firstnm", ""), pref.getString("login_lastnm", ""), "", "", "", "", "",
 													"", pref.getString("login_devid", ""), "", pref.getString("login_adrs", ""), "", "", "", formattedDate, "1");
-
-//													loginDataBaseAdapter.insertEntry("", "", "", "", "", "",
-//															"", "","", "", "", "", "",
-//															"", "", "", "","","","",formattedDate,"1");
 
 											LoginActivity.this.runOnUiThread(new Runnable() {
 												public void run() {
@@ -1264,91 +1318,75 @@ public class LoginActivity extends Activity{
 													toast.show();
 												}
 											});
-
 										}
-									} else {
-										dialog.dismiss();
-										startActivity(new Intent(LoginActivity.this, MainActivity.class));
-										overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-										finish();
 									}
-//									  }catch (ParseException e)
-//									   {
-//										 e.printStackTrace();
-//									   }
+
 								} else {
-									isInternetPresent = cd.isConnectingToInternet();
 
-									Calendar c = Calendar.getInstance();
-									SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-									String formattedDate = df.format(c.getTime());
-
-									if (isInternetPresent) {
-										SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-
-										loginDataBaseAdapter.updateEntry(pref.getString("login_usernm", ""), pref.getString("login_pwd", ""), pref.getString("login_dtofjn", ""), pref.getString("login_mobno", ""), pref.getString("login_email", ""), pref.getString("login_repto", ""),
-												pref.getString("login_firstnm", ""), pref.getString("login_lastnm", ""), "", "", "", "", "",
-												"", pref.getString("login_devid", ""), "", pref.getString("login_adrs", ""), "", "", "", formattedDate, "1");
-
-										LoginActivity.this.runOnUiThread(new Runnable() {
-											public void run() {
-												getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
-											}
-										});
-									} else {
-										LoginActivity.this.runOnUiThread(new Runnable() {
-											public void run() {
-												Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-												toast.setGravity(Gravity.CENTER, 0, 0);
-												toast.show();
-											}
-										});
-									}
+									LoginActivity.this.runOnUiThread(new Runnable() {
+										public void run() {
+											dialog.dismiss();
+											editText2.setText("");
+											Toast toast = Toast.makeText(LoginActivity.this, "Your Password doesnot match Please Try Again.", Toast.LENGTH_SHORT);
+											toast.setGravity(Gravity.CENTER, 0, 0);
+											toast.show();
+										}
+									});
 								}
-
-							} else {
-
+							}else
+							{
 								LoginActivity.this.runOnUiThread(new Runnable() {
 									public void run() {
 										dialog.dismiss();
+										editText1.setText("");
 										editText2.setText("");
-										Toast toast = Toast.makeText(LoginActivity.this, "Your Password doesnot match Please Try Again.", Toast.LENGTH_SHORT);
+
+										Toast toast = Toast.makeText(LoginActivity.this, "Your Credential doesnot match Please Try Again.", Toast.LENGTH_SHORT);
 										toast.setGravity(Gravity.CENTER, 0, 0);
 										toast.show();
 									}
 								});
 							}
-						}else
-						{
+
+						} catch (ParseException ex) {
+							ex.printStackTrace();
 							LoginActivity.this.runOnUiThread(new Runnable() {
 								public void run() {
 									dialog.dismiss();
 									editText1.setText("");
 									editText2.setText("");
+									//Toast.makeText(LoginActivity.this, "Your Credential doesnot match Please Try Again.", Toast.LENGTH_SHORT).show();
 
 									Toast toast = Toast.makeText(LoginActivity.this, "Your Credential doesnot match Please Try Again.", Toast.LENGTH_SHORT);
 									toast.setGravity(Gravity.CENTER, 0, 0);
 									toast.show();
 								}
 							});
-						}
 
-					} catch (ParseException ex) {
-						ex.printStackTrace();
+						}
+					}
+					else
+					{
 						LoginActivity.this.runOnUiThread(new Runnable() {
 							public void run() {
 								dialog.dismiss();
 								editText1.setText("");
 								editText2.setText("");
+								emp_code.setText("");
+								SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
+								SharedPreferences.Editor editor=spf.edit();
+								editor.putString(Code, "");
+								editor.commit();
 								//Toast.makeText(LoginActivity.this, "Your Credential doesnot match Please Try Again.", Toast.LENGTH_SHORT).show();
 
-								Toast toast = Toast.makeText(LoginActivity.this, "Your Credential doesnot match Please Try Again.", Toast.LENGTH_SHORT);
+								Toast toast = Toast.makeText(LoginActivity.this, "Your employee code not found in databse,Please contact with admin.", Toast.LENGTH_SHORT);
 								toast.setGravity(Gravity.CENTER, 0, 0);
 								toast.show();
 							}
 						});
-
 					}
+
+
 					dialog.dismiss();
 
 				}

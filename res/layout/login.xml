@@ -50,6 +50,8 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:editable="false"
+        android:clickable="false"
         android:layout_marginTop="10dp"
         android:hint="Employee Code"
         android:paddingTop="15dp" />

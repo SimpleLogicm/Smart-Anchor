@@ -1,13 +1,9 @@
 package com.anchor.activities;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
@@ -42,6 +38,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 
 
     private ArrayList<String> Scheme_array = new ArrayList<String>();
+
     int activity_load_flag = 0;
     String CategoriesSpinner = "";
     String ProductSpinner = "";
@@ -84,12 +81,13 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
     ArrayList<Category> dataCategories = new ArrayList<Category>();
     ArrayList<Product> dataProducts = new ArrayList<Product>();
     ArrayList<Scheme> dataScheme = new ArrayList<Scheme>();
+    TextView t_error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.previous_edit_product_item);
+        setContentView(R.layout.edit_product_item);
 
         // create a instance of SQLite Database
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -140,10 +138,12 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         txtDeleiveryQuantity1 = (EditText) findViewById(R.id.txtDeleiveryQuantity);
 
         txt_rp = (TextView) findViewById(R.id.textRP);
+        t_error = (TextView) findViewById(R.id.t_error);
         // for label RP change
         SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
         String rpstr=spf1.getString("var_rp", "");
         txt_rp.setText(rpstr);
+
 
         //TODO FOR SCHEME ERROR
         txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
@@ -205,14 +205,14 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         // adapter_state1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, results1);
         adapter_state2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, results);
         adapter_state3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, results2);
-
-//        Discount_list.add("Select Discount Type");
-//        Discount_list.add("Rupees");
-//        Discount_list.add("Percentage");
 //
-//        Discount_Adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Discount_list);
-//        Discount_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//        spnScheme.setAdapter(Discount_Adapter);
+//		  Discount_list.add("Select Discount Type");
+//		  Discount_list.add("Rupees");
+//		  Discount_list.add("Percentage");
+//
+//		  Discount_Adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, Discount_list);
+//		  Discount_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+//		  spnScheme.setAdapter(Discount_Adapter);
 
 //		  adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //		  city_spinner.setAdapter(adapter_state1);
@@ -225,40 +225,6 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //		  adapter_state3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //		  retail_spinner.setAdapter(adapter_state3);
 //		  retail_spinner.setOnItemSelectedListener(this);
-
-
-        if(Global_Data.amount != "")
-        {
-            spnProduct.setText(Global_Data.product_dec);
-            editTextQuantity.setText(Global_Data.total_qty);
-            editTextMRP.setText(Global_Data.MRP);
-            editTextRP.setText(Global_Data.RP);
-            // spnScheme.setEnabled(true);
-            txtPrice.setText("Total Price : "+Global_Data.amount);
-            //txtDeleiveryQuantity1.setVisibility(View.VISIBLE);
-
-            //TODO FOR SCHEME ERROR
-            txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
-
-            if (!Global_Data.actual_discount.equalsIgnoreCase(""))
-            {
-                Log.d("Globel ", "in");
-//                spnScheme.setSelection(Discount_Adapter.getPosition(Global_Data.actual_discount));
-                //Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-
-               // txtDeleiveryQuantity1.setText(Global_Data.scheme_amount);
-
-            }
-
-        }
-        else
-        {
-            //editTextQuantity.setFocusable(false) ;
-            editTextMRP.setText("");
-            editTextRP.setText("");
-            // spnScheme.setEnabled(false);
-            txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
-        }
 
         Scheme_array.clear();
         Scheme_array.add("Select Scheme");
@@ -277,12 +243,54 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         Discount_Adapter.setDropDownViewResource(R.layout.spinner_item);
         spnScheme.setAdapter(Discount_Adapter);
 
-        if(!(Global_Data.pre_schecode.equalsIgnoreCase("")))
-        {
-            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(scheme_namen)){
-                int spinnerPosition = Discount_Adapter.getPosition(scheme_namen);
-                spnScheme.setSelection(spinnerPosition);
+
+        List<Local_Data> schemeitem_name = dbvoc.Get_OrderProducts_scheme(Global_Data.GLObalOrder_id);
+//results2.add("Select Variant");
+        for (Local_Data ss : schemeitem_name) {
+
+            if(!(ss.getSche_code().toString().equalsIgnoreCase("")))
+            {
+                if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(scheme_namen)){
+                    int spinnerPosition = Discount_Adapter.getPosition(scheme_namen);
+                    spnScheme.setSelection(spinnerPosition);
+                }
             }
+        }
+
+
+
+
+        if(Global_Data.amount != "")
+        {
+            spnProduct.setText(Global_Data.product_dec);
+            editTextQuantity.setText(Global_Data.total_qty);
+            editTextMRP.setText(Global_Data.MRP);
+            editTextRP.setText(Global_Data.RP);
+            // spnScheme.setEnabled(true);
+            txtPrice.setText("Total Price : "+Global_Data.amount);
+            //txtDeleiveryQuantity1.setVisibility(View.VISIBLE);
+
+            //TODO FOR SCHEME ERROR
+            txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
+
+            if (!Global_Data.actual_discount.equalsIgnoreCase(""))
+            {
+                Log.d("Globel ", "in");
+                //spnScheme.setSelection(Discount_Adapter.getPosition(Global_Data.actual_discount));
+                //Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+
+                //txtDeleiveryQuantity1.setText(Global_Data.scheme_amount);
+
+            }
+
+        }
+        else
+        {
+            //editTextQuantity.setFocusable(false) ;
+            editTextMRP.setText("");
+            editTextRP.setText("");
+            // spnScheme.setEnabled(false);
+            txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
         }
 
 //		  spnProduct.setOnClickListener(new View.OnClickListener() {
@@ -307,7 +315,47 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
             //Log.e("data", "***********productList**********");
             Global_Data.productList=i.getParcelableArrayListExtra("productsList");
         }
+		/*ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setBackgroundDrawable(new ColorDrawable(Color
+				.parseColor("#8A0808")));
 
+		actionBar.setTitle(name);
+		actionBar.setHomeButtonEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+*/
+
+//		ActionBar mActionBar = getActionBar();
+//		mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+//       // mActionBar.setDisplayShowHomeEnabled(false);
+//       // mActionBar.setDisplayShowTitleEnabled(false);
+//        LayoutInflater mInflater = LayoutInflater.from(this);
+//
+//        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+//        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+//        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+//        mTitleTextView.setText("Order Booking");
+//
+//        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+//        SharedPreferences sp = Previous_Item_Edit_Activity.this.getSharedPreferences("SimpleLogic", 0);
+//
+//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+//        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+//		}
+//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+////        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+//        	todaysTarget.setText("Today's Target Acheived");
+//		}
+//
+//        mActionBar.setCustomView(mCustomView);
+//        mActionBar.setDisplayShowCustomEnabled(true);
+//        mActionBar.setHomeButtonEnabled(true);
+//        mActionBar.setDisplayHomeAsUpEnabled(true);
+       /* mActionBar.setDisplayShowCustomEnabled(true);
+        mActionBar.setDisplayShowHomeEnabled(false);
+        mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);*/
 
         buttonAddMOre = (Button) findViewById(R.id.buttonAddMOre);
         buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
@@ -333,7 +381,6 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                     b.setBackgroundColor(Color.parseColor("#910505"));
 
                     Global_Data.GLOVEL_ORDER_REJECT_FLAG = "";
-
                     Intent intent = new Intent(Previous_Item_Edit_Activity.this, Previous_orderNew_S2.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -378,31 +425,42 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 					}
 					*/
 //					if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) {
-//						Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please Select Category", Toast.LENGTH_SHORT);
+//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Category", Toast.LENGTH_SHORT);
 //						toast.setGravity(Gravity.CENTER, 0, 0);
 //						toast.show();
 //					}
 
 //					else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) {
-//							Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please Select Product", Toast.LENGTH_SHORT);
+//							Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Product", Toast.LENGTH_SHORT);
 //							toast.setGravity(Gravity.CENTER, 0, 0);
 //							toast.show();
 //						}
 
 //					else if (spnProductSpec.getSelectedItem().toString().equalsIgnoreCase("Select Variant")) {
-//						Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please Select Variant", Toast.LENGTH_SHORT);
+//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Variant", Toast.LENGTH_SHORT);
 //						toast.setGravity(Gravity.CENTER, 0, 0);
 //						toast.show();
 //					}
+
+                    int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim())%Integer.parseInt(Global_Data.item_SL);
 
                     if (editTextQuantity.getText().toString().length() == 0) {
                         Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please enter Quantity", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
+                    else
+                    if(SQMO_Validator != 0)
+                    {
+                        Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Entered Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        editTextQuantity.setText("");
+                    }
+
 
 //					else if (spnScheme.getSelectedItem().toString().equalsIgnoreCase("Select Discount Type")) {
-//						Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please Select Discount Type", Toast.LENGTH_SHORT);
+//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Discount Type", Toast.LENGTH_SHORT);
 //						toast.setGravity(Gravity.CENTER, 0, 0);
 //						toast.show();
 //					}
@@ -410,38 +468,20 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                     else{
 
                         // TODO Auto-generated method stub
-                        // v.setBackgroundColor(Color.parseColor("#910505"));
 
-                        // create a instance of SQLite Database
-
-//						if (!spnScheme.getSelectedItem().toString().equalsIgnoreCase("Select Discount Type")&& txtDeleiveryQuantity1.getText().toString().length() == 0) {
-//							Toast toast = Toast.makeText(Item_Edit_Activity.this,"Please enter Discount Amount", Toast.LENGTH_SHORT);
-//							toast.setGravity(Gravity.CENTER, 0, 0);
-//							toast.show();
-//						}
-//						else
-//						{
-                        //Global_Data.order_category = spnCategory.getSelectedItem().toString();
-                        //Global_Data.order_product = spnProduct.getSelectedItem().toString();
-                        // Global_Data.order_variant = spnProductSpec.getSelectedItem().toString();
 
 
                         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
                         String s_price[] = txtPrice.getText().toString().split(":");
 
-//	//					     //Reading all
-//				   	         List<Local_Data> contacts = dbvoc.getRR();
-//				   	          for (Local_Data cn : contacts) {
-//				   	        	String str = ""+cn.getRR();
-//				   	        	//Global_Data.local_pwd = ""+cn.getPwd();
-//				   	        	System.out.println("Local Values:-"+str);
-//				   	        	//Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
+//	//
 //				   	        	                             }
                         String discount_type = "";
                         String discount_amount = "";
-
+//
                         List<Local_Data> scheme_name = dbvoc.getProductscheme_code(spnScheme.getSelectedItem().toString().trim());
+//results2.add("Select Variant");
                         if(scheme_name.size() > 0)
                         {
                             for (Local_Data s : scheme_name) {
@@ -501,8 +541,8 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //
 //                            if(check_order_product.size() < 0)
 //                            {
-                                loginDataBaseAdapter.insertOrderProducts(" ", " ",  Global_Data.GLOvel_GORDER_ID, "", "" , "" ,"", " " , scheme_code , " ", "", editTextQuantity.getText().toString() ,editTextRP.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), "", "",Global_Data.order_retailer," ", Global_Data.item_no," ",spnProduct.getText().toString().trim());
-                           // }
+                            loginDataBaseAdapter.insertOrderProducts(" ", " ",  Global_Data.GLOvel_GORDER_ID, "", "" , "" ,"", " " , scheme_code , " ", "", editTextQuantity.getText().toString() ,editTextRP.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), "", "",Global_Data.order_retailer," ", Global_Data.item_no," ",spnProduct.getText().toString().trim());
+                            // }
 
                         }
                         else
@@ -510,10 +550,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                             dbvoc.update_item(editTextQuantity.getText().toString().trim(),editTextMRP.getText().toString().trim(),s_price[1].trim(),discount_amount,discount_type,Global_Data.item_no,Global_Data.GLObalOrder_id,scheme_code);
                         }
 
-
-                       // Toast.makeText(Previous_Item_Edit_Activity.this, "Item Update Successfully",Toast.LENGTH_LONG).show();
-
-                        Toast toast = Toast.makeText(getApplicationContext(),"Item Update Successfully",Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Item Update Successfully", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
 
@@ -562,7 +599,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //									PreviewOrderSwipeActivity.class);
 //							i.putParcelableArrayListExtra("productsList", Global_Data.productList);
 //							i.putExtra("new","new");
-//							SharedPreferences sp = Item_Edit_Activity.this
+//							SharedPreferences sp = Previous_Item_Edit_Activity.this
 //									.getSharedPreferences("SimpleLogic", 0);
 //
 //							i.putExtra("retialer",
@@ -754,7 +791,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 ////					//categoryID = Integer.parseInt(categoriesMap.get(""+parent.getSelectedItemId()));
 ////					categoryID =dataCategories.get(pos-1).getId();
 ////					CategoriesSpinner = parent.getItemAtPosition(pos).toString();
-////					LoadProductsAsyncTask loadProductsAsyncTask=new LoadProductsAsyncTask(Item_Edit_Activity.this);
+////					LoadProductsAsyncTask loadProductsAsyncTask=new LoadProductsAsyncTask(Previous_Item_Edit_Activity.this);
 ////					loadProductsAsyncTask.execute();
 ////
 ////				}
@@ -822,7 +859,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //					//productID= Integer.parseInt(productsMap.get(""+parent.getSelectedItemId()));;
 //					productID = dataProducts.get(pos-1).getProductID();
 //					ProductSpinner =parent.getItemAtPosition(pos).toString();
-//					LoadProductVarientsAsyncTask loadProductVarientsAsyncTask=new LoadProductVarientsAsyncTask(Item_Edit_Activity.this);
+//					LoadProductVarientsAsyncTask loadProductVarientsAsyncTask=new LoadProductVarientsAsyncTask(Previous_Item_Edit_Activity.this);
 //					loadProductVarientsAsyncTask.execute();
 //				}
 //	    	}
@@ -885,22 +922,41 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //			    	  {
                     if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") &&  !editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase(null))
                     {
+
                         try
                         {
-                            Double final_mrp = Double.valueOf(editTextMRP.getText().toString()) * Double.valueOf(editTextQuantity.getText().toString().trim());
-                            txtPrice.setText("Total Price : "+final_mrp);
-                            price = String.valueOf(final_mrp);
+                            int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim())%Integer.parseInt(Global_Data.item_SL);
+                            if(SQMO_Validator == 0)
+                            {
+                                Double final_mrp = Double.valueOf(editTextMRP.getText().toString()) * Double.valueOf(editTextQuantity.getText().toString().trim());
+                                txtPrice.setText("Total Price : "+final_mrp);
+                                price = String.valueOf(final_mrp);
+                                t_error.setText("");
+                            }
+                            else
+                            {
+                                txtPrice.setText("Total Price : "+"");
+                                price = "";
+                                t_error.setText("Entered Value Not A Multiple Of Item SQ Value.");
+                            }
+
                         }catch(Exception ex){ex.printStackTrace();}
+
                     }
                     else
                     {
                         txtPrice.setText("Total Price : " + "");
                         price = String.valueOf("0");
+                        t_error.setText("");
                     }
 
                     //}
 
 
+                }
+                else
+                {
+                    t_error.setText("");
                 }
                 //Field2.setText("");
             }
@@ -988,86 +1044,6 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 
         });
 
-//        spnScheme.setOnItemSelectedListener(new OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View arg1,
-//                                       int pos, long arg3) {
-//                // TODO Auto-generated method stub
-//                productScheme = parent.getItemAtPosition(pos).toString();
-//                if (parent.getItemAtPosition(pos).toString()
-//                        .equalsIgnoreCase("Select Discount Type")) {
-//
-//                    txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
-//
-//                    if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null"))
-//                    {
-//                        Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()))*(Float.valueOf(editTextQuantity.getText().toString().trim()));
-//                        txtPrice.setText("Total Price : "+final_mrp);
-//                        price = String.valueOf(final_mrp);
-//                    }
-//                    else
-//                    {
-//                        if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null"))
-//                        {
-//                            Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-//                            txtPrice.setText("Total Price : "+final_mrp);
-//                            price = String.valueOf(final_mrp);
-//                        }
-//                    }
-//
-//                }
-//                else
-//                if(activity_load_flag != 0)
-//                {
-//                    activity_load_flag++;
-//                    if(parent.getItemAtPosition(pos).toString()
-//                            .equalsIgnoreCase("Rupees"))
-//                    {
-//                        txtDeleiveryQuantity1.setText("");
-//                        txtDeleiveryQuantity1.setVisibility(View.VISIBLE);
-//                        txtDeleiveryQuantity1.setHint("Rs.");
-//                        txtPrice.setText("Total Price : ");
-//                    }
-//                    else
-//                    if(parent.getItemAtPosition(pos).toString()
-//                            .equalsIgnoreCase("Percentage"))
-//                    {
-//                        txtDeleiveryQuantity1.setText("");
-//                        txtDeleiveryQuantity1.setVisibility(View.VISIBLE);
-//                        txtDeleiveryQuantity1.setHint("%");
-//                        txtPrice.setText("Total Price : ");
-//                    }
-//                }
-//
-//                activity_load_flag++;
-////				else {
-////					schemeID=dbschemeID;
-////					scheme=parent.getSelectedItem().toString();
-////
-////					String [] aray=scheme.split("and");
-////					int buy=Integer.parseInt(aray[0].replaceAll("[\\D]", ""));
-////					int get=Integer.parseInt(aray[1].replaceAll("[\\D]", ""));
-////					if (editTextQuantity.getText().toString().length()!=0) {
-////						quantity=Integer.parseInt(editTextQuantity.getText().toString());
-////						int extra = quantity / buy;
-////						deleiveryQuantity = extra*get + quantity;
-////						txtDeleiveryQuantity.setText("Delivery Quantity : "
-////								+ deleiveryQuantity);
-////    				}
-////    			}
-//
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> arg0) {
-//                // TODO Auto-generated method stub
-//
-//            }
-//
-//        });
-
     }
 
     @Override
@@ -1098,143 +1074,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         //buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));
     }
 
-    public class LoadProductsAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        /** progress dialog to show user that the backup is processing. */
-        private ProgressDialog dialog;
-        /** application context. */
-        private Activity activity;
-        private Context context;
-        private boolean webServiceResponse;
-
-        public LoadProductsAsyncTask(Activity activity) {
-            this.activity = activity;
-            context=activity;
-            dialog = new ProgressDialog(context);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-            this.dialog.setMessage("Loading Products");
-            this.dialog.show();
-            listProduct.clear();
-            listProduct.add("Select Product");
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO Auto-generated method stub
-            try {
-
-                Product product1 = new Product("AP DEO Stick 15", "TITAN AFD", "100ML","", "productDeleiveryQuantity","productScheme", "productrp", "270.00","178.50", 2, 1,1);
-                Product product2 = new Product("AP DEO Stick 15", "REBEL AFD", "190ML","", "productDeleiveryQuantity","productScheme", "productrp", "240.00","188.50", 2, 2,1);
-                Product product3 = new Product("AP DEO Stick 15", "ADORE AFD", "190ML","", "productDeleiveryQuantity","productScheme", "productrp", "220.00","168.50", 2, 3,1);
-                Product product4 = new Product("AP DEO Stick 15", "OASIS AFD", "100ML","", "productDeleiveryQuantity","productScheme", "productrp", "230.00","178.50", 2, 4,1);
-                Product product5 = new Product("AP DEO Stick 15", "VIVA APD", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "230.00","138.50", 2, 5,1);
-                Product product6 = new Product("AP DEO Stick 15", "ALEXA AFD", "180ML","", "productDeleiveryQuantity","productScheme", "productrp", "260.00","148.50", 2, 6,1);
-
-                Product product7 = new Product("AP Deodorants", "MANGO 30", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "240.00","168.50", 1, 7,1);
-                Product product8= new Product("AP Deodorants", "ICON APD", "100ML","", "productDeleiveryQuantity","productScheme", "productrp", "250.00","158.50", 1, 8,1);
-                Product product9 = new Product("AP Deodorants", "ATLAS AFD", "160ML","", "productDeleiveryQuantity","productScheme", "productrp", "250.00","158.50", 1, 9,1);
-                Product product10 = new Product("AP Deodorants", "AP 15 RHYTHM", "160ML","", "productDeleiveryQuantity","productScheme", "productrp", "270.00","128.50", 1, 10,1);
-                Product product11 = new Product("AP Deodorants", "AP 15 VIVA", "130ML","", "productDeleiveryQuantity","productScheme", "productrp", "270.00","138.50", 1, 11,1);
-                Product product12 = new Product("AP Deodorants", "AP 15 ICON", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "280.00","148.50", 1, 12,1);
-                Product product13 = new Product("AP Deodorants", "AP 15 ODYSSEY", "160ML","", "productDeleiveryQuantity","productScheme", "productrp", "240.00","158.50", 1, 13,1);
-                Product product14 = new Product("AP Deodorants", "CM 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "230.00","178.50", 1, 14,1);
-
-                Product product15 = new Product("Hand Sanitizer 30", "NATURAL 30", "160ML","", "productDeleiveryQuantity","productScheme", "productrp", "210.00","188.50", 3, 15,1);
-                Product product16 = new Product("Hand Sanitizer 30", "ORANGE 30", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "270.00","148.50", 3, 16,1);
-                Product product17 = new Product("Hand Sanitizer 30", "STRAWBERRY 30", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "260.00","158.50", 3, 17,1);
-                Product product18 = new Product("Hand Sanitizer 30", "STRAWBEERRY 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "240.00","158.50", 3, 18,1);
-                Product product19 = new Product("Hand Sanitizer 30", "GA 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "260.00","175.50", 3, 19,1);
-
-                Product product20 = new Product("Junior Hand Sanitizer 30", "ORNAGE 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "260.00","175.50", 4, 20,1);
-                Product product21 = new Product("Junior Hand Sanitizer 30", "MANGO 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "270.00","173.50", 4, 21,1);
-                Product product22 = new Product("Junior Hand Sanitizer 30", "CV 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "240.00","176.50", 4, 22,1);
-                Product product23 = new Product("Junior Hand Sanitizer 30", "TB 250", "150ML","", "productDeleiveryQuantity","productScheme", "productrp", "250.00","175.50", 4, 23,1);
-
-                if (!dataProducts.isEmpty())
-                    dataProducts.clear();
-
-
-                dataProducts.add(product1);
-                dataProducts.add(product2);
-                dataProducts.add(product3);
-                dataProducts.add(product4);
-                dataProducts.add(product5);
-                dataProducts.add(product6);
-                dataProducts.add(product7);
-                dataProducts.add(product8);
-                dataProducts.add(product9);
-                dataProducts.add(product10);
-                dataProducts.add(product11);
-                dataProducts.add(product12);
-                dataProducts.add(product13);
-                dataProducts.add(product14);
-                dataProducts.add(product15);
-                dataProducts.add(product16);
-                dataProducts.add(product17);
-                dataProducts.add(product18);
-                dataProducts.add(product19);
-                dataProducts.add(product20);
-                dataProducts.add(product21);
-                dataProducts.add(product22);
-                dataProducts.add(product23);
-
-
-                //dataProducts=(ArrayList<DatabaseProductModel>) myDbHelper.loadProducts(categoryID);
-                //productsMap =new HashMap<String, String>();
-				/*int j=1;
-					for (Iterator iterator = dataProducts.iterator(); iterator.hasNext();) {
-						DatabaseProductModel databaseModel = (DatabaseProductModel) iterator.next();
-						//Log.e("DATA", ""+databaseModel);
-						listProduct.add(databaseModel.getProductDesc());
-						productsMap.put(""+j, ""+databaseModel.getId());
-						j++;
-					}*/
-
-
-                for (int i = 0; i < dataProducts.size(); i++) {
-
-                    if (categoryID == 1 && dataProducts.get(i).getCategory().equalsIgnoreCase(CategoriesSpinner)){
-                        listProduct.add(dataProducts.get(i).getProductName());
-                    } else if (categoryID == 2 && dataProducts.get(i).getCategory().equalsIgnoreCase(CategoriesSpinner)){
-                        listProduct.add(dataProducts.get(i).getProductName());
-                    }else if (categoryID == 3 && dataProducts.get(i).getCategory().equalsIgnoreCase(CategoriesSpinner)){
-                        listProduct.add(dataProducts.get(i).getProductName());
-                    }else if (categoryID == 4 && dataProducts.get(i).getCategory().equalsIgnoreCase(CategoriesSpinner)){
-                        listProduct.add(dataProducts.get(i).getProductName());
-                    }
-
-                }
-
-
-            } catch (Exception e) {
-                // TODO: handle exception
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-
-            }
-
-            dataAdapterProduct.notifyDataSetChanged();
-
-            //spnProduct.setAdapter(adapter_state2);
-
-
-        }
-    }
 
 
 

@@ -160,6 +160,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 		Global_Data.Glovel_BEAT_ID = "";
 		Global_Data.AmountOutstanding = "";
 		Global_Data.AmountOverdue = "";
+		Global_Data.Search_business_unit_name = "";
 		locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		//adr_button = (Button) findViewById(R.id.but_address);
 		city_spinner = (Spinner) findViewById(R.id.cust_city);
@@ -849,7 +850,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 					toast.show();
 
 				} else {
-					
+
+					Global_Data.Search_business_unit_name = "";
 					String customer_name = "";
 					String address_type = "";
 					if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
@@ -945,7 +947,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 		 toast.setGravity(Gravity.CENTER, 0, 0);
 		 toast.show();
 		 }else{
-			 
+
+			    Global_Data.Search_business_unit_name = "";
 			    String customer_name = "";
 				String address_type = "";
 				if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
@@ -1047,6 +1050,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 					// Re_Text = autoCompleteTextView1.getText().toString();
 					String customer_name = "";
 					String address_type = "";
+					Global_Data.Search_business_unit_name = "";
 					if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
 					{
 						 s = autoCompleteTextView1.getText().toString().trim().split(":");
@@ -1131,6 +1135,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 					// Re_Text = autoCompleteTextView1.getText().toString();
 					String customer_name = "";
 					String address_type = "";
+					Global_Data.Search_business_unit_name = "";
 					if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
 					{
 						 s = autoCompleteTextView1.getText().toString().trim().split(":");
@@ -1226,6 +1231,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 					// Re_Text = autoCompleteTextView1.getText().toString();
 					String customer_name = "";
 					String address_type = "";
+					Global_Data.Search_business_unit_name = "";
 					if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
 					{
 						 s = autoCompleteTextView1.getText().toString().trim().split(":");

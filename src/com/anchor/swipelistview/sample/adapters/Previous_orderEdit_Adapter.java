@@ -182,9 +182,15 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                     List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBERPre(getData.get(TAG_ITEM_NUMBER).toString(), Global_Data.Previous_Order_ServiceOrder_ID);
                     for (Local_Data cnp : cont1) {
 
+                        Global_Data.item_no = cnp.get_delivery_product_id();
+                        List<Local_Data> sl = dbvoc.getSL_BYPRODUCT_Id(Global_Data.item_no);
+                        for (Local_Data check_val : sl)
+                        {
+                            Global_Data.item_SL = check_val.getSQ();
+                        }
                         // tem.put("order_number", cnp.get_category_code());
                         //item.put("item_number", cnp.get_custadr());
-                        Global_Data.item_no = cnp.get_delivery_product_id();
+
                         Global_Data.total_qty = cnp.get_stocks_product_quantity();
                         Global_Data.MRP = cnp.getMRP();
                         Global_Data.RP = cnp.getRP();
@@ -205,6 +211,14 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                         // tem.put("order_number", cnp.get_category_code());
                         //item.put("item_number", cnp.get_custadr());
                         Global_Data.item_no = cnp.get_delivery_product_id();
+
+                        Global_Data.item_no = cnp.get_delivery_product_id();
+                        List<Local_Data> sl = dbvoc.getSL_BYPRODUCT_Id(Global_Data.item_no);
+                        for (Local_Data check_val : sl)
+                        {
+                            Global_Data.item_SL = check_val.getSQ();
+                        }
+
                         Global_Data.total_qty = cnp.get_stocks_product_quantity();
                         Global_Data.MRP = cnp.getMRP();
                         Global_Data.RP = cnp.getRP();
