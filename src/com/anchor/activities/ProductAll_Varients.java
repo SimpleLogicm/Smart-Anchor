@@ -969,6 +969,7 @@ public class ProductAll_Varients extends Activity {
                             Toast toast = Toast.makeText(ProductAll_Varients.this, "All item delete, Please add new item in order.", Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
+                            Product_Variant.setText("");
 
                             Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -987,6 +988,7 @@ public class ProductAll_Varients extends Activity {
                     txttotalPreview.setText("Total : " + pp);
                     q_check = "";
                     Global_Data.Order_hashmap.clear();
+                    Product_Variant.setText("");
                     p_id.clear();
                     p_q.clear();
                     p_price.clear();
