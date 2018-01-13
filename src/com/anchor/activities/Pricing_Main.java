@@ -101,6 +101,10 @@ public class Pricing_Main extends BaseActivity {
         Global_Data.Stock_product_flag = "";
         Global_Data.Stock_product_flag_value_check = "";
         Global_Data.Stock_warehouse_flag_value_check = "";
+        Global_Data.Search_business_unit_name = "";
+        Global_Data.Search_Category_name = "";
+        Global_Data.Search_BusinessCategory_name = "";
+        Global_Data.Search_brand_name = "";
 
         SwipeList = new ArrayList<HashMap<String, String>>();
 
@@ -156,28 +160,6 @@ public class Pricing_Main extends BaseActivity {
         adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
         spnProduct.setAdapter(adapter_state2);
-
-//        //Reading all
-//        List<Local_Data> contacts1 = dbvoc.HSS_DescriptionITEM();
-//        results1.add("Select Category");
-//        for (Local_Data cn : contacts1)
-//        {
-//            if(!cn.getStateName().equalsIgnoreCase("") && !cn.getStateName().equalsIgnoreCase(" "))
-//            {
-//                String str_categ = ""+cn.getStateName();
-//                results1.add(str_categ);
-//            }
-//        }
-//
-//        dataAdapterCategory = new ArrayAdapter<String>(this, R.layout.spinner_item, results1);
-//        dataAdapterCategory.setDropDownViewResource(R.layout.spinner_item);
-//        spnCategory.setAdapter(dataAdapterCategory);
-
-//        results.add("Select Product");
-//
-//        adapter_state2 = new ArrayAdapter<String>(this, R.layout.spinner_item, results);
-//        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
-//        spnProduct.setAdapter(adapter_state2);
 
         SharedPreferences spf=Pricing_Main.this.getSharedPreferences("SimpleLogic",0);
         SharedPreferences.Editor editor=spf.edit();
@@ -281,6 +263,8 @@ public class Pricing_Main extends BaseActivity {
                         adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
                         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
                         spnProduct.setAdapter(adapter_state2);
+
+                        recList.setVisibility(View.INVISIBLE);
 
 //					adapter_state1 = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, results1);
 //					adapter_state1.setDropDownViewResource(R.layout.spinner_item);
@@ -424,7 +408,7 @@ public class Pricing_Main extends BaseActivity {
 
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnBu.getSelectedItem().toString())&& Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnBusinessDiv.getSelectedItem().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnCategory.getSelectedItem().toString())&& Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(spnProduct.getSelectedItem().toString())) {
 
-                    List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(spnBu.getSelectedItem().toString(), spnBusinessDiv.getSelectedItem().toString(), spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString());
+                    List<Local_Data> cont1 = dbvoc.getProductvarientbyname(spnBu.getSelectedItem().toString(), spnBusinessDiv.getSelectedItem().toString(), spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString(),Product_Variant.getText().toString());
 
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -446,12 +430,9 @@ public class Pricing_Main extends BaseActivity {
                     } else {
 
                         // pp=0;
-                        result.clear();
+                      //  result.clear();
+                        result = new ArrayList<ContactInfo>();
                         for (Local_Data cnt1 : cont1) {
-
-
-                            result = new ArrayList<ContactInfo>();
-//for (Local_Data cn : contacts3) {
 
                             ContactInfo ci = new ContactInfo();
                             ci.name = cnt1.getProduct_nm();
@@ -495,36 +476,6 @@ public class Pricing_Main extends BaseActivity {
         Global_Data.GLOVEL_SubCategory_Button = "";
 
 
-//        //Reading all
-//        List<Local_Data> contacts12 = dbvoc.HSS_DescriptionITEM();
-//        results1.add("Select Bussiness Category");
-//        for (Local_Data cn : contacts12) {
-//            if (!cn.getStateName().equalsIgnoreCase("") && !cn.getStateName().equalsIgnoreCase(" ")) {
-//                String str_categ = "" + cn.getStateName();
-//                results1.add(str_categ);
-//            }
-//        }
-
-//        adapter_state1 = new ArrayAdapter<String>(this, R.layout.spinner_item, results1);
-//        adapter_state1.setDropDownViewResource(R.layout.spinner_item);
-//        spnCategory.setAdapter(adapter_state1);
-//        //	spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
-//
-//        if (!Global_Data.GLOVEL_CATEGORY_SELECTION.equalsIgnoreCase("")) {
-//            Log.d("Globel cat", "in");
-//            spnCategory.setSelection(adapter_state1.getPosition(Global_Data.GLOVEL_CATEGORY_SELECTION));
-//            Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-//
-//        }
-//
-//
-//        results.add("Select Brand");
-//        adapter_state2 = new ArrayAdapter<String>(this, R.layout.spinner_item, results);
-//        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
-//        spnProduct.setAdapter(adapter_state2);
-
-
-
         listProduct = new ArrayList<String>();
         dataAdapterProduct = new ArrayAdapter<String>(
                 this, R.layout.spinner_item, listProduct);
@@ -561,7 +512,7 @@ public class Pricing_Main extends BaseActivity {
                         adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
                         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
                         spnProduct.setAdapter(adapter_state2);
-                        //recList.setVisibility(View.INVISIBLE);
+                        recList.setVisibility(View.INVISIBLE);
 
                         results2.clear();
 
@@ -672,49 +623,20 @@ public class Pricing_Main extends BaseActivity {
                         // AutoCompleteTextView
                         Product_Variant.setTextColor(Color.BLACK);
                         Product_Variant.setText("");
+                        recList.setVisibility(View.INVISIBLE);
                         //recList.setVisibility(View.INVISIBLE);
 
                     }
                     else
                     {
                         Global_Data.Search_brand_name=parent.getItemAtPosition(pos).toString().trim();
-                        //results2.clear();
-
-//                        List<Local_Data> contacts33 = dbvoc.HSS_DescriptionITEM1_IDD(parent.getItemAtPosition(pos).toString().trim());
-//                        for (Local_Data cn : contacts33) {
-//                            Global_Data.GLOVEL_PRODUCT_ID = cn.getCust_Code();
-//                        }
-//
-//                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOVEL_PRODUCT_ID)) {
-//
-//                            //List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_ID(Global_Data.GLOVEL_PRODUCT_ID);
-//                            List<Local_Data> contacts3 = dbvoc.HSS_DescriptionITEM2_BYNAME(spnCategory.getSelectedItem().toString().trim(), parent.getItemAtPosition(pos).toString().trim());
-//                            // results2.add("Select Variant");
-//                            for (Local_Data cn : contacts3) {
-//                                str_variant = "" + cn.getStateName();
-//
-//                                results2.add(str_variant);
-//
-//                            }
-//
-//                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Pricing_Main.this, android.R.layout.simple_spinner_dropdown_item, results2);
-//                            Product_Variant.setThreshold(1);// will start working from
-//                            // first character
-//                            Product_Variant.setAdapter(adapter);// setting the adapter
-//                            // data into the
-//                            // AutoCompleteTextView
-//                            Product_Variant.setTextColor(Color.BLACK);
-//
-//
-//                        }
-//
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
 
                             List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
 
                             if (cont1.size() <= 0) {
-                                // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+
 
                                 Pricing_Main.this.runOnUiThread(new Runnable() {
                                     public void run() {
@@ -722,11 +644,7 @@ public class Pricing_Main extends BaseActivity {
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
 
-                                        Intent i = new Intent(Pricing_Main.this, NewOrderActivity.class);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(i);
-                                        finish();
+
                                     }
                                 });
 
@@ -734,60 +652,28 @@ public class Pricing_Main extends BaseActivity {
                                 resultsvarient.clear();
                                // SwipeList.clear();
                                // pp=0;
+                               // result.clear();
+                                result = new ArrayList<ContactInfo>();
                                 for (Local_Data cnt1 : cont1) {
-
-
-                                    result = new ArrayList<ContactInfo>();
-                                    //for (Local_Data cn : contacts3) {
-
                                     ContactInfo ci = new ContactInfo();
-                                    ci.name = cnt1.get_product_desc();
-                                    ci.rp = cnt1.getRP();
+                                    ci.name = cnt1.getProduct_nm();
+                                    ci.rp = cnt1.getStateName();
                                     ci.mrp = cnt1.getMRP();
 
                                     result.add(ci);
-
-
-
-//                                    HashMap<String, String> mapp = new HashMap<String, String>();
-//                                    mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
-//                                    mapp.put(TAG_QTY, "");
-//                                    mapp.put(TAG_PRICE, cnt1.getMRP());
-//                                    mapp.put(TAG_RP, cnt1.getStateName());
-//                                    mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-//                                    mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-//                                    mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-//                                    Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
                                     resultsvarient.add(cnt1.getProduct_variant());
 
-//                                    List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-//
-//
-//                                    if (contactsn.size() > 0) {
-//                                        for (Local_Data cn : contactsn) {
-//
-//                                            list1.add(cn.get_delivery_product_order_quantity());
-//                                            list2.add("PRICE : " + cn.getAmount());
-//                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-//                                                pp += Double.valueOf(cn.getAmount());
-//                                            }
-//                                        }
-//                                    } else {
-//                                        list1.add("");
-//                                        list2.add("");
-//                                    }
 
-                                   // SwipeList.add(mapp);
                                 }
 
                                 Pricing_Main.this.runOnUiThread(new Runnable() {
                                     public void run() {
                                         //recList.setItemsCanFocus(true);
 
-//                                        ContactAdapter ca = new ContactAdapter(Pricing_Main.this, result);
-//                                        recList.setAdapter(ca);
-//                                        ca.notifyDataSetChanged();
+                                        recList.setVisibility(View.VISIBLE);
+                                        ContactAdapter ca = new ContactAdapter(Pricing_Main.this, result);
+                                        recList.setAdapter(ca);
+                                        ca.notifyDataSetChanged();
 
                                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Pricing_Main.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
                                         Product_Variant.setThreshold(1);// will start working from
@@ -805,133 +691,7 @@ public class Pricing_Main extends BaseActivity {
 
 
                             }
-                        } else {
-
-                            List<Local_Data> cont1 = dbvoc.getProductvarient();
-
-                            if (cont1.size() <= 0) {
-                                // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-                                Pricing_Main.this.runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        Toast toast = Toast.makeText(Pricing_Main.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
-                                        toast.setGravity(Gravity.CENTER, 0, 0);
-                                        toast.show();
-
-                                        Intent i = new Intent(Pricing_Main.this, NewOrderActivity.class);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(i);
-                                        finish();
-                                    }
-                                });
-
-                            } else {
-//                                resultsvarient.clear();
-//                                SwipeList.clear();
-//                                //pp=0;
-//                                for (Local_Data cnt1 : cont1) {
-//
-//
-//                                     result = new ArrayList<ContactInfo>();
-//                                //for (Local_Data cn : contacts3) {
-//
-//                                    ContactInfo ci = new ContactInfo();
-//                                    ci.name = cnt1.get_product_desc();
-//                                    ci.rp = cnt1.getRP();
-//                                    ci.mrp = cnt1.getMRP();
-//
-//                                    result.add(ci);
-//
-////
-////                                    HashMap<String, String> mapp = new HashMap<String, String>();
-////                                    mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm() + " RP : " + cnt1.getStateName() + " MRP : " + cnt1.getMRP());
-////                                    mapp.put(TAG_QTY, "");
-////                                    mapp.put(TAG_PRICE, cnt1.getMRP());
-////                                    mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-////                                    mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-////                                    mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-////                                    Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-//
-////                                    List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-////
-////                                    if (contactsn.size() > 0) {
-////                                        for (Local_Data cn : contactsn) {
-////
-////                                            list1.add(cn.get_delivery_product_order_quantity());
-////                                            list2.add("PRICE : " + cn.getAmount());
-////                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-////                                                pp += Double.valueOf(cn.getAmount());
-////                                            }
-////                                        }
-////                                    } else {
-////                                        list1.add("");
-////                                        list2.add("");
-////                                    }
-//
-//                                    //SwipeList.add(mapp);
-//                                }
-//
-//                                Pricing_Main.this.runOnUiThread(new Runnable() {
-//                                    public void run() {
-//                                       // recList.setItemsCanFocus(true);
-////
-//                                        ContactAdapter ca = new ContactAdapter(Pricing_Main.this, result);
-//                                        recList.setAdapter(ca);
-//                                        ca.notifyDataSetChanged();
-//                                        //txttotalPreview.setText("Total : " + pp);
-//
-//
-//                                    }
-//                                });
-
-
-
-                            }
-
                         }
-
-
-
-
-
-//                        List<Local_Data> contacts3 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
-//
-//
-//                        if(contacts3.size() <= 0 && !Product_Variant.getText().toString().trim().equalsIgnoreCase(""))
-//                        {
-//                            // Toast.makeText(Pricing_Main.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-//
-////                            Toast toast = Toast.makeText(getApplicationContext(),  "Sorry No Record Found.", Toast.LENGTH_LONG);
-////                            toast.setGravity(Gravity.CENTER, 0, 0);
-////                            toast.show();
-//
-//                            Product_Variant.setTextColor(Color.BLACK);
-//                            Product_Variant.setText("");
-//                            //Toast.makeText(getApplicationContext(), "Please Select Product", Toast.LENGTH_LONG).show();
-//
-//                            recList.setVisibility(View.INVISIBLE);
-//                        }
-//                        else
-//                        {
-//                            if (Product_Variant.length() > 0) {
-//                                recList.setVisibility(View.VISIBLE);
-//                                List<ContactInfo> result = new ArrayList<ContactInfo>();
-//                                for (Local_Data cn : contacts3) {
-//
-//                                    ContactInfo ci = new ContactInfo();
-//                                    ci.name = cn.get_product_desc();
-//                                    ci.rp = cn.getRP();
-//                                    ci.mrp = cn.getMRP();
-//
-//                                    result.add(ci);
-//                                }
-//
-//                                ContactAdapter ca = new ContactAdapter(Pricing_Main.this, result);
-//                                recList.setAdapter(ca);
-//                                ca.notifyDataSetChanged();
-//                            }
-//                        }
                     }
                 }
             }

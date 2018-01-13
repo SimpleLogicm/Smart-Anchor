@@ -203,6 +203,28 @@ public class NewOrderActivity extends BaseActivity {
 					spnBu.setSelection(result_bu.indexOf(str_bunit));
 				}
 
+				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit.trim())) {
+					result_bussiness.clear();
+					result_bussiness.add("Select Bussiness Division");
+
+//					results_beat.clear();
+//					results_beat.add("Select Beat");
+					List<Local_Data> contacts2 = dbvoc.getBdivByBunit(str_bunit.trim());
+					for (Local_Data cn : contacts2) {
+
+						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
+							result_bussiness.add(cn.getprimary_category());
+						}
+
+					}
+
+					dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+					dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+					spnBusinessDiv.setAdapter(dataAdapterBd);
+
+
+				}
+
 			}
 			else
 			{
@@ -219,6 +241,12 @@ public class NewOrderActivity extends BaseActivity {
 				dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
 				dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
 				spnBu.setAdapter(dataAdapterBu);
+
+				result_bussiness.clear();
+				result_bussiness.add("Select Bussiness Division");
+				dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+				dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+				spnBusinessDiv.setAdapter(dataAdapterBd);
 			}
 		}catch(Exception ex){ex.printStackTrace();}
 
@@ -233,11 +261,7 @@ public class NewOrderActivity extends BaseActivity {
 		adapter_state1.setDropDownViewResource(R.layout.spinner_item);
 		spnCategory.setAdapter(adapter_state1);
 
-		result_bussiness.clear();
-		result_bussiness.add("Select Bussiness Division");
-		dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
-		dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-		spnBusinessDiv.setAdapter(dataAdapterBd);
+
 
 		results.clear();
 		results.add("Select Brand");

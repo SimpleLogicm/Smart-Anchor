@@ -444,6 +444,8 @@ public class PreviewOrderSwipeActivity extends BaseActivity {
 						beat_id = cn.getBEAT_ID();
 					}
 
+
+
 					List<Local_Data> getdistri_code = dbvoc.getDistributors_code(beat_id);
 					for (Local_Data cn : getdistri_code)
 					{
@@ -467,6 +469,16 @@ public class PreviewOrderSwipeActivity extends BaseActivity {
 					dataDistrubutorsAdapter = new ArrayAdapter<String>(PreviewOrderSwipeActivity.this,android.R.layout.simple_spinner_item,Distributer_list);
 					dataDistrubutorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					spnDistributor.setAdapter(dataDistrubutorsAdapter);
+
+					try
+					{
+						if(Distributer_list.size() > 1)
+						{
+							String s = Distributer_list.get(1);
+							spnDistributor.setSelection(Distributer_list.indexOf(s));
+						}
+					}catch (Exception ex){ex.printStackTrace();}
+
 					
 					spnDistributor.setOnItemSelectedListener(new OnItemSelectedListener() {
 					   @Override

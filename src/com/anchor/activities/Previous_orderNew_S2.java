@@ -496,6 +496,15 @@ public class Previous_orderNew_S2 extends BaseActivity {
                         dataDistrubutorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spnDistributor.setAdapter(dataDistrubutorsAdapter);
 
+                        try
+                        {
+                            if(Distributer_list.size() > 1)
+                            {
+                                String s = Distributer_list.get(1);
+                                spnDistributor.setSelection(Distributer_list.indexOf(s));
+                            }
+                        }catch (Exception ex){ex.printStackTrace();}
+
                         spnDistributor.setOnItemSelectedListener(new OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View arg1,
