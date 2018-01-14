@@ -5852,16 +5852,27 @@ public class DataBaseHelper extends SQLiteOpenHelper
         String selectQuery = "SELECT  order_id,customer_name,total_qty,MRP,amount,scheme_amount,item_number,actual_discount FROM " + TABLE_ORDER_PRODUCTS + " WHERE order_id"+ " ='"+ order_id + "'" + " AND item_number"+ " ='"+ item_number + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        Cursor cursor = null;
+        try {
+
+            cursor = db.rawQuery(selectQuery, null);
+
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if(cursor != null)
+                cursor.close();
         }
+
         // return contact list?
         return contactList14;
     }
@@ -6051,26 +6062,36 @@ public class DataBaseHelper extends SQLiteOpenHelper
         String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name,retail_price,scheme_id FROM " + TABLE_PREVIOUS_ORDER_PRODUCTS + " WHERE " + ORDER_ID +"='" + orderid +"'" + " AND item_number"+ " !='" + item_number + "'";;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
-        // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setProductId(cursor.getString(0));
-                contact.setQty(cursor.getString(1));
-                contact.setPrice(cursor.getString(2));
-                contact.setAmount(cursor.getString(3));
-                contact.set_category_ids(cursor.getString(4));
-                contact.setProduct_nm(cursor.getString(5));
-                contact.setRP(cursor.getString(6));
-                contact.setSche_code(cursor.getString(7));
+        Cursor cursor = null;
+        try {
 
-                // Adding contact to list
+            cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+            // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
+                    contact.setRP(cursor.getString(6));
+                    contact.setSche_code(cursor.getString(7));
+
+                    // Adding contact to list
+
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if(cursor != null)
+                cursor.close();
         }
+
 
         // return contact list?
         return contactList;
@@ -6186,18 +6207,29 @@ public class DataBaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select order_id FROM orders WHERE customer_id = ? AND order_id = ?",
-                new String[] {Customer_id,Order_id});
+        Cursor cursor = null;
+        try {
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
+            cursor = db.rawQuery("select order_id FROM orders WHERE customer_id = ? AND order_id = ?",
+                    new String[] {Customer_id,Order_id});
 
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
         }
+        finally {
+        // this gets called even if there is an exception somewhere above
+        if(cursor != null)
+            cursor.close();
+    }
+
+
         // return contact list?
         return contactList14;
     }

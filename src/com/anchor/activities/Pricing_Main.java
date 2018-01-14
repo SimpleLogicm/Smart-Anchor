@@ -67,7 +67,7 @@ public class Pricing_Main extends BaseActivity {
     private ArrayList<String> results2 = new ArrayList<String>();
     private ArrayList<String> result_product = new ArrayList<String>();
     private ArrayList<String> result_bu = new ArrayList<String>();
-    private ArrayList<String> result_bussiness = new ArrayList<String>();
+    private ArrayList<String> result_Business = new ArrayList<String>();
 
     ArrayAdapter<String> adapter_state1;
     ArrayAdapter<String> adapter_state2;
@@ -149,9 +149,9 @@ public class Pricing_Main extends BaseActivity {
         adapter_state1.setDropDownViewResource(R.layout.spinner_item);
         spnCategory.setAdapter(adapter_state1);
 
-        result_bussiness.clear();
-        result_bussiness.add("Select Bussiness Division");
-        dataAdapterBd = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, result_bussiness);
+        result_Business.clear();
+        result_Business.add("Select Business Division");
+        dataAdapterBd = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, result_Business);
         dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
         spnBusinessDiv.setAdapter(dataAdapterBd);
 
@@ -245,9 +245,9 @@ public class Pricing_Main extends BaseActivity {
                 checkb=checkb+1;
                 if(checkb>1) {
                     if (parent.getItemAtPosition(pos).toString().equalsIgnoreCase("Select BU")) {
-                        result_bussiness.clear();
-                        result_bussiness.add("Select Bussiness Division");
-                        dataAdapterBd = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, result_bussiness);
+                        result_Business.clear();
+                        result_Business.add("Select Business Division");
+                        dataAdapterBd = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, result_Business);
                         dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
                         spnBusinessDiv.setAdapter(dataAdapterBd);
 
@@ -292,8 +292,8 @@ public class Pricing_Main extends BaseActivity {
 //				}
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
-                            result_bussiness.clear();
-                            result_bussiness.add("Select Bussiness Division");
+                            result_Business.clear();
+                            result_Business.add("Select Business Division");
 
 //					results_beat.clear();
 //					results_beat.add("Select Beat");
@@ -301,12 +301,12 @@ public class Pricing_Main extends BaseActivity {
                             for (Local_Data cn : contacts2) {
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
-                                    result_bussiness.add(cn.getprimary_category());
+                                    result_Business.add(cn.getprimary_category());
                                 }
 
                             }
 
-                            dataAdapterBd = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, result_bussiness);
+                            dataAdapterBd = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, result_Business);
                             dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
                             spnBusinessDiv.setAdapter(dataAdapterBd);
 
@@ -489,7 +489,7 @@ public class Pricing_Main extends BaseActivity {
 //				this, R.layout.spinner_item, listScheme);
 
         final List<String> listCategory = new ArrayList<String>();
-        listCategory.add("Select Bussiness Category");
+        listCategory.add("Select Business Category");
 
         adapter_state1 = new ArrayAdapter<String>(this, R.layout.spinner_item, results1);
 
@@ -504,7 +504,7 @@ public class Pricing_Main extends BaseActivity {
                 if(check>1)
                 {
                     if (parent.getItemAtPosition(pos).toString()
-                            .equalsIgnoreCase("Select Bussiness Category")) {
+                            .equalsIgnoreCase("Select Business Category")) {
                         categ_name = "";
                         subcateg_name = "";
                         results.clear();
@@ -528,9 +528,9 @@ public class Pricing_Main extends BaseActivity {
                         Product_Variant.setText("");
                         //Toast.makeText(getApplicationContext(), "Please Select Category", Toast.LENGTH_LONG).show();
 
-                        Toast toast = Toast.makeText(getApplicationContext(), "Please Select Bussiness Category", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+//                        Toast toast = Toast.makeText(getApplicationContext(), "Please Select Business Category", Toast.LENGTH_LONG);
+//                        toast.setGravity(Gravity.CENTER, 0, 0);
+//                        toast.show();
 
                     }
                     else
@@ -599,14 +599,14 @@ public class Pricing_Main extends BaseActivity {
                 if(check_product>1)
                 {
 
-                    if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Bussiness Category"))
+                    if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Business Category"))
                     {
 
                         //Toast.makeText(getApplicationContext(), "Please Select Category", Toast.LENGTH_LONG).show();
 
-                        Toast toast = Toast.makeText(getApplicationContext(),  "Please Select Bussiness Category", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+//                        Toast toast = Toast.makeText(getApplicationContext(),  "Please Select Business Category", Toast.LENGTH_LONG);
+//                        toast.setGravity(Gravity.CENTER, 0, 0);
+//                        toast.show();
 
                     }
                     else

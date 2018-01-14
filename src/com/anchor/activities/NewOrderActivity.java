@@ -205,7 +205,7 @@ public class NewOrderActivity extends BaseActivity {
 
 				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit.trim())) {
 					result_bussiness.clear();
-					result_bussiness.add("Select Bussiness Division");
+					result_bussiness.add("Select Business Division");
 
 //					results_beat.clear();
 //					results_beat.add("Select Beat");
@@ -243,7 +243,7 @@ public class NewOrderActivity extends BaseActivity {
 				spnBu.setAdapter(dataAdapterBu);
 
 				result_bussiness.clear();
-				result_bussiness.add("Select Bussiness Division");
+				result_bussiness.add("Select Business Division");
 				dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
 				dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
 				spnBusinessDiv.setAdapter(dataAdapterBd);
@@ -508,7 +508,7 @@ public class NewOrderActivity extends BaseActivity {
 				if(checkb>1) {
 					if (parent.getItemAtPosition(pos).toString().equalsIgnoreCase("Select BU")) {
 						result_bussiness.clear();
-						result_bussiness.add("Select Bussiness Division");
+						result_bussiness.add("Select Business Division");
 						dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
 						dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
 						spnBusinessDiv.setAdapter(dataAdapterBd);
@@ -552,7 +552,7 @@ public class NewOrderActivity extends BaseActivity {
 
 						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
 							result_bussiness.clear();
-							result_bussiness.add("Select Bussiness Division");
+							result_bussiness.add("Select Business Division");
 
 //					results_beat.clear();
 //					results_beat.add("Select Beat");

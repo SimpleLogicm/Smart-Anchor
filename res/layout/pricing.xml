@@ -117,8 +117,8 @@
             android:layout_gravity="center"
             android:inputType="textMultiLine"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="2dp"
             android:completionThreshold="1"
             android:imeOptions="actionDone"
             android:ems="10"
@@ -132,7 +132,7 @@
 
         <android.support.v7.widget.RecyclerView
         android:id="@+id/cardList"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
