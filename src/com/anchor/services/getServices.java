@@ -4331,9 +4331,6 @@ public class getServices {
                             else
                             {
                                 dbvoc.deletesalesupdatebyID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
-//                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-//                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","",jsonObject.getString("latitude"),jsonObject.getString("longitude"));
-
                                 loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
                                         jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
 

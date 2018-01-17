@@ -2046,16 +2046,16 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
    // Getting All Local_Data
-    public List<Local_Data> getCustomerCode(String Customer_Code) {
+    public List<Local_Data> getCustomerCode(String Customer_Name) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" +  Customer_Code + "'" ;
+        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" +  Customer_Name + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
        // Cursor cursor = db.rawQuery(selectQuery1, null);
 
         Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long from customer_master WHERE CUSTOMER_SHOPNAME = ?",
-                new String[] {Customer_Code});
+                new String[] {Customer_Name});
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
