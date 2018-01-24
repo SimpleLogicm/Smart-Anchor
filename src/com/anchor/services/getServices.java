@@ -2420,8 +2420,8 @@ public class getServices {
       
        try {
 
-    	   Long randomPIN = System.currentTimeMillis();
-    	   String PINString = String.valueOf(randomPIN);
+    	  // Long randomPIN = System.currentTimeMillis();
+           String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
     	   
            JSONArray product = new JSONArray();
            JSONArray order = new JSONArray();
@@ -2436,7 +2436,7 @@ public class getServices {
            for (Local_Data cn : contacts)
            {
                JSONObject product_value = new JSONObject();
-               product_value.put("quote_number", "QNO"+PINString);
+               product_value.put("quote_number", PINString);
                product_value.put("original_quote_number", cn.get_category_code());
                product_value.put("aasm_state", Quote_status);
                product_value.put("customer_code", cn.get_category_id());

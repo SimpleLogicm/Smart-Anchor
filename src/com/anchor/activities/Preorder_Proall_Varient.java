@@ -37,7 +37,9 @@ import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -859,14 +861,14 @@ public class Preorder_Proall_Varient extends Activity {
 
             if (!p_id.isEmpty() && q_check.equalsIgnoreCase("yes")) {
 
-                Long randomPIN = System.currentTimeMillis();
-                String PINString = String.valueOf(randomPIN);
+
+                String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
                 if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
                 {
-                    Global_Data.Previous_Order_UpdateOrder_ID = "Ord"+PINString;
+                    Global_Data.Previous_Order_UpdateOrder_ID = PINString;
 
-                    Global_Data.GLObalOrder_id = "Ord"+PINString;
-                    Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
+                    Global_Data.GLObalOrder_id = PINString;
+                    Global_Data.GLOvel_GORDER_ID = PINString;
                     // Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
 
                     dbvoc.getDeleteTable("previous_orders");

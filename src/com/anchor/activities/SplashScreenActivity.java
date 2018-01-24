@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class SplashScreenActivity extends Activity {

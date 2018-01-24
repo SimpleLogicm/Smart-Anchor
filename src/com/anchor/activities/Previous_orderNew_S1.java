@@ -37,7 +37,9 @@ import com.anchor.model.Category;
 import com.anchor.model.Product;
 import com.anchor.model.Scheme;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -963,8 +965,8 @@ public class Previous_orderNew_S1 extends BaseActivity {
                             } else {
 
 
-                                Long randomPIN = System.currentTimeMillis();
-                                String PINString = String.valueOf(randomPIN);
+                                //Long randomPIN = System.currentTimeMillis();
+                                String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
                                 Global_Data.variant_rr = "";
                                 Global_Data.variant_mrp = editTextMRP.getText().toString();
                                 Global_Data.order_qty = editTextQuantity.getText().toString();
@@ -972,11 +974,11 @@ public class Previous_orderNew_S1 extends BaseActivity {
 
                                 if (Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
                                     if (Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales")) {
-                                        Global_Data.GLObalOrder_id = "Ord" + PINString;
-                                        Global_Data.GLOvel_GORDER_ID = "Ord" + PINString;
+                                        Global_Data.GLObalOrder_id = PINString;
+                                        Global_Data.GLOvel_GORDER_ID = PINString;
                                     } else {
-                                        Global_Data.GLObalOrder_id = "QNO" + PINString;
-                                        Global_Data.GLOvel_GORDER_ID = "QNO" + PINString;
+                                        Global_Data.GLObalOrder_id = PINString;
+                                        Global_Data.GLOvel_GORDER_ID = PINString;
                                     }
 
                                     try

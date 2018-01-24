@@ -647,8 +647,8 @@ public class NoOrderActivity extends BaseActivity {
 
 				 }catch(Exception ex){ex.printStackTrace();}
 
-				 Long randomPIN = System.currentTimeMillis();
-				 String PINString = String.valueOf(randomPIN);
+				// Long randomPIN = System.currentTimeMillis();
+				 String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 
 				 loginDataBaseAdapter.insertNoOrder("", Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLOvel_CUSTOMER_ID,"",
 						 Global_Data.GLOvel_USER_EMAIL,"","","","no","","","",Noorder_res,"Other",Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
@@ -818,8 +818,8 @@ public class NoOrderActivity extends BaseActivity {
 
 				 }catch(Exception ex){ex.printStackTrace();}
 
-				 Long randomPIN = System.currentTimeMillis();
-				 String PINString = String.valueOf(randomPIN);
+				// Long randomPIN = System.currentTimeMillis();
+				 String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 				 loginDataBaseAdapter.insertNoOrder("", Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLOvel_CUSTOMER_ID,"",
 						 Global_Data.GLOvel_USER_EMAIL,"","","","no","","","",reason_code,"",Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
 

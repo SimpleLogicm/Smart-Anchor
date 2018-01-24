@@ -45,7 +45,9 @@ import com.anchor.model.Product;
 import com.anchor.model.Products_Mine;
 import com.anchor.model.Scheme;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -832,9 +834,9 @@ public class ReturnOrder1 extends BaseActivity {
 						     else
 						     {
 
-		    	 
-						    	  Long randomPIN = System.currentTimeMillis();
-								  String PINString = String.valueOf(randomPIN);
+
+
+								 String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 								  Global_Data.variant_rr=editTextRP.getText().toString();
 								  Global_Data.variant_mrp=editTextMRP.getText().toString();
 								  Global_Data.order_qty=editTextQuantity.getText().toString();
@@ -844,13 +846,13 @@ public class ReturnOrder1 extends BaseActivity {
 								  {
 									  if(Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales"))
 									  {
-										  Global_Data.GLObalOrder_id_return = "Ord"+PINString;
-										  Global_Data.GLOvel_GORDER_ID_RETURN = "Ord"+PINString;
+										  Global_Data.GLObalOrder_id_return = PINString;
+										  Global_Data.GLOvel_GORDER_ID_RETURN = PINString;
 									  }
 									  else
 									  {
-										  Global_Data.GLObalOrder_id_return = "QNO"+PINString;
-										  Global_Data.GLOvel_GORDER_ID_RETURN = "QNO"+PINString;
+										  Global_Data.GLObalOrder_id_return = PINString;
+										  Global_Data.GLOvel_GORDER_ID_RETURN = PINString;
 									  }
 
 									  try

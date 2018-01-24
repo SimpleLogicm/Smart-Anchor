@@ -30,7 +30,9 @@ import com.anchor.activities.Previous_orderNew_S2;
 import com.anchor.activities.R;
 import com.anchor.swipelistview.SwipeListView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -281,13 +283,13 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                                 dataAray.remove(position);
                                 notifyDataSetChanged();
 
-                                Long randomPIN = System.currentTimeMillis();
-                                String PINString = String.valueOf(randomPIN);
+                                //Long randomPIN = System.currentTimeMillis();
+                                String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 
-                                Global_Data.Previous_Order_UpdateOrder_ID = "Ord"+PINString;
+                                Global_Data.Previous_Order_UpdateOrder_ID = PINString;
 
-                                Global_Data.GLObalOrder_id = "Ord"+PINString;
-                                Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
+                                Global_Data.GLObalOrder_id = PINString;
+                                Global_Data.GLOvel_GORDER_ID = PINString;
                                 // Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
 
                                 try
