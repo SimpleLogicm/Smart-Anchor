@@ -1016,6 +1016,7 @@ public class getServices {
              product_value.put("details1", cn.getOrder_detail1());
              product_value.put("details2", cn.getOrder_detail2());
              product_value.put("details3", cn.getOrder_detail3());
+             product_value.put("details4", cn.getOrder_detail4());
              product_value.put("order_category_code", cn.getOrder_category_type());
              product_value.put("shipment_priority", cn.getshipment_pri());
              product_value.put("order_image_string", cn.getimg_ordersign());
@@ -1395,6 +1396,7 @@ public class getServices {
                 product_value.put("details1", cn.getOrder_detail1());
                 product_value.put("details2", cn.getOrder_detail2());
                 product_value.put("details3", cn.getOrder_detail3());
+                product_value.put("details4", cn.getOrder_detail4());
                 product_value.put("order_category_code", cn.getOrder_category_type());
 
 
@@ -4196,6 +4198,33 @@ public class getServices {
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
                                 editor3.putString("var_detail2_allow", cn.getAllow());
+                                editor3.commit();
+
+                            }
+
+                            if(Global_Data.Var_Label.equalsIgnoreCase("details4"))
+                            {
+                                Global_Data.New_Label = cn.getNewLabel_account();
+                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
+
+                                SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
+                                SharedPreferences.Editor editor=spf.edit();
+                                editor.putString("var_detail4", cn.getNewLabel_account());
+                                editor.commit();
+
+                                SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
+                                SharedPreferences.Editor editor1=spf1.edit();
+                                editor1.putString("var_detail4_edit", cn.getEditable());
+                                editor1.commit();
+
+                                SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
+                                SharedPreferences.Editor editor2=spf2.edit();
+                                editor2.putString("var_detail4_mandate", cn.getMandatory());
+                                editor2.commit();
+
+                                SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
+                                SharedPreferences.Editor editor3=spf3.edit();
+                                editor3.putString("var_detail4_allow", cn.getAllow());
                                 editor3.commit();
 
                             }

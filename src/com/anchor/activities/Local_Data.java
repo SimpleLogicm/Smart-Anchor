@@ -332,11 +332,18 @@ public class Local_Data {
     }
 
     String order_detail1;
-    String order_detail2;
+    String order_detail2,order_detail4;
     String track_mov_action;
     String track_mov_datetime, Snippet;
 
 
+    public String getOrder_detail4() {
+        return order_detail4;
+    }
+
+    public void setOrder_detail4(String order_detail4) {
+        this.order_detail4 = order_detail4;
+    }
 
     public String getTrack_mov_datetime() {
         return track_mov_datetime;

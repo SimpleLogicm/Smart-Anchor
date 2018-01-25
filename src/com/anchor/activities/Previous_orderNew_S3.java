@@ -72,7 +72,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
     Boolean isInternetPresent = false;
     ImageView get_icon;
     Boolean B_flag;
-    String strdetail1_mandate,strdetail2_mandate;
+    String strdetail1_mandate,strdetail2_mandate,strdetail4_mandate;;
     Bitmap bitmap1;
     byte b5[];
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -94,13 +94,13 @@ public class Previous_orderNew_S3 extends BaseActivity {
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     private Bitmap mBitmap;
     View mView;
-    String detail1str, detail2str;
+    String detail1str, detail2str,detail4str;;
     int userID,cityID,beatID,retailerID,distID;
     TextView details1,details2;
     Calendar myCalendar;
     TextView txtWelcomeUser;
     //private String uniqueId;
-    private EditText yourName,order_detail1,order_detail2;
+    private EditText yourName,order_detail1,order_detail2,order_detail4;
     Spinner order_type,shipment_pri;
     ArrayAdapter<String> dataAdapter_order_type,dataAdapter_shipment_pri;
     List<String> list_order_type;
@@ -150,6 +150,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         yourName = (EditText) findViewById(R.id.yourName);
         order_detail1 = (EditText) findViewById(R.id.order_detail1);
         order_detail2 = (EditText) findViewById(R.id.order_detail2);
+        order_detail4 = (EditText) findViewById(R.id.yourRemarks);
         get_icon = (ImageView) findViewById(R.id.get_icon);
         order_type = (Spinner) findViewById(R.id.order_type);
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
@@ -233,6 +234,9 @@ public class Previous_orderNew_S3 extends BaseActivity {
         SharedPreferences spf2=this.getSharedPreferences("SimpleLogic",0);
         detail2str=spf2.getString("var_detail2", "");
 
+        SharedPreferences spf22=this.getSharedPreferences("SimpleLogic",0);
+        detail4str=spf22.getString("var_detail4", "");
+
         SharedPreferences spf3=this.getSharedPreferences("SimpleLogic",0);
         String strdetail1_edit=spf3.getString("var_detail1_edit", "");
 
@@ -245,11 +249,20 @@ public class Previous_orderNew_S3 extends BaseActivity {
         SharedPreferences spf23=this.getSharedPreferences("SimpleLogic",0);
         String strdetail2_edit=spf23.getString("var_detail2_edit", "");
 
+        SharedPreferences spf233=this.getSharedPreferences("SimpleLogic",0);
+        String strdetail4_edit=spf233.getString("var_detail4_edit", "");
+
         SharedPreferences spf24=this.getSharedPreferences("SimpleLogic",0);
         strdetail2_mandate=spf24.getString("var_detail2_mandate", "");
 
+        SharedPreferences spf244=this.getSharedPreferences("SimpleLogic",0);
+        strdetail4_mandate=spf244.getString("var_detail4_mandate", "");
+
         SharedPreferences spf25=this.getSharedPreferences("SimpleLogic",0);
         String strdetail2_allow=spf25.getString("var_detail2_allow", "");
+
+        SharedPreferences spf255=this.getSharedPreferences("SimpleLogic",0);
+        String strdetail4_allow=spf255.getString("var_detail4_allow", "");
 
         if(strdetail1_edit.equalsIgnoreCase("true"))
         {
@@ -307,6 +320,37 @@ public class Previous_orderNew_S3 extends BaseActivity {
             order_detail2.setHint(detail2str);
         }else{
             order_detail2.setText("Detail 2");
+        }
+
+
+        if(strdetail4_edit.equalsIgnoreCase("true"))
+        {
+            order_detail4.setEnabled(true);
+
+            if(strdetail4_allow.equalsIgnoreCase("Text"))
+            {
+                order_detail4.setInputType(InputType.TYPE_CLASS_TEXT);
+            }else if(strdetail4_allow.equalsIgnoreCase("Integer")){
+                order_detail4.setInputType(InputType.TYPE_CLASS_NUMBER);
+            }else{
+                order_detail4.setFocusableInTouchMode(false);
+                order_detail4.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(Previous_orderNew_S3.this, date1, myCalendar
+                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+            }
+        }
+
+        if(detail4str.length()>0)
+        {
+            order_detail4.setHint(detail4str);
+        }else{
+            order_detail4.setText("Remarks");
         }
 
         SharedPreferences sp1 = Previous_orderNew_S3.this
@@ -481,6 +525,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                                     String order_detail1_text = "";
                                     String order_detail2_text = "";
+                                    String order_detail4_text = "";
                                     String order_type_text = "";
                                     String order_type_name = "";
                                     String order_type_code = "";
@@ -492,6 +537,11 @@ public class Previous_orderNew_S3 extends BaseActivity {
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
 
                                         order_detail2_text = order_detail2.getText().toString().trim();
+                                    }
+
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
+
+                                        order_detail4_text = order_detail4.getText().toString().trim();
                                     }
 
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
@@ -532,7 +582,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
                                         out.flush();
                                         out.close();
                                         uploadImage = getStringImage(bitmap);
-                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name, order_type_code,shipment_pri.getSelectedItem().toString());
+                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name,order_detail4_text,order_type_code,shipment_pri.getSelectedItem().toString());
                                         mSignature.clear();
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -683,24 +733,46 @@ public class Previous_orderNew_S3 extends BaseActivity {
     private boolean Previous_orderNew_S3() {
         boolean error = false;
         String errorMessage = "";
+        String message_flag = "";
 
         if(yourName.getText().toString().equalsIgnoreCase("")){
             errorMessage = errorMessage + "Please Enter your Name \n";
             error = true;
-        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true"))){
+        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true")) || (strdetail4_mandate.equalsIgnoreCase("true"))){
 
             if(strdetail1_mandate.equalsIgnoreCase("true")) {
                 if (order_detail1.getText().toString().equalsIgnoreCase("")) {
-                    errorMessage = errorMessage + "Please Enter " + detail1str;
-                    error = true;
+                    if(!message_flag.equalsIgnoreCase("true"))
+                    {
+                        errorMessage = errorMessage + "Please Enter " + detail1str;
+                        error = true;
+                        message_flag = "true";
+                    }
+
                 }
             }
 
             if(strdetail2_mandate.equalsIgnoreCase("true"))
             {
                 if(order_detail2.getText().toString().equalsIgnoreCase("")){
-                    errorMessage = errorMessage + "Please Enter "+detail2str;
-                    error = true;
+                    if(!message_flag.equalsIgnoreCase("true"))
+                    {
+                        errorMessage = errorMessage + "Please Enter " + detail2str;
+                        error = true;
+                        message_flag = "true";
+                    }
+                }
+            }
+
+            if(strdetail4_mandate.equalsIgnoreCase("true"))
+            {
+                if(order_detail4.getText().toString().equalsIgnoreCase("")){
+                    if(!message_flag.equalsIgnoreCase("true"))
+                    {
+                        errorMessage = errorMessage + "Please Enter " + detail4str;
+                        error = true;
+                        message_flag = "true";
+                    }
                 }
             }
 

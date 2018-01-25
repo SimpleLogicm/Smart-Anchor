@@ -5557,7 +5557,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetOrders(String order_type,String order_id) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT order_id,customer_name,order_type,customer_id,signature_path,distributor_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
+        String selectQuery = "SELECT order_id,customer_name,order_type,customer_id,signature_path,distributor_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -5580,6 +5580,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_detail3(cursor.getString(11));
                 contact.setOrder_category_type(cursor.getString(12));
                 contact.setshipment_pri(cursor.getString(13));
+                contact.setOrder_detail4(cursor.getString(14));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
@@ -5725,7 +5726,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetAllOrders(String order_type) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'";
+        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -5749,6 +5750,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_detail3(cursor.getString(12));
                 contact.setOrder_category_type(cursor.getString(13));
                 contact.setshipment_pri(cursor.getString(14));
+                contact.setOrder_detail4(cursor.getString(15));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
@@ -6200,39 +6202,39 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     // Getting product data
     public List<Local_Data> checkOrderExist(String Customer_id,String Order_id) {
-        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
-        // Select All Query
+    List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+    // Select All Query
 //        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,latitude,longitude FROM " + TABLE_ORDERS + " WHERE customer_name"+ " ='"+ Customer_name + "'" + " AND order_type " + " ='"+ order_type + "'"+ " AND order_id"+ " ='" + Order_id + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        //Cursor cursor = db.rawQuery(selectQuery, null);
+    SQLiteDatabase db = this.getWritableDatabase();
+    //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = null;
-        try {
+    Cursor cursor = null;
+    try {
 
-            cursor = db.rawQuery("select order_id FROM orders WHERE customer_id = ? AND order_id = ?",
-                    new String[] {Customer_id,Order_id});
+        cursor = db.rawQuery("select order_id FROM orders WHERE customer_id = ? AND order_id = ?",
+                new String[] {Customer_id,Order_id});
 
-            // looping through all rows and adding to list
-            if (cursor.moveToFirst()) {
-                do {
-                    Local_Data contact = new Local_Data();
-                    contact.set_category_code(cursor.getString(0));
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.set_category_code(cursor.getString(0));
 
-                    contactList14.add(contact);
-                } while (cursor.moveToNext());
-            }
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
         }
-        finally {
+    }
+    finally {
         // this gets called even if there is an exception somewhere above
         if(cursor != null)
             cursor.close();
     }
 
 
-        // return contact list?
-        return contactList14;
-    }
+    // return contact list?
+    return contactList14;
+}
     
  // Getting product data
     public List<Local_Data> Getcustomer_email(String Customer_id) {
@@ -6562,9 +6564,9 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
 
-    public void updateORDER_SIGNATURENEW(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_category,String shipment_pri)
+    public void updateORDER_SIGNATURENEW(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_detail4_text,String order_category,String shipment_pri)
     {
-        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "order_category = '"  +  order_category + "'," + "shipmet_priority = '"  +  shipment_pri + "'" + " WHERE order_id = '" +  order_id    + "'";
+        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "details4 = '"  +  order_detail4_text + "'," + "order_category = '"  +  order_category + "'," + "shipmet_priority = '"  +  shipment_pri + "'" + " WHERE order_id = '" +  order_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
