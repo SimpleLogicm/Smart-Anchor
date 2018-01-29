@@ -57,6 +57,7 @@ import com.anchor.webservice.ConnectionDetector;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,10 +70,10 @@ import java.util.Locale;
  
 public class CaptureSignature extends BaseActivity { 
 	//DataBaseHelper dbvoc;
-    File storagePathn;
-    String filepath;
-    Uri mUri;
-    int CAMERA_PIC_REQUEST = 55;
+
+    private Bitmap mImageBitmap;
+    private String mCurrentPhotoPath = "";
+
 	Boolean isInternetPresent = false;
 	ImageView get_icon;
     Boolean B_flag;
@@ -447,9 +448,27 @@ public class CaptureSignature extends BaseActivity {
 //                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 //                    }
 
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+//                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+//                    }
+
+                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                        // Create the File where the photo should go
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+                            // Error occurred while creating the File
+                            Log.i("Image TAG", "IOException");
+                            mCurrentPhotoPath = "";
+                        }
+                        // Continue only if the File was successfully created
+                        if (photoFile != null) {
+                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                            startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                        }
                     }
 
                 }
@@ -1475,17 +1494,21 @@ public class CaptureSignature extends BaseActivity {
 //        }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
-            b5 = bos5.toByteArray();
 
-            String getsign_str=Base64.encodeToString(b5,Base64.DEFAULT);
+
+//            try {
+//                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+           // Bundle extras = data.getExtras();
+          //  Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             try {
 
-                dbvoc.updateORDER_order_image(getsign_str,Global_Data.GLObalOrder_id);
+                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1495,6 +1518,30 @@ public class CaptureSignature extends BaseActivity {
         }
 
     }
+
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String imageFileName = "Anchor";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+
+        if(!storageDir.exists())
+        {
+            storageDir.mkdir();
+        }
+
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+       mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+       // mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     // Call this whn the user has chosen the date and set the Date in the EditText in format that you wish
     private void updateLabel() {
 
