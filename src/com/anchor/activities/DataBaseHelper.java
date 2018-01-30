@@ -815,6 +815,36 @@ public class DataBaseHelper extends SQLiteOpenHelper
         return contactList1;
     }
 
+    // Getting All Local_Data
+    public List<Local_Data> getUSERAddressBY_Email(String email) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+//        String selectQuery1 = "SELECT  username,password,email_id,ids,reporting_to,first_name,last_name FROM " + TABLE_REG + " WHERE username = '" +  name + "'" + " GROUP BY username ORDER BY username";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cursor cursor = db.rawQuery(selectQuery1, null);
+
+
+        Cursor cursor = db.rawQuery("select username,city_id FROM users WHERE email_id = ? GROUP BY email_id ORDER BY email_id",
+                new String[] {email});
+
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setUser(cursor.getString(0));
+                contact.setAddress(cursor.getString(1));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
 
     // Getting All Local_Data
     public List<Local_Data> getManager_mobile(String reporting_to) {

@@ -567,7 +567,7 @@
         -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />
+            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />
 
         <meta-data
             android:name="com.google.android.gms.version"

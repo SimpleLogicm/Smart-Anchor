@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.model.DistanceData;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -77,6 +78,11 @@ import java.util.List;
 import java.util.Locale;
 
 import cpm.simplelogic.helper.ConnectionDetector;
+import cpm.simplelogic.helper.RetrofitMaps;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
@@ -99,6 +105,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     Double longi;
     StringBuilder str;
     Button at_in, at_out;
+    TextView show_distance_time;
     LoginDataBaseAdapter loginDataBaseAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     //public PrefManager prefManager;
@@ -117,6 +124,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         dialog = new ProgressDialog(BasicMapDemoActivity.this);
         at_in = (Button) findViewById(R.id.at_in);
         at_out = (Button) findViewById(R.id.at_out);
+        show_distance_time = (TextView) findViewById(R.id.show_distance_time);
 
         str = new StringBuilder();
         str.append(" ");
@@ -212,123 +220,25 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
 
-                try {
-                    LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
-                    try {
+                isInternetPresent = cd.isConnectingToInternet();
+                if (isInternetPresent) {
+                    List<Local_Data> contacts2 = dbvoc.getUSERAddressBY_Email(Global_Data.GLOvel_USER_EMAIL);
 
-//                        String user_email = prefManager.get_USERNAME().trim();
-//                        String conference_id = prefManager.get_ORDER_TYPE_ID().trim();
-//                        String vertical_id = prefManager.get_BRAND_ID().trim();
-
-                        //android.text.format.DateFormat df = new android.text.format.DateFormat();
-                        // String daten = df.format("hh:mm a yyyy-MM-dd", new java.util.Date()).toString();
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
-                        DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
-                        Date date = new Date();
-                        String daten = sdf.format(date);
-                        datenn = sdf.format(date);
-                        String date_only_s = date_only.format(date);
-
-                        String a_check_datan = "";
-                        List<Local_Data> a_checkn = dbvoc.getAllAttendanceF_Data();
-                        if (a_checkn.size() > 0) {
-                            for (Local_Data cn : a_checkn) {
-                                a_check_datan = cn.getName();
-                            }
-                        } else {
-                            loginDataBaseAdapter.insertattendence_flag("false");
-                            a_check_datan = "false";
+                    if(contacts2.size() > 0)
+                    {
+                        String user_address = "";
+                        for (Local_Data cn : contacts2) {
+                            user_address = cn.getAddress();
                         }
-
-                        List<Local_Data> contacts2 = dbvoc.getAllAttendance_Data_bydate(date_only_s);
-
-                        if (contacts2.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
-
-                            isInternetPresent = cd.isConnectingToInternet();
-                            if (isInternetPresent) {
-
-                                dialog.setMessage("Please wait....");
-                                dialog.setTitle("Siyaram App");
-                                dialog.setCancelable(false);
-                                dialog.show();
-
-                                in_out_flag = "IN";
-
-                                Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
-                            } else {
-                                in_out_flag = "IN";
-                                Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
-                                //loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN","false",date_only_s);
-                                loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
-
-
-                                dbvoc.getDeleteTable("attendence_f");
-                                loginDataBaseAdapter.insertattendence_flag("true");
-                                Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
-                                showDialogn(daten, str.toString());
-                            }
-
-                        } else {
-//                            for (Local_Data cn : contacts2)
-//                            {
-                            //  String database_date = cn.getCurrent_date_only();
-                            // String server_flag = cn.getServer_flag();
-                            // String button_flag = cn.getPunched_button();
-                            // Date date_check_date = date_only.parse(database_date);
-                            Date new_current_date = date_only.parse(date_only_s);
-                            //Date newdate = format.parse(daten);
-                            long millisecond = new_current_date.getTime();
-                            //Date newdate = format.parse(daten);
-
-                            String a_check_data = "";
-                            List<Local_Data> a_check = dbvoc.getAllAttendanceF_Data();
-                            if (a_check.size() > 0) {
-                                for (Local_Data cn : a_check) {
-                                    a_check_data = cn.getName();
-                                }
-                            }
-
-                            // Toast.makeText(Attendance_Map.this, ""+a_check_data, Toast.LENGTH_SHORT).show();
-
-                            if (DateUtils.isToday(millisecond) && a_check_data.equalsIgnoreCase("true")) {
-//                                    Toast.makeText(BasicMapDemoActivity.this, "You already punch attendance at "+database_date, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(BasicMapDemoActivity.this, "You Have Already Punched Your Attendance", Toast.LENGTH_SHORT).show();
-
-                            } else if (DateUtils.isToday(millisecond) && a_check_data.equalsIgnoreCase("false")) {
-
-                                isInternetPresent = cd.isConnectingToInternet();
-                                if (isInternetPresent) {
-
-                                    dialog.setMessage("Please wait....");
-                                    dialog.setTitle("Siyaram App");
-                                    dialog.setCancelable(false);
-                                    dialog.show();
-
-                                    in_out_flag = "IN";
-                                    Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
-                                } else {
-                                    in_out_flag = "IN";
-                                    Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
-                                    loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
-
-                                    dbvoc.getDeleteTable("attendence_f");
-                                    loginDataBaseAdapter.insertattendence_flag("true");
-                                    Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
-                                    showDialogn(daten, str.toString());
-                                }
-                            }
-                            //}
-                        }
-
-//
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                        build_retrofit_and_get_response("driving",user_address);
                     }
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
+                else
+                {
+                    Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                }
+
 
 
             }
@@ -1092,6 +1002,187 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                     .showInputMethodPicker();
             Toast.makeText(this, "Barcode Scanner detected. Please turn OFF Hardware/Physical keyboard to enable softkeyboard to function.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void build_retrofit_and_get_response(String type,String user_address) {
+
+        String url = "https://maps.googleapis.com/maps/";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RetrofitMaps service = retrofit.create(RetrofitMaps.class);
+
+//        Call<DistanceData> call = service.getDistanceDuration("metric", "19.310472" + "," +"72.854041","19.079024" + "," +" 72.908012", type);
+
+        Call<DistanceData> call = service.getDistanceDuration("metric", Global_Data.address,user_address, type);
+
+        call.enqueue(new Callback<DistanceData>() {
+            @Override
+            public void onResponse(retrofit.Response<DistanceData> response, Retrofit retrofit) {
+
+                try {
+                    //Remove previous line from map
+//                    if (line != null) {
+//                        line.remove();
+//                    }
+                    // This loop will go through all the results and add marker on each location.
+                    for (int i = 0; i < response.body().getRoutes().size(); i++) {
+                        String distance = response.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
+                        String time = response.body().getRoutes().get(i).getLegs().get(i).getDuration().getText();
+                        show_distance_time.setText("Distance:" + distance + ", Duration:" + time);
+
+                        String s[] = distance.split(" ");
+                        Double distancen = Double.valueOf(s[0])/1000.0;
+
+
+
+//                        String encodedString = response.body().getRoutes().get(0).getOverviewPolyline().getPoints();
+//                        List<LatLng> list = decodePoly(encodedString);
+//                        line = mMap.addPolyline(new PolylineOptions()
+//                                .addAll(list)
+//                                .width(20)
+//                                .color(Color.RED)
+//                                .geodesic(true)
+//                        );
+                    }
+                } catch (Exception e) {
+                    Log.d("onResponse", "There is an error");
+                    e.printStackTrace();
+                }
+
+                getatte_Data();
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.d("onFailure", t.toString());
+            }
+        });
+
+    }
+
+    public void getatte_Data()
+    {
+        try {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
+            try {
+
+//                        String user_email = prefManager.get_USERNAME().trim();
+//                        String conference_id = prefManager.get_ORDER_TYPE_ID().trim();
+//                        String vertical_id = prefManager.get_BRAND_ID().trim();
+
+                //android.text.format.DateFormat df = new android.text.format.DateFormat();
+                // String daten = df.format("hh:mm a yyyy-MM-dd", new java.util.Date()).toString();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
+                DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                String daten = sdf.format(date);
+                datenn = sdf.format(date);
+                String date_only_s = date_only.format(date);
+
+                String a_check_datan = "";
+                List<Local_Data> a_checkn = dbvoc.getAllAttendanceF_Data();
+                if (a_checkn.size() > 0) {
+                    for (Local_Data cn : a_checkn) {
+                        a_check_datan = cn.getName();
+                    }
+                } else {
+                    loginDataBaseAdapter.insertattendence_flag("false");
+                    a_check_datan = "false";
+                }
+
+                List<Local_Data> contacts2 = dbvoc.getAllAttendance_Data_bydate(date_only_s);
+
+                if (contacts2.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
+
+                    isInternetPresent = cd.isConnectingToInternet();
+                    if (isInternetPresent) {
+
+                        dialog.setMessage("Please wait....");
+                        dialog.setTitle("Siyaram App");
+                        dialog.setCancelable(false);
+                        dialog.show();
+
+                        in_out_flag = "IN";
+
+                        Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
+                    } else {
+                        in_out_flag = "IN";
+                        Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
+                        //loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN","false",date_only_s);
+                        loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
+
+
+                        dbvoc.getDeleteTable("attendence_f");
+                        loginDataBaseAdapter.insertattendence_flag("true");
+                        Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
+                        showDialogn(daten, str.toString());
+                    }
+
+                } else {
+//                            for (Local_Data cn : contacts2)
+//                            {
+                    //  String database_date = cn.getCurrent_date_only();
+                    // String server_flag = cn.getServer_flag();
+                    // String button_flag = cn.getPunched_button();
+                    // Date date_check_date = date_only.parse(database_date);
+                    Date new_current_date = date_only.parse(date_only_s);
+                    //Date newdate = format.parse(daten);
+                    long millisecond = new_current_date.getTime();
+                    //Date newdate = format.parse(daten);
+
+                    String a_check_data = "";
+                    List<Local_Data> a_check = dbvoc.getAllAttendanceF_Data();
+                    if (a_check.size() > 0) {
+                        for (Local_Data cn : a_check) {
+                            a_check_data = cn.getName();
+                        }
+                    }
+
+                    // Toast.makeText(Attendance_Map.this, ""+a_check_data, Toast.LENGTH_SHORT).show();
+
+                    if (DateUtils.isToday(millisecond) && a_check_data.equalsIgnoreCase("true")) {
+//                                    Toast.makeText(BasicMapDemoActivity.this, "You already punch attendance at "+database_date, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BasicMapDemoActivity.this, "You Have Already Punched Your Attendance", Toast.LENGTH_SHORT).show();
+
+                    } else if (DateUtils.isToday(millisecond) && a_check_data.equalsIgnoreCase("false")) {
+
+                        isInternetPresent = cd.isConnectingToInternet();
+                        if (isInternetPresent) {
+
+                            dialog.setMessage("Please wait....");
+                            dialog.setTitle("Siyaram App");
+                            dialog.setCancelable(false);
+                            dialog.show();
+
+                            in_out_flag = "IN";
+                            Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
+                        } else {
+                            in_out_flag = "IN";
+                            Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
+                            loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
+
+                            dbvoc.getDeleteTable("attendence_f");
+                            loginDataBaseAdapter.insertattendence_flag("true");
+                            Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
+                            showDialogn(daten, str.toString());
+                        }
+                    }
+                    //}
+                }
+
+//
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }
