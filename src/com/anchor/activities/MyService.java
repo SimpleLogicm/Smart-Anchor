@@ -430,7 +430,7 @@ public class MyService extends Service implements LocationListener{
 			public void run() {
 				try
 				{
-					String domain = domain = getResources().getString(R.string.service_domain);
+					String domain = getResources().getString(R.string.service_domain);
 
 //            Global_Val global_Val = new Global_Val();
 //            if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
