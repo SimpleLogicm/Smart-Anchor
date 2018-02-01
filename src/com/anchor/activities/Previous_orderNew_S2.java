@@ -182,6 +182,9 @@ public class Previous_orderNew_S2 extends BaseActivity {
                 for (Local_Data cn : contact_bu) {
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getBunit())) {
                         Global_Data.Search_business_unit_name = cn.getBunit();
+                        Global_Data.Search_Category_name = cn.getprimary_category();
+                        Global_Data.Search_BusinessCategory_name = cn.getbusiness_category();
+                        Global_Data.Search_brand_name = cn.getProduct();
                     }
                 }
             }catch (Exception ex){

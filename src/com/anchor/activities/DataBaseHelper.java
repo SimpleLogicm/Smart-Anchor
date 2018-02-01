@@ -329,7 +329,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getB_Unit_byproduct_id(String product_code) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT DISTINCT b_unit FROM " + TABLE_ITEM_MASTER + " WHERE code = '" +  product_code + "'" + " GROUP BY name ORDER BY name";
+        String selectQuery1 = "SELECT b_unit,primary_category,b_business_c, sub_category FROM " + TABLE_ITEM_MASTER + " WHERE code = '" +  product_code + "'" + " GROUP BY name ORDER BY name";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -339,6 +339,9 @@ public class DataBaseHelper extends SQLiteOpenHelper
             do {
                 Local_Data contact = new Local_Data();
                 contact.setBunit(cursor.getString(0));
+                contact.setprimary_category(cursor.getString(1));
+                contact.setbusiness_category(cursor.getString(2));
+                contact.setProduct(cursor.getString(3));
                 //contact.setPwd(cursor.getString(2));
                 //contact.setImei(cursor.getString(3));
 
@@ -6994,6 +6997,39 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     // Getting product data
     public List<Local_Data> getProductvarientbycategoryandproduct(String business_unit, String primary_category, String business_category, String sub_category) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY product_variant",
+                new String[]{business_unit, primary_category,business_category,sub_category});
+
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setStateName(cursor.getString(0));
+                contact.setMRP(cursor.getString(1));
+                contact.set_Description(cursor.getString(2));
+                contact.set_Claims(cursor.getString(3));
+                contact.setProduct_nm(cursor.getString(4));
+                contact.setCode(cursor.getString(5));
+                contact.setCategory(cursor.getString(6));
+                contact.setSubcateg(cursor.getString(7));
+                contact.setProduct_variant(cursor.getString(8));
+                contact.setSQ(cursor.getString(9));
+                contact.setMQ(cursor.getString(10));
+                // Adding contact to list
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Local_Data> getSelectedorder_downs_values(String business_unit, String primary_category, String business_category, String sub_category) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
