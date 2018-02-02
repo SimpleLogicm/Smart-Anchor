@@ -377,7 +377,8 @@ public class Stock_options extends Activity implements OnItemSelectedListener {
                 }
 
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(C_ID)) {
-					results_beat.clear();
+
+                    results_beat.clear();
 					results_beat.add("Select Warehouse");
                     List<Local_Data> contacts2 = dbvoc.getwarehouseByCityID((C_ID));
                     for (Local_Data cn : contacts2) {
@@ -390,11 +391,16 @@ public class Stock_options extends Activity implements OnItemSelectedListener {
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     beat_spinner.setAdapter(adapter_beat);
 
-                    if(items.equalsIgnoreCase("All Cities"))
-                    {
-                       // city_spinner.setEnabled(false);
-                        beat_spinner.setEnabled(false);
-                    }
+                }
+
+                if(items.equalsIgnoreCase("All Cities"))
+                {
+                    // city_spinner.setEnabled(false);
+                    beat_spinner.setEnabled(false);
+                }
+                else
+                {
+                    beat_spinner.setEnabled(true);
                 }
 
 
