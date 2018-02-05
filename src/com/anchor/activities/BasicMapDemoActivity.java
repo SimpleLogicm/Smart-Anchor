@@ -32,6 +32,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,6 +115,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     static String final_response = "";
     String response_result = "";
     ImageView Morelocationdetail;
+    RelativeLayout distance_la;
+    String user_address = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +129,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         dialog = new ProgressDialog(BasicMapDemoActivity.this);
         at_in = (Button) findViewById(R.id.at_in);
         at_out = (Button) findViewById(R.id.at_out);
+        distance_la = (RelativeLayout) findViewById(R.id.distance_la);
         show_distance_time = (TextView) findViewById(R.id.show_distance_time);
 
         str = new StringBuilder();
@@ -145,6 +149,21 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
         SharedPreferences sp = BasicMapDemoActivity.this.getSharedPreferences("SimpleLogic", 0);
+
+           try
+           {
+               List<Local_Data> contacts2 = dbvoc.getUSERAddressBY_Email(Global_Data.GLOvel_USER_EMAIL);
+
+               if(contacts2.size() > 0)
+               {
+                   for (Local_Data cn : contacts2) {
+                       user_address = cn.getAddress();
+                   }
+
+               }
+           }catch (Exception ex){ex.printStackTrace();}
+
+
 
 //		       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //		       //	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
@@ -238,18 +257,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     datenn = sdf.format(date);
                     String date_only_s = date_only.format(date);
                     String a_check_datan = "";
-                    String user_address = "";
+
                     isInternetPresent = cd.isConnectingToInternet();
                     if (isInternetPresent) {
-                        List<Local_Data> contacts2 = dbvoc.getUSERAddressBY_Email(Global_Data.GLOvel_USER_EMAIL);
 
-                        if(contacts2.size() > 0)
-                        {
-                            for (Local_Data cn : contacts2) {
-                                user_address = cn.getAddress();
-                            }
-
-                        }
 
                         List<Local_Data> a_checkn = dbvoc.getAllAttendanceF_Data();
                         if (a_checkn.size() > 0) {
@@ -272,7 +283,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                             dialog.setCancelable(false);
                             dialog.show();
 
-                            build_retrofit_and_get_response("driving",user_address);
+                            build_retrofit_and_get_response("driving",user_address,"Attendance");
                         }
                         else
                         {
@@ -534,6 +545,19 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                             if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str.toString()))
                             {
                                 Global_Data.address =  str.toString();
+
+
+                                if(!user_address.equalsIgnoreCase(""))
+                                {
+                                    dialog.setMessage("Please wait....");
+                                    dialog.setTitle("Siyaram App");
+                                    dialog.setCancelable(false);
+                                    dialog.show();
+
+                                    build_retrofit_and_get_response("driving",user_address,"location");
+                                }
+
+
                             }
 
                             //prefManager.setAddress(str.toString());
@@ -1058,9 +1082,11 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         }
     }
 
-    private void build_retrofit_and_get_response(String type,String user_address) {
+    private void build_retrofit_and_get_response(String type, String user_address, final String att_flags) {
 
         String url = "https://maps.googleapis.com/maps/";
+
+        final String att_flag =att_flags;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -1094,25 +1120,35 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                             try
                             {
+                                distance_la.setVisibility(View.VISIBLE);
                                 String distance = response.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
                                 String distance_value = String.valueOf(response.body().getRoutes().get(i).getLegs().get(i).getDistance().getValue());
                                 String time = response.body().getRoutes().get(i).getLegs().get(i).getDuration().getText();
-                                show_distance_time.setText("Distance:" + distance + ", Duration:" + time);
+                                show_distance_time.setText("Distance Covered : " + distance + ", Duration:" + time);
 
                                 Double distancen = Double.valueOf(distance_value)/1000.0;
 
                                 int retval = Double.compare(distancen, 0.5);
 
-                                if(retval > 0) {
-                                    Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
-                                    getatte_Data();
+                                if(att_flag.equalsIgnoreCase("Attendance"))
+                                {
+                                    if(retval > 0) {
+                                        Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
+                                        getatte_Data();
+                                    }
+                                    else
+                                    {
+                                        dialog.dismiss();
+                                        Toast.makeText(BasicMapDemoActivity.this, "less .5 ", Toast.LENGTH_SHORT).show();
+
+                                    }
                                 }
                                 else
                                 {
                                     dialog.dismiss();
-                                    Toast.makeText(BasicMapDemoActivity.this, "less .5 ", Toast.LENGTH_SHORT).show();
-
                                 }
+
+
                             }catch(Exception ex){
                                 ex.printStackTrace();
                             }
