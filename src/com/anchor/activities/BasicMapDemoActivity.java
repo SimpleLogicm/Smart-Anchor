@@ -91,6 +91,7 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 public class BasicMapDemoActivity extends FragmentActivity implements
         OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    String map_firstvisit_flag= "true";
     GPSTracker gps;
     String datenn;
     String in_out_flag = "";
@@ -108,7 +109,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     Double longi;
     StringBuilder str;
     Button at_in, at_out;
-    TextView show_distance_time;
+    TextView show_distance_time,show_time;
     LoginDataBaseAdapter loginDataBaseAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     //public PrefManager prefManager;
@@ -117,6 +118,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     ImageView Morelocationdetail;
     RelativeLayout distance_la;
     String user_address = "";
+    View mapView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +133,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         at_out = (Button) findViewById(R.id.at_out);
         distance_la = (RelativeLayout) findViewById(R.id.distance_la);
         show_distance_time = (TextView) findViewById(R.id.show_distance_time);
+        show_time = (TextView) findViewById(R.id.show_time);
 
         str = new StringBuilder();
         str.append(" ");
@@ -232,7 +235,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         mFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.googleMap);
 
+        mapView = mFragment.getView();
         mFragment.getMapAsync(this);
+
+
 
 
 
@@ -276,7 +282,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                         List<Local_Data> contadfg = dbvoc.getAllAttendance_Data_bydate(date_only_s);
 
-                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("")) {
+                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
 
                             dialog.setMessage("Please wait....");
                             dialog.setTitle("Siyaram App");
@@ -289,7 +295,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                         {
                             if(user_address.equalsIgnoreCase(""))
                             {
-                                Toast.makeText(BasicMapDemoActivity.this, "User address not found.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(BasicMapDemoActivity.this, "User address not found in database.", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            if(Global_Data.address.equalsIgnoreCase(""))
+                            {
+                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
@@ -301,7 +312,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     }
                     else
                     {
-                        Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BasicMapDemoActivity.this, " Internet not available.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -392,6 +403,20 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 return;
             }
             mGoogleMap.setMyLocationEnabled(true);
+
+            if (mapView != null &&
+                    mapView.findViewById(Integer.parseInt("1")) != null) {
+                // Get the button view
+                View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+                // and next place it, on bottom right (as Google Maps app)
+                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
+                        locationButton.getLayoutParams();
+                // position on right bottom
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP,  RelativeLayout.TRUE);
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+
+                layoutParams.setMargins(0, 110, 10, 30);
+            }
 
             buildGoogleApiClient();
 
@@ -547,8 +572,13 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 Global_Data.address =  str.toString();
 
 
-                                if(!user_address.equalsIgnoreCase(""))
+                                if(map_firstvisit_flag.equalsIgnoreCase("true"))
                                 {
+
+                                }
+                                if(map_firstvisit_flag.equalsIgnoreCase("true") && !user_address.equalsIgnoreCase(""))
+                                {
+                                    map_firstvisit_flag = "false";
                                     dialog.setMessage("Please wait....");
                                     dialog.setTitle("Siyaram App");
                                     dialog.setCancelable(false);
@@ -556,8 +586,11 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                     build_retrofit_and_get_response("driving",user_address,"location");
                                 }
-
-
+                            }
+                            else
+                            {
+                                Global_Data.address = "";
+                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
                             }
 
                             //prefManager.setAddress(str.toString());
@@ -1113,6 +1146,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     {
                         dialog.dismiss();
                         Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
+                        distance_la.setVisibility(View.GONE);
+                        show_distance_time.setText("");
+                        show_time.setText("");
                     }
                     else
                     {
@@ -1124,7 +1160,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 String distance = response.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
                                 String distance_value = String.valueOf(response.body().getRoutes().get(i).getLegs().get(i).getDistance().getValue());
                                 String time = response.body().getRoutes().get(i).getLegs().get(i).getDuration().getText();
-                                show_distance_time.setText("Distance Covered : " + distance + ", Duration:" + time);
+                                show_distance_time.setText("Distance Covered : " + distance);
+                                show_time.setText("Duration : " + time);
 
                                 Double distancen = Double.valueOf(distance_value)/1000.0;
 
@@ -1133,13 +1170,13 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 if(att_flag.equalsIgnoreCase("Attendance"))
                                 {
                                     if(retval > 0) {
-                                        Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
+                                       // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
                                         getatte_Data();
                                     }
                                     else
                                     {
                                         dialog.dismiss();
-                                        Toast.makeText(BasicMapDemoActivity.this, "less .5 ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch address after 0.5 km ", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }

@@ -42,6 +42,17 @@
         android:textColor="#382a2a"
         android:textSize="12dp" />
 
+        <TextView
+            android:id="@+id/show_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="1dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/show_distance_time"
+            android:text="dgdfg"
+            android:textColor="#382a2a"
+            android:textSize="12dp" />
+
     </RelativeLayout>
 
     <LinearLayout
