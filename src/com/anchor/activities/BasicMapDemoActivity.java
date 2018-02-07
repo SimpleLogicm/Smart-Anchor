@@ -285,7 +285,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                         if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
 
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Siyaram App");
+                            dialog.setTitle("Metal App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -352,7 +352,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 
                                 dialog.setMessage("Please wait....");
-                                dialog.setTitle("Siyaram App");
+                                dialog.setTitle("Metal App");
                                 dialog.setCancelable(false);
                                 dialog.show();
 
@@ -580,7 +580,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 {
                                     map_firstvisit_flag = "false";
                                     dialog.setMessage("Please wait....");
-                                    dialog.setTitle("Siyaram App");
+                                    dialog.setTitle("Metal App");
                                     dialog.setCancelable(false);
                                     dialog.show();
 

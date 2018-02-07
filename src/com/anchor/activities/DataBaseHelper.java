@@ -6582,10 +6582,10 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // db.close();
     }
 
-    public void updateUserEMPNO_BY_EMILID(String emp_code,String email_id)
+    public void updateUserEMPNO_BY_EMILID(String emp_code,String email_id,String address)
     {
 
-        String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'" + " WHERE email_id = '" +  email_id    + "'";
+        String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 

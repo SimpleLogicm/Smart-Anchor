@@ -3488,7 +3488,15 @@ public class getServices {
                         for (int i = 0; i < users_emp.length(); i++) {
 
                             JSONObject jsonObject = users_emp.getJSONObject(i);
-                            dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"),jsonObject.getString("email"));
+
+                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address").toString())) {
+                                dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"),jsonObject.getString("email"),jsonObject.getString("address"));
+                            }
+                            else
+                            {
+                                dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"),jsonObject.getString("email"),"");
+                            }
+
 
                         }
                         for (int i = 0; i < l1_contacts.length(); i++) {
@@ -4353,7 +4361,16 @@ public class getServices {
 //                 }
 
 
-                            Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+
+
+                                }
+                            });
+
                             mobile_numbers.clear();
 
                             if (!Global_Data.customer_MobileNumber.equalsIgnoreCase(null) && !Global_Data.customer_MobileNumber.equalsIgnoreCase("null") && !Global_Data.customer_MobileNumber.equalsIgnoreCase("") && !Global_Data.customer_MobileNumber.equalsIgnoreCase(" ")) {
@@ -4373,6 +4390,13 @@ public class getServices {
                                 }
                             } catch (Exception ex) {
                                 ex.printStackTrace();
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    public void run() {
+
+
+                                        dialog.dismiss();
+                                    }
+                                });
                             }
                             String sms_body = "Dear " + Global_Data.CUSTOMER_NAME_NEW + " ," + "\n" + " Thank you for your order for " + Global_Data.order_retailer + " at " + Global_Data.CUSTOMER_ADDRESS_NEW + " at " + formattedDate + " for Rs. " + String.valueOf(total_ammount) + "." + "\n\n" + " Thank you." + "\n" + " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME + "\n" + " " + gaddress;
 
@@ -5015,6 +5039,12 @@ public class getServices {
                                     }
                                 }catch (Exception ex){
                                     ex.printStackTrace();
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            dialog.dismiss();
+                                        }
+                                    });
                                 }
 
                                 PRODUCTOrder_ids.clear();
