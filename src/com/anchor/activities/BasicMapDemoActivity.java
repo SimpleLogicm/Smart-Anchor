@@ -1115,7 +1115,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         }
     }
 
-    private void build_retrofit_and_get_response(String type, String user_address, final String att_flags) {
+    private void build_retrofit_and_get_response(String type, final String user_address, final String att_flags) {
 
         String url = "https://maps.googleapis.com/maps/";
 
@@ -1142,13 +1142,64 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //                        line.remove();
 //                    }
                     // This loop will go through all the results and add marker on each location.
+
+
+
                     if(response.body().getRoutes().size() <=0)
                     {
+                        try
+                        {
+                            Location locationA = new Location(Global_Data.address);
+                            locationA.setLatitude(Float.valueOf(Global_Data.GLOvel_LATITUDE));
+                            locationA.setLongitude(Float.valueOf(Global_Data.GLOvel_LONGITUDE));
+
+                            Location locationB = new Location(user_address);
+
+                            Geocoder coder = new Geocoder(getApplicationContext());
+                            List<Address> address;
+                            // GeoPoint p1 = null;
+
+                            try {
+                                address = coder.getFromLocationName(user_address, 5);
+                                if (address == null) {
+                                    // return null;
+                                }
+                                Address location = address.get(0);
+                                location.getLatitude();
+                                location.getLongitude();
+
+                                locationB.setLatitude( location.getLatitude());
+                                locationB.setLongitude(location.getLongitude());
+                                float distancedfgdf = locationA.distanceTo(locationB)/1000;
+
+                                distance_la.setVisibility(View.VISIBLE);
+                                show_distance_time.setText("Distance Covered : " + distancedfgdf);
+                                show_time.setText("");
+
+
+                            }
+                            catch(Exception ex){ex.printStackTrace();
+                                Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
+                                distance_la.setVisibility(View.GONE);
+                                show_distance_time.setText("");
+                                show_time.setText("");
+                            }
+
+
+
+
+                        }catch(Exception ex){
+                            ex.printStackTrace();
+
+                            Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
+                            distance_la.setVisibility(View.GONE);
+                            show_distance_time.setText("");
+                            show_time.setText("");
+                        }
                         dialog.dismiss();
-                        Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
-                        distance_la.setVisibility(View.GONE);
-                        show_distance_time.setText("");
-                        show_time.setText("");
+
+
+
                     }
                     else
                     {
@@ -1176,7 +1227,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                     else
                                     {
                                         dialog.dismiss();
-                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch address after 0.5 km ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
 
                                     }
                                 }

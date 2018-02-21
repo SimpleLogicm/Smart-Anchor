@@ -324,7 +324,7 @@ public class CaptureSignature extends BaseActivity {
         {
             order_detail2.setHint(detail2str);
         }else{
-            order_detail2.setText("Detail 2");
+            order_detail2.setHint("Detail 2");
         }
 
 
@@ -355,7 +355,7 @@ public class CaptureSignature extends BaseActivity {
         {
             order_detail4.setHint(detail4str);
         }else{
-            order_detail4.setText("Remarks");
+            order_detail4.setHint("Remarks");
         }
 
     	SharedPreferences sp1 = CaptureSignature.this
@@ -763,47 +763,25 @@ public class CaptureSignature extends BaseActivity {
         boolean error = false;
         String errorMessage = "";
 
-        if(yourName.getText().toString().equalsIgnoreCase("")){
-            errorMessage = errorMessage + "Please Enter your Name \n";
+
+        if(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))
+        {
+
+            errorMessage = errorMessage + "Please Select Order Type.";
             error = true;
-        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true")) || (strdetail4_mandate.equalsIgnoreCase("true"))){
+        }
+        else
+        if(strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase(""))
+        {
+            errorMessage = errorMessage + "Please Enter " + detail1str;
+            error = true;
 
-            if(strdetail1_mandate.equalsIgnoreCase("true")) {
-                if (order_detail1.getText().toString().equalsIgnoreCase("")) {
-                    if(!message_flag.equalsIgnoreCase("true"))
-                    {
-                        errorMessage = errorMessage + "Please Enter " + detail1str;
-                        error = true;
-                        message_flag = "true";
-                    }
-
-                }
-            }
-
-            if(strdetail2_mandate.equalsIgnoreCase("true"))
-            {
-                if(order_detail2.getText().toString().equalsIgnoreCase("")){
-                    if(!message_flag.equalsIgnoreCase("true"))
-                    {
-                        errorMessage = errorMessage + "Please Enter " + detail2str;
-                        error = true;
-                        message_flag = "true";
-                    }
-                }
-            }
-
-            if(strdetail4_mandate.equalsIgnoreCase("true"))
-            {
-                if(order_detail4.getText().toString().equalsIgnoreCase("")){
-                    if(!message_flag.equalsIgnoreCase("true"))
-                    {
-                        errorMessage = errorMessage + "Please Enter " + detail4str;
-                        error = true;
-                        message_flag = "true";
-                    }
-                }
-            }
-
+        }
+        else
+        if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase(""))
+        {
+            errorMessage = errorMessage + "Please Enter " + detail2str;
+            error = true;
 
         }
         else
@@ -813,6 +791,63 @@ public class CaptureSignature extends BaseActivity {
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
         }
+        else
+        if(yourName.getText().toString().equalsIgnoreCase("")){
+            errorMessage = errorMessage + "Please Enter your Name.";
+            error = true;
+        }
+        else
+        if(strdetail4_mandate.equalsIgnoreCase("true") && order_detail4.getText().toString().equalsIgnoreCase(""))
+        {
+            errorMessage = errorMessage + "Please Enter " + detail4str;
+            error = true;
+
+        }
+//        else
+//        if(yourName.getText().toString().equalsIgnoreCase("")){
+//            errorMessage = errorMessage + "Please Enter your Name \n";
+//            error = true;
+//        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true")) || (strdetail4_mandate.equalsIgnoreCase("true"))){
+//
+//            if(strdetail1_mandate.equalsIgnoreCase("true")) {
+//                if (order_detail1.getText().toString().equalsIgnoreCase("")) {
+//                    if(!message_flag.equalsIgnoreCase("true"))
+//                    {
+//                        errorMessage = errorMessage + "Please Enter " + detail1str;
+//                        error = true;
+//                        message_flag = "true";
+//                    }
+//
+//                }
+//            }
+//
+//            if(strdetail2_mandate.equalsIgnoreCase("true"))
+//            {
+//                if(order_detail2.getText().toString().equalsIgnoreCase("")){
+//                    if(!message_flag.equalsIgnoreCase("true"))
+//                    {
+//                        errorMessage = errorMessage + "Please Enter " + detail2str;
+//                        error = true;
+//                        message_flag = "true";
+//                    }
+//                }
+//            }
+//
+//            if(strdetail4_mandate.equalsIgnoreCase("true"))
+//            {
+//                if(order_detail4.getText().toString().equalsIgnoreCase("")){
+//                    if(!message_flag.equalsIgnoreCase("true"))
+//                    {
+//                        errorMessage = errorMessage + "Please Enter " + detail4str;
+//                        error = true;
+//                        message_flag = "true";
+//                    }
+//                }
+//            }
+//
+//
+//        }
+
 
 
 //        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true"))){

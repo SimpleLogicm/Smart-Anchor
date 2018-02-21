@@ -950,7 +950,11 @@ public class getServices {
 // Now formattedDate have current date/time
        // Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
 
-        dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+        if (dialog != null && dialog.isShowing()){
+            dialog.dismiss();}
+
         dialog.setMessage("Order Sync in Progress, Please Wait");
         dialog.setTitle("Metal");
         dialog.setCancelable(false);
