@@ -1134,12 +1134,22 @@ public class DataBaseHelper extends SQLiteOpenHelper
         return contactList1;
     }
 
+    public void update_user_createDate(String cur_date,String email_id)
+    {
+
+        String selectQuery = "UPDATE " + TABLE_REG + " SET cur_date = '" +  cur_date  + "'" + " WHERE email_id = '" +  email_id    + "'";
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        // db.close();
+    }
 
     // Getting All Local_Data
-    public List<Local_Data> getDateBY_Device(String device_id) {
+    public List<Local_Data> getDateBY_Device(String device_id,String email_id) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT cur_date FROM " + TABLE_REG + " WHERE device_id = '" + device_id + "'";
+        String selectQuery1 = "SELECT cur_date FROM " + TABLE_REG + " WHERE device_id = '" + device_id + "'" + " AND email_id"+ " ='"+ email_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);

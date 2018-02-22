@@ -117,6 +117,9 @@ public class LoginActivity extends Activity{
 	   logo_img.setImageBitmap(blob_data_logo);
     }
 
+
+
+
 		SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 		pref_devid.getString("reg_devid", "");
 		devid = pref_devid.getString("reg_devid", "");
@@ -202,8 +205,8 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//				editText1.setText("tejal");
-//				editText2.setText("tejal12345");
+				editText1.setText("Jaya");
+				editText2.setText("jaya12345");
 
 //		        editText1.setText("aakash");
 //				editText2.setText("aakash12345");
@@ -1053,20 +1056,6 @@ public class LoginActivity extends Activity{
 
 										JSONObject jsonObject = users.getJSONObject(i);
 
-										SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-										SharedPreferences.Editor edit = pref.edit();
-										edit.putString("login_usernm", jsonObject.getString("user_name"));
-										edit.putString("login_pwd", jsonObject.getString("encrypted_password"));
-										edit.putString("login_dtofjn", jsonObject.getString("date_of_joining"));
-										edit.putString("login_mobno", jsonObject.getString("mob_no"));
-										edit.putString("login_email", jsonObject.getString("email"));
-										edit.putString("login_repto", jsonObject.getString("reporting_to"));
-										edit.putString("login_firstnm", jsonObject.getString("first_name"));
-										edit.putString("login_lastnm", jsonObject.getString("last_name"));
-										edit.putString("login_devid", Device_id);
-										edit.putString("login_adrs", jsonObject.getString("address"));
-										edit.commit();
-
 										loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
 												jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
 												"", Device_id, "", jsonObject.getString("address"), "", "", "", "", "",jsonObject.getString("emp_code"));
@@ -1225,12 +1214,7 @@ public class LoginActivity extends Activity{
 										}
 									});
 
-//								        dialog.dismiss();
-//        								startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//										overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//										finish();
-
-									List<Local_Data> conta = dbvoc.getDateBY_Device(Global_Data.imei_no);
+									List<Local_Data> conta = dbvoc.getDateBY_Device( Global_Data.imei_no,Global_Data.GLOvel_USER_EMAIL);
 									for (Local_Data cn1 : conta) {
 										current_date = cn1.getCur_date();
 										//current_date="28/02/2017";
@@ -1244,27 +1228,14 @@ public class LoginActivity extends Activity{
 										SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
 										String formattedDate = df.format(c.getTime());
 										Date to_ddd = df.parse(formattedDate);
+										//String formattedDate = df.format(c.getTime());
 
-										if (to_ddd.compareTo(date1) < 0) {
-//												Toast.makeText(LoginActivity.this, "to_ddd is after date1", Toast.LENGTH_SHORT).show();
-//											loginDataBaseAdapter.insertEntry("", "", "", "", "", "",
-//													"", "","", "", "", "", "",
-//													"", "", "", "","","","",formattedDate,"1");
-//
-//											startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//											overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+										if (to_ddd.compareTo(date1) > 0) {
 //											finish();
 											isInternetPresent = cd.isConnectingToInternet();
 											if (isInternetPresent) {
-												SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
-												loginDataBaseAdapter.updateEntry(pref.getString("login_usernm", ""), pref.getString("login_pwd", ""), pref.getString("login_dtofjn", ""), pref.getString("login_mobno", ""), pref.getString("login_email", ""), pref.getString("login_repto", ""),
-														pref.getString("login_firstnm", ""), pref.getString("login_lastnm", ""), "", "", "", "", "",
-														"", pref.getString("login_devid", ""), "", pref.getString("login_adrs", ""), "", "", "", formattedDate, "1");
-
-//													loginDataBaseAdapter.insertEntry("", "", "", "", "", "",
-//															"", "","", "", "", "", "",
-//															"", "", "", "","","","",formattedDate,"1");
+												dbvoc.update_user_createDate(formattedDate,Global_Data.GLOvel_USER_EMAIL);
 
 												LoginActivity.this.runOnUiThread(new Runnable() {
 													public void run() {
@@ -1274,9 +1245,10 @@ public class LoginActivity extends Activity{
 											} else {
 												LoginActivity.this.runOnUiThread(new Runnable() {
 													public void run() {
-														Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-														toast.setGravity(Gravity.CENTER, 0, 0);
-														toast.show();
+														dialog.dismiss();
+														startActivity(new Intent(LoginActivity.this, MainActivity.class));
+														overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+														finish();
 													}
 												});
 
@@ -1299,11 +1271,9 @@ public class LoginActivity extends Activity{
 										String formattedDate = df.format(c.getTime());
 
 										if (isInternetPresent) {
-											SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 
-											loginDataBaseAdapter.updateEntry(pref.getString("login_usernm", ""), pref.getString("login_pwd", ""), pref.getString("login_dtofjn", ""), pref.getString("login_mobno", ""), pref.getString("login_email", ""), pref.getString("login_repto", ""),
-													pref.getString("login_firstnm", ""), pref.getString("login_lastnm", ""), "", "", "", "", "",
-													"", pref.getString("login_devid", ""), "", pref.getString("login_adrs", ""), "", "", "", formattedDate, "1");
+											dbvoc.update_user_createDate(formattedDate,Global_Data.GLOvel_USER_EMAIL);
+
 
 											LoginActivity.this.runOnUiThread(new Runnable() {
 												public void run() {

@@ -2,9 +2,11 @@ package com.anchor.activities;
 
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -66,10 +68,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
@@ -91,6 +101,7 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 public class BasicMapDemoActivity extends FragmentActivity implements
         OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    static String g_lat,g_long;
     String map_firstvisit_flag= "true";
     GPSTracker gps;
     String datenn;
@@ -1130,6 +1141,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 //        Call<DistanceData> call = service.getDistanceDuration("metric", "19.310472" + "," +"72.854041","19.079024" + "," +" 72.908012", type);
 
+
+        Global_Data.address =Global_Data.address.trim().replaceAll("\n", " ");
         Call<DistanceData> call = service.getDistanceDuration("metric", Global_Data.address,user_address, type);
 
         call.enqueue(new Callback<DistanceData>() {
@@ -1155,7 +1168,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                             Location locationB = new Location(user_address);
 
-                            Geocoder coder = new Geocoder(getApplicationContext());
+                            Geocoder coder = new Geocoder(getApplicationContext(), getResources().getConfiguration().locale);
                             List<Address> address;
                             // GeoPoint p1 = null;
 
@@ -1163,6 +1176,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 address = coder.getFromLocationName(user_address, 5);
                                 if (address == null) {
                                     // return null;
+
                                 }
                                 Address location = address.get(0);
                                 location.getLatitude();
@@ -1176,13 +1190,103 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 show_distance_time.setText("Distance Covered : " + distancedfgdf);
                                 show_time.setText("");
 
+                                int retval = Double.compare(distancedfgdf, 0.5);
+
+                                if(retval > 0) {
+                                    // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
+                                    getatte_Data();
+                                }
+                                else
+                                {
+                                    dialog.dismiss();
+//                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
+                                    AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                                    alertDialog.setTitle("Metal");
+                                    alertDialog.setMessage("You should be at least 0.5 KM away from your base address- "+user_address);
+                                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+
+                                    //  alertDialog.setCancelable(false);
+                                    //  alertDialog.setCanceledOnTouchOutside(false);
+                                    alertDialog.show();
+
+                                }
+
 
                             }
                             catch(Exception ex){ex.printStackTrace();
-                                Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
-                                distance_la.setVisibility(View.GONE);
-                                show_distance_time.setText("");
-                                show_time.setText("");
+
+                                g_lat = "";
+                                g_long = "";
+                                Thread thread = new Thread(new Runnable() {
+
+                                    @Override
+                                    public void run() {
+                                        try  {
+                                            getLatLongFromGivenAddress(user_address);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+
+                                thread.start();
+
+
+                                if(!g_lat.equalsIgnoreCase("") && !g_long.equalsIgnoreCase(""))
+                                {
+                                    locationB.setLatitude(Float.valueOf(g_lat));
+                                    locationB.setLongitude(Float.valueOf(g_long));
+                                    float distancedfgdf = locationA.distanceTo(locationB)/1000;
+
+                                    distance_la.setVisibility(View.VISIBLE);
+                                    show_distance_time.setText("Distance Covered : " + distancedfgdf);
+                                    show_time.setText("");
+                                    g_lat = "";
+                                    g_long = "";
+
+                                    int retval = Double.compare(distancedfgdf, 0.5);
+
+                                    if(retval > 0) {
+                                        // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
+                                        getatte_Data();
+                                    }
+                                    else
+                                    {
+                                        dialog.dismiss();
+//                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
+                                        AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                                        alertDialog.setTitle("Metal");
+                                        alertDialog.setMessage("You should be at least 0.5 KM away from your base address- "+user_address);
+                                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+
+                                        //  alertDialog.setCancelable(false);
+                                        //  alertDialog.setCanceledOnTouchOutside(false);
+                                        alertDialog.show();
+
+                                    }
+                                }
+                                else
+                                {
+                                    distance_la.setVisibility(View.GONE);
+                                    show_distance_time.setText("");
+                                    show_time.setText("");
+                                    Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
+                                }
+
+
+
                             }
 
 
@@ -1227,7 +1331,21 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                     else
                                     {
                                         dialog.dismiss();
-                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
+                                        AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                                        alertDialog.setTitle("Metal");
+                                        alertDialog.setMessage("You should be at least 0.5 KM away from your base address- "+user_address);
+                                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                               dialog.dismiss();
+                                            }
+                                        });
+
+                                      //  alertDialog.setCancelable(false);
+                                      //  alertDialog.setCanceledOnTouchOutside(false);
+                                        alertDialog.show();
 
                                     }
                                 }
@@ -1389,5 +1507,47 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void getLatLongFromGivenAddress(String youraddress) {
+        String uri = "http://maps.google.com/maps/api/geocode/json?address=" +
+                youraddress + "&sensor=false";
+        HttpGet httpGet = new HttpGet(uri);
+        HttpClient client = new DefaultHttpClient();
+        HttpResponse response;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            response = client.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            InputStream stream = entity.getContent();
+            int b;
+            while ((b = stream.read()) != -1) {
+                stringBuilder.append((char) b);
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = new JSONObject(stringBuilder.toString());
+
+            g_lat = String.valueOf(((JSONArray)jsonObject.get("results")).getJSONObject(0)
+                    .getJSONObject("geometry").getJSONObject("location")
+                    .getDouble("lng"));
+
+            g_long = String.valueOf(((JSONArray)jsonObject.get("results")).getJSONObject(0)
+                    .getJSONObject("geometry").getJSONObject("location")
+                    .getDouble("lat"));
+
+            Log.d("latitude", g_lat);
+            Log.d("longitude", g_long);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }
