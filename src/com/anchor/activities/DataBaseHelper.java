@@ -5766,7 +5766,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetAllOrders(String order_type) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'";
+        String s= "";
+        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND shipmet_priority " + " !='"+ s + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

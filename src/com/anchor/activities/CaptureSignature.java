@@ -65,17 +65,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import cpm.simplelogic.helper.GPSTracker;
+
 //import com.simplelogic.database.DatabaseHandler;
 //import com.simplelogic.webservice.GmailSender;
- 
-public class CaptureSignature extends BaseActivity { 
-	//DataBaseHelper dbvoc;
+
+public class CaptureSignature extends BaseActivity {
+    //DataBaseHelper dbvoc;
 
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath = "";
-
-	Boolean isInternetPresent = false;
-	ImageView get_icon;
+    GPSTracker gps;
+    Boolean isInternetPresent = false;
+    ImageView get_icon;
     Boolean B_flag;
     String strdetail1_mandate,strdetail2_mandate,strdetail4_mandate;
     Bitmap bitmap1;
@@ -91,7 +93,7 @@ public class CaptureSignature extends BaseActivity {
     Button mClear, mGetSign, mCancel;
     int m_sign_flag = 0;
     DatePickerDialog.OnDateSetListener date,date1;
-	ArrayList<Product> dataOrder=new ArrayList<Product>();
+    ArrayList<Product> dataOrder=new ArrayList<Product>();
     public static String tempDir;
     public int count = 1;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -112,20 +114,22 @@ public class CaptureSignature extends BaseActivity {
     private ArrayList<String> results_order_type = new ArrayList<String>();
     private ArrayList<String> results_shipment_pri = new ArrayList<String>();
     float totalPrice;
-	public String order="",retailer_mobile="",retailer_emailID="",dist_mobile="",dist_emailID="",retailer_code="",ret_Name="";
- 
+    public String order="",retailer_mobile="",retailer_emailID="",dist_mobile="",dist_emailID="",retailer_code="",ret_Name="";
+
     @Override
-    public void onCreate(Bundle savedInstanceState) 
+    public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-       // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.signature);
-        
+
         tempDir = Environment.getExternalStorageDirectory() + "/SimpleLogic/" + getResources().getString(R.string.external_dir) + "/";
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
-       // File directory = cw.getDir(getResources().getString(R.string.external_dir), Context.MODE_PRIVATE);
- 
+        // File directory = cw.getDir(getResources().getString(R.string.external_dir), Context.MODE_PRIVATE);
+
+        gps = new GPSTracker(CaptureSignature.this);
+
         File directory = new File(tempDir);
         cd  = new ConnectionDetector(getApplicationContext());
         prepareDirectory();
@@ -133,7 +137,7 @@ public class CaptureSignature extends BaseActivity {
         SharedPreferences  sp=this.getSharedPreferences("SimpleLogic", 0);
 
         order=sp.getString("order", "");
-		String serailNo=sp.getString("SimID", "");
+        String serailNo=sp.getString("SimID", "");
         //uniqueId = serailNo+"_"+getTodaysDate() + "_" + getCurrentTime();
         //current = uniqueId + ".png";
         //mypath= new File(directory,current);
@@ -147,11 +151,11 @@ public class CaptureSignature extends BaseActivity {
         mClear.setBackgroundColor(Color.parseColor("#414042"));
         mGetSign = (Button)findViewById(R.id.getsign);
         mGetSign.setBackgroundColor(Color.parseColor("#414042"));
-       // mGetSign.setEnabled(false);
+        // mGetSign.setEnabled(false);
         mCancel = (Button)findViewById(R.id.cancel);
         mCancel.setBackgroundColor(Color.parseColor("#414042"));
         mView = mContent;
- 
+
         yourName = (EditText) findViewById(R.id.yourName);
         order_detail1 = (EditText) findViewById(R.id.order_detail1);
         order_detail2 = (EditText) findViewById(R.id.order_detail2);
@@ -160,12 +164,12 @@ public class CaptureSignature extends BaseActivity {
         order_type = (Spinner) findViewById(R.id.order_type);
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
         //details1 = (TextView) findViewById(R.id.details1);
-       // details2 = (TextView) findViewById(R.id.details2);
+        // details2 = (TextView) findViewById(R.id.details2);
         //order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
         //get_icon.setBackgroundColor(Color.parseColor("#414042"));
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
-        
+
 //        for (Iterator iterator = dataOrder.iterator(); iterator.hasNext();) {
 //			Product type = (Product) iterator.next();
 //			totalPrice=totalPrice+Float.parseFloat(type.getProducttotalPrice());
@@ -211,7 +215,7 @@ public class CaptureSignature extends BaseActivity {
             }
         };
 
-         myCalendar = Calendar.getInstance();
+        myCalendar = Calendar.getInstance();
 
         date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -358,19 +362,19 @@ public class CaptureSignature extends BaseActivity {
             order_detail4.setHint("Remarks");
         }
 
-    	SharedPreferences sp1 = CaptureSignature.this
-				.getSharedPreferences("SimpleLogic", 0);
-    	
-    	//userID=sp1.getInt("UserID", 0);
-    	cityID=sp1.getInt("CityID", 0);
-    	beatID=sp1.getInt("BeatID", 0);
-    	retailerID=sp1.getInt("RetailerID", 0);
-    	distID=sp1.getInt("DistributorID", 0);
-    	retailer_code=sp1.getString("RetailerCode", "");
-    	retailer_mobile=sp1.getString("RetailerMobile", "");
-    	retailer_emailID=sp1.getString("RetailerEmailId", "");
-    	dist_mobile=sp1.getString("DistributorMobile", "");
-    	dist_emailID=sp1.getString("DistributorEmailId", "");
+        SharedPreferences sp1 = CaptureSignature.this
+                .getSharedPreferences("SimpleLogic", 0);
+
+        //userID=sp1.getInt("UserID", 0);
+        cityID=sp1.getInt("CityID", 0);
+        beatID=sp1.getInt("BeatID", 0);
+        retailerID=sp1.getInt("RetailerID", 0);
+        distID=sp1.getInt("DistributorID", 0);
+        retailer_code=sp1.getString("RetailerCode", "");
+        retailer_mobile=sp1.getString("RetailerMobile", "");
+        retailer_emailID=sp1.getString("RetailerEmailId", "");
+        dist_mobile=sp1.getString("DistributorMobile", "");
+        dist_emailID=sp1.getString("DistributorEmailId", "");
 
 
         results_order_type.clear();
@@ -405,14 +409,23 @@ public class CaptureSignature extends BaseActivity {
 
         List<Local_Data> contacts = dbvoc.GetOrders_details("Secondary Sales / Retail Sales", Global_Data.GLOvel_GORDER_ID);
 
+        String s_pri = "";
         if(contacts.size() > 0)
         {
+
             for (Local_Data cn : contacts)
             {
                 yourName.setText(cn.getOrder_detail3());
                 order_detail1.setText(cn.getOrder_detail1());
                 order_detail2.setText(cn.getOrder_detail2());
+                order_detail4.setText(cn.getOrder_detail4());
                 cc_code = cn.getOrder_category_type().trim();
+                s_pri = cn.getshipment_pri();
+            }
+
+            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(s_pri)){
+                int spinnerPosition = dataAdapter_shipment_pri.getPosition(s_pri);
+                shipment_pri.setSelection(spinnerPosition);
             }
         }
 
@@ -430,9 +443,9 @@ public class CaptureSignature extends BaseActivity {
             }
         }
 
-         get_icon.setOnClickListener(new OnClickListener() {
+        get_icon.setOnClickListener(new OnClickListener() {
             @Override
-              public void onClick(View v) {
+            public void onClick(View v) {
                 B_flag = isDeviceSupportCamera();
 
                 if(B_flag == true)
@@ -481,53 +494,53 @@ public class CaptureSignature extends BaseActivity {
         });
 
         mClear.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View b, MotionEvent event) {
-				// TODO Auto-generated method stub
-				if(event.getAction() == MotionEvent.ACTION_UP)
-			    {
-			        //up event
-			        b.setBackgroundColor(Color.parseColor("#414042"));
-			        return true;
-			    }
-			    if(event.getAction() == MotionEvent.ACTION_DOWN)
-			    {
-			        //down event
-			        b.setBackgroundColor(Color.parseColor("#910505"));
-			        Log.v("log_tag", "Panel Cleared");
-	                mSignature.clear();
+
+            @Override
+            public boolean onTouch(View b, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    //up event
+                    b.setBackgroundColor(Color.parseColor("#414042"));
+                    return true;
+                }
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    //down event
+                    b.setBackgroundColor(Color.parseColor("#910505"));
+                    Log.v("log_tag", "Panel Cleared");
+                    mSignature.clear();
                     m_sign_flag = 0;
-	              //  mGetSign.setEnabled(false);
+                    //  mGetSign.setEnabled(false);
 
-			    }
-				return false;
-			}
-		});
-         
+                }
+                return false;
+            }
+        });
+
         mGetSign.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View b, MotionEvent event) {
-				// TODO Auto-generated method stub
-				if(event.getAction() == MotionEvent.ACTION_UP)
-			    {
-			        //up event
 
-			        b.setBackgroundColor(Color.parseColor("#414042"));
-			        return true;
-			    }
-			    if(event.getAction() == MotionEvent.ACTION_DOWN)
-			    {
-			        //down event
-			        b.setBackgroundColor(Color.parseColor("#910505"));
+            @Override
+            public boolean onTouch(View b, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    //up event
 
-	                Log.v("log_tag", "Panel Saved");
-	                boolean error = captureSignature();
-                   // boolean error1 = captureSignature1();
+                    b.setBackgroundColor(Color.parseColor("#414042"));
+                    return true;
+                }
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    //down event
+                    b.setBackgroundColor(Color.parseColor("#910505"));
 
-	                if(!error) {
-                       // if(!error1) {
+                    Log.v("log_tag", "Panel Saved");
+                    boolean error = captureSignature();
+                    // boolean error1 = captureSignature1();
+
+                    if(!error) {
+                        // if(!error1) {
                         mView.setDrawingCacheEnabled(true);
                         LinearLayout content = (LinearLayout) findViewById(R.id.linearLayout);
                         content.setDrawingCacheEnabled(true);
@@ -542,169 +555,181 @@ public class CaptureSignature extends BaseActivity {
                             toast.setGravity(Gravity.CENTER, 105, 50);
                             toast.show();
                         } else {
-                            AlertDialog alertDialog = new AlertDialog.Builder(CaptureSignature.this).create(); //Read Update
-                            alertDialog.setTitle("Confirmation");
-                            alertDialog.setMessage(" Are you sure you want to continue?");
-                            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+                            gps = new GPSTracker(CaptureSignature.this);
+                            if(!gps.canGetLocation()){
 
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // TODO Auto-generated method stub
+                                gps.showSettingsAlertnew();
+                            }
+                            else
+                            {
+                                AlertDialog alertDialog = new AlertDialog.Builder(CaptureSignature.this).create(); //Read Update
+                                alertDialog.setTitle("Confirmation");
+                                alertDialog.setMessage(" Are you sure you want to continue?");
+                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                                    String order_detail1_text = "";
-                                    String order_detail2_text = "";
-                                    String order_detail4_text = "";
-                                    String order_type_text = "";
-                                    String order_type_name = "";
-                                    String order_type_code = "";
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // TODO Auto-generated method stub
 
-                                        order_detail1_text = order_detail1.getText().toString().trim();
-                                    }
+                                        String order_detail1_text = "";
+                                        String order_detail2_text = "";
+                                        String order_detail4_text = "";
+                                        String order_type_text = "";
+                                        String order_type_name = "";
+                                        String order_type_code = "";
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
 
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
-
-                                        order_detail2_text = order_detail2.getText().toString().trim();
-                                    }
-
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
-
-                                        order_detail4_text = order_detail4.getText().toString().trim();
-                                    }
-
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
-
-                                        order_type_name = yourName.getText().toString().trim();
-                                    }
-
-                                    if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
-
-                                        order_type_text = order_type.getSelectedItem().toString();
-                                        List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
-
-                                        for (Local_Data cn : contacts1) {
-
-                                            order_type_code = cn.getOrder_type_code();
+                                            order_detail1_text = order_detail1.getText().toString().trim();
                                         }
 
-                                    }
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
 
-                                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                                    } else
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                                            order_detail2_text = order_detail2.getText().toString().trim();
+                                        }
+
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
+
+                                            order_detail4_text = order_detail4.getText().toString().trim();
+                                        }
+
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
+
+                                            order_type_name = yourName.getText().toString().trim();
+                                        }
+
+                                        if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
+
+                                            order_type_text = order_type.getSelectedItem().toString();
+                                            List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
+
+                                            for (Local_Data cn : contacts1) {
+
+                                                order_type_code = cn.getOrder_type_code();
+                                            }
+
+                                        }
+
+                                        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                        } else
+                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 //								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
 //								   insertOrderAsyncTask.execute();
 
-                                    File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
-                                    storagePath.mkdirs();
+                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
+                                        storagePath.mkdirs();
 
-                                    File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
+                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
 
 
-                                    String uploadImage = "";
+                                        String uploadImage = "";
 
-                                    try {
-                                        FileOutputStream out = new FileOutputStream(myImage);
-                                        bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
-                                        out.flush();
-                                        out.close();
-                                        uploadImage = getStringImage(bitmap);
-                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
-                                        mSignature.clear();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    try {
-                                        //delete(mediaStorageDir);
-                                        if (storagePath.isDirectory()) {
-                                            String[] children = storagePath.list();
-                                            for (int i = 0; i < children.length; i++) {
-                                                new File(storagePath, children[i]).delete();
-                                            }
+                                        try {
+                                            FileOutputStream out = new FileOutputStream(myImage);
+                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
+                                            out.flush();
+                                            out.close();
+                                            uploadImage = getStringImage(bitmap);
+                                            dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
+                                            mSignature.clear();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
                                         }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
+
+                                        try {
+                                            //delete(mediaStorageDir);
+                                            if (storagePath.isDirectory()) {
+                                                String[] children = storagePath.list();
+                                                for (int i = 0; i < children.length; i++) {
+                                                    new File(storagePath, children[i]).delete();
+                                                }
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        isInternetPresent = cd.isConnectingToInternet();
+
+
+                                        if (isInternetPresent) {
+                                            getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
+                                        } else {
+                                            //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+                                            Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                                            //toast.setGravity(Gravity.CENTER, 0, 0);
+                                            toast.show();
+
+                                            get_dialog();
+                                        }
+
+
                                     }
+                                });
 
-                                    isInternetPresent = cd.isConnectingToInternet();
+                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
 
-                                    if (isInternetPresent) {
-                                        getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
-                                    } else {
-                                        //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-
-                                        Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                                        //toast.setGravity(Gravity.CENTER, 0, 0);
-                                        toast.show();
-
-                                        get_dialog();
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // TODO Auto-generated method stub
+                                        dialog.cancel();
                                     }
-                                }
-                            });
+                                });
 
-                            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                                alertDialog.setCancelable(false);
+                                alertDialog.show();
+                            }
 
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // TODO Auto-generated method stub
-                                    dialog.cancel();
-                                }
-                            });
-
-                            alertDialog.setCancelable(false);
-                            alertDialog.show();
 
                         }
-	                }
-			    }
-				return false;
-			}
-		});
- 
-       /* mCancel.setOnClickListener(new OnClickListener() 
-        {        
-            public void onClick(View v) 
+                    }
+                }
+                return false;
+            }
+        });
+
+       /* mCancel.setOnClickListener(new OnClickListener()
+        {
+            public void onClick(View v)
             {
                 Log.v("log_tag", "Panel Canceled");
                 Bundle b = new Bundle();
                 b.putString("status", "cancel");
                 Intent intent = new Intent();
                 intent.putExtras(b);
-                setResult(RESULT_OK,intent);  
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });*/
-        
-        mCancel.setOnTouchListener(new OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View b, MotionEvent event) {
-				// TODO Auto-generated method stub
-				if(event.getAction() == MotionEvent.ACTION_UP)
-			    {
-			        //up event
-			        b.setBackgroundColor(Color.parseColor("#414042"));
-			        return true;
-			    }
-			    if(event.getAction() == MotionEvent.ACTION_DOWN)
-			    {
-			        //down event
-			        b.setBackgroundColor(Color.parseColor("#910505"));
 
-	                Log.v("log_tag", "Panel Canceled");
-	                Bundle b1 = new Bundle();
-	                b1.putString("status", "cancel");
-	                Intent intent = new Intent();
-	                intent.putExtras(b1);
-	                setResult(RESULT_OK,intent);  
-	                finish();
-	            
-			    }
-				return false;
-			}
-		});
+        mCancel.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View b, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if(event.getAction() == MotionEvent.ACTION_UP)
+                {
+                    //up event
+                    b.setBackgroundColor(Color.parseColor("#414042"));
+                    return true;
+                }
+                if(event.getAction() == MotionEvent.ACTION_DOWN)
+                {
+                    //down event
+                    b.setBackgroundColor(Color.parseColor("#910505"));
+
+                    Log.v("log_tag", "Panel Canceled");
+                    Bundle b1 = new Bundle();
+                    b1.putString("status", "cancel");
+                    Intent intent = new Intent();
+                    intent.putExtras(b1);
+                    setResult(RESULT_OK,intent);
+                    finish();
+
+                }
+                return false;
+            }
+        });
 
         ActionBar mActionBar = getActionBar();
         mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
@@ -751,13 +776,13 @@ public class CaptureSignature extends BaseActivity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
 
     }
- 
+
     @Override
     protected void onDestroy() {
         Log.w("GetSignature", "onDestory");
         super.onDestroy();
     }
- 
+
     private boolean captureSignature() {
         String message_flag = "";
         boolean error = false;
@@ -873,30 +898,30 @@ public class CaptureSignature extends BaseActivity {
             toast.setGravity(Gravity.CENTER, 105, 50);
             toast.show();
         }
- 
+
         return error;
     }
 
-    private String getTodaysDate() { 
- 
+    private String getTodaysDate() {
+
         final Calendar c = Calendar.getInstance();
-        int todaysDate =     (c.get(Calendar.YEAR) * 10000) + 
-        ((c.get(Calendar.MONTH) + 1) * 100) + 
-        (c.get(Calendar.DAY_OF_MONTH));
+        int todaysDate =     (c.get(Calendar.YEAR) * 10000) +
+                ((c.get(Calendar.MONTH) + 1) * 100) +
+                (c.get(Calendar.DAY_OF_MONTH));
         Log.w("DATE:",String.valueOf(todaysDate));
         return(String.valueOf(todaysDate));
- 
+
     }
- 
+
     private String getCurrentTime() {
- 
+
         final Calendar c = Calendar.getInstance();
-        int currentTime =     (c.get(Calendar.HOUR_OF_DAY) * 10000) + 
-        (c.get(Calendar.MINUTE) * 100) + 
-        (c.get(Calendar.SECOND));
+        int currentTime =     (c.get(Calendar.HOUR_OF_DAY) * 10000) +
+                (c.get(Calendar.MINUTE) * 100) +
+                (c.get(Calendar.SECOND));
         Log.w("TIME:",String.valueOf(currentTime));
         return(String.valueOf(currentTime));
- 
+
     }
 
     private boolean isDeviceSupportCamera() {
@@ -961,18 +986,18 @@ public class CaptureSignature extends BaseActivity {
 //        // Create the storage directory if it does not exist
 //        return null;
 //    }
- 
-    private boolean prepareDirectory() 
+
+    private boolean prepareDirectory()
     {
         try
         {
-            if (makedirs()) 
+            if (makedirs())
             {
                 return true;
             } else {
                 return false;
             }
-        } catch (Exception e) 
+        } catch (Exception e)
         {
             e.printStackTrace();
             //Toast.makeText(this, "Could not initiate File System.. Is Sdcard mounted properly?", Toast.LENGTH_LONG).show();
@@ -984,19 +1009,19 @@ public class CaptureSignature extends BaseActivity {
             return false;
         }
     }
- 
-    private boolean makedirs() 
+
+    private boolean makedirs()
     {
         File tempdir = new File(tempDir);
         if (!tempdir.exists())
             tempdir.mkdirs();
- 
-        if (tempdir.isDirectory()) 
+
+        if (tempdir.isDirectory())
         {/*
             File[] files = tempdir.listFiles();
-            for (File file : files) 
+            for (File file : files)
             {
-                if (!file.delete()) 
+                if (!file.delete())
                 {
                     System.out.println("Failed to delete " + file);
                 }
@@ -1004,19 +1029,19 @@ public class CaptureSignature extends BaseActivity {
         */}
         return (tempdir.isDirectory());
     }
- 
-    public class signature extends View 
+
+    public class signature extends View
     {
         private static final float STROKE_WIDTH = 5f;
         private static final float HALF_STROKE_WIDTH = STROKE_WIDTH / 2;
         private Paint paint = new Paint();
         private Path path = new Path();
- 
+
         private float lastTouchX;
         private float lastTouchY;
         private final RectF dirtyRect = new RectF();
- 
-        public signature(Context context, AttributeSet attrs) 
+
+        public signature(Context context, AttributeSet attrs)
         {
             super(context, attrs);
             paint.setAntiAlias(true);
@@ -1025,8 +1050,8 @@ public class CaptureSignature extends BaseActivity {
             paint.setStrokeJoin(Paint.Join.ROUND);
             paint.setStrokeWidth(STROKE_WIDTH);
         }
- 
-        public void save(View v,String mypath) 
+
+        public void save(View v,String mypath)
         {
             Log.e("log_tag", "Width: " + v.getWidth());
             Log.e("log_tag", "Height: " + v.getHeight());
@@ -1038,112 +1063,112 @@ public class CaptureSignature extends BaseActivity {
             try
             {
                 FileOutputStream mFileOutStream = new FileOutputStream(mypath);
- 
-                v.draw(canvas); 
-                mBitmap.compress(Bitmap.CompressFormat.PNG, 90, mFileOutStream); 
+
+                v.draw(canvas);
+                mBitmap.compress(Bitmap.CompressFormat.PNG, 90, mFileOutStream);
                 mFileOutStream.flush();
                 mFileOutStream.close();
                 String url = Images.Media.insertImage(getContentResolver(), mBitmap, "title", null);
                 Log.e("log_tag","mypath: " + mypath);
-                
+
                 Log.e("log_tag","url: " + url);
                 //In case you want to delete the file
                 //boolean deleted = mypath.delete();
                 //Log.v("log_tag","deleted: " + mypath.toString() + deleted);
                 //If you want to convert the image to string use base64 converter
- 
+
             }
-            catch(Exception e) 
-            { 
-                Log.v("log_tag", e.toString()); 
-            } 
+            catch(Exception e)
+            {
+                Log.v("log_tag", e.toString());
+            }
         }
- 
-        public void clear() 
+
+        public void clear()
         {
             path.reset();
             invalidate();
         }
- 
+
         @Override
-        protected void onDraw(Canvas canvas) 
+        protected void onDraw(Canvas canvas)
         {
             canvas.drawPath(path, paint);
         }
- 
+
         @Override
-        public boolean onTouchEvent(MotionEvent event) 
+        public boolean onTouchEvent(MotionEvent event)
         {
             float eventX = event.getX();
             float eventY = event.getY();
             m_sign_flag = 1;
             mGetSign.setEnabled(true);
- 
-            switch (event.getAction()) 
+
+            switch (event.getAction())
             {
-            case MotionEvent.ACTION_DOWN:
-                path.moveTo(eventX, eventY);
-                lastTouchX = eventX;
-                lastTouchY = eventY;
-                return true;
- 
-            case MotionEvent.ACTION_MOVE:
- 
-            case MotionEvent.ACTION_UP:
- 
-                resetDirtyRect(eventX, eventY);
-                int historySize = event.getHistorySize();
-                for (int i = 0; i < historySize; i++) 
-                {
-                    float historicalX = event.getHistoricalX(i);
-                    float historicalY = event.getHistoricalY(i);
-                    expandDirtyRect(historicalX, historicalY);
-                    path.lineTo(historicalX, historicalY);
-                }
-                path.lineTo(eventX, eventY);
-                break;
- 
-            default:
-                debug("Ignored touch event: " + event.toString());
-                return false;
+                case MotionEvent.ACTION_DOWN:
+                    path.moveTo(eventX, eventY);
+                    lastTouchX = eventX;
+                    lastTouchY = eventY;
+                    return true;
+
+                case MotionEvent.ACTION_MOVE:
+
+                case MotionEvent.ACTION_UP:
+
+                    resetDirtyRect(eventX, eventY);
+                    int historySize = event.getHistorySize();
+                    for (int i = 0; i < historySize; i++)
+                    {
+                        float historicalX = event.getHistoricalX(i);
+                        float historicalY = event.getHistoricalY(i);
+                        expandDirtyRect(historicalX, historicalY);
+                        path.lineTo(historicalX, historicalY);
+                    }
+                    path.lineTo(eventX, eventY);
+                    break;
+
+                default:
+                    debug("Ignored touch event: " + event.toString());
+                    return false;
             }
- 
+
             invalidate((int) (dirtyRect.left - HALF_STROKE_WIDTH),
                     (int) (dirtyRect.top - HALF_STROKE_WIDTH),
                     (int) (dirtyRect.right + HALF_STROKE_WIDTH),
                     (int) (dirtyRect.bottom + HALF_STROKE_WIDTH));
- 
+
             lastTouchX = eventX;
             lastTouchY = eventY;
- 
+
             return true;
         }
- 
+
         private void debug(String string){
         }
- 
-        private void expandDirtyRect(float historicalX, float historicalY) 
+
+        private void expandDirtyRect(float historicalX, float historicalY)
         {
-            if (historicalX < dirtyRect.left) 
+            if (historicalX < dirtyRect.left)
             {
                 dirtyRect.left = historicalX;
-            } 
-            else if (historicalX > dirtyRect.right) 
+            }
+            else if (historicalX > dirtyRect.right)
             {
                 dirtyRect.right = historicalX;
             }
- 
-            if (historicalY < dirtyRect.top) 
+
+            if (historicalY < dirtyRect.top)
             {
                 dirtyRect.top = historicalY;
-            } 
-            else if (historicalY > dirtyRect.bottom) 
+            }
+            else if (historicalY > dirtyRect.bottom)
             {
                 dirtyRect.bottom = historicalY;
             }
         }
- 
-        private void resetDirtyRect(float eventX, float eventY) 
+
+        private void resetDirtyRect(float eventX, float eventY)
         {
             dirtyRect.left = Math.min(lastTouchX, eventX);
             dirtyRect.right = Math.max(lastTouchX, eventX);
@@ -1151,59 +1176,59 @@ public class CaptureSignature extends BaseActivity {
             dirtyRect.bottom = Math.max(lastTouchY, eventY);
         }
     }
-    
-    
 
-	public class InsertOrderAsyncTask extends AsyncTask<Void, Void, Void> {
 
-		/** progress dialog to show user that the backup is processing. */
-		private ProgressDialog dialog;
-		/** application context. */
-		private Activity activity;
-		
-		private Context context;
-		
-		private boolean webServiceResponse;
-		float f=0.00f;
-		String createdID="";
-		 ConnectionDetector cd ; 
-		// TelephonyManager manager;
-		 int simState;
 
-		public InsertOrderAsyncTask(Activity activity) {
-			this.activity = activity;
-			context=activity;
-			dialog = new ProgressDialog(activity);
-			 cd  = new ConnectionDetector(getApplicationContext());
-			 //manager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-				// simState=manager.getSimState();
-				
-			
-		}
+    public class InsertOrderAsyncTask extends AsyncTask<Void, Void, Void> {
 
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			this.dialog.setMessage("Generating Order...Please wait");
-			dialog.setCancelable(false);
-			this.dialog.show();
-			
+        /** progress dialog to show user that the backup is processing. */
+        private ProgressDialog dialog;
+        /** application context. */
+        private Activity activity;
 
-		}
+        private Context context;
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
+        private boolean webServiceResponse;
+        float f=0.00f;
+        String createdID="";
+        ConnectionDetector cd ;
+        // TelephonyManager manager;
+        int simState;
+
+        public InsertOrderAsyncTask(Activity activity) {
+            this.activity = activity;
+            context=activity;
+            dialog = new ProgressDialog(activity);
+            cd  = new ConnectionDetector(getApplicationContext());
+            //manager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+            // simState=manager.getSimState();
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            super.onPreExecute();
+            this.dialog.setMessage("Generating Order...Please wait");
+            dialog.setCancelable(false);
+            this.dialog.show();
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // TODO Auto-generated method stub
 			/*try {
 				//dataProducts=(ArrayList<DatabaseProductModel>) myDbHelper.ger(spnCategory.getSelectedItem().toString());
-				
-				 
-					
+
+
+
 				  if (order.equalsIgnoreCase("new")||order.equalsIgnoreCase("previous")) {
-					  
+
 					  try {
-						
+
 						  ret_Name=yourName.getText().toString();
 						  createdID=myDbHelper.generateOrder(userID,cityID,beatID,retailerID,retailer_code,distID,dataOrder,totalPrice,ret_Name,getDateTime());
 							myDbHelper.insertPreviousOrder(userID,cityID,beatID,retailerID,retailer_code,distID,dataOrder,totalPrice,ret_Name,getDateTime(),createdID);
@@ -1213,10 +1238,10 @@ public class CaptureSignature extends BaseActivity {
 						// TODO: handle exception
 						Log.e("DATA new/previous Exception", e.getMessage());
 					}
-					   
+
 				  }
 				  if (order.equalsIgnoreCase("return")) {
-					  
+
 					  try {
 						  ret_Name=yourName.getText().toString();
 						  createdID=myDbHelper.generateReturnOrder(userID,cityID,beatID,retailerID,retailer_code,distID,dataOrder,totalPrice,ret_Name,getDateTime());
@@ -1226,9 +1251,9 @@ public class CaptureSignature extends BaseActivity {
 						// TODO: handle exception
 						Log.e("DATA return Exception", e.getMessage());
 					}
-					  
+
 				  }
-				
+
 					if (simState==TelephonyManager.SIM_STATE_READY) {
 				  if (!retailer_mobile.equalsIgnoreCase("NA")) {
 					   Real Time Code Start
@@ -1237,68 +1262,68 @@ public class CaptureSignature extends BaseActivity {
 					   Real Time Code End
 					}
 					}
-					
+
 					if (!dist_emailID.equalsIgnoreCase("NA")){
 						createExcel(userID,retailerID,distID,createdID);
 					}
-					
+
 					  if (cd.isConnectingToInternet()) {
 		                    // Internet Connection is Present
 		                    // make HTTP requests
-						  
+
 						  sendEmail(createdID,retailer_emailID);
 						  sendEmailtoDistributor(createdID,dist_emailID,new File(Environment.getExternalStorageDirectory().toString() + "/SimpleLogic/"+"order_"+userID+".xls"));
-		                   
+
 		                }
-					 
-					
+
+
 			} catch (Exception e) {
 				// TODO: handle exception
 			}*/
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			return null;
-		}
 
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			if (dialog.isShowing()) {
-				dialog.dismiss();
-				
-			}
-			 SharedPreferences spf=CaptureSignature.this.getSharedPreferences("SimpleLogic",0);        
-		        SharedPreferences.Editor editor=spf.edit();        
-		        //editor.putString("UserID", userid);
-		       
-		        editor.putFloat("Current_Target", f);
-		        editor.commit();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-			 
-		        
-		     // create a Dialog component
-				final Dialog dialog = new Dialog(context);
 
-				//tell the Dialog to use the dialog.xml as it's layout description
-				dialog.setContentView(R.layout.dialog);
-				dialog.setTitle("Order Status :");
+            return null;
+        }
 
-				TextView txt = (TextView) dialog.findViewById(R.id.txtOrderID);
+        @Override
+        protected void onPostExecute(Void result) {
+            // TODO Auto-generated method stub
+            super.onPostExecute(result);
+            if (dialog.isShowing()) {
+                dialog.dismiss();
 
-				txt.setText("Order is generated.");
-				TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
-				TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
-				
-				
-				/*if (simState==TelephonyManager.SIM_STATE_READY) 
+            }
+            SharedPreferences spf=CaptureSignature.this.getSharedPreferences("SimpleLogic",0);
+            SharedPreferences.Editor editor=spf.edit();
+            //editor.putString("UserID", userid);
+
+            editor.putFloat("Current_Target", f);
+            editor.commit();
+
+
+
+            // create a Dialog component
+            final Dialog dialog = new Dialog(context);
+
+            //tell the Dialog to use the dialog.xml as it's layout description
+            dialog.setContentView(R.layout.dialog);
+            dialog.setTitle("Order Status :");
+
+            TextView txt = (TextView) dialog.findViewById(R.id.txtOrderID);
+
+            txt.setText("Order is generated.");
+            TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
+            TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
+
+
+				/*if (simState==TelephonyManager.SIM_STATE_READY)
 				{
 					if (retailer_mobile.equalsIgnoreCase("NA")) {
 					txtMessage.setText("Mobile Number is not present for this retailer.");
@@ -1307,70 +1332,70 @@ public class CaptureSignature extends BaseActivity {
 					txtMessage.setText("SMS has been sent to "+retailer_mobile+".");
 				}
 				}
-				
+
 				else {
 					txtMessage.setText("No SIM card detected");
 				}
-				
-				
+
+
 				  if (!cd.isConnectingToInternet()) {
 	                    // Internet Connection is Present
 	                    // make HTTP requests
 					  txtEmail.setText("No internet connection..unable to send mail.");
 	                }
 				  else {
-					  
+
 					  if (!dist_emailID.equalsIgnoreCase("NA")) {
 						  txtEmail.setText("Mail has been sent to Admin and Distributor.");
 					}
 					  else {
 						  txtEmail.setText("Mail has been sent to Admin.");
 					}
-					  
-					  
+
+
 				}*/
-				  
-			ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
-				
-				dialogButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-						Bundle b = new Bundle();
-			            b.putString("status", "done");
-			            Intent intent = new Intent();
-			            intent.putExtras(b);
-			            setResult(RESULT_OK,intent);  
-					
-			            SharedPreferences spf=CaptureSignature.this.getSharedPreferences("SimpleLogic",0);        
-				        SharedPreferences.Editor editor=spf.edit();        
-				        //editor.putString("UserID", userid);
-				       
-				        editor.putInt("Capture", 1);
-				        editor.commit();
-			            //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-			            Intent intentn = new Intent(getApplicationContext(), MainActivity.class);
-						startActivity(intentn);
-						overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-			            finish();
-			           
-					}
-				});
 
-				dialog.show();
+            ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
 
-		}
-	}
-	
-	
-	private String getDateTime() {
+            dialogButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    Bundle b = new Bundle();
+                    b.putString("status", "done");
+                    Intent intent = new Intent();
+                    intent.putExtras(b);
+                    setResult(RESULT_OK,intent);
+
+                    SharedPreferences spf=CaptureSignature.this.getSharedPreferences("SimpleLogic",0);
+                    SharedPreferences.Editor editor=spf.edit();
+                    //editor.putString("UserID", userid);
+
+                    editor.putInt("Capture", 1);
+                    editor.commit();
+                    //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    Intent intentn = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intentn);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    finish();
+
+                }
+            });
+
+            dialog.show();
+
+        }
+    }
+
+
+    private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date date = new Date();
         return dateFormat.format(date);
-}
-	
-	
+    }
+
+
 //	public void sendEmail(String createdID, String emailID2) {
 //		// TODO Auto-generated method stub
 //
@@ -1405,7 +1430,7 @@ public class CaptureSignature extends BaseActivity {
 //        }
 //
 //	}
-	
+
 //	public void sendEmailtoDistributor(String createdID, String emailID2,File f) {
 //		// TODO Auto-generated method stub
 //
@@ -1435,16 +1460,16 @@ public class CaptureSignature extends BaseActivity {
 //        }
 //	}
 
-	
 
 
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		super.onBackPressed();
-		finish();
-		 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-	}
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 
 
     public void get_dialog()
@@ -1466,7 +1491,7 @@ public class CaptureSignature extends BaseActivity {
 //								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
 //								   insertOrderAsyncTask.execute();
 
-              //  Toast.makeText(getApplicationContext(),"Order generate successfully.",Toast.LENGTH_LONG).show();
+                //  Toast.makeText(getApplicationContext(),"Order generate successfully.",Toast.LENGTH_LONG).show();
 
                 Toast toast = Toast.makeText(getApplicationContext(),"Order generate successfully.",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1538,8 +1563,8 @@ public class CaptureSignature extends BaseActivity {
 //                e.printStackTrace();
 //            }
 
-           // Bundle extras = data.getExtras();
-          //  Bitmap imageBitmap = (Bitmap) extras.get("data");
+            // Bundle extras = data.getExtras();
+            //  Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             try {
 
@@ -1572,8 +1597,8 @@ public class CaptureSignature extends BaseActivity {
         );
 
         // Save a file: path for use with ACTION_VIEW intents
-       mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-       // mCurrentPhotoPath = image.getAbsolutePath();
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        // mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
