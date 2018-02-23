@@ -5636,7 +5636,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetOrders_details(String order_type,String order_id) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT details1,details2,details3,order_category FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
+        String selectQuery = "SELECT details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -5649,6 +5649,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_detail2(cursor.getString(1));
                 contact.setOrder_detail3(cursor.getString(2));
                 contact.setOrder_category_type(cursor.getString(3));
+                contact.setshipment_pri(cursor.getString(4));
+                contact.setOrder_detail4(cursor.getString(5));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
