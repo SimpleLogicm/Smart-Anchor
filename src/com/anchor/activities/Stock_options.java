@@ -315,17 +315,19 @@ public class Stock_options extends Activity implements OnItemSelectedListener {
                             .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     beat_spinner.setAdapter(adapter_state1);
 
-                    if(items.equalsIgnoreCase("All States"))
-                    {
-                        city_spinner.setEnabled(false);
-                        beat_spinner.setEnabled(false);
-                    }
-                    else
-                    {
-                        city_spinner.setEnabled(true);
-                        beat_spinner.setEnabled(true);
-                    }
 
+
+                }
+
+                if(items.equalsIgnoreCase("All States"))
+                {
+                    city_spinner.setEnabled(false);
+                    beat_spinner.setEnabled(false);
+                }
+                else
+                {
+                    city_spinner.setEnabled(true);
+                    beat_spinner.setEnabled(true);
                 }
 
                 if (!Global_Data.GLOvel_CITY_n.equalsIgnoreCase("")) {

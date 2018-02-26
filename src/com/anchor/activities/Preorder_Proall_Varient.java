@@ -341,9 +341,9 @@ public class Preorder_Proall_Varient extends Activity {
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
                     // Global_Data.Search_business_unit_name = "";
-//                    Global_Data.Search_Category_name = "";
-//                    Global_Data.Search_BusinessCategory_name = "";
-//                    Global_Data.Search_brand_name = "";
+                    Global_Data.Search_Category_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
 
                     Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S1.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -387,9 +387,9 @@ public class Preorder_Proall_Varient extends Activity {
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
                                 // Global_Data.Search_business_unit_name = "";
-//                                Global_Data.Search_Category_name = "";
-//                                Global_Data.Search_BusinessCategory_name = "";
-//                                Global_Data.Search_brand_name = "";
+                                Global_Data.Search_Category_name = "";
+                                Global_Data.Search_BusinessCategory_name = "";
+                                Global_Data.Search_brand_name = "";
                                 p_id.clear();
                                 p_name.clear();
                                 p_mrp.clear();
@@ -420,9 +420,9 @@ public class Preorder_Proall_Varient extends Activity {
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
                         // Global_Data.Search_business_unit_name = "";
-//                        Global_Data.Search_Category_name = "";
-//                        Global_Data.Search_BusinessCategory_name = "";
-//                        Global_Data.Search_brand_name = "";
+                        Global_Data.Search_Category_name = "";
+                        Global_Data.Search_BusinessCategory_name = "";
+                        Global_Data.Search_brand_name = "";
                         p_id.clear();
                         p_name.clear();
                         p_mrp.clear();
@@ -454,9 +454,9 @@ public class Preorder_Proall_Varient extends Activity {
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
                                 //   Global_Data.Search_business_unit_name = "";
-//                                Global_Data.Search_Category_name = "";
-//                                Global_Data.Search_BusinessCategory_name = "";
-//                                Global_Data.Search_brand_name = "";
+                                Global_Data.Search_Category_name = "";
+                                Global_Data.Search_BusinessCategory_name = "";
+                                Global_Data.Search_brand_name = "";
                                 p_id.clear();
                                 p_name.clear();
                                 p_mrp.clear();
@@ -492,9 +492,9 @@ public class Preorder_Proall_Varient extends Activity {
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
                         //  Global_Data.Search_business_unit_name = "";
-//                        Global_Data.Search_Category_name = "";
-//                        Global_Data.Search_BusinessCategory_name = "";
-//                        Global_Data.Search_brand_name = "";
+                        Global_Data.Search_Category_name = "";
+                        Global_Data.Search_BusinessCategory_name = "";
+                        Global_Data.Search_brand_name = "";
                         p_id.clear();
                         p_name.clear();
                         p_mrp.clear();
@@ -562,9 +562,9 @@ public class Preorder_Proall_Varient extends Activity {
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
                     //   Global_Data.Search_business_unit_name = "";
-//                    Global_Data.Search_Category_name = "";
-//                    Global_Data.Search_BusinessCategory_name = "";
-//                    Global_Data.Search_brand_name = "";
+                    Global_Data.Search_Category_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
 
                     Intent i = new Intent(Preorder_Proall_Varient.this, Previous_orderNew_S2.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -1116,9 +1116,9 @@ public class Preorder_Proall_Varient extends Activity {
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
                     //  Global_Data.Search_business_unit_name = "";
-//                    Global_Data.Search_Category_name = "";
-//                    Global_Data.Search_BusinessCategory_name = "";
-//                    Global_Data.Search_brand_name = "";
+                    Global_Data.Search_Category_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
                     p_id.clear();
                     p_name.clear();
                     p_mrp.clear();
@@ -1152,9 +1152,9 @@ public class Preorder_Proall_Varient extends Activity {
             Global_Data.GLOVEL_CATEGORY_SELECTION = "";
             Global_Data.GLOVEL_ITEM_MRP = "";
             // Global_Data.Search_business_unit_name = "";
-//            Global_Data.Search_Category_name = "";
-//            Global_Data.Search_BusinessCategory_name = "";
-//            Global_Data.Search_brand_name = "";
+            Global_Data.Search_Category_name = "";
+            Global_Data.Search_BusinessCategory_name = "";
+            Global_Data.Search_brand_name = "";
             p_id.clear();
             p_name.clear();
             p_mrp.clear();
