@@ -6620,6 +6620,16 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // db.close();
     }
 
+    public void updateORDER_SIGNATURENEW_WITHLATLONG(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_detail4_text,String order_category,String shipment_pri,String lat,String longs)
+    {
+        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "details4 = '"  +  order_detail4_text + "'," + "order_category = '"  +  order_category + "'," + "shipmet_priority = '"  +  shipment_pri + "'," + "latitude = '"  +  lat  + "'," + "longitude = '"  +  longs + "'" + " WHERE order_id = '" +  order_id    + "'";
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        // db.close();
+    }
+
     public void updateORDER_order_image(String signature,String order_id)
     {
 

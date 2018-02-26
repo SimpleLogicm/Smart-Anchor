@@ -44,10 +44,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import cpm.simplelogic.helper.ConnectionDetector;
+import cpm.simplelogic.helper.GPSTracker;
 
 public class ProductAll_Varients extends Activity {
 
     int pp = 0;
+    GPSTracker gps;
     String q_check = "";
     ProgressDialog dialog;
     String str;
@@ -360,7 +362,17 @@ public class ProductAll_Varients extends Activity {
                     p_rp.clear();
                     q_check = "";
 
-                    new Varientsave().execute();
+                    gps = new GPSTracker(ProductAll_Varients.this);
+                    if(!gps.canGetLocation()){
+
+                        gps.showSettingsAlertnew();
+                    }
+                    else
+                    {
+                        new Varientsave().execute();
+                    }
+
+
 
                 }
 

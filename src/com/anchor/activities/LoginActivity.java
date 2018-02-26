@@ -166,12 +166,12 @@ public class LoginActivity extends Activity{
 
 		 Global_Data.LOCATION_SERVICE_HIT = "TRUE";
 
-		 if(!gps.canGetLocation()){
+		if(!gps.canGetLocation()){
 			// can't get location
-	        	// GPS or Network is not enabled
-	        	// Ask user to enable GPS/network in settings
-	        	gps.showSettingsAlert();
-		 }
+			// GPS or Network is not enabled
+			// Ask user to enable GPS/network in settings
+			gps.showSettingsAlert();
+		}
 
     	 Calendar c = Calendar.getInstance();
          SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");

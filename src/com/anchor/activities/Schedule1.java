@@ -201,12 +201,37 @@ public class Schedule1 extends Activity{
         List<Local_Data> contactsP = dbvoc.getDeliverySchedule(Order_ID);
         for (Local_Data cn : contactsP) 
         {
-        	
-        	DISP_DATE.setText(cn.get_shedule_depatch_date());
-        	EST_DATE.setText(cn.get_shedule_delivery_date());
-        	D_CASH.setText(cn.get_shedule_payment_mode());
-        	
-        	//PRE_OUTSTANDING.setText(cn.get_shedule_outstanding_amount());
+
+			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.get_shedule_depatch_date()))
+			{
+				DISP_DATE.setText(cn.get_shedule_depatch_date());
+			}
+			else
+			{
+				DISP_DATE.setText("");
+			}
+
+			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.get_shedule_delivery_date()))
+			{
+				EST_DATE.setText(cn.get_shedule_delivery_date());
+			}
+			else
+			{
+				EST_DATE.setText("");
+			}
+
+
+			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.get_shedule_payment_mode()))
+			{
+				D_CASH.setText(cn.get_shedule_payment_mode());
+			}
+			else
+			{
+				D_CASH.setText("");
+			}
+
+
+			//PRE_OUTSTANDING.setText(cn.get_shedule_outstanding_amount());
 
 			if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.get_shedule_order_amount()))
 			{

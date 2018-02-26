@@ -19,6 +19,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import cpm.simplelogic.helper.Location_settings;
+
 public class SplashScreenActivity extends Activity {
 
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
@@ -39,6 +41,8 @@ public class SplashScreenActivity extends Activity {
 
 		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
+
+
 
 
 

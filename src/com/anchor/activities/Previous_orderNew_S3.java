@@ -586,13 +586,41 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                                         String uploadImage = "";
 
+                                        try
+                                        {
+                                            AppLocationManager appLocationManager = new AppLocationManager(Previous_orderNew_S3.this);
+                                            Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+                                            Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                                            PlayService_Location PlayServiceManager = new PlayService_Location(Previous_orderNew_S3.this);
+
+                                            if(PlayServiceManager.checkPlayServices(Previous_orderNew_S3.this))
+                                            {
+                                                Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+                                            }
+                                            else
+                                            if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+                                            {
+                                                Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+                                                Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+                                            }
+
+                                        }catch(Exception ex){ex.printStackTrace();}
+
                                         try {
                                             FileOutputStream out = new FileOutputStream(myImage);
                                             bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
                                             out.flush();
                                             out.close();
                                             uploadImage = getStringImage(bitmap);
-                                            dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name,order_detail4_text,order_type_code,shipment_pri.getSelectedItem().toString());
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+
+                                                dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LONGITUDE,Global_Data.GLOvel_LONGITUDE);
+                                            }
+                                            else
+                                            {
+                                                dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
+                                            }
                                             mSignature.clear();
                                         } catch (Exception e) {
                                             e.printStackTrace();

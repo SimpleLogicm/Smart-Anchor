@@ -968,11 +968,7 @@ public class getServices {
     public static void SYNCORDER_AllOrders(Context contextn){
         context = contextn;
 
-        dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Order Sync in Progress, Please Wait");
-        dialog.setTitle("Metal");
-        dialog.setCancelable(false);
-        dialog.show();
+
 
         new AllOrderAyncTask().execute();
 
@@ -4206,8 +4202,18 @@ public class getServices {
                     // product_value.put("order_take_by", "");
                     product_value.put("customer_code", cn.get_category_id());
                     product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
-                    product_value.put("latitude", cn.getlatitude());
-                    product_value.put("longitude", cn.getlongitude());
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
+
+                        product_value.put("latitude", cn.getlatitude());
+                        product_value.put("longitude", cn.getlongitude());
+                    }
+                    else
+                    {
+                        product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                    }
+
                     product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
                     product_value.put("details1", cn.getOrder_detail1());
                     product_value.put("details2", cn.getOrder_detail2());
@@ -4435,18 +4441,18 @@ public class getServices {
                                 public void run() {
 
                                     dialog.dismiss();
-                                    final Dialog dialog = new Dialog(context);
-                                    dialog.setCancelable(false);
+                                    final Dialog dialog1 = new Dialog(context);
+                                    dialog1.setCancelable(false);
 
                                     //tell the Dialog to use the dialog.xml as it's layout description
-                                    dialog.setContentView(R.layout.dialog);
-                                    dialog.setTitle("Order Status :");
+                                    dialog1.setContentView(R.layout.dialog);
+                                    dialog1.setTitle("Order Status :");
 
-                                    TextView txt = (TextView) dialog.findViewById(R.id.txtOrderID);
+                                    TextView txt = (TextView) dialog1.findViewById(R.id.txtOrderID);
 
                                     txt.setText("Order is generated.");
-                                    TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
-                                    TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
+                                    TextView txtMessage = (TextView) dialog1.findViewById(R.id.txtMessage);
+                                    TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
                                     if (!mobile_numbers.isEmpty() && mobile_numbers.size() > 0) {
@@ -4454,12 +4460,12 @@ public class getServices {
                                     }
 
 
-                                    ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
+                                    ImageView dialogButton = (ImageView) dialog1.findViewById(R.id.dialogButton);
 
                                     dialogButton.setOnClickListener(new OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            dialog.dismiss();
+                                            dialog1.dismiss();
 
                                             //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             getTargetDataservice(context);
@@ -4468,7 +4474,7 @@ public class getServices {
                                         }
                                     });
 
-                                    dialog.show();
+                                    dialog1.show();
                                 }
                             });
 
@@ -4610,8 +4616,16 @@ public class getServices {
 
         @Override
         protected void onPreExecute() {
-            // Here you can show progress bar or something on the similar lines.
-            // Since you are in a UI thread here.
+            if (dialog != null && dialog.isShowing()) {
+                dialog.cancel();
+                //dialog.dismiss();
+            }
+
+            dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+            dialog.setMessage("Order Sync in Progress, Please Wait");
+            dialog.setTitle("Metal");
+            dialog.setCancelable(false);
+            dialog.show();
             super.onPreExecute();
         }
 
@@ -4744,8 +4758,17 @@ public class getServices {
                     //product_value.put("signature_image_name", uploadImage);
                     product_value.put("device_code", Global_Data.device_id);
 
-                    product_value.put("latitude", cn.getlatitude());
-                    product_value.put("longitude", cn.getlongitude());
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
+
+                        product_value.put("latitude", cn.getlatitude());
+                        product_value.put("longitude", cn.getlongitude());
+                    }
+                    else
+                    {
+                        product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                    }
+
                     product_value.put("shipment_priority", cn.getshipment_pri());
                     product_value.put("signature_path", cn.getSignature_image());
 
