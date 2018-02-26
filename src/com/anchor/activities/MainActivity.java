@@ -32,6 +32,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.animation.ActivitySwitcher;
+import com.anchor.service.LocationServices;
+import com.anchor.services.getServices;
+import com.anchor.slidingmenu.adapter.NavDrawerListAdapter;
+import com.anchor.slidingmenu.model.NavDrawerItem;
+import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -46,12 +52,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.anchor.animation.ActivitySwitcher;
-import com.anchor.service.LocationServices;
-import com.anchor.services.getServices;
-import com.anchor.slidingmenu.adapter.NavDrawerListAdapter;
-import com.anchor.slidingmenu.model.NavDrawerItem;
-import com.anchor.webservice.ConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,6 +107,7 @@ public class MainActivity extends BaseActivity {
 
 
 		PlayServiceManager = new PlayService_Location(MainActivity.this);
+
 //		if(PlayServiceManager.checkPlayServices(MainActivity.this))
 //		{
 //

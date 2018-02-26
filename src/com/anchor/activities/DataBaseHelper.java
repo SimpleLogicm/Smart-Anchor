@@ -818,6 +818,36 @@ public class DataBaseHelper extends SQLiteOpenHelper
         return contactList1;
     }
 
+    // Getting All Local_Data
+    public List<Local_Data> getUSERAddressBY_Email(String email) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+//        String selectQuery1 = "SELECT  username,password,email_id,ids,reporting_to,first_name,last_name FROM " + TABLE_REG + " WHERE username = '" +  name + "'" + " GROUP BY username ORDER BY username";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cursor cursor = db.rawQuery(selectQuery1, null);
+
+
+        Cursor cursor = db.rawQuery("select username,city_id FROM users WHERE email_id = ? GROUP BY email_id ORDER BY email_id",
+                new String[] {email});
+
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setUser(cursor.getString(0));
+                contact.setAddress(cursor.getString(1));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
 
     // Getting All Local_Data
     public List<Local_Data> getManager_mobile(String reporting_to) {
@@ -1107,12 +1137,22 @@ public class DataBaseHelper extends SQLiteOpenHelper
         return contactList1;
     }
 
+    public void update_user_createDate(String cur_date,String email_id)
+    {
+
+        String selectQuery = "UPDATE " + TABLE_REG + " SET cur_date = '" +  cur_date  + "'" + " WHERE email_id = '" +  email_id    + "'";
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        // db.close();
+    }
 
     // Getting All Local_Data
-    public List<Local_Data> getDateBY_Device(String device_id) {
+    public List<Local_Data> getDateBY_Device(String device_id,String email_id) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT cur_date FROM " + TABLE_REG + " WHERE device_id = '" + device_id + "'";
+        String selectQuery1 = "SELECT cur_date FROM " + TABLE_REG + " WHERE device_id = '" + device_id + "'" + " AND email_id"+ " ='"+ email_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -5599,7 +5639,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetOrders_details(String order_type,String order_id) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT details1,details2,details3,order_category FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
+        String selectQuery = "SELECT details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND order_id " + " ='"+ order_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -5612,6 +5652,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_detail2(cursor.getString(1));
                 contact.setOrder_detail3(cursor.getString(2));
                 contact.setOrder_category_type(cursor.getString(3));
+                contact.setshipment_pri(cursor.getString(4));
+                contact.setOrder_detail4(cursor.getString(5));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
@@ -5729,7 +5771,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> GetAllOrders(String order_type) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'";
+        String s= "";
+        String selectQuery = "SELECT  order_id,customer_name,order_type,customer_id,signature_path,distributor_id,user_id,latitude,longitude,getsign_img,details1,details2,details3,order_category,shipmet_priority,details4 FROM " + TABLE_ORDERS + " WHERE order_type"+ " ='"+ order_type + "'" + " AND shipmet_priority " + " !='"+ s + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -6555,10 +6598,10 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // db.close();
     }
 
-    public void updateUserEMPNO_BY_EMILID(String emp_code,String email_id)
+    public void updateUserEMPNO_BY_EMILID(String emp_code,String email_id,String address)
     {
 
-        String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'" + " WHERE email_id = '" +  email_id    + "'";
+        String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 

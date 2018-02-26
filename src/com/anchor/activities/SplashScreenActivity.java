@@ -17,8 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.ImageView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
 public class SplashScreenActivity extends Activity {
@@ -41,6 +39,8 @@ public class SplashScreenActivity extends Activity {
 
 		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
+
+
 
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
 		String logostr=spf1.getString("splash_data", "");

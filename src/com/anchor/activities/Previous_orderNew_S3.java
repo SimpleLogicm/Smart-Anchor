@@ -64,12 +64,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import cpm.simplelogic.helper.GPSTracker;
+
 //import com.simplelogic.database.DatabaseHandler;
 //import com.simplelogic.webservice.GmailSender;
 
 public class Previous_orderNew_S3 extends BaseActivity {
     //DataBaseHelper dbvoc;
     Boolean isInternetPresent = false;
+    GPSTracker gps;
     ImageView get_icon;
     Boolean B_flag;
     String strdetail1_mandate,strdetail2_mandate,strdetail4_mandate;;
@@ -319,7 +322,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         {
             order_detail2.setHint(detail2str);
         }else{
-            order_detail2.setText("Detail 2");
+            order_detail2.setHint("Detail 2");
         }
 
 
@@ -350,7 +353,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         {
             order_detail4.setHint(detail4str);
         }else{
-            order_detail4.setText("Remarks");
+            order_detail4.setHint("Remarks");
         }
 
         SharedPreferences sp1 = Previous_orderNew_S3.this
@@ -514,119 +517,129 @@ public class Previous_orderNew_S3 extends BaseActivity {
                             toast.setGravity(Gravity.CENTER, 105, 50);
                             toast.show();
                         } else {
-                            AlertDialog alertDialog = new AlertDialog.Builder(Previous_orderNew_S3.this).create(); //Read Update
-                            alertDialog.setTitle("Confirmation");
-                            alertDialog.setMessage(" Are you sure you want to continue?");
-                            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+                            gps = new GPSTracker(Previous_orderNew_S3.this);
+                            if(!gps.canGetLocation()){
 
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // TODO Auto-generated method stub
+                                gps.showSettingsAlertnew();
+                            }
+                            else
+                            {
+                                AlertDialog alertDialog = new AlertDialog.Builder(Previous_orderNew_S3.this).create(); //Read Update
+                                alertDialog.setTitle("Confirmation");
+                                alertDialog.setMessage(" Are you sure you want to continue?");
+                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                                    String order_detail1_text = "";
-                                    String order_detail2_text = "";
-                                    String order_detail4_text = "";
-                                    String order_type_text = "";
-                                    String order_type_name = "";
-                                    String order_type_code = "";
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // TODO Auto-generated method stub
 
-                                        order_detail1_text = order_detail1.getText().toString().trim();
-                                    }
+                                        String order_detail1_text = "";
+                                        String order_detail2_text = "";
+                                        String order_detail4_text = "";
+                                        String order_type_text = "";
+                                        String order_type_name = "";
+                                        String order_type_code = "";
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
 
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
-
-                                        order_detail2_text = order_detail2.getText().toString().trim();
-                                    }
-
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
-
-                                        order_detail4_text = order_detail4.getText().toString().trim();
-                                    }
-
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
-
-                                        order_type_name = yourName.getText().toString().trim();
-                                    }
-
-                                    if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
-
-                                        order_type_text = order_type.getSelectedItem().toString();
-                                        List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
-
-                                        for (Local_Data cn : contacts1) {
-
-                                            order_type_code = cn.getOrder_type_code();
+                                            order_detail1_text = order_detail1.getText().toString().trim();
                                         }
 
-                                    }
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
 
-                                    if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                                    } else
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                                            order_detail2_text = order_detail2.getText().toString().trim();
+                                        }
+
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
+
+                                            order_detail4_text = order_detail4.getText().toString().trim();
+                                        }
+
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
+
+                                            order_type_name = yourName.getText().toString().trim();
+                                        }
+
+                                        if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
+
+                                            order_type_text = order_type.getSelectedItem().toString();
+                                            List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
+
+                                            for (Local_Data cn : contacts1) {
+
+                                                order_type_code = cn.getOrder_type_code();
+                                            }
+
+                                        }
+
+                                        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                        } else
+                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 //								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(Previous_orderNew_S3.this);
 //								   insertOrderAsyncTask.execute();
 
-                                    File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
-                                    storagePath.mkdirs();
+                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
+                                        storagePath.mkdirs();
 
-                                    File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
+                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
 
 
-                                    String uploadImage = "";
+                                        String uploadImage = "";
 
-                                    try {
-                                        FileOutputStream out = new FileOutputStream(myImage);
-                                        bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
-                                        out.flush();
-                                        out.close();
-                                        uploadImage = getStringImage(bitmap);
-                                        dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name,order_detail4_text,order_type_code,shipment_pri.getSelectedItem().toString());
-                                        mSignature.clear();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    try {
-                                        //delete(mediaStorageDir);
-                                        if (storagePath.isDirectory()) {
-                                            String[] children = storagePath.list();
-                                            for (int i = 0; i < children.length; i++) {
-                                                new File(storagePath, children[i]).delete();
-                                            }
+                                        try {
+                                            FileOutputStream out = new FileOutputStream(myImage);
+                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
+                                            out.flush();
+                                            out.close();
+                                            uploadImage = getStringImage(bitmap);
+                                            dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name,order_detail4_text,order_type_code,shipment_pri.getSelectedItem().toString());
+                                            mSignature.clear();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
                                         }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
+
+                                        try {
+                                            //delete(mediaStorageDir);
+                                            if (storagePath.isDirectory()) {
+                                                String[] children = storagePath.list();
+                                                for (int i = 0; i < children.length; i++) {
+                                                    new File(storagePath, children[i]).delete();
+                                                }
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+
+                                        isInternetPresent = cd.isConnectingToInternet();
+                                        if (isInternetPresent) {
+                                            getServices.SYNCORDER_BYCustomer(Previous_orderNew_S3.this, Global_Data.GLOvel_GORDER_ID);
+                                        } else {
+                                            //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+                                            Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                                            //toast.setGravity(Gravity.CENTER, 0, 0);
+                                            toast.show();
+
+                                            get_dialog();
+                                        }
+
                                     }
+                                });
 
-                                    isInternetPresent = cd.isConnectingToInternet();
+                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
 
-                                    if (isInternetPresent) {
-                                        getServices.SYNCORDER_BYCustomer(Previous_orderNew_S3.this, Global_Data.GLOvel_GORDER_ID);
-                                    } else {
-                                        //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-
-                                        Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                                        //toast.setGravity(Gravity.CENTER, 0, 0);
-                                        toast.show();
-
-                                        get_dialog();
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // TODO Auto-generated method stub
+                                        dialog.cancel();
                                     }
-                                }
-                            });
+                                });
 
-                            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                                alertDialog.setCancelable(false);
+                                alertDialog.show();
+                            }
 
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // TODO Auto-generated method stub
-                                    dialog.cancel();
-                                }
-                            });
-
-                            alertDialog.setCancelable(false);
-                            alertDialog.show();
 
                         }
                     }
@@ -735,47 +748,24 @@ public class Previous_orderNew_S3 extends BaseActivity {
         String errorMessage = "";
         String message_flag = "";
 
-        if(yourName.getText().toString().equalsIgnoreCase("")){
-            errorMessage = errorMessage + "Please Enter your Name \n";
+        if(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))
+        {
+
+            errorMessage = errorMessage + "Please Select Order Type.";
             error = true;
-        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true")) || (strdetail4_mandate.equalsIgnoreCase("true"))){
+        }
+        else
+        if(strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase(""))
+        {
+            errorMessage = errorMessage + "Please Enter " + detail1str;
+            error = true;
 
-            if(strdetail1_mandate.equalsIgnoreCase("true")) {
-                if (order_detail1.getText().toString().equalsIgnoreCase("")) {
-                    if(!message_flag.equalsIgnoreCase("true"))
-                    {
-                        errorMessage = errorMessage + "Please Enter " + detail1str;
-                        error = true;
-                        message_flag = "true";
-                    }
-
-                }
-            }
-
-            if(strdetail2_mandate.equalsIgnoreCase("true"))
-            {
-                if(order_detail2.getText().toString().equalsIgnoreCase("")){
-                    if(!message_flag.equalsIgnoreCase("true"))
-                    {
-                        errorMessage = errorMessage + "Please Enter " + detail2str;
-                        error = true;
-                        message_flag = "true";
-                    }
-                }
-            }
-
-            if(strdetail4_mandate.equalsIgnoreCase("true"))
-            {
-                if(order_detail4.getText().toString().equalsIgnoreCase("")){
-                    if(!message_flag.equalsIgnoreCase("true"))
-                    {
-                        errorMessage = errorMessage + "Please Enter " + detail4str;
-                        error = true;
-                        message_flag = "true";
-                    }
-                }
-            }
-
+        }
+        else
+        if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase(""))
+        {
+            errorMessage = errorMessage + "Please Enter " + detail2str;
+            error = true;
 
         }
         else
@@ -784,6 +774,18 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
+        }
+        else
+        if(yourName.getText().toString().equalsIgnoreCase("")){
+            errorMessage = errorMessage + "Please Enter your Name";
+            error = true;
+        }
+        else
+        if(strdetail4_mandate.equalsIgnoreCase("true") && order_detail4.getText().toString().equalsIgnoreCase(""))
+        {
+            errorMessage = errorMessage + "Please Enter " + detail4str;
+            error = true;
+
         }
 
 //        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true"))){

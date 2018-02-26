@@ -608,6 +608,8 @@ public class PreviewOrderSwipeActivity extends BaseActivity {
 									dbvoc.getDeleteTableorder_byOID(Global_Data.GLObalOrder_id);
 									dbvoc.getDeleteTableorderproduct_byOID(Global_Data.GLObalOrder_id);
 									Global_Data.GLOvel_GORDER_ID = "";
+									Global_Data.GLObalOrder_id = "";
+									Toast.makeText(PreviewOrderSwipeActivity.this, "Order Canceled Successfully", Toast.LENGTH_SHORT).show();
 									 Intent order_home = new Intent(getApplicationContext(),Order.class);
 									  startActivity(order_home);
 									 finish();

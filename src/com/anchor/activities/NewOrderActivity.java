@@ -1463,7 +1463,7 @@ public class NewOrderActivity extends BaseActivity {
 
 					AlertDialog alertDialog = new AlertDialog.Builder(NewOrderActivity.this).create(); //Read Update
 				    alertDialog.setTitle("Warning");
-				    alertDialog.setMessage("Are you sure you want to go back without order sync.?");
+				    alertDialog.setMessage("You have to fill all order related details, Press Cancel Order button if you want to cancel order. ");
 				    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
 						@Override
@@ -1473,16 +1473,33 @@ public class NewOrderActivity extends BaseActivity {
 							{
 								//Toast.makeText(getApplicationContext(), "Order save successfully", Toast.LENGTH_LONG).show();
 
-								Toast toast = Toast.makeText(getApplicationContext(),"Order save successfully",Toast.LENGTH_LONG);
-								toast.setGravity(Gravity.CENTER, 0, 0);
-								toast.show();
+//								Toast toast = Toast.makeText(getApplicationContext(),"Order save successfully",Toast.LENGTH_LONG);
+//								toast.setGravity(Gravity.CENTER, 0, 0);
+//								toast.show();
 							}
-							Intent i=new Intent(NewOrderActivity.this, Order.class);
+							Intent i=new Intent(NewOrderActivity.this, PreviewOrderSwipeActivity.class);
 							 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 							 startActivity(i);
 							 finish();
 						}
 					});
+
+				 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Cancel Order", new DialogInterface.OnClickListener() {
+
+					 public void onClick(DialogInterface dialog, int id) {
+
+						 dbvoc = new DataBaseHelper(NewOrderActivity.this);
+						 dbvoc.getDeleteTableorder_byOID(Global_Data.GLObalOrder_id);
+						 dbvoc.getDeleteTableorderproduct_byOID(Global_Data.GLObalOrder_id);
+						 Global_Data.GLOvel_GORDER_ID = "";
+						 Global_Data.GLObalOrder_id = "";
+						 Toast.makeText(NewOrderActivity.this, "Order Canceled Successfully", Toast.LENGTH_SHORT).show();
+						 Intent order_home = new Intent(getApplicationContext(),Order.class);
+						 startActivity(order_home);
+						 finish();
+						 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+					 }});
 
 		           alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
 

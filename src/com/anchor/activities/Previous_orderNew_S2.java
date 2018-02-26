@@ -769,15 +769,57 @@ public class Previous_orderNew_S2 extends BaseActivity {
 
                     if(!Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
                     {
-                      //  Toast.makeText(Previous_orderNew_S2.this, "Your New Order Save Successfully.", Toast.LENGTH_SHORT).show();
+                        AlertDialog alertDialog = new AlertDialog.Builder(Previous_orderNew_S2.this).create(); //Read Update
 
-                        Toast toast = Toast.makeText(Previous_orderNew_S2.this, "Your New Order Save Successfully.", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                        alertDialog.setTitle("Warning");
+                        alertDialog.setMessage("You have to fill all order related details, Press Cancel Order button if you want to cancel order. ");
+                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // TODO Auto-generated method stub
+
+                            }
+                        });
+
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Cancel Order", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                dbvoc = new DataBaseHelper(Previous_orderNew_S2.this);
+                                dbvoc.getDeleteTableorder_byOID(Global_Data.GLObalOrder_id);
+                                dbvoc.getDeleteTableorderproduct_byOID(Global_Data.GLObalOrder_id);
+                                Global_Data.GLOvel_GORDER_ID = "";
+                                Global_Data.GLObalOrder_id = "";
+                                Toast.makeText(Previous_orderNew_S2.this, "Order Canceled Successfully", Toast.LENGTH_SHORT).show();
+                                Intent order_home = new Intent(getApplicationContext(),Order.class);
+                                startActivity(order_home);
+                                finish();
+                                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+                            }});
+
+//                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                // TODO Auto-generated method stub
+//                                dialog.cancel();
+//                            }
+//                        });
+
+
+                        alertDialog.show();
+                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setEnabled(false);
                     }
-                    Intent intentn = new Intent(getApplicationContext(), Order.class);
-                    startActivity(intentn);
-                    finish();
+                    else
+                    {
+                        Intent order_home = new Intent(getApplicationContext(),Order.class);
+                        startActivity(order_home);
+                        finish();
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    }
+
                     //overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
                 }
