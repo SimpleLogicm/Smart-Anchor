@@ -65,5 +65,6 @@
     <string name="action_add_favourite">Sync</string>
     <string name="action_play_next">Delete</string>
     <string name="backdrop_title">LOVE MUSIC</string>
+    <string name="title_activity_sub_dealer__home">SubDealer_Home</string>
 
 </resources>
