@@ -63,6 +63,7 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 	private RequestQueue requestQueue;
+
 	String device_id;
 	String response_result = "";
 	static String final_response = "";

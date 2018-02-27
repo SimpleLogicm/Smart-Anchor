@@ -3310,159 +3310,144 @@ public class getServices {
 
                             JSONObject jsonObject = label_acc.getJSONObject(i);
                             loginDataBaseAdapter.insertLABEL_CHANGES(jsonObject.getString("variable_name"), jsonObject.getString("new_label"), jsonObject.getString("editable"), jsonObject.getString("mandatory"), jsonObject.getString("allow"));
-                        }
 
-                        List<Local_Data> cont_lab = dbvoc.getAllLabels();
-                        //results.add("Select Beat");
-                        for (Local_Data cn : cont_lab) {
+                            Global_Data.Var_Label =jsonObject.getString("variable_name");
+                            Global_Data.editable = jsonObject.getString("editable");
+                            Global_Data.mandatory = jsonObject.getString("mandatory");
+                            Global_Data.allow = jsonObject.getString("allow");
 
-                            Global_Data.Var_Label = cn.getVarLabel_account();
-                            Global_Data.editable = cn.getEditable();
-                            Global_Data.mandatory = cn.getMandatory();
-                            Global_Data.allow = cn.getAllow();
 
-                            //Label Change
                             if(Global_Data.Var_Label.equalsIgnoreCase("no_order"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
-                                Global_Data.editable = cn.getEditable();
+                               // Global_Data.New_Label =jsonObject.getString("new_label");
+                               // Global_Data.editable =jsonObject.getString("editable");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_norder", cn.getNewLabel_account());
+                                editor.putString("var_norder",jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("return_order"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
-                                Global_Data.editable = cn.getEditable();
+                                //Global_Data.New_Label =jsonObject.getString("new_label");
+                               // Global_Data.editable =jsonObject.getString("editable");
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_retorder", cn.getNewLabel_account());
+                                editor.putString("var_retorder", jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("rp"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                                //Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_rp", cn.getNewLabel_account());
+                                editor.putString("var_rp", jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("schedule"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                               // Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_schedule", cn.getNewLabel_account());
+                                editor.putString("var_schedule", jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
+
                             if(Global_Data.Var_Label.equalsIgnoreCase("detail1"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
-                                Global_Data.editable = cn.getEditable();
+                                //Global_Data.New_Label = jsonObject.getString("new_label");
+                               // Global_Data.editable = jsonObject.getString("editable");
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_detail1", cn.getNewLabel_account());
+                                editor.putString("var_detail1",jsonObject.getString("new_label"));
                                 editor.commit();
 
                                 SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor1=spf1.edit();
-                                editor1.putString("var_detail1_edit", cn.getEditable());
+                                editor1.putString("var_detail1_edit", jsonObject.getString("editable"));
                                 editor1.commit();
 
                                 SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor2=spf2.edit();
-                                editor2.putString("var_detail1_mandate", cn.getMandatory());
+                                editor2.putString("var_detail1_mandate", jsonObject.getString("mandatory"));
                                 editor2.commit();
 
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
-                                editor3.putString("var_detail1_allow", cn.getAllow());
+                                editor3.putString("var_detail1_allow", jsonObject.getString("allow"));
                                 editor3.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("detail2"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                               // Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_detail2", cn.getNewLabel_account());
+                                editor.putString("var_detail2", jsonObject.getString("new_label"));
                                 editor.commit();
 
                                 SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor1=spf1.edit();
-                                editor1.putString("var_detail2_edit", cn.getEditable());
+                                editor1.putString("var_detail2_edit", jsonObject.getString("editable"));
                                 editor1.commit();
 
                                 SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor2=spf2.edit();
-                                editor2.putString("var_detail2_mandate", cn.getMandatory());
+                                editor2.putString("var_detail2_mandate",jsonObject.getString("mandatory"));
                                 editor2.commit();
 
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
-                                editor3.putString("var_detail2_allow", cn.getAllow());
+                                editor3.putString("var_detail2_allow", jsonObject.getString("allow"));
                                 editor3.commit();
 
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("details4"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                                //Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_detail4", cn.getNewLabel_account());
+                                editor.putString("var_detail4", jsonObject.getString("new_label"));
                                 editor.commit();
 
                                 SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor1=spf1.edit();
-                                editor1.putString("var_detail4_edit", cn.getEditable());
+                                editor1.putString("var_detail4_edit", jsonObject.getString("editable"));
                                 editor1.commit();
 
                                 SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor2=spf2.edit();
-                                editor2.putString("var_detail4_mandate", cn.getMandatory());
+                                editor2.putString("var_detail4_mandate", jsonObject.getString("mandatory"));
                                 editor2.commit();
 
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
-                                editor3.putString("var_detail4_allow", cn.getAllow());
+                                editor3.putString("var_detail4_allow", jsonObject.getString("allow"));
                                 editor3.commit();
 
                             }
 
-//                            //Editable
-//                            if(Global_Data.editable.equalsIgnoreCase("editable"))
-//                            {
-//                                Global_Data.New_Label = cn.getNewLabel_account();
-//                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-//
-//                                SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
-//                                SharedPreferences.Editor editor=spf.edit();
-//                                editor.putString("var_norder", cn.getNewLabel_account());
-//                                editor.commit();
-//                            }
-
-
-
-
                         }
+
+                        List<Local_Data> cont_lab = dbvoc.getAllLabels();
+                        //results.add("Select Beat");
+                        for (Local_Data cn : cont_lab)
 
                         for(int z=0;z<logo_img.length();z++)
                         {
