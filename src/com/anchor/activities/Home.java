@@ -2,14 +2,16 @@ package com.anchor.activities;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -24,6 +26,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.animation.ActivitySwitcher;
+import com.anchor.model.City;
+import com.anchor.model.Product;
+import com.anchor.model.Retailer;
+import com.anchor.model.State;
+import com.anchor.slidingmenu.CalendarAct;
+import com.anchor.slidingmenu.CalendarFragment;
+import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,15 +41,6 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.anchor.animation.ActivitySwitcher;
-import com.anchor.model.City;
-import com.anchor.model.Product;
-import com.anchor.model.Retailer;
-import com.anchor.model.State;
-import com.anchor.slidingmenu.AddRetailerFragment;
-import com.anchor.slidingmenu.CalendarAct;
-import com.anchor.slidingmenu.CalendarFragment;
-import com.anchor.webservice.ConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -222,17 +223,77 @@ public class Home extends Fragment {
 			public void onClick(View v) {
 //				Fragment fragment = null;
 //				fragment = new AddRetailerFragment();
-				Fragment AddRetailerFragment = new AddRetailerFragment();
+				//Fragment AddRetailerFragment = new AddRetailerFragment();
 				// consider using Java coding conventions (upper first char class names!!!)
-				FragmentTransaction transaction = getFragmentManager().beginTransaction();
+			//	FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
 				// Replace whatever is in the fragment_container view with this fragment,
 				// and add the transaction to the back stack
-				transaction.replace(R.id.frame_container , AddRetailerFragment);
-				transaction.addToBackStack(null);
+			//	transaction.replace(R.id.frame_container , AddRetailerFragment);
+			//	transaction.addToBackStack(null);
 
 				// Commit the transaction
-				transaction.commit();
+			//	transaction.commit();
+
+//				Intent intent = new Intent(getActivity(), SubDealer_Home.class);
+//				startActivity(intent);
+//				getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+				Intent mIntent = getActivity().getPackageManager().getLaunchIntentForPackage("subdealer.anchor.com.anchorsubdealer_registration");
+
+				if (mIntent != null) {
+
+					try {
+
+						startActivity(mIntent);
+
+					} catch (ActivityNotFoundException err) {
+
+						err.printStackTrace();
+
+						Toast.makeText(getActivity(), "Please install bar", Toast.LENGTH_SHORT).show();
+//
+					try{
+						final String appPackageName = "com.google.zxing.client.android"; // Can also use getPackageName(), as below
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+					}catch(Exception ex){ex.printStackTrace();
+						Toast.makeText(getActivity(), "Please install google play app.", Toast.LENGTH_SHORT).show();
+					}
+
+					}
+
+				}
+
+//				Intent intent = new Intent("subdealer.anchor.com.anchorsubdealer_registration");
+//
+//				boolean isAppInstalled = appInstalledOrNot("subdealer.anchor.com.anchorsubdealer_registration");
+//
+//				if (isAppInstalled) {
+//					try {
+//
+//						startActivity(intent);
+//
+//					} catch (ActivityNotFoundException err) {
+//
+//						err.printStackTrace();
+//						Toast t = Toast.makeText(getActivity(), "App not found.", Toast.LENGTH_SHORT);
+//						t.show();
+//
+//					}
+//
+//				}
+//				else
+//				{
+//					Toast.makeText(getActivity(), "Please install bar", Toast.LENGTH_SHORT).show();
+//
+//					try{
+//						final String appPackageName = "com.google.zxing.client.android"; // Can also use getPackageName(), as below
+//						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+//					}catch(Exception ex){ex.printStackTrace();
+//						Toast.makeText(getActivity(), "Please install google play app.", Toast.LENGTH_SHORT).show();
+//					}
+//
+//				}
 
 
 			}
@@ -1021,7 +1082,16 @@ public class Home extends Fragment {
 	    }
 
 
+	private boolean appInstalledOrNot(String uri) {
+		PackageManager pm = getActivity().getPackageManager();
+		try {
+			pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+			return true;
+		} catch (PackageManager.NameNotFoundException e) {
+		}
 
+		return false;
+	}
 
 	 
 }

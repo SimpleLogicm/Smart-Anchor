@@ -66,5 +66,6 @@
     <string name="action_play_next">Delete</string>
     <string name="backdrop_title">LOVE MUSIC</string>
     <string name="title_activity_sub_dealer__home">SubDealer_Home</string>
+    <string name="title_activity_sub_dealer__detail1">SubDealer_Detail1</string>
 
 </resources>

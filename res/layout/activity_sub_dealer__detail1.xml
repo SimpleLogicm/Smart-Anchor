@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <EditText
+                android:id="@+id/Form_Territory_Code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Form Territory Code"
+                android:imeOptions="actionDone">
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/Sales_Executive_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Form_Territory_Code"
+                android:layout_marginTop="10dp"
+                android:hint="Sales Executive name"
+                android:imeOptions="actionDone" />
+
+            <EditText
+                android:id="@+id/Market_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Sales_Executive_name"
+                android:layout_marginTop="10dp"
+                android:hint="Market Name"
+                android:imeOptions="actionDone" />
+
+            <TextView
+                android:id="@+id/outlet_gps_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Market_Name"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="Outlet Gps :" />
+
+            <Button
+                android:id="@+id/outlet_gps_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/outlet_gps_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Select Location"
+                android:textColor="#FFFFFF" />
+
+
+            <TextView
+                android:id="@+id/outlet_signboard_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/outlet_gps_text"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="30dp"
+                android:text="Outlet Signboard :" />
+
+            <Button
+                android:id="@+id/outlet_signboard_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/outlet_signboard_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF"
+                tools:ignore="UnknownId"
+                />
+
+            <ImageView
+                android:id="@+id/outlet_signboard_pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/outlet_signboard_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/outlet_signboard_value"
+                android:layout_toRightOf="@+id/outlet_signboard_value"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/Proprietor1_Photo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/Proprietor2_Photo_text"
+                android:layout_alignStart="@+id/Proprietor2_Photo_text"
+                android:layout_below="@+id/outlet_signboard_value"
+                android:layout_marginTop="23dp"
+                android:text="Proprietor1 Photo :  " />
+
+            <Button
+                android:id="@+id/Proprietor1_Photo_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/Proprietor1_Photo_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/Proprietor1_Photo_Pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/Proprietor1_Photo_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_value"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_value"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/Proprietor2_Photo_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Proprietor1_Photo_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="Proprietor2 Photo :" />
+
+            <Button
+                android:id="@+id/Proprietor2_Photo_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/Proprietor2_Photo_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/Proprietor2_Photo_Pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/Proprietor2_Photo_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/Proprietor2_Photo_value"
+                android:layout_toRightOf="@+id/Proprietor2_Photo_value"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/Rubber_Stamp_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Proprietor2_Photo_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="Rubber Stamp :" />
+
+            <Button
+                android:id="@+id/Rubber_Stamp_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/Rubber_Stamp_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/Rubber_Stamp_Pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/Rubber_Stamp_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/Rubber_Stamp_value"
+                android:layout_toRightOf="@+id/Rubber_Stamp_value"
+                android:src="@drawable/vector_camera_icon" />
+
+
+            <TextView
+                android:id="@+id/Visiting_Card_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Rubber_Stamp_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="Visiting Card :" />
+
+            <Button
+                android:id="@+id/Visiting_Card_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_above="@+id/Outlet_Display_text"
+                android:layout_alignLeft="@+id/Rubber_Stamp_value"
+                android:layout_alignStart="@+id/Rubber_Stamp_value"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/Visiting_Card_Pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/Visiting_Card_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/Visiting_Card_value"
+                android:layout_toRightOf="@+id/Visiting_Card_value"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/Outlet_Display_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Visiting_Card_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="Outlet Display :" />
+
+            <Button
+                android:id="@+id/Outlet_Display_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/Outlet_Display_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/Outlet_Display_Pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/Outlet_Display_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/Outlet_Display_value"
+                android:layout_toRightOf="@+id/Outlet_Display_value"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/InShop_Display_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Outlet_Display_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="In-Shop Display :" />
+
+            <Button
+                android:id="@+id/InShop_Display_value"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignBaseline="@+id/InShop_Display_text"
+                android:layout_toEndOf="@+id/Proprietor1_Photo_text"
+                android:layout_toRightOf="@+id/Proprietor1_Photo_text"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Upload"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/InShop_Display_Pick"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/InShop_Display_value"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_toEndOf="@+id/InShop_Display_value"
+                android:layout_toRightOf="@+id/InShop_Display_value"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/dsignature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/InShop_Display_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:text="In-Shop Display :" />
+
+            <LinearLayout
+                android:id="@+id/d_linearLayout"
+                android:layout_below="@+id/dsignature_text"
+
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/d_linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="0dp"
+
+                android:layout_alignParentBottom="true"
+                >
+
+                <Button
+                    android:id="@+id/d_save"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:text="Save"
+                    android:layout_marginRight="10dp"
+                    android:background="#414042"
+                    android:textColor="#FFFFFF"/>
+
+                <Button
+                    android:id="@+id/d_submit"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Submit"
+                    android:background="#414042"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

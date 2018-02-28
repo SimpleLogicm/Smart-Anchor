@@ -205,11 +205,11 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-				editText1.setText("tejal");
-				editText2.setText("tejal12345");
+//				editText1.setText("tejal");
+//				editText2.setText("tejal12345");
 
-//		        editText1.setText("aakash");
-//				editText2.setText("aakash12345");
+		        editText1.setText("aakash");
+				editText2.setText("aakash12345");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -333,6 +333,20 @@ public class LoginActivity extends Activity{
 			   	          
 	   	       buttonLogin.setOnClickListener(new OnClickListener() {
 	   	         public void onClick(View view) {
+
+//					 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+//					 long bytesAvailable;
+//					 if (android.os.Build.VERSION.SDK_INT >=
+//							 android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//						 bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
+//					 }
+//					 else {
+//						 bytesAvailable = (long)stat.getBlockSize() * (long)stat.getAvailableBlocks();
+//					 }
+//					 long megAvailable = bytesAvailable / (1024 * 1024);
+//					 Log.e("","Available MB : "+megAvailable);
+//
+//					 Toast.makeText(LoginActivity.this, "Available MB : "+megAvailable, Toast.LENGTH_SHORT).show();
 
 					 gps = new GPSTracker(LoginActivity.this);
 					 if(!gps.canGetLocation()){
