@@ -1145,9 +1145,16 @@ public class LoginActivity extends Activity{
 				for (Local_Data cn : contacts2) {
 					String str_beat = "" + cn.getUser();
 
+					SharedPreferences prefs = getSharedPreferences("anchorde",
+							Context.CONTEXT_IGNORE_SECURITY);
+					SharedPreferences.Editor editor1 = prefs.edit();
+					editor1.putString("USER_LOGIN_CHECK", "Login");
+					editor1.commit();
+
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
 					editor.putString("USER_EMAIL", cn.getuser_email());
+
 					//editor.commit();
 
 					Global_Data.GLOvel_USER_EMAIL = cn.getuser_email();

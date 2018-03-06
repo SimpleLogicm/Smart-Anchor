@@ -511,6 +511,10 @@
             android:name=".MyService"
             android:enabled="true" />
 
+        <provider
+            android:authorities="cpm.simplelogic.helper.ContentProviderData"
+            android:name="cpm.simplelogic.helper.DataProvider"
+            android:exported="true"/>
         <!--
          <service android:name=".LocationService" />
 
