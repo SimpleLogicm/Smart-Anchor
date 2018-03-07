@@ -833,11 +833,9 @@ public class MainActivity extends BaseActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 
-					SharedPreferences prefs = getSharedPreferences("anchorde",
-							Context.MODE_WORLD_READABLE);
-					SharedPreferences.Editor editor1 = prefs.edit();
-					editor1.putString("USER_LOGIN_CHECK", "LOGOUT");
-					editor1.commit();
+					dbvoc.getDeleteTable("user_email");
+
+					loginDataBaseAdapter.insert_user_email(Global_Data.GLOvel_USER_EMAIL,"Logout");
 
 					 Intent i=new Intent(getApplicationContext(), LoginActivity.class);
 					  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

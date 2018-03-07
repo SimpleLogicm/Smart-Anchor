@@ -37,9 +37,7 @@ public class DataProvider extends ContentProvider{
         SQLiteDatabase db = dbManager.getWritableDatabase();
         Cursor mCursor = null;
 
-        Log.d("projections","pp "+projections[0]);
-        Log.d("selection","ss "+selection.toString());
-        Log.d("selectionArgs","sg "+selectionArgs[0]);
+
         switch (sUriMatcher.match(uri)){
             case 1:
                 mCursor = db.query(ContentProviderData.Dictionary.TABLE_NAME, projections, selection, selectionArgs, null, null, null);
@@ -92,7 +90,7 @@ public class DataProvider extends ContentProvider{
                 break;
             case 2:
                 String rowId = uri.getPathSegments().get(1);
-                count = db.delete(ContentProviderData.Dictionary.TABLE_NAME, ContentProviderData.Dictionary.ID + " = " + rowId
+                count = db.delete(ContentProviderData.Dictionary.TABLE_NAME, ContentProviderData.Dictionary.EMAIL + " = " + rowId
                         + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ")" : ""), selectionArgs);
                 break;
             default:
@@ -111,7 +109,7 @@ public class DataProvider extends ContentProvider{
                 break;
             case 2:
                 String rowId = uri.getPathSegments().get(1);
-                count = db.update(ContentProviderData.Dictionary.TABLE_NAME, contentValues, ContentProviderData.Dictionary.ID + " = " + rowId +
+                count = db.update(ContentProviderData.Dictionary.TABLE_NAME, contentValues, ContentProviderData.Dictionary.EMAIL + " = " + rowId +
                         (!TextUtils.isEmpty(selection) ? " AND (" + ")" : ""), selectionArgs);
                 break;
             default:

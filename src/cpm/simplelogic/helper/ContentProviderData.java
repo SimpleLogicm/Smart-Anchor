@@ -17,9 +17,9 @@ public class ContentProviderData {
 
     public static class Dictionary implements BaseColumns {
         private Dictionary(){}
-        public static final String TABLE_NAME = "item_master";
-        public static final String ID = "_id";
-        public static final String code = "code";
-        public static final String primary_category = "primary_category";
+        public static final String TABLE_NAME = "user_email";
+        public static final String EMAIL = "email";
+        public static final String STATUS = "status";
+       // public static final String primary_category = "primary_category";
     }
 }

@@ -245,6 +245,11 @@ public class Home extends Fragment {
 
 					try {
 
+						mIntent.putExtra("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
+						mIntent.putExtra("USER_ID", Global_Data.GLOVEL_USER_ID);
+						mIntent.putExtra("USER_FIRST_NAME", Global_Data.USER_FIRST_NAME);
+						mIntent.putExtra("USER_LAST_NAME", Global_Data.USER_LAST_NAME);
+						mIntent.putExtra("USER_imei_no", Global_Data.imei_no);
 						startActivity(mIntent);
 
 					} catch (ActivityNotFoundException err) {
@@ -254,14 +259,23 @@ public class Home extends Fragment {
 						Toast.makeText(getActivity(), "Please install bar", Toast.LENGTH_SHORT).show();
 //
 					try{
-						final String appPackageName = "com.google.zxing.client.android"; // Can also use getPackageName(), as below
+						final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
 						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
 					}catch(Exception ex){ex.printStackTrace();
-						Toast.makeText(getActivity(), "Please install google play app.", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "App Not available in google play.", Toast.LENGTH_SHORT).show();
 					}
 
 					}
 
+				}
+				else
+				{
+					try{
+						final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+					}catch(Exception ex){ex.printStackTrace();
+						Toast.makeText(getActivity(), "App Not available in google play.", Toast.LENGTH_SHORT).show();
+					}
 				}
 
 //				Intent intent = new Intent("subdealer.anchor.com.anchorsubdealer_registration");

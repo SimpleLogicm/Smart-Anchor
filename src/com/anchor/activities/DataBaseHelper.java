@@ -99,6 +99,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         private static final String TABLE_BACKGROUND_SERVICE_CHECK= "background_service_check";
         private static final String TABLE_ATTENDANCE_DATA = "attendance";
         private static final String TABLE_CREATE_ATTENDENCE_F = "attendence_f";
+
 		 
 	    static SQLiteDatabase db;
 		// Contacts Table Columns names
@@ -218,6 +219,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_BACKGROUND_SERVICE_CHECK);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_ATTENDENCE_F);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_ATTENDANCE_DATA);
+
             }
 	
 	@Override

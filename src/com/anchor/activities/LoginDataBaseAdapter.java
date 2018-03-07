@@ -290,7 +290,7 @@ public class LoginDataBaseAdapter
 			"( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text,retailer_id text,created_by text,created_at text,updated_at text,code text,credit_limit text,amount_outstanding text,amount_overdue text);";
 
 	static final String DATABASE_USER_EMAIL = "CREATE TABLE IF NOT EXISTS "+"user_email"+
-			"( " +"ID"+" integer primary key autoincrement,"+ "email text);";
+			"( " +"ID"+" integer primary key autoincrement,"+ "email text,status text);";
 
 	static final String DATABASE_GEO_DATA = "CREATE TABLE IF NOT EXISTS "+"geo_data"+
 			"( " +"ID"+" integer primary key autoincrement,"+ "lati text, longi text, addressg text, datatimeg text, date1 text, time1 text);";
@@ -319,6 +319,8 @@ public class LoginDataBaseAdapter
 
 	static final String DATABASE_VERSION_INFO = "CREATE TABLE IF NOT EXISTS " + "version_info" +
 			"( " + "ID" + " integer primary key autoincrement," + "version_code text, version_name text);";
+
+
 
 //		//new product and customer for Girnar Monday Demo
 //		static final String DATABASE_CREATE_NEWCUSTOMER = "create table "+"new_customers"+
@@ -3227,11 +3229,13 @@ public class LoginDataBaseAdapter
 		db.insert("credit_profile", null, newValues);
 	}
 
-	public void insert_user_email(String email)
+	public void insert_user_email(String email, String status)
 	{
 		ContentValues newValues = new ContentValues();
 		// Assign values for each row.
 		newValues.put("email", email);
+		newValues.put("status", status);
+
 		// Insert the row into your table
 		db.insert("user_email", null, newValues);
 	}
@@ -3421,6 +3425,8 @@ public class LoginDataBaseAdapter
 		// Insert the row into your table
 		db.insert("attendance", null, newValues);
 	}
+
+
 		
 }
 

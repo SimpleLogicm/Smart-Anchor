@@ -1145,11 +1145,12 @@ public class LoginActivity extends Activity{
 				for (Local_Data cn : contacts2) {
 					String str_beat = "" + cn.getUser();
 
-					SharedPreferences prefs = getSharedPreferences("anchorde",
-							Context.CONTEXT_IGNORE_SECURITY);
-					SharedPreferences.Editor editor1 = prefs.edit();
-					editor1.putString("USER_LOGIN_CHECK", "Login");
-					editor1.commit();
+//					SharedPreferences prefs = getSharedPreferences("anchorde",Context.MODE_WORLD_READABLE);
+//					SharedPreferences.Editor editor1 = prefs.edit();
+//					editor1.putString("USER_LOGIN_CHECK", "Login");
+//					editor1.commit();
+
+
 
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
@@ -1208,7 +1209,7 @@ public class LoginActivity extends Activity{
 
 						dbvoc.getDeleteTable("user_email");
 
-						loginDataBaseAdapter.insert_user_email(cn.getuser_email());
+						loginDataBaseAdapter.insert_user_email(cn.getuser_email(),"Login");
 						//Global_Data.local_pwd = ""+cn.getPwd();
 
 						//String test_passwd = "password";

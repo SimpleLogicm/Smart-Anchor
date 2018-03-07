@@ -19,8 +19,6 @@ import android.widget.ImageView;
 
 import java.util.List;
 
-import cpm.simplelogic.helper.Location_settings;
-
 public class SplashScreenActivity extends Activity {
 
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
@@ -65,6 +63,7 @@ public class SplashScreenActivity extends Activity {
 		int versionCode = pinfo.versionCode;
 		String versionName = pinfo.versionName;
 		int version_seven_check = 0;
+		int version_nine_check = 0;
 		int version_c_check = 0;
 
 // Reading all
@@ -86,6 +85,11 @@ public class SplashScreenActivity extends Activity {
 					version_seven_check = 1;
 				}
 
+				if(ver_code == 9)
+				{
+					version_nine_check = 1;
+				}
+
 				if(ver_code == versionCode)
 				{
 					version_c_check = 1;
@@ -95,6 +99,11 @@ public class SplashScreenActivity extends Activity {
 			if(version_seven_check != 1)
 			{
 				check_Columns_IsExist();
+			}
+
+			if(version_nine_check != 1)
+			{
+				check_Columns_IsExistnew();
 			}
 
 			if(version_c_check != 1)
@@ -267,5 +276,22 @@ public class SplashScreenActivity extends Activity {
 		 }
 	 }
  }
+
+	public void check_Columns_IsExistnew()
+	{
+		boolean column_check = dbvoc.isColumnExists("user_email","status");
+		if(!column_check)
+		{
+			try {
+				dbvoc.alter_Columns("user_email","status");
+			} catch (SQLiteException ex) {
+				Log.w("Alter Table", "Altering " + "orders" + ": " + ex.getMessage());
+			}
+		}
+
+
+	}
+
+
     
 }
