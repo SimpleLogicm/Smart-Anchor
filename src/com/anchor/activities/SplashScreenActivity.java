@@ -19,6 +19,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import cpm.simplelogic.helper.OnClearFromRecentService;
+
 public class SplashScreenActivity extends Activity {
 
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
@@ -113,6 +115,7 @@ public class SplashScreenActivity extends Activity {
 
 		}
 
+		startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
 
 
 		//startService(new Intent(getBaseContext(), LocationService.class));

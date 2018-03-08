@@ -511,6 +511,9 @@
             android:name=".MyService"
             android:enabled="true" />
 
+        <service android:name="cpm.simplelogic.helper.OnClearFromRecentService" android:stopWithTask="false" />
+
+
         <provider
             android:authorities="cpm.simplelogic.helper.ContentProviderData"
             android:name="cpm.simplelogic.helper.DataProvider"
