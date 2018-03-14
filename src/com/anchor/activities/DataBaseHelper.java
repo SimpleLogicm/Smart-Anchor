@@ -1,7 +1,9 @@
 package com.anchor.activities;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -6603,11 +6605,22 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public void updateUserEMPNO_BY_EMILID(String emp_code,String email_id,String address)
     {
 
-        String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
+       // address = address.replaceAll("'","\'");
+
+
+
+        //String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
-        db.execSQL(selectQuery);
+        //db.execSQL(selectQuery);
+
+        ContentValues cv = new ContentValues();
+        cv.put("emp_code",emp_code); //These Fields should be your String values of actual column names
+        cv.put("city_id",address);
+        db.update(TABLE_REG, cv, "email_id" + " = ?", new String[]{email_id});
+
+
         // db.close();
     }
 
