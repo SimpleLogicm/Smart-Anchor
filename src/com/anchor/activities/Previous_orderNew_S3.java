@@ -797,6 +797,13 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
         }
         else
+        if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6)
+        {
+            errorMessage = errorMessage + detail2str+ " should be 6 digit number.";
+            error = true;
+
+        }
+        else
         if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
         {
 
