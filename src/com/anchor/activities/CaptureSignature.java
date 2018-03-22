@@ -73,6 +73,7 @@ import cpm.simplelogic.helper.GPSTracker;
 public class CaptureSignature extends BaseActivity {
     //DataBaseHelper dbvoc;
 
+    private String Signature_path = "";
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath = "";
     GPSTracker gps;
@@ -616,13 +617,13 @@ public class CaptureSignature extends BaseActivity {
 //								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
 //								   insertOrderAsyncTask.execute();
 
-                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
-                                        storagePath.mkdirs();
-
-                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
-
-
-                                        String uploadImage = "";
+//                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
+//                                        storagePath.mkdirs();
+//
+//                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
+//
+//
+//                                        String uploadImage = "";
 
                                         try
                                         {
@@ -648,19 +649,21 @@ public class CaptureSignature extends BaseActivity {
                                         try {
 
 
-                                            FileOutputStream out = new FileOutputStream(myImage);
-                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
-                                            out.flush();
-                                            out.close();
-                                            uploadImage = getStringImage(bitmap);
+//                                            FileOutputStream out = new FileOutputStream(myImage);
+//                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
+//                                            out.flush();
+//                                            out.close();
+//                                            uploadImage = getStringImage(bitmap);
+
+                                            SaveImage(bitmap,"SI"+Global_Data.GLObalOrder_id);
 
                                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
 
-                                                dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LONGITUDE,Global_Data.GLOvel_LONGITUDE);
+                                                dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LONGITUDE,Global_Data.GLOvel_LONGITUDE);
                                             }
                                             else
                                             {
-                                                dbvoc.updateORDER_SIGNATURENEW(uploadImage, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
+                                                dbvoc.updateORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
                                             }
 
 
@@ -669,17 +672,17 @@ public class CaptureSignature extends BaseActivity {
                                             e.printStackTrace();
                                         }
 
-                                        try {
-                                            //delete(mediaStorageDir);
-                                            if (storagePath.isDirectory()) {
-                                                String[] children = storagePath.list();
-                                                for (int i = 0; i < children.length; i++) {
-                                                    new File(storagePath, children[i]).delete();
-                                                }
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
+//                                        try {
+//                                            //delete(mediaStorageDir);
+//                                            if (storagePath.isDirectory()) {
+//                                                String[] children = storagePath.list();
+//                                                for (int i = 0; i < children.length; i++) {
+//                                                    new File(storagePath, children[i]).delete();
+//                                                }
+//                                            }
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
 
                                         isInternetPresent = cd.isConnectingToInternet();
 
@@ -1640,6 +1643,27 @@ public class CaptureSignature extends BaseActivity {
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
         // mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+
+    private void SaveImage(Bitmap finalBitmap,String name) {
+
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File myDir = new File(path,"Anchor_Signature");
+        myDir.mkdirs();
+
+        String fname = name +".jpg";
+        File file = new File (myDir, fname);
+        if (file.exists ()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            Signature_path = "file:" + file.getAbsolutePath();
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Call this whn the user has chosen the date and set the Date in the EditText in format that you wish
