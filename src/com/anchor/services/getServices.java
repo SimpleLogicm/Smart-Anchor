@@ -4207,6 +4207,33 @@ public class getServices {
                     product_value.put("order_category_code", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
 
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
+                    {
+                        order_image_url = cn.getSignature_image().trim();
+                        // File filepath = new File(cn.getimg_ordersign());
+                        // String  path =  "file://"+filepath.getPath();
+                        try {
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature_image()));
+                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
+                            mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
+                            b5 = bos5.toByteArray();
+
+                            String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
+                            product_value.put("signature_path",getsign_str);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            product_value.put("signature_path", "");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        product_value.put("signature_path", "");
+                    }
+
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign()))
                     {
                         order_image_url = cn.getimg_ordersign().trim();
@@ -4235,7 +4262,7 @@ public class getServices {
                     }
 
 
-                    product_value.put("signature_path", cn.getSignature_image());
+                    // product_value.put("signature_path", cn.getSignature_image());
                     customer_id = cn.get_category_id();
                     // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                     // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
@@ -4755,7 +4782,34 @@ public class getServices {
                     }
 
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("signature_path", cn.getSignature_image());
+                   // product_value.put("signature_path", cn.getSignature_image());
+
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
+                    {
+                        order_image_url = cn.getSignature_image().trim();
+                        // File filepath = new File(cn.getimg_ordersign());
+                        // String  path =  "file://"+filepath.getPath();
+                        try {
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature_image()));
+                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
+                            mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
+                            b5 = bos5.toByteArray();
+
+                            String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
+                            product_value.put("signature_path",getsign_str);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            product_value.put("signature_path", "");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        product_value.put("signature_path", "");
+                    }
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign()))
                     {
