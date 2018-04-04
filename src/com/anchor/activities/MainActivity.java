@@ -942,6 +942,16 @@ public class MainActivity extends BaseActivity {
 							toast.show();
 
 						}
+						else
+						if(response_result.equalsIgnoreCase("Device not registered")) {
+
+							//Toast.makeText(MainActivity.this, response_result, Toast.LENGTH_LONG).show();
+
+							Toast toast = Toast.makeText(MainActivity.this, response_result, Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
+
+						}
 						else {
 
 							dbvoc.getDeleteTable("targets");
