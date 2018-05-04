@@ -450,7 +450,6 @@ public class getServices {
 //        }F
 
         Log.d("Server url","Server url"+domain+"menus/sync_masters?imei_no="+device_id);
-
         StringRequest stringRequest = null;
         stringRequest = new StringRequest(domain+"menus/sync_masters?imei_no="+device_id,
                 new Response.Listener<String>() {

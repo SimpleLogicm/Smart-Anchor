@@ -210,8 +210,8 @@ public class LoginActivity extends Activity{
 //				editText1.setText("tejal");
 //				editText2.setText("tejal12345");
 
-		        editText1.setText("tulsi");
-				editText2.setText("tulsi12345");
+//		        editText1.setText("swatiyamgar");
+//				editText2.setText("password");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -224,21 +224,7 @@ public class LoginActivity extends Activity{
 
 			    SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
 		        SharedPreferences.Editor editor=spf.edit();        
-		       // editor.putString("UserID", "admin");
-		       // editor.putString("pwd", "test");
-		       // editor.putFloat("Target", 5000);
-		        //editor.putString("SimID", simSerial);
-		        editor.commit();
 
-//		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-//		boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//
-//		// Check if enabled and if not send user to the GPS settings
-//		if (!enabled) {
-//			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-
-//			startActivity(intent);
-//		}
 
 		         // create a instance of SQLite Database
 			     loginDataBaseAdapter=new LoginDataBaseAdapter(this);

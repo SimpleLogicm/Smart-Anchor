@@ -19,6 +19,7 @@ public class ContentProviderData_Customers {
         private Dictionary(){}
         public static final String TABLE_NAME = "customer_master";
         public static final String NAME = "CUSTOMER_NAME";
+        public static final String MOBILE = "CUSTOMER_NAME";
         public static final String CITY = "CITY";
         // public static final String primary_category = "primary_category";
     }
