@@ -6,8 +6,8 @@
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 
     <!--<string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
-    <string name="service_domain">http://125.22.54.155/metal/api/v1/</string>
-    <!--<string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>-->
+    <!--<string name="service_domain">http://125.22.54.155/metal/api/v1/</string>-->
+    <string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
     <!--<string name="service_domain">http://150.242.140.105:8003/metal/api/v1/</string>-->
 

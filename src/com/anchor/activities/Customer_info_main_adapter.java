@@ -85,6 +85,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
         protected TextView c_mobile_number;
         protected ImageView c_call;
         protected ImageView c_location;
+        protected ImageView c_invoice;
 
         public ContactViewHolder(View v) {
             super(v);
@@ -101,9 +102,11 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
             c_call = (ImageView) v.findViewById(R.id.c_call);
             c_city_name = (TextView) v.findViewById(R.id.c_city_name);
             c_location = (ImageView) v.findViewById(R.id.c_location);
+            c_invoice = (ImageView) v.findViewById(R.id.c_invoice);
 
             c_call.setOnClickListener(this);
             c_location.setOnClickListener(this);
+            c_invoice.setOnClickListener(this);
         }
 
         // Handles the row being being clicked
@@ -171,6 +174,12 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                     callIntent.setData(Uri.parse("tel:"+c_mobile_number.getText().toString().trim()));
                     view.getContext().startActivity(callIntent);
                 }
+            }
+            else if (view.getId() == c_invoice.getId())
+            {
+                Intent i=new Intent( view.getContext(), Customer_Invoices.class);
+                view.getContext().startActivity(i);
+
             }
         }
     }
