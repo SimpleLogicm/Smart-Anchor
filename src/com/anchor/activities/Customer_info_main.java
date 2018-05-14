@@ -8,6 +8,8 @@ package com.anchor.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,26 +24,45 @@ import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import cpm.simplelogic.helper.Customer_Info;
 
 
 public class Customer_info_main extends Activity {
 
+    Calendar myCalendar;
+    HashMap<String, String> hm = new HashMap<String, String>();
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> badapter;
+    Spinner sortby_beat;
+    Spinner dcus_category;
     List<Customer_Info> Allresult = new ArrayList<Customer_Info>();
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     ProgressDialog dialog;
@@ -53,8 +74,13 @@ public class Customer_info_main extends Activity {
     Customer_info_main_adapter ca;
     String s[];
     ArrayList<String> All_customers = new ArrayList<String>();
-
+    DatePickerDialog.OnDateSetListener date,date1;
     AutoCompleteTextView autoCompleteTextView1;
+    ImageView filter_btn, close_filter;
+    Button filter_submit, filter_clear;
+    ProgressDialog dialog1;
+    private EditText c_start_date,c_end_date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +90,7 @@ public class Customer_info_main extends Activity {
 
         autoCompleteTextView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
         recList = (RecyclerView) findViewById(R.id.c_info_card);
+
        // recList.addItemDecoration(new DividerItemDecoration(Customer_info_main.this, DividerItemDecoration.VERTICAL_LIST));
 
         recList.setHasFixedSize(true);
@@ -120,6 +147,28 @@ public class Customer_info_main extends Activity {
 
        // setupSearchView();
 
+        date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+
+        date1 = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel1();
+            }
+        };
+
         dialog = new ProgressDialog(Customer_info_main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Customer Loading....");
         dialog.setTitle("Sales App");
@@ -127,6 +176,8 @@ public class Customer_info_main extends Activity {
         dialog.show();
 
         new CustomerASN().execute();
+
+
 
         autoCompleteTextView1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -190,118 +241,120 @@ public class Customer_info_main extends Activity {
 
                 Global_Data.hideSoftKeyboard(Customer_info_main.this);
 
-                String customer_name = "";
-                String address_type = "";
-                if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
-                {
-                    s = autoCompleteTextView1.getText().toString().trim().split(":");
-                    customer_name = s[0].trim();
-                    address_type = s[1].trim();
-                }
-                else
-                {
-                    customer_name = autoCompleteTextView1.getText().toString().trim();
-                }
+                FilterDialog();
+
+//                String customer_name = "";
+//                String address_type = "";
+//                if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
+//                {
+//                    s = autoCompleteTextView1.getText().toString().trim().split(":");
+//                    customer_name = s[0].trim();
+//                    address_type = s[1].trim();
+//                }
+//                else
+//                {
+//                    customer_name = autoCompleteTextView1.getText().toString().trim();
+//                }
+////
+////
+////				Global_Data.credit_limit_amount = "";
+////				Global_Data.outstandings_amount = "";
+//
+//                List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+//
+//                Customer_Info ci = new Customer_Info();
+//                List<Customer_Info> result = new ArrayList<Customer_Info>();
+//                if(contacts.size() <= 0)
+//                {
+//                    Toast toast = Toast.makeText(Customer_info_main.this,
+//                            "Customer Not Found", Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
+//                }
+//                else {
+//                    for (Local_Data cn : contacts) {
+//
+//                        recList.setVisibility(View.VISIBLE);
 //
 //
-//				Global_Data.credit_limit_amount = "";
-//				Global_Data.outstandings_amount = "";
-
-                List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
-
-                Customer_Info ci = new Customer_Info();
-                List<Customer_Info> result = new ArrayList<Customer_Info>();
-                if(contacts.size() <= 0)
-                {
-                    Toast toast = Toast.makeText(Customer_info_main.this,
-                            "Customer Not Found", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                else {
-                    for (Local_Data cn : contacts) {
-
-                        recList.setVisibility(View.VISIBLE);
-
-
-                        ci.name = String.valueOf(Html.fromHtml("<b>" +"Name : "+ "</b>"+cn.getCUSTOMER_NAME()));
-                        ci.mobile = cn.getMOBILE_NO();
-                        ci.shop_name = cn.getCUSTOMER_SHOPNAME();
-                        ci.address = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                        ci.latlong = cn.getlatitude()+","+cn.getlongitude();
-                        Customer_id = cn.getCust_Code();
-                        City_id = cn.getCITY_ID();
-                        Beat_id = cn.getBEAT_ID();
-
-
-
-                    }
-
-                    List<Local_Data> cityi = dbvoc.getcityByState_idn(City_id);
-                    if(cityi.size() > 0)
-                    {
-                        for (Local_Data cnnn : cityi) {
-                            ci.city_name = String.valueOf(Html.fromHtml("<b>" +"City Name : "+ "</b>"+cnnn.getCityName()));
-                        }
-                    }
-
-                    List<Local_Data> beati = dbvoc.getbeatByCityIDn(Beat_id);
-                    if(beati.size() > 0)
-                    {
-                        for (Local_Data cnnnn : beati) {
-                            //  ci.Beat_name = cnnnn.getCityName();
-                            ci.Beat_name = String.valueOf(Html.fromHtml("<b>" +"Beat Name : "+ "</b>"+cnnnn.getCityName()));
-                        }
-                    }
-
-                    List<Local_Data> contactlimit = dbvoc.getCreditprofileData(Customer_id);
-                    if(contactlimit.size() > 0) {
-
-                        for (Local_Data cnn : contactlimit) {
-
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.get_credit_limit())) {
-                                Double credit_limit =  ((Double.valueOf(cnn.get_credit_limit())));
-                                ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit : "+ "</b>"+String.format("%.2f",credit_limit)));
-                            } else {
-                                ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
-                            }
-
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.get_shedule_outstanding_amount())) {
-                                Double amt_outstanding =  ((Double.valueOf(cnn.get_shedule_outstanding_amount())));
-                                ci.amount1 = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding : "+ "</b>"+String.format("%.2f",amt_outstanding)));
-
-
-                            } else {
-
-                                ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
-                            }
-
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.getAmmount_overdue())) {
-                                Double amt_overdue =  ((Double.valueOf(cnn.getAmmount_overdue())));
-                                ci.amount2 = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue : "+ "</b>"+String.format("%.2f",amt_overdue)));
-
-
-                            } else {
-                                ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
-
-                            }
-
-
-                            }
-                        }
-                        else
-                        {
-                            ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
-                            ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
-                            ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
-                        }
-
-                        result.add(ci);
-
-                    ca = new Customer_info_main_adapter(result,Customer_info_main.this);
-                    recList.setAdapter(ca);
-                    ca.notifyDataSetChanged();
-                }
+//                        ci.name = String.valueOf(Html.fromHtml("<b>" +"Name : "+ "</b>"+cn.getCUSTOMER_NAME()));
+//                        ci.mobile = cn.getMOBILE_NO();
+//                        ci.shop_name = cn.getCUSTOMER_SHOPNAME();
+//                        ci.address = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
+//                        ci.latlong = cn.getlatitude()+","+cn.getlongitude();
+//                        Customer_id = cn.getCust_Code();
+//                        City_id = cn.getCITY_ID();
+//                        Beat_id = cn.getBEAT_ID();
+//
+//
+//
+//                    }
+//
+//                    List<Local_Data> cityi = dbvoc.getcityByState_idn(City_id);
+//                    if(cityi.size() > 0)
+//                    {
+//                        for (Local_Data cnnn : cityi) {
+//                            ci.city_name = String.valueOf(Html.fromHtml("<b>" +"City Name : "+ "</b>"+cnnn.getCityName()));
+//                        }
+//                    }
+//
+//                    List<Local_Data> beati = dbvoc.getbeatByCityIDn(Beat_id);
+//                    if(beati.size() > 0)
+//                    {
+//                        for (Local_Data cnnnn : beati) {
+//                            //  ci.Beat_name = cnnnn.getCityName();
+//                            ci.Beat_name = String.valueOf(Html.fromHtml("<b>" +"Beat Name : "+ "</b>"+cnnnn.getCityName()));
+//                        }
+//                    }
+//
+//                    List<Local_Data> contactlimit = dbvoc.getCreditprofileData(Customer_id);
+//                    if(contactlimit.size() > 0) {
+//
+//                        for (Local_Data cnn : contactlimit) {
+//
+//                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.get_credit_limit())) {
+//                                Double credit_limit =  ((Double.valueOf(cnn.get_credit_limit())));
+//                                ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit : "+ "</b>"+String.format("%.2f",credit_limit)));
+//                            } else {
+//                                ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
+//                            }
+//
+//                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.get_shedule_outstanding_amount())) {
+//                                Double amt_outstanding =  ((Double.valueOf(cnn.get_shedule_outstanding_amount())));
+//                                ci.amount1 = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding : "+ "</b>"+String.format("%.2f",amt_outstanding)));
+//
+//
+//                            } else {
+//
+//                                ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
+//                            }
+//
+//                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.getAmmount_overdue())) {
+//                                Double amt_overdue =  ((Double.valueOf(cnn.getAmmount_overdue())));
+//                                ci.amount2 = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue : "+ "</b>"+String.format("%.2f",amt_overdue)));
+//
+//
+//                            } else {
+//                                ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
+//
+//                            }
+//
+//
+//                            }
+//                        }
+//                        else
+//                        {
+//                            ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
+//                            ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
+//                            ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
+//                        }
+//
+//                        result.add(ci);
+//
+//                    ca = new Customer_info_main_adapter(result,Customer_info_main.this);
+//                    recList.setAdapter(ca);
+//                    ca.notifyDataSetChanged();
+//                }
 
 
             }
@@ -500,4 +553,156 @@ public class Customer_info_main extends Activity {
 //        return false;
 //    }
 
+    void FilterDialog() {
+        final Dialog dialog = new Dialog(Customer_info_main.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.customer_filter);
+
+        myCalendar = Calendar.getInstance();
+
+        filter_submit = (Button) dialog.findViewById(R.id.filter_submit);
+        filter_clear = (Button) dialog.findViewById(R.id.filter_clear);
+        c_start_date = (EditText) dialog.findViewById(R.id.c_start_date);
+        c_end_date = (EditText) dialog.findViewById(R.id.c_end_date);
+
+        final RadioButton c_all_dates = (RadioButton) dialog.findViewById(R.id.c_all_dates);
+        final RadioGroup cashradioGroup = (RadioGroup) dialog.findViewById(R.id.cashradioGroup);
+        final RadioButton radio_showall = (RadioButton) dialog.findViewById(R.id.radio_showall);
+        RadioButton radio_overdue = (RadioButton) dialog.findViewById(R.id.radio_overdue);
+        RadioButton radio_outstanding = (RadioButton) dialog.findViewById(R.id.radio_outstanding);
+        close_filter = (ImageView) dialog.findViewById(R.id.close_filter);
+
+        cashradioGroup.check(radio_showall.getId());
+
+        if (Global_Data.G_RadioG_valueC.equalsIgnoreCase("Show Overdue")) {
+            cashradioGroup.check(radio_overdue.getId());
+        } else if (Global_Data.G_RadioG_valueC.equalsIgnoreCase("Show Outstanding")) {
+            cashradioGroup.check(radio_outstanding.getId());
+        }
+
+        hm.clear();
+
+
+
+
+        c_start_date.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                DatePickerDialog picker = new DatePickerDialog(Customer_info_main.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                picker.show();
+
+            }
+        });
+
+
+        filter_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int radioButtonID = cashradioGroup.getCheckedRadioButtonId();
+                View radioButton = cashradioGroup.findViewById(radioButtonID);
+                int idx = cashradioGroup.indexOfChild(radioButton);
+
+
+                RadioButton r = (RadioButton) cashradioGroup.getChildAt(idx);
+                String selectedtext = r.getText().toString();
+
+                Log.d("Radio Value", "Radio value" + selectedtext);
+
+                Global_Data.G_RadioG_valueC = selectedtext.trim();
+
+                autoCompleteTextView1.setText("");
+
+                if (Global_Data.G_RadioG_valueC.equalsIgnoreCase("Show All") && !Global_Data.G_BEAT_VALUEC.equalsIgnoreCase("Sort by Beat") && !Global_Data.G_BEAT_VALUEC.equalsIgnoreCase("")) {
+                    Global_Data.G_BEAT_service_flag = "beat";
+                    dialog1.setMessage("Please wait Customer Loading....");
+                    dialog1.setTitle("Metal App");
+                    dialog1.setCancelable(false);
+                    dialog1.show();
+                    dialog.dismiss();
+                    new CustomerASN().execute();
+
+                } else if (Global_Data.G_RadioG_valueC.equalsIgnoreCase("Show All") && (Global_Data.G_BEAT_VALUEC.equalsIgnoreCase("Sort by Beat") || Global_Data.G_BEAT_VALUEC.equalsIgnoreCase(""))) {
+                    Log.d("No Filter", "No Filter");
+                    Global_Data.G_BEAT_service_flag = "";
+                    dialog1.setMessage("Please wait Customer Loading....");
+                    dialog1.setTitle("Metal App");
+                    dialog1.setCancelable(false);
+                    dialog1.show();
+                    new CustomerASN().execute();
+                    dialog.dismiss();
+                } else {
+
+
+
+
+                }
+
+            }
+        });
+
+        filter_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Global_Data.G_BEAT_IDC = "";
+                Global_Data.G_BEAT_VALUEC = "";
+                Global_Data.G_BEAT_service_flag = "";
+                Global_Data.G_RadioG_valueC = "";
+
+                Global_Data.G_CBUSINESS_TYPE = "";
+
+
+
+                cashradioGroup.check(radio_showall.getId());
+
+                int radioButtonID = cashradioGroup.getCheckedRadioButtonId();
+                View radioButton = cashradioGroup.findViewById(radioButtonID);
+                int idx = cashradioGroup.indexOfChild(radioButton);
+                RadioButton r = (RadioButton) cashradioGroup.getChildAt(idx);
+                String selectedtext = r.getText().toString();
+
+                if (!selectedtext.equalsIgnoreCase("Show All")) {
+                    Global_Data.G_BEAT_service_flag = "";
+                    dialog1.setMessage("Please wait Customer Loading....");
+                    dialog1.setTitle("Metal App");
+                    dialog1.setCancelable(false);
+                    dialog1.show();
+                    new CustomerASN().execute();
+                }
+
+
+            }
+        });
+
+        close_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    private void updateLabel() {
+
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        c_start_date.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    private void updateLabel1() {
+
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        c_end_date.setText(sdf.format(myCalendar.getTime()));
+    }
 }

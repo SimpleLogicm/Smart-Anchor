@@ -8,9 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -177,6 +174,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
             }
             else if (view.getId() == c_invoice.getId())
             {
+
                 Intent i=new Intent( view.getContext(), Customer_Invoices.class);
                 view.getContext().startActivity(i);
 
@@ -184,30 +182,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
         }
     }
 
-    private static class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
 
-            if(locationAddress.equalsIgnoreCase("Location not found for this address"))
-            {
-                Toast.makeText(mcontext, "Customer location not found.", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?saddr="+Global_Data.GLOvel_LATITUDE+","+Global_Data.GLOvel_LONGITUDE+"&daddr="+locationAddress+""));
-                ((Activity)mcontext).startActivity(intent);
-            }
 
-        }
-    }
+
 }
