@@ -298,7 +298,7 @@ public class MainActivity extends BaseActivity {
 				//getActionBar().setTitle(mDrawerTitle);
 				// calling onPrepareOptionsMenu() to hide action bar icons
 				
-				screen_title.setText("METAL");
+				screen_title.setText("Smart Anchor");
 				invalidateOptionsMenu();
 			}
 		};

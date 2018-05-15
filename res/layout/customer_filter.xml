@@ -42,6 +42,7 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/close_filter"
             android:layout_marginRight="6dp"
+            android:layout_marginBottom="2dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -98,8 +99,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:orientation="horizontal"
         android:layout_marginTop="5dp">
 
@@ -111,10 +112,10 @@
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="2dp"
             android:layout_gravity="center"
             android:drawableRight="@drawable/ic_date_range_black_24dp"
-            android:hint="Detail 1"
+            android:hint="Start Date"
             android:imeOptions="actionDone"
             android:singleLine="true">
         </EditText>
@@ -126,10 +127,10 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:layout_height="45dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="2dp"
             android:layout_gravity="center"
             android:drawableRight="@drawable/ic_date_range_black_24dp"
-            android:hint="Detail 1"
+            android:hint="End Date"
             android:imeOptions="actionDone"
             android:singleLine="true">
         </EditText>

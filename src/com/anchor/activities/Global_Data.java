@@ -91,9 +91,6 @@ public class Global_Data {
     public static String user_email="";
     public static String G_BEAT_IDC = "";
     public static String G_BEAT_service_flag = "";
-    public static String G_BEAT_VALUEC = "";
-    public static String G_CBUSINESS_TYPE = "";
-    public static String G_RadioG_valueC = "";
     public static String variant_rr="";
     public static String variant_mrp="";
     

@@ -151,7 +151,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
         
@@ -434,7 +434,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage(wait);
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -530,7 +530,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -955,7 +955,7 @@ public class getServices {
             dialog.dismiss();}
 
         dialog.setMessage("Order Sync in Progress, Please Wait");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -1111,7 +1111,7 @@ public class getServices {
             //params.put("token", json.toString());
 
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -1449,7 +1449,7 @@ public class getServices {
             //params.put("token", json.toString());
 
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -1720,7 +1720,7 @@ public class getServices {
            //params.put("token", json.toString());
 
            dialog.setMessage("Order Sync in Progress, Please Wait");
-           dialog.setTitle("Metal");
+           dialog.setTitle("Anchor");
            dialog.setCancelable(false);
            dialog.show();
 
@@ -1911,7 +1911,7 @@ public class getServices {
 
 		    dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 	        dialog.setMessage("Please wait....");
-	        dialog.setTitle("Metal");
+	        dialog.setTitle("Anchor");
 	        dialog.setCancelable(false);
 	        dialog.show();
 
@@ -2273,7 +2273,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -2862,7 +2862,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -3031,7 +3031,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -4634,7 +4634,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
             super.onPreExecute();

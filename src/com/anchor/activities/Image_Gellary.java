@@ -223,7 +223,7 @@ public class Image_Gellary extends FragmentActivity {
 
         //dialog = new ProgressDialog(Video_Main_List.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         pDialog.setMessage("Please wait....");
-        pDialog.setTitle("Metal");
+        pDialog.setTitle("Anchor");
         pDialog.setCancelable(false);
         pDialog.show();
 
