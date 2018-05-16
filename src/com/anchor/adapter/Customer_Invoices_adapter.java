@@ -2,6 +2,7 @@ package com.anchor.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,11 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
     public void onBindViewHolder(com.anchor.adapter.Customer_Invoices_adapter.ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
         contactViewHolder.ic_name.setText(ci.ic_name);
-        contactViewHolder.icustomer_code.setText(ci.icustomer_code);
-        contactViewHolder.invoice_number.setText(ci.invoice_number);
-        contactViewHolder.invoice_date.setText(ci.invoice_date);
-        contactViewHolder.invoice_due_date.setText(ci.invoice_due_date);
-        contactViewHolder.invoice_due_amount.setText(ci.invoice_due_amount);
+        contactViewHolder.icustomer_code.setText(Html.fromHtml("<b>" +"customer code : "+ "</b>")+ci.icustomer_code);
+       // contactViewHolder.invoice_number.setText(ci.invoice_number);
+        contactViewHolder.invoice_date.setText(Html.fromHtml("<b>" +"invoice date : "+ "</b>")+ci.invoice_date);
+        contactViewHolder.invoice_due_date.setText(Html.fromHtml("<b>" +"invoice due date : "+ "</b>")+ci.invoice_due_date);
+        contactViewHolder.invoice_due_amount.setText(Html.fromHtml("<b>" +"invoice due amount : "+ "</b>")+ci.invoice_due_amount);
 
     }
 

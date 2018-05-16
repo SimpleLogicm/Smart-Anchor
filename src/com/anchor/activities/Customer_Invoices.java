@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Html;
@@ -90,19 +89,19 @@ public class Customer_Invoices extends Activity {
     DatePickerDialog.OnDateSetListener date,date1;
     ImageView filter_btn, close_filter;
     Button filter_submit, filter_clear;
-    List<Customer_Info> Allresult = new ArrayList<Customer_Info>();
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     ProgressDialog dialog;
     RecyclerView recList;
     String Customer_id = "";
     String City_id = "";
     String Beat_id = "";
-    private SearchView mSearchView;
     Customer_Invoices_adapter ca;
     String s[];
     ArrayList<String> All_customers = new ArrayList<String>();
     EditText c_start_date,c_end_date;
     AutoCompleteTextView autoCompleteTextView1;
+    List<Customer_Info> result = new ArrayList<Customer_Info>();
+    List<Customer_Info> result_customer = new ArrayList<Customer_Info>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -239,7 +238,7 @@ public class Customer_Invoices extends Activity {
 
                 if(autoCompleteTextView1.getText().toString().trim().length() == 0) {
 
-                    ca = new Customer_Invoices_adapter(Allresult,Customer_Invoices.this);
+                    ca = new Customer_Invoices_adapter(result,Customer_Invoices.this);
                     recList.setAdapter(ca);
                     ca.notifyDataSetChanged();
 
@@ -270,61 +269,33 @@ public class Customer_Invoices extends Activity {
                 Global_Data.hideSoftKeyboard(Customer_Invoices.this);
 
                 String customer_name = "";
-                String address_type = "";
-                if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
-                {
-                    s = autoCompleteTextView1.getText().toString().trim().split(":");
-                    customer_name = s[0].trim();
-                    address_type = s[1].trim();
-                }
-                else
-                {
-                    customer_name = autoCompleteTextView1.getText().toString().trim();
-                }
-//
-//
-//				Global_Data.credit_limit_amount = "";
-//				Global_Data.outstandings_amount = "";
+                customer_name = autoCompleteTextView1.getText().toString().trim();
 
-                List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                result_customer = new ArrayList<Customer_Info>();
 
-                Customer_Info ci = new Customer_Info();
-                List<Customer_Info> result = new ArrayList<Customer_Info>();
-                if(contacts.size() <= 0)
-                {
-                    Toast toast = Toast.makeText(Customer_Invoices.this,
-                            "Customer Not Found", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                else {
-                    for (Local_Data cn : contacts) {
+                for (int i = 0; i < result.size(); i++) {
+                    Customer_Info ci = result.get(i);
 
-                        recList.setVisibility(View.VISIBLE);
+                    if (ci.icustomer_code.equalsIgnoreCase(customer_name)) {
 
+                        Customer_Info ci1 = result.get(i);
 
-                        ci.ic_name = cn.getCUSTOMER_SHOPNAME();
-                        ci.icustomer_code = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                        ci.invoice_number = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                        ci.invoice_date = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                        ci.invoice_due_date = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                        ci.invoice_due_amount = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
+                        ci1.ic_name = ci.ic_name;
+                        ci1.icustomer_code = ci.icustomer_code;
+                        ci1.invoice_date = ci.invoice_date;
+                        ci1.invoice_due_date = ci.invoice_due_date;
+                        ci1.invoice_due_amount = ci.invoice_due_amount;
 
-
-
+                        result_customer.add(ci1);
                     }
-
-
-                    result.add(ci);
-
-                    ca = new Customer_Invoices_adapter(result,Customer_Invoices.this);
-                    recList.setAdapter(ca);
-                    ca.notifyDataSetChanged();
                 }
 
+                ca = new Customer_Invoices_adapter(result_customer, Customer_Invoices.this);
+                recList.setAdapter(ca);
+                ca.notifyDataSetChanged();
+                }
 
-            }
-        });
+            });
 
 
     }
@@ -381,7 +352,7 @@ public class Customer_Invoices extends Activity {
                 });
 
 
-                List<Customer_Info> result = new ArrayList<Customer_Info>();
+
                 for (Local_Data cn : contacts3) {
 
                     Customer_Info ci = new Customer_Info();
@@ -400,7 +371,7 @@ public class Customer_Invoices extends Activity {
 
 
                     result.add(ci);
-                    Allresult.add(ci);
+                   // Allresult.add(ci);
                 }
                 ca = new Customer_Invoices_adapter(result,Customer_Invoices.this);
                 Customer_Invoices.this.runOnUiThread(new Runnable() {
@@ -816,7 +787,6 @@ public class Customer_Invoices extends Activity {
 
 
                             dialog.dismiss();
-                            //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
 
                             Toast toast = Toast.makeText(Customer_Invoices.this, response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -890,33 +860,58 @@ public class Customer_Invoices extends Activity {
 
 
 
-                JSONArray delivery_products = response.getJSONArray("delivery_products");
-                Log.i("volley", "response reg delivery_products Length: " + delivery_products.length());
-                Log.d("volley", "delivery_products" + delivery_products.toString());
+                JSONArray customer_invoices = response.getJSONArray("customer_invoices");
+                Log.i("volley", "response reg customer_invoices Length: " + customer_invoices.length());
+                Log.d("volley", "customer_invoices" + customer_invoices.toString());
 
                 //
-                if (delivery_products.length() <= 0) {
+                if (customer_invoices.length() <= 0) {
 
                     Customer_Invoices.this.runOnUiThread(new Runnable() {
                         public void run() {
 
                             dialog.dismiss();
 
-                            Toast toast = Toast.makeText(Customer_Invoices.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
+                            Toast toast = Toast.makeText(Customer_Invoices.this, "Record Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                         }
                     });
                 } else {
 
-                    for (int i = 0; i < delivery_products.length(); i++) {
 
-                        JSONObject jsonObject = delivery_products.getJSONObject(i);
+                    for (int i = 0; i < customer_invoices.length(); i++) {
 
-//                            loginDataBaseAdapter.insertDeliveryProducts("", jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("order_quantity"), jsonObject.getString("delivered_quantity"), jsonObject.getString("truck_number"), jsonObject.getString("transporter_details"), "", "", jsonObject.getString("product_name") + "" + "" + "");
+                        JSONObject jsonObject = customer_invoices.getJSONObject(i);
 
+                        Customer_Info ci = new Customer_Info();
+                        ci.ic_name = jsonObject.getString("invoice_number");
+                        ci.icustomer_code = jsonObject.getString("customer_code");
+//                        ci.invoice_number = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+jsonObject.getString("customer_code")));
+                        ci.invoice_date = String.valueOf(jsonObject.getString("invoice_date"));
+                        ci.invoice_due_date = String.valueOf(jsonObject.getString("invoice_due_date"));
+                        ci.invoice_due_amount = String.valueOf(jsonObject.getString("invoice_due_amount"));
+
+                        All_customers.add(jsonObject.getString("invoice_number"));
+                        result.add(ci);
 
                     }
 
+                    ca = new Customer_Invoices_adapter(result,Customer_Invoices.this);
+                    Customer_Invoices.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            dialog.dismiss();
+                            recList.setAdapter(ca);
+                            ca.notifyDataSetChanged();
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_Invoices.this, android.R.layout.simple_spinner_dropdown_item,
+                                    All_customers);
+                            autoCompleteTextView1.setThreshold(1);// will start working from
+                            // first character
+                            autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                            // data into the
+                            // AutoCompleteTextView
+                            autoCompleteTextView1.setTextColor(Color.BLACK);
+                        }
+                    });
 
                     }
 
@@ -926,9 +921,7 @@ public class Customer_Invoices extends Activity {
                         dialog.dismiss();
                     }
                 });
-                //	dialog.dismiss();
 
-                //finish();
 
             }
 
