@@ -48,6 +48,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
         contactViewHolder.c_name.setText(ci.shop_name);
+        contactViewHolder.c_code.setText(ci.icustomer_code);
         contactViewHolder.c_name2.setText(ci.name);
         contactViewHolder.c_address.setText(ci.address);
         contactViewHolder.c_credit_profile.setText(ci.credit_limit);
@@ -71,6 +72,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
     public static class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView c_name;
+        protected TextView c_code;
         protected TextView c_name2;
         protected TextView c_address;
         protected TextView c_credit_profile;
@@ -88,6 +90,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
             super(v);
 
             c_name =  (TextView) v.findViewById(R.id.c_name);
+            c_code =  (TextView) v.findViewById(R.id.c_code);
             c_name2 =  (TextView) v.findViewById(R.id.c_name2);
             c_address = (TextView)  v.findViewById(R.id.c_address);
             c_credit_profile = (TextView)  v.findViewById(R.id.c_credit_profile);
@@ -175,6 +178,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
             else if (view.getId() == c_invoice.getId())
             {
 
+                Global_Data.customer_code =  c_code.getText().toString().trim();
                 Intent i=new Intent( view.getContext(), Customer_Invoices.class);
                 view.getContext().startActivity(i);
 

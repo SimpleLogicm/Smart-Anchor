@@ -17,7 +17,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
@@ -77,7 +76,8 @@ public class Customer_Invoices extends Activity {
     String G_c_start_date_value = "";
     String G_c_end_date_value = "";
     String G_c_all_dates_value = "";
-    String Invoice_Flag = "";
+    String  G_Filter_Flag = "";
+
     ConnectionDetector cd;
     Boolean isInternetPresent = false;
     String response_result = "";
@@ -189,13 +189,7 @@ public class Customer_Invoices extends Activity {
 
         // setupSearchView();
 
-        dialog = new ProgressDialog(Customer_Invoices.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please wait Customer Loading....");
-        dialog.setTitle("Sales App");
-        dialog.setCancelable(false);
-        dialog.show();
-
-        new CustomerASN().execute();
+        get_invoice_Data();
 
         filter_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -276,7 +270,7 @@ public class Customer_Invoices extends Activity {
                 for (int i = 0; i < result.size(); i++) {
                     Customer_Info ci = result.get(i);
 
-                    if (ci.icustomer_code.equalsIgnoreCase(customer_name)) {
+                    if (ci.invoice_number.equalsIgnoreCase(customer_name)) {
 
                         Customer_Info ci1 = result.get(i);
 
@@ -314,6 +308,7 @@ public class Customer_Invoices extends Activity {
 
     @Override
     public void onBackPressed() {
+        Global_Data.customer_code = "";
         Intent i=new Intent(Customer_Invoices.this, Customer_info_main.class);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -322,101 +317,6 @@ public class Customer_Invoices extends Activity {
 
     }
 
-
-    private  class CustomerASN extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... response) {
-
-            List<Local_Data> contacts3 = dbvoc.getCustomersForList();
-
-            if (contacts3.size() <= 0) {
-                // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-                Customer_Invoices.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast toast = Toast.makeText(Customer_Invoices.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }
-                });
-
-                Intent intent = new Intent(getApplicationContext(),
-                        MainActivity.class);
-                startActivity(intent);
-            } else {
-                Customer_Invoices.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        recList.setVisibility(View.VISIBLE);
-                    }
-                });
-
-
-
-                for (Local_Data cn : contacts3) {
-
-                    Customer_Info ci = new Customer_Info();
-                    ci.ic_name = cn.getCUSTOMER_SHOPNAME();
-                    ci.icustomer_code = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                    ci.invoice_number = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                    ci.invoice_date = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                    ci.invoice_due_date = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-                    ci.invoice_due_amount = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
-
-                    Customer_id = cn.getCust_Code();
-                    City_id = cn.getCITY_ID();
-                    Beat_id = cn.getBEAT_ID();
-
-                    All_customers.add(cn.getCUSTOMER_SHOPNAME());
-
-
-                    result.add(ci);
-                   // Allresult.add(ci);
-                }
-                ca = new Customer_Invoices_adapter(result,Customer_Invoices.this);
-                Customer_Invoices.this.runOnUiThread(new Runnable() {
-                    public void run() {
-                        dialog.dismiss();
-                        recList.setAdapter(ca);
-                        ca.notifyDataSetChanged();
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_Invoices.this, android.R.layout.simple_spinner_dropdown_item,
-                                All_customers);
-                        autoCompleteTextView1.setThreshold(1);// will start working from
-                        // first character
-                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
-                        // data into the
-                        // AutoCompleteTextView
-                        autoCompleteTextView1.setTextColor(Color.BLACK);
-                    }
-                });
-
-
-
-            }
-
-            return "Executed";
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-            // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is upto you
-            //dialog.dismiss();
-            Customer_Invoices.this.runOnUiThread(new Runnable() {
-                public void run() {
-                    dialog.dismiss();
-                }
-            });
-
-        }
-
-        @Override
-        protected void onPreExecute() {}
-
-        @Override
-        protected void onProgressUpdate(Void... values) {}
-    }
 
     void FilterDialog() {
         final Dialog dialog1 = new Dialog(Customer_Invoices.this);
@@ -569,9 +469,8 @@ public class Customer_Invoices extends Activity {
                         {
                             G_c_start_date_value = c_start_date.getText().toString();
                             G_c_end_date_value = c_end_date.getText().toString();
-                            new CustomerASN().execute();
-
                             dialog1.dismiss();
+                            get_invoice_Data();
                         }
 
                     }
@@ -579,9 +478,8 @@ public class Customer_Invoices extends Activity {
                     {
                         G_c_start_date_value = c_start_date.getText().toString();
                         G_c_end_date_value = c_end_date.getText().toString();
-                        new CustomerASN().execute();
-
                         dialog1.dismiss();
+                        get_invoice_Data();
                     }
 
 
@@ -590,8 +488,7 @@ public class Customer_Invoices extends Activity {
                 {
                     G_c_start_date_value = "";
                     G_c_end_date_value = "";
-                    new CustomerASN().execute();
-
+                    get_invoice_Data();
                     dialog1.dismiss();
                 }
 
@@ -611,7 +508,7 @@ public class Customer_Invoices extends Activity {
                 G_c_start_date_value = "";
                 G_c_end_date_value = "";
                 G_c_all_dates_value = "";
-                Invoice_Flag = "";
+
 
                 cashradioGroup.check(radio_showall.getId());
                 int radioButtonID = cashradioGroup.getCheckedRadioButtonId();
@@ -619,8 +516,8 @@ public class Customer_Invoices extends Activity {
                 int idx = cashradioGroup.indexOfChild(radioButton);
                 RadioButton r = (RadioButton) cashradioGroup.getChildAt(idx);
                 String selectedtext = r.getText().toString();
-
                 dialog1.dismiss();
+                get_invoice_Data();
 
             }
         });
@@ -628,7 +525,7 @@ public class Customer_Invoices extends Activity {
         close_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog1.dismiss();
             }
         });
 
@@ -638,14 +535,14 @@ public class Customer_Invoices extends Activity {
 
     private void updateLabel() {
 
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         c_start_date.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabel1() {
 
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         c_end_date.setText(sdf.format(myCalendar.getTime()));
     }
@@ -658,26 +555,73 @@ public class Customer_Invoices extends Activity {
             TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
             String device_id = telephonyManager.getDeviceId();
             dialog = new ProgressDialog(Customer_Invoices.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-            dialog.setMessage("Please Wait Schedule Sync....");
+            dialog.setMessage("Please Wait....");
             dialog.setTitle("Sales App");
             dialog.setCancelable(false);
             dialog.show();
 
             String  domain = getResources().getString(R.string.service_domain);
 
+            String c_value = "";
+
+            if(G_RadioG_valueC.equalsIgnoreCase("Show Both") || G_RadioG_valueC.equalsIgnoreCase(""))
+            {
+                c_value = "";
+            }
+            else
+            if(G_RadioG_valueC.equalsIgnoreCase("Show Overdue"))
+            {
+                c_value = "overdue";
+            }
+            else
+            if(G_RadioG_valueC.equalsIgnoreCase("Show Outstanding"))
+            {
+                c_value = "outstanding";
+            }
+
             String url = "";
             if(!G_c_all_dates_value.equalsIgnoreCase(""))
             {
-                url = domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL;
+                G_Filter_Flag = "true";
+                if(c_value.equalsIgnoreCase(""))
+                {
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code;
+                }
+                else
+                {
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
+                }
+
             }
             else
-            if(G_c_all_dates_value.equalsIgnoreCase("") && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_start_date.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_end_date.getText().toString()))
+            if(G_c_all_dates_value.equalsIgnoreCase("") && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(G_c_start_date_value) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(G_c_end_date_value))
             {
-                url = domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL;
+                G_Filter_Flag = "true";
+
+                if(c_value.equalsIgnoreCase(""))
+                {
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
+                }
+                else
+                {
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
+                }
+
+
             }
             else
             {
-                url = domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL;
+                if(c_value.equalsIgnoreCase(""))
+                {
+                    G_Filter_Flag = "";
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code;
+                }
+                else
+                {
+                    G_Filter_Flag = "true";
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
+                }
+
             }
 
             Log.i("volley", "url: " + url);
@@ -770,14 +714,14 @@ public class Customer_Invoices extends Activity {
 
             try {
                 JSONObject response = new JSONObject(final_response);
-                if (response.has("result")) {
+                if (response.has("message")) {
                     response_result = response.getString("result");
                 } else {
                     response_result = "data";
                 }
 
 
-                if (response_result.equalsIgnoreCase("Schedule doesn't exist")) {
+                if (response_result.equalsIgnoreCase("doesn't exist")) {
 
 
                     //Toast.makeText(Order.this, response_result, Toast.LENGTH_LONG).show();
@@ -860,11 +804,10 @@ public class Customer_Invoices extends Activity {
 
 
 
-                JSONArray customer_invoices = response.getJSONArray("customer_invoices");
+                JSONArray customer_invoices = response.getJSONArray("invoices");
                 Log.i("volley", "response reg customer_invoices Length: " + customer_invoices.length());
                 Log.d("volley", "customer_invoices" + customer_invoices.toString());
 
-                //
                 if (customer_invoices.length() <= 0) {
 
                     Customer_Invoices.this.runOnUiThread(new Runnable() {
@@ -872,24 +815,39 @@ public class Customer_Invoices extends Activity {
 
                             dialog.dismiss();
 
-                            Toast toast = Toast.makeText(Customer_Invoices.this, "Record Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                            if(G_Filter_Flag.equalsIgnoreCase(""))
+                            {
+                                Toast toast = Toast.makeText(Customer_Invoices.this, "invoices Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                                Intent launch = new Intent(Customer_Invoices.this, Customer_info_main.class);
+                                startActivity(launch);
+                                finish();
+                            }
+                            else
+                            {
+                                Toast toast = Toast.makeText(Customer_Invoices.this, "Filter invoices Data Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
+
                         }
                     });
                 } else {
 
 
+                    All_customers.clear();
+                    result.clear();
                     for (int i = 0; i < customer_invoices.length(); i++) {
 
                         JSONObject jsonObject = customer_invoices.getJSONObject(i);
 
                         Customer_Info ci = new Customer_Info();
-                        ci.ic_name = jsonObject.getString("invoice_number");
-                        ci.icustomer_code = jsonObject.getString("customer_code");
-//                        ci.invoice_number = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+jsonObject.getString("customer_code")));
-                        ci.invoice_date = String.valueOf(jsonObject.getString("invoice_date"));
-                        ci.invoice_due_date = String.valueOf(jsonObject.getString("invoice_due_date"));
-                        ci.invoice_due_amount = String.valueOf(jsonObject.getString("invoice_due_amount"));
+                        ci.ic_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_number"));
+                        ci.icustomer_code = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("customer_id"));
+                        ci.invoice_number = jsonObject.getString("invoice_number");
+                        ci.invoice_date = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("date"));
+                        ci.invoice_due_date = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_date"));
+                        ci.invoice_due_amount = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
 
                         All_customers.add(jsonObject.getString("invoice_number"));
                         result.add(ci);

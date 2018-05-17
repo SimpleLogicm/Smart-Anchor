@@ -243,6 +243,7 @@ public class Customer_info_main extends Activity {
                         ci.name = String.valueOf(Html.fromHtml("<b>" +"Name : "+ "</b>"+cn.getCUSTOMER_NAME()));
                         ci.mobile = cn.getMOBILE_NO();
                         ci.shop_name = cn.getCUSTOMER_SHOPNAME();
+                        ci.icustomer_code = cn.getCust_Code();
                         ci.address = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
                         ci.latlong = cn.getlatitude()+","+cn.getlongitude();
                         Customer_id = cn.getCust_Code();
@@ -385,6 +386,7 @@ public class Customer_info_main extends Activity {
                     ci.name = String.valueOf(Html.fromHtml("<b>" +"Name : "+ "</b>"+cn.getCUSTOMER_NAME()));
                     ci.mobile = cn.getMOBILE_NO();
                     ci.shop_name = cn.getCUSTOMER_SHOPNAME();
+                    ci.icustomer_code = cn.getCust_Code();
                     ci.address = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
                     ci.latlong = cn.getlatitude()+","+cn.getlongitude();
                     Customer_id = cn.getCust_Code();

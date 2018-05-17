@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.anchor.activities.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.anchor.activities.R;
 
 import java.util.List;
 
@@ -50,9 +50,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Image image = images.get(position);
 
-        Glide.with(mContext).load(image.getMedium())
+        Glide.with(mContext).load(image.getLarge())
                 .thumbnail(0.5f)
                 .crossFade()
+                .error(R.drawable.imgnot_found)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.thumbnail);
     }

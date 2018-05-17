@@ -115,6 +115,7 @@ public class SlideshowDialogFragment extends DialogFragment {
 
             Glide.with(getActivity()).load(image.getLarge())
                     .thumbnail(0.5f)
+                    .error(R.drawable.imgnot_found)
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageViewPreview);
