@@ -496,6 +496,11 @@ public class getServices {
                             Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                         dialog.dismiss();
+
+                        Intent intentn = new Intent(context, MainActivity.class);
+                        context.startActivity(intentn);
+                        //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        ((Activity) context).finish();
                         // finish();
                     }
                 });

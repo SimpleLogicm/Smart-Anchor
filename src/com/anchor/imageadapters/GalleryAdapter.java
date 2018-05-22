@@ -1,6 +1,7 @@
 package com.anchor.imageadapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import com.anchor.activities.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.github.barteksc.pdfviewer.PDFView;
 
 import java.util.List;
 
@@ -25,10 +27,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnail;
+        public PDFView pDFView;
 
         public MyViewHolder(View view) {
             super(view);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            pDFView = (PDFView) view.findViewById(R.id.G_pdfView);
         }
     }
 
@@ -50,12 +54,29 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Image image = images.get(position);
 
-        Glide.with(mContext).load(image.getLarge())
-                .thumbnail(0.5f)
-                .crossFade()
-                .error(R.drawable.imgnot_found)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.thumbnail);
+        String type = image.getType();
+
+        if(type.equalsIgnoreCase("application/pdf"))
+        {
+            holder.pDFView.setVisibility(View.VISIBLE);
+            holder.thumbnail.setVisibility(View.GONE);
+            holder.pDFView.fromUri(Uri.parse(image.getLarge()))
+                    .load();
+        }
+        else
+        {
+            holder.pDFView.setVisibility(View.GONE);
+            holder.thumbnail.setVisibility(View.VISIBLE);
+
+            Glide.with(mContext).load(image.getLarge())
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .error(R.drawable.imgnot_found)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holder.thumbnail);
+        }
+
+
     }
 
     @Override

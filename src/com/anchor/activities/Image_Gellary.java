@@ -1,22 +1,21 @@
 package com.anchor.activities;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,39 +23,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.anchor.App.AppController;
 import com.anchor.imageadapters.GalleryAdapter;
 import com.anchor.imageadapters.Image;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Image_Gellary extends FragmentActivity {
 
     private String TAG = MainActivity.class.getSimpleName();
-    private static final String endpoint = "http://api.androidhive.info/json/glide.json";
+
     private ArrayList<Image> images;
     private ProgressDialog pDialog;
     private GalleryAdapter mAdapter;
     private RecyclerView recyclerView;
+    public DownloadManager downloadManager;
+    public long refid;
+    public Uri Download_Uri;
+    public ArrayList<Long> list = new ArrayList<>();
+    LoginDataBaseAdapter loginDataBaseAdapter;
+    DataBaseHelper dbvoc = new DataBaseHelper(this);
+    Intent target;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +60,10 @@ public class Image_Gellary extends FragmentActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        pDialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        loginDataBaseAdapter=new LoginDataBaseAdapter(Image_Gellary.this);
+        loginDataBaseAdapter=loginDataBaseAdapter.open();
+
+        //pDialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         images = new ArrayList<>();
         mAdapter = new GalleryAdapter(getApplicationContext(), images);
 
@@ -87,11 +79,44 @@ public class Image_Gellary extends FragmentActivity {
                 bundle.putSerializable("images", images);
                 bundle.putInt("position", position);
 
+                Image image = images.get(position);
 
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
-                newFragment.setArguments(bundle);
-                newFragment.show(ft, "slideshow");
+                String type = image.getType();
+                String image_url = image.getLarge();
+              //  File file = new File(Uri.parse(image_url));
+
+                if(type.equalsIgnoreCase("application/pdf"))
+                {
+                    if(!image_url.isEmpty()) {
+                        Intent target = new Intent(Intent.ACTION_VIEW);
+                        target.setDataAndType(Uri.parse(image_url), "application/pdf");
+                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                        Intent intent = Intent.createChooser(target, "Open File");
+                        try {
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            // Instruct the user to install a PDF reader here, or something
+                        }
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "File path is incorrect." , Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(ft, "slideshow");
+                }
+
+
+
+
+
+
+
+
 
 
 
@@ -123,13 +148,6 @@ public class Image_Gellary extends FragmentActivity {
         H_LOGO.setImageResource(R.drawable.video_imagenew);
         H_LOGO.setVisibility(View.INVISIBLE);
 
-//		if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
-//			todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
-//		}
-//		if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-////	        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-//			todaysTarget.setText("Today's Target Acheived");
-//		}
 
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
@@ -137,59 +155,11 @@ public class Image_Gellary extends FragmentActivity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
 
        // fetchImages();
-        GetNewLaunch_Datann();
+
+        new Image_Gellary.LongOperation().execute();
     }
 
-    private void fetchImages() {
 
-        pDialog.setMessage("Please wait...");
-       // pDialog.setCancelable(false);
-        pDialog.show();
-
-        JsonArrayRequest req = new JsonArrayRequest(endpoint,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d(TAG, response.toString());
-                        pDialog.hide();
-
-                        images.clear();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject object = response.getJSONObject(i);
-                                Image image = new Image();
-                                image.setName(object.getString("name"));
-
-                                JSONObject url = object.getJSONObject("url");
-                                image.setSmall(url.getString("small"));
-                                image.setMedium(url.getString("medium"));
-                                image.setLarge(url.getString("large"));
-                                image.setTimestamp(object.getString("timestamp"));
-
-                                images.add(image);
-
-                            } catch (JSONException e) {
-                                Log.e(TAG, "Json parsing error: " + e.getMessage());
-                            }
-                        }
-
-                        mAdapter.notifyDataSetChanged();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
-            }
-        });
-        RequestQueue requestQueue = Volley.newRequestQueue(Image_Gellary.this);
-        int socketTimeout = 300000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        req.setRetryPolicy(policy);
-        // Adding request to request queue
-        requestQueue.add(req);
-       // AppController.getInstance().addToRequestQueue(req);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -206,214 +176,43 @@ public class Image_Gellary extends FragmentActivity {
         this.finish();
     }
 
-    public  void GetNewLaunch_Datann()
-    {
-
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String device_id = telephonyManager.getDeviceId();
-        //context = contextn;
-
-        //loginDataBaseAdapter=new LoginDataBaseAdapter(Video_Main_List.this);
-        //loginDataBaseAdapter=loginDataBaseAdapter.open();
 
 
-        //PreferencesHelper Prefs = new PreferencesHelper(context);
-        //String URL = Prefs.GetPreferences("URL");
-        String domain = "";
-
-        //dialog = new ProgressDialog(Video_Main_List.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        pDialog.setMessage("Please wait....");
-        pDialog.setTitle("Anchor");
-        pDialog.setCancelable(false);
-        pDialog.show();
-
-        domain = getResources().getString(R.string.service_domain);
-
-        Log.d("Server url","Server url"+domain+"new_launches?imei_no="+device_id);
-
-        StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain+"new_launches?imei_no="+device_id,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //showJSON(response);
-                        // Log.d("jV", "JV" + response);
-                        Log.d("jV", "JV length" + response.length());
-                        // JSONObject person = (JSONObject) (response);
-                        try {
-                            JSONObject json = new JSONObject(new JSONTokener(response));
-                            try{
-
-                                String response_result = "";
-                                if(json.has("result"))
-                                {
-                                    response_result = json.getString("result");
-                                }
-                                else
-                                {
-                                    response_result = "data";
-                                }
 
 
-                                if(response_result.equalsIgnoreCase("No Data Found")) {
-                                    pDialog.hide();
+    private class LongOperation extends AsyncTask<String, Void, String> {
 
-                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
+        @Override
+        protected String doInBackground(String... params) {
+            try {
 
-                                    Intent launch = new Intent(Image_Gellary.this,MainActivity.class);
-                                    startActivity(launch);
-                                    finish();
+                List<Image> dealer_check_details1 = dbvoc.TABLE_CREATE_NEW_LAUNCHES_NEW_Data();
 
-                                }
-                                else
-                                if(response_result.equalsIgnoreCase("Device not registered")) {
-                                    pDialog.hide();
-                                   // Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
+                if(dealer_check_details1.size() > 0) {
+                    for (Image details : dealer_check_details1) {
 
-                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
+                        Image image = new Image();
+                        image.setName(details.getName());
+                        image.setLarge(details.getLarge());
+                        image.setType(details.getType());
+                        image.setTimestamp(details.getTimestamp());
 
-                                    Intent launch = new Intent(Image_Gellary.this,MainActivity.class);
-                                    startActivity(launch);
-                                    finish();
-
-                                }
-                                else {
-
-                                    JSONArray launches = json.getJSONArray("launches");
-//
-                                    Log.i("volley", "response reg launches Length: " + launches.length());
-//
-                                    Log.d("users", "launches" + launches.toString());
-//
-                                    //
-                                    images.clear();
-                                    for (int i = 0; i < launches.length(); i++) {
-
-                                        JSONObject object = launches.getJSONObject(i);
-                                        Image image = new Image();
-                                        image.setName(object.getString("name"));
-
-                                       // JSONObject url = object.getJSONObject("url");
-                                        image.setSmall(object.getString("small"));
-                                        image.setMedium(object.getString("small"));
-                                        image.setLarge(object.getString("medium"));
-                                        image.setTimestamp(object.getString("date"));
-
-                                        images.add(image);
-
-
-                                    }
-
-                                    //Intent launch = new Intent(context,Youtube_Player_Activity.class);
-                                    //startActivity(launch);
-
-                                    pDialog.hide();
-                                    mAdapter.notifyDataSetChanged();
-                                    //finish();
-
-                                }
-
-                                //  finish();
-                                // }
-
-                                // output.setText(data);
-                            }catch(JSONException e){e.printStackTrace();
-
-
-                                Toast toast = Toast.makeText(Image_Gellary.this,
-                                        "Service Error",
-                                        Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                                Intent launch = new Intent(Image_Gellary.this,MainActivity.class);
-                                startActivity(launch);
-                                finish();
-
-                                pDialog.hide(); }
-
-
-                            pDialog.hide();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            //  finish();
-                            pDialog.dismiss();
-                        }
-                        pDialog.dismiss();
-
+                        images.add(image);
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
-                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                            Toast.makeText(Image_Gellary.this,
-//                                    "Network Error",
-//                                    Toast.LENGTH_LONG).show();
+                    mAdapter.notifyDataSetChanged();
+                }
 
-                            Toast toast = Toast.makeText(Image_Gellary.this,
-                                    "Network Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof AuthFailureError) {
+            } catch (Exception e) {
 
+            }
+            return "Executed";
+        }
 
-                            Toast toast = Toast.makeText(Image_Gellary.this,
-                                    "Server AuthFailureError  Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof ServerError) {
+        @Override
+        protected void onPostExecute(String result) {
 
-                            Toast toast = Toast.makeText(Image_Gellary.this,
-                                    "Server   Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof NetworkError) {
-
-                            Toast toast = Toast.makeText(Image_Gellary.this,
-                                    "Network   Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof ParseError) {
-
-
-                            Toast toast = Toast.makeText(Image_Gellary.this,
-                                    "ParseError   Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                        else
-                        {
-                           // Toast.makeText(Image_Gellary.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                            Toast toast = Toast.makeText(Image_Gellary.this, error.getMessage(), Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                        }
-                        Intent launch = new Intent(Image_Gellary.this,MainActivity.class);
-                        startActivity(launch);
-                        finish();
-                        pDialog.dismiss();
-                        // finish();
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(Image_Gellary.this);
-
-        int socketTimeout = 300000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        stringRequest.setRetryPolicy(policy);
-        // requestQueue.se
-        //requestQueue.add(jsObjRequest);
-        stringRequest.setShouldCache(false);
-        requestQueue.getCache().clear();
-        //requestQueue.add(stringRequest);
-        AppController.getInstance().addToRequestQueue(stringRequest);
+        }
     }
 
 }

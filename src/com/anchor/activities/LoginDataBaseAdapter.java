@@ -230,6 +230,9 @@ public class LoginDataBaseAdapter
 		static final String DATABASE_CREATE_NEW_LAUNCHES = "CREATE TABLE IF NOT EXISTS "+"new_launches"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text, date text, media_path1 text, media_path2 text, media_path3 text, media_path4 text, media_path5 text, media_path6 text, " +
                 		"media_path7 text, media_path8 text, media_path9 text, media_path10 text, created_at text, updated_at text);";
+
+	static final String DATABASE_CREATE_NEW_LAUNCHES_NEW = "CREATE TABLE IF NOT EXISTS "+"new_launches_new"+
+			"( " +"ID"+" integer primary key autoincrement,"+ "name text, file_path text, file_type text, date text);";
 		
 		static final String DATABASE_CREATE_ADVERTISEMENTS = "CREATE TABLE IF NOT EXISTS "+"advertisements"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text, date text, media_path text, created_at text, updated_at text);";
@@ -1736,6 +1739,21 @@ public class LoginDataBaseAdapter
       		db.insert("new_launches", null, newValues);
       		//Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
       	}
+
+	public void insertNewLaunchesNew(String name, String file_path, String file_type, String date)
+	{
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("name", name);
+		newValues.put("file_path", file_path);
+		newValues.put("file_type", file_type);
+		newValues.put("date", date);
+
+
+		// Insert the row into your table
+		db.insert("new_launches_new", null, newValues);
+		//Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+	}
         
         public void insertAdevertisements(String project_id, String customer_id, String date, String media_path, 
         		String created_at, String updated_at)

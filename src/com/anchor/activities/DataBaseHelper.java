@@ -3,10 +3,11 @@ package com.anchor.activities;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.anchor.imageadapters.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
         private static final String TABLE_BACKGROUND_SERVICE_CHECK= "background_service_check";
         private static final String TABLE_ATTENDANCE_DATA = "attendance";
         private static final String TABLE_CREATE_ATTENDENCE_F = "attendence_f";
+        private static final String TABLE_CREATE_NEW_LAUNCHES_NEW = "new_launches_new";
 
 		 
 	    static SQLiteDatabase db;
@@ -221,6 +223,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_BACKGROUND_SERVICE_CHECK);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_ATTENDENCE_F);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_ATTENDANCE_DATA);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_NEW_LAUNCHES_NEW);
 
             }
 	
@@ -350,6 +353,57 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 //contact.setImei(cursor.getString(3));
 
                 // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> TABLE_CREATE_NEW_LAUNCHES_NEW_CHECK(String file_path) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT file_path FROM " + TABLE_CREATE_NEW_LAUNCHES_NEW + " WHERE file_path = '" +  file_path + "'" + " GROUP BY file_path ORDER BY file_path";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setImage_path(cursor.getString(0));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Image> TABLE_CREATE_NEW_LAUNCHES_NEW_Data() {
+        List<Image> contactList1 = new ArrayList<Image>();
+        // Select All Query
+        String selectQuery1 = "SELECT name,file_path,file_type,date FROM " + TABLE_CREATE_NEW_LAUNCHES_NEW + " GROUP BY name ORDER BY name";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Image contact = new Image();
+                contact.setName(cursor.getString(0));
+                contact.setLarge(cursor.getString(1));
+                contact.setType(cursor.getString(2));
+                contact.setTimestamp(cursor.getString(3));
+
                 contactList1.add(contact);
             } while (cursor.moveToNext());
         }

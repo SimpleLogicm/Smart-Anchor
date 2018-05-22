@@ -1,6 +1,7 @@
 package com.anchor.activities;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.PagerAdapter;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.anchor.imageadapters.Image;
+import com.github.barteksc.pdfviewer.PDFView;
+
 import java.util.ArrayList;
 
 
@@ -111,14 +114,38 @@ public class SlideshowDialogFragment extends DialogFragment {
 
             ImageView imageViewPreview = (ImageView) view.findViewById(R.id.image_preview);
 
+            PDFView pDFView = (PDFView) view.findViewById(R.id.GG_pdfView);
+
             Image image = images.get(position);
 
-            Glide.with(getActivity()).load(image.getLarge())
-                    .thumbnail(0.5f)
-                    .error(R.drawable.imgnot_found)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageViewPreview);
+            String type = image.getType();
+
+            if(type.equalsIgnoreCase("application/pdf"))
+            {
+                pDFView.setVisibility(View.VISIBLE);
+                imageViewPreview.setVisibility(View.GONE);
+                pDFView.fromUri(Uri.parse(image.getLarge()))
+                        .enableSwipe(true)
+                        .enableSwipe(true)
+                        .enableDoubletap(true)
+                        .defaultPage(0)
+                        .enableAnnotationRendering(true)
+                        .load();
+            }
+            else
+            {
+                pDFView.setVisibility(View.GONE);
+                imageViewPreview.setVisibility(View.VISIBLE);
+
+                Glide.with(getActivity()).load(image.getLarge())
+                        .thumbnail(0.5f)
+                        .error(R.drawable.imgnot_found)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imageViewPreview);
+            }
+
+
 
             container.addView(view);
 
