@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
@@ -63,6 +64,7 @@ public class Marketing extends Activity implements OnItemSelectedListener{
     Boolean isInternetPresent = false;
    // private ProgressDialog pDialog;
     ProgressDialog pDialog;
+    String response_result = "";
     public DownloadManager downloadManager;
     public long refid;
     public Uri Download_Uri;
@@ -103,7 +105,9 @@ public class Marketing extends Activity implements OnItemSelectedListener{
                         pDialog.setCancelable(false);
                         pDialog.show();
 
-                        GetNewLaunch_Datann();
+                       // GetNewLaunch_Datann();
+
+                        new Marketing.imagesync().execute();
 
 
                         //getServices.GetNewLaunch_Data(MainActivity.this);
@@ -577,6 +581,303 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
 
 
+    }
+
+
+    private class imagesync extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+
+                downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                String device_id = telephonyManager.getDeviceId();
+
+                String domain = "";
+
+                domain = getResources().getString(R.string.service_domain);
+
+                Log.d("Server url","Server url"+domain+"new_launches?imei_no="+device_id);
+
+                StringRequest stringRequest = null;
+                stringRequest = new StringRequest(domain+"new_launches?imei_no="+device_id,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                //showJSON(response);
+                                // Log.d("jV", "JV" + response);
+                                Log.d("jV", "JV length" + response.length());
+                                // JSONObject person = (JSONObject) (response);
+                                try {
+                                    JSONObject json = new JSONObject(new JSONTokener(response));
+                                    try{
+
+
+                                        if(json.has("result"))
+                                        {
+                                            response_result = json.getString("result");
+                                        }
+                                        else
+                                        {
+                                            response_result = "data";
+                                        }
+
+
+                                        if(response_result.equalsIgnoreCase("No Data Found")) {
+
+                                            Marketing.this.runOnUiThread(new Runnable() {
+                                                public void run() {
+
+                                                    pDialog.hide();
+
+                                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
+                                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                                    toast.show();
+
+                                                    Intent launch = new Intent(Marketing.this,MainActivity.class);
+                                                    startActivity(launch);
+                                                    finish();
+                                                }
+                                            });
+
+
+                                        }
+                                        else
+                                        if(response_result.equalsIgnoreCase("Device not registered")) {
+
+                                            Marketing.this.runOnUiThread(new Runnable() {
+                                                public void run() {
+
+                                                    pDialog.hide();
+
+                                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
+                                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                                    toast.show();
+
+                                                    Intent launch = new Intent(Marketing.this,MainActivity.class);
+                                                    startActivity(launch);
+                                                    finish();
+                                                }
+                                            });
+
+
+
+                                        }
+                                        else {
+
+                                            JSONArray launches = json.getJSONArray("launches");
+
+                                            Log.i("volley", "response reg launches Length: " + launches.length());
+
+                                            Log.d("users", "launches" + launches.toString());
+
+
+                                            if(launches.length() > 0)
+                                            {
+                                                dbvoc.getDeleteTable("new_launches_new");
+                                                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                                                File dir = new File(path,"Anchor_NewLaunch");
+
+                                                if (dir.isDirectory())
+                                                {
+                                                    String[] children = dir.list();
+                                                    for (int j = 0; j < children.length; j++)
+                                                    {
+                                                        new File(dir, children[j]).delete();
+                                                    }
+                                                }
+                                            }
+                                            for (int i = 0; i < launches.length(); i++) {
+
+                                                JSONObject object = launches.getJSONObject(i);
+//                                        Image image = new Image();
+//                                        image.setName(object.getString("name"));
+//                                        image.setLarge(object.getString("large"));
+//                                        image.setType(object.getString("type"));
+//                                        image.setTimestamp(object.getString("date"));
+//
+//                                        images.add(image);
+
+
+                                                String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1, object.getString("large").trim().length() );
+
+                                                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                                                File file = new File(path,"Anchor_NewLaunch"+"/"+fileName);
+
+
+
+
+                                                // dbvoc.TABLE_CREATE_NEW_LAUNCHES_NEW_CHECK("file:" + file.getAbsolutePath());
+                                                // if()
+
+                                                loginDataBaseAdapter.insertNewLaunchesNew(object.getString("name"),"file:" + file.getAbsolutePath(),object.getString("type"),object.getString("date"));
+
+                                                if(!file.exists())
+                                                {
+                                                    file.mkdir();
+                                                }
+
+                                                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim())));
+                                                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+                                                request.setAllowedOverRoaming(false);
+//                                           // request.setTitle("GadgetSaint Downloading " + "Sample_" + i + ".png");
+//                                            //request.setDescription("Downloading " + "Sample_" + i + ".png");
+                                                request.setVisibleInDownloadsUi(false);
+                                                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "Anchor_NewLaunch"+"/"+fileName);
+
+                                                refid = downloadManager.enqueue(request);
+
+
+                                                Log.e("OUTNM", "" + refid);
+
+                                                list.add(refid);
+
+
+                                            }
+
+                                            //Intent launch = new Intent(context,Youtube_Player_Activity.class);
+                                            //startActivity(launch);
+
+
+
+                                            // mAdapter.notifyDataSetChanged();
+                                            //finish();
+
+                                        }
+
+                                        //  finish();
+                                        // }
+
+                                        // output.setText(data);
+                                    }catch(JSONException e){e.printStackTrace();
+
+                                        Marketing.this.runOnUiThread(new Runnable() {
+                                            public void run() {
+
+                                                Toast toast = Toast.makeText(Marketing.this,
+                                                        "Service Error",
+                                                        Toast.LENGTH_LONG);
+                                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                                toast.show();
+                                                Intent launch = new Intent(Marketing.this,MainActivity.class);
+                                                startActivity(launch);
+                                                finish();
+
+                                                pDialog.hide();
+                                            }
+                                        });
+
+                                        }
+
+
+
+                                } catch (JSONException e) {
+
+                                    e.printStackTrace();
+                                    Marketing.this.runOnUiThread(new Runnable() {
+                                        public void run() {
+
+
+                                            //  finish();
+                                            pDialog.dismiss();
+                                        }
+                                    });
+
+                                }
+
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(final VolleyError error) {
+                                //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                                Marketing.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+
+
+                                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+//                            Toast.makeText(Image_Gellary.this,
+//                                    "Network Error",
+//                                    Toast.LENGTH_LONG).show();
+
+
+                                            Toast toast = Toast.makeText(Marketing.this,
+                                                    "Network Error",
+                                                    Toast.LENGTH_LONG);
+                                            toast.show();
+                                        } else if (error instanceof AuthFailureError) {
+
+
+                                            Toast toast = Toast.makeText(Marketing.this,
+                                                    "Server AuthFailureError  Error",
+                                                    Toast.LENGTH_LONG);
+                                            toast.show();
+                                        } else if (error instanceof ServerError) {
+
+                                            Toast toast = Toast.makeText(Marketing.this,
+                                                    "Server   Error",
+                                                    Toast.LENGTH_LONG);
+                                            toast.show();
+                                        } else if (error instanceof NetworkError) {
+
+                                            Toast toast = Toast.makeText(Marketing.this,
+                                                    "Network   Error",
+                                                    Toast.LENGTH_LONG);
+                                            toast.show();
+                                        } else if (error instanceof ParseError) {
+
+
+                                            Toast toast = Toast.makeText(Marketing.this,
+                                                    "ParseError   Error",
+                                                    Toast.LENGTH_LONG);
+                                            toast.show();
+                                        }
+                                        else
+                                        {
+                                            // Toast.makeText(Image_Gellary.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                                            Toast toast = Toast.makeText(Marketing.this, error.getMessage(), Toast.LENGTH_LONG);
+                                            toast.setGravity(Gravity.CENTER, 0, 0);
+                                            toast.show();
+                                        }
+                                        Intent launch = new Intent(Marketing.this,MainActivity.class);
+                                        startActivity(launch);
+                                        finish();
+                                        pDialog.dismiss();
+                                    }
+                                });
+
+
+                                // finish();
+                            }
+                        });
+
+                RequestQueue requestQueue = Volley.newRequestQueue(Marketing.this);
+
+                int socketTimeout = 300000;//30 seconds - change to what you want
+                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                stringRequest.setRetryPolicy(policy);
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                stringRequest.setShouldCache(false);
+                requestQueue.getCache().clear();
+                //requestQueue.add(stringRequest);
+                AppController.getInstance().addToRequestQueue(stringRequest);
+
+            } catch (Exception e) {
+
+            }
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
     }
 
 }
