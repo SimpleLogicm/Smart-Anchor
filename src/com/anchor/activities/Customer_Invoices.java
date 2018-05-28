@@ -59,6 +59,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -399,7 +400,7 @@ public class Customer_Invoices extends Activity {
                 DatePickerDialog picker = new DatePickerDialog(Customer_Invoices.this, date1, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                //picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 picker.show();
 
             }
@@ -414,7 +415,7 @@ public class Customer_Invoices extends Activity {
                 DatePickerDialog picker = new DatePickerDialog(Customer_Invoices.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+             //   picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 picker.show();
 
             }
@@ -452,26 +453,35 @@ public class Customer_Invoices extends Activity {
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_start_date.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_end_date.getText().toString())) {
 
 
-                        Date date1 = new Date(c_start_date.getText().toString());
-                        Date date2 = new Date(c_end_date.getText().toString());
-                        Calendar cal1 = Calendar.getInstance();
-                        Calendar cal2 = Calendar.getInstance();
-                        cal1.setTime(date1);
-                        cal2.setTime(date1);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        try {
+                            Date strDate = sdf.parse(c_start_date.getText().toString());
+                            Date endDate = sdf.parse(c_end_date.getText().toString());
+                            Date date1 = new Date(c_start_date.getText().toString());
+                            Date date2 = new Date(c_end_date.getText().toString());
+                            Calendar cal1 = Calendar.getInstance();
+                            Calendar cal2 = Calendar.getInstance();
+                            cal1.setTime(date1);
+                            cal2.setTime(date1);
 
-                        if(date1.compareTo(date2)>0)
-                        {
-                            Toast toast = Toast.makeText(getApplicationContext(), " End date not a valid date.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
+                            if(strDate.after(endDate))
+                            {
+                                Toast toast = Toast.makeText(getApplicationContext(), " End date not a valid date.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
+                            else
+                            {
+                                G_c_start_date_value = c_start_date.getText().toString();
+                                G_c_end_date_value = c_end_date.getText().toString();
+                                dialog1.dismiss();
+                                get_invoice_Data();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
-                        else
-                        {
-                            G_c_start_date_value = c_start_date.getText().toString();
-                            G_c_end_date_value = c_end_date.getText().toString();
-                            dialog1.dismiss();
-                            get_invoice_Data();
-                        }
+
+
 
                     }
                     else
@@ -817,7 +827,7 @@ public class Customer_Invoices extends Activity {
 
                             if(G_Filter_Flag.equalsIgnoreCase(""))
                             {
-                                Toast toast = Toast.makeText(Customer_Invoices.this, "invoices Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
+                                Toast toast = Toast.makeText(Customer_Invoices.this, "Invoices Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
                                 Intent launch = new Intent(Customer_Invoices.this, Customer_info_main.class);
@@ -826,7 +836,27 @@ public class Customer_Invoices extends Activity {
                             }
                             else
                             {
-                                Toast toast = Toast.makeText(Customer_Invoices.this, "Filter invoices Data Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
+                                All_customers.clear();
+                                result.clear();
+
+                                ca = new Customer_Invoices_adapter(result,Customer_Invoices.this);
+                                Customer_Invoices.this.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        dialog.dismiss();
+                                        recList.setAdapter(ca);
+                                        ca.notifyDataSetChanged();
+                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_Invoices.this, android.R.layout.simple_spinner_dropdown_item,
+                                                All_customers);
+                                        autoCompleteTextView1.setThreshold(1);// will start working from
+                                        // first character
+                                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                                        // data into the
+                                        // AutoCompleteTextView
+                                        autoCompleteTextView1.setTextColor(Color.BLACK);
+                                    }
+                                });
+
+                                Toast toast = Toast.makeText(Customer_Invoices.this, "Filter Invoices Data Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                             }
 

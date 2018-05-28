@@ -39,11 +39,11 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
     public void onBindViewHolder(com.anchor.adapter.Customer_Invoices_adapter.ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
         contactViewHolder.ic_name.setText(ci.ic_name);
-        contactViewHolder.icustomer_code.setText(Html.fromHtml("<b>" +"customer code : "+ "</b>")+ci.icustomer_code);
+        contactViewHolder.icustomer_code.setText(Html.fromHtml("<b>" +"Customer code : "+ "</b>")+ci.icustomer_code);
        // contactViewHolder.invoice_number.setText(ci.invoice_number);
-        contactViewHolder.invoice_date.setText(Html.fromHtml("<b>" +"invoice date : "+ "</b>")+ci.invoice_date);
-        contactViewHolder.invoice_due_date.setText(Html.fromHtml("<b>" +"invoice due date : "+ "</b>")+ci.invoice_due_date);
-        contactViewHolder.invoice_due_amount.setText(Html.fromHtml("<b>" +"invoice due amount : "+ "</b>")+ci.invoice_due_amount);
+        contactViewHolder.invoice_date.setText(Html.fromHtml("<b>" +"Invoice date : "+ "</b>")+ci.invoice_date);
+        contactViewHolder.invoice_due_date.setText(Html.fromHtml("<b>" +"Invoice due date : "+ "</b>")+ci.invoice_due_date);
+        contactViewHolder.invoice_due_amount.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.invoice_due_amount);
 
     }
 
