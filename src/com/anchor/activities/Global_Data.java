@@ -89,20 +89,8 @@ public class Global_Data {
     public static String user_doj="";
     public static String user_mobno="";
     public static String user_email="";
-    public static String user_report="";
-    public static String user_fname="";
-    public static String user_lname="";
-    public static String user_status="";
-    public static String user_createby="";
-    public static String user_modifyby="";
-    public static String user_project="";
-    public static String user_customer="";
-    public static String user_role="";
-    public static String user_device="";
-    public static String user_state="";
-    public static String user_city="";
-    public static String user_createat="";
-    public static String user_updateat="";
+    public static String G_BEAT_IDC = "";
+    public static String G_BEAT_service_flag = "";
     public static String variant_rr="";
     public static String variant_mrp="";
     

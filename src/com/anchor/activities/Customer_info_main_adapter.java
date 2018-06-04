@@ -8,9 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -51,6 +48,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
         contactViewHolder.c_name.setText(ci.shop_name);
+        contactViewHolder.c_code.setText(ci.icustomer_code);
         contactViewHolder.c_name2.setText(ci.name);
         contactViewHolder.c_address.setText(ci.address);
         contactViewHolder.c_credit_profile.setText(ci.credit_limit);
@@ -74,6 +72,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
     public static class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView c_name;
+        protected TextView c_code;
         protected TextView c_name2;
         protected TextView c_address;
         protected TextView c_credit_profile;
@@ -85,11 +84,13 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
         protected TextView c_mobile_number;
         protected ImageView c_call;
         protected ImageView c_location;
+        protected ImageView c_invoice;
 
         public ContactViewHolder(View v) {
             super(v);
 
             c_name =  (TextView) v.findViewById(R.id.c_name);
+            c_code =  (TextView) v.findViewById(R.id.c_code);
             c_name2 =  (TextView) v.findViewById(R.id.c_name2);
             c_address = (TextView)  v.findViewById(R.id.c_address);
             c_credit_profile = (TextView)  v.findViewById(R.id.c_credit_profile);
@@ -101,9 +102,11 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
             c_call = (ImageView) v.findViewById(R.id.c_call);
             c_city_name = (TextView) v.findViewById(R.id.c_city_name);
             c_location = (ImageView) v.findViewById(R.id.c_location);
+            c_invoice = (ImageView) v.findViewById(R.id.c_invoice);
 
             c_call.setOnClickListener(this);
             c_location.setOnClickListener(this);
+            c_invoice.setOnClickListener(this);
         }
 
         // Handles the row being being clicked
@@ -172,33 +175,18 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                     view.getContext().startActivity(callIntent);
                 }
             }
+            else if (view.getId() == c_invoice.getId())
+            {
+
+                Global_Data.customer_code =  c_code.getText().toString().trim();
+                Intent i=new Intent( view.getContext(), Customer_Invoices.class);
+                view.getContext().startActivity(i);
+
+            }
         }
     }
 
-    private static class GeocoderHandler extends Handler {
-        @Override
-        public void handleMessage(Message message) {
-            String locationAddress;
-            switch (message.what) {
-                case 1:
-                    Bundle bundle = message.getData();
-                    locationAddress = bundle.getString("address");
-                    break;
-                default:
-                    locationAddress = null;
-            }
 
-            if(locationAddress.equalsIgnoreCase("Location not found for this address"))
-            {
-                Toast.makeText(mcontext, "Customer location not found.", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?saddr="+Global_Data.GLOvel_LATITUDE+","+Global_Data.GLOvel_LONGITUDE+"&daddr="+locationAddress+""));
-                ((Activity)mcontext).startActivity(intent);
-            }
 
-        }
-    }
+
 }

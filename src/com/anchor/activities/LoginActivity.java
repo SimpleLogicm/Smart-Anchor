@@ -48,6 +48,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -93,7 +94,7 @@ public class LoginActivity extends Activity{
 	Bitmap blob_data_logo;
 	LoginDataBaseAdapter loginDataBaseAdapter;
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
-    ImageView logo_img;
+    ImageView logo_img,app_clear_dat;
 	SharedPreferences sharedpreferences;
 	public static final String mypreference = "mypref";
 
@@ -106,6 +107,7 @@ public class LoginActivity extends Activity{
 		setContentView(R.layout.login);
 
         logo_img=(ImageView)findViewById(R.id.imageView1);
+		app_clear_dat=(ImageView)findViewById(R.id.app_clear_dat);
 		link_fpwd = (TextView) findViewById(R.id.forget_pwd);
 
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
@@ -166,12 +168,12 @@ public class LoginActivity extends Activity{
 
 		 Global_Data.LOCATION_SERVICE_HIT = "TRUE";
 
-		 if(!gps.canGetLocation()){
+		if(!gps.canGetLocation()){
 			// can't get location
-	        	// GPS or Network is not enabled
-	        	// Ask user to enable GPS/network in settings
-	        	gps.showSettingsAlert();
-		 }
+			// GPS or Network is not enabled
+			// Ask user to enable GPS/network in settings
+			gps.showSettingsAlert();
+		}
 
     	 Calendar c = Calendar.getInstance();
          SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
@@ -205,11 +207,11 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-				editText1.setText("tejal");
-				editText2.setText("tejal12345");
+//				editText1.setText("Jaya");
+//				editText2.setText("jaya12345");
 
-//		        editText1.setText("aakash");
-//				editText2.setText("aakash12345");
+		        editText1.setText("swatiyamgar");
+				editText2.setText("password");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -222,21 +224,7 @@ public class LoginActivity extends Activity{
 
 			    SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
 		        SharedPreferences.Editor editor=spf.edit();        
-		       // editor.putString("UserID", "admin");
-		       // editor.putString("pwd", "test");
-		       // editor.putFloat("Target", 5000);
-		        //editor.putString("SimID", simSerial);
-		        editor.commit();
 
-//		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-//		boolean enabled = service.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//
-//		// Check if enabled and if not send user to the GPS settings
-//		if (!enabled) {
-//			Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-
-//			startActivity(intent);
-//		}
 
 		         // create a instance of SQLite Database
 			     loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -300,7 +288,53 @@ public class LoginActivity extends Activity{
 //			}
 //		});
 
-	   	       buttonReg.setOnClickListener(new OnClickListener() {
+
+		app_clear_dat.setOnClickListener(new OnClickListener() {
+			public void onClick(View view)
+			{
+				AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+
+
+				builder.setMessage("Do you want to Clear app Data ?")
+						.setCancelable(false)
+						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+
+								File cache = getCacheDir();
+								File appDir = new File(cache.getParent());
+								if(appDir.exists()) {
+									String[] children = appDir.list();
+									for (String s : children) {
+										if (!s.equals("lib")) {
+											deleteDir(new File(appDir, s));
+											Log.i("TAG", "File /data/data/APP_PACKAGE/" + s + " DELETED");
+
+											editText1.setText("");
+											editText2.setText("");
+											emp_code.setText("");
+											Toast.makeText(LoginActivity.this, "App Data Clear Successfully, Please click Sign Up Button.", Toast.LENGTH_SHORT).show();
+										}
+									}
+								}
+
+							}
+						})
+						.setNegativeButton("No", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								dialog.cancel();
+
+							}
+						});
+
+				//Creating dialog box
+				AlertDialog alert = builder.create();
+				//Setting the title manually
+				alert.setTitle("Metal");
+				alert.show();
+			}
+		});
+
+		buttonReg.setOnClickListener(new OnClickListener() {
 		   	         public void onClick(View view) 
 		   	         {
 		   	        	isInternetPresent = cd.isConnectingToInternet();
@@ -333,6 +367,20 @@ public class LoginActivity extends Activity{
 			   	          
 	   	       buttonLogin.setOnClickListener(new OnClickListener() {
 	   	         public void onClick(View view) {
+
+//					 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+//					 long bytesAvailable;
+//					 if (android.os.Build.VERSION.SDK_INT >=
+//							 android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//						 bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
+//					 }
+//					 else {
+//						 bytesAvailable = (long)stat.getBlockSize() * (long)stat.getAvailableBlocks();
+//					 }
+//					 long megAvailable = bytesAvailable / (1024 * 1024);
+//					 Log.e("","Available MB : "+megAvailable);
+//
+//					 Toast.makeText(LoginActivity.this, "Available MB : "+megAvailable, Toast.LENGTH_SHORT).show();
 
 					 gps = new GPSTracker(LoginActivity.this);
 					 if(!gps.canGetLocation()){
@@ -1131,9 +1179,17 @@ public class LoginActivity extends Activity{
 				for (Local_Data cn : contacts2) {
 					String str_beat = "" + cn.getUser();
 
+//					SharedPreferences prefs = getSharedPreferences("anchorde",Context.MODE_WORLD_READABLE);
+//					SharedPreferences.Editor editor1 = prefs.edit();
+//					editor1.putString("USER_LOGIN_CHECK", "Login");
+//					editor1.commit();
+
+
+
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
 					editor.putString("USER_EMAIL", cn.getuser_email());
+
 					//editor.commit();
 
 					Global_Data.GLOvel_USER_EMAIL = cn.getuser_email();
@@ -1187,7 +1243,7 @@ public class LoginActivity extends Activity{
 
 						dbvoc.getDeleteTable("user_email");
 
-						loginDataBaseAdapter.insert_user_email(cn.getuser_email());
+						loginDataBaseAdapter.insert_user_email(cn.getuser_email(),"Login");
 						//Global_Data.local_pwd = ""+cn.getPwd();
 
 						//String test_passwd = "password";
@@ -1423,5 +1479,19 @@ public class LoginActivity extends Activity{
 //		}
 //		return strDecryptedText;
 //	}
+
+	public static boolean deleteDir(File dir) {
+		if (dir != null && dir.isDirectory()) {
+			String[] children = dir.list();
+			for (int i = 0; i < children.length; i++) {
+				boolean success = deleteDir(new File(dir, children[i]));
+				if (!success) {
+					return false;
+				}
+			}
+		}
+
+		return dir.delete();
+	}
 
 }

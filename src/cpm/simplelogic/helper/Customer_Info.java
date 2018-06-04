@@ -19,5 +19,12 @@ public class Customer_Info {
     public String city_name;
     public String Beat_name;
 
+    public String ic_name;
+    public String icustomer_code;
+    public String invoice_number;
+    public String invoice_date;
+    public String invoice_due_date;
+    public String invoice_due_amount;
+
 }
 

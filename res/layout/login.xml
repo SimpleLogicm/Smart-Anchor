@@ -121,6 +121,16 @@
             android:layout_gravity="center"
             android:text="© 2014, Simple Logic IT Pvt. Ltd."
             android:textColor="#8A0808" />
+
+
+        <ImageView
+            android:id="@+id/app_clear_dat"
+            android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/cleardata_icon" />
     </LinearLayout>
 
 </LinearLayout>

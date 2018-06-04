@@ -23,7 +23,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.anchor.model.DistanceData;
 import com.android.volley.AuthFailureError;
@@ -296,7 +296,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                         if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
 
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Metal App");
+                            dialog.setTitle("Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 

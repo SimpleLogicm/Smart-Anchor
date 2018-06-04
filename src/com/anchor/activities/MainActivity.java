@@ -63,6 +63,7 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 	private RequestQueue requestQueue;
+
 	String device_id;
 	String response_result = "";
 	static String final_response = "";
@@ -297,7 +298,7 @@ public class MainActivity extends BaseActivity {
 				//getActionBar().setTitle(mDrawerTitle);
 				// calling onPrepareOptionsMenu() to hide action bar icons
 				
-				screen_title.setText("METAL");
+				screen_title.setText("Smart Anchor");
 				invalidateOptionsMenu();
 			}
 		};
@@ -832,6 +833,10 @@ public class MainActivity extends BaseActivity {
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 
+					dbvoc.getDeleteTable("user_email");
+
+					loginDataBaseAdapter.insert_user_email(Global_Data.GLOvel_USER_EMAIL,"Logout");
+
 					 Intent i=new Intent(getApplicationContext(), LoginActivity.class);
 					  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				       // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -929,6 +934,16 @@ public class MainActivity extends BaseActivity {
 						}
 						else
 						if(response_result.equalsIgnoreCase("User not registered")) {
+
+							//Toast.makeText(MainActivity.this, response_result, Toast.LENGTH_LONG).show();
+
+							Toast toast = Toast.makeText(MainActivity.this, response_result, Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
+
+						}
+						else
+						if(response_result.equalsIgnoreCase("Device not registered")) {
 
 							//Toast.makeText(MainActivity.this, response_result, Toast.LENGTH_LONG).show();
 

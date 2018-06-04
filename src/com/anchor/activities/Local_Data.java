@@ -179,7 +179,15 @@ public class Local_Data {
     String ware_name;
     String sub_categ;
     String img_ordersign, name, punched_button, current_date_only;
-    String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant,shipment_pri,business_category,primary_category,emp_code;
+    String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant,shipment_pri,business_category,primary_category,emp_code,image_path;
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
 
     public String getEmp_code() {
         return emp_code;

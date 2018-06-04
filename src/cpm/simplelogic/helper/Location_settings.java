@@ -127,10 +127,7 @@ public class Location_settings implements
     public Location_settings(Context context) {
 
         c_context = context;
-        buildGoogleApiClient();
-        createLocationRequest();
-        buildLocationSettingsRequest();
-        checkLocationSettings();
+
 
     }
 
@@ -170,7 +167,7 @@ public class Location_settings implements
      * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the
      * LocationServices API.
      */
-    protected synchronized void buildGoogleApiClient() {
+    public synchronized  void buildGoogleApiClient() {
         Log.i(TAG, "Building GoogleApiClient");
         mGoogleApiClient = new GoogleApiClient.Builder(c_context)
                 .addConnectionCallbacks(this)
@@ -192,7 +189,7 @@ public class Location_settings implements
      * These settings are appropriate for mapping applications that show real-time location
      * updates.
      */
-    protected void createLocationRequest() {
+    public void createLocationRequest() {
         mLocationRequest = new LocationRequest();
 
         // Sets the desired interval for active location updates. This interval is
@@ -213,7 +210,7 @@ public class Location_settings implements
      * a {@link com.google.android.gms.location.LocationSettingsRequest} that is used for checking
      * if a device has the needed location settings.
      */
-    protected void buildLocationSettingsRequest() {
+    public void buildLocationSettingsRequest() {
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
         builder.addLocationRequest(mLocationRequest);
         mLocationSettingsRequest = builder.build();
@@ -224,7 +221,7 @@ public class Location_settings implements
      * {@link com.google.android.gms.location.SettingsApi#checkLocationSettings(GoogleApiClient,
      * LocationSettingsRequest)} method, with the results provided through a {@code PendingResult}.
      */
-    protected void checkLocationSettings() {
+    public void checkLocationSettings() {
         PendingResult<LocationSettingsResult> result =
                 LocationServices.SettingsApi.checkLocationSettings(
                         mGoogleApiClient,

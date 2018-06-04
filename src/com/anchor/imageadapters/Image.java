@@ -9,16 +9,26 @@ public class Image implements Serializable{
     private String name;
     private String small, medium, large;
     private String timestamp;
+    private String type;
 
     public Image() {
     }
 
-    public Image(String name, String small, String medium, String large, String timestamp) {
+    public Image(String name, String small, String medium, String large, String timestamp,String type) {
         this.name = name;
         this.small = small;
         this.medium = medium;
         this.large = large;
         this.timestamp = timestamp;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getName() {

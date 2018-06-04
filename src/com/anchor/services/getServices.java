@@ -151,7 +151,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
         
@@ -434,7 +434,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage(wait);
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -450,7 +450,6 @@ public class getServices {
 //        }F
 
         Log.d("Server url","Server url"+domain+"menus/sync_masters?imei_no="+device_id);
-
         StringRequest stringRequest = null;
         stringRequest = new StringRequest(domain+"menus/sync_masters?imei_no="+device_id,
                 new Response.Listener<String>() {
@@ -497,6 +496,11 @@ public class getServices {
                             Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
                         }
                         dialog.dismiss();
+
+                        Intent intentn = new Intent(context, MainActivity.class);
+                        context.startActivity(intentn);
+                        //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        ((Activity) context).finish();
                         // finish();
                     }
                 });
@@ -531,7 +535,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -956,7 +960,7 @@ public class getServices {
             dialog.dismiss();}
 
         dialog.setMessage("Order Sync in Progress, Please Wait");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -968,11 +972,7 @@ public class getServices {
     public static void SYNCORDER_AllOrders(Context contextn){
         context = contextn;
 
-        dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Order Sync in Progress, Please Wait");
-        dialog.setTitle("Metal");
-        dialog.setCancelable(false);
-        dialog.show();
+
 
         new AllOrderAyncTask().execute();
 
@@ -1116,7 +1116,7 @@ public class getServices {
             //params.put("token", json.toString());
 
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -1454,7 +1454,7 @@ public class getServices {
             //params.put("token", json.toString());
 
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -1725,7 +1725,7 @@ public class getServices {
            //params.put("token", json.toString());
 
            dialog.setMessage("Order Sync in Progress, Please Wait");
-           dialog.setTitle("Metal");
+           dialog.setTitle("Anchor");
            dialog.setCancelable(false);
            dialog.show();
 
@@ -1916,7 +1916,7 @@ public class getServices {
 
 		    dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 	        dialog.setMessage("Please wait....");
-	        dialog.setTitle("Metal");
+	        dialog.setTitle("Anchor");
 	        dialog.setCancelable(false);
 	        dialog.show();
 
@@ -2278,7 +2278,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -2867,7 +2867,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Anchor");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -3036,7 +3036,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -3314,159 +3314,144 @@ public class getServices {
 
                             JSONObject jsonObject = label_acc.getJSONObject(i);
                             loginDataBaseAdapter.insertLABEL_CHANGES(jsonObject.getString("variable_name"), jsonObject.getString("new_label"), jsonObject.getString("editable"), jsonObject.getString("mandatory"), jsonObject.getString("allow"));
-                        }
 
-                        List<Local_Data> cont_lab = dbvoc.getAllLabels();
-                        //results.add("Select Beat");
-                        for (Local_Data cn : cont_lab) {
+                            Global_Data.Var_Label =jsonObject.getString("variable_name");
+                            Global_Data.editable = jsonObject.getString("editable");
+                            Global_Data.mandatory = jsonObject.getString("mandatory");
+                            Global_Data.allow = jsonObject.getString("allow");
 
-                            Global_Data.Var_Label = cn.getVarLabel_account();
-                            Global_Data.editable = cn.getEditable();
-                            Global_Data.mandatory = cn.getMandatory();
-                            Global_Data.allow = cn.getAllow();
 
-                            //Label Change
                             if(Global_Data.Var_Label.equalsIgnoreCase("no_order"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
-                                Global_Data.editable = cn.getEditable();
+                               // Global_Data.New_Label =jsonObject.getString("new_label");
+                               // Global_Data.editable =jsonObject.getString("editable");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_norder", cn.getNewLabel_account());
+                                editor.putString("var_norder",jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("return_order"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
-                                Global_Data.editable = cn.getEditable();
+                                //Global_Data.New_Label =jsonObject.getString("new_label");
+                               // Global_Data.editable =jsonObject.getString("editable");
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_retorder", cn.getNewLabel_account());
+                                editor.putString("var_retorder", jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("rp"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                                //Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_rp", cn.getNewLabel_account());
+                                editor.putString("var_rp", jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("schedule"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                               // Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_schedule", cn.getNewLabel_account());
+                                editor.putString("var_schedule", jsonObject.getString("new_label"));
                                 editor.commit();
                             }
 
+
                             if(Global_Data.Var_Label.equalsIgnoreCase("detail1"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
-                                Global_Data.editable = cn.getEditable();
+                                //Global_Data.New_Label = jsonObject.getString("new_label");
+                               // Global_Data.editable = jsonObject.getString("editable");
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_detail1", cn.getNewLabel_account());
+                                editor.putString("var_detail1",jsonObject.getString("new_label"));
                                 editor.commit();
 
                                 SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor1=spf1.edit();
-                                editor1.putString("var_detail1_edit", cn.getEditable());
+                                editor1.putString("var_detail1_edit", jsonObject.getString("editable"));
                                 editor1.commit();
 
                                 SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor2=spf2.edit();
-                                editor2.putString("var_detail1_mandate", cn.getMandatory());
+                                editor2.putString("var_detail1_mandate", jsonObject.getString("mandatory"));
                                 editor2.commit();
 
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
-                                editor3.putString("var_detail1_allow", cn.getAllow());
+                                editor3.putString("var_detail1_allow", jsonObject.getString("allow"));
                                 editor3.commit();
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("detail2"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                               // Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_detail2", cn.getNewLabel_account());
+                                editor.putString("var_detail2", jsonObject.getString("new_label"));
                                 editor.commit();
 
                                 SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor1=spf1.edit();
-                                editor1.putString("var_detail2_edit", cn.getEditable());
+                                editor1.putString("var_detail2_edit", jsonObject.getString("editable"));
                                 editor1.commit();
 
                                 SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor2=spf2.edit();
-                                editor2.putString("var_detail2_mandate", cn.getMandatory());
+                                editor2.putString("var_detail2_mandate",jsonObject.getString("mandatory"));
                                 editor2.commit();
 
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
-                                editor3.putString("var_detail2_allow", cn.getAllow());
+                                editor3.putString("var_detail2_allow", jsonObject.getString("allow"));
                                 editor3.commit();
 
                             }
 
                             if(Global_Data.Var_Label.equalsIgnoreCase("details4"))
                             {
-                                Global_Data.New_Label = cn.getNewLabel_account();
+                                //Global_Data.New_Label = jsonObject.getString("new_label");
                                 // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
                                 SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor=spf.edit();
-                                editor.putString("var_detail4", cn.getNewLabel_account());
+                                editor.putString("var_detail4", jsonObject.getString("new_label"));
                                 editor.commit();
 
                                 SharedPreferences spf1=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor1=spf1.edit();
-                                editor1.putString("var_detail4_edit", cn.getEditable());
+                                editor1.putString("var_detail4_edit", jsonObject.getString("editable"));
                                 editor1.commit();
 
                                 SharedPreferences spf2=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor2=spf2.edit();
-                                editor2.putString("var_detail4_mandate", cn.getMandatory());
+                                editor2.putString("var_detail4_mandate", jsonObject.getString("mandatory"));
                                 editor2.commit();
 
                                 SharedPreferences spf3=context.getSharedPreferences("SimpleLogic",0);
                                 SharedPreferences.Editor editor3=spf3.edit();
-                                editor3.putString("var_detail4_allow", cn.getAllow());
+                                editor3.putString("var_detail4_allow", jsonObject.getString("allow"));
                                 editor3.commit();
 
                             }
 
-//                            //Editable
-//                            if(Global_Data.editable.equalsIgnoreCase("editable"))
-//                            {
-//                                Global_Data.New_Label = cn.getNewLabel_account();
-//                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-//
-//                                SharedPreferences spf=context.getSharedPreferences("SimpleLogic",0);
-//                                SharedPreferences.Editor editor=spf.edit();
-//                                editor.putString("var_norder", cn.getNewLabel_account());
-//                                editor.commit();
-//                            }
-
-
-
-
                         }
+
+                        List<Local_Data> cont_lab = dbvoc.getAllLabels();
+                        //results.add("Select Beat");
+                        for (Local_Data cn : cont_lab)
 
                         for(int z=0;z<logo_img.length();z++)
                         {
@@ -4206,8 +4191,18 @@ public class getServices {
                     // product_value.put("order_take_by", "");
                     product_value.put("customer_code", cn.get_category_id());
                     product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
-                    product_value.put("latitude", cn.getlatitude());
-                    product_value.put("longitude", cn.getlongitude());
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
+
+                        product_value.put("latitude", cn.getlatitude());
+                        product_value.put("longitude", cn.getlongitude());
+                    }
+                    else
+                    {
+                        product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                    }
+
                     product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
                     product_value.put("details1", cn.getOrder_detail1());
                     product_value.put("details2", cn.getOrder_detail2());
@@ -4215,6 +4210,33 @@ public class getServices {
                     product_value.put("details4", cn.getOrder_detail4());
                     product_value.put("order_category_code", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
+
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
+                    {
+                        order_image_url = cn.getSignature_image().trim();
+                        // File filepath = new File(cn.getimg_ordersign());
+                        // String  path =  "file://"+filepath.getPath();
+                        try {
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature_image()));
+                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
+                            mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
+                            b5 = bos5.toByteArray();
+
+                            String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
+                            product_value.put("signature_path",getsign_str);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            product_value.put("signature_path", "");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        product_value.put("signature_path", "");
+                    }
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign()))
                     {
@@ -4244,7 +4266,7 @@ public class getServices {
                     }
 
 
-                    product_value.put("signature_path", cn.getSignature_image());
+                    // product_value.put("signature_path", cn.getSignature_image());
                     customer_id = cn.get_category_id();
                     // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                     // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
@@ -4435,18 +4457,18 @@ public class getServices {
                                 public void run() {
 
                                     dialog.dismiss();
-                                    final Dialog dialog = new Dialog(context);
-                                    dialog.setCancelable(false);
+                                    final Dialog dialog1 = new Dialog(context);
+                                    dialog1.setCancelable(false);
 
                                     //tell the Dialog to use the dialog.xml as it's layout description
-                                    dialog.setContentView(R.layout.dialog);
-                                    dialog.setTitle("Order Status :");
+                                    dialog1.setContentView(R.layout.dialog);
+                                    dialog1.setTitle("Order Status :");
 
-                                    TextView txt = (TextView) dialog.findViewById(R.id.txtOrderID);
+                                    TextView txt = (TextView) dialog1.findViewById(R.id.txtOrderID);
 
                                     txt.setText("Order is generated.");
-                                    TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
-                                    TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
+                                    TextView txtMessage = (TextView) dialog1.findViewById(R.id.txtMessage);
+                                    TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
                                     if (!mobile_numbers.isEmpty() && mobile_numbers.size() > 0) {
@@ -4454,12 +4476,12 @@ public class getServices {
                                     }
 
 
-                                    ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
+                                    ImageView dialogButton = (ImageView) dialog1.findViewById(R.id.dialogButton);
 
                                     dialogButton.setOnClickListener(new OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            dialog.dismiss();
+                                            dialog1.dismiss();
 
                                             //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             getTargetDataservice(context);
@@ -4468,7 +4490,7 @@ public class getServices {
                                         }
                                     });
 
-                                    dialog.show();
+                                    dialog1.show();
                                 }
                             });
 
@@ -4610,8 +4632,16 @@ public class getServices {
 
         @Override
         protected void onPreExecute() {
-            // Here you can show progress bar or something on the similar lines.
-            // Since you are in a UI thread here.
+            if (dialog != null && dialog.isShowing()) {
+                dialog.cancel();
+                //dialog.dismiss();
+            }
+
+            dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+            dialog.setMessage("Order Sync in Progress, Please Wait");
+            dialog.setTitle("Anchor");
+            dialog.setCancelable(false);
+            dialog.show();
             super.onPreExecute();
         }
 
@@ -4744,10 +4774,46 @@ public class getServices {
                     //product_value.put("signature_image_name", uploadImage);
                     product_value.put("device_code", Global_Data.device_id);
 
-                    product_value.put("latitude", cn.getlatitude());
-                    product_value.put("longitude", cn.getlongitude());
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
+
+                        product_value.put("latitude", cn.getlatitude());
+                        product_value.put("longitude", cn.getlongitude());
+                    }
+                    else
+                    {
+                        product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                    }
+
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("signature_path", cn.getSignature_image());
+                   // product_value.put("signature_path", cn.getSignature_image());
+
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
+                    {
+                        order_image_url = cn.getSignature_image().trim();
+                        // File filepath = new File(cn.getimg_ordersign());
+                        // String  path =  "file://"+filepath.getPath();
+                        try {
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature_image()));
+                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
+                            mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
+                            b5 = bos5.toByteArray();
+
+                            String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
+                            product_value.put("signature_path",getsign_str);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            product_value.put("signature_path", "");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        product_value.put("signature_path", "");
+                    }
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign()))
                     {

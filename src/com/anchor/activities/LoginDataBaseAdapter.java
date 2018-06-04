@@ -230,6 +230,9 @@ public class LoginDataBaseAdapter
 		static final String DATABASE_CREATE_NEW_LAUNCHES = "CREATE TABLE IF NOT EXISTS "+"new_launches"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text, date text, media_path1 text, media_path2 text, media_path3 text, media_path4 text, media_path5 text, media_path6 text, " +
                 		"media_path7 text, media_path8 text, media_path9 text, media_path10 text, created_at text, updated_at text);";
+
+	static final String DATABASE_CREATE_NEW_LAUNCHES_NEW = "CREATE TABLE IF NOT EXISTS "+"new_launches_new"+
+			"( " +"ID"+" integer primary key autoincrement,"+ "name text, file_path text, file_type text, date text);";
 		
 		static final String DATABASE_CREATE_ADVERTISEMENTS = "CREATE TABLE IF NOT EXISTS "+"advertisements"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text, date text, media_path text, created_at text, updated_at text);";
@@ -290,7 +293,7 @@ public class LoginDataBaseAdapter
 			"( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text,retailer_id text,created_by text,created_at text,updated_at text,code text,credit_limit text,amount_outstanding text,amount_overdue text);";
 
 	static final String DATABASE_USER_EMAIL = "CREATE TABLE IF NOT EXISTS "+"user_email"+
-			"( " +"ID"+" integer primary key autoincrement,"+ "email text);";
+			"( " +"ID"+" integer primary key autoincrement,"+ "email text,status text);";
 
 	static final String DATABASE_GEO_DATA = "CREATE TABLE IF NOT EXISTS "+"geo_data"+
 			"( " +"ID"+" integer primary key autoincrement,"+ "lati text, longi text, addressg text, datatimeg text, date1 text, time1 text);";
@@ -319,6 +322,8 @@ public class LoginDataBaseAdapter
 
 	static final String DATABASE_VERSION_INFO = "CREATE TABLE IF NOT EXISTS " + "version_info" +
 			"( " + "ID" + " integer primary key autoincrement," + "version_code text, version_name text);";
+
+
 
 //		//new product and customer for Girnar Monday Demo
 //		static final String DATABASE_CREATE_NEWCUSTOMER = "create table "+"new_customers"+
@@ -1734,6 +1739,21 @@ public class LoginDataBaseAdapter
       		db.insert("new_launches", null, newValues);
       		//Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
       	}
+
+	public void insertNewLaunchesNew(String name, String file_path, String file_type, String date)
+	{
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("name", name);
+		newValues.put("file_path", file_path);
+		newValues.put("file_type", file_type);
+		newValues.put("date", date);
+
+
+		// Insert the row into your table
+		db.insert("new_launches_new", null, newValues);
+		//Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+	}
         
         public void insertAdevertisements(String project_id, String customer_id, String date, String media_path, 
         		String created_at, String updated_at)
@@ -3227,11 +3247,13 @@ public class LoginDataBaseAdapter
 		db.insert("credit_profile", null, newValues);
 	}
 
-	public void insert_user_email(String email)
+	public void insert_user_email(String email, String status)
 	{
 		ContentValues newValues = new ContentValues();
 		// Assign values for each row.
 		newValues.put("email", email);
+		newValues.put("status", status);
+
 		// Insert the row into your table
 		db.insert("user_email", null, newValues);
 	}
@@ -3421,6 +3443,8 @@ public class LoginDataBaseAdapter
 		// Insert the row into your table
 		db.insert("attendance", null, newValues);
 	}
+
+
 		
 }
 

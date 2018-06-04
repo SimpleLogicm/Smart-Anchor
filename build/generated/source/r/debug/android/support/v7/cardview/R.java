@@ -14,11 +14,11 @@ public final class R {
         public static final int cardMaxElevation = 0x7f030034;
         public static final int cardPreventCornerOverlap = 0x7f030035;
         public static final int cardUseCompatPadding = 0x7f030036;
-        public static final int contentPadding = 0x7f03004b;
-        public static final int contentPaddingBottom = 0x7f03004c;
-        public static final int contentPaddingLeft = 0x7f03004d;
-        public static final int contentPaddingRight = 0x7f03004e;
-        public static final int contentPaddingTop = 0x7f03004f;
+        public static final int contentPadding = 0x7f03004c;
+        public static final int contentPaddingBottom = 0x7f03004d;
+        public static final int contentPaddingLeft = 0x7f03004e;
+        public static final int contentPaddingRight = 0x7f03004f;
+        public static final int contentPaddingTop = 0x7f030050;
     }
     public static final class color {
         public static final int cardview_dark_background = 0x7f050021;
@@ -37,7 +37,7 @@ public final class R {
         public static final int CardView_Light = 0x7f0e0071;
     }
     public static final class styleable {
-        public static final int[] CardView = { 0x7f030031, 0x7f030032, 0x7f030033, 0x7f030034, 0x7f030035, 0x7f030036, 0x7f03004b, 0x7f03004c, 0x7f03004d, 0x7f03004e, 0x7f03004f };
+        public static final int[] CardView = { 0x7f030031, 0x7f030032, 0x7f030033, 0x7f030034, 0x7f030035, 0x7f030036, 0x7f03004c, 0x7f03004d, 0x7f03004e, 0x7f03004f, 0x7f030050 };
         public static final int CardView_cardBackgroundColor = 0;
         public static final int CardView_cardCornerRadius = 1;
         public static final int CardView_cardElevation = 2;

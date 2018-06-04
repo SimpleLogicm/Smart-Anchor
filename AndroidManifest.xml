@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.anchor.activities"
-    android:versionCode="8"
-    android:versionName="1.4.9">
+    android:versionCode="12"
+    android:versionName="1.6.2">
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,7 +24,6 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -88,14 +87,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
-
         <activity
             android:name=".Stock_options"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light.Dialog"
-            />
-
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
         <activity
             android:name=".Stock_Product_Options"
             android:label="@string/app_name"
@@ -172,8 +168,8 @@
         -->
         <activity
             android:name=".CaptureSignature"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ReturnOrderActivity"
             android:label="@string/app_name"
@@ -213,8 +209,8 @@
         <activity
             android:name=".Customer_Feed"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Customer_Stock"
             android:label="@string/app_name"
@@ -246,8 +242,8 @@
         <activity
             android:name=".Order"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".Sales_Dash"
             android:label="@string/app_name"
@@ -285,21 +281,18 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Item_Edit_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Sound_Act"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Calender_ReadonlyView"
             android:label="@string/app_name"
@@ -356,13 +349,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Stock_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Expended_List_Main"
             android:label="@string/app_name"
@@ -388,7 +379,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Previous_orderNew_S1"
             android:label="@string/app_name"
@@ -404,143 +394,118 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Previous_Item_Edit_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Survey_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Survey_Home"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Marketing"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Contact_Us"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".About_Metal"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".SDcard_imageMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".SDcard_VideoMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Target_REYC_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Target_REYCLE"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Webview_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
-
-
         <activity
             android:name=".Customer_info_main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Target_Summary1"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Target_Summary2"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Expended_list_demo"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Forget_Pwd"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".Sound_Setting"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ProductAll_Varients"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Preorder_Proall_Varient"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".SubDealer_Home"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".SubDealer_Detail1"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".Customer_Invoices"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
 
         <receiver android:name=".AutoStart">
             <intent-filter>
@@ -551,6 +516,34 @@
         <service
             android:name=".MyService"
             android:enabled="true" />
+
+        <service android:name="cpm.simplelogic.helper.OnClearFromRecentService" android:stopWithTask="false" />
+
+
+        <provider
+            android:authorities="cpm.simplelogic.helper.ContentProviderData"
+            android:name="cpm.simplelogic.helper.DataProvider"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="cpm.simplelogic.helper.ContentProviderData_City"
+            android:name="cpm.simplelogic.helper.DataProvider_City"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="cpm.simplelogic.helper.ContentProviderData_State"
+            android:name="cpm.simplelogic.helper.DataProvider_States"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="cpm.simplelogic.helper.ContentProviderData_City"
+            android:name="cpm.simplelogic.helper.DataProvider_City"
+            android:exported="true"/>
+
+        <provider
+            android:authorities="cpm.simplelogic.helper.ContentProviderData_Customers"
+            android:name="cpm.simplelogic.helper.DataProvider_Customers"
+            android:exported="true"/>
 
         <!--
          <service android:name=".LocationService" />
@@ -566,19 +559,21 @@
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
 
-        <!--Production-->
-        <!--<meta-data-->
-            <!--android:name="com.google.android.maps.v2.API_KEY"-->
-            <!--android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
 
-        <!--UAT-->
+        <!-- Production -->
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
+        <!-- android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" /> -->
+
+
+        <!-- UAT -->
         <meta-data
-        android:name="com.google.android.maps.v2.API_KEY"
-        android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />
-
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
 
     </application>
 

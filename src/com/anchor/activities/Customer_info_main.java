@@ -18,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -31,17 +30,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import cpm.simplelogic.helper.Customer_Info;
 
 
+
+
 public class Customer_info_main extends Activity {
 
+    Calendar myCalendar;
+    HashMap<String, String> hm = new HashMap<String, String>();
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> badapter;
     List<Customer_Info> Allresult = new ArrayList<Customer_Info>();
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     ProgressDialog dialog;
@@ -55,6 +65,9 @@ public class Customer_info_main extends Activity {
     ArrayList<String> All_customers = new ArrayList<String>();
 
     AutoCompleteTextView autoCompleteTextView1;
+    ImageView close_filter;
+    Button filter_submit, filter_clear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +77,6 @@ public class Customer_info_main extends Activity {
 
         autoCompleteTextView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
         recList = (RecyclerView) findViewById(R.id.c_info_card);
-       // recList.addItemDecoration(new DividerItemDecoration(Customer_info_main.this, DividerItemDecoration.VERTICAL_LIST));
 
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -120,6 +132,8 @@ public class Customer_info_main extends Activity {
 
        // setupSearchView();
 
+
+
         dialog = new ProgressDialog(Customer_info_main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Customer Loading....");
         dialog.setTitle("Sales App");
@@ -127,6 +141,8 @@ public class Customer_info_main extends Activity {
         dialog.show();
 
         new CustomerASN().execute();
+
+
 
         autoCompleteTextView1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -227,6 +243,7 @@ public class Customer_info_main extends Activity {
                         ci.name = String.valueOf(Html.fromHtml("<b>" +"Name : "+ "</b>"+cn.getCUSTOMER_NAME()));
                         ci.mobile = cn.getMOBILE_NO();
                         ci.shop_name = cn.getCUSTOMER_SHOPNAME();
+                        ci.icustomer_code = cn.getCust_Code();
                         ci.address = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
                         ci.latlong = cn.getlatitude()+","+cn.getlongitude();
                         Customer_id = cn.getCust_Code();
@@ -324,7 +341,7 @@ public class Customer_info_main extends Activity {
 
     @Override
     public void onBackPressed() {
-             Intent i=new Intent(Customer_info_main.this, Sales_Dash.class);
+           Intent i=new Intent(Customer_info_main.this, Sales_Dash.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
@@ -369,6 +386,7 @@ public class Customer_info_main extends Activity {
                     ci.name = String.valueOf(Html.fromHtml("<b>" +"Name : "+ "</b>"+cn.getCUSTOMER_NAME()));
                     ci.mobile = cn.getMOBILE_NO();
                     ci.shop_name = cn.getCUSTOMER_SHOPNAME();
+                    ci.icustomer_code = cn.getCust_Code();
                     ci.address = String.valueOf(Html.fromHtml("<b>" +"Address : "+ "</b>"+cn.getAddress()));
                     ci.latlong = cn.getlatitude()+","+cn.getlongitude();
                     Customer_id = cn.getCust_Code();
@@ -499,5 +517,7 @@ public class Customer_info_main extends Activity {
 //    public boolean onQueryTextSubmit(String query) {
 //        return false;
 //    }
+
+
 
 }

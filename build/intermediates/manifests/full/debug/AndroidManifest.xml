@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anchor.activities"
-    android:versionCode="8"
-    android:versionName="1.4.9" >
+    android:versionCode="9"
+    android:versionName="1.5.9" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -52,7 +52,6 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.anchor.activities.SplashScreenActivity"
@@ -402,62 +401,52 @@
             android:name="com.anchor.activities.Previous_Item_Edit_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Survey_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Survey_Home"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Marketing"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Contact_Us"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.About_Metal"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.SDcard_imageMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.SDcard_VideoMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Target_REYC_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Target_REYCLE"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.Webview_Activity"
             android:label="@string/app_name"
@@ -492,8 +481,7 @@
             android:name="com.anchor.activities.Sound_Setting"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.anchor.activities.ProductAll_Varients"
             android:label="@string/app_name"
@@ -501,6 +489,16 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.anchor.activities.Preorder_Proall_Varient"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.anchor.activities.SubDealer_Home"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.anchor.activities.SubDealer_Detail1"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
@@ -514,7 +512,14 @@
         <service
             android:name="com.anchor.activities.MyService"
             android:enabled="true" />
+        <service
+            android:name="cpm.simplelogic.helper.OnClearFromRecentService"
+            android:stopWithTask="false" />
 
+        <provider
+            android:name="cpm.simplelogic.helper.DataProvider"
+            android:authorities="cpm.simplelogic.helper.ContentProviderData"
+            android:exported="true" />
         <!--
          <service android:name=".LocationService" />
 

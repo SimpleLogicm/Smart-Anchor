@@ -1,10 +1,13 @@
 package com.anchor.activities;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.anchor.imageadapters.Image;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +102,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
         private static final String TABLE_BACKGROUND_SERVICE_CHECK= "background_service_check";
         private static final String TABLE_ATTENDANCE_DATA = "attendance";
         private static final String TABLE_CREATE_ATTENDENCE_F = "attendence_f";
+        private static final String TABLE_CREATE_NEW_LAUNCHES_NEW = "new_launches_new";
+
 		 
 	    static SQLiteDatabase db;
 		// Contacts Table Columns names
@@ -218,6 +223,8 @@ public class DataBaseHelper extends SQLiteOpenHelper
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_BACKGROUND_SERVICE_CHECK);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_ATTENDENCE_F);
             _db.execSQL(LoginDataBaseAdapter.DATABASE_ATTENDANCE_DATA);
+            _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_NEW_LAUNCHES_NEW);
+
             }
 	
 	@Override
@@ -346,6 +353,57 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 //contact.setImei(cursor.getString(3));
 
                 // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> TABLE_CREATE_NEW_LAUNCHES_NEW_CHECK(String file_path) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT file_path FROM " + TABLE_CREATE_NEW_LAUNCHES_NEW + " WHERE file_path = '" +  file_path + "'" + " GROUP BY file_path ORDER BY file_path";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setImage_path(cursor.getString(0));
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Image> TABLE_CREATE_NEW_LAUNCHES_NEW_Data() {
+        List<Image> contactList1 = new ArrayList<Image>();
+        // Select All Query
+        String selectQuery1 = "SELECT name,file_path,file_type,date FROM " + TABLE_CREATE_NEW_LAUNCHES_NEW + " GROUP BY name ORDER BY name";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Image contact = new Image();
+                contact.setName(cursor.getString(0));
+                contact.setLarge(cursor.getString(1));
+                contact.setType(cursor.getString(2));
+                contact.setTimestamp(cursor.getString(3));
+
                 contactList1.add(contact);
             } while (cursor.moveToNext());
         }
@@ -6601,11 +6659,22 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public void updateUserEMPNO_BY_EMILID(String emp_code,String email_id,String address)
     {
 
-        String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
+       // address = address.replaceAll("'","\'");
+
+
+
+        //String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
-        db.execSQL(selectQuery);
+        //db.execSQL(selectQuery);
+
+        ContentValues cv = new ContentValues();
+        cv.put("emp_code",emp_code); //These Fields should be your String values of actual column names
+        cv.put("city_id",address);
+        db.update(TABLE_REG, cv, "email_id" + " = ?", new String[]{email_id});
+
+
         // db.close();
     }
 
@@ -6613,6 +6682,16 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public void updateORDER_SIGNATURENEW(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_detail4_text,String order_category,String shipment_pri)
     {
         String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "details4 = '"  +  order_detail4_text + "'," + "order_category = '"  +  order_category + "'," + "shipmet_priority = '"  +  shipment_pri + "'" + " WHERE order_id = '" +  order_id    + "'";
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        // db.close();
+    }
+
+    public void updateORDER_SIGNATURENEW_WITHLATLONG(String signature,String order_id,String order_detail1_text,String order_detail2_text,String details3,String order_detail4_text,String order_category,String shipment_pri,String lat,String longs)
+    {
+        String   selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '"  +  signature + "'," + "details1 = '"  +  order_detail1_text + "'," + "details2 = '"  +  order_detail2_text + "'," + "details3 = '"  +  details3 + "'," + "details4 = '"  +  order_detail4_text + "'," + "order_category = '"  +  order_category + "'," + "shipmet_priority = '"  +  shipment_pri + "'," + "latitude = '"  +  lat  + "'," + "longitude = '"  +  longs + "'" + " WHERE order_id = '" +  order_id    + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
