@@ -5,6 +5,7 @@ package com.anchor.activities;
  */
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,7 +15,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +31,12 @@ import cpm.simplelogic.helper.Customer_Info;
 
 public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_info_main_adapter.ContactViewHolder> {
 
+
     static ConnectionDetector cd;
     static  Boolean isInternetPresent = false;
     private List<Customer_Info> contactList;
-    private List<Customer_Info> contactListfilter;
-
+    static ImageView filter_btn, close_filter;
+    static Button filter_submit, filter_back;
     static Context mcontext;
     public Customer_info_main_adapter(List<Customer_Info> contactList, Context context) {
         this.contactList = contactList;
@@ -85,6 +91,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
         protected ImageView c_call;
         protected ImageView c_location;
         protected ImageView c_invoice;
+        protected ImageView c_schemes;
 
         public ContactViewHolder(View v) {
             super(v);
@@ -103,10 +110,12 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
             c_city_name = (TextView) v.findViewById(R.id.c_city_name);
             c_location = (ImageView) v.findViewById(R.id.c_location);
             c_invoice = (ImageView) v.findViewById(R.id.c_invoice);
+            c_schemes = (ImageView) v.findViewById(R.id.c_schemes);
 
             c_call.setOnClickListener(this);
             c_location.setOnClickListener(this);
             c_invoice.setOnClickListener(this);
+            c_schemes.setOnClickListener(this);
         }
 
         // Handles the row being being clicked
@@ -183,8 +192,87 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                 view.getContext().startActivity(i);
 
             }
+            else if (view.getId() == c_schemes.getId())
+            {
+
+                Global_Data.Scheme_report_Type = "";
+                Global_Data.customer_code =  c_code.getText().toString().trim();
+                FilterDialog_scheme();
+
+            }
         }
     }
+
+
+
+    public static void FilterDialog_scheme() {
+        final Dialog dialog1 = new Dialog(mcontext);
+        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog1.setCancelable(false);
+        dialog1.setContentView(R.layout.c_scheme_dialog);
+
+
+
+        filter_submit = (Button) dialog1.findViewById(R.id.c_filter_submit);
+        filter_back = (Button) dialog1.findViewById(R.id.c_filter_back);
+        final RadioGroup c_radioGroup = (RadioGroup) dialog1.findViewById(R.id.c_radioGroup);
+        RadioButton s_management = (RadioButton) dialog1.findViewById(R.id.s_management);
+        RadioButton s_report = (RadioButton) dialog1.findViewById(R.id.s_report);
+        close_filter = (ImageView) dialog1.findViewById(R.id.close_filter);
+
+
+        filter_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                   if (c_radioGroup.getCheckedRadioButtonId() == -1)
+                    {
+                        Toast.makeText(mcontext, "Please Select Scheme Report Type.", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+
+                        int selectedId = c_radioGroup.getCheckedRadioButtonId();
+                        RadioButton rb=(RadioButton) dialog1.findViewById(selectedId);
+                        String radioText=rb.getText().toString();
+
+                        Global_Data.Scheme_report_Type = radioText;
+
+                        Toast.makeText(mcontext, radioText, Toast.LENGTH_SHORT).show();
+
+
+                        dialog1.dismiss();
+                        Intent i=new Intent(mcontext, Customer_Schemes.class);
+                        mcontext.startActivity(i);
+                    }
+
+
+                }
+        });
+
+        filter_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Global_Data.Scheme_report_Type = "";
+
+                dialog1.dismiss();
+
+            }
+        });
+
+        close_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog1.dismiss();
+            }
+        });
+
+        dialog1.show();
+
+    }
+
 
 
 

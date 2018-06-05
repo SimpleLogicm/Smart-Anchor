@@ -171,6 +171,7 @@ public class Global_Data {
 
     public static String GLOVEL_PREVIOUS_ORDER_FLAG="";
     public static String Glovel_BEAT_ID="";
+    public static String Scheme_report_Type="";
 	
 	
 	//public static String GLOVEL_LONG_DESC="";

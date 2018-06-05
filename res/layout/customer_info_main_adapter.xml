@@ -154,6 +154,16 @@
                 android:layout_width="45dp"
                 android:layout_height="55dp"
                 android:textColor="@color/white"
+                android:id="@+id/c_schemes"
+                />
+
+            <ImageView
+                android:layout_marginTop="15dp"
+                android:src="@drawable/invoice_icon"
+                android:layout_marginRight="15dp"
+                android:layout_width="45dp"
+                android:layout_height="55dp"
+                android:textColor="@color/white"
                 android:id="@+id/c_invoice"
                 />
 

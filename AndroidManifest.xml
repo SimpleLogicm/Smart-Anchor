@@ -507,6 +507,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
 
+        <activity
+            android:name=".Customer_Schemes"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+
         <receiver android:name=".AutoStart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -535,10 +541,7 @@
             android:name="cpm.simplelogic.helper.DataProvider_States"
             android:exported="true"/>
 
-        <provider
-            android:authorities="cpm.simplelogic.helper.ContentProviderData_City"
-            android:name="cpm.simplelogic.helper.DataProvider_City"
-            android:exported="true"/>
+
 
         <provider
             android:authorities="cpm.simplelogic.helper.ContentProviderData_Customers"
