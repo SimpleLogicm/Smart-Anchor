@@ -38,10 +38,11 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
     @Override
     public void onBindViewHolder(com.anchor.adapter.Customer_Invoices_adapter.ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
-        contactViewHolder.ic_name.setText(ci.ic_name);
+        contactViewHolder.ic_name.setText(Html.fromHtml("<b>" +"Invoice Number : "+ "</b>")+ci.ic_name);
         contactViewHolder.icustomer_code.setText(Html.fromHtml("<b>" +"Customer code : "+ "</b>")+ci.icustomer_code);
        // contactViewHolder.invoice_number.setText(ci.invoice_number);
         contactViewHolder.invoice_date.setText(Html.fromHtml("<b>" +"Invoice date : "+ "</b>")+ci.invoice_date);
+        contactViewHolder.invoice_amount.setText(Html.fromHtml("<b>" +"Invoice amount : "+ "</b>")+ci.invoice_amount);
         contactViewHolder.invoice_due_date.setText(Html.fromHtml("<b>" +"Invoice due date : "+ "</b>")+ci.invoice_due_date);
         contactViewHolder.invoice_due_amount.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.invoice_due_amount);
 
@@ -64,6 +65,7 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
         protected TextView invoice_date;
         protected TextView invoice_due_date;
         protected TextView invoice_due_amount;
+        protected TextView invoice_amount;
 
 
         public ContactViewHolder(View v) {
@@ -75,6 +77,7 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
             invoice_date = (TextView)  v.findViewById(R.id.invoice_date);
             invoice_due_date = (TextView)  v.findViewById(R.id.invoice_due_date);
             invoice_due_amount = (TextView) v.findViewById(R.id.invoice_due_amount);
+            invoice_amount = (TextView) v.findViewById(R.id.invoice_amount);
 
         }
 

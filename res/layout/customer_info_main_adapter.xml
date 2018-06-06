@@ -149,7 +149,7 @@
 
             <ImageView
                 android:layout_marginTop="15dp"
-                android:src="@drawable/invoice_icon"
+                android:src="@drawable/scheme_icon"
                 android:layout_marginRight="15dp"
                 android:layout_width="45dp"
                 android:layout_height="55dp"

@@ -879,6 +879,8 @@ public class Customer_Invoices extends Activity {
                         ci.invoice_due_date = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_date"));
                         ci.invoice_due_amount = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
 
+                        ci.invoice_amount = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("total"));
+
                         All_customers.add(jsonObject.getString("invoice_number"));
                         result.add(ci);
 

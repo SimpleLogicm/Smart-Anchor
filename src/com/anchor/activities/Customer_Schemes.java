@@ -3,8 +3,6 @@ package com.anchor.activities;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -24,18 +22,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,47 +49,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 import cpm.simplelogic.helper.Customer_Info;
 
 
 public class Customer_Schemes extends Activity {
 
-    String G_RadioG_valueC = "";
-    String G_c_start_date_value = "";
-    String G_c_end_date_value = "";
-    String G_c_all_dates_value = "";
-    String  G_Filter_Flag = "";
+
 
     ConnectionDetector cd;
     Boolean isInternetPresent = false;
     String response_result = "";
     static String final_response = "";
-    Calendar myCalendar;
-    HashMap<String, String> hm = new HashMap<String, String>();
-    ArrayAdapter<String> adapter;
-    ArrayAdapter<String> badapter;
-    DatePickerDialog.OnDateSetListener date,date1;
-    ImageView filter_btn, close_filter;
-    Button filter_submit, filter_clear;
+    String url = "";
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     ProgressDialog dialog;
     RecyclerView recList;
-    String Customer_id = "";
-    String City_id = "";
-    String Beat_id = "";
     Customer_Schemes_adapter ca;
     String s[];
-    ArrayList<String> All_customers = new ArrayList<String>();
-    EditText c_start_date,c_end_date;
+    ArrayList<String> Filter_List = new ArrayList<String>();
     AutoCompleteTextView autoCompleteTextView1;
     List<Customer_Info> result = new ArrayList<Customer_Info>();
     List<Customer_Info> result_customer = new ArrayList<Customer_Info>();
@@ -112,7 +82,7 @@ public class Customer_Schemes extends Activity {
 
         autoCompleteTextView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
         recList = (RecyclerView) findViewById(R.id.c_info_card);
-        filter_btn = (ImageView) findViewById(R.id.filter_btn);
+
         // recList.addItemDecoration(new DividerItemDecoration(Customer_Schemes.this, DividerItemDecoration.VERTICAL_LIST));
 
         recList.setHasFixedSize(true);
@@ -166,40 +136,10 @@ public class Customer_Schemes extends Activity {
 
         cd = new ConnectionDetector(getApplicationContext());
 
-        date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-        };
-
-        date1 = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel1();
-            }
-        };
-
-        // setupSearchView();
 
         get_invoice_Data();
 
-        filter_btn.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-
-                FilterDialog();
-            }
-        });
 
         autoCompleteTextView1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -319,243 +259,9 @@ public class Customer_Schemes extends Activity {
     }
 
 
-    void FilterDialog() {
-        final Dialog dialog1 = new Dialog(Customer_Schemes.this);
-        dialog1.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog1.setCancelable(false);
-        dialog1.setContentView(R.layout.customer_filter);
-
-        myCalendar = Calendar.getInstance();
-
-        filter_submit = (Button) dialog1.findViewById(R.id.filter_submit);
-        filter_clear = (Button) dialog1.findViewById(R.id.filter_clear);
-        c_start_date = (EditText) dialog1.findViewById(R.id.c_start_date);
-        c_end_date = (EditText) dialog1.findViewById(R.id.c_end_date);
-
-        final RadioButton c_all_dates = (RadioButton) dialog1.findViewById(R.id.c_all_dates);
-        final RadioGroup cashradioGroup = (RadioGroup) dialog1.findViewById(R.id.cashradioGroup);
-        final RadioButton radio_showall = (RadioButton) dialog1.findViewById(R.id.radio_showall);
-        RadioButton radio_overdue = (RadioButton) dialog1.findViewById(R.id.radio_overdue);
-        RadioButton radio_outstanding = (RadioButton) dialog1.findViewById(R.id.radio_outstanding);
-        close_filter = (ImageView) dialog1.findViewById(R.id.close_filter);
-
-
-        if (G_RadioG_valueC.equalsIgnoreCase("Show Overdue")) {
-            cashradioGroup.check(radio_overdue.getId());
-        } else if (G_RadioG_valueC.equalsIgnoreCase("Show Outstanding")) {
-            cashradioGroup.check(radio_outstanding.getId());
-        }
-        else
-        {
-            cashradioGroup.check(radio_showall.getId());
-        }
-
-        if (!G_c_start_date_value.equalsIgnoreCase(""))
-        {
-            c_start_date.setText(G_c_start_date_value);
-        }
-
-        if (!G_c_end_date_value.equalsIgnoreCase(""))
-        {
-            c_end_date.setText(G_c_end_date_value);
-        }
-
-        if (!G_c_all_dates_value.equalsIgnoreCase(""))
-        {
-            c_all_dates.setChecked(true);
-        }
-
-        hm.clear();
-
-        c_all_dates.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
-                    G_c_all_dates_value = "yes";
-                    c_start_date.setText("");
-                    c_end_date.setText("");
-
-//                    c_start_date.setClickable(false);
-//                    c_end_date.setClickable(false);
-//                    c_start_date.setEnabled(false);
-//                    c_end_date.setEnabled(false);
-
-                    G_c_start_date_value = "";
-                    G_c_end_date_value = "";
-                }
-                else
-                {
-                    G_c_all_dates_value = "";
-                    c_start_date.setClickable(true);
-                    c_end_date.setClickable(true);
-                }
-            }
-        });
-        c_end_date.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                c_all_dates.setChecked(false);
-                G_c_all_dates_value = "";
-                DatePickerDialog picker = new DatePickerDialog(Customer_Schemes.this, date1, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                //picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                picker.show();
-
-            }
-        });
-
-        c_start_date.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                c_all_dates.setChecked(false);
-                G_c_all_dates_value = "";
-                DatePickerDialog picker = new DatePickerDialog(Customer_Schemes.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH));
-                //   picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                picker.show();
-
-            }
-        });
-
-
-        filter_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                int radioButtonID = cashradioGroup.getCheckedRadioButtonId();
-                View radioButton = cashradioGroup.findViewById(radioButtonID);
-                int idx = cashradioGroup.indexOfChild(radioButton);
-
-
-                RadioButton r = (RadioButton) cashradioGroup.getChildAt(idx);
-                String selectedtext = r.getText().toString();
-
-                Log.d("Radio Value", "Radio value" + selectedtext);
-
-                G_RadioG_valueC = selectedtext.trim();
-
-                if(G_c_all_dates_value.equalsIgnoreCase(""))
-                {
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_start_date.getText().toString()) && !Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_end_date.getText().toString())) {
-                        Toast.makeText(Customer_Schemes.this, "Please select end date.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else
-                    if (!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_start_date.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_end_date.getText().toString())) {
-                        Toast.makeText(Customer_Schemes.this, "Please select start date.", Toast.LENGTH_SHORT).show();
-
-                    }
-                    else
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_start_date.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_end_date.getText().toString())) {
-
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        try {
-                            Date strDate = sdf.parse(c_start_date.getText().toString());
-                            Date endDate = sdf.parse(c_end_date.getText().toString());
-                            Date date1 = new Date(c_start_date.getText().toString());
-                            Date date2 = new Date(c_end_date.getText().toString());
-                            Calendar cal1 = Calendar.getInstance();
-                            Calendar cal2 = Calendar.getInstance();
-                            cal1.setTime(date1);
-                            cal2.setTime(date1);
-
-                            if(strDate.after(endDate))
-                            {
-                                Toast toast = Toast.makeText(getApplicationContext(), " End date not a valid date.", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                            }
-                            else
-                            {
-                                G_c_start_date_value = c_start_date.getText().toString();
-                                G_c_end_date_value = c_end_date.getText().toString();
-                                dialog1.dismiss();
-                                get_invoice_Data();
-                            }
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
 
 
 
-                    }
-                    else
-                    {
-                        G_c_start_date_value = c_start_date.getText().toString();
-                        G_c_end_date_value = c_end_date.getText().toString();
-                        dialog1.dismiss();
-                        get_invoice_Data();
-                    }
-
-
-                }
-                else
-                {
-                    G_c_start_date_value = "";
-                    G_c_end_date_value = "";
-                    get_invoice_Data();
-                    dialog1.dismiss();
-                }
-
-
-
-
-
-            }
-        });
-
-        filter_clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                G_RadioG_valueC = "";
-                G_c_start_date_value = "";
-                G_c_end_date_value = "";
-                G_c_all_dates_value = "";
-
-
-                cashradioGroup.check(radio_showall.getId());
-                int radioButtonID = cashradioGroup.getCheckedRadioButtonId();
-                View radioButton = cashradioGroup.findViewById(radioButtonID);
-                int idx = cashradioGroup.indexOfChild(radioButton);
-                RadioButton r = (RadioButton) cashradioGroup.getChildAt(idx);
-                String selectedtext = r.getText().toString();
-                dialog1.dismiss();
-                get_invoice_Data();
-
-            }
-        });
-
-        close_filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog1.dismiss();
-            }
-        });
-
-        dialog1.show();
-
-    }
-
-    private void updateLabel() {
-
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        c_start_date.setText(sdf.format(myCalendar.getTime()));
-    }
-
-    private void updateLabel1() {
-
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        c_end_date.setText(sdf.format(myCalendar.getTime()));
-    }
 
     public void get_invoice_Data()
     {
@@ -574,65 +280,19 @@ public class Customer_Schemes extends Activity {
 
             String c_value = "";
 
-            if(G_RadioG_valueC.equalsIgnoreCase("Show Both") || G_RadioG_valueC.equalsIgnoreCase(""))
+            if(Global_Data.Scheme_report_Type.equalsIgnoreCase("Show Both"))
             {
                 c_value = "";
+                url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&scheme_report_type="+Global_Data.Scheme_report_Type;
             }
             else
-            if(G_RadioG_valueC.equalsIgnoreCase("Show Overdue"))
+            if(Global_Data.Scheme_report_Type.equalsIgnoreCase("Show Both"))
             {
                 c_value = "overdue";
-            }
-            else
-            if(G_RadioG_valueC.equalsIgnoreCase("Show Outstanding"))
-            {
-                c_value = "outstanding";
+                url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&scheme_report_type="+Global_Data.Scheme_report_Type;
             }
 
-            String url = "";
-            if(!G_c_all_dates_value.equalsIgnoreCase(""))
-            {
-                G_Filter_Flag = "true";
-                if(c_value.equalsIgnoreCase(""))
-                {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code;
-                }
-                else
-                {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
-                }
 
-            }
-            else
-            if(G_c_all_dates_value.equalsIgnoreCase("") && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(G_c_start_date_value) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(G_c_end_date_value))
-            {
-                G_Filter_Flag = "true";
-
-                if(c_value.equalsIgnoreCase(""))
-                {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
-                }
-                else
-                {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
-                }
-
-
-            }
-            else
-            {
-                if(c_value.equalsIgnoreCase(""))
-                {
-                    G_Filter_Flag = "";
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code;
-                }
-                else
-                {
-                    G_Filter_Flag = "true";
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
-                }
-
-            }
 
             Log.i("volley", "url: " + url);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
@@ -825,61 +485,39 @@ public class Customer_Schemes extends Activity {
 
                                 dialog.dismiss();
 
-                                if(G_Filter_Flag.equalsIgnoreCase(""))
-                                {
-                                    Toast toast = Toast.makeText(Customer_Schemes.this, "Invoices Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
+
+                                    Toast toast = Toast.makeText(Customer_Schemes.this, "Schemes Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
 
                                     Intent launch = new Intent(Customer_Schemes.this, Customer_info_main.class);
                                     startActivity(launch);
                                     finish();
-                                }
-                                else
-                                {
-                                    All_customers.clear();
-                                    result.clear();
 
-                                    ca = new Customer_Schemes_adapter(result,Customer_Schemes.this);
-                                    Customer_Schemes.this.runOnUiThread(new Runnable() {
-                                        public void run() {
-                                            dialog.dismiss();
-                                            recList.setAdapter(ca);
-                                            ca.notifyDataSetChanged();
-                                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_Schemes.this, android.R.layout.simple_spinner_dropdown_item,
-                                                    All_customers);
-                                            autoCompleteTextView1.setThreshold(1);// will start working from
-                                            // first character
-                                            autoCompleteTextView1.setAdapter(adapter);// setting the adapter
-                                            // data into the
-                                            // AutoCompleteTextView
-                                            autoCompleteTextView1.setTextColor(Color.BLACK);
-                                        }
-                                    });
 
-                                    Toast toast = Toast.makeText(Customer_Schemes.this, "Filter Invoices Data Not Found.", Toast.LENGTH_LONG);toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-                                }
+
 
                             }
                         });
                     } else {
 
 
-                        All_customers.clear();
+                        Filter_List.clear();
                         result.clear();
                         for (int i = 0; i < Customer_Schemes.length(); i++) {
 
                             JSONObject jsonObject = Customer_Schemes.getJSONObject(i);
 
                             Customer_Info ci = new Customer_Info();
-                            ci.ic_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_number"));
-                            ci.icustomer_code = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("customer_id"));
-                            ci.invoice_number = jsonObject.getString("invoice_number");
-                            ci.invoice_date = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("date"));
-                            ci.invoice_due_date = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_date"));
-                            ci.invoice_due_amount = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
+                            ci.c_header =Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("date"));
+                            ci.c_detail1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("date"));
+                            ci.c_detail2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_date"));
+                            ci.c_detail3 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
+                            ci.c_detail4 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
+                            ci.c_detail5 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
+                            ci.c_detail6 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
+                            ci.c_detail7 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
 
-                            All_customers.add(jsonObject.getString("invoice_number"));
+                            Filter_List.add(jsonObject.getString("invoice_number"));
                             result.add(ci);
 
                         }
@@ -891,7 +529,7 @@ public class Customer_Schemes extends Activity {
                                 recList.setAdapter(ca);
                                 ca.notifyDataSetChanged();
                                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_Schemes.this, android.R.layout.simple_spinner_dropdown_item,
-                                        All_customers);
+                                        Filter_List);
                                 autoCompleteTextView1.setThreshold(1);// will start working from
                                 // first character
                                 autoCompleteTextView1.setAdapter(adapter);// setting the adapter

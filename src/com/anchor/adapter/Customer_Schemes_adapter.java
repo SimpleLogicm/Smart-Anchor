@@ -38,12 +38,14 @@ public class Customer_Schemes_adapter extends RecyclerView.Adapter<com.anchor.ad
     @Override
     public void onBindViewHolder(com.anchor.adapter.Customer_Schemes_adapter.ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
-        contactViewHolder.ic_name.setText(ci.ic_name);
-        contactViewHolder.icustomer_code.setText(Html.fromHtml("<b>" +"Customer code : "+ "</b>")+ci.icustomer_code);
-        // contactViewHolder.invoice_number.setText(ci.invoice_number);
-        contactViewHolder.invoice_date.setText(Html.fromHtml("<b>" +"Invoice date : "+ "</b>")+ci.invoice_date);
-        contactViewHolder.invoice_due_date.setText(Html.fromHtml("<b>" +"Invoice due date : "+ "</b>")+ci.invoice_due_date);
-        contactViewHolder.invoice_due_amount.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.invoice_due_amount);
+        contactViewHolder.c_header.setText(ci.c_header);
+        contactViewHolder.c_detail1.setText(Html.fromHtml("<b>" +"Customer code : "+ "</b>")+ci.c_detail1);
+        contactViewHolder.c_detail2.setText(Html.fromHtml("<b>" +"Invoice date : "+ "</b>")+ci.c_detail2);
+        contactViewHolder.c_detail3.setText(Html.fromHtml("<b>" +"Invoice due date : "+ "</b>")+ci.c_detail3);
+        contactViewHolder.c_detail4.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail4);
+        contactViewHolder.c_detail5.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail5);
+        contactViewHolder.c_detail6.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail6);
+        contactViewHolder.c_detail7.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail7);
 
     }
 
@@ -58,23 +60,27 @@ public class Customer_Schemes_adapter extends RecyclerView.Adapter<com.anchor.ad
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder  {
 
-        protected TextView ic_name;
-        protected TextView icustomer_code;
-        protected TextView invoice_number;
-        protected TextView invoice_date;
-        protected TextView invoice_due_date;
-        protected TextView invoice_due_amount;
+        protected TextView c_header;
+        protected TextView c_detail1;
+        protected TextView c_detail2;
+        protected TextView c_detail3;
+        protected TextView c_detail4;
+        protected TextView c_detail5;
+        protected TextView c_detail6;
+        protected TextView c_detail7;
 
 
         public ContactViewHolder(View v) {
             super(v);
 
-            ic_name =  (TextView) v.findViewById(R.id.ic_name);
-            icustomer_code =  (TextView) v.findViewById(R.id.icustomer_code);
-            invoice_number = (TextView)  v.findViewById(R.id.invoice_number);
-            invoice_date = (TextView)  v.findViewById(R.id.invoice_date);
-            invoice_due_date = (TextView)  v.findViewById(R.id.invoice_due_date);
-            invoice_due_amount = (TextView) v.findViewById(R.id.invoice_due_amount);
+            c_header =  (TextView) v.findViewById(R.id.c_header);
+            c_detail1 =  (TextView) v.findViewById(R.id.c_detail1);
+            c_detail2 = (TextView)  v.findViewById(R.id.c_detail2);
+            c_detail3 = (TextView)  v.findViewById(R.id.c_detail3);
+            c_detail4 = (TextView)  v.findViewById(R.id.c_detail4);
+            c_detail5 = (TextView) v.findViewById(R.id.c_detail5);
+            c_detail6 = (TextView) v.findViewById(R.id.c_detail6);
+            c_detail7 = (TextView) v.findViewById(R.id.c_detail7);
 
         }
 

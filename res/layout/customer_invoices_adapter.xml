@@ -74,6 +74,18 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"/>
 
+            <TextView
+                android:id="@+id/invoice_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center_vertical"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_below="@id/invoice_date"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
 
             <TextView
                 android:id="@+id/invoice_due_date"
@@ -83,7 +95,7 @@
                 android:gravity="center_vertical"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                android:layout_below="@id/invoice_date"
+                android:layout_below="@id/invoice_amount"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"/>
 

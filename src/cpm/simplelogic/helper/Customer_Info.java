@@ -21,24 +21,19 @@ public class Customer_Info {
 
     public String ic_name;
     public String icustomer_code;
+    public String invoice_amount;
     public String invoice_number;
     public String invoice_date;
     public String invoice_due_date;
     public String invoice_due_amount;
 
-    public String scheme_org_name;
-    public String scheme_quantity;
-    public String scheme_line_amount;
-    public String scheme_tax_amount;
-    public String scheme_total_amount;
-    public String scheme_gift_amount;
-    public String scheme_current_volume;
-    public String scheme_current_eligibility;
-    public String scheme_gift_detail;
-    public String scheme_gift_value;
-    public String scheme_s_value_for_nextslab;
-    public String scheme_next_scheme_slab;
-    public String scheme_next_scheme_value;
-
+    public String c_header;
+    public String c_detail1;
+    public String c_detail2;
+    public String c_detail3;
+    public String c_detail4;
+    public String c_detail5;
+    public String c_detail6;
+    public String c_detail7;
 }
 
