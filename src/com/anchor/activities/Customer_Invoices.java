@@ -725,7 +725,7 @@ public class Customer_Invoices extends Activity {
             try {
                 JSONObject response = new JSONObject(final_response);
                 if (response.has("message")) {
-                    response_result = response.getString("result");
+                    response_result = response.getString("message");
                 } else {
                     response_result = "data";
                 }

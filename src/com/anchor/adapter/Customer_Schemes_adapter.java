@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.anchor.activities.Global_Data;
 import com.anchor.activities.R;
 import com.anchor.webservice.ConnectionDetector;
 
@@ -38,14 +39,31 @@ public class Customer_Schemes_adapter extends RecyclerView.Adapter<com.anchor.ad
     @Override
     public void onBindViewHolder(com.anchor.adapter.Customer_Schemes_adapter.ContactViewHolder contactViewHolder, int i) {
         Customer_Info ci = contactList.get(i);
-        contactViewHolder.c_header.setText(ci.c_header);
-        contactViewHolder.c_detail1.setText(Html.fromHtml("<b>" +"Customer code : "+ "</b>")+ci.c_detail1);
-        contactViewHolder.c_detail2.setText(Html.fromHtml("<b>" +"Invoice date : "+ "</b>")+ci.c_detail2);
-        contactViewHolder.c_detail3.setText(Html.fromHtml("<b>" +"Invoice due date : "+ "</b>")+ci.c_detail3);
-        contactViewHolder.c_detail4.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail4);
-        contactViewHolder.c_detail5.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail5);
-        contactViewHolder.c_detail6.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail6);
-        contactViewHolder.c_detail7.setText(Html.fromHtml("<b>" +"Invoice due amount : "+ "</b>")+ci.c_detail7);
+
+        if(Global_Data.Scheme_report_Type.equalsIgnoreCase("scheme_management"))
+        {
+            contactViewHolder.c_header.setText(Html.fromHtml("<b>" +"Organization Name : "+ "</b>")+ci.c_header);
+            contactViewHolder.c_detail1.setText(Html.fromHtml("<b>" +"Quantity : "+ "</b>")+ci.c_detail1);
+            contactViewHolder.c_detail2.setText(Html.fromHtml("<b>" +"Line Amount : "+ "</b>")+ci.c_detail2);
+            contactViewHolder.c_detail3.setText(Html.fromHtml("<b>" +"Tax Amount : "+ "</b>")+ci.c_detail3);
+            contactViewHolder.c_detail4.setText(Html.fromHtml("<b>" +"Total Amount : "+ "</b>")+ci.c_detail4);
+            contactViewHolder.c_detail5.setText(Html.fromHtml("<b>" +"Gift Amount : "+ "</b>")+ci.c_detail5);
+            contactViewHolder.c_detail6.setVisibility(View.GONE);
+            contactViewHolder.c_detail7.setVisibility(View.GONE);
+
+        }
+        else
+        {
+            contactViewHolder.c_header.setText(Html.fromHtml("<b>" +"Current Volumn : "+ "</b>")+ci.c_header);
+            contactViewHolder.c_detail1.setText(Html.fromHtml("<b>" +"Current Eligibility : "+ "</b>")+ci.c_detail1);
+            contactViewHolder.c_detail2.setText(Html.fromHtml("<b>" +"Gift Detail : "+ "</b>")+ci.c_detail2);
+            contactViewHolder.c_detail3.setText(Html.fromHtml("<b>" +"Gift Value : "+ "</b>")+ci.c_detail3);
+            contactViewHolder.c_detail4.setText(Html.fromHtml("<b>" +"Short Volumn For Next Slab : "+ "</b>")+ci.c_detail4);
+            contactViewHolder.c_detail5.setText(Html.fromHtml("<b>" +"Next Scheme Slab : "+ "</b>")+ci.c_detail5);
+            contactViewHolder.c_detail6.setText(Html.fromHtml("<b>" +"Next Scheme Value : "+ "</b>")+ci.c_detail6);
+            contactViewHolder.c_detail7.setVisibility(View.GONE);
+        }
+
 
     }
 

@@ -237,11 +237,15 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                         RadioButton rb=(RadioButton) dialog1.findViewById(selectedId);
                         String radioText=rb.getText().toString();
 
-                        Global_Data.Scheme_report_Type = radioText;
-
-                        Toast.makeText(mcontext, radioText, Toast.LENGTH_SHORT).show();
-
-
+                        if(radioText.equalsIgnoreCase("Scheme Management"))
+                        {
+                            Global_Data.Scheme_report_Type = "scheme_management";
+                        }
+                        else
+                        if(radioText.equalsIgnoreCase("Shortfall Report"))
+                        {
+                            Global_Data.Scheme_report_Type = "shortfall_report";
+                        }
                         dialog1.dismiss();
                         Intent i=new Intent(mcontext, Customer_Schemes.class);
                         mcontext.startActivity(i);

@@ -137,7 +137,7 @@ public class Customer_Schemes extends Activity {
         cd = new ConnectionDetector(getApplicationContext());
 
 
-        get_invoice_Data();
+        get_scheme_Data();
 
 
 
@@ -211,15 +211,37 @@ public class Customer_Schemes extends Activity {
                 for (int i = 0; i < result.size(); i++) {
                     Customer_Info ci = result.get(i);
 
-                    if (ci.invoice_number.equalsIgnoreCase(customer_name)) {
+                    if (ci.c_header.equalsIgnoreCase(customer_name)) {
 
                         Customer_Info ci1 = result.get(i);
 
-                        ci1.ic_name = ci.ic_name;
-                        ci1.icustomer_code = ci.icustomer_code;
-                        ci1.invoice_date = ci.invoice_date;
-                        ci1.invoice_due_date = ci.invoice_due_date;
-                        ci1.invoice_due_amount = ci.invoice_due_amount;
+                        if(Global_Data.Scheme_report_Type.equalsIgnoreCase("scheme_management"))
+                        {
+                            ci1.c_header =ci.c_header;
+                            ci1.c_detail1 = ci.c_detail1;
+                            ci1.c_detail2 =  ci.c_detail2;
+                            ci1.c_detail3 =  ci.c_detail3;
+                            ci1.c_detail4 =  ci.c_detail4;
+                            ci1.c_detail5 = ci.c_detail5;
+                            ci1.c_detail6 = "";
+                            ci1.c_detail7 = "";
+
+
+                        }
+                        else
+                        if(Global_Data.Scheme_report_Type.equalsIgnoreCase("shortfall_report"))
+                        {
+                            ci1.c_header =ci.c_header;
+                            ci1.c_detail1 = ci.c_detail1;
+                            ci1.c_detail2 =  ci.c_detail2;
+                            ci1.c_detail3 =  ci.c_detail3;
+                            ci1.c_detail4 =  ci.c_detail4;
+                            ci1.c_detail5 = ci.c_detail5;
+                            ci1.c_detail6 = ci.c_detail6;
+                            ci1.c_detail7 = "";
+
+
+                        }
 
                         result_customer.add(ci1);
                     }
@@ -263,7 +285,7 @@ public class Customer_Schemes extends Activity {
 
 
 
-    public void get_invoice_Data()
+    public void get_scheme_Data()
     {
         isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent)
@@ -278,19 +300,10 @@ public class Customer_Schemes extends Activity {
 
             String  domain = getResources().getString(R.string.service_domain);
 
-            String c_value = "";
 
-            if(Global_Data.Scheme_report_Type.equalsIgnoreCase("Show Both"))
-            {
-                c_value = "";
-                url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&scheme_report_type="+Global_Data.Scheme_report_Type;
-            }
-            else
-            if(Global_Data.Scheme_report_Type.equalsIgnoreCase("Show Both"))
-            {
-                c_value = "overdue";
-                url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&scheme_report_type="+Global_Data.Scheme_report_Type;
-            }
+            url = domain+"scheme_managements?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&customer_code="+Global_Data.customer_code+"&scheme_report_type="+Global_Data.Scheme_report_Type;
+
+
 
 
 
@@ -306,7 +319,7 @@ public class Customer_Schemes extends Activity {
                     Log.i("volley", "response: " + response);
                     final_response = response;
 
-                    new Customer_Schemes.invoiceData().execute(response);
+                    new Customer_Schemes.schemeData().execute(response);
 
                 }
             },
@@ -377,7 +390,7 @@ public class Customer_Schemes extends Activity {
         }
     }
 
-    private  class  invoiceData extends AsyncTask<String, Void, String> {
+    private  class  schemeData extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... responsenew) {
 
@@ -385,7 +398,7 @@ public class Customer_Schemes extends Activity {
             try {
                 JSONObject response = new JSONObject(final_response);
                 if (response.has("message")) {
-                    response_result = response.getString("result");
+                    response_result = response.getString("message");
                 } else {
                     response_result = "data";
                 }
@@ -474,7 +487,7 @@ public class Customer_Schemes extends Activity {
 
 
 
-                    JSONArray Customer_Schemes = response.getJSONArray("invoices");
+                    JSONArray Customer_Schemes = response.getJSONArray("result");
                     Log.i("volley", "response reg Customer_Schemes Length: " + Customer_Schemes.length());
                     Log.d("volley", "Customer_Schemes" + Customer_Schemes.toString());
 
@@ -508,16 +521,35 @@ public class Customer_Schemes extends Activity {
                             JSONObject jsonObject = Customer_Schemes.getJSONObject(i);
 
                             Customer_Info ci = new Customer_Info();
-                            ci.c_header =Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("date"));
-                            ci.c_detail1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("date"));
-                            ci.c_detail2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_date"));
-                            ci.c_detail3 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
-                            ci.c_detail4 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
-                            ci.c_detail5 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
-                            ci.c_detail6 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
-                            ci.c_detail7 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("invoice_due_amount"));
 
-                            Filter_List.add(jsonObject.getString("invoice_number"));
+                            if(Global_Data.Scheme_report_Type.equalsIgnoreCase("scheme_management"))
+                            {
+                                ci.c_header =Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("organization_name"));
+                                ci.c_detail1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("quantity"));
+                                ci.c_detail2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("line_amount"));
+                                ci.c_detail3 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("tax_amount"));
+                                ci.c_detail4 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("total_amount"));
+                                ci.c_detail5 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("gift_amount"));
+                                ci.c_detail6 = "";
+                                ci.c_detail7 = "";
+
+                                Filter_List.add(jsonObject.getString("organization_name"));
+                            }
+                            else
+                            if(Global_Data.Scheme_report_Type.equalsIgnoreCase("shortfall_report"))
+                            {
+                                ci.c_header =Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("current_volume"));
+                                ci.c_detail1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("current_eligibility"));
+                                ci.c_detail2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("gift_detail"));
+                                ci.c_detail3 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("gift_value"));
+                                ci.c_detail4 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("short_volume_for_next_slab"));
+                                ci.c_detail5 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("next_scheme_slab"));
+                                ci.c_detail6 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("next_scheme_value"));
+                                ci.c_detail7 = "";
+
+                                Filter_List.add(jsonObject.getString("current_volume"));
+                            }
+
                             result.add(ci);
 
                         }

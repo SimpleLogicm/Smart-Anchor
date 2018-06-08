@@ -207,8 +207,8 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//				editText1.setText("Jaya");
-//				editText2.setText("jaya12345");
+				editText1.setText("Jaya");
+				editText2.setText("jaya12345");
 
 //		        editText1.setText("swatiyamgar");
 //				editText2.setText("password");
@@ -1198,6 +1198,10 @@ public class LoginActivity extends Activity{
 					Global_Data.USER_FIRST_NAME = cn.getfirst_name();
 					Global_Data.USER_LAST_NAME = cn.getlast_name();
 
+					dbvoc.getDeleteTable("user_email");
+
+					loginDataBaseAdapter.insert_user_email(cn.getuser_email(),"Login");
+
 					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getEmp_code())) {
 						String empl_code=cn.getEmp_code();
 						Global_Data.emp_code =empl_code;
@@ -1241,9 +1245,7 @@ public class LoginActivity extends Activity{
 						Log.d("user email", "user email"+cn.getuser_email());
 						Log.d("user id", "user id"+cn.get_shedule_order_id());
 
-						dbvoc.getDeleteTable("user_email");
 
-						loginDataBaseAdapter.insert_user_email(cn.getuser_email(),"Login");
 						//Global_Data.local_pwd = ""+cn.getPwd();
 
 						//String test_passwd = "password";
