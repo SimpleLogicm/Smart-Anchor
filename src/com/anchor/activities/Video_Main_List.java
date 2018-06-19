@@ -54,8 +54,6 @@ public class Video_Main_List extends Activity {
 	// Log tag
 	private static final String TAG = MainActivity.class.getSimpleName();
 	ProgressDialog dialog;
-	// Movies json url
-	private static final String url = "http://api.androidhive.info/json/movies.json";
 	private ProgressDialog pDialog;
 	private List<Movie> movieList = new ArrayList<Movie>();
 	DataBaseHelper dbvoc = new DataBaseHelper(this);

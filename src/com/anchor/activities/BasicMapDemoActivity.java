@@ -164,18 +164,18 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
         SharedPreferences sp = BasicMapDemoActivity.this.getSharedPreferences("SimpleLogic", 0);
 
-           try
-           {
-               List<Local_Data> contacts2 = dbvoc.getUSERAddressBY_Email(Global_Data.GLOvel_USER_EMAIL);
-
-               if(contacts2.size() > 0)
-               {
-                   for (Local_Data cn : contacts2) {
-                       user_address = cn.getAddress();
-                   }
-
-               }
-           }catch (Exception ex){ex.printStackTrace();}
+//           try
+//           {
+//               List<Local_Data> contacts2 = dbvoc.getUSERAddressBY_Email(Global_Data.GLOvel_USER_EMAIL);
+//
+//               if(contacts2.size() > 0)
+//               {
+//                   for (Local_Data cn : contacts2) {
+//                       user_address = cn.getAddress();
+//                   }
+//
+//               }
+//           }catch (Exception ex){ex.printStackTrace();}
 
 
 
@@ -293,30 +293,33 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                         List<Local_Data> contadfg = dbvoc.getAllAttendance_Data_bydate(date_only_s);
 
-                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
+//                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
+                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
 
                             dialog.setMessage("Please wait....");
                             dialog.setTitle("Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
-                            build_retrofit_and_get_response("driving",user_address,"Attendance");
+                            getatte_Data();
+
+                           // build_retrofit_and_get_response("driving",user_address,"Attendance");
                         }
                         else
                         {
-                            if(user_address.equalsIgnoreCase(""))
-                            {
-                                Toast.makeText(BasicMapDemoActivity.this, "User address not found in database.", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            if(Global_Data.address.equalsIgnoreCase(""))
-                            {
-                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
+//                            if(user_address.equalsIgnoreCase(""))
+//                            {
+//                                Toast.makeText(BasicMapDemoActivity.this, "User address not found in database.", Toast.LENGTH_SHORT).show();
+//                            }
+//                            else
+//                            if(Global_Data.address.equalsIgnoreCase(""))
+//                            {
+//                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
+//                            }
+//                            else
+//                            {
                                 Toast.makeText(BasicMapDemoActivity.this, "You Have Already Punched Your Attendance", Toast.LENGTH_SHORT).show();
-                            }
+                           // }
 
                         }
 
@@ -583,19 +586,21 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 Global_Data.address =  str.toString();
 
 
+//                                if(map_firstvisit_flag.equalsIgnoreCase("true"))
+//                                {
+//
+//                                }
+                              //  if(map_firstvisit_flag.equalsIgnoreCase("true") && !user_address.equalsIgnoreCase(""))
                                 if(map_firstvisit_flag.equalsIgnoreCase("true"))
-                                {
-
-                                }
-                                if(map_firstvisit_flag.equalsIgnoreCase("true") && !user_address.equalsIgnoreCase(""))
                                 {
                                     map_firstvisit_flag = "false";
                                     dialog.setMessage("Please wait....");
                                     dialog.setTitle("Metal App");
                                     dialog.setCancelable(false);
                                     dialog.show();
+                                    getatte_Data();
 
-                                    build_retrofit_and_get_response("driving",user_address,"location");
+                                   // build_retrofit_and_get_response("driving",user_address,"location");
                                 }
                             }
                             else
@@ -1428,7 +1433,6 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                     isInternetPresent = cd.isConnectingToInternet();
                     if (isInternetPresent) {
-
 
 
                         in_out_flag = "IN";
