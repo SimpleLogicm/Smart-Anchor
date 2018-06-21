@@ -14,9 +14,21 @@
         android:adjustViewBounds="true"
         android:layout_height="match_parent"
         />
-    <com.github.barteksc.pdfviewer.PDFView
-        android:id="@+id/G_pdfView"
+    <!--<com.github.barteksc.pdfviewer.PDFView-->
+    <!--android:id="@+id/G_pdfView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"/>-->
+
+    <TextView
+        android:id="@+id/pdf_name"
+        android:background="#e00102"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textSize="20dp"/>
 
 </com.anchor.imageadapters.SquareLayout>

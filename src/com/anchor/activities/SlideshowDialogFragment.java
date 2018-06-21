@@ -1,6 +1,8 @@
 package com.anchor.activities;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -12,11 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.anchor.imageadapters.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.anchor.imageadapters.Image;
-import com.github.barteksc.pdfviewer.PDFView;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class SlideshowDialogFragment extends DialogFragment {
     private MyViewPagerAdapter myViewPagerAdapter;
     private TextView lblCount, lblTitle, lblDate;
     private int selectedPosition = 0;
+
 
     static SlideshowDialogFragment newInstance() {
         SlideshowDialogFragment f = new SlideshowDialogFragment();
@@ -114,27 +117,58 @@ public class SlideshowDialogFragment extends DialogFragment {
 
             ImageView imageViewPreview = (ImageView) view.findViewById(R.id.image_preview);
 
-            PDFView pDFView = (PDFView) view.findViewById(R.id.GG_pdfView);
+            TextView pdf_name = (TextView) view.findViewById(R.id.pdf_name);
 
-            Image image = images.get(position);
+            //PDFView pDFView = (PDFView) view.findViewById(R.id.GG_pdfView);
+
+             final Image image = images.get(position);
 
             String type = image.getType();
 
             if(type.equalsIgnoreCase("application/pdf"))
             {
-                pDFView.setVisibility(View.VISIBLE);
+                //  pDFView.setVisibility(View.VISIBLE);
+                // imageViewPreview.setVisibility(View.GONE);
+//                pDFView.fromUri(Uri.parse(image.getFile_path()))
+//                        .enableSwipe(true)
+//                        .enableSwipe(true)
+//                        .enableDoubletap(true)
+//                        .defaultPage(0)
+//                        .enableAnnotationRendering(true)
+//                        .load();
+                pdf_name.setVisibility(View.VISIBLE);
                 imageViewPreview.setVisibility(View.GONE);
-                pDFView.fromUri(Uri.parse(image.getLarge()))
-                        .enableSwipe(true)
-                        .enableSwipe(true)
-                        .enableDoubletap(true)
-                        .defaultPage(0)
-                        .enableAnnotationRendering(true)
-                        .load();
+                pdf_name.setText(image.getName()+" \n"+"PDF");
+
+                pdf_name.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(image.getLarge()))
+                        {
+                            try {
+                                Intent target = new Intent(Intent.ACTION_VIEW);
+                                target.setDataAndType(Uri.parse(image.getLarge()), "application/pdf");
+                                target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                                Intent intent = Intent.createChooser(target, "Open File");
+
+                                getActivity().startActivity(intent);
+                            } catch (ActivityNotFoundException e) {
+                                // Instruct the user to install a PDF reader here, or something
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "File path is incorrect." , Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
             else
             {
-                pDFView.setVisibility(View.GONE);
+                //pDFView.setVisibility(View.GONE);
+                pdf_name.setVisibility(View.GONE);
                 imageViewPreview.setVisibility(View.VISIBLE);
 
                 Glide.with(getActivity()).load(image.getLarge())

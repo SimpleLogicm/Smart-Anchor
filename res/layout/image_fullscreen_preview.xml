@@ -12,10 +12,22 @@
         android:layout_centerInParent="true"
         android:scaleType="fitCenter" />
 
-    <com.github.barteksc.pdfviewer.PDFView
-        android:id="@+id/GG_pdfView"
-        android:layout_centerInParent="true"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+    <!--<com.github.barteksc.pdfviewer.PDFView-->
+    <!--android:id="@+id/GG_pdfView"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"/>-->
+
+    <TextView
+        android:id="@+id/pdf_name"
+        android:background="#e00102"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/white"
+        android:textSize="20dp"/>
 
 </RelativeLayout>

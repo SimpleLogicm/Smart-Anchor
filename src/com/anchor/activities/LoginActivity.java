@@ -207,8 +207,8 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//				editText1.setText("Jaya");
-//				editText2.setText("jaya12345");
+//				editText1.setText("Dnyanada");
+//				editText2.setText("dnyanada12345");
 
 		        editText1.setText("swatiyamgar");
 				editText2.setText("password");
@@ -219,7 +219,7 @@ public class LoginActivity extends Activity{
 					textViewVersion.setText("Mobile Sales App, v. "+version);
 				} catch (PackageManager.NameNotFoundException e) {
 					e.printStackTrace();
-					textViewVersion.setText("Mobile Sales App, v. 1.3.1");
+					//textViewVersion.setText("Mobile Sales App, v. 1.3.1");
 				}
 
 			    SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
