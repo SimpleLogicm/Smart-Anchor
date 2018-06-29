@@ -591,22 +591,22 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //
 //                                }
                               //  if(map_firstvisit_flag.equalsIgnoreCase("true") && !user_address.equalsIgnoreCase(""))
-                                if(map_firstvisit_flag.equalsIgnoreCase("true"))
-                                {
-                                    map_firstvisit_flag = "false";
-                                    dialog.setMessage("Please wait....");
-                                    dialog.setTitle("Metal App");
-                                    dialog.setCancelable(false);
-                                    dialog.show();
-                                    getatte_Data();
-
-                                   // build_retrofit_and_get_response("driving",user_address,"location");
-                                }
+//                                if(map_firstvisit_flag.equalsIgnoreCase("true"))
+//                                {
+//                                    map_firstvisit_flag = "false";
+//                                    dialog.setMessage("Please wait....");
+//                                    dialog.setTitle("Metal App");
+//                                    dialog.setCancelable(false);
+//                                    dialog.show();
+//                                    getatte_Data();
+//
+//                                   // build_retrofit_and_get_response("driving",user_address,"location");
+//                                }
                             }
                             else
                             {
                                 Global_Data.address = "";
-                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
                             }
 
                             //prefManager.setAddress(str.toString());

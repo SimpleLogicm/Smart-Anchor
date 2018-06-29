@@ -547,6 +547,7 @@
         <provider
             android:authorities="cpm.simplelogic.helper.ContentProviderData"
             android:name="cpm.simplelogic.helper.DataProvider"
+            android:grantUriPermissions="true"
             android:exported="true"/>
 
         <provider

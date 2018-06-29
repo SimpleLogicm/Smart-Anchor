@@ -192,14 +192,14 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                 view.getContext().startActivity(i);
 
             }
-            else if (view.getId() == c_schemes.getId())
-            {
-
-                Global_Data.Scheme_report_Type = "";
-                Global_Data.customer_code =  c_code.getText().toString().trim();
-                FilterDialog_scheme();
-
-            }
+//            else if (view.getId() == c_schemes.getId())
+//            {
+//
+//                Global_Data.Scheme_report_Type = "";
+//                Global_Data.customer_code =  c_code.getText().toString().trim();
+//                FilterDialog_scheme();
+//
+//            }
         }
     }
 
