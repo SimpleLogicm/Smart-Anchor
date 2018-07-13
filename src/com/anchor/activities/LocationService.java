@@ -150,7 +150,7 @@ public class LocationService extends Service {
          StateName= addresses.get(0).getAdminArea();
          
          CountryName = addresses.get(0).getCountryName();
-        } catch (IOException e) {            
+        } catch (Exception e) {
         e.printStackTrace();  
       } 
           

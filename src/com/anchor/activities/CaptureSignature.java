@@ -117,6 +117,7 @@ public class CaptureSignature extends BaseActivity {
     float totalPrice;
     public String order="",retailer_mobile="",retailer_emailID="",dist_mobile="",dist_emailID="",retailer_code="",ret_Name="";
 
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -273,6 +274,22 @@ public class CaptureSignature extends BaseActivity {
 
         SharedPreferences spf255=this.getSharedPreferences("SimpleLogic",0);
         String strdetail4_allow=spf255.getString("var_detail4_allow", "");
+
+
+        InputFilter filter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+                char[] chars = {'\'','"'};
+                for (int i = start; i < end; i++) {
+                    if (new String(chars).contains(String.valueOf(source.charAt(i)))) {
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+        order_detail4.setFilters(new InputFilter[] { filter });
+
 
         if(strdetail1_edit.equalsIgnoreCase("true"))
         {
@@ -473,7 +490,7 @@ public class CaptureSignature extends BaseActivity {
                         File photoFile = null;
                         try {
                             photoFile = createImageFile();
-                        } catch (IOException ex) {
+                        } catch (Exception ex) {
                             // Error occurred while creating the File
                             Log.i("Image TAG", "IOException");
                             mCurrentPhotoPath = "";
@@ -688,7 +705,7 @@ public class CaptureSignature extends BaseActivity {
 
 
                                         if (isInternetPresent) {
-                                            getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
+                             onDestroy();               getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
                                         } else {
                                             //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 

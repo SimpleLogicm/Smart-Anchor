@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import java.io.IOException;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -61,7 +61,7 @@ public class LocationAddress {
                         //sb.append(address.getCountryName());
                         result = sb.toString();
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     Log.e(TAG, "Unable connect to Geocoder", e);
                 } finally {
                     Message message = Message.obtain();

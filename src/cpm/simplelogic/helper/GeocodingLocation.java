@@ -36,7 +36,7 @@ public class GeocodingLocation {
                        // sb.append(address.getLongitude()).append("\n");
                         result = sb.toString();
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     Log.e(TAG, "Unable to connect to Geocoder", e);
                 } finally {
                     Message message = Message.obtain();

@@ -16,7 +16,6 @@ import android.provider.Settings;
 
 import com.anchor.activities.Global_Data;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -138,10 +137,8 @@ public class GPSService extends Service implements LocationListener {
 				 * Return 1 address.
 				 */
 				addresses = geocoder.getFromLocation(mLatitude, mLongitude, 1);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-				return ("IO Exception trying to get address:" + e1);
-			} catch (IllegalArgumentException e2) {
+			}
+			catch (IllegalArgumentException e2) {
 				// Error message to post in the log
 				String errorString = "Illegal arguments "
 						+ Double.toString(mLatitude) + " , "
@@ -149,6 +146,10 @@ public class GPSService extends Service implements LocationListener {
 						+ " passed to address service";
 				e2.printStackTrace();
 				return errorString;
+			}
+			catch (Exception e1) {
+				e1.printStackTrace();
+				return ("IO Exception trying to get address:" + e1);
 			}
 			// If the reverse geocode returned an address
 			if (addresses != null && addresses.size() > 0) {

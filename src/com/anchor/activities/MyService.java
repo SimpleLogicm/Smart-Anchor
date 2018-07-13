@@ -42,7 +42,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -379,7 +378,7 @@ public class MyService extends Service implements LocationListener{
 
 
 			//Toast.makeText(this,"vals:++++++++++++++++++++++++++++++++>"+latitude+" "+longitude, Toast.LENGTH_SHORT).show();
-		} catch (SecurityException e) {
+		} catch (Exception e) {
 			// dialogGPS(this.getContext()); // lets the user know there is a problem with the gps
 		}
 
@@ -891,7 +890,7 @@ public class MyService extends Service implements LocationListener{
 			//String knownName = addresses.get(0).getFeatureName();
 
 			Global_Data.address = sb.toString();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 

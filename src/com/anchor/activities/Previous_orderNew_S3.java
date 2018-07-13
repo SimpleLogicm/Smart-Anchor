@@ -268,6 +268,20 @@ public class Previous_orderNew_S3 extends BaseActivity {
         SharedPreferences spf255=this.getSharedPreferences("SimpleLogic",0);
         String strdetail4_allow=spf255.getString("var_detail4_allow", "");
 
+        InputFilter filter = new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+                char[] chars = {'\'','"'};
+                for (int i = start; i < end; i++) {
+                    if (new String(chars).contains(String.valueOf(source.charAt(i)))) {
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+        order_detail4.setFilters(new InputFilter[] { filter });
+
         if(strdetail1_edit.equalsIgnoreCase("true"))
         {
             order_detail1.setEnabled(true);

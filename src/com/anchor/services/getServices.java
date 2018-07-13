@@ -57,7 +57,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -4225,7 +4224,7 @@ public class getServices {
                             String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
                             product_value.put("signature_path",getsign_str);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             product_value.put("signature_path", "");
                         }
@@ -4252,7 +4251,7 @@ public class getServices {
                             String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
                             product_value.put("order_image_string",getsign_str);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             product_value.put("order_image_string", "");
                         }
@@ -4802,7 +4801,7 @@ public class getServices {
                             String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
                             product_value.put("signature_path",getsign_str);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             product_value.put("signature_path", "");
                         }
@@ -4829,7 +4828,7 @@ public class getServices {
                             String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
                             product_value.put("order_image_string",getsign_str);
 
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             product_value.put("order_image_string", "");
                         }
