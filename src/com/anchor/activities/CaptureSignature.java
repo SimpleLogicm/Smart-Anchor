@@ -606,8 +606,17 @@ public class CaptureSignature extends BaseActivity {
                                         }
 
                                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
+                                            try
+                                            {
+                                                order_detail4_text = order_detail4.getText().toString().trim();
+                                                order_detail4_text = order_detail4_text.replaceAll("'", "");
+                                                order_detail4_text = order_detail4_text.replaceAll("\"", "");
+                                            }catch(Exception ex){
+                                                ex.printStackTrace();
 
-                                            order_detail4_text = order_detail4.getText().toString().trim();
+                                                order_detail4_text = order_detail4.getText().toString().trim();
+                                            }
+
                                         }
 
                                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
