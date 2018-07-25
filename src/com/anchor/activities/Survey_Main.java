@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,7 +13,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +22,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.App.AppController;
+import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -39,8 +39,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.anchor.App.AppController;
-import com.anchor.webservice.ConnectionDetector;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -367,8 +365,9 @@ public class Survey_Main extends Activity implements OnOptionSelected {
     public  void GetSurveey_Datan()
     {
 
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String device_id = telephonyManager.getDeviceId();
+        SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
+
         String domain = "";
 
         dialog = new ProgressDialog(Survey_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
@@ -600,8 +599,8 @@ public class Survey_Main extends Activity implements OnOptionSelected {
             String domain = "";
             String device_id = "";
 
-            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-            device_id = telephonyManager.getDeviceId();
+            SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+             device_id = sp.getString("devid", "");
 
             domain = getResources().getString(R.string.service_domain);
 

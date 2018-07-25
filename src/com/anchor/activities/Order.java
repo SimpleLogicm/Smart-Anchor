@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -57,6 +58,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.anchor.webservice.ConnectionDetector;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -447,10 +454,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 		customer_MObile.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
-				Intent callIntent = new Intent(Intent.ACTION_CALL);
-				callIntent.setData(Uri.parse("tel:"+c_mobile_number.trim()));
-				startActivity(callIntent );
+				requestPhoneCallPermission(c_mobile_number.trim());
 			}
 		});
 
@@ -2416,27 +2420,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 		}
 	}
 
-	public void current_locationcheck() {
-		flag = displayGpsStatus();
-		if (flag) {
 
-			Log.v(TAG, "onClick");
-
-			// editLocation.setText("Please!! move your device to"+
-			// " see the changes in coordinates."+"\nWait..");
-
-			// pb.setVisibility(View.VISIBLE);
-
-			locationListener = new MyLocationListener();
-
-			locationMangaer.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER, 300, 2, locationListener);
-
-		} else {
-			alertbox("Gps Status!!", "Your GPS is: OFF");
-			dialog.dismiss();
-		}
-	}
 
 	public void showstate(String state_name, String cityname) {
 //apk for fashion house testing and live (8000)
@@ -2455,10 +2439,9 @@ public class Order extends Activity implements OnItemSelectedListener {
 
 	public void getScheduleData()
 	{
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		String device_id = telephonyManager.getDeviceId();
-		//calendarn = Calendar.getInstance();
-		//year = calendarn.get(Calendar.YEAR);
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		String device_id = sp.getString("devid", "");
+
 		loginDataBaseAdapter=new LoginDataBaseAdapter(Order.this);
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
 		dialog = new ProgressDialog(Order.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
@@ -2640,8 +2623,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
 	public void getPrevious_OrderData()
 	{
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		String device_id = telephonyManager.getDeviceId();
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		String device_id = sp.getString("devid", "");
 		//calendarn = Calendar.getInstance();
 		//year = calendarn.get(Calendar.YEAR);
 		loginDataBaseAdapter=new LoginDataBaseAdapter(Order.this);
@@ -2796,4 +2779,68 @@ public class Order extends Activity implements OnItemSelectedListener {
 		}
 	}
 
+	private void requestPhoneCallPermission(final String mobile_number) {
+		Dexter.withActivity(this)
+				.withPermission(Manifest.permission.CALL_PHONE)
+				.withListener(new PermissionListener() {
+					@Override
+					public void onPermissionGranted(PermissionGrantedResponse response) {
+
+						Intent callIntent = new Intent(Intent.ACTION_CALL);
+						callIntent.setData(Uri.parse("tel:" + mobile_number));
+						startActivity(callIntent);
+
+						return;
+
+					}
+
+					@Override
+					public void onPermissionDenied(PermissionDeniedResponse response) {
+						// check for permanent denial of permission
+						if (response.isPermanentlyDenied()) {
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(Order.this);
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
+	}
 }

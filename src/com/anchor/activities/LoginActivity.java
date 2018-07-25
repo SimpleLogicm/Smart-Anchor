@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,9 +16,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.multidex.MultiDex;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
@@ -42,6 +45,16 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -119,12 +132,8 @@ public class LoginActivity extends Activity{
 	   logo_img.setImageBitmap(blob_data_logo);
     }
 
-
-
-
-		SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-		pref_devid.getString("reg_devid", "");
-		devid = pref_devid.getString("reg_devid", "");
+        SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+		devid = pref_devid.getString("devid", "");
 
 		if (devid.length() > 0) {
 			link_fpwd.setVisibility(View.VISIBLE);
@@ -164,16 +173,9 @@ public class LoginActivity extends Activity{
 
 		 dialog = new ProgressDialog(LoginActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		 cd = new ConnectionDetector(getApplicationContext());
-		 gps = new GPSTracker(LoginActivity.this);
 
-		 Global_Data.LOCATION_SERVICE_HIT = "TRUE";
+		requestGPSPermissionsigna();
 
-		if(!gps.canGetLocation()){
-			// can't get location
-			// GPS or Network is not enabled
-			// Ask user to enable GPS/network in settings
-			gps.showSettingsAlert();
-		}
 
     	 Calendar c = Calendar.getInstance();
          SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
@@ -190,15 +192,14 @@ public class LoginActivity extends Activity{
            cn=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
            nf=cn.getActiveNetworkInfo();
 
-		  TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-		  Global_Data.imei_no = tm.getDeviceId();
 
-		        textViewVersion =(TextView) findViewById(R.id.textViewVersion);
-				buttonLogin=(Button) findViewById(R.id.buttonLogin);
-				buttonReg=(Button) findViewById(R.id.buttonReg);
-				editText1=(EditText) findViewById(R.id.editText1);
-				editText2=(EditText) findViewById(R.id.editText2);
-		        emp_code=(EditText) findViewById(R.id.emp_code);
+
+		textViewVersion =(TextView) findViewById(R.id.textViewVersion);
+		buttonLogin=(Button) findViewById(R.id.buttonLogin);
+		buttonReg=(Button) findViewById(R.id.buttonReg);
+		editText1=(EditText) findViewById(R.id.editText1);
+		editText2=(EditText) findViewById(R.id.editText2);
+		emp_code=(EditText) findViewById(R.id.emp_code);
 
 		sharedpreferences = getSharedPreferences("SimpleLogic",
 				Context.MODE_PRIVATE);
@@ -352,7 +353,8 @@ public class LoginActivity extends Activity{
 		                {
 		                	if (isInternetPresent)
 		                    {
-			   	        	  getserviceData();
+								requestPhoneStatePermission();
+
 		                    }
 			   	        	else
 			   	        	{
@@ -367,82 +369,8 @@ public class LoginActivity extends Activity{
 			   	          
 	   	       buttonLogin.setOnClickListener(new OnClickListener() {
 	   	         public void onClick(View view) {
+					 requestGPSPermissionsignlogin();
 
-//					 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-//					 long bytesAvailable;
-//					 if (android.os.Build.VERSION.SDK_INT >=
-//							 android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-//						 bytesAvailable = stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
-//					 }
-//					 else {
-//						 bytesAvailable = (long)stat.getBlockSize() * (long)stat.getAvailableBlocks();
-//					 }
-//					 long megAvailable = bytesAvailable / (1024 * 1024);
-//					 Log.e("","Available MB : "+megAvailable);
-//
-//					 Toast.makeText(LoginActivity.this, "Available MB : "+megAvailable, Toast.LENGTH_SHORT).show();
-
-					 gps = new GPSTracker(LoginActivity.this);
-					 if(!gps.canGetLocation()){
-//						 Toast toast = Toast.makeText(LoginActivity.this,"Your GPS is off,Please on it.", Toast.LENGTH_LONG);
-//						 toast.setGravity(Gravity.CENTER, 0, 0);
-//						 toast.show();
-						 gps.showSettingsAlertnew();
-					 }
-					 else
-					 if (CheckNullValue.findNullValue(editText1.getText().toString().trim()) == true) {
-	                   // Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_SHORT).show();
-
-						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter UserName", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-	                }
-	                else
-	                if(CheckNullValue.findNullValue(editText2.getText().toString().trim()) == true)
-	                {
-	                   // Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
-
-						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Password", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-	                }
-//					else
-//					if(CheckNullValue.findNullValue(emp_code.getText().toString().trim()) == true)
-//					{
-//						// Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
-//
-//						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Employee Code", Toast.LENGTH_LONG);
-//						toast.setGravity(Gravity.CENTER, 0, 0);
-//						toast.show();
-//					}
-	                else
-	                {
-//	                    if(switchCompat.isChecked())
-//	                    {
-//	                        Prefs.SavePreferences("USERNAME", user_name.getText().toString());
-//	                        Prefs.SavePreferences("PASSWORD", password.getText().toString());
-//	                    }
-//	                    else
-//	                    {
-//	                        Prefs.SavePreferences("USERNAME", "");
-//	                        Prefs.SavePreferences("PASSWORD", "");
-//	                    }
-
-	                    List<Local_Data> contacts2 = dbvoc.getUSERBY_Device(Global_Data.imei_no);
-
-	                    if(contacts2.size() > 0)
-	                    {
-	                        Validate_Email_Pass(editText1.getText().toString().trim(),editText2.getText().toString().trim());
-	                    }
-	                    else
-	                    {
-	                      //  Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_SHORT).show();
-
-							Toast toast = Toast.makeText(LoginActivity.this,"Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-	                    }
-	                }
 				 }
 		   	       });
 	}
@@ -1017,19 +945,14 @@ public class LoginActivity extends Activity{
 
 	        try
 	        {
-	        	TelephonyManager tm = (TelephonyManager)LoginActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
-                //final String Device_id =  tm.getDeviceId();
-				final String Device_id =  tm.getDeviceId();
+				SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+				devid = pref_devid.getString("devid", "");
+				final String Device_id = pref_devid.getString("devid", "");
+
 	            String domain = getResources().getString(R.string.service_domain);
 
-				SharedPreferences pref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-				SharedPreferences.Editor edit = pref.edit();
-				edit.putString("reg_devid", Device_id);
-				edit.commit();
 
-				SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-				pref_devid.getString("reg_devid", "");
-				devid = pref_devid.getString("reg_devid", "");
+
 
 				if (devid.length() > 0) {
 					link_fpwd.setVisibility(View.VISIBLE);
@@ -1156,14 +1079,10 @@ public class LoginActivity extends Activity{
 	    }
 
 	public void Validate_Email_Pass(String username, String passwordnew) {
-	        dialog.setMessage("Please wait....");
-	        dialog.setTitle("Metal App");
-	        dialog.setCancelable(false);
-	        dialog.show();
+
+		requestStoragegpsPermissionsigna(username, passwordnew);
 
 
-
-			new LOGINOperation().execute(username,passwordnew);
 	    }
 
 	private class LOGINOperation extends AsyncTask<String, Void, String> {
@@ -1471,17 +1390,6 @@ public class LoginActivity extends Activity{
 		super.onDestroy();
 	}
 
-//	public String decryption(String strEncryptedText){
-//		String seedValue = "YourSecKey";
-//		String strDecryptedText="";
-//		try {
-//			strDecryptedText = AESHelper.decrypt(seedValue, strEncryptedText);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return strDecryptedText;
-//	}
-
 	public static boolean deleteDir(File dir) {
 		if (dir != null && dir.isDirectory()) {
 			String[] children = dir.list();
@@ -1494,6 +1402,264 @@ public class LoginActivity extends Activity{
 		}
 
 		return dir.delete();
+	}
+
+	private void requestStoragegpsPermissionsigna(final String username, final String passwordnew) {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.READ_EXTERNAL_STORAGE,
+						Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+
+							dialog.setMessage("Please wait....");
+							dialog.setTitle("Metal App");
+							dialog.setCancelable(false);
+							dialog.show();
+
+
+
+							new LOGINOperation().execute(username,passwordnew);
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog(LoginActivity.this);
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	private void requestPhoneStatePermission() {
+		Dexter.withActivity(this)
+				.withPermission(Manifest.permission.READ_PHONE_STATE)
+				.withListener(new PermissionListener() {
+					@Override
+					public void onPermissionGranted(PermissionGrantedResponse response) {
+
+						TelephonyManager tm = (TelephonyManager) LoginActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
+
+						String Device_id = tm.getDeviceId();
+
+						SharedPreferences pref = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+						SharedPreferences.Editor edit = pref.edit();
+						edit.putString("devid", Device_id);
+						edit.commit();
+
+						Global_Data.device_id = Device_id;
+
+						Global_Data.imei_no = Device_id;
+
+						getserviceData();
+						return;
+
+
+					}
+
+					@Override
+					public void onPermissionDenied(PermissionDeniedResponse response) {
+						// check for permanent denial of permission
+						if (response.isPermanentlyDenied()) {
+							showSettingsDialog(LoginActivity.this);
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).check();
+	}
+
+	private void requestGPSPermissionsigna() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+							gps = new GPSTracker(LoginActivity.this);
+
+							Global_Data.LOCATION_SERVICE_HIT = "TRUE";
+
+							if(!gps.canGetLocation()){
+								// can't get location
+								// GPS or Network is not enabled
+								// Ask user to enable GPS/network in settings
+								gps.showSettingsAlert();
+							}
+
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog(LoginActivity.this);
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	private void requestGPSPermissionsignlogin() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+							gps = new GPSTracker(LoginActivity.this);
+							if(!gps.canGetLocation()){
+//						 Toast toast = Toast.makeText(LoginActivity.this,"Your GPS is off,Please on it.", Toast.LENGTH_LONG);
+//						 toast.setGravity(Gravity.CENTER, 0, 0);
+//						 toast.show();
+								gps.showSettingsAlertnew();
+							}
+							else
+							if (CheckNullValue.findNullValue(editText1.getText().toString().trim()) == true) {
+								// Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_SHORT).show();
+
+								Toast toast = Toast.makeText(LoginActivity.this,"Please Enter UserName", Toast.LENGTH_LONG);
+								toast.setGravity(Gravity.CENTER, 0, 0);
+								toast.show();
+							}
+							else
+							if(CheckNullValue.findNullValue(editText2.getText().toString().trim()) == true)
+							{
+								// Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+
+								Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Password", Toast.LENGTH_LONG);
+								toast.setGravity(Gravity.CENTER, 0, 0);
+								toast.show();
+							}
+//					else
+//					if(CheckNullValue.findNullValue(emp_code.getText().toString().trim()) == true)
+//					{
+//						// Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_SHORT).show();
+//
+//						Toast toast = Toast.makeText(LoginActivity.this,"Please Enter Employee Code", Toast.LENGTH_LONG);
+//						toast.setGravity(Gravity.CENTER, 0, 0);
+//						toast.show();
+//					}
+							else
+							{
+
+								SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+								String Device_id = pref_devid.getString("devid", "");
+								Global_Data.device_id = Device_id;
+								Global_Data.imei_no = Device_id;
+
+								List<Local_Data> contacts2 = dbvoc.getUSERBY_Device(Global_Data.imei_no);
+
+								if(contacts2.size() > 0)
+								{
+									Validate_Email_Pass(editText1.getText().toString().trim(),editText2.getText().toString().trim());
+								}
+								else
+								{
+									//  Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_SHORT).show();
+
+									Toast toast = Toast.makeText(LoginActivity.this,"Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
+									toast.setGravity(Gravity.CENTER, 0, 0);
+									toast.show();
+								}
+							}
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog(LoginActivity.this);
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog(Context context) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
 	}
 
 }

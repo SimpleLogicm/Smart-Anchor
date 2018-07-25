@@ -20,7 +20,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -138,8 +137,7 @@ public class MainActivity extends BaseActivity {
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
 		 
 		 //scheduleNotify();
-		 TelephonyManager TM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-	     Global_Data.device_id = TM.getDeviceId();
+
 
 		if(Global_Data.LOCATION_SERVICE_HIT.equalsIgnoreCase("TRUE"))
 		{
@@ -374,7 +372,8 @@ public class MainActivity extends BaseActivity {
 			isInternetPresent = cd.isConnectingToInternet();
 			if (isInternetPresent)
 			{
-				TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+				SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+				String device_id = sp.getString("devid", "");
 
 				try
 				{
@@ -397,7 +396,7 @@ public class MainActivity extends BaseActivity {
 
 				}catch(Exception ex){ex.printStackTrace();}
 				// device_id = telephonyManager.getDeviceId();
-				Log.d("device_id ","device_id"+telephonyManager.getDeviceId());
+				Log.d("device_id ","device_id"+device_id);
 				Log.d("Address", "Address"+Global_Data.address);
 				Log.d("Latitude", "Latitude"+Global_Data.GLOvel_LATITUDE);
 				Log.d("Longitude", "Longitude"+Global_Data.GLOvel_LONGITUDE);
@@ -536,8 +535,8 @@ public class MainActivity extends BaseActivity {
 					{
 						//getScheduleDataFORALLCUSTOMERS();
 
-						TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-						String device_id = telephonyManager.getDeviceId();
+						SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+						String device_id = sp.getString("devid", "");
 						//calendarn = Calendar.getInstance();
 						//year = calendarn.get(Calendar.YEAR);
 						loginDataBaseAdapter=new LoginDataBaseAdapter(MainActivity.this);
@@ -868,16 +867,19 @@ public class MainActivity extends BaseActivity {
 	     PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 	     AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 	     alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0,1000*60*5,pendingIntent);
-	     TelephonyManager TM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-	     Global_Data.device_id = TM.getDeviceId();
+		   SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		   String device_id = sp.getString("devid", "");
+
+		   Global_Data.device_id = device_id;
 	   }
 
 	public void getTargetDatamain()
 	{
 		t_total = 0;
 		achived_total = 0;
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		String device_id = telephonyManager.getDeviceId();
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		String device_id = sp.getString("devid", "");
+
 		calendarn = Calendar.getInstance();
 		year = calendarn.get(Calendar.YEAR);
 
@@ -1269,8 +1271,8 @@ public class MainActivity extends BaseActivity {
 
 	public void getScheduleDataFORALLCUSTOMERS()
 	{
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		String device_id = telephonyManager.getDeviceId();
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		String device_id = sp.getString("devid", "");
 		//calendarn = Calendar.getInstance();
 		//year = calendarn.get(Calendar.YEAR);
 		loginDataBaseAdapter=new LoginDataBaseAdapter(MainActivity.this);

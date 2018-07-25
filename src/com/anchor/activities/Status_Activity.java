@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,6 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.activities.Status_Adapter.customButtonListener;
+import com.anchor.services.getServices;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -42,8 +42,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.anchor.activities.Status_Adapter.customButtonListener;
-import com.anchor.services.getServices;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -112,9 +110,9 @@ public class Status_Activity extends Activity implements customButtonListener {
 		
 		status_list=(ListView)findViewById(R.id.status_list);
 		cancel_list=(Button)findViewById(R.id.cancel_list);
-				
-		TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+
+		SharedPreferences sp1 = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		 device_id = sp1.getString("devid", "");
 		
         dataArrayList=new ArrayList<HashMap<String, String>>();
     	
@@ -224,9 +222,9 @@ public class Status_Activity extends Activity implements customButtonListener {
 
 	public  void View_NearestCustomer(String device_id, String cust_id)
     {
-      
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+		 device_id = sp.getString("devid", "");
         
          loginDataBaseAdapter=new LoginDataBaseAdapter(Status_Activity.this);
 	     loginDataBaseAdapter=loginDataBaseAdapter.open();

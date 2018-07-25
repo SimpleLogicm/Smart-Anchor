@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,9 +12,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,6 +35,13 @@ import android.widget.Toast;
 import com.anchor.model.Reason;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -224,68 +233,8 @@ public class NoOrderActivity extends BaseActivity {
 				{
 					//down event
 					b.setBackgroundColor(Color.parseColor("#910505"));
+					requestGPSPermissionsigna();
 
-					gps = new GPSTracker(NoOrderActivity.this);
-					if(!gps.canGetLocation()){
-
-						gps.showSettingsAlertnew();
-					}
-					else
-					{
-						if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Select Reason")) {
-							Toast toast1 = Toast.makeText(getApplicationContext(),"Please select reason", Toast.LENGTH_SHORT);
-							toast1.setGravity(Gravity.CENTER, 0, 0);
-							toast1.show();
-						}
-						else {
-							if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Other")) {
-								reasonOther=edittextNoOrderreason.getText().toString();
-								if (reasonOther.length()==0) {
-									Toast toast1 = Toast.makeText(getApplicationContext(),"Please Enter reason", Toast.LENGTH_SHORT);
-									toast1.setGravity(Gravity.CENTER, 0, 0);
-									toast1.show();
-								}
-								else {
-//									isInternetPresent = cd.isConnectingToInternet();
-//									if (isInternetPresent)
-//				                    {
-									showDialogueBox();
-
-									//call_service();
-//				                    }
-//					   	        	else
-//					   	        	{
-//					   	        	 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-//										Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
-//										toast.setGravity(Gravity.CENTER, 0, 0);
-//										toast.show();
-//					   	        	}
-
-								}
-
-							}
-
-							else {
-//							  isInternetPresent = cd.isConnectingToInternet();
-//								if (isInternetPresent)
-//			                    {
-								showDialogueBox();
-
-								//call_service();
-//			                    }
-//				   	        	else
-//				   	        	{
-//
-//									Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
-//									toast.setGravity(Gravity.CENTER, 0, 0);
-//									toast.show();
-//				   	        	}
-							}
-
-
-
-						}
-					}
 
 
 				}
@@ -598,8 +547,8 @@ public class NoOrderActivity extends BaseActivity {
 			String device_id = "";
 
 
-			TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-			device_id = telephonyManager.getDeviceId();
+			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+			 device_id = sp.getString("devid", "");
 
 			domain = this.getResources().getString(R.string.service_domain);
 
@@ -994,5 +943,135 @@ public class NoOrderActivity extends BaseActivity {
 		return dateFormat.format(date);
 	}
 
+	private void requestGPSPermissionsigna() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+							gps = new GPSTracker(NoOrderActivity.this);
+							if(!gps.canGetLocation()){
+
+								gps.showSettingsAlertnew();
+							}
+							else
+							{
+								if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Select Reason")) {
+									Toast toast1 = Toast.makeText(getApplicationContext(),"Please select reason", Toast.LENGTH_SHORT);
+									toast1.setGravity(Gravity.CENTER, 0, 0);
+									toast1.show();
+								}
+								else {
+									if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Other")) {
+										reasonOther=edittextNoOrderreason.getText().toString();
+										if (reasonOther.length()==0) {
+											Toast toast1 = Toast.makeText(getApplicationContext(),"Please Enter reason", Toast.LENGTH_SHORT);
+											toast1.setGravity(Gravity.CENTER, 0, 0);
+											toast1.show();
+										}
+										else {
+//									isInternetPresent = cd.isConnectingToInternet();
+//									if (isInternetPresent)
+//				                    {
+											showDialogueBox();
+
+											//call_service();
+//				                    }
+//					   	        	else
+//					   	        	{
+//					   	        	 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+//										Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+//										toast.setGravity(Gravity.CENTER, 0, 0);
+//										toast.show();
+//					   	        	}
+
+										}
+
+									}
+
+									else {
+//							  isInternetPresent = cd.isConnectingToInternet();
+//								if (isInternetPresent)
+//			                    {
+										showDialogueBox();
+
+										//call_service();
+//			                    }
+//				   	        	else
+//				   	        	{
+//
+//									Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+//									toast.setGravity(Gravity.CENTER, 0, 0);
+//									toast.show();
+//				   	        	}
+									}
+
+
+
+								}
+							}
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
+	}
 
 }

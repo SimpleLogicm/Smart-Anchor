@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.App.AppController;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -36,7 +36,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.anchor.App.AppController;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -256,8 +255,8 @@ public class Video_Main_List extends Activity {
 	public  void GetNewLaunch_Datan()
 	{
 
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		String device_id = telephonyManager.getDeviceId();
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+		String device_id = sp.getString("devid", "");
 		//context = contextn;
 
 		//loginDataBaseAdapter=new LoginDataBaseAdapter(Video_Main_List.this);

@@ -9,13 +9,13 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +29,11 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.activities.Customer_Feed;
+import com.anchor.activities.DataBaseHelper;
+import com.anchor.activities.Global_Data;
+import com.anchor.activities.Local_Data;
+import com.anchor.activities.R;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,11 +43,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.anchor.activities.Customer_Feed;
-import com.anchor.activities.DataBaseHelper;
-import com.anchor.activities.Global_Data;
-import com.anchor.activities.Local_Data;
-import com.anchor.activities.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -272,8 +272,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.MyViewHold
             String domain = "";
             String device_id = "";
 
-            TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-            device_id = telephonyManager.getDeviceId();
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
 

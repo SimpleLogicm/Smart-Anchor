@@ -18,7 +18,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -277,8 +276,8 @@ public class Marketing extends Activity implements OnItemSelectedListener{
     {
 
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String device_id = telephonyManager.getDeviceId();
+        SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
         //context = contextn;
 
         //loginDataBaseAdapter=new LoginDataBaseAdapter(Video_Main_List.this);
@@ -592,8 +591,8 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
 
                 downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                String device_id = telephonyManager.getDeviceId();
+                SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+                String device_id = sp.getString("devid", "");
 
                 String domain = "";
 

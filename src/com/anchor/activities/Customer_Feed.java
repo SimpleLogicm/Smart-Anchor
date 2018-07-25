@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -34,7 +35,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,6 +67,13 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.soundcloud.android.crop.Crop;
 
 import org.apache.http.HttpEntity;
@@ -581,652 +589,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 		button1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
-				gps = new GPSTracker(Customer_Feed.this);
-				if(!gps.canGetLocation()){
-
-					gps.showSettingsAlertnew();
-				}
-				else
-				{
-					List<Local_Data> contacts = dbvoc.getRetailer(RE_TEXT);
-					for (Local_Data cn : contacts) {
-
-						RE_ID = cn.get_Retailer_id();
-					}
-
-					if (CP_NAME.equals("video") || CP_NAME.equals("Image")) {
-
-						try {
-							if (CP_NAME.equals("video")) {
-
-								if (video_option.equalsIgnoreCase("Gallery") && (selectedPath == null || selectedPath.equals(""))) {
-									//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
-									Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Video First", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-								} else if(fileUri.getPath() == null || fileUri.getPath().equals("")) {
-									//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
-
-									Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Video First", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-								} else if (discription.getText().toString() == null || discription.getText().toString().equals("")) {
-									//Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG).show();
-
-									Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Description.", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-
-								} else {
-
-									//Toast.makeText(getApplicationContext(), discription.getText().toString(), Toast.LENGTH_LONG).show();
-
-									//image_url = getStringImage(bitmap);
-									//new UploadFileToServer().execute();
-
-									//executeMultipartPost();LoadDatabaseAsyncTask
-									media_text = discription.getText().toString();
-
-									if (video_option.equalsIgnoreCase("Gallery")) {
-										final_media_path = selectedPath;
-									} else {
-										final_media_path = fileUri.getPath();
-									}
-
-									filename = final_media_path.substring(final_media_path.lastIndexOf("/") + 1);
-
-
-									AlertDialog alertDialog = new AlertDialog.Builder(Customer_Feed.this).create(); //Read Update
-
-									alertDialog.setMessage("If you want to save Video offline press Save Offline Button ?");
-//}
-
-									alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Save Offline ",new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialogn, int which) {
-											// TODO Auto-generated method stub
-
-											try
-											{
-												AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-												Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-												Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-												PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-												if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-												{
-													Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-												}
-												else
-												if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-												{
-													Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-													Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-												}
-
-											}catch(Exception ex){ex.printStackTrace();}
-
-
-											Long randomPIN = System.currentTimeMillis();
-											String PINString = String.valueOf(randomPIN);
-
-											loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
-													"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_video_Path,PINString);
-
-											Intent intent = new Intent(Customer_Feed.this, Order.class);
-											startActivity(intent);
-											overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-											finish();
-
-											Toast toast = Toast.makeText(getApplicationContext(), "Save Successfully.", Toast.LENGTH_LONG);
-											toast.setGravity(Gravity.CENTER, 0, 0);
-											toast.show();
-
-											dialogn.cancel();
-
-										}
-									});
-
-									alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Online Sync",new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialogn, int which) {
-
-
-											isInternetPresent = cd.isConnectingToInternet();
-											if (isInternetPresent)
-											{
-												button1.setClickable(false);
-												button1.setEnabled(false);
-
-												response_result = "";
-
-												runOnUiThread(new Runnable()
-												{
-													public void run()
-													{
-														dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-														dialog.setMessage("Please wait....");
-														dialog.setTitle("Metal");
-														dialog.setCancelable(false);
-														dialog.show();
-													}
-												});
-
-
-
-												//media_coden = encodeVideoFile(final_media_path);
-
-												SyncMediaData(CP_NAME, video_code, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
-
-//									new Mediaperation().execute(CP_NAME, video_code, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
-											}
-											else
-											{
-
-												try
-												{
-													AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-													Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-													Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-													PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-													if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-													{
-														Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-													}
-													else
-													if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-													{
-														Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-														Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-													}
-
-												}catch(Exception ex){ex.printStackTrace();}
-
-
-												Long randomPIN = System.currentTimeMillis();
-												String PINString = String.valueOf(randomPIN);
-
-												loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
-														"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_video_Path,PINString);
-
-												Toast toast = Toast.makeText(getApplicationContext(), "No Internet. Data save on your phone. Please Sync when network available.", Toast.LENGTH_LONG);
-												toast.setGravity(Gravity.CENTER, 0, 0);
-												toast.show();
-
-												Intent intent = new Intent(Customer_Feed.this, Order.class);
-												startActivity(intent);
-												overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-												finish();
-
-
-											}
-
-
-											dialogn.cancel();
-										}
-									});
-
-									alertDialog.setCancelable(false);
-									alertDialog.show();
-
-									//new LoadDatabaseAsyncTask().execute();
-									//uploadFile();
-
-
-
-
-
-								}
-
-							} else {
-								if (image_option.equalsIgnoreCase("Gallery") && (picturePath == null || picturePath.equals(""))) {
-									//	Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
-
-									Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Image First", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-
-								} else if (fileUri.getPath() == null || fileUri.getPath().equals("") || fileUri.equals("")) {
-									//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
-									Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Image First", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-
-								} else if (discription.getText().toString() == null || discription.getText().toString().equals("")) {
-									//Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG).show();
-
-									Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-								} else {
-
-									//Toast.makeText(getApplicationContext(), discription.getText().toString(), Toast.LENGTH_LONG).show();
-									image_url = "";
-
-
-//									loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME,Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLOvel_USER_EMAIL,
-//											image_url,discription.getText().toString(), Current_Date, Current_Date);
-//									//get_dialogC();
-
-
-									media_text = discription.getText().toString();
-									if (image_option.equalsIgnoreCase("Gallery")) {
-										final_media_path = picturePath;
-									} else {
-										final_media_path = fileUri.getPath();
-									}
-
-									filename = final_media_path.substring(final_media_path.lastIndexOf("/") + 1);
-
-
-									AlertDialog alertDialog = new AlertDialog.Builder(Customer_Feed.this).create(); //Read Update
-
-									alertDialog.setMessage("If you want to save image offline press Save Offline Button ?");
-									//}
-
-									alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Save Offline ",new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialogn, int which) {
-											// TODO Auto-generated method stub
-
-											try
-											{
-												AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-												Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-												Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-												PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-												if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-												{
-													Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-												}
-												else
-												if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-												{
-													Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-													Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-												}
-
-											}catch(Exception ex){ex.printStackTrace();}
-
-											Long randomPIN = System.currentTimeMillis();
-											String PINString = String.valueOf(randomPIN);
-
-											loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_Image_Path,PINString);
-
-											Intent intent = new Intent(Customer_Feed.this, Order.class);
-											startActivity(intent);
-											overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-											finish();
-
-											Toast toast = Toast.makeText(getApplicationContext(), "Save Successfully.", Toast.LENGTH_LONG);
-											toast.setGravity(Gravity.CENTER, 0, 0);
-											toast.show();
-											dialogn.cancel();
-
-										}
-									});
-
-									alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Online Sync",new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(DialogInterface dialogn, int which) {
-
-
-											isInternetPresent = cd.isConnectingToInternet();
-											if (isInternetPresent)
-											{
-												button1.setClickable(false);
-												button1.setEnabled(false);
-												response_result = "";
-
-												dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-												dialog.setMessage("Please wait....");
-												dialog.setTitle("Metal");
-												dialog.setCancelable(false);
-												dialog.show();
-
-
-												//media_coden = getStringImage(bitmap);
-
-
-
-
-
-												new Mediaperation().execute(CP_NAME, image_url, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
-
-//									SyncMediaData(CP_NAME, image_url, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
-											}
-											else
-											{
-												//Toast.makeText(getApplicationContext(),"No Internet. Data saved on your phone. Please Sync when network available.",Toast.LENGTH_LONG).show();
-
-												try
-												{
-													AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-													Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-													Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-													PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-													if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-													{
-														Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-													}
-													else
-													if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-													{
-														Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-														Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-													}
-
-												}catch(Exception ex){ex.printStackTrace();}
-
-												Long randomPIN = System.currentTimeMillis();
-												String PINString = String.valueOf(randomPIN);
-
-												loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
-														"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_Image_Path,PINString);
-
-												Intent intent = new Intent(Customer_Feed.this, Order.class);
-												startActivity(intent);
-												overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-												finish();
-												Toast toast = Toast.makeText(getApplicationContext(), "No Internet. Data save on your phone. Please Sync when network available.", Toast.LENGTH_LONG);
-												toast.setGravity(Gravity.CENTER, 0, 0);
-												toast.show();
-											}
-
-
-											dialogn.cancel();
-										}
-									});
-
-									alertDialog.setCancelable(false);
-									alertDialog.show();
-
-
-
-
-									//new LoadDatabaseAsyncTask().execute();
-
-
-								}
-							}
-
-
-						} catch (Exception e) {
-							e.printStackTrace();
-							//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-//						Intent intent = new Intent(Customer_Feed.this, Order.class);
-//						intent.putExtra("filePath", "");
-//
-//						startActivity(intent);
-//						overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-						}
-					} else {
-						//discription.setVisibility(View.VISIBLE);
-						//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
-						if (CP_NAME.equals("Feedback")) {
-
-							if (new_feedback.getText().toString() == null || new_feedback.getText().toString().equals("")) {
-								//Toast.makeText(getApplicationContext(), "Please Enter Feedback Description", Toast.LENGTH_LONG).show();
-
-
-								Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Feedback Description", Toast.LENGTH_LONG);
-								toast.setGravity(Gravity.CENTER, 0, 0);
-								toast.show();
-
-							} else {
-								try {
-
-									try
-									{
-
-										Log.d("Play LAT LOG","Play LAT LOG"+PlayServiceManager.getLatitude()+" "+ PlayServiceManager.getLongitude());
-
-
-										AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-										Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-										Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-										PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-										if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-										{
-											Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-										}
-										else
-										if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-										{
-											Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-											Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-										}
-
-									}catch(Exception ex){ex.printStackTrace();}
-
-									Long randomPIN = System.currentTimeMillis();
-									String PINString = String.valueOf(randomPIN);
-									loginDataBaseAdapter.insertCustomer_Service_Feedbacks("1", Global_Data.GLOvel_CUSTOMER_ID, RE_ID, Global_Data.GLOvel_USER_EMAIL,
-											Current_Date, new_feedback.getText().toString(), "Active", Current_Date, "User1", "User1",
-											Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
-
-									String gaddress = "";
-									try {
-										if (Global_Data.address.equalsIgnoreCase("null")) {
-											gaddress = "";
-										} else {
-											gaddress = Global_Data.address;
-										}
-									}catch(Exception ex){ex.printStackTrace();}
-
-									String sms_body = "";
-									sms_body = "Dear " + Global_Data.USER_MANAGER_NAME + " ,"  +"\n"+" There is a feedback from  " + Global_Data.CUSTOMER_NAME_NEW + " about  " +  new_feedback.getText().toString() + ". This is to keep you updated."+"\n\n"+ " Thank you." +"\n"+ " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME +"\n"+ " " +gaddress;
-
-									if(!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" "))
-									{
-										//	Global_Data.sendSMS(Global_Data.cus_MAnager_mobile,sms_body, Customer_Feed.this);
-										// mobile_numbers.add(Global_Data.cus_MAnager_mobile);
-									}
-
-									//call_service_FORCUSS("Feedback");
-
-									//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
-									//Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG).show();
-									Toast toast = Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-
-									Intent intent = new Intent(Customer_Feed.this, Order.class);
-									startActivity(intent);
-									overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-									finish();
-
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-								//String D_TEXT = new_feedback.getText().toString();
-
-
-							}
-						} else if (CP_NAME.equals("Claim")) {
-
-							if (claim_amount.getText().toString() == null || claim_amount.getText().toString().equals("")) {
-								//Toast.makeText(getApplicationContext(), "Please Enter Claim Amount", Toast.LENGTH_LONG).show();
-								Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Claim Amount", Toast.LENGTH_LONG);
-								toast.setGravity(Gravity.CENTER, 0, 0);
-								toast.show();
-							} else if (discription.getText().toString() == null || discription.getText().toString().equals("")) {
-								//Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG).show();
-
-								Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG);
-								toast.setGravity(Gravity.CENTER, 0, 0);
-								toast.show();
-
-							} else {
-								try {
-
-									try
-									{
-										AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-										Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-										Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-										PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-										if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-										{
-											Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-										}
-										else
-										if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-										{
-											Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-											Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-										}
-
-									}catch(Exception ex){ex.printStackTrace();}
-
-									Long randomPIN = System.currentTimeMillis();
-									String PINString = String.valueOf(randomPIN);
-									loginDataBaseAdapter.insertCustomerServiceClaims("1", Global_Data.GLOvel_CUSTOMER_ID, "Customer", RE_ID,
-											Global_Data.GLOvel_USER_EMAIL, Current_Date, discription.getText().toString(), claim_amount.getText().toString(), "Active", "10000", Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
-
-									//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
-
-									String gaddress = "";
-									try {
-										if (Global_Data.address.equalsIgnoreCase("null")) {
-											gaddress = "";
-										} else {
-											gaddress = Global_Data.address;
-										}
-									}catch(Exception ex){ex.printStackTrace();}
-
-									String sms_body = "";
-									sms_body = "Dear " + Global_Data.USER_MANAGER_NAME + " ,"  +"\n"+" There is a claim from  " + Global_Data.CUSTOMER_NAME_NEW + " for Rs.  " + claim_amount.getText().toString() + " regarding " + discription.getText().toString() + ". This is to keep you updated."+"\n\n"+ " Thank you." +"\n"+ " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME +"\n"+ " " +gaddress;
-
-									if(!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" "))
-									{
-										//				Global_Data.sendSMS(Global_Data.cus_MAnager_mobile,sms_body, Customer_Feed.this);
-										// mobile_numbers.add(Global_Data.cus_MAnager_mobile);
-									}
-
-									//	Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG).show();
-
-									Toast toast = Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-
-									Intent intent = new Intent(Customer_Feed.this, Order.class);
-									startActivity(intent);
-									overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-									finish();
-
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-								//String D_TEXT = new_feedback.getText().toString();
-
-
-							}
-						} else if (CP_NAME.equals("Complaints")) {
-
-							if (new_complaints.getText().toString() == null || new_complaints.getText().toString().equals("")) {
-								//Toast.makeText(getApplicationContext(), "Please Enter Complaints", Toast.LENGTH_LONG).show();
-
-								Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Complaints", Toast.LENGTH_LONG);
-								toast.setGravity(Gravity.CENTER, 0, 0);
-								toast.show();
-
-							} else {
-								try {
-
-									try
-									{
-										AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
-										Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-										Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-										PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
-
-										if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
-										{
-											Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-										}
-										else
-										if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-										{
-											Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-											Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-										}
-
-									}catch(Exception ex){ex.printStackTrace();}
-
-									Long randomPIN = System.currentTimeMillis();
-									String PINString = String.valueOf(randomPIN);
-
-									loginDataBaseAdapter.insertCustomer_Service_Complaints("1", Global_Data.GLOvel_CUSTOMER_ID, RE_ID, Global_Data.GLOvel_USER_EMAIL, Current_Date, new_complaints.getText().toString(), "Active", Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
-
-									//Toast.makeText(getApplicationContext(), new_complaints.getText().toString(), Toast.LENGTH_LONG).show();
-
-									String gaddress = "";
-									try {
-										if (Global_Data.address.equalsIgnoreCase("null")) {
-											gaddress = "";
-										} else {
-											gaddress = Global_Data.address;
-										}
-									}catch(Exception ex){ex.printStackTrace();}
-
-									String sms_body = "";
-									sms_body = "Dear " + Global_Data.USER_MANAGER_NAME + " ,"  +"\n"+" There is a complaint  from  " + Global_Data.CUSTOMER_NAME_NEW + " about  " +  new_complaints.getText().toString() + ". This is to keep you updated."+"\n\n"+ " Thank you." +"\n"+ " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME +"\n"+ " " +gaddress;
-
-									if(!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" "))
-									{
-										//				Global_Data.sendSMS(Global_Data.cus_MAnager_mobile,sms_body, Customer_Feed.this);
-										// mobile_numbers.add(Global_Data.cus_MAnager_mobile);
-									}
-
-									//Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG).show();
-									Toast toast = Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG);
-									toast.setGravity(Gravity.CENTER, 0, 0);
-									toast.show();
-
-									Intent intent = new Intent(Customer_Feed.this, Order.class);
-									startActivity(intent);
-									overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-									finish();
-
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-								//String D_TEXT = new_feedback.getText().toString();
-
-
-							}
-						}
-
-
-					}
-				}
-
-
-
-
+				requestGPSPermissionsigna();
 
 			}
 		});
@@ -2360,9 +1723,8 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			String domain = "";
 			String device_id = "";
 
-
-			TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-			device_id = telephonyManager.getDeviceId();
+			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+			device_id = sp.getString("devid", "");
 
 			domain = this.getResources().getString(R.string.service_domain);
 
@@ -3527,50 +2889,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				image_option = "image";
-				B_flag = isDeviceSupportCamera();
 
-				if(B_flag == true)
-				{
-					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				requestStoragePermission();
 
-					fileUri = getOutputMediaFileUrinew(MEDIA_TYPE_IMAGE);
-
-					Global_Data.Default_Image_Path = fileUri.getPath();
-
-					intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-					// performCrop(fileUri);
-					// start the image capture Intent
-					startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-
-//					File mediaStorageDir = new File(
-//							Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-//							Config.IMAGE_DIRECTORY_NAME+"/"+"CUSTOMER_SERVICES");
-//
-//					try {
-//						//delete(mediaStorageDir);
-//						if (mediaStorageDir.isDirectory())
-//						{
-//							String[] children = mediaStorageDir.list();
-//							for (int i = 0; i < children.length; i++)
-//							{
-//								new File(mediaStorageDir, children[i]).delete();
-//							}
-//						}
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-
-//					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//					fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-//
-//			        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-//	                startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_CAMERA);
-				}
-				else
-				{
-					Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
-				}
 				dialog.cancel();
 			}
 		});
@@ -3764,10 +3085,10 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 
 
-				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				device_id = telephonyManager.getDeviceId();
+				SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+				device_id = sp.getString("devid", "");
 
-				domain = getResources().getString(R.string.service_domain);
+				  domain = getResources().getString(R.string.service_domain);
 
 
 
@@ -4102,9 +3423,8 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 
 
-
-			TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-			device_id = telephonyManager.getDeviceId();
+			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+			device_id = sp.getString("devid", "");
 
 			domain = getResources().getString(R.string.service_domain);
 
@@ -4396,5 +3716,806 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			//conn = null;
 		}
 	}
+
+	/**
+	 * Requesting multiple permissions (storage and location) at once
+	 * This uses multiple permission model from dexter
+	 * On permanent denial opens settings dialog
+	 */
+	private void requestStoragePermission() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.CAMERA,
+						Manifest.permission.READ_EXTERNAL_STORAGE,
+						Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+							B_flag = isDeviceSupportCamera();
+
+							if(B_flag == true)
+							{
+								Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+								fileUri = getOutputMediaFileUrinew(MEDIA_TYPE_IMAGE);
+
+								Global_Data.Default_Image_Path = fileUri.getPath();
+
+								intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+								// performCrop(fileUri);
+								// start the image capture Intent
+								startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+
+//					File mediaStorageDir = new File(
+//							Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+//							Config.IMAGE_DIRECTORY_NAME+"/"+"CUSTOMER_SERVICES");
+//
+//					try {
+//						//delete(mediaStorageDir);
+//						if (mediaStorageDir.isDirectory())
+//						{
+//							String[] children = mediaStorageDir.list();
+//							for (int i = 0; i < children.length; i++)
+//							{
+//								new File(mediaStorageDir, children[i]).delete();
+//							}
+//						}
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+
+//					Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//					fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+//
+//			        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+//	                startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_CAMERA);
+							}
+							else
+							{
+								Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
+							}
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(Customer_Feed.this);
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
+	}
+
+	private void requestGPSPermissionsigna() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+
+							gps = new GPSTracker(Customer_Feed.this);
+							if(!gps.canGetLocation()){
+
+								gps.showSettingsAlertnew();
+							}
+							else
+							{
+								List<Local_Data> contacts = dbvoc.getRetailer(RE_TEXT);
+								for (Local_Data cn : contacts) {
+
+									RE_ID = cn.get_Retailer_id();
+								}
+
+								if (CP_NAME.equals("video") || CP_NAME.equals("Image")) {
+
+									try {
+										if (CP_NAME.equals("video")) {
+
+											if (video_option.equalsIgnoreCase("Gallery") && (selectedPath == null || selectedPath.equals(""))) {
+												//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
+												Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Video First", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+											} else if(fileUri.getPath() == null || fileUri.getPath().equals("")) {
+												//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
+
+												Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Video First", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+											} else if (discription.getText().toString() == null || discription.getText().toString().equals("")) {
+												//Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG).show();
+
+												Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Description.", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+
+											} else {
+
+												//Toast.makeText(getApplicationContext(), discription.getText().toString(), Toast.LENGTH_LONG).show();
+
+												//image_url = getStringImage(bitmap);
+												//new UploadFileToServer().execute();
+
+												//executeMultipartPost();LoadDatabaseAsyncTask
+												media_text = discription.getText().toString();
+
+												if (video_option.equalsIgnoreCase("Gallery")) {
+													final_media_path = selectedPath;
+												} else {
+													final_media_path = fileUri.getPath();
+												}
+
+												filename = final_media_path.substring(final_media_path.lastIndexOf("/") + 1);
+
+
+												AlertDialog alertDialog = new AlertDialog.Builder(Customer_Feed.this).create(); //Read Update
+
+												alertDialog.setMessage("If you want to save Video offline press Save Offline Button ?");
+//}
+
+												alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Save Offline ",new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(DialogInterface dialogn, int which) {
+														// TODO Auto-generated method stub
+
+														try
+														{
+															AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+															Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+															Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+															PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+															if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+															{
+																Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+															}
+															else
+															if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+															{
+																Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+																Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+															}
+
+														}catch(Exception ex){ex.printStackTrace();}
+
+
+														Long randomPIN = System.currentTimeMillis();
+														String PINString = String.valueOf(randomPIN);
+
+														loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
+																"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_video_Path,PINString);
+
+														Intent intent = new Intent(Customer_Feed.this, Order.class);
+														startActivity(intent);
+														overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+														finish();
+
+														Toast toast = Toast.makeText(getApplicationContext(), "Save Successfully.", Toast.LENGTH_LONG);
+														toast.setGravity(Gravity.CENTER, 0, 0);
+														toast.show();
+
+														dialogn.cancel();
+
+													}
+												});
+
+												alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Online Sync",new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(DialogInterface dialogn, int which) {
+
+
+														isInternetPresent = cd.isConnectingToInternet();
+														if (isInternetPresent)
+														{
+															button1.setClickable(false);
+															button1.setEnabled(false);
+
+															response_result = "";
+
+															runOnUiThread(new Runnable()
+															{
+																public void run()
+																{
+																	dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+																	dialog.setMessage("Please wait....");
+																	dialog.setTitle("Metal");
+																	dialog.setCancelable(false);
+																	dialog.show();
+																}
+															});
+
+
+
+															//media_coden = encodeVideoFile(final_media_path);
+
+															SyncMediaData(CP_NAME, video_code, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
+
+//									new Mediaperation().execute(CP_NAME, video_code, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
+														}
+														else
+														{
+
+															try
+															{
+																AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+																Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+																Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+																PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+																if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+																{
+																	Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+																}
+																else
+																if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+																{
+																	Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+																	Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+																}
+
+															}catch(Exception ex){ex.printStackTrace();}
+
+
+															Long randomPIN = System.currentTimeMillis();
+															String PINString = String.valueOf(randomPIN);
+
+															loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
+																	"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_video_Path,PINString);
+
+															Toast toast = Toast.makeText(getApplicationContext(), "No Internet. Data save on your phone. Please Sync when network available.", Toast.LENGTH_LONG);
+															toast.setGravity(Gravity.CENTER, 0, 0);
+															toast.show();
+
+															Intent intent = new Intent(Customer_Feed.this, Order.class);
+															startActivity(intent);
+															overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+															finish();
+
+
+														}
+
+
+														dialogn.cancel();
+													}
+												});
+
+												alertDialog.setCancelable(false);
+												alertDialog.show();
+
+												//new LoadDatabaseAsyncTask().execute();
+												//uploadFile();
+
+
+
+
+
+											}
+
+										} else {
+											if (image_option.equalsIgnoreCase("Gallery") && (picturePath == null || picturePath.equals(""))) {
+												//	Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
+
+												Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Image First", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+
+											} else if (fileUri.getPath() == null || fileUri.getPath().equals("") || fileUri.equals("")) {
+												//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
+												Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Image First", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+
+											} else if (discription.getText().toString() == null || discription.getText().toString().equals("")) {
+												//Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG).show();
+
+												Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+											} else {
+
+												//Toast.makeText(getApplicationContext(), discription.getText().toString(), Toast.LENGTH_LONG).show();
+												image_url = "";
+
+
+//									loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME,Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLOvel_USER_EMAIL,
+//											image_url,discription.getText().toString(), Current_Date, Current_Date);
+//									//get_dialogC();
+
+
+												media_text = discription.getText().toString();
+												if (image_option.equalsIgnoreCase("Gallery")) {
+													final_media_path = picturePath;
+												} else {
+													final_media_path = fileUri.getPath();
+												}
+
+												filename = final_media_path.substring(final_media_path.lastIndexOf("/") + 1);
+
+
+												AlertDialog alertDialog = new AlertDialog.Builder(Customer_Feed.this).create(); //Read Update
+
+												alertDialog.setMessage("If you want to save image offline press Save Offline Button ?");
+												//}
+
+												alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Save Offline ",new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(DialogInterface dialogn, int which) {
+														// TODO Auto-generated method stub
+
+														try
+														{
+															AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+															Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+															Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+															PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+															if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+															{
+																Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+															}
+															else
+															if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+															{
+																Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+																Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+															}
+
+														}catch(Exception ex){ex.printStackTrace();}
+
+														Long randomPIN = System.currentTimeMillis();
+														String PINString = String.valueOf(randomPIN);
+
+														loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_Image_Path,PINString);
+
+														Intent intent = new Intent(Customer_Feed.this, Order.class);
+														startActivity(intent);
+														overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+														finish();
+
+														Toast toast = Toast.makeText(getApplicationContext(), "Save Successfully.", Toast.LENGTH_LONG);
+														toast.setGravity(Gravity.CENTER, 0, 0);
+														toast.show();
+														dialogn.cancel();
+
+													}
+												});
+
+												alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Online Sync",new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(DialogInterface dialogn, int which) {
+
+
+														isInternetPresent = cd.isConnectingToInternet();
+														if (isInternetPresent)
+														{
+															button1.setClickable(false);
+															button1.setEnabled(false);
+															response_result = "";
+
+															dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+															dialog.setMessage("Please wait....");
+															dialog.setTitle("Metal");
+															dialog.setCancelable(false);
+															dialog.show();
+
+
+															//media_coden = getStringImage(bitmap);
+
+
+
+
+
+															new Mediaperation().execute(CP_NAME, image_url, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
+
+//									SyncMediaData(CP_NAME, image_url, discription.getText().toString(), Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_USER_EMAIL, filename);
+														}
+														else
+														{
+															//Toast.makeText(getApplicationContext(),"No Internet. Data saved on your phone. Please Sync when network available.",Toast.LENGTH_LONG).show();
+
+															try
+															{
+																AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+																Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+																Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+																PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+																if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+																{
+																	Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+																}
+																else
+																if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+																{
+																	Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+																	Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+																}
+
+															}catch(Exception ex){ex.printStackTrace();}
+
+															Long randomPIN = System.currentTimeMillis();
+															String PINString = String.valueOf(randomPIN);
+
+															loginDataBaseAdapter.insertCustomerServiceMedia("",Global_Data.GLOvel_CUSTOMER_ID,CP_NAME, RE_ID, Global_Data.GLOvel_USER_EMAIL,
+																	"", discription.getText().toString(),Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Default_Image_Path,PINString);
+
+															Intent intent = new Intent(Customer_Feed.this, Order.class);
+															startActivity(intent);
+															overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+															finish();
+															Toast toast = Toast.makeText(getApplicationContext(), "No Internet. Data save on your phone. Please Sync when network available.", Toast.LENGTH_LONG);
+															toast.setGravity(Gravity.CENTER, 0, 0);
+															toast.show();
+														}
+
+
+														dialogn.cancel();
+													}
+												});
+
+												alertDialog.setCancelable(false);
+												alertDialog.show();
+
+
+
+
+												//new LoadDatabaseAsyncTask().execute();
+
+
+											}
+										}
+
+
+									} catch (Exception e) {
+										e.printStackTrace();
+										//Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(getApplicationContext(), "Please Capture Media First", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+//						Intent intent = new Intent(Customer_Feed.this, Order.class);
+//						intent.putExtra("filePath", "");
+//
+//						startActivity(intent);
+//						overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+									}
+								} else {
+									//discription.setVisibility(View.VISIBLE);
+									//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
+									if (CP_NAME.equals("Feedback")) {
+
+										if (new_feedback.getText().toString() == null || new_feedback.getText().toString().equals("")) {
+											//Toast.makeText(getApplicationContext(), "Please Enter Feedback Description", Toast.LENGTH_LONG).show();
+
+
+											Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Feedback Description", Toast.LENGTH_LONG);
+											toast.setGravity(Gravity.CENTER, 0, 0);
+											toast.show();
+
+										} else {
+											try {
+
+												try
+												{
+
+													Log.d("Play LAT LOG","Play LAT LOG"+PlayServiceManager.getLatitude()+" "+ PlayServiceManager.getLongitude());
+
+
+													AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+													Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+													Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+													PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+													if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+													{
+														Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+													}
+													else
+													if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+													{
+														Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+														Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+													}
+
+												}catch(Exception ex){ex.printStackTrace();}
+
+												Long randomPIN = System.currentTimeMillis();
+												String PINString = String.valueOf(randomPIN);
+												loginDataBaseAdapter.insertCustomer_Service_Feedbacks("1", Global_Data.GLOvel_CUSTOMER_ID, RE_ID, Global_Data.GLOvel_USER_EMAIL,
+														Current_Date, new_feedback.getText().toString(), "Active", Current_Date, "User1", "User1",
+														Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
+
+												String gaddress = "";
+												try {
+													if (Global_Data.address.equalsIgnoreCase("null")) {
+														gaddress = "";
+													} else {
+														gaddress = Global_Data.address;
+													}
+												}catch(Exception ex){ex.printStackTrace();}
+
+												String sms_body = "";
+												sms_body = "Dear " + Global_Data.USER_MANAGER_NAME + " ,"  +"\n"+" There is a feedback from  " + Global_Data.CUSTOMER_NAME_NEW + " about  " +  new_feedback.getText().toString() + ". This is to keep you updated."+"\n\n"+ " Thank you." +"\n"+ " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME +"\n"+ " " +gaddress;
+
+												if(!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" "))
+												{
+													//	Global_Data.sendSMS(Global_Data.cus_MAnager_mobile,sms_body, Customer_Feed.this);
+													// mobile_numbers.add(Global_Data.cus_MAnager_mobile);
+												}
+
+												//call_service_FORCUSS("Feedback");
+
+												//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
+												//Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG).show();
+												Toast toast = Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+
+												Intent intent = new Intent(Customer_Feed.this, Order.class);
+												startActivity(intent);
+												overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+												finish();
+
+											} catch (Exception e) {
+												e.printStackTrace();
+											}
+											//String D_TEXT = new_feedback.getText().toString();
+
+
+										}
+									} else if (CP_NAME.equals("Claim")) {
+
+										if (claim_amount.getText().toString() == null || claim_amount.getText().toString().equals("")) {
+											//Toast.makeText(getApplicationContext(), "Please Enter Claim Amount", Toast.LENGTH_LONG).show();
+											Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Claim Amount", Toast.LENGTH_LONG);
+											toast.setGravity(Gravity.CENTER, 0, 0);
+											toast.show();
+										} else if (discription.getText().toString() == null || discription.getText().toString().equals("")) {
+											//Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG).show();
+
+											Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Description", Toast.LENGTH_LONG);
+											toast.setGravity(Gravity.CENTER, 0, 0);
+											toast.show();
+
+										} else {
+											try {
+
+												try
+												{
+													AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+													Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+													Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+													PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+													if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+													{
+														Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+													}
+													else
+													if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+													{
+														Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+														Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+													}
+
+												}catch(Exception ex){ex.printStackTrace();}
+
+												Long randomPIN = System.currentTimeMillis();
+												String PINString = String.valueOf(randomPIN);
+												loginDataBaseAdapter.insertCustomerServiceClaims("1", Global_Data.GLOvel_CUSTOMER_ID, "Customer", RE_ID,
+														Global_Data.GLOvel_USER_EMAIL, Current_Date, discription.getText().toString(), claim_amount.getText().toString(), "Active", "10000", Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
+
+												//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
+
+												String gaddress = "";
+												try {
+													if (Global_Data.address.equalsIgnoreCase("null")) {
+														gaddress = "";
+													} else {
+														gaddress = Global_Data.address;
+													}
+												}catch(Exception ex){ex.printStackTrace();}
+
+												String sms_body = "";
+												sms_body = "Dear " + Global_Data.USER_MANAGER_NAME + " ,"  +"\n"+" There is a claim from  " + Global_Data.CUSTOMER_NAME_NEW + " for Rs.  " + claim_amount.getText().toString() + " regarding " + discription.getText().toString() + ". This is to keep you updated."+"\n\n"+ " Thank you." +"\n"+ " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME +"\n"+ " " +gaddress;
+
+												if(!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" "))
+												{
+													//				Global_Data.sendSMS(Global_Data.cus_MAnager_mobile,sms_body, Customer_Feed.this);
+													// mobile_numbers.add(Global_Data.cus_MAnager_mobile);
+												}
+
+												//	Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG).show();
+
+												Toast toast = Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+
+												Intent intent = new Intent(Customer_Feed.this, Order.class);
+												startActivity(intent);
+												overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+												finish();
+
+											} catch (Exception e) {
+												e.printStackTrace();
+											}
+											//String D_TEXT = new_feedback.getText().toString();
+
+
+										}
+									} else if (CP_NAME.equals("Complaints")) {
+
+										if (new_complaints.getText().toString() == null || new_complaints.getText().toString().equals("")) {
+											//Toast.makeText(getApplicationContext(), "Please Enter Complaints", Toast.LENGTH_LONG).show();
+
+											Toast toast = Toast.makeText(getApplicationContext(), "Please Enter Complaints", Toast.LENGTH_LONG);
+											toast.setGravity(Gravity.CENTER, 0, 0);
+											toast.show();
+
+										} else {
+											try {
+
+												try
+												{
+													AppLocationManager appLocationManager = new AppLocationManager(Customer_Feed.this);
+													Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+													Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+													PlayService_Location PlayServiceManager = new PlayService_Location(Customer_Feed.this);
+
+													if(PlayServiceManager.checkPlayServices(Customer_Feed.this))
+													{
+														Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+													}
+													else
+													if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+													{
+														Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+														Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+													}
+
+												}catch(Exception ex){ex.printStackTrace();}
+
+												Long randomPIN = System.currentTimeMillis();
+												String PINString = String.valueOf(randomPIN);
+
+												loginDataBaseAdapter.insertCustomer_Service_Complaints("1", Global_Data.GLOvel_CUSTOMER_ID, RE_ID, Global_Data.GLOvel_USER_EMAIL, Current_Date, new_complaints.getText().toString(), "Active", Current_Date, Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,PINString);
+
+												//Toast.makeText(getApplicationContext(), new_complaints.getText().toString(), Toast.LENGTH_LONG).show();
+
+												String gaddress = "";
+												try {
+													if (Global_Data.address.equalsIgnoreCase("null")) {
+														gaddress = "";
+													} else {
+														gaddress = Global_Data.address;
+													}
+												}catch(Exception ex){ex.printStackTrace();}
+
+												String sms_body = "";
+												sms_body = "Dear " + Global_Data.USER_MANAGER_NAME + " ,"  +"\n"+" There is a complaint  from  " + Global_Data.CUSTOMER_NAME_NEW + " about  " +  new_complaints.getText().toString() + ". This is to keep you updated."+"\n\n"+ " Thank you." +"\n"+ " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME +"\n"+ " " +gaddress;
+
+												if(!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("")  && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" "))
+												{
+													//				Global_Data.sendSMS(Global_Data.cus_MAnager_mobile,sms_body, Customer_Feed.this);
+													// mobile_numbers.add(Global_Data.cus_MAnager_mobile);
+												}
+
+												//Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG).show();
+												Toast toast = Toast.makeText(getApplicationContext(), "Your Data Save Successfuly", Toast.LENGTH_LONG);
+												toast.setGravity(Gravity.CENTER, 0, 0);
+												toast.show();
+
+												Intent intent = new Intent(Customer_Feed.this, Order.class);
+												startActivity(intent);
+												overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+												finish();
+
+											} catch (Exception e) {
+												e.printStackTrace();
+											}
+											//String D_TEXT = new_feedback.getText().toString();
+
+
+										}
+									}
+
+
+								}
+							}
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+
+
+
 
 }

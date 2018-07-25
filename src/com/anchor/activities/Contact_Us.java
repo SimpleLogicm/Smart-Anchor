@@ -1,7 +1,10 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Html;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -24,6 +28,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.webservice.ConnectionDetector;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.List;
 
@@ -180,10 +190,8 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
         phonenext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                requestPhoneCallPermission(phonenext.getText().toString().trim());
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+phonenext.getText().toString().trim()));
-                startActivity(callIntent );
             }
         });
 
@@ -219,9 +227,7 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
             @Override
             public void onClick(View v) {
 
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:"+phonenext2.getText().toString().trim()));
-                startActivity(callIntent );
+                requestPhoneCallPermission(phonenext2.getText().toString().trim());
             }
         });
 
@@ -231,14 +237,10 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
 
                 try
                 {
-                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                    sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email1.getText().toString().trim() });
-                    sendIntent.setData(Uri.parse("email@gmail.com"));
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "");
-                    sendIntent.setType("plain/text");
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                    startActivity(sendIntent);
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                            "mailto", email1.getText().toString().trim(), null));
+                    // emailIntent.putExtra(Intent.EXTRA_SUBJECT, "This is my subject text");
+                    startActivity(Intent.createChooser(emailIntent, null));
                 }catch(Exception ex) {
                     ex.printStackTrace();
                 }
@@ -252,14 +254,10 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
 
                 try
                 {
-                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                    sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { email2.getText().toString().trim() });
-                    sendIntent.setData(Uri.parse("email@gmail.com"));
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "");
-                    sendIntent.setType("plain/text");
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, "");
-                    startActivity(sendIntent);
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                            "mailto", email2.getText().toString().trim(), null));
+                    // emailIntent.putExtra(Intent.EXTRA_SUBJECT, "This is my subject text");
+                    startActivity(Intent.createChooser(emailIntent, null));
                 }catch(Exception ex) {
                     ex.printStackTrace();
                 }
@@ -354,5 +352,74 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
         startActivity(i);
         finish();
     }
+    /**
+     * Requesting GPS permission
+     * This uses single permission model from dexter
+     * Once the permission granted, opens the camera
+     * On permanent denial opens settings dialog
+     */
+    private void requestPhoneCallPermission(final String mobile_number) {
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.CALL_PHONE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
 
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" + mobile_number));
+                        startActivity(callIntent);
+
+                        return;
+
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        // check for permanent denial of permission
+                        if (response.isPermanentlyDenied()) {
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Contact_Us.this);
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
+    }
 }

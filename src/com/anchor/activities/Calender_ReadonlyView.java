@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.InputFilter;
@@ -379,8 +380,8 @@ public class Calender_ReadonlyView extends BaseActivity{
             String device_id = "";
 
 
-            TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-            device_id = telephonyManager.getDeviceId();
+            SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+             device_id = sp.getString("devid", "");
 
             domain = this.getResources().getString(R.string.service_domain);
 

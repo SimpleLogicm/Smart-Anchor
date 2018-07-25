@@ -17,10 +17,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.text.format.DateUtils;
@@ -67,6 +69,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -100,8 +109,8 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 public class BasicMapDemoActivity extends FragmentActivity implements
         OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    static String g_lat,g_long;
-    String map_firstvisit_flag= "true";
+    static String g_lat, g_long;
+    String map_firstvisit_flag = "true";
     GPSTracker gps;
     String datenn;
     String in_out_flag = "";
@@ -119,7 +128,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     Double longi;
     StringBuilder str;
     Button at_in, at_out;
-    TextView show_distance_time,show_time;
+    TextView show_distance_time, show_time;
     LoginDataBaseAdapter loginDataBaseAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     //public PrefManager prefManager;
@@ -129,6 +138,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     RelativeLayout distance_la;
     String user_address = "";
     View mapView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,7 +185,6 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //
 //               }
 //           }catch (Exception ex){ex.printStackTrace();}
-
 
 
 //		       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -249,85 +258,11 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         mFragment.getMapAsync(this);
 
 
-
-
-
-
         at_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                requestGPSPermissionsigna();
 
-                gps = new GPSTracker(BasicMapDemoActivity.this);
-                if(!gps.canGetLocation()){
-//						 Toast toast = Toast.makeText(LoginActivity.this,"Your GPS is off,Please on it.", Toast.LENGTH_LONG);
-//						 toast.setGravity(Gravity.CENTER, 0, 0);
-//						 toast.show();
-                    gps.showSettingsAlertnew();
-                }
-                else
-                {
-                    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
-                    DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date = new Date();
-                    String daten = sdf.format(date);
-                    datenn = sdf.format(date);
-                    String date_only_s = date_only.format(date);
-                    String a_check_datan = "";
-
-                    isInternetPresent = cd.isConnectingToInternet();
-                    if (isInternetPresent) {
-
-
-                        List<Local_Data> a_checkn = dbvoc.getAllAttendanceF_Data();
-                        if (a_checkn.size() > 0) {
-                            for (Local_Data cn : a_checkn) {
-                                a_check_datan = cn.getName();
-                            }
-                        } else {
-                            loginDataBaseAdapter.insertattendence_flag("false");
-                            a_check_datan = "false";
-                        }
-
-
-
-                        List<Local_Data> contadfg = dbvoc.getAllAttendance_Data_bydate(date_only_s);
-
-//                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
-                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
-
-                            dialog.setMessage("Please wait....");
-                            dialog.setTitle("Anchor App");
-                            dialog.setCancelable(false);
-                            dialog.show();
-
-                            getatte_Data();
-
-                           // build_retrofit_and_get_response("driving",user_address,"Attendance");
-                        }
-                        else
-                        {
-//                            if(user_address.equalsIgnoreCase(""))
-//                            {
-//                                Toast.makeText(BasicMapDemoActivity.this, "User address not found in database.", Toast.LENGTH_SHORT).show();
-//                            }
-//                            else
-//                            if(Global_Data.address.equalsIgnoreCase(""))
-//                            {
-//                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
-//                            }
-//                            else
-//                            {
-                                Toast.makeText(BasicMapDemoActivity.this, "You Have Already Punched Your Attendance", Toast.LENGTH_SHORT).show();
-                           // }
-
-                        }
-
-                    }
-                    else
-                    {
-                        Toast.makeText(BasicMapDemoActivity.this, " Internet not available.", Toast.LENGTH_SHORT).show();
-                    }
-                }
 
             }
         });
@@ -425,7 +360,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
                         locationButton.getLayoutParams();
                 // position on right bottom
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP,  RelativeLayout.TRUE);
+                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
                 layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 
                 layoutParams.setMargins(0, 110, 10, 30);
@@ -501,7 +436,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 return;
             }
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-        }catch(Exception ex){ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -557,39 +494,34 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                             String region_code = returnAddress.getCountryCode();
                             String zipcode = returnAddress.getPostalCode();
                             str = new StringBuilder();
-                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0))+" ");
-                            if(!(str.indexOf(addresses.get(0).getLocality()) > 0))
-                            {
-                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality())+" ");
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0)) + " ");
+                            if (!(str.indexOf(addresses.get(0).getLocality()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality()) + " ");
                             }
 
-                            if(!(str.indexOf(addresses.get(0).getAdminArea()) > 0))
-                            {
-                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea())+" ");
+                            if (!(str.indexOf(addresses.get(0).getAdminArea()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea()) + " ");
                             }
 
-                            if(!(str.indexOf(addresses.get(0).getCountryName()) > 0))
-                            {
-                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName())+" ");
+                            if (!(str.indexOf(addresses.get(0).getCountryName()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName()) + " ");
                             }
 
-                            if(!(str.indexOf(addresses.get(0).getPostalCode()) > 0))
-                            {
-                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode())+" ");
+                            if (!(str.indexOf(addresses.get(0).getPostalCode()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode()) + " ");
                             }
 
                             str.append("\n");
 
-                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str.toString()))
-                            {
-                                Global_Data.address =  str.toString();
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str.toString())) {
+                                Global_Data.address = str.toString();
 
 
 //                                if(map_firstvisit_flag.equalsIgnoreCase("true"))
 //                                {
 //
 //                                }
-                              //  if(map_firstvisit_flag.equalsIgnoreCase("true") && !user_address.equalsIgnoreCase(""))
+                                //  if(map_firstvisit_flag.equalsIgnoreCase("true") && !user_address.equalsIgnoreCase(""))
 //                                if(map_firstvisit_flag.equalsIgnoreCase("true"))
 //                                {
 //                                    map_firstvisit_flag = "false";
@@ -601,11 +533,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //
 //                                   // build_retrofit_and_get_response("driving",user_address,"location");
 //                                }
-                            }
-                            else
-                            {
+                            } else {
                                 Global_Data.address = "";
-                              //  Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
                             }
 
                             //prefManager.setAddress(str.toString());
@@ -613,12 +543,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //                    str.append(region_code + " ");
 //                    str.append(zipcode + " ");
 //                    yourtextfieldname.setText(addresses.get(0).getFeatureName() + ", " + addresses.get(0).getLocality() +", " + addresses.get(0).getAdminArea() + ", " + addresses.get(0).getCountryName());
-                            if(str.equals(Global_Data.address))
-                            {
+                            if (str.equals(Global_Data.address)) {
                                 markerOptions.title(str.toString());
-                            }
-                            else
-                            {
+                            } else {
                                 markerOptions.title(Global_Data.address);
                             }
 
@@ -629,9 +556,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     ex.printStackTrace();
                 }
 
-            }
-            else
-            {
+            } else {
                 Global_Data.address = "";
             }
 
@@ -650,8 +575,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             mGoogleMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace(); // getFromLocation() may sometimes fail
         }
 
@@ -669,6 +593,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         Intent i = new Intent(BasicMapDemoActivity.this, MainActivity.class);
@@ -1134,7 +1059,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         String url = "https://maps.googleapis.com/maps/";
 
-        final String att_flag =att_flags;
+        final String att_flag = att_flags;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -1146,8 +1071,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //        Call<DistanceData> call = service.getDistanceDuration("metric", "19.310472" + "," +"72.854041","19.079024" + "," +" 72.908012", type);
 
 
-        Global_Data.address =Global_Data.address.trim().replaceAll("\n", " ");
-        Call<DistanceData> call = service.getDistanceDuration("metric", Global_Data.address,user_address, type);
+        Global_Data.address = Global_Data.address.trim().replaceAll("\n", " ");
+        Call<DistanceData> call = service.getDistanceDuration("metric", Global_Data.address, user_address, type);
 
         call.enqueue(new Callback<DistanceData>() {
             @Override
@@ -1161,11 +1086,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     // This loop will go through all the results and add marker on each location.
 
 
-
-                    if(response.body().getRoutes().size() <=0)
-                    {
-                        try
-                        {
+                    if (response.body().getRoutes().size() <= 0) {
+                        try {
                             Location locationA = new Location(Global_Data.address);
                             locationA.setLatitude(Float.valueOf(Global_Data.GLOvel_LATITUDE));
                             locationA.setLongitude(Float.valueOf(Global_Data.GLOvel_LONGITUDE));
@@ -1186,9 +1108,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 location.getLatitude();
                                 location.getLongitude();
 
-                                locationB.setLatitude( location.getLatitude());
+                                locationB.setLatitude(location.getLatitude());
                                 locationB.setLongitude(location.getLongitude());
-                                float distancedfgdf = locationA.distanceTo(locationB)/1000;
+                                float distancedfgdf = locationA.distanceTo(locationB) / 1000;
 
                                 distance_la.setVisibility(View.VISIBLE);
                                 show_distance_time.setText("Distance Covered : " + distancedfgdf);
@@ -1196,18 +1118,16 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                 int retval = Double.compare(distancedfgdf, 0.5);
 
-                                if(retval > 0) {
+                                if (retval > 0) {
                                     // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
                                     getatte_Data();
-                                }
-                                else
-                                {
+                                } else {
                                     dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
                                     alertDialog.setTitle("Metal");
-                                    alertDialog.setMessage("You should be at least 0.5 KM away from your base address- "+user_address);
-                                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+                                    alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
+                                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -1222,8 +1142,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 }
 
 
-                            }
-                            catch(Exception ex){ex.printStackTrace();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
 
                                 g_lat = "";
                                 g_long = "";
@@ -1231,7 +1151,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                     @Override
                                     public void run() {
-                                        try  {
+                                        try {
                                             getLatLongFromGivenAddress(user_address);
                                         } catch (Exception e) {
                                             e.printStackTrace();
@@ -1242,11 +1162,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 thread.start();
 
 
-                                if(!g_lat.equalsIgnoreCase("") && !g_long.equalsIgnoreCase(""))
-                                {
+                                if (!g_lat.equalsIgnoreCase("") && !g_long.equalsIgnoreCase("")) {
                                     locationB.setLatitude(Float.valueOf(g_lat));
                                     locationB.setLongitude(Float.valueOf(g_long));
-                                    float distancedfgdf = locationA.distanceTo(locationB)/1000;
+                                    float distancedfgdf = locationA.distanceTo(locationB) / 1000;
 
                                     distance_la.setVisibility(View.VISIBLE);
                                     show_distance_time.setText("Distance Covered : " + distancedfgdf);
@@ -1256,18 +1175,16 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                     int retval = Double.compare(distancedfgdf, 0.5);
 
-                                    if(retval > 0) {
+                                    if (retval > 0) {
                                         // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
                                         getatte_Data();
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                         AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
                                         alertDialog.setTitle("Metal");
-                                        alertDialog.setMessage("You should be at least 0.5 KM away from your base address- "+user_address);
-                                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+                                        alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
+                                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
@@ -1280,9 +1197,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         alertDialog.show();
 
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     distance_la.setVisibility(View.GONE);
                                     show_distance_time.setText("");
                                     show_time.setText("");
@@ -1290,13 +1205,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 }
 
 
-
                             }
 
 
-
-
-                        }catch(Exception ex){
+                        } catch (Exception ex) {
                             ex.printStackTrace();
 
                             Toast.makeText(BasicMapDemoActivity.this, "Distance not found. ", Toast.LENGTH_SHORT).show();
@@ -1307,14 +1219,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                         dialog.dismiss();
 
 
-
-                    }
-                    else
-                    {
+                    } else {
                         for (int i = 0; i < response.body().getRoutes().size(); i++) {
 
-                            try
-                            {
+                            try {
                                 distance_la.setVisibility(View.VISIBLE);
                                 String distance = response.body().getRoutes().get(i).getLegs().get(i).getDistance().getText();
                                 String distance_value = String.valueOf(response.body().getRoutes().get(i).getLegs().get(i).getDistance().getValue());
@@ -1322,48 +1230,41 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                 show_distance_time.setText("Distance Covered : " + distance);
                                 show_time.setText("Duration : " + time);
 
-                                Double distancen = Double.valueOf(distance_value)/1000.0;
+                                Double distancen = Double.valueOf(distance_value) / 1000.0;
 
                                 int retval = Double.compare(distancen, 0.5);
 
-                                if(att_flag.equalsIgnoreCase("Attendance"))
-                                {
-                                    if(retval > 0) {
-                                       // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
+                                if (att_flag.equalsIgnoreCase("Attendance")) {
+                                    if (retval > 0) {
+                                        // Toast.makeText(BasicMapDemoActivity.this, "greater .5 ", Toast.LENGTH_SHORT).show();
                                         getatte_Data();
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                         AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
                                         alertDialog.setTitle("Metal");
-                                        alertDialog.setMessage("You should be at least 0.5 KM away from your base address- "+user_address);
-                                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+                                        alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
+                                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                               dialog.dismiss();
+                                                dialog.dismiss();
                                             }
                                         });
 
-                                      //  alertDialog.setCancelable(false);
-                                      //  alertDialog.setCanceledOnTouchOutside(false);
+                                        //  alertDialog.setCancelable(false);
+                                        //  alertDialog.setCanceledOnTouchOutside(false);
                                         alertDialog.show();
 
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     dialog.dismiss();
                                 }
 
 
-                            }catch(Exception ex){
+                            } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
-
-
 
 
 //                        String encodedString = response.body().getRoutes().get(0).getOverviewPolyline().getPoints();
@@ -1395,8 +1296,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
     }
 
-    public void getatte_Data()
-    {
+    public void getatte_Data() {
         try {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
             try {
@@ -1428,27 +1328,27 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //
 //                List<Local_Data> contacts2 = dbvoc.getAllAttendance_Data_bydate(date_only_s);
 
-               // if (contacts2.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
+                // if (contacts2.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
 
-                    isInternetPresent = cd.isConnectingToInternet();
-                    if (isInternetPresent) {
-
-
-                        in_out_flag = "IN";
-
-                        Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
-                    } else {
-                        in_out_flag = "IN";
-                        Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
-                        //loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN","false",date_only_s);
-                        loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
+                isInternetPresent = cd.isConnectingToInternet();
+                if (isInternetPresent) {
 
 
-                        dbvoc.getDeleteTable("attendence_f");
-                        loginDataBaseAdapter.insertattendence_flag("true");
-                        Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
-                        showDialogn(daten, str.toString());
-                    }
+                    in_out_flag = "IN";
+
+                    Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
+                } else {
+                    in_out_flag = "IN";
+                    Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
+                    //loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN","false",date_only_s);
+                    loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
+
+
+                    dbvoc.getDeleteTable("attendence_f");
+                    loginDataBaseAdapter.insertattendence_flag("true");
+                    Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
+                    showDialogn(daten, str.toString());
+                }
 
 //                } else {
 ////                            for (Local_Data cn : contacts2)
@@ -1538,11 +1438,11 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         try {
             jsonObject = new JSONObject(stringBuilder.toString());
 
-            g_lat = String.valueOf(((JSONArray)jsonObject.get("results")).getJSONObject(0)
+            g_lat = String.valueOf(((JSONArray) jsonObject.get("results")).getJSONObject(0)
                     .getJSONObject("geometry").getJSONObject("location")
                     .getDouble("lng"));
 
-            g_long = String.valueOf(((JSONArray)jsonObject.get("results")).getJSONObject(0)
+            g_long = String.valueOf(((JSONArray) jsonObject.get("results")).getJSONObject(0)
                     .getJSONObject("geometry").getJSONObject("location")
                     .getDouble("lat"));
 
@@ -1552,5 +1452,139 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             e.printStackTrace();
         }
 
+    }
+
+    private void requestGPSPermissionsigna() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            gps = new GPSTracker(BasicMapDemoActivity.this);
+                            if (!gps.canGetLocation()) {
+//						 Toast toast = Toast.makeText(LoginActivity.this,"Your GPS is off,Please on it.", Toast.LENGTH_LONG);
+//						 toast.setGravity(Gravity.CENTER, 0, 0);
+//						 toast.show();
+                                gps.showSettingsAlertnew();
+                            } else {
+                                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
+                                DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = new Date();
+                                String daten = sdf.format(date);
+                                datenn = sdf.format(date);
+                                String date_only_s = date_only.format(date);
+                                String a_check_datan = "";
+
+                                isInternetPresent = cd.isConnectingToInternet();
+                                if (isInternetPresent) {
+
+
+                                    List<Local_Data> a_checkn = dbvoc.getAllAttendanceF_Data();
+                                    if (a_checkn.size() > 0) {
+                                        for (Local_Data cn : a_checkn) {
+                                            a_check_datan = cn.getName();
+                                        }
+                                    } else {
+                                        loginDataBaseAdapter.insertattendence_flag("false");
+                                        a_check_datan = "false";
+                                    }
+
+
+                                    List<Local_Data> contadfg = dbvoc.getAllAttendance_Data_bydate(date_only_s);
+
+//                        if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false") && !user_address.equalsIgnoreCase("") &&  !Global_Data.address.equalsIgnoreCase("")) {
+                                    if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
+
+                                        dialog.setMessage("Please wait....");
+                                        dialog.setTitle("Anchor App");
+                                        dialog.setCancelable(false);
+                                        dialog.show();
+
+                                        getatte_Data();
+
+                                        // build_retrofit_and_get_response("driving",user_address,"Attendance");
+                                    } else {
+//                            if(user_address.equalsIgnoreCase(""))
+//                            {
+//                                Toast.makeText(BasicMapDemoActivity.this, "User address not found in database.", Toast.LENGTH_SHORT).show();
+//                            }
+//                            else
+//                            if(Global_Data.address.equalsIgnoreCase(""))
+//                            {
+//                                Toast.makeText(BasicMapDemoActivity.this, "Current location address not found.", Toast.LENGTH_SHORT).show();
+//                            }
+//                            else
+//                            {
+                                        Toast.makeText(BasicMapDemoActivity.this, "You Have Already Punched Your Attendance", Toast.LENGTH_SHORT).show();
+                                        // }
+
+                                    }
+
+                                } else {
+                                    Toast.makeText(BasicMapDemoActivity.this, " Internet not available.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
     }
 }

@@ -352,8 +352,8 @@ public class Target_Summary2 extends BaseActivity {
 
     public void getTargetDataSummary2()
     {
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        String device_id = telephonyManager.getDeviceId();
+        SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
 
         result.clear();
         loginDataBaseAdapter=new LoginDataBaseAdapter(Target_Summary2.this);

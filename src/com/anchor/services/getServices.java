@@ -136,8 +136,9 @@ public class getServices {
     public static void sendRequest(Context contextn)
     {
 
-        TelephonyManager telephonyManager = (TelephonyManager)contextn.getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+        SharedPreferences sp = contextn.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        device_id = sp.getString("devid", "");
+
         context = contextn;
 
          loginDataBaseAdapter=new LoginDataBaseAdapter(context);
@@ -419,10 +420,10 @@ public class getServices {
 
     public static void sendRequestnew(Context contextn, String wait)
     {
-        TelephonyManager telephonyManager = (TelephonyManager)contextn.getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
-        context = contextn;
 
+        context = contextn;
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        device_id = sp.getString("devid", "");
         loginDataBaseAdapter=new LoginDataBaseAdapter(context);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
         dbvoc = new DataBaseHelper(context);
@@ -518,12 +519,12 @@ public class getServices {
     public static void View_NearestCustomer(Context contextn,String address,String latitude,String longitude)
     {
 
-        TelephonyManager telephonyManager = (TelephonyManager)contextn.getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+
         context = contextn;
         loginDataBaseAdapter=new LoginDataBaseAdapter(context);
 	     loginDataBaseAdapter=loginDataBaseAdapter.open();
-        
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        device_id = sp.getString("devid", "");
         Log.d("device_id ","device_id"+device_id);
 
        // dbvoc = new DataBaseHelper(context);
@@ -1923,9 +1924,8 @@ public class getServices {
 			 String device_id = "";
 
 
-			 TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-		      device_id = telephonyManager.getDeviceId();
-
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            device_id = sp.getString("devid", "");
 			 domain = context.getResources().getString(R.string.service_domain);
 
 
@@ -2285,8 +2285,8 @@ public class getServices {
             String device_id = "";
 
 
-            TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-            device_id = telephonyManager.getDeviceId();
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
 
@@ -2874,8 +2874,8 @@ public class getServices {
             String device_id = "";
 
 
-            TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
-            device_id = telephonyManager.getDeviceId();
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
 
@@ -3020,11 +3020,9 @@ public class getServices {
 
     public static void GetNewLaunch_Data(Context contextn)
     {
-
-        TelephonyManager telephonyManager = (TelephonyManager)contextn.getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
         context = contextn;
-
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        device_id = sp.getString("devid", "");
         loginDataBaseAdapter=new LoginDataBaseAdapter(context);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
         dbvoc = new DataBaseHelper(context);
@@ -3763,8 +3761,8 @@ public class getServices {
 
     public static void getTargetDataservicenew(final Context contextn)
     {
-        TelephonyManager telephonyManager = (TelephonyManager)contextn.getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+        SharedPreferences sp = contextn.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        device_id = sp.getString("devid", "");
 
         calendarn = Calendar.getInstance();
         year = calendarn.get(Calendar.YEAR);
@@ -3924,8 +3922,8 @@ public class getServices {
         t_total = 0;
         achived_total = 0;
 
-        TelephonyManager telephonyManager = (TelephonyManager)contextn.getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+        SharedPreferences sp = contextn.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        device_id = sp.getString("devid", "");
 
          calendarn = Calendar.getInstance();
         year = calendarn.get(Calendar.YEAR);

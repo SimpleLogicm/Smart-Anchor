@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -561,9 +560,9 @@ public class Customer_Invoices extends Activity {
     {
         isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent)
-        {
-            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-            String device_id = telephonyManager.getDeviceId();
+        {			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+            String device_id = sp.getString("devid", "");
+
             dialog = new ProgressDialog(Customer_Invoices.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please Wait....");
             dialog.setTitle("Sales App");

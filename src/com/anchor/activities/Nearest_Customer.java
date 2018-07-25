@@ -1,10 +1,12 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,7 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,6 +47,12 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -256,8 +264,8 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 	public  void View_NearestCustomer(String address,String latitude,String longitude)
     {
 
-        TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        device_id = telephonyManager.getDeviceId();
+		SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+		device_id = sp.getString("devid", "");
        
         loginDataBaseAdapter=new LoginDataBaseAdapter(Nearest_Customer.this);
 	    loginDataBaseAdapter=loginDataBaseAdapter.open();
@@ -610,9 +618,7 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(mobileno.trim()))
 				{
 
-					Intent callIntent = new Intent(Intent.ACTION_CALL);
-					callIntent.setData(Uri.parse("tel:"+mobileno.trim()));
-					startActivity(callIntent);
+					requestPhoneCallPermission(mobileno.trim());
 				}
 				else
 				{
@@ -697,5 +703,70 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 			}
 
 		}
+	}
+
+	private void requestPhoneCallPermission(final String mobile_number) {
+		Dexter.withActivity(this)
+				.withPermission(Manifest.permission.CALL_PHONE)
+				.withListener(new PermissionListener() {
+					@Override
+					public void onPermissionGranted(PermissionGrantedResponse response) {
+
+						Intent callIntent = new Intent(Intent.ACTION_CALL);
+						callIntent.setData(Uri.parse("tel:" + mobile_number));
+						startActivity(callIntent);
+
+						return;
+
+					}
+
+					@Override
+					public void onPermissionDenied(PermissionDeniedResponse response) {
+						// check for permanent denial of permission
+						if (response.isPermanentlyDenied()) {
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(Nearest_Customer.this);
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
 	}
 }

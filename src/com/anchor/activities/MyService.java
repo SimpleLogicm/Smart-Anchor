@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -438,9 +437,8 @@ public class MyService extends Service implements LocationListener{
 //            else
 //            {
 //                domain = URL.toString();
-
-					TelephonyManager TM = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-					Global_Data.device_id = TM.getDeviceId();
+					SharedPreferences spf= getSharedPreferences("SimpleLogic",0);
+					Global_Data.device_id = spf.getString("devid", "");
 //            }
 					Log.i("volley", "domain: " + domain);
 					Log.i("volley", "Device_id: " + Global_Data.device_id);

@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,8 +12,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,6 +37,13 @@ import android.widget.Toast;
 
 import com.anchor.model.Product;
 import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONObject;
 
@@ -354,26 +364,10 @@ public class ProductAll_Varients extends Activity {
                     finish();
 
                 } else {
-                    p_id.clear();
-                    p_name.clear();
-                    p_mrp.clear();
-                    p_q.clear();
-                    p_price.clear();
-                    p_rp.clear();
-                    q_check = "";
-
-                    gps = new GPSTracker(ProductAll_Varients.this);
-                    if(!gps.canGetLocation()){
-
-                        gps.showSettingsAlertnew();
-                    }
-                    else
-                    {
-                        new Varientsave().execute();
-                    }
 
 
 
+                    requestGPSPermissionsigna();
                 }
 
 
@@ -1179,6 +1173,93 @@ public class ProductAll_Varients extends Activity {
             finish();
         }
 
+    }
+
+    private void requestGPSPermissionsigna() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            p_id.clear();
+                            p_name.clear();
+                            p_mrp.clear();
+                            p_q.clear();
+                            p_price.clear();
+                            p_rp.clear();
+                            q_check = "";
+
+                            gps = new GPSTracker(ProductAll_Varients.this);
+                            if(!gps.canGetLocation()){
+
+                                gps.showSettingsAlertnew();
+                            }
+                            else
+                            {
+                                new Varientsave().execute();
+                            }
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
     }
 
 

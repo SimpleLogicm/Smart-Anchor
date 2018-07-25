@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -7,14 +8,14 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.Log;
@@ -37,6 +38,13 @@ import com.anchor.slidingmenu.CalendarAct;
 import com.anchor.slidingmenu.CalendarAct.GridCellAdapter;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -304,90 +312,7 @@ public class Calendar_Event extends BaseActivity{
 		submit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
-				gps = new GPSTracker(Calendar_Event.this);
-				if(!gps.canGetLocation()){
-
-					gps.showSettingsAlertnew();
-				}
-				else
-				{
-					if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(from.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(to.getText().toString()))
-					{
-						date1 = new Date(from.getText().toString());
-						date2 = new Date(to.getText().toString());
-						Calendar cal1 = Calendar.getInstance();
-						Calendar cal2 = Calendar.getInstance();
-						cal1.setTime(date1);
-						cal2.setTime(date1);
-					}
-
-
-					if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(from.getText().toString()))
-					{
-
-						Toast toast = Toast.makeText(getApplicationContext(), "Please Select From Date", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-					}
-					else
-					if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(to.getText().toString()))
-					{
-						//Toast.makeText(getApplicationContext(),"Please Select To Date", Toast.LENGTH_LONG).show();
-						Toast toast = Toast.makeText(getApplicationContext(), "Please Select To Date", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-					}
-					else
-					if(date1.compareTo(date2)>0)
-					{
-						//System.out.println("Date1 is after Date2");
-						//Toast.makeText(getApplicationContext(),"To Date not a valid date.", Toast.LENGTH_LONG).show();
-						Toast toast = Toast.makeText(getApplicationContext(), "To Date not a valid date.", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-					}
-					else
-					if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(details.getText().toString()))
-					{
-
-						Toast toast = Toast.makeText(getApplicationContext(),"Please Enter Travel Details", Toast.LENGTH_LONG);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-					}
-
-					else
-					{
-
-//						 SecureRandom random = new SecureRandom();
-//						loginDataBaseAdapter.insertCalenderEntries("", "", Global_Data.GLOvel_USER_EMAIL, new BigInteger(130,random).toString(32),Global_Data.CALENDER_EVENT_TYPE, from.getText().toString().trim(), to.getText().toString().trim(), details.getText().toString().trim(),  Global_Data.lat_val+","+Global_Data.long_val, Current_Date, Current_Date);
-
-//						 isInternetPresent = cd.isConnectingToInternet();
-//
-//						if (isInternetPresent)
-//	                    {
-						call_service_Calender_Event();
-//	                    }
-//		   	        	else
-//		   	        	{
-//		   	        	 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-//							Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.", Toast.LENGTH_LONG);
-//							toast.setGravity(Gravity.CENTER, 0, 0);
-//							toast.show();
-//		   	        	}
-
-
-//						 Toast.makeText(getApplicationContext(),"Your Data Submit Successfuly", Toast.LENGTH_LONG).show();
-//
-//						 Intent intent = new Intent(Expenses.this, Order.class);
-//						 startActivity(intent);
-//						 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//						 finish();
-					}
-				}
-
-
-
+				requestGPSPermissionsigna();
 
 			}
 		});
@@ -565,8 +490,8 @@ public class Calendar_Event extends BaseActivity{
 			String device_id = "";
 
 
-			TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-			device_id = telephonyManager.getDeviceId();
+			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+			 device_id = sp.getString("devid", "");
 
 			domain = this.getResources().getString(R.string.service_domain);
 
@@ -964,4 +889,154 @@ public class Calendar_Event extends BaseActivity{
 		}
 	};
 
+	private void requestGPSPermissionsigna() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+							gps = new GPSTracker(Calendar_Event.this);
+							if(!gps.canGetLocation()){
+
+								gps.showSettingsAlertnew();
+							}
+							else
+							{
+								if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(from.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(to.getText().toString()))
+								{
+									date1 = new Date(from.getText().toString());
+									date2 = new Date(to.getText().toString());
+									Calendar cal1 = Calendar.getInstance();
+									Calendar cal2 = Calendar.getInstance();
+									cal1.setTime(date1);
+									cal2.setTime(date1);
+								}
+
+
+								if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(from.getText().toString()))
+								{
+
+									Toast toast = Toast.makeText(getApplicationContext(), "Please Select From Date", Toast.LENGTH_LONG);
+									toast.setGravity(Gravity.CENTER, 0, 0);
+									toast.show();
+								}
+								else
+								if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(to.getText().toString()))
+								{
+									//Toast.makeText(getApplicationContext(),"Please Select To Date", Toast.LENGTH_LONG).show();
+									Toast toast = Toast.makeText(getApplicationContext(), "Please Select To Date", Toast.LENGTH_LONG);
+									toast.setGravity(Gravity.CENTER, 0, 0);
+									toast.show();
+								}
+								else
+								if(date1.compareTo(date2)>0)
+								{
+									//System.out.println("Date1 is after Date2");
+									//Toast.makeText(getApplicationContext(),"To Date not a valid date.", Toast.LENGTH_LONG).show();
+									Toast toast = Toast.makeText(getApplicationContext(), "To Date not a valid date.", Toast.LENGTH_LONG);
+									toast.setGravity(Gravity.CENTER, 0, 0);
+									toast.show();
+								}
+								else
+								if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(details.getText().toString()))
+								{
+
+									Toast toast = Toast.makeText(getApplicationContext(),"Please Enter Travel Details", Toast.LENGTH_LONG);
+									toast.setGravity(Gravity.CENTER, 0, 0);
+									toast.show();
+								}
+
+								else
+								{
+
+//						 SecureRandom random = new SecureRandom();
+//						loginDataBaseAdapter.insertCalenderEntries("", "", Global_Data.GLOvel_USER_EMAIL, new BigInteger(130,random).toString(32),Global_Data.CALENDER_EVENT_TYPE, from.getText().toString().trim(), to.getText().toString().trim(), details.getText().toString().trim(),  Global_Data.lat_val+","+Global_Data.long_val, Current_Date, Current_Date);
+
+//						 isInternetPresent = cd.isConnectingToInternet();
+//
+//						if (isInternetPresent)
+//	                    {
+									call_service_Calender_Event();
+//	                    }
+//		   	        	else
+//		   	        	{
+//		   	        	 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+//							Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.", Toast.LENGTH_LONG);
+//							toast.setGravity(Gravity.CENTER, 0, 0);
+//							toast.show();
+//		   	        	}
+
+
+//						 Toast.makeText(getApplicationContext(),"Your Data Submit Successfuly", Toast.LENGTH_LONG).show();
+//
+//						 Intent intent = new Intent(Expenses.this, Order.class);
+//						 startActivity(intent);
+//						 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//						 finish();
+								}
+							}
+
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
+	}
 }

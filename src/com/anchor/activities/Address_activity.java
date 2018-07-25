@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class Address_activity extends Activity {
 
     TextView textview;
-    Button buttonx,ghgfh;
+    Button buttonx;
     GPSTracker_n gpsTracker = new GPSTracker_n(this);
 
     @Override

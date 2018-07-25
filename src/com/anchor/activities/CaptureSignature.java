@@ -1,13 +1,11 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,11 +20,11 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
+import android.provider.Settings;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.Spanned;
@@ -53,6 +51,13 @@ import android.widget.Toast;
 import com.anchor.model.Product;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -61,7 +66,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -71,8 +75,6 @@ import cpm.simplelogic.helper.GPSTracker;
 //import com.simplelogic.webservice.GmailSender;
 
 public class CaptureSignature extends BaseActivity {
-    //DataBaseHelper dbvoc;
-
     private String Signature_path = "";
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath = "";
@@ -84,11 +86,7 @@ public class CaptureSignature extends BaseActivity {
     Bitmap bitmap1;
     byte b5[];
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final int PICK_FROM_CAMERA = 1;
-    public static final int MEDIA_TYPE_IMAGE = 1;
     ConnectionDetector cd;
-    String str_uri;
-    private Uri fileUri;
     LinearLayout mContent;
     signature mSignature;
     Button mClear, mGetSign, mCancel;
@@ -97,24 +95,21 @@ public class CaptureSignature extends BaseActivity {
     ArrayList<Product> dataOrder=new ArrayList<Product>();
     public static String tempDir;
     public int count = 1;
-    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public String current = null;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     private Bitmap mBitmap;
     View mView;
     String detail1str, detail2str,detail4str;
-    int userID,cityID,beatID,retailerID,distID;
+    int cityID,beatID,retailerID,distID;
     TextView details1,details2;
     Calendar myCalendar;
     TextView txtWelcomeUser;
-    //private String uniqueId;
     private EditText yourName,order_detail1,order_detail2,order_detail4;
     Spinner order_type,shipment_pri;
     ArrayAdapter<String> dataAdapter_order_type,dataAdapter_shipment_pri;
-    List<String> list_order_type;
     private ArrayList<String> results_order_type = new ArrayList<String>();
     private ArrayList<String> results_shipment_pri = new ArrayList<String>();
-    float totalPrice;
+
     public String order="",retailer_mobile="",retailer_emailID="",dist_mobile="",dist_emailID="",retailer_code="",ret_Name="";
 
 
@@ -126,24 +121,13 @@ public class CaptureSignature extends BaseActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.signature);
 
-        tempDir = Environment.getExternalStorageDirectory() + "/SimpleLogic/" + getResources().getString(R.string.external_dir) + "/";
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // File directory = cw.getDir(getResources().getString(R.string.external_dir), Context.MODE_PRIVATE);
 
-        gps = new GPSTracker(CaptureSignature.this);
 
-        File directory = new File(tempDir);
         cd  = new ConnectionDetector(getApplicationContext());
-        prepareDirectory();
-//        uniqueId = getTodaysDate() + "_" + getCurrentTime() + "_" + Math.random();
+
         SharedPreferences  sp=this.getSharedPreferences("SimpleLogic", 0);
 
         order=sp.getString("order", "");
-        String serailNo=sp.getString("SimID", "");
-        //uniqueId = serailNo+"_"+getTodaysDate() + "_" + getCurrentTime();
-        //current = uniqueId + ".png";
-        //mypath= new File(directory,current);
-
         txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
         mContent = (LinearLayout) findViewById(R.id.linearLayout);
         mSignature = new signature(this, null);
@@ -165,19 +149,9 @@ public class CaptureSignature extends BaseActivity {
         get_icon = (ImageView) findViewById(R.id.get_icon);
         order_type = (Spinner) findViewById(R.id.order_type);
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
-        //details1 = (TextView) findViewById(R.id.details1);
-        // details2 = (TextView) findViewById(R.id.details2);
-        //order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
-        //get_icon.setBackgroundColor(Color.parseColor("#414042"));
+
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
-
-//        for (Iterator iterator = dataOrder.iterator(); iterator.hasNext();) {
-//			Product type = (Product) iterator.next();
-//			totalPrice=totalPrice+Float.parseFloat(type.getProducttotalPrice());
-//		}
-
-        // for label change
 
         String user_name = "";
         if(!Global_Data.USER_FIRST_NAME.equalsIgnoreCase("null"))
@@ -316,7 +290,7 @@ public class CaptureSignature extends BaseActivity {
                     }
                 });
 
-                //order_detail1.setInputType(InputType.TYPE_CLASS_DATETIME);
+
             }
         }
         if(strdetail2_edit.equalsIgnoreCase("true"))
@@ -382,18 +356,6 @@ public class CaptureSignature extends BaseActivity {
 
         SharedPreferences sp1 = CaptureSignature.this
                 .getSharedPreferences("SimpleLogic", 0);
-
-        //userID=sp1.getInt("UserID", 0);
-        cityID=sp1.getInt("CityID", 0);
-        beatID=sp1.getInt("BeatID", 0);
-        retailerID=sp1.getInt("RetailerID", 0);
-        distID=sp1.getInt("DistributorID", 0);
-        retailer_code=sp1.getString("RetailerCode", "");
-        retailer_mobile=sp1.getString("RetailerMobile", "");
-        retailer_emailID=sp1.getString("RetailerEmailId", "");
-        dist_mobile=sp1.getString("DistributorMobile", "");
-        dist_emailID=sp1.getString("DistributorEmailId", "");
-
 
         results_order_type.clear();
         List<Local_Data> contacts1 = dbvoc.getorder_category();
@@ -464,50 +426,8 @@ public class CaptureSignature extends BaseActivity {
         get_icon.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                B_flag = isDeviceSupportCamera();
 
-                if(B_flag == true)
-                {
-//                    //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//                   // fileUri = getOutputMediaFileUrinew(MEDIA_TYPE_IMAGE);
-//                    Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    //startActivityForResult(intent1, MEDIA_TYPE_IMAGE);
-//                    startActivityForResult(intent1, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
-//                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                    }
-
-//                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                    }
-
-                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-                        // Create the File where the photo should go
-                        File photoFile = null;
-                        try {
-                            photoFile = createImageFile();
-                        } catch (Exception ex) {
-                            // Error occurred while creating the File
-                            Log.i("Image TAG", "IOException");
-                            mCurrentPhotoPath = "";
-                        }
-                        // Continue only if the File was successfully created
-                        if (photoFile != null) {
-                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                            startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-                        }
-                    }
-
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
-                }
-
+                requestStoragePermission();
             }
         });
 
@@ -558,211 +478,15 @@ public class CaptureSignature extends BaseActivity {
                     // boolean error1 = captureSignature1();
 
                     if(!error) {
-                        // if(!error1) {
-                        mView.setDrawingCacheEnabled(true);
-                        LinearLayout content = (LinearLayout) findViewById(R.id.linearLayout);
-                        content.setDrawingCacheEnabled(true);
-                        final Bitmap bitmap = content.getDrawingCache();
-                        //finish();
 
-                        // TODO Auto-generated method stub
-                        //v.setBackgroundColor(Color.parseColor("#910505"));
-
-                        if (m_sign_flag == 0) {
-                            Toast toast = Toast.makeText(CaptureSignature.this, "Please Sign.... ", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 105, 50);
-                            toast.show();
-                        } else {
-                            gps = new GPSTracker(CaptureSignature.this);
-                            if(!gps.canGetLocation()){
-
-                                gps.showSettingsAlertnew();
-                            }
-                            else
-                            {
-                                AlertDialog alertDialog = new AlertDialog.Builder(CaptureSignature.this).create(); //Read Update
-                                alertDialog.setTitle("Confirmation");
-                                alertDialog.setMessage(" Are you sure you want to continue?");
-                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // TODO Auto-generated method stub
-
-                                        String order_detail1_text = "";
-                                        String order_detail2_text = "";
-                                        String order_detail4_text = "";
-                                        String order_type_text = "";
-                                        String order_type_name = "";
-                                        String order_type_code = "";
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
-
-                                            order_detail1_text = order_detail1.getText().toString().trim();
-                                        }
-
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
-
-                                            order_detail2_text = order_detail2.getText().toString().trim();
-                                        }
-
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
-                                            try
-                                            {
-                                                order_detail4_text = order_detail4.getText().toString().trim();
-                                                order_detail4_text = order_detail4_text.replaceAll("'", "");
-                                                order_detail4_text = order_detail4_text.replaceAll("\"", "");
-                                            }catch(Exception ex){
-                                                ex.printStackTrace();
-
-                                                order_detail4_text = order_detail4.getText().toString().trim();
-                                            }
-
-                                        }
-
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
-
-                                            order_type_name = yourName.getText().toString().trim();
-                                        }
-
-                                        if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
-
-                                            order_type_text = order_type.getSelectedItem().toString();
-                                            List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
-
-                                            for (Local_Data cn : contacts1) {
-
-                                                order_type_code = cn.getOrder_type_code();
-                                            }
-
-                                        }
-
-                                        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                                        } else
-                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
-//								   insertOrderAsyncTask.execute();
-
-//                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
-//                                        storagePath.mkdirs();
-//
-//                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
-//
-//
-//                                        String uploadImage = "";
-
-                                        try
-                                        {
-                                            AppLocationManager appLocationManager = new AppLocationManager(CaptureSignature.this);
-                                            Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-                                            Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-                                            PlayService_Location PlayServiceManager = new PlayService_Location(CaptureSignature.this);
-
-                                            if(PlayServiceManager.checkPlayServices(CaptureSignature.this))
-                                            {
-                                                Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-                                            }
-                                            else
-                                            if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-                                            {
-                                                Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-                                                Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-                                            }
-
-                                        }catch(Exception ex){ex.printStackTrace();}
-
-                                        try {
-
-
-//                                            FileOutputStream out = new FileOutputStream(myImage);
-//                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
-//                                            out.flush();
-//                                            out.close();
-//                                            uploadImage = getStringImage(bitmap);
-
-                                            SaveImage(bitmap,"SI"+Global_Data.GLObalOrder_id);
-
-                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
-
-                                                dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE);
-                                            }
-                                            else
-                                            {
-                                                dbvoc.updateORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
-                                            }
-
-
-                                            mSignature.clear();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-
-//                                        try {
-//                                            //delete(mediaStorageDir);
-//                                            if (storagePath.isDirectory()) {
-//                                                String[] children = storagePath.list();
-//                                                for (int i = 0; i < children.length; i++) {
-//                                                    new File(storagePath, children[i]).delete();
-//                                                }
-//                                            }
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-
-                                        isInternetPresent = cd.isConnectingToInternet();
-
-
-                                        if (isInternetPresent) {
-                             onDestroy();               getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
-                                        } else {
-                                            //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-
-                                            Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                                            //toast.setGravity(Gravity.CENTER, 0, 0);
-                                            toast.show();
-
-                                            get_dialog();
-                                        }
-
-
-                                    }
-                                });
-
-                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // TODO Auto-generated method stub
-                                        dialog.cancel();
-                                    }
-                                });
-
-                                alertDialog.setCancelable(false);
-                                alertDialog.show();
-                            }
-
-
-                        }
+                        requestStoragePermissionsave();
                     }
                 }
                 return false;
             }
         });
 
-       /* mCancel.setOnClickListener(new OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Log.v("log_tag", "Panel Canceled");
-                Bundle b = new Bundle();
-                b.putString("status", "cancel");
-                Intent intent = new Intent();
-                intent.putExtras(b);
-                setResult(RESULT_OK,intent);
-                finish();
-            }
-        });*/
+
 
         mCancel.setOnTouchListener(new OnTouchListener() {
 
@@ -897,70 +621,7 @@ public class CaptureSignature extends BaseActivity {
             error = true;
 
         }
-//        else
-//        if(yourName.getText().toString().equalsIgnoreCase("")){
-//            errorMessage = errorMessage + "Please Enter your Name \n";
-//            error = true;
-//        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true")) || (strdetail4_mandate.equalsIgnoreCase("true"))){
-//
-//            if(strdetail1_mandate.equalsIgnoreCase("true")) {
-//                if (order_detail1.getText().toString().equalsIgnoreCase("")) {
-//                    if(!message_flag.equalsIgnoreCase("true"))
-//                    {
-//                        errorMessage = errorMessage + "Please Enter " + detail1str;
-//                        error = true;
-//                        message_flag = "true";
-//                    }
-//
-//                }
-//            }
-//
-//            if(strdetail2_mandate.equalsIgnoreCase("true"))
-//            {
-//                if(order_detail2.getText().toString().equalsIgnoreCase("")){
-//                    if(!message_flag.equalsIgnoreCase("true"))
-//                    {
-//                        errorMessage = errorMessage + "Please Enter " + detail2str;
-//                        error = true;
-//                        message_flag = "true";
-//                    }
-//                }
-//            }
-//
-//            if(strdetail4_mandate.equalsIgnoreCase("true"))
-//            {
-//                if(order_detail4.getText().toString().equalsIgnoreCase("")){
-//                    if(!message_flag.equalsIgnoreCase("true"))
-//                    {
-//                        errorMessage = errorMessage + "Please Enter " + detail4str;
-//                        error = true;
-//                        message_flag = "true";
-//                    }
-//                }
-//            }
-//
-//
-//        }
 
-
-
-//        }else if((strdetail1_mandate.equalsIgnoreCase("true")) || (strdetail2_mandate.equalsIgnoreCase("true"))){
-//
-//            if(strdetail1_mandate.equalsIgnoreCase("true")) {
-//                if (order_detail1.getText().toString().equalsIgnoreCase("")) {
-//                    errorMessage = errorMessage + "Please Enter " + detail1str;
-//                    error = true;
-//                }
-//            }
-//
-//            if(strdetail2_mandate.equalsIgnoreCase("true"))
-//            {
-//                if(order_detail2.getText().toString().equalsIgnoreCase("")){
-//                    errorMessage = errorMessage + "Please Enter "+detail2str;
-//                    error = true;
-//                }
-//            }
-//        }
 
         if(error){
             Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
@@ -1004,58 +665,6 @@ public class CaptureSignature extends BaseActivity {
         }
     }
 
-//    public Uri getOutputMediaFileUrinew(int type) {
-//        try
-//        {
-//            return Uri.fromFile(getOutputMediaFilenew(type));
-//        }
-//        catch(Exception ex){
-//            ex.printStackTrace();
-//        }
-//        return null;
-//    }
-
-//    private static File getOutputMediaFilenew(int type) {
-//        File mediaStorageDir;
-//        // External sdcard location
-//        if (type == MEDIA_TYPE_IMAGE) {
-//            mediaStorageDir = new File(
-//                    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),Config.IMAGE_DIRECTORY_NAME);
-//                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"M_PICTURE");
-//
-//            image_path = mediaStorageDir.getPath();
-//            if (!mediaStorageDir.exists()) {
-//                if (!mediaStorageDir.mkdirs()) {
-//                    Log.d(TAG, "Oops! Failed create "
-//                            + Config.IMAGE_DIRECTORY_NAME + " directory");
-//                    return null;
-//                }
-//                else
-//                {
-//                    mediaStorageDir.mkdirs();
-//                }
-//            }
-//
-//            // Create a media file name
-//            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-//                    Locale.getDefault()).format(new Date());
-//            File mediaFile;
-//            if (type == MEDIA_TYPE_IMAGE) {
-//                mediaFile = new File(mediaStorageDir.getPath() + File.separator
-//                        + "IMG_" + timeStamp + ".jpg");
-//
-//            }  else {
-//                return null;
-//            }
-//
-//            return mediaFile;
-//        }
-//
-//
-//        // Create the storage directory if it does not exist
-//        return null;
-//    }
-
     private boolean prepareDirectory()
     {
         try
@@ -1069,8 +678,6 @@ public class CaptureSignature extends BaseActivity {
         } catch (Exception e)
         {
             e.printStackTrace();
-            //Toast.makeText(this, "Could not initiate File System.. Is Sdcard mounted properly?", Toast.LENGTH_LONG).show();
-
             Toast toast = Toast.makeText(getApplicationContext(),"Could not initiate File System.. Is Sdcard mounted properly?",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
@@ -1141,10 +748,7 @@ public class CaptureSignature extends BaseActivity {
                 Log.e("log_tag","mypath: " + mypath);
 
                 Log.e("log_tag","url: " + url);
-                //In case you want to delete the file
-                //boolean deleted = mypath.delete();
-                //Log.v("log_tag","deleted: " + mypath.toString() + deleted);
-                //If you want to convert the image to string use base64 converter
+
 
             }
             catch(Exception e)
@@ -1246,292 +850,6 @@ public class CaptureSignature extends BaseActivity {
         }
     }
 
-
-
-    public class InsertOrderAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        /** progress dialog to show user that the backup is processing. */
-        private ProgressDialog dialog;
-        /** application context. */
-        private Activity activity;
-
-        private Context context;
-
-        private boolean webServiceResponse;
-        float f=0.00f;
-        String createdID="";
-        ConnectionDetector cd ;
-        // TelephonyManager manager;
-        int simState;
-
-        public InsertOrderAsyncTask(Activity activity) {
-            this.activity = activity;
-            context=activity;
-            dialog = new ProgressDialog(activity);
-            cd  = new ConnectionDetector(getApplicationContext());
-            //manager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-            // simState=manager.getSimState();
-
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-            this.dialog.setMessage("Generating Order...Please wait");
-            dialog.setCancelable(false);
-            this.dialog.show();
-
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO Auto-generated method stub
-			/*try {
-				//dataProducts=(ArrayList<DatabaseProductModel>) myDbHelper.ger(spnCategory.getSelectedItem().toString());
-
-
-
-				  if (order.equalsIgnoreCase("new")||order.equalsIgnoreCase("previous")) {
-
-					  try {
-
-						  ret_Name=yourName.getText().toString();
-						  createdID=myDbHelper.generateOrder(userID,cityID,beatID,retailerID,retailer_code,distID,dataOrder,totalPrice,ret_Name,getDateTime());
-							myDbHelper.insertPreviousOrder(userID,cityID,beatID,retailerID,retailer_code,distID,dataOrder,totalPrice,ret_Name,getDateTime(),createdID);
-							f=myDbHelper.getupdatedTarget(userID,getDateTime());
-							 mSignature.save(mView,tempDir+createdID+"_"+ret_Name+".png");
-					} catch (Exception e) {
-						// TODO: handle exception
-						Log.e("DATA new/previous Exception", e.getMessage());
-					}
-
-				  }
-				  if (order.equalsIgnoreCase("return")) {
-
-					  try {
-						  ret_Name=yourName.getText().toString();
-						  createdID=myDbHelper.generateReturnOrder(userID,cityID,beatID,retailerID,retailer_code,distID,dataOrder,totalPrice,ret_Name,getDateTime());
-						  f=myDbHelper.getupdatedTarget(userID,getDateTime());
-						  mSignature.save(mView,tempDir+createdID+"_"+ret_Name+".png");
-					} catch (Exception e) {
-						// TODO: handle exception
-						Log.e("DATA return Exception", e.getMessage());
-					}
-
-				  }
-
-					if (simState==TelephonyManager.SIM_STATE_READY) {
-				  if (!retailer_mobile.equalsIgnoreCase("NA")) {
-					   Real Time Code Start
-						//SmsManager smsManager=SmsManager.getDefault(); // kirti
-						//smsManager.sendTextMessage("+91"+retailer_mobile, null, "Order ID : "+createdID+" is generated", null, null); // smssend kirti
-					   Real Time Code End
-					}
-					}
-
-					if (!dist_emailID.equalsIgnoreCase("NA")){
-						createExcel(userID,retailerID,distID,createdID);
-					}
-
-					  if (cd.isConnectingToInternet()) {
-		                    // Internet Connection is Present
-		                    // make HTTP requests
-
-						  sendEmail(createdID,retailer_emailID);
-						  sendEmailtoDistributor(createdID,dist_emailID,new File(Environment.getExternalStorageDirectory().toString() + "/SimpleLogic/"+"order_"+userID+".xls"));
-
-		                }
-
-
-			} catch (Exception e) {
-				// TODO: handle exception
-			}*/
-
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-
-            }
-            SharedPreferences spf=CaptureSignature.this.getSharedPreferences("SimpleLogic",0);
-            SharedPreferences.Editor editor=spf.edit();
-            //editor.putString("UserID", userid);
-
-            editor.putFloat("Current_Target", f);
-            editor.commit();
-
-
-
-            // create a Dialog component
-            final Dialog dialog = new Dialog(context);
-
-            //tell the Dialog to use the dialog.xml as it's layout description
-            dialog.setContentView(R.layout.dialog);
-            dialog.setTitle("Order Status :");
-
-            TextView txt = (TextView) dialog.findViewById(R.id.txtOrderID);
-
-            txt.setText("Order is generated.");
-            TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
-            TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
-
-
-				/*if (simState==TelephonyManager.SIM_STATE_READY)
-				{
-					if (retailer_mobile.equalsIgnoreCase("NA")) {
-					txtMessage.setText("Mobile Number is not present for this retailer.");
-				}
-				else {
-					txtMessage.setText("SMS has been sent to "+retailer_mobile+".");
-				}
-				}
-
-				else {
-					txtMessage.setText("No SIM card detected");
-				}
-
-
-				  if (!cd.isConnectingToInternet()) {
-	                    // Internet Connection is Present
-	                    // make HTTP requests
-					  txtEmail.setText("No internet connection..unable to send mail.");
-	                }
-				  else {
-
-					  if (!dist_emailID.equalsIgnoreCase("NA")) {
-						  txtEmail.setText("Mail has been sent to Admin and Distributor.");
-					}
-					  else {
-						  txtEmail.setText("Mail has been sent to Admin.");
-					}
-
-
-				}*/
-
-            ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
-
-            dialogButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    Bundle b = new Bundle();
-                    b.putString("status", "done");
-                    Intent intent = new Intent();
-                    intent.putExtras(b);
-                    setResult(RESULT_OK,intent);
-
-                    SharedPreferences spf=CaptureSignature.this.getSharedPreferences("SimpleLogic",0);
-                    SharedPreferences.Editor editor=spf.edit();
-                    //editor.putString("UserID", userid);
-
-                    editor.putInt("Capture", 1);
-                    editor.commit();
-                    //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    Intent intentn = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intentn);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-
-                }
-            });
-
-            dialog.show();
-
-        }
-    }
-
-
-    private String getDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
-
-
-//	public void sendEmail(String createdID, String emailID2) {
-//		// TODO Auto-generated method stub
-//
-//		try {
-//            GmailSender sender = new GmailSender("test.simple.logic@gmail.com", "simplelogic123456789");
-//
-//
-//            /* Real Time Code Start*/
-//            if (!emailID2.equalsIgnoreCase("NA")) {
-//            	 sender.sendMail("Order Status",
-//                         "Order ID : "+createdID+" is generated.",
-//                         "test.simple.logic@gmail.com",
-//                         emailID2+",test.simple.logic@gmail.com,krunal.gujarathi@simplelogic.in");
-//			}
-//
-//            else {
-//            	 sender.sendMail("Order Status",
-//                         "Order ID : "+createdID+" is generated.",
-//                         "test.simple.logic@gmail.com",
-//                         "test.simple.logic@gmail.com,krunal.gujarathi@simplelogic.in");
-//			}
-//
-//            /* Real Time Code End*/
-//
-//            /*sender.sendMail("Order Status",
-//                    "Order ID : "+createdID+" is generated.",
-//                    "test.simple.logic@gmail.com",
-//                    "test.simple.logic@gmail.com,krunal.gujarathi@simplelogic.in"); */
-//
-//        } catch (Exception e) {
-//            Log.e("SendMail", e.getMessage(), e);
-//        }
-//
-//	}
-
-//	public void sendEmailtoDistributor(String createdID, String emailID2,File f) {
-//		// TODO Auto-generated method stub
-//
-//		try {
-//            GmailSender sender = new GmailSender("test.simple.logic@gmail.com", "simplelogic123456789");
-//
-//            if (!emailID2.equalsIgnoreCase("NA")) {
-//            	 /* Real Time Code Start*/
-//            	  sender.sendMailAttachement("Order Status",
-//                          "Hi \n Order ID : "+createdID+" is generated.Please find attachment.",
-//                          "test.simple.logic@gmail.com",
-//                          emailID2+",test.simple.logic@gmail.com,krunal.gujarathi@simplelogic.in",f);
-//            	 /* Real Time Code End*/
-//
-//            	/* sender.sendMailAttachement("Order Status",
-//                         "Hi \n Order ID : "+createdID+" is generated.Please find attachment.",
-//                         "test.simple.logic@gmail.com",
-//                         "test.simple.logic@gmail.com,krunal.gujarathi@simplelogic.in",f);  */
-//			}
-//
-//            else {
-//
-//			}
-//
-//        } catch (Exception e) {
-//            Log.e("SendMail", e.getMessage(), e);
-//        }
-//	}
-
-
-
-
     @Override
     public void onBackPressed() {
         // TODO Auto-generated method stub
@@ -1557,10 +875,7 @@ public class CaptureSignature extends BaseActivity {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 } else
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
-//								   insertOrderAsyncTask.execute();
 
-                //  Toast.makeText(getApplicationContext(),"Order generate successfully.",Toast.LENGTH_LONG).show();
 
                 Toast toast = Toast.makeText(getApplicationContext(),"Order generate successfully.",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1705,5 +1020,336 @@ public class CaptureSignature extends BaseActivity {
         String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         order_detail2.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    /**
+     * Requesting multiple permissions (storage and location) at once
+     * This uses multiple permission model from dexter
+     * On permanent denial opens settings dialog
+     */
+    private void requestStoragePermission() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+
+                            B_flag = isDeviceSupportCamera();
+
+                            if(B_flag == true)
+                            {
+                                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                                    // Create the File where the photo should go
+                                    File photoFile = null;
+                                    try {
+                                        photoFile = createImageFile();
+                                    } catch (Exception ex) {
+                                        // Error occurred while creating the File
+                                        Log.i("Image TAG", "IOException");
+                                        mCurrentPhotoPath = "";
+                                    }
+                                    // Continue only if the File was successfully created
+                                    if (photoFile != null) {
+                                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                        startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    /**
+     * Requesting multiple permissions (storage and location) at once
+     * This uses multiple permission model from dexter
+     * On permanent denial opens settings dialog
+     */
+    private void requestStoragePermissionsave() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+
+                            mView.setDrawingCacheEnabled(true);
+                            LinearLayout content = (LinearLayout) findViewById(R.id.linearLayout);
+                            content.setDrawingCacheEnabled(true);
+                            final Bitmap bitmap = content.getDrawingCache();
+                            //finish();
+
+                            // TODO Auto-generated method stub
+                            //v.setBackgroundColor(Color.parseColor("#910505"));
+
+                            if (m_sign_flag == 0) {
+                                Toast toast = Toast.makeText(CaptureSignature.this, "Please Sign.... ", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 105, 50);
+                                toast.show();
+                            } else {
+                                gps = new GPSTracker(CaptureSignature.this);
+                                if(!gps.canGetLocation()){
+
+                                    gps.showSettingsAlertnew();
+                                }
+                                else
+                                {
+                                    AlertDialog alertDialog = new AlertDialog.Builder(CaptureSignature.this).create(); //Read Update
+                                    alertDialog.setTitle("Confirmation");
+                                    alertDialog.setMessage(" Are you sure you want to continue?");
+                                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // TODO Auto-generated method stub
+
+                                            String order_detail1_text = "";
+                                            String order_detail2_text = "";
+                                            String order_detail4_text = "";
+                                            String order_type_text = "";
+                                            String order_type_name = "";
+                                            String order_type_code = "";
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
+
+                                                order_detail1_text = order_detail1.getText().toString().trim();
+                                            }
+
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail2.getText().toString().trim())) {
+
+                                                order_detail2_text = order_detail2.getText().toString().trim();
+                                            }
+
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail4.getText().toString().trim())) {
+                                                try
+                                                {
+                                                    order_detail4_text = order_detail4.getText().toString().trim();
+                                                    order_detail4_text = order_detail4_text.replaceAll("'", "");
+                                                    order_detail4_text = order_detail4_text.replaceAll("\"", "");
+                                                }catch(Exception ex){
+                                                    ex.printStackTrace();
+
+                                                    order_detail4_text = order_detail4.getText().toString().trim();
+                                                }
+
+                                            }
+
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(yourName.getText().toString().trim())) {
+
+                                                order_type_name = yourName.getText().toString().trim();
+                                            }
+
+                                            if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
+
+                                                order_type_text = order_type.getSelectedItem().toString();
+                                                List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
+
+                                                for (Local_Data cn : contacts1) {
+
+                                                    order_type_code = cn.getOrder_type_code();
+                                                }
+
+                                            }
+
+                                            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                                            } else
+                                                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
+//								   insertOrderAsyncTask.execute();
+
+//                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
+//                                        storagePath.mkdirs();
+//
+//                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
+//
+//
+//                                        String uploadImage = "";
+
+                                            try
+                                            {
+                                                AppLocationManager appLocationManager = new AppLocationManager(CaptureSignature.this);
+                                                Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+                                                Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                                                PlayService_Location PlayServiceManager = new PlayService_Location(CaptureSignature.this);
+
+                                                if(PlayServiceManager.checkPlayServices(CaptureSignature.this))
+                                                {
+                                                    Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+                                                }
+                                                else
+                                                if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+                                                {
+                                                    Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+                                                    Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+                                                }
+
+                                            }catch(Exception ex){ex.printStackTrace();}
+
+                                            try {
+
+
+//                                            FileOutputStream out = new FileOutputStream(myImage);
+//                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
+//                                            out.flush();
+//                                            out.close();
+//                                            uploadImage = getStringImage(bitmap);
+
+                                                SaveImage(bitmap,"SI"+Global_Data.GLObalOrder_id);
+
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+
+                                                    dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE);
+                                                }
+                                                else
+                                                {
+                                                    dbvoc.updateORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
+                                                }
+
+
+                                                mSignature.clear();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
+//                                        try {
+//                                            //delete(mediaStorageDir);
+//                                            if (storagePath.isDirectory()) {
+//                                                String[] children = storagePath.list();
+//                                                for (int i = 0; i < children.length; i++) {
+//                                                    new File(storagePath, children[i]).delete();
+//                                                }
+//                                            }
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+
+                                            isInternetPresent = cd.isConnectingToInternet();
+
+
+                                            if (isInternetPresent) {
+                                                onDestroy();               getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
+                                            } else {
+                                                //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+                                                Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                                                //toast.setGravity(Gravity.CENTER, 0, 0);
+                                                toast.show();
+
+                                                get_dialog();
+                                            }
+
+
+                                        }
+                                    });
+
+                                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // TODO Auto-generated method stub
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                                    alertDialog.setCancelable(false);
+                                    alertDialog.show();
+                                }
+
+
+                            }
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(CaptureSignature.this);
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
     }
 }

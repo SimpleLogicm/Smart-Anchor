@@ -4,11 +4,15 @@ package com.anchor.activities;
  * Created by vinod on 04-10-2016.
  */
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,6 +28,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.webservice.ConnectionDetector;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.List;
 
@@ -179,9 +189,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(c_mobile_number.getText().toString().trim()))
                 {
 
-                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:"+c_mobile_number.getText().toString().trim()));
-                    view.getContext().startActivity(callIntent);
+                    requestPhoneCallPermission(c_mobile_number.getText().toString().trim());
                 }
             }
             else if (view.getId() == c_invoice.getId())
@@ -279,6 +287,69 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
 
 
 
+    public static void requestPhoneCallPermission(final String mobile_number) {
+        Dexter.withActivity((Activity) mcontext)
+                .withPermission(Manifest.permission.CALL_PHONE)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
 
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:" + mobile_number));
+                        mcontext.startActivity(callIntent);
+
+                        return;
+
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        // check for permanent denial of permission
+                        if (response.isPermanentlyDenied()) {
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private static void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private static void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", mcontext.getPackageName(), null);
+        intent.setData(uri);
+        ((Activity) mcontext).startActivityForResult(intent, 101);
+    }
 
 }

@@ -16,7 +16,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -585,8 +584,8 @@ public class Stock_Main extends BaseActivity {
         protected String doInBackground(String... params) {
             try {
 
-                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                String device_id = telephonyManager.getDeviceId();
+                SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+                String device_id = sp.getString("devid", "");
 
                 recList.setVisibility(View.INVISIBLE);
 

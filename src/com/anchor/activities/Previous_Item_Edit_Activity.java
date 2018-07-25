@@ -1,10 +1,15 @@
 package com.anchor.activities;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,6 +31,13 @@ import android.widget.Toast;
 import com.anchor.model.Category;
 import com.anchor.model.Product;
 import com.anchor.model.Scheme;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -412,173 +424,8 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                 }
                 if(event.getAction() == MotionEvent.ACTION_DOWN)
                 {
-                    //down event
                     b.setBackgroundColor(Color.parseColor("#910505"));
-
-					/*if (spnCategory.getSelectedItem().toString()
-							.equalsIgnoreCase("Select Category")
-							|| spnProduct.getSelectedItem().toString()
-									.equalsIgnoreCase("Select Product")
-							|| spnCategory.getSelectedItem().toString()
-									.equalsIgnoreCase("Select Variant")
-							|| editTextQuantity.getText().toString().length() == 0) {
-
-						//Toast.makeText(getApplicationContext(),"Please Fill details ", Toast.LENGTH_SHORT).setGravity(Gravity.CENTER, 0, 0).show();
-						Toast toast = Toast.makeText(getApplicationContext(),"Please Fill details ", Toast.LENGTH_SHORT);
-						toast.setGravity(Gravity.CENTER, 0, 0);
-						toast.show();
-					}
-					*/
-//					if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) {
-//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Category", Toast.LENGTH_SHORT);
-//						toast.setGravity(Gravity.CENTER, 0, 0);
-//						toast.show();
-//					}
-
-//					else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) {
-//							Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Product", Toast.LENGTH_SHORT);
-//							toast.setGravity(Gravity.CENTER, 0, 0);
-//							toast.show();
-//						}
-
-//					else if (spnProductSpec.getSelectedItem().toString().equalsIgnoreCase("Select Variant")) {
-//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Variant", Toast.LENGTH_SHORT);
-//						toast.setGravity(Gravity.CENTER, 0, 0);
-//						toast.show();
-//					}
-
-                    gps = new GPSTracker(Previous_Item_Edit_Activity.this);
-                    if(!gps.canGetLocation()){
-
-                        gps.showSettingsAlertnew();
-                    }
-                    else
-                    {
-                        int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim())%Integer.parseInt(Global_Data.item_SL);
-
-                        if (editTextQuantity.getText().toString().length() == 0) {
-                            Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please enter Quantity", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                        }
-                        else
-                        if(SQMO_Validator != 0)
-                        {
-                            Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Entered Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            editTextQuantity.setText("");
-                        }
-
-
-//					else if (spnScheme.getSelectedItem().toString().equalsIgnoreCase("Select Discount Type")) {
-//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Discount Type", Toast.LENGTH_SHORT);
-//						toast.setGravity(Gravity.CENTER, 0, 0);
-//						toast.show();
-//					}
-
-                        else{
-
-                            // TODO Auto-generated method stub
-
-
-
-                            loginDataBaseAdapter=loginDataBaseAdapter.open();
-
-                            String s_price[] = txtPrice.getText().toString().split(":");
-
-//	//
-//				   	        	                             }
-                            String discount_type = "";
-                            String discount_amount = "";
-//
-                            List<Local_Data> scheme_name = dbvoc.getProductscheme_code(spnScheme.getSelectedItem().toString().trim());
-//results2.add("Select Variant");
-                            if(scheme_name.size() > 0)
-                            {
-                                for (Local_Data s : scheme_name) {
-                                    scheme_code= s.getCode();
-                                }
-                            }
-                            else
-                            {
-                                scheme_code = "";
-                            }
-
-                            // Long randomPIN = System.currentTimeMillis();
-                            String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
-
-                            if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
-                            {
-                                Global_Data.Previous_Order_UpdateOrder_ID = PINString;
-
-                                Global_Data.GLObalOrder_id = PINString;
-                                Global_Data.GLOvel_GORDER_ID = PINString;
-                                // Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
-
-                                dbvoc.getDeleteTable("previous_orders");
-
-                                try
-                                {
-                                    AppLocationManager appLocationManager = new AppLocationManager(Previous_Item_Edit_Activity.this);
-                                    Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
-                                    Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-                                    PlayService_Location PlayServiceManager = new PlayService_Location(Previous_Item_Edit_Activity.this);
-
-                                    if(PlayServiceManager.checkPlayServices(Previous_Item_Edit_Activity.this))
-                                    {
-                                        Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
-
-                                    }
-                                    else
-                                    if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
-                                    {
-                                        Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
-                                        Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
-                                    }
-
-                                }catch(Exception ex){ex.printStackTrace();}
-
-                                loginDataBaseAdapter.insertOrders("",  Global_Data.Previous_Order_UpdateOrder_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "",Global_Data.order_retailer,Global_Data.order_state,Global_Data.order_city,Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","");
-
-                                List<Local_Data> cont1 = dbvoc.getItemNamePrevious_OrderCheck(Global_Data.Previous_Order_ServiceOrder_ID,Global_Data.item_no);
-                                for (Local_Data cnt1 : cont1) {
-
-                                    loginDataBaseAdapter.insertOrderProducts("", "", Global_Data.GLOvel_GORDER_ID, "","","","", "", cnt1.getSche_code().trim(), " ", "",cnt1.getQty().trim(),cnt1.getRP().trim(),cnt1.getPrice().trim(), cnt1.getAmount().trim(), "", "",Global_Data.order_retailer," ",cnt1.get_category_ids()," ",cnt1.getProduct_nm());
-                                }
-
-                                dbvoc.getDeleteTable("previous_order_products");
-
-//                            List<Local_Data> check_order_product = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLOvel_GORDER_ID,Global_Data.item_no);
-//
-//                            if(check_order_product.size() < 0)
-//                            {
-                                loginDataBaseAdapter.insertOrderProducts(" ", " ",  Global_Data.GLOvel_GORDER_ID, "", "" , "" ,"", " " , scheme_code , " ", "", editTextQuantity.getText().toString() ,editTextRP.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), "", "",Global_Data.order_retailer," ", Global_Data.item_no," ",spnProduct.getText().toString().trim());
-                                // }
-
-                            }
-                            else
-                            {
-                                dbvoc.update_item(editTextQuantity.getText().toString().trim(),editTextMRP.getText().toString().trim(),s_price[1].trim(),discount_amount,discount_type,Global_Data.item_no,Global_Data.GLObalOrder_id,scheme_code);
-                            }
-
-                            Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Item Update Successfully", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-
-
-                            Intent intent = new Intent(Previous_Item_Edit_Activity.this, Previous_orderNew_S2.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            startActivity(intent);
-                            finish();
-
-
-//
-                            return true;
-                            //}
-                        }
-                    }
+                    requestGPSPermissionsigna();
 
 
 
@@ -1152,6 +999,243 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //	        });
 
         dialognew.show();
+    }
+
+    private void requestGPSPermissionsigna() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            //down event
+
+
+					/*if (spnCategory.getSelectedItem().toString()
+							.equalsIgnoreCase("Select Category")
+							|| spnProduct.getSelectedItem().toString()
+									.equalsIgnoreCase("Select Product")
+							|| spnCategory.getSelectedItem().toString()
+									.equalsIgnoreCase("Select Variant")
+							|| editTextQuantity.getText().toString().length() == 0) {
+
+						//Toast.makeText(getApplicationContext(),"Please Fill details ", Toast.LENGTH_SHORT).setGravity(Gravity.CENTER, 0, 0).show();
+						Toast toast = Toast.makeText(getApplicationContext(),"Please Fill details ", Toast.LENGTH_SHORT);
+						toast.setGravity(Gravity.CENTER, 0, 0);
+						toast.show();
+					}
+					*/
+//					if (spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) {
+//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Category", Toast.LENGTH_SHORT);
+//						toast.setGravity(Gravity.CENTER, 0, 0);
+//						toast.show();
+//					}
+
+//					else if (spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) {
+//							Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Product", Toast.LENGTH_SHORT);
+//							toast.setGravity(Gravity.CENTER, 0, 0);
+//							toast.show();
+//						}
+
+//					else if (spnProductSpec.getSelectedItem().toString().equalsIgnoreCase("Select Variant")) {
+//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Variant", Toast.LENGTH_SHORT);
+//						toast.setGravity(Gravity.CENTER, 0, 0);
+//						toast.show();
+//					}
+
+                            gps = new GPSTracker(Previous_Item_Edit_Activity.this);
+                            if(!gps.canGetLocation()){
+
+                                gps.showSettingsAlertnew();
+                            }
+                            else
+                            {
+                                int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim())%Integer.parseInt(Global_Data.item_SL);
+
+                                if (editTextQuantity.getText().toString().length() == 0) {
+                                    Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please enter Quantity", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                }
+                                else
+                                if(SQMO_Validator != 0)
+                                {
+                                    Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Entered Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    editTextQuantity.setText("");
+                                }
+
+
+//					else if (spnScheme.getSelectedItem().toString().equalsIgnoreCase("Select Discount Type")) {
+//						Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Please Select Discount Type", Toast.LENGTH_SHORT);
+//						toast.setGravity(Gravity.CENTER, 0, 0);
+//						toast.show();
+//					}
+
+                                else{
+
+                                    // TODO Auto-generated method stub
+
+
+
+                                    loginDataBaseAdapter=loginDataBaseAdapter.open();
+
+                                    String s_price[] = txtPrice.getText().toString().split(":");
+
+//	//
+//				   	        	                             }
+                                    String discount_type = "";
+                                    String discount_amount = "";
+//
+                                    List<Local_Data> scheme_name = dbvoc.getProductscheme_code(spnScheme.getSelectedItem().toString().trim());
+//results2.add("Select Variant");
+                                    if(scheme_name.size() > 0)
+                                    {
+                                        for (Local_Data s : scheme_name) {
+                                            scheme_code= s.getCode();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        scheme_code = "";
+                                    }
+
+                                    // Long randomPIN = System.currentTimeMillis();
+                                    String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
+
+                                    if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID))
+                                    {
+                                        Global_Data.Previous_Order_UpdateOrder_ID = PINString;
+
+                                        Global_Data.GLObalOrder_id = PINString;
+                                        Global_Data.GLOvel_GORDER_ID = PINString;
+                                        // Global_Data.GLOvel_GORDER_ID = "Ord"+PINString;
+
+                                        dbvoc.getDeleteTable("previous_orders");
+
+                                        try
+                                        {
+                                            AppLocationManager appLocationManager = new AppLocationManager(Previous_Item_Edit_Activity.this);
+                                            Log.d("Class LAT LOG","Class LAT LOG"+appLocationManager.getLatitude()+" "+ appLocationManager.getLongitude());
+                                            Log.d("Service LAT LOG","Service LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                                            PlayService_Location PlayServiceManager = new PlayService_Location(Previous_Item_Edit_Activity.this);
+
+                                            if(PlayServiceManager.checkPlayServices(Previous_Item_Edit_Activity.this))
+                                            {
+                                                Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+
+                                            }
+                                            else
+                                            if(!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null))
+                                            {
+                                                Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+                                                Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+                                            }
+
+                                        }catch(Exception ex){ex.printStackTrace();}
+
+                                        loginDataBaseAdapter.insertOrders("",  Global_Data.Previous_Order_UpdateOrder_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "",Global_Data.order_retailer,Global_Data.order_state,Global_Data.order_city,Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","");
+
+                                        List<Local_Data> cont1 = dbvoc.getItemNamePrevious_OrderCheck(Global_Data.Previous_Order_ServiceOrder_ID,Global_Data.item_no);
+                                        for (Local_Data cnt1 : cont1) {
+
+                                            loginDataBaseAdapter.insertOrderProducts("", "", Global_Data.GLOvel_GORDER_ID, "","","","", "", cnt1.getSche_code().trim(), " ", "",cnt1.getQty().trim(),cnt1.getRP().trim(),cnt1.getPrice().trim(), cnt1.getAmount().trim(), "", "",Global_Data.order_retailer," ",cnt1.get_category_ids()," ",cnt1.getProduct_nm());
+                                        }
+
+                                        dbvoc.getDeleteTable("previous_order_products");
+
+//                            List<Local_Data> check_order_product = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLOvel_GORDER_ID,Global_Data.item_no);
+//
+//                            if(check_order_product.size() < 0)
+//                            {
+                                        loginDataBaseAdapter.insertOrderProducts(" ", " ",  Global_Data.GLOvel_GORDER_ID, "", "" , "" ,"", " " , scheme_code , " ", "", editTextQuantity.getText().toString() ,editTextRP.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), "", "",Global_Data.order_retailer," ", Global_Data.item_no," ",spnProduct.getText().toString().trim());
+                                        // }
+
+                                    }
+                                    else
+                                    {
+                                        dbvoc.update_item(editTextQuantity.getText().toString().trim(),editTextMRP.getText().toString().trim(),s_price[1].trim(),discount_amount,discount_type,Global_Data.item_no,Global_Data.GLObalOrder_id,scheme_code);
+                                    }
+
+                                    Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this,"Item Update Successfully", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+
+                                    Intent intent = new Intent(Previous_Item_Edit_Activity.this, Previous_orderNew_S2.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    startActivity(intent);
+                                    finish();
+
+
+//
+
+                                    //}
+                                }
+                            }
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
     }
 
 }

@@ -71,11 +71,8 @@ public class Forget_Pwd extends Activity {
         mTitleTextView.setText("Forget Password");
 
         TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = Forget_Pwd.this.getSharedPreferences("SimpleLogic", 0);
-
-        SharedPreferences pref_devid = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-        pref_devid.getString("reg_devid", "");
-        devid = pref_devid.getString("reg_devid", "");
+        SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        devid = sp.getString("devid", "");
 
         forgetpwd_btn.setOnClickListener(new View.OnClickListener() {
             @Override

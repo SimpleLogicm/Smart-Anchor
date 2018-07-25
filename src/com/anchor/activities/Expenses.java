@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,12 +8,14 @@ import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -44,6 +47,13 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +62,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import cpm.simplelogic.helper.GPSTracker;
@@ -184,224 +195,7 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 			@Override
 			public void onClick(View v) {
 
-
-				gps = new GPSTracker(Expenses.this);
-				if(!gps.canGetLocation()){
-
-					gps.showSettingsAlertnew();
-				}
-				else
-				{
-					Date date1 = new Date();
-
-
-					if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_date.getText().toString()))
-					{
-						date2 = new Date(exp_date.getText().toString());
-						Calendar cal1 = Calendar.getInstance();
-						Calendar cal2 = Calendar.getInstance();
-						cal1.setTime(date1);
-						cal2.setTime(date1);
-					}
-
-					if(Expenses_text == "Travel")
-					{
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_date.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Select Date", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Select Date", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-						}
-						else
-						if(date2.compareTo(date1)>0)
-						{
-							//System.out.println("Date1 is after Date2");
-							// Toast.makeText(getApplicationContext(),"Selected date can not to be a future date.", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Selected date can not to be a future date.", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_cost.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Enter Cost", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter Cost", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_discr.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Enter Description", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter Description", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_from.getText().toString()))
-						{
-							//Toast.makeText(getApplicationContext(),"Please Enter Form Field Data", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter Form Field Data", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_to.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Enter To Field Data", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter To Field Data", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_mot.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Enter Mode of Travel", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter Mode of Travel", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						{
-
-							Long randomPIN = System.currentTimeMillis();
-							String PINString = String.valueOf(randomPIN);
-
-							loginDataBaseAdapter.insertExpenceTravels("1", "1",Global_Data.GLOvel_USER_EMAIL,
-									"1", exp_from.getText().toString(), exp_to.getText().toString(), exp_date.getText().toString(), exp_mot.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString(),
-									"","","", "", Current_Date, Current_Date,PINString);
-
-							Toast toast = Toast.makeText(getApplicationContext(),
-									"Travel Expense Save Successfully", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-							Intent a = new Intent(Expenses.this,MainActivity.class);
-							startActivity(a);
-							finish();
-
-
-//						 isInternetPresent = cd.isConnectingToInternet();
-//
-//						if (isInternetPresent)
-//	                    {
-//							call_service_Expenses_TRAVEL(Global_Data.GLOvel_USER_EMAIL,exp_from.getText().toString(),exp_to.getText().toString(), exp_date.getText().toString(), exp_mot.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString(),
-//				 					Current_Date, Current_Date);
-//	                    }
-//		   	        	else
-//		   	        	{
-//		   	        	   //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-//
-//							Toast toast = Toast.makeText(Expenses.this,"You don't have internet connection.", Toast.LENGTH_LONG);
-//							toast.setGravity(Gravity.CENTER, 0, 0);
-//							toast.show();
-//
-//		   	        	}
-
-
-//						 Toast.makeText(getApplicationContext(),"Your Data Submit Successfuly", Toast.LENGTH_LONG).show();
-//
-//						 Intent intent = new Intent(Expenses.this, Order.class);
-//						 startActivity(intent);
-//						 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//						 finish();
-						}
-					}
-					else
-					if(Expenses_text == "Miscellaneous")
-					{
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_date.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Select Date", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Select Date", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(date2.compareTo(date1)>0)
-						{
-							//System.out.println("Date1 is after Date2");
-							//Toast.makeText(getApplicationContext(),"Selected date can not to be a future date.", Toast.LENGTH_LONG).show();
-
-
-							Toast toast = Toast.makeText(Expenses.this,"Selected date can not to be a future date.", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_cost.getText().toString()))
-						{
-							//Toast.makeText(getApplicationContext(),"Please Enter Cost", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter Cost", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-						}
-						else
-						if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_discr.getText().toString()))
-						{
-							// Toast.makeText(getApplicationContext(),"Please Enter Description", Toast.LENGTH_LONG).show();
-
-							Toast toast = Toast.makeText(Expenses.this,"Please Enter Description", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-						}
-						else
-						{
-
-							Long randomPIN = System.currentTimeMillis();
-							String PINString = String.valueOf(randomPIN);
-
-							loginDataBaseAdapter.insertExpencesMiscs("1", "1", Global_Data.GLOvel_USER_EMAIL, "1", exp_date.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString(), "", "", "",
-									"", Current_Date, Current_Date,PINString);
-
-							Toast toast = Toast.makeText(getApplicationContext(),
-									"Miscellaneous Expense Save Successfully", Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
-
-							Intent a = new Intent(Expenses.this,MainActivity.class);
-							startActivity(a);
-							finish();
-
-//						  isInternetPresent = cd.isConnectingToInternet();
-//
-//							if (isInternetPresent)
-//		                    {
-//								call_service_Expenses_MISC(Global_Data.GLOvel_USER_EMAIL, exp_date.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString());
-//		                    }
-//			   	        	else
-//			   	        	{
-//			   	        	 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-//
-//								Toast toast = Toast.makeText(Expenses.this,"You don't have internet connection.", Toast.LENGTH_LONG);
-//								toast.setGravity(Gravity.CENTER, 0, 0);
-//								toast.show();
-//			   	        	}
-
-
-						}
-					}
-				}
-
+				requestGPSPermissionsigna();
 
 			}
 		});
@@ -543,8 +337,8 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 			String device_id = "";
 
 
-			TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-			device_id = telephonyManager.getDeviceId();
+			SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+			device_id = sp.getString("devid", "");
 
 			domain = this.getResources().getString(R.string.service_domain);
 
@@ -736,8 +530,8 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 			String device_id = "";
 
 
-			TelephonyManager telephonyManager = (TelephonyManager)getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-			device_id = telephonyManager.getDeviceId();
+			SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+			device_id = sp.getString("devid", "");
 
 			domain = this.getResources().getString(R.string.service_domain);
 
@@ -913,4 +707,290 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 			return null;
 		}
 	};
+
+	private void requestGPSPermissionsigna() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.ACCESS_FINE_LOCATION
+				)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+							gps = new GPSTracker(Expenses.this);
+							if(!gps.canGetLocation()){
+
+								gps.showSettingsAlertnew();
+							}
+							else
+							{
+								Date date1 = new Date();
+
+
+								if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_date.getText().toString()))
+								{
+									date2 = new Date(exp_date.getText().toString());
+									Calendar cal1 = Calendar.getInstance();
+									Calendar cal2 = Calendar.getInstance();
+									cal1.setTime(date1);
+									cal2.setTime(date1);
+								}
+
+								if(Expenses_text == "Travel")
+								{
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_date.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Select Date", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Select Date", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+									}
+									else
+									if(date2.compareTo(date1)>0)
+									{
+										//System.out.println("Date1 is after Date2");
+										// Toast.makeText(getApplicationContext(),"Selected date can not to be a future date.", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Selected date can not to be a future date.", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_cost.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Enter Cost", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter Cost", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_discr.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Enter Description", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter Description", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_from.getText().toString()))
+									{
+										//Toast.makeText(getApplicationContext(),"Please Enter Form Field Data", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter Form Field Data", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_to.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Enter To Field Data", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter To Field Data", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_mot.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Enter Mode of Travel", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter Mode of Travel", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									{
+
+										Long randomPIN = System.currentTimeMillis();
+										String PINString = String.valueOf(randomPIN);
+
+										loginDataBaseAdapter.insertExpenceTravels("1", "1",Global_Data.GLOvel_USER_EMAIL,
+												"1", exp_from.getText().toString(), exp_to.getText().toString(), exp_date.getText().toString(), exp_mot.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString(),
+												"","","", "", Current_Date, Current_Date,PINString);
+
+										Toast toast = Toast.makeText(getApplicationContext(),
+												"Travel Expense Save Successfully", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+										Intent a = new Intent(Expenses.this,MainActivity.class);
+										startActivity(a);
+										finish();
+
+
+//						 isInternetPresent = cd.isConnectingToInternet();
+//
+//						if (isInternetPresent)
+//	                    {
+//							call_service_Expenses_TRAVEL(Global_Data.GLOvel_USER_EMAIL,exp_from.getText().toString(),exp_to.getText().toString(), exp_date.getText().toString(), exp_mot.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString(),
+//				 					Current_Date, Current_Date);
+//	                    }
+//		   	        	else
+//		   	        	{
+//		   	        	   //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+//
+//							Toast toast = Toast.makeText(Expenses.this,"You don't have internet connection.", Toast.LENGTH_LONG);
+//							toast.setGravity(Gravity.CENTER, 0, 0);
+//							toast.show();
+//
+//		   	        	}
+
+
+//						 Toast.makeText(getApplicationContext(),"Your Data Submit Successfuly", Toast.LENGTH_LONG).show();
+//
+//						 Intent intent = new Intent(Expenses.this, Order.class);
+//						 startActivity(intent);
+//						 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//						 finish();
+									}
+								}
+								else
+								if(Expenses_text == "Miscellaneous")
+								{
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_date.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Select Date", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Select Date", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(date2.compareTo(date1)>0)
+									{
+										//System.out.println("Date1 is after Date2");
+										//Toast.makeText(getApplicationContext(),"Selected date can not to be a future date.", Toast.LENGTH_LONG).show();
+
+
+										Toast toast = Toast.makeText(Expenses.this,"Selected date can not to be a future date.", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_cost.getText().toString()))
+									{
+										//Toast.makeText(getApplicationContext(),"Please Enter Cost", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter Cost", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+									}
+									else
+									if(!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(exp_discr.getText().toString()))
+									{
+										// Toast.makeText(getApplicationContext(),"Please Enter Description", Toast.LENGTH_LONG).show();
+
+										Toast toast = Toast.makeText(Expenses.this,"Please Enter Description", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+									}
+									else
+									{
+
+										Long randomPIN = System.currentTimeMillis();
+										String PINString = String.valueOf(randomPIN);
+
+										loginDataBaseAdapter.insertExpencesMiscs("1", "1", Global_Data.GLOvel_USER_EMAIL, "1", exp_date.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString(), "", "", "",
+												"", Current_Date, Current_Date,PINString);
+
+										Toast toast = Toast.makeText(getApplicationContext(),
+												"Miscellaneous Expense Save Successfully", Toast.LENGTH_LONG);
+										toast.setGravity(Gravity.CENTER, 0, 0);
+										toast.show();
+
+										Intent a = new Intent(Expenses.this,MainActivity.class);
+										startActivity(a);
+										finish();
+
+//						  isInternetPresent = cd.isConnectingToInternet();
+//
+//							if (isInternetPresent)
+//		                    {
+//								call_service_Expenses_MISC(Global_Data.GLOvel_USER_EMAIL, exp_date.getText().toString(), exp_cost.getText().toString(), exp_discr.getText().toString());
+//		                    }
+//			   	        	else
+//			   	        	{
+//			   	        	 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+//
+//								Toast toast = Toast.makeText(Expenses.this,"You don't have internet connection.", Toast.LENGTH_LONG);
+//								toast.setGravity(Gravity.CENTER, 0, 0);
+//								toast.show();
+//			   	        	}
+
+
+									}
+								}
+							}
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	/**
+	 * Showing Alert Dialog with Settings option
+	 * Navigates user to app settings
+	 * NOTE: Keep proper title and message depending on your app
+	 */
+	private void showSettingsDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+		builder.setTitle("Need Permissions");
+		builder.setCancelable(false);
+		builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+		builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+				openSettings();
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+			}
+		});
+		builder.show();
+
+	}
+
+	// navigating user to app settings
+	private void openSettings() {
+		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+		Uri uri = Uri.fromParts("package", getPackageName(), null);
+		intent.setData(uri);
+		startActivityForResult(intent, 101);
+	}
 }
