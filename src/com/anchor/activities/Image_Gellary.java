@@ -128,31 +128,33 @@ public class Image_Gellary extends FragmentActivity {
 
             }
         }));
+       try{
+           ActionBar mActionBar = getActionBar();
+           mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+           // mActionBar.setDisplayShowHomeEnabled(false);
+           // mActionBar.setDisplayShowTitleEnabled(false);
+           LayoutInflater mInflater = LayoutInflater.from(this);
 
-        ActionBar mActionBar = getActionBar();
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        // mActionBar.setDisplayShowHomeEnabled(false);
-        // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
+           View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+           mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+           TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+           mTitleTextView.setText("New Launches");
 
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText("New Launches");
+           TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+           todaysTarget.setVisibility(View.INVISIBLE);
+           ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+           SharedPreferences sp = Image_Gellary.this.getSharedPreferences("SimpleLogic", 0);
 
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        todaysTarget.setVisibility(View.INVISIBLE);
-        ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
-        SharedPreferences sp = Image_Gellary.this.getSharedPreferences("SimpleLogic", 0);
-
-        H_LOGO.setImageResource(R.drawable.video_imagenew);
-        H_LOGO.setVisibility(View.INVISIBLE);
+           H_LOGO.setImageResource(R.drawable.video_imagenew);
+           H_LOGO.setVisibility(View.INVISIBLE);
 
 
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+           mActionBar.setCustomView(mCustomView);
+           mActionBar.setDisplayShowCustomEnabled(true);
+           mActionBar.setHomeButtonEnabled(true);
+           mActionBar.setDisplayHomeAsUpEnabled(true);
+       }catch(Exception ex){ex.printStackTrace();}
+
 
        // fetchImages();
 

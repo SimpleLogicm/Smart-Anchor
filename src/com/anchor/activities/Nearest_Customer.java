@@ -211,22 +211,23 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 //
 //            }
 //        });
-		
+			try
+			{
 				android.app.ActionBar mActionBar = getActionBar();
 				mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-		      // mActionBar.setDisplayShowHomeEnabled(false);
-		      // mActionBar.setDisplayShowTitleEnabled(false);
-		       LayoutInflater mInflater = LayoutInflater.from(this);
-		       Intent i = getIntent();
+				// mActionBar.setDisplayShowHomeEnabled(false);
+				// mActionBar.setDisplayShowTitleEnabled(false);
+				LayoutInflater mInflater = LayoutInflater.from(this);
+				Intent i = getIntent();
 				String name = i.getStringExtra("retialer");
-		       View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-		       mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-		       TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-		       mTitleTextView.setText("Nearest Customer");
-		       
-		       TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-		       SharedPreferences sp = Nearest_Customer.this.getSharedPreferences("SimpleLogic", 0);
-		      
+				View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+				mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+				TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+				mTitleTextView.setText("Nearest Customer");
+
+				TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+				SharedPreferences sp = Nearest_Customer.this.getSharedPreferences("SimpleLogic", 0);
+
 //		       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //		       //	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
 //				   todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
@@ -250,15 +251,17 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 
 				}catch(Exception ex){ex.printStackTrace();}
 
-		       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-		 //       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-		       	todaysTarget.setText("Today's Target Acheived");
+				if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+					//       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+					todaysTarget.setText("Today's Target Acheived");
 				}
-		       
-		       mActionBar.setCustomView(mCustomView);
-		       mActionBar.setDisplayShowCustomEnabled(true);
-		       mActionBar.setHomeButtonEnabled(true);
-		       mActionBar.setDisplayHomeAsUpEnabled(true);
+
+				mActionBar.setCustomView(mCustomView);
+				mActionBar.setDisplayShowCustomEnabled(true);
+				mActionBar.setHomeButtonEnabled(true);
+				mActionBar.setDisplayHomeAsUpEnabled(true);
+			}catch(Exception ex){ex.printStackTrace();}
+
 	}
 
 	public  void View_NearestCustomer(String address,String latitude,String longitude)

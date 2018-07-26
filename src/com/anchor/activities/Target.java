@@ -120,36 +120,39 @@ public class Target extends Activity implements OnItemSelectedListener {
 			int spinnerPosition = adapter_state1.getPosition(city_state[2]);
 			type_spinner.setSelection(spinnerPosition);
 
-		  
-		ActionBar mActionBar = getActionBar();
-		mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-   // mActionBar.setDisplayShowHomeEnabled(false);
-   // mActionBar.setDisplayShowTitleEnabled(false);
-    LayoutInflater mInflater = LayoutInflater.from(this);
-    Intent i = getIntent();
-		String name = i.getStringExtra("retialer");
-    View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-    mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-    TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-    mTitleTextView.setText("Target");
-    
-    TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-    SharedPreferences sp = Target.this.getSharedPreferences("SimpleLogic", 0);
-    
-    ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
-    H_LOGO.setImageResource(R.drawable.tar);
-    H_LOGO.setVisibility(View.VISIBLE);
-   
-    Calendar c = Calendar.getInstance();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-    String strDate = sdf.format(c.getTime());
-    
-    todaysTarget.setText("Date :- "+strDate);
-    
-    mActionBar.setCustomView(mCustomView);
-    mActionBar.setDisplayShowCustomEnabled(true);
-    mActionBar.setHomeButtonEnabled(true);
-    mActionBar.setDisplayHomeAsUpEnabled(true);
+		try
+		{
+			ActionBar mActionBar = getActionBar();
+			mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			// mActionBar.setDisplayShowHomeEnabled(false);
+			// mActionBar.setDisplayShowTitleEnabled(false);
+			LayoutInflater mInflater = LayoutInflater.from(this);
+			Intent i = getIntent();
+			String name = i.getStringExtra("retialer");
+			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			mTitleTextView.setText("Target");
+
+			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			SharedPreferences sp = Target.this.getSharedPreferences("SimpleLogic", 0);
+
+			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			H_LOGO.setImageResource(R.drawable.tar);
+			H_LOGO.setVisibility(View.VISIBLE);
+
+			Calendar c = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+			String strDate = sdf.format(c.getTime());
+
+			todaysTarget.setText("Date :- "+strDate);
+
+			mActionBar.setCustomView(mCustomView);
+			mActionBar.setDisplayShowCustomEnabled(true);
+			mActionBar.setHomeButtonEnabled(true);
+			mActionBar.setDisplayHomeAsUpEnabled(true);
+		}catch(Exception ex){ex.printStackTrace();}
+
 
 		List<Local_Data> contacts = dbvoc.checkTargets();
 		if(contacts.size() <= 0)

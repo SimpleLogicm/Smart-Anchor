@@ -146,69 +146,72 @@ public class MainActivity extends BaseActivity {
 		}
 
 		 Global_Data.PREVIOUS_ORDER_BACK_FLAG="";
-		
-		ActionBar mActionBar = getActionBar();
-		mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-       // mActionBar.setDisplayShowHomeEnabled(false);
-       // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
- 
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        //TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
-       
+		try
+		{
+			ActionBar mActionBar = getActionBar();
+			mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			// mActionBar.setDisplayShowHomeEnabled(false);
+			// mActionBar.setDisplayShowTitleEnabled(false);
+			LayoutInflater mInflater = LayoutInflater.from(this);
+
+			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			//TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			SharedPreferences sp = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
+
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //        	todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
 //		}
 
-		if(sp.getFloat("Target",0) == 0.0)
-		{
-			isInternetPresent = cd.isConnectingToInternet();
-			if (isInternetPresent)
+			if(sp.getFloat("Target",0) == 0.0)
 			{
-				getTargetDatamain();
-			}
-		}
-		else
-		{
-			try
-			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-
-				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+				isInternetPresent = cd.isConnectingToInternet();
+				if (isInternetPresent)
 				{
-					int age = (int) Math.round(age_float);
-
-					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-				}else
-				{
-					int age = (int) Math.round(age_float);
-
-					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+					getTargetDatamain();
 				}
+			}
+			else
+			{
+				try
+				{
+					int target  = (int) Math.round(sp.getFloat("Target",0));
+					int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+					Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 
-			//	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+					if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+					{
+						int age = (int) Math.round(age_float);
 
-			}catch(Exception ex){ex.printStackTrace();}
+						todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+					}else
+					{
+						int age = (int) Math.round(age_float);
+
+						todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+					}
+
+					//	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+
+				}catch(Exception ex){ex.printStackTrace();}
 			}
 
-		Log.d("pre value","Pre value"+sp.getFloat("Target",0));
+			Log.d("pre value","Pre value"+sp.getFloat("Target",0));
 
-        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+			if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
 //        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-        	todaysTarget.setText("Today's Target Acheived");
-		}
-  	
-       // mTitleTextView.setText("My Own Title");
- 
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+				todaysTarget.setText("Today's Target Acheived");
+			}
+
+			// mTitleTextView.setText("My Own Title");
+
+			mActionBar.setCustomView(mCustomView);
+			mActionBar.setDisplayShowCustomEnabled(true);
+			mActionBar.setHomeButtonEnabled(true);
+			mActionBar.setDisplayHomeAsUpEnabled(true);
+		}catch(Exception ex){ex.printStackTrace();}
+
 		
 		 mTitle = mDrawerTitle = getTitle();
 		 v=getActionBar().getCustomView();
@@ -775,10 +778,11 @@ public class MainActivity extends BaseActivity {
 			 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 			 try {
 				 ActivitySwitcher.animationIn(findViewById(R.id.container), getWindowManager());
+				 screen_title.setText("Order Booking");
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			 screen_title.setText("Order Booking");
+
 			 SharedPreferences sp = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
 		       
 //		        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -896,15 +900,27 @@ public class MainActivity extends BaseActivity {
 		});
 		dialog.show();
 
+		String user_email = "";
+
+		try {
+			if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+				user_email = sp.getString("USER_EMAIL", "");
+			} else {
+				user_email = Global_Data.GLOvel_USER_EMAIL;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
 		try
 		{
 
 			String  domain =getResources().getString(R.string.service_domain);
 
 			Log.i("volley", "domain: " + domain);
-			Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-			Log.i("target url", "target url " + domain+"targets?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL);
-			JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"targets?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL,null, new Response.Listener<JSONObject>() {
+			Log.i("volley", "email: " + user_email);
+			Log.i("target url", "target url " + domain+"targets?imei_no="+device_id+"&email="+user_email);
+			JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"targets?imei_no="+device_id+"&email="+user_email,null, new Response.Listener<JSONObject>() {
 
 				@Override
 				public void onResponse(JSONObject response) {
@@ -1033,15 +1049,20 @@ public class MainActivity extends BaseActivity {
 									ex.printStackTrace();
 								}
 							} else {
-								SharedPreferences spf = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
-								SharedPreferences.Editor editor = spf.edit();
-								//editor.putString("UserID", "admin");
-								//editor.putString("pwd", "test");
-								editor.putFloat("Target", 0);
-								editor.putFloat("Achived", 0);
-								//editor.putString("SimID", simSerial);
-								editor.commit();
-								todaysTarget.setText("T/A : Rs " + String.format("0" + "/" + "0" + " [" + "0") + "%" + "]");
+
+								try
+								{
+									SharedPreferences spf = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
+									SharedPreferences.Editor editor = spf.edit();
+									//editor.putString("UserID", "admin");
+									//editor.putString("pwd", "test");
+									editor.putFloat("Target", 0);
+									editor.putFloat("Achived", 0);
+									//editor.putString("SimID", simSerial);
+									editor.commit();
+									todaysTarget.setText("T/A : Rs " + String.format("0" + "/" + "0" + " [" + "0") + "%" + "]");
+								}catch(Exception ex){ex.printStackTrace();}
+
 							}
 
 

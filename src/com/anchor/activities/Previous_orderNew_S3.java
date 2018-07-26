@@ -23,6 +23,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.provider.Settings;
@@ -123,7 +124,8 @@ public class Previous_orderNew_S3 extends BaseActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.activity_previous_order_new_s3);
 
-
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
 
 
@@ -515,46 +517,49 @@ public class Previous_orderNew_S3 extends BaseActivity {
                 return false;
             }
         });
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
 
-        ActionBar mActionBar = getActionBar();
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        // mActionBar.setDisplayShowHomeEnabled(false);
-        // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
 
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
 
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            try {
+                int target = (int) Math.round(sp.getFloat("Target", 0));
+                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+                    int age = (int) Math.round(age_float);
 
-        try {
-            int target = (int) Math.round(sp.getFloat("Target", 0));
-            int achieved = (int) Math.round(sp.getFloat("Achived", 0));
-            Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
-            if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                int age = (int) Math.round(age_float);
+                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+                } else {
+                    int age = (int) Math.round(age_float);
 
-                todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
-            } else {
-                int age = (int) Math.round(age_float);
+                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+                }
 
-                todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
+//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+                todaysTarget.setText("Today's Target Acheived");
             }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-            todaysTarget.setText("Today's Target Acheived");
-        }
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception ex){ex.printStackTrace();}
 
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 

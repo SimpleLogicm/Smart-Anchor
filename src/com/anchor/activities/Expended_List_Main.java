@@ -108,45 +108,48 @@ public class Expended_List_Main extends BaseActivity {
                 return false;
             }
         });
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
+            Intent i = getIntent();
+            String name = i.getStringExtra("retialer");
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            // int month = calendar.get(Calendar.MONTH);
+            // int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        ActionBar mActionBar = getActionBar();
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        // mActionBar.setDisplayShowHomeEnabled(false);
-        // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        Intent i = getIntent();
-        String name = i.getStringExtra("retialer");
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-       // int month = calendar.get(Calendar.MONTH);
-       // int day = calendar.get(Calendar.DAY_OF_MONTH);
+            //Calendar cal = Calendar.getInstance();
+            //int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 28
+            Formatter fmt = new Formatter();
+            // fmt.format("%tB %tb %tm", calendar, calendar, calendar);
 
-        //Calendar cal = Calendar.getInstance();
-        //int days = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // 28
-        Formatter fmt = new Formatter();
-        // fmt.format("%tB %tb %tm", calendar, calendar, calendar);
-
-        String mm = fmt.format("%tB", calendar).toString();
-        mTitleTextView.setText("Calendar - "+mm+" "+year);
-        mTitleTextView.setTextSize(15);
-
-
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        todaysTarget.setVisibility(View.INVISIBLE);
-        SharedPreferences sp = Expended_List_Main.this.getSharedPreferences("SimpleLogic", 0);
-
-        ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
-        H_LOGO.setImageResource(R.drawable.cal);
-        H_LOGO.setVisibility(View.VISIBLE);
+            String mm = fmt.format("%tB", calendar).toString();
+            mTitleTextView.setText("Calendar - "+mm+" "+year);
+            mTitleTextView.setTextSize(15);
 
 
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            todaysTarget.setVisibility(View.INVISIBLE);
+            SharedPreferences sp = Expended_List_Main.this.getSharedPreferences("SimpleLogic", 0);
+
+            ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+            H_LOGO.setImageResource(R.drawable.cal);
+            H_LOGO.setVisibility(View.VISIBLE);
+
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception ex){ex.printStackTrace();}
+
     }
 
     @Override

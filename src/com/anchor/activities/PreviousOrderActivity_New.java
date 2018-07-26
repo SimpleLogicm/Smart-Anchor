@@ -1,11 +1,6 @@
 package com.anchor.activities;
 
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-
 import android.app.ActionBar;
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
@@ -26,6 +21,11 @@ import android.widget.TextView;
 
 import com.anchor.model.Product;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+
 public class PreviousOrderActivity_New extends Activity {
 
 	TextView textView1,tabletextview1,txtPreviousOrder;
@@ -36,7 +36,7 @@ public class PreviousOrderActivity_New extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.previousorder);
-		
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color

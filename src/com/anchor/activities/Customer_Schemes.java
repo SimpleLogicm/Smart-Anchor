@@ -93,45 +93,48 @@ public class Customer_Schemes extends Activity {
         SharedPreferences.Editor editor = spf.edit();
         editor.putString("order", "new");
         editor.commit();
-
-        ActionBar mActionBar = getActionBar();
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        // mActionBar.setDisplayShowHomeEnabled(false);
-        // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText("Customer Schemes");
-
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = Customer_Schemes.this.getSharedPreferences("SimpleLogic", 0);
-
         try
         {
-            int target  = (int) Math.round(sp.getFloat("Target",0));
-            int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-            Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-            if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
+
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText("Customer Schemes");
+
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            SharedPreferences sp = Customer_Schemes.this.getSharedPreferences("SimpleLogic", 0);
+
+            try
             {
-                int age = (int) Math.round(age_float);
+                int target  = (int) Math.round(sp.getFloat("Target",0));
+                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
+                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+                {
+                    int age = (int) Math.round(age_float);
 
-                todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-            }else
-            {
-                int age = (int) Math.round(age_float);
+                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+                }else
+                {
+                    int age = (int) Math.round(age_float);
 
-                todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-            }
+                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+                }
 
+            }catch(Exception ex){ex.printStackTrace();}
+
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
         }catch(Exception ex){ex.printStackTrace();}
 
-
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
 
         cd = new ConnectionDetector(getApplicationContext());
 

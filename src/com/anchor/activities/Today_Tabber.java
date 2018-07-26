@@ -1,14 +1,5 @@
 package com.anchor.activities;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-
 import android.app.ActionBar;
 import android.app.TabActivity;
 import android.content.Context;
@@ -23,6 +14,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
  
 public class Today_Tabber extends TabActivity {
 	HttpPost httppst;
@@ -38,22 +38,23 @@ public class Today_Tabber extends TabActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.today_tab);
-        
-		ActionBar mActionBar = getActionBar();
-		mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-       // mActionBar.setDisplayShowHomeEnabled(false);
-       // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        Intent i = getIntent();
-		String name = i.getStringExtra("retialer");
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText("Today");
-        
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = Today_Tabber.this.getSharedPreferences("SimpleLogic", 0);
-       
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
+            Intent i = getIntent();
+            String name = i.getStringExtra("retialer");
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText("Today");
+
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            SharedPreferences sp = Today_Tabber.this.getSharedPreferences("SimpleLogic", 0);
+
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
 //		}
@@ -61,17 +62,19 @@ public class Today_Tabber extends TabActivity {
 ////        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
 //        	todaysTarget.setText("Today's Target Acheived");
 //		}
-        
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
-		
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-        String strDate = sdf.format(c.getTime());
-        
-        todaysTarget.setText("Date :- "+strDate);
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+            String strDate = sdf.format(c.getTime());
+
+            todaysTarget.setText("Date :- "+strDate);
+        }catch(Exception ex){ex.printStackTrace();}
+
         
 //        img_back=(ImageView)findViewById(R.id.tab_back);
 //	    txt_header=(TextView)findViewById(R.id.follow_veb);

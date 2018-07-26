@@ -6,42 +6,30 @@ package com.anchor.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
+import android.widget.TextView;
 
-import com.anchor.webservice.ConnectionDetector;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Sound_Setting extends Activity implements OnItemSelectedListener {
@@ -62,92 +50,95 @@ public class Sound_Setting extends Activity implements OnItemSelectedListener {
         cursor = null;
         switch_appsound = (Switch) findViewById(R.id.switch_appsound);
         browse_btn = (Button) findViewById(R.id.browse_btn);
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
+            Intent i = getIntent();
+            String name = i.getStringExtra("retialer");
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText("Setting");
 
-        ActionBar mActionBar = getActionBar();
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        // mActionBar.setDisplayShowHomeEnabled(false);
-        // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        Intent i = getIntent();
-        String name = i.getStringExtra("retialer");
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText("Setting");
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            SharedPreferences sp = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
 
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
+            mp = new MediaPlayer();
 
-        mp = new MediaPlayer();
-
-        browse_btn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Sound_Setting.this, Sound_Act.class));
-            }
-        });
-
-        switch_appsound.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
-                if (bChecked) {
-                    browse_btn.setVisibility(View.VISIBLE);
-                    status_addmore = false;
-                    SharedPreferences snd = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
-                    SharedPreferences.Editor edt_snd = snd.edit();
-                    edt_snd.putBoolean("var_addmore", status_addmore);
-                    edt_snd.commit();
-                    //textView.setText(switchOn);
-                } else {
-                    browse_btn.setVisibility(View.INVISIBLE);
-                    status_addmore = true;
-                    SharedPreferences snd = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
-                    SharedPreferences.Editor edt_snd = snd.edit();
-                    edt_snd.putBoolean("var_addmore", status_addmore);
-                    edt_snd.commit();
-                    //textView.setText(switchOff);
+            browse_btn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Sound_Setting.this, Sound_Act.class));
                 }
-            }
-        });
+            });
 
-        SharedPreferences spf1 = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
-        Global_Data.app_sound = spf1.getBoolean("var_addmore", false);
+            switch_appsound.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean bChecked) {
+                    if (bChecked) {
+                        browse_btn.setVisibility(View.VISIBLE);
+                        status_addmore = false;
+                        SharedPreferences snd = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
+                        SharedPreferences.Editor edt_snd = snd.edit();
+                        edt_snd.putBoolean("var_addmore", status_addmore);
+                        edt_snd.commit();
+                        //textView.setText(switchOn);
+                    } else {
+                        browse_btn.setVisibility(View.INVISIBLE);
+                        status_addmore = true;
+                        SharedPreferences snd = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
+                        SharedPreferences.Editor edt_snd = snd.edit();
+                        edt_snd.putBoolean("var_addmore", status_addmore);
+                        edt_snd.commit();
+                        //textView.setText(switchOff);
+                    }
+                }
+            });
 
-        if (Global_Data.app_sound == false) {
+            SharedPreferences spf1 = Sound_Setting.this.getSharedPreferences("SimpleLogic", 0);
+            Global_Data.app_sound = spf1.getBoolean("var_addmore", false);
 
-            switch_appsound.setChecked(true);
+            if (Global_Data.app_sound == false) {
 
-        } else {
+                switch_appsound.setChecked(true);
 
-            switch_appsound.setChecked(false);
-        }
-
-        try {
-            int target = (int) Math.round(sp.getFloat("Target", 0));
-            int achieved = (int) Math.round(sp.getFloat("Achived", 0));
-            Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
-            if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                int age = (int) Math.round(age_float);
-
-                todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
             } else {
-                int age = (int) Math.round(age_float);
 
-                todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+                switch_appsound.setChecked(false);
             }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
-//	       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-            todaysTarget.setText("Today's Target Acheived");
-        }
+            try {
+                int target = (int) Math.round(sp.getFloat("Target", 0));
+                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+                    int age = (int) Math.round(age_float);
 
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+                } else {
+                    int age = (int) Math.round(age_float);
+
+                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
+//	       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+                todaysTarget.setText("Today's Target Acheived");
+            }
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception ex){ex.printStackTrace();}
+
     }
 
     @Override

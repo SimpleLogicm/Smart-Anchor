@@ -61,22 +61,23 @@ public class Customer_Media extends Activity implements OnItemSelectedListener{
 //		  adapter_state.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //		  feed_spinner.setAdapter(adapter_state);
 //		  feed_spinner.setOnItemSelectedListener(this);
-		  
-		    ActionBar mActionBar = getActionBar();
+		try
+		{
+			ActionBar mActionBar = getActionBar();
 			mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-	       // mActionBar.setDisplayShowHomeEnabled(false);
-	       // mActionBar.setDisplayShowTitleEnabled(false);
-	        LayoutInflater mInflater = LayoutInflater.from(this);
-	        Intent i = getIntent();
+			// mActionBar.setDisplayShowHomeEnabled(false);
+			// mActionBar.setDisplayShowTitleEnabled(false);
+			LayoutInflater mInflater = LayoutInflater.from(this);
+			Intent i = getIntent();
 			String name = i.getStringExtra("retialer");
-	        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-	        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-	        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-	      //  mTitleTextView.setText(Global_Data.retailer);
-	        
+			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			//  mTitleTextView.setText(Global_Data.retailer);
+
 	        /*TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
 	        SharedPreferences sp = Customer_Media.this.getSharedPreferences("SimpleLogic", 0);
-	       
+
 	        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 	        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
 			}
@@ -84,11 +85,13 @@ public class Customer_Media extends Activity implements OnItemSelectedListener{
 //	        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
 	        	todaysTarget.setText("Today's Target Acheived");
 			}*/
-	        
-	        mActionBar.setCustomView(mCustomView);
-	        mActionBar.setDisplayShowCustomEnabled(true);
-	        mActionBar.setHomeButtonEnabled(true);
-	        mActionBar.setDisplayHomeAsUpEnabled(true);
+
+			mActionBar.setCustomView(mCustomView);
+			mActionBar.setDisplayShowCustomEnabled(true);
+			mActionBar.setHomeButtonEnabled(true);
+			mActionBar.setDisplayHomeAsUpEnabled(true);
+		}catch(Exception ex){ex.printStackTrace();}
+
 	}
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,

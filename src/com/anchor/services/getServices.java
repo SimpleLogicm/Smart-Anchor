@@ -12,7 +12,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
-import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -447,7 +446,7 @@ public class getServices {
 //        else
 //        {
 //            domain = URL.toString();
-//        }F
+//        }
 
         Log.d("Server url","Server url"+domain+"menus/sync_masters?imei_no="+device_id);
         StringRequest stringRequest = null;

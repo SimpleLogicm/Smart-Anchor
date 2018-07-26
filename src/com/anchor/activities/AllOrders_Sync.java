@@ -201,25 +201,26 @@ public class AllOrders_Sync  extends Activity  {
 
             }
         });
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
 
-        ActionBar mActionBar = getActionBar();
-        mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        // mActionBar.setDisplayShowHomeEnabled(false);
-        // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText("Sync Data");
 
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText("Sync Data");
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            todaysTarget.setVisibility(View.INVISIBLE);
+            ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+            SharedPreferences sp = AllOrders_Sync.this.getSharedPreferences("SimpleLogic", 0);
 
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        todaysTarget.setVisibility(View.INVISIBLE);
-        ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
-        SharedPreferences sp = AllOrders_Sync.this.getSharedPreferences("SimpleLogic", 0);
-
-        H_LOGO.setImageResource(R.drawable.video_imagenew);
-        H_LOGO.setVisibility(View.INVISIBLE);
+            H_LOGO.setImageResource(R.drawable.video_imagenew);
+            H_LOGO.setVisibility(View.INVISIBLE);
 
 //		if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //			todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
@@ -229,10 +230,12 @@ public class AllOrders_Sync  extends Activity  {
 //			todaysTarget.setText("Today's Target Acheived");
 //		}
 
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception ex){ex.printStackTrace();}
+
 
     }
 

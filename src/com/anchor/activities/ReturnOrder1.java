@@ -38,7 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.animation.ActivitySwitcher;
-
 import com.anchor.model.Category;
 import com.anchor.model.DatabaseProductModel;
 import com.anchor.model.Product;
@@ -615,52 +614,55 @@ public class ReturnOrder1 extends BaseActivity {
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 */
-		
-		ActionBar mActionBar = getActionBar();
-		mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-       // mActionBar.setDisplayShowHomeEnabled(false);
-       // mActionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
- 
-        View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-        mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-        mTitleTextView.setText(Global_Data.order_retailer +" "+"("+Global_Data.AmountOutstanding+"/"+Global_Data.AmountOverdue+")");
-        
-        TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-        SharedPreferences sp = ReturnOrder1.this.getSharedPreferences("SimpleLogic", 0);
-       
+		try
+		{
+			ActionBar mActionBar = getActionBar();
+			mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			// mActionBar.setDisplayShowHomeEnabled(false);
+			// mActionBar.setDisplayShowTitleEnabled(false);
+			LayoutInflater mInflater = LayoutInflater.from(this);
+
+			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			mTitleTextView.setText(Global_Data.order_retailer +" "+"("+Global_Data.AmountOutstanding+"/"+Global_Data.AmountOverdue+")");
+
+			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			SharedPreferences sp = ReturnOrder1.this.getSharedPreferences("SimpleLogic", 0);
+
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
 //		}
 
-		try
-		{
-			int target  = (int) Math.round(sp.getFloat("Target",0));
-			int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-			Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-			if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+			try
 			{
-				int age = (int) Math.round(age_float);
+				int target  = (int) Math.round(sp.getFloat("Target",0));
+				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
+				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+				{
+					int age = (int) Math.round(age_float);
 
-				todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-			}else
-			{
-				int age = (int) Math.round(age_float);
+					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+				}else
+				{
+					int age = (int) Math.round(age_float);
 
-				todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+				}
+
+			}catch(Exception ex){ex.printStackTrace();}
+			if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+				todaysTarget.setText("Today's Target Acheived");
 			}
 
+			mActionBar.setCustomView(mCustomView);
+			mActionBar.setDisplayShowCustomEnabled(true);
+			mActionBar.setHomeButtonEnabled(true);
+			mActionBar.setDisplayHomeAsUpEnabled(true);
 		}catch(Exception ex){ex.printStackTrace();}
-        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-        	todaysTarget.setText("Today's Target Acheived");
-		}
-        
-        mActionBar.setCustomView(mCustomView);
-        mActionBar.setDisplayShowCustomEnabled(true);
-        mActionBar.setHomeButtonEnabled(true);
-        mActionBar.setDisplayHomeAsUpEnabled(true);
+
        /* mActionBar.setDisplayShowCustomEnabled(true);
         mActionBar.setDisplayShowHomeEnabled(false);
         mActionBar.setHomeButtonEnabled(true);

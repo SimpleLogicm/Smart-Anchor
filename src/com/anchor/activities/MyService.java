@@ -896,4 +896,6 @@ public class MyService extends Service implements LocationListener{
 	}
 
 
+
+
 }

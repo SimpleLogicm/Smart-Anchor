@@ -208,11 +208,11 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//				editText1.setText("Jaya");
-//				editText2.setText("jaya12345");
+				editText1.setText("dnyanada");
+				editText2.setText("dnyanada12345");
 
-		        editText1.setText("swatiyamgar");
-				editText2.setText("password");
+//		        editText1.setText("swatiyamgar");
+//				editText2.setText("password");
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -1409,7 +1409,7 @@ public class LoginActivity extends Activity{
 		Dexter.withActivity(this)
 				.withPermissions(
 						Manifest.permission.READ_EXTERNAL_STORAGE,
-						Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION
+						Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION
 				)
 				.withListener(new MultiplePermissionsListener() {
 					@Override
@@ -1494,7 +1494,7 @@ public class LoginActivity extends Activity{
 
 		Dexter.withActivity(this)
 				.withPermissions(
-						Manifest.permission.ACCESS_FINE_LOCATION
+						Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION
 				)
 				.withListener(new MultiplePermissionsListener() {
 					@Override
@@ -1540,7 +1540,7 @@ public class LoginActivity extends Activity{
 
 		Dexter.withActivity(this)
 				.withPermissions(
-						Manifest.permission.ACCESS_FINE_LOCATION
+						Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION
 				)
 				.withListener(new MultiplePermissionsListener() {
 					@Override
