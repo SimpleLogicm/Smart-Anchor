@@ -5,22 +5,26 @@ package cpm.simplelogic.helper;
  */
 
 import android.content.ContentProvider;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.anchor.activities.DataBaseHelper;
 
+import java.util.HashMap;
+
 public class DataProvider_States extends ContentProvider{
     private DataBaseHelper dbManager;
+    private SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
+    HashMap<String,String> SEARCH_PROJECTION_MAP;
+
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
         sUriMatcher.addURI(ContentProviderData_State.AUTHORITY, ContentProviderData_State.PATH, 1);
@@ -35,16 +39,23 @@ public class DataProvider_States extends ContentProvider{
     @Override
     public Cursor query(@NonNull Uri uri, String[] projections, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteDatabase db = dbManager.getWritableDatabase();
+        SEARCH_PROJECTION_MAP = new HashMap<String, String>();
+
+        SEARCH_PROJECTION_MAP.put("code", "code" + " as code" );
+        SEARCH_PROJECTION_MAP.put( "name" , "name" + " as name" );
+
+        sqLiteQueryBuilder.setProjectionMap(SEARCH_PROJECTION_MAP);
+        sqLiteQueryBuilder.setTables("states");
+        sqLiteQueryBuilder.setStrict(true);
+
         Cursor mCursor = null;
-
-
         switch (sUriMatcher.match(uri)){
             case 1:
-                mCursor = db.query(ContentProviderData_State.Dictionary.TABLE_NAME, projections, selection, selectionArgs, null, null, null);
+                mCursor = sqLiteQueryBuilder.query(db, projections, selection, selectionArgs, null, null, null);
                 break;
             case 2:
                 // selection = selection + ContentProviderData_State.Dictionary.code + " = " + selectionArgs;
-                mCursor = db.query(ContentProviderData_State.Dictionary.TABLE_NAME, projections, selection, selectionArgs, null, null, null);
+                mCursor = sqLiteQueryBuilder.query(db, projections, selection, selectionArgs, null, null, null);
                 break;
             default:
                 Toast.makeText(getContext(), "Invalid content uri", Toast.LENGTH_LONG).show();
@@ -65,58 +76,21 @@ public class DataProvider_States extends ContentProvider{
                 throw new IllegalArgumentException("Unknown Uri: " + uri);
         }
     }
+
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
-        SQLiteDatabase db = dbManager.getWritableDatabase();
-        if(sUriMatcher.match(uri) != 1) {
-            throw new IllegalArgumentException("Unknown URI: " + uri);
-        }
-        long rowId = db.insert(ContentProviderData_State.Dictionary.TABLE_NAME, null, contentValues);
-        if(rowId > 0) {
-            Uri articleUri = ContentUris.withAppendedId(ContentProviderData_State.CONTENT_URI, rowId);
-            getContext().getContentResolver().notifyChange(articleUri, null);
-            return articleUri;
-        }
-        throw new IllegalArgumentException("Unknown URI: " + uri);
+    public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
+        return null;
     }
+
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
-        SQLiteDatabase db = dbManager.getWritableDatabase();
-        int count = 0;
-        switch(sUriMatcher.match(uri)) {
-            case 1:
-                count = db.delete(ContentProviderData_State.Dictionary.TABLE_NAME, selection, selectionArgs);
-                break;
-            case 2:
-                String rowId = uri.getPathSegments().get(1);
-                count = db.delete(ContentProviderData_State.Dictionary.TABLE_NAME, ContentProviderData_State.Dictionary.STATE + " = " + rowId
-                        + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ")" : ""), selectionArgs);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown URI: " + uri);
-        }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return count;
+    public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
+        return 0;
     }
+
     @Override
-    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
-        SQLiteDatabase db = dbManager.getWritableDatabase();
-        int count = 0;
-        switch (sUriMatcher.match(uri)){
-            case 1:
-                count = db.update(ContentProviderData_State.Dictionary.TABLE_NAME, contentValues, selection, selectionArgs);
-                break;
-            case 2:
-                String rowId = uri.getPathSegments().get(1);
-                count = db.update(ContentProviderData_State.Dictionary.TABLE_NAME, contentValues, ContentProviderData_State.Dictionary.STATE + " = " + rowId +
-                        (!TextUtils.isEmpty(selection) ? " AND (" + ")" : ""), selectionArgs);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown Uri: " + uri );
-        }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return count;
+    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
+        return 0;
     }
 
     public void save() {

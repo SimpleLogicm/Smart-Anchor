@@ -255,9 +255,6 @@ public class NewOrderActivity extends BaseActivity {
 		}catch(Exception ex){ex.printStackTrace();}
 
 
-
-
-
 		results1.clear();
 		results1.add("Select Business Category");
 
