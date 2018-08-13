@@ -192,9 +192,7 @@ public class LoginActivity extends Activity{
            cn=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
            nf=cn.getActiveNetworkInfo();
 
-
-
-		textViewVersion =(TextView) findViewById(R.id.textViewVersion);
+	    textViewVersion =(TextView) findViewById(R.id.textViewVersion);
 		buttonLogin=(Button) findViewById(R.id.buttonLogin);
 		buttonReg=(Button) findViewById(R.id.buttonReg);
 		editText1=(EditText) findViewById(R.id.editText1);

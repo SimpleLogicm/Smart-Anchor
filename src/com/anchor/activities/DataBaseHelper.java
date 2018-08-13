@@ -871,7 +871,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             } while (cursor.moveToNext());
         }
 
-        db.close();
+       // db.close();
         // return contact list?
         return contactList1;
     }
@@ -936,7 +936,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             } while (cursor.moveToNext());
         }
 
-        db.close();
+        //db.close();
         // return contact list?
         return contactList1;
     }
@@ -1164,7 +1164,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             } while (cursor.moveToNext());
         }
         
-        db.close();
+     //   db.close();
         // return contact list?
         return contactList1;
     }
@@ -1229,7 +1229,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
             } while (cursor.moveToNext());
         }
 
-        db.close();
+       // db.close();
         // return contact list?
         return contactList1;
     }//

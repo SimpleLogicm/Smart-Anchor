@@ -488,7 +488,8 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			@Override
 			public void onClick(View v) {
 
-				get_dialogC_Video();
+				requestStoragePermissionvideo();
+
 			}
 		});
 
@@ -3783,6 +3784,45 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 							{
 								Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
 							}
+						}
+
+						// check for permanent denial of any permission
+						if (report.isAnyPermissionPermanentlyDenied()) {
+							// show alert dialog navigating to Settings
+							showSettingsDialog();
+						}
+					}
+
+					@Override
+					public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+						token.continuePermissionRequest();
+					}
+				}).
+				withErrorListener(new PermissionRequestErrorListener() {
+					@Override
+					public void onError(DexterError error) {
+						Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+					}
+				})
+				.onSameThread()
+				.check();
+	}
+
+	private void requestStoragePermissionvideo() {
+
+		Dexter.withActivity(this)
+				.withPermissions(
+						Manifest.permission.CAMERA,Manifest.permission.RECORD_AUDIO,
+						Manifest.permission.READ_EXTERNAL_STORAGE,
+						Manifest.permission.WRITE_EXTERNAL_STORAGE)
+				.withListener(new MultiplePermissionsListener() {
+					@Override
+					public void onPermissionsChecked(MultiplePermissionsReport report) {
+						// check if all permissions are granted
+						if (report.areAllPermissionsGranted()) {
+
+							get_dialogC_Video();
+
 						}
 
 						// check for permanent denial of any permission

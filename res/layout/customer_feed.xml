@@ -79,7 +79,7 @@
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
+        android:layout_gravity="center"
         android:hint="Claim Amount"
         android:inputType="number"
         android:textSize="15dp"
@@ -94,11 +94,12 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
+        android:layout_gravity="center"
+         android:visibility="gone"
          android:inputType="textEmailAddress|textMultiLine"
         android:hint="New Feedback"
         android:textSize="15dp"
-        android:visibility="gone"
+
         android:ems="10" >
 
         <requestFocus />
@@ -109,7 +110,7 @@
         android:layout_width="250dp"
           android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
+          android:layout_gravity="center"
           android:inputType="textEmailAddress|textMultiLine"
         android:hint="New Complaints"
         android:textSize="15dp"
@@ -260,7 +261,7 @@
         android:id="@+id/discription"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_gravity="center"
         android:inputType="textEmailAddress|textMultiLine"
         android:hint="Description"
         android:textSize="15dp"
