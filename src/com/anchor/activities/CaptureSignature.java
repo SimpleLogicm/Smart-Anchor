@@ -67,6 +67,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -106,12 +107,15 @@ public class CaptureSignature extends BaseActivity {
     Calendar myCalendar;
     TextView txtWelcomeUser;
     private EditText yourName,order_detail1,order_detail2,order_detail4;
-    Spinner order_type,shipment_pri;
-    ArrayAdapter<String> dataAdapter_order_type,dataAdapter_shipment_pri;
+    Spinner order_type,shipment_pri,order_payment_term;
+    ArrayAdapter<String> dataAdapter_order_type,dataAdapter_shipment_pri,dataAdapter_order_payment_term;
     private ArrayList<String> results_order_type = new ArrayList<String>();
     private ArrayList<String> results_shipment_pri = new ArrayList<String>();
+    private ArrayList<String> results_payment_term = new ArrayList<String>();
 
-    public String order="",retailer_mobile="",retailer_emailID="",dist_mobile="",dist_emailID="",retailer_code="",ret_Name="";
+    public String order="",retailer_code="";
+
+    HashMap<String,String> order_payment_type_map = new HashMap<String,String>();
 
 
     @Override
@@ -153,6 +157,7 @@ public class CaptureSignature extends BaseActivity {
         get_icon = (ImageView) findViewById(R.id.get_icon);
         order_type = (Spinner) findViewById(R.id.order_type);
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
+        order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
 
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
@@ -388,12 +393,30 @@ public class CaptureSignature extends BaseActivity {
         dataAdapter_shipment_pri.setDropDownViewResource(R.layout.spinner_item);
         shipment_pri.setAdapter(dataAdapter_shipment_pri);
 
+        results_payment_term.clear();
+        order_payment_type_map.clear();
+        List<Local_Data> contacts_payment = dbvoc.getorder_payment_term_data();
+        results_payment_term.add("Select Payment Term");
+        for (Local_Data cn : contacts_payment)
+        {
+            if(!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" "))
+            {
+                results_payment_term.add(cn.getName());
+                order_payment_type_map.put(cn.getName(),cn.getCode());
+            }
+        }
+
+        dataAdapter_order_payment_term = new ArrayAdapter<String>(this, R.layout.spinner_item, results_payment_term);
+        dataAdapter_order_payment_term.setDropDownViewResource(R.layout.spinner_item);
+        order_payment_term.setAdapter(dataAdapter_order_payment_term);
+
 
         String cc_code = "";
 
         List<Local_Data> contacts = dbvoc.GetOrders_details("Secondary Sales / Retail Sales", Global_Data.GLOvel_GORDER_ID);
 
         String s_pri = "";
+        String asset_code = "";
         if(contacts.size() > 0)
         {
 
@@ -404,6 +427,7 @@ public class CaptureSignature extends BaseActivity {
                 order_detail2.setText(cn.getOrder_detail2());
                 order_detail4.setText(cn.getOrder_detail4());
                 cc_code = cn.getOrder_category_type().trim();
+                asset_code = cn.getAsset_code().trim();
                 s_pri = cn.getshipment_pri();
             }
 
@@ -411,6 +435,8 @@ public class CaptureSignature extends BaseActivity {
                 int spinnerPosition = dataAdapter_shipment_pri.getPosition(s_pri);
                 shipment_pri.setSelection(spinnerPosition);
             }
+
+
         }
 
         if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cc_code)){
@@ -423,6 +449,19 @@ public class CaptureSignature extends BaseActivity {
                 if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getOrder_type_name().trim())){
                     int spinnerPosition = dataAdapter_order_type.getPosition(cn.getOrder_type_name().trim());
                     order_type.setSelection(spinnerPosition);
+                }
+            }
+        }
+
+        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(asset_code)){
+
+            List<Local_Data> cont = dbvoc.get_order_assetcode_name(asset_code);
+
+            for (Local_Data cn : cont)
+            {
+                if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getName().trim())){
+                    int spinnerPosition = dataAdapter_order_payment_term.getPosition(cn.getName().trim());
+                    order_payment_term.setSelection(spinnerPosition);
                 }
             }
         }
@@ -614,6 +653,13 @@ public class CaptureSignature extends BaseActivity {
         {
 
             errorMessage = errorMessage + "Please Select Shipment Priority";
+            error = true;
+        }
+        else
+        if(order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term"))
+        {
+
+            errorMessage = errorMessage + "Please Select Payment Term";
             error = true;
         }
         else
@@ -1152,6 +1198,8 @@ public class CaptureSignature extends BaseActivity {
                                             String order_type_text = "";
                                             String order_type_name = "";
                                             String order_type_code = "";
+                                            String order_asset_name = "";
+                                            String order_asset_code = "";
                                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(order_detail1.getText().toString().trim())) {
 
                                                 order_detail1_text = order_detail1.getText().toString().trim();
@@ -1192,6 +1240,22 @@ public class CaptureSignature extends BaseActivity {
                                                 }
 
                                             }
+
+                                            try
+                                            {
+                                                if (!(order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term")))
+                                                {
+
+                                                    order_asset_name = order_payment_term.getSelectedItem().toString();
+
+                                                    order_asset_code = order_payment_type_map.get(order_asset_name);
+
+                                                }
+                                            }catch(Exception Ex)
+                                            {
+                                                Ex.printStackTrace();
+                                            }
+
 
                                             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                                                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -1242,11 +1306,11 @@ public class CaptureSignature extends BaseActivity {
 
                                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
 
-                                                    dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE);
+                                                    dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,order_asset_code);
                                                 }
                                                 else
                                                 {
-                                                    dbvoc.updateORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString());
+                                                    dbvoc.updateORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text,order_type_name,order_detail4_text, order_type_code,shipment_pri.getSelectedItem().toString(),order_asset_code);
                                                 }
 
 
@@ -1271,7 +1335,8 @@ public class CaptureSignature extends BaseActivity {
 
 
                                             if (isInternetPresent) {
-                                                onDestroy();               getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
+                                                onDestroy();
+                                                getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
                                             } else {
                                                 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 

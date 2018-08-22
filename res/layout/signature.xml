@@ -75,6 +75,16 @@
             android:paddingTop="20dp"
             android:layout_marginTop="10dp"></Spinner>
 
+        <Spinner
+            android:id="@+id/order_payment_term"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="Select Payment Term"
+            android:layout_gravity="center"
+            android:inputType="textPersonName"
+            android:paddingTop="20dp"
+            android:layout_marginTop="10dp"></Spinner>
+
         <EditText
             android:id="@+id/yourName"
             android:layout_width="250dp"

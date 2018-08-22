@@ -903,7 +903,7 @@ public class Preorder_Proall_Varient extends Activity {
 
                     }catch(Exception ex){ex.printStackTrace();}
 
-                    loginDataBaseAdapter.insertOrders("",  Global_Data.Previous_Order_UpdateOrder_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "",Global_Data.order_retailer,Global_Data.order_state,Global_Data.order_city,Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","");
+                    loginDataBaseAdapter.insertOrders("",  Global_Data.Previous_Order_UpdateOrder_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "",Global_Data.order_retailer,Global_Data.order_state,Global_Data.order_city,Global_Data.sales_btnstring,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,Global_Data.Glovel_BEAT_ID,"","","","","","","","","");
 
                     List<Local_Data> cont1 = dbvoc.getItemNamePrevious_OrderCheck(Global_Data.Previous_Order_ServiceOrder_ID,Global_Data.GLOvel_ITEM_NUMBER);
                     for (Local_Data cnt1 : cont1) {

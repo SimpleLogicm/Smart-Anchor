@@ -98,7 +98,7 @@ public class LoginDataBaseAdapter
 		
 		static final String DATABASE_CREATE_ORDERS = "CREATE TABLE IF NOT EXISTS "+"orders"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text,order_id text, customer_id text, retailer_id text, user_id text, city_id text, beat_id text, latlon text, sync text, total_order_amount text, signature_path text, distributor_id text, " +
-                		"total_line_items text, created_at text, updated_at text,customer_name text,state_name text,city_name text,order_type text,latitude text,longitude text,beat_idnew text,getsign_img text,details1 text,details2 text,details3 text,details4 text,details5 text,order_category text,shipmet_priority txt);";
+                		"total_line_items text, created_at text, updated_at text,customer_name text,state_name text,city_name text,order_type text,latitude text,longitude text,beat_idnew text,getsign_img text,details1 text,details2 text,details3 text,details4 text,details5 text,order_category text,shipmet_priority txt,asset_code txt);";
 
 		static final String DATABASE_CREATE_ORDER_PRODUCTS = "CREATE TABLE IF NOT EXISTS "+"order_products"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text, order_id text, line_number text, category_id text, product_id text, product_variant_id text, product_pack_size_id text, scheme_id text, billed_qty text, free_qty text, " +
@@ -322,6 +322,9 @@ public class LoginDataBaseAdapter
 
 	static final String DATABASE_VERSION_INFO = "CREATE TABLE IF NOT EXISTS " + "version_info" +
 			"( " + "ID" + " integer primary key autoincrement," + "version_code text, version_name text);";
+
+	static final String DATABASE_CREATE_TABLE_ASSET_CODE = "CREATE TABLE IF NOT EXISTS " + "asset_code" +
+			"( " + "ID" + " integer primary key autoincrement," + "code text, name text, description text, status text, created_at text, created_by text, updated_at text, updated_by text);";
 
 
 
@@ -942,7 +945,7 @@ public class LoginDataBaseAdapter
         
         public void insertOrders(String project_id, String order_id,String customer_id, String retailer_id, String user_id, 
         		String city_id, String beat_id, String latlon, String sync, String total_order_amount, String signature_path, 
-        		String distributor_id, String total_line_items, String create_at, String update_at,String customer_name,String state_name,String city_name,String order_type,String latitude,String longitude,String beat_idnew,String getsign_img,String details1,String details2,String details3,String details4,String details5,String order_category_id,String shipmet_priority)
+        		String distributor_id, String total_line_items, String create_at, String update_at,String customer_name,String state_name,String city_name,String order_type,String latitude,String longitude,String beat_idnew,String getsign_img,String details1,String details2,String details3,String details4,String details5,String order_category_id,String shipmet_priority,String asset_code)
 		{
 	       ContentValues newValues = new ContentValues();
 			// Assign values for each row.
@@ -976,6 +979,7 @@ public class LoginDataBaseAdapter
 			newValues.put("details5", details5);
 			newValues.put("order_category", order_category_id);
 			newValues.put("shipmet_priority", shipmet_priority);
+			newValues.put("asset_code", asset_code);
 
 			// Insert the row into your table
 			db.insert("orders", null, newValues);
@@ -3442,6 +3446,22 @@ public class LoginDataBaseAdapter
 
 		// Insert the row into your table
 		db.insert("attendance", null, newValues);
+	}
+
+	public void insert_asset_code_table_data(String code, String name, String description, String status, String created_at, String created_by, String updated_at, String updated_by) {
+		ContentValues newValues = new ContentValues();
+		// Assign values for each row.
+		newValues.put("code", code);
+		newValues.put("name", name);
+		newValues.put("description", description);
+		newValues.put("status", status);
+		newValues.put("created_at", created_at);
+		newValues.put("created_by", created_by);
+		newValues.put("updated_at", updated_at);
+		newValues.put("updated_by", updated_by);
+
+		// Insert the row into your table
+		db.insert("asset_code", null, newValues);
 	}
 
 

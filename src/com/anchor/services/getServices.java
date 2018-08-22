@@ -3258,6 +3258,8 @@ public class getServices {
 
                         JSONArray users_emp = json.getJSONArray("users");
 
+                        JSONArray payment_terms = json.getJSONArray("payment_terms");
+
                         dbvoc.getDeleteTable("cities");
                         dbvoc.getDeleteTable("states");
                         dbvoc.getDeleteTable("beats");
@@ -3497,6 +3499,13 @@ public class getServices {
 
                             JSONObject jsonObject = Order_Category.getJSONObject(i);
                             loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("code"),jsonObject.getString("name"),"","","","");
+
+                        }
+
+                        for (int i = 0; i < payment_terms.length(); i++) {
+
+                            JSONObject jsonObject = payment_terms.getJSONObject(i);
+                            loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("code"),jsonObject.getString("name"),"","", "", "", "", "");
 
                         }
 
@@ -4206,6 +4215,7 @@ public class getServices {
                     product_value.put("details4", cn.getOrder_detail4());
                     product_value.put("order_category_code", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
+                    product_value.put("asset_code", cn.getAsset_code());
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
                     {
@@ -4782,6 +4792,7 @@ public class getServices {
                     }
 
                     product_value.put("shipment_priority", cn.getshipment_pri());
+                    product_value.put("asset_code", cn.getAsset_code());
                    // product_value.put("signature_path", cn.getSignature_image());
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))

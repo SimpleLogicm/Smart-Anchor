@@ -66,6 +66,7 @@ public class SplashScreenActivity extends Activity {
 		String versionName = pinfo.versionName;
 		int version_seven_check = 0;
 		int version_nine_check = 0;
+		int version_fifteen_check = 0;
 		int version_c_check = 0;
 
 // Reading all
@@ -92,6 +93,11 @@ public class SplashScreenActivity extends Activity {
 					version_nine_check = 1;
 				}
 
+				if(ver_code == 15)
+				{
+					version_fifteen_check = 1;
+				}
+
 				if(ver_code == versionCode)
 				{
 					version_c_check = 1;
@@ -106,6 +112,11 @@ public class SplashScreenActivity extends Activity {
 			if(version_nine_check != 1)
 			{
 				check_Columns_IsExistnew();
+			}
+
+			if(version_fifteen_check != 1)
+			{
+				check_Columns_IsExistp_type_order();
 			}
 
 			if(version_c_check != 1)
@@ -289,6 +300,21 @@ public class SplashScreenActivity extends Activity {
 				dbvoc.alter_Columns("user_email","status");
 			} catch (SQLiteException ex) {
 				Log.w("Alter Table", "Altering " + "orders" + ": " + ex.getMessage());
+			}
+		}
+
+
+	}
+
+	public void check_Columns_IsExistp_type_order()
+	{
+		boolean column_check = dbvoc.isColumnExists("orders","asset_code");
+		if(!column_check)
+		{
+			try {
+				dbvoc.alter_Columns("orders","asset_code");
+			} catch (SQLiteException ex) {
+				Log.w("Alter Table", "Altering " + "asset_code" + ": " + ex.getMessage());
 			}
 		}
 
