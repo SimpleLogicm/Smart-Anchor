@@ -39,12 +39,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -116,13 +118,16 @@ public class CaptureSignature extends BaseActivity {
     public String order="",retailer_code="";
 
     HashMap<String,String> order_payment_type_map = new HashMap<String,String>();
+    ScrollView s_container_l;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.signature);
 
@@ -158,6 +163,19 @@ public class CaptureSignature extends BaseActivity {
         order_type = (Spinner) findViewById(R.id.order_type);
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
         order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
+        s_container_l =  findViewById(R.id.s_container_l);
+       // s_container_l.fullScroll(ScrollView.FOCUS_UP);
+       // s_container_l.scrollTo(0, s_container_l.getBottom());
+
+        // Wait until my scrollView is ready
+        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Ready, move up
+                s_container_l.fullScroll(View.FOCUS_UP);
+            }
+        });
+
 
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
@@ -399,7 +417,7 @@ public class CaptureSignature extends BaseActivity {
         results_payment_term.add("Select Payment Term");
         for (Local_Data cn : contacts_payment)
         {
-            if(!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" "))
+            if(!cn.getName().equalsIgnoreCase("") && !cn.getName().equalsIgnoreCase(" "))
             {
                 results_payment_term.add(cn.getName());
                 order_payment_type_map.put(cn.getName(),cn.getCode());
@@ -457,12 +475,16 @@ public class CaptureSignature extends BaseActivity {
 
             List<Local_Data> cont = dbvoc.get_order_assetcode_name(asset_code);
 
-            for (Local_Data cn : cont)
+            if(cont.size() > 0)
             {
-                if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getName().trim())){
-                    int spinnerPosition = dataAdapter_order_payment_term.getPosition(cn.getName().trim());
-                    order_payment_term.setSelection(spinnerPosition);
-                }
+                for (Local_Data cn : cont)
+                {
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getName().trim()))
+                        {
+                            int spinnerPosition = dataAdapter_order_payment_term.getPosition(cn.getName().trim());
+                            order_payment_term.setSelection(spinnerPosition);
+                        }
+                    }
             }
         }
 
@@ -623,13 +645,14 @@ public class CaptureSignature extends BaseActivity {
 
         if(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))
         {
-
+            order_type.requestFocus();
             errorMessage = errorMessage + "Please Select Order Type.";
             error = true;
         }
         else
         if(strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase(""))
         {
+            order_detail1.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail1str;
             error = true;
 
@@ -637,6 +660,7 @@ public class CaptureSignature extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase(""))
         {
+            order_detail2.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail2str;
             error = true;
 
@@ -644,6 +668,7 @@ public class CaptureSignature extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6)
         {
+            order_detail2.requestFocus();
             errorMessage = errorMessage + detail2str+ " should be 6 digit number.";
             error = true;
 
@@ -652,6 +677,7 @@ public class CaptureSignature extends BaseActivity {
         if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
         {
 
+            shipment_pri.requestFocus();
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
         }
@@ -659,17 +685,20 @@ public class CaptureSignature extends BaseActivity {
         if(order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term"))
         {
 
+            order_payment_term.requestFocus();
             errorMessage = errorMessage + "Please Select Payment Term";
             error = true;
         }
         else
         if(yourName.getText().toString().equalsIgnoreCase("")){
+            yourName.requestFocus();
             errorMessage = errorMessage + "Please Enter your Name.";
             error = true;
         }
         else
         if(strdetail4_mandate.equalsIgnoreCase("true") && order_detail4.getText().toString().equalsIgnoreCase(""))
         {
+            order_detail4.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail4str;
             error = true;
 

@@ -4,7 +4,13 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-
+    <ScrollView
+        android:id="@+id/s_container_l"
+        android:layout_width="fill_parent"
+        android:layout_above="@+id/bottom_container"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:orientation="vertical" >
     <LinearLayout
         android:id="@+id/linearLayout245"
         android:layout_width="fill_parent"
@@ -111,24 +117,33 @@
             <requestFocus />
         </EditText>
 
+    </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2.0"
+        android:layout_height="200dp">
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
             android:text="Please Sign below ..."
             android:layout_marginTop="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_below="@+id/linearLayout245"
-        android:layout_above="@+id/linearLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:layout_weight="1.9"
         android:orientation="horizontal" />
 
     <LinearLayout
@@ -136,8 +151,9 @@
         android:layout_width="match_parent"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+         >
 
         <Button
             android:id="@+id/cancel"
@@ -181,6 +197,7 @@
             android:layout_marginRight="2dp"
             android:textColor="#FFFFFF"/>
 
+    </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

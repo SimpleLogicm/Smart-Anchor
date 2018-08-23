@@ -40,12 +40,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -119,6 +121,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
     HashMap<String,String> order_payment_type_map = new HashMap<String,String>();
 
     public String order="",retailer_code="";
+    ScrollView s_container_l;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -163,6 +166,15 @@ public class Previous_orderNew_S3 extends BaseActivity {
         order_type = (Spinner) findViewById(R.id.order_type);
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
         order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
+        s_container_l =  findViewById(R.id.s_container_l);
+
+        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // Ready, move up
+                s_container_l.fullScroll(View.FOCUS_UP);
+            }
+        });
 
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
@@ -402,14 +414,19 @@ public class Previous_orderNew_S3 extends BaseActivity {
         order_payment_type_map.clear();
         List<Local_Data> contacts_payment = dbvoc.getorder_payment_term_data();
         results_payment_term.add("Select Payment Term");
-        for (Local_Data cn : contacts_payment)
+
+        if(contacts_payment.size() > 0)
         {
-            if(!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" "))
+            for (Local_Data cn : contacts_payment)
             {
-                results_payment_term.add(cn.getName());
-                order_payment_type_map.put(cn.getName(),cn.getCode());
+                if(!cn.getName().equalsIgnoreCase("") && !cn.getName().equalsIgnoreCase(" "))
+                {
+                    results_payment_term.add(cn.getName());
+                    order_payment_type_map.put(cn.getName(),cn.getCode());
+                }
             }
         }
+
 
         dataAdapter_order_payment_term = new ArrayAdapter<String>(this, R.layout.spinner_item, results_payment_term);
         dataAdapter_order_payment_term.setDropDownViewResource(R.layout.spinner_item);
@@ -599,13 +616,14 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
         if(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))
         {
-
+            order_type.requestFocus();
             errorMessage = errorMessage + "Please Select Order Type.";
             error = true;
         }
         else
         if(strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase(""))
         {
+            order_detail1.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail1str;
             error = true;
 
@@ -613,6 +631,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase(""))
         {
+            order_detail2.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail2str;
             error = true;
 
@@ -620,6 +639,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6)
         {
+            order_detail2.requestFocus();
             errorMessage = errorMessage + detail2str+ " should be 6 digit number.";
             error = true;
 
@@ -628,6 +648,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
         {
 
+            shipment_pri.requestFocus();
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
         }
@@ -635,17 +656,20 @@ public class Previous_orderNew_S3 extends BaseActivity {
         if(order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term"))
         {
 
+            order_payment_term.requestFocus();
             errorMessage = errorMessage + "Please Select Payment Term";
             error = true;
         }
         else
         if(yourName.getText().toString().equalsIgnoreCase("")){
-            errorMessage = errorMessage + "Please Enter your Name";
+            yourName.requestFocus();
+            errorMessage = errorMessage + "Please Enter your Name.";
             error = true;
         }
         else
         if(strdetail4_mandate.equalsIgnoreCase("true") && order_detail4.getText().toString().equalsIgnoreCase(""))
         {
+            order_detail4.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail4str;
             error = true;
 

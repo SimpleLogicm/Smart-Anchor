@@ -4215,7 +4215,7 @@ public class getServices {
                     product_value.put("details4", cn.getOrder_detail4());
                     product_value.put("order_category_code", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("asset_code", cn.getAsset_code());
+                    product_value.put("payment_term_code", cn.getAsset_code());
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
                     {
@@ -4792,7 +4792,7 @@ public class getServices {
                     }
 
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("asset_code", cn.getAsset_code());
+                    product_value.put("payment_term_code", cn.getAsset_code());
                    // product_value.put("signature_path", cn.getSignature_image());
 
                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
