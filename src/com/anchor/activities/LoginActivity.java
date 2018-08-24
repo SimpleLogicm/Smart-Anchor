@@ -206,8 +206,8 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-				editText1.setText("Dnyanada");
-				editText2.setText("dnyanada12345");
+//				editText1.setText("Dnyanada");
+//				editText2.setText("dnyanada12345");
 
 //		        editText1.setText("sujit");
 //				editText2.setText("sujit12345");

@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -40,7 +41,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -66,6 +66,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -79,7 +80,8 @@ import cpm.simplelogic.helper.GPSTracker;
 //import com.simplelogic.webservice.GmailSender;
 
 public class Previous_orderNew_S3 extends BaseActivity {
-
+    private String mCurrentPhotoPath = "";
+    private String pictureImagePath_new = "";
     private String Signature_path = "";
     Boolean isInternetPresent = false;
     GPSTracker gps;
@@ -168,13 +170,13 @@ public class Previous_orderNew_S3 extends BaseActivity {
         order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
         s_container_l =  findViewById(R.id.s_container_l);
 
-        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                // Ready, move up
-                s_container_l.fullScroll(View.FOCUS_UP);
-            }
-        });
+//        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                // Ready, move up
+//                s_container_l.fullScroll(View.FOCUS_UP);
+//            }
+//        });
 
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
@@ -616,6 +618,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
         if(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_type.requestFocus();
             errorMessage = errorMessage + "Please Select Order Type.";
             error = true;
@@ -623,6 +626,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         else
         if(strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase(""))
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_detail1.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail1str;
             error = true;
@@ -631,6 +635,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase(""))
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_detail2.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail2str;
             error = true;
@@ -639,6 +644,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6)
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_detail2.requestFocus();
             errorMessage = errorMessage + detail2str+ " should be 6 digit number.";
             error = true;
@@ -647,7 +653,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
         else
         if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
         {
-
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             shipment_pri.requestFocus();
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
@@ -975,17 +981,21 @@ public class Previous_orderNew_S3 extends BaseActivity {
 //        }
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
-            b5 = bos5.toByteArray();
 
-            String getsign_str=Base64.encodeToString(b5,Base64.DEFAULT);
+
+//            try {
+//                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+            // Bundle extras = data.getExtras();
+            //  Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             try {
 
-                dbvoc.updateORDER_order_image(getsign_str,Global_Data.GLObalOrder_id);
+                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -993,9 +1003,43 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
             //get_icon.setImageBitmap(imageBitmap);
         }
+        else if (requestCode == 2 && resultCode == RESULT_OK) {
+            try {
+                Uri selectedImage = data.getData();
+
+                String[] filePath = {MediaStore.Images.Media.DATA};
+
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+
+                c.moveToFirst();
+
+                int columnIndex = c.getColumnIndex(filePath[0]);
+
+                mCurrentPhotoPath = "file:" + c.getString(columnIndex);
+
+                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
+
+                pictureImagePath_new = c.getString(columnIndex);
+
+                c.close();
+
+//                String imageFileName = "Anchor";
+//                File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+//
+//                if (!storageDir.exists()) {
+//                    storageDir.mkdir();
+//                }
+//
+//                copyFileOrDirectory(pictureImagePath_new,storageDir.toString());
+                //new Expenses.LongOperation().execute();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+
+        }
 
     }
-
     private void SaveImage(Bitmap finalBitmap,String name) {
 
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -1053,11 +1097,62 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                             if(B_flag == true)
                             {
+                                final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
-                                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                                }
+
+                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Previous_orderNew_S3.this);
+
+                                builder.setTitle("Add Photo!");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+
+                                    @Override
+
+                                    public void onClick(DialogInterface dialog, int item) {
+
+                                        if (options[item].equals("Take Photo"))
+
+                                        {
+                                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                                                // Create the File where the photo should go
+                                                File photoFile = null;
+                                                try {
+                                                    photoFile = createImageFile();
+                                                } catch (Exception ex) {
+                                                    // Error occurred while creating the File
+                                                    Log.i("Image TAG", "IOException");
+                                                    mCurrentPhotoPath = "";
+                                                }
+                                                // Continue only if the File was successfully created
+                                                if (photoFile != null) {
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                                                }
+                                            }
+
+                                        }
+                                        else
+                                        if (options[item].equals("Choose from Gallery"))
+                                        {
+
+                                            // image_check = "gallery";
+                                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                                            startActivityForResult(intent, 2);
+
+
+                                        } else if (options[item].equals("Cancel")) {
+
+                                            dialog.dismiss();
+
+                                        }
+
+                                    }
+
+                                });
+
+                                builder.show();
 
                             }
                             else
@@ -1339,5 +1434,27 @@ public class Previous_orderNew_S3 extends BaseActivity {
         Uri uri = Uri.fromParts("package", getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String imageFileName = "Anchor";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+
+        if(!storageDir.exists())
+        {
+            storageDir.mkdir();
+        }
+
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        // mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }

@@ -9,11 +9,13 @@
         android:layout_width="fill_parent"
         android:layout_above="@+id/bottom_container"
         android:layout_height="match_parent"
+        android:isScrollContainer="false"
         android:fillViewport="true"
         android:orientation="vertical" >
     <LinearLayout
         android:id="@+id/linearLayout245"
         android:layout_width="fill_parent"
+        android:focusableInTouchMode="true"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -98,7 +100,7 @@
             android:layout_gravity="center"
             android:hint="Name"
             android:layout_marginTop="10dp"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionNext"
             android:singleLine="true">
 
             <requestFocus />
@@ -110,6 +112,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:hint="Remark"
+            android:inputType="textLongMessage"
             android:layout_marginTop="10dp"
             android:imeOptions="actionDone"
             android:singleLine="true">

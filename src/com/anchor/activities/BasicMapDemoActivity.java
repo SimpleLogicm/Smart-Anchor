@@ -264,7 +264,34 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         at_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                requestGPSPermissionsigna();
+
+                AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                alertDialog.setTitle("Anchor");
+                alertDialog.setMessage("Would you like to punch in attendance ?");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog1, int which) {
+                        // TODO Auto-generated method stub
+                        dialog1.dismiss();
+                        requestGPSPermissionsigna();
+
+                    }
+                });
+
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        dialog.cancel();
+                    }
+                });
+
+
+                alertDialog.show();
+
 
 
             }
@@ -274,65 +301,88 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
 
-                try {
-                    LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
-                    try {
+                AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                alertDialog.setTitle("Anchor");
+                alertDialog.setMessage("Would you like to punch out attendance ?");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
-//                        String user_email = prefManager.get_USERNAME().trim();
-//                        String conference_id = prefManager.get_ORDER_TYPE_ID().trim();
-//                        String vertical_id = prefManager.get_BRAND_ID().trim();
+                    @Override
+                    public void onClick(DialogInterface dialog1, int which) {
+                        // TODO Auto-generated method stub
+                        try {
+                            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
+                            dialog1.dismiss();
+                            try {
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
-                        DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
-                        Date date = new Date();
-                        String daten = sdf.format(date);
-                        String date_only_s = date_only.format(date);
-                        String datenn = sdf.format(date);
+                                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
+                                DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = new Date();
+                                String daten = sdf.format(date);
+                                String date_only_s = date_only.format(date);
+                                String datenn = sdf.format(date);
 
-                        String a_check_data = "";
-                        List<Local_Data> a_check = dbvoc.getAllAttendanceF_Data();
-                        if (a_check.size() > 0) {
-                            for (Local_Data cn : a_check) {
-                                a_check_data = cn.getName();
+                                String a_check_data = "";
+                                List<Local_Data> a_check = dbvoc.getAllAttendanceF_Data();
+                                if (a_check.size() > 0) {
+                                    for (Local_Data cn : a_check) {
+                                        a_check_data = cn.getName();
+                                    }
+                                }
+
+                                if (a_check_data.equalsIgnoreCase("true")) {
+                                    isInternetPresent = cd.isConnectingToInternet();
+                                    if (isInternetPresent) {
+
+
+                                        dialog.setMessage("Please wait....");
+                                        dialog.setTitle("Metal App");
+                                        dialog.setCancelable(false);
+                                        dialog.show();
+
+                                        in_out_flag = "OUT";
+                                        Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address);
+                                        //break;
+                                    } else {
+                                        in_out_flag = "OUT";
+                                        loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address, "false", date_only_s);
+                                        Toast.makeText(BasicMapDemoActivity.this, "Out successfully.", Toast.LENGTH_SHORT).show();
+
+                                        dbvoc.getDeleteTable("attendence_f");
+                                        loginDataBaseAdapter.insertattendence_flag("false");
+
+                                        showDialogn(daten, str.toString());
+                                        // break;
+                                    }
+                                } else {
+                                    Toast.makeText(BasicMapDemoActivity.this, "Please Press IN Button", Toast.LENGTH_SHORT).show();
+                                    // prefManager.setATTENDANCE_FLAG("false");
+                                }
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
                             }
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
                         }
 
-                        if (a_check_data.equalsIgnoreCase("true")) {
-                            isInternetPresent = cd.isConnectingToInternet();
-                            if (isInternetPresent) {
-
-
-                                dialog.setMessage("Please wait....");
-                                dialog.setTitle("Metal App");
-                                dialog.setCancelable(false);
-                                dialog.show();
-
-                                in_out_flag = "OUT";
-                                Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address);
-                                //break;
-                            } else {
-                                in_out_flag = "OUT";
-                                loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address, "false", date_only_s);
-                                Toast.makeText(BasicMapDemoActivity.this, "Out successfully.", Toast.LENGTH_SHORT).show();
-
-                                dbvoc.getDeleteTable("attendence_f");
-                                loginDataBaseAdapter.insertattendence_flag("false");
-
-                                showDialogn(daten, str.toString());
-                                // break;
-                            }
-                        } else {
-                            Toast.makeText(BasicMapDemoActivity.this, "Please Press IN Button", Toast.LENGTH_SHORT).show();
-                            // prefManager.setATTENDANCE_FLAG("false");
-                        }
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
                     }
+                });
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog1, int which) {
+                        // TODO Auto-generated method stub
+                        dialog1.cancel();
+                    }
+                });
+
+
+                alertDialog.show();
+
+
 
 
             }

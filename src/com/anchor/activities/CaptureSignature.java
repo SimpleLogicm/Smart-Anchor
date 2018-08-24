@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -39,7 +40,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -64,8 +64,10 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,6 +84,7 @@ public class CaptureSignature extends BaseActivity {
     private String Signature_path = "";
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath = "";
+    private String pictureImagePath_new = "";
     GPSTracker gps;
     Boolean isInternetPresent = false;
     ImageView get_icon;
@@ -164,17 +167,18 @@ public class CaptureSignature extends BaseActivity {
         shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
         order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
         s_container_l =  findViewById(R.id.s_container_l);
+
        // s_container_l.fullScroll(ScrollView.FOCUS_UP);
        // s_container_l.scrollTo(0, s_container_l.getBottom());
 
-        // Wait until my scrollView is ready
-        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                // Ready, move up
-                s_container_l.fullScroll(View.FOCUS_UP);
-            }
-        });
+//        // Wait until my scrollView is ready
+//        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                // Ready, move up
+//              //  s_container_l.fullScroll(View.FOCUS_UP);
+//            }
+//        });
 
 
         Intent i=getIntent();
@@ -351,6 +355,7 @@ public class CaptureSignature extends BaseActivity {
         }
 
 
+
         if(strdetail4_edit.equalsIgnoreCase("true"))
         {
             order_detail4.setEnabled(true);
@@ -456,6 +461,24 @@ public class CaptureSignature extends BaseActivity {
 
 
         }
+
+//        // Wait until my scrollView is ready
+//        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                // Ready, move up
+//                 s_container_l.fullScroll(0);
+//
+//            }
+//        });
+
+
+
+        //s_container_l.pageScroll(View.FOCUS_UP);
+
+
+       // s_container_l.clearFocus();
+
 
         if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cc_code)){
 
@@ -645,6 +668,7 @@ public class CaptureSignature extends BaseActivity {
 
         if(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_type.requestFocus();
             errorMessage = errorMessage + "Please Select Order Type.";
             error = true;
@@ -652,6 +676,7 @@ public class CaptureSignature extends BaseActivity {
         else
         if(strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase(""))
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_detail1.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail1str;
             error = true;
@@ -660,6 +685,7 @@ public class CaptureSignature extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase(""))
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_detail2.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail2str;
             error = true;
@@ -668,6 +694,7 @@ public class CaptureSignature extends BaseActivity {
         else
         if(strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6)
         {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             order_detail2.requestFocus();
             errorMessage = errorMessage + detail2str+ " should be 6 digit number.";
             error = true;
@@ -676,7 +703,7 @@ public class CaptureSignature extends BaseActivity {
         else
         if(shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority"))
         {
-
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(),txtWelcomeUser.getScrollY());
             shipment_pri.requestFocus();
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
@@ -1042,6 +1069,41 @@ public class CaptureSignature extends BaseActivity {
 
             //get_icon.setImageBitmap(imageBitmap);
         }
+        else if (requestCode == 2 && resultCode == RESULT_OK) {
+            try {
+                Uri selectedImage = data.getData();
+
+                String[] filePath = {MediaStore.Images.Media.DATA};
+
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+
+                c.moveToFirst();
+
+                int columnIndex = c.getColumnIndex(filePath[0]);
+
+                mCurrentPhotoPath = "file:" + c.getString(columnIndex);
+
+                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
+
+                pictureImagePath_new = c.getString(columnIndex);
+
+                c.close();
+
+//                String imageFileName = "Anchor";
+//                File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+//
+//                if (!storageDir.exists()) {
+//                    storageDir.mkdir();
+//                }
+//
+//                copyFileOrDirectory(pictureImagePath_new,storageDir.toString());
+                //new Expenses.LongOperation().execute();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+
+        }
 
     }
 
@@ -1126,23 +1188,62 @@ public class CaptureSignature extends BaseActivity {
 
                             if(B_flag == true)
                             {
-                                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-                                    // Create the File where the photo should go
-                                    File photoFile = null;
-                                    try {
-                                        photoFile = createImageFile();
-                                    } catch (Exception ex) {
-                                        // Error occurred while creating the File
-                                        Log.i("Image TAG", "IOException");
-                                        mCurrentPhotoPath = "";
+                                final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+
+
+                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(CaptureSignature.this);
+
+                                builder.setTitle("Add Photo!");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+
+                                    @Override
+
+                                    public void onClick(DialogInterface dialog, int item) {
+
+                                        if (options[item].equals("Take Photo"))
+
+                                        {
+                                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                                                // Create the File where the photo should go
+                                                File photoFile = null;
+                                                try {
+                                                    photoFile = createImageFile();
+                                                } catch (Exception ex) {
+                                                    // Error occurred while creating the File
+                                                    Log.i("Image TAG", "IOException");
+                                                    mCurrentPhotoPath = "";
+                                                }
+                                                // Continue only if the File was successfully created
+                                                if (photoFile != null) {
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                                                }
+                                            }
+
+                                        }
+                                        else
+                                        if (options[item].equals("Choose from Gallery"))
+                                        {
+
+                                            // image_check = "gallery";
+                                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                                            startActivityForResult(intent, 2);
+
+
+                                        } else if (options[item].equals("Cancel")) {
+
+                                            dialog.dismiss();
+
+                                        }
+
                                     }
-                                    // Continue only if the File was successfully created
-                                    if (photoFile != null) {
-                                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                                        startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
-                                    }
-                                }
+
+                                });
+
+                                builder.show();
 
                             }
                             else
@@ -1452,5 +1553,54 @@ public class CaptureSignature extends BaseActivity {
         Uri uri = Uri.fromParts("package", getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
+    }
+
+    public static void copyFileOrDirectory(String srcDir, String dstDir) {
+
+        try {
+            File src = new File(srcDir);
+            File dst = new File(dstDir, src.getName());
+
+            if (src.isDirectory()) {
+
+                String files[] = src.list();
+                int filesLength = files.length;
+                for (int i = 0; i < filesLength; i++) {
+                    String src1 = (new File(src, files[i]).getPath());
+                    String dst1 = dst.getPath();
+                    copyFileOrDirectory(src1, dst1);
+
+                }
+            } else {
+                copyFile(src, dst);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void copyFile(File sourceFile, File destFile) throws IOException {
+        if (!destFile.getParentFile().exists())
+            destFile.getParentFile().mkdirs();
+
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
+
+        FileChannel source = null;
+        FileChannel destination = null;
+
+        try {
+            source = new FileInputStream(sourceFile).getChannel();
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        } finally {
+            if (source != null) {
+                source.close();
+            }
+            if (destination != null) {
+                destination.close();
+            }
+        }
     }
 }
