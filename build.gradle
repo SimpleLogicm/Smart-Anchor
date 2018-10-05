@@ -9,12 +9,17 @@ repositories {
         url 'https://maven.google.com/'
         name 'Google'
     }
+
+    google()
 }
+
+
+
 
 buildscript {
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath 'com.google.gms:google-services:3.1.1'
     }
     repositories {
@@ -94,8 +99,8 @@ android {
         exclude 'META-INF/LGPL2.1'
     }
 
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.2'
 
     dexOptions {
         jumboMode = true
