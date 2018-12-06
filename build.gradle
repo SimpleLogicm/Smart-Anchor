@@ -1,8 +1,12 @@
 allprojects {
     repositories {
-        jcenter()
+        google()
+        jcenter() //also add it here!!!
+
     }
 }
+
+
 repositories {
     mavenCentral()
     maven {
@@ -19,7 +23,7 @@ repositories {
 buildscript {
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'com.google.gms:google-services:3.1.1'
     }
     repositories {
@@ -100,7 +104,7 @@ android {
     }
 
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 
     dexOptions {
         jumboMode = true
@@ -125,6 +129,13 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
+    }
+
+    lintOptions {
+
+        checkReleaseBuilds false
+
+
     }
 
     sourceSets {

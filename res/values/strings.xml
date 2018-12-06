@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--<string name="service_domain">http://2553ed2b.ngrok.io/metal/api/v1/</string>-->
+    <!--<string name="service_domain">http://0d1a1b5f.ngrok.io/metal/api/v1/</string>-->
 
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 
     <!-- SIMPLE LOGIC UAT URL -->
-    <!--<string name="service_domain">http://150.242.140.105:8004/metal/api/v1/</string>-->
+    <!--<string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
 
     <!--<string name="service_domain">http://192.168.101.192/metal/api/v1/</string>-->
 

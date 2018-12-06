@@ -206,11 +206,12 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//				editText1.setText("Dnyanada");
-//				editText2.setText("dnyanada12345");
+		editText1.setText("Jaya");
+		editText2.setText("jaya12345");
 
-//		        editText1.setText("sujit");
-//				editText2.setText("sujit12345");
+		//  editText1.setText("swatiyamgar");
+		//editText2.setText("12345678");
+
 				PackageInfo pInfo = null;
 				try {
 					pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
