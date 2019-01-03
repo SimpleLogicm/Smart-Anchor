@@ -206,11 +206,11 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-		editText1.setText("Jaya");
-		editText2.setText("jaya12345");
+//		editText1.setText("Dnyanada");
+//		editText2.setText("dnyanada12345");
 
-		//  editText1.setText("swatiyamgar");
-		//editText2.setText("12345678");
+//		  editText1.setText("swatiyamgar");
+//		editText2.setText("password");
 
 				PackageInfo pInfo = null;
 				try {
@@ -971,9 +971,9 @@ public class LoginActivity extends Activity{
 	            Log.i("volley", "domain: " + domain);
 	            Log.i("volley", "Device_id: " + Device_id);
 	           // Log.i("volley", "Sim_Number: " + Global_Val.Sim_Number);
-	            Log.i("volley", "Service url: " + domain+"/menus/registration?imei_no="+ URLEncoder.encode(Device_id, "UTF-8"));
+	            Log.i("volley", "Service url: " + domain+"menus/registration?imei_no="+ URLEncoder.encode(Device_id, "UTF-8"));
 
-	            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode(Device_id, "UTF-8"),null, new Response.Listener<JSONObject>() {
+	            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"menus/registration?imei_no="+ URLEncoder.encode(Device_id, "UTF-8"),null, new Response.Listener<JSONObject>() {
 	            	// JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
 
 	                @Override

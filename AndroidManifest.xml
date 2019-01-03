@@ -46,14 +46,12 @@
         android:protectionLevel="signature"/>
     <uses-permission android:name="android.permission.CALL_PHONE"
         android:protectionLevel="signature"/>
-    <uses-permission android:name="android.permission.SEND_SMS"
-        android:protectionLevel="signature"/>
+
     <uses-permission android:name="android.permission.WAKE_LOCK"
         android:protectionLevel="signature"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"
         android:protectionLevel="signature"/>
-    <uses-permission android:name="android.permission.SEND_SMS"
-        android:protectionLevel="signature"/>
+
     <uses-permission android:name="android.permission.RECORD_AUDIO"
         android:protectionLevel="signature"/>
     <uses-permission android:name="cpm.simplelogic.helper.DataProvider.READ_DATABASE" android:protectionLevel="signature"/>
