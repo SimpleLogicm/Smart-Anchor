@@ -180,7 +180,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
                 HashMap<String, String> edit = new HashMap<>();
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.mrpv.getText().toString())) {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.mrpv.getText().toString()) && Integer.parseInt(String.valueOf(s))>0) {
                     edit.put("string", s.toString());
 
                     try
