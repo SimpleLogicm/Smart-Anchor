@@ -597,6 +597,20 @@
             android:value="@integer/google_play_services_version" />
 
 
+        <!-- Defining our FirebaseMessagingService -->
+        <service android:name="com.anchor.services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+
+            android:resource="@drawable/ic_notification" />
+
+
+
+
     </application>
 
 </manifest>

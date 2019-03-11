@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +20,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -45,6 +48,10 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -118,6 +125,10 @@ public class LoginActivity extends Activity{
 	SharedPreferences sharedpreferences;
 	public static final String mypreference = "mypref";
 
+	public static String CHANNEL_ID = "SmartAnchor";
+	String CHANNEL_NAME= "SmartAnchor";
+	String CHANNEL_DESC = "Anchor App";
+
 	@SuppressLint("InlinedApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +139,25 @@ public class LoginActivity extends Activity{
 
 		/* SSL CONFIG */
 		handleSSLHandshake();
+
+		FirebaseApp.initializeApp(this);
+
+		FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
+			@Override
+			public void onSuccess(InstanceIdResult instanceIdResult) {
+				String newToken = instanceIdResult.getToken();
+				Log.e("newToken", newToken);
+//			getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("fb", newToken).apply();
+			}
+		});
+
+		//creating notification channel if android version is greater than or equals to oreo
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+			channel.setDescription(CHANNEL_DESC);
+			NotificationManager manager = getSystemService(NotificationManager.class);
+			manager.createNotificationChannel(channel);
+		}
 
         logo_img=(ImageView)findViewById(R.id.imageView1);
 		app_clear_dat=(ImageView)findViewById(R.id.app_clear_dat);

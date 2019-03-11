@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "579768033340",
-    "firebase_url": "https://salesappofflineoldpolycabversi.firebaseio.com",
-    "project_id": "salesappofflineoldpolycabversi",
-    "storage_bucket": "salesappofflineoldpolycabversi.appspot.com"
+    "project_number": "118376519583",
+    "firebase_url": "https://slogicmobile-1517306596414.firebaseio.com",
+    "project_id": "slogicmobile-1517306596414",
+    "storage_bucket": "slogicmobile-1517306596414.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:579768033340:android:02283fb870c398e5",
+        "mobilesdk_app_id": "1:118376519583:android:8a8625b87f9564ff",
         "android_client_info": {
-          "package_name": "com.simplelogic.activities"
+          "package_name": "com.anchor.activities"
         }
       },
       "oauth_client": [
         {
-          "client_id": "579768033340-dnc4inq0a6otb4j6aior8si8uhhiilui.apps.googleusercontent.com",
+          "client_id": "118376519583-ucbhpfb2h2o1mdjsodj8dfvd7mp3r8e3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.simplelogic.activities",
-            "certificate_hash": "B82FB48D46AF5AAA1173CF3CA13BC6D232B78A1C"
+            "package_name": "com.anchor.activities",
+            "certificate_hash": "b82fb48d46af5aaa1173cf3ca13bc6d232b78a1c"
           }
         },
         {
-          "client_id": "579768033340-skl45s38dg4umuvf5fmoc11tgv7glje9.apps.googleusercontent.com",
+          "client_id": "118376519583-u58adp664056ldktkkt4fe55p9b00fco.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8ejsbEDC7eCRdyBeryIjJQ4LE6pMpvFs"
+          "current_key": "AIzaSyBPYFP2HlP02GoD4U6jUA9OX1uh6D7ry3A"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "579768033340-skl45s38dg4umuvf5fmoc11tgv7glje9.apps.googleusercontent.com",
+              "client_id": "118376519583-u58adp664056ldktkkt4fe55p9b00fco.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

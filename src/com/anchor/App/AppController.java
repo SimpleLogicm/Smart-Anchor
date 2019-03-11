@@ -9,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.FirebaseApp;
 
 import cpm.simplelogic.helper.LruBitmapCache;
 
@@ -25,6 +26,7 @@ public class AppController extends MultiDexApplication {
 	public void onCreate() {
 		super.onCreate();
 		mInstance = this;
+		FirebaseApp.initializeApp(this);
 	}
 
 	@Override
