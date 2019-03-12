@@ -51,11 +51,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -94,6 +96,7 @@ public class MainActivity extends BaseActivity {
 	TextView todaysTarget;
 	int fragmentPoistion;
 	PlayService_Location PlayServiceManager;
+	private FirebaseAnalytics mFirebaseAnalytics;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +140,21 @@ public class MainActivity extends BaseActivity {
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
 		 
 		 //scheduleNotify();
+
+		Calendar c1 = Calendar.getInstance();
+		//System.out.println("Current time => " + c.getTime());
+
+		SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
+		String formattedDate = df.format(c1.getTime());
+		// Obtain the FirebaseAnalytics instance.
+		mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+		Bundle bundle = new Bundle();
+		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Global_Data.GLOvel_USER_EMAIL);
+		bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Global_Data.USER_FIRST_NAME+" " +Global_Data.USER_LAST_NAME);
+		bundle.putString(FirebaseAnalytics.Param.START_DATE, formattedDate);
+		mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+		/* Firebase Code End */
 
 
 		if(Global_Data.LOCATION_SERVICE_HIT.equalsIgnoreCase("TRUE"))

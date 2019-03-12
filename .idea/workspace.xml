@@ -35,6 +35,10 @@
       <change beforePath="$PROJECT_DIR$/LibAndroidCrop/build/intermediates/incremental/packageDebugResources/merged.dir/values/values.xml" beforeDir="false" afterPath="$PROJECT_DIR$/LibAndroidCrop/build/intermediates/incremental/packageDebugResources/merged.dir/values/values.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibAndroidCrop/build/intermediates/incremental/packageDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/LibAndroidCrop/build/intermediates/incremental/packageDebugResources/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LibAndroidCrop/build/intermediates/manifests/aapt/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/source/buildConfig/debug/com/anchor/activities/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/source/buildConfig/debug/com/anchor/activities/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/incremental/mergeDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/incremental/mergeDebugResources/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cropping/cropping.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cropping/cropping.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imageResizer/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/imageResizer/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imageResizer/build/generated/source/r/debug/android/support/v7/appcompat/R.java" beforeDir="false" />
@@ -45,6 +49,8 @@
       <change beforePath="$PROJECT_DIR$/imageResizer/build/intermediates/incremental/packageDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/imageResizer/build/intermediates/incremental/packageDebugResources/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imageResizer/build/intermediates/manifests/aapt/debug/AndroidManifest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/imageResizer/imageResizer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/imageResizer/imageResizer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java" afterDir="false" />
     </list>
     <ignored path="ANCHOR.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,51 +84,51 @@
     <session id="945722942">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
-          <entry key="project.open.time.1" value="5" />
+          <entry key="project.closed" value="17" />
+          <entry key="project.open.time.1" value="6" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.2" value="9" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="17" />
+          <entry key="project.opened" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gradle" value="3" />
-          <entry key="java" value="25" />
+          <entry key="gradle" value="4" />
+          <entry key="java" value="27" />
           <entry key="json" value="2" />
           <entry key="kt" value="4" />
           <entry key="png" value="1" />
-          <entry key="xml" value="15" />
+          <entry key="xml" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="3" />
+          <entry key="Groovy" value="4" />
           <entry key="Image" value="1" />
-          <entry key="JAVA" value="25" />
+          <entry key="JAVA" value="27" />
           <entry key="JSON" value="2" />
           <entry key="Kotlin" value="4" />
-          <entry key="XML" value="15" />
+          <entry key="XML" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gradle" value="25" />
-          <entry key="java" value="122" />
+          <entry key="gradle" value="27" />
+          <entry key="java" value="126" />
           <entry key="kt" value="36" />
-          <entry key="txt" value="52" />
-          <entry key="xml" value="10" />
+          <entry key="txt" value="95" />
+          <entry key="xml" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="25" />
-          <entry key="JAVA" value="122" />
+          <entry key="Groovy" value="27" />
+          <entry key="JAVA" value="126" />
           <entry key="Kotlin" value="36" />
-          <entry key="PLAIN_TEXT" value="52" />
-          <entry key="XML" value="10" />
+          <entry key="PLAIN_TEXT" value="95" />
+          <entry key="XML" value="11" />
         </counts>
       </usages-collector>
     </session>
@@ -131,7 +137,54 @@
     <favorites_list name="ANCHOR" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="134">
+              <caret line="140" column="26" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="508">
+              <caret line="600" column="62" selection-start-line="600" selection-start-column="62" selection-end-line="600" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-595">
+              <caret line="98" column="49" selection-start-line="98" selection-start-column="49" selection-end-line="98" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -143,7 +196,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>calllog</find>
       <find>READ_CALL_LOG</find>
       <find>sms</find>
       <find>SEND_SMS</find>
@@ -165,7 +217,6 @@
       <find>spnProduct.setOnItemSelectedListener</find>
       <find>ss</find>
       <find>ssl</find>
-      <find>handleSSLHandshake</find>
       <find>fire</find>
       <find>apply plugin</find>
       <find>com.google.android</find>
@@ -173,6 +224,8 @@
       <find>kot</find>
       <find>google-services</find>
       <find>buildscript</find>
+      <find>dexOptions</find>
+      <find>handleSSLHandshake</find>
     </findStrings>
     <replaceStrings>
       <replace>DataProvider_City</replace>
@@ -191,6 +244,7 @@
     </dirStrings>
   </component>
   <component name="GenerateSignedApkSettings">
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
     <option name="KEY_STORE_PATH" value="E:\anchor_keystore\anchor_mykeystore.jks" />
     <option name="KEY_ALIAS" value="anchor production apk" />
     <option name="REMEMBER_PASSWORDS" value="true" />
@@ -3839,7 +3893,6 @@
         <option value="$PROJECT_DIR$/src/com/anchor/activities/Pricing_Main.java" />
         <option value="$PROJECT_DIR$/src/com/anchor/activities/Image_Gellary.java" />
         <option value="$PROJECT_DIR$/src/com/anchor/activities/Schedule.java" />
-        <option value="$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/anchor/activities/Order.java" />
         <option value="$PROJECT_DIR$/src/com/anchor/activities/MyService.java" />
         <option value="$PROJECT_DIR$/src/cpm/simplelogic/helper/DataProvider_States.java" />
@@ -3873,13 +3926,14 @@
         <option value="$PROJECT_DIR$/bin/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/anchor/services/getServices.java" />
         <option value="$PROJECT_DIR$/src/com/anchor/swipelistview/sample/adapters/Product_AllVarient_Adapter.java" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/com/anchor/services/MyFirebaseMessagingService.kt" />
         <option value="$PROJECT_DIR$/src/com/anchor/App/AppController.java" />
         <option value="$PROJECT_DIR$/src/com/anchor/activities/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/anchor/services/NotificationHelper.kt" />
+        <option value="$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -3896,17 +3950,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ANCHOR" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ANCHOR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -3923,6 +3966,17 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ANCHOR" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ANCHOR" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
     </panes>
   </component>
@@ -3934,7 +3988,7 @@
     <property name="ExportApk.SignV1" value="true" />
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="ScreenshotViewer.SavePath" value="E:/" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/services/getServices.java&#10;Demo&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/BasicMapDemoActivity.java&#10;get&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/services/getServices.java&#10;Sche&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/adapter/Customer_Schemes_adapter.java&#10;Invoi&#9;PSI&#9;JAVA://com.anchor.activities.Customer_Invoices&#10;Info&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/Customer_info_main.java&#10;Str&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/res/values/strings.xml&#10;Login&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/LoginActivity.java&#10;String&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/res/values/strings.xml" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/LoginActivity.java&#10;Demo&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/BasicMapDemoActivity.java&#10;get&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/services/getServices.java&#10;Sche&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/adapter/Customer_Schemes_adapter.java&#10;Invoi&#9;PSI&#9;JAVA://com.anchor.activities.Customer_Invoices&#10;Info&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/Customer_info_main.java&#10;Str&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/res/values/strings.xml&#10;Login&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/src/com/anchor/activities/LoginActivity.java&#10;String&#9;FILE&#9;file://E:/Vinod/android_studio_metal/ANCHOR_METAL_23_02_2018_Before_MasterMerge/ANCHOR_METAL/ANCHOR/res/values/strings.xml" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="VectorAssetImportPath" value="E:\Vinod\android_studio_metal\ANCHOR_METAL_23_02_2018_Before_MasterMerge\ANCHOR_METAL" />
     <property name="android.project.structure.last.selected" value="cropping" />
@@ -4361,13 +4415,6 @@
       <option name="presentableId" value="Default" />
       <updated>1489125406020</updated>
     </task>
-    <task id="LOCAL-00003" summary="vinod 27-03-2017 bug fixed">
-      <created>1490596303274</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1490596303274</updated>
-    </task>
     <task id="LOCAL-00004" summary="vinod 29-03-2017 bug fixed">
       <created>1490786591586</created>
       <option name="number" value="00004" />
@@ -4704,7 +4751,14 @@
       <option name="project" value="LOCAL" />
       <updated>1552303785984</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="vinod Metal 11-03_2019 Firebase push implemented.">
+      <created>1552306404436</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1552306404437</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView">
@@ -4718,11 +4772,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.61564624" visible="true" weight="0.18154311" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6136364" visible="true" weight="0.18154311" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
-      <window_info id="Build Variants" order="3" sideWeight="0.38435373" side_tool="true" weight="0.18154311" />
+      <window_info active="true" id="Build Variants" order="3" sideWeight="0.38636363" side_tool="true" visible="true" weight="0.18154311" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Designer" order="5" />
       <window_info id="Nl-Palette" order="6" />
@@ -4735,7 +4790,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32711864" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="Android Monitor" order="8" weight="0.8739353" />
       <window_info anchor="bottom" id="Logcat" order="9" sideWeight="0.49924356" weight="0.68367344" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.027118644" />
@@ -4743,7 +4798,7 @@
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.34412265" />
       <window_info anchor="bottom" id="Gradle Console" order="13" sideWeight="0.5030257" side_tool="true" weight="0.32879046" />
       <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50075644" side_tool="true" weight="0.3707483" />
-      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.49924356" weight="0.7346939" />
+      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.49924356" visible="true" weight="0.17687075" />
       <window_info anchor="bottom" id="Statistic" order="16" weight="1.0" />
       <window_info anchor="bottom" id="Flutter Performance" order="17" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -4785,7 +4840,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="vinod 14_05_2018 v" />
     <MESSAGE value="vinod 15_05_2018 v" />
     <MESSAGE value="vinod 16_05_2018 v" />
     <MESSAGE value="vinod 17_05_2018 v" />
@@ -4810,7 +4864,8 @@
     <MESSAGE value="21_02_2019 zero quantity order bug issue resolved." />
     <MESSAGE value="06_03_2019 SSL CODE Implementation on MUM Vinod." />
     <MESSAGE value="vinod 11_03_2019 Firebase pushh notification implemented." />
-    <option name="LAST_COMMIT_MESSAGE" value="vinod 11_03_2019 Firebase pushh notification implemented." />
+    <MESSAGE value="vinod Metal 11-03_2019 Firebase push implemented." />
+    <option name="LAST_COMMIT_MESSAGE" value="vinod Metal 11-03_2019 Firebase push implemented." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -5033,13 +5088,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16490">
-          <caret line="988" column="133" selection-start-line="988" selection-start-column="126" selection-end-line="988" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/Home.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2618">
@@ -5110,13 +5158,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/google-services.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -5157,35 +5198,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/anchor/services/MyFirebaseMessagingService.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="129" column="39" selection-start-line="127" selection-start-column="4" selection-end-line="129" selection-end-column="39" />
+        <state relative-caret-position="102">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-595">
+          <caret line="98" column="49" selection-start-line="98" selection-start-column="49" selection-end-line="98" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
+        <state relative-caret-position="508">
           <caret line="600" column="62" selection-start-line="600" selection-start-column="62" selection-end-line="600" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1958">
-          <caret line="41" column="30" selection-start-line="40" selection-end-line="41" selection-end-column="30" />
+        <state relative-caret-position="26">
+          <caret line="121" column="22" selection-start-line="121" selection-start-column="22" selection-end-line="121" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/anchor/services/MyFirebaseMessagingService.kt">
+    <entry file="file://$PROJECT_DIR$/src/com/anchor/activities/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding>
-            <element signature="e#29#141#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="134">
+          <caret line="140" column="26" selection-start-line="140" selection-start-column="8" selection-end-line="140" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
         </state>
       </provider>
     </entry>

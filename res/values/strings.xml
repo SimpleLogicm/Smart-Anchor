@@ -16,7 +16,7 @@
     <!--<string name="service_domain">http://125.22.54.155/metal/api/v1/</string>-->
 
     <!-- Anchor PRODUCTion NEW URL -->
-    <string name="service_domain">http://ecart.anchor-group.in/metal/api/v1/</string>
+    <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>
 
     <!-- Anchor UAT URL -->
     <!--<string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>-->
