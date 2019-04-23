@@ -81,17 +81,6 @@ public class Forget_Pwd extends Activity {
                     Fun_Fpwd();
                 }
             });
-
-//    //Reading all
-//    List<Local_Data> contacts = dbvoc.getAllMain();
-//    for (Local_Data cn : contacts) {
-//        Global_Data.local_user = ""+cn.getUser();
-//        Global_Data.local_pwd = ""+cn.getemail();
-//        System.out.println("Local Values:-"+Global_Data.local_user+","+Global_Data.local_pwd);
-//        //Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
-//    }
-
-
             try {
                 int target = (int) Math.round(sp.getFloat("Target", 0));
                 int achieved = (int) Math.round(sp.getFloat("Achived", 0));
@@ -137,27 +126,6 @@ public class Forget_Pwd extends Activity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("volley", "response: " + response.toString());
-                        //  Log.i("volley", "response reg Length: " + response.length());
-
-//                        try {
-//                            String response_result = "";
-//                            if (response.has("result")) {
-//                                response_result = response.getString("result");
-//                                if(response_result.equalsIgnoreCase("Device not found."))
-//                                {
-//                                    Toast toast = Toast.makeText(Forget_Pwd.this, response_result, Toast.LENGTH_LONG);
-//                                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                                    toast.show();
-//                                }
-//                            } else {
-//                                response_result = "data";
-//                            }
-//                            dialog.dismiss();
-//                            Log.d("response_result","response_result"+response_result);
-//                            Log.d("response","response"+response);
-//
-//                            Toast.makeText(getApplicationContext(), "Register successfully."+response, Toast.LENGTH_LONG).show();
-
 
                         if (response.has("result")) {
                             String response_result = "";

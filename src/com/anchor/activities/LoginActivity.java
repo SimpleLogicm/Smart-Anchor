@@ -246,11 +246,11 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//		editText1.setText("swatiyamgar");
-//		editText2.setText("swati12345");
+//		editText1.setText("jaya");
+//		editText2.setText("jaya12345");
 
-//		  editText1.setText("Dnyanada");
-//		  editText2.setText("dnyanada12345");
+		  editText1.setText("Dnyanada");
+		  editText2.setText("dnyanada12345");
 
 				PackageInfo pInfo = null;
 				try {
@@ -1147,6 +1147,7 @@ public class LoginActivity extends Activity{
 					SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);
 					SharedPreferences.Editor editor=spf.edit();
 					editor.putString("USER_EMAIL", cn.getuser_email());
+					editor.putString("USER_NAMEs", cn.getfirst_name()+" "+cn.getlast_name());
 
 					//editor.commit();
 

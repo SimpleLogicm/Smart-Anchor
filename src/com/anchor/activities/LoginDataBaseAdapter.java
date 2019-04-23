@@ -315,7 +315,7 @@ public class LoginDataBaseAdapter
 			"( " +"ID"+" integer primary key autoincrement,"+ "Code text,Name text, Description text, Details1 text, Details2 text,Details3 text,Created_at text,Updated_at text,Created_by text,Updated_by text);";
 
 	static final String DATABASE_CREATE_ATTENDENCE_F = "CREATE TABLE IF NOT EXISTS " + "attendence_f" +
-			"( " + "ID" + " integer primary key autoincrement," + "name text);";
+			"( " + "ID" + " integer primary key autoincrement," + "name text,date1 text);";
 
 	static final String DATABASE_ATTENDANCE_DATA = "CREATE TABLE IF NOT EXISTS " + "attendance" +
 			"( " + "ID" + " integer primary key autoincrement," + "user_id text, punched_on text, punched_at_latitude text, punched_at_longitude text, punched_button text, conference_id text,vertical_id text,punched_at_address text,server_flag text,current_date_only text);";
@@ -3420,11 +3420,11 @@ public class LoginDataBaseAdapter
 		db.insert("background_service_check", null, newValues);
 	}
 
-	public void insertattendence_flag(String name) {
+	public void insertattendence_flag(String name,String date1) {
 		ContentValues newValues = new ContentValues();
 		// Assign values for each row.
 		newValues.put("name", name);
-
+		newValues.put("date1", date1);
 
 		db.insert("attendence_f", null, newValues);
 

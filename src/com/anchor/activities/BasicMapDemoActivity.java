@@ -223,7 +223,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 
 
-        // List<Local_Data> contacts2 = dbvoc.getAllAttendance_Data();
+
 
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
         DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
@@ -247,11 +247,18 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //            }
 //        }
 
-        // List<Local_Data> newone = dbvoc.getAllAttendance_Data_bydate(date_only_s);
+
+
+        List<Local_Data> a_checkn = dbvoc.getAllAttendanceF_Data_byDate(date_only_ss);
+        if (a_checkn.size() <= 0) {
+
+            dbvoc.getDeleteTable("attendence_f");
+            loginDataBaseAdapter.insertattendence_flag("false",date_only_ss);
+        }
 
         if (!(DateUtils.isToday(millisecondn))) {
             dbvoc.getDeleteTable("attendence_f");
-            loginDataBaseAdapter.insertattendence_flag("false");
+            loginDataBaseAdapter.insertattendence_flag("false",date_only_ss);
 
         }
 
@@ -348,7 +355,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         Toast.makeText(BasicMapDemoActivity.this, "Out successfully.", Toast.LENGTH_SHORT).show();
 
                                         dbvoc.getDeleteTable("attendence_f");
-                                        loginDataBaseAdapter.insertattendence_flag("false");
+                                        loginDataBaseAdapter.insertattendence_flag("false",date_only_s);
 
                                         showDialogn(daten, str.toString());
                                         // break;
@@ -987,15 +994,18 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     });
 
 
+                    DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    String date_only_s = date_only.format(date);
                     //dbvoc.getDeleteTable("attendance");
                     dbvoc.getDeleteattendance_daten(datenn, in_out_flag);
 
                     if (in_out_flag.equalsIgnoreCase("IN")) {
                         dbvoc.getDeleteTable("attendence_f");
-                        loginDataBaseAdapter.insertattendence_flag("true");
+                        loginDataBaseAdapter.insertattendence_flag("true",date_only_s);
                     } else {
                         dbvoc.getDeleteTable("attendence_f");
-                        loginDataBaseAdapter.insertattendence_flag("false");
+                        loginDataBaseAdapter.insertattendence_flag("false",date_only_s);
                     }
 
 
@@ -1397,8 +1407,9 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                     loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
 
 
+
                     dbvoc.getDeleteTable("attendence_f");
-                    loginDataBaseAdapter.insertattendence_flag("true");
+                    loginDataBaseAdapter.insertattendence_flag("true",date_only_s);
                     Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
                     showDialogn(daten, str.toString());
                 }
@@ -1543,7 +1554,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                             a_check_datan = cn.getName();
                                         }
                                     } else {
-                                        loginDataBaseAdapter.insertattendence_flag("false");
+                                        loginDataBaseAdapter.insertattendence_flag("false",date_only_s);
                                         a_check_datan = "false";
                                     }
 

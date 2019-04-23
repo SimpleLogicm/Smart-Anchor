@@ -35,6 +35,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +83,7 @@ public class MyService extends Service implements LocationListener{
 	GoogleApiClient mGoogleApiClient;
 	Location mCurrentLocation;
 	String mLastUpdateTime;
+	private FirebaseAnalytics mFirebaseAnalytics;
 
 	protected void createLocationRequest() {
 		mLocationRequest = new LocationRequest();
@@ -428,6 +430,16 @@ public class MyService extends Service implements LocationListener{
 			public void run() {
 				try
 				{
+					// Obtain the FirebaseAnalytics instance.
+					mFirebaseAnalytics = FirebaseAnalytics.getInstance(getBaseContext());
+					Bundle bundle = new Bundle();
+					bundle.putString(FirebaseAnalytics.Param.ITEM_ID,  sp.getString("USER_EMAIL", ""));
+					bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,sp.getString("USER_NAMEs", ""));
+
+					mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+					/* Firebase Code End */
+
 					String domain = getResources().getString(R.string.service_domain);
 
 //            Global_Val global_Val = new Global_Val();

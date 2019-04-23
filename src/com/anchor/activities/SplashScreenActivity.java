@@ -68,6 +68,7 @@ public class SplashScreenActivity extends Activity {
 		int version_nine_check = 0;
 		int version_fifteen_check = 0;
 		int version_c_check = 0;
+		int version_ninteen_check = 0;
 
 // Reading all
 		List<Local_Data> contacts1 = dbvoc.getVersioninfo();
@@ -98,6 +99,11 @@ public class SplashScreenActivity extends Activity {
 					version_fifteen_check = 1;
 				}
 
+				if(ver_code == 19)
+				{
+					version_ninteen_check = 1;
+				}
+
 				if(ver_code == versionCode)
 				{
 					version_c_check = 1;
@@ -117,6 +123,11 @@ public class SplashScreenActivity extends Activity {
 			if(version_fifteen_check != 1)
 			{
 				check_Columns_IsExistp_type_order();
+			}
+
+			if(version_ninteen_check != 1)
+			{
+				check_Columns_Isattendence_fDate1();
 			}
 
 			if(version_c_check != 1)
@@ -139,77 +150,15 @@ public class SplashScreenActivity extends Activity {
 				@Override
 				public void run() {
 					finish();
-					// TODO Auto-generated method stub
-//					 GPSService mGPSService = new GPSService(getApplicationContext());
-//						mGPSService.getLocation();
-//						
-//						if (mGPSService.isLocationAvailable == false) {
-//
-//							// Here you can ask the user to try again, using return; for that
-//							Toast.makeText(getApplicationContext(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
-//							return;
-//
-//							// Or you can continue without getting the location, remove the return; above and uncomment the line given below
-//							// address = "Location not available";
-//
-//						}
-//						else {
-//
-//							// Getting location co-ordinates
-//							double latitude = mGPSService.getLatitude();
-//							double longitude = mGPSService.getLongitude();
-//							Toast.makeText(getApplicationContext(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
-//
-//
-//
-//							Toast.makeText(getApplicationContext(), "Your address is: " +  mGPSService.getLocationAddress(), Toast.LENGTH_SHORT).show();
-//						}
+
 					Intent i=new Intent(getApplicationContext(), LoginActivity.class);
 					i.putExtra("splash", "splash");
-					
-					
-					//overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-					//overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-				//overridePendingTransition(R.anim.anim_in, R.anim.anim_out);
-					//overridePendingTransition(R.anim.grow_from_middle,R.anim.shrink_to_middle);
-					// overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+
 					startActivity(i);
 				}
 			}, 2000);
-		
 
-		
-        
-//        Intent i= new Intent(getApplicationContext(), LocationService.class);
-//	     // potentially add data to the intent
-//	     i.putExtra("KEY1", "Value to be used by the service");
-//	     startService(i);	
-       // DatabaseHandler myDbHelper = new DatabaseHandler(this);
-        
- /*
-        try {
- 
-        	//myDbHelper.createDataBase();
- 
- 	} catch (IOException ioe) {
- 
- 		throw new Error("Unable to create database");
- 
- 	}
- 
- 	try {
- 
- 		//myDbHelper.openDataBase();
- 
- 	}catch(SQLException sqle){
- 
- 		throw sqle;
- 
- 	}*/
- 	
- 	
-       
     }
 
 
@@ -315,6 +264,21 @@ public class SplashScreenActivity extends Activity {
 				dbvoc.alter_Columns("orders","asset_code");
 			} catch (SQLiteException ex) {
 				Log.w("Alter Table", "Altering " + "asset_code" + ": " + ex.getMessage());
+			}
+		}
+
+
+	}
+
+	public void check_Columns_Isattendence_fDate1()
+	{
+		boolean column_check = dbvoc.isColumnExists("attendence_f","date1");
+		if(!column_check)
+		{
+			try {
+				dbvoc.alter_Columns("attendence_f","date1");
+			} catch (SQLiteException ex) {
+				Log.w("Alter Table", "Altering " + "date1" + ": " + ex.getMessage());
 			}
 		}
 

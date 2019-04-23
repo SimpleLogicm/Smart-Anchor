@@ -57,7 +57,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -144,15 +143,15 @@ public class MainActivity extends BaseActivity {
 		Calendar c1 = Calendar.getInstance();
 		//System.out.println("Current time => " + c.getTime());
 
-		SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
-		String formattedDate = df.format(c1.getTime());
-		// Obtain the FirebaseAnalytics instance.
-		mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-		Bundle bundle = new Bundle();
-		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Global_Data.GLOvel_USER_EMAIL);
-		bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Global_Data.USER_FIRST_NAME+" " +Global_Data.USER_LAST_NAME);
-		bundle.putString(FirebaseAnalytics.Param.START_DATE, formattedDate);
-		mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+//		SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss.SSS");
+//		String formattedDate = df.format(c1.getTime());
+//		// Obtain the FirebaseAnalytics instance.
+//		mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+//		Bundle bundle = new Bundle();
+//		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Global_Data.GLOvel_USER_EMAIL);
+//		bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Global_Data.USER_FIRST_NAME+" " +Global_Data.USER_LAST_NAME);
+//		bundle.putString(FirebaseAnalytics.Param.START_DATE, formattedDate);
+//		mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
 		/* Firebase Code End */
 

@@ -16,7 +16,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 {
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
-		static final int DATABASE_VERSION = 7;
+		static final int DATABASE_VERSION = 8;
 
 
 		// Contacts table name
@@ -7148,6 +7148,29 @@ public class DataBaseHelper extends SQLiteOpenHelper
 //				new String[] { });
 
         // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setName(cursor.getString(0));
+
+
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllAttendanceF_Data_byDate(String date1) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT name,date1 FROM " + TABLE_CREATE_ATTENDENCE_F + " WHERE date1 = '" + date1 + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
         if (cursor.moveToFirst()) {
             do {
                 Local_Data contact = new Local_Data();

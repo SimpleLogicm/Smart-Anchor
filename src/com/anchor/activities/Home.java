@@ -167,7 +167,6 @@ public class Home extends Fragment {
 				Intent mIntent = getActivity().getPackageManager().getLaunchIntentForPackage("subdealer.anchor.com.anchorsubdealer_registration");
 
 				if (mIntent != null) {
-
 					try {
 
 						mIntent.putExtra("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
