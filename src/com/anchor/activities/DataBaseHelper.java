@@ -6121,7 +6121,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getItemName(String orderid) {
         List<Local_Data> contactList = new ArrayList<Local_Data>();  
         // Select All Query
-        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name FROM " + TABLE_ORDER_PRODUCTS + " WHERE " + ORDER_ID +"='" + orderid +"'";
+        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name,retail_price FROM " + TABLE_ORDER_PRODUCTS + " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -6137,6 +6137,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                     contact.setAmount(cursor.getString(3));
                     contact.set_category_ids(cursor.getString(4));
                     contact.setProduct_nm(cursor.getString(5));
+                    contact.setRP(cursor.getString(6));
 
                     // Adding contact to list
 
@@ -6162,7 +6163,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getItemNamePrevious_Order(String orderid) {
         List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name FROM " + TABLE_PREVIOUS_ORDER_PRODUCTS + " WHERE " + ORDER_ID +"='" + orderid +"'";
+        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name,retail_price FROM " + TABLE_PREVIOUS_ORDER_PRODUCTS + " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
@@ -6177,6 +6178,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setAmount(cursor.getString(3));
                 contact.set_category_ids(cursor.getString(4));
                 contact.setProduct_nm(cursor.getString(5));
+                contact.setRP(cursor.getString(6));
 
                 // Adding contact to list
 
@@ -6302,7 +6304,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getItemName_return(String orderid) {
         List<Local_Data> contactList = new ArrayList<Local_Data>();  
         // Select All Query
-        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name FROM " + TABLE_RETURNORDERNEW_PRODUCT + " WHERE " + ORDER_ID +"='" + orderid +"'";
+        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name,retail_price FROM " + TABLE_RETURNORDERNEW_PRODUCT + " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
@@ -6316,8 +6318,9 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setPrice(cursor.getString(2));
                 contact.setAmount(cursor.getString(3)); 
                 contact.set_category_ids(cursor.getString(4)); 
-                contact.setProduct_nm(cursor.getString(5)); 
-                
+                contact.setProduct_nm(cursor.getString(5));
+                contact.setRP(cursor.getString(6));
+
                 // Adding contact to list
                 
                 contactList.add(contact);

@@ -139,7 +139,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
         holder.rpv.setText(getData.get(TAG_RP));
 
         holder.mrpvnew.setText("[MRP] : " + getData.get(TAG_PRICE));
-        holder.mrpvs.setText("[RP] : " + getData.get(TAG_RP));
+        holder.mrpvs.setText("[DLP] : " + getData.get(TAG_RP));
 
         holder.PSQ.setText("SQ : " + getData.get(TAG_ITEM_SQ));
         holder.PMQ.setText("MQ : " + getData.get(TAG_ITEM_MQ));
@@ -180,7 +180,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
                 HashMap<String, String> edit = new HashMap<>();
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.mrpv.getText().toString()) && Integer.parseInt(String.valueOf(s))>0) {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.rpv.getText().toString()) && Integer.parseInt(String.valueOf(s))>0) {
                     edit.put("string", s.toString());
 
                     try
@@ -188,7 +188,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                         int SQMO_Validator = Integer.parseInt(holder.productquantity.getText().toString())%Integer.parseInt(holder.PSQVALUE.getText().toString());
                         if(SQMO_Validator == 0)
                         {
-                            Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.mrpv.getText().toString());
+                            Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.rpv.getText().toString());
                             holder.totalprice.setText("PRICE : " + String.valueOf(value));
                             holder.quantity_error.setText("");
                         Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() +"pq" + String.valueOf(value)+"pprice"+holder.Productnamerpmrp.getText().toString()+"pmrp"+holder.mrpv.getText().toString()+"prp"+holder.rpv.getText().toString());

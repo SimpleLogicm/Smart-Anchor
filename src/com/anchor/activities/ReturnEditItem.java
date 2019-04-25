@@ -827,10 +827,10 @@ public class ReturnEditItem extends BaseActivity {
 //			    	  }
 //			    	  else
 //			    	  {
-					  if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") &&  !editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase(null)) {
+					  if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") &&  !editTextRP.getText().toString().equalsIgnoreCase("") && !editTextRP.getText().toString().equalsIgnoreCase("null") && !editTextRP.getText().toString().equalsIgnoreCase(null)) {
 						  try
 						  {
-							  Double final_mrp = Double.valueOf(editTextMRP.getText().toString()) * Double.valueOf(editTextQuantity.getText().toString().trim());
+							  Double final_mrp = Double.valueOf(editTextRP.getText().toString()) * Double.valueOf(editTextQuantity.getText().toString().trim());
 							  txtPrice.setText("Total Price : "+final_mrp);
 							  price = String.valueOf(final_mrp);
 						  }catch(Exception ex){ex.printStackTrace();}
@@ -867,7 +867,7 @@ public class ReturnEditItem extends BaseActivity {
 			    	  {
 						  if(spnScheme.getSelectedItem().toString().equalsIgnoreCase("Rupees"))
 						  {
-							  long final_mrp = (Long.valueOf(editTextMRP.getText().toString()))*(Long.valueOf(editTextQuantity.getText().toString().trim()));
+							  long final_mrp = (Long.valueOf(editTextRP.getText().toString()))*(Long.valueOf(editTextQuantity.getText().toString().trim()));
 							  long final_discount = Long.parseLong(String.valueOf(s));
 							  //int final_discount = (Integer.parseInt(String.valueOf(s)))*(Integer.parseInt(editTextQuantity.getText().toString()));
 							  // int price1 = (Integer.parseInt(editTextMRP.getText().toString()))-(Integer.parseInt((String.valueOf(s))));
@@ -878,7 +878,7 @@ public class ReturnEditItem extends BaseActivity {
 				    	  else
 			    		  if(spnScheme.getSelectedItem().toString().equalsIgnoreCase("Percentage"))
 				    	  {
-			    			   Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()))*(Float.valueOf(editTextQuantity.getText().toString()));
+			    			   Float final_mrp = (Float.valueOf(editTextRP.getText().toString()))*(Float.valueOf(editTextQuantity.getText().toString()));
 			    			   int final_discount = Integer.parseInt(String.valueOf(s));
 			    			   //Float final_discount = (Float.valueOf((String.valueOf(s))))*(Float.valueOf(editTextQuantity.getText().toString()));
 	//		    			   Float per_value = (Float.valueOf((editTextMRP.getText().toString())))*(Float.valueOf((String.valueOf(s))))/(100);
@@ -913,15 +913,15 @@ public class ReturnEditItem extends BaseActivity {
 					
 					if(!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null"))
 			    	  {
-						 Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()))*(Float.valueOf(editTextQuantity.getText().toString().trim()));
+						 Float final_mrp = (Float.valueOf(editTextRP.getText().toString()))*(Float.valueOf(editTextQuantity.getText().toString().trim()));
 			    		 txtPrice.setText("Total Price : "+final_mrp);
 			    		 price = String.valueOf(final_mrp);
 			    	  }
 					else
 					{
-						if(!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null"))
+						if(!editTextRP.getText().toString().equalsIgnoreCase("") && !editTextRP.getText().toString().equalsIgnoreCase(null) && !editTextRP.getText().toString().equalsIgnoreCase("null"))
 						{
-							 Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
+							 Float final_mrp = (Float.valueOf(editTextRP.getText().toString()));
 				    		 txtPrice.setText("Total Price : "+final_mrp);
 				    		 price = String.valueOf(final_mrp);
 						}

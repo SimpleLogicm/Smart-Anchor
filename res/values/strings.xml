@@ -8,7 +8,7 @@
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 
     <!-- SIMPLE LOGIC UAT URL -->
-    <!--<string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
+    <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>
 
     <!--<string name="service_domain">http://192.168.101.192/metal/api/v1/</string>-->
 
@@ -22,7 +22,7 @@
     <!--<string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
-    <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>
+    <!--<string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
 
 
 

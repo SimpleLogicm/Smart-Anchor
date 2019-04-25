@@ -44,6 +44,7 @@ import com.anchor.swipelistview.sample.adapters.PackageAdapter;
 import com.anchor.swipelistview.sample.utils.SettingsManager;
 import com.anchor.webservice.ConnectionDetector;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -150,16 +151,14 @@ public class PreviewOrderSwipeActivity extends BaseActivity {
 			statusOrderActivity="previous";
 		}
 
-//
-
-		   try
+		try
 		   {
 			   List<Local_Data> cont1 = dbvoc.getItemName(Global_Data.GLObalOrder_id);
 			   for (Local_Data cnt1 : cont1) {
 				   HashMap<String, String> mapp = new HashMap<String, String>();
 				   mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
 				   mapp.put(TAG_QTY, cnt1.getQty());
-				   mapp.put(TAG_PRICE, cnt1.getPrice());
+				   mapp.put(TAG_PRICE, cnt1.getRP());
 				   mapp.put(TAG_ITEM_NUMBER, cnt1.get_category_ids());
 				   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N"+cnt1.get_category_ids());
 				   str += cnt1.getAmount();
@@ -830,6 +829,7 @@ public class PreviewOrderSwipeActivity extends BaseActivity {
 	}
     
     public static void updateSum(Double sum){
-    	 txttotalPreview.setText("Total		:		"+sum);
+		DecimalFormat df = new DecimalFormat("#0.00");
+    	 txttotalPreview.setText("Total		:		"+df.format(sum));
       } 
 }

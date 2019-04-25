@@ -87,6 +87,60 @@
             android:layout_marginLeft="5dp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        >
+
+        <TextView
+            android:id="@+id/textSQ"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#414042"
+            android:text="SQ"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/editTextSQ"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#111111"
+            android:text=""
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/adjust1"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/adjust2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:textColor="#111111"
+            android:layout_marginLeft="5dp"/>
+
+
+    </LinearLayout>
+
     <EditText
         android:id="@+id/editTextQuantity"
         android:layout_width="242dp"
