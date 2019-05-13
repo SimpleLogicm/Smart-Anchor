@@ -31,6 +31,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -134,6 +135,7 @@ public class LoginActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		MultiDex.install(this);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
@@ -246,8 +248,8 @@ public class LoginActivity extends Activity{
 			emp_code.setText(Global_Data.emp_code);
 		}
 
-//		editText1.setText("Jaya");
-//		editText2.setText("jaya12345");
+//		editText1.setText("Akhil");
+//		editText2.setText("akhilesh12345");
 
 		  editText1.setText("Dnyanada");
 		  editText2.setText("dnyanada12345");

@@ -229,6 +229,7 @@ public class ProductAll_Varients extends Activity {
 
                 try
                 {
+
                     List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
 
                     if (cont1.size() <= 0) {
@@ -604,10 +605,25 @@ public class ProductAll_Varients extends Activity {
 
             try {
 
+                if(Global_Data.array_of_pVarient.size() >0)
+                {
+                    StringBuilder ss = new StringBuilder();
+                    String[] mStringArray = new String[Global_Data.array_of_pVarient.size()];
+                    mStringArray = Global_Data.array_of_pVarient.toArray(mStringArray);
+                    for(int i=0; i<Global_Data.array_of_pVarient.size(); i++)
+                    {
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
 
-                    List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
+                        ss.append('"' +Global_Data.array_of_pVarient.get(i)+ '"');
+                        if((Global_Data.array_of_pVarient.size()-1) != i)
+                        {
+                            ss.append(",");
+                        }
+
+
+                    }
+
+                    List<Local_Data> cont1 = dbvoc.getSearchProduct(ss.toString());
 
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -641,7 +657,7 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-                          //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+                            //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             resultsvarient.add(cnt1.getProduct_variant());
 
@@ -674,12 +690,12 @@ public class ProductAll_Varients extends Activity {
                                 swipeListView.setAdapter(adapter);
 
                                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductAll_Varients.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
-								 Product_Variant.setThreshold(1);// will start working from
-								 // first character
-								 Product_Variant.setAdapter(adapter);// setting the adapter
-								 // data into the
-								 // AutoCompleteTextView
-								 Product_Variant.setTextColor(Color.BLACK);
+                                Product_Variant.setThreshold(1);// will start working from
+                                // first character
+                                Product_Variant.setAdapter(adapter);// setting the adapter
+                                // data into the
+                                // AutoCompleteTextView
+                                Product_Variant.setTextColor(Color.BLACK);
                                 txttotalPreview.setText("Total : " + pp);
 
 
@@ -689,78 +705,168 @@ public class ProductAll_Varients extends Activity {
 
 
                     }
-                } else {
+                }
+                else
+                {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
 
-                    List<Local_Data> cont1 = dbvoc.getProductvarient();
+                        List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
 
-                    if (cont1.size() <= 0) {
-                        // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+                        if (cont1.size() <= 0) {
+                            // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
+                            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
 
-                                Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-                                finish();
-                            }
-                        });
-
-                    } else {
-                        resultsvarient.clear();
-                        SwipeList.clear();
-                        pp=0;
-                        for (Local_Data cnt1 : cont1) {
-                            HashMap<String, String> mapp = new HashMap<String, String>();
-                            mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm() + " RP : " + cnt1.getStateName() + " MRP : " + cnt1.getMRP());
-                            mapp.put(TAG_QTY, "");
-                            mapp.put(TAG_PRICE, cnt1.getMRP());
-                            mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-                            mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-                            mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-                          //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
-                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-
-                            if (contactsn.size() > 0) {
-                                for (Local_Data cn : contactsn) {
-
-                                    list1.add(cn.get_delivery_product_order_quantity());
-                                    list2.add("PRICE : " + cn.getAmount());
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-                                        pp += Double.valueOf(cn.getAmount());
-                                    }
+                                    Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                    finish();
                                 }
-                            } else {
-                                list1.add("");
-                                list2.add("");
+                            });
+
+                        } else {
+                            resultsvarient.clear();
+                            SwipeList.clear();
+                            list1.clear();
+                            list2.clear();
+                            pp=0;
+                            for (Local_Data cnt1 : cont1) {
+                                HashMap<String, String> mapp = new HashMap<String, String>();
+                                mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
+                                mapp.put(TAG_QTY, "");
+                                mapp.put(TAG_PRICE, cnt1.getMRP());
+                                mapp.put(TAG_RP, cnt1.getStateName());
+                                mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                                mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
+                                mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                                //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+
+                                resultsvarient.add(cnt1.getProduct_variant());
+
+                                List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+
+
+                                if (contactsn.size() > 0) {
+                                    for (Local_Data cn : contactsn) {
+
+                                        list1.add(cn.get_delivery_product_order_quantity());
+                                        list2.add("PRICE : " + cn.getAmount());
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                            pp += Double.valueOf(cn.getAmount());
+                                        }
+                                    }
+                                } else {
+                                    list1.add("");
+                                    list2.add("");
+                                }
+
+                                SwipeList.add(mapp);
                             }
 
-                            SwipeList.add(mapp);
+                            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    swipeListView.setItemsCanFocus(true);
+
+                                    adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+
+                                    swipeListView.setAdapter(adapter);
+
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductAll_Varients.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+                                    Product_Variant.setThreshold(1);// will start working from
+                                    // first character
+                                    Product_Variant.setAdapter(adapter);// setting the adapter
+                                    // data into the
+                                    // AutoCompleteTextView
+                                    Product_Variant.setTextColor(Color.BLACK);
+                                    txttotalPreview.setText("Total : " + pp);
+
+
+                                }
+                            });
+
+
+
+                        }
+                    } else {
+
+                        List<Local_Data> cont1 = dbvoc.getProductvarient();
+
+                        if (cont1.size() <= 0) {
+                            // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
+
+                            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast toast = Toast.makeText(ProductAll_Varients.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+                                    Intent i = new Intent(ProductAll_Varients.this, NewOrderActivity.class);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            });
+
+                        } else {
+                            resultsvarient.clear();
+                            SwipeList.clear();
+                            pp=0;
+                            for (Local_Data cnt1 : cont1) {
+                                HashMap<String, String> mapp = new HashMap<String, String>();
+                                mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm() + " RP : " + cnt1.getStateName() + " MRP : " + cnt1.getMRP());
+                                mapp.put(TAG_QTY, "");
+                                mapp.put(TAG_PRICE, cnt1.getMRP());
+                                mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
+                                mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
+                                mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                                //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+
+                                List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+
+                                if (contactsn.size() > 0) {
+                                    for (Local_Data cn : contactsn) {
+
+                                        list1.add(cn.get_delivery_product_order_quantity());
+                                        list2.add("PRICE : " + cn.getAmount());
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                            pp += Double.valueOf(cn.getAmount());
+                                        }
+                                    }
+                                } else {
+                                    list1.add("");
+                                    list2.add("");
+                                }
+
+                                SwipeList.add(mapp);
+                            }
+
+                            ProductAll_Varients.this.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    swipeListView.setItemsCanFocus(true);
+
+                                    adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
+
+                                    swipeListView.setAdapter(adapter);
+                                    txttotalPreview.setText("Total : " + pp);
+
+
+                                }
+                            });
+
+
+
                         }
 
-                        ProductAll_Varients.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                swipeListView.setItemsCanFocus(true);
-
-                                adapter = new Product_AllVarient_Adapter(ProductAll_Varients.this, SwipeList, list1, list2);
-
-                                swipeListView.setAdapter(adapter);
-                                txttotalPreview.setText("Total : " + pp);
-
-
-                            }
-                        });
-
-
-
                     }
-
                 }
+
+
 
 
                 dialog.dismiss();

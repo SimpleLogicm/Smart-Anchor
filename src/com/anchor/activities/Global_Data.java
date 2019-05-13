@@ -3,6 +3,8 @@ package com.anchor.activities;
 import android.app.Activity;
 import android.view.inputmethod.InputMethodManager;
 
+import com.anchor.model.Spiner_List_Model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -172,6 +174,8 @@ public class Global_Data {
     public static String GLOVEL_PREVIOUS_ORDER_FLAG="";
     public static String Glovel_BEAT_ID="";
     public static String Scheme_report_Type="";
+    public static List<Spiner_List_Model> spiner_list_modelList =new ArrayList<Spiner_List_Model>();
+    public static List<String> array_of_pVarient =new ArrayList<>();
 	
 	
 	//public static String GLOVEL_LONG_DESC="";

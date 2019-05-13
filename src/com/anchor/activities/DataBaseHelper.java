@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.anchor.imageadapters.Image;
+import com.anchor.model.Spiner_List_Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7234,6 +7235,40 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
+    public List<Local_Data> getSearchProduct(String Product_varient_code) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+//        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE code IN ?  GROUP BY product_variant",
+//                new String[]{Product_varient_code});
+
+        Cursor cursor = db.query("item_master", new String[]{"retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq"}, "code in(" + Product_varient_code + ")", null, "product_variant", null, "product_variant");
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setStateName(cursor.getString(0));
+                contact.setMRP(cursor.getString(1));
+                contact.set_Description(cursor.getString(2));
+                contact.set_Claims(cursor.getString(3));
+                contact.setProduct_nm(cursor.getString(4));
+                contact.setCode(cursor.getString(5));
+                contact.setCategory(cursor.getString(6));
+                contact.setSubcateg(cursor.getString(7));
+                contact.setProduct_variant(cursor.getString(8));
+                contact.setSQ(cursor.getString(9));
+                contact.setMQ(cursor.getString(10));
+                // Adding contact to list
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
     public List<Local_Data> getSelectedorder_downs_values(String business_unit, String primary_category, String business_category, String sub_category) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -7399,6 +7434,31 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
         db.setTransactionSuccessful();
         db.endTransaction();
+    }
+
+    // Getting product data
+    public List<Spiner_List_Model> varientserch(String product_variant) {
+        List<Spiner_List_Model> contactList14 = new ArrayList<Spiner_List_Model>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+//        Cursor cursor = db.rawQuery("select code,product_variant FROM item_master WHERE product_variant = ? GROUP BY product_variant",
+//                new String[]{product_variant});
+
+        Cursor cursor = db.rawQuery("select code,product_variant FROM item_master " +"where product_variant "+ " like '%"+product_variant+"%'" + "LIMIT 100" , null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Spiner_List_Model contact = new Spiner_List_Model();
+                contact.setCode(cursor.getString(0));
+                contact.setProduct_variant(cursor.getString(1));
+
+                // Adding contact to list
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
     }
 
     
