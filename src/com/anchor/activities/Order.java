@@ -400,7 +400,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
                 }
 
-                List<Local_Data> contactlimit = dbvoc.getCreditprofileData(Global_Data.GLOvel_CUSTOMER_ID);
+                List<Local_Data> contactlimit = dbvoc.getCreditprofileDataSum_ByBUSINESS_UNIT(Global_Data.GLOvel_CUSTOMER_ID);
                 if (contactlimit.size() > 0) {
                     credit_profile_layout.setVisibility(View.VISIBLE);
                     for (Local_Data cn : contactlimit) {
@@ -434,7 +434,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                 } else {
                     Global_Data.AmountOutstanding = "0.0";
                     Global_Data.AmountOverdue = "0.0";
-                    credit_profile_layout.setVisibility(View.GONE);
+                    //credit_profile_layout.setVisibility(View.GONE);
                     ocredit_limit.setText(Html.fromHtml("<b>" + "Credit Limit Not Found" + "</b>"));
                     oamount_utstanding.setText(Html.fromHtml("<b>" + "Amount Outstanding Not Found" + "</b>"));
                     oamount_overdue.setText(Html.fromHtml("<b>" + "Amount Overdue Not Found" + "</b>"));
@@ -2400,7 +2400,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
+                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"),jsonObject.getString("business_unit"));
 
 
                                 }

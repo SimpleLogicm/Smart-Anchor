@@ -35,7 +35,7 @@
         android:textSize="15dp"
         android:layout_below="@+id/txtWelcomeUser"
         android:drawableRight="@drawable/search_icon"
-        android:hint="Search Variant" >
+        android:hint="Search Variants" >
         <requestFocus />
     </AutoCompleteTextView>
 
@@ -239,6 +239,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         android:text="OK"
         android:layout_gravity="center"
         android:textAllCaps="false"

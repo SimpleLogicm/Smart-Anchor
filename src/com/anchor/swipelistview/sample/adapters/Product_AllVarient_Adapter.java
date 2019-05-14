@@ -41,6 +41,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     static final String TAG_ITEM_NUMBER = "item_number";
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
+    static final String TAG_STOCK = "PRODUCT_STOCK";
     HashMap<String, String> getData = new HashMap<String, String>();
     private ArrayList<HashMap<String, String>> dataAray;
     HashMap<String, String> dataIthjem;
@@ -113,6 +114,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             holder.PMQ = (TextView) convertView.findViewById(R.id.PMQ);
             holder.PSQVALUE = (TextView) convertView.findViewById(R.id.PSQVALUE);
             holder.PMQVALUE = (TextView) convertView.findViewById(R.id.PMQVALUE);
+            holder.PSTOCK = (TextView) convertView.findViewById(R.id.PSTOCK);
             holder.quantity_error = (TextView) convertView.findViewById(R.id.quantity_error);
             // holder.rpvnew = (TextView) convertView.findViewById(R.id.rpvnew);
 
@@ -142,7 +144,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
         holder.mrpvs.setText("[DLP] : " + getData.get(TAG_RP));
 
         holder.PSQ.setText("SQ : " + getData.get(TAG_ITEM_SQ));
-        holder.PMQ.setText("MQ : " + getData.get(TAG_ITEM_MQ));
+        holder.PMQ.setText("Minimum order qty : " + getData.get(TAG_ITEM_MQ));
+      //  holder.PSTOCK.setText("Stock : " + getData.get(TAG_STOCK));
         holder.PSQVALUE.setText(getData.get(TAG_ITEM_SQ));
         holder.PMQVALUE.setText(getData.get(TAG_ITEM_MQ));
         //holder.rpvnew.setText("RP : " + getData.get(TAG_RP));
@@ -243,7 +246,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     }
 
     static class ViewHolder {
-        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs;
+        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs,PSTOCK;
         TextView PSQ,PMQ,PSQVALUE,PMQVALUE,quantity_error;
         EditText productquantity;
         TextView totalprice,pcode_new;

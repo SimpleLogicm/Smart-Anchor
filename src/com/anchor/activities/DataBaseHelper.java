@@ -17,7 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 {
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
-		static final int DATABASE_VERSION = 8;
+		static final int DATABASE_VERSION = 9;
 
 
 		// Contacts table name
@@ -3310,6 +3310,36 @@ public class DataBaseHelper extends SQLiteOpenHelper
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT  credit_limit,amount_outstanding,amount_overdue FROM " + TABLE_CREDIT_PROFILE + " WHERE customer_id = '" + customer_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.set_credit_limit(cursor.getString(0));
+                contact.set_shedule_outstanding_amount(cursor.getString(1));
+                contact.setAmmount_overdue(cursor.getString(2));
+
+                //contact.setPwd(cursor.getString(2));
+                //contact.setImei(cursor.getString(3));
+
+                // Adding contact to list
+                contactList1.add(contact);
+                Log.d("ConTACT", "ConTACT"+contactList1);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data for Credit Limit
+    public List<Local_Data> getCreditprofileDataSum_ByBUSINESS_UNIT(String customer_id) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT  sum(credit_limit),sum(amount_outstanding),sum(amount_overdue) FROM " + TABLE_CREDIT_PROFILE + " WHERE customer_id = '" + customer_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -7226,6 +7256,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setProduct_variant(cursor.getString(8));
                 contact.setSQ(cursor.getString(9));
                 contact.setMQ(cursor.getString(10));
+                //contact.set_stocks_product_name(cursor.getString(11));
                 // Adding contact to list
                 contactList14.add(contact);
             } while (cursor.moveToNext());
@@ -7235,7 +7266,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
-    public List<Local_Data> getSearchProduct(String Product_varient_code) {
+    public List<Local_Data> getSearchProduct(String Product_varient_codes_list) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
@@ -7243,7 +7274,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 //        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE code IN ?  GROUP BY product_variant",
 //                new String[]{Product_varient_code});
 
-        Cursor cursor = db.query("item_master", new String[]{"retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq"}, "code in(" + Product_varient_code + ")", null, "product_variant", null, "product_variant");
+        Cursor cursor = db.query("item_master", new String[]{"retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq"}, "code in(" + Product_varient_codes_list + ")", null, "product_variant", null, "product_variant");
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -7260,6 +7291,40 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setProduct_variant(cursor.getString(8));
                 contact.setSQ(cursor.getString(9));
                 contact.setMQ(cursor.getString(10));
+              //  contact.set_stocks_product_name(cursor.getString(11));
+                // Adding contact to list
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Local_Data> getSearchProduct_with_name(String Product_varient) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE product_variant = ? GROUP BY product_variant",
+                new String[]{Product_varient});
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setStateName(cursor.getString(0));
+                contact.setMRP(cursor.getString(1));
+                contact.set_Description(cursor.getString(2));
+                contact.set_Claims(cursor.getString(3));
+                contact.setProduct_nm(cursor.getString(4));
+                contact.setCode(cursor.getString(5));
+                contact.setCategory(cursor.getString(6));
+                contact.setSubcateg(cursor.getString(7));
+                contact.setProduct_variant(cursor.getString(8));
+                contact.setSQ(cursor.getString(9));
+                contact.setMQ(cursor.getString(10));
+               // contact.set_stocks_product_name(cursor.getString(11));
                 // Adding contact to list
                 contactList14.add(contact);
             } while (cursor.moveToNext());
@@ -7381,6 +7446,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setSubcateg(cursor.getString(7));
                 contact.setSQ(cursor.getString(8));
                 contact.setMQ(cursor.getString(9));
+                //contact.set_stocks_product_name(cursor.getString(10));
                 // Adding contact to list
                 contactList14.add(contact);
             } while (cursor.moveToNext());

@@ -290,7 +290,7 @@ public class LoginDataBaseAdapter
 			"( " +"ID"+" integer primary key autoincrement,"+ "sync_time text, total_sync text);";
 
 	static final String DATABASE_CREDIT_PROFILE = "CREATE TABLE IF NOT EXISTS "+"credit_profile"+
-			"( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text,retailer_id text,created_by text,created_at text,updated_at text,code text,credit_limit text,amount_outstanding text,amount_overdue text);";
+			"( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text,retailer_id text,created_by text,created_at text,updated_at text,code text,credit_limit text,amount_outstanding text,amount_overdue text,business_unit text);";
 
 	static final String DATABASE_USER_EMAIL = "CREATE TABLE IF NOT EXISTS "+"user_email"+
 			"( " +"ID"+" integer primary key autoincrement,"+ "email text,status text);";
@@ -2980,6 +2980,7 @@ public class LoginDataBaseAdapter
 				newValues.put("b_business_c", b_business_c);
 				newValues.put("sq", sq);
 				newValues.put("mq", mq);
+				//newValues.put("product_stock", product_stock);
 		
 				// Insert the row into your table
 				db.insert("item_master", null, newValues);
@@ -3232,7 +3233,7 @@ public class LoginDataBaseAdapter
 		db.insert("scheme_new", null, newValues);
 	}
 
-	public void insert_credit_profile(String project_id,String customer_id,String retailer_id,String created_by,String created_at,String updated_at,String code,String credit_limit,String amount_outstanding,String amount_overdue)
+	public void insert_credit_profile(String project_id,String customer_id,String retailer_id,String created_by,String created_at,String updated_at,String code,String credit_limit,String amount_outstanding,String amount_overdue,String business_unit)
 	{
 		ContentValues newValues = new ContentValues();
 		// Assign values for each row.
@@ -3246,6 +3247,7 @@ public class LoginDataBaseAdapter
 		newValues.put("credit_limit", credit_limit);
 		newValues.put("amount_outstanding", amount_outstanding);
 		newValues.put("amount_overdue", amount_overdue);
+		newValues.put("business_unit", business_unit);
 
 		// Insert the row into your table
 		db.insert("credit_profile", null, newValues);

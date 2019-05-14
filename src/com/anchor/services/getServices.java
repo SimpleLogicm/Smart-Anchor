@@ -3308,6 +3308,8 @@ public class getServices {
                         // Log.d("customers", "customers" + customers.toString());
                         // Log.d("devices", "devices" + devices.toString());
 
+                        List<Local_Data> checkproducts =  dbvoc.HSS_DescriptionITEM();
+
                         for (int i = 0; i < label_acc.length(); i++) {
 
                             JSONObject jsonObject = label_acc.getJSONObject(i);
@@ -3525,7 +3527,7 @@ public class getServices {
 
                         }
 
-                        List<Local_Data> checkproducts =  dbvoc.HSS_DescriptionITEM();
+
 
                         if(checkproducts.size() <= 0)
                         {
@@ -3670,7 +3672,7 @@ public class getServices {
 
                             JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                            loginDataBaseAdapter.insert_credit_profile("",jsonObject.getString("customer_code"),jsonObject.getString("customer_code"),"","","","",jsonObject.getString("credit_limit"),jsonObject.getString("amount_outstanding"),jsonObject.getString("amount_overdue"));
+                            loginDataBaseAdapter.insert_credit_profile("",jsonObject.getString("customer_code"),jsonObject.getString("customer_code"),"","","","",jsonObject.getString("credit_limit"),jsonObject.getString("amount_outstanding"),jsonObject.getString("amount_overdue"),jsonObject.getString("business_unit"));
 
 
                         }

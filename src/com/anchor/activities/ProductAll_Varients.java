@@ -97,6 +97,7 @@ public class ProductAll_Varients extends Activity {
     static final String TAG_ITEM_NUMBER = "item_number";
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
+    static final String TAG_STOCK = "PRODUCT_STOCK";
 
     ImageView imgView;
     static float totalPrice;
@@ -230,7 +231,11 @@ public class ProductAll_Varients extends Activity {
                 try
                 {
 
-                    List<Local_Data> cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
+                    List<Local_Data> cont1 = dbvoc.getSearchProduct_with_name(Product_Variant.getText().toString());
+//
+//                        cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
+
+
 
                     if (cont1.size() <= 0) {
                         // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -263,6 +268,7 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                            mapp.put(TAG_STOCK, "");
                          //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
 
@@ -657,6 +663,7 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                            mapp.put(TAG_STOCK, "");
                             //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             resultsvarient.add(cnt1.getProduct_variant());
@@ -744,6 +751,7 @@ public class ProductAll_Varients extends Activity {
                                 mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                                 mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                                 mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                                mapp.put(TAG_STOCK, "");
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                                 resultsvarient.add(cnt1.getProduct_variant());
@@ -825,6 +833,7 @@ public class ProductAll_Varients extends Activity {
                                 mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                                 mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                                 mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
+                                mapp.put(TAG_STOCK, "");
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                                 List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());

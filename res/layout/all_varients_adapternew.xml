@@ -3,7 +3,7 @@
     android:id="@+id/card_view"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="180dp"
     card_view:cardCornerRadius="4dp"
     android:layout_marginBottom="8dp"
     android:layout_marginLeft="5dp"
@@ -80,17 +80,29 @@
             android:id="@+id/PMQ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/PSQ"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/PSQ"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/PSQ"
+            android:layout_alignParentLeft="true"
             android:text="MQ 20"
+            android:textSize="12dp" />
+        <TextView
+            android:id="@+id/PSTOCK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/PMQ"
+            android:layout_alignParentLeft="true"
+            android:text="Stock"
             android:textSize="12dp" />
 
         <TextView
             android:id="@+id/PSCHEME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/PSQ"
+            android:layout_below="@id/PSTOCK"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
 
