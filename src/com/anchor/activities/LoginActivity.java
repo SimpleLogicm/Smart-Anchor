@@ -371,7 +371,7 @@ public class LoginActivity extends Activity{
 				//Creating dialog box
 				AlertDialog alert = builder.create();
 				//Setting the title manually
-				alert.setTitle("Metal");
+				alert.setTitle("Smart Anchor");
 				alert.show();
 			}
 		});
@@ -980,7 +980,7 @@ public class LoginActivity extends Activity{
 
 	public void getserviceData() {
 	        dialog.setMessage("Please wait Data Sync....");
-	        dialog.setTitle("Metal App");
+	        dialog.setTitle("Smart Anchor App");
 	        dialog.setCancelable(false);
 	        dialog.show();
 
@@ -1460,7 +1460,7 @@ public class LoginActivity extends Activity{
 						if (report.areAllPermissionsGranted()) {
 
 							dialog.setMessage("Please wait....");
-							dialog.setTitle("Metal App");
+							dialog.setTitle("Smart Anchor App");
 							dialog.setCancelable(false);
 							dialog.show();
 
