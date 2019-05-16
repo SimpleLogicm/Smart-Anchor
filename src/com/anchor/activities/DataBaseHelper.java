@@ -18,10 +18,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
 		static final int DATABASE_VERSION = 9;
-
-
-		// Contacts table name
-         public static final String KEY_ID = "_id";
+		 public static final String KEY_ID = "_id";
 		 public static final String FNAME = "name";
 		 private static final String TABLE_REG = "users";
 		 private static final String TABLE_TASKS = "tasks";
