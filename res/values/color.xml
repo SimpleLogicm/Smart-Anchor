@@ -2,13 +2,13 @@
 <resources>
     <drawable name="red_color">#ff0000</drawable>
 
- <drawable name="white_color">#ffffff</drawable>
+    <drawable name="white_color">#ffffff</drawable>
 
- <drawable name="orange_color">#ffffbb33</drawable>
+    <drawable name="orange_color">#ffffbb33</drawable>
     <color name="list_item_title">#fff</color>
     <color name="list_background">#303030</color>
     <color name="list_background_pressed">#992416</color>
-   <!-- <color name="list_divider">#272727</color>-->
+    <!-- <color name="list_divider">#272727</color>-->
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
 
@@ -21,10 +21,10 @@
     <color name="list_row_hover_start_color">#ebeef0</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
 
-   <color name="colorPrimary">#25baa2</color>
-   <color name="colorPrimaryDark">#0e917c</color>
-   <color name="colorAccent">#89d0c2</color>
-    
+    <color name="colorPrimary">#303F9F</color>
+    <color name="colorPrimaryDark">#00316b</color>
+    <color name="colorAccent">#FF4081</color>
+
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="symptom_color_selected">#003366</color>
@@ -37,19 +37,19 @@
     <color name="sky">#0099CC</color>
     <color name="gray">#808080</color>
     <color name="lightgray">#bfbfbf</color>
-      <color name="lightgray02">#111111</color>
+    <color name="lightgray02">#111111</color>
     <color name="dark">#000015</color>
     <color name="lightgreen">#336666</color>
     <color name="orrange">#e33d1b</color>
     <color name="darkorrange">#cc2303</color>
-    
+
     <color name="view_background">#e8ecfa</color>
     <color name="btn_bg">#277bec</color>
-   
+
     <color name="txt_font">#4e5572</color>
     <color name="action_bar">#1f2649</color>
-   <color name="shadow">#555555</color>
-   <color name="title">#777777</color>
+    <color name="shadow">#555555</color>
+    <color name="title">#777777</color>
 
     <color name="bkg_card">#c73e3e</color>
 
@@ -58,5 +58,25 @@
 
     <color name="text_background_color">#ffffff</color>
     <color name="grey_secondry">#BDBDBD</color>
-    
+    <color name="light_grey">#DCDCDC</color>
+
+    <color name="bgBackSideColor">#f4f0ff</color>
+    <color name="bgTitleLeft">#594691</color>
+    <color name="bgTitleRight">#ffffff</color>
+    <color name="bgContentTop">#594691</color>
+    <color name="bgContent">#ffffff</color>
+    <color name="contentDividerLine">#e0e0e0</color>
+    <color name="contentBadgeTitle">#ffffff</color>
+    <color name="titleBadgeTitle">#adafb1</color>
+    <color name="titleBadgeText">#adafb1</color>
+    <color name="mainTextColor">#343d43</color>
+    <color name="btnRequest">#ffbf12</color>
+    <color name="t_header_background_color">#b2b2b2</color>
+    <color name="text_color">#ffffff</color>
+    <color name="textview_background_color">#e9001c</color>
+    <color name="dard_grey">#aeaeae</color>
+    <color name="light_greynew">#cacaca</color>
+    <color name="ledger_header">#a1a1a1</color>
+    <color name="ledger_text_value">#797575</color>
+
 </resources>

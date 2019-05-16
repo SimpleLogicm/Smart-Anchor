@@ -1,6 +1,7 @@
 package com.anchor.activities;
 
 public class Local_Data {
+    String cust_email;
     int version_code;
     String b_unit;
     String SQ,MQ;
@@ -2296,5 +2297,16 @@ public class Local_Data {
     public void setBunit(String bunit){
         this.b_unit=bunit;
     }
+
+    //getting cust email
+    public String getCust_email(){
+        return  this.cust_email;
+    }
+
+    //setting cust email
+    public void setCust_email(String cemail){
+        this.cust_email=cemail;
+    }
+
 
 }

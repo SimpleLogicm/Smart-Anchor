@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.GlideApp;
 import com.anchor.imageadapters.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -171,10 +172,10 @@ public class SlideshowDialogFragment extends DialogFragment {
                 pdf_name.setVisibility(View.GONE);
                 imageViewPreview.setVisibility(View.VISIBLE);
 
-                Glide.with(getActivity()).load(image.getLarge())
+                GlideApp.with(getActivity()).load(image.getLarge())
                         .thumbnail(0.5f)
                         .error(R.drawable.imgnot_found)
-                        .crossFade()
+                        //.crossFade()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(imageViewPreview);
             }

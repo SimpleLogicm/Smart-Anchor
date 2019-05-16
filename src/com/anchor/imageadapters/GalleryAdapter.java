@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anchor.activities.R;
+import com.anchor.helper.GlideApp;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
@@ -73,9 +74,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
             holder.pdf_name.setVisibility(View.GONE);
             holder.thumbnail.setVisibility(View.VISIBLE);
 
-            Glide.with(mContext).load(image.getLarge())
+            GlideApp.with(mContext).load(image.getLarge())
                     .thumbnail(0.5f)
-                    .crossFade()
+                    //.crossFade()
                     .error(R.drawable.imgnot_found)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(holder.thumbnail);

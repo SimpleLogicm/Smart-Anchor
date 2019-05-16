@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgContent"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bgTitleRight"
+        android:paddingBottom="20dp"
+        android:paddingEnd="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="20dp"
+        android:paddingStart="15dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:ellipsize="marquee"
+            android:layout_centerHorizontal="true"
+            android:text="Product"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/product_title"
+            android:ellipsize="marquee"
+            android:layout_marginTop="10dp"
+            android:fadingEdge="horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/header_product2_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/product_name"
+            android:ellipsize="marquee"
+            android:layout_marginTop="10dp"
+            android:fadingEdge="horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/header_product2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/header_product2_text"
+            android:ellipsize="marquee"
+            android:layout_marginTop="10dp"
+            android:fadingEdge="horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+
+
+
+
+        <TextView
+            android:id="@+id/title_time_label"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:text="abcd type"
+            android:layout_below="@+id/type_header"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/header_product2"
+            android:id="@+id/type_header"
+            android:layout_alignLeft="@id/title_time_label"
+            android:layout_alignStart="@id/title_time_label"
+            android:text="Date" />
+
+        <TextView
+            android:id="@+id/status_text"
+            style="@style/TitleBadgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/status_header"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Open" />
+
+        <TextView
+            android:id="@+id/status_header"
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/header_product2"
+            android:layout_marginTop="10dp"
+            android:text="Status" />
+
+        <TextView
+            android:id="@+id/type_text"
+            style="@style/TitleBadgeText"
+            android:layout_below="@+id/title_time_label_text"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            style="@style/TitleBadgeTitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/title_time_label_text"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:layout_below="@+id/title_time_label"
+            android:text="Date" />
+
+    </RelativeLayout>
+</LinearLayout>

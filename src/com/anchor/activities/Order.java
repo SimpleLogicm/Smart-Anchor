@@ -1342,7 +1342,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                             Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
                             Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
                             Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
-
+                            Global_Data.CUSTOMER_EMAIL = cn.getCust_email();
                         }
 
 
@@ -1581,6 +1581,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                             Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
                             Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
                             Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
+                            Global_Data.CUSTOMER_EMAIL = cn.getCust_email();
                         }
 
                         Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
@@ -1594,7 +1595,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                         Global_Data.PREVIOUS_ORDER_BACK_FLAG_REURN = "";
                         Intent intent = new Intent(getApplicationContext(),
-                                Customer_Feed.class);
+                                CustomerServicesActivity.class);
                         intent.putExtra("CP_NAME", "video");
                         intent.putExtra("RE_TEXT", Re_Text);
                         startActivity(intent);

@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class Global_Data {
 
+    public static String CUSTOMER_EMAIL="";
+    public static HashMap<Integer,String> p_cus_services_status_check = new HashMap<>();
     public static String Varient_value_add_flag = "";
     public static HashMap<String,String> Order_hashmap = new HashMap<String,String>();
     public static String item_SL = "";
