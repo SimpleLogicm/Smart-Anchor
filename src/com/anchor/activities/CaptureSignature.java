@@ -1425,7 +1425,6 @@ public class CaptureSignature extends BaseActivity {
 
                                             try {
 
-
 //                                            FileOutputStream out = new FileOutputStream(myImage);
 //                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
 //                                            out.flush();

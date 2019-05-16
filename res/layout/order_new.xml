@@ -285,6 +285,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="horizontal" >
 
             <Button
@@ -313,6 +314,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingTop="5dp"
+            android:visibility="gone"
             android:layout_marginTop="5dp" >
 
             <Button
@@ -348,6 +350,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Picture"
+                android:visibility="gone"
                 android:background="#414042"
                 android:textColor="#FFFFFF" />
 
@@ -356,7 +359,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Video"
+                android:text="Ok"
                 android:background="#414042"
                 android:layout_marginLeft="10dp"
                 android:textColor="#FFFFFF"/>

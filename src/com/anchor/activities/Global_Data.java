@@ -49,7 +49,7 @@ public class Global_Data {
     public static String target_grpby="";
     public static String SCHE_CODE="";
 
-
+    public static String CUSTOMER_EMAIL="";
     public static String AmountOutstanding="";
     public static String AmountOverdue="";
 	public static String customer_code="";
@@ -172,9 +172,18 @@ public class Global_Data {
     public static String GLOVEL_PREVIOUS_ORDER_FLAG="";
     public static String Glovel_BEAT_ID="";
     public static String Scheme_report_Type="";
-	
-	
-	//public static String GLOVEL_LONG_DESC="";
+
+    public static HashMap<Integer,String> image_check = new HashMap<>();
+    public static HashMap<Integer,String> Order_Select_check = new HashMap<>();
+    public static HashMap<Integer,String> p_cus_services_status_check = new HashMap<>();
+    public static HashMap<String,String> paymentTerm_map = new HashMap<>();
+//    public static List<Spiner_List_Model> spiner_list_modelList =new ArrayList<Spiner_List_Model>();
+//    public static List<String> array_of_pVarient =new ArrayList<>();
+//    public static HashMap<String,String> Order_TYPE = new HashMap<>();
+
+
+
+    //public static String GLOVEL_LONG_DESC="";
     
  // create map to store
     public static  Map<String, List<String>> map = new HashMap<String, List<String>>();

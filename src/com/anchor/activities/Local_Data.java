@@ -143,7 +143,7 @@ public class Local_Data {
     String datetime1;
     String date1;
     String time1;
-
+    String cust_email;
     String survey_code;
     String question_code;
     String active_from;
@@ -2295,6 +2295,16 @@ public class Local_Data {
     //setting b_unit
     public void setBunit(String bunit){
         this.b_unit=bunit;
+    }
+
+    //getting cust email
+    public String getCust_email(){
+        return  this.cust_email;
+    }
+
+    //setting cust email
+    public void setCust_email(String cemail){
+        this.cust_email=cemail;
     }
 
 }

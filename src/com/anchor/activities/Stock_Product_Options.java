@@ -50,13 +50,13 @@ public class Stock_Product_Options extends Activity  {
     int check_ProductSpec=0;
 
     Button  adr_button;
-    Spinner spnCategory,spnProduct,Product_Variant;
+    Spinner spnCategory,spnProduct,Product_Variant, spnBu, spnBusinessDiv;;
     TextView selVersion;
     HttpGet httppst;
     String s[];
     int state_flag = 0;
     ProgressDialog dialog;
-    ArrayAdapter<String> adapter_state1;
+    ArrayAdapter<String> adapter_state1,dataAdapterBu,dataAdapterBd;;
 
     ArrayAdapter<String> adapter_state2;
     ArrayAdapter<String> adapter_beat;
@@ -87,7 +87,8 @@ public class Stock_Product_Options extends Activity  {
     private ArrayList<String> results = new ArrayList<String>();
     private ArrayList<String> results1 = new ArrayList<String>();
     private ArrayList<String> results2 = new ArrayList<String>();
-
+    private ArrayList<String> result_bu = new ArrayList<String>();
+    private ArrayList<String> result_Business = new ArrayList<String>();
 
     private LocationManager locationMangaer = null;
     private LocationListener locationListener = null;
@@ -113,6 +114,8 @@ public class Stock_Product_Options extends Activity  {
         spnCategory = (Spinner) findViewById(R.id.spnCategory);
         spnProduct = (Spinner) findViewById(R.id.spnProduct);
         Product_Variant = (Spinner) findViewById(R.id.Product_Variant);
+        spnBu = (Spinner) findViewById(R.id.spnBu);
+        spnBusinessDiv = (Spinner) findViewById(R.id.spnBusinessDiv);
 
         spnCategory.setPopupBackgroundResource(R.drawable.spinner);
         spnProduct.setPopupBackgroundResource(R.drawable.spinner);
@@ -158,7 +161,7 @@ public class Stock_Product_Options extends Activity  {
 
 
                 }
-                else if(!(spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) && !(spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Sub Category")) && Product_Variant.getSelectedItem().toString().equalsIgnoreCase("Select Variant"))
+                else if(!(spnCategory.getSelectedItem().toString().equalsIgnoreCase("Select Category")) && !(spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) && Product_Variant.getSelectedItem().toString().equalsIgnoreCase("Select Variant"))
                 {
                     Global_Data.Stock_product_flag = spnCategory.getSelectedItem().toString()+"-"+spnProduct.getSelectedItem().toString();
                     Global_Data.Stock_product_flag_value_check = "Category and All Sub Category";
@@ -175,8 +178,8 @@ public class Stock_Product_Options extends Activity  {
                     toast.show();
                 }
 
-                else if(spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Sub Category")) {
-                    Toast toast = Toast.makeText(Stock_Product_Options.this,"Please Select Sub Category", Toast.LENGTH_SHORT);
+                else if(spnProduct.getSelectedItem().toString().equalsIgnoreCase("Select Product")) {
+                    Toast toast = Toast.makeText(Stock_Product_Options.this,"Please Select Product", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
@@ -218,6 +221,43 @@ public class Stock_Product_Options extends Activity  {
 
 
 
+//        //for BU
+//        result_bu.clear();
+//        //result_bu.add("Select BU");
+//
+//
+//        // Reading all
+//        List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
+//        result_bu.add("Select BU");
+//        for (Local_Data cn : contact_bu) {
+//            String str_bunit = "" + cn.getBunit();
+//            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+//                result_bu.add(str_bunit);
+//            }
+//        }
+//
+//        dataAdapterBu = new ArrayAdapter<String>(Stock_Product_Options.this, R.layout.spinner_item, result_bu);
+//        dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+//        spnBu.setAdapter(dataAdapterBu);
+//
+////        results1.clear();
+////        results1.add("Select Business Category");
+////
+////        adapter_state1 = new ArrayAdapter<String>(Pricing_Main.this, R.layout.spinner_item, results1);
+////        adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+////        spnCategory.setAdapter(adapter_state1);
+//
+//        result_Business.clear();
+//        result_Business.add("Select Business Division");
+//        dataAdapterBd = new ArrayAdapter<String>(Stock_Product_Options.this, R.layout.spinner_item, result_Business);
+//        dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+//        spnBusinessDiv.setAdapter(dataAdapterBd);
+
+//        results.clear();
+//        results.add("Select Brand");
+//        adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
+//        adapter_state2.setDropDownViewResource(R.layout.spinner_item);
+//        spnProduct.setAdapter(adapter_state2);
 
 
 
@@ -249,7 +289,7 @@ public class Stock_Product_Options extends Activity  {
         spnCategory.setAdapter(adapter_state1);
       //  spnCategory.setOnItemSelectedListener(this);
 
-        results.add("Select Sub Category");
+        results.add("Select Product");
         adapter_state2 = new ArrayAdapter<String>(this, R.layout.spinner_item, results);
         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
         spnProduct.setAdapter(adapter_state2);
@@ -281,7 +321,7 @@ public class Stock_Product_Options extends Activity  {
                     }
                     else
                     if (parent.getItemAtPosition(pos).toString()
-                            .equalsIgnoreCase("Select Sub Category"))
+                            .equalsIgnoreCase("Select Product"))
                     {
                         results2.add("");
                         results2.clear();
@@ -350,7 +390,7 @@ public class Stock_Product_Options extends Activity  {
                             .equalsIgnoreCase("Select Category")) {
 
                         results.clear();
-                        results.add("Select Sub Category");
+                        results.add("Select Product");
                         adapter_state2 = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, results);
                         adapter_state2.setDropDownViewResource(R.layout.spinner_item);
                         spnProduct.setAdapter(adapter_state2);
@@ -383,7 +423,7 @@ public class Stock_Product_Options extends Activity  {
                         results.clear();
                         //List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_ID(Global_Data.GLOVEL_CATEGORY_ID);
                         List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_category_name(parent.getItemAtPosition(pos).toString().trim());
-                        results.add("Select Sub Category");
+                        results.add("Select Product");
                         for (Local_Data cn : contacts22) {
                             String str_product = ""+cn.getStateName();
                             //Global_Data.local_pwd = ""+cn.getPwd();

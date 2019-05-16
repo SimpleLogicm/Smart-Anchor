@@ -130,7 +130,7 @@ public class Home extends Fragment {
 //					    	 Flwg();
 //					      }
 //					    }).start();
- 				Intent intent1 = new Intent(getActivity(), CalendarAct.class); 
+ 				Intent intent1 = new Intent(getActivity(), CalendarAct.class);
  			    startActivity(intent1);
  				getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 				//getActivity().finish();

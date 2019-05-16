@@ -21,9 +21,9 @@
     <color name="list_row_hover_start_color">#ebeef0</color>
     <color name="list_row_hover_end_color">#ebeef0</color>
 
-   <color name="colorPrimary">#25baa2</color>
-   <color name="colorPrimaryDark">#0e917c</color>
-   <color name="colorAccent">#89d0c2</color>
+    <color name="colorPrimary">#303F9F</color>
+    <color name="colorPrimaryDark">#00316b</color>
+    <color name="colorAccent">#FF4081</color>
     
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -58,5 +58,25 @@
 
     <color name="text_background_color">#ffffff</color>
     <color name="grey_secondry">#BDBDBD</color>
+    <color name="light_grey">#DCDCDC</color>
+
+    <color name="bgBackSideColor">#f4f0ff</color>
+    <color name="bgTitleLeft">#594691</color>
+    <color name="bgTitleRight">#ffffff</color>
+    <color name="bgContentTop">#594691</color>
+    <color name="bgContent">#ffffff</color>
+    <color name="contentDividerLine">#e0e0e0</color>
+    <color name="contentBadgeTitle">#a9a9a9</color>
+    <color name="titleBadgeTitle">#adafb1</color>
+    <color name="titleBadgeText">#adafb1</color>
+    <color name="mainTextColor">#343d43</color>
+    <color name="btnRequest">#ffbf12</color>
+    <color name="t_header_background_color">#b2b2b2</color>
+    <color name="text_color">#ffffff</color>
+    <color name="textview_background_color">#e9001c</color>
+    <color name="dard_grey">#aeaeae</color>
+    <color name="light_greynew">#cacaca</color>
+    <color name="ledger_header">#a1a1a1</color>
+    <color name="ledger_text_value">#797575</color>
     
 </resources>

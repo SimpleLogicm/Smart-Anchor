@@ -2,10 +2,10 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/contacts_action_bar"
-android:layout_width="fill_parent"
-android:layout_height="wrap_content"
+android:layout_width="match_parent"
+android:layout_height="55dp"
 android:orientation="horizontal"
- android:background="#8A0808"
+android:background="#8A0808"
 android:padding="1dip" >
 
 <!-- ListRow Left side Thumbnail image -->

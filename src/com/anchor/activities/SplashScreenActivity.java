@@ -42,10 +42,6 @@ public class SplashScreenActivity extends Activity {
 		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
 
-
-
-
-
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
 		String logostr=spf1.getString("splash_data", "");
 

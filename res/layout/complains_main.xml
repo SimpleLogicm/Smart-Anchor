@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/coordinatorLayout"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:titleTextColor="@android:color/white"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/MyDarkToolbarStyle"
+
+            />
+    </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/containerNewOrder"
+            android:orientation="vertical"
+            android:fillViewport="true"
+            android:background="@color/gray"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <RelativeLayout
+
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+
+                >
+
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvComplaint"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/complaint_card">
+
+                </android.support.v7.widget.RecyclerView>
+                <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/rec1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/c_horizontalRecyclerView"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:orientation="vertical"
+                    android:fillViewport="true"
+                    android:background="@color/gray"
+                    >
+                    <LinearLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    >
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/c_spinner_search_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    android:spinnerMode="dropdown"
+
+                    android:layout_centerHorizontal="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/c_spinner_search_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    android:spinnerMode="dropdown"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/c_spinner_search_product"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/c_spinner_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    android:spinnerMode="dropdown"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/c_spinner_search_type"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+
+            <RelativeLayout
+                android:id="@+id/t1_container"
+                android:layout_below="@+id/c_spinner_area"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text1_value_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/gray"
+                    app:hintTextAppearance="@style/GreenTextInputLayout"
+                    android:theme="@style/TextLabel"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/text1_value"
+                        android:layout_width="match_parent"
+                        android:maxLength="150"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:textColorHint="@color/gray"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:hint=""
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text1_value_text"
+                        android:singleLine="true"
+                        android:scrollbars="none"
+                        android:inputType="textImeMultiLine"
+                        android:completionThreshold="1"
+                        android:imeOptions="actionNext"
+                        android:ems="10"
+                        android:drawableRight="@drawable/search_icon"
+                        android:textSize="15dp"
+                        android:hint="Search Customer"
+                        android:theme="@style/Autocomplete">
+                        <requestFocus />
+                    </AutoCompleteTextView>
+                    </RelativeLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text2_value_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/gray"
+                    android:layout_below="@+id/t1_container"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:hintTextAppearance="@style/GreenTextInputLayout"
+                    android:theme="@style/TextLabel"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/text2_value"
+                        android:layout_width="match_parent"
+                        android:maxLength="150"
+                        android:imeOptions="actionNext"
+                        android:singleLine="true"
+                        android:textColorHint="@color/gray"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:hint=""
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text3_value_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/gray"
+                    android:layout_below="@+id/text2_value_text"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:theme="@style/TextLabel"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/text3_value"
+                        android:layout_width="match_parent"
+                        android:maxLength="150"
+                        android:textColorHint="@color/gray"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:hint=""
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text4_value_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/gray"
+                    android:layout_below="@+id/text3_value_text"
+
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:theme="@style/TextLabel"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/text4_value"
+                        android:layout_width="match_parent"
+                        android:maxLength="150"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:textColorHint="@color/gray"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:hint=""
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+                </RelativeLayout>
+                    </LinearLayout>
+                </android.support.v4.widget.NestedScrollView>
+
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/c_horizontalRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_above="@+id/c_fab_add"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:clipToPadding="false"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/c_fab_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    app:backgroundTint="#414143"
+                    android:layout_alignParentBottom="true"
+
+                    app:srcCompat="@drawable/camera_icon"/>
+
+                <Button
+                    android:id="@+id/btnNewComplaintSubmit"
+                    android:layout_width="87dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/create_order_buttons"
+                    android:clickable="true"
+                    android:text="Submit"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
