@@ -1212,7 +1212,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
                 if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("feedbacks"))
                 {
                     multipart.addFormField("type",prefManager.getCustomer_service_type().toLowerCase());
-                    multipart.addFormField("email", prefManager.getUser_Email());
+                    multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                    // multipart.addFormField("area_complaint",areaTypeItem);
                   //  multipart.addFormField("product", productItem);
@@ -1224,7 +1224,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
                 if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("claims"))
                 {
                     multipart.addFormField("type",prefManager.getCustomer_service_type().toLowerCase());
-                    multipart.addFormField("email", prefManager.getUser_Email());
+                    multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                     multipart.addFormField("product_category", type_spinner.getSelectedItem().toString());
                     multipart.addFormField("sub_category", c_spinner_area.getSelectedItem().toString());
@@ -1241,7 +1241,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
                 if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("logistics"))
                 {
                     multipart.addFormField("type",prefManager.getCustomer_service_type().toLowerCase());
-                    multipart.addFormField("email", prefManager.getUser_Email());
+                    multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                     multipart.addFormField("product_category", type_spinner.getSelectedItem().toString());
                     multipart.addFormField("sub_category", c_spinner_area.getSelectedItem().toString());
@@ -1258,7 +1258,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
                 if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("marketing tool"))
                 {
                     multipart.addFormField("type","marketing_tool");
-                    multipart.addFormField("email", prefManager.getUser_Email());
+                    multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                     multipart.addFormField("business_unit", type_spinner.getSelectedItem().toString());
                     multipart.addFormField("brand", c_spinner_area.getSelectedItem().toString());
@@ -1393,7 +1393,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
         StringRequest jsObjRequest = null;
         String service_url = "";
         //String email="payal@gmail.com";
-        String email=prefManager.getUser_Email();
+        String email=Global_Data.CUSTOMER_EMAIL;
 
         if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("Marketing Tool"))
         {
@@ -1743,15 +1743,15 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
         String Service_url = "";
 
         Log.i("volley", "domain: " + domain);
-        Log.i("volley", "email: " +  prefManager.getUser_Email());
+        Log.i("volley", "email: " +  Global_Data.CUSTOMER_EMAIL);
         try {
             if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("Marketing Tool"))
             {
-                 Service_url = domain + "customer_service_complaints/populate_sub_category?email=" +  prefManager.getUser_Email()+"&product_category=" + URLEncoder.encode(primary_category, "UTF-8")+"&type=" + "marketing_tool";
+                 Service_url = domain + "customer_service_complaints/populate_sub_category?email=" +  Global_Data.CUSTOMER_EMAIL+"&product_category=" + URLEncoder.encode(primary_category, "UTF-8")+"&type=" + "marketing_tool";
             }
             else
             {
-                 Service_url = domain + "customer_service_complaints/populate_sub_category?email=" +  prefManager.getUser_Email()+"&product_category=" + URLEncoder.encode(primary_category, "UTF-8")+"&type=" + URLEncoder.encode(prefManager.getCustomer_service_type().toLowerCase(), "UTF-8");
+                 Service_url = domain + "customer_service_complaints/populate_sub_category?email=" +  Global_Data.CUSTOMER_EMAIL+"&product_category=" + URLEncoder.encode(primary_category, "UTF-8")+"&type=" + URLEncoder.encode(prefManager.getCustomer_service_type().toLowerCase(), "UTF-8");
             }
 
 
@@ -1994,7 +1994,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
         String domain = getResources().getString(R.string.service_domain);
 
         Log.i("volley", "domain: " + domain);
-        Log.i("volley", "email: " + prefManager.getUser_Email());
+        Log.i("volley", "email: " + Global_Data.CUSTOMER_EMAIL);
 
         String service_url = "";
 
@@ -2003,12 +2003,12 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
             if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("marketing tool"))
             {
                 service_url = domain + "customer_service_complaints/populate_item_description?email=" +
-                        URLEncoder.encode(prefManager.getUser_Email(), "UTF-8") + "&product_category=" + URLEncoder.encode(type_spinner.getSelectedItem().toString(), "UTF-8") + "&sub_category=" + URLEncoder.encode(c_spinner_area.getSelectedItem().toString(), "UTF-8")+ "&type=" + URLEncoder.encode("marketing_tool", "UTF-8");;
+                        URLEncoder.encode(Global_Data.CUSTOMER_EMAIL, "UTF-8") + "&product_category=" + URLEncoder.encode(type_spinner.getSelectedItem().toString(), "UTF-8") + "&sub_category=" + URLEncoder.encode(c_spinner_area.getSelectedItem().toString(), "UTF-8")+ "&type=" + URLEncoder.encode("marketing_tool", "UTF-8");;
             }
             else
             {
                 service_url = domain + "customer_service_complaints/populate_item_description?email=" +
-                        URLEncoder.encode(prefManager.getUser_Email(), "UTF-8") + "&product_category=" + URLEncoder.encode(type_spinner.getSelectedItem().toString(), "UTF-8") + "&sub_category=" + URLEncoder.encode(c_spinner_area.getSelectedItem().toString(), "UTF-8") + "&type=" + URLEncoder.encode(prefManager.getCustomer_service_type().toLowerCase(), "UTF-8");
+                        URLEncoder.encode(Global_Data.CUSTOMER_EMAIL, "UTF-8") + "&product_category=" + URLEncoder.encode(type_spinner.getSelectedItem().toString(), "UTF-8") + "&sub_category=" + URLEncoder.encode(c_spinner_area.getSelectedItem().toString(), "UTF-8") + "&type=" + URLEncoder.encode(prefManager.getCustomer_service_type().toLowerCase(), "UTF-8");
             }
 
 
