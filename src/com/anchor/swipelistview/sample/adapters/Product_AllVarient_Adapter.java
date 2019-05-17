@@ -143,8 +143,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
         holder.mrpvnew.setText("[MRP] : " + getData.get(TAG_PRICE));
         holder.mrpvs.setText("[DLP] : " + getData.get(TAG_RP));
 
-        holder.PSQ.setText("SQ : " + getData.get(TAG_ITEM_SQ));
-        holder.PMQ.setText("Minimum order qty : " + getData.get(TAG_ITEM_MQ));
+        holder.PSQ.setText("Minimum order qty : " + getData.get(TAG_ITEM_SQ));
+        holder.PMQ.setText("MQ : " + getData.get(TAG_ITEM_MQ));
       //  holder.PSTOCK.setText("Stock : " + getData.get(TAG_STOCK));
         holder.PSQVALUE.setText(getData.get(TAG_ITEM_SQ));
         holder.PMQVALUE.setText(getData.get(TAG_ITEM_MQ));
