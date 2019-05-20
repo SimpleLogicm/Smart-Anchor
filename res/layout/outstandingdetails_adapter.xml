@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/light_greynew"
+        android:weightSum="9.0">
+
+        <TextView
+            android:id="@+id/Reference_No"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:autoLink="web"
+            android:text=""
+            android:layout_marginLeft="1dp"
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/invoice_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text=""
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text=""
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Product_Category"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Due_Amount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Due_Date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Total_No_Of_Days"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_marginRight="1dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+    </LinearLayout>
+
+</RelativeLayout>

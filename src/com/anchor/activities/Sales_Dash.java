@@ -116,7 +116,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			isInternetPresent = cd.isConnectingToInternet();
 			if (isInternetPresent)
 			{
-				Intent a = new Intent(Sales_Dash.this,Status_Act.class);
+				Intent a = new Intent(Sales_Dash.this,OutstandingActivity.class);
 				startActivity(a);
 				finish();
 			}

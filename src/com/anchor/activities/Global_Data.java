@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Global_Data {
 
+    public static String GLOvel_BU = "";
     public static String CUSTOMER_EMAIL="";
     public static HashMap<Integer,String> p_cus_services_status_check = new HashMap<>();
     public static String Varient_value_add_flag = "";

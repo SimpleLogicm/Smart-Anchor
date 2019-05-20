@@ -39,6 +39,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -165,20 +166,13 @@ public class NewMarketingToolActivity extends AppCompatActivity implements Custo
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+        prefManager = new PrefManager(this);
 
-        try
-        {
+        ImageView Header_logo = (ImageView) findViewById(R.id.Header_logo);
+        TextView mTitleTextView = (TextView)findViewById(R.id.screenname);
+         mTitleTextView.setText(prefManager.getCustomer_service_type());
 
-            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setCustomView(R.layout.action_bar);
-            View view =getSupportActionBar().getCustomView();
-
-            view.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) view.findViewById(R.id.screenname);
-            mTitleTextView.setText("New Marketing Tool");
-
-            TextView todaysTarget = (TextView) view.findViewById(R.id.todaysTarget);
+        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
 
             SharedPreferences sp = NewMarketingToolActivity.this.getSharedPreferences("SimpleLogic", 0);
 
@@ -187,33 +181,62 @@ public class NewMarketingToolActivity extends AppCompatActivity implements Custo
 			todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
 		}
 
-            try
-            {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-                {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-                }else
-                {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-                }
-
-            }catch(Exception ex){ex.printStackTrace();}
-            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-                todaysTarget.setText("Today's Target Acheived");
+        Header_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
+        });
 
-           getActionBar().setHomeButtonEnabled(true);
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        }catch(Exception ex){ex.printStackTrace();}
+//        try
+//        {
+//            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//            getSupportActionBar().setDisplayShowCustomEnabled(true);
+//            getSupportActionBar().setCustomView(R.layout.action_bar);
+//            View view =getSupportActionBar().getCustomView();
+//            view.setPadding(0, 0, 0, 0);
+//            view.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+//            TextView mTitleTextView = (TextView) view.findViewById(R.id.screenname);
+//
+//
+//            mTitleTextView.setText(prefManager.getCustomer_service_type());
+//
+//            TextView todaysTarget = (TextView) view.findViewById(R.id.todaysTarget);
+//
+//            SharedPreferences sp = NewMarketingToolActivity.this.getSharedPreferences("SimpleLogic", 0);
+//
+//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+//        	//todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+//			todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+//		}
+//
+//            try
+//            {
+//                int target  = (int) Math.round(sp.getFloat("Target",0));
+//                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+//                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
+//                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+//                {
+//                    int age = (int) Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+//                }else
+//                {
+//                    int age = (int) Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+//                }
+//
+//            }catch(Exception ex){ex.printStackTrace();}
+//            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+////        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+//                todaysTarget.setText("Today's Target Acheived");
+//            }
+//
+//           getActionBar().setHomeButtonEnabled(true);
+//            getActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        }catch(Exception ex){ex.printStackTrace();}
 
 
         c_spinner_search_state = findViewById(R.id.c_spinner_search_state);
@@ -242,7 +265,7 @@ public class NewMarketingToolActivity extends AppCompatActivity implements Custo
 //        myRv.setLayoutManager(new LinearLayoutManager(this));
 //        myRv.setAdapter(myAdapter);
 
-        prefManager = new PrefManager(this);
+
 
 
 

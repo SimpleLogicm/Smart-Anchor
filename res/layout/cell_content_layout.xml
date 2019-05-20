@@ -290,10 +290,11 @@
         android:layout_marginTop="100dp"
         android:background="@color/btnRequest"
         android:padding="10dp"
-        android:text=""
+        android:text="OK"
+        android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/mainTextColor"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
 
 

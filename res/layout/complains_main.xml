@@ -23,6 +23,48 @@
             />
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:id="@+id/thumbnaill"
+        android:layout_width="fill_parent"
+        android:layout_height="52dp"
+        android:background="#8A0808"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/screenname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Order Booking"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/todaysTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/Header_logo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
+        android:background="@drawable/anchor_logo"
+        />
+
+
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,6 +72,7 @@
             android:id="@+id/containerNewOrder"
             android:orientation="vertical"
             android:fillViewport="true"
+            android:layout_marginTop="50dp"
             android:background="@color/gray"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
@@ -148,7 +191,7 @@
                     android:id="@+id/text1_value_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/white"
                     app:hintTextAppearance="@style/GreenTextInputLayout"
                     android:theme="@style/TextLabel"
                     >
@@ -159,9 +202,9 @@
                         android:maxLength="150"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
-                        android:textColorHint="@color/gray"
+                        android:textColorHint="@color/white"
                         android:layout_height="match_parent"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:hint=""
                         />
 
@@ -185,11 +228,12 @@
                         <requestFocus />
                     </AutoCompleteTextView>
                     </RelativeLayout>
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/text2_value_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/white"
                     android:layout_below="@+id/t1_container"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
@@ -205,10 +249,10 @@
                         android:maxLength="150"
                         android:imeOptions="actionNext"
                         android:singleLine="true"
-                        android:textColorHint="@color/gray"
+                        android:textColorHint="@color/white"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
-                        android:hint=""
+
                         />
 
                 </android.support.design.widget.TextInputLayout>
@@ -217,7 +261,7 @@
                     android:id="@+id/text3_value_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/white"
                     android:layout_below="@+id/text2_value_text"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
@@ -230,12 +274,12 @@
                         android:id="@+id/text3_value"
                         android:layout_width="match_parent"
                         android:maxLength="150"
-                        android:textColorHint="@color/gray"
+                        android:textColorHint="@color/white"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
-                        android:hint=""
+
                         />
 
                 </android.support.design.widget.TextInputLayout>
@@ -244,7 +288,7 @@
                     android:id="@+id/text4_value_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/white"
                     android:layout_below="@+id/text3_value_text"
 
                     android:layout_marginRight="10dp"
@@ -261,10 +305,10 @@
                         android:maxLength="150"
                         android:singleLine="true"
                         android:imeOptions="actionNext"
-                        android:textColorHint="@color/gray"
+                        android:textColorHint="@color/white"
                         android:layout_height="match_parent"
                         android:textColor="@color/white"
-                        android:hint=""
+
                         />
 
                 </android.support.design.widget.TextInputLayout>

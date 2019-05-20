@@ -46,6 +46,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -211,54 +212,75 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
 //            getSupportActionBar().setHomeButtonEnabled(true);
 //        }
 
-        try
-        {
+        ImageView Header_logo = (ImageView)findViewById(R.id.Header_logo);
+        TextView mTitleTextView = (TextView)findViewById(R.id.screenname);
+        mTitleTextView.setText(prefManager.getCustomer_service_type());
 
-            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-            getSupportActionBar().setDisplayShowCustomEnabled(true);
-            getSupportActionBar().setCustomView(R.layout.action_bar);
-            View view =getSupportActionBar().getCustomView();
 
-            view.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) view.findViewById(R.id.screenname);
-            mTitleTextView.setText("New Marketing Tool");
+        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
 
-            TextView todaysTarget = (TextView) view.findViewById(R.id.todaysTarget);
+        SharedPreferences sp = ComplaintsActivity.this.getSharedPreferences("SimpleLogic", 0);
 
-            SharedPreferences sp = ComplaintsActivity.this.getSharedPreferences("SimpleLogic", 0);
+        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+            //todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+            todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+        }
 
-            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
-                //todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
-                todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+        Header_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
+        });
 
-            try
-            {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-                {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-                }else
-                {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-                }
-
-            }catch(Exception ex){ex.printStackTrace();}
-            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-                todaysTarget.setText("Today's Target Acheived");
-            }
-
-            getActionBar().setHomeButtonEnabled(true);
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        }catch(Exception ex){ex.printStackTrace();}
+//        try
+//        {
+//
+//            getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//            getSupportActionBar().setDisplayShowCustomEnabled(true);
+//            getSupportActionBar().setCustomView(R.layout.action_bar);
+//            View view =getSupportActionBar().getCustomView();
+//
+//            view.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+//            TextView mTitleTextView = (TextView) view.findViewById(R.id.screenname);
+//            mTitleTextView.setText(prefManager.getCustomer_service_type());
+//
+//            TextView todaysTarget = (TextView) view.findViewById(R.id.todaysTarget);
+//
+//            SharedPreferences sp = ComplaintsActivity.this.getSharedPreferences("SimpleLogic", 0);
+//
+//            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+//                //todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+//                todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+//            }
+//
+//            try
+//            {
+//                int target  = (int) Math.round(sp.getFloat("Target",0));
+//                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+//                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
+//                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+//                {
+//                    int age = (int) Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+//                }else
+//                {
+//                    int age = (int) Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+//                }
+//
+//            }catch(Exception ex){ex.printStackTrace();}
+//            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+////        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+//                todaysTarget.setText("Today's Target Acheived");
+//            }
+//
+//            getActionBar().setHomeButtonEnabled(true);
+//            getActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        }catch(Exception ex){ex.printStackTrace();}
 
 
         if (cd.isConnectingToInternet())
@@ -290,8 +312,8 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
             type_list.add("Selects Business Unit");
             area_list.add("Selects Brand");
             comment="Please Enter Claim";
-            text1_value.setHint("Item Description");
-            text2_value.setHint("Quantity");
+            text1_value_text.setHint("Item Description");
+            text2_value_text.setHint("Quantity");
             text2_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
             type_spinner.setVisibility(View.VISIBLE);
             c_spinner_area.setVisibility(View.VISIBLE);
@@ -309,9 +331,9 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
             type_list.add("Selects Product Category");
             area_list.add("Selects Sub Category");
             comment="Please Enter Claim";
-            text1_value.setHint("Reference 1 (Invoice No)");
-            text2_value.setHint("Reference 2 (Scheme)");
-            text3_value.setHint("Reference 3");
+            text1_value_text.setHint("Reference 1 (Invoice No)");
+            text2_value_text.setHint("Reference 2 (Scheme)");
+            text3_value_text.setHint("Reference 3");
             type_spinner.setVisibility(View.VISIBLE);
             c_spinner_area.setVisibility(View.VISIBLE);
             autoCompleteTextView1.setVisibility(View.GONE);
@@ -327,11 +349,11 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
             type_list.add("Selects Product Category");
             area_list.add("Selects Sub Category");
             comment="Please Enter Claim";
-            text1_value.setHint("Item Description");
-            text2_value.setHint("Invoice No");
-            text3_value.setHint("Quantity");
+            text1_value_text.setHint("Item Description");
+            text2_value_text.setHint("Invoice No");
+            text3_value_text.setHint("Quantity");
             text3_value.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-            text4_value.setHint("Remarks");
+            text4_value_text.setHint("Remarks");
             autoCompleteTextView1.setHint("Item Description");
             type_spinner.setVisibility(View.VISIBLE);
             c_spinner_area.setVisibility(View.VISIBLE);
@@ -348,7 +370,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
            // type_list.add("Selects Business Unit");
            // area_list.add("Selects Brand");
             comment="Please Enter Claim";
-            text1_value.setHint("Description");
+            text1_value_text.setHint("Description");
             type_spinner.setVisibility(View.GONE);
             c_spinner_area.setVisibility(View.GONE);
             text1_value_text.setVisibility(View.VISIBLE);
@@ -2097,7 +2119,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
                                         autoCompleteTextView1.setAdapter(adapter);// setting the adapter
                                         // data into the
                                         // AutoCompleteTextView
-                                        autoCompleteTextView1.setTextColor(Color.BLACK);
+                                        autoCompleteTextView1.setTextColor(Color.WHITE);
 
 
 

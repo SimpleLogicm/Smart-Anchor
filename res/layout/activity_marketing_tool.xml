@@ -7,6 +7,57 @@
     android:layout_height="match_parent"
     >
 
+    <LinearLayout
+        android:id="@+id/thumbnaill"
+        android:layout_width="fill_parent"
+        android:layout_height="52dp"
+        android:background="#8A0808"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/screenname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Order Booking"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/todaysTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/aaa"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/arr_left"
+        />
+
+    <ImageView
+        android:id="@+id/Header_logo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/anchor_logo"
+        />
+
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +69,18 @@
             android:layout_width="match_parent"
             app:titleTextColor="@android:color/white"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/MyDarkToolbarStyle"
+            app:popupTheme="@style/MyDarkToolbarStyle">
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Toolbar Title"
+            android:textColor="@color/white"
+            android:textSize="17.0sp" />
 
             />
     </android.support.design.widget.AppBarLayout>
@@ -30,6 +92,7 @@
         android:id="@+id/containerNewOrder"
         android:orientation="vertical"
         android:fillViewport="true"
+        android:layout_marginTop="50dp"
         android:background="@color/gray"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
@@ -115,7 +178,7 @@
                             android:id="@+id/address_value_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/gray"
+                            android:textColorHint="@color/white"
                             android:layout_below="@+id/name_value_text"
                             android:layout_marginRight="10dp"
                             android:visibility="gone"
@@ -129,7 +192,7 @@
                                 android:id="@+id/address_value"
                                 android:layout_width="match_parent"
                                 android:maxLength="150"
-                                android:textColorHint="@color/gray"
+                                android:textColorHint="@color/white"
                                 android:singleLine="true"
                                 android:imeOptions="actionNext"
                                 android:layout_height="match_parent"
@@ -307,7 +370,7 @@
                             android:id="@+id/text1_value_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/gray"
+                            android:textColorHint="@color/white"
                             android:layout_below="@+id/c_spinner_call_type"
                             android:layout_marginRight="10dp"
                             android:layout_marginLeft="10dp"
@@ -322,7 +385,7 @@
                                 android:maxLength="150"
                                 android:singleLine="true"
                                 android:imeOptions="actionDone"
-                                android:textColorHint="@color/gray"
+                                android:textColorHint="@color/white"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/white"
                                 android:hint="Remarks"

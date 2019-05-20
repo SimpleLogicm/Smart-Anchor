@@ -1,15 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:support-v4:21.0.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-v4-21.0.3.aar/5c2ffa50e88c5cfce05aca8f885dd58c/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-v4-21.0.3.aar/5c2ffa50e88c5cfce05aca8f885dd58c/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-v4-21.0.3.aar/5c2ffa50e88c5cfce05aca8f885dd58c/jars/libs/internal_impl-21.0.3.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/12a5373029c5d882acf447a43eed87f8/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/12a5373029c5d882acf447a43eed87f8/jars/libs/internal_impl-21.0.3.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/12a5373029c5d882acf447a43eed87f8/jars/classes.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://E:/android_stdio_bundle/SDK/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
-      <root url="jar://E:/android_stdio_bundle/SDK/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-v4/21.0.3/e40b935f2f6bfa8497a390b045a999de1bee1d5/support-v4-21.0.3-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

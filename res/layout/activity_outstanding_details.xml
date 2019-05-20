@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".OutstandingDetails"
+    tools:showIn="@layout/activity_outstanding_details">
+
+    <LinearLayout
+        android:id="@+id/sl_header_container"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Select Date"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/out_de_period_value"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none">
+
+        </EditText>
+
+        <ImageView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/date_range"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="To"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/out_de_period_value2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none"
+            >
+
+        </EditText>
+
+        <ImageView android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/date_range"
+
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sl_header_containerhh"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+
+        >
+
+        <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
+            android:id="@+id/out_button_expandable"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:aebAnimDurationMillis="175"
+            app:aebButtonElevation="4dp"
+            app:aebButtonGapDp="2dp"
+            app:aebEndAngleDegree="260"
+            android:layout_marginBottom="5dp"
+            app:aebIsSelectionMode="false"
+            app:aebMainButtonRotateAnimDurationMillis="250"
+            app:aebMainButtonRotateDegree="-135"
+            app:aebMainButtonSizeDp="40dp"
+            app:aebMainButtonTextSizeSp="20dp"
+            app:aebMaskBackgroundColor="@color/transparent"
+            app:aebRippleEffect="true"
+            app:aebStartAngleDegree="140"
+            app:aebSubButtonSizeDp="40dp"
+            app:aebSubButtonTextColor="#ff0000ff"
+            app:aebSubButtonTextSizeSp="18dp"
+            app:aebBlurRadius="10"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/spinner_in_container"
+        android:layout_below="@+id/sl_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="0dp"
+        >
+
+        <Spinner
+            android:id="@+id/outstanding_category"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:spinnerMode="dialog"
+
+            android:layout_gravity="center"
+            android:hint="Select Business Division"
+
+            />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/l_header_container"
+        android:layout_below="@+id/spinner_in_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="9.0">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:background="@color/ledger_header"
+            android:text="Reference No"
+            android:layout_marginLeft="1dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:background="@color/ledger_header"
+            android:text="Invoice No"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:background="@color/ledger_header"
+            android:text="Date"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="Type"
+            android:background="@color/ledger_header"
+            android:padding="1dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="Product Category"
+            android:background="@color/ledger_header"
+            android:padding="1dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="Value"
+            android:background="@color/ledger_header"
+            android:padding="1dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="Due Amount"
+            android:background="@color/ledger_header"
+            android:padding="1dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="Due Date"
+            android:padding="1dp"
+            android:background="@color/ledger_header"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="Total No Of Days"
+            android:padding="1dp"
+            android:background="@color/ledger_header"
+            android:layout_marginRight="1dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+    </LinearLayout>
+
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+        android:id="@+id/ou_detail_lshimmer_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:shimmer_demo_child_count="10"
+        app:shimmer_demo_grid_child_count="2"
+        app:shimmer_demo_layout="@layout/placeholder_item"
+        app:shimmer_demo_layout_manager_type="linear_vertical"
+        app:shimmer_demo_angle="0"
+        android:layout_below="@+id/l_header_container"
+        />
+
+</RelativeLayout>
