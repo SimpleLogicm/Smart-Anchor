@@ -84,3 +84,6 @@
 
 -dontwarn okhttp3.**
 -dontwarn okio.**
+
+-dontwarn afu.org.checkerframework.**
+-dontwarn org.checkerframework.**

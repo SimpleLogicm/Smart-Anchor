@@ -5,8 +5,11 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">8dp</dimen>
-
-
+    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="activity_padding_horizontal">16dp</dimen>
+    <dimen name="placeholder_image">50dp</dimen>
+    <dimen name="placeholder_text_height">8dp</dimen>
+    <dimen name="com_l_margin">12dp</dimen>
     <dimen name="text_size_header">20dp</dimen>
     <dimen name="text_content_size">18dp</dimen>
     <dimen name="activity_vertical_marginn">16dp</dimen>

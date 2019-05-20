@@ -372,7 +372,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                             } else {
                                 txtPrice.setText("Total Price : " + "");
                                 price = "";
-                                t_error.setText("Entered Value Not A Multiple Of Item SQ Value.");
+                                t_error.setText("Entered Value Not A Multiple Of Item Minimum Order Quantity.");
                             }
 
                         } catch (Exception ex) {
@@ -607,7 +607,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
                                 } else if (SQMO_Validator != 0) {
-                                    Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this, "Entered Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this, "Entered Value Not A Multiple Of Item Minimum Order Quantity.", Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
                                     editTextQuantity.setText("");

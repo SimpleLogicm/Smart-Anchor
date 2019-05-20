@@ -209,7 +209,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
 
                                 holder.totalprice.setText("");
-                                holder.quantity_error.setText("Entered Value Not A Multiple Of Item SQ Value.");
+                                holder.quantity_error.setText("Entered Value Not A Multiple Of Item Minimum Order Quantity.");
                             }
 
                             Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");

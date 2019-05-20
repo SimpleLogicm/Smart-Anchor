@@ -448,7 +448,7 @@ public class Item_Edit_Activity extends BaseActivity {
                             } else {
                                 txtPrice.setText("Total Price : " + "");
                                 price = "";
-                                t_error.setText("Entered Value Not A Multiple Of Item SQ Value.");
+                                t_error.setText("Entered Value Not A Multiple Of Item Item Minimum Order Quantity.");
                             }
 
                         } catch (Exception ex) {
