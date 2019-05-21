@@ -17,6 +17,7 @@
     <!--</TextView>-->
 
     <LinearLayout
+        android:id="@+id/tab_layout"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:background="#ececec"

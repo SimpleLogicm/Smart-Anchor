@@ -5,60 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".OutstandingDetails"
     android:background="@color/gray"
-    >
-
-    <LinearLayout
-        android:id="@+id/thumbnaill"
-        android:layout_width="fill_parent"
-        android:layout_height="52dp"
-        android:background="#8A0808"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/screenname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="Order Booking"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:typeface="sans" />
-
-        <TextView
-            android:id="@+id/todaysTarget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:typeface="sans" />
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/aaa"
-        android:layout_width="13dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/arr_left"
-        />
-
-    <ImageView
-        android:id="@+id/Header_logo"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="8dp"
-        android:background="@drawable/anchor_logo"
-        />
-
+    tools:context="Scheme_EarningSummary"
+   >
 
     <LinearLayout
         android:id="@+id/sl_header_container"
@@ -67,8 +16,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_below="@+id/thumbnaill"
+        android:layout_marginBottom="2dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         >
@@ -76,16 +24,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select Date"
+            android:text="Scheme Period"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/black" >
+            android:textColor="@color/white" >
         </TextView>
 
         <EditText
-            android:id="@+id/out_de_period_value"
+            android:id="@+id/scheme_period_value"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -93,7 +41,7 @@
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -119,24 +67,24 @@
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/black" >
+            android:textColor="@color/white" >
         </TextView>
 
         <EditText
-            android:id="@+id/out_de_period_value2"
+            android:id="@+id/scheme_period_value2"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/sl_header_container"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginLeft="5dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:gravity="center"
             android:inputType="none"
-            android:textColor="@color/black"
-            android:textSize="@dimen/com_l_margin"
-            android:textStyle="bold">
+            >
 
         </EditText>
 
@@ -147,6 +95,9 @@
             app:srcCompat="@drawable/date_range"
 
             />
+
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -155,13 +106,13 @@
         android:layout_height="65dp"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/thumbnaill"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
+
         >
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
-            android:id="@+id/out_button_expandable"
+            android:id="@+id/button_expandable"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:aebAnimDurationMillis="175"
@@ -180,46 +131,83 @@
             app:aebSubButtonSizeDp="40dp"
             app:aebSubButtonTextColor="#ff0000ff"
             app:aebSubButtonTextSizeSp="18dp"
-            app:aebBlurRadius="10"/>
+            app:aebBlurRadius="10"
+            />
 
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/spinner_in_container"
+        android:id="@+id/spinner_s_container"
         android:layout_below="@+id/sl_header_container"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="0dp"
-        >
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone"
+        android:layout_marginBottom="5dp"
+        android:weightSum="4.0">
 
         <Spinner
-            android:id="@+id/outstanding_category"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
+            android:id="@+id/sc_businees_unit"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:spinnerMode="dialog"
+            android:hint="Select Business Unit"
 
+            />
+
+        <Spinner
+            android:id="@+id/sc_businees_division"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
             android:layout_gravity="center"
             android:hint="Select Business Division"
 
             />
 
+        <Spinner
+            android:id="@+id/sc_businees_category"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:layout_gravity="center"
+            android:hint="Select Business Category"
 
+            />
+
+        <Spinner
+            android:id="@+id/sc_businees_brand"
+            android:layout_width="0dp"
+            android:layout_weight="1.0"
+            android:layout_marginRight="5dp"
+            android:spinnerMode="dialog"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="Select Brand"
+
+            />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/l_header_container"
-        android:layout_below="@+id/spinner_in_container"
+        android:layout_below="@+id/spinner_s_container"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:weightSum="9.0">
+        android:weightSum="7.0">
 
         <TextView
             android:layout_width="0dp"
@@ -228,7 +216,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Reference No"
+            android:text="Scheme Name"
             android:layout_marginLeft="1dp"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
@@ -243,7 +231,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Invoice No"
+            android:text="Quantity"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -255,21 +243,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:padding="1dp"
-            android:background="@color/ledger_header"
-            android:text="Date"
-            android:textSize="@dimen/com_l_margin"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/black" >
-        </TextView>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="Type"
+            android:text="Line Amount"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -283,7 +257,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Product Category"
+            android:text="Tax Amount"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -297,7 +271,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Value"
+            android:text="Total Amount"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -311,7 +285,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Due Amount"
+            android:text="Gift Amount"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -326,7 +300,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Due Date"
+            android:text=""
             android:padding="1dp"
             android:background="@color/ledger_header"
             android:textSize="@dimen/com_l_margin"
@@ -335,24 +309,11 @@
             android:textColor="@color/black" >
         </TextView>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="Total No Of Days"
-            android:padding="1dp"
-            android:background="@color/ledger_header"
-            android:layout_marginRight="1dp"
-            android:textSize="@dimen/com_l_margin"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/black" >
-        </TextView>
+
     </LinearLayout>
 
     <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-        android:id="@+id/ou_detail_lshimmer_recycler_view"
+        android:id="@+id/sc_lshimmer_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"

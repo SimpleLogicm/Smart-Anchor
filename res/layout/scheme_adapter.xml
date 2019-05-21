@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/light_greynew"
+        android:weightSum="8.0">
+
+        <TextView
+            android:id="@+id/Scheme_Name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:autoLink="web"
+            android:text="3-APR-2018"
+            android:layout_marginLeft="1dp"
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#a3bad7" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Current_Volume"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="Credit Memo"
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Current_Eligibility"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="456546456566"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Gift_Detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="CH345435"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Gift_Value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text=""
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Short_Volumn_For_Next_Slab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="200"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Next_Scheme_Slab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="200"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/Next_Scheme_Value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="2324"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_marginRight="1dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+    </LinearLayout>
+
+</RelativeLayout>

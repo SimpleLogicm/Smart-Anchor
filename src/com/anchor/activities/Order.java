@@ -84,6 +84,7 @@ import java.util.Locale;
 public class Order extends Activity implements OnItemSelectedListener {
     private String Re_Text = "";
     String state_name = "";
+    LinearLayout tabLayout;
     String city_name = "";
     TextView schedule_txt;
     TextView mTitleTextView;
@@ -176,6 +177,7 @@ public class Order extends Activity implements OnItemSelectedListener {
         rlout_custserve = (RelativeLayout) findViewById(R.id.rlout_customer);
         rlout_schedule = (RelativeLayout) findViewById(R.id.rlout_schedule);
 
+        tabLayout = (LinearLayout) findViewById(R.id.tab_layout);
         order_view = (LinearLayout) findViewById(R.id.order_view);
         custserve_view = (LinearLayout) findViewById(R.id.customer_view);
         schedule_view = (LinearLayout) findViewById(R.id.schedule_view);
@@ -1569,11 +1571,68 @@ public class Order extends Activity implements OnItemSelectedListener {
                     List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
 
                     if (contacts.size() <= 0) {
+
                         Toast toast = Toast.makeText(Order.this,
                                 "Customer Not Found", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                    } else {
+                    } else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue")){
+
+                        for (Local_Data cn : contacts) {
+
+                            Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
+                            Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
+                            Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
+                            Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
+                            Global_Data.CUSTOMER_EMAIL = cn.getCust_email();
+                        }
+
+                        Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
+                        Global_Data.order_city = city_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_beat = beat_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_state = state_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_retailer = customer_name;
+
+                        Global_Data.PREVIOUS_ORDER_BACK_FLAG_REURN = "";
+                        Intent intent = new Intent(getApplicationContext(),
+                                OutstandingActivity.class);
+                        intent.putExtra("CP_NAME", "video");
+                        intent.putExtra("RE_TEXT", Re_Text);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme")){
+
+                        for (Local_Data cn : contacts) {
+
+                            Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
+                            Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
+                            Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
+                            Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
+                            Global_Data.CUSTOMER_EMAIL = cn.getCust_email();
+                        }
+
+                        Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
+                        Global_Data.order_city = city_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_beat = beat_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_state = state_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_retailer = customer_name;
+
+                        Global_Data.PREVIOUS_ORDER_BACK_FLAG_REURN = "";
+                        Intent intent = new Intent(getApplicationContext(),
+                                Scheme_Filter_Activity.class);
+                        intent.putExtra("CP_NAME", "video");
+                        intent.putExtra("RE_TEXT", Re_Text);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    }
+
+                    else{
 
                         for (Local_Data cn : contacts) {
 
@@ -1636,7 +1695,32 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             schedule_view.setVisibility(View.VISIBLE);
             // rlout_schedule.setVisibility(View.INVISIBLE);
-        } else {
+        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue")) {
+            mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
+            custserve_view.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.GONE);
+            // rlout_custserve.setVisibility(View.INVISIBLE);
+            rlout_order.setBackgroundResource(R.drawable.single_wtab);
+            rlout_schedule.setBackgroundResource(R.drawable.single_wtab);
+            rlout_custserve.setBackgroundResource(R.drawable.single_btab);
+            order_view.setVisibility(View.GONE);
+            // rlout_order.setVisibility(View.VISIBLE);
+            schedule_view.setVisibility(View.GONE);
+            // rlout_schedule.setVisibility(View.VISIBLE);
+        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme")) {
+            mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
+            custserve_view.setVisibility(View.VISIBLE);
+            tabLayout.setVisibility(View.GONE);
+            // rlout_custserve.setVisibility(View.INVISIBLE);
+            rlout_order.setBackgroundResource(R.drawable.single_wtab);
+            rlout_schedule.setBackgroundResource(R.drawable.single_wtab);
+            rlout_custserve.setBackgroundResource(R.drawable.single_btab);
+            order_view.setVisibility(View.GONE);
+            // rlout_order.setVisibility(View.VISIBLE);
+            schedule_view.setVisibility(View.GONE);
+            // rlout_schedule.setVisibility(View.VISIBLE);
+        }
+        else {
             if (Global_Data.sales_btnstring.equalsIgnoreCase("Institutional Sales")) {
                 mTitleTextView.setText("Quote");
             } else {

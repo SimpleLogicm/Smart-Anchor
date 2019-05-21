@@ -15,14 +15,14 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.anchor.webservice.ConnectionDetector;
 //how to give voice for icon when swipe in android
 public class Sales_Dash extends Activity implements OnItemSelectedListener{ 
 	//Button retail_sales, institute_sales;
-	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile;
+	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn;
 	ConnectionDetector cd;
 	Boolean isInternetPresent = false;
 	TextView schedule_txt,textView1sf;
@@ -42,6 +42,10 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		C_profile = (ImageView) findViewById(R.id.C_profile);
 		schedule_txt = (TextView) findViewById(R.id.schedule_txt);
 		textView1sf = (TextView) findViewById(R.id.textView1sf);
+		outstandingBtn = (ImageView) findViewById(R.id.outstanding_btn);
+		schemeBtn = (ImageView) findViewById(R.id.scheme_btn);
+		otherInfoBtn = (ImageView) findViewById(R.id.otherinfo_btn);
+
 		txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
 		cd = new ConnectionDetector(getApplicationContext());
 		String user_name = "";
@@ -116,9 +120,10 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			isInternetPresent = cd.isConnectingToInternet();
 			if (isInternetPresent)
 			{
-				Intent a = new Intent(Sales_Dash.this,OutstandingActivity.class);
+				Intent a = new Intent(Sales_Dash.this,Order.class);
 				startActivity(a);
-				finish();
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+				//finish();
 			}
 			else
 			{
@@ -141,6 +146,77 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 		}
 	});
+
+		outstandingBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isInternetPresent = cd.isConnectingToInternet();
+				Global_Data.CUSTOMER_SERVICE_FLAG="Outstanding/Overdue";
+				if (isInternetPresent)
+				{
+					//Global_Data.CUSTOMER_SERVICE_FLAG = "CUSTOMER_SERVICE" ;
+					Intent intent = new Intent(getApplicationContext(), Order.class);
+					startActivity(intent);
+					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//					Intent a = new Intent(Sales_Dash.this,OutstandingActivity.class);
+//					startActivity(a);
+//					finish();
+				}
+				else
+				{
+					Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+				}
+			}
+		});
+
+		schemeBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isInternetPresent = cd.isConnectingToInternet();
+				Global_Data.CUSTOMER_SERVICE_FLAG="Scheme";
+				if (isInternetPresent)
+				{
+
+					Intent intent = new Intent(getApplicationContext(), Order.class);
+					startActivity(intent);
+					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+//					Intent a = new Intent(Sales_Dash.this,Scheme_Filter_Activity.class);
+//					startActivity(a);
+//					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+					//finish();
+				}
+				else
+				{
+					Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+				}
+			}
+		});
+
+		otherInfoBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isInternetPresent = cd.isConnectingToInternet();
+				Global_Data.CUSTOMER_SERVICE_FLAG="Other Info";
+				if (isInternetPresent)
+				{
+					Intent a = new Intent(Sales_Dash.this,OtherInfoActivity.class);
+					startActivity(a);
+					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+					//finish();
+				}
+				else
+				{
+					Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+				}
+			}
+		});
 
 		try
 		{
@@ -224,8 +300,9 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		
 	 Intent i = new Intent(Sales_Dash.this,MainActivity.class);
 	 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	// overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+	 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
      startActivity(i);
 	 finish();
 	}
+
 }

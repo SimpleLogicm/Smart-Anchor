@@ -13,6 +13,29 @@ import java.util.Map;
 
 public class Global_Data {
 
+    public static String year_value = "";
+    public static String halfyear_value = "";
+    public static String quartly_value = "";
+    public static String monthly_value = "";
+
+    public static String scheme_from_date = "";
+    public static String scheme_to_date = "";
+    public static String close_scheme_name = "";
+
+    public static String target_month_value = "";
+    public static String target_year_value = "";
+    public static String target_quater_value = "";
+    public static String target_todate_value = "";
+    public static String target_product_cate_value = "";
+    public static String target_product_Bu_value = "";
+    public static String target_product_division_value = "";
+    public static String target_product_brand_value = "";
+
+    public static String Quantity_click_flag = "";
+    public static String Value_click_flag = "";
+    public static String close_click_flag = "";
+    public static String Ongoing_click_flag = "";
+
     public static String GLOvel_BU = "";
     public static String CUSTOMER_EMAIL="";
     public static HashMap<Integer,String> p_cus_services_status_check = new HashMap<>();
@@ -33,7 +56,7 @@ public class Global_Data {
     public static String mandatory="";
     public static String allow="";
     public static String emp_code="";
-
+    public static String topHeader="";
     public static String Stock_warehouse_flag="";
     public static String Stock_product_flag="";
     public static String Stock_product_flag_value_check="";
@@ -191,8 +214,7 @@ public class Global_Data {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(
                         Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
 //    public static void sendSMS(String phoneNumber, String message, final Context activity) {

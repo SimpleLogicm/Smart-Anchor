@@ -13,8 +13,58 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:background="@color/gray"
         >
+
+        <LinearLayout
+            android:id="@+id/thumbnaill"
+            android:layout_width="fill_parent"
+            android:layout_height="52dp"
+            android:background="#8A0808"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/screenname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Order Booking"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/todaysTarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:typeface="sans" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/aaa"
+            android:layout_width="13dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/arr_left"
+            />
+
+        <ImageView
+            android:id="@+id/Header_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/anchor_logo"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +72,7 @@
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-
+            android:layout_below="@+id/thumbnaill"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="#c3c3c3"
@@ -156,7 +206,7 @@
                     android:text="TOTAL"
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="#4D7FB6"
+                    android:textColor="#ffffff"
                     android:textSize="13dp" />
 
             </RelativeLayout>
@@ -178,7 +228,7 @@
                     android:textStyle="bold"
                     android:text=""
                     android:textAllCaps="false"
-                    android:textColor="#4D7FB6"
+                    android:textColor="#ffffff"
                     android:textSize="13sp" />
 
             </RelativeLayout>
@@ -200,7 +250,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="#4D7FB6"
+                    android:textColor="#ffffff"
                     android:textSize="13sp" />
 
             </RelativeLayout>
@@ -222,7 +272,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="#4D7FB6"
+                    android:textColor="#ffffff"
                     android:textSize="13sp" />
 
             </RelativeLayout>

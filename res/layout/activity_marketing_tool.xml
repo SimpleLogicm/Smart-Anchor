@@ -40,18 +40,18 @@
 
     <ImageView
         android:id="@+id/aaa"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="13dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/arr_left"
-        />
+        android:scaleType="centerCrop"
+        android:src="@drawable/arr_left"
+         />
 
     <ImageView
         android:id="@+id/Header_logo"
         android:layout_width="30dp"
         android:layout_height="30dp"
-
         android:layout_marginTop="10dp"
         android:layout_marginLeft="8dp"
         android:background="@drawable/anchor_logo"

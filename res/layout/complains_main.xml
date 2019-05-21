@@ -55,6 +55,16 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/aaa"
+        android:layout_width="13dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/arr_left"
+        />
+
+    <ImageView
         android:id="@+id/Header_logo"
         android:layout_width="30dp"
         android:layout_height="30dp"
