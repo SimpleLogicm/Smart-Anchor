@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <LinearLayout
+        android:id="@+id/ledger_l_container"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:weightSum="7.0">
+
+        <TextView
+            android:id="@+id/ld_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="3-APR-2018"
+            android:layout_marginLeft="1dp"
+
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/lt_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="Credit Memo"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/li_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="456546456566"
+
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/lc_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="CH345435"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/lp_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="gfhgfh"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/lde_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="200"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/lcr_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="2324"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_marginRight="1dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lcr_value_hide"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+    </TextView>
+
+</RelativeLayout>

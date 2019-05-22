@@ -603,6 +603,16 @@
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan"/>
 
+        <activity
+            android:name=".Ledger_Report"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".Invoices"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan"/>
+
         <receiver android:name=".AutoStart">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -614,7 +624,6 @@
             android:enabled="true" />
 
         <service android:name="cpm.simplelogic.helper.OnClearFromRecentService" android:stopWithTask="false" />
-
 
         <provider
             android:authorities="cpm.simplelogic.helper.ContentProviderData"

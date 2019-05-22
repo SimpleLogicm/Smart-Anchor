@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/light_greynew"
+        android:weightSum="7.0">
+
+        <TextView
+            android:id="@+id/n_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="3-APR-2018"
+            android:layout_marginLeft="1dp"
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/n_ttype"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="Credit Memo"
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/n_invoice_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="456546456566"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:autoLink="web"
+            android:textColor="#a3bad7" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/n_pro_category"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="CH345435"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/n_s_order"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="gfhgfh"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/n_debit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="200"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+
+            android:textColor="@color/black" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/n_credit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="2324"
+            android:background="@color/white"
+            android:padding="1dp"
+            android:textSize="@dimen/column_text_size"
+            android:layout_marginRight="1dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
+    </LinearLayout>
+
+</RelativeLayout>

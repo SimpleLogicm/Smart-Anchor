@@ -456,14 +456,14 @@ public class OutstandingDetails extends AppCompatActivity implements Outstanding
         String domain = getResources().getString(R.string.service_domain);
 
         Log.i("volley", "domain: " + domain);
-        Log.i("volley", "email: " +  Global_Data.GLOvel_USER_EMAIL);
+        Log.i("volley", "email: " +  Global_Data.CUSTOMER_EMAIL);
 
         StringRequest jsObjRequest = null;
         String service_url = "";
 
 
         try {
-            service_url = domain + "outstanding_lists/outstanding_index?email=" +Global_Data.GLOvel_USER_EMAIL+ "&start_date=" + out_de_period_value.getText().toString()+ "&end_date=" + out_de_period_value2.getText().toString()+"&business_unit=" + URLEncoder.encode(Global_Data.GLOvel_BU, "UTF-8")+"&primary_category=" +URLEncoder.encode(product_category, "UTF-8");
+            service_url = domain + "outstanding_lists/outstanding_index?email=" +Global_Data.CUSTOMER_EMAIL+ "&start_date=" + out_de_period_value.getText().toString()+ "&end_date=" + out_de_period_value2.getText().toString()+"&business_unit=" + URLEncoder.encode(Global_Data.GLOvel_BU, "UTF-8")+"&primary_category=" +URLEncoder.encode(product_category, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -1312,7 +1312,7 @@ public class OutstandingDetails extends AppCompatActivity implements Outstanding
 
         String service_url = "";
 
-        service_url = domain + "dealer_users/utilization_report_records?email="+Global_Data.GLOvel_USER_EMAIL+"&module_name="+Module_name+"&action_name="+type;
+        service_url = domain + "dealer_users/utilization_report_records?email="+Global_Data.CUSTOMER_EMAIL+"&module_name="+Module_name+"&action_name="+type;
         Log.i("volley", "service_url: " + service_url);
 
         jsObjRequest = new StringRequest(service_url, new Response.Listener<String>() {

@@ -7,11 +7,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.anchor.webservice.ConnectionDetector;
 
@@ -96,9 +98,43 @@ public class OtherInfoActivity extends Activity {
         ledgerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                isInternetPresent = cd.isConnectingToInternet();
+                Global_Data.CUSTOMER_SERVICE_FLAG="Ledger Report";
+                if (isInternetPresent)
+                {
+                    Intent intent = new Intent(getApplicationContext(), Order.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
             }
         });
+
+        invoiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isInternetPresent = cd.isConnectingToInternet();
+                Global_Data.CUSTOMER_SERVICE_FLAG="Invoices/CN/DN";
+                if (isInternetPresent)
+                {
+                    Intent intent = new Intent(getApplicationContext(), Order.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            }
+        });
+
     }
 
     @Override

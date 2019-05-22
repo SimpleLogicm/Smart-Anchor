@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="320dp"
+    android:layout_height="380dp"
+    android:layout_gravity="center"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/c_ficon"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/filter_icon"
+            android:layout_marginLeft="6dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/c_ficon"
+            android:layout_alignBaseline="@+id/c_ficon"
+            android:textSize="20dp"
+            android:text="Filter"
+            />
+
+        <ImageView
+            android:id="@+id/close_filter"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/close_filter"
+            android:layout_marginRight="6dp"
+            android:layout_marginBottom="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="#c0c0c0"/>
+    </RelativeLayout>
+
+    <Spinner
+        android:id="@+id/dcus_category"
+        android:layout_width="300dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.13" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cashradioGroup"
+        android:gravity="center"
+
+        android:layout_alignTop="@+id/textViewSelection"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.07">
+
+        <RadioButton
+            android:id="@+id/radio_overdue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Show Overdue" />
+
+        <RadioButton
+            android:id="@+id/radio_outstanding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Outstanding" />
+
+        <RadioButton
+            android:id="@+id/radio_showall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Both" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/c_start_date"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.5"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_marginRight="2dp"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/ic_date_range_black_24dp"
+            android:hint="Start Date"
+            android:imeOptions="actionDone"
+            android:singleLine="true">
+        </EditText>
+
+        <EditText
+            android:id="@+id/c_end_date"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_height="45dp"
+            android:layout_marginLeft="2dp"
+            android:layout_gravity="center"
+            android:drawableRight="@drawable/ic_date_range_black_24dp"
+            android:hint="End Date"
+            android:imeOptions="actionDone"
+            android:singleLine="true">
+        </EditText>
+
+    </LinearLayout>
+
+    <RadioButton
+        android:id="@+id/c_all_dates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Show Overdue" />
+
+    <Spinner
+        android:id="@+id/sortby_beat"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.13" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/filter_submit"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Apply"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:background="#414042"
+            android:textSize="18sp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/filter_clear"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Clear"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:background="#414042"
+            android:textSize="18sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="27dp"
+            android:layout_marginEnd="27dp" />
+    </RelativeLayout>
+
+</LinearLayout>

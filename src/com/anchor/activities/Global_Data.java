@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Global_Data {
 
+    public static String Service_Domain = "";
     public static String year_value = "";
     public static String halfyear_value = "";
     public static String quartly_value = "";

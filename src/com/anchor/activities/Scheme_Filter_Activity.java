@@ -217,7 +217,7 @@ public class Scheme_Filter_Activity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Scheme_Filter_Activity.this);
+                //Global_Data.hideSoftKeyboard(Scheme_Filter_Activity.this);
 
                 click_detect_flag = "from_date";
 
@@ -241,7 +241,7 @@ public class Scheme_Filter_Activity extends AppCompatActivity implements DatePic
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Scheme_Filter_Activity.this);
+                //Global_Data.hideSoftKeyboard(Scheme_Filter_Activity.this);
                 click_detect_flag = "to_date";
 
                 datePickerDialog = DatePickerDialog.newInstance(Scheme_Filter_Activity.this, Year, Month, Day);

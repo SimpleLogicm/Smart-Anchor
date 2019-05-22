@@ -1630,6 +1630,60 @@ public class Order extends Activity implements OnItemSelectedListener {
                         intent.putExtra("RE_TEXT", Re_Text);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    } else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report")){
+
+                        for (Local_Data cn : contacts) {
+
+                            Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
+                            Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
+                            Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
+                            Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
+                            Global_Data.CUSTOMER_EMAIL = cn.getCust_email();
+                        }
+
+                        Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
+                        Global_Data.order_city = city_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_beat = beat_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_state = state_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_retailer = customer_name;
+
+                        Global_Data.PREVIOUS_ORDER_BACK_FLAG_REURN = "";
+                        Intent intent = new Intent(getApplicationContext(),
+                                Ledger_Report.class);
+                        intent.putExtra("CP_NAME", "video");
+                        intent.putExtra("RE_TEXT", Re_Text);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    } else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")){
+
+                        for (Local_Data cn : contacts) {
+
+                            Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
+                            Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
+                            Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
+                            Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
+                            Global_Data.CUSTOMER_EMAIL = cn.getCust_email();
+                        }
+
+                        Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
+                        Global_Data.order_city = city_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_beat = beat_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_state = state_spinner.getSelectedItem()
+                                .toString();
+                        Global_Data.order_retailer = customer_name;
+
+                        Global_Data.PREVIOUS_ORDER_BACK_FLAG_REURN = "";
+                        Intent intent = new Intent(getApplicationContext(),
+                                Invoices.class);
+                        intent.putExtra("CP_NAME", "video");
+                        intent.putExtra("RE_TEXT", Re_Text);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
 
                     else{
@@ -1695,7 +1749,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             schedule_view.setVisibility(View.VISIBLE);
             // rlout_schedule.setVisibility(View.INVISIBLE);
-        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue")) {
+        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")) {
             mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
             custserve_view.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.GONE);
@@ -1707,7 +1761,7 @@ public class Order extends Activity implements OnItemSelectedListener {
             // rlout_order.setVisibility(View.VISIBLE);
             schedule_view.setVisibility(View.GONE);
             // rlout_schedule.setVisibility(View.VISIBLE);
-        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme")) {
+        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report")) {
             mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
             custserve_view.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.GONE);

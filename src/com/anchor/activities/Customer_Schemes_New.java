@@ -345,7 +345,7 @@ public class Customer_Schemes_New extends AppCompatActivity implements Scheme_Ad
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Customer_Schemes_New.this);
+                //Global_Data.hideSoftKeyboard(Customer_Schemes_New.this);
 
                 click_detect_flag = "from_date";
 
@@ -369,7 +369,7 @@ public class Customer_Schemes_New extends AppCompatActivity implements Scheme_Ad
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Customer_Schemes_New.this);
+                //Global_Data.hideSoftKeyboard(Customer_Schemes_New.this);
 
                 click_detect_flag = "to_date";
 
