@@ -602,9 +602,9 @@ public class OutstandingActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         //super.onBackPressed();
         Global_Data.GLOvel_BU =  "";
-        Intent i = new Intent(OutstandingActivity.this,Sales_Dash.class);
+        Intent i = new Intent(OutstandingActivity.this,Order.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         startActivity(i);
         finish();
     }
@@ -612,7 +612,6 @@ public class OutstandingActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         hidePDialog();
     }
 

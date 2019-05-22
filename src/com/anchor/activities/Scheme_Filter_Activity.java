@@ -1854,7 +1854,7 @@ public class Scheme_Filter_Activity extends AppCompatActivity implements DatePic
         Global_Data.scheme_to_date = "";
         Global_Data.target_product_cate_value = "";
 
-        Intent m = new Intent(getApplicationContext(), MainActivity.class);
+        Intent m = new Intent(getApplicationContext(), Order.class);
         startActivity(m);
 
         finish();

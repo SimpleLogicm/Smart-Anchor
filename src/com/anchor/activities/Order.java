@@ -2274,11 +2274,21 @@ public class Order extends Activity implements OnItemSelectedListener {
         // TODO Auto-generated method stub
         // super.onBackPressed();
 
-        Intent i = new Intent(Order.this, Sales_Dash.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        startActivity(i);
-        finish();
+        if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN"))
+        {
+            Intent i = new Intent(Order.this, OtherInfoActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            startActivity(i);
+            finish();
+        }else{
+            Intent i = new Intent(Order.this, Sales_Dash.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            startActivity(i);
+            finish();
+        }
+
     }
 
     void Flwg() {

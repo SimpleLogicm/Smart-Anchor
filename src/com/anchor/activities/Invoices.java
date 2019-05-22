@@ -450,7 +450,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
     @Override
     public void onBackPressed() {
 
-        Intent m = new Intent(getApplicationContext(), MainActivity.class);
+        Intent m = new Intent(getApplicationContext(), Order.class);
         startActivity(m);
 
         finish();

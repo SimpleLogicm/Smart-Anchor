@@ -163,10 +163,13 @@ public class OutstandingDetails extends AppCompatActivity implements Outstanding
         Header_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(OutstandingDetails.this,OutstandingActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                startActivity(i);
                 finish();
             }
         });
-
 
         calendar = Calendar.getInstance();
 
@@ -330,9 +333,6 @@ public class OutstandingDetails extends AppCompatActivity implements Outstanding
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         if(id == android.R.id.home)
@@ -351,7 +351,7 @@ public class OutstandingDetails extends AppCompatActivity implements Outstanding
         startActivity(m);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         this.finish();
-    //finish();
+        finish();
 }
 
     @Override
