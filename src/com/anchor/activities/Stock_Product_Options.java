@@ -44,7 +44,6 @@ public class Stock_Product_Options extends Activity  {
     private String Re_Text = "";
     Boolean isInternetPresent = false;
     ConnectionDetector cd;
-
     int check=0;
     int check_product=0;
     int check_ProductSpec=0;
@@ -57,7 +56,6 @@ public class Stock_Product_Options extends Activity  {
     int state_flag = 0;
     ProgressDialog dialog;
     ArrayAdapter<String> adapter_state1;
-
     ArrayAdapter<String> adapter_state2;
     ArrayAdapter<String> adapter_beat;
     ArrayAdapter<String> adapter_state3;
@@ -215,13 +213,6 @@ public class Stock_Product_Options extends Activity  {
                 }
             }
         });
-
-
-
-
-
-
-
 
         // Reading all
         List<Local_Data> contacts1 = dbvoc.HSS_DescriptionITEM();

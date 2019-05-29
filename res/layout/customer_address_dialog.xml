@@ -11,7 +11,7 @@
         android:id="@+id/item_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CUSTOMER DETAILS"
+        android:text="@string/customer_details"
         android:textSize="17dp"
         android:gravity="center"
         android:textColor="#111111"
@@ -56,7 +56,6 @@
          android:scrollbars="vertical"
          android:text=""
          android:textColor="#111111" >
-
         <requestFocus />
 
     </EditText>
@@ -75,7 +74,7 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:background="@drawable/but_red"
-            android:text="OK"
+            android:text="@string/ok"
             android:textColor="#FFFFFF" />
 
 
@@ -92,7 +91,6 @@
             <ImageView
                 android:layout_marginTop="7dp"
                 android:src="@drawable/callnew"
-
                 android:layout_width="45dp"
                 android:layout_height="50dp"
                 android:textColor="@color/white"

@@ -23,7 +23,7 @@
         android:singleLine="true"
         android:drawableRight="@drawable/search_icon"
         android:textSize="15dp"
-        android:hint="Search Customer" >
+        android:hint="@string/Search_Customer" >
         <requestFocus />
     </AutoCompleteTextView>
 

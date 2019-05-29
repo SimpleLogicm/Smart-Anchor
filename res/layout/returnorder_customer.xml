@@ -17,7 +17,6 @@
     <!--</TextView>-->
 
      <TextView
-       
         android:layout_width="250dp"
         android:layout_gravity="center"
         android:gravity="center"
@@ -25,7 +24,7 @@
         android:layout_marginTop="20dp"
         android:textColor="#111111"
         android:textSize="18dp"
-        android:text="Search Customer" >
+        android:text="@string/Search_Customer" >
         
     </TextView>
     
@@ -34,7 +33,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:hint="Select City"
+        android:hint="@string/Select_City"
         android:inputType="textPassword"
         android:paddingTop="20dp" 
         android:layout_marginTop="10dp"/>
@@ -44,7 +43,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:hint="Select Beat"
+        android:hint="@string/Select_Beats"
         android:inputType="textPassword"
         android:paddingTop="20dp"
         android:layout_marginTop="10dp" />
@@ -54,7 +53,7 @@
         android:layout_width="250dp"
          android:layout_height="70dp"
         android:layout_gravity="center"
-        android:hint="Select Retailer"
+        android:hint="@string/select_retailer"
         android:inputType="textPassword"
         android:paddingTop="30dp"
         android:layout_marginTop="10dp" />
@@ -67,7 +66,7 @@
         android:layout_marginTop="30dp"
         android:layout_weight="0.09"
         android:ems="10"
-        android:hint="Search Customer"
+        android:hint="@string/Search_Customer"
         android:singleLine="true"
         android:textSize="15dp" >
 
@@ -78,15 +77,15 @@
      android:layout_width="match_parent" 
      android:layout_height="0dip" 
      android:layout_weight="1"/>
+
 	  <Button 
 	       android:id="@+id/but_neworder"
 	     android:layout_width="match_parent" 
 	     android:layout_height="wrap_content" 
 	     android:layout_weight="0"
 	      android:background="#414042"
-          android:text="View List"
+          android:text="@string/view_list"
           android:textColor="#FFFFFF"/>
-	  
-      
+
    </LinearLayout>
 

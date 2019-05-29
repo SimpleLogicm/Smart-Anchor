@@ -24,7 +24,6 @@
             android:padding="1dp"
             android:text="3-APR-2018"
             android:layout_marginLeft="1dp"
-
             android:textSize="@dimen/column_text_size"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -99,7 +98,6 @@
             android:textSize="@dimen/column_text_size"
             android:layout_gravity="center"
             android:textStyle="bold"
-
             android:textColor="@color/black" >
         </TextView>
 

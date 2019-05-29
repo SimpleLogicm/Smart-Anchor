@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="QUOTATION NO"
+                android:text="@string/QUOTATION_NO"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REMARK"
+                android:text="@string/REMARK"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -67,7 +67,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STATUS"
+                android:text="@string/STATUS"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -92,8 +92,7 @@
         android:layout_height="481dp"
         android:adjustViewBounds="true"
         android:background="#ffffff"
-        android:gravity="center" >
-    </ListView>
+        android:gravity="center"></ListView>
 
     <Button
         android:id="@+id/cancel_list"
@@ -102,7 +101,7 @@
         android:layout_marginLeft="140dp"
         android:layout_marginTop="5dp"
         android:background="#545454"
-        android:text="Cancel"
+        android:text="@string/Cancel"
         android:textColor="#ffffff" />
 
 </LinearLayout>

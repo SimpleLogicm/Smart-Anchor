@@ -11,8 +11,6 @@
         android:orientation="vertical"
         android:background="#ffffff">
 
-
-
         <EditText
             android:id="@+id/spnProduct"
             android:layout_width="250dp"
@@ -21,7 +19,7 @@
             android:gravity="top"
             android:editable="false"
             android:layout_marginTop="20dp"
-            android:hint="Item Description"
+            android:hint="@string/Item_Description"
             android:background="@android:drawable/editbox_background_normal"
             android:paddingTop="10dp" />
 
@@ -31,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:hint="Select Product Specification"
+            android:hint="@string/select_product_spec"
             android:inputType="textPassword"
             android:visibility="gone"
             android:paddingTop="10dp" />
@@ -53,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#414042"
-                android:text="RP"
+                android:text="@string/RP"
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:textAlignment="center"
@@ -74,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#414042"
-                android:text="MRP"
+                android:text="@string/RP"
                 android:gravity="center"
                 android:textColor="#FFFFFF" />
 
@@ -94,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:hint="Quantity"
+            android:hint="@string/EQuantity"
             android:inputType="number"
             android:paddingTop="10dp" >
         </EditText>
@@ -107,7 +105,6 @@
             android:layout_marginTop="5dp"
             android:textColor="#ea0707"
             android:hint=""
-
             />
 
         <Spinner
@@ -116,8 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:hint="Scheme"
-
+            android:hint="@string/scheme"
             android:paddingTop="10dp" />
 
         <!--    <TextView
@@ -154,7 +150,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="Total Price : "
+            android:text="@string/Total_Price"
             android:textSize="17dp" >
         </TextView>
 
@@ -178,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:text="Back"
+                    android:text="@string/Back_button"
                     android:textColor="#FFFFFF" />
 
                 <Button
@@ -187,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:text="Update"
+                    android:text="@string/Update"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>

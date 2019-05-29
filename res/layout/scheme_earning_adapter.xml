@@ -113,7 +113,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="View Details"
+            android:text="@string/view_details"
             android:background="@color/white"
             android:padding="1dp"
             android:textSize="@dimen/column_text_size"

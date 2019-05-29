@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Scheme_Details"
-    android:background="@color/gray"
+
     >
 
     <LinearLayout
@@ -24,12 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Scheme Period"
+            android:text="@string/scheme_period"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white" >
+            android:textColor="@color/black" >
         </TextView>
 
         <EditText
@@ -41,7 +40,7 @@
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -62,12 +61,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="To"
+            android:text="@string/to"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white" >
+            android:textColor="@color/black" >
         </TextView>
 
         <EditText
@@ -79,7 +78,7 @@
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -93,11 +92,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             app:srcCompat="@drawable/date_range"
-
             />
-
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -108,7 +103,6 @@
         android:layout_marginTop="5dp"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
-
         >
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
@@ -133,8 +127,6 @@
             app:aebSubButtonTextSizeSp="18dp"
             app:aebBlurRadius="10"
             />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -155,8 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:spinnerMode="dialog"
-            android:hint="Select Business Unit"
-
+            android:hint="@string/business_unit"
             />
 
         <Spinner
@@ -167,8 +158,7 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:layout_gravity="center"
-            android:hint="Select Business Division"
-
+            android:hint="@string/business_division"
             />
 
         <Spinner
@@ -179,8 +169,7 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:layout_gravity="center"
-            android:hint="Select Business Category"
-
+            android:hint="@string/business_category"
             />
 
         <Spinner
@@ -191,8 +180,7 @@
             android:spinnerMode="dialog"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Select Brand"
-
+            android:hint="@string/brand"
             />
 
     </LinearLayout>
@@ -228,7 +216,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Invoice No"
+                    android:text="@string/invoice_no"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -239,7 +227,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Invoice Date"
+                    android:text="@string/invoice_date"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -250,7 +238,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Order No"
+                    android:text="@string/order_no"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -261,7 +249,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Order Date"
+                    android:text="@string/order_date"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -272,7 +260,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Order Type"
+                    android:text="@string/Order_Type"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -283,19 +271,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Item Code"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/com_l_margin"
-
-                    android:textStyle="bold"></TextView>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1.0"
-                    android:gravity="center"
-                    android:text="Item Name"
+                    android:text="@string/item_code"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -306,7 +282,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Quantity"
+                    android:text="@string/item_name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -317,7 +293,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Line Amount"
+                    android:text="@string/EQuantity"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -328,7 +304,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Tax Amount"
+                    android:text="@string/line_amount"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -339,7 +315,18 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Total Amount"
+                    android:text="@string/tax_amount"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/com_l_margin"
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:gravity="center"
+                    android:text="@string/total_amount"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -351,7 +338,7 @@
                     android:layout_marginRight="2dp"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Eligible Volumn"
+                    android:text="@string/eligible_vol"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -363,7 +350,7 @@
                     android:layout_weight="1.0"
                     android:gravity="center"
                     android:visibility="gone"
-                    android:text="CN : 1.00(0.00/- Per Pcs)"
+                    android:text="@string/cn_per_pic"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -375,7 +362,7 @@
                     android:layout_weight="1.0"
                     android:visibility="gone"
                     android:gravity="center"
-                    android:text="CN : 125000.00(2.00/- Per Pcs)"
+                    android:text="@string/cn_2per_pic"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -387,7 +374,7 @@
                     android:layout_weight="1.0"
                     android:visibility="gone"
                     android:gravity="center"
-                    android:text="CN : 225000.00(2.50/- Per Pcs)"
+                    android:text="@string/cn_3per_pic"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -399,7 +386,7 @@
                     android:layout_weight="1.0"
                     android:gravity="center"
                     android:visibility="gone"
-                    android:text="CN : 400000.00(3.00/- Per Pcs)"
+                    android:text="@string/cn_4per_pic"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
@@ -410,11 +397,10 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:gravity="center"
-                    android:text="Gift Amount"
+                    android:text="@string/gift_amount"
                     android:textColor="@color/black"
                     android:textSize="@dimen/com_l_margin"
                     android:textStyle="bold"></TextView>
-
 
             </LinearLayout>
 
@@ -437,7 +423,6 @@
                     app:shimmer_demo_grid_child_count="2"
                     app:shimmer_demo_layout="@layout/placeholder_item"
                     app:shimmer_demo_layout_manager_type="linear_vertical"
-
                     />
 
             </LinearLayout>

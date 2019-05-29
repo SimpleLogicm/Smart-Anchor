@@ -29,13 +29,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:gravity="center"
-                android:text="ORDER ID"
+                android:text="@string/order_id"
                 android:textColor="#111111"
                 android:textSize="15dp" />
-
         </RelativeLayout>
-
-       
 
         <RelativeLayout
             android:layout_width="20dp"
@@ -47,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CUSTOMER"
+                android:text="@string/customer"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -65,9 +62,7 @@
         android:layout_height="0.5dp" 
         android:background="#111111">
     </RelativeLayout>
-    
-    
-    
+
       <com.anchor.swipelistview.SwipeListView
             android:id="@+id/prev_list"
             android:listSelector="#00000000"

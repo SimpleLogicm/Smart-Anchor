@@ -110,11 +110,6 @@
                 android:layout_below="@id/invoice_due_date"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"/>
-
-
-
-
-
         </RelativeLayout>
     </RelativeLayout>
 

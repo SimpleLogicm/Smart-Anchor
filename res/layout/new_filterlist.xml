@@ -14,7 +14,7 @@
             android:id="@+id/search_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search" >
+            android:hint="@string/Search" >
         </EditText>
     </LinearLayout>
 
@@ -37,7 +37,7 @@
         android:layout_height="41dp"
         android:layout_alignParentBottom="true"
         android:background="#414042"
-        android:text="SORT"
+        android:text="@string/sort"
         android:textColor="#FFFFFF"
         android:textSize="15dp" />
 

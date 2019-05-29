@@ -35,7 +35,7 @@
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="NEW LAUNCH"
+                android:text="@string/title_logo"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -47,9 +47,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/newlaunch" />
-
         </RelativeLayout>
-
 
     </LinearLayout>
 
@@ -78,7 +76,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="MARKET SURVEY"
+                android:text="@string/MARKET_SURVEY"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -122,7 +120,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="ADVERTISEMENT"
+                android:text="@string/ADVERTISEMENT"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 

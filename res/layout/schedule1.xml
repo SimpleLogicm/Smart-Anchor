@@ -23,7 +23,7 @@
             android:background="#c3c3c3"
             android:textColor="#ffffff"
             android:gravity="center"
-            android:text="admin" />
+            android:text="@string/adminn" />
     </RelativeLayout>
 
          <LinearLayout
@@ -47,7 +47,7 @@
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
                              android:gravity="center"
-                             android:text="Product"
+                             android:text="@string/AProduct"
                              android:textColor="#111111"
                              android:textSize="15dp" />
 
@@ -69,7 +69,7 @@
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
                              android:gravity="center"
-                             android:text="Quantity Ordered"
+                             android:text="@string/qty_ordered"
                              android:textColor="#111111"
                              android:textSize="15dp" />
 
@@ -90,7 +90,7 @@
                              android:layout_alignParentLeft="true"
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
-                             android:text="Quantity Delivered"
+                             android:text="@string/qty_delivered"
                              android:gravity="center"
                              android:textColor="#111111"
                              android:textSize="15dp" />
@@ -106,7 +106,6 @@
                      
                 <ListView
 				      android:id="@+id/DProduct_List"
-
                       android:layout_margin="2dp"
 				      android:background="#ffffff"
 				      android:adjustViewBounds="true"
@@ -276,8 +275,6 @@
              android:background="#d3d3d3" >
          </RelativeLayout>
 
-
-
         <android.support.v7.widget.CardView
             android:id="@+id/card_view"
             android:layout_marginTop="10dp"
@@ -292,13 +289,11 @@
                 android:layout_height="wrap_content"
                 android:background="#ffffff">
 
-
-
                 <TextView
                     android:id="@+id/txtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dispatch"
+                    android:text="@string/disptach"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
@@ -310,7 +305,7 @@
                     android:id="@+id/txtSurname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estimated Arrival"
+                    android:text="@string/estimate_arrival"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -323,7 +318,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    android:text="Mode of Payment"
+                    android:text="@string/mode_of_payment"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -335,7 +330,7 @@
                     android:id="@+id/txtSurname2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mode of Payment"
+                    android:text="@string/mode_of_payment"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -347,7 +342,7 @@
                     android:id="@+id/txtSurname3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Credit Limit"
+                    android:text="@string/creditlimit"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -359,7 +354,7 @@
                     android:id="@+id/txtSurname4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Previous Outstanding"
+                    android:text="@string/prev_outstanding"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -371,7 +366,7 @@
                     android:id="@+id/txtSurname5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Current Order"
+                    android:text="@string/current_order"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -383,7 +378,7 @@
                     android:id="@+id/txtSurname6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Amount Overdue"
+                    android:text="@string/amount_overdue"
                     android:gravity="center_vertical"
                     android:textSize="15dp"
                     android:textStyle="bold"
@@ -488,7 +483,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:hint="Comment"
+        android:hint="@string/Comments"
         android:ems="10">
         <requestFocus />
     </EditText>
@@ -512,7 +507,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#545454"
-                android:text="Back"
+                android:text="@string/Back_button"
                 android:textColor="#FFFFFF" />
 
 

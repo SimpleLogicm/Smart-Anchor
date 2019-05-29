@@ -31,7 +31,7 @@
             android:textSize="18dp"
             android:gravity="center"
             android:background="#f1f1f1"
-            android:text="Competition Stock" />
+            android:text="@string/Competition_Stock" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Select Beat"
+            android:hint="@string/Select_Beats"
             android:inputType="textPassword"
             android:paddingTop="20dp"
             android:layout_marginTop="10dp" />
@@ -63,7 +63,7 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Select Retailer"
+            android:hint="@string/select_retailer"
             android:inputType="textPassword"
             android:paddingTop="30dp"
             android:layout_marginTop="10dp" />
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:hint="Select Retailer"
+            android:hint="@string/select_retailer"
             android:paddingTop="30dp" />
 
         <EditText
@@ -86,7 +86,7 @@
             android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="number"
-            android:hint="Quantity" >
+            android:hint="@string/EQuantity" >
             <requestFocus />
         </EditText>
 
@@ -98,7 +98,7 @@
             android:layout_marginTop="10dp"
             android:inputType="textEmailAddress|textMultiLine"
             android:ems="10"
-            android:hint="Details" />
+            android:hint="@string/Details" />
 
         <Button
             android:id="@+id/claims_submit"
@@ -107,7 +107,7 @@
             android:background="#545454"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="210dp"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:textColor="#ffffff" />
 
     </LinearLayout>

@@ -38,7 +38,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="Order"
+                android:text="@string/Ordero"
                 android:gravity="center"
                 android:textSize="15dp" />
 
@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:background="@drawable/single_btab"
-            android:layout_weight="1.00" >
+            android:layout_weight="1.00">
 
             <TextView
                 android:id="@+id/textView1jkjk"
@@ -60,7 +60,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:gravity="center"
-                android:text="Customer Service"
+                android:text="@string/Customer_Serviceo"
                 android:textColor="#111111"
                 android:textSize="15dp" />
 
@@ -81,7 +81,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="Schedule"
+                android:text="@string/Scheduleo"
                 android:gravity="center"
                 android:textColor="#111111"
                 android:textSize="15dp" />
@@ -105,7 +105,7 @@
                 android:layout_width="250dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:hint="Select City"
+                android:hint="@string/Select_City"
                 android:inputType="textPassword"
                 android:paddingTop="20dp"
                 android:layout_marginTop="10dp"/>
@@ -115,7 +115,7 @@
                 android:layout_width="250dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:hint="Select Beat"
+                android:hint="@string/Select_Beats"
                 android:inputType="textPassword"
                 android:paddingTop="20dp"
                 android:layout_marginTop="10dp" />
@@ -125,7 +125,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Select Retailer"
+                android:hint="@string/select_retailer"
                 android:inputType="textPassword"
                 android:paddingTop="30dp"
                 android:layout_marginTop="10dp" />
@@ -145,11 +145,9 @@
                 android:singleLine="true"
                 android:drawableRight="@drawable/search_icon"
                 android:textSize="15dp"
-                android:hint="Search Customer" >
+                android:hint="@string/Search_Customer" >
                 <requestFocus />
             </AutoCompleteTextView>
-
-
 
             <LinearLayout
                 android:id="@+id/add_layout"
@@ -228,7 +226,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="New Order"
+                        android:text="@string/New_Order"
                         android:background="#414042"
                         android:textColor="#FFFFFF" />
 
@@ -237,8 +235,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Previous Order"
-
+                        android:text="@string/Previous_Order"
                         android:background="#414042"
                         android:layout_marginLeft="10dp"
                         android:textColor="#FFFFFF"/>
@@ -257,7 +254,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="No Order"
+                        android:text="@string/No_Order"
                         android:background="#414042"
                         android:textColor="#FFFFFF" />
 
@@ -266,7 +263,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Return Order"
+                        android:text="@string/Return_Order"
                         android:background="#414042"
                         android:layout_marginLeft="10dp"
                         android:textColor="#FFFFFF"/>
@@ -294,7 +291,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Feedback"
+                        android:text="@string/Feedback"
                         android:background="#414042"
                         android:textColor="#FFFFFF" />
 
@@ -303,7 +300,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Complaints"
+                        android:text="@string/Complaints"
                         android:background="#414042"
                         android:layout_marginLeft="10dp"
                         android:textColor="#FFFFFF"/>
@@ -323,7 +320,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Claims"
+                        android:text="@string/Claims"
                         android:background="#414042"
                         android:textColor="#FFFFFF" />
 
@@ -332,7 +329,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Competition Stock"
+                        android:text="@string/Competition_Stock"
                         android:background="#414042"
                         android:layout_marginLeft="10dp"
                         android:textColor="#FFFFFF"/>
@@ -350,7 +347,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Picture"
+                        android:text="@string/Picture"
                         android:visibility="gone"
                         android:background="#414042"
                         android:textColor="#FFFFFF" />
@@ -360,7 +357,7 @@
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="OK"
+                        android:text="@string/ok"
                         android:background="#414042"
                         android:layout_marginLeft="10dp"
                         android:textColor="#FFFFFF"/>
@@ -387,7 +384,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="15dp"
-                        android:text="Delivery Schedule"
+                        android:text="@string/Delivery_Schedule"
                         android:background="#414042"
                         android:textColor="#FFFFFF" />
 
@@ -397,14 +394,12 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:visibility="gone"
-                        android:text="Invoice"
+                        android:text="@string/Invoice"
                         android:background="#414042"
                         android:layout_marginLeft="10dp"
                         android:textColor="#FFFFFF"/>
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

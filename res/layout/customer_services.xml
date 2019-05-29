@@ -41,7 +41,7 @@
                     android:layout_alignParentStart="true"
                     android:gravity="center"
                     android:layout_marginTop="30dp"
-                    android:text="Product Quality"
+                    android:text="@string/product_quality"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 
@@ -73,7 +73,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="Logistics"
+                    android:text="@string/logistics"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 
@@ -117,7 +117,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="Commercial Claim"
+                    android:text="@string/commertial_claim"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 
@@ -148,7 +148,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="Marketing Tools"
+                    android:text="@string/marketing_tools"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 
@@ -189,7 +189,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="Feedback"
+                    android:text="@string/Feedback"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 

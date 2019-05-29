@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Customer_Schemes_New"
-    android:background="@color/gray"
+
 >
 
     <LinearLayout
@@ -24,12 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Scheme Period"
+            android:text="@string/scheme_period"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white" >
+            android:textColor="@color/black" >
         </TextView>
 
         <EditText
@@ -41,7 +41,7 @@
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -62,12 +62,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="To"
+            android:text="@string/to"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white" >
+            android:textColor="@color/black" >
         </TextView>
 
         <EditText
@@ -79,7 +79,7 @@
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:cursorVisible="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
@@ -93,11 +93,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             app:srcCompat="@drawable/date_range"
-
             />
-
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -108,7 +104,6 @@
         android:layout_marginTop="5dp"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="5dp"
-
         >
 
         <com.fangxu.allangleexpandablebutton.AllAngleExpandableButton
@@ -134,7 +129,6 @@
             app:aebBlurRadius="10"
             />
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -157,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:spinnerMode="dialog"
-            android:hint="Select Business Unit"
+            android:hint="@string/business_unit"
 
             />
 
@@ -169,7 +163,7 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:layout_gravity="center"
-            android:hint="Select Business Division"
+            android:hint="@string/business_division"
 
             />
 
@@ -181,7 +175,7 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:layout_gravity="center"
-            android:hint="Select Business Category"
+            android:hint="@string/business_category"
 
             />
 
@@ -193,7 +187,7 @@
             android:spinnerMode="dialog"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Select Brand"
+            android:hint="@string/brand"
 
             />
 
@@ -216,7 +210,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Scheme Name"
+            android:text="@string/scheme_name"
             android:layout_marginLeft="1dp"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
@@ -231,7 +225,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Current Volume"
+            android:text="@string/current_volume"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -243,7 +237,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Current Eligibility"
+            android:text="@string/current_eligibility"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -257,7 +251,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Gift Detail"
+            android:text="@string/gift_details"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -285,7 +279,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Short Volumn For Next Slab"
+            android:text="@string/short_vol_next_slab"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -300,7 +294,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Next Scheme Slab"
+            android:text="@string/next_scheme_slab"
             android:padding="1dp"
             android:background="@color/ledger_header"
             android:textSize="@dimen/com_l_margin"
@@ -314,7 +308,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Next Scheme Value"
+            android:text="@string/next_scheme_value"
             android:padding="1dp"
             android:background="@color/ledger_header"
             android:layout_marginRight="1dp"

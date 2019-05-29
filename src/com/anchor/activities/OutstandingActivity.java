@@ -1,10 +1,13 @@
 package com.anchor.activities;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -58,7 +62,7 @@ import cpm.simplelogic.helper.ConnectionDetector;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
-public class OutstandingActivity extends AppCompatActivity {
+public class OutstandingActivity extends Activity {
     
     BarChart barChart;
     RecyclerView listOutstanding;
@@ -79,7 +83,6 @@ public class OutstandingActivity extends AppCompatActivity {
     Float overdue_total = 0.0f;
     TextView total_creditlimit,total_outstanding,total_overdue;
     DecimalFormat formatter = new DecimalFormat("#,##,##,###");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,26 +113,76 @@ public class OutstandingActivity extends AppCompatActivity {
         listOutstanding.setItemAnimator(new DefaultItemAnimator());
         listOutstanding.setAdapter(outstandingAdapter);
 
-        ImageView Header_logo = (ImageView)findViewById(R.id.Header_logo);
-        TextView mTitleTextView = (TextView)findViewById(R.id.screenname);
-        mTitleTextView.setText("Outstanding/Overdue");
+//        ImageView Header_logo = (ImageView)findViewById(R.id.Header_logo);
+////        TextView mTitleTextView = (TextView)findViewById(R.id.screenname);
+////        mTitleTextView.setText("Outstanding/Overdue");
+////
+////        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
+////
+////        SharedPreferences sp = OutstandingActivity.this.getSharedPreferences("SimpleLogic", 0);
+////
+////        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+////            //todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+////            todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+////        }
+////
+////        Header_logo.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+////                finish();
+////            }
+////        });
 
 
-        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
+            Intent i = getIntent();
+            String name = i.getStringExtra("retialer");
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
 
-        SharedPreferences sp = OutstandingActivity.this.getSharedPreferences("SimpleLogic", 0);
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            SharedPreferences sp = OutstandingActivity.this.getSharedPreferences("SimpleLogic", 0);
 
-        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
-            //todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
-            todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
-        }
+//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+//        	//todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+//			todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+//		}
+            try
+            {
+                int target  = (int) Math.round(sp.getFloat("Target",0));
+                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
+                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+                {
+                    int age = (int) Math.round(age_float);
 
-        Header_logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
+                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+                }else
+                {
+                    int age = (int) Math.round(age_float);
+
+                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+                }
+
+            }catch(Exception ex){ex.printStackTrace();}
+            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+                todaysTarget.setText("Today's Target Acheived");
             }
-        });
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception ex){ex.printStackTrace();}
 
         btn_seedetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,9 +376,6 @@ public class OutstandingActivity extends AppCompatActivity {
                             finish();
                         }
                     });
-
-
-
                 }
                 else {
 
@@ -484,18 +534,10 @@ public class OutstandingActivity extends AppCompatActivity {
                                // barChart.setVisibleXRangeMinimum(5);
 
                                 barChart.setDescription("");  // set the description
-
                                 barChart.animateY(5000);
-
                                 barChart.invalidate();
-
-
-
                             }
                         });
-
-
-
                     }
 
                     OutstandingActivity.this.runOnUiThread(new Runnable() {

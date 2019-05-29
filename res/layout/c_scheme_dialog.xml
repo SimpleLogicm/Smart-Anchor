@@ -27,6 +27,7 @@
             android:layout_height="2dp"
             android:layout_alignParentBottom="true"
             android:background="#c0c0c0"/>
+
     </RelativeLayout>
 
     <RadioGroup
@@ -37,7 +38,6 @@
         android:orientation="vertical"
         android:layout_alignTop="@+id/textViewSelection"
         android:layout_centerHorizontal="true"
-
         android:layout_weight="0.07">
 
         <RadioButton
@@ -45,16 +45,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Scheme Management" />
+            android:text="@string/scheme_management" />
 
         <RadioButton
             android:id="@+id/s_report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Shortfall Report" />
-
-
-
+            android:text="@string/shortfall_report" />
     </RadioGroup>
 
 
@@ -69,7 +66,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:background="#414042"
@@ -85,7 +82,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Back"
+            android:text="@string/Back_button"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:background="#414042"

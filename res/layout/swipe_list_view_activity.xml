@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PRODUCT"
+                android:text="@string/PPRODUCT"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="QUANTITY"
+                android:text="@string/PQUANTITY"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -84,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PRICE"
+                android:text="@string/PPRICE"
                 android:textColor="#111111"
                 android:gravity="center"
                 android:textSize="15dp"
@@ -140,7 +140,7 @@
                    android:layout_marginTop="10dp"
                    android:layout_marginBottom="10dp"
                    android:paddingTop="10dp"
-                   android:text="Total "
+                   android:text="@string/Total"
                    android:textSize="17dp" >
                </TextView>
            </LinearLayout>
@@ -158,7 +158,7 @@
                    android:layout_height="wrap_content"
                    android:layout_gravity="center"
                    android:layout_marginRight="9dp"
-                   android:text="Add More"
+                   android:text="@string/add_more"
                    android:textColor="#FFFFFF" />
 
                <Button
@@ -166,7 +166,7 @@
                    android:layout_width="110dp"
                    android:layout_height="wrap_content"
                    android:layout_gravity="center"
-                   android:text="Checkout"
+                   android:text="@string/PCheckout"
                    android:background="#414042"
                    android:textColor="#FFFFFF"
                   
@@ -177,7 +177,7 @@
                    android:layout_width="110dp"
                    android:layout_height="wrap_content"
                    android:layout_gravity="center"
-                   android:text="Checkout"
+                   android:text="@string/PCheckout"
                    android:visibility="gone"
                    android:background="#c3c3c3"
                    android:textColor="#FFFFFF"
@@ -202,14 +202,14 @@
                    android:background="#414042"
                    android:textColor="#FFFFFF"
                    android:visibility="gone"
-                   android:text="Submit for Approval"
+                   android:text="@string/submit_for_approval"
                     />
              <Button
                    android:id="@+id/buttonPreviewHome"
                    android:layout_width="120dp"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="8dp"
-                   android:text="Cancel Order"
+                   android:text="@string/Cancel_Order"
                    android:background="#414042"
                    android:textColor="#FFFFFF" />
                

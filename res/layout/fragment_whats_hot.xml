@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textSize="16dp"
-        android:text="What's Hot View"/>
+        android:text="@string/whats_hot_view"/>
     
     <ImageView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +17,5 @@
         android:src="@drawable/ic_whats_hot"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
-    
 
 </RelativeLayout>

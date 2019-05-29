@@ -177,9 +177,7 @@ public class Home extends Fragment {
 						startActivity(mIntent);
 
 					} catch (ActivityNotFoundException err) {
-
 						err.printStackTrace();
-
 						Toast.makeText(getActivity(), "Please install bar", Toast.LENGTH_SHORT).show();
 //
 					try{
@@ -214,7 +212,6 @@ public class Home extends Fragment {
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 				//getActivity().finish();
-
 
 			}
 		});

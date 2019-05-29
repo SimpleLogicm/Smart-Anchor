@@ -7,7 +7,7 @@
     <Button android:id="@+id/btnShowLocation" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Location"
+        android:text="@string/show_location"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 

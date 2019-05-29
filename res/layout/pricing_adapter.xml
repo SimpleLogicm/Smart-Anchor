@@ -14,7 +14,6 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-
             android:layout_height="20dp"
             android:background="@color/bkg_card"
             android:text="contact det"
@@ -26,7 +25,7 @@
             android:id="@+id/txtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/Name"
             android:gravity="center_vertical"
             android:textSize="12dp"
             android:layout_below="@id/title"
@@ -37,7 +36,7 @@
             android:id="@+id/txtSurname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Surname"
+            android:text="@string/surname"
             android:gravity="center_vertical"
             android:textSize="12dp"
             android:layout_below="@id/txtName"

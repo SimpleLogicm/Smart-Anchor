@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Order Booking"
+            android:text="@string/order_booking"
             android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:typeface="sans" />
@@ -169,7 +169,7 @@
                                 android:textColorHint="@color/gray"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/black"
-                                android:hint="Name"
+                                android:hint="@string/Name"
                                 />
 
                         </android.support.design.widget.TextInputLayout>
@@ -197,7 +197,7 @@
                                 android:imeOptions="actionNext"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/black"
-                                android:hint="Address"
+                                android:hint="@string/Addressn"
                                 />
 
                         </android.support.design.widget.TextInputLayout>
@@ -265,7 +265,6 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:theme="@style/ThemeOverlay.AppCompat.Dark"
-
                             android:spinnerMode="dropdown"
                             android:layout_centerHorizontal="true"
                             android:layout_below="@+id/c_spinner_area"
@@ -388,17 +387,13 @@
                                 android:textColorHint="@color/white"
                                 android:layout_height="match_parent"
                                 android:textColor="@color/white"
-                                android:hint="Remarks"
+                                android:hint="@string/ERemarks"
                                 />
-
-                        </android.support.design.widget.TextInputLayout>
-
+                           </android.support.design.widget.TextInputLayout>
 
                     </RelativeLayout>
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
-
-
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/c_horizontalRecyclerView"
@@ -422,7 +417,6 @@
                 android:layout_marginTop="10dp"
                 app:backgroundTint="#414143"
                 android:layout_alignParentBottom="true"
-
                 app:srcCompat="@drawable/camera_icon"/>
 
             <Button
@@ -439,14 +433,9 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/create_order_buttons"
                 android:clickable="true"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textColor="@color/white" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
-
-
-
 
 </android.support.design.widget.CoordinatorLayout>

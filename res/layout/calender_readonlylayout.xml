@@ -21,12 +21,10 @@
             android:textColor="#000000"
             android:textSize="18dp"
             android:text=""
-
             android:background="#BDBDBD"
             android:gravity="center"
             >
         </TextView>
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,7 +39,7 @@
                 android:layout_alignLeft="@+id/textView1"
                 android:layout_below="@+id/textView1"
                 android:layout_marginTop="26dp"
-                android:text="To"
+                android:text="@string/to"
                 android:textSize="18dp" />
 
             <TextView
@@ -53,7 +51,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="26dp"
                 android:layout_marginTop="35dp"
-                android:text="From"
+                android:text="@string/From"
                 android:textSize="18dp" />
 
             <TextView
@@ -80,7 +78,7 @@
                 android:layout_alignLeft="@+id/textView2"
                 android:layout_below="@+id/to_details"
                 android:layout_marginTop="27dp"
-                android:text="Travel Details"
+                android:text="@string/Travel_Details"
                 android:textSize="18dp" />
 
             <Button
@@ -93,7 +91,7 @@
                 android:layout_below="@+id/details"
                 android:layout_marginTop="22dp"
                 android:background="#545454"
-                android:text="Save"
+                android:text="@string/Save"
                 android:textColor="#ffffff" />
 
             <Button
@@ -105,7 +103,7 @@
                 android:layout_below="@+id/details"
                 android:layout_marginTop="22dp"
                 android:background="#545454"
-                android:text="OK"
+                android:text="@string/ok"
                 android:textColor="#ffffff" />
 
             <EditText
@@ -123,8 +121,6 @@
                 android:ems="10"
                 android:gravity="top"
                 android:inputType="textEmailAddress|textMultiLine" >
-
-
             </EditText>
 
             <TextView
@@ -145,6 +141,5 @@
                 android:background="#f1f1f1"
                 android:ems="10" />
         </RelativeLayout>
-
     </LinearLayout>
 </ScrollView>

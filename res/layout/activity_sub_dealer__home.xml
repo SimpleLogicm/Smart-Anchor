@@ -21,11 +21,9 @@
         android:singleLine="true"
         android:drawableRight="@drawable/search_icon"
         android:textSize="15dp"
-        android:hint="Search In Submitted Sub Dealers" >
+        android:hint="@string/search_insubmitted_subdealers" >
         <requestFocus />
     </AutoCompleteTextView>
-
-
 
     <ImageView
         android:id="@+id/add_new_dealer"
@@ -35,8 +33,6 @@
         android:layout_below="@+id/dealer_search"
         android:layout_marginTop="80dp"
         android:layout_marginLeft="50dp"/>
-
-
 
     <ImageView
         android:id="@+id/pending_dealers"
@@ -60,7 +56,7 @@
         android:layout_marginTop="10dp"
         android:textSize="@dimen/text_size_header"
         android:textStyle="bold"
-        android:text="Add New" />
+        android:text="@string/add_new" />
 
     <TextView
         android:id="@+id/textView5"
@@ -74,7 +70,7 @@
         android:textSize="@dimen/text_size_header"
         android:textStyle="bold"
         android:layout_marginRight="12dp"
-        android:text="Pending" />
+        android:text="@string/pending" />
 
     <ImageView
         android:id="@+id/cash_Reportmenu"

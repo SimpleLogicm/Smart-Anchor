@@ -20,9 +20,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="Form Territory Code"
+                android:hint="@string/form_teritory_code"
                 android:imeOptions="actionDone">
-
                 <requestFocus />
             </EditText>
 
@@ -32,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Form_Territory_Code"
                 android:layout_marginTop="10dp"
-                android:hint="Sales Executive name"
+                android:hint="@string/sales_executive_name"
                 android:imeOptions="actionDone" />
 
             <EditText
@@ -41,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Sales_Executive_name"
                 android:layout_marginTop="10dp"
-                android:hint="Market Name"
+                android:hint="@string/market_name"
                 android:imeOptions="actionDone" />
 
             <TextView
@@ -51,7 +50,7 @@
                 android:layout_below="@+id/Market_Name"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="Outlet Gps :" />
+                android:text="@string/outlet_gps" />
 
             <Button
                 android:id="@+id/outlet_gps_value"
@@ -64,7 +63,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Select Location"
+                android:text="@string/select_location"
                 android:textColor="#FFFFFF" />
 
 
@@ -75,7 +74,7 @@
                 android:layout_below="@+id/outlet_gps_text"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="30dp"
-                android:text="Outlet Signboard :" />
+                android:text="@string/outlet_signboard" />
 
             <Button
                 android:id="@+id/outlet_signboard_value"
@@ -88,7 +87,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF"
                 tools:ignore="UnknownId"
                 />
@@ -112,7 +111,7 @@
                 android:layout_alignStart="@+id/Proprietor2_Photo_text"
                 android:layout_below="@+id/outlet_signboard_value"
                 android:layout_marginTop="23dp"
-                android:text="Proprietor1 Photo :  " />
+                android:text="@string/proprietor1_photo" />
 
             <Button
                 android:id="@+id/Proprietor1_Photo_value"
@@ -125,7 +124,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF" />
 
             <ImageView
@@ -146,7 +145,7 @@
                 android:layout_below="@+id/Proprietor1_Photo_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="Proprietor2 Photo :" />
+                android:text="@string/proprietor2_photo" />
 
             <Button
                 android:id="@+id/Proprietor2_Photo_value"
@@ -159,7 +158,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF" />
 
             <ImageView
@@ -180,7 +179,7 @@
                 android:layout_below="@+id/Proprietor2_Photo_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="Rubber Stamp :" />
+                android:text="@string/rubber_stamp" />
 
             <Button
                 android:id="@+id/Rubber_Stamp_value"
@@ -193,7 +192,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF" />
 
             <ImageView
@@ -207,7 +206,6 @@
                 android:layout_toRightOf="@+id/Rubber_Stamp_value"
                 android:src="@drawable/vector_camera_icon" />
 
-
             <TextView
                 android:id="@+id/Visiting_Card_text"
                 android:layout_width="wrap_content"
@@ -215,7 +213,7 @@
                 android:layout_below="@+id/Rubber_Stamp_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="Visiting Card :" />
+                android:text="@string/visiting_card" />
 
             <Button
                 android:id="@+id/Visiting_Card_value"
@@ -227,7 +225,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF" />
 
             <ImageView
@@ -248,7 +246,7 @@
                 android:layout_below="@+id/Visiting_Card_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="Outlet Display :" />
+                android:text="@string/outlet_display" />
 
             <Button
                 android:id="@+id/Outlet_Display_value"
@@ -261,7 +259,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF" />
 
             <ImageView
@@ -282,7 +280,7 @@
                 android:layout_below="@+id/Outlet_Display_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="In-Shop Display :" />
+                android:text="@string/inshop_display" />
 
             <Button
                 android:id="@+id/InShop_Display_value"
@@ -295,7 +293,7 @@
                 android:background="@drawable/roundedbutton"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textColor="#FFFFFF" />
 
             <ImageView
@@ -316,12 +314,11 @@
                 android:layout_below="@+id/InShop_Display_text"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="30dp"
-                android:text="In-Shop Display :" />
+                android:text="@string/inshop_display" />
 
             <LinearLayout
                 android:id="@+id/d_linearLayout"
                 android:layout_below="@+id/dsignature_text"
-
                 android:layout_width="fill_parent"
                 android:layout_height="250dp"
                 android:orientation="horizontal" />
@@ -334,7 +331,6 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_marginBottom="0dp"
-
                 android:layout_alignParentBottom="true"
                 >
 
@@ -342,7 +338,7 @@
                     android:id="@+id/d_save"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
-                    android:text="Save"
+                    android:text="@string/Save"
                     android:layout_marginRight="10dp"
                     android:background="#414042"
                     android:textColor="#FFFFFF"/>
@@ -352,7 +348,7 @@
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Submit"
+                    android:text="@string/Submit"
                     android:background="#414042"
                     android:textColor="#FFFFFF"/>
 
@@ -366,5 +362,5 @@
         android:id="@+id/checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CheckBox" />
+        android:text="@string/checkbox" />
 </ScrollView>

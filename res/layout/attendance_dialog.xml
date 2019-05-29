@@ -13,8 +13,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/text_size_header"
         android:layout_marginTop="20dp"
-        android:text="IN DETAILS" />
-
+        android:text="@string/in_details" />
 
     <TextView
         android:id="@+id/att_time"
@@ -25,7 +24,7 @@
         android:layout_marginLeft="10dp"
         android:textSize="@dimen/text_content_size"
         android:layout_marginTop="20dp"
-        android:text="Order Filter" />
+        android:text="@string/order_filter" />
 
     <TextView
         android:id="@+id/att_address"
@@ -36,7 +35,7 @@
         android:layout_marginLeft="10dp"
         android:textSize="@dimen/text_content_size"
         android:layout_marginTop="20dp"
-        android:text="Order " />
+        android:text="@string/Ordero" />
 
     <TextView
         android:id="@+id/att_lat"
@@ -47,7 +46,7 @@
         android:layout_marginLeft="10dp"
         android:textSize="@dimen/text_content_size"
         android:layout_marginTop="10dp"
-        android:text="Latitude : " />
+        android:text="@string/latitude" />
 
     <TextView
         android:id="@+id/att_long"
@@ -58,8 +57,7 @@
         android:layout_marginLeft="10dp"
         android:textSize="@dimen/text_content_size"
         android:layout_marginTop="10dp"
-        android:text="Longitude : " />
-
+        android:text="@string/longitude" />
 
     <Button
         android:id="@+id/atok"
@@ -70,7 +68,7 @@
         android:layout_marginRight="5dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/att_long"
-        android:text="OK"
+        android:text="@string/ok"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="17sp" />

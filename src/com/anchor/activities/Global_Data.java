@@ -31,7 +31,6 @@ public class Global_Data {
     public static String target_product_Bu_value = "";
     public static String target_product_division_value = "";
     public static String target_product_brand_value = "";
-
     public static String Quantity_click_flag = "";
     public static String Value_click_flag = "";
     public static String close_click_flag = "";

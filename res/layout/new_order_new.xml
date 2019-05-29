@@ -18,7 +18,6 @@
         android:textSize="15sp"  >
     </TextView>
 
-
     <AutoCompleteTextView
         android:id="@+id/Product_Variant_search"
         android:layout_width="match_parent"
@@ -35,7 +34,7 @@
         android:textSize="15dp"
         android:layout_below="@+id/txtWelcomeUser"
         android:drawableRight="@drawable/search_icon"
-        android:hint="Search Variants" >
+        android:hint="@string/Search_Variants" >
         <requestFocus />
     </AutoCompleteTextView>
 
@@ -56,7 +55,7 @@
         android:layout_gravity="center"
         android:layout_below="@+id/Product_Variant_search"
         android:layout_centerHorizontal="true"
-        android:hint="Select BU"
+        android:hint="@string/select_bu"
         android:layout_marginTop="10dp"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
@@ -70,7 +69,7 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/spnBu"
         android:layout_centerHorizontal="true"
-        android:hint="Select Business Division"
+        android:hint="@string/business_division"
         android:inputType="textPassword"
         android:paddingTop="10dp" />
 
@@ -81,7 +80,7 @@
         android:layout_gravity="center"
         android:layout_below="@+id/spnBusinessDiv"
         android:layout_centerHorizontal="true"
-        android:hint="Select Category"
+        android:hint="@string/Select_Categories"
         android:layout_marginTop="20dp"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
@@ -95,7 +94,7 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/spnCategory"
         android:layout_centerHorizontal="true"
-        android:hint="Select Product"
+        android:hint="@string/Please_Select_Product"
         android:inputType="textPassword"
         android:paddingTop="10dp" />
 
@@ -107,7 +106,7 @@
         android:visibility="gone"
         android:layout_marginTop="10dp"
         android:textSize="40sp"
-        android:hint="Select Product Specification"
+        android:hint="@string/select_product_spec"
         android:inputType="textPassword"
         android:paddingTop="10dp" />
 
@@ -129,7 +128,7 @@
         android:singleLine="true"
         android:textSize="15dp"
         android:drawableRight="@drawable/search_icon"
-        android:hint="Search Variant" >
+        android:hint="@string/Search_Variants" >
         <requestFocus />
     </AutoCompleteTextView>
 
@@ -151,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#414042"
-            android:text="RP"
+            android:text="@string/RP"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="#FFFFFF" />
@@ -169,7 +168,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#414042"
-            android:text="MRP"
+            android:text="@string/MRP"
             android:gravity="center"
             android:textColor="#FFFFFF" />
 
@@ -189,7 +188,7 @@
         android:layout_marginTop="10dp"
         android:maxLength="9"
         android:visibility="gone"
-        android:hint="Quantity"
+        android:hint="@string/EQuantity"
         android:inputType="number"
         android:paddingTop="10dp" >
     </EditText>
@@ -201,7 +200,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:hint="Scheme"
+        android:hint="@string/scheme"
          android:paddingTop="10dp" />
 
     <EditText
@@ -211,7 +210,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:hint="Delivery Quantity"
+        android:hint="@string/delivery_qty"
         android:paddingTop="10dp"
         android:visibility="gone"
         android:textSize="17dp">
@@ -225,12 +224,11 @@
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="Total Price : "
+        android:text="@string/Total_Price"
         android:paddingTop="10dp"
-         android:visibility="gone"
+        android:visibility="gone"
         android:textSize="17dp" >
     </TextView>
-
 
     <Button
         android:id="@+id/list_ok"
@@ -240,11 +238,10 @@
         android:layout_alignParentBottom="true"
         android:textColor="#FFFFFF"
         android:visibility="gone"
-        android:text="OK"
+        android:text="@string/ok"
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:textSize="18sp"
-
         />
 
     <LinearLayout
@@ -253,8 +250,6 @@
         android:gravity="bottom"
         android:orientation="vertical"
         android:layout_marginBottom="10dp" >
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -268,8 +263,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
-                android:text="Add"
+                android:text="@string/add"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -277,11 +271,9 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
-
-                android:text="Preview Order"
+                android:text="@string/Preview_Order"
                 android:textColor="#FFFFFF"
-                 android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp" />
         </LinearLayout>
     </LinearLayout>
 

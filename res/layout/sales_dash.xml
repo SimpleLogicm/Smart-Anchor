@@ -49,7 +49,7 @@
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="ORDER"
+                android:text="@string/ORDER"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -81,7 +81,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="CUSTOMER SERVICE"
+                android:text="@string/CUSTOMER_SERVICE"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -124,7 +124,7 @@
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="QUOTES"
+                android:text="@string/QUOTES"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -157,7 +157,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
-                android:text="QUOTE STATUS"
+                android:text="@string/QUOTE_STATUS"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -202,7 +202,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="SCHEDULE"
+                android:text="@string/SCHEDULE"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -218,7 +218,6 @@
 
         <RelativeLayout
             android:layout_width="20dp"
-
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="2dp"
@@ -234,7 +233,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="CUSTOMER PROFILE"
+                android:text="@string/CUSTOMER_PROFILE"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -278,7 +277,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="SCHEME"
+                android:text="@string/SCHEME"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -310,7 +309,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="OUTSTANDING"
+                android:text="@string/outstanding"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -355,7 +354,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="OTHER INFO"
+                android:text="@string/order_info"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -387,7 +386,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="OUTSTANDING"
+                android:text="@string/outstanding"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 

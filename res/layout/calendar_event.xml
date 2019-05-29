@@ -37,7 +37,7 @@
             android:layout_alignLeft="@+id/textView1"
             android:layout_below="@+id/textView1"
             android:layout_marginTop="26dp"
-            android:text="To"
+            android:text="@string/to"
             android:textSize="18dp" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="26dp"
             android:layout_marginTop="35dp"
-            android:text="From"
+            android:text="@string/From"
             android:textSize="18dp" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:layout_alignLeft="@+id/textView2"
             android:layout_below="@+id/to_details"
             android:layout_marginTop="27dp"
-            android:text="Travel Details"
+            android:text="@string/Travel_Details"
             android:textSize="18dp" />
 
         <Button
@@ -83,7 +83,7 @@
             android:layout_below="@+id/details"
             android:layout_marginTop="22dp"
             android:background="#545454"
-            android:text="Delete"
+            android:text="@string/Delete_button_label"
             android:textColor="#ffffff" />
 
         <Button
@@ -95,7 +95,7 @@
             android:layout_below="@+id/details"
             android:layout_marginTop="22dp"
             android:background="#545454"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:textColor="#ffffff" />
 
         <EditText

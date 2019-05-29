@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/example_row_b_action_1"
                	android:layout_weight="28"
-                android:text="View"
+                android:text="@string/view"
                 android:textColor="#FFFFFF"
                 android:background="#8A0808"
                   />
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/example_row_b_action_2"
               	android:layout_weight="28"
-                android:text="Delete"
+                android:text="@string/Delete"
                  android:textColor="#FFFFFF"
                   android:background="#8A0808"
                   

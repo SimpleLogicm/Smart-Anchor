@@ -23,7 +23,7 @@
                 android:maxLines="3"
                 android:layout_marginTop="5dp"
                 android:padding="4dp"
-                android:text="About METAL"
+                android:text="@string/About_Metal"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="15dp" />
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Metal_Header"
                 android:padding="4dp"
-                android:text="METAL facilitates the field sales organisation to interact with their respective offices in a structured and efficient manner. Thus automating the activities of the field sales using this android based field sales automation tool. This will help you to have better outlook of your targets and achievers at the same time have well coordinated field sales operation."
+                android:text="@string/Metal_Description"
                 android:textColor="#080707"
                 android:textSize="13dp" />
 
@@ -46,7 +46,7 @@
                 android:maxLines="3"
                 android:layout_marginTop="5dp"
                 android:padding="4dp"
-                android:text="Simple Logic IT Private Ltd."
+                android:text="@string/Simple_Logic_full_name"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="15dp" />
@@ -58,11 +58,7 @@
                 android:layout_below="@+id/title"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="609, Damji Shamji Corporate Square,
-Melville Estate, Next to KBC,
-Ghatkopar Andheri Link Road,
-Ghatkopar (E), Mumbai - 400 075.
-INDIA."
+                android:text="@string/Simple_Logic_address"
                 android:textColor="#080707"
                 android:textSize="13dp" />
 
@@ -73,7 +69,7 @@ INDIA."
                 android:layout_below="@+id/discriptionnew"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="Call us :"
+                android:text="@string/Call_us"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="15dp" />
@@ -85,7 +81,7 @@ INDIA."
                 android:layout_below="@+id/phone"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="+91 22 6511 6620"
+                android:text="@string/number1"
                 android:textColor="#080707"
                 android:textSize="13dp" />
 
@@ -96,7 +92,7 @@ INDIA."
                 android:layout_below="@+id/phonenext"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="+91 22 2500 6620"
+                android:text="@string/number2"
                 android:textColor="#080707"
                 android:textSize="13dp" />
 
@@ -117,7 +113,7 @@ INDIA."
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="support@simplelogic.in"
+                android:text="@string/email2"
                 android:textColor="#080707"
                 android:textSize="13dp"
                 android:layout_below="@+id/email1"
@@ -130,10 +126,9 @@ INDIA."
                 android:id="@+id/email1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="sales@simplelogic.in"
+                android:text="@string/email1"
                 android:textColor="#080707"
                 android:textSize="13dp"
                 android:layout_alignBaseline="@+id/phonenext"
@@ -152,7 +147,7 @@ INDIA."
                 android:layout_marginTop="10dp"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="METAL by Simple Logic IT Pvt Ltd."
+                android:text="@string/Simplelogic_web_link"
                 android:textColor="#080707"
                 android:textSize="15dp"
                 />
@@ -165,7 +160,7 @@ INDIA."
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:text="Email Us :"
+                android:text="@string/Email_Us"
                 android:layout_marginRight="29dp"
 
                 android:layout_below="@+id/discriptionnew"

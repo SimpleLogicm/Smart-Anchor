@@ -58,7 +58,7 @@
     <EditText
         android:id="@+id/search_filter"
         android:layout_width="238dp"
-         android:hint="Search"
+         android:hint="@string/Search"
         android:layout_height="wrap_content"
          >
     </EditText>
@@ -66,7 +66,7 @@
          android:id="@+id/filter_btn"
                 android:layout_width="87dp"
                 android:layout_height="wrap_content"
-                android:text="Filter" />
+                android:text="@string/filter" />
     
     </LinearLayout>
 

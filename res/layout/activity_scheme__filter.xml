@@ -9,13 +9,11 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:fillViewport="true"
-    android:background="@color/gray"
     tools:context=".Scheme_Filter_Activity"
     android:scrollbars="none">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         >
 
         <RelativeLayout
@@ -34,9 +32,9 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="left|center"
                 android:textSize="16sp"
-                android:textColor="#ffffff"
+                android:textColor="@color/black"
                 android:layout_marginTop="5dp"
-                android:text="Filter By"
+                android:text="@string/filter_by"
                 android:layout_alignParentLeft="true" />
 
             <LinearLayout
@@ -64,7 +62,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:inputType="textPassword"
                         />
@@ -76,15 +73,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center">
-
-
 
                     <Spinner
                         android:id="@+id/target_half_year"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:inputType="textPassword"
                         />
@@ -96,15 +90,12 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center">
-
-
 
                     <Spinner
                         android:id="@+id/target_quarter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:inputType="textPassword"
                         />
@@ -116,14 +107,11 @@
                     android:layout_weight="1"
                     android:gravity="center">
 
-
-
                     <Spinner
                         android:id="@+id/target_month"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="@color/white"
                         android:textSize="14sp"
                         android:inputType="textPassword"
                         />
@@ -147,12 +135,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Scheme Period"
+                    android:text="@string/scheme_period"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:textColor="#ffffff" >
+                    android:textColor="@color/black" >
                 </TextView>
 
                 <EditText
@@ -164,7 +152,7 @@
                     android:textSize="@dimen/com_l_margin"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
@@ -185,12 +173,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="To"
+                    android:text="@string/to"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:textColor="#ffffff" >
+                    android:textColor="@color/black" >
                 </TextView>
 
                 <EditText
@@ -202,7 +190,7 @@
                     android:textSize="@dimen/com_l_margin"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
@@ -216,11 +204,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/date_range"
-
                     />
-
-
-
             </LinearLayout>
 
 
@@ -246,20 +230,20 @@
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/black"
                         android:gravity="left|center"
                         android:textSize="16sp"
-                        android:text="View" />
+                        android:text="@string/view" />
 
                     <TextView
                         android:id="@+id/type_text"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/black"
                         android:gravity="left|center"
                         android:textSize="16sp"
-                        android:text="Type" />
+                        android:text="@string/type" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -293,7 +277,8 @@
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
                                 android:background="@drawable/create_order_buttons"
-                                android:text="Close"
+                                android:text="@string/close"
+                                android:gravity="center"
                                 android:layout_marginBottom="10dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_alignParentBottom="true"
@@ -314,16 +299,17 @@
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
                                 android:background="@drawable/create_order_buttons"
-                                android:text="Ongoing"
+                                android:text="@string/ongoing"
+                                android:gravity="center"
                                 android:layout_marginBottom="10dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_alignParentBottom="true"
                                 android:textAllCaps="false"
                                 android:textColor="#fff"
                                 android:textSize="14sp" />
-
                         </RelativeLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="55dp"
@@ -346,20 +332,19 @@
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
                                 android:background="@drawable/create_order_buttons"
-                                android:text="Quantity"
+                                android:text="@string/EQuantity"
+                                android:gravity="center"
                                 android:layout_marginBottom="10dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_alignParentBottom="true"
                                 android:textAllCaps="false"
                                 android:textColor="#fff"
                                 android:textSize="14sp" />
-
                         </RelativeLayout>
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-
                             android:layout_marginLeft="10dp"
                             android:gravity="center">
 
@@ -368,7 +353,8 @@
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
                                 android:background="@drawable/create_order_buttons"
-                                android:text="Value"
+                                android:text="@string/value"
+                                android:gravity="center"
                                 android:layout_marginBottom="10dp"
                                 android:layout_centerHorizontal="true"
                                 android:layout_alignParentBottom="true"
@@ -395,20 +381,17 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
-
                     />
+
                 <Spinner
                     android:id="@+id/division_spinnern"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-
                     />
 
             </LinearLayout>
@@ -428,23 +411,18 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
-
                     />
+
                 <Spinner
                     android:id="@+id/brand_spinnern"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textColor="@color/white"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
-
                     />
-
-
 
             </LinearLayout>
 
@@ -467,8 +445,9 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:padding="10dp"
+                    android:gravity="center"
                     android:background="@drawable/create_order_buttons"
-                    android:text="Apply"
+                    android:text="@string/Apply"
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     android:textSize="14sp" />

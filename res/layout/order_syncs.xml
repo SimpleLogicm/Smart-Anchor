@@ -36,7 +36,7 @@
             android:id="@+id/lastsyncon"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Last Sync On"
+            android:text="@string/Last_Sync_On"
             android:textColor="#000000"
             android:textSize="20sp"  >
         </TextView>
@@ -46,7 +46,7 @@
             android:layout_width="fill_parent"
             android:layout_marginTop="40dp"
             android:layout_height="wrap_content"
-            android:text="Total Orders Synced"
+            android:text="@string/Total_Orders_Synced"
             android:textColor="#000000"
             android:textSize="20sp"  >
         </TextView>
@@ -67,7 +67,7 @@
             android:id="@+id/angry_btn2"
             android:layout_marginTop="0dp"
             android:layout_gravity="center"
-            android:text="Check Updates"
+            android:text="@string/Check_Updates"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:layout_width="250dp"
@@ -80,7 +80,7 @@
 
         <Button
             android:id="@+id/angry_btn1"
-            android:text="Upload Orders"
+            android:text="@string/Upload_Orders"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
             android:textColor="#FFFFFF"
@@ -93,13 +93,11 @@
             android:shadowRadius="5"
             />
 
-
-
         <Button
             android:id="@+id/angry_btn3"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:text="Upload Customers"
+            android:text="@string/upload_customer"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:visibility="gone"
@@ -114,7 +112,7 @@
             android:id="@+id/angry_btn4"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:text="Upload Data"
+            android:text="@string/Upload_Data"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:layout_width="250dp"

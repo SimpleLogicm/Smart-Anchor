@@ -10,7 +10,7 @@
         android:inputType="textEmailAddress"
         android:text=""
         android:ems="10"
-        android:hint="Enter Email Id"
+        android:hint="@string/email_id_hint"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="50dp"
@@ -23,7 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="40dp"
-        android:text="OK"
+        android:text="@string/ok"
         android:background="#8A0808"
         android:textColor="#FFFFFF" />
 

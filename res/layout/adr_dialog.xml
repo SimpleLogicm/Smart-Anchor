@@ -11,7 +11,7 @@
         android:id="@+id/item_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CUSTOMER ADDRESS"
+        android:text="@string/customer_address"
         android:textSize="18dp"
         android:gravity="center"
         android:textColor="#111111"
@@ -55,7 +55,7 @@
             android:background="@drawable/but_red"
             android:layout_height="30dp"
             android:textColor="#FFFFFF"
-            android:text="OK"
+            android:text="@string/ok"
             android:textSize="16dp"
             android:layout_marginRight="10dp"
             
@@ -66,7 +66,7 @@
             android:background="@drawable/but_red"
             android:layout_height="30dp"
             android:textColor="#FFFFFF"
-            android:text="CANCEL"
+            android:text="@string/cancel"
             android:textSize="16dp"
             android:layout_marginLeft="10dp"
             />

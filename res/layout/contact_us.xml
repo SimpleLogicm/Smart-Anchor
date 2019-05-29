@@ -12,7 +12,6 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-
             android:layout_height="match_parent">
 
         <RelativeLayout
@@ -59,7 +58,7 @@
                 android:layout_below="@+id/discriptionnew"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="Call us :"
+                android:text="@string/Call_us"
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="15dp" />
@@ -107,7 +106,6 @@
                 android:id="@+id/email1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:maxLines="3"
                 android:padding="4dp"
                 android:text=""
@@ -118,8 +116,6 @@
                 android:layout_alignLeft="@+id/email2"
                 android:layout_alignStart="@+id/email2" />
 
-
-
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
@@ -128,9 +124,8 @@
                 android:textColor="#222"
                 android:textStyle="bold"
                 android:textSize="15dp"
-                android:text="Email Us :"
+                android:text="@string/Email_Us"
                 android:layout_marginRight="29dp"
-
                 android:layout_below="@+id/discriptionnew"
                 android:layout_alignRight="@+id/email1"
                 android:layout_alignEnd="@+id/email1"
@@ -173,7 +168,7 @@
                 android:layout_marginTop="10dp"
                 android:maxLines="3"
                 android:padding="4dp"
-                android:text="Visit our website"
+                android:text="@string/Visit_our_websites"
                 android:textColor="#080707"
                 android:textSize="15dp"
                 />

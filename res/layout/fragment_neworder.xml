@@ -21,7 +21,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select Category"
+        android:hint="@string/Select_Categories"
         android:inputType="textPersonName"
         android:layout_marginTop="20dp"
         android:paddingTop="10dp" >
@@ -35,7 +35,7 @@
         android:gravity="top"
         android:editable="false"
         android:layout_marginTop="10dp"
-        android:hint="Item Description"
+        android:hint="@string/Item_Description"
         android:background="@android:drawable/editbox_background_normal"
         android:paddingTop="10dp" />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:hint="Select Product Specification"
+        android:hint="@string/select_product_spec"
         android:inputType="textPassword"
         android:visibility="gone"
         android:paddingTop="10dp" />
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#414042"
-            android:text="RP"
+            android:text="@string/RP"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="#FFFFFF" />
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#414042"
-            android:text="MRP"
+            android:text="@string/MRP"
             android:gravity="center"
             android:textColor="#FFFFFF" />
 
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:hint="Quantity"
+        android:hint="@string/EQuantity"
         android:inputType="number"
         android:paddingTop="10dp" >
     </EditText>
@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:hint="Scheme"
+        android:hint="@string/scheme"
         android:paddingTop="10dp" />
 
  <!--    <TextView
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="Total Price : "
+        android:text="@string/Total_Price"
         android:paddingTop="10dp"
         android:textSize="17dp" >
     </TextView>
@@ -171,8 +171,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                
-                android:text="Add"
+                android:text="@string/add"
                 android:textColor="#FFFFFF" />
 
             <Button
@@ -180,7 +179,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Preview Order"
+                android:text="@string/Preview_Order"
                 android:textColor="#FFFFFF"
                  android:layout_marginLeft="5dp" />
         </LinearLayout>

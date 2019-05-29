@@ -21,7 +21,7 @@
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:hint="Select City"
+        android:hint="@string/Select_City"
         android:inputType="textPassword"
         android:paddingTop="30dp" 
         android:layout_marginTop="10dp"/>
@@ -30,7 +30,7 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         android:layout_marginLeft="50dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_launcher" />
 
@@ -66,7 +66,7 @@
         android:background="#A93D33"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="60dp"
-        android:text="Image"
+        android:text="@string/image"
         android:textColor="#ffffff" />
     
     <Button
@@ -76,7 +76,7 @@
         android:background="#A93D33"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="5dp"
-        android:text="Video"
+        android:text="@string/Video"
         android:textColor="#ffffff" />
     
    </LinearLayout>

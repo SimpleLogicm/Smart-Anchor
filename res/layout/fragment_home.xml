@@ -23,7 +23,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select City"
+        android:hint="@string/Select_City"
         android:inputType="textPassword"
         android:paddingTop="30dp" 
         android:layout_marginTop="10dp"/>
@@ -33,7 +33,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select Beat"
+        android:hint="@string/Select_Beats"
         android:inputType="textPassword"
         android:paddingTop="20dp"
         android:layout_marginTop="10dp" />
@@ -43,7 +43,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select Retailer"
+        android:hint="@string/select_retailer"
         android:inputType="textPassword"
         android:paddingTop="30dp"
         android:layout_marginTop="10dp" />
@@ -66,22 +66,18 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                
-                android:text="New Order"
-               
-                
-        android:textColor="#FFFFFF" />
+                android:text="@string/New_Order"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonPreviousOrder"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="Previous Order" 
-                 android:background="#8A0808"
-                 android:layout_marginLeft="10dp"
-        android:textColor="#FFFFFF"/>
+                android:text="@string/Previous_Order"
+                android:background="#8A0808"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
 
         <LinearLayout
@@ -97,21 +93,18 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="No Order"
-                 android:background="#8A0808"
-                
-        android:textColor="#FFFFFF" />
+                android:text="@string/No_Order"
+                android:background="#8A0808"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonReturnOrder"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="Return Order" 
-                 android:background="#8A0808"
-                  android:layout_marginLeft="10dp"
+                android:text="@string/Return_Order"
+                android:background="#8A0808"
+                android:layout_marginLeft="10dp"
         android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>

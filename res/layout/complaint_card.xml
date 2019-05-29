@@ -12,10 +12,12 @@
     android:clickable="true"
     tools:style="@style/CardView"
     android:id="@+id/cvComplaint">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:gravity="center"
             android:id="@+id/tvCardComplaintDate"

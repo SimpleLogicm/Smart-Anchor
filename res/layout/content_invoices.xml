@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Invoice Period"
+            android:text="@string/invoice_period"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
@@ -53,14 +53,13 @@
             android:layout_marginRight="15dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/date_range"
-
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="To"
+            android:text="@string/to"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
@@ -91,10 +90,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             app:srcCompat="@drawable/date_range"
-
             tools:ignore="VectorDrawableCompat" />
-
-
 
     </LinearLayout>
 
@@ -131,7 +127,6 @@
             app:aebSubButtonTextSizeSp="18dp"
             app:aebBlurRadius="10"/>
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -154,7 +149,7 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dialog"
             android:layout_gravity="center"
-            android:hint="Select Business Division"
+            android:hint="@string/business_division"
 
             />
 
@@ -163,12 +158,11 @@
             android:layout_width="0dp"
             android:layout_weight="1.0"
             android:visibility="gone"
-           android:layout_marginLeft="5dp"
+            android:layout_marginLeft="5dp"
             android:spinnerMode="dialog"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="Select Brand"
-
+            android:hint="@string/brand"
             />
 
     </LinearLayout>
@@ -190,7 +184,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Date"
+            android:text="@string/date"
             android:layout_marginLeft="1dp"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
@@ -205,7 +199,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Transaction Type"
+            android:text="@string/transaction_type"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -217,7 +211,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Reference No"
+            android:text="@string/reference_no"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -231,7 +225,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Product Category"
+            android:text="@string/product_category"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -245,7 +239,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Sales Order"
+            android:text="@string/sales_order"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -259,13 +253,12 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Debit "
+            android:text="@string/sales_order"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
-
             android:textColor="@color/black" >
         </TextView>
 
@@ -274,7 +267,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Credit"
+            android:text="@string/credit"
             android:padding="1dp"
             android:background="@color/ledger_header"
             android:textSize="@dimen/com_l_margin"
@@ -282,7 +275,6 @@
             android:textStyle="bold"
             android:textColor="@color/black" >
         </TextView>
-
 
     </LinearLayout>
 

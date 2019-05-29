@@ -38,6 +38,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp" >
          </ListView>
+
           <TextView
             android:id="@+id/list_text"
             android:visibility="gone"
@@ -46,8 +47,6 @@
             android:layout_below="@+id/target"
             android:layout_gravity="center"
             android:layout_marginTop="60dp" />
-
-
 
         <TextView
             android:id="@+id/textView1"
@@ -58,7 +57,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:textColor="#990000"
-            android:text="Year" />
+            android:text="@string/year" />
 
         <TextView
             android:id="@+id/textView3"
@@ -68,7 +67,7 @@
             android:layout_alignBottom="@+id/textView2"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:text="Achieved Target"
+            android:text="@string/achieved_target"
             android:textColor="#990000" />
 
         <RelativeLayout
@@ -101,7 +100,7 @@
             android:layout_toRightOf="@+id/textView1"
             android:layout_marginRight="20dp"
             android:visibility="gone"
-            android:text="Month"
+            android:text="@string/month"
             android:textColor="#990000" />
 
          <TextView
@@ -112,7 +111,7 @@
              android:layout_alignBaseline="@+id/textViewm"
              android:layout_alignBottom="@+id/textView1"
              android:layout_centerHorizontal="true"
-             android:text="Assigned Target"
+             android:text="@string/assigned_target"
              android:textColor="#990000" />
     </RelativeLayout>
 

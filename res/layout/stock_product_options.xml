@@ -11,7 +11,6 @@
         android:background="@color/white"
         android:orientation="vertical" >
 
-
         <TextView
             android:layout_width="250dp"
             android:layout_gravity="center"
@@ -20,7 +19,7 @@
             android:layout_marginTop="5dp"
             android:textColor="#111111"
             android:textSize="18dp"
-            android:text="Select Product" >
+            android:text="@string/Select_Product" >
 
         </TextView>
 
@@ -29,7 +28,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:hint="Select City"
+            android:hint="@string/Select_City"
             android:inputType="textPassword"
             android:paddingTop="5dp"
             />
@@ -39,7 +38,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:hint="Select Beat"
+            android:hint="@string/Select_Beats"
             android:inputType="textPassword"
             android:paddingTop="5dp"
             android:layout_marginTop="10dp" />
@@ -49,7 +48,7 @@
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:hint="Select Retailer"
+            android:hint="@string/select_retailer"
             android:inputType="textPassword"
             android:paddingTop="10dp"
             android:layout_marginTop="10dp" />
@@ -63,7 +62,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="0"
             android:background="#414042"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:textColor="#FFFFFF"/>
 
 

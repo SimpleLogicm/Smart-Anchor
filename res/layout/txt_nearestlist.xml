@@ -20,6 +20,6 @@
         android:background="#414042"
         android:textColor="#FFFFFF"
         android:layout_marginLeft="10dp"
-        android:text="View Address" />
+        android:text="@string/view_address" />
 
 </LinearLayout>

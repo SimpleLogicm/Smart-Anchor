@@ -21,11 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Product"
+            android:text="@string/AProduct"
             android:padding="12dp"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
-
 
     </RelativeLayout>
 
@@ -39,8 +38,6 @@
         android:layout_marginTop="9dp"
         android:src="@color/contentDividerLine" />
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +50,7 @@
             android:id="@+id/Response_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Response"
+            android:text="@string/response"
             android:layout_centerHorizontal="true"
             android:textColor="@color/mainTextColor"
             android:textSize="18sp"
@@ -74,7 +71,7 @@
             android:id="@+id/Respondent_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Respondent Name"
+            android:text="@string/respondent_name"
             android:layout_below="@+id/Response"
             android:layout_centerHorizontal="true"
             android:textColor="@color/mainTextColor"
@@ -96,7 +93,7 @@
             android:id="@+id/r_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date"
+            android:text="@string/date"
             android:layout_below="@+id/Respondent"
             android:layout_centerHorizontal="true"
             android:textColor="@color/mainTextColor"
@@ -157,6 +154,7 @@
             android:text=""
             android:textColor="@color/mainTextColor"
             android:textSize="14sp" />
+
         <TextView
             android:id="@+id/r_desription_text3"
             android:layout_width="wrap_content"
@@ -290,7 +288,7 @@
         android:layout_marginTop="100dp"
         android:background="@color/btnRequest"
         android:padding="10dp"
-        android:text="OK"
+        android:text="@string/ok"
         android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/mainTextColor"

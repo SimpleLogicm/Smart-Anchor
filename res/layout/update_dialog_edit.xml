@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="INVOICE DESCRIPTION"
+        android:text="@string/INVOICE_DESCRIPTION"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#111111"
         android:textSize="17dp" />
@@ -52,7 +52,7 @@
             android:background="@drawable/but_red"
             android:layout_height="30dp"
             android:textColor="#FFFFFF"
-            android:text="OK"
+            android:text="@string/ok"
             android:layout_marginRight="10dp"
             android:textSize="16dp" />
 
@@ -62,7 +62,7 @@
             android:background="@drawable/but_red"
             android:layout_height="30dp"
             android:textColor="#FFFFFF"
-            android:text="CANCEL"
+            android:text="@string/cancel"
             android:textSize="16dp" />
     </LinearLayout>
 

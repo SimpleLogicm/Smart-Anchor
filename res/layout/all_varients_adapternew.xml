@@ -12,15 +12,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
         >
 
         <TextView
             android:id="@+id/Productnamerpmrp"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-
             android:background="@color/grey_secondry"
             android:gravity="center_vertical"
             android:paddingLeft="5dp"
@@ -40,7 +37,7 @@
             android:layout_marginTop="6dp"
             android:textStyle="bold"
             android:layout_alignParentLeft="true"
-            android:text="CODE : "
+            android:text="@string/code"
             android:textSize="12dp" />
 
         <TextView
@@ -51,7 +48,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="6dp"
             android:layout_alignParentLeft="true"
-            android:text="MRP "
+            android:text="@string/MRP"
             android:textSize="12dp" />
 
         <TextView
@@ -62,7 +59,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_alignParentLeft="true"
-            android:text="RP "
+            android:text="@string/RP"
             android:textSize="12dp" />
 
         <TextView
@@ -73,7 +70,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_alignParentLeft="true"
-            android:text="SQ 10"
+            android:text="@string/sq"
             android:textSize="12dp" />
 
         <TextView
@@ -84,8 +81,9 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/PSQ"
             android:layout_alignParentLeft="true"
-            android:text="MQ 20"
+            android:text="@string/mq"
             android:textSize="12dp" />
+
         <TextView
             android:id="@+id/PSTOCK"
             android:layout_width="wrap_content"
@@ -95,7 +93,7 @@
             android:layout_marginTop="5dp"
             android:layout_below="@+id/PMQ"
             android:layout_alignParentLeft="true"
-            android:text="Stock"
+            android:text="@string/stock"
             android:textSize="12dp" />
 
         <TextView
@@ -105,9 +103,8 @@
             android:layout_below="@id/PSTOCK"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-
             android:layout_alignParentLeft="true"
-            android:text="Scheme Name"
+            android:text="@string/scheme_name"
             android:textSize="12dp" />
 
         <EditText
@@ -118,7 +115,7 @@
             android:focusable="true"
             android:clickable="true"
             android:background="@drawable/squareedittext"
-            android:hint="ENTER QUANTITY"
+            android:hint="@string/ENTER_QUANTITY"
             android:inputType="number"
             android:maxLength="9"
             android:imeOptions="actionNext"
@@ -129,8 +126,6 @@
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/Productnamerpmrp"
-
-
             />
 
         <TextView
@@ -153,9 +148,8 @@
             android:layout_alignBaseline="@id/productquantityp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="20dp"
-
             android:layout_toRightOf="@+id/productquantityp"
-            android:text="PRICE : "
+            android:text="@string/PRICE"
             android:textSize="12dp" />
 
         <TextView
@@ -167,7 +161,7 @@
             android:layout_marginTop="5dp"
             android:visibility="gone"
             android:layout_alignParentLeft="true"
-            android:text="RP "
+            android:text="@string/RP"
             android:textSize="12dp" />
 
         <TextView

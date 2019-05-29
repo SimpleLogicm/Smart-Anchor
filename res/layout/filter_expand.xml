@@ -9,7 +9,6 @@
         android:id="@+id/exp_list"
         android:layout_width="wrap_content"
         android:choiceMode= "multipleChoice"
-        
         android:layout_height="370dp" >
     </ExpandableListView>
 
@@ -20,6 +19,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/exp_list"
-        android:text="SORT" />
+        android:text="@string/sort" />
 
 </RelativeLayout>

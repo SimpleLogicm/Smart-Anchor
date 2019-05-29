@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".OutstandingDetails"
-    android:background="@color/gray"
+
     >
 
     <LinearLayout
@@ -14,6 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="52dp"
         android:background="#8A0808"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <TextView
@@ -22,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Order Booking"
+            android:text="@string/order_booking"
             android:textColor="#FFFFFF"
             android:textSize="17sp"
             android:typeface="sans" />
@@ -48,6 +49,7 @@
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/arr_left"
+        android:visibility="gone"
         />
 
     <ImageView
@@ -56,9 +58,9 @@
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="8dp"
+        android:visibility="gone"
         android:background="@drawable/anchor_logo"
         />
-
 
     <LinearLayout
         android:id="@+id/sl_header_container"
@@ -76,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Select Date"
+            android:text="@string/select_date"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
@@ -114,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="To"
+            android:text="@string/to"
             android:textSize="@dimen/com_l_margin"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
@@ -200,14 +202,9 @@
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:spinnerMode="dialog"
-
             android:layout_gravity="center"
-            android:hint="Select Business Division"
-
+            android:hint="@string/business_division"
             />
-
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -228,7 +225,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Reference No"
+            android:text="@string/reference_no"
             android:layout_marginLeft="1dp"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
@@ -243,7 +240,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Invoice No"
+            android:text="@string/invoice_no"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -257,7 +254,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="Date"
+            android:text="@string/date"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -269,7 +266,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Type"
+            android:text="@string/type"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -283,7 +280,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Product Category"
+            android:text="@string/product_category"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -297,7 +294,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Value"
+            android:text="@string/value"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -311,7 +308,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Due Amount"
+            android:text="@string/due_amount"
             android:background="@color/ledger_header"
             android:padding="1dp"
             android:textSize="@dimen/com_l_margin"
@@ -326,7 +323,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Due Date"
+            android:text="@string/due_date"
             android:padding="1dp"
             android:background="@color/ledger_header"
             android:textSize="@dimen/com_l_margin"
@@ -340,7 +337,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="Total No Of Days"
+            android:text="@string/total_no_ofdays"
             android:padding="1dp"
             android:background="@color/ledger_header"
             android:layout_marginRight="1dp"

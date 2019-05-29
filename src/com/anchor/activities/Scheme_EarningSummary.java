@@ -1,6 +1,8 @@
 package com.anchor.activities;
 
 import android.Manifest;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -9,8 +11,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +32,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +41,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.adapter.Scheme_EarningSummary_Adapter;
@@ -97,7 +103,7 @@ import cpm.simplelogic.helper.ConnectionDetector;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
-public class Scheme_EarningSummary extends AppCompatActivity implements Scheme_EarningSummary_Adapter.UserAdapterListener, Scheme_EarningSummary_Adapter.UserAdapterListenernew, DatePickerDialog.OnDateSetListener {
+public class Scheme_EarningSummary extends Activity implements Scheme_EarningSummary_Adapter.UserAdapterListener, Scheme_EarningSummary_Adapter.UserAdapterListenernew, DatePickerDialog.OnDateSetListener {
     private ProgressDialog dialog;
     private ShimmerRecyclerView recyclerView;
     Scheme_EarningSummary_Adapter scheme_earningSummary_adapter;
@@ -161,7 +167,59 @@ public class Scheme_EarningSummary extends AppCompatActivity implements Scheme_E
             type = "value";
         }
 
-        setTitle(Title_Text);
+        //setTitle(Title_Text);
+
+
+        try
+        {
+            ActionBar mActionBar = getActionBar();
+            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            // mActionBar.setDisplayShowHomeEnabled(false);
+            // mActionBar.setDisplayShowTitleEnabled(false);
+            LayoutInflater mInflater = LayoutInflater.from(this);
+            Intent i = getIntent();
+            String name = i.getStringExtra("retialer");
+            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
+            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
+            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView.setText(Title_Text);
+
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            SharedPreferences sp = Scheme_EarningSummary.this.getSharedPreferences("SimpleLogic", 0);
+
+//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+//        	//todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+//			todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+//		}
+            try
+            {
+                int target  = (int) Math.round(sp.getFloat("Target",0));
+                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
+                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
+                {
+                    int age = (int) Math.round(age_float);
+
+                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
+                }else
+                {
+                    int age = (int) Math.round(age_float);
+
+                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+                }
+
+            }catch(Exception ex){ex.printStackTrace();}
+            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
+                todaysTarget.setText("Today's Target Acheived");
+            }
+
+            mActionBar.setCustomView(mCustomView);
+            mActionBar.setDisplayShowCustomEnabled(true);
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception ex){ex.printStackTrace();}
+
 
         calendar = Calendar.getInstance();
 

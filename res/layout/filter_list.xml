@@ -58,7 +58,7 @@
     <EditText
         android:id="@+id/search_filter"
         android:layout_width="match_parent"
-         android:hint="Search"
+        android:hint="@string/Search"
         android:inputType="text"
         android:singleLine="true"
         android:layout_height="wrap_content"

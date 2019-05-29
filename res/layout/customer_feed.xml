@@ -40,7 +40,7 @@
         android:layout_marginLeft="12dp"
         android:textColor="#111111"
         android:textSize="15dp"
-        android:text="Previous Claims" />
+        android:text="@string/Previous_Claims" />
 
     <TextView
         android:id="@+id/textView2"
@@ -80,7 +80,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:hint="Claim Amount"
+        android:hint="@string/Claim_Amount"
         android:inputType="number"
         android:textSize="15dp"
         android:visibility="gone"
@@ -97,9 +97,8 @@
         android:layout_gravity="center"
          android:visibility="gone"
          android:inputType="textEmailAddress|textMultiLine"
-        android:hint="New Feedback"
+        android:hint="@string/New_Feedback"
         android:textSize="15dp"
-
         android:ems="10" >
 
         <requestFocus />
@@ -108,22 +107,22 @@
       <EditText
         android:id="@+id/new_complaints"
         android:layout_width="250dp"
-          android:layout_height="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-          android:layout_gravity="center"
-          android:inputType="textEmailAddress|textMultiLine"
-        android:hint="New Complaints"
+        android:layout_gravity="center"
+        android:inputType="textEmailAddress|textMultiLine"
+        android:hint="@string/New_Complaints"
         android:textSize="15dp"
         android:visibility="gone"
         android:ems="10" >
-
         <requestFocus />
     </EditText>
 	
     <LinearLayout 
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-     android:orientation="horizontal" >
+    android:orientation="horizontal" >
+
     <ImageView
         android:id="@+id/result_image"
         android:layout_width="300dp"
@@ -137,6 +136,7 @@
         android:src="@drawable/white_background"
         />
      </LinearLayout>
+
     <ImageView
         android:id="@+id/result_imager"
         android:layout_width="200dp"
@@ -147,10 +147,7 @@
         android:layout_marginTop="2dp"
         android:src="@drawable/logo"
         />
-    
-   
 
-    
      <VideoView
          android:id="@+id/videoPreview"
          android:layout_width="fill_parent"
@@ -162,12 +159,7 @@
          android:layout_gravity="center" 
        />
 
-
-     
-    
-      
-    
-     <LinearLayout 
+     <LinearLayout
 	    android:id="@+id/Emageview_option"    
 	    android:visibility="gone" 
 	    android:layout_gravity="center"
@@ -175,8 +167,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal" >
-     
-     
+
      <ImageView
         android:id="@+id/Take_pick"
         android:src="@drawable/capture"
@@ -203,8 +194,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal" >
-     
-     
+
      <ImageView
         android:id="@+id/Media_Play"
         android:src="@drawable/play"
@@ -227,11 +217,11 @@
     <LinearLayout 
     android:id="@+id/Media_Button"    
     android:layout_gravity="center"
-   
     android:layout_marginBottom="5dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
+
     <ImageView
         android:id="@+id/Media_image_Button"
         android:src="@drawable/capture"
@@ -240,8 +230,7 @@
         android:layout_gravity="center"
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
-       
-         />
+        />
     
     <ImageView
         android:id="@+id/Media_Video_Button"
@@ -252,9 +241,6 @@
         android:layout_height="55dp"
         android:layout_marginTop="5dp"
        />
-
-
-    
     </LinearLayout>
       
     <EditText
@@ -263,7 +249,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:inputType="textEmailAddress|textMultiLine"
-        android:hint="Description"
+        android:hint="@string/Description"
         android:textSize="15dp"
         android:text=""
         android:visibility="gone"
@@ -276,10 +262,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            
             android:background="#545454"
             android:layout_marginLeft="200dp"
-            android:text="Submit"
+            android:text="@string/Submit"
             android:textColor="#ffffff"/>
  
 </LinearLayout>

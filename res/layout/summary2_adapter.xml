@@ -37,7 +37,7 @@
                  android:id="@+id/month_grpby"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Product Category"
+                 android:text="@string/product_category"
                  android:textColor="#ffffff"
                  android:gravity="center"
                  android:textSize="13dp"
@@ -61,7 +61,7 @@
                  android:id="@+id/target_grpby1"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Target"
+                 android:text="@string/target"
                  android:textColor="#ffffff"
                  android:gravity="center"
                  android:textSize="13dp"
@@ -87,7 +87,7 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="Achieved"
+                 android:text="@string/achieved"
                  android:textColor="#ffffff"
                  android:gravity="center"
                  android:textSize="13dp"
@@ -114,7 +114,7 @@
                  android:id="@+id/age_grpby2"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="% Age"
+                 android:text="@string/age"
                  android:textColor="#ffffff"
                  android:gravity="center"
                  android:textSize="13dp"
@@ -235,7 +235,6 @@
                        android:gravity="center"
                        android:textSize="12dp"
                        android:layout_alignParentLeft="true"
-
                        android:layout_alignParentRight="true"
                        android:layout_alignParentEnd="true"
                        android:layout_alignParentTop="true"
@@ -265,9 +264,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_gravity="center"
                 android:text="" />
-
         </LinearLayout>
-
 
     </RelativeLayout>
 

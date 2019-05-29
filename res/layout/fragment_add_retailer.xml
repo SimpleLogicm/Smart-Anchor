@@ -28,7 +28,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Retailer Name"
+        android:hint="@string/Retailer_Name"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
     </EditText>
@@ -38,7 +38,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Store Name"
+        android:hint="@string/Store_Name"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
     </EditText>
@@ -48,7 +48,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Address"
+        android:hint="@string/Addressn"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
     </EditText>
@@ -58,7 +58,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Street"
+        android:hint="@string/Street"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
           </EditText>
@@ -68,17 +68,17 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="LandMark"
+        android:hint="@string/LandMark"
         android:inputType="textPersonName"
         android:paddingTop="10dp" >
           </EditText>
           
-         <Spinner
+        <Spinner
         android:id="@+id/spnBeat"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select Beat"
+        android:hint="@string/Select_Beats"
         android:inputType="textPassword"
         android:paddingTop="5dp"
         android:layout_marginTop="5dp" 
@@ -91,32 +91,30 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select City"
+        android:hint="@string/Select_City"
         android:inputType="textPassword"
         android:paddingTop="5dp" 
         android:layout_marginTop="5dp"/>
-
 
     <Spinner
         android:id="@+id/spnState"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select State"
+        android:hint="@string/Select_State"
         android:inputType="textPassword"
         android:paddingTop="5dp" 
         android:layout_marginTop="5dp"/>
 
-    
     <EditText
         android:id="@+id/editTextPin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="PIN"
+        android:hint="@string/PIN"
         android:inputType="number"
         android:digits="0123456789" 
-          android:maxLength="6"
+        android:maxLength="6"
         android:paddingTop="10dp" >
     </EditText>
     
@@ -136,7 +134,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Contact Mobile Number"
+        android:hint="@string/Contact_Mobile_Number"
         android:maxLength="10"
          android:inputType="number"
         android:digits="0123456789" 
@@ -188,7 +186,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Contact Email ID"
+        android:hint="@string/Contact_Email_ID"
         android:inputType="textEmailAddress"
         android:paddingTop="10dp" >
     </EditText>
@@ -198,12 +196,11 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="VATIN"
-      android:maxLength="11"
-      android:inputType="number"
-      android:digits="0123456789"
-
-          android:paddingTop="10dp" >
+        android:hint="@string/vatin"
+        android:maxLength="11"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:paddingTop="10dp" >
     </EditText>
     
      
@@ -218,7 +215,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingTop="5dp"
@@ -229,26 +225,21 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="Save"
-                 android:background="#414042"
-                
-        android:textColor="#FFFFFF" />
+                android:text="@string/Save"
+                android:background="#414042"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonAddRetailerCancel"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="Cancel" 
-                 android:background="#414042"
-                  android:layout_marginLeft="10dp"
+                android:text="@string/Cancel"
+                android:background="#414042"
+                android:layout_marginLeft="10dp"
         android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>
-
-
 </LinearLayout>
 
 </ScrollView>

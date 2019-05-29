@@ -1,5 +1,6 @@
 package com.anchor.activities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +17,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,7 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import cpm.simplelogic.helper.ConnectionDetector;
 
-public class Scheme_Filter_Activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
+public class Scheme_Filter_Activity extends Activity implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
     int counter = 0;
     Button btn_close, btn_Ongoing, btn_Quantity, btn_Value, btn_apply;
     String close_click_flag = "";
@@ -78,7 +81,6 @@ public class Scheme_Filter_Activity extends AppCompatActivity implements DatePic
     ArrayList<String> product_bu_list = new ArrayList<>();
     ArrayList<String> product_division_list = new ArrayList<>();
     ArrayList<String> product_brand_list = new ArrayList<>();
-
     private PrefManager prefManager;
     DatePickerDialog datePickerDialog;
     String click_detect_flag = "";
@@ -95,8 +97,8 @@ public class Scheme_Filter_Activity extends AppCompatActivity implements DatePic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //  getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+         requestWindowFeature(Window.FEATURE_NO_TITLE);
+          getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         setContentView(R.layout.activity_scheme__filter);
 

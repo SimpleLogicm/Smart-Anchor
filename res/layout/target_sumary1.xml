@@ -56,7 +56,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To"
+                android:text="@string/to"
                 android:textColor="#f9f5f5"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -82,9 +82,7 @@
                     android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:textSize="18dp"
-
                     android:layout_alignParentLeft="true"
-
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
@@ -113,7 +111,7 @@
                     android:id="@+id/TS1month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="MONTH"
+                    android:text="@string/MONTH"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:textSize="15dp"
@@ -138,7 +136,7 @@
                     android:id="@+id/TS1target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TARGET"
+                    android:text="@string/TARGET"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:textSize="15dp"
@@ -164,7 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ACHIEVED"
+                    android:text="@string/ACHIEVED"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:textSize="15dp"
@@ -191,7 +189,7 @@
                     android:id="@+id/TS1age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="% AGE"
+                    android:text="@string/AGE"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:textSize="15dp"
@@ -240,7 +238,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TARGET"
+                    android:text="@string/TARGET"
                     android:textStyle="bold"
                     android:paddingLeft="5dp"
                     android:textColor="#f9f5f5"
@@ -267,7 +265,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ACHIEVED"
+                    android:text="@string/ACHIEVED"
                     android:textColor="#f9f5f5"
                     android:textStyle="bold"
                     android:gravity="center"
@@ -293,16 +291,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="% AGE"
+                    android:text="@string/AGE"
                     android:textColor="#f9f5f5"
                     android:textStyle="bold"
                     android:paddingRight="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:textSize="18dp"
-
                     android:layout_alignParentLeft="true"
-
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
@@ -367,7 +363,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true" />
 
@@ -393,7 +388,6 @@
                     android:gravity="center"
                     android:textSize="16dp"
                     android:layout_alignParentLeft="true"
-
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
@@ -412,7 +406,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="BACK"
+            android:text="@string/BACK"
             android:background="#414042"
             android:textColor="#FFFFFF" />
 
@@ -421,7 +415,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="MORE"
+            android:text="@string/MORE"
             android:background="#414042"
             android:textColor="#FFFFFF"
             android:layout_marginLeft="5dp" />

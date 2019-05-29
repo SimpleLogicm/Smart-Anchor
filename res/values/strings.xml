@@ -87,4 +87,707 @@
     <string name="title_activity_sub_dealer__home">SubDealer_Home</string>
     <string name="title_activity_sub_dealer__detail1">SubDealer_Detail1</string>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="advertisement">Advertisement</string>
+    <string name="new_launch">New Launch</string>
+
+
+
+
+
+    <string name="Select_Language">Select Language</string>
+    <string name="Please_Select_Language">Please Select Language</string>
+    <string name="English">English</string>
+    <string name="Hindi">हिन्दी</string>
+
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Sign_In">Sign In</string>
+    <string name="Sign_Up">Sign Up</string>
+    <string name="company_name">© 2014, Simple Logic IT Pvt. Ltd.</string>
+    <string name="email_id_hint">Enter Email Id</string>
+    <string name="Forget_Password">Forget Password</string>
+    <string name="OK_Button_label">OK</string>
+    <string name="No_Button_label">No</string>
+    <string name="Email_ID_validation_Toast">Please Enter Email Id</string>
+    <string name="Server_Error">Some server error occurred. Please Contact IT team.</string>
+    <string name="device_register_message">Your Device Already Register.</string>
+    <string name="internet_connection_error">You don\'t have internet connection.</string>
+    <string name="server_url_hint">Enter Server Url</string>
+    <string name="server_url_dilog_title">If you want to change application server url, you have to clear app data, Press ok button for app setting page redirection.</string>
+    <string name="url_validation_message">Enter url not a valid url.</string>
+    <string name="url_athentication_check_messagen">Please wait, We are check your metal server authentication....</string>
+    <string name="url_athentication_success_message">Your metal server authentication done successfully, Click Sign Up button for registration.</string>
+    <string name="user_name_validation_message">Please Enter UserName</string>
+    <string name="user_password_validation_message">Please Enter Password</string>
+    <string name="device_not_found_message">Your Device id not found in database, Please register first.</string>
+    <string name="server_continue_message">Do you want to continue with trackfieldsales.com ?</string>
+    <string name="dialog_wait_message">Please wait Data Sync....</string>
+    <string name="user_not_found_message">User not found, Please contact with it team.</string>
+    <string name="Register_successfully_message">Register successfully.</string>
+    <string name="first_sync_dialog_message">First Login of the day, Please wait for Data download...</string>
+    <string name="password_not_match_message">Your Password doesnot match Please Try Again.</string>
+    <string name="Credential_not_match_message">Your Credential doesnot match Please Try Again.</string>
+    <string name="user_name_not_match_message">Your username doesnot match Please Try Again.</string>
+    <string name="need_permission_message">Need Permissions</string>
+    <string name="need_permission_setting_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="GOTO_SETTINGS">GOTO SETTINGS</string>
+    <string name="Cancel">Cancel</string>
+    <string name="please_wait_dialog_messagen">Please wait....</string>
+    <string name="Error_occurredd">Error occurred!</string>
+
+    <string name="VISIT_REPORT">VISIT REPORT</string>
+    <string name="CALENDAR">CALENDAR</string>
+    <string name="TARGET">TARGET</string>
+    <string name="EXPENSES">EXPENSES</string>
+    <string name="PRICE_AND_STOCK">PRICE AND STOCK</string>
+    <string name="ADD_RETAILER">ADD RETAILER</string>
+    <string name="MARKETING">MARKETING</string>
+    <string name="SYNC">SYNC</string>
+
+    <string name="customer_notfound_message">No customers found. Please try Sync or contact IT team</string>
+    <string name="Menu">Menu</string>
+    <string name="Attendance">Attendance</string>
+    <string name="Nearest_Customer">Nearest Customer</string>
+    <string name="Location_On_Map">Location On Map</string>
+    <string name="Beat_On_Map">Beat On Map</string>
+    <string name="Schedule_List">Schedule List</string>
+    <string name="Outstanding">Outstanding</string>
+    <string name="Order_List">Order List</string>
+    <string name="Return_Order_List">Return Order List</string>
+    <string name="Cash_Deposit">Cash Deposit</string>
+
+    <string name="Home">Home</string>
+    <string name="Settings">Settings</string>
+    <string name="Contact_Us">Contact Us</string>
+    <string name="About_Metal">About Metal</string>
+    <string name="Log_Out">Log Out</string>
+
+    <string name="Dashboard">Dashboard</string>
+    <string name="Confirmation">Confirmation</string>
+    <string name="Logout_warning_message">Are you sure you want to logout?</string>
+    <string name="Yes">Yes</string>
+    <string name="Target_dialog_message">Please wait Target Sync....</string>
+
+    <string name="Last_Sync_On">Last Sync On</string>
+    <string name="Total_Orders_Synced">Total Orders Synced</string>
+    <string name="Check_Updates">Check Updates</string>
+    <string name="Upload_Orders">Upload Orders</string>
+    <string name="Upload_Data">Upload Data</string>
+
+    <string name="Last_Sync_Date">Last Sync Date : </string>
+    <string name="Last_Sync_Time">Last Sync Time  : </string>
+
+    <string name="sync_data">sync data</string>
+
+    <string name="Add_Item_Sounds">Add Item Sound</string>
+    <string name="Browses">Browse</string>
+
+    <string name="About">About</string>
+    <string name="Simple_Logic">Simple Logic</string>
+    <string name="Metal_Description">METAL facilitates the field sales organisation to interact with their respective offices in a structured and efficient manner. Thus automating the activities of the field sales using this android based field sales automation tool. This will help you to have better outlook of your targets and achievers at the same time have well coordinated field sales operation.</string>
+    <string name="Simple_Logic_full_name">Simple Logic IT Private Ltd.</string>
+    <string name="Simple_Logic_address">609, Damji Shamji Corporate Square,
+Melville Estate, Next to KBC,
+Ghatkopar Andheri Link Road,
+Ghatkopar (E), Mumbai - 400 075.
+INDIA.</string>
+    <string name="Call_us">Call us :</string>
+    <string name="Email_Us">Email Us :</string>
+    <string name="Simplelogic_web_link">METAL by Simple Logic IT Pvt Ltd.</string>
+    <string name="email1">sales@simplelogic.in</string>
+    <string name="email2">support@simplelogic.in</string>
+    <string name="Address">Address: </string>
+    <string name="Contact_not_found">Contact detail not found.</string>
+    <string name="Contact">Contact</string>
+    <string name="Visit_our_websites">Visit our website</string>
+    <string name="number1">+91 22 6511 6620</string>
+    <string name="number2">+91 22 2500 6620</string>
+    <string name="Retailer_Name">Retailer Name</string>
+    <string name="Store_Name">Store Name</string>
+    <string name="Addressn">Address</string>
+    <string name="Street">Street</string>
+    <string name="LandMark">LandMark</string>
+    <string name="PIN">PIN</string>
+    <string name="Contact_Mobile_Number">Contact Mobile Number</string>
+    <string name="Contact_Email_ID">Contact Email ID</string>
+    <string name="GSTIN">GSTIN</string>
+    <string name="Save">Save</string>
+
+    <string name="Enter_Retailer_Name">Please Enter Retailer Name</string>
+    <string name="Enter_Store_Name">Please Enter Store Name</string>
+    <string name="Enter_Address">Please Enter Address</string>
+    <string name="Enter_Street">Please Enter Street</string>
+    <string name="Enter_LandMark">Please Enter LandMark</string>
+    <string name="select_beat">Please select beat</string>
+    <string name="select_city">Please select city</string>
+    <string name="select_state">Please select state</string>
+    <string name="Enter_Pin">Please Enter Pin</string>
+    <string name="Enter_Valid_Pin">Please Enter Valid Pin</string>
+
+    <string name="Enter_Contact_Number">Please Enter Contact Number</string>
+    <string name="Enter_Valid_Email_Address">Please Enter Valid Email Address</string>
+    <string name="Enter_GSTIN_Number">Please Enter GSTIN Number</string>
+    <string name="Enter_Valid_GSTIN_Number">Please Enter Valid GSTIN Number</string>
+    <string name="Do_you_wish_to_continue">Do you wish to continue?</string>
+
+    <string name="Warning">Warning</string>
+    <string name="retailer_discard_warning_message">This operation will discard all the values entered, Are you sure you want to continue?</string>
+
+    <string name="Retailer_dialog_message">Adding Retailer...Please wait</string>
+    <string name="Retailer_Added">Retailer Added</string>
+    <string name="Retailer_Already_Exists">Retailer Already Exists</string>
+    <string name="Select_State">Select State</string>
+    <string name="Select_City">Select City</string>
+    <string name="Select_Beats">Select Beat</string>
+
+    <string name="Date_label">Date</string>
+    <string name="Cost">Cost</string>
+    <string name="From">From</string>
+    <string name="To">To</string>
+    <string name="Mode_of_Travel">Mode of Travel</string>
+    <string name="Description">Description</string>
+    <string name="Submit">Submit</string>
+
+    <string name="Select_Type">Select Type</string>
+    <string name="Travel">Travel</string>
+    <string name="Miscellaneous">Miscellaneous</string>
+    <string name="Select">Select</string>
+
+    <string name="Select_Date">Please Select Date</string>
+    <string name="Future_date_validation">Selected date can not to be a future date.</string>
+    <string name="Enter_Cost">Please Enter Cost</string>
+    <string name="Enter_Description">Please Enter Description</string>
+    <string name="Enter_Form_Field_Data">Please Enter Form Field Data</string>
+    <string name="Enter_To_Field_Data">Please Enter To Field Data</string>
+    <string name="Enter_Mode_of_Travel">Please Enter Mode of Travel</string>
+    <string name="Travel_Expense_Save_Successfully">Travel Expense Save Successfully</string>
+    <string name="Miscellaneous_Expense_Save_Successfully">Miscellaneous Expense Save Successfully</string>
+    <string name="Take_Photo">Take Photo</string>
+    <string name="Choose_from_Gallery">Choose from Gallery</string>
+    <string name="Add_Photo">Add Photo!</string>
+    <string name="no_camera">no camera on this device</string>
+
+    <string name="NEW_LAUNCH">NEW LAUNCH</string>
+    <string name="MARKET_SURVEY">MARKET SURVEY</string>
+    <string name="ADVERTISEMENT">ADVERTISEMENT</string>
+
+    <string name="Advertisement_Date">Advertisement Date </string>
+    <string name="Product_Description">Product Description </string>
+
+    <string name="Select_Customer">Select Customer</string>
+    <string name="Search_Customer">Search Customer</string>
+    <string name="STARTs">START</string>
+
+    <string name="Customer_Not_Found">Customer Not Found</string>
+    <string name="Please_Select_Customer">Please Select Customer</string>
+    <string name="Survey_not_found">Survey Data Not Found.</string>
+    <string name="survey_quastion_validation_message">Please select at least one option of</string>
+    <string name="Survey_Data_Save_Successfully">Survey Data Saved Successfully</string>
+    <string name="Survey_dialog_message">Are you sure you want to move previous page without submit survey data ?</string>
+
+    <string name="List_Events">List Events</string>
+    <string name="Travel_Details">Travel Details</string>
+    <string name="Delete_button_label">Delete</string>
+    <string name="Leave_Details">Leave Details</string>
+    <string name="Task_Details">Task Details</string>
+    <string name="Update">Update</string>
+    <string name="event_dialog_warning_message">Are you sure you want to delete this event ?</string>
+    <string name="event_dialog_delete_success">Event deleted successfully.</string>
+    <string name="Select_From_Date">Please Select From Date</string>
+    <string name="Select_To_Date">Please Select To Date</string>
+    <string name="To_date_validation_message">To Date not a valid date.</string>
+    <string name="Travel_Details_vali_message">Please Enter Travel Details</string>
+    <string name="Calender_Entry_Update_Message">Calender Entry Updated Successfully.</string>
+    <string name="Calender_Entry_Created_Message">Calender Entry Created Successfully.</string>
+
+    <string name="PRICE_LIST">PRICE LIST</string>
+    <string name="STOCK">STOCK</string>
+    <string name="Search_Variants">Search Variant</string>
+
+    <string name="Pricing">Pricing</string>
+    <string name="Select_Product">Select Product</string>
+    <string name="Select_Categories">Select Category</string>
+    <string name="Please_Select_Category">Please Select Category</string>
+    <string name="Enter_Warehouse">Enter Warehouse</string>
+    <string name="Enter_Product">Enter Product</string>
+    <string name="Search">Search</string>
+    <string name="Select_warehouse_message">Please Select Warehouse Search Options.</string>
+    <string name="customer_loading_dialog_message">Please wait Customer Loading....</string>
+    <string name="product_not_found_message">Sorry Products Record Not Found.</string>
+    <string name="Warehouses_not_found_message">Sorry Warehouses Record Not Found.</string>
+    <string name="warehouse_loading_message">Please wait Warehouse Details Sync....</string>
+    <!--<string name="All_States">All States</string>-->
+    <!--<string name="All_Cities">All Cities</string>-->
+    <!--<string name="All_States_AND_All_Cities">All States AND All Cities</string>-->
+    <!--<string name="All_Category">All Category</string>-->
+    <!--<string name="All_Sub_Category">All Sub Category</string>-->
+    <!--<string name="Category_and_All_Sub_Category">Category and All Sub Category</string>-->
+    <string name="Warehouse_Data_Not_Found">Warehouse Data Not Found.</string>
+    <string name="valid_warehouse_name">Please Enter Valid Warehouse Name.</string>
+    <string name="valid_product_name">Please Enter Valid Product Name.</string>
+
+    <string name="SADDRESS">ADDRESS : </string>
+    <string name="GROSS_STOCK">GROSS STOCK : </string>
+    <string name="SELLABLE">SELLABLE : </string>
+    <string name="SUPDATED">UPDATED : </string>
+    <string name="SCITY">CITY : </string>
+    <string name="SSTATE">STATE : </string>
+    <string name="SMRP">MRP : </string>
+    <string name="SRP">RP : </string>
+    <string name="SPRODUCT">PRODUCT : </string>
+    <string name="MRP">MRP</string>
+
+    <string name="ORDER">ORDER</string>
+    <string name="CUSTOMER_SERVICE">CUSTOMER SERVICE</string>
+    <string name="QUOTES">QUOTES</string>
+    <string name="QUOTE_STATUS">QUOTE STATUS</string>
+    <string name="SCHEDULE">SCHEDULE</string>
+    <string name="CUSTOMER_PROFILE">CUSTOMER PROFILE</string>
+    <string name="Order_Type">Order Type</string>
+
+    <string name="CName">Name : </string>
+    <string name="CAddress">Address :</string>
+    <string name="Business_Type">Business Type : </string>
+    <string name="City_Name">City Name : </string>
+    <string name="Beat_Name">Beat Name : </string>
+    <string name="Credit_Limit">Credit Limit : </string>
+    <string name="Credit_Limit_Not_Found">Credit Limit Not Found</string>
+    <string name="Amount_Outstanding">Amount Outstanding : </string>
+    <string name="Amount_Outstanding_Not_Found">Amount Outstanding Not Found</string>
+    <string name="Amount_Overdue">Amount Overdue : </string>
+    <string name="Amount_Overdue_Not_Found">Amount Overdue Not Found</string>
+    <string name="Sorry_No_Record_Found">Sorry No Record Found.</string>
+
+    <string name="FBusiness_Type">Business Type</string>
+    <string name="Sort_by_Beat">Sort by Beat</string>
+    <string name="Apply">Apply</string>
+    <string name="Clear">Clear</string>
+
+    <string name="Filter_Option">Filter Option</string>
+    <string name="Show_All">Show All</string>
+    <string name="Show_Overdue">Show Overdue</string>
+    <string name="Show_Outstanding">Show Outstanding</string>
+
+    <string name="Collection_Statement">Collection Statement</string>
+    <string name="Deposit_Statement">Deposit Statement</string>
+    <string name="Pending_Transactions">Pending Transaction</string>
+
+    <string name="Ordero">Order</string>
+    <string name="Customer_Serviceo">Customer Service</string>
+    <string name="Scheduleo">Schedule</string>
+
+    <string name="New_Order">New Order</string>
+    <string name="Previous_Order">Previous Order</string>
+    <string name="No_Order">No Order</string>
+    <string name="Return_Order">Return Order</string>
+    <string name="Order_Delivery">Order Delivery</string>
+    <string name="Delivery_Schedule">Delivery Schedule</string>
+    <string name="Invoice">Invoice</string>
+    <string name="Feedback">Feedback</string>
+    <string name="Complaints">Complaints</string>
+    <string name="Claims">Claims</string>
+    <string name="Competition_Stock">Competition Stock</string>
+    <string name="Video">Video</string>
+    <string name="Picture">Picture</string>
+
+    <string name="Mobile_Number_H">Mobile Number: </string>
+    <string name="New_Quote">New Quote</string>
+    <string name="Previous_Quote">Previous Quote</string>
+    <string name="No_Quote">No Quote</string>
+    <string name="Return_Quote">Return Quote</string>
+    <string name="Quote">Quote</string>
+    <string name="Nearest_Customer_Not_Found">Nearest Customer Not Found</string>
+    <string name="Distance_of">Distance of </string>
+    <string name="iso"> is : </string>
+
+    <string name="view_dialog">If you want to view </string>
+    <string name="offline_dialog"> offline, Please click Offline button</string>
+    <string name="Online">Online</string>
+    <string name="Offline">Offline</string>
+    <string name="Schedule_sync_dialog_message">Please Wait Schedule Sync</string>
+    <string name="Please_Wait">Please Wait </string>
+    <string name="Synco"> Sync...</string>
+    <string name="Delivery_Schedule_Not_Found">Delivery Schedule Not Found.</string>
+
+    <string name="Please_Wait_Previous_Sync">Please Wait Previous Order Sync....</string>
+    <string name="Previous_order_not_found">Previous order not found.</string>
+
+    <string name="nearest_internet">If you want to search nearest customer, Please switch on your internet.</string>
+    <string name="Nearest_customer_searching">Nearest customer searching in process,Please wait,....</string>
+    <string name="Customers_not_found">Customers not found</string>
+
+    <string name="Online_Catalogue">Online Catalogue</string>
+    <string name="Local_Catalogue">Local Catalogue</string>
+    <string name="Show_List">Show List</string>
+    <string name="Preview_Order">Preview Order</string>
+    <string name="RP">RP</string>
+    <string name="Select_Scheme">Select Scheme</string>
+
+    <string name="Please_Select_Product">Please Select Product</string>
+    <string name="Please_Select_Variant">Please Select Variant</string>
+    <string name="Variant_Not_Found">Variant Not Found</string>
+    <string name="Please_enter_Quantity">Please enter Quantity</string>
+
+    <string name="Item_updated_successfully">Item updated successfully</string>
+    <string name="Item_added_successfully">Item added successfully</string>
+    <string name="No_Items_Added">No Items Added</string>
+    <string name="Order_dialog_message">You have to fill all order related details, Press Cancel Order button if you want to cancel order.</string>
+    <string name="Cancel_Order">Cancel Order</string>
+    <string name="Order_Canceled_Successfully">Order Canceled Successfully</string>
+    <string name="Order_save_successfully">Order save successfully</string>
+
+    <string name="Total">Total </string>
+    <string name="Add_More_Items">Add More Items</string>
+    <string name="ENTER_QUANTITY">ENTER QUANTITY</string>
+    <string name="PRICE">PRICE :</string>
+    <string name="Detail1">Detail1</string>
+    <string name="Detail2">Detail2</string>
+    <string name="Detail3">Detail3</string>
+    <string name="Detail4">Detail4</string>
+    <string name="Details5">Detail5</string>
+
+    <string name="CMRP">[MRP] : </string>
+    <string name="MIN_QTY">[MIN QTY] : </string>
+    <string name="CRP">[RP] : </string>
+    <string name="PKG_QTY">[PKG QTY] : </string>
+    <string name="Comments">Comment</string>
+    <string name="Product_List">Product List</string>
+
+    <string name="item_add_dialog_message">Are you sure you want to Add more items without saving current list items?</string>
+    <string name="Preview_order_validation_message">Please save order before preview.</string>
+    <string name="CTotal">Total : </string>
+
+    <string name="All_item_delete">All item delete, Please add new item in order.</string>
+    <string name="CItems_added_successfully">Items added successfully</string>
+    <string name="Please_enter_quantity">Please enter quantity. </string>
+    <string name="ITEM_DISCART_DIALOG_MESSAGE">Are you sure you want to discard the entered quantity?</string>
+
+    <string name="Catalogues">Catalogue</string>
+    <string name="Flip">Flip</string>
+    <string name="OMIN_QTY">Min Qty : </string>
+    <string name="OPkg_Qty">Pkg Qty : </string>
+    <string name="OScheme">Scheme : </string>
+
+    <string name="PPRODUCT">PRODUCT</string>
+    <string name="PQUANTITY">QUANTITY</string>
+    <string name="PPRICE">PRICE</string>
+    <string name="PAdd_More">Add More</string>
+    <string name="PCheckout">Checkout</string>
+    <string name="PDistributors">Distributors</string>
+
+    <string name="Select_Distributor">Select Distributor</string>
+    <string name="Please_Select_distributor">Please Select distributor</string>
+    <string name="Dialog_cancel_alert_message"> Are you sure you want to cancel?</string>
+    <string name="Details">Details</string>
+    <string name="Edit">Edit</string>
+    <string name="Delete">Delete</string>
+    <string name="AProduct">Product</string>
+
+    <string name="Product_Name">Product Name : </string>
+    <string name="VPrice">Price : </string>
+    <string name="Product_Remarks">Product Remarks : </string>
+    <string name="Product_Detail1">Product Detail1 : </string>
+    <string name="Product_Detail2">Product Detail2 : </string>
+    <string name="Product_Detail3">Product Detail3 : </string>
+    <string name="Product_Detail4">Product Detail4 : </string>
+    <string name="Product_Detail5">Product Detail5 : </string>
+
+    <string name="Product_Delete_dialog_message"> Are you sure you want to delete?</string>
+    <string name="Item_Deleted">Item Deleted</string>
+    <string name="Item_Description">Item Description</string>
+    <string name="EQuantity">Quantity</string>
+
+    <string name="Total_Price">Total Price : </string>
+    <string name="Back_button">Back</string>
+    <string name="ERemarks">Remarks</string>
+    <string name="Name">Name</string>
+    <string name="Please_Sign_below">Please Sign below ...</string>
+    <string name="Continue">Continue</string>
+
+    <string name="Select_Order_Type">Select Order Type</string>
+    <string name="Please_Enter_your_Name">Please Enter your Name</string>
+    <string name="Please_Enter">Please Enter </string>
+    <string name="Dialog_order_offline_message">Your internet not working, Do you want to save order offline ?</string>
+    <string name="Order_generate_successfully">Order generate successfully.</string>
+    <string name="Please_Sign">Please Sign.... </string>
+    <string name="Continue_dialog"> Are you sure you want to continue?</string>
+
+    <string name="Previous_Claims">Previous Claims</string>
+    <string name="Claim_Amount">Claim Amount</string>
+    <string name="New_Feedback">New Feedback</string>
+    <string name="New_Complaints">New Complaints</string>
+    <string name="Previous_Feedback">Previous Feedback</string>
+    <string name="Previous_Complaints">Previous Complaints</string>
+    <string name="Please_Capture_Image_First">Please Capture Image First</string>
+    <string name="Please_Capture_Video_First">Please Capture Video First</string>
+    <string name="Offline_dialog_message">If you want to save Video offline press Save Offline Button ?</string>
+    <string name="Save_Offline">Save Offline</string>
+    <string name="Online_Sync">Online Sync</string>
+    <string name="Save_Successfully">Saved Successfully</string>
+
+    <string name="Offline_save_message">No Internet. Data saved on your phone. Please Sync when network available.</string>
+    <string name="Save_offline_image_message">If you want to save image offline press Save Offline Button ?</string>
+    <string name="Please_Capture_Media_First">Please Capture Media First</string>
+    <string name="Please_Enter_Feedback_Description">Please Enter Feedback Description</string>
+    <string name="Your_Data_Save_Successfuly">Your Data Saved Successfuly</string>
+    <string name="Please_Enter_Claim_Amount">Please Enter Claim Amount</string>
+    <string name="Please_Enter_Complaints">Please Enter Complaints</string>
+    <string name="Previous">Previous</string>
+
+    <string name="Image_Not_Selected">Image Not Selected</string>
+    <string name="User_cancelled_image_capture">User cancelled image capture</string>
+    <string name="Failed_to_capture_image">Sorry! Failed to capture image</string>
+    <string name="User_cancelled_video_recording">User cancelled video recording</string>
+    <string name="Failed_to_record_video">Sorry! Failed to record video</string>
+    <string name="Video_Not_Selected">Video Not Selected</string>
+    <string name="Please_Select_Video_File">Please Select Video File.</string>
+    <string name="Can_not_find_image_crop_app">Can not find image crop app</string>
+
+    <string name="video_back_button_message">Do you want to Back without saving this video ?</string>
+    <string name="image_back_button_message">Do you want to Back without saving this image ?</string>
+    <string name="Videos">Video</string>
+    <string name="Select_option">Select option</string>
+    <string name="View_Save_Video_Gallery">View Save Video Gallery</string>
+    <string name="Video_Not_Found">Video Not Found.</string>
+    <string name="Take_Video">Take Video</string>
+    <string name="Photo">Photo</string>
+    <string name="View_Save_Image_Gallery">View Save Image Gallery</string>
+
+    <string name="Image_Not_Found">Image Not Found.</string>
+    <string name="Media_Upload_Successfully">Media Uploaded Successfully.</string>
+    <string name="All_files_deleted">All files deleted</string>
+
+    <string name="Select_Variant">Select variants</string>
+    <string name="Select_Competitors_Stock">Select Competitors Stock</string>
+    <string name="Please_Enter_Details">Please Enter Details</string>
+    <string name="Your_Data_Saved_Successfully">Your Data Saved Successfully</string>
+
+    <string name="Data_is_up_to_date">Data is up to date.</string>
+    <string name="Device_not_registered">Device not registered</string>
+    <string name="Stock_Sync_Successfully">Stock Sync Successfully.</string>
+    <string name="Order_Sync_in_Progress">Order Sync in Progress, Please Wait</string>
+    <string name="Device_not_found">Device not found.</string>
+    <string name="Order_Sync_Successfully">Order Sync Successfully</string>
+    <string name="Return_Order_Sync_Successfully">Return Order Sync Successfully</string>
+    <string name="Order_Status">Order Status :</string>
+    <string name="Order_is_generated">Order is generated.</string>
+    <string name="Mail_has_been_sent_to">Mail has been sent to </string>
+    <string name="Sms_Send_Successfully">Sms Send Successfully</string>
+    <string name="Order_send_for_approval_successfully">Order send for approval successfully</string>
+    <string name="No_record_found_for_sync">No record found for sync.</string>
+    <string name="items_Sync_Successfully">items Sync Successfully.</string>
+    <string name="Created_Data_Successfully">Created Data Successfully</string>
+
+    <string name="scheme_period">Scheme Period</string>
+    <string name="to">To</string>
+    <string name="business_unit">Select Business Unit</string>
+    <string name="business_division">Select Business Division</string>
+    <string name="business_category">Select Business Category</string>
+    <string name="brand">Select Brand</string>
+    <string name="scheme_name">Scheme Name</string>
+    <string name="current_volume">Current Volume</string>
+    <string name="current_eligibility">Current Eligibility</string>
+    <string name="gift_details">Gift Detail</string>
+    <string name="gift_value">Gift Value</string>
+    <string name="short_vol_next_slab">Short Volumn For Next Slab</string>
+    <string name="next_scheme_slab">Next Scheme Slab</string>
+    <string name="next_scheme_value">Next Scheme Value</string>
+    <string name="invoice_period">Invoice Period</string>
+    <string name="date">Date</string>
+    <string name="transaction_type">Transaction Type</string>
+    <string name="reference_no">Reference No</string>
+    <string name="product_category">Product Category</string>
+    <string name="sales_order">Sales Order</string>
+    <string name="debit">Debit</string>
+    <string name="credit">Credit</string>
+    <string name="ledger_period">Ledger Period</string>
+    <string name="invoice_no">Invoice No</string>
+    <string name="cheque_no">Cheque No</string>
+    <string name="particular">Particulars</string>
+    <string name="order_booking">Order Booking</string>
+    <string name="ledger">LEDGER</string>
+    <string name="invoice">INVOICE</string>
+    <string name="businessunit">BUSSINESS UNIT</string>
+    <string name="credit_limit">CREDIT LIMIT</string>
+    <string name="outstanding">OUTSTANDING</string>
+    <string name="overdue">OVERDUE</string>
+    <string name="total">TOTAL</string>
+    <string name="see_details">See Details</string>
+    <string name="select_date">Select Date</string>
+    <string name="type">Type</string>
+    <string name="value">Value</string>
+    <string name="due_amount">Due Amount</string>
+    <string name="due_date">Due Date</string>
+    <string name="total_no_ofdays">Total No Of Days</string>
+    <string name="qty">Qty</string>
+    <string name="preview">Preview</string>
+    <string name="datee">Date :</string>
+    <string name="select_bu">Select BU</string>
+    <string name="select_product_spec">Select Product Specification</string>
+    <string name="scheme">Scheme</string>
+    <string name="delivery_qty">Delivery Quantity</string>
+    <string name="add">Add</string>
+    <string name="add_more">Add More</string>
+    <string name="submit_for_approval">Submit for Approval</string>
+    <string name="detail1">Detail 1</string>
+    <string name="detail2">Detail 2</string>
+    <string name="select_payment_term">Select Payment Term</string>
+    <string name="invoice_date">Invoice Date</string>
+    <string name="order_no">Order No</string>
+    <string name="order_date">Order Date</string>
+    <string name="item_code">Item Code</string>
+    <string name="item_name">Item Name</string>
+    <string name="line_amount">Line Amount</string>
+    <string name="tax_amount">Tax Amount</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="eligible_vol">Eligible Volumn</string>
+    <string name="cn_per_pic">CN : 1.00(0.00/- Per Pcs)</string>
+    <string name="cn_2per_pic">CN : 125000.00(2.00/- Per Pcs)</string>
+    <string name="cn_3per_pic">CN : 225000.00(2.50/- Per Pcs)</string>
+    <string name="cn_4per_pic">CN : 400000.00(3.00/- Per Pcs)</string>
+    <string name="gift_amount">Gift Amount</string>
+    <string name="filter_by">Filter By</string>
+    <string name="view">View</string>
+    <string name="close">Close</string>
+    <string name="ongoing">Ongoing</string>
+    <string name="form_teritory_code">Form Territory Code</string>
+    <string name="sales_executive_name">Sales Executive name</string>
+    <string name="market_name">Market Name</string>
+    <string name="outlet_gps">Outlet Gps :</string>
+    <string name="select_location">Select Location</string>
+    <string name="outlet_signboard">Outlet Signboard :</string>
+    <string name="upload">Upload</string>
+    <string name="proprietor1_photo">Proprietor1 Photo :  </string>
+    <string name="proprietor2_photo">Proprietor2 Photo :  </string>
+    <string name="rubber_stamp">Rubber Stamp :</string>
+    <string name="visiting_card">Visiting Card :</string>
+    <string name="outlet_display">Outlet Display :</string>
+    <string name="inshop_display">In-Shop Display :</string>
+    <string name="checkbox">CheckBox</string>
+    <string name="search_insubmitted_subdealers">Search In Submitted Sub Dealers</string>
+    <string name="add_new">Add New</string>
+    <string name="pending">Pending</string>
+    <string name="upload_to_server">Uplaod to Server</string>
+    <string name="customer_address">CUSTOMER ADDRESS</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="code">CODE :</string>
+    <string name="sq">SQ 10</string>
+    <string name="mq">MQ 20</string>
+    <string name="stock">Stock</string>
+    <string name="in">IN</string>
+    <string name="out">OUT</string>
+    <string name="in_details">IN DETAILS</string>
+    <string name="order_filter">Order Filter</string>
+    <string name="latitude">Latitude :</string>
+    <string name="longitude">Longitude :</string>
+    <string name="scheme_management">Scheme Management</string>
+    <string name="shortfall_report">Shortfall Report</string>
+    <string name="response">Response</string>
+    <string name="respondent_name">Respondent Name</string>
+    <string name="open">Open</string>
+    <string name="status">Status</string>
+    <string name="click_to_open_dialog">Click here to open Dialog</string>
+    <string name="customer_details">CUSTOMER DETAILS</string>
+    <string name="select_retailer">Select Retailer</string>
+    <string name="filter">Filter</string>
+    <string name="show_both">Show Both</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="search_invoice_no">Search Invoice Number</string>
+    <string name="image">Image</string>
+    <string name="search_scheme">Search Schemes</string>
+    <string name="product_quality">Product Quality</string>
+    <string name="logistics">Logistics</string>
+    <string name="commertial_claim">Commercial Claim</string>
+    <string name="marketing_tools">Marketing Tools</string>
+    <string name="orderid_generated">Order ID : OA-0000000001 is generated</string>
+    <string name="sqq">SQ</string>
+    <string name="target">Target</string>
+    <string name="achieved">Achieved</string>
+    <string name="age">% Age</string>
+    <string name="more">More</string>
+    <string name="sort">SORT</string>
+    <string name="title">Title</string>
+    <string name="vatin">VATIN</string>
+    <string name="m">M</string>
+    <string name="t">T</string>
+    <string name="w">W</string>
+    <string name="f">F</string>
+    <string name="s">S</string>
+    <string name="communities_view">Communities View</string>
+    <string name="add_sub_dealer">ADD SUB DEALER</string>
+    <string name="price">Price</string>
+    <string name="last_sync">Last Sync on</string>
+    <string name="total_order_sync">Total Orders synced</string>
+    <string name="whats_hot_view">Whats Hot View</string>
+    <string name="emp_code">Employee Code</string>
+    <string name="show_location">Show Location</string>
+    <string name="enter_reason">Enter Reason</string>
+    <string name="product_description">PRODUCT DESCRIPTION</string>
+    <string name="upload_customer">Upload Customers</string>
+    <string name="upload_status">Upload Status</string>
+    <string name="sms_sent_to">SMS has been sent to ##########</string>
+    <string name="mail_sent_to">Mail has been sent to ##########@####.com</string>
+    <string name="New">New</string>
+    <string name="order_id">ORDER ID</string>
+    <string name="customer">CUSTOMER</string>
+    <string name="allitems_prevorder">All items from previous order are added..Click Add More to add new items.. Or Click Preview to continue..</string>
+    <string name="surname">Surname</string>
+    <string name="view_list">View List</string>
+    <string name="SCHEME">SCHEME</string>
+    <string name="order_info">OTHER INFO</string>
+    <string name="adminn">admin</string>
+    <string name="qty_ordered">Quantity Ordered</string>
+    <string name="qty_delivered">Quantity Delivered</string>
+    <string name="estimate_arrival">Estimated Arrival</string>
+    <string name="mode_of_payment">Mode of Payment</string>
+    <string name="creditlimit">Credit Limit</string>
+    <string name="prev_outstanding">Previous Outstanding</string>
+    <string name="current_order">Current Order</string>
+    <string name="amount_overdue">Amount Overdue</string>
+    <string name="disptach">Dispatch</string>
+    <string name="total_amountt">Total Amount :</string>
+    <string name="invoice_datet">Invoice Date :</string>
+    <string name="mode_of_paymentt">Mode of Payment :</string>
+    <string name="view_details">View Details</string>
+    <string name="select_sound">Select Sound</string>
+    <string name="dialog_box">DIALOG BOX</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="amount">AMOUNT</string>
+    <string name="SUB_FOR_APPROVAL">SUBMIT FOR APPROVAL</string>
+    <string name="BACK">BACK</string>
+    <string name="ADD_MORE">ADD MORE</string>
+    <string name="QUOTATION_NO">QUOTATION NO</string>
+    <string name="REMARK">REMARK</string>
+    <string name="STATUS">STATUS</string>
+    <string name="ORDER_NO">ORDER NO</string>
+    <string name="select_warehouse">Select Warehouse</string>
+    <string name="year">Year</string>
+    <string name="month">Month</string>
+    <string name="achieved_target">Achieved Target</string>
+    <string name="assigned_target">Assigned Target</string>
+    <string name="select_values">Select Values</string>
+    <string name="to_month">To Month</string>
+    <string name="show">Show</string>
+    <string name="MONTH">MONTH</string>
+    <string name="ACHIEVED">ACHIEVED</string>
+    <string name="AGE">% AGE</string>
+    <string name="MORE">MORE</string>
+    <string name="view_address">View Address</string>
+    <string name="INVOICE_DESCRIPTION">INVOICE DESCRIPTION</string>
+
 </resources>

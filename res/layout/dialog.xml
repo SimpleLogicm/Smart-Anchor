@@ -16,7 +16,7 @@
         android:id="@+id/txtOrderID"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:text="Order ID : OA-0000000001 is generated"
+        android:text="@string/orderid_generated"
         android:gravity="center"
         android:textSize="16dp"
        />
@@ -100,6 +100,5 @@
          android:layout_height="7dp"
          />
 
-  
 
 </LinearLayout>

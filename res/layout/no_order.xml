@@ -26,15 +26,15 @@
         android:id="@+id/editTextTarget"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-         android:layout_gravity="center"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="No Order"
+        android:text="@string/No_Order"
         android:layout_marginLeft="10dp"
         android:paddingTop="30dp"
         android:textColor="#060606"
         android:typeface="sans"
         android:textAlignment="center"
-    android:textSize="18sp"  >
+        android:textSize="18sp"  >
     </TextView>
 
     <Spinner
@@ -42,18 +42,17 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Select City"
+        android:hint="@string/Select_City"
         android:inputType="textPassword"
         android:paddingTop="30dp" 
         android:layout_marginTop="20dp"/>
 
-    
     <EditText
         android:id="@+id/edittextNoOrderreason"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Enter Reason"
+        android:hint="@string/enter_reason"
         android:visibility="invisible"
         android:inputType="textEmailAddress|textMultiLine"
         android:paddingTop="30dp"
@@ -65,8 +64,6 @@
         android:gravity="bottom"
         android:orientation="vertical" 
         android:layout_marginBottom="10dp">
-
-       
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -81,21 +78,18 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="Submit"
-                 android:background="#414042"
-                
-        android:textColor="#FFFFFF" />
+                android:text="@string/Submit"
+                android:background="#414042"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonnoOrdercancel"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-               
-                android:text="Cancel" 
-                 android:background="#414042"
-                  android:layout_marginLeft="10dp"
+                android:text="@string/Cancel"
+                android:background="#414042"
+                android:layout_marginLeft="10dp"
         android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>

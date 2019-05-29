@@ -51,7 +51,7 @@
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:layout_marginTop="30dp"
-                android:text="VISIT REPORT"
+                android:text="@string/VISIT_REPORT"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -83,7 +83,7 @@
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="CALENDAR"
+                android:text="@string/CALENDAR"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -126,7 +126,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="TARGET"
+                android:text="@string/TARGET"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -157,7 +157,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="EXPENSES"
+                android:text="@string/EXPENSES"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -200,7 +200,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="PRICE AND STOCK"
+                android:text="@string/PRICE_AND_STOCK"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -231,7 +231,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="ADD SUB DEALER"
+                android:text="@string/add_sub_dealer"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -274,7 +274,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
-                android:text="MARKETING"
+                android:text="@string/MARKETING"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -305,7 +305,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="SYNC"
+                android:text="@string/SYNC"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
@@ -319,7 +319,6 @@
                 android:src="@drawable/sync" />
         </RelativeLayout>
     </LinearLayout>
-
 
 </RelativeLayout>
  </ScrollView>

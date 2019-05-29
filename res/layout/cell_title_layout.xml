@@ -26,13 +26,11 @@
             android:layout_marginTop="-5dp"
             android:ellipsize="marquee"
             android:layout_centerHorizontal="true"
-            android:text="Product"
+            android:text="@string/AProduct"
             android:fadingEdge="horizontal"
             android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
-
-
 
         <TextView
             android:id="@+id/product_name"
@@ -73,10 +71,6 @@
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
-
-
-
-
         <TextView
             android:id="@+id/title_time_label"
             style="@style/TitleBadgeText"
@@ -96,7 +90,7 @@
             android:id="@+id/type_header"
             android:layout_alignLeft="@id/title_time_label"
             android:layout_alignStart="@id/title_time_label"
-            android:text="Date" />
+            android:text="@string/date" />
 
         <TextView
             android:id="@+id/status_text"
@@ -106,7 +100,7 @@
             android:layout_below="@+id/status_header"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="Open" />
+            android:text="@string/open" />
 
         <TextView
             android:id="@+id/status_header"
@@ -117,7 +111,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/header_product2"
             android:layout_marginTop="10dp"
-            android:text="Status" />
+            android:text="@string/status" />
 
         <TextView
             android:id="@+id/type_text"
@@ -137,7 +131,7 @@
             android:layout_centerHorizontal="true"
             android:visibility="invisible"
             android:layout_below="@+id/title_time_label"
-            android:text="Date" />
+            android:text="@string/date" />
 
     </RelativeLayout>
 </LinearLayout>

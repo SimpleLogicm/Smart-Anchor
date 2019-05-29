@@ -11,7 +11,7 @@
         android:id="@+id/item_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PRODUCT DESCRIPTION"
+        android:text="@string/product_description"
         android:textSize="17dp"
         android:gravity="center"
         android:textColor="#111111"
@@ -56,10 +56,10 @@
             android:background="@drawable/but_red"
             android:layout_height="26dp"
             android:textColor="#FFFFFF"
-            android:text="OK"
+            android:text="@string/ok"
             android:textSize="16dp"
             android:layout_marginRight="10dp"
-            
+
             />
         
          <Button android:id="@+id/adr_cancel"
@@ -67,7 +67,7 @@
             android:background="@drawable/but_red"
             android:layout_height="26dp"
             android:textColor="#FFFFFF"
-            android:text="CANCEL"
+            android:text="@string/cancel"
             android:textSize="16dp"
             android:layout_marginLeft="10dp"
             />

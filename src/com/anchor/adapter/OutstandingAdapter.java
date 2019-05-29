@@ -111,6 +111,7 @@ public class OutstandingAdapter extends RecyclerView.Adapter<OutstandingAdapter.
 
                         Global_Data.GLOvel_BU =  holder.text_bu.getText().toString().trim();
                         Intent i = new Intent(mContext, OutstandingDetails.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         mContext.startActivity(i);
 
                     }

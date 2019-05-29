@@ -27,5 +27,5 @@
         android:textColor="#FFFFFF"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Save" />
+        android:text="@string/Save" />
 </RelativeLayout>

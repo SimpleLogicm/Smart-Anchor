@@ -94,7 +94,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="S"
+                            android:text="@string/s"
                             android:gravity="center"
                             android:textColor="#111111"
                             android:textSize="18dp" />
@@ -115,7 +115,7 @@
                              android:layout_alignParentLeft="true"
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
-                             android:text="M"
+                             android:text="@string/m"
                              android:textColor="#111111"
                              android:gravity="center"
                              android:textSize="18dp" />
@@ -136,7 +136,7 @@
                              android:layout_alignParentLeft="true"
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
-                             android:text="T"
+                             android:text="@string/t"
                              android:textColor="#111111"
                              android:gravity="center"
                              android:textSize="18dp" />
@@ -157,7 +157,7 @@
                              android:layout_alignParentLeft="true"
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
-                             android:text="W"
+                             android:text="@string/w"
                              android:gravity="center"
                              android:textColor="#111111"
                              android:textSize="18dp" />
@@ -178,7 +178,7 @@
                              android:layout_alignParentLeft="true"
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
-                             android:text="T"
+                             android:text="@string/t"
                              android:textColor="#111111"
                              android:gravity="center"
                              android:textSize="18dp" />
@@ -200,7 +200,7 @@
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
                              android:gravity="center"
-                             android:text="F"
+                             android:text="@string/f"
                              android:textColor="#111111"
                              android:textSize="18dp" />
 
@@ -220,7 +220,7 @@
                              android:layout_alignParentLeft="true"
                              android:layout_alignParentRight="true"
                              android:layout_centerVertical="true"
-                             android:text="S"
+                             android:text="@string/s"
                              android:gravity="center"
                              android:textColor="#111111"
                              android:textSize="18dp" />
@@ -243,7 +243,7 @@
         android:layout_marginLeft="200dp"
         android:layout_marginTop="50dp"
         android:background="#545454"
-        android:text="List Events"
+        android:text="@string/List_Events"
         android:textColor="#ffffff" />
 
 </LinearLayout>
