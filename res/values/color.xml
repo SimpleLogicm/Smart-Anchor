@@ -78,7 +78,7 @@
     <color name="textview_background_color">#e9001c</color>
     <color name="dard_grey">#aeaeae</color>
     <color name="light_greynew">#cacaca</color>
-    <color name="ledger_header">#a1a1a1</color>
+    <color name="ledger_header">#E0E0E0</color>
     <color name="ledger_text_value">#797575</color>
     <color name="placeholder_bg">#dddddd</color>
     <color name="transparent">#00000000</color>

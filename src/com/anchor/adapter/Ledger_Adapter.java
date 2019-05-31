@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,7 +160,9 @@ public class Ledger_Adapter extends RecyclerView.Adapter<Ledger_Adapter.MyViewHo
 
     public void ShowFullText(Context context,String text)
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.myDialog));
+
+        //AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(text)
                 .setCancelable(true)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

@@ -188,7 +188,7 @@
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/spinner_s_container"
         android:layout_alignParentStart="true"
         android:layout_marginTop="0dp">
@@ -196,9 +196,7 @@
         <LinearLayout
             android:id="@+id/l_header_containerhead"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -405,7 +403,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="1289dp"
                 android:layout_height="match_parent"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -422,8 +420,7 @@
                     app:shimmer_demo_child_count="10"
                     app:shimmer_demo_grid_child_count="2"
                     app:shimmer_demo_layout="@layout/placeholder_item"
-                    app:shimmer_demo_layout_manager_type="linear_vertical"
-                    />
+                    app:shimmer_demo_layout_manager_type="linear_vertical" />
 
             </LinearLayout>
         </LinearLayout>
