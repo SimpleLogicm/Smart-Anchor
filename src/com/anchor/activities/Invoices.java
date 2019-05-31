@@ -318,7 +318,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Invoices.this);
+                //Global_Data.hideSoftKeyboard(Invoices.this);
 
                 click_detect_flag = "from_date";
 
@@ -342,7 +342,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Invoices.this);
+               // Global_Data.hideSoftKeyboard(Invoices.this);
 
                 click_detect_flag = "to_date";
 

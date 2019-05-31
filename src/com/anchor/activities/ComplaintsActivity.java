@@ -2,6 +2,7 @@ package com.anchor.activities;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -109,7 +110,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class ComplaintsActivity extends AppCompatActivity implements Customer_S_Interface,LocationListener {
+public class ComplaintsActivity extends Activity implements Customer_S_Interface,LocationListener {
     private ProgressDialog dialog;
     String longitude,latitude;
     LocationManager locationManager;
@@ -215,7 +216,6 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
         ImageView Header_logo = (ImageView)findViewById(R.id.Header_logo);
         TextView mTitleTextView = (TextView)findViewById(R.id.screenname);
         mTitleTextView.setText(prefManager.getCustomer_service_type());
-
 
         TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
 
@@ -704,9 +704,6 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
 
                     }
                 }
-
-
-
             }
 
             @Override
@@ -2119,7 +2116,7 @@ public class ComplaintsActivity extends AppCompatActivity implements Customer_S_
                                         autoCompleteTextView1.setAdapter(adapter);// setting the adapter
                                         // data into the
                                         // AutoCompleteTextView
-                                        autoCompleteTextView1.setTextColor(Color.WHITE);
+                                        autoCompleteTextView1.setTextColor(Color.BLACK);
 
 
 

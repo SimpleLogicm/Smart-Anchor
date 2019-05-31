@@ -392,6 +392,7 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
                 datePickerDialog = DatePickerDialog.newInstance(Scheme_Details.this, Year, Month, Day);
 
                 datePickerDialog.setThemeDark(false);
+
                 datePickerDialog.setYearRange(2017,Year);
 
                 datePickerDialog.showYearPickerFirst(false);
@@ -412,6 +413,7 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
                 Global_Data.hideSoftKeyboard(Scheme_Details.this);
 
                 click_detect_flag = "to_date";
+
                 datePickerDialog.setYearRange(2017,Year);
 
                 datePickerDialog = DatePickerDialog.newInstance(Scheme_Details.this, Year, Month, Day);

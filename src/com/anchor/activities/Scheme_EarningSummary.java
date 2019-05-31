@@ -393,7 +393,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Scheme_EarningSummary.this);
+                //Global_Data.hideSoftKeyboard(Scheme_EarningSummary.this);
 
                 click_detect_flag = "from_date";
 
@@ -417,7 +417,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
             @Override
             public void onClick(View v) {
 
-                Global_Data.hideSoftKeyboard(Scheme_EarningSummary.this);
+                //Global_Data.hideSoftKeyboard(Scheme_EarningSummary.this);
 
                 click_detect_flag = "to_date";
 

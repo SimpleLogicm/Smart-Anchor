@@ -68,7 +68,7 @@
     <color name="bgContentTop">#594691</color>
     <color name="bgContent">#ffffff</color>
     <color name="contentDividerLine">#e0e0e0</color>
-    <color name="contentBadgeTitle">#ffffff</color>
+    <color name="contentBadgeTitle">#111111</color>
     <color name="titleBadgeTitle">#adafb1</color>
     <color name="titleBadgeText">#adafb1</color>
     <color name="mainTextColor">#343d43</color>
