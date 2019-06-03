@@ -1,7 +1,6 @@
 package com.anchor.activities;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -9,8 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,18 +17,16 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,7 +86,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import cpm.simplelogic.helper.ConnectionDetector;
+
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
 public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapterListener, Ledger_Adapter.UserAdapterListenernew, DatePickerDialog.OnDateSetListener{
@@ -127,6 +124,7 @@ public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapte
     String G_closing_value = "";
     private String update_At_Date = "";
     String server_flag = "";
+    TextView mTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,56 +141,26 @@ public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapte
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        prefManager = new PrefManager(this);
+        ImageView Header_logo = (ImageView) findViewById(R.id.Header_logo);
+         mTitleTextView = (TextView)findViewById(R.id.screenname);
+        mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
 
-        try
-        {
-            ActionBar mActionBar = getActionBar();
-            mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            // mActionBar.setDisplayShowHomeEnabled(false);
-            // mActionBar.setDisplayShowTitleEnabled(false);
-            LayoutInflater mInflater = LayoutInflater.from(this);
-            Intent i = getIntent();
-            String name = i.getStringExtra("retialer");
-            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
-            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-            mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
+        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-            SharedPreferences sp = Ledger_Report.this.getSharedPreferences("SimpleLogic", 0);
+        SharedPreferences sp = Ledger_Report.this.getSharedPreferences("SimpleLogic", 0);
 
-//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
-//        	//todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
-//			todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
-//		}
-            try
-            {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-                {
-                    int age = (int) Math.round(age_float);
+        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
+            //todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
+            todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
+        }
 
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-                }else
-                {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-                }
-
-            }catch(Exception ex){ex.printStackTrace();}
-            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-                todaysTarget.setText("Today's Target Acheived");
+        Header_logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
-
-            mActionBar.setCustomView(mCustomView);
-            mActionBar.setDisplayShowCustomEnabled(true);
-            mActionBar.setHomeButtonEnabled(true);
-            mActionBar.setDisplayHomeAsUpEnabled(true);
-        }catch(Exception ex){ex.printStackTrace();}
+        });
 
          calendar = Calendar.getInstance();
 
@@ -317,73 +285,67 @@ public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapte
                 click_detect_flag = "from_date";
                 //Global_Data.hideSoftKeyboard(Ledger_Report.this);
 
-//                if(server_flag.equalsIgnoreCase("true"))
-//                {
-//                    server_flag = "";
+                if(server_flag.equalsIgnoreCase("true"))
+                {
+                    server_flag = "";
 
-//                    MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(Ledger_Report.this, new MonthPickerDialog.OnDateSetListener() {
-//                        @Override
-//                        public void onDateSet(int selectedMonth, int selectedYear) {
-//
-//                            from_date_value = selectedMonth;
-//                            from_date_year_value = selectedYear;
-//                            if(!ledger_period_value2.getText().toString().equalsIgnoreCase(""))
-//                            {
-//                                String s = CheckDates(selectedMonth,from_date_year_value,to_date_value,to_date_year_value);
-//
-//                                if(s.equalsIgnoreCase("f") || s.equalsIgnoreCase("a"))
-//                                {
-//                                    ledger_period_value.setText(getMonth(selectedMonth) + " " +selectedYear);
-//
-//                                    cd  = new ConnectionDetector(getApplicationContext());
-//                                    if (cd.isConnectedToInternet())
-//                                    {
-//                                        download_csv.setEnabled(false);
-//                                        download_csv.setClickable(false);
-//                                        recyclerView.showShimmerAdapter();
-//                                        Ledger_ReportList_Result();
-//                                    }
-//                                    else
-//                                    {
-//                                        Toast toast = Toast.makeText(Ledger_Report.this,"You don't have internet connection.", Toast.LENGTH_LONG);
-//                                        toast.setGravity(Gravity.CENTER, 0, 0);
-//                                        toast.show();
-//                                    }
-//                                }
-//                                else if(s.equalsIgnoreCase("t"))
-//                                {
-//                                    Toast toast = Toast.makeText(Ledger_Report.this,"From Month should be less ", Toast.LENGTH_LONG);
-//                                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                                    toast.show();
-//                                }
-//                            }
-//                            else
-//                            {
-//                                ledger_period_value.setText(getMonth(selectedMonth) + " " +selectedYear);
-//                                Toast toast = Toast.makeText(Ledger_Report.this,"Please Select To Date Month ", Toast.LENGTH_LONG);
-//                                toast.setGravity(Gravity.CENTER, 0, 0);
-//                                toast.show();
-//                            }
-//                        }
-//                    }, /* activated number in year */ Year, Month);
-//
-//                    builder.setMinYear(2017);
-//                    builder.build().show();
+                    MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(Ledger_Report.this, new MonthPickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(int selectedMonth, int selectedYear) {
 
-                    datePickerDialog = DatePickerDialog.newInstance(Ledger_Report.this, Year, Month, Day);
-                    datePickerDialog.setThemeDark(false);
-                    datePickerDialog.showYearPickerFirst(false);
-                    datePickerDialog.setYearRange(2017,Year);
-                    datePickerDialog.setAccentColor(Color.parseColor("#303F9F"));
-                    datePickerDialog.setTitle("Select From Date");
-                    datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
-//                }
-//                else
-//                {
-//                    Toast toast = Toast.makeText(Ledger_Report.this,"Please wait data loading on previous filter.", Toast.LENGTH_LONG);
-//                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                    toast.show();
-//                }
+                            from_date_value = selectedMonth;
+                            from_date_year_value = selectedYear;
+                            if(!ledger_period_value2.getText().toString().equalsIgnoreCase(""))
+                            {
+                                String s = CheckDates(selectedMonth,from_date_year_value,to_date_value,to_date_year_value);
+
+                                if(s.equalsIgnoreCase("f") || s.equalsIgnoreCase("a"))
+                                {
+                                    ledger_period_value.setText(getMonth(selectedMonth) + " " +selectedYear);
+
+                                    cd  = new ConnectionDetector(getApplicationContext());
+                                    if (cd.isConnectedToInternet())
+                                    {
+                                        download_csv.setEnabled(false);
+                                        download_csv.setClickable(false);
+                                        recyclerView.showShimmerAdapter();
+                                        Ledger_ReportList_Result();
+                                    }
+                                    else
+                                    {
+                                        Toast toast = Toast.makeText(Ledger_Report.this,"You don't have internet connection.", Toast.LENGTH_LONG);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }
+                                }
+                                else if(s.equalsIgnoreCase("t"))
+                                {
+                                    Toast toast = Toast.makeText(Ledger_Report.this,"From Month should be less ", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                }
+                            }
+                            else
+                            {
+                                ledger_period_value.setText(getMonth(selectedMonth) + " " +selectedYear);
+                                Toast toast = Toast.makeText(Ledger_Report.this,"Please Select To Date Month ", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
+                        }
+                    }, /* activated number in year */ Year, Month);
+
+                    builder.setMinYear(2017);
+                    builder.build().show();
+
+
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(Ledger_Report.this,"Please wait data loading on previous filter.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
             }
         });
 
@@ -393,68 +355,68 @@ public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapte
                 click_detect_flag = "to_date";
                 //Global_Data.hideSoftKeyboard(Ledger_Report.this);
 
-//                if(server_flag.equalsIgnoreCase("true"))
-//                {
-//                    server_flag = "";
+                if(server_flag.equalsIgnoreCase("true"))
+                {
+                    server_flag = "";
 
-                    datePickerDialog = DatePickerDialog.newInstance(Ledger_Report.this, Year, Month, Day);
-                    datePickerDialog.setThemeDark(false);
-                    datePickerDialog.setYearRange(2017,Year);
-                    datePickerDialog.showYearPickerFirst(false);
-                    datePickerDialog.setAccentColor(Color.parseColor("#303F9F"));
-                    datePickerDialog.setTitle("Select To Date");
-                    datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
+//                    datePickerDialog = DatePickerDialog.newInstance(Ledger_Report.this, Year, Month, Day);
+//                    datePickerDialog.setThemeDark(false);
+//                    datePickerDialog.setYearRange(2017,Year);
+//                    datePickerDialog.showYearPickerFirst(false);
+//                    datePickerDialog.setAccentColor(Color.parseColor("#303F9F"));
+//                    datePickerDialog.setTitle("Select To Date");
+//                    datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
-//                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(Ledger_Report.this, new MonthPickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(int selectedMonth, int selectedYear) {
-//                        to_date_value = selectedMonth;
-//                        to_date_year_value = selectedYear;
-//                        if (!ledger_period_value.getText().toString().equalsIgnoreCase("")) {
-//                            String s = CheckDates(from_date_value, from_date_year_value, selectedMonth, to_date_year_value);
-//
-//                            if (s.equalsIgnoreCase("f") || s.equalsIgnoreCase("a")) {
-//                                ledger_period_value2.setText(getMonth(selectedMonth) + " " + selectedYear);
-//
-//                                if (cd.isConnectedToInternet()) {
-//                                    download_csv.setEnabled(false);
-//                                    download_csv.setClickable(false);
-//                                    recyclerView.showShimmerAdapter();
-//                                    Ledger_ReportList_Result();
-//                                } else {
-//                                    Toast toast = Toast.makeText(Ledger_Report.this, "You don't have internet connection.", Toast.LENGTH_LONG);
-//                                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                                    toast.show();
-//
-//
-//                                }
-//                            } else if (s.equalsIgnoreCase("t")) {
-//                                Toast toast = Toast.makeText(Ledger_Report.this, "TO Month should be Greater than ", Toast.LENGTH_LONG);
-//                                toast.setGravity(Gravity.CENTER, 0, 0);
-//                                toast.show();
-//                            }
-//                        } else {
-//                            ledger_period_value2.setText(getMonth(selectedMonth) + " " + selectedYear);
-//                            Toast toast = Toast.makeText(Ledger_Report.this, "Please Select From Date Month ", Toast.LENGTH_LONG);
-//                            toast.setGravity(Gravity.CENTER, 0, 0);
-//                            toast.show();
-//
-//
-//                        }
-//
-//                    }
-//                }, /* activated number in year */ Year, Month);
-//                builder.setMinYear(2017);
-//                builder.build()
-//                        .show();
+                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(Ledger_Report.this, new MonthPickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(int selectedMonth, int selectedYear) {
+                        to_date_value = selectedMonth;
+                        to_date_year_value = selectedYear;
+                        if (!ledger_period_value.getText().toString().equalsIgnoreCase("")) {
+                            String s = CheckDates(from_date_value, from_date_year_value, selectedMonth, to_date_year_value);
 
-//            }
-//            else
-//            {
-//                Toast toast = Toast.makeText(Ledger_Report.this,"Please wait data loading on previous filter.", Toast.LENGTH_LONG);
-//                toast.setGravity(Gravity.CENTER, 0, 0);
-//                toast.show();
-//            }
+                            if (s.equalsIgnoreCase("f") || s.equalsIgnoreCase("a")) {
+                                ledger_period_value2.setText(getMonth(selectedMonth) + " " + selectedYear);
+
+                                if (cd.isConnectedToInternet()) {
+                                    download_csv.setEnabled(false);
+                                    download_csv.setClickable(false);
+                                    recyclerView.showShimmerAdapter();
+                                    Ledger_ReportList_Result();
+                                } else {
+                                    Toast toast = Toast.makeText(Ledger_Report.this, "You don't have internet connection.", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+
+                                }
+                            } else if (s.equalsIgnoreCase("t")) {
+                                Toast toast = Toast.makeText(Ledger_Report.this, "TO Month should be Greater than ", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            }
+                        } else {
+                            ledger_period_value2.setText(getMonth(selectedMonth) + " " + selectedYear);
+                            Toast toast = Toast.makeText(Ledger_Report.this, "Please Select From Date Month ", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        }
+
+                    }
+                }, /* activated number in year */ Year, Month);
+                builder.setMinYear(2017);
+                builder.build()
+                        .show();
+
+            }
+            else
+            {
+                Toast toast = Toast.makeText(Ledger_Report.this,"Please wait data loading on previous filter.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
 
             }
         });
@@ -870,7 +832,9 @@ public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapte
 
                                 recyclerView.hideShimmerAdapter();
                                 ledger_adapter.notifyDataSetChanged();
-                                setTitle("Ledger Report "+"Data as on "+update_At_Date);
+                               // setTitle("Ledger Report "+"Data as on "+update_At_Date);
+                                mTitleTextView.setText("Ledger Report "+"Data as on "+update_At_Date);
+
 
                                 try
                                 {

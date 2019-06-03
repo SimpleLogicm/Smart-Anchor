@@ -601,6 +601,7 @@
         <activity
             android:name=".Ledger_Report"
             android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:windowSoftInputMode="adjustPan"/>
 
         <activity

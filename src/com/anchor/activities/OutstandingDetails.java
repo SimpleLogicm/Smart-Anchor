@@ -20,12 +20,10 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,15 +34,10 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anchor.activities.Global_Data;
-import com.anchor.activities.MainActivity;
-import com.anchor.activities.OutstandingActivity;
-import com.anchor.activities.R;
 import com.anchor.adapter.OutstandingDetails_Adapter;
 import com.anchor.helper.PrefManager;
 import com.anchor.helper.SimpleDividerItemDecoration;
@@ -134,6 +127,7 @@ public class OutstandingDetails extends Activity implements OutstandingDetails_A
     int check=0;
     int service_hit = 0;
     private String update_At_Date = "";
+    TextView mTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,7 +179,7 @@ public class OutstandingDetails extends Activity implements OutstandingDetails_A
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
 
             TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
@@ -719,7 +713,8 @@ public class OutstandingDetails extends Activity implements OutstandingDetails_A
                         {
                             public void run() {
 
-                                setTitle("Outstanding/Overdue Data as on "+update_At_Date);
+                                //setTitle("Outstanding/Overdue Data as on "+update_At_Date);
+                                mTitleTextView.setText("Outstanding/Overdue Data as on "+update_At_Date);
                                 recyclerView.hideShimmerAdapter();
                                 outstandingDetails_adapter.notifyDataSetChanged();
                                 button.setEnabled(true);

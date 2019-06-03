@@ -9,8 +9,61 @@
     >
 
     <LinearLayout
+        android:id="@+id/thumbnaill"
+        android:layout_width="fill_parent"
+        android:layout_height="52dp"
+        android:background="#8A0808"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/screenname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/order_booking"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/todaysTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/aaa"
+        android:layout_width="13dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="4dp"
+        android:src="@drawable/arr_left"
+        />
+
+    <ImageView
+        android:id="@+id/Header_logo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/anchor_logo"
+        />
+
+    <LinearLayout
         android:id="@+id/ld_header_container"
         android:layout_width="wrap_content"
+        android:layout_below="@+id/thumbnaill"
         android:layout_height="60dp"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
@@ -102,6 +155,7 @@
         android:id="@+id/ld_header_containerhh"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_below="@+id/thumbnaill"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
         android:layout_alignParentRight="true"

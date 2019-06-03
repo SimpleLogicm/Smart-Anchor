@@ -209,7 +209,7 @@
                     android:text="@string/total"
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/black"
                     android:textSize="13dp" />
 
             </RelativeLayout>
@@ -231,7 +231,7 @@
                     android:textStyle="bold"
                     android:text=""
                     android:textAllCaps="false"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
             </RelativeLayout>
@@ -253,7 +253,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
             </RelativeLayout>
@@ -275,7 +275,7 @@
                     android:text=""
                     android:textStyle="bold"
                     android:textAllCaps="false"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
             </RelativeLayout>

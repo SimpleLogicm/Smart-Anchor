@@ -25,12 +25,10 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -76,12 +74,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-//import com.jcraft.jsch.Channel;
-//import com.jcraft.jsch.ChannelSftp;
-//import com.jcraft.jsch.JSch;
-//import com.jcraft.jsch.JSchException;
-//import com.jcraft.jsch.Session;
-//import com.jcraft.jsch.SftpException;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -92,24 +84,15 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.opencsv.CSVWriter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-//import org.apache.commons.net.ftp.FTP;
-//import org.apache.commons.net.ftp.FTPClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.SocketException;
 import java.net.URLEncoder;
-import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -117,11 +100,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 import cpm.simplelogic.helper.ConnectionDetector;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
-import static com.github.mikephil.charting.charts.Chart.LOG_TAG;
+
+//import com.jcraft.jsch.Channel;
+//import com.jcraft.jsch.ChannelSftp;
+//import com.jcraft.jsch.JSch;
+//import com.jcraft.jsch.JSchException;
+//import com.jcraft.jsch.Session;
+//import com.jcraft.jsch.SftpException;
+//import org.apache.commons.net.ftp.FTP;
+//import org.apache.commons.net.ftp.FTPClient;
 
 
 public class Invoices extends Activity implements Invoices_Adapter.UserAdapterListener, Invoices_Adapter.UserAdapterListenernew, DatePickerDialog.OnDateSetListener {
@@ -166,6 +156,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
     int menu_click_flag = 0;
     private ProgressDialog dialog;
     private String update_At_Date = "";
+    TextView mTitleTextView;
 
 
     @Override
@@ -191,7 +182,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+             mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
 
             TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
@@ -1277,7 +1268,8 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
                                 recyclerView.hideShimmerAdapter();
                                 Invoices_Adapter.notifyDataSetChanged();
 
-                                setTitle("Invoices/CN/DN     " + "Data as on "+update_At_Date);
+                                mTitleTextView.setText("Invoices/CN/DN     " + "Data as on "+update_At_Date);
+
                                 button.setEnabled(true);
                                 button.setClickable(true);
 

@@ -24,12 +24,10 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -84,9 +82,11 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.opencsv.CSVWriter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -99,6 +99,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import cpm.simplelogic.helper.ConnectionDetector;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
@@ -145,6 +146,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
     String Title_Text = "";
     String type = "";
     private String update_At_Date = "";
+    TextView mTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +183,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Title_Text);
 
             TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
@@ -842,7 +844,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
                         Scheme_EarningSummary.this.runOnUiThread(new Runnable() {
                             public void run() {
 
-                                setTitle(Title_Text+update_At_Date);
+                                mTitleTextView.setText(Title_Text+update_At_Date);
                                 recyclerView.hideShimmerAdapter();
 
 
