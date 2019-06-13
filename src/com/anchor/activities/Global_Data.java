@@ -202,7 +202,7 @@ public class Global_Data {
     public static String Scheme_report_Type="";
     public static List<Spiner_List_Model> spiner_list_modelList =new ArrayList<Spiner_List_Model>();
     public static List<String> array_of_pVarient =new ArrayList<>();
-	
+    public static HashMap<String,String> Download_hashmap = new HashMap<String,String>();
 	
 	//public static String GLOVEL_LONG_DESC="";
     

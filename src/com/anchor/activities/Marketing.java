@@ -4,12 +4,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
-import android.app.NotificationManager;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,7 +15,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.NotificationCompat;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.App.AppController;
+import com.anchor.helper.FileDownloader;
 import com.anchor.imageadapters.Image;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -73,6 +72,8 @@ public class Marketing extends Activity implements OnItemSelectedListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_marketing);
 
         new_launch = (ImageView) findViewById(R.id.new_launch);
@@ -85,34 +86,51 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
         pDialog = new ProgressDialog(Marketing.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
-        registerReceiver(onComplete,
-                new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+//        registerReceiver(onComplete,
+//                new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
         new_launch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(Marketing.this);
+                builder.setTitle("Anchor App");
+                builder.setCancelable(false);
+                builder.setMessage("New Launch");
+                builder.setPositiveButton("Online", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
 
-                    isInternetPresent = cd.isConnectingToInternet();
-                    if (isInternetPresent)
-                    {
-
-
-                        pDialog.setMessage("Please Wait....");
-                        pDialog.setTitle("Anchor App");
-                        pDialog.setCancelable(false);
-                        pDialog.show();
-
-                       // GetNewLaunch_Datann();
-
-                        new Marketing.imagesync().execute();
+                        isInternetPresent = cd.isConnectingToInternet();
+                        if (isInternetPresent)
+                        {
 
 
-                        //getServices.GetNewLaunch_Data(MainActivity.this);
+                            pDialog.setMessage("Please Wait....");
+                            pDialog.setTitle("Anchor App");
+                            pDialog.setCancelable(false);
+                            pDialog.show();
+
+
+
+                            new Marketing.imagesync().execute();
+
+
+
+                        }
+                        else
+                        {
+                            Toast.makeText(Marketing.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
-                    else
-                    {
+                });
+                builder.setNegativeButton("Offline", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
                         List<Image> dealer_check_details1 = dbvoc.TABLE_CREATE_NEW_LAUNCHES_NEW_Data();
 
                         if(dealer_check_details1.size() > 0) {
@@ -123,11 +141,11 @@ public class Marketing extends Activity implements OnItemSelectedListener{
                         {
                             Toast.makeText(Marketing.this, "Record not Found", Toast.LENGTH_SHORT).show();
                         }
-
                     }
+                });
+                builder.show();
 
 
-                    //getServices.GetNewLaunch_Data(MainActivity.this);
                 }
 
 
@@ -275,303 +293,52 @@ public class Marketing extends Activity implements OnItemSelectedListener{
         finish();
     }
 
-    public  void GetNewLaunch_Datann()
-    {
-
-        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
-        //context = contextn;
-
-        //loginDataBaseAdapter=new LoginDataBaseAdapter(Video_Main_List.this);
-        //loginDataBaseAdapter=loginDataBaseAdapter.open();
 
 
-        //PreferencesHelper Prefs = new PreferencesHelper(context);
-        //String URL = Prefs.GetPreferences("URL");
-        String domain = "";
 
-        //dialog = new ProgressDialog(Video_Main_List.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-
-
-        domain = getResources().getString(R.string.service_domain);
-
-        Log.d("Server url","Server url"+domain+"new_launches?imei_no="+device_id);
-
-        StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain+"new_launches?imei_no="+device_id,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //showJSON(response);
-                        // Log.d("jV", "JV" + response);
-                        Log.d("jV", "JV length" + response.length());
-                        // JSONObject person = (JSONObject) (response);
-                        try {
-                            JSONObject json = new JSONObject(new JSONTokener(response));
-                            try{
-
-                                String response_result = "";
-                                if(json.has("result"))
-                                {
-                                    response_result = json.getString("result");
-                                }
-                                else
-                                {
-                                    response_result = "data";
-                                }
-
-
-                                if(response_result.equalsIgnoreCase("No Data Found")) {
-                                    pDialog.hide();
-
-                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-
-                                    Intent launch = new Intent(Marketing.this,MainActivity.class);
-                                    startActivity(launch);
-                                    finish();
-
-                                }
-                                else
-                                if(response_result.equalsIgnoreCase("Device not registered")) {
-                                    pDialog.hide();
-                                    // Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-
-                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-
-                                    Intent launch = new Intent(Marketing.this,MainActivity.class);
-                                    startActivity(launch);
-                                    finish();
-
-                                }
-                                else {
-
-                                    JSONArray launches = json.getJSONArray("launches");
-
-                                    Log.i("volley", "response reg launches Length: " + launches.length());
-
-                                    Log.d("users", "launches" + launches.toString());
-
-
-                                    if(launches.length() > 0)
-                                    {
-                                        dbvoc.getDeleteTable("new_launches_new");
-                                        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                                        File dir = new File(path,"Anchor_NewLaunch");
-
-                                        if (dir.isDirectory())
-                                        {
-                                            String[] children = dir.list();
-                                            for (int j = 0; j < children.length; j++)
-                                            {
-                                                new File(dir, children[j]).delete();
-                                            }
-                                        }
-                                    }
-                                    for (int i = 0; i < launches.length(); i++) {
-
-                                        JSONObject object = launches.getJSONObject(i);
-//                                        Image image = new Image();
-//                                        image.setName(object.getString("name"));
-//                                        image.setLarge(object.getString("large"));
-//                                        image.setType(object.getString("type"));
-//                                        image.setTimestamp(object.getString("date"));
+//    public BroadcastReceiver onComplete = new BroadcastReceiver() {
 //
-//                                        images.add(image);
-
-
-                                        String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1, object.getString("large").trim().length() );
-
-                                        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                                        File file = new File(path,"Anchor_NewLaunch"+"/"+fileName);
-
-
-
-
-                                        // dbvoc.TABLE_CREATE_NEW_LAUNCHES_NEW_CHECK("file:" + file.getAbsolutePath());
-                                        // if()
-
-                                        loginDataBaseAdapter.insertNewLaunchesNew(object.getString("name"),"file:" + file.getAbsolutePath(),object.getString("type"),object.getString("date"));
-
-                                        if(!file.exists())
-                                        {
-                                            file.mkdir();
-                                        }
-
-                                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim())));
-                                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-                                        request.setAllowedOverRoaming(false);
-//                                           // request.setTitle("GadgetSaint Downloading " + "Sample_" + i + ".png");
-//                                            //request.setDescription("Downloading " + "Sample_" + i + ".png");
-                                        request.setVisibleInDownloadsUi(false);
-                                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "Anchor_NewLaunch"+"/"+fileName);
-
-                                        refid = downloadManager.enqueue(request);
-
-
-                                        Log.e("OUTNM", "" + refid);
-
-                                        list.add(refid);
-
-
-                                    }
-
-                                    //Intent launch = new Intent(context,Youtube_Player_Activity.class);
-                                    //startActivity(launch);
-
-
-
-                                    // mAdapter.notifyDataSetChanged();
-                                    //finish();
-
-                                }
-
-                                //  finish();
-                                // }
-
-                                // output.setText(data);
-                            }catch(JSONException e){e.printStackTrace();
-
-
-                                Toast toast = Toast.makeText(Marketing.this,
-                                        "Service Error",
-                                        Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                                Intent launch = new Intent(Marketing.this,MainActivity.class);
-                                startActivity(launch);
-                                finish();
-
-                                pDialog.hide(); }
-
-
-                            pDialog.hide();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            //  finish();
-                            pDialog.dismiss();
-                        }
-                        pDialog.dismiss();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                            Toast.makeText(Image_Gellary.this,
-//                                    "Network Error",
-//                                    Toast.LENGTH_LONG).show();
-
-                            Toast toast = Toast.makeText(Marketing.this,
-                                    "Network Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof AuthFailureError) {
-
-
-                            Toast toast = Toast.makeText(Marketing.this,
-                                    "Server AuthFailureError  Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof ServerError) {
-
-                            Toast toast = Toast.makeText(Marketing.this,
-                                    "Server   Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof NetworkError) {
-
-                            Toast toast = Toast.makeText(Marketing.this,
-                                    "Network   Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        } else if (error instanceof ParseError) {
-
-
-                            Toast toast = Toast.makeText(Marketing.this,
-                                    "ParseError   Error",
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                        else
-                        {
-                            // Toast.makeText(Image_Gellary.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                            Toast toast = Toast.makeText(Marketing.this, error.getMessage(), Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                        }
-                        Intent launch = new Intent(Marketing.this,MainActivity.class);
-                        startActivity(launch);
-                        finish();
-                        pDialog.dismiss();
-                        // finish();
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(Marketing.this);
-
-        int socketTimeout = 300000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        stringRequest.setRetryPolicy(policy);
-        // requestQueue.se
-        //requestQueue.add(jsObjRequest);
-        stringRequest.setShouldCache(false);
-        requestQueue.getCache().clear();
-        //requestQueue.add(stringRequest);
-        AppController.getInstance().addToRequestQueue(stringRequest);
-    }
-
-    public BroadcastReceiver onComplete = new BroadcastReceiver() {
-
-        public void onReceive(Context ctxt, Intent intent) {
-
-
-
-
-            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
-
-            Log.e("IN", "" + referenceId);
-
-            list.remove(referenceId);
-
-
-            if (list.isEmpty())
-            {
-
-                pDialog.hide();
-
-                Log.e("INSIDE", "" + referenceId);
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(Marketing.this)
-                                .setSmallIcon(R.drawable.anchor_logo)
-                                .setContentTitle("Anchor")
-                                .setContentText("All Download completed");
-
-
-                NotificationManager notificationManager = (NotificationManager) Marketing.this.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(455, mBuilder.build());
-
-                Intent intent1 = new Intent(Marketing.this, Image_Gellary.class);
-                // intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               startActivity(intent1);
-
-
-            }
-
-
-        }
-
-
-    };
+//        public void onReceive(Context ctxt, Intent intent) {
+//
+//
+//
+//
+//            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+//
+//
+//            Log.e("IN", "" + referenceId);
+//
+//            list.remove(referenceId);
+//
+//
+//            if (list.isEmpty())
+//            {
+//
+//                pDialog.hide();
+//
+//                Log.e("INSIDE", "" + referenceId);
+//                NotificationCompat.Builder mBuilder =
+//                        new NotificationCompat.Builder(Marketing.this)
+//                                .setSmallIcon(R.drawable.anchor_logo)
+//                                .setContentTitle("Anchor")
+//                                .setContentText("All Download completed");
+//
+//
+//                NotificationManager notificationManager = (NotificationManager) Marketing.this.getSystemService(Context.NOTIFICATION_SERVICE);
+//                notificationManager.notify(455, mBuilder.build());
+//
+//                Intent intent1 = new Intent(Marketing.this, Image_Gellary.class);
+//                // intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//               startActivity(intent1);
+//
+//
+//            }
+//
+//
+//        }
+//
+//
+//    };
 
     @Override
     protected void onDestroy() {
@@ -579,7 +346,7 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
         super.onDestroy();
 
-        unregisterReceiver(onComplete);
+       // unregisterReceiver(onComplete);
 
 
 
@@ -593,7 +360,7 @@ public class Marketing extends Activity implements OnItemSelectedListener{
             try {
 
 
-                downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                //downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
                 String device_id = sp.getString("devid", "");
 
@@ -679,8 +446,9 @@ public class Marketing extends Activity implements OnItemSelectedListener{
                                             if(launches.length() > 0)
                                             {
                                                 dbvoc.getDeleteTable("new_launches_new");
-                                                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                                                File dir = new File(path,"Anchor_NewLaunch");
+
+                                                String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                                                File dir = new File(extStorageDirectory, "Anchor_NewLaunch");
 
                                                 if (dir.isDirectory())
                                                 {
@@ -703,40 +471,52 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 //                                        images.add(image);
 
 
-                                                String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1, object.getString("large").trim().length() );
+                                                String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1, object.getString("large").trim().length());
 
-                                                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                                                if(fileName.indexOf("?") > 0)
+                                                {
+                                                    String [] file_name_array = fileName.split("\\?");
+                                                    fileName = file_name_array[0];
+                                                }
+
+                                                fileName = fileName.replaceAll("[%,]","");
+
+                                                String path = Environment.getExternalStorageDirectory().toString();
                                                 File file = new File(path,"Anchor_NewLaunch"+"/"+fileName);
 
 
-
-
+                                                Global_Data.Download_hashmap.put(fileName,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim()));
                                                 // dbvoc.TABLE_CREATE_NEW_LAUNCHES_NEW_CHECK("file:" + file.getAbsolutePath());
-                                                // if()
+
 
                                                 loginDataBaseAdapter.insertNewLaunchesNew(object.getString("name"),"file:" + file.getAbsolutePath(),object.getString("type"),object.getString("date"));
 
-                                                if(!file.exists())
-                                                {
-                                                    file.mkdir();
-                                                }
+//                                        if(!file.exists())
+//                                        {
+//                                            file.mkdir();
+//                                        }
+//
+//                                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim())));
+//                                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
+//                                        request.setAllowedOverRoaming(false);
+////                                           // request.setTitle("GadgetSaint Downloading " + "Sample_" + i + ".png");
+////                                            //request.setDescription("Downloading " + "Sample_" + i + ".png");
+//                                        request.setVisibleInDownloadsUi(false);
+//                                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "Anchor_NewLaunch"+"/"+fileName);
+//
+//                                        refid = downloadManager.enqueue(request);
+//
+//
+//                                        Log.e("OUTNM", "" + refid);
+//
+//                                        list.add(refid);
 
-                                                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim())));
-                                                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-                                                request.setAllowedOverRoaming(false);
-//                                           // request.setTitle("GadgetSaint Downloading " + "Sample_" + i + ".png");
-//                                            //request.setDescription("Downloading " + "Sample_" + i + ".png");
-                                                request.setVisibleInDownloadsUi(false);
-                                                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "Anchor_NewLaunch"+"/"+fileName);
 
-                                                refid = downloadManager.enqueue(request);
+                                            }
 
-
-                                                Log.e("OUTNM", "" + refid);
-
-                                                list.add(refid);
-
-
+                                            if(Global_Data.Download_hashmap.size() > 0)
+                                            {
+                                                FileDownloader.downloadFile(Marketing.this,pDialog,"");
                                             }
 
                                             //Intent launch = new Intent(context,Youtube_Player_Activity.class);

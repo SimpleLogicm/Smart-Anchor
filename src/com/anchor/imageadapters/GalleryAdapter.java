@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.anchor.activities.R;
 import com.anchor.helper.GlideApp;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
@@ -64,6 +63,39 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
             holder.pdf_name.setVisibility(View.VISIBLE);
             holder.thumbnail.setVisibility(View.GONE);
             holder.pdf_name.setText(image.getName()+" \n"+"PDF");
+
+            // holder.pDFView.fromUri(Uri.parse(LaunchesItem.getFile_path()))
+            //        .load();
+        }
+        else
+        if(type.equalsIgnoreCase("video/mp4"))
+        {
+            // holder.pDFView.setVisibility(View.VISIBLE);
+            holder.pdf_name.setVisibility(View.VISIBLE);
+            holder.thumbnail.setVisibility(View.GONE);
+            holder.pdf_name.setText(image.getName()+" \n"+"Video");
+
+            // holder.pDFView.fromUri(Uri.parse(LaunchesItem.getFile_path()))
+            //        .load();
+        }
+        else
+        if(type.equalsIgnoreCase("text/plain"))
+        {
+            // holder.pDFView.setVisibility(View.VISIBLE);
+            holder.pdf_name.setVisibility(View.VISIBLE);
+            holder.thumbnail.setVisibility(View.GONE);
+            holder.pdf_name.setText(image.getName()+" \n"+"CSV");
+
+            // holder.pDFView.fromUri(Uri.parse(LaunchesItem.getFile_path()))
+            //        .load();
+        }
+        else
+        if(type.equalsIgnoreCase("audio/mpeg"))
+        {
+            // holder.pDFView.setVisibility(View.VISIBLE);
+            holder.pdf_name.setVisibility(View.VISIBLE);
+            holder.thumbnail.setVisibility(View.GONE);
+            holder.pdf_name.setText(image.getName()+" \n"+"Audio");
 
             // holder.pDFView.fromUri(Uri.parse(LaunchesItem.getFile_path()))
             //        .load();

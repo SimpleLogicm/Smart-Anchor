@@ -162,7 +162,7 @@ public class LoginActivity extends Activity{
 		}
 
         logo_img=(ImageView)findViewById(R.id.imageView1);
-		app_clear_dat=(ImageView)findViewById(R.id.app_clear_dat);
+		//app_clear_dat=(ImageView)findViewById(R.id.app_clear_dat);
 		link_fpwd = (TextView) findViewById(R.id.forget_pwd);
 
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
@@ -254,8 +254,8 @@ public class LoginActivity extends Activity{
 //		  editText1.setText("sadanand");
 //		editText2.setText("sadanand12345");
 
-		editText1.setText("Dnyanada");
-		editText2.setText("Dnyanada5008322");
+		editText1.setText("Akhil");
+		editText2.setText("akhilesh12345");
 
 				PackageInfo pInfo = null;
 				try {
@@ -334,50 +334,50 @@ public class LoginActivity extends Activity{
 //		});
 
 
-		app_clear_dat.setOnClickListener(new OnClickListener() {
-			public void onClick(View view)
-			{
-				AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-
-
-				builder.setMessage("Do you want to Clear app Data ?")
-						.setCancelable(false)
-						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-
-								File cache = getCacheDir();
-								File appDir = new File(cache.getParent());
-								if(appDir.exists()) {
-									String[] children = appDir.list();
-									for (String s : children) {
-										if (!s.equals("lib")) {
-											deleteDir(new File(appDir, s));
-											Log.i("TAG", "File /data/data/APP_PACKAGE/" + s + " DELETED");
-
-											editText1.setText("");
-											editText2.setText("");
-											emp_code.setText("");
-											Toast.makeText(LoginActivity.this, "App Data Clear Successfully, Please click Sign Up Button.", Toast.LENGTH_SHORT).show();
-										}
-									}
-								}
-
-							}
-						})
-						.setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-
-							}
-						});
-
-				//Creating dialog box
-				AlertDialog alert = builder.create();
-				//Setting the title manually
-				alert.setTitle("Smart Anchor");
-				alert.show();
-			}
-		});
+//		app_clear_dat.setOnClickListener(new OnClickListener() {
+//			public void onClick(View view)
+//			{
+//				AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+//
+//
+//				builder.setMessage("Do you want to Clear app Data ?")
+//						.setCancelable(false)
+//						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int id) {
+//
+//								File cache = getCacheDir();
+//								File appDir = new File(cache.getParent());
+//								if(appDir.exists()) {
+//									String[] children = appDir.list();
+//									for (String s : children) {
+//										if (!s.equals("lib")) {
+//											deleteDir(new File(appDir, s));
+//											Log.i("TAG", "File /data/data/APP_PACKAGE/" + s + " DELETED");
+//
+//											editText1.setText("");
+//											editText2.setText("");
+//											emp_code.setText("");
+//											Toast.makeText(LoginActivity.this, "App Data Clear Successfully, Please click Sign Up Button.", Toast.LENGTH_SHORT).show();
+//										}
+//									}
+//								}
+//
+//							}
+//						})
+//						.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog, int id) {
+//								dialog.cancel();
+//
+//							}
+//						});
+//
+//				//Creating dialog box
+//				AlertDialog alert = builder.create();
+//				//Setting the title manually
+//				alert.setTitle("Smart Anchor");
+//				alert.show();
+//			}
+//		});
 
 		buttonReg.setOnClickListener(new OnClickListener() {
 		   	         public void onClick(View view) 

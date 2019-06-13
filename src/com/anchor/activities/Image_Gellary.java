@@ -11,6 +11,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 import com.anchor.imageadapters.GalleryAdapter;
 import com.anchor.imageadapters.Image;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,8 @@ public class Image_Gellary extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -98,6 +103,82 @@ public class Image_Gellary extends FragmentActivity {
                         } catch (ActivityNotFoundException e) {
                             // Instruct the user to install a PDF reader here, or something
                         }
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "File path is incorrect." , Toast.LENGTH_LONG).show();
+                }
+                else
+                if(type.equalsIgnoreCase("video/mp4"))
+                {
+                    if(!image_url.isEmpty()) {
+
+                        String strNew = image_url.toString();
+                        File yourFile = new File(strNew.trim());
+                        Uri uri = Uri.fromFile(yourFile);
+
+//                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                        intent.setDataAndType(Uri.parse(image_url), "video/mp4");
+//                        startActivity(intent);
+
+                        String fileName =image_url.substring(image_url.lastIndexOf('/')+1, image_url.length());
+
+                        Intent intent1 = new Intent(android.content.Intent.ACTION_VIEW);
+                        Uri data = Uri.parse("file://"+Environment.getExternalStorageDirectory().getPath()+"/Anchor_NewLaunch"
+                                + "/"+fileName);
+                        intent1.setDataAndType(data, "video/mp4");
+                        startActivity(intent1);
+
+//                        Intent intent = Intent.createChooser(target, "Open File");
+//                        try {
+//                            startActivity(intent);
+//                        } catch (ActivityNotFoundException e) {
+//                            // Instruct the user to install a PDF reader here, or something
+//                        }
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "File path is incorrect." , Toast.LENGTH_LONG).show();
+                }
+                else
+                if(type.equalsIgnoreCase("text/plain"))
+                {
+                    if(!image_url.isEmpty()) {
+                        Intent target = new Intent(Intent.ACTION_VIEW);
+                        target.setDataAndType(Uri.parse(image_url), "text/csv");
+                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                        Intent intent = Intent.createChooser(target, "Open File");
+                        try {
+                            startActivity(intent);
+                        } catch (ActivityNotFoundException e) {
+                            // Instruct the user to install a PDF reader here, or something
+                        }
+                    }
+                    else
+                        Toast.makeText(getApplicationContext(), "File path is incorrect." , Toast.LENGTH_LONG).show();
+                }
+                else
+                if(type.equalsIgnoreCase("audio/mpeg"))
+                {
+                    if(!image_url.isEmpty()) {
+
+                        String fileName =image_url.substring(image_url.lastIndexOf('/')+1, image_url.length());
+
+                        Intent intent1 = new Intent(android.content.Intent.ACTION_VIEW);
+                        Uri data = Uri.parse("file://"+Environment.getExternalStorageDirectory().getPath()+"/Anchor_NewLaunch"
+                                + "/"+fileName);
+                        intent1.setDataAndType(data, "audio/*");
+                        startActivity(intent1);
+
+//                        Intent target = new Intent(Intent.ACTION_VIEW);
+//                        target.setDataAndType(Uri.parse(image_url), "audio/*");
+//                        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//                        Intent intent = Intent.createChooser(target, "Open File");
+//                        try {
+//                            startActivity(intent);
+//                        } catch (ActivityNotFoundException e) {
+//                            // Instruct the user to install a PDF reader here, or something
+//                        }
                     }
                     else
                         Toast.makeText(getApplicationContext(), "File path is incorrect." , Toast.LENGTH_LONG).show();
@@ -214,6 +295,60 @@ public class Image_Gellary extends FragmentActivity {
         @Override
         protected void onPostExecute(String result) {
 
+        }
+    }
+
+    private void openFile(File url) {
+
+        try {
+
+            Uri uri = Uri.fromFile(url);
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            if (url.toString().contains(".doc") || url.toString().contains(".docx")) {
+                // Word document
+                intent.setDataAndType(uri, "application/msword");
+            } else if (url.toString().contains(".pdf")) {
+                // PDF file
+                intent.setDataAndType(uri, "application/pdf");
+            } else if (url.toString().contains(".jpg")) {
+                // PDF file
+                intent.setDataAndType(uri, "image/*");
+            } else if (url.toString().contains(".png")) {
+                // PDF file
+                intent.setDataAndType(uri, "image/*");
+            } else if (url.toString().contains(".jpeg")) {
+                // PDF file
+                intent.setDataAndType(uri, "image/*");
+            } else if (url.toString().contains(".gif")) {
+                // PDF file
+                intent.setDataAndType(uri, "image/*");
+            } else if (url.toString().contains(".ppt") || url.toString().contains(".pptx")) {
+                // Powerpoint file
+                intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
+            } else if (url.toString().contains(".xls") || url.toString().contains(".xlsx")) {
+                // Excel file
+                intent.setDataAndType(uri, "application/vnd.ms-excel");
+
+            } else if (url.toString().contains(".txt")) {
+                // Text file
+                intent.setDataAndType(uri, "text/plain");
+
+            } else if (url.toString().contains(".mp4") || url.toString().contains(".AVI") || url.toString().contains(".FLV") || url.toString().contains(".WMV") || url.toString().contains(".MOV")) {
+                // Text file
+                intent.setDataAndType(uri, "video/mp4");
+
+            } else {
+                intent.setDataAndType(uri, "text/csv");
+            }
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "No application found which can open the file", Toast.LENGTH_SHORT).show();
         }
     }
 

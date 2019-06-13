@@ -1317,8 +1317,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
     // Getting All Local_Data
     public void getDeleteTable(String tablename) {
-       // List<Local_Data> contactList = new ArrayList<Local_Data>();
-        // Select All Query
+	    // Select All Query
         String selectQuery = "DELETE FROM " + tablename;
        
        SQLiteDatabase db= this.getWritableDatabase();
@@ -1331,6 +1330,16 @@ public class DataBaseHelper extends SQLiteOpenHelper
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery = "DELETE FROM " + TABLE_GEO_DATA + " WHERE datatimeg = '" + datatimeg + "'";
+
+        SQLiteDatabase db= this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+    }
+
+    // Getting All Local_Data
+    public void getDeleteImageData(String file_path) {
+	    // Select All Query
+        String selectQuery = "DELETE FROM new_launches_new WHERE file_path = '" + file_path + "'";
 
         SQLiteDatabase db= this.getWritableDatabase();
 
