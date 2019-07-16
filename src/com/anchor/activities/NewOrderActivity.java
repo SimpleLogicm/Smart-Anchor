@@ -250,25 +250,51 @@ public class NewOrderActivity extends BaseActivity {
 			}
 			else
 			{
-				result_bu.clear();
-				List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
-				result_bu.add("Select BU");
-				for (Local_Data cn : contact_bu) {
-					String str_bunit = "" + cn.getBunit();
-					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
-						result_bu.add(str_bunit);
+				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
+
+					result_bu.clear();
+					List<Local_Data> contact_bu = dbvoc.getAllB_Unit_BYBU(Global_Data.Business_unit_code_array);
+					result_bu.add("Select BU");
+					for (Local_Data cn : contact_bu) {
+						String str_bunit = "" + cn.getBunit();
+						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+							result_bu.add(str_bunit);
+						}
 					}
+
+					dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
+					dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+					spnBu.setAdapter(dataAdapterBu);
+
+					result_bussiness.clear();
+					result_bussiness.add("Select Business Division");
+					dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+					dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+					spnBusinessDiv.setAdapter(dataAdapterBd);
+				}
+				else
+				{
+					result_bu.clear();
+					List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
+					result_bu.add("Select BU");
+					for (Local_Data cn : contact_bu) {
+						String str_bunit = "" + cn.getBunit();
+						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+							result_bu.add(str_bunit);
+						}
+					}
+
+					dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
+					dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+					spnBu.setAdapter(dataAdapterBu);
+
+					result_bussiness.clear();
+					result_bussiness.add("Select Business Division");
+					dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+					dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+					spnBusinessDiv.setAdapter(dataAdapterBd);
 				}
 
-				dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
-				dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
-				spnBu.setAdapter(dataAdapterBu);
-
-				result_bussiness.clear();
-				result_bussiness.add("Select Business Division");
-				dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
-				dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-				spnBusinessDiv.setAdapter(dataAdapterBd);
 			}
 		}catch(Exception ex){ex.printStackTrace();}
 

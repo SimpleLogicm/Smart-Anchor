@@ -70,6 +70,7 @@ public class SplashScreenActivity extends Activity {
 		int version_c_check = 0;
 		int version_ninteen_check = 0;
 		int version_twintee_check = 0;
+		int version_twintee_one_check = 0;
 
 // Reading all
 		List<Local_Data> contacts1 = dbvoc.getVersioninfo();
@@ -108,6 +109,10 @@ public class SplashScreenActivity extends Activity {
 				{
 					version_twintee_check = 1;
 				}
+				if(ver_code == 21)
+				{
+					version_twintee_one_check = 1;
+				}
 
 				if(ver_code == versionCode)
 				{
@@ -138,6 +143,11 @@ public class SplashScreenActivity extends Activity {
 			if(version_twintee_check != 1)
 			{
 				check_Columns_business_unit_CreditProfile();
+			}
+
+			if(version_twintee_one_check != 1)
+			{
+				check_Columns_business_unit_code_array_customer_master();
 			}
 
 			if(version_c_check != 1)
@@ -304,6 +314,21 @@ public class SplashScreenActivity extends Activity {
 				dbvoc.alter_Columns("credit_profile","business_unit");
 			} catch (SQLiteException ex) {
 				Log.w("Alter Table", "credit_profile " + "business_unit" + ": " + ex.getMessage());
+			}
+		}
+
+
+	}
+
+	public void check_Columns_business_unit_code_array_customer_master()
+	{
+		boolean column_check = dbvoc.isColumnExists("customer_master","business_unit_code_array");
+		if(!column_check)
+		{
+			try {
+				dbvoc.alter_Columns("customer_master","business_unit_code_array");
+			} catch (SQLiteException ex) {
+				Log.w("Alter Table", "customer_master " + "business_unit" + ": " + ex.getMessage());
 			}
 		}
 

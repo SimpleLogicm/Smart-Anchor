@@ -17,7 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 {
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
-		static final int DATABASE_VERSION = 9;
+		static final int DATABASE_VERSION = 10;
 		 public static final String KEY_ID = "_id";
 		 public static final String FNAME = "name";
 		 private static final String TABLE_REG = "users";
@@ -283,6 +283,33 @@ public class DataBaseHelper extends SQLiteOpenHelper
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT DISTINCT b_unit FROM " + TABLE_ITEM_MASTER;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Local_Data contact = new Local_Data();
+                contact.setBunit(cursor.getString(0));
+                //contact.setPwd(cursor.getString(2));
+                //contact.setImei(cursor.getString(3));
+
+                // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllB_Unit_BYBU(String bu) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT DISTINCT b_unit FROM " + TABLE_ITEM_MASTER +" WHERE b_unit IN (" +  bu + ")";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -2211,12 +2238,12 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getCustomerCode(String Customer_Name) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" +  Customer_Name + "'" ;
+        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" +  Customer_Name + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
        // Cursor cursor = db.rawQuery(selectQuery1, null);
 
-        Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS from customer_master WHERE CUSTOMER_SHOPNAME = ?",
+        Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array from customer_master WHERE CUSTOMER_SHOPNAME = ?",
                 new String[] {Customer_Name});
 
         // looping through all rows and adding to list
@@ -2234,6 +2261,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setlatitude(cursor.getString(8));
                 contact.setlongitude(cursor.getString(9));
                 contact.setCust_email(cursor.getString(10));
+                contact.setBusiness_unit_code_array(cursor.getString(11));
                 //contact.setPwd(cursor.getString(2));
                 //contact.setImei(cursor.getString(3));
 
@@ -7517,14 +7545,22 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
 //        Cursor cursor = db.rawQuery("select code,product_variant FROM item_master WHERE product_variant = ? GROUP BY product_variant",
 //                new String[]{product_variant});
+        Cursor cursor;
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " +"where b_unit IN (" +  Global_Data.Business_unit_code_array + ") AND product_variant "+ " like '%"+product_variant+"%'" + "LIMIT 100" , null);
+        }
+        else
+        {
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " +"where product_variant "+ " like '%"+product_variant+"%'" + "LIMIT 100" , null);
+        }
 
-        Cursor cursor = db.rawQuery("select code,product_variant FROM item_master " +"where product_variant "+ " like '%"+product_variant+"%'" + "LIMIT 100" , null);
 
         if (cursor.moveToFirst()) {
             do {
                 Spiner_List_Model contact = new Spiner_List_Model();
                 contact.setCode(cursor.getString(0));
                 contact.setProduct_variant(cursor.getString(1));
+                contact.setBusiness_unit(cursor.getString(2));
 
                 // Adding contact to list
                 contactList14.add(contact);

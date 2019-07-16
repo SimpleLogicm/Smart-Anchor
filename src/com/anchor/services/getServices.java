@@ -275,13 +275,13 @@ public class getServices {
                                     if(contactsr.size() <= 0)
                                     {
                                         loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
+                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","","");
                                     }
                                     else
                                     {
                                         dbvoc.deletesalesupdatebyID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
                                         loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
+                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","","");
                                     }
                                 }
 	                            
@@ -3278,7 +3278,7 @@ public class getServices {
                         Log.d("items", "items" + items.toString());
                         Log.d("customers", "customers" + customers.toString());
                         // TODO DONE for distributor problem
-                        Log.d("distributors", "distributors" + customers.toString());
+                        Log.d("distributors", "distributors" + distributor_beats.toString());
 
                         Log.d("reasons", "reasons" + reasons.toString());
 
@@ -3569,23 +3569,23 @@ public class getServices {
                         for (int i = 0; i < customers.length(); i++) {
 
                             JSONObject jsonObject = customers.getJSONObject(i);
-                            List<Local_Data> contactsr =  dbvoc.getCustomer_BYID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
-
-                            if(contactsr.size() <= 0)
-                            {
+//                            List<Local_Data> contactsr =  dbvoc.getCustomer_BYID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
+//
+//                            if(contactsr.size() <= 0)
+//                            {
 //                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
 //                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","",jsonObject.getString("latitude"),jsonObject.getString("longitude"));
 
-                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
-                            }
-                            else
-                            {
-                                dbvoc.deletesalesupdatebyID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
-                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
-
-                            }
+                            loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")));
+//                            }
+//                            else
+//                            {
+//                                dbvoc.deletesalesupdatebyID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
+//                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+//                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
+//
+//                            }
 
                         }
 

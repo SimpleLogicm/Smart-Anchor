@@ -88,6 +88,7 @@ public class Global_Data {
     public static String USER_LAST_NAME="";
     public static String CUSTOMER_NAME_NEW="";
     public static String CUSTOMER_ADDRESS_NEW="";
+    public static String Business_unit_code_array="";
     public static String customer_reportingTo="";
     public static String cus_MAnager_mobile="";
     public static String customer_Address="";
