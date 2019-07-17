@@ -177,10 +177,10 @@ android {
     defaultConfig {
         applicationId "com.anchor.activities"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         multiDexEnabled = true
-        versionCode 20
-        versionName "1.7.1"
+        versionCode 21
+        versionName "1.7.2"
         resConfigs "en"
     }
 
@@ -190,6 +190,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
     }

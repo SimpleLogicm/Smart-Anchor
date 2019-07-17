@@ -338,7 +338,7 @@ public class ProductAll_Varients extends Activity {
 
         dialog = new ProgressDialog(ProductAll_Varients.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Product Loading....");
-        dialog.setTitle("Metal App");
+        dialog.setTitle("Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,10 +34,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.AutoCompleteAdapter;
+import com.anchor.adapter.Spinner_List_Adapter;
 import com.anchor.animation.ActivitySwitcher;
-import com.anchor.model.Category;
-import com.anchor.model.Product;
-import com.anchor.model.Scheme;
+import com.anchor.model.Spiner_List_Model;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class Previous_orderNew_S1 extends BaseActivity {
     String CategoriesSpinner = "";
     String str_var1;
     String S_ID;
-    AutoCompleteTextView Product_Variant;
+    AutoCompleteTextView Product_Variant,Product_Variant_search;
     String categ_name,subcateg_name;
     String ProductSpinner = "";
     String price = "";
@@ -103,10 +105,11 @@ public class Previous_orderNew_S1 extends BaseActivity {
     SimpleCursorAdapter cursorAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
 
-    ArrayList<Category> dataCategories = new ArrayList<Category>();
-    ArrayList<Product> dataProducts = new ArrayList<Product>();
-    ArrayList<Scheme> dataScheme = new ArrayList<Scheme>();
-
+    AutoCompleteAdapter adapter;
+    Spinner_List_Adapter spinner_list_adapter;
+    List<Spiner_List_Model> snlist = new ArrayList<>();
+    Button list_ok;
+    RecyclerView spinner_recycleview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -120,6 +123,8 @@ public class Previous_orderNew_S1 extends BaseActivity {
         Global_Data.Search_BusinessCategory_name = "";
         Global_Data.Search_brand_name = "";
         Global_Data.Order_hashmap.clear();
+        Global_Data.spiner_list_modelList.clear();
+        Global_Data.array_of_pVarient.clear();
 
         // create a instance of SQLite Database
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -132,6 +137,18 @@ public class Previous_orderNew_S1 extends BaseActivity {
         spnProduct = (Spinner) findViewById(R.id.spnProduct);
         //spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
         Product_Variant = (AutoCompleteTextView) findViewById(R.id.Product_Variant);
+        Product_Variant_search = findViewById(R.id.Product_Variant_search);
+        list_ok = findViewById(R.id.list_ok);
+        spinner_recycleview = findViewById(R.id.spinner_recycleview);
+
+        spinner_recycleview.setLayoutManager(new LinearLayoutManager(Previous_orderNew_S1.this));
+
+        adapter = new AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        Product_Variant_search.setAdapter(adapter);
+
+        spinner_recycleview.setLayoutManager(new LinearLayoutManager(Previous_orderNew_S1.this));
+        spinner_list_adapter = new Spinner_List_Adapter(Previous_orderNew_S1.this, snlist);
+        spinner_recycleview.setAdapter(spinner_list_adapter);
         spnScheme = (Spinner) findViewById(R.id.spnScheme1);
         spnBu = (Spinner) findViewById(R.id.spnBu);
         spnBusinessDiv = (Spinner) findViewById(R.id.spnBusinessDiv);
@@ -465,6 +482,147 @@ public class Previous_orderNew_S1 extends BaseActivity {
             }
         });
 
+
+        Product_Variant_search.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (Product_Variant_search.getRight() - Product_Variant_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                        View view = Previous_orderNew_S1.this.getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                        if(!Product_Variant_search.getText().toString().equalsIgnoreCase(""))
+                        {
+                            Product_Variant_search.setText("");
+                            spinner_recycleview.setVisibility(View.GONE);
+                            list_ok.setVisibility(View.GONE);
+                            spnBusinessDiv.setVisibility(View.VISIBLE);
+                            spnCategory.setVisibility(View.VISIBLE);
+                            spnProduct.setVisibility(View.VISIBLE);
+                            spnBu.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            spinner_recycleview.setVisibility(View.VISIBLE);
+                            list_ok.setVisibility(View.VISIBLE);
+                            spnBusinessDiv.setVisibility(View.GONE);
+                            spnCategory.setVisibility(View.GONE);
+                            spnProduct.setVisibility(View.GONE);
+                            spnBu.setVisibility(View.GONE);
+                        }
+                        //autoCompleteTextView1.setText("");
+                        // Product_Variant.showDropDown();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+
+        Product_Variant_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos,
+                                    long id) {
+                //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
+
+                Global_Data.hideSoftKeyboard(Previous_orderNew_S1.this);
+
+                String customer_name = "";
+                String address_type = "";
+//                if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
+//                {
+//                    s = autoCompleteTextView1.getText().toString().trim().split(":");
+//                    customer_name = s[0].trim();
+//                    address_type = s[1].trim();
+//                }
+//                else
+//                {
+//                    customer_name = autoCompleteTextView1.getText().toString().trim();
+//                }
+
+
+            }
+        });
+
+        Product_Variant_search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(Product_Variant_search.getText().toString().trim().length() == 0)
+                {
+                    Product_Variant_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
+                    spinner_recycleview.setVisibility(View.GONE);
+                    list_ok.setVisibility(View.GONE);
+                    spnBusinessDiv.setVisibility(View.VISIBLE);
+                    spnCategory.setVisibility(View.VISIBLE);
+                    spnProduct.setVisibility(View.VISIBLE);
+                    spnBu.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    Product_Variant_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.close_product, 0);
+                }
+            }
+        });
+
+        list_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String data = "";
+                Global_Data.array_of_pVarient.clear();
+                for (int i = 0; i < Global_Data.spiner_list_modelList.size(); i++) {
+                    Spiner_List_Model singleStudent = Global_Data.spiner_list_modelList.get(i);
+                    if (singleStudent.isSelected() == true) {
+
+                        data = singleStudent.getCode().toString();
+                        Log.d("Values","Values"+data+" "+singleStudent.isSelected());
+                        Global_Data.array_of_pVarient.add(data);
+                    }
+                    Log.d("Values","Values"+data+" "+singleStudent.isSelected());
+
+                }
+
+                if(Global_Data.array_of_pVarient.size() > 0)
+                {
+                    Global_Data.Search_business_unit_name = "";
+                    Global_Data.Search_Category_name ="";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Intent i = new Intent(getApplicationContext(),Preorder_Proall_Varient.class);
+                    startActivity(i);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Please select product variant.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         editTextQuantity.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
@@ -735,6 +893,8 @@ public class Previous_orderNew_S1 extends BaseActivity {
                             Global_Data.Search_brand_name = parent.getItemAtPosition(pos).toString().trim();
 
                             Global_Data.Order_hashmap.clear();
+                            Global_Data.spiner_list_modelList.clear();
+                            Global_Data.array_of_pVarient.clear();
                             Intent intent = new Intent(getApplicationContext(), Preorder_Proall_Varient.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             //startActivityForResult(intent,SIGNATURE_ACTIVITY);
@@ -1407,6 +1567,8 @@ public class Previous_orderNew_S1 extends BaseActivity {
         Global_Data.Search_Category_name = "";
         Global_Data.Search_BusinessCategory_name = "";
         Global_Data.Search_brand_name = "";
+        Global_Data.spiner_list_modelList.clear();
+        Global_Data.array_of_pVarient.clear();
 
         Intent i=new Intent(Previous_orderNew_S1.this, Previous_orderNew_S2.class);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -1420,6 +1582,8 @@ public class Previous_orderNew_S1 extends BaseActivity {
     public void onResume() {
         // TODO Auto-generated method stubs
         super.onResume();
+        Global_Data.spiner_list_modelList.clear();
+        Global_Data.array_of_pVarient.clear();
         buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));
     }
