@@ -203,53 +203,53 @@ public class NewOrderActivity extends BaseActivity {
 
 		try
 		{
-			if(!Global_Data.Search_business_unit_name.equalsIgnoreCase("") &&  !Global_Data.GLObalOrder_id.equalsIgnoreCase(""))
-			{
-				String str_bunit = "";
-				result_bu.clear();
-				List<Local_Data> contact_bu = dbvoc.getB_Unit_byName(Global_Data.Search_business_unit_name);
-				result_bu.add("Select BU");
-				for (Local_Data cn : contact_bu) {
-					str_bunit = "" + cn.getBunit();
-					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
-						result_bu.add(str_bunit);
-					}
-				}
-
-				dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
-				dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
-				spnBu.setAdapter(dataAdapterBu);
-
-				if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit) && !result_bu.isEmpty())
-				{
-					spnBu.setSelection(result_bu.indexOf(str_bunit));
-				}
-
-				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit.trim())) {
-					result_bussiness.clear();
-					result_bussiness.add("Select Business Division");
-
-//					results_beat.clear();
-//					results_beat.add("Select Beat");
-					List<Local_Data> contacts2 = dbvoc.getBdivByBunit(str_bunit.trim());
-					for (Local_Data cn : contacts2) {
-
-						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
-							result_bussiness.add(cn.getprimary_category());
-						}
-
-					}
-
-					dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
-					dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-					spnBusinessDiv.setAdapter(dataAdapterBd);
-
-
-				}
-
-			}
-			else
-			{
+//			if(!Global_Data.Search_business_unit_name.equalsIgnoreCase("") &&  !Global_Data.GLObalOrder_id.equalsIgnoreCase(""))
+//			{
+//				String str_bunit = "";
+//				result_bu.clear();
+//				List<Local_Data> contact_bu = dbvoc.getB_Unit_byName(Global_Data.Search_business_unit_name);
+//				result_bu.add("Select BU");
+//				for (Local_Data cn : contact_bu) {
+//					str_bunit = "" + cn.getBunit();
+//					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+//						result_bu.add(str_bunit);
+//					}
+//				}
+//
+//				dataAdapterBu = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bu);
+//				dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+//				spnBu.setAdapter(dataAdapterBu);
+//
+//				if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit) && !result_bu.isEmpty())
+//				{
+//					spnBu.setSelection(result_bu.indexOf(str_bunit));
+//				}
+//
+//				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit.trim())) {
+//					result_bussiness.clear();
+//					result_bussiness.add("Select Business Division");
+//
+////					results_beat.clear();
+////					results_beat.add("Select Beat");
+//					List<Local_Data> contacts2 = dbvoc.getBdivByBunit(str_bunit.trim());
+//					for (Local_Data cn : contacts2) {
+//
+//						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
+//							result_bussiness.add(cn.getprimary_category());
+//						}
+//
+//					}
+//
+//					dataAdapterBd = new ArrayAdapter<String>(NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+//					dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+//					spnBusinessDiv.setAdapter(dataAdapterBd);
+//
+//
+//				}
+//
+//			}
+//			else
+//			{
 				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
 
 					result_bu.clear();
@@ -295,7 +295,7 @@ public class NewOrderActivity extends BaseActivity {
 					spnBusinessDiv.setAdapter(dataAdapterBd);
 				}
 
-			}
+			//}
 		}catch(Exception ex){ex.printStackTrace();}
 
 
