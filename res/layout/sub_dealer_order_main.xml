@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="250dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#111111"
+            android:textSize="18dp"
+            android:text="@string/Select_Customer" >
+
+        </TextView>
+
+        <Spinner
+            android:id="@+id/s_state"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/Select_City"
+            android:inputType="textPassword"
+            android:paddingTop="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <Spinner
+            android:id="@+id/s_district"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/Select_Beats"
+            android:inputType="textPassword"
+            android:paddingTop="20dp"
+            android:layout_marginTop="10dp" />
+
+        <Spinner
+            android:id="@+id/s_city"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:hint="@string/select_retailer"
+            android:inputType="textPassword"
+            android:paddingTop="30dp"
+            android:layout_marginTop="10dp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/s_sub_dealer_search"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:scrollbars="none"
+            android:hint="@string/Search_Subdealer"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:drawableRight="@drawable/search_icon"
+            android:singleLine="true"
+            android:textSize="15dp" >
+            <requestFocus />
+        </AutoCompleteTextView>
+
+        <AutoCompleteTextView
+            android:id="@+id/s_dealer_search"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:scrollbars="none"
+            android:hint="@string/Search_Dealer"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:drawableRight="@drawable/search_icon"
+            android:singleLine="true"
+            android:textSize="15dp" >
+            <requestFocus />
+        </AutoCompleteTextView>
+
+
+        <Button
+            android:id="@+id/s_submit"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/Submit"
+            android:background="#414042"
+            android:textColor="#FFFFFF"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -421,6 +421,19 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Sub_Dealer_Order_Main"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Sub_Dealer_ProductList"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Survey_Home"
             android:label="@string/app_name"
@@ -685,9 +698,6 @@
         <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
 
             android:resource="@drawable/ic_notification" />
-
-
-
 
     </application>
 

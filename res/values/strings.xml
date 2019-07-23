@@ -8,7 +8,7 @@
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 
     <!-- SIMPLE LOGIC UAT URL -->
-    <!--<string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
+    <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>
 
     <!--<string name="service_domain">http://192.168.101.192/metal/api/v1/</string>-->
 
@@ -22,7 +22,7 @@
     <!--<string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
-    <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>
+    <!--<string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
 
 
 
@@ -289,6 +289,8 @@ INDIA.</string>
 
     <string name="Select_Customer">Select Customer</string>
     <string name="Search_Customer">Search Customer</string>
+    <string name="Search_Subdealer">Search Subdealer</string>
+    <string name="Search_Dealer">Search Dealer</string>
     <string name="STARTs">START</string>
 
     <string name="Customer_Not_Found">Customer Not Found</string>
@@ -352,6 +354,7 @@ INDIA.</string>
 
     <string name="ORDER">ORDER</string>
     <string name="CUSTOMER_SERVICE">CUSTOMER SERVICE</string>
+    <string name="SUB_DEALER_ORDER">SUB DEALER ORDER</string>
     <string name="QUOTES">QUOTES</string>
     <string name="QUOTE_STATUS">QUOTE STATUS</string>
     <string name="SCHEDULE">SCHEDULE</string>
