@@ -99,78 +99,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/target_layout"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/order_layout"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal" >
 
-        <RelativeLayout
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_weight="1.20" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="@string/TARGET"
-                android:textColor="#111111"
-                android:textSize="16dp" />
-
-            <ImageView
-                android:id="@+id/target"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/target" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_weight="1.20" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="@string/EXPENSES"
-                android:textColor="#111111"
-                android:textSize="16dp" />
-
-            <ImageView
-                android:id="@+id/expenses"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:src="@drawable/expenses" />
-        </RelativeLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/price_layout"
@@ -178,7 +107,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="30dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/target_layout"
+        android:layout_below="@id/order_layout"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal" >
@@ -317,6 +246,81 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/sync" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/target_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/marketing_layout"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1.20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/TARGET"
+                android:textColor="#111111"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/target"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/target" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1.20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/EXPENSES"
+                android:textColor="#111111"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/expenses"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:visibility="gone"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/expenses" />
         </RelativeLayout>
     </LinearLayout>
 

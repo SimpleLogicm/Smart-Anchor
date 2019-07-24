@@ -11,22 +11,95 @@ public class Spiner_List_Model implements Serializable {
     String business_unit;
     String business_category;
     String code;
+    String MRP;
+    String RP;
+    String SQ;
+    String MQ;
+    String STOCK;
+    String QUANTITY;
+    String Name;
 
 
 
-    public Spiner_List_Model(String primary_category, String sub_category, String product_variant, String business_unit, String business_category,String code) {
+    public Spiner_List_Model(String primary_category, String sub_category, String product_variant, String business_unit, String business_category,String code,String MRP,String RP,String SQ,String MQ,String STOCK,String QUANTITY,String Name) {
         this.primary_category = primary_category;
         this.sub_category = sub_category;
         this.product_variant = product_variant;
         this.business_unit = business_unit;
         this.business_category = business_category;
         this.code = code;
+        this.MRP = MRP;
+        this.RP = RP;
+        this.SQ = SQ;
+        this.MQ = MQ;
+        this.STOCK = STOCK;
+        this.QUANTITY = QUANTITY;
+        this.Name = Name;
+
 
     }
 
     public Spiner_List_Model() {
 
     }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getMRP() {
+        return MRP;
+    }
+
+    public void setMRP(String MRP) {
+        this.MRP = MRP;
+    }
+
+    public String getRP() {
+        return RP;
+    }
+
+    public void setRP(String RP) {
+        this.RP = RP;
+    }
+
+    public String getSQ() {
+        return SQ;
+    }
+
+    public void setSQ(String SQ) {
+        this.SQ = SQ;
+    }
+
+    public String getMQ() {
+        return MQ;
+    }
+
+    public void setMQ(String MQ) {
+        this.MQ = MQ;
+    }
+
+    public String getSTOCK() {
+        return STOCK;
+    }
+
+    public void setSTOCK(String STOCK) {
+        this.STOCK = STOCK;
+    }
+
+    public String getQUANTITY() {
+        return QUANTITY;
+    }
+
+    public void setQUANTITY(String QUANTITY) {
+        this.QUANTITY = QUANTITY;
+    }
+
+
 
     public String getCode() {
         return code;

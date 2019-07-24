@@ -16,6 +16,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,12 +32,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anchor.model.Product;
+import com.anchor.adapter.SP_AutoCompleteAdapter;
+import com.anchor.adapter.Spinner_List_Adapter;
+import com.anchor.model.Spiner_List_Model;
 import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -68,7 +71,7 @@ public class Sub_Dealer_ProductList extends Activity {
     ArrayList<String> list2 = new ArrayList<String>();
     Boolean isInternetPresent = false;
 
-    private   ArrayList<String> p_id = new ArrayList<String>();
+    private ArrayList<String> p_id = new ArrayList<String>();
     private ArrayList<String> p_name = new ArrayList<String>();
     private ArrayList<String> p_mrp = new ArrayList<String>();
     private ArrayList<String> p_rp = new ArrayList<String>();
@@ -79,15 +82,11 @@ public class Sub_Dealer_ProductList extends Activity {
 
     ConnectionDetector cd;
     ArrayList<HashMap<String, String>> SwipeList;
-    ArrayList<String> Amount_tp = new ArrayList<String>();
     DataBaseHelper dbvoc = new DataBaseHelper(this);
-    private static final int REQUEST_CODE_SETTINGS = 0;
-    private ArrayList<String> Distributer_list = new ArrayList<String>();
     private Product_AllVarient_Adapter adapter;
-    private ArrayList<Product> dataOrder;
     LoginDataBaseAdapter loginDataBaseAdapter;
     private ListView swipeListView;
-    TextView textView1, tabletextview1, tabletextview2, tabletextview3;
+
     public static TextView txttotalPreview;
     static final String TAG_ITEMNAME = "product_name";
     static final String TAG_QTY = "total_qty";
@@ -98,17 +97,14 @@ public class Sub_Dealer_ProductList extends Activity {
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
     static final String TAG_STOCK = "PRODUCT_STOCK";
-
-    ImageView imgView;
-    static float totalPrice;
-    String statusOrderActivity = "";
-    Button  buttonPreviewAddMOre;
+    Button buttonPreviewAddMOre;
     public static final int SIGNATURE_ACTIVITY = 1;
     AutoCompleteTextView Product_Variant;
-
-
-
-    boolean firstLaunch = false;
+    SP_AutoCompleteAdapter search_adapter;
+    RecyclerView spinner_recycleview;
+    Spinner_List_Adapter spinner_list_adapter;
+    List<Spiner_List_Model> snlist = new ArrayList<>();
+    Button list_ok;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,16 +118,24 @@ public class Sub_Dealer_ProductList extends Activity {
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
-        txttotalPreview = (TextView) findViewById(R.id.txttotalPreviewv);
+        txttotalPreview = findViewById(R.id.txttotalPreviewv);
 
-        buttonPreviewAddMOre = (Button) findViewById(R.id.buttonPreviewAddMOrev);
-        swipeListView = (ListView) findViewById(R.id.example_lv_list);
+        buttonPreviewAddMOre = findViewById(R.id.buttonPreviewAddMOrev);
+        list_ok = findViewById(R.id.list_ok);
+        swipeListView = findViewById(R.id.example_lv_list);
         swipeListView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
-        Product_Variant = (AutoCompleteTextView) findViewById(R.id.newProduct_varient);
+        Product_Variant = findViewById(R.id.newProduct_varient);
+
+
+        search_adapter = new SP_AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        Product_Variant.setAdapter(search_adapter);
+        spinner_recycleview = findViewById(R.id.spinner_recycleview);
+
+        spinner_recycleview.setLayoutManager(new LinearLayoutManager(Sub_Dealer_ProductList.this));
+        spinner_list_adapter = new Spinner_List_Adapter(Sub_Dealer_ProductList.this, snlist);
+        spinner_recycleview.setAdapter(spinner_list_adapter);
+
         map = new HashMap<String, String>();
-
-        //txttotalPreview.setText("Total		:		"+"");
-
         SwipeList = new ArrayList<HashMap<String, String>>();
 
 
@@ -139,8 +143,7 @@ public class Sub_Dealer_ProductList extends Activity {
         SharedPreferences.Editor editor = spf.edit();
         editor.putString("order", "new");
         editor.commit();
-        try
-        {
+        try {
             ActionBar mActionBar = getActionBar();
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             // mActionBar.setDisplayShowHomeEnabled(false);
@@ -181,10 +184,13 @@ public class Sub_Dealer_ProductList extends Activity {
             mActionBar.setDisplayShowCustomEnabled(true);
             mActionBar.setHomeButtonEnabled(true);
             mActionBar.setDisplayHomeAsUpEnabled(true);
-        }catch(Exception ex){ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
 
         Product_Variant.setOnTouchListener(new View.OnTouchListener() {
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 final int DRAWABLE_LEFT = 0;
@@ -192,16 +198,30 @@ public class Sub_Dealer_ProductList extends Activity {
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (Product_Variant.getRight() - Product_Variant.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (Product_Variant.getRight() - Product_Variant.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                         View view = Sub_Dealer_ProductList.this.getCurrentFocus();
                         if (view != null) {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
+                        if (!Product_Variant.getText().toString().equalsIgnoreCase("")) {
+                            Product_Variant.setText("");
+                            spinner_recycleview.setVisibility(View.GONE);
+                            list_ok.setVisibility(View.GONE);
+                            swipeListView.setVisibility(View.VISIBLE);
+                            buttonPreviewAddMOre.setVisibility(View.VISIBLE);
+                            txttotalPreview.setVisibility(View.VISIBLE);
+                        } else {
+                            spinner_recycleview.setVisibility(View.VISIBLE);
+                            list_ok.setVisibility(View.VISIBLE);
+                            swipeListView.setVisibility(View.GONE);
+                            buttonPreviewAddMOre.setVisibility(View.GONE);
+                            txttotalPreview.setVisibility(View.GONE);
+                        }
                         //autoCompleteTextView1.setText("");
-                        Product_Variant.showDropDown();
+                        // Product_Variant.showDropDown();
                         return true;
                     }
                 }
@@ -210,6 +230,7 @@ public class Sub_Dealer_ProductList extends Activity {
         });
 
         Product_Variant.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos,
                                     long id) {
@@ -217,98 +238,18 @@ public class Sub_Dealer_ProductList extends Activity {
 
                 Global_Data.hideSoftKeyboard(Sub_Dealer_ProductList.this);
 
-                q_check = "";
-                Global_Data.Order_hashmap.clear();
-                p_id.clear();
-                p_q.clear();
-                p_price.clear();
-                p_name.clear();
-                p_mrp.clear();
-                p_rp.clear();
-
-                try
-                {
-
-                    List<Local_Data> cont1 = dbvoc.getSearchProduct_with_name(Product_Variant.getText().toString());
-//
-//                        cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
-
-
-
-                    if (cont1.size() <= 0) {
-                        // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-                        Sub_Dealer_ProductList.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-
-                                Intent i = new Intent(Sub_Dealer_ProductList.this, NewOrderActivity.class);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(i);
-                                finish();
-                            }
-                        });
-
-                    } else {
-                        SwipeList.clear();
-                        list1.clear();
-                        list2.clear();
-                        pp=0;
-                        for (Local_Data cnt1 : cont1) {
-                            HashMap<String, String> mapp = new HashMap<String, String>();
-                            mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
-                            mapp.put(TAG_QTY, "");
-                            mapp.put(TAG_PRICE, cnt1.getMRP());
-                            mapp.put(TAG_RP, cnt1.getStateName());
-                            mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
-                            mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
-                            mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-                            mapp.put(TAG_STOCK, "");
-                            //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
-
-
-                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
-
-                            if (contactsn.size() > 0) {
-                                for (Local_Data cn : contactsn) {
-
-                                    list1.add(cn.get_delivery_product_order_quantity());
-                                    list2.add("PRICE : " + cn.getAmount());
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
-                                        pp += Double.valueOf(cn.getAmount());
-                                    }
-                                }
-                            } else {
-                                list1.add("");
-                                list2.add("");
-                            }
-
-                            SwipeList.add(mapp);
-                        }
-
-                        Sub_Dealer_ProductList.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                swipeListView.setItemsCanFocus(true);
-
-                                adapter = new Product_AllVarient_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
-
-                                swipeListView.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                                txttotalPreview.setText("Total : " + pp);
-
-                            }
-                        });
-
-
-
-                    }
-                }catch (Exception ex){ex.printStackTrace();}
-
-
+                String customer_name = "";
+                String address_type = "";
+//                if(autoCompleteTextView1.getText().toString().trim().indexOf(":") > 0)
+//                {
+//                    s = autoCompleteTextView1.getText().toString().trim().split(":");
+//                    customer_name = s[0].trim();
+//                    address_type = s[1].trim();
+//                }
+//                else
+//                {
+//                    customer_name = autoCompleteTextView1.getText().toString().trim();
+//                }
 
 
             }
@@ -316,19 +257,88 @@ public class Sub_Dealer_ProductList extends Activity {
 
         Product_Variant.addTextChangedListener(new TextWatcher() {
 
-            public void afterTextChanged(Editable s) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(Product_Variant.getText().toString().trim().length() == 0) {
-                    new VarientASN().execute();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (Product_Variant.getText().toString().trim().length() == 0) {
+                    Product_Variant.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
+                    spinner_recycleview.setVisibility(View.GONE);
+                    list_ok.setVisibility(View.GONE);
+                    swipeListView.setVisibility(View.VISIBLE);
+                    buttonPreviewAddMOre.setVisibility(View.VISIBLE);
+                    txttotalPreview.setVisibility(View.VISIBLE);
+                } else {
+                    Product_Variant.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.close_product, 0);
+                }
+            }
+        });
+
+        list_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String data = "";
+                Global_Data.array_of_pVarient.clear();
+                resultsvarient.clear();
+                SwipeList.clear();
+                list1.clear();
+                list2.clear();
+                pp = 0;
+                for (int i = 0; i < Global_Data.spiner_list_modelList.size(); i++) {
+                    Spiner_List_Model singleStudent = Global_Data.spiner_list_modelList.get(i);
+                    if (singleStudent.isSelected() == true) {
+
+                        data = singleStudent.getCode().toString();
+                        Log.d("Values", "Values" + data + " " + singleStudent.isSelected());
+                        Global_Data.array_of_pVarient.add(data);
+
+                        HashMap<String, String> mapp = new HashMap<String, String>();
+                        mapp.put(TAG_ITEMNAME, singleStudent.getName());
+                        mapp.put(TAG_QTY, "");
+                        mapp.put(TAG_PRICE, singleStudent.getMRP());
+                        mapp.put(TAG_RP, singleStudent.getRP());
+                        mapp.put(TAG_ITEM_NUMBER, singleStudent.getCode());
+                        mapp.put(TAG_ITEM_SQ, singleStudent.getSQ());
+                        mapp.put(TAG_ITEM_MQ, singleStudent.getMQ());
+                        mapp.put(TAG_STOCK, "");
+
+                        list1.add("");
+                        list2.add("");
+
+                        SwipeList.add(mapp);
+                    }
+                    Log.d("Values", "Values" + data + " " + singleStudent.isSelected());
 
                 }
+
+                Product_Variant.setText("");
+                if (Global_Data.array_of_pVarient.size() > 0) {
+                    adapter = new Product_AllVarient_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+
+                    swipeListView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+
+                    spinner_recycleview.setVisibility(View.GONE);
+                    list_ok.setVisibility(View.GONE);
+                    swipeListView.setVisibility(View.VISIBLE);
+                    buttonPreviewAddMOre.setVisibility(View.VISIBLE);
+                    txttotalPreview.setVisibility(View.VISIBLE);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please select product variant.", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -374,17 +384,12 @@ public class Sub_Dealer_ProductList extends Activity {
                 } else {
 
 
-
                     requestGPSPermissionsigna();
                 }
 
 
             }
         });
-
-
-
-
 
 
     }
@@ -397,18 +402,15 @@ public class Sub_Dealer_ProductList extends Activity {
 
             try {
 
-                if(Global_Data.array_of_pVarient.size() >0)
-                {
+                if (Global_Data.array_of_pVarient.size() > 0) {
                     StringBuilder ss = new StringBuilder();
                     String[] mStringArray = new String[Global_Data.array_of_pVarient.size()];
                     mStringArray = Global_Data.array_of_pVarient.toArray(mStringArray);
-                    for(int i=0; i<Global_Data.array_of_pVarient.size(); i++)
-                    {
+                    for (int i = 0; i < Global_Data.array_of_pVarient.size(); i++) {
 
 
-                        ss.append('"' +Global_Data.array_of_pVarient.get(i)+ '"');
-                        if((Global_Data.array_of_pVarient.size()-1) != i)
-                        {
+                        ss.append('"' + Global_Data.array_of_pVarient.get(i) + '"');
+                        if ((Global_Data.array_of_pVarient.size() - 1) != i) {
                             ss.append(",");
                         }
 
@@ -439,7 +441,7 @@ public class Sub_Dealer_ProductList extends Activity {
                         SwipeList.clear();
                         list1.clear();
                         list2.clear();
-                        pp=0;
+                        pp = 0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
                             mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
@@ -482,7 +484,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
                                 swipeListView.setAdapter(adapter);
 
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
                                 Product_Variant.setThreshold(1);// will start working from
                                 // first character
                                 Product_Variant.setAdapter(adapter);// setting the adapter
@@ -494,7 +496,6 @@ public class Sub_Dealer_ProductList extends Activity {
 
                             }
                         });
-
 
 
                     }
@@ -546,10 +547,9 @@ public class Sub_Dealer_ProductList extends Activity {
                     public void run() {
                         View parentView = null;
 
-                        if(!(Global_Data.Order_hashmap.isEmpty())) {
+                        if (!(Global_Data.Order_hashmap.isEmpty())) {
 
-                            try
-                            {
+                            try {
                                 for (Object name : Global_Data.Order_hashmap.keySet()) {
 
                                     Object key = name.toString();
@@ -578,11 +578,11 @@ public class Sub_Dealer_ProductList extends Activity {
                                         }
 
 
-
-
                                     }
                                 }
-                            }catch(Exception ex){ex.printStackTrace();}
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
 
                         }
 
@@ -614,8 +614,8 @@ public class Sub_Dealer_ProductList extends Activity {
                         Global_Data.GLObalOrder_id = PINString;
                         Global_Data.GLOvel_GORDER_ID = PINString;
                     } else {
-                        Global_Data.GLObalOrder_id =  PINString;
-                        Global_Data.GLOvel_GORDER_ID =  PINString;
+                        Global_Data.GLObalOrder_id = PINString;
+                        Global_Data.GLOvel_GORDER_ID = PINString;
                     }
 
                     try {
@@ -636,10 +636,10 @@ public class Sub_Dealer_ProductList extends Activity {
                         ex.printStackTrace();
                     }
 
-                    List<Local_Data> checkq = dbvoc.checkOrderExist(Global_Data.GLOvel_CUSTOMER_ID,Global_Data.GLObalOrder_id);
+                    List<Local_Data> checkq = dbvoc.checkOrderExist(Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLObalOrder_id);
 
                     if (checkq.size() <= 0) {
-                        loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.Glovel_BEAT_ID, "", "", "", "", "", "", "","","");
+                        loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.Glovel_BEAT_ID, "", "", "", "", "", "", "", "", "");
                     }
 
                 }
@@ -690,7 +690,6 @@ public class Sub_Dealer_ProductList extends Activity {
                         }
 
 
-
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -731,16 +730,14 @@ public class Sub_Dealer_ProductList extends Activity {
 
                 } else {
                     pp = 0.0;
-                    for(Local_Data qtr : checkq)
-                    {
+                    for (Local_Data qtr : checkq) {
                         pp += Double.valueOf(qtr.getAmount());
                     }
                     txttotalPreview.setText("Total : " + pp);
                     q_check = "";
                     Global_Data.Order_hashmap.clear();
 
-                    if(!Product_Variant.getText().toString().equalsIgnoreCase(""))
-                    {
+                    if (!Product_Variant.getText().toString().equalsIgnoreCase("")) {
                         Product_Variant.setText("");
                     }
 
@@ -754,7 +751,6 @@ public class Sub_Dealer_ProductList extends Activity {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-
 
 
             } else {
@@ -870,7 +866,7 @@ public class Sub_Dealer_ProductList extends Activity {
                     p_rp.clear();
                     Global_Data.Order_hashmap.clear();
 
-                    Intent i = new Intent(Sub_Dealer_ProductList.this, NewOrderActivity.class);
+                    Intent i = new Intent(Sub_Dealer_ProductList.this, Sub_Dealer_Order_Main.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
@@ -906,7 +902,7 @@ public class Sub_Dealer_ProductList extends Activity {
             p_rp.clear();
             Global_Data.Order_hashmap.clear();
 
-            Intent i = new Intent(Sub_Dealer_ProductList.this, NewOrderActivity.class);
+            Intent i = new Intent(Sub_Dealer_ProductList.this, Sub_Dealer_Order_Main.class);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
@@ -935,12 +931,10 @@ public class Sub_Dealer_ProductList extends Activity {
                             q_check = "";
 
                             gps = new GPSTracker(Sub_Dealer_ProductList.this);
-                            if(!gps.canGetLocation()){
+                            if (!gps.canGetLocation()) {
 
                                 gps.showSettingsAlertnew();
-                            }
-                            else
-                            {
+                            } else {
                                 new Varientsave().execute();
                             }
                         }

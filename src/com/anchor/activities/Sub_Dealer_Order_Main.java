@@ -361,6 +361,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             } else {
 
                 String items = s_state.getSelectedItem().toString().trim();
+                state_name = items;
                 //String C_ID = "";
                 Log.i("Selected item : ", items);
 
@@ -422,7 +423,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 Log.i("Selected item : ", items);
 
                 city_name = "";
-                district_name = "";
+                district_name =items;
                 results_city.clear();
                 results_city.add("Select City");
 
@@ -475,6 +476,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             } else {
 
                 String items = s_city.getSelectedItem().toString();
+                city_name = items;
                 //String C_ID = "";
                 Log.i("Selected item : ", items);
 
@@ -505,7 +507,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             ex.printStackTrace();
         }
         String domain = getResources().getString(R.string.service_domain);
-        String service_domain = domain + "menus/get_states_for_sub_dealer_sync?email=" + user_email;
+        String service_domain = domain + "menus/get_states_for_sub_dealer_synce?email=" + user_email;
 
 
         Log.i("user list url", "order list url " + service_domain);
@@ -643,7 +645,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         statemap.clear();
                         results1.clear();
                         results1.add("Select State");
-                        dbvoc.getDeleteTable("beat_states");
                         for (int i = 0; i < STATE_JSON.length(); i++) {
 
                             JSONObject jsonObject = null;
@@ -1037,7 +1038,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     public void City_OnlineData(String dis_code) {
 
         String domain = getResources().getString(R.string.service_domain);
-        String service_domain = domain + "sub_dealers/sync_cities?sub_code=" + dis_code;
+        String service_domain = domain + "sub_dealers/sync_cities?district_code=" + dis_code;
 
 
         Log.i("user list url", "order list url " + service_domain);

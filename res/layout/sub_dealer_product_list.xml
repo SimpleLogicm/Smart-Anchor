@@ -25,6 +25,16 @@
         <requestFocus />
     </AutoCompleteTextView>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/spinner_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/newProduct_varient"
+        android:layout_above="@+id/list_ok"
+        android:scrollbars="vertical" />
+
     <ListView
         android:id="@+id/example_lv_list"
         android:listSelector="#00000000"
@@ -35,6 +45,20 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
         android:layout_above="@+id/exampllist" />
+
+    <Button
+        android:id="@+id/list_ok"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        android:text="@string/ok"
+        android:layout_gravity="center"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        />
 
     <LinearLayout
         android:id="@+id/exampllist"
