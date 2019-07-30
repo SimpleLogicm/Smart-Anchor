@@ -165,7 +165,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onClick(View v) {
 
-                Intent s_dub = new Intent(getApplicationContext(),Sub_Dealer_ProductList.class);
+                Intent s_dub = new Intent(getApplicationContext(),SubDealer_NewOrderActivity.class);
                 startActivity(s_dub);
                 finish();
 

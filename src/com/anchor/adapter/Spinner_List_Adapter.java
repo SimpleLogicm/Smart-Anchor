@@ -45,7 +45,7 @@ public class Spinner_List_Adapter extends
 
         final int pos = position;
 
-        viewHolder.tvName.setText(stList.get(position).getName());
+        viewHolder.tvName.setText(stList.get(position).getProduct_variant());
 
 
         viewHolder.chkSelected.setChecked(stList.get(position).isSelected());
