@@ -402,7 +402,7 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -427,7 +427,7 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });

@@ -350,14 +350,16 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address);
                                         //break;
                                     } else {
-                                        in_out_flag = "OUT";
-                                        loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address, "false", date_only_s);
-                                        Toast.makeText(BasicMapDemoActivity.this, "Out successfully.", Toast.LENGTH_SHORT).show();
+//                                        in_out_flag = "OUT";
+//                                        loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address, "false", date_only_s);
+//                                        Toast.makeText(BasicMapDemoActivity.this, "Out successfully.", Toast.LENGTH_SHORT).show();
+//
+//                                        dbvoc.getDeleteTable("attendence_f");
+//                                        loginDataBaseAdapter.insertattendence_flag("false",date_only_s);
+//
+//                                        showDialogn(daten, str.toString());
 
-                                        dbvoc.getDeleteTable("attendence_f");
-                                        loginDataBaseAdapter.insertattendence_flag("false",date_only_s);
-
-                                        showDialogn(daten, str.toString());
+                                        Toast.makeText(BasicMapDemoActivity.this, " Internet not available.", Toast.LENGTH_SHORT).show();
                                         // break;
                                     }
                                 } else {

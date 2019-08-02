@@ -173,7 +173,6 @@ android {
     }
 
 
-
     defaultConfig {
         applicationId "com.anchor.activities"
         minSdkVersion 16

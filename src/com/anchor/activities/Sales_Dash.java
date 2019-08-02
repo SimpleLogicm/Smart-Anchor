@@ -22,7 +22,7 @@ import com.anchor.webservice.ConnectionDetector;
 //how to give voice for icon when swipe in android
 public class Sales_Dash extends Activity implements OnItemSelectedListener{ 
 	//Button retail_sales, institute_sales;
-	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn,sub_delaer_order;
+	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn,sub_delaer_order,pro_activity_click;
 	ConnectionDetector cd;
 	Boolean isInternetPresent = false;
 	TextView schedule_txt,textView1sf;
@@ -37,7 +37,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		retail_sales = (ImageView) findViewById(R.id.retail_sales);
 		institute_sales = (ImageView) findViewById(R.id.institute_sales);
 		customer_services = (ImageView) findViewById(R.id.customer_services);
-		quote_status = (ImageView) findViewById(R.id.quote_status);
+		//quote_status = (ImageView) findViewById(R.id.quote_status);
 		schedule_listn = (ImageView) findViewById(R.id.schedule_listn);
 		C_profile = (ImageView) findViewById(R.id.C_profile);
 		schedule_txt = (TextView) findViewById(R.id.schedule_txt);
@@ -46,6 +46,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		schemeBtn = (ImageView) findViewById(R.id.scheme_btn);
 		otherInfoBtn = (ImageView) findViewById(R.id.otherinfo_btn);
 		sub_delaer_order = (ImageView) findViewById(R.id.sub_delaer_order);
+		pro_activity_click = (ImageView) findViewById(R.id.pro_activity_click);
 
 		txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
 		cd = new ConnectionDetector(getApplicationContext());
@@ -93,6 +94,16 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			}
 		});
 
+		pro_activity_click.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(getApplicationContext(), Promotion_Activity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			}
+		});
+
 		C_profile.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -124,28 +135,28 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		}
 	});
 
-		quote_status.setOnClickListener(new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-
-			isInternetPresent = cd.isConnectingToInternet();
-			if (isInternetPresent)
-			{
-				Intent a = new Intent(Sales_Dash.this,Order.class);
-				startActivity(a);
-				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-				//finish();
-			}
-			else
-			{
-				//Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-
-				Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
-				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
-			}
-		}
-	});
+//		quote_status.setOnClickListener(new OnClickListener() {
+//		@Override
+//		public void onClick(View v) {
+//
+//			isInternetPresent = cd.isConnectingToInternet();
+//			if (isInternetPresent)
+//			{
+//				Intent a = new Intent(Sales_Dash.this,Order.class);
+//				startActivity(a);
+//				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//				//finish();
+//			}
+//			else
+//			{
+//				//Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+//
+//				Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+//				toast.setGravity(Gravity.CENTER, 0, 0);
+//				toast.show();
+//			}
+//		}
+//	});
 
 		schedule_listn.setOnClickListener(new OnClickListener() {
 		@Override

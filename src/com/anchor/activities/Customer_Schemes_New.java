@@ -414,7 +414,7 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -438,7 +438,7 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -1694,7 +1694,7 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
 
                             dialog = new ProgressDialog(Customer_Schemes_New.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Dealer");
+                            dialog.setTitle("Anchor");
                             dialog.setCancelable(false);
                             dialog.show();
 

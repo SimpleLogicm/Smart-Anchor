@@ -1,7 +1,6 @@
 package com.anchor.activities;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -27,14 +25,12 @@ import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -343,7 +339,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
         if (cd.isConnectingToInternet()) {
             dialog = new ProgressDialog(NewMarketingToolActivity.this);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Dealer App");
+            dialog.setTitle("Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -541,7 +537,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
                         if (cd.isConnectingToInternet()) {
                             dialog = new ProgressDialog(NewMarketingToolActivity.this);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Dealer App");
+                            dialog.setTitle("Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -597,7 +593,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
                         if (cd.isConnectingToInternet()) {
                             dialog = new ProgressDialog(NewMarketingToolActivity.this);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Dealer App");
+                            dialog.setTitle("Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -2254,7 +2250,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
     public void getproducts() {
 
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Dealer");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -2494,7 +2490,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
                             if (cd.isConnectingToInternet()) {
                                 dialog = new ProgressDialog(NewMarketingToolActivity.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                                 dialog.setMessage("Sync in Progress, Please Wait");
-                                dialog.setTitle("Dealer");
+                                dialog.setTitle("Anchor");
                                 dialog.setCancelable(false);
                                 dialog.show();
 

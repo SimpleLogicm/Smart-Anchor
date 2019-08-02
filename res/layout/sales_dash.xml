@@ -365,7 +365,6 @@
         android:layout_height="100dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
-        android:visibility="gone"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/lout_fifth"
         android:layout_marginTop="30dp"
@@ -387,12 +386,44 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
+                android:text="@string/Promotional_Activity"
+                android:textColor="#111111"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:id="@+id/pro_activity_click"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/quotesstatus" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:visibility="invisible"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1.20" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
                 android:text="@string/QUOTE_STATUS"
                 android:textColor="#111111"
                 android:textSize="16dp" />
 
             <ImageView
-                android:id="@+id/quote_status"
+                android:id="@+id/test"
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_alignParentLeft="true"

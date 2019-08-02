@@ -4,7 +4,6 @@
     <!--<string name="service_domain">http://fa9c1bfb.ngrok.io/metal/api/v1/</string>-->
 
 
-
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
 
     <!-- SIMPLE LOGIC UAT URL -->
@@ -23,7 +22,6 @@
 
     <!-- Anchor UAT NEW URL -->
     <!--<string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
-
 
 
     <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
@@ -88,23 +86,8 @@
     <string name="title_activity_sub_dealer__detail1">SubDealer_Detail1</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <string name="advertisement">Advertisement</string>
     <string name="new_launch">New Launch</string>
-
-
-
 
 
     <string name="Select_Language">Select Language</string>
@@ -260,11 +243,13 @@ INDIA.</string>
     <string name="Mode_of_Travel">Mode of Travel</string>
     <string name="Description">Description</string>
     <string name="Submit">Submit</string>
+    <string name="Reset">Reset</string>
 
     <string name="Select_Type">Select Type</string>
     <string name="Travel">Travel</string>
     <string name="Miscellaneous">Miscellaneous</string>
     <string name="Select">Select</string>
+    <string name="List_Of_Event">List of Event</string>
 
     <string name="Select_Date">Please Select Date</string>
     <string name="Future_date_validation">Selected date can not to be a future date.</string>
@@ -360,6 +345,7 @@ INDIA.</string>
     <string name="SCHEDULE">SCHEDULE</string>
     <string name="CUSTOMER_PROFILE">CUSTOMER PROFILE</string>
     <string name="Order_Type">Order Type</string>
+    <string name="Promotional_Activity">Promotional Activity</string>
 
     <string name="CName">Name : </string>
     <string name="CAddress">Address :</string>

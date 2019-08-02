@@ -410,7 +410,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -434,7 +434,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });

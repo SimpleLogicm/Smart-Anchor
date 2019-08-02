@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:checked="false"
+            android:gravity="center"
+            android:switchMinWidth="100dp"
+            android:text=""
+            android:textOff="OUT"
+            android:textOn="IN" />
+
+        <Spinner
+            android:id="@+id/List_Of_Event"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:hint="@string/List_Of_Event"
+            android:inputType="textPassword"
+            android:paddingTop="20dp" />
+
+        <View
+            android:id="@+id/border"
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="#e2e2e2" />
+
+        <EditText
+            android:id="@+id/EditText02"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:lines="5"
+
+            android:layout_gravity="center"
+            android:gravity="start|left"
+            android:hint="Summary"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/ss_Resxcvxcet"
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:background="#414042"
+                android:text="@string/Reset"
+                android:textColor="#FFFFFF" />
+
+            <View
+                android:id="@+id/borderfd"
+                android:layout_width="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:background="#cecece" />
+
+            <ImageView
+                android:id="@+id/outlet_signboard_pick"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/vector_camera_icon" />
+
+            <TextView
+                android:id="@+id/abf"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="Upload Photo"
+                android:layout_gravity="center"
+
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/ss_Reset"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:background="#414042"
+                android:text="@string/Reset"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/ss_submit"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:background="#414042"
+                android:text="@string/Submit"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

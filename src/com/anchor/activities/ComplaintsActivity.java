@@ -1,7 +1,6 @@
 package com.anchor.activities;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,7 +10,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -29,7 +27,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -287,7 +284,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
         {
             dialog = new ProgressDialog(ComplaintsActivity.this);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Dealer App");
+            dialog.setTitle("Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -619,7 +616,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                         {
                             dialog = new ProgressDialog(ComplaintsActivity.this);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Dealer App");
+                            dialog.setTitle("Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -2006,7 +2003,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
     public void getproducts() {
 
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Dealer");
+        dialog.setTitle("Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -2254,7 +2251,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                             if (cd.isConnectingToInternet()) {
                                 dialog = new ProgressDialog(ComplaintsActivity.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                                 dialog.setMessage("Sync in Progress, Please Wait");
-                                dialog.setTitle("Dealer");
+                                dialog.setTitle("Anchor");
                                 dialog.setCancelable(false);
                                 dialog.show();
                                 new doFileUpload().execute();

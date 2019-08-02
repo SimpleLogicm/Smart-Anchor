@@ -7,9 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -54,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import cpm.simplelogic.helper.ConnectionDetector;
 
 public class Scheme_Filter_Activity extends Activity implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
@@ -234,7 +233,7 @@ public class Scheme_Filter_Activity extends Activity implements DatePickerDialog
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -257,7 +256,7 @@ public class Scheme_Filter_Activity extends Activity implements DatePickerDialog
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -548,7 +547,7 @@ public class Scheme_Filter_Activity extends Activity implements DatePickerDialog
 
         if (cd.isConnectingToInternet()) {
             dialog.setMessage("Please wait Product Category Loading....");
-            dialog.setTitle("Dealer App");
+            dialog.setTitle("Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 

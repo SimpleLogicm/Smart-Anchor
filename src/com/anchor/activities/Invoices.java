@@ -324,7 +324,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Anchor App");
 
             }
         });
@@ -376,7 +376,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
                             }
 
                             dialog.setMessage("Please Wait....");
-                            dialog.setTitle("Dealer App");
+                            dialog.setTitle("Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -731,7 +731,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
 //                            }
 
                             android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Invoices.this).create();
-                            alertDialog.setTitle("Dealer App");
+                            alertDialog.setTitle("Anchor App");
                             alertDialog.setMessage(" Are you sure you want to Continue?");
                             alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
@@ -742,7 +742,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
                                     Log.d("Link Invoice no", "Link Invoice no " + download_invoice_no);
                                     dialog = new ProgressDialog(Invoices.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                                     dialog.setMessage("Please wait....");
-                                    dialog.setTitle("Dealer");
+                                    dialog.setTitle("Anchor");
                                     dialog.setCancelable(false);
                                     dialog.show();
 

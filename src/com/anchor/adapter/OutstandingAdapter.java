@@ -102,7 +102,7 @@ public class OutstandingAdapter extends RecyclerView.Adapter<OutstandingAdapter.
 
                // alertDialog = new AlertDialog.Builder(mContext).create(); //Read Update
                 alertDialog = new AlertDialog.Builder(view.getRootView().getContext()).create();
-                alertDialog.setTitle("Dealer App");
+                alertDialog.setTitle("Anchor App");
                 alertDialog.setMessage("Do you want To See Details Of " +holder.text_bu.getText().toString()+"?");
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 

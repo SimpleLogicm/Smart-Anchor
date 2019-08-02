@@ -214,7 +214,7 @@ public class OutstandingActivity extends Activity {
             if(dialog == null) {
                 dialog = new ProgressDialog(OutstandingActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                 dialog.setMessage("Please Wait....");
-                dialog.setTitle("Dealer App");
+                dialog.setTitle("Anchor App");
                 dialog.setCancelable(false);
                 dialog.show();
             }
