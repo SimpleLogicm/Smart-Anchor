@@ -202,8 +202,12 @@ public class Global_Data {
     public static String Glovel_BEAT_ID="";
     public static String Scheme_report_Type="";
     public static List<Spiner_List_Model> spiner_list_modelList =new ArrayList<Spiner_List_Model>();
+    public static List<Local_Data> spiner_list_modelListn =new ArrayList<Local_Data>();
     public static List<String> array_of_pVarient =new ArrayList<>();
     public static HashMap<String,String> Download_hashmap = new HashMap<String,String>();
+
+    public static List<String> Customers =new ArrayList<>();
+    public static HashMap<String,String> Customers_map = new HashMap<String,String>();
 	
 	//public static String GLOVEL_LONG_DESC="";
     

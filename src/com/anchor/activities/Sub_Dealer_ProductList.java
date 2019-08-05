@@ -39,6 +39,20 @@ import android.widget.Toast;
 import com.anchor.adapter.Spinner_List_Adapter;
 import com.anchor.model.Spiner_List_Model;
 import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -47,6 +61,8 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -99,7 +115,7 @@ public class Sub_Dealer_ProductList extends Activity {
     Button buttonPreviewAddMOre;
     public static final int SIGNATURE_ACTIVITY = 1;
     AutoCompleteTextView Product_Variant;
-   // SP_AutoCompleteAdapter search_adapter;
+    // SP_AutoCompleteAdapter search_adapter;
     RecyclerView spinner_recycleview;
     Spinner_List_Adapter spinner_list_adapter;
     List<Spiner_List_Model> snlist = new ArrayList<>();
@@ -126,8 +142,8 @@ public class Sub_Dealer_ProductList extends Activity {
         Product_Variant = findViewById(R.id.newProduct_varient);
 
 
-       // search_adapter = new SP_AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
-       // Product_Variant.setAdapter(search_adapter);
+        // search_adapter = new SP_AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        // Product_Variant.setAdapter(search_adapter);
         spinner_recycleview = findViewById(R.id.spinner_recycleview);
 
         spinner_recycleview.setLayoutManager(new LinearLayoutManager(Sub_Dealer_ProductList.this));
@@ -196,12 +212,12 @@ public class Sub_Dealer_ProductList extends Activity {
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (Product_Variant.getRight() - Product_Variant.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (Product_Variant.getRight() - Product_Variant.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                         View view = Sub_Dealer_ProductList.this.getCurrentFocus();
                         if (view != null) {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                         //autoCompleteTextView1.setText("");
@@ -230,13 +246,11 @@ public class Sub_Dealer_ProductList extends Activity {
                 p_mrp.clear();
                 p_rp.clear();
 
-                try
-                {
+                try {
 
                     List<Local_Data> cont1 = dbvoc.getSearchProduct_with_name(Product_Variant.getText().toString());
 //
 //                        cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
-
 
 
                     if (cont1.size() <= 0) {
@@ -260,7 +274,7 @@ public class Sub_Dealer_ProductList extends Activity {
                         SwipeList.clear();
                         list1.clear();
                         list2.clear();
-                        pp=0;
+                        pp = 0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
                             mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
@@ -272,7 +286,6 @@ public class Sub_Dealer_ProductList extends Activity {
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
                             //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
-
 
 
                             List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
@@ -308,11 +321,10 @@ public class Sub_Dealer_ProductList extends Activity {
                         });
 
 
-
                     }
-                }catch (Exception ex){ex.printStackTrace();}
-
-
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
 
 
             }
@@ -325,11 +337,12 @@ public class Sub_Dealer_ProductList extends Activity {
 
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(Product_Variant.getText().toString().trim().length() == 0) {
+                if (Product_Variant.getText().toString().trim().length() == 0) {
                     new Sub_Dealer_ProductList.VarientASN().execute();
 
                 }
@@ -410,34 +423,8 @@ public class Sub_Dealer_ProductList extends Activity {
 
                 String buttonText = ((Button) arg0).getText().toString();
 
-                if (buttonText.equalsIgnoreCase("Add More")) {
-                    p_id.clear();
-                    p_name.clear();
-                    p_mrp.clear();
-                    p_q.clear();
-                    p_price.clear();
-                    p_rp.clear();
-                    Global_Data.Order_hashmap.clear();
 
-                    Global_Data.GLOVEL_LONG_DESC = "";
-                    Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-                    Global_Data.GLOVEL_ITEM_MRP = "";
-                    // Global_Data.Search_business_unit_name = "";
-                    Global_Data.Search_Category_name = "";
-                    Global_Data.Search_BusinessCategory_name = "";
-                    Global_Data.Search_brand_name = "";
-
-                    Intent i = new Intent(Sub_Dealer_ProductList.this, NewOrderActivity.class);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                    finish();
-
-                } else {
-
-
-                    requestGPSPermissionsigna();
-                }
+                requestGPSPermissionsigna();
 
 
             }
@@ -454,18 +441,15 @@ public class Sub_Dealer_ProductList extends Activity {
 
             try {
 
-                if(Global_Data.array_of_pVarient.size() >0)
-                {
+                if (Global_Data.array_of_pVarient.size() > 0) {
                     StringBuilder ss = new StringBuilder();
                     String[] mStringArray = new String[Global_Data.array_of_pVarient.size()];
                     mStringArray = Global_Data.array_of_pVarient.toArray(mStringArray);
-                    for(int i=0; i<Global_Data.array_of_pVarient.size(); i++)
-                    {
+                    for (int i = 0; i < Global_Data.array_of_pVarient.size(); i++) {
 
 
-                        ss.append('"' +Global_Data.array_of_pVarient.get(i)+ '"');
-                        if((Global_Data.array_of_pVarient.size()-1) != i)
-                        {
+                        ss.append('"' + Global_Data.array_of_pVarient.get(i) + '"');
+                        if ((Global_Data.array_of_pVarient.size() - 1) != i) {
                             ss.append(",");
                         }
 
@@ -496,7 +480,7 @@ public class Sub_Dealer_ProductList extends Activity {
                         SwipeList.clear();
                         list1.clear();
                         list2.clear();
-                        pp=0;
+                        pp = 0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
                             mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
@@ -539,7 +523,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
                                 swipeListView.setAdapter(adapter);
 
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
                                 Product_Variant.setThreshold(1);// will start working from
                                 // first character
                                 Product_Variant.setAdapter(adapter);// setting the adapter
@@ -553,14 +537,11 @@ public class Sub_Dealer_ProductList extends Activity {
                         });
 
 
-
                     }
-                }
-                else
-                {
+                } else {
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
 
-                        List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
+                        List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name, Global_Data.Search_Category_name, Global_Data.Search_BusinessCategory_name, Global_Data.Search_brand_name);
 
                         if (cont1.size() <= 0) {
                             // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -584,7 +565,7 @@ public class Sub_Dealer_ProductList extends Activity {
                             SwipeList.clear();
                             list1.clear();
                             list2.clear();
-                            pp=0;
+                            pp = 0;
                             for (Local_Data cnt1 : cont1) {
                                 HashMap<String, String> mapp = new HashMap<String, String>();
                                 mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm());
@@ -627,7 +608,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
                                     swipeListView.setAdapter(adapter);
 
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
                                     Product_Variant.setThreshold(1);// will start working from
                                     // first character
                                     Product_Variant.setAdapter(adapter);// setting the adapter
@@ -639,7 +620,6 @@ public class Sub_Dealer_ProductList extends Activity {
 
                                 }
                             });
-
 
 
                         }
@@ -667,7 +647,7 @@ public class Sub_Dealer_ProductList extends Activity {
                         } else {
                             resultsvarient.clear();
                             SwipeList.clear();
-                            pp=0;
+                            pp = 0;
                             for (Local_Data cnt1 : cont1) {
                                 HashMap<String, String> mapp = new HashMap<String, String>();
                                 mapp.put(TAG_ITEMNAME, cnt1.getProduct_nm() + " RP : " + cnt1.getStateName() + " MRP : " + cnt1.getMRP());
@@ -712,13 +692,10 @@ public class Sub_Dealer_ProductList extends Activity {
                             });
 
 
-
                         }
 
                     }
                 }
-
-
 
 
                 dialog.dismiss();
@@ -827,17 +804,18 @@ public class Sub_Dealer_ProductList extends Activity {
 
             if (!p_id.isEmpty() && q_check.equalsIgnoreCase("yes")) {
 
-                // Long randomPIN = System.currentTimeMillis();
-                String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
-                if (Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
-                    if (Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales")) {
-                        Global_Data.GLObalOrder_id = PINString;
-                        Global_Data.GLOvel_GORDER_ID = PINString;
-                    } else {
-                        Global_Data.GLObalOrder_id = PINString;
-                        Global_Data.GLOvel_GORDER_ID = PINString;
-                    }
+                cd = new ConnectionDetector(Sub_Dealer_ProductList.this);
+                isInternetPresent = cd.isConnectingToInternet();
+                if (isInternetPresent) {
 
+                    if(dialog == null)
+                    dialog = new ProgressDialog(Sub_Dealer_ProductList.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                    dialog.setMessage("Please wait Product Loading....");
+                    dialog.setTitle("Anchor App");
+                    dialog.setCancelable(false);
+                    dialog.show();
+
+                    String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
                     try {
                         AppLocationManager appLocationManager = new AppLocationManager(Sub_Dealer_ProductList.this);
                         Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
@@ -856,122 +834,208 @@ public class Sub_Dealer_ProductList extends Activity {
                         ex.printStackTrace();
                     }
 
-                    List<Local_Data> checkq = dbvoc.checkOrderExist(Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLObalOrder_id);
-
-                    if (checkq.size() <= 0) {
-                        loginDataBaseAdapter.insertOrders("", Global_Data.GLOvel_GORDER_ID, Global_Data.GLOvel_CUSTOMER_ID, Global_Data.order_retailer, Global_Data.GLOvel_USER_EMAIL, Global_Data.order_city, Global_Data.order_beat, "", "", "", "", "", "", "", "", Global_Data.order_retailer, Global_Data.order_state, Global_Data.order_city, Global_Data.sales_btnstring, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.Glovel_BEAT_ID, "", "", "", "", "", "", "", "", "");
+                    JSONArray product = new JSONArray();
+                    JSONObject product_value = new JSONObject();
+                    JSONArray order = new JSONArray();
+                    JSONObject product_valuenew = new JSONObject();
+                    try {
+                        product_value.put("order_number", PINString);
+                        product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("sub_dealer_code", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("dealer_code", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("state_code", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("dist_code", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("city_code", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                        order.put(product_value);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                }
 
-
-                Double pp = 0.0;
-                try {
-                    for (int k = 0; k < p_id.size(); k++) {
-
-
-                        List<Local_Data> contactsn = dbvoc.GetOrders_BY_ORDER_ID(Global_Data.GLObalOrder_id, p_id.get(k));
-
-                        if (contactsn.size() > 0) {
-
-                            for (Local_Data cn : contactsn) {
-
-//                                if(Global_Data.Varient_value_add_flag.equalsIgnoreCase("yes"))
-//                                {
-
-                                if (!(p_q.get(k).equalsIgnoreCase(cn.get_delivery_product_order_quantity())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
-                                    dbvoc.update_itemamountandquantity(String.valueOf(p_q.get(k)), String.valueOf(p_price.get(k)), p_id.get(k), Global_Data.GLObalOrder_id);
-                                } else if (!(p_q.get(k).equalsIgnoreCase(cn.get_delivery_product_order_quantity())) && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k)))) {
-                                    dbvoc.getDeleteTableorderproduct_byITEM_NUMBER(p_id.get(k), Global_Data.GLObalOrder_id);
-                                }
-
-//                                }
-//                                else
-//                                {
-//                                    int quantity = Integer.parseInt(cn.get_delivery_product_order_quantity()) + Integer.parseInt(p_q.get(k));
-//                                    Double amount = Double.valueOf(cn.getAmount()) + Double.valueOf(p_price.get(k));
-//                                    dbvoc.update_itemamountandquantity(String.valueOf(quantity), String.valueOf(amount), p_id.get(k), Global_Data.GLObalOrder_id);
-//                                }
-
-                            }
-                        } else {
+                    Double pp = 0.0;
+                    try {
+                        for (int k = 0; k < p_id.size(); k++) {
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
                                 loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
 
-                                // Log.d("pPRIZE","Pprize"+ p_price.get(k));
+                                JSONObject item = new JSONObject();
+                                item.put("order_number", PINString);
+                                item.put("item_number", p_id.get(k));
+                                item.put("total_qty", p_q.get(k));
+                                item.put("MRP", p_mrp.get(k));
+                                item.put("amount", p_price.get(k));
+                                //item.put("scheme_code", cnp.getSche_code());
+
+                                product.put(item);
+                            }
+
+
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
+                                pp += Double.valueOf(p_price.get(k));
                             }
 
 
                         }
 
-                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
-                            pp += Double.valueOf(p_price.get(k));
-                        }
+                        product_valuenew.put("orders", order);
+                        product_valuenew.put("order_products", product);
+                        product_valuenew.put("imei_no", Global_Data.device_id);
+                        Log.d("Orders", order.toString());
+                        Log.d("order_products", product.toString());
+                        Log.d("product_valuenew", product_valuenew.toString());
+
+                        String  domain = Sub_Dealer_ProductList.this.getResources().getString(R.string.service_domain);
+                        Log.i("volley", "domain: " + domain);
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain+"orders/save_orders", product_valuenew, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.i("volley", "response: " + response);
 
 
+                                String response_result = "";
+                                //if (response.has("result")) {
+                                try {
+                                    response_result = response.getString("result");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                }
+
+                                if (response_result.equalsIgnoreCase("Device not found.")) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Device Not Found", Toast.LENGTH_LONG);
+                                            toast.setGravity(Gravity.CENTER, 0, 0);
+                                            toast.show();
+                                            dialog.dismiss();
+
+
+                                        }
+                                    });
+
+                                } else {
+
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                                            Intent i = new Intent(Sub_Dealer_ProductList.this, Sub_Dealer_Order_Main.class);
+                                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(i);
+                                            finish();
+
+                                            dialog.dismiss();
+
+
+                                        }
+                                    });
+
+
+
+
+                                }
+                            }
+                        },   new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(final VolleyError error) {
+                                //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
+                                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this,
+                                                    "your internet connection is not working, saving locally. Please sync when Internet is available",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                } else if (error instanceof AuthFailureError) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this,
+                                                    "Server AuthFailureError  Error",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                } else if (error instanceof ServerError) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this,
+                                                    "Server   Error",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                } else if (error instanceof NetworkError) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this,
+                                                    "your internet connection is not working, saving locally. Please sync when Internet is available",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                } else if (error instanceof ParseError) {
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this,
+                                                    "ParseError   Error",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                }
+                                else
+                                {
+                                   runOnUiThread(new Runnable() {
+                                        public void run() {
+
+                                            Toast.makeText(Sub_Dealer_ProductList.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                }
+                               runOnUiThread(new Runnable() {
+                                    public void run() {
+
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                // finish();
+                            }
+                        });
+
+                        RequestQueue requestQueue = Volley.newRequestQueue(Sub_Dealer_ProductList.this);
+                        // queue.add(jsObjRequest);
+                        int socketTimeout = 30000;//30 seconds - change to what you want
+                        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                        jsObjRequest.setRetryPolicy(policy);
+                        requestQueue.add(jsObjRequest);
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-
-                buttonPreviewAddMOre.setEnabled(true);
-                buttonPreviewAddMOre.setText("Save");
-                txttotalPreview.setText("Total : " + pp);
-                Global_Data.Varient_value_add_flag = "yes";
-
-                List<Local_Data> checkq = dbvoc.getItemName(Global_Data.GLObalOrder_id);
-
-                if (checkq.size() <= 0) {
-                    q_check = "";
-                    Global_Data.Order_hashmap.clear();
-                    p_id.clear();
-                    p_q.clear();
-                    p_price.clear();
-                    p_name.clear();
-                    p_mrp.clear();
-                    p_rp.clear();
-                    // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-                    Sub_Dealer_ProductList.this.runOnUiThread(new Runnable() {
-                        public void run() {
-                            Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "All item delete, Please add new item in order.", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                            Product_Variant.setText("");
-
-                            Intent i = new Intent(Sub_Dealer_ProductList.this, NewOrderActivity.class);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                            finish();
-                        }
-                    });
-
                 } else {
-                    pp = 0.0;
-                    for (Local_Data qtr : checkq) {
-                        pp += Double.valueOf(qtr.getAmount());
-                    }
-                    txttotalPreview.setText("Total : " + pp);
-                    q_check = "";
-                    Global_Data.Order_hashmap.clear();
-
-                    if (!Product_Variant.getText().toString().equalsIgnoreCase("")) {
-                        Product_Variant.setText("");
-                    }
-
-                    p_id.clear();
-                    p_q.clear();
-                    p_price.clear();
-                    p_name.clear();
-                    p_mrp.clear();
-                    p_rp.clear();
-                    Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items add successfully", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    Toast.makeText(Sub_Dealer_ProductList.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
                 }
-
 
             } else {
 
@@ -1216,7 +1280,9 @@ public class Sub_Dealer_ProductList extends Activity {
         startActivityForResult(intent, 101);
     }
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog.dismiss();
+    }
 }

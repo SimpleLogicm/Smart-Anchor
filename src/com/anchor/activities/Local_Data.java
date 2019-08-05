@@ -179,7 +179,7 @@ public class Local_Data {
     String sche_discription;
     String ware_name;
     String sub_categ;
-    String img_ordersign, name, punched_button, current_date_only;
+    public String img_ordersign, name, punched_button, current_date_only;
     String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant,shipment_pri,business_category,primary_category,emp_code,image_path,asset_code,business_unit_code_array;
 
     public String getBusiness_unit_code_array() {
@@ -307,7 +307,7 @@ public class Local_Data {
         this.punched_at_address = punched_at_address;
     }
 
-    String Address;
+    public String Address;
 
     public String getName() {
         return name;

@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--<string name="service_domain">http://fa9c1bfb.ngrok.io/metal/api/v1/</string>-->
-
-
-    <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
-
     <!-- SIMPLE LOGIC UAT URL -->
     <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>
-
-    <!--<string name="service_domain">http://192.168.101.192/metal/api/v1/</string>-->
-
-    <!-- Anchor Production URL -->
-    <!--<string name="service_domain">http://125.22.54.155/metal/api/v1/</string>-->
-
-    <!-- Anchor PRODUCTion NEW URL -->
-    <!--<string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
-
-    <!-- Anchor UAT URL -->
-    <!--<string name="service_domain">http://125.22.54.155:8000/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
     <!--<string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
 
+    <!-- Anchor PRODUCTion NEW URL -->
+    <!--<string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
 
-    <!--<string name="service_domain">http://150.242.140.105:8005/metal/api/v1/</string>-->
-    <!--<string name="service_domain">http://150.242.140.105:8003/metal/api/v1/</string>-->
+    <!--Sub Dealer PRODUCTION-->
+    <!--<string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
 
-    <!--<string name="service_domain">http://85e8e2df.ngrok.io/polycab/api/v1/</string>-->
+    <!--ANCHOR NEW SUB DEALER UAT-->
+    <string name="service_domain_sub_dealer">http://subdealer.anchor-group.in/metal/api/v1/</string>
+
+    <!--<string name="service_domain">http://fa9c1bfb.ngrok.io/metal/api/v1/</string>-->
+
+
+
     <string name="app_name">Smart Anchor</string>
     <string name="app_name_anchor">Smart Anchor</string>
     <string name="action_settings">Settings</string>

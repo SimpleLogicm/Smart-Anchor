@@ -12,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +31,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.AutoCompleteContactArrayAdapter;
+import com.anchor.model.SubDealerModel;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -88,19 +92,23 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String response_result = "";
     JSONArray City_JSON = null;
     JSONArray STATE_JSON = null;
+    JSONArray SubDealer_JSON = null;
     HashMap<String, String> statemap = new HashMap<String, String>();
     HashMap<String, String> citymap = new HashMap<String, String>();
     HashMap<String, String> districmap = new HashMap<String, String>();
+    ArrayList<SubDealerModel> All_sdealers = new ArrayList<SubDealerModel>();
+    String valid_sub_dealer_flag = "";
+    String sub_dealer_code = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sub_dealer_order_main);
 
-        s_submit = (Button) findViewById(R.id.s_submit);
-        s_state = (Spinner) findViewById(R.id.s_state);
-        s_city = (Spinner) findViewById(R.id.s_city);
-        s_district = (Spinner) findViewById(R.id.s_district);
+        s_submit = findViewById(R.id.s_submit);
+        s_state = findViewById(R.id.s_state);
+        s_city = findViewById(R.id.s_city);
+        s_district = findViewById(R.id.s_district);
         s_sub_dealer_search = findViewById(R.id.s_sub_dealer_search);
         s_dealer_search = findViewById(R.id.s_dealer_search);
 
@@ -114,6 +122,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         // AutoCompleteTextView
         s_sub_dealer_search.setTextColor(Color.BLACK);
 
+        Global_Data.Customers.clear();
+        Global_Data.Customers_map.clear();
+
         s_sub_dealer_search.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -122,12 +133,12 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (s_sub_dealer_search.getRight() - s_sub_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (s_sub_dealer_search.getRight() - s_sub_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                         View view = Sub_Dealer_Order_Main.this.getCurrentFocus();
                         if (view != null) {
-                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                         //autoCompleteTextView1.setText("");
@@ -139,33 +150,122 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             }
         });
 
-        s_sub_dealer_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        s_sub_dealer_search.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View arg1, int pos,
-                                    long id) {
-                //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                Global_Data.hideSoftKeyboard(Sub_Dealer_Order_Main.this);
+                if(s_sub_dealer_search.getText().toString().trim().length() == 0) {
 
-                String customer_name = "";
-                String address_type = "";
-                if (s_sub_dealer_search.getText().toString().trim().indexOf(":") > 0) {
-                    s = s_sub_dealer_search.getText().toString().trim().split(":");
-                    customer_name = s[0].trim();
-                    address_type = s[1].trim();
-                } else {
-                    customer_name = s_sub_dealer_search.getText().toString().trim();
+                    valid_sub_dealer_flag = "";
+                    sub_dealer_code = "";
                 }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
 
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        s_sub_dealer_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos,
+                                    long id) {
+
+
+                valid_sub_dealer_flag = "";
+                sub_dealer_code = "";
+                for (SubDealerModel dataItem : All_sdealers)
+                {
+                    if(dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString()))
+                    {
+                        sub_dealer_code = dataItem.code;
+                        valid_sub_dealer_flag = "yes";
+                        break;
+                    }
+
+                }
+
+
+
+
+
+            }
+
+        });
+
+        s_dealer_search.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (s_dealer_search.getRight() - s_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                        View view = Sub_Dealer_Order_Main.this.getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                        //autoCompleteTextView1.setText("");
+                        s_dealer_search.showDropDown();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        s_dealer_search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s_dealer_search.getText().toString().trim().length() == 0) {
+
+                    //valid_sub_dealer_flag = "";
+                    //sub_dealer_code = "";
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        s_dealer_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos,
+                                    long id) {
+
+            }
+
         });
 
         s_submit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent s_dub = new Intent(getApplicationContext(),SubDealer_NewOrderActivity.class);
+                Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
                 startActivity(s_dub);
                 finish();
 
@@ -423,7 +523,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 Log.i("Selected item : ", items);
 
                 city_name = "";
-                district_name =items;
+                district_name = items;
                 results_city.clear();
                 results_city.add("Select City");
 
@@ -477,8 +577,35 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 String items = s_city.getSelectedItem().toString();
                 city_name = items;
-                //String C_ID = "";
                 Log.i("Selected item : ", items);
+
+                cd = new ConnectionDetector(Sub_Dealer_Order_Main.this);
+
+                isInternetPresent = cd.isConnectingToInternet();
+                if (isInternetPresent) {
+                    if (progressDialog != null && progressDialog.isShowing())
+                        progressDialog.dismiss();
+                    progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
+                    progressDialog.setMessage("Please wait....");
+                    progressDialog.setTitle("Anchor App");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
+                    try {
+
+                        String city_code = citymap.get(items);
+                        sub_OnlineData(city_code);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                } else {
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+
+                }
 
 
             }
@@ -1217,6 +1344,282 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                             android.R.layout.simple_spinner_item, results_city);
                                     adapter_city.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                     s_city.setAdapter(adapter_city);
+
+                                    progressDialog.dismiss();
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+
+                            }
+                        });
+
+
+                        Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                progressDialog.dismiss();
+                            }
+                        });
+                        //	dialog.dismiss();
+
+                        //finish();
+
+                    }
+
+
+                    Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            progressDialog.dismiss();
+                        }
+                    });
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+
+                Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        progressDialog.dismiss();
+                    }
+                });
+
+            }
+
+
+            Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                public void run() {
+
+                    progressDialog.dismiss();
+                }
+            });
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                public void run() {
+
+                    progressDialog.dismiss();
+                }
+            });
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    public void sub_OnlineData(String city_code) {
+
+        String domain = getResources().getString(R.string.service_domain);
+        String service_domain = domain + "sub_dealers/sync_cities?city_code=" + city_code;
+
+
+        Log.i("user Sub Dealer url", "Sub Dealer url " + service_domain);
+
+        StringRequest jsObjRequest = null;
+
+        jsObjRequest = new StringRequest(Request.Method.GET, service_domain, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("volley", "response: " + response);
+                final_response = response;
+
+                new Sub_Dealer_Order_Main.getsubDealer_Data().execute(response);
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        } else if (error instanceof AuthFailureError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Server AuthFailureError Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        } else if (error instanceof ServerError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        } else if (error instanceof NetworkError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        } else if (error instanceof ParseError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "ParseError Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        } else {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        }
+
+                        progressDialog.dismiss();
+                        //  State_Offline_Data();
+                        // finish();
+                    }
+                });
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        int socketTimeout = 300000;//3 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        jsObjRequest.setShouldCache(true);
+        //requestQueue.getCache().clear();
+        requestQueue.add(jsObjRequest);
+    }
+
+    private class getsubDealer_Data extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... responsenew) {
+
+
+            try {
+                JSONObject response = new JSONObject(final_response);
+                All_sdealers.clear();
+                if (response.has("message")) {
+                    response_result = response.getString("message");
+
+                    Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            progressDialog.dismiss();
+                            Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        }
+                    });
+
+                } else {
+                    response_result = "data";
+
+
+                    try {
+
+                        SubDealer_JSON = response.getJSONArray("cities");
+                        // City = response.getJSONArray("business_product_categories");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    Log.i("volley", "response cities Length: " + City_JSON.length());
+                    Log.d("volley", "cities" + City_JSON.toString());
+
+                    if (SubDealer_JSON.length() <= 0) {
+
+                        Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                progressDialog.dismiss();
+                                Toast toast = Toast.makeText(getApplicationContext(), "Sub Dealer Record doesn't exist.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+
+                            }
+                        });
+                    } else {
+
+                        for (int i = 0; i < SubDealer_JSON.length(); i++) {
+
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = SubDealer_JSON.getJSONObject(i);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(SubDealer_JSON.getString(i))) {
+                                    {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("name").trim()))
+                                        {
+                                            SubDealerModel di = new SubDealerModel();
+
+                                            di.name = jsonObject.getString("firm_name").trim();
+                                            di.proprietor_mobile1 = jsonObject.getString("proprietor_mobile1").trim();
+                                            di.proprietor_name1 = jsonObject.getString("proprietor_name1").trim();
+                                            di.proprietor_email1 = jsonObject.getString("proprietor_email1").trim();
+                                            di.proprietor_mobile2 = jsonObject.getString("proprietor_mobile2").trim();
+                                            di.proprietor_name2 = jsonObject.getString("proprietor_name2").trim();
+                                            di.proprietor_email2 = jsonObject.getString("proprietor_email2").trim();
+                                            di.shop_name = jsonObject.getString("shop_name").trim();
+                                            di.Stage = jsonObject.getString("stage").trim();
+
+                                            di.p_approval1 = "Approval 1 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status1").trim());
+
+                                            di.p_approval2 = "Approval 2 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status2").trim());
+
+                                            di.p_approval3 = "Approval 3 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status3").trim());
+                                            di.city = jsonObject.getString("city_name").trim();
+                                            di.code = jsonObject.getString("code").trim();
+                                            di.p_approved = jsonObject.getString("approved").trim();
+
+                                            di.remarks1 =jsonObject.getString("approver_remarks1").trim();
+                                            di.remarks2 =jsonObject.getString("approver_remarks2").trim();
+
+                                            All_sdealers.add(di);
+
+
+                                        }
+                                    }
+
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+
+                        Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                try {
+                                    AutoCompleteContactArrayAdapter adapter = new AutoCompleteContactArrayAdapter(Sub_Dealer_Order_Main.this,R.layout.auto_layout, All_sdealers);
+                                    s_sub_dealer_search.setAdapter(adapter);
 
                                     progressDialog.dismiss();
                                 } catch (Exception ex) {

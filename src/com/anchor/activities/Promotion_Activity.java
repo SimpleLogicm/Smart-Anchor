@@ -1,12 +1,16 @@
 package com.anchor.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.DownloadManager;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -14,11 +18,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +46,13 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,28 +60,40 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Promotion_Activity extends Activity {
-    //Button retail_sales, institute_sales;
+
     ImageView new_launch,market_survey,advertisement;
     ConnectionDetector cd;
     Boolean isInternetPresent = false;
-    // private ProgressDialog pDialog;
     ProgressDialog pDialog;
     String response_result = "";
-    public DownloadManager downloadManager;
-    public long refid;
-    public Uri Download_Uri;
     public ArrayList<Long> list = new ArrayList<>();
     LoginDataBaseAdapter loginDataBaseAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
+    Button rpo_chhose_file;
+    Boolean B_flag;
+    private String mCurrentPhotoPath = "";
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private String pictureImagePath_new = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_promotional_);
+        rpo_chhose_file = findViewById(R.id.rpo_chhose_file);
+
+        rpo_chhose_file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                requestStoragePermission();
+            }
+        });
 
         try
         {
@@ -137,53 +163,6 @@ public class Promotion_Activity extends Activity {
         startActivity(i);
         finish();
     }
-
-
-
-
-//    public BroadcastReceiver onComplete = new BroadcastReceiver() {
-//
-//        public void onReceive(Context ctxt, Intent intent) {
-//
-//
-//
-//
-//            long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-//
-//
-//            Log.e("IN", "" + referenceId);
-//
-//            list.remove(referenceId);
-//
-//
-//            if (list.isEmpty())
-//            {
-//
-//                pDialog.hide();
-//
-//                Log.e("INSIDE", "" + referenceId);
-//                NotificationCompat.Builder mBuilder =
-//                        new NotificationCompat.Builder(Promotion_Activity.this)
-//                                .setSmallIcon(R.drawable.anchor_logo)
-//                                .setContentTitle("Anchor")
-//                                .setContentText("All Download completed");
-//
-//
-//                NotificationManager notificationManager = (NotificationManager) Promotion_Activity.this.getSystemService(Context.NOTIFICATION_SERVICE);
-//                notificationManager.notify(455, mBuilder.build());
-//
-//                Intent intent1 = new Intent(Promotion_Activity.this, Image_Gellary.class);
-//                // intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//               startActivity(intent1);
-//
-//
-//            }
-//
-//
-//        }
-//
-//
-//    };
 
     @Override
     protected void onDestroy() {
@@ -505,6 +484,263 @@ public class Promotion_Activity extends Activity {
         protected void onPostExecute(String result) {
 
         }
+    }
+
+    private boolean isDeviceSupportCamera() {
+        if (getApplicationContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_CAMERA)) {
+            // this device has a camera
+            return true;
+        } else {
+            // no camera on this device
+            return false;
+        }
+    }
+
+    /**
+     * Requesting multiple permissions (storage and location) at once
+     * This uses multiple permission model from dexter
+     * On permanent denial opens settings dialog
+     */
+    private void requestStoragePermission() {
+
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+
+                            B_flag = isDeviceSupportCamera();
+
+                            if(B_flag == true)
+                            {
+                                final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+
+
+                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Promotion_Activity.this);
+
+                                builder.setTitle("Add Photo!");
+
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+
+                                    @Override
+
+                                    public void onClick(DialogInterface dialog, int item) {
+
+                                        if (options[item].equals("Take Photo"))
+
+                                        {
+                                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                                                // Create the File where the photo should go
+                                                File photoFile = null;
+                                                try {
+                                                    photoFile = createImageFile();
+                                                } catch (Exception ex) {
+                                                    // Error occurred while creating the File
+                                                    Log.i("Image TAG", "IOException");
+                                                    mCurrentPhotoPath = "";
+                                                }
+                                                // Continue only if the File was successfully created
+                                                if (photoFile != null) {
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+                                                }
+                                            }
+
+                                        }
+                                        else
+                                        if (options[item].equals("Choose from Gallery"))
+                                        {
+
+                                            // image_check = "gallery";
+                                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                                            startActivityForResult(intent, 2);
+
+
+                                        } else if (options[item].equals("Cancel")) {
+
+                                            dialog.dismiss();
+
+                                        }
+
+                                    }
+
+                                });
+
+                                builder.show();
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Error occurred! " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    /**
+     * Showing Alert Dialog with Settings option
+     * Navigates user to app settings
+     * NOTE: Keep proper title and message depending on your app
+     */
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Promotion_Activity.this);
+        builder.setTitle("Need Permissions");
+        builder.setCancelable(false);
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String imageFileName = "Anchor";
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+
+        if(!storageDir.exists())
+        {
+            storageDir.mkdir();
+        }
+
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        // mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+//       if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+//            if (resultCode == RESULT_OK) {
+//                previewCapturedImage();
+//
+//            } else if (resultCode == RESULT_CANCELED) {
+//                // user cancelled Image capture
+//                Toast.makeText(getApplicationContext(),
+//                        "User cancelled image capture", Toast.LENGTH_SHORT)
+//                        .show();
+//            } else {
+//                // failed to capture image
+//                Toast.makeText(getApplicationContext(),
+//                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+//                        .show();
+//            }
+//        }
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+
+//            try {
+//                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+            // Bundle extras = data.getExtras();
+            //  Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+            try {
+
+                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            //get_icon.setImageBitmap(imageBitmap);
+        }
+        else if (requestCode == 2 && resultCode == RESULT_OK) {
+            try {
+                Uri selectedImage = data.getData();
+
+                String[] filePath = {MediaStore.Images.Media.DATA};
+
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+
+                c.moveToFirst();
+
+                int columnIndex = c.getColumnIndex(filePath[0]);
+
+                mCurrentPhotoPath = "file:" + c.getString(columnIndex);
+
+                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
+
+                pictureImagePath_new = c.getString(columnIndex);
+
+                c.close();
+
+//                String imageFileName = "Anchor";
+//                File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+//
+//                if (!storageDir.exists()) {
+//                    storageDir.mkdir();
+//                }
+//
+//                copyFileOrDirectory(pictureImagePath_new,storageDir.toString());
+                //new Expenses.LongOperation().execute();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+
+        }
+
     }
 
 }
