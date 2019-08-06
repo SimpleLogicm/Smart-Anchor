@@ -54,7 +54,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedListener {
@@ -633,8 +637,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        String domain = getResources().getString(R.string.service_domain);
-        String service_domain = domain + "menus/get_states_for_sub_dealer_synce?email=" + user_email;
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
+        String service_domain = domain + "menus/get_states_for_sub_dealer_sync?email=" + user_email;
 
 
         Log.i("user list url", "order list url " + service_domain);
@@ -904,7 +908,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             ex.printStackTrace();
         }
 
-        String domain = getResources().getString(R.string.service_domain);
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
         String service_domain = domain + "sub_dealers/sync_districts?email=" + user_email + "&state_code=" + state_code;
 
 
@@ -1164,8 +1168,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
     public void City_OnlineData(String dis_code) {
 
-        String domain = getResources().getString(R.string.service_domain);
-        String service_domain = domain + "sub_dealers/sync_cities?district_code=" + dis_code;
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
+        String service_domain = domain + "sub_dealers/sync_cities?sub_code=" + dis_code;
 
 
         Log.i("user list url", "order list url " + service_domain);
@@ -1423,8 +1427,34 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
     public void sub_OnlineData(String city_code) {
 
-        String domain = getResources().getString(R.string.service_domain);
-        String service_domain = domain + "sub_dealers/sync_cities?city_code=" + city_code;
+        String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
+        try {
+            AppLocationManager appLocationManager = new AppLocationManager(Sub_Dealer_Order_Main.this);
+            Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
+            Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
+            PlayService_Location PlayServiceManager = new PlayService_Location(Sub_Dealer_Order_Main.this);
+
+            if (PlayServiceManager.checkPlayServices(Sub_Dealer_Order_Main.this)) {
+                Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
+
+            } else if (!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)) {
+                Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+                Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
+        String service_domain = null;
+        try {
+            service_domain = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + city_code+"&lat="
+                    + URLEncoder.encode( Global_Data.GLOvel_LATITUDE, "UTF-8")+"&lon="
+                    + URLEncoder.encode( Global_Data.GLOvel_LONGITUDE, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 
         Log.i("user Sub Dealer url", "Sub Dealer url " + service_domain);
@@ -1585,19 +1615,20 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                             di.proprietor_name2 = jsonObject.getString("proprietor_name2").trim();
                                             di.proprietor_email2 = jsonObject.getString("proprietor_email2").trim();
                                             di.shop_name = jsonObject.getString("shop_name").trim();
-                                            di.Stage = jsonObject.getString("stage").trim();
-
-                                            di.p_approval1 = "Approval 1 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status1").trim());
-
-                                            di.p_approval2 = "Approval 2 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status2").trim());
-
-                                            di.p_approval3 = "Approval 3 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status3").trim());
-                                            di.city = jsonObject.getString("city_name").trim();
                                             di.code = jsonObject.getString("code").trim();
-                                            di.p_approved = jsonObject.getString("approved").trim();
+                                          //  di.Stage = jsonObject.getString("stage").trim();
 
-                                            di.remarks1 =jsonObject.getString("approver_remarks1").trim();
-                                            di.remarks2 =jsonObject.getString("approver_remarks2").trim();
+                                          //  di.p_approval1 = "Approval 1 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status1").trim());
+
+                                           // di.p_approval2 = "Approval 2 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status2").trim());
+
+                                           // di.p_approval3 = "Approval 3 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status3").trim());
+                                          //  di.city = jsonObject.getString("city_name").trim();
+                                            di.code = jsonObject.getString("code").trim();
+                                         //   di.p_approved = jsonObject.getString("approved").trim();
+
+                                           // di.remarks1 =jsonObject.getString("approver_remarks1").trim();
+                                          //  di.remarks2 =jsonObject.getString("approver_remarks2").trim();
 
                                             All_sdealers.add(di);
 

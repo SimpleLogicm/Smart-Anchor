@@ -149,15 +149,15 @@ public class AutoCompleteContactArrayAdapter extends
                 auemai2.setVisibility(View.GONE);
             }
 
-            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(a.getCity()))
-            {
-                aucity.setVisibility(View.VISIBLE);
-                aucity.setText("City : "+a.getCity());
-            }
-            else
-            {
-                aucity.setVisibility(View.GONE);
-            }
+//            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(a.getCity()))
+//            {
+//                aucity.setVisibility(View.VISIBLE);
+//                aucity.setText("City : "+a.getCity());
+//            }
+//            else
+//            {
+//                aucity.setVisibility(View.GONE);
+//            }
 
 
 

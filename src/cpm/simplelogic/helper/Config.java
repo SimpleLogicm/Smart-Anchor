@@ -5,8 +5,10 @@ package cpm.simplelogic.helper;
  */
 public class Config {
     // Google Console APIs developer key
-    // Replace this key with your's
-    public static final String DEVELOPER_KEY = "AIzaSyBBVQp4TJDUAjbhvJcp9pdYNZjkU_O265M";
+    // Replace this key with your's AIzaSyCecip9PemdWTBbypNO8F79VeksAxQTJ9Y
+//    public static final String DEVELOPER_KEY = "AIzaSyBBVQp4TJDUAjbhvJcp9pdYNZjkU_O265M";
+
+    public static final String DEVELOPER_KEY = "AIzaSyCecip9PemdWTBbypNO8F79VeksAxQTJ9Y";
 
     // YouTube video id
     public static  String YOUTUBE_VIDEO_CODE = "_oEA18Y8gM0";
