@@ -137,12 +137,12 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (s_sub_dealer_search.getRight() - s_sub_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (s_sub_dealer_search.getRight() - s_sub_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                         View view = Sub_Dealer_Order_Main.this.getCurrentFocus();
                         if (view != null) {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                         //autoCompleteTextView1.setText("");
@@ -159,7 +159,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s_sub_dealer_search.getText().toString().trim().length() == 0) {
+                if (s_sub_dealer_search.getText().toString().trim().length() == 0) {
 
                     valid_sub_dealer_flag = "";
                     sub_dealer_code = "";
@@ -183,23 +183,18 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos,
                                     long id) {
-
+                Global_Data.hideSoftKeyboard(Sub_Dealer_Order_Main.this);
 
                 valid_sub_dealer_flag = "";
                 sub_dealer_code = "";
-                for (SubDealerModel dataItem : All_sdealers)
-                {
-                    if(dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString()))
-                    {
+                for (SubDealerModel dataItem : All_sdealers) {
+                    if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
                         sub_dealer_code = dataItem.code;
                         valid_sub_dealer_flag = "yes";
                         break;
                     }
 
                 }
-
-
-
 
 
             }
@@ -214,12 +209,12 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (s_dealer_search.getRight() - s_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (s_dealer_search.getRight() - s_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                         View view = Sub_Dealer_Order_Main.this.getCurrentFocus();
                         if (view != null) {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                         }
                         //autoCompleteTextView1.setText("");
@@ -236,7 +231,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(s_dealer_search.getText().toString().trim().length() == 0) {
+                if (s_dealer_search.getText().toString().trim().length() == 0) {
 
                     //valid_sub_dealer_flag = "";
                     //sub_dealer_code = "";
@@ -261,6 +256,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             public void onItemClick(AdapterView<?> parent, View arg1, int pos,
                                     long id) {
 
+                Global_Data.hideSoftKeyboard(Sub_Dealer_Order_Main.this);
             }
 
         });
@@ -1449,9 +1445,12 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         String domain = getResources().getString(R.string.service_domain_sub_dealer);
         String service_domain = null;
         try {
-            service_domain = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + city_code+"&lat="
-                    + URLEncoder.encode( Global_Data.GLOvel_LATITUDE, "UTF-8")+"&lon="
-                    + URLEncoder.encode( Global_Data.GLOvel_LONGITUDE, "UTF-8");
+//            service_domain = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + city_code+"&lat="
+//                    + URLEncoder.encode( Global_Data.GLOvel_LATITUDE, "UTF-8")+"&lon="
+//                    + URLEncoder.encode( Global_Data.GLOvel_LONGITUDE, "UTF-8");
+            service_domain = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + city_code + "&lat="
+                    + URLEncoder.encode("21.8970873", "UTF-8") + "&lon="
+                    + URLEncoder.encode("83.3980456", "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -1565,7 +1564,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                     try {
 
-                        SubDealer_JSON = response.getJSONArray("cities");
+                        SubDealer_JSON = response.getJSONArray("sub_dealers");
                         // City = response.getJSONArray("business_product_categories");
 
                     } catch (JSONException e) {
@@ -1573,8 +1572,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     }
 
 
-                    Log.i("volley", "response cities Length: " + City_JSON.length());
-                    Log.d("volley", "cities" + City_JSON.toString());
+                    Log.i("volley", "response SubDealer_JSON Length: " + SubDealer_JSON.length());
+                    Log.d("volley", "SubDealer_JSON" + SubDealer_JSON.toString());
 
                     if (SubDealer_JSON.length() <= 0) {
 
@@ -1603,32 +1602,32 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             try {
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(SubDealer_JSON.getString(i))) {
                                     {
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("name").trim()))
-                                        {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("shop_name").trim())) {
                                             SubDealerModel di = new SubDealerModel();
 
-                                            di.name = jsonObject.getString("firm_name").trim();
-                                            di.proprietor_mobile1 = jsonObject.getString("proprietor_mobile1").trim();
-                                            di.proprietor_name1 = jsonObject.getString("proprietor_name1").trim();
-                                            di.proprietor_email1 = jsonObject.getString("proprietor_email1").trim();
-                                            di.proprietor_mobile2 = jsonObject.getString("proprietor_mobile2").trim();
-                                            di.proprietor_name2 = jsonObject.getString("proprietor_name2").trim();
-                                            di.proprietor_email2 = jsonObject.getString("proprietor_email2").trim();
-                                            di.shop_name = jsonObject.getString("shop_name").trim();
-                                            di.code = jsonObject.getString("code").trim();
-                                          //  di.Stage = jsonObject.getString("stage").trim();
+                                            di.name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("firm_name"));
+                                            di.proprietor_mobile1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("proprietor_mobile1"));
+                                            di.proprietor_name1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("proprietor_name1"));
 
-                                          //  di.p_approval1 = "Approval 1 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status1").trim());
+                                            di.proprietor_email1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("proprietor_email1"));
+                                            di.proprietor_mobile2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("proprietor_mobile2"));
+                                            di.proprietor_name2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("proprietor_name2"));
+                                            di.proprietor_email2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("proprietor_email2"));
+                                            di.shop_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("shop_name"));
+                                            di.code = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("code"));
+                                            //  di.Stage = jsonObject.getString("stage").trim();
 
-                                           // di.p_approval2 = "Approval 2 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status2").trim());
+                                            //  di.p_approval1 = "Approval 1 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status1").trim());
 
-                                           // di.p_approval3 = "Approval 3 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status3").trim());
-                                          //  di.city = jsonObject.getString("city_name").trim();
-                                            di.code = jsonObject.getString("code").trim();
-                                         //   di.p_approved = jsonObject.getString("approved").trim();
+                                            // di.p_approval2 = "Approval 2 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status2").trim());
 
-                                           // di.remarks1 =jsonObject.getString("approver_remarks1").trim();
-                                          //  di.remarks2 =jsonObject.getString("approver_remarks2").trim();
+                                            // di.p_approval3 = "Approval 3 : "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("approval_status3").trim());
+                                            //  di.city = jsonObject.getString("city_name").trim();
+                                            // di.code = jsonObject.getString("code").trim();
+                                            //   di.p_approved = jsonObject.getString("approved").trim();
+
+                                            // di.remarks1 =jsonObject.getString("approver_remarks1").trim();
+                                            //  di.remarks2 =jsonObject.getString("approver_remarks2").trim();
 
                                             All_sdealers.add(di);
 
@@ -1649,7 +1648,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             public void run() {
 
                                 try {
-                                    AutoCompleteContactArrayAdapter adapter = new AutoCompleteContactArrayAdapter(Sub_Dealer_Order_Main.this,R.layout.auto_layout, All_sdealers);
+                                    AutoCompleteContactArrayAdapter adapter = new AutoCompleteContactArrayAdapter(Sub_Dealer_Order_Main.this, R.layout.auto_layout, All_sdealers);
                                     s_sub_dealer_search.setAdapter(adapter);
 
                                     progressDialog.dismiss();

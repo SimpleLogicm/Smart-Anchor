@@ -199,7 +199,7 @@ public class AutoCompleteContactArrayAdapter extends
 
                 // int position = 0;
                 for (SubDealerModel dataItem : dataListAllItems) {
-                    if (dataItem.shop_name.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_mobile1.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_mobile2.toLowerCase().startsWith(searchStrLowerCase) || dataItem.name.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_name1.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_name2.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_email1.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_email2.toLowerCase().startsWith(searchStrLowerCase) || dataItem.city.toLowerCase().startsWith(searchStrLowerCase)) {
+                    if (dataItem.shop_name.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_mobile1.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_mobile2.toLowerCase().startsWith(searchStrLowerCase) || dataItem.name.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_name1.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_name2.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_email1.toLowerCase().startsWith(searchStrLowerCase) || dataItem.proprietor_email2.toLowerCase().startsWith(searchStrLowerCase)) {
                         SubDealerModel a = new SubDealerModel();
                         a.shop_name = dataItem.shop_name;
                         a.name = dataItem.name;
@@ -209,7 +209,7 @@ public class AutoCompleteContactArrayAdapter extends
                         a.proprietor_mobile2 = dataItem.proprietor_mobile2;
                         a.proprietor_name2 = dataItem.proprietor_name2;
                         a.proprietor_email2 = dataItem.proprietor_email2;
-                        a.city = dataItem.city;
+                       // a.city = dataItem.city;
 
                         matchValues.add(a);
 
