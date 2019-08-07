@@ -120,6 +120,7 @@ public class Sub_Dealer_ProductList extends Activity {
     Spinner_List_Adapter spinner_list_adapter;
     List<Spiner_List_Model> snlist = new ArrayList<>();
     Button list_ok;
+    String response_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -839,13 +840,13 @@ public class Sub_Dealer_ProductList extends Activity {
                     JSONArray order = new JSONArray();
                     JSONObject product_valuenew = new JSONObject();
                     try {
-                        product_value.put("order_number", PINString);
+                       // product_value.put("order_number", PINString);
                         product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
-                        product_value.put("sub_dealer_code", Global_Data.GLOvel_USER_EMAIL);
-                        product_value.put("dealer_code", Global_Data.GLOvel_USER_EMAIL);
-                        product_value.put("state_code", Global_Data.GLOvel_USER_EMAIL);
-                        product_value.put("dist_code", Global_Data.GLOvel_USER_EMAIL);
-                        product_value.put("city_code", Global_Data.GLOvel_USER_EMAIL);
+                        product_value.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
+                        product_value.put("dealer_id", Global_Data.Dealer_Code);
+                        product_value.put("user_email", Global_Data.GLOvel_USER_EMAIL);
+                        //product_value.put("dist_code", Global_Data.GLOvel_USER_EMAIL);
+                        //product_value.put("city_code", Global_Data.GLOvel_USER_EMAIL);
                         product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
                         product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
                         order.put(product_value);
@@ -862,8 +863,8 @@ public class Sub_Dealer_ProductList extends Activity {
                                 loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
 
                                 JSONObject item = new JSONObject();
-                                item.put("order_number", PINString);
-                                item.put("item_number", p_id.get(k));
+                                //item.put("order_number", PINString);
+                                item.put("product_code", p_id.get(k));
                                 item.put("total_qty", p_q.get(k));
                                 item.put("MRP", p_mrp.get(k));
                                 item.put("amount", p_price.get(k));
@@ -880,8 +881,8 @@ public class Sub_Dealer_ProductList extends Activity {
 
                         }
 
-                        product_valuenew.put("orders", order);
-                        product_valuenew.put("order_products", product);
+                        product_valuenew.put("sub_dealer_order", order);
+                        product_valuenew.put("sub_dealer_order_details", product);
                         product_valuenew.put("imei_no", Global_Data.device_id);
                         Log.d("Orders", order.toString());
                         Log.d("order_products", product.toString());
@@ -889,16 +890,16 @@ public class Sub_Dealer_ProductList extends Activity {
 
                         String  domain = Sub_Dealer_ProductList.this.getResources().getString(R.string.service_domain);
                         Log.i("volley", "domain: " + domain);
-                        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain+"orders/save_orders", product_valuenew, new Response.Listener<JSONObject>() {
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain+"sub_dealers/create_sub_dealer_order_details", product_valuenew, new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.i("volley", "response: " + response);
 
 
-                                String response_result = "";
+                                 response_result = "";
                                 //if (response.has("result")) {
                                 try {
-                                    response_result = response.getString("result");
+                                    response_result = response.getString("message");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
 
@@ -928,7 +929,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                     runOnUiThread(new Runnable() {
                                         public void run() {
 
-                                            Toast.makeText(Sub_Dealer_ProductList.this, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(Sub_Dealer_ProductList.this, response_result, Toast.LENGTH_LONG).show();
                                             Intent i = new Intent(Sub_Dealer_ProductList.this, Sub_Dealer_Order_Main.class);
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

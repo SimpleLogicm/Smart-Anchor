@@ -12,6 +12,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,11 +29,15 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.AutocompleteAdapternew;
 import com.anchor.adapter.AutoCompleteContactArrayAdapter;
+import com.anchor.adapter.CustomerAutoAdapter;
+import com.anchor.helper.WrapContentLinearLayoutManager;
 import com.anchor.model.SubDealerModel;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -60,6 +66,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedListener {
     private String Re_Text = "";
@@ -103,18 +110,25 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     ArrayList<SubDealerModel> All_sdealers = new ArrayList<SubDealerModel>();
     String valid_sub_dealer_flag = "";
     String sub_dealer_code = "";
+    AutocompleteAdapternew adapter1;
+    RecyclerView auto_recycleview;
+    CustomerAutoAdapter customerAutoAdapter;
+    List<Local_Data> autolist = new ArrayList<>();
+    ScrollView auto_scroll;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sub_dealer_order_main);
 
+        auto_scroll = findViewById(R.id.auto_scroll);
         s_submit = findViewById(R.id.s_submit);
         s_state = findViewById(R.id.s_state);
         s_city = findViewById(R.id.s_city);
         s_district = findViewById(R.id.s_district);
         s_sub_dealer_search = findViewById(R.id.s_sub_dealer_search);
         s_dealer_search = findViewById(R.id.s_dealer_search);
+        auto_recycleview = findViewById(R.id.auto_recycleview);
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -126,8 +140,17 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         // AutoCompleteTextView
         s_sub_dealer_search.setTextColor(Color.BLACK);
 
+        auto_recycleview.setLayoutManager(new WrapContentLinearLayoutManager(Sub_Dealer_Order_Main.this, LinearLayoutManager.VERTICAL, false));
+        adapter1 = new AutocompleteAdapternew(this, android.R.layout.simple_dropdown_item_1line);
+        s_dealer_search.setAdapter(adapter1);
+
+        customerAutoAdapter = new CustomerAutoAdapter(autolist,Sub_Dealer_Order_Main.this );
+        auto_recycleview.setAdapter(customerAutoAdapter);
+
         Global_Data.Customers.clear();
         Global_Data.Customers_map.clear();
+        Global_Data.spiner_list_modelListn.clear();
+        Global_Data.state_code = "";
 
         s_sub_dealer_search.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -185,16 +208,16 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                     long id) {
                 Global_Data.hideSoftKeyboard(Sub_Dealer_Order_Main.this);
 
-                valid_sub_dealer_flag = "";
-                sub_dealer_code = "";
-                for (SubDealerModel dataItem : All_sdealers) {
-                    if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                        sub_dealer_code = dataItem.code;
-                        valid_sub_dealer_flag = "yes";
-                        break;
-                    }
-
-                }
+//                valid_sub_dealer_flag = "";
+//                sub_dealer_code = "";
+//                for (SubDealerModel dataItem : All_sdealers) {
+//                    if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+//                        sub_dealer_code = dataItem.code;
+//                        valid_sub_dealer_flag = "yes";
+//                        break;
+//                    }
+//
+//                }
 
 
             }
@@ -233,9 +256,16 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 if (s_dealer_search.getText().toString().trim().length() == 0) {
 
+                    auto_recycleview.setVisibility(View.GONE);
+                    Global_Data.Customers.clear();
+                    Global_Data.Customers_map.clear();
+                    Global_Data.spiner_list_modelListn.clear();
+//                    adapter1 = new AutocompleteAdapternew(Sub_Dealer_Order_Main.this, android.R.layout.simple_dropdown_item_1line);
+//                    s_dealer_search.setAdapter(adapter1);
                     //valid_sub_dealer_flag = "";
                     //sub_dealer_code = "";
                 }
+
             }
 
             @Override
@@ -246,6 +276,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                adapter1 = new AutocompleteAdapternew(Sub_Dealer_Order_Main.this, android.R.layout.simple_dropdown_item_1line);
+                s_dealer_search.setAdapter(adapter1);
 
             }
         });
@@ -265,9 +298,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onClick(View v) {
 
-                Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
-                startActivity(s_dub);
-                finish();
 
                 if (s_state.getSelectedItem().toString().equalsIgnoreCase("Select State")) {
 
@@ -305,10 +335,50 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     String address_type = "";
                     sub_dealer_name = s_sub_dealer_search.getText().toString().trim();
 
+                    valid_sub_dealer_flag = "";
+                    sub_dealer_code = "";
 
-//                    Intent s_dub = new Intent(getApplicationContext(), Sub_Dealer_ProductList.class);
-//                    startActivity(s_dub);
-//                    finish();
+                    if (All_sdealers.size() > 0) {
+                        for (SubDealerModel dataItem : All_sdealers) {
+                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.code;
+                                Global_Data.Sub_Dealer_Code = sub_dealer_code;
+                                valid_sub_dealer_flag = "yes";
+                                break;
+                            }
+
+                        }
+                    } else {
+                        Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Sub Dealer Not Found",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+
+                    if(Global_Data.Customers_map.size() > 0)
+                    {
+                        try
+                        {
+                            Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+                        }catch(Exception ex)
+                        {
+                            Global_Data.Dealer_Code ="";
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    if(Global_Data.Dealer_Code.equalsIgnoreCase(""))
+                    {
+                        Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Dealer Not Found",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+
+
+                    Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
+                    startActivity(s_dub);
+                    finish();
 
 
                 }
@@ -430,7 +500,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             if (arg0.getItemAtPosition(arg2).toString()
                     .equalsIgnoreCase("Select State")) {
 
-
+                Global_Data.state_code = "";
                 state_name = "";
                 city_name = "";
                 district_name = "";
@@ -481,8 +551,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     try {
                         results2.clear();
                         results2.add("Select District");
-
                         String state_code = statemap.get(state_name);
+                        Global_Data.state_code = state_code;
                         districts_OnlineData(state_code);
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -1747,5 +1817,25 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         startActivity(i);
         finish();
     }
+
+    public void onClickCalled(String anyValue) {
+
+        ArrayList<String> s = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                s);
+        s_dealer_search.setThreshold(1);// will start working from
+        // first character
+        s_dealer_search.setAdapter(adapter);// setting the adapter
+        // data into the
+        // AutoCompleteTextView
+        s_dealer_search.setTextColor(Color.BLACK);
+
+        s_dealer_search.setText(anyValue);
+       // auto_recycleview.setVisibility(View.GONE);
+       // auto_recycleview.setAlpha(0);
+        //holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+    }
+
 }
 

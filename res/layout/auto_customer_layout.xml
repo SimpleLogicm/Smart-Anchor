@@ -8,6 +8,7 @@
     >
 
     <LinearLayout
+        android:id="@+id/customer_glayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +27,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/cs_address"
             android:textColor="@color/black"
-            android:textStyle="bold"
+
+            android:text="" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cs_shope"
+            android:visibility="gone"
+            android:textColor="@color/black"
+
             android:text="" />
 
 

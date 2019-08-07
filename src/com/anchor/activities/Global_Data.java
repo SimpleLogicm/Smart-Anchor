@@ -208,6 +208,11 @@ public class Global_Data {
 
     public static List<String> Customers =new ArrayList<>();
     public static HashMap<String,String> Customers_map = new HashMap<String,String>();
+
+    public static String Sub_Dealer_Code="";
+    public static String Dealer_Code="";
+    public static String state_code="";
+    public static String click_flag="";
 	
 	//public static String GLOVEL_LONG_DESC="";
     
@@ -222,143 +227,5 @@ public class Global_Data {
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
-//    public static void sendSMS(String phoneNumber, String message, final Context activity) {
-//        String SENT = "SMS_SENT";
-//        String DELIVERED = "SMS_DELIVERED";
-//
-//        PendingIntent sentPI = PendingIntent.getBroadcast(activity, 0, new Intent(
-//                SENT), 0);
-//
-//        PendingIntent deliveredPI = PendingIntent.getBroadcast(activity, 0,
-//                new Intent(DELIVERED), 0);
-//
-//        // ---when the SMS has been sent---
-//        activity.registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode()) {
-//                    case Activity.RESULT_OK:
-//                        ContentValues values = new ContentValues();
-////						for (int i = 0; i < MobNumber.size() - 1; i++) {
-////							values.put("address", MobNumber.get(i).toString());// txtPhoneNo.getText().toString());
-////							values.put("body","gdfgdgd");
-////						}
-//
-//                        //for (int i = 0; i < MobNumber.size() - 1; i++) {
-//                       values.put("address", "8454858739");// txtPhoneNo.getText().toString());
-//                        values.put("body","gdfgdgd");
-//                        //}
-//
-//                        activity.getContentResolver().insert(
-//                                Uri.parse("content://sms/sent"), values);
-//                        Toast.makeText(activity, "SMS sent",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-//                        Toast.makeText(activity, "Generic failure",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-//                        Toast.makeText(activity, "No service",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NULL_PDU:
-//                        Toast.makeText(activity, "Null PDU",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-//                        Toast.makeText(activity, "Radio off",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(SENT));
-//
-//        // ---when the SMS has been delivered---
-//        activity.registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode()) {
-//                    case Activity.RESULT_OK:
-//                        Toast.makeText(activity, "SMS delivered",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case Activity.RESULT_CANCELED:
-//                        Toast.makeText(activity, "SMS not delivered",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(DELIVERED));
-//
-//        SmsManager sms = SmsManager.getDefault();
-//        ArrayList<String> parts = sms.divideMessage(message);
-//        //sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
-//        sms.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
-//    }
 
-//    public static void sendSMS(String phoneNumber, String message,final Context activity)
-//    {
-//        String SENT = "SMS_SENT";
-//        String DELIVERED = "SMS_DELIVERED";
-//
-//        PendingIntent sentPI = PendingIntent.getBroadcast(activity, 0,
-//                new Intent(SENT), 0);
-//
-//        PendingIntent deliveredPI = PendingIntent.getBroadcast(activity, 0,
-//                new Intent(DELIVERED), 0);
-//
-//        //---when the SMS has been sent---
-//         activity.registerReceiver(new BroadcastReceiver(){
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode())
-//                {
-//                    case Activity.RESULT_OK:
-//                        Toast.makeText(activity, "SMS sent",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-//                        Toast.makeText(activity, "Generic failure",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-//                        Toast.makeText(activity, "No service",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NULL_PDU:
-//                        Toast.makeText(activity, "Null PDU",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-//                        Toast.makeText(activity, "Radio off",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        },new IntentFilter(SENT));
-//
-//        //---when the SMS has been delivered---
-//        activity.registerReceiver(new BroadcastReceiver(){
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode())
-//                {
-//                    case Activity.RESULT_OK:
-//                        Toast.makeText(activity, "SMS delivered",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case Activity.RESULT_CANCELED:
-//                        Toast.makeText(activity, "SMS not delivered",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(DELIVERED));
-//
-//        SmsManager sms = SmsManager.getDefault();
-//        //sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
-//        ArrayList<String> parts = sms.divideMessage(message);
-//        sms.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
-//    }
 }

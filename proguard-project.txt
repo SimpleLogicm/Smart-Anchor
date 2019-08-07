@@ -87,3 +87,8 @@
 
 -dontwarn afu.org.checkerframework.**
 -dontwarn org.checkerframework.**
+-dontwarn io.realm.**
+-keep class com.github.mikephil.charting.** { *; }
+-keep class com.itextpdf.** { *; }
+-dontwarn com.itextpdf.**
+-dontwarn com.fangxu.allangleexpandablebutton.**
