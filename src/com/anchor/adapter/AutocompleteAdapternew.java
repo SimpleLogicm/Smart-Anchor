@@ -162,7 +162,7 @@ public class AutocompleteAdapternew extends ArrayAdapter<String> implements Filt
                                                     ScrollView auto_scroll = ((Activity) mcontext).findViewById(R.id.auto_scroll);
                                                     if(recyclerView.getVisibility() != View.VISIBLE)
                                                     {
-                                                        auto_scroll.fullScroll(View.FOCUS_DOWN);
+                                                       // auto_scroll.fullScroll(View.FOCUS_DOWN);
                                                     }
                                                     recyclerView.setVisibility(View.VISIBLE);
                                                     Global_Data.click_flag = "";

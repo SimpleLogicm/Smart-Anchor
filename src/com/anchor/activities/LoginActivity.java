@@ -998,7 +998,12 @@ public class LoginActivity extends Activity {
                                         public void onClick(DialogInterface dialog, int which) {
                                             dialog.cancel();
                                         }
-                                    }).show();
+                                    });
+
+                            AlertDialog dialogn = mAlertDialog.create();
+                            dialogn.getButton(AlertDialog.BUTTON1).setEnabled(false);
+                            dialogn.show();
+
                         }
                     }
 

@@ -10,22 +10,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:checked="false"
             android:gravity="center"
-            android:switchMinWidth="100dp"
-            android:text=""
-            android:textOff="OUT"
-            android:textOn="IN" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="IN"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <com.suke.widget.SwitchButton
+                android:id="@+id/switch1"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:sb_checked="false"
+                app:sb_checked_color="@color/switch_incolor"
+                app:sb_show_indicator="false"
+                app:sb_uncheck_color="@color/switch_incolor"
+                app:sb_uncheckcircle_color="@color/switch_incolor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="OUT"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <Spinner
             android:id="@+id/List_Of_Event"
@@ -41,28 +65,27 @@
             android:id="@+id/border"
             android:layout_width="300dp"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="#e2e2e2" />
 
         <EditText
             android:id="@+id/EditText02"
             android:layout_width="300dp"
             android:layout_height="100dp"
-            android:lines="5"
-            android:background="@drawable/edittext_bottom_line"
             android:layout_gravity="center"
+            android:background="@drawable/edittext_bottom_line"
             android:gravity="start|left"
             android:hint="Summary"
             android:inputType="textMultiLine"
-            android:scrollHorizontally="false"
-            />
+            android:lines="5"
+            android:scrollHorizontally="false" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -70,18 +93,18 @@
                 android:id="@+id/rpo_chhose_file"
                 android:layout_width="140dp"
                 android:layout_height="30dp"
-                android:gravity="center"
                 android:background="#414042"
-                android:text="@string/Reset"
+                android:gravity="center"
+                android:text="@string/Take_Photo"
                 android:textColor="#FFFFFF" />
 
             <View
                 android:id="@+id/borderfd"
                 android:layout_width="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:background="#cecece" />
 
             <ImageView
@@ -95,9 +118,9 @@
                 android:id="@+id/abf"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="Upload Photo"
-                android:layout_gravity="center"
 
                 />
 

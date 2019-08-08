@@ -44,6 +44,7 @@
     <color name="lightgreen">#336666</color>
     <color name="orrange">#e33d1b</color>
     <color name="darkorrange">#cc2303</color>
+    <color name="switch_incolor">#8e8e8e</color>
 
     <color name="view_background">#e8ecfa</color>
     <color name="btn_bg">#277bec</color>

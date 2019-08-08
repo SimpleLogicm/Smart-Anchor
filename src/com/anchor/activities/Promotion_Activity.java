@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,10 +14,14 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -25,6 +30,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +59,7 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.suke.widget.SwitchButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,8 +68,15 @@ import org.json.JSONTokener;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
 public class Promotion_Activity extends Activity {
 
@@ -79,6 +93,9 @@ public class Promotion_Activity extends Activity {
     private String mCurrentPhotoPath = "";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private String pictureImagePath_new = "";
+    com.suke.widget.SwitchButton switchButton;
+    StringBuilder str ;
+    String datenn;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +103,24 @@ public class Promotion_Activity extends Activity {
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_promotional_);
         rpo_chhose_file = findViewById(R.id.rpo_chhose_file);
+        switchButton = findViewById(R.id.switch1);
+
+        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+
+                if(isChecked)
+                {
+                    showDialogn("OUT");
+                }
+                else
+                {
+                    showDialogn("IN");
+                }
+
+            }
+        });
+
 
         rpo_chhose_file.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +175,14 @@ public class Promotion_Activity extends Activity {
             mActionBar.setHomeButtonEnabled(true);
             mActionBar.setDisplayHomeAsUpEnabled(true);
         }catch(Exception ex){ex.printStackTrace();}
+
+        cd = new ConnectionDetector(getApplicationContext());
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
+        DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String daten = sdf.format(date);
+        datenn = sdf.format(date);
+        getAddress();
 
 
     }
@@ -741,6 +784,190 @@ public class Promotion_Activity extends Activity {
 
         }
 
+    }
+
+    public void showDialogn(String flag) {
+        final Dialog dialognew = new Dialog(Promotion_Activity.this);
+        dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialognew.setCancelable(false);
+        dialognew.setContentView(R.layout.promotion_dialog);
+
+        TextView pro_header =  dialognew.findViewById(R.id.pro_header);
+        TextView pro_time = dialognew.findViewById(R.id.pro_time);
+        TextView pro_date = dialognew.findViewById(R.id.pro_date);
+        TextView pro_address =  dialognew.findViewById(R.id.pro_address);
+        Button pro_click =  dialognew.findViewById(R.id.pro_click);
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date();
+        // String daten = sdf.format(date);
+        String datenew = sdf.format(date);
+
+        Date d=new Date();
+        SimpleDateFormat sdf_time=new SimpleDateFormat("hh:mm a");
+        String currentDateTimeString = sdf_time.format(d);
+
+        if (flag.equalsIgnoreCase("OUT")) {
+            pro_header.setText("OUT TIME");
+        } else {
+            pro_header.setText("IN TIME");
+        }
+
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
+//            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
+//        }
+//
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+//            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
+//        }
+
+
+        //inh.setPaintFlags(inh.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.address)) {
+            String str = Global_Data.address.trim().replaceAll("\n", " ");
+            pro_address.setText("Address : " + str);
+        } else {
+            pro_address.setText("Address Not Found.");
+        }
+
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(datenew)) {
+            try {
+                String timenewarray[] = datenew.split("-");
+                String month = getMonthForInt(Integer.parseInt(timenewarray[1]) - 1);
+                pro_date.setText("Date : " + timenewarray[0] + " " + month + " " + timenewarray[2]);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            pro_date.setText("Date Not Found.");
+        }
+
+        pro_time.setText("Time : "+currentDateTimeString);
+
+        pro_click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialognew.dismiss();
+
+            }
+        });
+
+        dialognew.show();
+
+    }
+
+    String getMonthForInt(int num) {
+        String month = "wrong";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11) {
+            month = months[num];
+        }
+        return month;
+    }
+
+    public void getAddress()
+    {
+
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+                try {
+
+                    LocationAddress locationAddress = new LocationAddress();
+                    locationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE) ,Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+                            Promotion_Activity.this, new Promotion_Activity.GeocoderHandler());
+                    Geocoder geo = new Geocoder(Promotion_Activity.this.getApplicationContext(), Locale.getDefault());
+                    List<Address> addresses = geo.getFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE), 1);
+                    if (addresses.isEmpty()) {
+                    } else {
+                        if (addresses.size() > 0) {
+                            Address returnAddress = addresses.get(0);
+                            String localityString = returnAddress.getLocality();
+                            String city = returnAddress.getCountryName();
+                            String region_code = returnAddress.getCountryCode();
+                            String zipcode = returnAddress.getPostalCode();
+                            str = new StringBuilder();
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0)) + " ");
+                            if (!(str.indexOf(addresses.get(0).getLocality()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality()) + " ");
+                            }
+
+                            if (!(str.indexOf(addresses.get(0).getAdminArea()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea()) + " ");
+                            }
+
+                            if (!(str.indexOf(addresses.get(0).getCountryName()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName()) + " ");
+                            }
+
+                            if (!(str.indexOf(addresses.get(0).getPostalCode()) > 0)) {
+                                str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode()) + " ");
+                            }
+
+                            str.append("\n");
+
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str.toString())) {
+                                Global_Data.address = str.toString();
+
+
+                            } else {
+                                Global_Data.address = "";
+
+                            }
+
+
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+            else
+            {
+                Global_Data.address = "";
+            }
+
+
+        } else {
+            Global_Data.address = "";
+        }
+    }
+
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress = "";
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    //locationAddress = " ";
+            }
+            //  LOCATION.setText(locationAddress);
+
+
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(locationAddress)) {
+                str = new StringBuilder();
+                //prefManager.setAddress(locationAddress);
+                Log.d("GLOBEL ADDRESS G", "V" + locationAddress);
+                str.append("");
+                str.append(locationAddress);
+
+            } else {
+                str = new StringBuilder();
+                Log.d("GLOBEL ADDRESS G", "address not found.");
+                //prefManager.setAddress("");
+                str.append("");
+            }
+
+
+        }
     }
 
 }
