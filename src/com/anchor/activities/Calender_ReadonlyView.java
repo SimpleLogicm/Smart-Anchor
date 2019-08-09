@@ -372,7 +372,7 @@ public class Calender_ReadonlyView extends BaseActivity{
 
             dialog = new ProgressDialog(Calender_ReadonlyView.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 

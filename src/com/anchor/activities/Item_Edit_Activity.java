@@ -309,9 +309,17 @@ public class Item_Edit_Activity extends BaseActivity {
 //						toast.show();
 //					}
 
-                    int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
+                    int SQMO_Validator = 0;
 
-                    if (editTextQuantity.getText().toString().length() == 0) {
+                    if(editTextQuantity.length() != 0)
+                    {
+                         SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
+                    }
+
+
+
+
+                    if (editTextQuantity.length() == 0) {
                         Toast toast = Toast.makeText(Item_Edit_Activity.this, "Please enter Quantity", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();

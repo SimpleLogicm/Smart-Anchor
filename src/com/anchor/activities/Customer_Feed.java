@@ -1722,7 +1722,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 
 			dialog.setMessage("Please wait....");
-			dialog.setTitle("Metal");
+			dialog.setTitle("Smart Anchor App");
 			dialog.setCancelable(false);
 			dialog.show();
 
@@ -2251,7 +2251,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			// setting progress bar to zero
 			//progressBar.setProgress(0);
 			dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-			dialog.setTitle("Metal");
+			dialog.setTitle("Smart Anchor App");
 			dialog.setCancelable(false);
 			dialog.show();
 			super.onPreExecute();
@@ -2547,7 +2547,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			// TODO Auto-generated method stub
 			super.onPreExecute();
 			dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-			dialog.setTitle("Metal");
+			dialog.setTitle("Smart Anchor App");
 			dialog.setCancelable(false);
 			dialog.show();
 
@@ -4022,7 +4022,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 																{
 																	dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 																	dialog.setMessage("Please wait....");
-																	dialog.setTitle("Metal");
+																	dialog.setTitle("Smart Anchor App");
 																	dialog.setCancelable(false);
 																	dialog.show();
 																}
@@ -4202,7 +4202,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 															dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 															dialog.setMessage("Please wait....");
-															dialog.setTitle("Metal");
+															dialog.setTitle("Smart Anchor App");
 															dialog.setCancelable(false);
 															dialog.show();
 

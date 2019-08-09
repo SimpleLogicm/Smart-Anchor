@@ -281,7 +281,7 @@ public class VideoAlbumAdapter extends RecyclerView.Adapter<VideoAlbumAdapter.My
         System.gc();
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
         String reason_code = "";

@@ -331,7 +331,7 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 
 			dialog = new ProgressDialog(Expenses.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 			dialog.setMessage("Please wait....");
-			dialog.setTitle("Metal");
+			dialog.setTitle("Smart Anchor App");
 			dialog.setCancelable(false);
 			dialog.show();
 
@@ -524,7 +524,7 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 
 			dialog = new ProgressDialog(Expenses.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 			dialog.setMessage("Please wait....");
-			dialog.setTitle("Metal");
+			dialog.setTitle("Smart Anchor App");
 			dialog.setCancelable(false);
 			dialog.show();
 
