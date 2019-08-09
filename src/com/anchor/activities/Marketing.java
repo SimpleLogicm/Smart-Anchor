@@ -95,7 +95,7 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Marketing.this);
-                builder.setTitle("Anchor App");
+                builder.setTitle("Smart Anchor App");
                 builder.setCancelable(false);
                 builder.setMessage("New Launch");
                 builder.setPositiveButton("Online", new DialogInterface.OnClickListener() {
@@ -109,7 +109,7 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
 
                             pDialog.setMessage("Please Wait....");
-                            pDialog.setTitle("Anchor App");
+                            pDialog.setTitle("Smart Anchor App");
                             pDialog.setCancelable(false);
                             pDialog.show();
 

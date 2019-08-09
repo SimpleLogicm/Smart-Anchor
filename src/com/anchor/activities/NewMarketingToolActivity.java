@@ -339,7 +339,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
         if (cd.isConnectingToInternet()) {
             dialog = new ProgressDialog(NewMarketingToolActivity.this);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Anchor App");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -537,7 +537,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
                         if (cd.isConnectingToInternet()) {
                             dialog = new ProgressDialog(NewMarketingToolActivity.this);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Anchor App");
+                            dialog.setTitle("Smart Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -593,7 +593,7 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
                         if (cd.isConnectingToInternet()) {
                             dialog = new ProgressDialog(NewMarketingToolActivity.this);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Anchor App");
+                            dialog.setTitle("Smart Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 

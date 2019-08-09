@@ -254,8 +254,8 @@ public class LoginActivity extends Activity {
 //		editText1.setText("Akhil");
 //		editText2.setText("akhilesh12345");
 
-        editText1.setText("sadanand");
-        editText2.setText("PASSWORD");
+//        editText1.setText("sadanand");
+//        editText2.setText("PASSWORD");
 
 //		editText1.setText("HP0POW001");
 //		editText2.setText("naresh12345");
@@ -993,15 +993,15 @@ public class LoginActivity extends Activity {
                                             }
 
                                         }
-                                    })
-                                    .setNegativeButton("Dismiss",new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.cancel();
-                                        }
                                     });
+//                                    .setNegativeButton("Dismiss",new DialogInterface.OnClickListener() {
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            dialog.cancel();
+//                                        }
+//                                    });
 
                             AlertDialog dialogn = mAlertDialog.create();
-                            dialogn.getButton(AlertDialog.BUTTON1).setEnabled(false);
+                            //dialogn.getButton(AlertDialog.BUTTON1).setEnabled(false);
                             dialogn.show();
 
                         }

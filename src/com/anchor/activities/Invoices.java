@@ -324,7 +324,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Anchor App");
+                datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
             }
         });
@@ -376,7 +376,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
                             }
 
                             dialog.setMessage("Please Wait....");
-                            dialog.setTitle("Anchor App");
+                            dialog.setTitle("Smart Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -731,7 +731,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
 //                            }
 
                             android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(Invoices.this).create();
-                            alertDialog.setTitle("Anchor App");
+                            alertDialog.setTitle("Smart Anchor App");
                             alertDialog.setMessage(" Are you sure you want to Continue?");
                             alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 

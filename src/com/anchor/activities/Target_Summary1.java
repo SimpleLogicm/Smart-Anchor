@@ -361,7 +361,7 @@ public class Target_Summary1 extends BaseActivity {
         loginDataBaseAdapter=loginDataBaseAdapter.open();
         dialog = new ProgressDialog(Target_Summary1.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

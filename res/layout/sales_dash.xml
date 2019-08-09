@@ -328,6 +328,7 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="20dp"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"
             android:layout_weight="1.20" >
@@ -358,18 +359,6 @@
                 android:layout_marginRight="1dp"
                 android:src="@drawable/quotes" />
         </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/lout_second"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/lout_fifth"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal" >
-
         <RelativeLayout
             android:layout_width="20dp"
             android:layout_height="match_parent"
@@ -400,6 +389,20 @@
                 android:src="@drawable/quotesstatus" />
 
         </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lout_second"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lout_fifth"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+
 
         <RelativeLayout
             android:layout_width="20dp"

@@ -407,7 +407,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //                progressDialog.dismiss();
                 progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
                 progressDialog.setMessage("Please wait....");
-                progressDialog.setTitle("Anchor App");
+                progressDialog.setTitle("Smart Anchor App");
                 progressDialog.setCancelable(false);
                 progressDialog.show();
 
@@ -544,7 +544,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                     progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
                     progressDialog.setMessage("Please wait....");
-                    progressDialog.setTitle("Anchor App");
+                    progressDialog.setTitle("Smart Anchor App");
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 
@@ -612,7 +612,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         progressDialog.dismiss();
                     progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
                     progressDialog.setMessage("Please wait....");
-                    progressDialog.setTitle("Anchor App");
+                    progressDialog.setTitle("Smart Anchor App");
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 
@@ -657,7 +657,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         progressDialog.dismiss();
                     progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
                     progressDialog.setMessage("Please wait....");
-                    progressDialog.setTitle("Anchor App");
+                    progressDialog.setTitle("Smart Anchor App");
                     progressDialog.setCancelable(false);
                     progressDialog.show();
 

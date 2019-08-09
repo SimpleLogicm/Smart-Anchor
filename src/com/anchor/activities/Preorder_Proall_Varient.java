@@ -332,7 +332,7 @@ public class Preorder_Proall_Varient extends Activity {
 
         dialog = new ProgressDialog(Preorder_Proall_Varient.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Product Loading....");
-        dialog.setTitle("Anchor App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

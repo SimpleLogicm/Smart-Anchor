@@ -297,7 +297,7 @@ public class Customer_Schemes extends Activity {
 
             dialog = new ProgressDialog(Customer_Schemes.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please Wait....");
-            dialog.setTitle("Sales App");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 

@@ -1567,7 +1567,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                     if (contadfg.size() <= 0 && a_check_datan.equalsIgnoreCase("false")) {
 
                                         dialog.setMessage("Please wait....");
-                                        dialog.setTitle("Anchor App");
+                                        dialog.setTitle("Smart Anchor App");
                                         dialog.setCancelable(false);
                                         dialog.show();
 

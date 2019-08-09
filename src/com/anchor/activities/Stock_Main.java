@@ -223,7 +223,7 @@ public class Stock_Main extends BaseActivity {
 
         dialog = new ProgressDialog(Stock_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Customer Loading....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -1155,7 +1155,7 @@ public class Stock_Main extends BaseActivity {
         protected void onPreExecute() {
 
             dialog.setMessage("Please wait Warehouse Details Sync....");
-            dialog.setTitle("Sales App");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
         }

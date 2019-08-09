@@ -349,7 +349,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
         dialog = new ProgressDialog(Sub_Dealer_ProductList.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Product Loading....");
-        dialog.setTitle("Anchor App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -958,7 +958,7 @@ public class Sub_Dealer_ProductList extends Activity {
                     if (dialog == null)
                         dialog = new ProgressDialog(Sub_Dealer_ProductList.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                     dialog.setMessage("Please wait Product Loading....");
-                    dialog.setTitle("Anchor App");
+                    dialog.setTitle("Smart Anchor App");
                     dialog.setCancelable(false);
                     dialog.show();
                 }

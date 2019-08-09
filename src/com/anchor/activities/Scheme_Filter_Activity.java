@@ -233,7 +233,7 @@ public class Scheme_Filter_Activity extends Activity implements DatePickerDialog
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Anchor App");
+                datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
             }
         });
@@ -256,7 +256,7 @@ public class Scheme_Filter_Activity extends Activity implements DatePickerDialog
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Anchor App");
+                datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
             }
         });
@@ -547,7 +547,7 @@ public class Scheme_Filter_Activity extends Activity implements DatePickerDialog
 
         if (cd.isConnectingToInternet()) {
             dialog.setMessage("Please wait Product Category Loading....");
-            dialog.setTitle("Anchor App");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 

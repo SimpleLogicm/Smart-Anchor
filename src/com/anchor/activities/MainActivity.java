@@ -43,19 +43,12 @@ import com.anchor.services.getServices;
 import com.anchor.slidingmenu.adapter.NavDrawerListAdapter;
 import com.anchor.slidingmenu.model.NavDrawerItem;
 import com.anchor.webservice.ConnectionDetector;
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.karumi.dexter.Dexter;
@@ -269,7 +262,7 @@ public class MainActivity extends BaseActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[7]));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[8]));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[9]));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[10]));
+       // navDrawerItems.add(new NavDrawerItem(navMenuTitles[10]));
 //
 //		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7]));
 //
@@ -529,162 +522,26 @@ public class MainActivity extends BaseActivity {
                 fragment = new Home();
 
                 break;
+
             case 6:
-
-                isInternetPresent = cd.isConnectingToInternet();
-
-                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
-                alertDialog.setTitle("Schedule");
-                alertDialog.setMessage("If you want to view schedule offline, Please click Offline button");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Online", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog1, int which) {
-                        dialog1.cancel();
-                        if (isInternetPresent) {
-                            //getScheduleDataFORALLCUSTOMERS();
-
-                            SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-                            String device_id = sp.getString("devid", "");
-                            //calendarn = Calendar.getInstance();
-                            //year = calendarn.get(Calendar.YEAR);
-                            loginDataBaseAdapter = new LoginDataBaseAdapter(MainActivity.this);
-                            loginDataBaseAdapter = loginDataBaseAdapter.open();
-                            dialog = new ProgressDialog(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-                            dialog.setMessage("Please Wait Schedule Sync....");
-                            dialog.setTitle("Sales App");
-                            dialog.setCancelable(false);
-                            dialog.show();
-
-                            String domain = getResources().getString(R.string.service_domain);
-
-                            Log.i("volley", "domain: " + domain);
-                            Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-                            Log.i("target url", "target url " + domain + "delivery_schedules/send_all_schedules?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-
-                            StringRequest jsObjRequest = null;
-
-                            jsObjRequest = new StringRequest(domain + "delivery_schedules/send_all_schedules?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL, new Response.Listener<String>() {
-
-
-//						jsObjRequest = new StringRequest(domain+"delivery_schedules/send_all_schedules?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL, new Response.Listener<String>() {
-
-                                @Override
-                                public void onResponse(String response) {
-                                    Log.i("volley", "response: " + response);
-                                    final_response = response;
-
-                                    new scheduleoperation().execute(response);
-
-                                }
-                            },
-                                    new Response.ErrorListener() {
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            dialog.dismiss();
-                                            //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                                            if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                                                Toast.makeText(getApplicationContext(),
-                                                        "Network Error",
-                                                        Toast.LENGTH_LONG).show();
-                                            } else if (error instanceof AuthFailureError) {
-                                                Toast.makeText(getApplicationContext(),
-                                                        "Server AuthFailureError  Error",
-                                                        Toast.LENGTH_LONG).show();
-                                            } else if (error instanceof ServerError) {
-                                                Toast.makeText(getApplicationContext(),
-                                                        "Server   Error",
-                                                        Toast.LENGTH_LONG).show();
-                                            } else if (error instanceof NetworkError) {
-                                                Toast.makeText(getApplicationContext(),
-                                                        "Network   Error",
-                                                        Toast.LENGTH_LONG).show();
-                                            } else if (error instanceof ParseError) {
-                                                Toast.makeText(getApplicationContext(),
-                                                        "ParseError   Error",
-                                                        Toast.LENGTH_LONG).show();
-                                            } else {
-                                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                                            }
-                                            dialog.dismiss();
-                                            // finish();
-                                        }
-                                    });
-
-                            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                            int socketTimeout = 300000;//30 seconds - change to what you want
-                            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-                            jsObjRequest.setRetryPolicy(policy);
-                            // requestQueue.se
-                            //requestQueue.add(jsObjRequest);
-                            jsObjRequest.setShouldCache(false);
-                            requestQueue.getCache().clear();
-                            requestQueue.add(jsObjRequest);
-
-
-                        } else {
-
-                            //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-                            Toast toast = Toast.makeText(MainActivity.this, "You don't have internet connection.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                        }
-
-
-                    }
-                });
-
-                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Offline", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog1, int which) {
-
-                        List<Local_Data> contacts3 = dbvoc.getSchedule_ListAll();
-
-                        if (contacts3.size() <= 0) {
-                            //Toast.makeText(Order.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
-                            Toast toast = Toast.makeText(MainActivity.this, "Sorry No Record Found.", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-
-                        } else {
-                            Global_Data.Schedule_FLAG = "ALLCUSTOMER";
-                            Intent intent = new Intent(getApplicationContext(),
-                                    Schedule_List.class);
-                            startActivity(intent);
-                            finish();
-                            overridePendingTransition(R.anim.slide_in_right,
-                                    R.anim.slide_out_left);
-                        }
-
-                        dialog1.cancel();
-
-                    }
-                });
-                alertDialog.show();
-                fragment = new Home();
-                break;
-            case 7:
                 Intent conaa = new Intent(MainActivity.this, Sound_Setting.class);
                 startActivity(conaa);
                 //finish();
                 fragment = new Home();
                 break;
-            case 8:
+            case 7:
                 Intent con = new Intent(MainActivity.this, Contact_Us.class);
                 startActivity(con);
                 //finish();
                 fragment = new Home();
                 break;
-            case 9:
+            case 8:
                 Intent cona = new Intent(MainActivity.this, About_Metal.class);
                 startActivity(cona);
                 //finish();
                 fragment = new Home();
                 break;
-            case 10:
+            case 9:
                 onBackPressed();
                 fragment = new Home();
                 break;
@@ -884,7 +741,7 @@ public class MainActivity extends BaseActivity {
 
         dialog = new ProgressDialog(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.setCancelable(false);
         dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {

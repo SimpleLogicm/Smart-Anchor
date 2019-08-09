@@ -2644,7 +2644,7 @@ public class Order extends Activity implements OnItemSelectedListener {
         loginDataBaseAdapter = loginDataBaseAdapter.open();
         dialog = new ProgressDialog(Order.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please Wait Previous Sync....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

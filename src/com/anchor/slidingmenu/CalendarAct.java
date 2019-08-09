@@ -199,7 +199,7 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
 			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-			mTitleTextView.setText("Calender");
+			mTitleTextView.setText("Calendar");
 
 			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = CalendarAct.this.getSharedPreferences("SimpleLogic", 0);

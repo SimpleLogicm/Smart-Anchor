@@ -268,7 +268,7 @@ public class Electrician_Map extends FragmentActivity implements OnMapReadyCallb
                 {
                     dialog = new ProgressDialog(Electrician_Map.this, ProgressDialog.THEME_HOLO_LIGHT);
                     dialog.setMessage("Please wait....");
-                    dialog.setTitle("Anchor App");
+                    dialog.setTitle("Smart Anchor App");
                     dialog.setCancelable(false);
                     dialog.show();
 

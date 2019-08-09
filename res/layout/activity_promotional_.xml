@@ -34,7 +34,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:sb_checked="false"
+                app:sb_checked="true"
                 app:sb_checked_color="@color/switch_incolor"
                 app:sb_show_indicator="false"
                 app:sb_uncheck_color="@color/switch_incolor"
@@ -51,8 +51,66 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/indt_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/intime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/indate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/outdt_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/outtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/outdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
         <Spinner
-            android:id="@+id/List_Of_Event"
+            android:id="@+id/List_Of_Event_Spinner"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
@@ -70,7 +128,7 @@
             android:background="#e2e2e2" />
 
         <EditText
-            android:id="@+id/EditText02"
+            android:id="@+id/pro_edit"
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
@@ -108,7 +166,7 @@
                 android:background="#cecece" />
 
             <ImageView
-                android:id="@+id/outlet_signboard_pick"
+                android:id="@+id/events_pick"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="0dp"
@@ -118,6 +176,7 @@
                 android:id="@+id/abf"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:text="Upload Photo"

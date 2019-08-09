@@ -139,7 +139,7 @@ public class Customer_info_main extends Activity {
 
         dialog = new ProgressDialog(Customer_info_main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Customer Loading....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

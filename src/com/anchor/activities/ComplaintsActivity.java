@@ -284,7 +284,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
         {
             dialog = new ProgressDialog(ComplaintsActivity.this);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Anchor App");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -616,7 +616,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                         {
                             dialog = new ProgressDialog(ComplaintsActivity.this);
                             dialog.setMessage("Please wait....");
-                            dialog.setTitle("Anchor App");
+                            dialog.setTitle("Smart Anchor App");
                             dialog.setCancelable(false);
                             dialog.show();
 
@@ -2003,7 +2003,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
     public void getproducts() {
 
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Anchor");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -2251,7 +2251,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                             if (cd.isConnectingToInternet()) {
                                 dialog = new ProgressDialog(ComplaintsActivity.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                                 dialog.setMessage("Sync in Progress, Please Wait");
-                                dialog.setTitle("Anchor");
+                                dialog.setTitle("Smart Anchor App");
                                 dialog.setCancelable(false);
                                 dialog.show();
                                 new doFileUpload().execute();

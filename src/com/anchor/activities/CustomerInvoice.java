@@ -427,7 +427,7 @@ public class CustomerInvoice extends AppCompatActivity {
         if(cd.isConnectedToInternet()) {
             dialog = new ProgressDialog(CustomerInvoice.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please Wait....");
-            dialog.setTitle("Sales App");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 

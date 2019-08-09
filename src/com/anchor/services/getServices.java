@@ -433,7 +433,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage(wait);
-        dialog.setTitle("Anchor");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -534,7 +534,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Anchor");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -959,7 +959,7 @@ public class getServices {
             dialog.dismiss();}
 
         dialog.setMessage("Order Sync in Progress, Please Wait");
-        dialog.setTitle("Anchor");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -1115,7 +1115,7 @@ public class getServices {
             //params.put("token", json.toString());
 
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Anchor");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -1453,7 +1453,7 @@ public class getServices {
             //params.put("token", json.toString());
 
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Anchor");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -1724,7 +1724,7 @@ public class getServices {
            //params.put("token", json.toString());
 
            dialog.setMessage("Order Sync in Progress, Please Wait");
-           dialog.setTitle("Anchor");
+           dialog.setTitle("Smart Anchor App");
            dialog.setCancelable(false);
            dialog.show();
 
@@ -1915,7 +1915,7 @@ public class getServices {
 
 		    dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 	        dialog.setMessage("Please wait....");
-	        dialog.setTitle("Anchor");
+	        dialog.setTitle("Smart Anchor App");
 	        dialog.setCancelable(false);
 	        dialog.show();
 
@@ -2276,7 +2276,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Anchor");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -2865,7 +2865,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Anchor");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
 
@@ -3032,7 +3032,7 @@ public class getServices {
 
         dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Anchor");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -3781,7 +3781,7 @@ public class getServices {
         dbvoc = new DataBaseHelper(contextn);
         dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -3942,7 +3942,7 @@ public class getServices {
         dbvoc = new DataBaseHelper(contextn);
         dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Sales App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -4649,7 +4649,7 @@ public class getServices {
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Anchor");
+            dialog.setTitle("Smart Anchor App");
             dialog.setCancelable(false);
             dialog.show();
             super.onPreExecute();

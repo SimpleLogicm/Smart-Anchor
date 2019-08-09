@@ -6,16 +6,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,19 +36,24 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anchor.App.AppController;
-import com.anchor.helper.FileDownloader;
+import com.anchor.helper.GlideApp;
+import com.anchor.helper.MultipartUtility;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
@@ -52,6 +62,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -64,15 +76,16 @@ import com.suke.widget.SwitchButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -80,7 +93,7 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 
 public class Promotion_Activity extends Activity {
 
-    ImageView new_launch,market_survey,advertisement;
+    ImageView new_launch, market_survey, advertisement;
     ConnectionDetector cd;
     Boolean isInternetPresent = false;
     ProgressDialog pDialog;
@@ -94,28 +107,93 @@ public class Promotion_Activity extends Activity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private String pictureImagePath_new = "";
     com.suke.widget.SwitchButton switchButton;
-    StringBuilder str ;
-    String datenn;
+    StringBuilder str;
+    TextView intime, indate, outtime, outdate;
+    String inDateTime = "";
+    String outDateTime = "";
+    LinearLayout indt_container, outdt_container;
+    ProgressDialog progressDialog;
+    SharedPreferences sp;
+    static String final_response = "";
+    JSONArray EVENT_JSON = null;
+    HashMap<String, String> eventmap = new HashMap<String, String>();
+    ArrayList<String> list_Events = new ArrayList<String>();
+    ArrayAdapter<String> adapter_events;
+    Spinner List_Of_Event_Spinner;
+    Button ss_submit, ss_Reset;
+    ImageView events_pick;
+    EditText pro_edit;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_promotional_);
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
+        ss_submit = findViewById(R.id.ss_submit);
+        ss_Reset = findViewById(R.id.ss_Reset);
+        events_pick = findViewById(R.id.events_pick);
+
+        pro_edit = findViewById(R.id.pro_edit);
+        intime = findViewById(R.id.intime);
+        indate = findViewById(R.id.indate);
+        outtime = findViewById(R.id.outtime);
+        outdate = findViewById(R.id.outdate);
+        indt_container = findViewById(R.id.indt_container);
+        outdt_container = findViewById(R.id.outdt_container);
         rpo_chhose_file = findViewById(R.id.rpo_chhose_file);
+        List_Of_Event_Spinner = findViewById(R.id.List_Of_Event_Spinner);
         switchButton = findViewById(R.id.switch1);
+
+        list_Events.add("Select Events");
+        adapter_events = new ArrayAdapter<String>(Promotion_Activity.this,
+                android.R.layout.simple_spinner_item, list_Events);
+        adapter_events.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        List_Of_Event_Spinner.setAdapter(adapter_events);
 
         switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
 
-                if(isChecked)
-                {
-                    showDialogn("OUT");
+                if (indt_container.getVisibility() == View.GONE) {
+                    indt_container.setVisibility(View.VISIBLE);
+                    outdt_container.setVisibility(View.VISIBLE);
                 }
-                else
-                {
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                String daten = sdf.format(date);
+
+                SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                String datenew = date_form.format(date);
+
+                SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                String currentDateTimeString = sdf_time.format(date);
+
+
+                if (isChecked) {
+                    outDateTime = sdf.format(date);
+                    outtime.setText("Out Time : " + currentDateTimeString);
+                    outdate.setText("Out Date : " + datenew);
+                    outdt_container.setVisibility(View.VISIBLE);
+                    showDialogn("OUT");
+
+                } else {
+                    inDateTime = sdf.format(date);
+                    intime.setText("IN Time : " + currentDateTimeString);
+                    indate.setText("IN Date : " + datenew);
+                    if (!outDateTime.equalsIgnoreCase("")) {
+                        outdt_container.setVisibility(View.GONE);
+                    }
                     showDialogn("IN");
+
+
                 }
 
             }
@@ -130,8 +208,45 @@ public class Promotion_Activity extends Activity {
             }
         });
 
-        try
-        {
+
+        try {
+
+
+            cd = new ConnectionDetector(Promotion_Activity.this);
+            progressDialog = new ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
+
+            isInternetPresent = cd.isConnectingToInternet();
+            if (isInternetPresent) {
+//            if (progressDialog != null && progressDialog.isShowing())
+//                progressDialog.dismiss();
+
+                progressDialog.setMessage("Please wait....");
+                progressDialog.setTitle("Smart Anchor App");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+
+                try {
+
+                    Events_OnlineData();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+
+            } else {
+
+                Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
             ActionBar mActionBar = getActionBar();
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             // mActionBar.setDisplayShowHomeEnabled(false);
@@ -147,25 +262,24 @@ public class Promotion_Activity extends Activity {
             TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Promotion_Activity.this.getSharedPreferences("SimpleLogic", 0);
 
-            try
-            {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-                {
+            try {
+                int target = (int) Math.round(sp.getFloat("Target", 0));
+                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
                     int age = (int) Math.round(age_float);
 
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-                }else
-                {
+                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+                } else {
                     int age = (int) Math.round(age_float);
 
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
 
-            }catch(Exception ex){ex.printStackTrace();}
-            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
 //	       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
                 todaysTarget.setText("Today's Target Acheived");
             }
@@ -174,15 +288,73 @@ public class Promotion_Activity extends Activity {
             mActionBar.setDisplayShowCustomEnabled(true);
             mActionBar.setHomeButtonEnabled(true);
             mActionBar.setDisplayHomeAsUpEnabled(true);
-        }catch(Exception ex){ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         cd = new ConnectionDetector(getApplicationContext());
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
-        DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        String daten = sdf.format(date);
-        datenn = sdf.format(date);
         getAddress();
+
+
+        ss_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (inDateTime.equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please In ",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else if (outDateTime.equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please Out ",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
+
+                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please Select Events",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else {
+                    new doFileUpload().execute();
+                }
+
+            }
+        });
+
+        ss_Reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                outDateTime = "";
+                inDateTime = "";
+                mCurrentPhotoPath = "";
+                outtime.setText("");
+                outdate.setText("");
+                intime.setText("");
+                indate.setText("");
+                pro_edit.setText("");
+                List_Of_Event_Spinner.setSelection(0);
+                events_pick.setImageResource(R.drawable.vector_camera_icon);
+                switchButton.setChecked(true);
+            }
+        });
+
+        events_pick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!mCurrentPhotoPath.equalsIgnoreCase("")) {
+
+                    showImage(mCurrentPhotoPath);
+
+
+                }
+            }
+        });
 
 
     }
@@ -201,7 +373,7 @@ public class Promotion_Activity extends Activity {
     @Override
     public void onBackPressed() {
 
-        Intent i = new Intent(Promotion_Activity.this,Sales_Dash.class);
+        Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();
@@ -213,321 +385,13 @@ public class Promotion_Activity extends Activity {
 
         super.onDestroy();
 
-        // unregisterReceiver(onComplete);
-
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
 
 
     }
 
-
-    private class imagesync extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-
-
-                //downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                String device_id = sp.getString("devid", "");
-
-                String domain = "";
-
-                domain = getResources().getString(R.string.service_domain);
-
-                Log.d("Server url","Server url"+domain+"new_launches?imei_no="+device_id);
-
-                StringRequest stringRequest = null;
-                stringRequest = new StringRequest(domain+"new_launches?imei_no="+device_id,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                //showJSON(response);
-                                // Log.d("jV", "JV" + response);
-                                Log.d("jV", "JV length" + response.length());
-                                // JSONObject person = (JSONObject) (response);
-                                try {
-                                    JSONObject json = new JSONObject(new JSONTokener(response));
-                                    try{
-
-
-                                        if(json.has("result"))
-                                        {
-                                            response_result = json.getString("result");
-                                        }
-                                        else
-                                        {
-                                            response_result = "data";
-                                        }
-
-
-                                        if(response_result.equalsIgnoreCase("No Data Found")) {
-
-                                            Promotion_Activity.this.runOnUiThread(new Runnable() {
-                                                public void run() {
-
-                                                    pDialog.hide();
-
-                                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
-                                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                                    toast.show();
-
-                                                    Intent launch = new Intent(Promotion_Activity.this,MainActivity.class);
-                                                    startActivity(launch);
-                                                    finish();
-                                                }
-                                            });
-
-
-                                        }
-                                        else
-                                        if(response_result.equalsIgnoreCase("Device not registered")) {
-
-                                            Promotion_Activity.this.runOnUiThread(new Runnable() {
-                                                public void run() {
-
-                                                    pDialog.hide();
-
-                                                    Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
-                                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                                    toast.show();
-
-                                                    Intent launch = new Intent(Promotion_Activity.this,MainActivity.class);
-                                                    startActivity(launch);
-                                                    finish();
-                                                }
-                                            });
-
-
-
-                                        }
-                                        else {
-
-                                            JSONArray launches = json.getJSONArray("launches");
-
-                                            Log.i("volley", "response reg launches Length: " + launches.length());
-
-                                            Log.d("users", "launches" + launches.toString());
-
-
-                                            if(launches.length() > 0)
-                                            {
-                                                dbvoc.getDeleteTable("new_launches_new");
-
-                                                String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
-                                                File dir = new File(extStorageDirectory, "Anchor_NewLaunch");
-
-                                                if (dir.isDirectory())
-                                                {
-                                                    String[] children = dir.list();
-                                                    for (int j = 0; j < children.length; j++)
-                                                    {
-                                                        new File(dir, children[j]).delete();
-                                                    }
-                                                }
-                                            }
-                                            for (int i = 0; i < launches.length(); i++) {
-
-                                                JSONObject object = launches.getJSONObject(i);
-//                                        Image image = new Image();
-//                                        image.setName(object.getString("name"));
-//                                        image.setLarge(object.getString("large"));
-//                                        image.setType(object.getString("type"));
-//                                        image.setTimestamp(object.getString("date"));
-//
-//                                        images.add(image);
-
-
-                                                String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1, object.getString("large").trim().length());
-
-                                                if(fileName.indexOf("?") > 0)
-                                                {
-                                                    String [] file_name_array = fileName.split("\\?");
-                                                    fileName = file_name_array[0];
-                                                }
-
-                                                fileName = fileName.replaceAll("[%,]","");
-
-                                                String path = Environment.getExternalStorageDirectory().toString();
-                                                File file = new File(path,"Anchor_NewLaunch"+"/"+fileName);
-
-
-                                                Global_Data.Download_hashmap.put(fileName,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim()));
-                                                // dbvoc.TABLE_CREATE_NEW_LAUNCHES_NEW_CHECK("file:" + file.getAbsolutePath());
-
-
-                                                loginDataBaseAdapter.insertNewLaunchesNew(object.getString("name"),"file:" + file.getAbsolutePath(),object.getString("type"),object.getString("date"));
-
-//                                        if(!file.exists())
-//                                        {
-//                                            file.mkdir();
-//                                        }
-//
-//                                        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(object.getString("large").trim())));
-//                                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-//                                        request.setAllowedOverRoaming(false);
-////                                           // request.setTitle("GadgetSaint Downloading " + "Sample_" + i + ".png");
-////                                            //request.setDescription("Downloading " + "Sample_" + i + ".png");
-//                                        request.setVisibleInDownloadsUi(false);
-//                                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "Anchor_NewLaunch"+"/"+fileName);
-//
-//                                        refid = downloadManager.enqueue(request);
-//
-//
-//                                        Log.e("OUTNM", "" + refid);
-//
-//                                        list.add(refid);
-
-
-                                            }
-
-                                            if(Global_Data.Download_hashmap.size() > 0)
-                                            {
-                                                FileDownloader.downloadFile(Promotion_Activity.this,pDialog,"");
-                                            }
-
-                                            //Intent launch = new Intent(context,Youtube_Player_Activity.class);
-                                            //startActivity(launch);
-
-
-
-                                            // mAdapter.notifyDataSetChanged();
-                                            //finish();
-
-                                        }
-
-                                        //  finish();
-                                        // }
-
-                                        // output.setText(data);
-                                    }catch(JSONException e){e.printStackTrace();
-
-                                        Promotion_Activity.this.runOnUiThread(new Runnable() {
-                                            public void run() {
-
-                                                Toast toast = Toast.makeText(Promotion_Activity.this,
-                                                        "Service Error",
-                                                        Toast.LENGTH_LONG);
-                                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                                toast.show();
-                                                Intent launch = new Intent(Promotion_Activity.this,MainActivity.class);
-                                                startActivity(launch);
-                                                finish();
-
-                                                pDialog.hide();
-                                            }
-                                        });
-
-                                    }
-
-
-
-                                } catch (JSONException e) {
-
-                                    e.printStackTrace();
-                                    Promotion_Activity.this.runOnUiThread(new Runnable() {
-                                        public void run() {
-
-
-                                            //  finish();
-                                            pDialog.dismiss();
-                                        }
-                                    });
-
-                                }
-
-
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(final VolleyError error) {
-                                //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                                Promotion_Activity.this.runOnUiThread(new Runnable() {
-                                    public void run() {
-
-
-                                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-//                            Toast.makeText(Image_Gellary.this,
-//                                    "Network Error",
-//                                    Toast.LENGTH_LONG).show();
-
-
-                                            Toast toast = Toast.makeText(Promotion_Activity.this,
-                                                    "Network Error",
-                                                    Toast.LENGTH_LONG);
-                                            toast.show();
-                                        } else if (error instanceof AuthFailureError) {
-
-
-                                            Toast toast = Toast.makeText(Promotion_Activity.this,
-                                                    "Server AuthFailureError  Error",
-                                                    Toast.LENGTH_LONG);
-                                            toast.show();
-                                        } else if (error instanceof ServerError) {
-
-                                            Toast toast = Toast.makeText(Promotion_Activity.this,
-                                                    "Server   Error",
-                                                    Toast.LENGTH_LONG);
-                                            toast.show();
-                                        } else if (error instanceof NetworkError) {
-
-                                            Toast toast = Toast.makeText(Promotion_Activity.this,
-                                                    "Network   Error",
-                                                    Toast.LENGTH_LONG);
-                                            toast.show();
-                                        } else if (error instanceof ParseError) {
-
-
-                                            Toast toast = Toast.makeText(Promotion_Activity.this,
-                                                    "ParseError   Error",
-                                                    Toast.LENGTH_LONG);
-                                            toast.show();
-                                        }
-                                        else
-                                        {
-                                            // Toast.makeText(Image_Gellary.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                                            Toast toast = Toast.makeText(Promotion_Activity.this, error.getMessage(), Toast.LENGTH_LONG);
-                                            toast.setGravity(Gravity.CENTER, 0, 0);
-                                            toast.show();
-                                        }
-                                        Intent launch = new Intent(Promotion_Activity.this,MainActivity.class);
-                                        startActivity(launch);
-                                        finish();
-                                        pDialog.dismiss();
-                                    }
-                                });
-
-
-                                // finish();
-                            }
-                        });
-
-                RequestQueue requestQueue = Volley.newRequestQueue(Promotion_Activity.this);
-
-                int socketTimeout = 300000;//30 seconds - change to what you want
-                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-                stringRequest.setRetryPolicy(policy);
-                // requestQueue.se
-                //requestQueue.add(jsObjRequest);
-                stringRequest.setShouldCache(false);
-                requestQueue.getCache().clear();
-                //requestQueue.add(stringRequest);
-                AppController.getInstance().addToRequestQueue(stringRequest);
-
-            } catch (Exception e) {
-
-            }
-            return "Executed";
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-
-        }
-    }
 
     private boolean isDeviceSupportCamera() {
         if (getApplicationContext().getPackageManager().hasSystemFeature(
@@ -560,8 +424,7 @@ public class Promotion_Activity extends Activity {
 
                             B_flag = isDeviceSupportCamera();
 
-                            if(B_flag == true)
-                            {
+                            if (B_flag == true) {
                                 final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
 
@@ -575,9 +438,7 @@ public class Promotion_Activity extends Activity {
 
                                     public void onClick(DialogInterface dialog, int item) {
 
-                                        if (options[item].equals("Take Photo"))
-
-                                        {
+                                        if (options[item].equals("Take Photo")) {
                                             Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                             if (cameraIntent.resolveActivity(getPackageManager()) != null) {
                                                 // Create the File where the photo should go
@@ -596,10 +457,7 @@ public class Promotion_Activity extends Activity {
                                                 }
                                             }
 
-                                        }
-                                        else
-                                        if (options[item].equals("Choose from Gallery"))
-                                        {
+                                        } else if (options[item].equals("Choose from Gallery")) {
 
                                             // image_check = "gallery";
                                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -619,9 +477,7 @@ public class Promotion_Activity extends Activity {
 
                                 builder.show();
 
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(getApplicationContext(), "no camera on this device", Toast.LENGTH_LONG).show();
                             }
                         }
@@ -686,10 +542,9 @@ public class Promotion_Activity extends Activity {
     private File createImageFile() throws IOException {
         // Create an image file name
         String imageFileName = "Anchor";
-        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "AnchorEvents");
 
-        if(!storageDir.exists())
-        {
+        if (!storageDir.exists()) {
             storageDir.mkdir();
         }
 
@@ -707,48 +562,26 @@ public class Promotion_Activity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-//       if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
-//            if (resultCode == RESULT_OK) {
-//                previewCapturedImage();
-//
-//            } else if (resultCode == RESULT_CANCELED) {
-//                // user cancelled Image capture
-//                Toast.makeText(getApplicationContext(),
-//                        "User cancelled image capture", Toast.LENGTH_SHORT)
-//                        .show();
-//            } else {
-//                // failed to capture image
-//                Toast.makeText(getApplicationContext(),
-//                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
-//                        .show();
-//            }
-//        }
-
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-
-
-//            try {
-//                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            // Bundle extras = data.getExtras();
-            //  Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             try {
 
-                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
+                progressDialog = new android.app.ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                progressDialog.setMessage("Please wait....");
+                progressDialog.setTitle("Smart Anchor App");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                //  }
+
+                new ActivityResultTask().execute();
+
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            //get_icon.setImageBitmap(imageBitmap);
-        }
-        else if (requestCode == 2 && resultCode == RESULT_OK) {
+
+        } else if (requestCode == 2 && resultCode == RESULT_OK) {
             try {
                 Uri selectedImage = data.getData();
 
@@ -762,21 +595,20 @@ public class Promotion_Activity extends Activity {
 
                 mCurrentPhotoPath = "file:" + c.getString(columnIndex);
 
-                dbvoc.updateORDER_order_image(mCurrentPhotoPath,Global_Data.GLObalOrder_id);
+                progressDialog = new android.app.ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                progressDialog.setMessage("Please wait....");
+                progressDialog.setTitle("Smart Anchor App");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                //  }
+
+                new ActivityResultTask().execute();
 
                 pictureImagePath_new = c.getString(columnIndex);
 
                 c.close();
 
-//                String imageFileName = "Anchor";
-//                File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
-//
-//                if (!storageDir.exists()) {
-//                    storageDir.mkdir();
-//                }
-//
-//                copyFileOrDirectory(pictureImagePath_new,storageDir.toString());
-                //new Expenses.LongOperation().execute();
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -792,11 +624,11 @@ public class Promotion_Activity extends Activity {
         dialognew.setCancelable(false);
         dialognew.setContentView(R.layout.promotion_dialog);
 
-        TextView pro_header =  dialognew.findViewById(R.id.pro_header);
+        TextView pro_header = dialognew.findViewById(R.id.pro_header);
         TextView pro_time = dialognew.findViewById(R.id.pro_time);
         TextView pro_date = dialognew.findViewById(R.id.pro_date);
-        TextView pro_address =  dialognew.findViewById(R.id.pro_address);
-        Button pro_click =  dialognew.findViewById(R.id.pro_click);
+        TextView pro_address = dialognew.findViewById(R.id.pro_address);
+        Button pro_click = dialognew.findViewById(R.id.pro_click);
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -804,8 +636,8 @@ public class Promotion_Activity extends Activity {
         // String daten = sdf.format(date);
         String datenew = sdf.format(date);
 
-        Date d=new Date();
-        SimpleDateFormat sdf_time=new SimpleDateFormat("hh:mm a");
+        Date d = new Date();
+        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
         String currentDateTimeString = sdf_time.format(d);
 
         if (flag.equalsIgnoreCase("OUT")) {
@@ -844,7 +676,7 @@ public class Promotion_Activity extends Activity {
             pro_date.setText("Date Not Found.");
         }
 
-        pro_time.setText("Time : "+currentDateTimeString);
+        pro_time.setText("Time : " + currentDateTimeString);
 
         pro_click.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -869,8 +701,7 @@ public class Promotion_Activity extends Activity {
         return month;
     }
 
-    public void getAddress()
-    {
+    public void getAddress() {
 
         isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent) {
@@ -878,10 +709,10 @@ public class Promotion_Activity extends Activity {
                 try {
 
                     LocationAddress locationAddress = new LocationAddress();
-                    locationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE) ,Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+                    locationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
                             Promotion_Activity.this, new Promotion_Activity.GeocoderHandler());
                     Geocoder geo = new Geocoder(Promotion_Activity.this.getApplicationContext(), Locale.getDefault());
-                    List<Address> addresses = geo.getFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE), 1);
+                    List<Address> addresses = geo.getFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE), 1);
                     if (addresses.isEmpty()) {
                     } else {
                         if (addresses.size() > 0) {
@@ -925,9 +756,7 @@ public class Promotion_Activity extends Activity {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-            }
-            else
-            {
+            } else {
                 Global_Data.address = "";
             }
 
@@ -969,5 +798,691 @@ public class Promotion_Activity extends Activity {
 
         }
     }
+
+    public void Events_OnlineData() {
+
+        String user_email = "";
+        sp = this.getSharedPreferences("SimpleLogic", 0);
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        String domain = getResources().getString(R.string.service_domain);
+        String service_domain = domain + "nukkad_meets/get_all_events";
+
+
+        Log.i("user list url", "order list url " + service_domain);
+
+        StringRequest jsObjRequest = null;
+
+        jsObjRequest = new StringRequest(Request.Method.GET, service_domain, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("volley", "response: " + response);
+                final_response = response;
+
+                //  auto_searchcust.setText(namemm);
+                new Promotion_Activity.getevents_Data().execute(response);
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+
+
+//                        Intent intent = new Intent(ShopProfile.this, ShopProfile.class);
+//                        startActivity(intent);
+//                        finish();
+                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        } else if (error instanceof AuthFailureError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Server AuthFailureError Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        } else if (error instanceof ServerError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        } else if (error instanceof NetworkError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        } else if (error instanceof ParseError) {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "ParseError Error", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        } else {
+
+                            Toast toast = Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        }
+                        progressDialog.dismiss();
+                        //  State_Offline_Data();
+                        // finish();
+                    }
+                });
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        int socketTimeout = 300000;//3 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        jsObjRequest.setShouldCache(true);
+        //requestQueue.getCache().clear();
+        requestQueue.add(jsObjRequest);
+    }
+
+
+    private class getevents_Data extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... responsenew) {
+
+
+            try {
+                JSONObject response = new JSONObject(final_response);
+                if (response.has("message")) {
+                    response_result = response.getString("message");
+                    Promotion_Activity.this.runOnUiThread(new Runnable() {
+                        public void run() {
+                            progressDialog.dismiss();
+                            Toast toast = Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                    });
+                } else {
+                    response_result = "data";
+                    try {
+
+                        EVENT_JSON = response.getJSONArray("events");
+                        // City = response.getJSONArray("business_product_categories");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    Log.i("volley", "response EVENT_JSON Length: " + EVENT_JSON.length());
+                    Log.d("volley", "EVENT_JSON" + EVENT_JSON.toString());
+
+                    if (EVENT_JSON.length() <= 0) {
+
+                        Promotion_Activity.this.runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                progressDialog.dismiss();
+                                Toast toast = Toast.makeText(getApplicationContext(), "Events Record doesn't exist", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+
+                            }
+                        });
+                    } else {
+
+                        eventmap.clear();
+                        list_Events.clear();
+                        list_Events.add("Select Events");
+                        for (int i = 0; i < EVENT_JSON.length(); i++) {
+
+                            JSONObject jsonObject = null;
+                            try {
+                                jsonObject = EVENT_JSON.getJSONObject(i);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            try {
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(EVENT_JSON.getString(i))) {
+                                    {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("name").trim())) {
+
+                                            if (!list_Events.contains(jsonObject.getString("name").trim())) {
+                                                list_Events.add(jsonObject.getString("name").trim());
+                                                eventmap.put(jsonObject.getString("name").trim(), jsonObject.getString("id").trim());
+
+                                            }
+
+                                        }
+                                    }
+
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+
+                        Promotion_Activity.this.runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                try {
+
+                                    adapter_events = new ArrayAdapter<String>(Promotion_Activity.this,
+                                            android.R.layout.simple_spinner_item, list_Events);
+                                    adapter_events.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    List_Of_Event_Spinner.setAdapter(adapter_events);
+
+                                    progressDialog.dismiss();
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+
+                            }
+                        });
+
+
+                        Promotion_Activity.this.runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                progressDialog.dismiss();
+                            }
+                        });
+                        //	dialog.dismiss();
+
+                        //finish();
+
+                    }
+
+
+                    Promotion_Activity.this.runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            progressDialog.dismiss();
+                        }
+                    });
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+
+                Promotion_Activity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        progressDialog.dismiss();
+                    }
+                });
+
+            }
+
+
+            Promotion_Activity.this.runOnUiThread(new Runnable() {
+                public void run() {
+
+                    progressDialog.dismiss();
+                }
+            });
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            Promotion_Activity.this.runOnUiThread(new Runnable() {
+                public void run() {
+
+                    progressDialog.dismiss();
+                }
+            });
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    private class ActivityResultTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... response) {
+
+            try {
+
+                if (!mCurrentPhotoPath.equalsIgnoreCase("")) {
+                    try {
+                        // reduce_img_Qaulity(Uri.parse(outletsignboard_mCurrentPhotoPath));
+                        // compressImage(outletsignboard_mCurrentPhotoPath);
+                        String filePath = getRealPathFromURI(Uri.parse(mCurrentPhotoPath).getPath());
+                        Bitmap scaledBitmap = null;
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inJustDecodeBounds = true;
+                        Bitmap b = BitmapFactory.decodeFile(Uri.parse(mCurrentPhotoPath).getPath(), options);
+                        int actualHeight = options.outHeight;
+                        int actualWidth = options.outWidth;
+
+                        float maxHeight = 816.0f;
+                        float maxWidth = 612.0f;
+                        float imgRatio = actualWidth / actualHeight;
+                        float maxRatio = maxWidth / maxHeight;
+
+                        if (actualHeight > maxHeight || actualWidth > maxWidth) {
+                            if (imgRatio < maxRatio) {
+                                imgRatio = maxHeight / actualHeight;
+                                actualWidth = (int) (imgRatio * actualWidth);
+                                actualHeight = (int) maxHeight;
+                            } else if (imgRatio > maxRatio) {
+                                imgRatio = maxWidth / actualWidth;
+                                actualHeight = (int) (imgRatio * actualHeight);
+                                actualWidth = (int) maxWidth;
+                            } else {
+                                actualHeight = (int) maxHeight;
+                                actualWidth = (int) maxWidth;
+
+                            }
+                        }
+                        options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
+                        options.inJustDecodeBounds = false;
+                        options.inPurgeable = true;
+                        options.inInputShareable = true;
+                        options.inTempStorage = new byte[16 * 1024];
+                        try {
+//          load the bitmap from its path
+                            b = BitmapFactory.decodeFile(Uri.parse(mCurrentPhotoPath).getPath(), options);
+
+                        } catch (OutOfMemoryError exception) {
+                            exception.printStackTrace();
+
+                        }
+                        try {
+                            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
+                        } catch (OutOfMemoryError exception) {
+                            exception.printStackTrace();
+                        }
+                        float ratioX = actualWidth / (float) options.outWidth;
+                        float ratioY = actualHeight / (float) options.outHeight;
+                        float middleX = actualWidth / 2.0f;
+                        float middleY = actualHeight / 2.0f;
+
+                        Matrix scaleMatrix = new Matrix();
+                        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+                        Canvas canvas = new Canvas(scaledBitmap);
+                        canvas.setMatrix(scaleMatrix);
+                        canvas.drawBitmap(b, middleX - b.getWidth() / 2, middleY - b.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+                        ExifInterface exif = null;
+                        try {
+                            exif = new ExifInterface(Uri.parse(mCurrentPhotoPath).getPath());
+
+                            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                                    ExifInterface.ORIENTATION_UNDEFINED);
+                            Matrix matrix = new Matrix();
+                            if (orientation == 6) {
+                                matrix.postRotate(90);
+
+                            } else if (orientation == 3) {
+                                matrix.postRotate(180);
+
+                            } else if (orientation == 8) {
+                                matrix.postRotate(270);
+
+                            }
+                            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0,
+                                    scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,
+                                    true);
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
+//                            Bitmap bmRotated = rotateBitmap(out, orientation);
+                        File file = new File(Uri.parse(mCurrentPhotoPath).getPath());
+//                            FileOutputStream fOut;
+                        FileOutputStream out = null;
+
+
+                        try {
+                            out = new FileOutputStream(file);
+
+//          write the compressed bitmap at the destination specified by filename.
+                            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
+
+//                                fOut = new FileOutputStream(file);
+//                                bmRotated.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+//                                fOut.flush();
+//                                fOut.close();
+//                                out.recycle();
+//                                b.recycle();
+//                                bmRotated.recycle();
+                        } catch (Exception e) {
+                        }
+
+
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+
+                                Bitmap mImageBitmap = null;
+                                try {
+                                    mImageBitmap = MediaStore.Images.Media.getBitmap(Promotion_Activity.this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+                                    events_pick.setImageBitmap(mImageBitmap);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }
+                        });
+
+                        // outlet_signboard_pick.setRotation(90);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            progressDialog.dismiss();
+
+
+//                }
+//            });
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+            //dialog.dismiss();
+            Promotion_Activity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                }
+            });
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    private String getRealPathFromURI(String contentURI) {
+        Uri contentUri = Uri.parse(contentURI);
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        if (cursor == null) {
+            return contentUri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(index);
+        }
+    }
+
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        final float totalPixels = width * height;
+        final float totalReqPixelsCap = reqWidth * reqHeight * 2;
+        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
+            inSampleSize++;
+        }
+
+        return inSampleSize;
+    }
+
+    public void showImage(String bitmap) {
+        final Dialog dialognew = new Dialog(Promotion_Activity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // dialognew.setCancelable(false);
+        dialognew.setContentView(R.layout.image_custom_dialog);
+
+        final PhotoView zoom_image = dialognew.findViewById(R.id.zoom_image);
+
+        // String final_url = bitmap.replace("file:", "");
+        // zoom_image.setImage(ImageSource.uri(final_url));
+//
+//        Picasso.get().load(Uri.parse(bitmap)) // web image url
+//                .fit().centerInside()
+//                //.transform(transformation)
+//                // .rotate(90)
+//                .error(R.drawable.img_not_found)
+//                .placeholder(R.drawable.jz_loading)
+//                .into(zoom_image);
+
+        GlideApp.with(Promotion_Activity.this)
+                .load(Uri.parse(bitmap))
+                .thumbnail(0.5f)
+                //.centerCrop()
+                .placeholder(R.drawable.img_not_found)
+                .error(R.drawable.img_not_found)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(zoom_image);
+
+
+        Button cancelf = (Button) dialognew.findViewById(R.id.cancelf);
+        cancelf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialognew.dismiss();
+            }
+        });
+
+        dialognew.show();
+
+    }
+
+    public class doFileUpload extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... response) {
+
+            String event_id = "";
+
+            try {
+                event_id = eventmap.get(List_Of_Event_Spinner.getSelectedItem().toString());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            String domain = getResources().getString(R.string.service_domain);
+            Log.i("volley", "domain: " + domain);
+
+            Uri uri1 = Uri.parse(mCurrentPhotoPath);
+            final File file1 = new File(uri1.getPath());
+
+
+            String urlString = domain + "nukkad_meets/create_nukkad_meet";
+            try {
+
+                String charset = "UTF-8";
+                //File uploadFile1 = new File("/sdcard/myvideo.mp4");
+
+                MultipartUtility multipart = new MultipartUtility(urlString, charset);
+
+//            multipart.addHeaderField("User-Agent", "CodeJava");
+//            multipart.addHeaderField("Test-Header", "Header-Value");
+
+                multipart.addFormField("email", Global_Data.GLOvel_USER_EMAIL);
+                multipart.addFormField("event_id", event_id);
+                multipart.addFormField("meet_in", inDateTime);
+                multipart.addFormField("meet_out", outDateTime);
+                multipart.addFormField("description", pro_edit.getText().toString());
+                multipart.addFormField("latitude", Global_Data.GLOvel_LATITUDE);
+                multipart.addFormField("longitude", Global_Data.GLOvel_LONGITUDE);
+                multipart.addFormField("address", Global_Data.address);
+
+
+                if (!mCurrentPhotoPath.equalsIgnoreCase("")) {
+                    multipart.addFilePart("image", file1);
+                }
+
+                List<String> response1 = multipart.finish();
+
+                Log.v("rht", "SERVER REPLIED:");
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        progressDialog.dismiss();
+                    }
+                });
+
+                for (String line : response1) {
+                    Log.v("rht", "Line : " + line);
+                    response_result = line;
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            try {
+
+                                JSONObject obj = new JSONObject(response_result);
+                                progressDialog.dismiss();
+
+                                if (obj.getString("message").equalsIgnoreCase("Nukkad Meet created successfuly.")) {
+                                    Toast toast = Toast.makeText(Promotion_Activity.this, obj.getString("message"),
+                                            Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(i);
+                                    finish();
+
+
+                                } else {
+                                    Toast toast = Toast.makeText(Promotion_Activity.this, obj.getString("message"),
+                                            Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                }
+
+                                Log.d("My App", obj.toString());
+
+                            } catch (Throwable t) {
+                                Log.e("My App", "Could not parse malformed JSON: \"" + response_result + "\"");
+
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+
+                                        progressDialog.dismiss();
+                                        Toast toast = Toast.makeText(Promotion_Activity.this, "Something went wrong,Please try again.",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+
+
+                                    }
+                                });
+                            }
+
+
+                        }
+                    });
+
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        progressDialog.dismiss();
+                        Toast toast = Toast.makeText(Promotion_Activity.this, "Something went wrong,Please try again.",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+                });
+            }
+
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            runOnUiThread(new Runnable() {
+                public void run() {
+
+                    progressDialog.dismiss();
+                    // Sub_Dealer_Approval_Stage(context,sub_dealer_approval_stag_val);
+                }
+            });
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            progressDialog = new ProgressDialog(Promotion_Activity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+            progressDialog.setMessage("Sync in Progress, Please Wait");
+            progressDialog.setTitle("Smart Anchor App");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
 
 }

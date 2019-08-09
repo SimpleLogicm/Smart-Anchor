@@ -432,7 +432,7 @@ public class Expended_list_demo extends BaseActivity {
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
 		dialog = new ProgressDialog(Expended_list_demo.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		dialog.setMessage("Please wait Target Sync....");
-		dialog.setTitle("Sales App");
+		dialog.setTitle("Smart Anchor App");
 		dialog.setCancelable(false);
 		dialog.show();
 

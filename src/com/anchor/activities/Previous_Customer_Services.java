@@ -155,7 +155,7 @@ public class Previous_Customer_Services extends Activity {
         theListView.setAdapter(adapter);
 
         dialog.setMessage("Please Wait....");
-        dialog.setTitle("Anchor App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

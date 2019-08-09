@@ -348,7 +348,7 @@ public class OutstandingDetails extends Activity implements OutstandingDetails_A
 
                 datePickerDialog.setTitle("Select From Date");
 
-                datePickerDialog.show(getFragmentManager(), "Anchor App");
+                datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
             }
         });
@@ -372,7 +372,7 @@ public class OutstandingDetails extends Activity implements OutstandingDetails_A
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Anchor App");
+                datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
             }
         });
