@@ -32,6 +32,10 @@
     <dimen name="genre">13dip</dimen>
     <dimen name="year">12dip</dimen>
 
+    <dimen name="card_title_height">40dp</dimen>
+    <dimen name="card_title_padding_top">1dp</dimen>
+    <dimen name="card_title_text_size">14dp</dimen>
+
 
 
 

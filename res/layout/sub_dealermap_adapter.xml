@@ -1,0 +1,140 @@
+<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:id="@+id/sub_h_container"
+        android:layout_width="match_parent"
+        android:background="#0A4C86"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/d_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_title_height"
+            android:textAlignment="center"
+            android:padding="@dimen/card_title_padding_top"
+            android:textColor="#ffffff"
+            android:background="#1D3A58"
+            android:textSize="@dimen/card_title_text_size"
+            android:gravity="center_vertical" />
+
+        <RelativeLayout
+            android:layout_marginTop="0dp"
+            app:srcCompat="@drawable/rounded_corner"
+            android:layout_below="@+id/d_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="1dp"
+            >
+
+            <TextView
+                android:id="@+id/p_delaer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center_vertical"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+
+            <TextView
+                android:id="@+id/p_dealer_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center_vertical"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:layout_below="@id/p_delaer_name"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/p_proprietor_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="12dp"
+                android:layout_below="@id/p_dealer_city"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:id="@+id/p_proprietor_mobile1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="12dp"
+                android:layout_below="@id/p_proprietor_name1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:id="@+id/p_proprietor_email1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="12dp"
+                android:layout_below="@id/p_proprietor_mobile1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:id="@+id/p_stages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:textSize="12dp"
+                android:layout_below="@id/p_proprietor_email1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp" />
+
+
+
+
+            <TextView
+                android:id="@+id/p_dealer_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/p_approved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+</android.support.v7.widget.CardView>

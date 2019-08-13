@@ -8,6 +8,15 @@ public class InfoWindowData {
     private String cdistance;
     private String cmobile;
     private String cmobilenew;
+    private String s_code;
+
+    public String getS_code() {
+        return s_code;
+    }
+
+    public void setS_code(String s_code) {
+        this.s_code = s_code;
+    }
 
     public String getCmobilenew() {
         return cmobilenew;
