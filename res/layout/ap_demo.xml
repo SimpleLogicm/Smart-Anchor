@@ -22,7 +22,6 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/dimg"
             android:layout_width="40dp"
             android:layout_height="20dp"
             android:layout_toLeftOf="@+id/show_distance_time"

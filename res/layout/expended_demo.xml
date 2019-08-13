@@ -16,7 +16,6 @@
         android:gravity="top"
         >
         <LinearLayout
-            android:id="@+id/dfg"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
@@ -61,7 +60,6 @@
                 />
 
             <RelativeLayout
-                android:id="@+id/salehistory_btnlhjk"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
@@ -146,7 +144,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/saleupdate_btn"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
@@ -166,14 +163,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:id="@+id/textView39"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/salehistory_btn"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
@@ -199,7 +194,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/product_ACVALUE"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:orientation="horizontal"

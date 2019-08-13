@@ -193,7 +193,6 @@
                 android:layout_weight="1.20" >
 
                 <TextView
-                    android:id="@+id/scheme_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -270,7 +269,6 @@
                 android:layout_weight="1.20" >
 
                 <TextView
-                    android:id="@+id/otherinfo_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -391,7 +389,6 @@
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/lout_second"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginLeft="5dp"
@@ -426,7 +423,6 @@
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/test"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"

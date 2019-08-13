@@ -45,7 +45,6 @@
         android:layout_marginRight="50dp"/>
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/add_new_dealer"
@@ -59,7 +58,6 @@
         android:text="@string/add_new" />
 
     <TextView
-        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pending_dealers"
@@ -73,7 +71,6 @@
         android:text="@string/pending" />
 
     <ImageView
-        android:id="@+id/cash_Reportmenu"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/logout"

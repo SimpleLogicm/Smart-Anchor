@@ -19,8 +19,7 @@
         </FrameLayout>
  
               <TextView
-android:id="@+id/tabDivider"
-android:layout_width="fill_parent"
+                  android:layout_width="fill_parent"
 android:layout_height="2dp"
 android:layout_alignParentBottom="true"
 android:background="#c3c3c3" />
@@ -35,8 +34,7 @@ android:background="#c3c3c3" />
         
     
 <TextView
-android:id="@+id/tabSplitter"
-android:layout_width="1px"
+    android:layout_width="1px"
 android:layout_height="23dp"
 android:layout_alignParentRight="true"
 android:layout_marginTop="10dp"

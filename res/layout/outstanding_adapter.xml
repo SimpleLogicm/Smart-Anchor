@@ -16,7 +16,6 @@
         android:id="@+id/linearLayout">
 
         <RelativeLayout
-            android:id="@+id/mainmenu_btn"
             android:layout_width="wrap_content"
             android:gravity="center"
             android:layout_height="match_parent"

@@ -153,7 +153,6 @@
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/advertisement2"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"
@@ -194,7 +193,6 @@
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/feed_image"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"
@@ -204,7 +202,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/r_four"
                 android:onClick="onRequestButtonClicked"
                 android:layout_width="0dp"
                 android:visibility="invisible"
@@ -226,7 +223,6 @@
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/feed_image2"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"

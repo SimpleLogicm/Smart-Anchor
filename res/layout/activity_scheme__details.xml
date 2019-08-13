@@ -96,7 +96,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sl_header_containerhh"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:orientation="horizontal"
@@ -186,7 +185,6 @@
     </LinearLayout>
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/spinner_s_container"
@@ -194,7 +192,6 @@
         android:layout_marginTop="0dp">
 
         <LinearLayout
-            android:id="@+id/l_header_containerhead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

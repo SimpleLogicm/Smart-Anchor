@@ -42,7 +42,6 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/aaa"
         android:layout_width="13dp"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
@@ -152,7 +151,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sl_header_containerhh"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:orientation="horizontal"

@@ -120,7 +120,6 @@
             android:paddingTop="20dp" />
 
         <View
-            android:id="@+id/border"
             android:layout_width="300dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
@@ -157,7 +156,6 @@
                 android:textColor="#FFFFFF" />
 
             <View
-                android:id="@+id/borderfd"
                 android:layout_width="10dp"
                 android:layout_height="4dp"
                 android:layout_gravity="center"
@@ -173,7 +171,6 @@
                 android:src="@drawable/vector_camera_icon" />
 
             <TextView
-                android:id="@+id/abf"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:visibility="gone"

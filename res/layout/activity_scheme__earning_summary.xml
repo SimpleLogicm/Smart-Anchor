@@ -95,7 +95,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/sl_header_containerhh"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:orientation="horizontal"

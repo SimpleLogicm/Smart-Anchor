@@ -13,7 +13,6 @@
         android:fillViewport="true"
         android:orientation="vertical" >
     <LinearLayout
-        android:id="@+id/linearLayout245"
         android:layout_width="fill_parent"
         android:focusableInTouchMode="true"
         android:layout_height="wrap_content"

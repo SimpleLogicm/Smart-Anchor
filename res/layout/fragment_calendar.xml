@@ -15,7 +15,6 @@
         <!--android:textColor="#ffffff" />-->
 
     <LinearLayout
-        android:id="@+id/buttonlayout"
         android:layout_width="fill_parent"
         android:layout_height="35sp"
         android:background="#990000"
@@ -24,7 +23,6 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/settings"
             android:layout_width="54sp"
             android:layout_height="60sp"
             android:visibility="gone"
@@ -59,7 +57,6 @@
         </ImageView>
 
         <Button
-            android:id="@+id/addEvent"
             android:layout_width="54sp"
             android:layout_height="60sp"
             android:visibility="gone"
@@ -81,8 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" >
   <RelativeLayout
-                        android:id="@+id/rlout_pumpup"
-                        android:layout_width="20dp"
+      android:layout_width="20dp"
                         android:layout_height="30dp"
                         android:layout_marginRight="2dp"
                         android:layout_weight="1.00" >
@@ -102,14 +98,12 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rlout_me_revoicit"
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView16"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -123,14 +117,12 @@
                     </RelativeLayout>
                     
                     <RelativeLayout
-                        android:id="@+id/rlout_me_revoicit6"
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1ty"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -144,14 +136,12 @@
                     </RelativeLayout>
                     
                     <RelativeLayout
-                        android:id="@+id/rlout_me_revoicit56"
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView18"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -165,14 +155,12 @@
                     </RelativeLayout>
                     
                     <RelativeLayout
-                        android:id="@+id/rlout_me_revoicit54354"
                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1dfg"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -186,14 +174,12 @@
                     </RelativeLayout>
                     
                      <RelativeLayout
-                         android:id="@+id/rlout_me_revoicit345"
-                        android:layout_width="20dp"
+                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1dg"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -207,14 +193,12 @@
                     </RelativeLayout>
                     
                      <RelativeLayout
-                         android:id="@+id/rlout_me_revoicit65"
-                        android:layout_width="20dp"
+                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1fh"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"

@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
      <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
+         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
@@ -33,14 +32,12 @@
         android:layout_gravity="center" >
                       
                      <RelativeLayout
-                        android:id="@+id/rlout_me_revoicit"
-                        android:layout_width="100dp"
+                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:background="#d3d3d3"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1fhfgh"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -54,15 +51,13 @@
                     </RelativeLayout>
                     
                      <RelativeLayout
-                         android:id="@+id/rlout_me_revoicithfhfg"
-                        android:layout_width="20dp"
+                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:background="#d3d3d3"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1h"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -76,15 +71,13 @@
                     </RelativeLayout>
                     
                      <RelativeLayout
-                         android:id="@+id/rlout_me_revoicitfgh"
-                        android:layout_width="20dp"
+                         android:layout_width="20dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="2dp"
                         android:background="#d3d3d3"
                         android:layout_weight="1.00" >
 
                          <TextView
-                             android:id="@+id/textView1fgh"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:layout_alignParentLeft="true"
@@ -276,7 +269,6 @@
          </RelativeLayout>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
             android:layout_marginTop="10dp"
             android:background="#ffffff"
             android:layout_width="match_parent"
@@ -314,7 +306,6 @@
                     android:layout_marginLeft="5dp"/>
 
                 <TextView
-                    android:id="@+id/order_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"

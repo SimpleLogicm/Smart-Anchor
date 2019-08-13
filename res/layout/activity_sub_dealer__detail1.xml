@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -53,7 +52,6 @@
                 android:text="@string/outlet_gps" />
 
             <Button
-                android:id="@+id/outlet_gps_value"
                 android:layout_width="150dp"
                 android:layout_height="40dp"
                 android:layout_alignBaseline="@+id/outlet_gps_text"
@@ -93,7 +91,6 @@
                 />
 
             <ImageView
-                android:id="@+id/outlet_signboard_pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/outlet_signboard_value"
@@ -128,7 +125,6 @@
                 android:textColor="#FFFFFF" />
 
             <ImageView
-                android:id="@+id/Proprietor1_Photo_Pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/Proprietor1_Photo_value"
@@ -162,7 +158,6 @@
                 android:textColor="#FFFFFF" />
 
             <ImageView
-                android:id="@+id/Proprietor2_Photo_Pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/Proprietor2_Photo_value"
@@ -196,7 +191,6 @@
                 android:textColor="#FFFFFF" />
 
             <ImageView
-                android:id="@+id/Rubber_Stamp_Pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/Rubber_Stamp_value"
@@ -229,7 +223,6 @@
                 android:textColor="#FFFFFF" />
 
             <ImageView
-                android:id="@+id/Visiting_Card_Pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/Visiting_Card_value"
@@ -263,7 +256,6 @@
                 android:textColor="#FFFFFF" />
 
             <ImageView
-                android:id="@+id/Outlet_Display_Pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/Outlet_Display_value"
@@ -297,7 +289,6 @@
                 android:textColor="#FFFFFF" />
 
             <ImageView
-                android:id="@+id/InShop_Display_Pick"
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_alignTop="@+id/InShop_Display_value"
@@ -324,7 +315,6 @@
                 android:orientation="horizontal" />
 
             <LinearLayout
-                android:id="@+id/d_linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -335,7 +325,6 @@
                 >
 
                 <Button
-                    android:id="@+id/d_save"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:text="@string/Save"
@@ -344,7 +333,6 @@
                     android:textColor="#FFFFFF"/>
 
                 <Button
-                    android:id="@+id/d_submit"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
@@ -359,7 +347,6 @@
     </LinearLayout>
 
     <CheckBox
-        android:id="@+id/checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/checkbox" />

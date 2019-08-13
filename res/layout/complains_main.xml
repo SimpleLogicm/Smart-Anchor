@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:titleTextColor="@android:color/white"
             android:layout_height="?attr/actionBarSize"
@@ -55,7 +54,6 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/aaa"
         android:layout_width="13dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
@@ -110,7 +108,6 @@
 
                 </android.support.v7.widget.RecyclerView>
                 <android.support.v4.widget.NestedScrollView
-                    android:id="@+id/rec1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@id/c_horizontalRecyclerView"

@@ -1,7 +1,6 @@
 <android.support.v7.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardElevation="8dp"
@@ -26,7 +25,6 @@
         android:layout_marginTop="32dp">
 
          <RelativeLayout
-             android:id="@+id/mainmenu_btn"
              android:layout_width="20dp"
              android:layout_height="match_parent"
              android:layout_marginRight="2dp"
@@ -58,7 +56,6 @@
              android:layout_weight="1.00" >
 
              <TextView
-                 android:id="@+id/target_grpby1"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="@string/target"
@@ -76,7 +73,6 @@
          </RelativeLayout>
 
          <RelativeLayout
-             android:id="@+id/saleupdate_btn"
              android:layout_width="20dp"
              android:layout_height="match_parent"
              android:layout_marginLeft="2dp"
@@ -96,14 +92,12 @@
                  android:layout_alignParentStart="true"
                  android:layout_alignParentRight="true"
                  android:layout_alignParentEnd="true"
-                 android:id="@+id/achievd_grpby2"
                  android:layout_alignParentTop="true"
                  android:layout_alignParentBottom="true" />
 
          </RelativeLayout>
 
          <RelativeLayout
-             android:id="@+id/salehistory_btn"
              android:layout_width="20dp"
              android:layout_height="match_parent"
              android:layout_marginLeft="2dp"
@@ -111,7 +105,6 @@
              android:layout_weight="1.00" >
 
              <TextView
-                 android:id="@+id/age_grpby2"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:text="@string/age"
@@ -130,8 +123,7 @@
         </LinearLayout>
 
            <LinearLayout
-            android:id="@+id/product_ACVALUE"
-            android:layout_width="match_parent"
+               android:layout_width="match_parent"
             android:background="@drawable/rounded_corner"
             android:layout_height="40dp"
             android:orientation="horizontal"

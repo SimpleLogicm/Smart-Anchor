@@ -67,7 +67,6 @@
             android:layout_marginLeft="7dp" />
 
         <TextView
-            android:id="@+id/textRPfghfgh"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -97,7 +96,6 @@
         >
 
         <TextView
-            android:id="@+id/textSQ"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -118,7 +116,6 @@
             android:layout_marginLeft="10dp" />
 
         <TextView
-            android:id="@+id/adjust1"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -128,7 +125,6 @@
             android:textColor="#FFFFFF" />
 
         <TextView
-            android:id="@+id/adjust2"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -163,7 +163,6 @@
             android:layout_marginLeft="5dp" />
 
         <TextView
-            android:id="@+id/textRPghh"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

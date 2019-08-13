@@ -22,16 +22,14 @@ public class Customer_Media extends Activity implements OnItemSelectedListener{
 	Spinner feed_spinner,category_spinner,product_spinner,variant_spinner;
 	Button claims_submit;
 	private String[] feed_state = { "Competitors Stock" };
-	private String[] category_state = { "Category" };
-	private String[] product_state = { "Product" };
-	private String[] variant_state = { "Variant" };
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.customer_claims);
 		
 		claims_submit=(Button)findViewById(R.id.claims_submit);
-		feed_spinner=(Spinner)findViewById(R.id.comp_stock);
+		//feed_spinner=(Spinner)findViewById(R.id.comp_stock);
 		
 		  ArrayAdapter<String> adapter_state1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, feed_state);
 		  

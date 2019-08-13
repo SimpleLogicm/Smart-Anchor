@@ -35,7 +35,6 @@
 
 
     <TableRow
-        android:id="@+id/tableRow1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -49,7 +48,6 @@
             android:textColor="#000000" />
 
         <TextView
-            android:id="@+id/TextView01hj"
             android:layout_height="80dp"
             android:layout_width="wrap_content"
             android:background="#d3d3d3"
@@ -60,8 +58,7 @@
      
         
         <ImageView
-            android:id="@+id/ImageView01"
-           android:layout_height="80dp"
+            android:layout_height="80dp"
              android:layout_width="wrap_content"
             android:background="#d3d3d3"
            
@@ -89,7 +86,6 @@
             >
 
             <TextView
-                android:id="@+id/txtPreviousOrderStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

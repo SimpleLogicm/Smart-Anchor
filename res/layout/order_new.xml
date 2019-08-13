@@ -53,7 +53,6 @@
             android:layout_weight="1.00">
 
             <TextView
-                android:id="@+id/textView1jkjk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -150,7 +149,6 @@
             </AutoCompleteTextView>
 
             <LinearLayout
-                android:id="@+id/add_layout"
                 android:layout_marginTop="1dp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

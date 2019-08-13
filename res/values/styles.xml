@@ -43,17 +43,6 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    
-     <style name="ListButtonAction">
-        <item name="android:layout_margin">10dp</item>
-    </style>
-    
-       <style name="ListBackContent">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">@dimen/height_list</item>
-        <item name="android:background">@drawable/background_item</item>
-        <item name="android:gravity">center</item>
-    </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">
 
