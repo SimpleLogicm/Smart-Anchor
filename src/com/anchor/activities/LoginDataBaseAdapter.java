@@ -268,7 +268,7 @@ public class LoginDataBaseAdapter
 		
 		static final String DATABASE_CREATE_CUST_MASTER = "CREATE TABLE IF NOT EXISTS "+"customer_master"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "LEGACY_CUSTOMER_CODE text," +
-"CUSTOMER_NAME text,CUSTOMER_SHOPNAME text, ADDRESS text, STREET text, LANDMARK text, PIN_CODE text, LANDLINE_NO text, MOBILE_NO text, EMAIL_ADDRESS text, STATUS text, STATE text, CITY text, BEAT text,vatin text,email text,created_at text,lat text,long text,business_unit_code_array text);";
+"CUSTOMER_NAME text,CUSTOMER_SHOPNAME text, ADDRESS text, STREET text, LANDMARK text, PIN_CODE text, LANDLINE_NO text, MOBILE_NO text, EMAIL_ADDRESS text, STATUS text, STATE text, CITY text, BEAT text,vatin text,email text,created_at text,lat text,long text,business_unit_code_array text,order_category_code_array text);";
 		
 		
 		static final String DATABASE_CREATE_ORDERSTATUS = "CREATE TABLE IF NOT EXISTS "+"status_master"+
@@ -3060,7 +3060,7 @@ public class LoginDataBaseAdapter
 		//insert customer master function
 		  public void insertCustMaster(String LEGACY_CUSTOMER_CODE, String CUSTOMER_NAME, String CUSTOMER_SHOPNAME,String ADDRESS,
 			String STREET, String LANDMARK, String PIN_CODE, String LANDLINE_NO, String MOBILE_NO
-			, String EMAIL_ADDRESS, String STATUS, String STATE, String CITY, String BEAT,String vatin,String email,String created_at,String lat,String longi,String business_unit_code_array)
+			, String EMAIL_ADDRESS, String STATUS, String STATE, String CITY, String BEAT,String vatin,String email,String created_at,String lat,String longi,String business_unit_code_array,String order_category_code_array)
 	{
         ContentValues newValues = new ContentValues();
 		// Assign values for each row.
@@ -3084,6 +3084,7 @@ public class LoginDataBaseAdapter
 		newValues.put("lat", lat);
 		newValues.put("long", longi);
 		newValues.put("business_unit_code_array", business_unit_code_array);
+		newValues.put("order_category_code_array", order_category_code_array);
 		// Insert the row into your table
 		db.insert("customer_master", null, newValues);
 	}

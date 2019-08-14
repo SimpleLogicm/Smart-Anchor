@@ -52,6 +52,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -59,6 +60,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.karumi.dexter.Dexter;
@@ -82,9 +84,9 @@ import cpm.simplelogic.helper.CustomInfoWindowGoogleMap;
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,GoogleMap.OnInfoWindowClickListener,LocationListener  {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnInfoWindowClickListener, LocationListener {
     List<LatLng> locations;
-    int a = 0;
+    static int ab = 0;
     JSONObject jsonObject;
     ArrayList<String> address = new ArrayList<>();
     ArrayList<String> name = new ArrayList<>();
@@ -116,6 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int visibleItemCount, totalItemCount, firstVisibleItemPosition, lastVisibleItem;
     private Marker marker;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,46 +137,96 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
         prefManager = new PrefManager(this);
 
-        marker_rview.setHasFixedSize(true);
+        // marker_rview.setHasFixedSize(true);
+
+
         llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        llm.setReverseLayout(true);
         marker_rview.setLayoutManager(llm);
 
         marker_rview.addOnScrollListener(onScrollListener);
 
 
-       // map_add_toast_flag = "";
+        // map_add_toast_flag = "";
 
         cd = new ConnectionDetector(getApplicationContext());
 
 
-
-
-
-        }
+    }
 
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
         }
+
         @Override
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);
             visibleItemCount = llm.getChildCount();
             totalItemCount = llm.getItemCount();
             firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
-            lastVisibleItem = firstVisibleItemPosition +visibleItemCount;
+            lastVisibleItem = firstVisibleItemPosition + visibleItemCount;
 
-            String code = Allresult.get(lastVisibleItem).getCode();
+            String code = Allresult.get(lastVisibleItem - 1).getCode();
+            String lati = Allresult.get(lastVisibleItem - 1).getLati();
+            String longi = Allresult.get(lastVisibleItem - 1).getLongi();
+            String name = Allresult.get(lastVisibleItem - 1).getName();
+            String distance = Allresult.get(lastVisibleItem - 1).getDescription();
 
-            Log.d("Last_Visible","Last_Visible "+lastVisibleItem);
-            Log.d("First_Visible","First_Visible "+firstVisibleItemPosition);
-            Log.d("CODE","CODE "+code);
+            Log.d("Last_Visible", "Last_Visible " + lastVisibleItem);
+            Log.d("First_Visible", "First_Visible " + firstVisibleItemPosition);
+            Log.d("CODE", "CODE " + code);
 
-            LatLng mLatLng = new LatLng(23434, 3223);
+            LatLng mLatLng = new LatLng(Double.valueOf(lati), Double.valueOf(longi));
 
-            marker = mMap.addMarker(new MarkerOptions().position(mLatLng).title("My Title").snippet("My Snippet").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+//            if (hashMapMarker.size() > 0) {
+//
+//                try {
+//                    if (hashMapMarker.containsKey(code)) {
+//                        Marker marker = hashMapMarker.get(code);
+//                        marker.remove();
+//                        hashMapMarker.remove(code);
+//                    }
+//
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
+//
+//            }
+
+
+            if(marker != null && marker.isVisible())
+            {
+                marker.remove();
+            }
+            marker = mMap.addMarker(new MarkerOptions().position(mLatLng).title(name).snippet(distance).icon(BitmapDescriptorFactory.fromResource(R.drawable.star_icon)));
+
+            //hashMapMarker.put(code, marker);
+            LatLngBounds.Builder buildern = new LatLngBounds.Builder();
+
+            try {
+                buildern.include(marker.getPosition());
+                //infowindow.open(map,marker);
+            } catch (Exception ex) {
+
+            }
+
+
+            try {
+                LatLngBounds bounds = buildern.build();
+
+                int width = getResources().getDisplayMetrics().widthPixels;
+                int height = getResources().getDisplayMetrics().heightPixels;
+                int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+                mMap.animateCamera(cu);
+
+
+            } catch (Exception ex) {
+
+            }
         }
     };
 
@@ -183,8 +236,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
 
 
-        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile()))
-        {
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile())) {
             requestPHONEPermission(infoWindowData.getCmobile());
         }
     }
@@ -255,22 +307,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mGoogleApiClient.connect();
 
+//            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//                @Override
+//                public boolean onMarkerClick(Marker marker) {
+//                    int position = (int)(marker.getTag());
+//                    Log.d("id", "gfhgfh" + marker.getId());
+//                    marker_rview.setVisibility(View.VISIBLE);
+//                    //Using position get Value from arraylist
+//                    return false;
+//                }
+//            });
+
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 
                 @Override
                 public void onInfoWindowClick(Marker arg0) {
 
                     InfoWindowData infoWindowData = (InfoWindowData) arg0.getTag();
-
-                    Log.d("id","gfhgfh"+arg0.getId());
+                    arg0.hideInfoWindow();
                     marker_rview.setVisibility(View.VISIBLE);
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(infoWindowData.getS_code())) {
+                        String code = infoWindowData.getS_code();
+                        int position = -1;
+                        for (int i = 0; i < Allresult.size(); i++) {
+                            if (Allresult.get(i).getCode() == code) {
+                                position = i;
+                                 break;  // uncomment to get the first instance
+                            }
+                        }
 
-//                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(infoWindowData.getS_code())) {
-//                        Global_Data.Sub_Dealer_Code = infoWindowData.getS_code();
-//                    } else {
-//                        Global_Data.Sub_Dealer_Code = "";
-//                    }
-                    // startActivity(new Intent(MapsActivity.this, Sub_Dealer_Order_Main.class));
+                        if(position != -1)
+                        {
+                            marker_rview.getLayoutManager().scrollToPosition(position);
+                        }
+
+
+                    }
+                    Log.d("id", "gfhgfh" + arg0.getId());
+
+
+
+
 
 
 
@@ -320,8 +397,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onMapLoaded() {
                 //Your code where exception occurs goes here...
 
-                if (cd.isConnectedToInternet())
-                {
+                if (cd.isConnectedToInternet()) {
                     dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
                     dialog.setMessage("Please wait....");
                     dialog.setTitle("Dealer App");
@@ -329,9 +405,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     dialog.show();
 
                     getUserGeoData();
-                }
-                else
-                {
+                } else {
 
                     Toast.makeText(MapsActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
                     finish();
@@ -481,32 +555,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String region_code = returnAddress.getCountryCode();
                         String zipcode = returnAddress.getPostalCode();
                         str = new StringBuilder();
-                        str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0))+" ");
-                        if(!(str.indexOf(addresses.get(0).getLocality()) > 0))
-                        {
-                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality())+" ");
+                        str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0)) + " ");
+                        if (!(str.indexOf(addresses.get(0).getLocality()) > 0)) {
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality()) + " ");
                         }
 
-                        if(!(str.indexOf(addresses.get(0).getAdminArea()) > 0))
-                        {
-                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea())+" ");
+                        if (!(str.indexOf(addresses.get(0).getAdminArea()) > 0)) {
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea()) + " ");
                         }
 
-                        if(!(str.indexOf(addresses.get(0).getCountryName()) > 0))
-                        {
-                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName())+" ");
+                        if (!(str.indexOf(addresses.get(0).getCountryName()) > 0)) {
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName()) + " ");
                         }
 
-                        if(!(str.indexOf(addresses.get(0).getPostalCode()) > 0))
-                        {
-                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode())+" ");
+                        if (!(str.indexOf(addresses.get(0).getPostalCode()) > 0)) {
+                            str.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode()) + " ");
                         }
 
                         str.append("\n");
 
 
                         markerOptions.title(str.toString());
-
 
 
                         //Toast.makeText(getApplicationContext(), "Address:- " + addresses.get(0).getFeatureName() + addresses.get(0).getAdminArea() + addresses.get(0).getLocality(), Toast.LENGTH_LONG).show();
@@ -537,13 +606,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace(); // getFromLocation() may sometimes fail
         }
 
     }
-
 
 
     @Override
@@ -575,12 +642,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 info.setCdistance("");
                 info.setCmobile("");
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOvel_ADDRESS))
-                {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOvel_ADDRESS)) {
                     markerOptions.title(Global_Data.GLOvel_ADDRESS);
-                }
-                else
-                {
+                } else {
                     markerOptions.title("Current Position");
                 }
 
@@ -588,7 +652,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
                 mMap.setInfoWindowAdapter(customInfoWindow);
                 currLocationMarker = mMap.addMarker(markerOptions);
-               // Marker m = mMap.addMarker(markerOptions);
+                // Marker m = mMap.addMarker(markerOptions);
                 currLocationMarker.setTag(info);
             }
 
@@ -603,7 +667,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return;
             }
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
-        }catch(Exception ex){ex.printStackTrace();}
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 
@@ -616,9 +682,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
-
-
 
 
     private class GeocoderHandler extends Handler {
@@ -654,12 +717,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void getUserGeoData()
-    {
+    public void getUserGeoData() {
         String domain = getResources().getString(R.string.service_domain);
 
         Log.i("volley", "domain: " + domain);
-        Log.i("volley", "email: " +  prefManager.getUser_Email());
+        Log.i("volley", "email: " + prefManager.getUser_Email());
 
 
         try {
@@ -667,11 +729,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             StringRequest jsObjRequest = null;
             String service_url = "";
 
-            service_url = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + "2958"+ "&lat="
-                    + Global_Data.GLOvel_LATITUDE + "&lon="
-                    + Global_Data.GLOvel_LONGITUDE;
 
-            Log.i("user list url", "user list url " +service_url);
+//            service_url = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + "2958"+ "&lat="
+//                    + Global_Data.GLOvel_LATITUDE + "&lon="
+//                    + Global_Data.GLOvel_LONGITUDE;
+
+            service_url = " http://subdealer.anchor-group.in/metal/api/v1/sub_dealers/get_sub_dealers_filter_by_stage_for_map?city_code=3648&lat=19.112067&lon=72.9303298&sub_dealers_code=%5B%5D&flag=%5B%22approved%22%2C%22pending_for_approval%22%2C%22incomplete_but_not_touched%22%2C%22partially_filled%22%5D";
+
+            Log.i("user list url", "user list url " + service_url);
 
             jsObjRequest = new StringRequest(service_url, new Response.Listener<String>() {
 
@@ -761,7 +826,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 } else {
                     response_result = "data";
-                    JSONArray data = response.getJSONArray("sub_dealers");
+                    JSONArray data = response.getJSONArray("partially_filled_sub_dealers");
                     Log.i("volley", "response data Length: " + data.length());
                     Log.d("volley", "users" + data.toString());
 
@@ -791,9 +856,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         for (int i = 0; i < data.length(); i++) {
 
-                             jsonObject = data.getJSONObject(i);
+                            jsonObject = data.getJSONObject(i);
 
-                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("latitude")) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("longitude"))){
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("latitude")) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("longitude"))) {
 
                                 SubDealerModel di = new SubDealerModel();
 
@@ -807,40 +872,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //status.add("Approved");
 
 
-                                di.name = jsonObject.getString("firm_name").trim();
-                                di.proprietor_mobile1 = jsonObject.getString("proprietor_mobile1").trim();
-                                di.proprietor_name1 = jsonObject.getString("proprietor_name1").trim();
-                                di.proprietor_email1 = jsonObject.getString("proprietor_email1").trim();
-                                di.proprietor_mobile2 = jsonObject.getString("proprietor_mobile2").trim();
-                                di.proprietor_name2 = jsonObject.getString("proprietor_name2").trim();
-                                di.proprietor_email2 = jsonObject.getString("proprietor_email2").trim();
-                                di.shop_name = jsonObject.getString("shop_name").trim();
-                                di.city = jsonObject.getString("city_name").trim();
+                                di.name = jsonObject.getString("customer_name").trim();
+                                di.proprietor_mobile1 = jsonObject.getString("mobile_no").trim();
+                                di.proprietor_name1 = jsonObject.getString("customer_address").trim();
+                                di.proprietor_email1 = jsonObject.getString("customer_address").trim();
+                                di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
+                                di.proprietor_name2 = jsonObject.getString("distance").trim();
+                                di.proprietor_email2 = jsonObject.getString("distance").trim();
+                                di.shop_name = jsonObject.getString("customer_name").trim();
+                                di.city = jsonObject.getString("distance").trim();
                                 di.code = jsonObject.getString("code").trim();
+
+                                di.lati = jsonObject.getString("latitude").trim();
+                                di.longi = jsonObject.getString("longitude").trim();
 
                                 Allresult.add(di);
 
 
-                                }
-
-
-                                a++;
-
                             }
 
 
-                        MapsActivity.this.runOnUiThread(new Runnable()
-                        {
+                        }
+
+
+                        MapsActivity.this.runOnUiThread(new Runnable() {
                             public void run() {
 
                                 dialog.dismiss();
 
-                                if(locations.size() > 0)
-                                {
+                                if (locations.size() > 0) {
                                     int a = 0;
                                     for (LatLng latLng : locations) {
 
-                                     //   mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(MapsActivity.this,"Name : "+name.get(a),
+                                        //   mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(MapsActivity.this,"Name : "+name.get(a),
 //                                                "Address : "+address.get(a)));
 
 //                                        Marker marker = mMap.addMarker(new MarkerOptions()
@@ -851,13 +915,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         MarkerOptions markerOptions = new MarkerOptions();
 
                                         markerOptions.position(latLng)
-                                                .title("Name : "+name.get(a))
-                                                .snippet("Address : "+address.get(a))
-                                                .icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE));
+                                                .title("Name : " + name.get(a))
+                                                .snippet("Address : " + address.get(a))
+                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
                                         InfoWindowData info = new InfoWindowData();
-                                        info.setCdistance("Distance : "+distance.get(a));
-                                        info.setCmobile("Mobile No : "+mobile.get(a));
+                                        info.setCdistance("Distance : " + distance.get(a));
+                                        info.setCmobile("Mobile No : " + mobile.get(a));
                                         info.setCmobilenew(mobile.get(a));
                                         info.setS_code(code.get(a));
 
@@ -866,60 +930,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                         m = mMap.addMarker(markerOptions);
                                         m.setTag(info);
-                                      //  m.showInfoWindow();
+
+
+                                        //  m.showInfoWindow();
 
                                         //.icon(BitmapDescriptorFactory
                                         //   .fromResource(R.drawable.marker)));
 
-                                      //  marker.showInfoWindow();
+                                        //  marker.showInfoWindow();
 
-                                       // mMap.addMarker(new MarkerOptions().position(latLng).title("Name : "+name.get(a)+ " Address : "+address.get(a)));
+                                        // mMap.addMarker(new MarkerOptions().position(latLng).title("Name : "+name.get(a)+ " Address : "+address.get(a)));
                                         a++;
                                     }
 
 
-//                                    LatLngBounds.Builder buildern = new LatLngBounds.Builder();
-//                                    try
-//                                    {
-//                                        buildern.include(m.getPosition());
-//                                    }catch(Exception ex){
-//
-//                                    }
-//
-//
-//                                    try
-//                                    {
-//                                        LatLngBounds bounds = buildern.build();
-//
-//                                        int width = getResources().getDisplayMetrics().widthPixels;
-//                                        int height = getResources().getDisplayMetrics().heightPixels;
-//                                        int padding = (int) (width * 0.10); // offset from edges of the map 10% of screen
-//
-//                                        //  int padding1 = 0; // offset from edges of the map in pixels
-//                                        // CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding1);
-//
-//                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-//
-//                                        mMap.animateCamera(cu);
-//                                    }catch(Exception ex){
-//
-//                                    }
+                                    LatLngBounds.Builder buildern = new LatLngBounds.Builder();
+
+                                    try {
+                                        buildern.include(m.getPosition());
+                                    } catch (Exception ex) {
+
+                                    }
+
+
+                                    try {
+                                        LatLngBounds bounds = buildern.build();
+
+                                        int width = getResources().getDisplayMetrics().widthPixels;
+                                        int height = getResources().getDisplayMetrics().heightPixels;
+                                        int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+                                        mMap.animateCamera(cu);
+
+
+                                    } catch (Exception ex) {
+
+                                    }
+
 
                                     ca = new Sub_DealerMap_Adapter(Allresult, MapsActivity.this);
                                     marker_rview.setAdapter(ca);
                                     ca.notifyDataSetChanged();
-                                }
-                                else
-                                {
+                                } else {
                                     Toast.makeText(MapsActivity.this, "Sub Dealer Not Found.", Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
 
 
-
                             }
                         });
-
 
 
                     }
@@ -977,8 +1036,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             });
 
 
-
-
         }
 
         @Override
@@ -994,8 +1051,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onDestroy() {
         super.onDestroy();
 
-        if(dialog != null)
-        {
+        if (dialog != null) {
             dialog.dismiss();
         }
 
@@ -1007,7 +1063,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         finish();
 
     }
-
 
 
     /**

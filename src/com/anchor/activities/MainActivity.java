@@ -39,7 +39,6 @@ import android.widget.Toast;
 import com.anchor.animation.ActivitySwitcher;
 import com.anchor.service.LocationServices;
 import com.anchor.service.StartLocationAlert;
-import com.anchor.services.getServices;
 import com.anchor.slidingmenu.adapter.NavDrawerListAdapter;
 import com.anchor.slidingmenu.model.NavDrawerItem;
 import com.anchor.webservice.ConnectionDetector;
@@ -296,7 +295,7 @@ public class MainActivity extends BaseActivity {
 
         if (Global_Data.SYNC_SERVICE_FLAG.equalsIgnoreCase("TRUE")) {
             Global_Data.SYNC_SERVICE_FLAG = "";
-            getServices.sendRequest(MainActivity.this);
+           // getServices.sendRequest(MainActivity.this);
         }
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,

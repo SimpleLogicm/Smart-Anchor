@@ -737,7 +737,7 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
 							public void run() {
 								loginDataBaseAdapter.insertCustMaster(new BigInteger(130, random).toString(32),editTextRetailerName.getText().toString(), editTextStoreName.getText().toString(),editTextAddress.getText().toString(),
 										editTextStreet.getText().toString(),editTextLandMark.getText().toString(), editTextPin.getText().toString(),"", editTextContatNo1.getText().toString()
-										, editTextContatMail.getText().toString(), "active", F_STATE_ID,F_CITY_ID,F_BEAT_ID,editTextContatVatINId.getText().toString(),Global_Data.GLOvel_USER_EMAIL,Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,"");
+										, editTextContatMail.getText().toString(), "active", F_STATE_ID,F_CITY_ID,F_BEAT_ID,editTextContatVatINId.getText().toString(),Global_Data.GLOvel_USER_EMAIL,Current_Date,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE,"","");
 							}
 						});
 

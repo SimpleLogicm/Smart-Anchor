@@ -17,7 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
 {
 	// Database Name
 		static final String DATABASE_NAME = "simple_logic.db";
-		static final int DATABASE_VERSION = 10;
+		static final int DATABASE_VERSION = 11;
 		 public static final String KEY_ID = "_id";
 		 public static final String FNAME = "name";
 		 private static final String TABLE_REG = "users";
@@ -661,6 +661,33 @@ public class DataBaseHelper extends SQLiteOpenHelper
 
         // return contact list?
         return contactList;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getorder_category_bycodeArray(String order_category_array) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT Name,Description FROM " + TABLE_ORDER_CATEGORY +" WHERE Code IN (" +  order_category_array + ")";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+
+                Local_Data contact = new Local_Data();
+                contact.setOrder_type_name(cursor.getString(0));
+                contact.setOrder_type_desc(cursor.getString(1));
+
+                // Adding contact to list
+                contactList1.add(contact);
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
     }
 
     // Getting All Local_Data REASON
@@ -2238,12 +2265,12 @@ public class DataBaseHelper extends SQLiteOpenHelper
     public List<Local_Data> getCustomerCode(String Customer_Name) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" +  Customer_Name + "'" ;
+        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array,order_category_code_array FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" +  Customer_Name + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
        // Cursor cursor = db.rawQuery(selectQuery1, null);
 
-        Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array from customer_master WHERE CUSTOMER_SHOPNAME = ?",
+        Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array,order_category_code_array from customer_master WHERE CUSTOMER_SHOPNAME = ?",
                 new String[] {Customer_Name});
 
         // looping through all rows and adding to list
@@ -2262,6 +2289,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setlongitude(cursor.getString(9));
                 contact.setCust_email(cursor.getString(10));
                 contact.setBusiness_unit_code_array(cursor.getString(11));
+                contact.setOrder_category_code_array(cursor.getString(12));
                 //contact.setPwd(cursor.getString(2));
                 //contact.setImei(cursor.getString(3));
 

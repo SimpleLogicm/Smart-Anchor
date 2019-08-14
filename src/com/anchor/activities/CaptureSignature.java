@@ -390,16 +390,35 @@ public class CaptureSignature extends BaseActivity {
                 .getSharedPreferences("SimpleLogic", 0);
 
         results_order_type.clear();
-        List<Local_Data> contacts1 = dbvoc.getorder_category();
-        results_order_type.add("Select Order Type");
-        for (Local_Data cn : contacts1)
-        {
-            if(!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" "))
+
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
+
+            List<Local_Data> contacts1 = dbvoc.getorder_category_bycodeArray(Global_Data.order_category_code_array);
+            results_order_type.add("Select Order Type");
+            for (Local_Data cn : contacts1)
             {
-                String str_categ = ""+cn.getOrder_type_name();
-                results_order_type.add(str_categ);
+                if(!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" "))
+                {
+                    String str_categ = ""+cn.getOrder_type_name();
+                    results_order_type.add(str_categ);
+                }
             }
         }
+        else
+        {
+            List<Local_Data> contacts1 = dbvoc.getorder_category();
+            results_order_type.add("Select Order Type");
+            for (Local_Data cn : contacts1)
+            {
+                if(!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" "))
+                {
+                    String str_categ = ""+cn.getOrder_type_name();
+                    results_order_type.add(str_categ);
+                }
+            }
+        }
+
+
 
         dataAdapter_order_type = new ArrayAdapter<String>(this, R.layout.spinner_item, results_order_type);
         dataAdapter_order_type.setDropDownViewResource(R.layout.spinner_item);

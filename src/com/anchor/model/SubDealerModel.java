@@ -31,6 +31,24 @@ public class SubDealerModel {
     public String Stage;
     public String remarks1;
     public String remarks2;
+    public String lati;
+    public String longi;
+
+    public String getLongi() {
+        return longi;
+    }
+
+    public void setLongi(String longi) {
+        this.longi = longi;
+    }
+
+    public String getLati() {
+        return lati;
+    }
+
+    public void setLati(String lati) {
+        this.lati = lati;
+    }
 
     public String getState() {
         return State;

@@ -88,7 +88,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(getApplicationContext(), Sub_Dealer_Order_Main.class);
+				Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 			}

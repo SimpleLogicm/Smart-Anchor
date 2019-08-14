@@ -845,19 +845,26 @@ public class Order extends Activity implements OnItemSelectedListener {
                             Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
                             Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
                             Global_Data.Business_unit_code_array = cn.getBusiness_unit_code_array();
+                            Global_Data.order_category_code_array = cn.getOrder_category_code_array();
 
                         }
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
                            Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("[\\[\\](){}]","");
-                            //Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("^\"|\"$", "");
-                            //Global_Data.Business_unit_code_array =  Global_Data.Business_unit_code_array.substring(1,  Global_Data.Business_unit_code_array.length()-1);
-                           // List<String> stringList = new ArrayList<String>(Arrays.asList(Global_Data.Business_unit_code_array ));
-                            //Global_Data.Business_unit_code_array =stringList.toString();
+
                         }
                         else
                         {
                             Global_Data.Business_unit_code_array = "";
+                        }
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
+                            Global_Data.order_category_code_array = Global_Data.order_category_code_array.replaceAll("[\\[\\](){}]","");
+
+                        }
+                        else
+                        {
+                            Global_Data.order_category_code_array = "";
                         }
 
                         Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
@@ -942,20 +949,27 @@ public class Order extends Activity implements OnItemSelectedListener {
                             Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
                             Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
                             Global_Data.Business_unit_code_array = cn.getBusiness_unit_code_array();
+                            Global_Data.order_category_code_array = cn.getOrder_category_code_array();
 
                         }
 
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
                             Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("[\\[\\](){}]","");
-                            //Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("^\"|\"$", "");
-                            //Global_Data.Business_unit_code_array =  Global_Data.Business_unit_code_array.substring(1,  Global_Data.Business_unit_code_array.length()-1);
-                            // List<String> stringList = new ArrayList<String>(Arrays.asList(Global_Data.Business_unit_code_array ));
-                            //Global_Data.Business_unit_code_array =stringList.toString();
+
                         }
                         else
                         {
                             Global_Data.Business_unit_code_array = "";
+                        }
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
+                            Global_Data.order_category_code_array = Global_Data.order_category_code_array.replaceAll("[\\[\\](){}]","");
+
+                        }
+                        else
+                        {
+                            Global_Data.order_category_code_array = "";
                         }
 
                         Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
