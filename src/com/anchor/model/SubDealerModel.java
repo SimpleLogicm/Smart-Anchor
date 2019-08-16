@@ -33,6 +33,15 @@ public class SubDealerModel {
     public String remarks2;
     public String lati;
     public String longi;
+    public String distance;
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 
     public String getLongi() {
         return longi;

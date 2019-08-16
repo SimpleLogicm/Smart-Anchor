@@ -79,7 +79,6 @@ import java.util.List;
 import java.util.Locale;
 
 import cpm.simplelogic.helper.ConnectionDetector;
-import cpm.simplelogic.helper.CustomInfoWindowGoogleMap;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
@@ -116,13 +115,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List<SubDealerModel> Allresult = new ArrayList<SubDealerModel>();
     LinearLayoutManager llm;
     private int visibleItemCount, totalItemCount, firstVisibleItemPosition, lastVisibleItem;
-    private Marker marker;
+    public Marker marker;
+    String click_flag = "";
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Global_Data.selectedPosition = -1;
+        Global_Data.mMarkers.clear();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -179,54 +182,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d("First_Visible", "First_Visible " + firstVisibleItemPosition);
             Log.d("CODE", "CODE " + code);
 
-            LatLng mLatLng = new LatLng(Double.valueOf(lati), Double.valueOf(longi));
-
-//            if (hashMapMarker.size() > 0) {
-//
-//                try {
-//                    if (hashMapMarker.containsKey(code)) {
-//                        Marker marker = hashMapMarker.get(code);
-//                        marker.remove();
-//                        hashMapMarker.remove(code);
-//                    }
-//
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
-//
-//            }
-
-
-            if(marker != null && marker.isVisible())
+            if(click_flag.equalsIgnoreCase(""))
             {
-                marker.remove();
+                LatLng mLatLng = new LatLng(Double.valueOf(lati), Double.valueOf(longi));
+
+                if (marker != null && marker.isVisible()) {
+                    marker.remove();
+                }
+                marker = mMap.addMarker(new MarkerOptions().position(mLatLng).title(name).snippet("").icon(BitmapDescriptorFactory.fromResource(R.drawable.star_icon)));
+
+                //hashMapMarker.put(code, marker);
+                LatLngBounds.Builder buildern = new LatLngBounds.Builder();
+
+                try {
+                    buildern.include(marker.getPosition());
+                    Global_Data.mMarkers.get(lastVisibleItem - 1).showInfoWindow();
+                    //infowindow.open(map,marker);
+                } catch (Exception ex) {
+
+                }
+
+
+                try {
+
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    for (Marker marker : Global_Data.mMarkers) {
+                        builder.include(marker.getPosition());
+                    }
+
+                    LatLngBounds bounds = builder.build();
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                    mMap.moveCamera(cu);
+
+//                    LatLngBounds bounds = buildern.build();
+//
+//                    int width = getResources().getDisplayMetrics().widthPixels;
+//                    int height = getResources().getDisplayMetrics().heightPixels;
+//                    int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+//                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+//                    mMap.animateCamera(cu);
+
+
+                } catch (Exception ex) {
+
+                }
             }
-            marker = mMap.addMarker(new MarkerOptions().position(mLatLng).title(name).snippet(distance).icon(BitmapDescriptorFactory.fromResource(R.drawable.star_icon)));
-
-            //hashMapMarker.put(code, marker);
-            LatLngBounds.Builder buildern = new LatLngBounds.Builder();
-
-            try {
-                buildern.include(marker.getPosition());
-                //infowindow.open(map,marker);
-            } catch (Exception ex) {
-
+            else
+            {
+                click_flag = "";
             }
 
 
-            try {
-                LatLngBounds bounds = buildern.build();
-
-                int width = getResources().getDisplayMetrics().widthPixels;
-                int height = getResources().getDisplayMetrics().heightPixels;
-                int padding = (int) (width * 0.005); // offset from edges of the map 10% of
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-                mMap.animateCamera(cu);
 
 
-            } catch (Exception ex) {
-
-            }
         }
     };
 
@@ -239,6 +247,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile())) {
             requestPHONEPermission(infoWindowData.getCmobile());
         }
+    }
+
+    public Marker getmarker(){
+        return marker;
+    }
+
+    public void setmarker(Marker markers){
+        this.marker = markers;
+    }
+
+    public GoogleMap getmap(){
+        return mMap;
     }
 
 
@@ -307,89 +327,124 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mGoogleApiClient.connect();
 
-//            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//                @Override
-//                public boolean onMarkerClick(Marker marker) {
-//                    int position = (int)(marker.getTag());
-//                    Log.d("id", "gfhgfh" + marker.getId());
-//                    marker_rview.setVisibility(View.VISIBLE);
-//                    //Using position get Value from arraylist
-//                    return false;
-//                }
-//            });
-
-            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
-                public void onInfoWindowClick(Marker arg0) {
+                public boolean onMarkerClick(Marker marker) {
 
-                    InfoWindowData infoWindowData = (InfoWindowData) arg0.getTag();
-                    arg0.hideInfoWindow();
                     marker_rview.setVisibility(View.VISIBLE);
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(infoWindowData.getS_code())) {
-                        String code = infoWindowData.getS_code();
-                        int position = -1;
+                    String code = String.valueOf(marker.getTag());
+                    Log.d("id", "code" + code);
+
+
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(code)) {
+                        int positionn = -1;
+                        String lati = "";
+                        String longi = "";
                         for (int i = 0; i < Allresult.size(); i++) {
                             if (Allresult.get(i).getCode() == code) {
-                                position = i;
+                                positionn = i;
+
+                                 lati = Allresult.get(i).getLati();
+                                 longi = Allresult.get(i).getLongi();
+
                                  break;  // uncomment to get the first instance
                             }
                         }
 
-                        if(position != -1)
+                        if(positionn != -1)
                         {
-                            marker_rview.getLayoutManager().scrollToPosition(position);
+                            Global_Data.selectedPosition = positionn;
+                            marker_rview.getLayoutManager().scrollToPosition(positionn);
+                        }
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(lati) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(longi)) {
+
+                            LatLng mLatLng = new LatLng(Double.valueOf(lati), Double.valueOf(longi));
+
+                            if (MapsActivity.this.marker != null && MapsActivity.this.marker.isVisible()) {
+                                MapsActivity.this.marker.remove();
+                            }
+                            MapsActivity.this.marker = mMap.addMarker(new MarkerOptions().position(mLatLng).title("").snippet("").icon(BitmapDescriptorFactory.fromResource(R.drawable.star_icon)));
+
+                            //hashMapMarker.put(code, marker);
+                            LatLngBounds.Builder buildern = new LatLngBounds.Builder();
+
+                            try {
+                                buildern.include(MapsActivity.this.marker.getPosition());
+                                //infowindow.open(map,marker);
+                            } catch (Exception ex) {
+
+                            }
+
+                            try {
+                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                                for (Marker markers : Global_Data.mMarkers) {
+                                    builder.include(markers.getPosition());
+                                }
+
+                                LatLngBounds bounds = builder.build();
+                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                                mMap.moveCamera(cu);
+
+//                                LatLngBounds bounds = buildern.build();
+//
+//                                int width = getResources().getDisplayMetrics().widthPixels;
+//                                int height = getResources().getDisplayMetrics().heightPixels;
+//                                int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+//                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+//                                mMap.animateCamera(cu);
+
+
+                            } catch (Exception ex) {
+
+                            }
+
                         }
 
 
+                        click_flag = "yes";
+
+
                     }
-                    Log.d("id", "gfhgfh" + arg0.getId());
-
-
-
-
-
-
-
+                    return false;
                 }
             });
+
+//            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//
+//                @Override
+//                public void onInfoWindowClick(Marker arg0) {
+//
+//                    // InfoWindowData infoWindowData = (InfoWindowData) arg0.getTag();
+//                    // arg0.hideInfoWindow();
+//                    marker_rview.setVisibility(View.VISIBLE);
+////                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(infoWindowData.getS_code())) {
+////                        String code = infoWindowData.getS_code();
+////                        int position = -1;
+////                        for (int i = 0; i < Allresult.size(); i++) {
+////                            if (Allresult.get(i).getCode() == code) {
+////                                position = i;
+////                                 break;  // uncomment to get the first instance
+////                            }
+////                        }
+////
+////                        if(position != -1)
+////                        {
+////                            marker_rview.getLayoutManager().scrollToPosition(position);
+////                        }
+////
+////
+////                    }
+//                    Log.d("id", "gfhgfh" + arg0.getId());
+//
+//
+//                }
+//            });
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
-//        //When Map Loads Successfully
-//        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-//            @Override
-//            public void onMapLoaded() {
-//
-//                LatLng customMarkerLocationOne = new LatLng(24.823580, 67.025625);
-//                LatLng customMarkerLocationTwo = new LatLng(24.823229, 67.033070);
-//                LatLng customMarkerLocationThree = new LatLng(24.820211, 67.029465);
-//
-//
-//                mMap.addMarker(new MarkerOptions().position(customMarkerLocationOne).
-//                        icon(BitmapDescriptorFactory.fromBitmap(
-//                                createCustomMarker(MapsActivity.this,R.drawable.my_dp,"Yasir Ameen"))));
-//                mMap.addMarker(new MarkerOptions().position(customMarkerLocationTwo).
-//                        icon(BitmapDescriptorFactory.fromBitmap(
-//                                createCustomMarker(MapsActivity.this,R.drawable.janet,"Mary Jane"))));
-//
-//                mMap.addMarker(new MarkerOptions().position(customMarkerLocationThree).
-//                        icon(BitmapDescriptorFactory.fromBitmap(
-//                                createCustomMarker(MapsActivity.this,R.drawable.john,"Janet John"))));
-//
-//                //LatLngBound will cover all your marker on Google Maps
-//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//                builder.include(customMarkerLocationOne); //Taking Point A (First LatLng)
-//                builder.include(customMarkerLocationThree); //Taking Point B (Second LatLng)
-//                LatLngBounds bounds = builder.build();
-//                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
-//                mMap.moveCamera(cu);
-//                mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 2000, null);
-//            }
-//        });
 
         //When Map Loads Successfully
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
@@ -400,7 +455,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (cd.isConnectedToInternet()) {
                     dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
                     dialog.setMessage("Please wait....");
-                    dialog.setTitle("Dealer App");
+                    dialog.setTitle("Smart Anchor App");
                     dialog.setCancelable(false);
                     dialog.show();
 
@@ -520,11 +575,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
 
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            InfoWindowData info = new InfoWindowData();
+            // InfoWindowData info = new InfoWindowData();
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
-            info.setCdistance("");
-            info.setCmobile("");
+            // info.setCdistance("");
+            //  info.setCmobile("");
 
             // lat = location.getLatitude();
 //            longi = location.getLongitude();
@@ -589,22 +644,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
-            mMap.setInfoWindowAdapter(customInfoWindow);
+            // CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
+            //  mMap.setInfoWindowAdapter(customInfoWindow);
             currLocationMarker = mMap.addMarker(markerOptions);
             // Marker m = mMap.addMarker(markerOptions);
-            currLocationMarker.setTag(info);
+            // currLocationMarker.setTag(info);
 
             //Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
 
             Log.d("Location change event", "Location Change");
 
-            //zoom to current position:
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLng).zoom(12).build();
+            if(m != null)
+            {
+                LatLngBounds.Builder buildern = new LatLngBounds.Builder();
 
-            mMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
+                try {
+                    buildern.include(m.getPosition());
+                } catch (Exception ex) {
+
+                }
+
+
+                try {
+
+                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                    for (Marker marker : Global_Data.mMarkers) {
+                        builder.include(marker.getPosition());
+                    }
+
+                    LatLngBounds bounds = builder.build();
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                    mMap.moveCamera(cu);
+
+                   // mMap.setPadding(10, 10, 10, 10);
+
+//                    LatLngBounds bounds = buildern.build();
+//
+//                    int width = getResources().getDisplayMetrics().widthPixels;
+//                    int height = getResources().getDisplayMetrics().heightPixels;
+//                    int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+//                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+//                    mMap.animateCamera(cu);
+
+
+                } catch (Exception ex) {
+
+                }
+            }
+            else
+            {
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(latLng).zoom(12).build();
+
+                mMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(cameraPosition));
+            }
+
+
+
+            //zoom to current position:
+
 
         } catch (Exception e) {
             e.printStackTrace(); // getFromLocation() may sometimes fail
@@ -634,13 +733,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (mLastLocation != null) {
                 //place marker at current position
                 //mGoogleMap.clear();
-                InfoWindowData info = new InfoWindowData();
+                //  InfoWindowData info = new InfoWindowData();
                 latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
 
-                info.setCdistance("");
-                info.setCmobile("");
+                // info.setCdistance("");
+                //  info.setCmobile("");
 
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOvel_ADDRESS)) {
                     markerOptions.title(Global_Data.GLOvel_ADDRESS);
@@ -649,11 +748,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
-                mMap.setInfoWindowAdapter(customInfoWindow);
+                //  CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
+                // mMap.setInfoWindowAdapter(customInfoWindow);
                 currLocationMarker = mMap.addMarker(markerOptions);
                 // Marker m = mMap.addMarker(markerOptions);
-                currLocationMarker.setTag(info);
+                // currLocationMarker.setTag(info);
             }
 
             mLocationRequest = new LocationRequest();
@@ -872,15 +971,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //status.add("Approved");
 
 
-                                di.name = jsonObject.getString("customer_name").trim();
+                                //di.name = jsonObject.getString("customer_name").trim();
                                 di.proprietor_mobile1 = jsonObject.getString("mobile_no").trim();
-                                di.proprietor_name1 = jsonObject.getString("customer_address").trim();
+                              //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
                                 di.proprietor_email1 = jsonObject.getString("customer_address").trim();
-                                di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
-                                di.proprietor_name2 = jsonObject.getString("distance").trim();
-                                di.proprietor_email2 = jsonObject.getString("distance").trim();
+                                di.address = jsonObject.getString("customer_address").trim();
+                              //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
+                               // di.proprietor_name2 = jsonObject.getString("distance").trim();
+                               // di.proprietor_email2 = jsonObject.getString("distance").trim();
                                 di.shop_name = jsonObject.getString("customer_name").trim();
-                                di.city = jsonObject.getString("distance").trim();
+                                di.distance = jsonObject.getString("distance").trim();
                                 di.code = jsonObject.getString("code").trim();
 
                                 di.lati = jsonObject.getString("latitude").trim();
@@ -919,17 +1019,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                 .snippet("Address : " + address.get(a))
                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
-                                        InfoWindowData info = new InfoWindowData();
-                                        info.setCdistance("Distance : " + distance.get(a));
-                                        info.setCmobile("Mobile No : " + mobile.get(a));
-                                        info.setCmobilenew(mobile.get(a));
-                                        info.setS_code(code.get(a));
 
-                                        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
-                                        mMap.setInfoWindowAdapter(customInfoWindow);
+                                        // InfoWindowData info = new InfoWindowData();
+                                        // info.setCdistance("Distance : " + distance.get(a));
+                                        // info.setCmobile("Mobile No : " + mobile.get(a));
+                                        // info.setCmobilenew(mobile.get(a));
+                                        // info.setS_code(code.get(a));
+
+                                        //CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
+                                        //  mMap.setInfoWindowAdapter(customInfoWindow);
 
                                         m = mMap.addMarker(markerOptions);
-                                        m.setTag(info);
+                                          m.setTag(code.get(a));
+                                        Global_Data.mMarkers.add(m);
 
 
                                         //  m.showInfoWindow();
@@ -954,13 +1056,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                                     try {
-                                        LatLngBounds bounds = buildern.build();
 
-                                        int width = getResources().getDisplayMetrics().widthPixels;
-                                        int height = getResources().getDisplayMetrics().heightPixels;
-                                        int padding = (int) (width * 0.005); // offset from edges of the map 10% of
-                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-                                        mMap.animateCamera(cu);
+                                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                                        for (Marker marker : Global_Data.mMarkers) {
+                                            builder.include(marker.getPosition());
+                                        }
+
+                                        LatLngBounds bounds = builder.build();
+                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                                        mMap.moveCamera(cu);
+
+//                                        LatLngBounds bounds = buildern.build();
+//
+//                                        int width = getResources().getDisplayMetrics().widthPixels;
+//                                        int height = getResources().getDisplayMetrics().heightPixels;
+//                                        int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+//                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+//                                        mMap.animateCamera(cu);
 
 
                                     } catch (Exception ex) {
@@ -968,7 +1080,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     }
 
 
-                                    ca = new Sub_DealerMap_Adapter(Allresult, MapsActivity.this);
+                                    ca = new Sub_DealerMap_Adapter(Allresult, MapsActivity.this,MapsActivity.this);
                                     marker_rview.setAdapter(ca);
                                     ca.notifyDataSetChanged();
                                 } else {
@@ -1060,6 +1172,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onBackPressed() {
 
+        Intent i = new Intent(MapsActivity.this, Sales_Dash.class);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        startActivity(i);
         finish();
 
     }

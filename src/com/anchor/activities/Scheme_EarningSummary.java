@@ -1690,7 +1690,7 @@ public class Scheme_EarningSummary extends Activity implements Scheme_EarningSum
                             if (action_type.equalsIgnoreCase("scheme")) {
                                 dialog = new ProgressDialog(Scheme_EarningSummary.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                                 dialog.setMessage("Please wait....");
-                                dialog.setTitle("Dealer");
+                                dialog.setTitle("Smart Anchor App");
                                 dialog.setCancelable(false);
                                 dialog.show();
 

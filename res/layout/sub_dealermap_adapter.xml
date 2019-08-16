@@ -1,6 +1,6 @@
 <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/tools"
     card_view:cardCornerRadius="4dp"
@@ -34,7 +34,7 @@
             >
 
             <TextView
-                android:id="@+id/p_delaer_name"
+                android:id="@+id/p_delaer_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -47,28 +47,17 @@
 
 
             <TextView
-                android:id="@+id/p_dealer_city"
+                android:id="@+id/p_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:gravity="center_vertical"
                 android:textSize="12dp"
                 android:textColor="@color/white"
-                android:layout_below="@id/p_delaer_name"
+                android:layout_below="@id/p_delaer_address"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"/>
 
-            <TextView
-                android:id="@+id/p_proprietor_name1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/white"
-                android:gravity="center_vertical"
-                android:textSize="12dp"
-                android:layout_below="@id/p_dealer_city"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp" />
 
             <TextView
                 android:id="@+id/p_proprietor_mobile1"
@@ -78,7 +67,7 @@
                 android:textColor="@color/white"
                 android:gravity="center_vertical"
                 android:textSize="12dp"
-                android:layout_below="@id/p_proprietor_name1"
+                android:layout_below="@id/p_distance"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp" />
 
@@ -87,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:gravity="center_vertical"
                 android:textSize="12dp"
@@ -129,6 +119,90 @@
                 android:visibility="gone"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/p_lati"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/p_longi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/p_mobi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"/>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/p_proprietor_mobile1"
+                >
+
+            <Button
+                android:id="@+id/pro_mobile_click"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/pro_address"
+                android:text="@string/Call"
+                android:textAllCaps="false"
+                android:background="@drawable/roundedbutton"
+                android:textColor="@drawable/white_color"
+                android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/pro_check_distance"
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/pro_address"
+                    android:text="@string/Shop_Distance"
+                    android:textAllCaps="false"
+                    android:background="@drawable/roundedbutton"
+                    android:textColor="@drawable/white_color"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/pro_click_order"
+                    android:layout_width="110dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/pro_address"
+                    android:text="@string/Ordero"
+                    android:textAllCaps="false"
+                    android:background="@drawable/roundedbutton"
+                    android:textColor="@drawable/white_color"
+                    android:textSize="17sp" />
+            </LinearLayout>
 
 
         </RelativeLayout>

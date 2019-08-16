@@ -348,7 +348,7 @@ public class Invoices extends Activity implements Invoices_Adapter.UserAdapterLi
 
                 datePickerDialog.setTitle("Select To Date");
 
-                datePickerDialog.show(getFragmentManager(), "Dealer App");
+                datePickerDialog.show(getFragmentManager(), "Smart Anchor App");
 
             }
         });

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.inputmethod.InputMethodManager;
 
 import com.anchor.model.Spiner_List_Model;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,7 +91,8 @@ public class Global_Data {
     public static String CUSTOMER_ADDRESS_NEW="";
     public static String Business_unit_code_array="";
     public static String order_category_code_array="";
-
+    public static int selectedPosition=-1;
+    public static List<Marker> mMarkers = new ArrayList<Marker>();
     public static String customer_reportingTo="";
     public static String cus_MAnager_mobile="";
     public static String customer_Address="";

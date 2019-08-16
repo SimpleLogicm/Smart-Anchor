@@ -1812,7 +1812,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         // TODO Auto-generated method stub
         // super.onBackPressed();
 
-        Intent i = new Intent(Sub_Dealer_Order_Main.this, Sales_Dash.class);
+        Intent i = new Intent(Sub_Dealer_Order_Main.this, MapsActivity.class);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(i);
         finish();
