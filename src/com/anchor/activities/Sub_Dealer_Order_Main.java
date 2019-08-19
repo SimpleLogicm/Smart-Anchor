@@ -34,8 +34,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anchor.adapter.AutocompleteAdapternew;
 import com.anchor.adapter.AutoCompleteContactArrayAdapter;
+import com.anchor.adapter.AutocompleteAdapternew;
 import com.anchor.adapter.CustomerAutoAdapter;
 import com.anchor.helper.WrapContentLinearLayoutManager;
 import com.anchor.model.SubDealerModel;
@@ -139,8 +139,10 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         // data into the
         // AutoCompleteTextView
         s_sub_dealer_search.setTextColor(Color.BLACK);
+       WrapContentLinearLayoutManager wrapContentLinearLayoutManager = new WrapContentLinearLayoutManager(Sub_Dealer_Order_Main.this, LinearLayoutManager.VERTICAL, false);
+        wrapContentLinearLayoutManager.setStackFromEnd(true);
+        auto_recycleview.setLayoutManager(wrapContentLinearLayoutManager);
 
-        auto_recycleview.setLayoutManager(new WrapContentLinearLayoutManager(Sub_Dealer_Order_Main.this, LinearLayoutManager.VERTICAL, false));
         adapter1 = new AutocompleteAdapternew(this, android.R.layout.simple_dropdown_item_1line);
         s_dealer_search.setAdapter(adapter1);
 
@@ -294,6 +296,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
         });
 
+
+
         s_submit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -317,13 +321,16 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+                }
 
-                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                } else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
+//                else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+//
+//                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer",
+//                            Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
+//                }
+                else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
                     Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer",
                             Toast.LENGTH_SHORT);
@@ -336,24 +343,24 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     sub_dealer_name = s_sub_dealer_search.getText().toString().trim();
 
                     valid_sub_dealer_flag = "";
-                    sub_dealer_code = "";
+                  //  sub_dealer_code = "";
 
-                    if (All_sdealers.size() > 0) {
-                        for (SubDealerModel dataItem : All_sdealers) {
-                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.code;
-                                Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                valid_sub_dealer_flag = "yes";
-                                break;
-                            }
-
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Sub Dealer Not Found",
-                                Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                    }
+//                    if (All_sdealers.size() > 0) {
+//                        for (SubDealerModel dataItem : All_sdealers) {
+//                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+//                                sub_dealer_code = dataItem.code;
+//                                Global_Data.Sub_Dealer_Code = sub_dealer_code;
+//                                valid_sub_dealer_flag = "yes";
+//                                break;
+//                            }
+//
+//                        }
+//                    } else {
+//                        Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Sub Dealer Not Found",
+//                                Toast.LENGTH_SHORT);
+//                        toast.setGravity(Gravity.CENTER, 0, 0);
+//                        toast.show();
+//                    }
 
                     if(Global_Data.Customers_map.size() > 0)
                     {
@@ -651,31 +658,31 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 cd = new ConnectionDetector(Sub_Dealer_Order_Main.this);
 
-                isInternetPresent = cd.isConnectingToInternet();
-                if (isInternetPresent) {
-                    if (progressDialog != null && progressDialog.isShowing())
-                        progressDialog.dismiss();
-                    progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
-                    progressDialog.setMessage("Please wait....");
-                    progressDialog.setTitle("Smart Anchor App");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-
-                    try {
-
-                        String city_code = citymap.get(items);
-                        sub_OnlineData(city_code);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                } else {
-
-                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-
-                }
+//                isInternetPresent = cd.isConnectingToInternet();
+//                if (isInternetPresent) {
+//                    if (progressDialog != null && progressDialog.isShowing())
+//                        progressDialog.dismiss();
+//                    progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, ProgressDialog.THEME_HOLO_LIGHT);
+//                    progressDialog.setMessage("Please wait....");
+//                    progressDialog.setTitle("Smart Anchor App");
+//                    progressDialog.setCancelable(false);
+//                    progressDialog.show();
+//
+//                    try {
+//
+//                        String city_code = citymap.get(items);
+//                        sub_OnlineData(city_code);
+//                    } catch (Exception ex) {
+//                        ex.printStackTrace();
+//                    }
+//
+//                } else {
+//
+//                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
+//
+//                }
 
 
             }

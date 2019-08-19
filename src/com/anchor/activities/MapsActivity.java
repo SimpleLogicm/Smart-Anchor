@@ -817,7 +817,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void getUserGeoData() {
-        String domain = getResources().getString(R.string.service_domain);
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
 
         Log.i("volley", "domain: " + domain);
         Log.i("volley", "email: " + prefManager.getUser_Email());
@@ -829,11 +829,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String service_url = "";
 
 
-//            service_url = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + "2958"+ "&lat="
-//                    + Global_Data.GLOvel_LATITUDE + "&lon="
-//                    + Global_Data.GLOvel_LONGITUDE;
+            service_url = domain + "sub_dealers/get_nearest_sub_dealers?lat="
+                    + Global_Data.GLOvel_LATITUDE + "&lon="
+                    + Global_Data.GLOvel_LONGITUDE;
 
-            service_url = " http://subdealer.anchor-group.in/metal/api/v1/sub_dealers/get_sub_dealers_filter_by_stage_for_map?city_code=3648&lat=19.112067&lon=72.9303298&sub_dealers_code=%5B%5D&flag=%5B%22approved%22%2C%22pending_for_approval%22%2C%22incomplete_but_not_touched%22%2C%22partially_filled%22%5D";
 
             Log.i("user list url", "user list url " + service_url);
 
@@ -925,7 +924,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 } else {
                     response_result = "data";
-                    JSONArray data = response.getJSONArray("partially_filled_sub_dealers");
+                    JSONArray data = response.getJSONArray("sub_dealers");
                     Log.i("volley", "response data Length: " + data.length());
                     Log.d("volley", "users" + data.toString());
 

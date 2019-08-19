@@ -434,7 +434,7 @@
             android:name=".Sub_Dealer_Order_Main"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".Sub_Dealer_ProductList"
             android:label="@string/app_name"
