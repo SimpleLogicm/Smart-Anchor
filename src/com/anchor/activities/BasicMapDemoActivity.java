@@ -1403,17 +1403,17 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                     Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address);
                 } else {
-                    in_out_flag = "IN";
+                  //  in_out_flag = "IN";
                     Toast.makeText(BasicMapDemoActivity.this, "You don't have internet connection.Your Intime save successfully in offline mode.", Toast.LENGTH_SHORT).show();
                     //loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN","false",date_only_s);
-                    loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
+                   // loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "IN", Global_Data.address, "false", date_only_s);
 
 
 
-                    dbvoc.getDeleteTable("attendence_f");
-                    loginDataBaseAdapter.insertattendence_flag("true",date_only_s);
-                    Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
-                    showDialogn(daten, str.toString());
+//                    dbvoc.getDeleteTable("attendence_f");
+//                    loginDataBaseAdapter.insertattendence_flag("true",date_only_s);
+//                    Toast.makeText(BasicMapDemoActivity.this, "Attendance punch successfully.", Toast.LENGTH_SHORT).show();
+//                    showDialogn(daten, str.toString());
                 }
 
 //                } else {

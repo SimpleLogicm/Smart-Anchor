@@ -380,6 +380,7 @@ public class MyService extends Service implements LocationListener{
 
 			//Toast.makeText(this,"vals:++++++++++++++++++++++++++++++++>"+latitude+" "+longitude, Toast.LENGTH_SHORT).show();
 		} catch (Exception e) {
+			e.printStackTrace();
 			// dialogGPS(this.getContext()); // lets the user know there is a problem with the gps
 		}
 
@@ -477,7 +478,7 @@ public class MyService extends Service implements LocationListener{
 						JSONArray at_array = new JSONArray();
 
 						List<Local_Data> geo = dbvoc.getGEo_DATA();
-						List<Local_Data> attendance = dbvoc.getAllAttendance_Data();
+						//List<Local_Data> attendance = dbvoc.getAllAttendance_Data();
 						if (geo.size() > 0)
 						{
 							for (Local_Data g : geo) {
@@ -518,43 +519,43 @@ public class MyService extends Service implements LocationListener{
 
 							}
 
-							if (attendance.size() > 0) {
-								for (Local_Data a : attendance) {
-
-									JSONObject at_json = new JSONObject();
-									//at_json.put("user_id", a.getUser_id());
-									at_json.put("punched_on", a.getPunched_on());
-									at_json.put("punched_at_latitude", a.getPunched_at_latitude());
-									at_json.put("punched_at_longitude", a.getPunched_at_longitude());
-									at_json.put("punched_button", a.getPunched_button());
-
-									try {
-										if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_address()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_latitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_longitude()))) {
-											try
-											{
-												LocationAddress locationAddress = new LocationAddress();
-												LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
-														getApplicationContext(), new GeocoderHandler());
-												at_json.put("punched_at_address", Global_Data.address);
-											}catch(Exception ex){
-												ex.printStackTrace();
-												addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
-												at_json.put("punched_at_address", Global_Data.address);
-											}
-										} else {
-											at_json.put("punched_at_address", a.getPunched_at_address());
-										}
-									} catch (Exception ex) {
-										ex.printStackTrace();
-									}
-
-									AT_results.add(a.getPunched_on());
-									at_array.put(at_json);
-
-									//loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(g.getlatitude(),g.getlongitude(),g.getdatetime1());
-
-								}
-							}
+//							if (attendance.size() > 0) {
+//								for (Local_Data a : attendance) {
+//
+//									JSONObject at_json = new JSONObject();
+//									//at_json.put("user_id", a.getUser_id());
+//									at_json.put("punched_on", a.getPunched_on());
+//									at_json.put("punched_at_latitude", a.getPunched_at_latitude());
+//									at_json.put("punched_at_longitude", a.getPunched_at_longitude());
+//									at_json.put("punched_button", a.getPunched_button());
+//
+//									try {
+//										if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_address()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_latitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_longitude()))) {
+//											try
+//											{
+//												LocationAddress locationAddress = new LocationAddress();
+//												LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
+//														getApplicationContext(), new GeocoderHandler());
+//												at_json.put("punched_at_address", Global_Data.address);
+//											}catch(Exception ex){
+//												ex.printStackTrace();
+//												addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
+//												at_json.put("punched_at_address", Global_Data.address);
+//											}
+//										} else {
+//											at_json.put("punched_at_address", a.getPunched_at_address());
+//										}
+//									} catch (Exception ex) {
+//										ex.printStackTrace();
+//									}
+//
+//									AT_results.add(a.getPunched_on());
+//									at_array.put(at_json);
+//
+//									//loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(g.getlatitude(),g.getlongitude(),g.getdatetime1());
+//
+//								}
+//							}
 						}
 						else
 						{
@@ -586,43 +587,43 @@ public class MyService extends Service implements LocationListener{
 							picture.put("location_date", dateFormat.format(date));
 							PICTURE.put(picture);
 
-							if (attendance.size() > 0) {
-								for (Local_Data a : attendance) {
-
-									JSONObject at_json = new JSONObject();
-									//at_json.put("user_id", a.getUser_id());
-									at_json.put("punched_on", a.getPunched_on());
-									at_json.put("punched_at_latitude", a.getPunched_at_latitude());
-									at_json.put("punched_at_longitude", a.getPunched_at_longitude());
-									at_json.put("punched_button", a.getPunched_button());
-
-									try {
-										if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_address()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_latitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_longitude()))) {
-											try
-											{
-												LocationAddress locationAddress = new LocationAddress();
-												LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
-														getApplicationContext(), new GeocoderHandler());
-												at_json.put("punched_at_address", Global_Data.address);
-											}catch(Exception ex){
-												ex.printStackTrace();
-												addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
-												at_json.put("punched_at_address", Global_Data.address);
-											}
-										} else {
-											at_json.put("punched_at_address", a.getPunched_at_address());
-										}
-									} catch (Exception ex) {
-										ex.printStackTrace();
-									}
-
-									AT_results.add(a.getPunched_on());
-									at_array.put(at_json);
-
-									//loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(g.getlatitude(),g.getlongitude(),g.getdatetime1());
-
-								}
-							}
+//							if (attendance.size() > 0) {
+//								for (Local_Data a : attendance) {
+//
+//									JSONObject at_json = new JSONObject();
+//									//at_json.put("user_id", a.getUser_id());
+//									at_json.put("punched_on", a.getPunched_on());
+//									at_json.put("punched_at_latitude", a.getPunched_at_latitude());
+//									at_json.put("punched_at_longitude", a.getPunched_at_longitude());
+//									at_json.put("punched_button", a.getPunched_button());
+//
+//									try {
+//										if (isInternetPresent && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_address()))) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_latitude())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(a.getPunched_at_longitude()))) {
+//											try
+//											{
+//												LocationAddress locationAddress = new LocationAddress();
+//												LocationAddress.getAddressFromLocation(Double.valueOf(a.getlatitude()), Double.valueOf(a.getlongitude()),
+//														getApplicationContext(), new GeocoderHandler());
+//												at_json.put("punched_at_address", Global_Data.address);
+//											}catch(Exception ex){
+//												ex.printStackTrace();
+//												addressn(Double.valueOf(a.getlatitude()),Double.valueOf(a.getlongitude()));
+//												at_json.put("punched_at_address", Global_Data.address);
+//											}
+//										} else {
+//											at_json.put("punched_at_address", a.getPunched_at_address());
+//										}
+//									} catch (Exception ex) {
+//										ex.printStackTrace();
+//									}
+//
+//									AT_results.add(a.getPunched_on());
+//									at_array.put(at_json);
+//
+//									//loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(g.getlatitude(),g.getlongitude(),g.getdatetime1());
+//
+//								}
+//							}
 
 							loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, dateFormat.format(date));
 
@@ -631,7 +632,7 @@ public class MyService extends Service implements LocationListener{
 
 
 						product_value_n.put("user_location_histories", PICTURE);
-						product_value_n.put("attendances", at_array);
+						//product_value_n.put("attendances", at_array);
 						product_value_n.put("imei_no", Global_Data.device_id);
 						product_value_n.put("email", user_name);
 						Log.d("user_location_histories",product_value_n.toString());
@@ -762,6 +763,7 @@ public class MyService extends Service implements LocationListener{
 
 				} catch (Exception e) {
 					e.printStackTrace();
+					dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 					//dialog.dismiss();
 				}
 			}

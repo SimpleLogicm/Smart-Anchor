@@ -44,11 +44,13 @@ public class PlayService_Location implements LocationListener {
 
     private double fusedLatitude = 0.0;
     private  double fusedLongitude = 0.0;
+    DataBaseHelper dbvoc;
 
     public PlayService_Location(Context context) {
 
         c_context = context;
         MultiDex.install(c_context);
+        dbvoc = new DataBaseHelper(c_context);
         locationManager = (LocationManager) context
                 .getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
@@ -187,9 +189,11 @@ public class PlayService_Location implements LocationListener {
                 try {
                     LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, listener);
                 } catch (SecurityException e) {
+                    dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
                     e.printStackTrace();
                 } catch (Exception e) {
                     e.printStackTrace();
+                    dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
                     if (!isGoogleApiClientConnected()) {
                         mGoogleApiClient.connect();
                     }
