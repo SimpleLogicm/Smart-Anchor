@@ -7,6 +7,8 @@
     android:fillViewport="true"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,16 +31,42 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <com.suke.widget.SwitchButton
-                android:id="@+id/switch1"
+            <RelativeLayout
+                android:id="@+id/rlbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/in"
                 android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:sb_checked="true"
-                app:sb_checked_color="@color/switch_incolor"
-                app:sb_show_indicator="false"
-                app:sb_uncheck_color="@color/switch_incolor"
-                app:sb_uncheckcircle_color="@color/switch_incolor" />
+                android:layout_height="35dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/toggle">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/out"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/toggleout">
+
+            </ImageView>
+            </RelativeLayout>
+
+
+
+            <!--            <com.suke.widget.SwitchButton-->
+<!--                android:id="@+id/switch1"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                app:sb_checked="true"-->
+<!--                app:sb_checked_color="@color/switch_incolor"-->
+<!--                app:sb_show_indicator="false"-->
+<!--                app:sb_uncheck_color="@color/switch_incolor"-->
+<!--                app:sb_uncheckcircle_color="@color/switch_incolor" />-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -124,7 +152,7 @@
             android:layout_height="1dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:background="#e2e2e2" />
+            android:background="#746363" />
 
         <EditText
             android:id="@+id/pro_edit"

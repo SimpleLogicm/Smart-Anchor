@@ -37,8 +37,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.adapter.Spinner_List_Adapter;
+import com.anchor.adapter.Sub_Dealer_ProductList_Adapter;
 import com.anchor.model.Spiner_List_Model;
-import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -98,7 +98,7 @@ public class Sub_Dealer_ProductList extends Activity {
     ConnectionDetector cd;
     ArrayList<HashMap<String, String>> SwipeList;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
-    private Product_AllVarient_Adapter adapter;
+    private Sub_Dealer_ProductList_Adapter adapter;
     private ListView swipeListView;
 
     public static TextView txttotalPreview;
@@ -307,7 +307,7 @@ public class Sub_Dealer_ProductList extends Activity {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Product_AllVarient_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+                                adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -441,7 +441,7 @@ public class Sub_Dealer_ProductList extends Activity {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Product_AllVarient_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+                                adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
 
                                 swipeListView.setAdapter(adapter);
 
@@ -452,7 +452,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                 // data into the
                                 // AutoCompleteTextView
                                 Product_Variant.setTextColor(Color.BLACK);
-                                txttotalPreview.setText("Total : " + pp);
+                               // txttotalPreview.setText("Total : " + pp);
 
 
                             }
@@ -511,7 +511,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                 public void run() {
                                     swipeListView.setItemsCanFocus(true);
 
-                                    adapter = new Product_AllVarient_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+                                    adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
 
                                     swipeListView.setAdapter(adapter);
 
@@ -522,7 +522,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                     // data into the
                                     // AutoCompleteTextView
                                     Product_Variant.setTextColor(Color.BLACK);
-                                    txttotalPreview.setText("Total : " + pp);
+                                  //  txttotalPreview.setText("Total : " + pp);
 
 
                                 }
@@ -574,10 +574,10 @@ public class Sub_Dealer_ProductList extends Activity {
                                 public void run() {
                                     swipeListView.setItemsCanFocus(true);
 
-                                    adapter = new Product_AllVarient_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+                                    adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
 
                                     swipeListView.setAdapter(adapter);
-                                    txttotalPreview.setText("Total : " + pp);
+                                  //  txttotalPreview.setText("Total : " + pp);
 
 
                                 }
@@ -985,8 +985,51 @@ public class Sub_Dealer_ProductList extends Activity {
     }
 
     public static void updateSum(Double sum) {
-        //txttotalPreview.setText("Total		:		"+sum);
+
+        Double total = 0.0;
+        if (!(Global_Data.Order_hashmap.isEmpty())) {
+
+            try {
+                for (Object name : Global_Data.Order_hashmap.keySet()) {
+
+                    Object key = name.toString();
+                    Object value = Global_Data.Order_hashmap.get(name);
+                    //System.out.println(key + " " + value);
+                    Log.d("KEY", "Key: " + key + " Value: " + value);
+                    JSONObject item = new JSONObject();
+
+                    String key_array[] = String.valueOf(key).split("&");
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(String.valueOf(value))) {
+
+                        String key_value_array[] = String.valueOf(value).split("pq");
+                        String key_value_price_array[] = key_value_array[1].split("pprice");
+
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(key_value_price_array[0])) {
+
+                            total +=Double.valueOf(key_value_price_array[0]);
+
+
+                        }
+
+
+                    }
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            txttotalPreview.setText("Total		:		"+total);
+
+        }
+        else
+        {
+            txttotalPreview.setText("Total		:		"+0.0);
+        }
+
+
     }
+
+
 
 
     public View getViewByPosition(int pos, ListView listView) {

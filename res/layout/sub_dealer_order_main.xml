@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auto_scroll"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,6 +31,7 @@
             android:id="@+id/s_state"
             android:layout_width="250dp"
             android:layout_height="60dp"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:hint="@string/Select_City"
             android:inputType="textPassword"
@@ -42,6 +46,7 @@
             android:hint="@string/Select_Beats"
             android:inputType="textPassword"
             android:paddingTop="20dp"
+            android:visibility="gone"
             android:layout_marginTop="10dp" />
 
         <Spinner
@@ -49,10 +54,24 @@
             android:layout_width="250dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:hint="@string/select_retailer"
             android:inputType="textPassword"
             android:paddingTop="30dp"
             android:layout_marginTop="10dp" />
+
+        <Spinner
+            android:id="@+id/Beat_search"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:hint="@string/Select_Beats"
+            android:inputType="textPassword"
+            android:paddingTop="20dp"
+
+            android:layout_marginTop="10dp" />
+
+
 
         <AutoCompleteTextView
             android:id="@+id/s_sub_dealer_search"
@@ -62,7 +81,6 @@
             android:layout_marginTop="20dp"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:visibility="gone"
             android:scrollbars="none"
             android:hint="@string/Search_Subdealer"
             android:completionThreshold="1"
@@ -73,6 +91,7 @@
             <requestFocus />
         </AutoCompleteTextView>
 
+
         <AutoCompleteTextView
             android:id="@+id/s_dealer_search"
             android:layout_width="250dp"
@@ -81,8 +100,8 @@
             android:layout_marginTop="20dp"
             android:inputType="textMultiLine"
             android:ems="10"
+            android:hint="Select Dealer"
             android:scrollbars="none"
-            android:hint="@string/Search_Dealer"
             android:completionThreshold="1"
             android:imeOptions="actionDone"
             android:drawableRight="@drawable/search_icon"
@@ -90,6 +109,27 @@
             android:textSize="15dp" >
             <requestFocus />
         </AutoCompleteTextView>
+
+
+<!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/s_dealer_search"-->
+<!--            android:layout_width="250dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:completionThreshold="1"-->
+<!--            android:drawableRight="@drawable/search_icon"-->
+<!--            android:ems="10"-->
+<!--            android:hint="Select Dealer"-->
+
+<!--            android:imeOptions="actionDone"-->
+<!--            android:inputType="textMultiLine"-->
+<!--            android:scrollbars="none"-->
+<!--            android:singleLine="true"-->
+<!--            android:textSize="15dp">-->
+
+<!--            <requestFocus />-->
+<!--        </AutoCompleteTextView>-->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/auto_recycleview"

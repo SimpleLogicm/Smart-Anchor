@@ -75,7 +75,7 @@ public class CustomerAutoAdapter extends RecyclerView.Adapter<CustomerAutoAdapte
               //  recyclerView.setVisibility(View.GONE);
                // AutoCompleteTextView at = ((Sub_Dealer_Order_Main) mcontext).findViewById(R.id.s_dealer_search);
                // at.setText(contactViewHolder.cs_shope.getText().toString());
-                ((Sub_Dealer_Order_Main) mcontext).onClickCalled(contactViewHolder.cs_shope.getText().toString());
+               // ((Sub_Dealer_Order_Main) mcontext).onClickCalled(contactViewHolder.cs_shope.getText().toString());
             }
         });
 

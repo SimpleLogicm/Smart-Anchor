@@ -164,7 +164,7 @@ INDIA.</string>
 
     <string name="ORDER">ORDER</string>
     <string name="CUSTOMER_SERVICE">CUSTOMER SERVICE</string>
-    <string name="SUB_DEALER_ORDER">SUB DEALER ORDER</string>
+    <string name="SUB_DEALER_ORDER">RETAILER ORDER</string>
     <string name="QUOTES">QUOTES</string>
     <string name="QUOTE_STATUS">QUOTE STATUS</string>
     <string name="SCHEDULE">SCHEDULE</string>

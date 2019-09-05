@@ -41,6 +41,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +72,6 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.suke.widget.SwitchButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -106,7 +106,7 @@ public class Promotion_Activity extends Activity {
     private String mCurrentPhotoPath = "";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private String pictureImagePath_new = "";
-    com.suke.widget.SwitchButton switchButton;
+    //com.suke.widget.SwitchButton switchButton;
     StringBuilder str;
     TextView intime, indate, outtime, outdate;
     String inDateTime = "";
@@ -123,6 +123,8 @@ public class Promotion_Activity extends Activity {
     Button ss_submit, ss_Reset;
     ImageView events_pick;
     EditText pro_edit;
+    ImageView in,out;
+    RelativeLayout rlbtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -138,6 +140,10 @@ public class Promotion_Activity extends Activity {
         ss_Reset = findViewById(R.id.ss_Reset);
         events_pick = findViewById(R.id.events_pick);
 
+        in=findViewById(R.id.in);
+        out=findViewById(R.id.out);
+        rlbtn=findViewById(R.id.rlbtn);
+
         pro_edit = findViewById(R.id.pro_edit);
         intime = findViewById(R.id.intime);
         indate = findViewById(R.id.indate);
@@ -147,7 +153,7 @@ public class Promotion_Activity extends Activity {
         outdt_container = findViewById(R.id.outdt_container);
         rpo_chhose_file = findViewById(R.id.rpo_chhose_file);
         List_Of_Event_Spinner = findViewById(R.id.List_Of_Event_Spinner);
-        switchButton = findViewById(R.id.switch1);
+     //   switchButton = findViewById(R.id.switch1);
 
         list_Events.add("Select Events");
         adapter_events = new ArrayAdapter<String>(Promotion_Activity.this,
@@ -155,49 +161,151 @@ public class Promotion_Activity extends Activity {
         adapter_events.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         List_Of_Event_Spinner.setAdapter(adapter_events);
 
-        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+        in.setVisibility(View.INVISIBLE);
+
+
+        rlbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+            public void onClick(View view) {
+                in.setVisibility(View.VISIBLE);
+                out.setVisibility(View.INVISIBLE);
+                infn();
 
-                if (indt_container.getVisibility() == View.GONE) {
-                    indt_container.setVisibility(View.VISIBLE);
-                    outdt_container.setVisibility(View.VISIBLE);
-                }
+            }
 
-
-                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
-                DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = new Date();
-                String daten = sdf.format(date);
-
-                SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
-                String datenew = date_form.format(date);
-
-                SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
-                String currentDateTimeString = sdf_time.format(date);
+            private void infn() {
 
 
-                if (isChecked) {
-                    outDateTime = sdf.format(date);
-                    outtime.setText("Out Time : " + currentDateTimeString);
-                    outdate.setText("Out Date : " + datenew);
-                    outdt_container.setVisibility(View.VISIBLE);
-                    showDialogn("OUT");
+                        if (indt_container.getVisibility() == View.GONE) {
+                            indt_container.setVisibility(View.VISIBLE);
+                            outdt_container.setVisibility(View.VISIBLE);
+                        }
 
-                } else {
-                    inDateTime = sdf.format(date);
-                    intime.setText("IN Time : " + currentDateTimeString);
-                    indate.setText("IN Date : " + datenew);
-                    if (!outDateTime.equalsIgnoreCase("")) {
-                        outdt_container.setVisibility(View.GONE);
-                    }
-                    showDialogn("IN");
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                        DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = new Date();
+                        String daten = sdf.format(date);
+
+                        SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                        String datenew = date_form.format(date);
+
+                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                        String currentDateTimeString = sdf_time.format(date);
+
+                        inDateTime = sdf.format(date);
+                        intime.setText("IN Time : " + currentDateTimeString);
+                        indate.setText("IN Date : " + datenew);
+                        if (!outDateTime.equalsIgnoreCase("")) {
+                            outdt_container.setVisibility(View.GONE);
+                        }
+                        showDialogn("IN");
 
 
-                }
+
 
             }
         });
+
+
+        in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")){
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please Select Event", Toast.LENGTH_LONG);
+                       toast.setGravity(Gravity.CENTER, 0, 0);
+                      toast.show();
+
+
+                }else {
+
+
+                    if (indt_container.getVisibility() == View.GONE) {
+                        indt_container.setVisibility(View.VISIBLE);
+                        outdt_container.setVisibility(View.VISIBLE);
+                    }
+                    in.setVisibility(View.INVISIBLE);
+                    out.setVisibility(View.VISIBLE);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                    DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                    Date date = new Date();
+                    String daten = sdf.format(date);
+
+                    SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                    String datenew = date_form.format(date);
+
+                    SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                    String currentDateTimeString = sdf_time.format(date);
+
+                    outDateTime = sdf.format(date);
+                        outtime.setText("Out Time : " + currentDateTimeString);
+                      outdate.setText("Out Date : " + datenew);
+                        outdt_container.setVisibility(View.VISIBLE);
+                       showDialogn("OUT");
+
+                }
+            }
+        });
+
+
+
+
+
+
+//        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+//
+//                if (indt_container.getVisibility() == View.GONE) {
+//                    indt_container.setVisibility(View.VISIBLE);
+//                    outdt_container.setVisibility(View.VISIBLE);
+//                }
+//
+//
+//                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+//                DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+//                Date date = new Date();
+//                String daten = sdf.format(date);
+//
+//                SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+//                String datenew = date_form.format(date);
+//
+//                SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+//                String currentDateTimeString = sdf_time.format(date);
+//
+//
+//                if (isChecked) {
+//                    if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
+//
+//
+//                        Toast toast = Toast.makeText(getApplicationContext(), "Please Select Event", Toast.LENGTH_LONG);
+//                        toast.setGravity(Gravity.CENTER, 0, 0);
+//                        toast.show();
+//
+//                    } else {
+//                        outDateTime = sdf.format(date);
+//                        outtime.setText("Out Time : " + currentDateTimeString);
+//                        outdate.setText("Out Date : " + datenew);
+//                        outdt_container.setVisibility(View.VISIBLE);
+//                        showDialogn("OUT");
+//                    }
+//
+//
+//                } else {
+//                    inDateTime = sdf.format(date);
+//                    intime.setText("IN Time : " + currentDateTimeString);
+//                    indate.setText("IN Date : " + datenew);
+//                    if (!outDateTime.equalsIgnoreCase("")) {
+//                        outdt_container.setVisibility(View.GONE);
+//                    }
+//                    showDialogn("IN");
+
+//
+//                }
+//            }
+//
+//        });
 
 
         rpo_chhose_file.setOnClickListener(new View.OnClickListener() {
@@ -306,20 +414,37 @@ public class Promotion_Activity extends Activity {
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else if (outDateTime.equalsIgnoreCase("")) {
-
-                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please Out ",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
                 } else if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
 
                     Toast toast = Toast.makeText(Promotion_Activity.this, "Please Select Events",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                } else if (outDateTime.equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please Out ",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+
+
                 } else {
-                    new doFileUpload().execute();
+                    cd  = new ConnectionDetector(getApplicationContext());
+                    if (cd.isConnectingToInternet())
+                    {
+                        new doFileUpload().execute();
+                    }
+                    else
+                    {
+
+                        Toast toast = Toast.makeText(Promotion_Activity.this,"You don't have internet connection.", Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+
+
+
+                    }
+
                 }
 
             }
@@ -339,7 +464,93 @@ public class Promotion_Activity extends Activity {
                 pro_edit.setText("");
                 List_Of_Event_Spinner.setSelection(0);
                 events_pick.setImageResource(R.drawable.vector_camera_icon);
-                switchButton.setChecked(true);
+                in.setVisibility(View.INVISIBLE);
+                out.setVisibility(View.VISIBLE);
+                rlbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        in.setVisibility(View.VISIBLE);
+                        out.setVisibility(View.INVISIBLE);
+                        infn();
+
+                    }
+
+                    private void infn() {
+
+
+                        if (indt_container.getVisibility() == View.GONE) {
+                            indt_container.setVisibility(View.VISIBLE);
+                            outdt_container.setVisibility(View.VISIBLE);
+                        }
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                        DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date = new Date();
+                        String daten = sdf.format(date);
+
+                        SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                        String datenew = date_form.format(date);
+
+                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                        String currentDateTimeString = sdf_time.format(date);
+
+                        inDateTime = sdf.format(date);
+                        intime.setText("IN Time : " + currentDateTimeString);
+                        indate.setText("IN Date : " + datenew);
+                        if (!outDateTime.equalsIgnoreCase("")) {
+                            outdt_container.setVisibility(View.GONE);
+                        }
+                        showDialogn("IN");
+
+
+
+
+                    }
+                });
+
+
+                in.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")){
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "Please Select Event", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+
+                        }else {
+
+
+                            if (indt_container.getVisibility() == View.GONE) {
+                                indt_container.setVisibility(View.VISIBLE);
+                                outdt_container.setVisibility(View.VISIBLE);
+                            }
+                            in.setVisibility(View.INVISIBLE);
+                            out.setVisibility(View.VISIBLE);
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                            DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date = new Date();
+                            String daten = sdf.format(date);
+
+                            SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                            String datenew = date_form.format(date);
+
+                            SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                            String currentDateTimeString = sdf_time.format(date);
+
+                            outDateTime = sdf.format(date);
+                            outtime.setText("Out Time : " + currentDateTimeString);
+                            outdate.setText("Out Date : " + datenew);
+                            outdt_container.setVisibility(View.VISIBLE);
+                            showDialogn("OUT");
+
+                        }
+                    }
+                });
+
+              //  switchButton.setChecked(true);
             }
         });
 
@@ -428,7 +639,7 @@ public class Promotion_Activity extends Activity {
                                 final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
 
-                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(Promotion_Activity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Promotion_Activity.this);
 
                                 builder.setTitle("Add Photo!");
 
@@ -566,7 +777,7 @@ public class Promotion_Activity extends Activity {
 
             try {
 
-                progressDialog = new android.app.ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                progressDialog = new ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
                 progressDialog.setMessage("Please wait....");
                 progressDialog.setTitle("Smart Anchor App");
                 progressDialog.setCancelable(false);
@@ -595,7 +806,7 @@ public class Promotion_Activity extends Activity {
 
                 mCurrentPhotoPath = "file:" + c.getString(columnIndex);
 
-                progressDialog = new android.app.ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                progressDialog = new ProgressDialog(Promotion_Activity.this, ProgressDialog.THEME_HOLO_LIGHT);
                 progressDialog.setMessage("Please wait....");
                 progressDialog.setTitle("Smart Anchor App");
                 progressDialog.setCancelable(false);
@@ -710,7 +921,7 @@ public class Promotion_Activity extends Activity {
 
                     LocationAddress locationAddress = new LocationAddress();
                     locationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
-                            Promotion_Activity.this, new Promotion_Activity.GeocoderHandler());
+                            Promotion_Activity.this, new GeocoderHandler());
                     Geocoder geo = new Geocoder(Promotion_Activity.this.getApplicationContext(), Locale.getDefault());
                     List<Address> addresses = geo.getFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE), 1);
                     if (addresses.isEmpty()) {
@@ -828,7 +1039,7 @@ public class Promotion_Activity extends Activity {
                 final_response = response;
 
                 //  auto_searchcust.setText(namemm);
-                new Promotion_Activity.getevents_Data().execute(response);
+                new getevents_Data().execute(response);
 
             }
         },
@@ -1392,10 +1603,24 @@ public class Promotion_Activity extends Activity {
 
                                 JSONObject obj = new JSONObject(response_result);
                                 progressDialog.dismiss();
-
-                                if (obj.getString("message").equalsIgnoreCase("Nukkad Meet created successfuly.")) {
+                                //Successcul message issue on submit. Message should be "Promotional activity submitted successfully"
+                                if (obj.getString("message").equalsIgnoreCase("Promotional activity submitted successfully")) {
                                     Toast toast = Toast.makeText(Promotion_Activity.this, obj.getString("message"),
                                             Toast.LENGTH_SHORT);
+                                    outDateTime = "";
+                                    inDateTime = "";
+                                    mCurrentPhotoPath = "";
+                                    outtime.setText("");
+                                    outdate.setText("");
+                                    intime.setText("");
+                                    indate.setText("");
+                                    pro_edit.setText("");
+                                    List_Of_Event_Spinner.setSelection(0);
+                                    events_pick.setImageResource(R.drawable.vector_camera_icon);
+                                    in.setVisibility(View.INVISIBLE);
+                                    out.setVisibility(View.VISIBLE);
+
+
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
                                     Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
@@ -1404,11 +1629,26 @@ public class Promotion_Activity extends Activity {
                                     finish();
 
 
+
                                 } else {
                                     Toast toast = Toast.makeText(Promotion_Activity.this, obj.getString("message"),
                                             Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
+
+                                    outDateTime = "";
+                                    inDateTime = "";
+                                    mCurrentPhotoPath = "";
+                                    outtime.setText("");
+                                    outdate.setText("");
+                                    intime.setText("");
+                                    indate.setText("");
+                                    pro_edit.setText("");
+                                    List_Of_Event_Spinner.setSelection(0);
+                                    events_pick.setImageResource(R.drawable.vector_camera_icon);
+                                    in.setVisibility(View.INVISIBLE);
+                                    out.setVisibility(View.VISIBLE);
+
                                 }
 
                                 Log.d("My App", obj.toString());

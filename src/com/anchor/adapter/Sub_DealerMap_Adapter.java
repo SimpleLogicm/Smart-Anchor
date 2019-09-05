@@ -79,8 +79,9 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
     @Override
     public void onBindViewHolder(final ContactViewHolder contactViewHolder, final int i) {
-        SubDealerModel ci = contactList.get(i);
+        final SubDealerModel ci = contactList.get(i);
         contactViewHolder.d_name.setText("Shop Name : " + ci.shop_name);
+        final String shopname =ci.shop_name;
         contactViewHolder.p_delaer_address.setText("Address : " + ci.address);
         contactViewHolder.p_distance.setText("Distance : " + ci.distance);
         //contactViewHolder.p_delaer_name.setText("Firm Name : " + ci.name);
@@ -88,11 +89,15 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         contactViewHolder.p_mobi.setText(ci.proprietor_mobile1);
         //contactViewHolder.p_proprietor_name1.setText("proprietor Name : " + ci.proprietor_name1);
         contactViewHolder.p_proprietor_email1.setText("proprietor Email : " + ci.proprietor_email1);
+
+
        // contactViewHolder.p_dealer_city.setText("City : " + ci.city);
       //  contactViewHolder.p_stages.setText("Stage : " + ci.Stage);
         contactViewHolder.p_dealer_code.setText(ci.code);
         contactViewHolder.p_lati.setText(ci.lati);
         contactViewHolder.p_longi.setText(ci.longi);
+
+
 
 //        if(Global_Data.selectedPosition==i)
 //            contactViewHolder.d_name.setBackgroundColor(Color.parseColor("#cc2303"));
@@ -104,8 +109,14 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
             @Override
             public void onClick(View arg0) {
+           //     Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
 
+                Global_Data.Sub_Dealer_name = shopname;
                 Global_Data.Sub_Dealer_Code = contactViewHolder.p_dealer_code.getText().toString();
+
+         //       Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
+               // String subdealer_name =contactViewHolder.d_name.getText().toString();
+
                 mcontext.startActivity(new Intent(mcontext, Sub_Dealer_Order_Main.class));
                 ((Activity)mcontext).finish();
 
@@ -123,7 +134,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(lati) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(longi)) {
 
 
-                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse("http://maps.google.com/maps?daddr="+lati+","+longi));
                     mcontext.startActivity(intent);
 

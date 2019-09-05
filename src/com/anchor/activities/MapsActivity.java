@@ -81,6 +81,8 @@ import java.util.Locale;
 import cpm.simplelogic.helper.ConnectionDetector;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
+import static com.anchor.activities.Global_Data.AllresultSubDealer;
+import static com.anchor.activities.Global_Data.SubDealer_List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnInfoWindowClickListener, LocationListener {
@@ -117,8 +119,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int visibleItemCount, totalItemCount, firstVisibleItemPosition, lastVisibleItem;
     public Marker marker;
     String click_flag = "";
-
-
 
 
     @Override
@@ -182,8 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d("First_Visible", "First_Visible " + firstVisibleItemPosition);
             Log.d("CODE", "CODE " + code);
 
-            if(click_flag.equalsIgnoreCase(""))
-            {
+            if (click_flag.equalsIgnoreCase("")) {
                 LatLng mLatLng = new LatLng(Double.valueOf(lati), Double.valueOf(longi));
 
                 if (marker != null && marker.isVisible()) {
@@ -211,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                     LatLngBounds bounds = builder.build();
-                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
                     mMap.moveCamera(cu);
 
 //                    LatLngBounds bounds = buildern.build();
@@ -226,13 +225,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } catch (Exception ex) {
 
                 }
-            }
-            else
-            {
+            } else {
                 click_flag = "";
             }
-
-
 
 
         }
@@ -249,15 +244,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public Marker getmarker(){
+    public Marker getmarker() {
         return marker;
     }
 
-    public void setmarker(Marker markers){
+    public void setmarker(Marker markers) {
         this.marker = markers;
     }
 
-    public GoogleMap getmap(){
+    public GoogleMap getmap() {
         return mMap;
     }
 
@@ -336,7 +331,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Log.d("id", "code" + code);
 
 
-
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(code)) {
                         int positionn = -1;
                         String lati = "";
@@ -345,15 +339,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             if (Allresult.get(i).getCode() == code) {
                                 positionn = i;
 
-                                 lati = Allresult.get(i).getLati();
-                                 longi = Allresult.get(i).getLongi();
+                                lati = Allresult.get(i).getLati();
+                                longi = Allresult.get(i).getLongi();
 
-                                 break;  // uncomment to get the first instance
+                                break;  // uncomment to get the first instance
                             }
                         }
 
-                        if(positionn != -1)
-                        {
+                        if (positionn != -1) {
                             Global_Data.selectedPosition = positionn;
                             marker_rview.getLayoutManager().scrollToPosition(positionn);
                         }
@@ -384,7 +377,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 }
 
                                 LatLngBounds bounds = builder.build();
-                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
                                 mMap.moveCamera(cu);
 
 //                                LatLngBounds bounds = buildern.build();
@@ -654,8 +647,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             Log.d("Location change event", "Location Change");
 
-            if(m != null)
-            {
+            if (m != null) {
                 LatLngBounds.Builder buildern = new LatLngBounds.Builder();
 
                 try {
@@ -673,10 +665,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                     LatLngBounds bounds = builder.build();
-                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
                     mMap.moveCamera(cu);
 
-                   // mMap.setPadding(10, 10, 10, 10);
+                    // mMap.setPadding(10, 10, 10, 10);
 
 //                    LatLngBounds bounds = buildern.build();
 //
@@ -690,16 +682,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } catch (Exception ex) {
 
                 }
-            }
-            else
-            {
+            } else {
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(latLng).zoom(12).build();
 
                 mMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(cameraPosition));
             }
-
 
 
             //zoom to current position:
@@ -951,6 +940,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         Allresult.clear();
                         locations = new ArrayList<>();
+                        AllresultSubDealer.clear();
+                        SubDealer_List.clear();
 
                         for (int i = 0; i < data.length(); i++) {
 
@@ -972,12 +963,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 //di.name = jsonObject.getString("customer_name").trim();
                                 di.proprietor_mobile1 = jsonObject.getString("mobile_no").trim();
-                              //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
+                                //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
                                 di.proprietor_email1 = jsonObject.getString("customer_address").trim();
                                 di.address = jsonObject.getString("customer_address").trim();
-                              //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
-                               // di.proprietor_name2 = jsonObject.getString("distance").trim();
-                               // di.proprietor_email2 = jsonObject.getString("distance").trim();
+                                //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
+                                // di.proprietor_name2 = jsonObject.getString("distance").trim();
+                                // di.proprietor_email2 = jsonObject.getString("distance").trim();
                                 di.shop_name = jsonObject.getString("customer_name").trim();
                                 di.distance = jsonObject.getString("distance").trim();
                                 di.code = jsonObject.getString("code").trim();
@@ -985,7 +976,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 di.lati = jsonObject.getString("latitude").trim();
                                 di.longi = jsonObject.getString("longitude").trim();
 
+                                ArrayList<String> names = new ArrayList<>();
+                                names.add(di.shop_name);
                                 Allresult.add(di);
+                                AllresultSubDealer.add(di);
+                                SubDealer_List.add(jsonObject.getString("customer_name"));
 
 
                             }
@@ -1029,7 +1024,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         //  mMap.setInfoWindowAdapter(customInfoWindow);
 
                                         m = mMap.addMarker(markerOptions);
-                                          m.setTag(code.get(a));
+                                        m.setTag(code.get(a));
                                         Global_Data.mMarkers.add(m);
 
 
@@ -1062,7 +1057,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         }
 
                                         LatLngBounds bounds = builder.build();
-                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 10);
+                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
                                         mMap.moveCamera(cu);
 
 //                                        LatLngBounds bounds = buildern.build();
@@ -1079,7 +1074,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     }
 
 
-                                    ca = new Sub_DealerMap_Adapter(Allresult, MapsActivity.this,MapsActivity.this);
+                                    ca = new Sub_DealerMap_Adapter(Allresult, MapsActivity.this, MapsActivity.this);
                                     marker_rview.setAdapter(ca);
                                     ca.notifyDataSetChanged();
                                 } else {

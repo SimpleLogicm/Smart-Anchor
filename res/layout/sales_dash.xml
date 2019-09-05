@@ -92,7 +92,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/customerservice" />
+                    android:src="@drawable/sub_dealer_order" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -384,7 +384,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/quotesstatus" />
+                    android:src="@drawable/promotion" />
 
             </RelativeLayout>
         </LinearLayout>
