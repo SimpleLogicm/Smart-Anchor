@@ -146,8 +146,30 @@ public class Previous_orderNew_S1 extends BaseActivity {
         adapter = new AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
         Product_Variant_search.setAdapter(adapter);
 
+
+        List<Spiner_List_Model> cont1 = dbvoc.getAllProducta();
+
+        if (cont1.size() > 0) {
+            Global_Data.spiner_list_modelList.clear();
+            for (Spiner_List_Model cnt1 : cont1) {
+                Spiner_List_Model spiner_list_model = new Spiner_List_Model();
+                spiner_list_model.setBusiness_category("");
+                spiner_list_model.setBusiness_unit("");
+                spiner_list_model.setPrimary_category("");
+                spiner_list_model.setProduct_variant(cnt1.getProduct_variant());
+                spiner_list_model.setSub_category("");
+                spiner_list_model.setCode(cnt1.getCode());
+                spiner_list_model.setSelected(false);
+
+                snlist.add(spiner_list_model);
+                Global_Data.spiner_list_modelList.add(spiner_list_model);
+
+
+            }
+        }
         spinner_recycleview.setLayoutManager(new LinearLayoutManager(Previous_orderNew_S1.this));
         spinner_list_adapter = new Spinner_List_Adapter(Previous_orderNew_S1.this, snlist);
+
         spinner_recycleview.setAdapter(spinner_list_adapter);
         spnScheme = (Spinner) findViewById(R.id.spnScheme1);
         spnBu = (Spinner) findViewById(R.id.spnBu);
@@ -1582,7 +1604,7 @@ public class Previous_orderNew_S1 extends BaseActivity {
     public void onResume() {
         // TODO Auto-generated method stubs
         super.onResume();
-        Global_Data.spiner_list_modelList.clear();
+       // Global_Data.spiner_list_modelList.clear();
         Global_Data.array_of_pVarient.clear();
         buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));

@@ -123,7 +123,7 @@ public class Promotion_Activity extends Activity {
     Button ss_submit, ss_Reset;
     ImageView events_pick;
     EditText pro_edit;
-    ImageView in,out;
+    ImageView in, out;
     RelativeLayout rlbtn;
 
     @Override
@@ -140,9 +140,9 @@ public class Promotion_Activity extends Activity {
         ss_Reset = findViewById(R.id.ss_Reset);
         events_pick = findViewById(R.id.events_pick);
 
-        in=findViewById(R.id.in);
-        out=findViewById(R.id.out);
-        rlbtn=findViewById(R.id.rlbtn);
+        in = findViewById(R.id.in);
+        out = findViewById(R.id.out);
+        rlbtn = findViewById(R.id.rlbtn);
 
         pro_edit = findViewById(R.id.pro_edit);
         intime = findViewById(R.id.intime);
@@ -153,7 +153,7 @@ public class Promotion_Activity extends Activity {
         outdt_container = findViewById(R.id.outdt_container);
         rpo_chhose_file = findViewById(R.id.rpo_chhose_file);
         List_Of_Event_Spinner = findViewById(R.id.List_Of_Event_Spinner);
-     //   switchButton = findViewById(R.id.switch1);
+        //   switchButton = findViewById(R.id.switch1);
 
         list_Events.add("Select Events");
         adapter_events = new ArrayAdapter<String>(Promotion_Activity.this,
@@ -176,31 +176,29 @@ public class Promotion_Activity extends Activity {
             private void infn() {
 
 
-                        if (indt_container.getVisibility() == View.GONE) {
-                            indt_container.setVisibility(View.VISIBLE);
-                            outdt_container.setVisibility(View.VISIBLE);
-                        }
+                if (indt_container.getVisibility() == View.GONE) {
+                    indt_container.setVisibility(View.VISIBLE);
+                    outdt_container.setVisibility(View.VISIBLE);
+                }
 
-                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
-                        DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
-                        Date date = new Date();
-                        String daten = sdf.format(date);
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                String daten = sdf.format(date);
 
-                        SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
-                        String datenew = date_form.format(date);
+                SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                String datenew = date_form.format(date);
 
-                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
-                        String currentDateTimeString = sdf_time.format(date);
+                SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                String currentDateTimeString = sdf_time.format(date);
 
-                        inDateTime = sdf.format(date);
-                        intime.setText("IN Time : " + currentDateTimeString);
-                        indate.setText("IN Date : " + datenew);
-                        if (!outDateTime.equalsIgnoreCase("")) {
-                            outdt_container.setVisibility(View.GONE);
-                        }
-                        showDialogn("IN");
-
-
+                inDateTime = sdf.format(date);
+                intime.setText("IN Time : " + currentDateTimeString);
+                indate.setText("IN Date : " + datenew);
+                if (!outDateTime.equalsIgnoreCase("")) {
+                    outdt_container.setVisibility(View.GONE);
+                }
+                showDialogn("IN");
 
 
             }
@@ -210,14 +208,14 @@ public class Promotion_Activity extends Activity {
         in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")){
+                if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Please Select Event", Toast.LENGTH_LONG);
-                       toast.setGravity(Gravity.CENTER, 0, 0);
-                      toast.show();
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
 
 
-                }else {
+                } else {
 
 
                     if (indt_container.getVisibility() == View.GONE) {
@@ -239,18 +237,14 @@ public class Promotion_Activity extends Activity {
                     String currentDateTimeString = sdf_time.format(date);
 
                     outDateTime = sdf.format(date);
-                        outtime.setText("Out Time : " + currentDateTimeString);
-                      outdate.setText("Out Date : " + datenew);
-                        outdt_container.setVisibility(View.VISIBLE);
-                       showDialogn("OUT");
+                    outtime.setText("Out Time : " + currentDateTimeString);
+                    outdate.setText("Out Date : " + datenew);
+                    outdt_container.setVisibility(View.VISIBLE);
+                    showDialogn("OUT");
 
                 }
             }
         });
-
-
-
-
 
 
 //        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
@@ -429,21 +423,39 @@ public class Promotion_Activity extends Activity {
 
 
                 } else {
-                    cd  = new ConnectionDetector(getApplicationContext());
-                    if (cd.isConnectingToInternet())
-                    {
-                        new doFileUpload().execute();
-                    }
-                    else
-                    {
+                    AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
+                    alertDialog.setTitle("Confirmation");
+                    alertDialog.setMessage("Sure do you wish to submit the Promotional Activity ?");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                        Toast toast = Toast.makeText(Promotion_Activity.this,"You don't have internet connection.", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
 
+                            cd = new ConnectionDetector(getApplicationContext());
+                            if (cd.isConnectingToInternet()) {
+                                new doFileUpload().execute();
+                            } else {
 
-                    }
+                                Toast toast = Toast.makeText(Promotion_Activity.this, "You don't have internet connection.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+
+                            }
+                        }
+                    });
+
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    alertDialog.show();
+
+
 
                 }
 
@@ -454,103 +466,123 @@ public class Promotion_Activity extends Activity {
             @Override
             public void onClick(View v) {
 
-                outDateTime = "";
-                inDateTime = "";
-                mCurrentPhotoPath = "";
-                outtime.setText("");
-                outdate.setText("");
-                intime.setText("");
-                indate.setText("");
-                pro_edit.setText("");
-                List_Of_Event_Spinner.setSelection(0);
-                events_pick.setImageResource(R.drawable.vector_camera_icon);
-                in.setVisibility(View.INVISIBLE);
-                out.setVisibility(View.VISIBLE);
-                rlbtn.setOnClickListener(new View.OnClickListener() {
+                AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
+                alertDialog.setTitle("Confirmation");
+                alertDialog.setMessage("Sure do you wish to reset the Promotional Activity ?");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+
                     @Override
-                    public void onClick(View view) {
-                        in.setVisibility(View.VISIBLE);
-                        out.setVisibility(View.INVISIBLE);
-                        infn();
+                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
+                        outDateTime = "";
+                        inDateTime = "";
+                        mCurrentPhotoPath = "";
+                        outtime.setText("");
+                        outdate.setText("");
+                        intime.setText("");
+                        indate.setText("");
+                        pro_edit.setText("");
+                        List_Of_Event_Spinner.setSelection(0);
+                        events_pick.setImageResource(R.drawable.vector_camera_icon);
+                        in.setVisibility(View.INVISIBLE);
+                        out.setVisibility(View.VISIBLE);
+                        rlbtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                in.setVisibility(View.VISIBLE);
+                                out.setVisibility(View.INVISIBLE);
+                                infn();
 
-                    private void infn() {
-
-
-                        if (indt_container.getVisibility() == View.GONE) {
-                            indt_container.setVisibility(View.VISIBLE);
-                            outdt_container.setVisibility(View.VISIBLE);
-                        }
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
-                        DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
-                        Date date = new Date();
-                        String daten = sdf.format(date);
-
-                        SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
-                        String datenew = date_form.format(date);
-
-                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
-                        String currentDateTimeString = sdf_time.format(date);
-
-                        inDateTime = sdf.format(date);
-                        intime.setText("IN Time : " + currentDateTimeString);
-                        indate.setText("IN Date : " + datenew);
-                        if (!outDateTime.equalsIgnoreCase("")) {
-                            outdt_container.setVisibility(View.GONE);
-                        }
-                        showDialogn("IN");
-
-
-
-
-                    }
-                });
-
-
-                in.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")){
-
-                            Toast toast = Toast.makeText(getApplicationContext(), "Please Select Event", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-
-
-                        }else {
-
-
-                            if (indt_container.getVisibility() == View.GONE) {
-                                indt_container.setVisibility(View.VISIBLE);
-                                outdt_container.setVisibility(View.VISIBLE);
                             }
-                            in.setVisibility(View.INVISIBLE);
-                            out.setVisibility(View.VISIBLE);
 
-                            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
-                            DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
-                            Date date = new Date();
-                            String daten = sdf.format(date);
+                            private void infn() {
 
-                            SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
-                            String datenew = date_form.format(date);
 
-                            SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
-                            String currentDateTimeString = sdf_time.format(date);
+                                if (indt_container.getVisibility() == View.GONE) {
+                                    indt_container.setVisibility(View.VISIBLE);
+                                    outdt_container.setVisibility(View.VISIBLE);
+                                }
 
-                            outDateTime = sdf.format(date);
-                            outtime.setText("Out Time : " + currentDateTimeString);
-                            outdate.setText("Out Date : " + datenew);
-                            outdt_container.setVisibility(View.VISIBLE);
-                            showDialogn("OUT");
+                                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                                DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                                Date date = new Date();
+                                String daten = sdf.format(date);
 
-                        }
+                                SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                                String datenew = date_form.format(date);
+
+                                SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                                String currentDateTimeString = sdf_time.format(date);
+
+                                inDateTime = sdf.format(date);
+                                intime.setText("IN Time : " + currentDateTimeString);
+                                indate.setText("IN Date : " + datenew);
+                                if (!outDateTime.equalsIgnoreCase("")) {
+                                    outdt_container.setVisibility(View.GONE);
+                                }
+                                showDialogn("IN");
+
+
+                            }
+                        });
+
+
+                        in.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
+
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Please Select Event", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+
+                                } else {
+
+
+                                    if (indt_container.getVisibility() == View.GONE) {
+                                        indt_container.setVisibility(View.VISIBLE);
+                                        outdt_container.setVisibility(View.VISIBLE);
+                                    }
+                                    in.setVisibility(View.INVISIBLE);
+                                    out.setVisibility(View.VISIBLE);
+
+                                    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                                    DateFormat date_onlyn = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date date = new Date();
+                                    String daten = sdf.format(date);
+
+                                    SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                                    String datenew = date_form.format(date);
+
+                                    SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                                    String currentDateTimeString = sdf_time.format(date);
+
+                                    outDateTime = sdf.format(date);
+                                    outtime.setText("Out Time : " + currentDateTimeString);
+                                    outdate.setText("Out Date : " + datenew);
+                                    outdt_container.setVisibility(View.VISIBLE);
+                                    showDialogn("OUT");
+
+                                }
+                            }
+                        });
+
                     }
                 });
 
-              //  switchButton.setChecked(true);
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                alertDialog.show();
+
+
+
+                //  switchButton.setChecked(true);
             }
         });
 
@@ -1627,7 +1659,6 @@ public class Promotion_Activity extends Activity {
                                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(i);
                                     finish();
-
 
 
                                 } else {

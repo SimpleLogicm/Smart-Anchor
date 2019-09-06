@@ -7627,6 +7627,30 @@ public class DataBaseHelper extends SQLiteOpenHelper
     }
 
     // Getting product data
+    public List<Spiner_List_Model> getAllProducta() {
+        List<Spiner_List_Model> contactList14 = new ArrayList<Spiner_List_Model>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " +" LIMIT 200" , null);
+
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                Spiner_List_Model contact = new Spiner_List_Model();
+                contact.setCode(cursor.getString(0));
+                contact.setProduct_variant(cursor.getString(1));
+                contact.setBusiness_unit(cursor.getString(2));
+
+                // Adding contact to list
+                contactList14.add(contact);
+            } while (cursor.moveToNext());
+        }
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
     public List<Spiner_List_Model> varientserchSub(String product_variant) {
         List<Spiner_List_Model> contactList14 = new ArrayList<Spiner_List_Model>();
         SQLiteDatabase db = this.getWritableDatabase();
