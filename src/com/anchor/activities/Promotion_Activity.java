@@ -616,10 +616,32 @@ public class Promotion_Activity extends Activity {
     @Override
     public void onBackPressed() {
 
-        Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);
-        finish();
+        AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
+        alertDialog.setTitle("Confirmation");
+        alertDialog.setMessage("Do you want to discard your meeting ?");
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+                Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialog.show();
+
+
     }
 
     @Override
