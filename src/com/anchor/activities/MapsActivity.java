@@ -953,24 +953,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 locations.add(new LatLng(Double.valueOf(jsonObject.getString("latitude")), Double.valueOf(jsonObject.getString("longitude"))));
 
-                                address.add(jsonObject.getString("customer_address"));
-                                name.add(jsonObject.getString("customer_name"));
-                                distance.add(jsonObject.getString("distance"));
-                                mobile.add(jsonObject.getString("mobile_no"));
+                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_address")));
+                                name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name")));
+                                distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")));
+                                mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no")));
                                 code.add(jsonObject.getString("code"));
                                 //status.add("Approved");
 
 
                                 //di.name = jsonObject.getString("customer_name").trim();
-                                di.proprietor_mobile1 = jsonObject.getString("mobile_no").trim();
+                                di.proprietor_mobile1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no"));
                                 //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
-                                di.proprietor_email1 = jsonObject.getString("sub_dealer_email").trim();
-                                di.address = jsonObject.getString("customer_address").trim();
+                                di.proprietor_email1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("sub_dealer_email"));
+                                di.address = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_address"));
                                 //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
                                 // di.proprietor_name2 = jsonObject.getString("distance").trim();
                                 // di.proprietor_email2 = jsonObject.getString("distance").trim();
-                                di.shop_name = jsonObject.getString("customer_name").trim();
-                                di.distance = jsonObject.getString("distance").trim();
+                                di.shop_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name"));
+                                di.distance = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance"));
                                 di.code = jsonObject.getString("code").trim();
 
                                 di.lati = jsonObject.getString("latitude").trim();
