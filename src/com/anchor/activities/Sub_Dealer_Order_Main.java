@@ -76,7 +76,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String state_name = "";
     String city_name = "";
     String district_name = "";
-    Button s_submit;
+    Button s_submit,s_no_order;
     Spinner s_state, s_district, s_city;
     String s[];
     ProgressDialog progressDialog;
@@ -136,6 +136,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
         auto_scroll = findViewById(R.id.auto_scroll);
         s_submit = findViewById(R.id.s_submit);
+        s_no_order = findViewById(R.id.s_no_order);
         s_state = findViewById(R.id.s_state);
         s_city = findViewById(R.id.s_city);
         s_district = findViewById(R.id.s_district);
@@ -413,6 +414,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
                                 sub_dealer_code = dataItem.code;
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
+                                Global_Data.SUB_Mobile =  dataItem.proprietor_mobile1;
+                                Global_Data.Sub_Email = dataItem.proprietor_email1;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -453,6 +456,107 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
                         startActivity(s_dub);
                         finish();
+                    }
+
+
+
+
+
+                }
+            }
+        });
+
+
+        s_no_order.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+//                if (s_state.getSelectedItem().toString().equalsIgnoreCase("Select State")) {
+//
+//                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select State",
+//                            Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
+//                } else if (s_district.getSelectedItem().toString().equalsIgnoreCase("Select District")) {
+//
+//                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select City",
+//                            Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
+//                }
+//                else
+                if (Beat_search.getSelectedItem().toString().equalsIgnoreCase("Select Beat")) {
+
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Beat",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+                else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else {
+                    valid_sub_dealer_flag = "";
+                    if (AllresultSubDealer.size() > 0) {
+                        for (SubDealerModel dataItem : AllresultSubDealer) {
+                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.code;
+                                Global_Data.Sub_Dealer_Code = sub_dealer_code;
+                                Global_Data.SUB_Mobile =  dataItem.proprietor_mobile1;
+                                Global_Data.Sub_Email = dataItem.proprietor_email1;
+                                Global_Data.Sub_Dealer_name = s_sub_dealer_search.getText().toString();
+                                valid_sub_dealer_flag = "yes";
+                                break;
+                            }
+
+                        }
+                    }
+
+                    if (Global_Data.Customers_map.size() > 0) {
+                        try {
+                            Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+                        } catch (Exception ex) {
+                            Global_Data.Dealer_Code = "";
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    if (Global_Data.Dealer_Code.equalsIgnoreCase("") || !valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
+
+                        if(!valid_sub_dealer_flag.equalsIgnoreCase("yes"))
+                        {
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Sub Dealer Not Found",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                        else
+                        if(Global_Data.Dealer_Code.equalsIgnoreCase(""))
+                        {
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Dealer Not Found",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+
+                    }
+                    else
+                    {
+                        Intent s_dub = new Intent(getApplicationContext(), NoOrderActivity.class);
+                        startActivity(s_dub);
+
                     }
 
 

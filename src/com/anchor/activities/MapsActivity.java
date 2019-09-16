@@ -964,7 +964,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //di.name = jsonObject.getString("customer_name").trim();
                                 di.proprietor_mobile1 = jsonObject.getString("mobile_no").trim();
                                 //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
-                                di.proprietor_email1 = jsonObject.getString("customer_address").trim();
+                                di.proprietor_email1 = jsonObject.getString("sub_dealer_email").trim();
                                 di.address = jsonObject.getString("customer_address").trim();
                                 //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
                                 // di.proprietor_name2 = jsonObject.getString("distance").trim();

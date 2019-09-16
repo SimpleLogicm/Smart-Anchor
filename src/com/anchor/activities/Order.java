@@ -1070,6 +1070,8 @@ public class Order extends Activity implements OnItemSelectedListener {
                             Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
                         }
 
+                        Global_Data.Sub_Dealer_name = "";
+
                         Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
                         Global_Data.order_city = city_spinner.getSelectedItem()
                                 .toString();

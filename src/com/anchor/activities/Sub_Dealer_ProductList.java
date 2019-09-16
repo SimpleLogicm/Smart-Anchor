@@ -726,6 +726,8 @@ public class Sub_Dealer_ProductList extends Activity {
                         // product_value.put("order_number", PINString);
                         product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
                         product_value.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
+                        product_value.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
+                        product_value.put("sub_dealer_email", Global_Data.Sub_Email);
                         product_value.put("dealer_id", Global_Data.Dealer_Code);
                         // product_value.put("user_email", Global_Data.GLOvel_USER_EMAIL);
                         //product_value.put("dist_code", Global_Data.GLOvel_USER_EMAIL);

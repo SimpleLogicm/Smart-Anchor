@@ -15,20 +15,14 @@ import java.util.Map;
 
 public class Global_Data {
 
-    public static String Service_Domain = "";
+
     public static String year_value = "";
     public static String halfyear_value = "";
     public static String quartly_value = "";
     public static String monthly_value = "";
-
     public static String scheme_from_date = "";
     public static String scheme_to_date = "";
     public static String close_scheme_name = "";
-
-    public static String target_month_value = "";
-    public static String target_year_value = "";
-    public static String target_quater_value = "";
-    public static String target_todate_value = "";
     public static String target_product_cate_value = "";
     public static String target_product_Bu_value = "";
     public static String target_product_division_value = "";
@@ -218,6 +212,8 @@ public class Global_Data {
 
     public static String Sub_Dealer_Code="";
     public static String Sub_Dealer_name="";
+    public static String Sub_Email="";
+    public static String SUB_Mobile="";
     public static String Dealer_Code="";
     public static String state_code="";
     public static String click_flag="";

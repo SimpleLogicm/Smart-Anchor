@@ -68,7 +68,6 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
-                android:visibility="gone"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1.20" >
 
@@ -95,36 +94,6 @@
                     android:layout_alignParentTop="true"
                     android:src="@drawable/sub_dealer_order" />
 
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1.20" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:text="@string/order_info"
-                    android:textColor="#111111"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:id="@+id/otherinfo_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/other_info" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -286,7 +255,6 @@
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
-            android:visibility="gone"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:layout_below="@+id/lout_fourth"
@@ -296,7 +264,6 @@
             <RelativeLayout
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1.20" >
@@ -316,7 +283,7 @@
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/otherinfo_btn_test"
+                    android:id="@+id/otherinfo_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"
@@ -393,7 +360,6 @@
             <RelativeLayout
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1.20" >

@@ -139,16 +139,33 @@
             android:scrollbars="vertical"
             android:visibility="gone" />
 
-
-        <Button
-            android:id="@+id/s_submit"
-            android:layout_width="140dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="@string/Submit"
-            android:background="#414042"
-            android:textColor="#FFFFFF"/>
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:layout_marginTop="20dp" >
+
+            <Button
+                android:id="@+id/s_submit"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/Submit"
+                android:background="#414042"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/s_no_order"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/No_Order"
+                android:background="#414042"
+                android:layout_marginLeft="10dp"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
 
 
     </LinearLayout>
