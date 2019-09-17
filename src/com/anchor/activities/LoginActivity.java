@@ -1177,7 +1177,7 @@ public class LoginActivity extends Activity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             // queue.add(jsObjRequest);
             jsObjRequest.setShouldCache(false);
-            int socketTimeout = 300000;//30 seconds - change to what you want
+            int socketTimeout = 3000000;//3000 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             jsObjRequest.setRetryPolicy(policy);
             requestQueue.add(jsObjRequest);

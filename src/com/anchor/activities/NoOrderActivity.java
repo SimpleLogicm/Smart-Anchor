@@ -888,20 +888,20 @@ public class NoOrderActivity extends BaseActivity {
 					try {
 						String PINStrings = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 						no_order_object.put("order_number", PINStrings);
-						product_value.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
-						product_value.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
-						product_value.put("sub_dealer_email", Global_Data.Sub_Email);
-						product_value.put("dealer_id", Global_Data.Dealer_Code);
+						no_order_object.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
+						no_order_object.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
+						no_order_object.put("sub_dealer_email", Global_Data.Sub_Email);
+						no_order_object.put("dealer_id", Global_Data.Dealer_Code);
 
 						if(!reason_name.equalsIgnoreCase(""))
 						{
-							no_order_object.put("reason_name", reason_name);
+							no_order_object.put("reason", reason_name);
 						}
 						else
 						{
 							no_order_object.put("reason_code", reason_codes);
 						}
-						no_order_object.put("user_email", Global_Data.GLOvel_USER_EMAIL);
+						no_order_object.put("email", Global_Data.GLOvel_USER_EMAIL);
 						no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
 						no_order_object.put("longitude",  Global_Data.GLOvel_LONGITUDE);
 
@@ -916,14 +916,14 @@ public class NoOrderActivity extends BaseActivity {
 					try {
 
 
-						product_valuenew.put("sub_dealer_order_details", no_order);
+						product_valuenew.put("sub_dealer_no_order", no_order);
 						product_valuenew.put("imei_no", Global_Data.device_id);
-						Log.d("no_orders", no_order.toString());
+						Log.d("sub_dealer_no_order", no_order.toString());
 						Log.d("product_valuenew", product_valuenew.toString());
 
 						String domain = NoOrderActivity.this.getResources().getString(R.string.service_domain);
 						Log.i("volley", "domain: " + domain);
-						JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "sub_dealers/create_sub_dealer_order_details", product_valuenew, new Response.Listener<JSONObject>() {
+						JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "sub_dealers/create_sub_delaer_no_order", product_valuenew, new Response.Listener<JSONObject>() {
 							@Override
 							public void onResponse(JSONObject response) {
 								Log.i("volley", "response: " + response);
