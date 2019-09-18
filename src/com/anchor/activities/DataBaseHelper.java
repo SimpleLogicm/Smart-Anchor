@@ -6033,7 +6033,7 @@ public class DataBaseHelper extends SQLiteOpenHelper
                 contact.setOrder_category_type(cursor.getString(13));
                 contact.setshipment_pri(cursor.getString(14));
                 contact.setOrder_detail4(cursor.getString(15));
-                contact.setOrder_detail4(cursor.getString(16));
+                contact.setAsset_code(cursor.getString(16));
                 //contact.setStateName(cursor.getString(1));
 
                 // Adding contact to list
