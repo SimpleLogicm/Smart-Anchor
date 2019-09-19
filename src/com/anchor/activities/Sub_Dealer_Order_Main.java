@@ -312,6 +312,16 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             public void afterTextChanged(Editable s) {
                 if (s_dealer_search.getText().toString().trim().length() == 0) {
 
+                    final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            Global_Data.Customers);
+
+                    s_dealer_search.setThreshold(1);
+                    s_dealer_search.setAdapter(adapterstr);
+
+                    s_dealer_search.setTextColor(Color.BLACK);
+
+                    Beat_search.setSelection(0);
 
                 } else {
                     s_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.close_product, 0);
@@ -898,7 +908,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     try {
                         List<String> Customers_n =new ArrayList<>();
                         String customer_name = "";
-                        String beat_id = Dealer_ma_CODE.get(items);
+                        String beat_id = Dealer_map.get(items);
                         List<Local_Data> contacts2 = dbvoc.getcustomerByCityName(beat_id);
                         if (contacts2.size() > 0) {
                             for (Local_Data localData : contacts2) {
@@ -1545,7 +1555,11 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         String service_domain = "";
 //        if(beat_flag.equalsIgnoreCase("beat_click"))
 //        {
-            service_domain = domain + "customers/get_statewise_customers?beat_code=" + beat_code;
+        try {
+            service_domain = domain + "customers/get_statewise_customers?beat_code=" +  URLEncoder.encode(beat_code, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 //        }
 //        else
 //        {

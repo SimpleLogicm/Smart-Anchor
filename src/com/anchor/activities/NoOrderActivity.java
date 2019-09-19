@@ -825,11 +825,11 @@ public class NoOrderActivity extends BaseActivity {
                     no_order_object.put("dealer_id", Global_Data.Dealer_Code);
 
                     if (!reason_name.equalsIgnoreCase("")) {
-                        no_order_object.put("reason", reason_name);
+                        no_order_object.put("reason_name", reason_name);
                         no_order_object.put("reason_code", "");
                     } else {
                         no_order_object.put("reason_code", reason_codes);
-                        no_order_object.put("reason", "");
+                        no_order_object.put("reason_name", "");
                     }
                     no_order_object.put("email", Global_Data.GLOvel_USER_EMAIL);
                     no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
