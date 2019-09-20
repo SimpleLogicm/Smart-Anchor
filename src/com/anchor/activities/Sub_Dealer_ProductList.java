@@ -84,6 +84,7 @@ public class Sub_Dealer_ProductList extends Activity {
     HashMap<String, String> map;
     ArrayList<String> list1 = new ArrayList<String>();
     ArrayList<String> list2 = new ArrayList<String>();
+    ArrayList<String> list3 = new ArrayList<String>();
     Boolean isInternetPresent = false;
 
     private ArrayList<String> p_id = new ArrayList<String>();
@@ -270,6 +271,7 @@ public class Sub_Dealer_ProductList extends Activity {
                         SwipeList.clear();
                         list1.clear();
                         list2.clear();
+                        list3.clear();
                         pp = 0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
@@ -299,6 +301,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                 list1.add("");
                                 list2.add("");
                             }
+
 
                             SwipeList.add(mapp);
                         }
@@ -988,7 +991,9 @@ public class Sub_Dealer_ProductList extends Activity {
 
     public static void updateSum(Double sum) {
 
+       // txttotalPreview.setText("Total		:		"+sum);
         Double total = 0.0;
+
         if (!(Global_Data.Order_hashmap.isEmpty())) {
 
             try {

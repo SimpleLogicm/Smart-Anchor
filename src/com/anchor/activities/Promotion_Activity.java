@@ -89,6 +89,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import cpm.simplelogic.helper.GPSTracker;
+
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
 
 public class Promotion_Activity extends Activity {
@@ -125,6 +127,7 @@ public class Promotion_Activity extends Activity {
     EditText pro_edit;
     ImageView in, out;
     RelativeLayout rlbtn;
+    GPSTracker gps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -402,62 +405,68 @@ public class Promotion_Activity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if (inDateTime.equalsIgnoreCase("")) {
+                gps = new GPSTracker(Promotion_Activity.this);
+                if (!gps.canGetLocation()) {
 
-                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please In ",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                } else if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
-
-                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please Select Events",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                } else if (outDateTime.equalsIgnoreCase("")) {
-
-                    Toast toast = Toast.makeText(Promotion_Activity.this, "Please Out ",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-
-
+                    gps.showSettingsAlertnew();
                 } else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
-                    alertDialog.setTitle("Confirmation");
-                    alertDialog.setMessage("Sure do you wish to submit the Promotional Activity ?");
-                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+                    if (inDateTime.equalsIgnoreCase("")) {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        Toast toast = Toast.makeText(Promotion_Activity.this, "Please select In",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    } else if (List_Of_Event_Spinner.getSelectedItem().toString().equalsIgnoreCase("Select Events")) {
+
+                        Toast toast = Toast.makeText(Promotion_Activity.this, "Please Select Events",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    } else if (outDateTime.equalsIgnoreCase("")) {
+
+                        Toast toast = Toast.makeText(Promotion_Activity.this, " Please select Out",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
 
 
-                            cd = new ConnectionDetector(getApplicationContext());
-                            if (cd.isConnectingToInternet()) {
-                                new doFileUpload().execute();
-                            } else {
+                    } else {
+                        AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
+                        alertDialog.setTitle("Confirmation");
+                        alertDialog.setMessage("Sure do you wish to submit the Promotional Activity ?");
+                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                                Toast toast = Toast.makeText(Promotion_Activity.this, "You don't have internet connection.", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
 
+                                cd = new ConnectionDetector(getApplicationContext());
+                                if (cd.isConnectingToInternet()) {
+                                    new doFileUpload().execute();
+                                } else {
+
+                                    Toast toast = Toast.makeText(Promotion_Activity.this, "You don't have internet connection.", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    alertDialog.show();
-
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                        alertDialog.show();
 
 
+                    }
                 }
+
 
             }
         });
@@ -579,7 +588,6 @@ public class Promotion_Activity extends Activity {
                     }
                 });
                 alertDialog.show();
-
 
 
                 //  switchButton.setChecked(true);
@@ -884,32 +892,48 @@ public class Promotion_Activity extends Activity {
     }
 
     public void showDialogn(String flag) {
-        final Dialog dialognew = new Dialog(Promotion_Activity.this);
-        dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialognew.setCancelable(false);
-        dialognew.setContentView(R.layout.promotion_dialog);
+        gps = new GPSTracker(Promotion_Activity.this);
+        if (!gps.canGetLocation()) {
+            indt_container.setVisibility(View.GONE);
+            outdt_container.setVisibility(View.GONE);
+            in.setVisibility(View.INVISIBLE);
+            out.setVisibility(View.VISIBLE);
+            intime.setText("");
+            indate.setText("");
+            inDateTime ="";
+            outDateTime = "";
 
-        TextView pro_header = dialognew.findViewById(R.id.pro_header);
-        TextView pro_time = dialognew.findViewById(R.id.pro_time);
-        TextView pro_date = dialognew.findViewById(R.id.pro_date);
-        TextView pro_address = dialognew.findViewById(R.id.pro_address);
-        Button pro_click = dialognew.findViewById(R.id.pro_click);
-
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = new Date();
-        // String daten = sdf.format(date);
-        String datenew = sdf.format(date);
-
-        Date d = new Date();
-        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
-        String currentDateTimeString = sdf_time.format(d);
-
-        if (flag.equalsIgnoreCase("OUT")) {
-            pro_header.setText("OUT TIME");
+            outtime.setText("");
+            outdate.setText("");
+            gps.showSettingsAlertnew();
         } else {
-            pro_header.setText("IN TIME");
-        }
+            final Dialog dialognew = new Dialog(Promotion_Activity.this);
+            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialognew.setCancelable(false);
+            dialognew.setContentView(R.layout.promotion_dialog);
+
+            TextView pro_header = dialognew.findViewById(R.id.pro_header);
+            TextView pro_time = dialognew.findViewById(R.id.pro_time);
+            TextView pro_date = dialognew.findViewById(R.id.pro_date);
+            TextView pro_address = dialognew.findViewById(R.id.pro_address);
+            Button pro_click = dialognew.findViewById(R.id.pro_click);
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = new Date();
+            // String daten = sdf.format(date);
+            String datenew = sdf.format(date);
+
+            Date d = new Date();
+            SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+            String currentDateTimeString = sdf_time.format(d);
+
+            if (flag.equalsIgnoreCase("OUT")) {
+                pro_header.setText("OUT TIME");
+            } else {
+                pro_header.setText("IN TIME");
+                outDateTime = "";
+            }
 
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
@@ -920,39 +944,41 @@ public class Promotion_Activity extends Activity {
 //        }
 
 
-        //inh.setPaintFlags(inh.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            //inh.setPaintFlags(inh.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.address)) {
-            String str = Global_Data.address.trim().replaceAll("\n", " ");
-            pro_address.setText("Address : " + str);
-        } else {
-            pro_address.setText("Address Not Found.");
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.address)) {
+                String str = Global_Data.address.trim().replaceAll("\n", " ");
+                pro_address.setText("Address : " + str);
+            } else {
+                pro_address.setText("Address Not Found.");
+            }
+
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(datenew)) {
+                try {
+                    String timenewarray[] = datenew.split("-");
+                    String month = getMonthForInt(Integer.parseInt(timenewarray[1]) - 1);
+                    pro_date.setText("Date : " + timenewarray[0] + " " + month + " " + timenewarray[2]);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                pro_date.setText("Date Not Found.");
+            }
+
+            pro_time.setText("Time : " + currentDateTimeString);
+
+            pro_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dialognew.dismiss();
+
+                }
+            });
+
+            dialognew.show();
         }
 
-        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(datenew)) {
-            try {
-                String timenewarray[] = datenew.split("-");
-                String month = getMonthForInt(Integer.parseInt(timenewarray[1]) - 1);
-                pro_date.setText("Date : " + timenewarray[0] + " " + month + " " + timenewarray[2]);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            pro_date.setText("Date Not Found.");
-        }
-
-        pro_time.setText("Time : " + currentDateTimeString);
-
-        pro_click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialognew.dismiss();
-
-            }
-        });
-
-        dialognew.show();
 
     }
 
@@ -1344,6 +1370,26 @@ public class Promotion_Activity extends Activity {
 
                 if (!mCurrentPhotoPath.equalsIgnoreCase("")) {
                     try {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    GlideApp.with(Promotion_Activity.this)
+                                            .load(Uri.parse(mCurrentPhotoPath))
+                                            .thumbnail(0.5f)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .into(events_pick);
+
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+
+
                         // reduce_img_Qaulity(Uri.parse(outletsignboard_mCurrentPhotoPath));
                         // compressImage(outletsignboard_mCurrentPhotoPath);
                         String filePath = getRealPathFromURI(Uri.parse(mCurrentPhotoPath).getPath());
@@ -1391,6 +1437,7 @@ public class Promotion_Activity extends Activity {
                             scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
                         } catch (OutOfMemoryError exception) {
                             exception.printStackTrace();
+
                         }
                         float ratioX = actualWidth / (float) options.outWidth;
                         float ratioY = actualHeight / (float) options.outHeight;
@@ -1427,6 +1474,24 @@ public class Promotion_Activity extends Activity {
 
                         } catch (IOException e) {
                             e.printStackTrace();
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        GlideApp.with(Promotion_Activity.this)
+                                                .load(Uri.parse(mCurrentPhotoPath))
+                                                .thumbnail(0.5f)
+                                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                                .into(events_pick);
+
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
                         }
 
 
@@ -1462,6 +1527,8 @@ public class Promotion_Activity extends Activity {
                                 try {
                                     mImageBitmap = MediaStore.Images.Media.getBitmap(Promotion_Activity.this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
                                     events_pick.setImageBitmap(mImageBitmap);
+//
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }

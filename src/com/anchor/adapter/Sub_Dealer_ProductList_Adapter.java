@@ -64,6 +64,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
         this.list1 = list1;
         this.list2 = list2;
 
+
         this.context = context;
     }
 
@@ -124,16 +125,19 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
             holder = (ViewHolder) convertView.getTag();
         }
 
-
+        getData = dataAray.get(position);
         holder.productquantity.setRawInputType(Configuration.KEYBOARD_QWERTY);
         holder.productquantity.addTextChangedListener(holder.mWatcher1);
         holder.mWatcher1.setActive(false);
+       // holder.mDetailEditText.setText(dataAray.get(position), TextView.BufferType.EDITABLE);
+        holder.mWatcher1.setPosition(position);
+        holder.mWatcher1.setActive(true);
 
         holder.totalprice.addTextChangedListener(holder.mWatcher2);
         holder.mWatcher2.setActive(false);
 
 
-        getData = dataAray.get(position);
+
 
         holder.Productnamerpmrp.setText(getData.get(TAG_ITEMNAME));
         holder.pidp.setText(getData.get(TAG_ITEM_NUMBER));
@@ -193,10 +197,10 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
                         if(SQMO_Validator == 0)
                         {
                             Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.rpv.getText().toString());
-                            holder.totalprice.setText("PRICE : " + String.valueOf(value));
+                            holder.totalprice.setText("PRICE : " + String.valueOf(String.format("%.2f", value)));
                             holder.quantity_error.setText("");
-                            Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() +"pq" + String.valueOf(value)+"pprice"+holder.Productnamerpmrp.getText().toString()+"pmrp"+holder.mrpv.getText().toString()+"prp"+holder.rpv.getText().toString());
-
+                           // Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() +"pq" + String.valueOf(value)+"pprice"+holder.Productnamerpmrp.getText().toString()+"pmrp"+holder.mrpv.getText().toString()+"prp"+holder.rpv.getText().toString());
+                           // Global_Data.Some_list.set(position,holder.totalprice.getText().toString());
                         }
                         else
                         {
@@ -213,7 +217,8 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
                                 holder.quantity_error.setText("Entered Value Not A Multiple Of Item Minimum Order Quantity.");
                             }
 
-                            Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+                            //Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+                            //Global_Data.Some_list.set(position,String.valueOf(0));
 
 
                             //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
@@ -229,12 +234,13 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
 
                     // sum += value;
                     //  ProductAll_Varients.txttotalPreview.setText("Total "+sum);
-                    Sub_Dealer_ProductList.updateSum(sum);
+//                    Sub_Dealer_ProductList.updateSum(sum);
                 } else {
                     holder.totalprice.setText("");
                     holder.quantity_error.setText("");
-                    Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
-                    Sub_Dealer_ProductList.updateSum(sum);
+                   // Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+                   // Global_Data.Some_list.set(position,String.valueOf(0));
+                   // Sub_Dealer_ProductList.updateSum(sum);
 
                 }
 
@@ -280,9 +286,62 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
 
         @Override
         public void afterTextChanged(Editable s) {
+            Double total = 0.0;
             if (mActive) {
                 list1.set(mPosition, s.toString());
+
+                getData = dataAray.get(mPosition);
+
+                HashMap<String, String> edit = new HashMap<>();
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(s.toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(getData.get(TAG_RP)) && Integer.parseInt(String.valueOf(s.toString()))>0) {
+                    edit.put("string", s.toString());
+
+                    try
+                    {
+                        int SQMO_Validator = Integer.parseInt(s.toString())%Integer.parseInt(getData.get(TAG_ITEM_SQ));
+                        if(SQMO_Validator == 0)
+                        {
+                            Double value = Double.valueOf(s.toString()) * Double.valueOf(getData.get(TAG_RP));
+                          //  holder.totalprice.setText("PRICE : " + String.valueOf(value));
+                          //  holder.quantity_error.setText("");
+                            Global_Data.Order_hashmap.put(mPosition + "&" + getData.get(TAG_ITEM_NUMBER), s.toString() +"pq" + String.valueOf(value)+"pprice"+getData.get(TAG_ITEMNAME)+"pmrp"+getData.get(TAG_PRICE)+"prp"+getData.get(TAG_RP));
+                            // Global_Data.Some_list.set(position,holder.totalprice.getText().toString());
+                        }
+                        else
+                        {
+
+
+                            Global_Data.Order_hashmap.put(mPosition + "&" + getData.get(TAG_ITEM_NUMBER),"");
+                            //Global_Data.Some_list.set(position,String.valueOf(0));
+
+
+                            //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }catch (Exception exception){
+                        exception.printStackTrace();
+                    }
+
+
+                    // Global_Data.itemmap.put(holder.pidp.getText().toString(),)
+
+                    // sum += value;
+                    //  ProductAll_Varients.txttotalPreview.setText("Total "+sum);
+                   Sub_Dealer_ProductList.updateSum(sum);
+                } else {
+                  //  holder.totalprice.setText("");
+                   // holder.quantity_error.setText("");
+                    Global_Data.Order_hashmap.put(mPosition + "&" + getData.get(TAG_ITEM_NUMBER),"");
+                    // Global_Data.Some_list.set(position,String.valueOf(0));
+                     Sub_Dealer_ProductList.updateSum(sum);
+
+                }
             }
+
+
+
         }
     }
 

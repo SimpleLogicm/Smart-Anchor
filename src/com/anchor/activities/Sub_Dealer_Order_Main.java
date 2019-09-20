@@ -127,6 +127,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String bs_check = "";
     int i = 0;
     ArrayAdapter<String> adaptorBeats;
+    String beat_click_flag = "";
+    String spinner_flag = "";
 
 
     @Override
@@ -312,16 +314,26 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             public void afterTextChanged(Editable s) {
                 if (s_dealer_search.getText().toString().trim().length() == 0) {
 
-                    final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            Global_Data.Customers);
+                    if(beat_click_flag.equalsIgnoreCase(""))
+                    {
+                        final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+                                android.R.layout.simple_spinner_dropdown_item,
+                                Global_Data.Customers);
 
-                    s_dealer_search.setThreshold(1);
-                    s_dealer_search.setAdapter(adapterstr);
+                        s_dealer_search.setThreshold(1);
+                        s_dealer_search.setAdapter(adapterstr);
 
-                    s_dealer_search.setTextColor(Color.BLACK);
+                        s_dealer_search.setTextColor(Color.BLACK);
 
-                    Beat_search.setSelection(0);
+                        Beat_search.setSelection(0);
+                    }
+                    else
+                    {
+                        beat_click_flag = "";
+                    }
+
+
+
 
                 } else {
                     s_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.close_product, 0);
@@ -336,7 +348,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
 
-
+                spinner_flag= Beat_search.getSelectedItem().toString();
                 Global_Data.hideSoftKeyboard(Sub_Dealer_Order_Main.this);
 
                 String name = s_dealer_search.getText().toString();
@@ -397,14 +409,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
-                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer",
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
                 else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
-                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer",
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -436,6 +448,11 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     if (Global_Data.Customers_map.size() > 0) {
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+
+                            if(Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase(""))
+                            {
+                                Global_Data.Dealer_Code = "";
+                            }
                         } catch (Exception ex) {
                             Global_Data.Dealer_Code = "";
                             ex.printStackTrace();
@@ -446,7 +463,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                         if(!valid_sub_dealer_flag.equalsIgnoreCase("yes"))
                         {
-                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Sub Dealer Not Found",
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -454,7 +471,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         else
                         if(Global_Data.Dealer_Code.equalsIgnoreCase(""))
                         {
-                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Dealer Not Found",
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -506,14 +523,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
-                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer",
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
                 else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
-                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer",
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -537,6 +554,10 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     if (Global_Data.Customers_map.size() > 0) {
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+                            if(Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase(""))
+                            {
+                                Global_Data.Dealer_Code = "";
+                            }
                         } catch (Exception ex) {
                             Global_Data.Dealer_Code = "";
                             ex.printStackTrace();
@@ -547,7 +568,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                         if(!valid_sub_dealer_flag.equalsIgnoreCase("yes"))
                         {
-                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Sub Dealer Not Found",
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -555,7 +576,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         else
                         if(Global_Data.Dealer_Code.equalsIgnoreCase(""))
                         {
-                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Dealer Not Found",
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -887,6 +908,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 s_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
 
             } else {
+                beat_click_flag = "yes";
 
                 s_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
                 String items = Beat_search.getSelectedItem().toString().trim();
@@ -914,18 +936,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             for (Local_Data localData : contacts2) {
                                 customer_name = localData.get_stocks_product_name();
                                 Customers_n.add(customer_name);
-//                                for (int i = 0; i < Global_Data.Customers.size(); i++) {
-//                                    if (customer_name.equalsIgnoreCase(Global_Data.Customers.get(i))) {
-//                                        Customers_n.add(Global_Data.Customers.get(i));
-//                                         break;
-//                                    }
-//                                }
 
                             }
                         }
-
-
-
 
                         final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
                                 android.R.layout.simple_spinner_dropdown_item,
@@ -935,6 +948,16 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         s_dealer_search.setAdapter(adapterstr);
 
                         s_dealer_search.setTextColor(Color.BLACK);
+
+                        if(!spinner_flag.equalsIgnoreCase("Select Beat"))
+                        {
+                            s_dealer_search.setText("");
+                        }
+                        else
+                        {
+                            spinner_flag = "";
+                        }
+
 
                         //customer_OnlineData(bs_check,"beat_click");
                     } catch (Exception ex) {
