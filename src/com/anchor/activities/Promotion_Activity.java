@@ -5,7 +5,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +26,7 @@ import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -30,6 +34,7 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -48,6 +53,7 @@ import android.widget.Toast;
 
 import com.anchor.helper.GlideApp;
 import com.anchor.helper.MultipartUtility;
+import com.anchor.model.Promotional_Model;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -119,6 +125,7 @@ public class Promotion_Activity extends Activity {
     static String final_response = "";
     JSONArray EVENT_JSON = null;
     HashMap<String, String> eventmap = new HashMap<String, String>();
+    HashMap<String, String> eventmapNEW = new HashMap<String, String>();
     ArrayList<String> list_Events = new ArrayList<String>();
     ArrayAdapter<String> adapter_events;
     Spinner List_Of_Event_Spinner;
@@ -128,6 +135,9 @@ public class Promotion_Activity extends Activity {
     ImageView in, out;
     RelativeLayout rlbtn;
     GPSTracker gps;
+    String event_name = "Select Events";
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -165,6 +175,9 @@ public class Promotion_Activity extends Activity {
         List_Of_Event_Spinner.setAdapter(adapter_events);
 
         in.setVisibility(View.INVISIBLE);
+
+        loginDataBaseAdapter = new LoginDataBaseAdapter(Promotion_Activity.this);
+        loginDataBaseAdapter = loginDataBaseAdapter.open();
 
 
         rlbtn.setOnClickListener(new View.OnClickListener() {
@@ -495,6 +508,11 @@ public class Promotion_Activity extends Activity {
                         events_pick.setImageResource(R.drawable.vector_camera_icon);
                         in.setVisibility(View.INVISIBLE);
                         out.setVisibility(View.VISIBLE);
+                        dbvoc.getDeleteTable("promotion_activity");
+
+                        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.cancelAll();
+
                         rlbtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -624,6 +642,8 @@ public class Promotion_Activity extends Activity {
     @Override
     public void onBackPressed() {
 
+
+        dbvoc.getDeleteTable("promotion_activity");
         AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
         alertDialog.setTitle("Confirmation");
         alertDialog.setMessage("Do you want to discard your meeting ?");
@@ -632,6 +652,19 @@ public class Promotion_Activity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(inDateTime))) {
+
+                    String event_id = "";
+                    try {
+                        event_id = eventmap.get(List_Of_Event_Spinner.getSelectedItem().toString());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                    loginDataBaseAdapter.insert_promotion_activity_table_data(Global_Data.GLOvel_USER_EMAIL, List_Of_Event_Spinner.getSelectedItem().toString(), inDateTime, outDateTime, pro_edit.getText().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.address, "", "", "", "", "", "", "",mCurrentPhotoPath);
+
+                    local_notification();
+                }
 
                 Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1241,6 +1274,7 @@ public class Promotion_Activity extends Activity {
                     } else {
 
                         eventmap.clear();
+                        eventmapNEW.clear();
                         list_Events.clear();
                         list_Events.add("Select Events");
                         for (int i = 0; i < EVENT_JSON.length(); i++) {
@@ -1260,7 +1294,7 @@ public class Promotion_Activity extends Activity {
                                             if (!list_Events.contains(jsonObject.getString("name").trim())) {
                                                 list_Events.add(jsonObject.getString("name").trim());
                                                 eventmap.put(jsonObject.getString("name").trim(), jsonObject.getString("id").trim());
-
+                                                eventmapNEW.put(jsonObject.getString("id").trim(), jsonObject.getString("name").trim());
                                             }
 
                                         }
@@ -1284,6 +1318,15 @@ public class Promotion_Activity extends Activity {
                                             android.R.layout.simple_spinner_item, list_Events);
                                     adapter_events.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                     List_Of_Event_Spinner.setAdapter(adapter_events);
+
+                                    try
+                                    {
+                                        int spinnerPosition = adapter_events.getPosition(event_name);
+                                        List_Of_Event_Spinner.setSelection(spinnerPosition);
+                                    }catch (Exception ex)
+                                    {
+                                        ex.printStackTrace();
+                                    }
 
                                     progressDialog.dismiss();
                                 } catch (Exception ex) {
@@ -1725,7 +1768,7 @@ public class Promotion_Activity extends Activity {
                                 JSONObject obj = new JSONObject(response_result);
                                 progressDialog.dismiss();
                                 //Successcul message issue on submit. Message should be "Promotional activity submitted successfully"
-                                if (obj.getString("message").equalsIgnoreCase("Promotional activity submitted successfully")) {
+                                if (obj.getString("message").equalsIgnoreCase("Promotional activity submitted successfully.")) {
                                     Toast toast = Toast.makeText(Promotion_Activity.this, obj.getString("message"),
                                             Toast.LENGTH_SHORT);
                                     outDateTime = "";
@@ -1740,6 +1783,11 @@ public class Promotion_Activity extends Activity {
                                     events_pick.setImageResource(R.drawable.vector_camera_icon);
                                     in.setVisibility(View.INVISIBLE);
                                     out.setVisibility(View.VISIBLE);
+
+                                    dbvoc.getDeleteTable("promotion_activity");
+
+                                    NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                                    notificationManager.cancelAll();
 
 
                                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1844,5 +1892,126 @@ public class Promotion_Activity extends Activity {
         }
     }
 
+    public void local_notification() {
+        Intent intent = new Intent(Promotion_Activity.this, MainActivity.class);
 
+        //PendingIntent contentIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder b = new NotificationCompat.Builder(Promotion_Activity.this);
+        b.setOngoing(true);
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                //.setSmallIcon(R.drawable.anchor_logo)
+                .setColor(getResources().getColor(R.color.mdtp_red))
+                .setTicker("Anchor")
+                .setContentTitle("Promotional Activity")
+                .setContentText("You are in Promotional Activity")
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
+                // .setContentIntent(contentIntent)
+                .setContentInfo("Info");
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            b.setSmallIcon(R.drawable.notifi);
+            b.setColor(getResources().getColor(R.color.darkorrange));
+        } else {
+            b.setSmallIcon(R.drawable.notifi);
+            b.setColor(getResources().getColor(R.color.darkorrange));
+        }
+
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+        List<Promotional_Model> contacts = dbvoc.getPromotional_Activity();
+        if (contacts.size() > 0) {
+
+            indt_container.setVisibility(View.VISIBLE);
+            outdt_container.setVisibility(View.GONE);
+            in.setVisibility(View.VISIBLE);
+            out.setVisibility(View.GONE);
+
+            for (Promotional_Model cn : contacts) {
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getEvent_id()))) {
+
+                    event_name = cn.getEvent_id();
+
+                }
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getMeet_in()))) {
+
+                    inDateTime = cn.getMeet_in();
+
+                    try
+                    {
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a dd-MM-yyyy");
+                        Date date = sdf.parse(inDateTime);
+
+                        SimpleDateFormat date_form = new SimpleDateFormat("dd-MM-yyyy");
+                        String datenew = date_form.format(date);
+
+                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm a");
+                        String currentDateTimeString = sdf_time.format(date);
+
+                        intime.setText("IN Time : " + currentDateTimeString);
+                        indate.setText("IN Date : " + datenew);
+                    }catch (Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
+
+
+                }
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getDescription()))) {
+
+                    pro_edit.setText(cn.getDescription());
+
+                }
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getImage_url()))) {
+
+                    mCurrentPhotoPath = cn.getImage_url();
+                    try {
+                        GlideApp.with(Promotion_Activity.this)
+                                .load(Uri.parse(mCurrentPhotoPath))
+                                .thumbnail(0.5f)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(events_pick);
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            }
+
+            try
+            {
+                int spinnerPosition = adapter_events.getPosition(event_name);
+                List_Of_Event_Spinner.setSelection(spinnerPosition);
+            }catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+
+
+
+        }
+
+
+    }
 }

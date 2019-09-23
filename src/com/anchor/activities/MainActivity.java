@@ -8,6 +8,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,9 +24,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +43,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.animation.ActivitySwitcher;
+import com.anchor.model.Promotional_Model;
 import com.anchor.service.LocationServices;
 import com.anchor.service.StartLocationAlert;
 import com.anchor.slidingmenu.adapter.NavDrawerListAdapter;
@@ -261,7 +268,7 @@ public class MainActivity extends BaseActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[7]));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[8]));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[9]));
-       // navDrawerItems.add(new NavDrawerItem(navMenuTitles[10]));
+        // navDrawerItems.add(new NavDrawerItem(navMenuTitles[10]));
 //
 //		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7]));
 //
@@ -295,7 +302,7 @@ public class MainActivity extends BaseActivity {
 
         if (Global_Data.SYNC_SERVICE_FLAG.equalsIgnoreCase("TRUE")) {
             Global_Data.SYNC_SERVICE_FLAG = "";
-           // getServices.sendRequest(MainActivity.this);
+            // getServices.sendRequest(MainActivity.this);
         }
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -622,6 +629,39 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         // animateIn this activity
+
+        List<Promotional_Model> contacts = dbvoc.getPromotional_Activity();
+        if (contacts.size() > 0) {
+            local_notification();
+
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+            alertDialog.setTitle("Confirmation");
+            alertDialog.setMessage("You are in Promotional Activity, Do you want to complete it?");
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+
+                    Intent i = new Intent(getApplicationContext(), Promotion_Activity.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+
+            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+        }
+
+
 
         if (firstLaunch) {
             // Your onResume Code Here
@@ -1057,7 +1097,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"),jsonObject.getString("business_unit"));
+                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                         }
@@ -1226,5 +1266,39 @@ public class MainActivity extends BaseActivity {
         intent.setData(uri);
         startActivityForResult(intent, 101);
     }
+
+    public void local_notification() {
+        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+
+        //PendingIntent contentIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder b = new NotificationCompat.Builder(MainActivity.this);
+        b.setOngoing(true);
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                //.setSmallIcon(R.drawable.anchor_logo)
+                .setColor(getResources().getColor(R.color.mdtp_red))
+                .setTicker("Anchor")
+                .setContentTitle("Promotional Activity")
+                .setContentText("You are in Promotional Activity")
+                .setDefaults(Notification.DEFAULT_LIGHTS)
+                // .setContentIntent(contentIntent)
+                .setContentInfo("Info");
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            b.setSmallIcon(R.drawable.notifi);
+            b.setColor(getResources().getColor(R.color.darkorrange));
+        } else {
+            b.setSmallIcon(R.drawable.notifi);
+            b.setColor(getResources().getColor(R.color.darkorrange));
+        }
+
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
+
+    }
+
 
 }
