@@ -644,43 +644,45 @@ public class Promotion_Activity extends Activity {
 
 
         dbvoc.getDeleteTable("promotion_activity");
-        AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
-        alertDialog.setTitle("Confirmation");
-        alertDialog.setMessage("Do you want to discard your meeting ?");
-        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(inDateTime))) {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(inDateTime))) {
-
-                    String event_id = "";
-                    try {
-                        event_id = eventmap.get(List_Of_Event_Spinner.getSelectedItem().toString());
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                    loginDataBaseAdapter.insert_promotion_activity_table_data(Global_Data.GLOvel_USER_EMAIL, List_Of_Event_Spinner.getSelectedItem().toString(), inDateTime, outDateTime, pro_edit.getText().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.address, "", "", "", "", "", "", "",mCurrentPhotoPath);
-
-                    local_notification();
-                }
-
-                Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                finish();
+            String event_id = "";
+            try {
+                event_id = eventmap.get(List_Of_Event_Spinner.getSelectedItem().toString());
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        });
 
-        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            loginDataBaseAdapter.insert_promotion_activity_table_data(Global_Data.GLOvel_USER_EMAIL, List_Of_Event_Spinner.getSelectedItem().toString(), inDateTime, outDateTime, pro_edit.getText().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.address, "", "", "", "", "", "", "",mCurrentPhotoPath);
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        alertDialog.show();
+            local_notification();
+        }
+
+        Intent i = new Intent(Promotion_Activity.this, Sales_Dash.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+        finish();
+
+//        AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
+//        alertDialog.setTitle("Confirmation");
+//        alertDialog.setMessage("Do you want to discard your meeting ?");
+//        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//
+//            }
+//        });
+//
+//        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//        alertDialog.show();
 
 
     }

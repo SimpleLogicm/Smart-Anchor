@@ -71,21 +71,18 @@
         android:name="cpm.simplelogic.helper.DataProvider.WRITE_DATABASE"
         android:protectionLevel="signature" />
 
-
-
     <application
         android:name="com.anchor.App.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@drawable/anchor_logo"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
 
         <activity
             android:name=".SplashScreenActivity"
@@ -669,15 +666,21 @@
 
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
-        <!-- Production -->
-<!--         <meta-data-->
-<!--         android:name="com.google.android.maps.v2.API_KEY"-->
-<!--         android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
+        <!--&lt;!&ndash; Production &ndash;&gt;-->
+        <!--<meta-data-->
+        <!--android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
 
         <!-- UAT -->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.maps.v2.API_KEY"-->
+<!--            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />-->
+
+        <!-- UAT FOR MACBBOK-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />
+            android:value="AIzaSyCZ0V_EyLti7MktVyiirh757xc1Uzwtb68" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> <!-- Defining our FirebaseMessagingService -->
@@ -687,9 +690,6 @@
             </intent-filter>
         </service>
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
     </application>
 
 </manifest>
