@@ -2,6 +2,7 @@ package  com.anchor.activities;
 
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -909,7 +910,11 @@ public class MyService extends Service implements LocationListener{
 		return sb.toString();
 	}
 
-
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		startForeground(1,new Notification());
+	}
 
 
 }

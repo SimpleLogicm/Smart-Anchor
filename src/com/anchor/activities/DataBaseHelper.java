@@ -260,15 +260,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVersioncode(cursor.getInt(1));
-                contact.setVersionname(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVersioncode(cursor.getInt(1));
+                    contact.setVersionname(cursor.getString(2));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -286,16 +292,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBunit(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBunit(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -314,25 +327,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Promotional_Model promotional_model = new Promotional_Model();
-                promotional_model.setEmail(cursor.getString(0));
-                promotional_model.setEvent_id(cursor.getString(1));
-                promotional_model.setMeet_in(cursor.getString(2));
-                promotional_model.setMeet_out(cursor.getString(3));
-                promotional_model.setDescription(cursor.getString(4));
-                promotional_model.setLatitude(cursor.getString(5));
-                promotional_model.setLongitude(cursor.getString(6));
-                promotional_model.setAddress(cursor.getString(7));
-                promotional_model.setImage_url(cursor.getString(8));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Promotional_Model promotional_model = new Promotional_Model();
+                    promotional_model.setEmail(cursor.getString(0));
+                    promotional_model.setEvent_id(cursor.getString(1));
+                    promotional_model.setMeet_in(cursor.getString(2));
+                    promotional_model.setMeet_out(cursor.getString(3));
+                    promotional_model.setDescription(cursor.getString(4));
+                    promotional_model.setLatitude(cursor.getString(5));
+                    promotional_model.setLongitude(cursor.getString(6));
+                    promotional_model.setAddress(cursor.getString(7));
+                    promotional_model.setImage_url(cursor.getString(8));
 
 
-
-
-                // Adding contact to list
-                contactList1.add(promotional_model);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(promotional_model);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -350,16 +367,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBunit(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBunit(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -377,16 +400,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBunit(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBunit(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -404,19 +433,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBunit(cursor.getString(0));
-                contact.setprimary_category(cursor.getString(1));
-                contact.setbusiness_category(cursor.getString(2));
-                contact.setProduct(cursor.getString(3));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBunit(cursor.getString(0));
+                    contact.setprimary_category(cursor.getString(1));
+                    contact.setbusiness_category(cursor.getString(2));
+                    contact.setProduct(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -434,13 +469,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setImage_path(cursor.getString(0));
+        try {
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setImage_path(cursor.getString(0));
+
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -458,16 +500,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Image contact = new Image();
-                contact.setName(cursor.getString(0));
-                contact.setLarge(cursor.getString(1));
-                contact.setType(cursor.getString(2));
-                contact.setTimestamp(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Image contact = new Image();
+                    contact.setName(cursor.getString(0));
+                    contact.setLarge(cursor.getString(1));
+                    contact.setType(cursor.getString(2));
+                    contact.setTimestamp(cursor.getString(3));
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -485,16 +533,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setprimary_category(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setprimary_category(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -515,16 +569,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{bunit});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setSTATE_ID(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setSTATE_ID(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -542,17 +602,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVarLabel_account(cursor.getString(1));
-                contact.setNewLabel_account(cursor.getString(2));
-                contact.setEditable(cursor.getString(3));
-                contact.setMandatory(cursor.getString(4));
-                contact.setAllow(cursor.getString(5));
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVarLabel_account(cursor.getString(1));
+                    contact.setNewLabel_account(cursor.getString(2));
+                    contact.setEditable(cursor.getString(3));
+                    contact.setMandatory(cursor.getString(4));
+                    contact.setAllow(cursor.getString(5));
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -571,17 +637,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setUser(cursor.getString(1));
-                contact.setPwd(cursor.getString(2));
-                contact.setemail(cursor.getString(5));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setUser(cursor.getString(1));
+                    contact.setPwd(cursor.getString(2));
+                    contact.setemail(cursor.getString(5));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         // return contact list?
@@ -598,22 +670,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setTitle(cursor.getString(0));
-                contact.setHeading(cursor.getString(1));
-                contact.setSub_Heading(cursor.getString(2));
-                contact.setL1_Address(cursor.getString(3));
-                contact.setL1_phone1(cursor.getString(4));
-                contact.setL1_phone2(cursor.getString(5));
-                contact.setL1_email_id1(cursor.getString(6));
-                contact.setL1_email_id2(cursor.getString(7));
-                contact.setL1_website(cursor.getString(8));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setTitle(cursor.getString(0));
+                    contact.setHeading(cursor.getString(1));
+                    contact.setSub_Heading(cursor.getString(2));
+                    contact.setL1_Address(cursor.getString(3));
+                    contact.setL1_phone1(cursor.getString(4));
+                    contact.setL1_phone2(cursor.getString(5));
+                    contact.setL1_email_id1(cursor.getString(6));
+                    contact.setL1_email_id2(cursor.getString(7));
+                    contact.setL1_website(cursor.getString(8));
 
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         // return contact list?
@@ -630,16 +708,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setemail(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setemail(cursor.getString(0));
 
-                //contact.setImei(cursor.getString(3));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         // return contact list?
@@ -656,16 +740,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setreason_code(cursor.getString(0));
-                contact.setreason_name(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setreason_code(cursor.getString(0));
+                    contact.setreason_name(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         // return contact list?
@@ -682,16 +772,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrder_type_name(cursor.getString(0));
-                contact.setOrder_type_desc(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrder_type_name(cursor.getString(0));
+                    contact.setOrder_type_desc(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         // return contact list?
@@ -708,16 +804,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
+        try {
+            if (cursor.moveToFirst()) {
+                do {
 
-                Local_Data contact = new Local_Data();
-                contact.setOrder_type_name(cursor.getString(0));
-                contact.setOrder_type_desc(cursor.getString(1));
+                    Local_Data contact = new Local_Data();
+                    contact.setOrder_type_name(cursor.getString(0));
+                    contact.setOrder_type_desc(cursor.getString(1));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -735,17 +837,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCode(cursor.getString(0));
-                contact.setName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
+                    contact.setName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
+        db.close();
         // return contact list?
         return contactList;
     }
@@ -761,17 +870,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrder_type_code(cursor.getString(0));
-                contact.setOrder_type_name(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrder_type_code(cursor.getString(0));
+                    contact.setOrder_type_name(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
 
         // return contact list?
         return contactList;
@@ -788,18 +904,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{code});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrder_type_code(cursor.getString(0));
-                contact.setOrder_type_name(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrder_type_code(cursor.getString(0));
+                    contact.setOrder_type_name(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
+        db.close();
         // return contact list?
         return contactList;
     }
@@ -815,18 +937,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{code});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCode(cursor.getString(0));
-                contact.setName(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
+                    contact.setName(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
+        db.close();
         // return contact list?
         return contactList;
     }
@@ -841,17 +969,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setsync_time(cursor.getString(0));
-                contact.settotal_sync(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setsync_time(cursor.getString(0));
+                    contact.settotal_sync(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
 
         // return contact list?
         return contactList;
@@ -868,22 +1003,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setLEGACY_CUSTOMER_CODE(cursor.getString(0));
-                contact.setuser_email(cursor.getString(1));
-                contact.setreason_code(cursor.getString(2));
-                contact.setreason_type(cursor.getString(3));
-                contact.setlatitude(cursor.getString(4));
-                contact.setlongitude(cursor.getString(5));
-                contact.setorder_number(cursor.getString(6));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setLEGACY_CUSTOMER_CODE(cursor.getString(0));
+                    contact.setuser_email(cursor.getString(1));
+                    contact.setreason_code(cursor.getString(2));
+                    contact.setreason_type(cursor.getString(3));
+                    contact.setlatitude(cursor.getString(4));
+                    contact.setlongitude(cursor.getString(5));
+                    contact.setorder_number(cursor.getString(6));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -903,17 +1046,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{reason_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setreason_code(cursor.getString(0));
-                contact.setreason_name(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setreason_code(cursor.getString(0));
+                    contact.setreason_name(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -929,22 +1080,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setlatitude(cursor.getString(0));
-                contact.setlongitude(cursor.getString(1));
-                contact.setAddress(cursor.getString(2));
-                contact.setdatetime1(cursor.getString(3));
-                contact.setdate1(cursor.getString(4));
-                contact.settime1(cursor.getString(5));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setlatitude(cursor.getString(0));
+                    contact.setlongitude(cursor.getString(1));
+                    contact.setAddress(cursor.getString(2));
+                    contact.setdatetime1(cursor.getString(3));
+                    contact.setdate1(cursor.getString(4));
+                    contact.settime1(cursor.getString(5));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -962,16 +1119,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setlatitude(cursor.getString(0));
-                contact.setlongitude(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setlatitude(cursor.getString(0));
+                    contact.setlongitude(cursor.getString(1));
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -993,26 +1157,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setUser(cursor.getString(0));
-                contact.setPwd(cursor.getString(1));
-                contact.setuser_email(cursor.getString(2));
-                contact.set_shedule_order_id(cursor.getString(3));
-                contact.setreporting_to(cursor.getString(4));
-                contact.setfirst_name(cursor.getString(5));
-                contact.setlast_name(cursor.getString(6));
-                contact.setEmp_code(cursor.getString(7));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setUser(cursor.getString(0));
+                    contact.setPwd(cursor.getString(1));
+                    contact.setuser_email(cursor.getString(2));
+                    contact.set_shedule_order_id(cursor.getString(3));
+                    contact.setreporting_to(cursor.getString(4));
+                    contact.setfirst_name(cursor.getString(5));
+                    contact.setlast_name(cursor.getString(6));
+                    contact.setEmp_code(cursor.getString(7));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
-        // db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }
@@ -1032,14 +1202,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setUser(cursor.getString(0));
-                contact.setAddress(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setUser(cursor.getString(0));
+                    contact.setAddress(cursor.getString(1));
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1062,22 +1238,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{reporting_to});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setMOBILE_NO(cursor.getString(0));
-                contact.setfirst_name(cursor.getString(1));
-                contact.setlast_name(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setMOBILE_NO(cursor.getString(0));
+                    contact.setfirst_name(cursor.getString(1));
+                    contact.setlast_name(cursor.getString(2));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
-        //db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }
@@ -1092,17 +1274,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1120,17 +1308,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1148,17 +1342,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1176,17 +1376,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1205,17 +1411,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1234,17 +1446,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1263,17 +1481,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setc_name(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setc_name(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -1290,20 +1514,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setDistr(cursor.getString(0));
-                //contact.setPwd(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setDistr(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
-        //   db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }
@@ -1317,16 +1547,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setUser(cursor.getString(0));
-                contact.setPwd(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setUser(cursor.getString(0));
+                    contact.setPwd(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1341,7 +1577,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1354,20 +1590,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCur_date(cursor.getString(0));
-                //contact.setPwd(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCur_date(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
-        // db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }//
@@ -1382,17 +1624,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setemail(cursor.getString(0));
-                //contact.setPwd(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setemail(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1409,6 +1657,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1420,6 +1670,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1430,6 +1682,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
 
@@ -1443,6 +1696,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1454,6 +1708,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1465,6 +1720,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1476,6 +1732,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
 
@@ -1488,6 +1745,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1499,6 +1757,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1510,6 +1769,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1521,6 +1781,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1532,6 +1793,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
 
@@ -1544,6 +1806,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     public void getDeleteBACKGROUND_SERVICE_CHECK() {
@@ -1554,6 +1817,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1565,6 +1829,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1576,6 +1841,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1587,6 +1853,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1598,6 +1865,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
 
@@ -1610,6 +1878,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1621,6 +1890,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1632,6 +1902,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1643,6 +1914,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1654,6 +1926,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1665,6 +1938,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1677,6 +1951,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1688,6 +1963,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1701,6 +1977,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1712,6 +1989,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1723,6 +2001,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1736,6 +2015,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1747,6 +2027,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1758,6 +2039,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1771,6 +2053,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
 
@@ -1783,6 +2066,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1794,6 +2078,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1805,6 +2090,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1816,6 +2102,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1827,6 +2114,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1838,6 +2126,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -1850,16 +2139,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1877,16 +2172,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1904,16 +2205,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1932,16 +2239,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_mob(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_mob(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1960,16 +2273,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -1987,16 +2306,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2015,29 +2340,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setLEGACY_CUSTOMER_CODE(cursor.getString(0));
-                contact.setCUSTOMER_NAME(cursor.getString(1));
-                contact.setCUSTOMER_SHOPNAME(cursor.getString(2));
-                contact.setADDRESS(cursor.getString(3));
-                contact.setSTREET(cursor.getString(4));
-                contact.setLANDMARK(cursor.getString(5));
-                contact.setPIN_CODE(cursor.getString(6));
-                contact.setMOBILE_NO(cursor.getString(7));
-                contact.setEMAIL_ADDRESS(cursor.getString(8));
-                contact.setSTATUS(cursor.getString(9));
-                contact.setSTATE_ID(cursor.getString(10));
-                contact.setCITY_ID(cursor.getString(11));
-                contact.setBEAT_ID(cursor.getString(12));
-                contact.setvatin(cursor.getString(13));
-                contact.setemail(cursor.getString(14));
-                contact.setlatitude(cursor.getString(15));
-                contact.setlongitude(cursor.getString(16));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setLEGACY_CUSTOMER_CODE(cursor.getString(0));
+                    contact.setCUSTOMER_NAME(cursor.getString(1));
+                    contact.setCUSTOMER_SHOPNAME(cursor.getString(2));
+                    contact.setADDRESS(cursor.getString(3));
+                    contact.setSTREET(cursor.getString(4));
+                    contact.setLANDMARK(cursor.getString(5));
+                    contact.setPIN_CODE(cursor.getString(6));
+                    contact.setMOBILE_NO(cursor.getString(7));
+                    contact.setEMAIL_ADDRESS(cursor.getString(8));
+                    contact.setSTATUS(cursor.getString(9));
+                    contact.setSTATE_ID(cursor.getString(10));
+                    contact.setCITY_ID(cursor.getString(11));
+                    contact.setBEAT_ID(cursor.getString(12));
+                    contact.setvatin(cursor.getString(13));
+                    contact.setemail(cursor.getString(14));
+                    contact.setlatitude(cursor.getString(15));
+                    contact.setlongitude(cursor.getString(16));
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2053,7 +2384,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
 
@@ -2096,16 +2427,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2124,16 +2461,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2150,16 +2493,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setDISTRIBUTER_ID(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setDISTRIBUTER_ID(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2208,17 +2557,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{Customer_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setCust_Code(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setCust_Code(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2265,7 +2620,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 cursor.close();
         }
 
-        //db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }
@@ -2285,7 +2640,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     // Getting All Local_Data
@@ -2301,28 +2656,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{Customer_Name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setAddress(cursor.getString(1));
-                contact.setMOBILE_NO(cursor.getString(2));
-                contact.setCUSTOMER_NAME(cursor.getString(3));
-                contact.setSTATE_ID(cursor.getString(4));
-                contact.setCITY_ID(cursor.getString(5));
-                contact.setBEAT_ID(cursor.getString(6));
-                contact.setCUSTOMER_SHOPNAME(cursor.getString(7));
-                contact.setlatitude(cursor.getString(8));
-                contact.setlongitude(cursor.getString(9));
-                contact.setCust_email(cursor.getString(10));
-                contact.setBusiness_unit_code_array(cursor.getString(11));
-                contact.setOrder_category_code_array(cursor.getString(12));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setAddress(cursor.getString(1));
+                    contact.setMOBILE_NO(cursor.getString(2));
+                    contact.setCUSTOMER_NAME(cursor.getString(3));
+                    contact.setSTATE_ID(cursor.getString(4));
+                    contact.setCITY_ID(cursor.getString(5));
+                    contact.setBEAT_ID(cursor.getString(6));
+                    contact.setCUSTOMER_SHOPNAME(cursor.getString(7));
+                    contact.setlatitude(cursor.getString(8));
+                    contact.setlongitude(cursor.getString(9));
+                    contact.setCust_email(cursor.getString(10));
+                    contact.setBusiness_unit_code_array(cursor.getString(11));
+                    contact.setOrder_category_code_array(cursor.getString(12));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2340,20 +2701,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setAddress(cursor.getString(1));
-                contact.setMOBILE_NO(cursor.getString(2));
-                contact.setCUSTOMER_NAME(cursor.getString(3));
-                contact.setCUSTOMER_SHOPNAME(cursor.getString(4));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setAddress(cursor.getString(1));
+                    contact.setMOBILE_NO(cursor.getString(2));
+                    contact.setCUSTOMER_NAME(cursor.getString(3));
+                    contact.setCUSTOMER_SHOPNAME(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2372,28 +2739,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setAddress(cursor.getString(1));
-                contact.setMOBILE_NO(cursor.getString(2));
-                contact.setCUSTOMER_NAME(cursor.getString(3));
-                contact.setSTATE_ID(cursor.getString(4));
-                contact.setCITY_ID(cursor.getString(5));
-                contact.setBEAT_ID(cursor.getString(6));
-                contact.setCUSTOMER_SHOPNAME(cursor.getString(7));
-                contact.setlatitude(cursor.getString(8));
-                contact.setlongitude(cursor.getString(9));
-                contact.setCITY_ID(cursor.getString(10));
-                contact.setBEAT_ID(cursor.getString(11));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setAddress(cursor.getString(1));
+                    contact.setMOBILE_NO(cursor.getString(2));
+                    contact.setCUSTOMER_NAME(cursor.getString(3));
+                    contact.setSTATE_ID(cursor.getString(4));
+                    contact.setCITY_ID(cursor.getString(5));
+                    contact.setBEAT_ID(cursor.getString(6));
+                    contact.setCUSTOMER_SHOPNAME(cursor.getString(7));
+                    contact.setlatitude(cursor.getString(8));
+                    contact.setlongitude(cursor.getString(9));
+                    contact.setCITY_ID(cursor.getString(10));
+                    contact.setBEAT_ID(cursor.getString(11));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2411,16 +2784,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2438,16 +2817,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_Target_Text(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_Target_Text(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2469,16 +2854,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{pro_variant, pro_categ, pro_product});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setItem_Code(cursor.getString(0));
-                contact.setProdname(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setItem_Code(cursor.getString(0));
+                    contact.setProdname(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2496,16 +2887,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setItem_Code(cursor.getString(0));
-                contact.setProdname(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setItem_Code(cursor.getString(0));
+                    contact.setProdname(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2523,16 +2920,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setWare_code(cursor.getString(0));
-                contact.setWare_name(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setWare_code(cursor.getString(0));
+                    contact.setWare_name(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2555,16 +2958,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{pro_variant, pro_categ, pro_product});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setItem_Code(cursor.getString(0));
-                contact.setProdname(cursor.getString(1));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setItem_Code(cursor.getString(0));
+                    contact.setProdname(cursor.getString(1));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2583,16 +2992,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2610,16 +3025,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCityName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2637,16 +3058,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCityName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2664,16 +3091,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCityName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2692,16 +3125,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCityName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2722,16 +3161,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{State_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setSTATE_ID(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setSTATE_ID(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2752,16 +3197,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{city_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCITY_ID(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCITY_ID(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2782,16 +3233,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{beat_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBEAT_ID(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBEAT_ID(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -2809,17 +3267,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_stocks_product_name(cursor.getString(0));
-                //contact.setPURPOSE_ADDRESS(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_stocks_product_name(cursor.getString(0));
+                    //contact.setPURPOSE_ADDRESS(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -2836,17 +3300,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBEAT_ID(cursor.getString(0));
-                //contact.setPURPOSE_ADDRESS(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBEAT_ID(cursor.getString(0));
+                    //contact.setPURPOSE_ADDRESS(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -2864,17 +3334,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_stocks_product_name(cursor.getString(0));
-                //contact.setPURPOSE_ADDRESS(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_stocks_product_name(cursor.getString(0));
+                    //contact.setPURPOSE_ADDRESS(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -2891,20 +3367,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setcalender_id(cursor.getString(1));
-                contact.setcalender_type(cursor.getString(2));
-                contact.setfrom_date(cursor.getString(3));
-                contact.setto_date(cursor.getString(4));
-                contact.setcalender_details(cursor.getString(5));
-                contact.setlatlon(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setcalender_id(cursor.getString(1));
+                    contact.setcalender_type(cursor.getString(2));
+                    contact.setfrom_date(cursor.getString(3));
+                    contact.setto_date(cursor.getString(4));
+                    contact.setcalender_details(cursor.getString(5));
+                    contact.setlatlon(cursor.getString(6));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -2921,20 +3403,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setcalender_id(cursor.getString(1));
-                contact.setcalender_type(cursor.getString(2));
-                contact.setfrom_date(cursor.getString(3));
-                contact.setto_date(cursor.getString(4));
-                contact.setcalender_details(cursor.getString(5));
-                contact.setlatlon(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setcalender_id(cursor.getString(1));
+                    contact.setcalender_type(cursor.getString(2));
+                    contact.setfrom_date(cursor.getString(3));
+                    contact.setto_date(cursor.getString(4));
+                    contact.setcalender_details(cursor.getString(5));
+                    contact.setlatlon(cursor.getString(6));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -2956,20 +3444,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{detail});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setcalender_id(cursor.getString(1));
-                contact.setcalender_type(cursor.getString(2));
-                contact.setfrom_date(cursor.getString(3));
-                contact.setto_date(cursor.getString(4));
-                contact.setcalender_details(cursor.getString(5));
-                contact.setlatlon(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setcalender_id(cursor.getString(1));
+                    contact.setcalender_type(cursor.getString(2));
+                    contact.setfrom_date(cursor.getString(3));
+                    contact.setto_date(cursor.getString(4));
+                    contact.setcalender_details(cursor.getString(5));
+                    contact.setlatlon(cursor.getString(6));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -2986,22 +3480,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setcalender_id(cursor.getString(1));
-                contact.setcalender_type(cursor.getString(2));
-                contact.setfrom_date(cursor.getString(3));
-                contact.setto_date(cursor.getString(4));
-                contact.setcalender_details(cursor.getString(5));
-                contact.setlatlon(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setcalender_id(cursor.getString(1));
+                    contact.setcalender_type(cursor.getString(2));
+                    contact.setfrom_date(cursor.getString(3));
+                    contact.setto_date(cursor.getString(4));
+                    contact.setcalender_details(cursor.getString(5));
+                    contact.setlatlon(cursor.getString(6));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-        // db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }
@@ -3017,24 +3517,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setcalender_id(cursor.getString(1));
-                contact.setcalender_type(cursor.getString(2));
-                contact.setfrom_date(cursor.getString(3));
-                contact.setto_date(cursor.getString(4));
-                contact.setcalender_details(cursor.getString(5));
-                contact.setcalender_delete_flag(cursor.getString(6));
-                contact.setlatitude(cursor.getString(7));
-                contact.setlongitude(cursor.getString(8));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setcalender_id(cursor.getString(1));
+                    contact.setcalender_type(cursor.getString(2));
+                    contact.setfrom_date(cursor.getString(3));
+                    contact.setto_date(cursor.getString(4));
+                    contact.setcalender_details(cursor.getString(5));
+                    contact.setcalender_delete_flag(cursor.getString(6));
+                    contact.setlatitude(cursor.getString(7));
+                    contact.setlongitude(cursor.getString(8));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-        // db.close();
+        db.close();
         // return contact list?
         return contactList1;
     }
@@ -3050,20 +3556,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setcalender_id(cursor.getString(1));
-                contact.setcalender_type(cursor.getString(2));
-                contact.setfrom_date(cursor.getString(3));
-                contact.setto_date(cursor.getString(4));
-                contact.setcalender_details(cursor.getString(5));
-                contact.setlatlon(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setcalender_id(cursor.getString(1));
+                    contact.setcalender_type(cursor.getString(2));
+                    contact.setfrom_date(cursor.getString(3));
+                    contact.setto_date(cursor.getString(4));
+                    contact.setcalender_details(cursor.getString(5));
+                    contact.setlatlon(cursor.getString(6));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -3080,16 +3592,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setPwd(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setPwd(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -3107,16 +3625,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCityName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -3134,16 +3658,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCityName(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCityName(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -3166,16 +3696,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setWare_code(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setWare_code(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -3193,17 +3729,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                contact.setcity_id(cursor.getString(11));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    contact.setcity_id(cursor.getString(11));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -3224,17 +3766,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{namae});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                contact.setcity_id(cursor.getString(5));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    contact.setcity_id(cursor.getString(5));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -3252,19 +3800,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setC_Date(cursor.getString(5));
-                contact.set_Description(cursor.getString(6));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setC_Date(cursor.getString(5));
+                    contact.set_Description(cursor.getString(6));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3280,19 +3836,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setC_Date(cursor.getString(5));
-                contact.set_Description(cursor.getString(6));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setC_Date(cursor.getString(5));
+                    contact.set_Description(cursor.getString(6));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3308,24 +3871,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.setC_Date(cursor.getString(2));
-                contact.set_Description(cursor.getString(3));
-                contact.setlatitude(cursor.getString(4));
-                contact.setlongitude(cursor.getString(5));
-                contact.setCode(cursor.getString(6));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.setC_Date(cursor.getString(2));
+                    contact.set_Description(cursor.getString(3));
+                    contact.setlatitude(cursor.getString(4));
+                    contact.setlongitude(cursor.getString(5));
+                    contact.setCode(cursor.getString(6));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3341,22 +3912,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_PackSizes_variant_id(cursor.getString(3));
-                contact.set_PackSizes_desc(cursor.getString(4));
-                contact.set_PackSizes_product_unit(cursor.getString(5));
-                contact.set_PackSizes_product_pack_size(cursor.getString(6));
-                contact.set_PackSizes_status(cursor.getString(7));
-                contact.set_PackSizes_ids(cursor.getString(10));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_PackSizes_variant_id(cursor.getString(3));
+                    contact.set_PackSizes_desc(cursor.getString(4));
+                    contact.set_PackSizes_product_unit(cursor.getString(5));
+                    contact.set_PackSizes_product_pack_size(cursor.getString(6));
+                    contact.set_PackSizes_status(cursor.getString(7));
+                    contact.set_PackSizes_ids(cursor.getString(10));
 
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3372,19 +3951,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setC_Date(cursor.getString(5));
-                contact.set_Description(cursor.getString(6));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setC_Date(cursor.getString(5));
+                    contact.set_Description(cursor.getString(6));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3401,19 +3988,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_credit_limit(cursor.getString(5));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_credit_limit(cursor.getString(5));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3430,21 +4025,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_credit_limit(cursor.getString(0));
-                contact.set_shedule_outstanding_amount(cursor.getString(1));
-                contact.setAmmount_overdue(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_credit_limit(cursor.getString(0));
+                    contact.set_shedule_outstanding_amount(cursor.getString(1));
+                    contact.setAmmount_overdue(cursor.getString(2));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3460,21 +4063,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_credit_limit(cursor.getString(0));
-                contact.set_shedule_outstanding_amount(cursor.getString(1));
-                contact.setAmmount_overdue(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_credit_limit(cursor.getString(0));
+                    contact.set_shedule_outstanding_amount(cursor.getString(1));
+                    contact.setAmmount_overdue(cursor.getString(2));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3491,19 +4102,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_credit_limit(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_credit_limit(cursor.getString(0));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3519,19 +4138,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_outstanding_amount(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_outstanding_amount(cursor.getString(0));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3548,24 +4175,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_variants_code(cursor.getString(3));
-                contact.set_variants_desc(cursor.getString(4));
-                contact.set_variants_MRP(cursor.getString(6));
-                contact.set_variants_retail_price(cursor.getString(7));
-                contact.set_variants_product_unit(cursor.getString(8));
-                contact.set_variants_status(cursor.getString(9));
-                contact.set_variants_ids(cursor.getString(12));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_variants_code(cursor.getString(3));
+                    contact.set_variants_desc(cursor.getString(4));
+                    contact.set_variants_MRP(cursor.getString(6));
+                    contact.set_variants_retail_price(cursor.getString(7));
+                    contact.set_variants_product_unit(cursor.getString(8));
+                    contact.set_variants_status(cursor.getString(9));
+                    contact.set_variants_ids(cursor.getString(12));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3581,21 +4216,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(0));
-                contact.set_shedule_delivery_date(cursor.getString(1));
-                contact.setCust_Code(cursor.getString(2));
-                //contact.setAddress(cursor.getString(2));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(0));
+                    contact.set_shedule_delivery_date(cursor.getString(1));
+                    contact.setCust_Code(cursor.getString(2));
+                    //contact.setAddress(cursor.getString(2));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3611,22 +4254,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(0));
-                contact.set_shedule_delivery_date(cursor.getString(1));
-                contact.setADDRESS(cursor.getString(2));
-                contact.setCust_Code(cursor.getString(3));
-                //contact.setAddress(cursor.getString(2));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(0));
+                    contact.set_shedule_delivery_date(cursor.getString(1));
+                    contact.setADDRESS(cursor.getString(2));
+                    contact.setCust_Code(cursor.getString(3));
+                    //contact.setAddress(cursor.getString(2));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3642,25 +4293,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(4));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_delivery_date(cursor.getString(8));
-                contact.set_shedule_order_amount(cursor.getString(9));
-                contact.set_shedule_payment_mode(cursor.getString(10));
-                contact.set_shedule_outstanding_amount(cursor.getString(13));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(4));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_delivery_date(cursor.getString(8));
+                    contact.set_shedule_order_amount(cursor.getString(9));
+                    contact.set_shedule_payment_mode(cursor.getString(10));
+                    contact.set_shedule_outstanding_amount(cursor.getString(13));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3677,25 +4336,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(4));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_delivery_date(cursor.getString(8));
-                contact.set_shedule_order_amount(cursor.getString(9));
-                contact.set_shedule_payment_mode(cursor.getString(10));
-                contact.set_shedule_outstanding_amount(cursor.getString(13));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(4));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_delivery_date(cursor.getString(8));
+                    contact.set_shedule_order_amount(cursor.getString(9));
+                    contact.set_shedule_payment_mode(cursor.getString(10));
+                    contact.set_shedule_outstanding_amount(cursor.getString(13));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3711,27 +4378,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(0));
-                contact.set_shedule_delivery_date(cursor.getString(1));
-                contact.setAddress(cursor.getString(2));
-                // contact.set_shedule_depatch_date(cursor.getString(7));
-                // contact.set_shedule_depatch_date(cursor.getString(7));
-                //contact.set_shedule_delivery_date(cursor.getString(8));
-                //contact.set_shedule_order_amount(cursor.getString(9));
-                // contact.set_shedule_payment_mode(cursor.getString(10));
-                // contact.set_shedule_outstanding_amount(cursor.getString(13));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(0));
+                    contact.set_shedule_delivery_date(cursor.getString(1));
+                    contact.setAddress(cursor.getString(2));
+                    // contact.set_shedule_depatch_date(cursor.getString(7));
+                    // contact.set_shedule_depatch_date(cursor.getString(7));
+                    //contact.set_shedule_delivery_date(cursor.getString(8));
+                    //contact.set_shedule_order_amount(cursor.getString(9));
+                    // contact.set_shedule_payment_mode(cursor.getString(10));
+                    // contact.set_shedule_outstanding_amount(cursor.getString(13));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3748,25 +4423,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(4));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_delivery_date(cursor.getString(8));
-                contact.set_shedule_order_amount(cursor.getString(9));
-                contact.set_shedule_payment_mode(cursor.getString(10));
-                contact.set_shedule_outstanding_amount(cursor.getString(13));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(4));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_delivery_date(cursor.getString(8));
+                    contact.set_shedule_order_amount(cursor.getString(9));
+                    contact.set_shedule_payment_mode(cursor.getString(10));
+                    contact.set_shedule_outstanding_amount(cursor.getString(13));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3782,24 +4465,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(4));
-                contact.set_shedule_depatch_date(cursor.getString(7));
-                contact.set_shedule_delivery_date(cursor.getString(8));
-                contact.set_shedule_order_amount(cursor.getString(9));
-                contact.set_shedule_payment_mode(cursor.getString(10));
-                contact.set_shedule_outstanding_amount(cursor.getString(13));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(4));
+                    contact.set_shedule_depatch_date(cursor.getString(7));
+                    contact.set_shedule_delivery_date(cursor.getString(8));
+                    contact.set_shedule_order_amount(cursor.getString(9));
+                    contact.set_shedule_payment_mode(cursor.getString(10));
+                    contact.set_shedule_outstanding_amount(cursor.getString(13));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3815,24 +4506,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_shedule_order_id(cursor.getString(0));
-                contact.set_delivery_product_id(cursor.getString(1));
-                contact.set_delivery_product_order_quantity(cursor.getString(2));
-                contact.set_delivery_product_delivered_quality(cursor.getString(3));
-                contact.set_delivery_product_transporter_details(cursor.getString(4));
-                contact.set_stocks_product_name(cursor.getString(5));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_shedule_order_id(cursor.getString(0));
+                    contact.set_delivery_product_id(cursor.getString(1));
+                    contact.set_delivery_product_order_quantity(cursor.getString(2));
+                    contact.set_delivery_product_delivered_quality(cursor.getString(3));
+                    contact.set_delivery_product_transporter_details(cursor.getString(4));
+                    contact.set_stocks_product_name(cursor.getString(5));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3852,26 +4551,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{Category_text});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
+        try {
+            if (cursor.moveToFirst()) {
+                do {
 
-                Local_Data contact = new Local_Data();
-                contact.set_variants_code(cursor.getString(3));
-                contact.set_variants_desc(cursor.getString(4));
-                contact.set_variants_MRP(cursor.getString(6));
-                contact.set_variants_retail_price(cursor.getString(7));
-                contact.set_variants_product_unit(cursor.getString(8));
-                contact.set_variants_status(cursor.getString(9));
-                contact.set_variants_ids(cursor.getString(12));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    Local_Data contact = new Local_Data();
+                    contact.set_variants_code(cursor.getString(3));
+                    contact.set_variants_desc(cursor.getString(4));
+                    contact.set_variants_MRP(cursor.getString(6));
+                    contact.set_variants_retail_price(cursor.getString(7));
+                    contact.set_variants_product_unit(cursor.getString(8));
+                    contact.set_variants_status(cursor.getString(9));
+                    contact.set_variants_ids(cursor.getString(12));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList4.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList4.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
-        cursor.close();
         db.close();
         // return contact list?
         return contactList4;
@@ -3887,20 +4590,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setC_Date(cursor.getString(6));
-                contact.set_Claims(cursor.getString(7));
-                contact.set_Claims_amount(cursor.getString(8));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setC_Date(cursor.getString(6));
+                    contact.set_Claims(cursor.getString(7));
+                    contact.set_Claims_amount(cursor.getString(8));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3916,20 +4627,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setC_Date(cursor.getString(6));
-                contact.set_Claims(cursor.getString(7));
-                contact.set_Claims_amount(cursor.getString(8));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setC_Date(cursor.getString(6));
+                    contact.set_Claims(cursor.getString(7));
+                    contact.set_Claims_amount(cursor.getString(8));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3945,20 +4664,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setC_Date(cursor.getString(5));
-                contact.set_complaints(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setC_Date(cursor.getString(5));
+                    contact.set_complaints(cursor.getString(6));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -3975,25 +4702,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.setC_Date(cursor.getString(2));
-                contact.set_Description(cursor.getString(3));
-                contact.setlatitude(cursor.getString(4));
-                contact.setlongitude(cursor.getString(5));
-                contact.setCode(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.setC_Date(cursor.getString(2));
+                    contact.set_Description(cursor.getString(3));
+                    contact.setlatitude(cursor.getString(4));
+                    contact.setlongitude(cursor.getString(5));
+                    contact.setCode(cursor.getString(6));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4010,22 +4745,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.setC_Date(cursor.getString(2));
-                contact.set_complaints(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.setC_Date(cursor.getString(2));
+                    contact.set_complaints(cursor.getString(3));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4041,25 +4784,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.setC_Date(cursor.getString(2));
-                contact.set_Description(cursor.getString(3));
-                contact.set_Claims_amount(cursor.getString(4));
-                contact.setlatitude(cursor.getString(5));
-                contact.setlongitude(cursor.getString(6));
-                contact.setCode(cursor.getString(7));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.setC_Date(cursor.getString(2));
+                    contact.set_Description(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.setlatitude(cursor.getString(5));
+                    contact.setlongitude(cursor.getString(6));
+                    contact.setCode(cursor.getString(7));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4075,24 +4826,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.set_mediaType(cursor.getString(2));
-                contact.set_mediaUrl(cursor.getString(4));
-                contact.set_mediaDisc(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.set_mediaType(cursor.getString(2));
+                    contact.set_mediaUrl(cursor.getString(4));
+                    contact.set_mediaDisc(cursor.getString(3));
 
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4108,26 +4867,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.set_mediaType(cursor.getString(2));
-                contact.setcalender_details(cursor.getString(3));
-                contact.set_mediaUrl(cursor.getString(4));
-                contact.set_mediaDisc(cursor.getString(3));
-                contact.setCode(cursor.getString(8));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.set_mediaType(cursor.getString(2));
+                    contact.setcalender_details(cursor.getString(3));
+                    contact.set_mediaUrl(cursor.getString(4));
+                    contact.set_mediaDisc(cursor.getString(3));
+                    contact.setCode(cursor.getString(8));
 
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4144,26 +4911,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.set_mediaType(cursor.getString(2));
-                contact.setcalender_details(cursor.getString(3));
-                contact.set_mediaUrl(cursor.getString(4));
-                contact.set_mediaDisc(cursor.getString(3));
-                contact.setmedia_id(cursor.getString(7));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.set_mediaType(cursor.getString(2));
+                    contact.setcalender_details(cursor.getString(3));
+                    contact.set_mediaUrl(cursor.getString(4));
+                    contact.set_mediaDisc(cursor.getString(3));
+                    contact.setmedia_id(cursor.getString(7));
 
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4180,29 +4955,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
-                contact.setEMAIL_ADDRESS(cursor.getString(1));
-                contact.set_category_id(cursor.getString(2));
-                contact.set_product_code(cursor.getString(3));
-                contact.set_variants_code(cursor.getString(4));
-                contact.set_Description(cursor.getString(5));
-                contact.set_stocks_product_quantity(cursor.getString(6));
-                contact.setlatitude(cursor.getString(7));
-                contact.setlongitude(cursor.getString(8));
-                contact.setCode(cursor.getString(9));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setEMAIL_ADDRESS(cursor.getString(1));
+                    contact.set_category_id(cursor.getString(2));
+                    contact.set_product_code(cursor.getString(3));
+                    contact.set_variants_code(cursor.getString(4));
+                    contact.set_Description(cursor.getString(5));
+                    contact.set_stocks_product_quantity(cursor.getString(6));
+                    contact.setlatitude(cursor.getString(7));
+                    contact.setlongitude(cursor.getString(8));
+                    contact.setCode(cursor.getString(9));
 
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4218,21 +5001,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_mediaType(cursor.getString(3));
-                contact.set_mediaUrl(cursor.getString(6));
-                contact.set_mediaDisc(cursor.getString(7));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_mediaType(cursor.getString(3));
+                    contact.set_mediaUrl(cursor.getString(6));
+                    contact.set_mediaDisc(cursor.getString(7));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4275,26 +5066,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.set_travel_from(cursor.getString(1));
-                contact.set_travel_to(cursor.getString(2));
-                contact.set_travel_date(cursor.getString(3));
-                contact.set_travel_mode(cursor.getString(4));
-                contact.set_travel_cost(cursor.getString(5));
-                contact.set_travel_text(cursor.getString(6));
-                contact.setCode(cursor.getString(7));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.set_travel_from(cursor.getString(1));
+                    contact.set_travel_to(cursor.getString(2));
+                    contact.set_travel_date(cursor.getString(3));
+                    contact.set_travel_mode(cursor.getString(4));
+                    contact.set_travel_cost(cursor.getString(5));
+                    contact.set_travel_text(cursor.getString(6));
+                    contact.setCode(cursor.getString(7));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                // Log.d("ConTACT", "ConTACT"+contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    // Log.d("ConTACT", "ConTACT"+contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4310,20 +5109,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setmisc_date(cursor.getString(1));
-                contact.setmisc_cost(cursor.getString(2));
-                contact.setmisc_text(cursor.getString(3));
-                contact.setCode(cursor.getString(4));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setmisc_date(cursor.getString(1));
+                    contact.setmisc_cost(cursor.getString(2));
+                    contact.setmisc_text(cursor.getString(3));
+                    contact.setCode(cursor.getString(4));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                //Log.d("ConTACT", "ConTACT"+contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    //Log.d("ConTACT", "ConTACT"+contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4369,22 +5176,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_Target_Year(cursor.getString(0));
-                contact.set_Target_Month(cursor.getString(1));
-                contact.set_Target_Text(cursor.getString(2));
-                contact.set_Target_Achieved(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_Target_Year(cursor.getString(0));
+                    contact.set_Target_Month(cursor.getString(1));
+                    contact.set_Target_Text(cursor.getString(2));
+                    contact.set_Target_Achieved(cursor.getString(3));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4400,22 +5215,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_Target_Year(cursor.getString(0));
-                //  contact.set_Target_Month(cursor.getString(5));
-                contact.set_Target_Text(cursor.getString(1));
-                contact.set_Target_Achieved(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_Target_Year(cursor.getString(0));
+                    //  contact.set_Target_Month(cursor.getString(5));
+                    contact.set_Target_Text(cursor.getString(1));
+                    contact.set_Target_Achieved(cursor.getString(2));
 
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-                Log.d("ConTACT", "ConTACT" + contactList1);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList1;
@@ -4432,17 +5255,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setCode(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setCode(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -4492,17 +5321,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(6));
-                contact.set_category_id(cursor.getString(12));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(6));
+                    contact.set_category_id(cursor.getString(12));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList2.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList2.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -4521,16 +5356,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(5));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(5));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList3.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList3.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -4552,17 +5393,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{RE_NAME});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_Retailer_id(cursor.getString(22));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_Retailer_id(cursor.getString(22));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList3.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList3.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList3;
@@ -4578,20 +5427,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(5));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(5));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList4.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList4.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
-        // return contact list?
-        cursor.close();
         db.close();
         return contactList4;
     }
@@ -4607,23 +5459,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_id(cursor.getString(3));
-                contact.set_category_code(cursor.getString(4));
-                contact.set_ccategory_desc(cursor.getString(5));
-                contact.set_category_status(cursor.getString(6));
-                contact.set_category_id(cursor.getString(3));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_id(cursor.getString(3));
+                    contact.set_category_code(cursor.getString(4));
+                    contact.set_ccategory_desc(cursor.getString(5));
+                    contact.set_category_status(cursor.getString(6));
+                    contact.set_category_id(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList4.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList4.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
-        cursor.close();
         db.close();
         // return contact list?
         return contactList4;
@@ -4639,23 +5495,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_id(cursor.getString(3));
-                contact.set_category_code(cursor.getString(4));
-                contact.set_ccategory_desc(cursor.getString(5));
-                contact.set_category_status(cursor.getString(6));
-                contact.set_category_id(cursor.getString(3));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_id(cursor.getString(3));
+                    contact.set_category_code(cursor.getString(4));
+                    contact.set_ccategory_desc(cursor.getString(5));
+                    contact.set_category_status(cursor.getString(6));
+                    contact.set_category_id(cursor.getString(3));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList4.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList4.add(contact);
+                } while (cursor.moveToNext());
+            }
+
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
-        cursor.close();
         db.close();
         // return contact list?
         return contactList4;
@@ -4671,17 +5532,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList5.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList5.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList5;
@@ -4698,22 +5567,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_product_code(cursor.getString(3));
-                contact.set_product_desc(cursor.getString(4));
-                contact.set_product_status(cursor.getString(6));
-                contact.set_product_ids(cursor.getString(11));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_product_code(cursor.getString(3));
+                    contact.set_product_desc(cursor.getString(4));
+                    contact.set_product_status(cursor.getString(6));
+                    contact.set_product_ids(cursor.getString(11));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList4.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList4.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
-
-        cursor.close();
         db.close();
         // return contact list?
         return contactList4;
@@ -4729,20 +5602,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_product_code(cursor.getString(3));
-                contact.set_product_desc(cursor.getString(4));
-                contact.set_product_status(cursor.getString(6));
-                contact.set_product_ids(cursor.getString(11));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_product_code(cursor.getString(3));
+                    contact.set_product_desc(cursor.getString(4));
+                    contact.set_product_status(cursor.getString(6));
+                    contact.set_product_ids(cursor.getString(11));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList5.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList5.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
 
         // return contact list?
         return contactList5;
@@ -4758,17 +5638,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(4));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList6.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList6.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList6;
@@ -4784,18 +5672,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setRR(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setRR(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -4811,18 +5707,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setRR(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setRR(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -4861,15 +5765,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -4889,18 +5800,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select code FROM item_master WHERE primary_category = ?;",
                 new String[]{categ});
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
 //                contact.setCategory(cursor.getString(1));
 //                contact.set_Description(cursor.getString(2));
 //                contact.set_Claims(cursor.getString(3));
 //                contact.setProduct_nm(cursor.getString(4));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -4916,15 +5834,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -4944,18 +5870,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{primary_category});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 //                contact.setCategory(cursor.getString(1));
 //                contact.set_Description(cursor.getString(2));
 //                contact.set_Claims(cursor.getString(3));
 //                contact.setProduct_nm(cursor.getString(4));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -4973,15 +5907,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select code FROM item_master WHERE product_variant = ?;",
                 new String[]{primary_category});
 
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setItem_Code(cursor.getString(0));
 
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setItem_Code(cursor.getString(0));
-
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         return contactList14;
     }
@@ -4999,15 +5940,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select code FROM item_master WHERE name = ?;",
                 new String[]{product_name});
 
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setItem_Code(cursor.getString(0));
 
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setItem_Code(cursor.getString(0));
-
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         return contactList14;
     }
@@ -5024,18 +5972,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 //                contact.setCategory(cursor.getString(1));
 //                contact.set_Description(cursor.getString(2));
 //                contact.set_Claims(cursor.getString(3));
 //                contact.setProduct_nm(cursor.getString(4));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5055,18 +6011,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{sub_category});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCust_Code(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
 //                contact.setCategory(cursor.getString(1));
 //                contact.set_Description(cursor.getString(2));
 //                contact.set_Claims(cursor.getString(3));
 //                contact.setProduct_nm(cursor.getString(4));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5081,15 +6045,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5107,18 +6079,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 //                contact.setCategory(cursor.getString(1));
 //                contact.set_Description(cursor.getString(2));
 //                contact.set_Claims(cursor.getString(3));
 //                contact.setProduct_nm(cursor.getString(4));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5139,18 +6119,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{category_name, product_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 //                contact.setCategory(cursor.getString(1));
 //                contact.set_Description(cursor.getString(2));
 //                contact.set_Claims(cursor.getString(3));
 //                contact.setProduct_nm(cursor.getString(4));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5165,17 +6153,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery1, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                //contact.setPURPOSE_ADDRESS(cursor.getString(1));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    //contact.setPURPOSE_ADDRESS(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
         db.close();
         // return contact list?
@@ -5197,16 +6191,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{category_name, product_name, product_variant});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setRP(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_product_desc(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setRP(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_product_desc(cursor.getString(2));
 //
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5223,13 +6225,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{business_unit, primary_categore});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setbusiness_category(cursor.getString(0));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setbusiness_category(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5246,13 +6256,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{business_unit, primary_categore, business_category});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setSubcateg(cursor.getString(0));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setSubcateg(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5274,21 +6292,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5306,19 +6332,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCode(cursor.getString(0));
-                contact.setSche_name(cursor.getString(1));
-                contact.setSche_type(cursor.getString(2));
-                contact.setSche_discription(cursor.getString(3));
-                contact.setSche_disname(cursor.getString(4));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
+                    contact.setSche_name(cursor.getString(1));
+                    contact.setSche_type(cursor.getString(2));
+                    contact.setSche_discription(cursor.getString(3));
+                    contact.setSche_disname(cursor.getString(4));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5339,15 +6373,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{display_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setCode(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5366,15 +6408,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{categary_name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5389,26 +6439,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_travel_text(cursor.getString(0));
-                contact.set_category_code(cursor.getString(1));
-                contact.set_ccategory_desc(cursor.getString(2));
-                contact.set_category_ids(cursor.getString(3));
-                contact.set_product_code(cursor.getString(4));
-                contact.set_product_desc(cursor.getString(5));
-                contact.set_product_status(cursor.getString(6));
-                contact.set_variants_code(cursor.getString(7));
-                contact.set_variants_desc(cursor.getString(8));
-                contact.set_variants_MRP(cursor.getString(9));
-                contact.set_variants_retail_price(cursor.getString(10));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_travel_text(cursor.getString(0));
+                    contact.set_category_code(cursor.getString(1));
+                    contact.set_ccategory_desc(cursor.getString(2));
+                    contact.set_category_ids(cursor.getString(3));
+                    contact.set_product_code(cursor.getString(4));
+                    contact.set_product_desc(cursor.getString(5));
+                    contact.set_product_status(cursor.getString(6));
+                    contact.set_variants_code(cursor.getString(7));
+                    contact.set_variants_desc(cursor.getString(8));
+                    contact.set_variants_MRP(cursor.getString(9));
+                    contact.set_variants_retail_price(cursor.getString(10));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5425,16 +6483,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_travel_text(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_travel_text(cursor.getString(0));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5452,16 +6518,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_travel_text(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_travel_text(cursor.getString(0));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5479,16 +6553,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{subcategary});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVariant(cursor.getString(0));
-                contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVariant(cursor.getString(0));
+                    contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5504,17 +6586,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVariant(cursor.getString(0));
-                contact.setImei(cursor.getString(1));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVariant(cursor.getString(0));
+                    contact.setImei(cursor.getString(1));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5744,17 +6834,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVariant(cursor.getString(0));
-                contact.setImei(cursor.getString(1));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVariant(cursor.getString(0));
+                    contact.setImei(cursor.getString(1));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5769,16 +6867,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVariant(cursor.getString(0));
-                contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVariant(cursor.getString(0));
+                    contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5793,31 +6899,39 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.set_category_id(cursor.getString(3));
-                contact.setSignature_image(cursor.getString(4));
-                contact.setDISTRIBUTER_ID(cursor.getString(5));
-                contact.setlatitude(cursor.getString(6));
-                contact.setlongitude(cursor.getString(7));
-                contact.setimg_ordersign(cursor.getString(8));
-                contact.setOrder_detail1(cursor.getString(9));
-                contact.setOrder_detail2(cursor.getString(10));
-                contact.setOrder_detail3(cursor.getString(11));
-                contact.setOrder_category_type(cursor.getString(12));
-                contact.setshipment_pri(cursor.getString(13));
-                contact.setOrder_detail4(cursor.getString(14));
-                contact.setAsset_code(cursor.getString(15));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.set_category_id(cursor.getString(3));
+                    contact.setSignature_image(cursor.getString(4));
+                    contact.setDISTRIBUTER_ID(cursor.getString(5));
+                    contact.setlatitude(cursor.getString(6));
+                    contact.setlongitude(cursor.getString(7));
+                    contact.setimg_ordersign(cursor.getString(8));
+                    contact.setOrder_detail1(cursor.getString(9));
+                    contact.setOrder_detail2(cursor.getString(10));
+                    contact.setOrder_detail3(cursor.getString(11));
+                    contact.setOrder_category_type(cursor.getString(12));
+                    contact.setshipment_pri(cursor.getString(13));
+                    contact.setOrder_detail4(cursor.getString(14));
+                    contact.setAsset_code(cursor.getString(15));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5833,22 +6947,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrder_detail1(cursor.getString(0));
-                contact.setOrder_detail2(cursor.getString(1));
-                contact.setOrder_detail3(cursor.getString(2));
-                contact.setOrder_category_type(cursor.getString(3));
-                contact.setshipment_pri(cursor.getString(4));
-                contact.setOrder_detail4(cursor.getString(5));
-                contact.setAsset_code(cursor.getString(6));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrder_detail1(cursor.getString(0));
+                    contact.setOrder_detail2(cursor.getString(1));
+                    contact.setOrder_detail3(cursor.getString(2));
+                    contact.setOrder_category_type(cursor.getString(3));
+                    contact.setshipment_pri(cursor.getString(4));
+                    contact.setOrder_detail4(cursor.getString(5));
+                    contact.setAsset_code(cursor.getString(6));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5863,14 +6985,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBEAT_ID(cursor.getString(0));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBEAT_ID(cursor.getString(0));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5885,14 +7015,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setBEAT_ID(cursor.getString(0));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBEAT_ID(cursor.getString(0));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5908,21 +7046,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.setLEGACY_CUSTOMER_CODE(cursor.getString(3));
-                contact.setSignature_image(cursor.getString(4));
-                contact.setDISTRIBUTER_ID(cursor.getString(5));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.setLEGACY_CUSTOMER_CODE(cursor.getString(3));
+                    contact.setSignature_image(cursor.getString(4));
+                    contact.setDISTRIBUTER_ID(cursor.getString(5));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5937,21 +7083,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.setLEGACY_CUSTOMER_CODE(cursor.getString(3));
-                contact.setSignature_image(cursor.getString(4));
-                contact.setDISTRIBUTER_ID(cursor.getString(5));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.setLEGACY_CUSTOMER_CODE(cursor.getString(3));
+                    contact.setSignature_image(cursor.getString(4));
+                    contact.setDISTRIBUTER_ID(cursor.getString(5));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -5967,32 +7121,40 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.set_category_id(cursor.getString(3));
-                contact.setSignature_image(cursor.getString(4));
-                contact.setDISTRIBUTER_ID(cursor.getString(5));
-                contact.setuser_email(cursor.getString(6));
-                contact.setlatitude(cursor.getString(7));
-                contact.setlongitude(cursor.getString(8));
-                contact.setimg_ordersign(cursor.getString(9));
-                contact.setOrder_detail1(cursor.getString(10));
-                contact.setOrder_detail2(cursor.getString(11));
-                contact.setOrder_detail3(cursor.getString(12));
-                contact.setOrder_category_type(cursor.getString(13));
-                contact.setshipment_pri(cursor.getString(14));
-                contact.setOrder_detail4(cursor.getString(15));
-                contact.setAsset_code(cursor.getString(16));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.set_category_id(cursor.getString(3));
+                    contact.setSignature_image(cursor.getString(4));
+                    contact.setDISTRIBUTER_ID(cursor.getString(5));
+                    contact.setuser_email(cursor.getString(6));
+                    contact.setlatitude(cursor.getString(7));
+                    contact.setlongitude(cursor.getString(8));
+                    contact.setimg_ordersign(cursor.getString(9));
+                    contact.setOrder_detail1(cursor.getString(10));
+                    contact.setOrder_detail2(cursor.getString(11));
+                    contact.setOrder_detail3(cursor.getString(12));
+                    contact.setOrder_category_type(cursor.getString(13));
+                    contact.setshipment_pri(cursor.getString(14));
+                    contact.setOrder_detail4(cursor.getString(15));
+                    contact.setAsset_code(cursor.getString(16));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6007,23 +7169,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.set_category_id(cursor.getString(3));
-                contact.setSignature_image(cursor.getString(4));
-                contact.setDISTRIBUTER_ID(cursor.getString(5));
-                contact.setlatitude(cursor.getString(6));
-                contact.setlongitude(cursor.getString(7));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.set_category_id(cursor.getString(3));
+                    contact.setSignature_image(cursor.getString(4));
+                    contact.setDISTRIBUTER_ID(cursor.getString(5));
+                    contact.setlatitude(cursor.getString(6));
+                    contact.setlongitude(cursor.getString(7));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6039,23 +7209,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.set_category_id(cursor.getString(3));
-                contact.setSignature_image(cursor.getString(4));
-                contact.setDISTRIBUTER_ID(cursor.getString(5));
-                contact.setlatitude(cursor.getString(6));
-                contact.setlongitude(cursor.getString(7));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.set_category_id(cursor.getString(3));
+                    contact.setSignature_image(cursor.getString(4));
+                    contact.setDISTRIBUTER_ID(cursor.getString(5));
+                    contact.setlatitude(cursor.getString(6));
+                    contact.setlongitude(cursor.getString(7));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6071,13 +7249,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6111,6 +7297,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 cursor.close();
         }
 
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6139,6 +7326,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             if (cursor != null)
                 cursor.close();
         }
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6153,13 +7341,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6175,18 +7371,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrderId(cursor.getString(0));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrderId(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -6225,6 +7429,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 cursor.close();
         }
 
+        db.close();
         // Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
@@ -6244,22 +7449,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setProductId(cursor.getString(0));
-                contact.setQty(cursor.getString(1));
-                contact.setPrice(cursor.getString(2));
-                contact.setAmount(cursor.getString(3));
-                contact.set_category_ids(cursor.getString(4));
-                contact.setProduct_nm(cursor.getString(5));
-                contact.setRP(cursor.getString(6));
 
-                // Adding contact to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
+                    contact.setRP(cursor.getString(6));
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -6275,21 +7489,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setProductId(cursor.getString(0));
-                contact.setQty(cursor.getString(1));
-                contact.setPrice(cursor.getString(2));
-                contact.setAmount(cursor.getString(3));
-                contact.set_category_ids(cursor.getString(4));
-                contact.setProduct_nm(cursor.getString(5));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -6333,7 +7555,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 cursor.close();
         }
 
-
+        db.close();
         // return contact list?
         return contactList;
     }
@@ -6349,23 +7571,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setProductId(cursor.getString(0));
-                contact.setQty(cursor.getString(1));
-                contact.setPrice(cursor.getString(2));
-                contact.setAmount(cursor.getString(3));
-                contact.set_category_ids(cursor.getString(4));
-                contact.setProduct_nm(cursor.getString(5));
-                contact.setRP(cursor.getString(6));
-                contact.setSche_code(cursor.getString(7));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
+                    contact.setRP(cursor.getString(6));
+                    contact.setSche_code(cursor.getString(7));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -6382,22 +7612,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
 
         // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setProductId(cursor.getString(0));
-                contact.setQty(cursor.getString(1));
-                contact.setPrice(cursor.getString(2));
-                contact.setAmount(cursor.getString(3));
-                contact.set_category_ids(cursor.getString(4));
-                contact.setProduct_nm(cursor.getString(5));
-                contact.setRP(cursor.getString(6));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
+                    contact.setRP(cursor.getString(6));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -6417,21 +7655,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{Customer_name, order_type, Order_id});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_shedule_payment_mode(cursor.getString(2));
-                contact.set_category_id(cursor.getString(3));
-                contact.setlatitude(cursor.getString(4));
-                contact.setlongitude(cursor.getString(5));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_shedule_payment_mode(cursor.getString(2));
+                    contact.set_category_id(cursor.getString(3));
+                    contact.setlatitude(cursor.getString(4));
+                    contact.setlongitude(cursor.getString(5));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6466,7 +7712,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 cursor.close();
         }
 
-
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6481,16 +7727,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_Description(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_Description(cursor.getString(0));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6505,26 +7759,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_stocks_product_quantity(cursor.getString(2));
-                contact.setMRP(cursor.getString(3));
-                contact.set_Claims_amount(cursor.getString(4));
-                contact.set_Target_Text(cursor.getString(5));
-                contact.set_delivery_product_id(cursor.getString(6));
-                contact.set_stocks_product_text(cursor.getString(7));
-                contact.setSche_code(cursor.getString(8));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_stocks_product_quantity(cursor.getString(2));
+                    contact.setMRP(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.set_Target_Text(cursor.getString(5));
+                    contact.set_delivery_product_id(cursor.getString(6));
+                    contact.set_stocks_product_text(cursor.getString(7));
+                    contact.setSche_code(cursor.getString(8));
 
 
-                //contact.setStateName(cursor.getString(1));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6540,14 +7801,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setSche_code(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setSche_code(cursor.getString(0));
 
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6563,23 +7832,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_stocks_product_quantity(cursor.getString(2));
-                contact.setMRP(cursor.getString(3));
-                contact.set_Claims_amount(cursor.getString(4));
-                contact.set_Target_Text(cursor.getString(5));
-                contact.set_delivery_product_id(cursor.getString(6));
-                contact.set_stocks_product_text(cursor.getString(7));
-                //contact.setStateName(cursor.getString(1));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_stocks_product_quantity(cursor.getString(2));
+                    contact.setMRP(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.set_Target_Text(cursor.getString(5));
+                    contact.set_delivery_product_id(cursor.getString(6));
+                    contact.set_stocks_product_text(cursor.getString(7));
+                    //contact.setStateName(cursor.getString(1));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6594,26 +7871,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_stocks_product_quantity(cursor.getString(2));
-                contact.setMRP(cursor.getString(3));
-                contact.set_Claims_amount(cursor.getString(4));
-                contact.set_Target_Text(cursor.getString(5));
-                contact.set_delivery_product_id(cursor.getString(6));
-                contact.set_stocks_product_text(cursor.getString(7));
-                contact.set_product_status(cursor.getString(8));
-                contact.setRP(cursor.getString(9));
-                contact.setSche_code(cursor.getString(10));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_stocks_product_quantity(cursor.getString(2));
+                    contact.setMRP(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.set_Target_Text(cursor.getString(5));
+                    contact.set_delivery_product_id(cursor.getString(6));
+                    contact.set_stocks_product_text(cursor.getString(7));
+                    contact.set_product_status(cursor.getString(8));
+                    contact.setRP(cursor.getString(9));
+                    contact.setSche_code(cursor.getString(10));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6628,25 +7913,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_stocks_product_quantity(cursor.getString(2));
-                contact.setMRP(cursor.getString(3));
-                contact.set_Claims_amount(cursor.getString(4));
-                contact.set_Target_Text(cursor.getString(5));
-                contact.set_delivery_product_id(cursor.getString(6));
-                contact.set_stocks_product_text(cursor.getString(7));
-                contact.set_product_status(cursor.getString(8));
-                contact.setRP(cursor.getString(9));
-                contact.setSche_code(cursor.getString(10));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_stocks_product_quantity(cursor.getString(2));
+                    contact.setMRP(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.set_Target_Text(cursor.getString(5));
+                    contact.set_delivery_product_id(cursor.getString(6));
+                    contact.set_stocks_product_text(cursor.getString(7));
+                    contact.set_product_status(cursor.getString(8));
+                    contact.setRP(cursor.getString(9));
+                    contact.setSche_code(cursor.getString(10));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6662,25 +7955,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setsurvey_code(cursor.getString(0));
-                contact.setquestion_code(cursor.getString(1));
-                contact.setactive_from(cursor.getString(2));
-                contact.setactive_to(cursor.getString(3));
-                contact.setquestion(cursor.getString(4));
-                contact.setoption_1(cursor.getString(5));
-                contact.setoption_2(cursor.getString(6));
-                contact.setoption_3(cursor.getString(7));
-                contact.setoption_4(cursor.getString(8));
-                contact.setoption_5(cursor.getString(9));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setsurvey_code(cursor.getString(0));
+                    contact.setquestion_code(cursor.getString(1));
+                    contact.setactive_from(cursor.getString(2));
+                    contact.setactive_to(cursor.getString(3));
+                    contact.setquestion(cursor.getString(4));
+                    contact.setoption_1(cursor.getString(5));
+                    contact.setoption_2(cursor.getString(6));
+                    contact.setoption_3(cursor.getString(7));
+                    contact.setoption_4(cursor.getString(8));
+                    contact.setoption_5(cursor.getString(9));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6695,24 +7996,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setuser_email(cursor.getString(0));
-                contact.setanswer_date(cursor.getString(1));
-                contact.setsurvey_code(cursor.getString(2));
-                contact.setCust_Code(cursor.getString(3));
-                contact.setquestion_code(cursor.getString(4));
-                contact.setcustomer_choice(cursor.getString(5));
-                contact.setlatitude(cursor.getString(6));
-                contact.setlongitude(cursor.getString(7));
-                contact.setCode(cursor.getString(8));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setuser_email(cursor.getString(0));
+                    contact.setanswer_date(cursor.getString(1));
+                    contact.setsurvey_code(cursor.getString(2));
+                    contact.setCust_Code(cursor.getString(3));
+                    contact.setquestion_code(cursor.getString(4));
+                    contact.setcustomer_choice(cursor.getString(5));
+                    contact.setlatitude(cursor.getString(6));
+                    contact.setlongitude(cursor.getString(7));
+                    contact.setCode(cursor.getString(8));
 
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6728,24 +8037,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.set_category_code(cursor.getString(0));
-                contact.set_custadr(cursor.getString(1));
-                contact.set_stocks_product_quantity(cursor.getString(2));
-                contact.setMRP(cursor.getString(3));
-                contact.set_Claims_amount(cursor.getString(4));
-                contact.set_Target_Text(cursor.getString(5));
-                contact.set_delivery_product_id(cursor.getString(6));
-                contact.set_stocks_product_text(cursor.getString(7));
-                contact.set_product_status(cursor.getString(8));
-                contact.setRP(cursor.getString(9));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_stocks_product_quantity(cursor.getString(2));
+                    contact.setMRP(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.set_Target_Text(cursor.getString(5));
+                    contact.set_delivery_product_id(cursor.getString(6));
+                    contact.set_stocks_product_text(cursor.getString(7));
+                    contact.set_product_status(cursor.getString(8));
+                    contact.setRP(cursor.getString(9));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -6761,6 +8078,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.setTransactionSuccessful();
         db.endTransaction();
+        db.close();
     }
 
     public void updateCustomerby_Createid(String CODE) {
@@ -6770,7 +8088,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
 
@@ -6781,7 +8099,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateUserEMPNO_BY_EMILID(String emp_code, String email_id, String address) {
@@ -6801,7 +8119,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_REG, cv, "email_id" + " = ?", new String[]{email_id});
 
 
-        // db.close();
+        db.close();
     }
 
 
@@ -6811,7 +8129,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_SIGNATURENEW_WITHLATLONG(String signature, String order_id, String order_detail1_text, String order_detail2_text, String details3, String order_detail4_text, String order_category, String shipment_pri, String lat, String longs, String asset_code) {
@@ -6820,7 +8138,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_order_image(String signature, String order_id) {
@@ -6830,7 +8148,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateCalendervalue(String delete_flag, String calender_id) {
@@ -6840,7 +8158,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_SIGNATUREnew(String created_at, String calender_id) {
@@ -6850,7 +8168,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateCalenderEn_DeleteFlag(String signature, String order_id) {
@@ -6860,7 +8178,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
 
@@ -6871,7 +8189,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_feedback(String value) {
@@ -6881,7 +8199,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void update_password(String value) {
@@ -6891,7 +8209,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void update_password(String pwd, String email) {
@@ -6901,7 +8219,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_claims(String value) {
@@ -6911,7 +8229,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
 
@@ -6922,7 +8240,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_stocks(String value) {
@@ -6932,7 +8250,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_calenderevent(String value) {
@@ -6942,7 +8260,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_DISTRIBUTER(String code, String order_id) {
@@ -6952,7 +8270,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
     public void updateORDER_DISTRIBUTER_return(String code, String order_id) {
@@ -6962,7 +8280,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
-        // db.close();
+        db.close();
     }
 
 
@@ -6979,14 +8297,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{name});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setDISTRIBUTER_ID(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setDISTRIBUTER_ID(cursor.getString(0));
 
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7002,6 +8328,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.setTransactionSuccessful();
         db.endTransaction();
+
+        db.close();
     }
 
     public List<Local_Data> ITEM_description_byINVOICE(String Invoice_Description1) {
@@ -7013,17 +8341,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVariant(cursor.getString(0));
-                contact.setStateName(cursor.getString(1));
-                contact.setMRP(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVariant(cursor.getString(0));
+                    contact.setStateName(cursor.getString(1));
+                    contact.setMRP(cursor.getString(2));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7037,17 +8373,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setVariant(cursor.getString(0));
-                contact.setStateName(cursor.getString(1));
-                contact.setMRP(cursor.getString(2));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setVariant(cursor.getString(0));
+                    contact.setStateName(cursor.getString(1));
+                    contact.setMRP(cursor.getString(2));
 
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7063,20 +8407,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrderStatus(cursor.getString(0));
-                contact.setOrderAmount(cursor.getString(1));
-                contact.setorder_number(cursor.getString(2));
-                //contact.setPwd(cursor.getString(2));
-                //contact.setImei(cursor.getString(3));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrderStatus(cursor.getString(0));
+                    contact.setOrderAmount(cursor.getString(1));
+                    contact.setorder_number(cursor.getString(2));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
 
-                // Adding contact to list
+                    // Adding contact to list
 
-                contactList.add(contact);
-            } while (cursor.moveToNext());
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         // return contact list?
         return contactList;
@@ -7092,15 +8444,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setOrderStatus(cursor.getString(0));
-                contact.setOrderAmount(cursor.getString(1));
-                contact.setorder_number(cursor.getString(2));
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setOrderStatus(cursor.getString(0));
+                    contact.setOrderAmount(cursor.getString(1));
+                    contact.setorder_number(cursor.getString(2));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7119,21 +8479,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //				new String[] { });
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setUser_id(cursor.getString(0));
-                contact.setPunched_on(cursor.getString(1));
-                contact.setPunched_at_latitude(cursor.getString(2));
-                contact.setPunched_at_longitude(cursor.getString(3));
-                contact.setPunched_button(cursor.getString(4));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setUser_id(cursor.getString(0));
+                    contact.setPunched_on(cursor.getString(1));
+                    contact.setPunched_at_latitude(cursor.getString(2));
+                    contact.setPunched_at_longitude(cursor.getString(3));
+                    contact.setPunched_button(cursor.getString(4));
 
-                contact.setPunched_at_address(cursor.getString(5));
-                contact.setServer_flag(cursor.getString(6));
-                contact.setCurrent_date_only(cursor.getString(7));
+                    contact.setPunched_at_address(cursor.getString(5));
+                    contact.setServer_flag(cursor.getString(6));
+                    contact.setCurrent_date_only(cursor.getString(7));
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -7159,20 +8525,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //				new String[] { });
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setUser_id(cursor.getString(0));
-                contact.setPunched_on(cursor.getString(1));
-                contact.setPunched_at_latitude(cursor.getString(2));
-                contact.setPunched_at_longitude(cursor.getString(3));
-                contact.setPunched_button(cursor.getString(4));
-                contact.setPunched_at_address(cursor.getString(5));
-                contact.setServer_flag(cursor.getString(6));
-                contact.setCurrent_date_only(cursor.getString(7));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setUser_id(cursor.getString(0));
+                    contact.setPunched_on(cursor.getString(1));
+                    contact.setPunched_at_latitude(cursor.getString(2));
+                    contact.setPunched_at_longitude(cursor.getString(3));
+                    contact.setPunched_button(cursor.getString(4));
+                    contact.setPunched_at_address(cursor.getString(5));
+                    contact.setServer_flag(cursor.getString(6));
+                    contact.setCurrent_date_only(cursor.getString(7));
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -7189,6 +8561,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting All Local_Data
@@ -7204,14 +8577,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //				new String[] { });
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setName(cursor.getString(0));
 
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -7227,14 +8606,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setName(cursor.getString(0));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setName(cursor.getString(0));
 
 
-                contactList1.add(contact);
-            } while (cursor.moveToNext());
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
 
         db.close();
@@ -7251,6 +8636,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL(selectQuery);
+        db.close();
     }
 
     // Getting product data
@@ -7264,25 +8650,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                contact.setProduct_variant(cursor.getString(8));
-                contact.setSQ(cursor.getString(9));
-                contact.setMQ(cursor.getString(10));
-                //contact.set_stocks_product_name(cursor.getString(11));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setProduct_variant(cursor.getString(8));
+                    contact.setSQ(cursor.getString(9));
+                    contact.setMQ(cursor.getString(10));
+                    //contact.set_stocks_product_name(cursor.getString(11));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7299,25 +8693,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query("item_master", new String[]{"retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq"}, "code in(" + Product_varient_codes_list + ")", null, "product_variant", null, "product_variant");
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                contact.setProduct_variant(cursor.getString(8));
-                contact.setSQ(cursor.getString(9));
-                contact.setMQ(cursor.getString(10));
-                //  contact.set_stocks_product_name(cursor.getString(11));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setProduct_variant(cursor.getString(8));
+                    contact.setSQ(cursor.getString(9));
+                    contact.setMQ(cursor.getString(10));
+                    //  contact.set_stocks_product_name(cursor.getString(11));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7332,25 +8734,33 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{Product_varient});
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                contact.setProduct_variant(cursor.getString(8));
-                contact.setSQ(cursor.getString(9));
-                contact.setMQ(cursor.getString(10));
-                // contact.set_stocks_product_name(cursor.getString(11));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setProduct_variant(cursor.getString(8));
+                    contact.setSQ(cursor.getString(9));
+                    contact.setMQ(cursor.getString(10));
+                    // contact.set_stocks_product_name(cursor.getString(11));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7366,24 +8776,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                contact.setProduct_variant(cursor.getString(8));
-                contact.setSQ(cursor.getString(9));
-                contact.setMQ(cursor.getString(10));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setProduct_variant(cursor.getString(8));
+                    contact.setSQ(cursor.getString(9));
+                    contact.setMQ(cursor.getString(10));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7399,15 +8817,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
 
-                contact.setSQ(cursor.getString(0));
+                    contact.setSQ(cursor.getString(0));
 
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7423,23 +8849,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                contact.setSQ(cursor.getString(8));
-                contact.setMQ(cursor.getString(9));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setSQ(cursor.getString(8));
+                    contact.setMQ(cursor.getString(9));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7455,24 +8889,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                Local_Data contact = new Local_Data();
-                contact.setStateName(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.set_Description(cursor.getString(2));
-                contact.set_Claims(cursor.getString(3));
-                contact.setProduct_nm(cursor.getString(4));
-                contact.setCode(cursor.getString(5));
-                contact.setCategory(cursor.getString(6));
-                contact.setSubcateg(cursor.getString(7));
-                contact.setSQ(cursor.getString(8));
-                contact.setMQ(cursor.getString(9));
-                //contact.set_stocks_product_name(cursor.getString(10));
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setSQ(cursor.getString(8));
+                    contact.setMQ(cursor.getString(9));
+                    //contact.set_stocks_product_name(cursor.getString(10));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7488,6 +8930,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.setTransactionSuccessful();
         db.endTransaction();
+        db.close();
     }
 
 
@@ -7495,14 +8938,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         //SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("PRAGMA table_info(" + table + ")", null);
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                if (column.equalsIgnoreCase(name)) {
-                    return true;
+        try {
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(cursor.getColumnIndex("name"));
+                    if (column.equalsIgnoreCase(name)) {
+                        return true;
+                    }
                 }
             }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
 
         return false;
     }
@@ -7520,6 +8971,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.setTransactionSuccessful();
         db.endTransaction();
+        db.close();
     }
 
     // Getting product data
@@ -7537,18 +8989,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + "LIMIT 100", null);
         }
 
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Spiner_List_Model contact = new Spiner_List_Model();
+                    contact.setCode(cursor.getString(0));
+                    contact.setProduct_variant(cursor.getString(1));
+                    contact.setBusiness_unit(cursor.getString(2));
 
-        if (cursor.moveToFirst()) {
-            do {
-                Spiner_List_Model contact = new Spiner_List_Model();
-                contact.setCode(cursor.getString(0));
-                contact.setProduct_variant(cursor.getString(1));
-                contact.setBusiness_unit(cursor.getString(2));
-
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7560,18 +9019,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor;
         cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + " LIMIT 200", null);
 
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Spiner_List_Model contact = new Spiner_List_Model();
+                    contact.setCode(cursor.getString(0));
+                    contact.setProduct_variant(cursor.getString(1));
+                    contact.setBusiness_unit(cursor.getString(2));
 
-        if (cursor.moveToFirst()) {
-            do {
-                Spiner_List_Model contact = new Spiner_List_Model();
-                contact.setCode(cursor.getString(0));
-                contact.setProduct_variant(cursor.getString(1));
-                contact.setBusiness_unit(cursor.getString(2));
-
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }
@@ -7588,22 +9054,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         cursor = db.rawQuery("select retail_price,mrp,qualifying_qty,name,code,sq,mq FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + "LIMIT 100", null);
 
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Spiner_List_Model contact = new Spiner_List_Model();
+                    contact.setRP(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.setQUANTITY(cursor.getString(2));
+                    contact.setName(cursor.getString(3));
+                    contact.setCode(cursor.getString(4));
+                    contact.setSQ(cursor.getString(5));
+                    contact.setMQ(cursor.getString(6));
 
-        if (cursor.moveToFirst()) {
-            do {
-                Spiner_List_Model contact = new Spiner_List_Model();
-                contact.setRP(cursor.getString(0));
-                contact.setMRP(cursor.getString(1));
-                contact.setQUANTITY(cursor.getString(2));
-                contact.setName(cursor.getString(3));
-                contact.setCode(cursor.getString(4));
-                contact.setSQ(cursor.getString(5));
-                contact.setMQ(cursor.getString(6));
-
-                // Adding contact to list
-                contactList14.add(contact);
-            } while (cursor.moveToNext());
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
         }
+
+        db.close();
         // return contact list?
         return contactList14;
     }

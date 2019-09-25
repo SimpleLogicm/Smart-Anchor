@@ -297,7 +297,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 });
 
 
-                alertDialog.show();
+                try {
+                    alertDialog.show();
+                } catch(Exception e){
+                    // WindowManager$BadTokenException will be caught and the app would not display
+                    // the 'Force Close' message
+                }
 
 
 
@@ -389,7 +394,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 });
 
 
-                alertDialog.show();
+                try {
+                    alertDialog.show();
+                } catch(Exception e){
+                    // WindowManager$BadTokenException will be caught and the app would not display
+                    // the 'Force Close' message
+                }
 
 
 
@@ -676,9 +686,15 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     @Override
     public void onPause() {
         super.onPause();
-        dialog.dismiss();
-        mFragment.onPause();
-        mGoogleMap.clear();
+        try {
+            dialog.dismiss();
+            mFragment.onPause();
+            mGoogleMap.clear();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
     }
 
 
@@ -1202,7 +1218,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                     //  alertDialog.setCancelable(false);
                                     //  alertDialog.setCanceledOnTouchOutside(false);
-                                    alertDialog.show();
+                                    try {
+                                        alertDialog.show();
+                                    } catch(Exception e){
+                                        // WindowManager$BadTokenException will be caught and the app would not display
+                                        // the 'Force Close' message
+                                    }
 
                                 }
 
@@ -1259,7 +1280,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                         //  alertDialog.setCancelable(false);
                                         //  alertDialog.setCanceledOnTouchOutside(false);
-                                        alertDialog.show();
+                                        try {
+                                            alertDialog.show();
+                                        } catch(Exception e){
+                                            // WindowManager$BadTokenException will be caught and the app would not display
+                                            // the 'Force Close' message
+                                        }
 
                                     }
                                 } else {
@@ -1319,7 +1345,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
                                         //  alertDialog.setCancelable(false);
                                         //  alertDialog.setCanceledOnTouchOutside(false);
-                                        alertDialog.show();
+                                        try {
+                                            alertDialog.show();
+                                        } catch(Exception e){
+                                            // WindowManager$BadTokenException will be caught and the app would not display
+                                            // the 'Force Close' message
+                                        }
 
                                     }
                                 } else {
@@ -1625,7 +1656,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
      * NOTE: Keep proper title and message depending on your app
      */
     private void showSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(BasicMapDemoActivity.this);
         builder.setTitle("Need Permissions");
         builder.setCancelable(false);
         builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
@@ -1642,7 +1673,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 dialog.cancel();
             }
         });
-        builder.show();
+        try {
+            builder.show();
+        } catch(Exception e){
+            // WindowManager$BadTokenException will be caught and the app would not display
+            // the 'Force Close' message
+        }
 
     }
 

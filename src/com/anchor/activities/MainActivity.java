@@ -169,7 +169,13 @@ public class MainActivity extends BaseActivity {
 
 
         if (Global_Data.LOCATION_SERVICE_HIT.equalsIgnoreCase("TRUE")) {
-            startService(new Intent(this, MyService.class));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(new Intent(this, MyService.class));
+            } else {
+                startService(new Intent(this, MyService.class));
+            }
+           // startService(new Intent(this, MyService.class));
             Global_Data.LOCATION_SERVICE_HIT = "";
         }
 
@@ -455,7 +461,11 @@ public class MainActivity extends BaseActivity {
                         Toast toast = Toast.makeText(getApplicationContext(), "We can not find yoor location Please try again or check your net connection or login again.", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                        startService(new Intent(this, MyService.class));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            startForegroundService(new Intent(this, MyService.class));
+                        } else {
+                            startService(new Intent(this, MyService.class));
+                        }
                         ex.printStackTrace();
                     }
                 } else {
@@ -951,7 +961,11 @@ public class MainActivity extends BaseActivity {
 
                             //todaysTarget.setText("T/A : Rs "+t_total+"/"+achived_total);
 
-                            dialog.dismiss();
+                            if(dialog != null || dialog.isShowing())
+                            {
+                                dialog.dismiss();
+                            }
+
                             //finish();
 
                         }
@@ -962,11 +976,17 @@ public class MainActivity extends BaseActivity {
                         // output.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        dialog.dismiss();
+                        if(dialog != null || dialog.isShowing())
+                        {
+                            dialog.dismiss();
+                        }
                     }
 
 
-                    dialog.dismiss();
+                    if(dialog != null || dialog.isShowing())
+                    {
+                        dialog.dismiss();
+                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -976,7 +996,10 @@ public class MainActivity extends BaseActivity {
 //					Toast toast = Toast.makeText(MainActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
 //					toast.setGravity(Gravity.CENTER, 0, 0);
 //					toast.show();
-                    dialog.dismiss();
+                    if(dialog != null || dialog.isShowing())
+                    {
+                        dialog.dismiss();
+                    }
 
                 }
             });
@@ -996,7 +1019,10 @@ public class MainActivity extends BaseActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            dialog.dismiss();
+            if(dialog != null || dialog.isShowing())
+            {
+                dialog.dismiss();
+            }
 
 
         }
