@@ -9077,7 +9077,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         db.close();
-        // return contact list?
+
         return contactList14;
     }
 
