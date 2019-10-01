@@ -15,6 +15,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -717,6 +719,13 @@ public class Sub_Dealer_ProductList extends Activity {
                             Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
                         }
 
+                        if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(Global_Data.GLOvel_LONGITUDE)) {
+                            LocationAddress locationAddress = new LocationAddress();
+                            LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+                                    getApplicationContext(), new GeocoderHandler());
+                        }
+
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -726,12 +735,14 @@ public class Sub_Dealer_ProductList extends Activity {
                     JSONArray order = new JSONArray();
                     JSONObject product_valuenew = new JSONObject();
                     try {
-                        // product_value.put("order_number", PINString);
+                         product_value.put("order_number", "R"+PINString);
                         product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
                         product_value.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
                         product_value.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
                         product_value.put("sub_dealer_email", Global_Data.Sub_Email);
                         product_value.put("dealer_id", Global_Data.Dealer_Code);
+                        product_value.put("booked_at", Global_Data.address);
+                        product_value.put("sub_dealer_shop_name", Global_Data.Sub_shop_name);
                         // product_value.put("user_email", Global_Data.GLOvel_USER_EMAIL);
                         //product_value.put("dist_code", Global_Data.GLOvel_USER_EMAIL);
                         //product_value.put("city_code", Global_Data.GLOvel_USER_EMAIL);
@@ -1216,5 +1227,33 @@ public class Sub_Dealer_ProductList extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         dialog.dismiss();
+    }
+
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress = "";
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    //locationAddress = " ";
+            }
+            //  LOCATION.setText(locationAddress);
+
+
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(locationAddress)) {
+                Global_Data.address = locationAddress;
+                Log.d("GLOBEL ADDRESS G", "V" + locationAddress);
+
+            } else {
+                Global_Data.address = "";
+                Log.d("GLOBEL ADDRESS G", "address not found.");
+            }
+
+
+        }
     }
 }

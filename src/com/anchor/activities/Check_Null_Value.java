@@ -46,5 +46,13 @@ public class Check_Null_Value {
 		}
 	}
 
+	public static Boolean isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(final String string) {
+		if (string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null") && !string.equalsIgnoreCase("0") && !string.equalsIgnoreCase("0.0")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }

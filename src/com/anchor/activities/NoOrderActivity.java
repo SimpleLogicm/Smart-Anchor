@@ -316,10 +316,6 @@ public class NoOrderActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
-//						InsertOrderAsyncTask insertOrderAsyncTask = new InsertOrderAsyncTask(
-//								NoOrderActivity.this);
-//						insertOrderAsyncTask.execute();
-
                         call_service();
                         dialog.cancel();
 
@@ -494,7 +490,7 @@ public class NoOrderActivity extends BaseActivity {
     }
 
 
-    public void call_service() {
+    public void                                                                                                                    call_service() {
         System.gc();
 
         Calendar c = Calendar.getInstance();

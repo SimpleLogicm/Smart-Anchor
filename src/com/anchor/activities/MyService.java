@@ -16,6 +16,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
@@ -207,9 +208,15 @@ public class MyService extends Service implements LocationListener{
 								if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))) {
 									//String address = addressn(latitude,longitude);
 
-									LocationAddress locationAddress = new LocationAddress();
-									LocationAddress.getAddressFromLocation(latitude, longitude,
-											getApplicationContext(), new GeocoderHandler());
+									new Handler(Looper.getMainLooper()).post(new Runnable() {
+										public void run() {
+											LocationAddress locationAddress = new LocationAddress();
+											LocationAddress.getAddressFromLocation(latitude, longitude,
+													getApplicationContext(), new GeocoderHandler());
+										}
+									});
+
+
 
 									loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude), String.valueOf(longitude), Global_Data.address, dateFormat.format(date), "", "");
 								} else {
@@ -253,9 +260,16 @@ public class MyService extends Service implements LocationListener{
 						if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(latitude))) {
 
 							if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))) {
-								LocationAddress locationAddress = new LocationAddress();
-								LocationAddress.getAddressFromLocation(latitude, longitude,
-										getApplicationContext(), new GeocoderHandler());
+
+								new Handler(Looper.getMainLooper()).post(new Runnable() {
+									public void run() {
+										LocationAddress locationAddress = new LocationAddress();
+										LocationAddress.getAddressFromLocation(latitude, longitude,
+												getApplicationContext(), new GeocoderHandler());
+									}
+								});
+
+
 								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude), String.valueOf(longitude), Global_Data.address, dateFormat.format(date), "", "");
 							} else {
 								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude), String.valueOf(longitude), "", dateFormat.format(date), "", "");
@@ -299,9 +313,15 @@ public class MyService extends Service implements LocationListener{
 									if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))) {
 										//String address = addressn(latitude,longitude);
 
-										LocationAddress locationAddress = new LocationAddress();
-										LocationAddress.getAddressFromLocation(latitude, longitude,
-												getApplicationContext(), new GeocoderHandler());
+										new Handler(Looper.getMainLooper()).post(new Runnable() {
+											public void run() {
+												LocationAddress locationAddress = new LocationAddress();
+												LocationAddress.getAddressFromLocation(latitude, longitude,
+														getApplicationContext(), new GeocoderHandler());
+											}
+										});
+
+
 										loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude), String.valueOf(longitude), Global_Data.address, dateFormat.format(date), "", "");
 									} else {
 										loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude), String.valueOf(longitude), "", dateFormat.format(date), "", "");
@@ -357,9 +377,15 @@ public class MyService extends Service implements LocationListener{
 							if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(longitude))) {
 								//String address = addressn(latitude,longitude);
 
-								LocationAddress locationAddress = new LocationAddress();
-								LocationAddress.getAddressFromLocation(latitude, longitude,
-										getApplicationContext(), new GeocoderHandler());
+								new Handler(Looper.getMainLooper()).post(new Runnable() {
+									public void run() {
+										LocationAddress locationAddress = new LocationAddress();
+										LocationAddress.getAddressFromLocation(latitude, longitude,
+												getApplicationContext(), new GeocoderHandler());
+									}
+								});
+
+
 
 								loginDataBaseAdapter.insert_geo_data(String.valueOf(latitude), String.valueOf(longitude), Global_Data.address, dateFormat.format(date), "", "");
 							} else {
@@ -482,7 +508,7 @@ public class MyService extends Service implements LocationListener{
 						//List<Local_Data> attendance = dbvoc.getAllAttendance_Data();
 						if (geo.size() > 0)
 						{
-							for (Local_Data g : geo) {
+							for (final Local_Data g : geo) {
 
 								JSONObject picture = new JSONObject();
 								picture.put("latitude",g.getlatitude());
@@ -494,9 +520,16 @@ public class MyService extends Service implements LocationListener{
 
 										try
 										{
-											LocationAddress locationAddress = new LocationAddress();
-											LocationAddress.getAddressFromLocation(Double.valueOf(g.getlatitude()), Double.valueOf(g.getlongitude()),
-													getApplicationContext(), new GeocoderHandler());
+											new Handler(Looper.getMainLooper()).post(new Runnable() {
+												public void run() {
+													LocationAddress locationAddress = new LocationAddress();
+													LocationAddress.getAddressFromLocation(Double.valueOf(g.getlatitude()), Double.valueOf(g.getlongitude()),
+															getApplicationContext(), new GeocoderHandler());
+												}
+											});
+
+
+
 											picture.put("address", Global_Data.address);
 										}catch(Exception ex){
 											ex.printStackTrace();
@@ -572,9 +605,14 @@ public class MyService extends Service implements LocationListener{
 							if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE))) {
 								try
 								{
-									LocationAddress locationAddress = new LocationAddress();
-									LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
-											getApplicationContext(), new GeocoderHandler());
+									new Handler(Looper.getMainLooper()).post(new Runnable() {
+										public void run() {
+											LocationAddress locationAddress = new LocationAddress();
+											LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+													getApplicationContext(), new GeocoderHandler());
+										}
+									});
+
 									picture.put("address", Global_Data.address);
 								}catch(Exception ex){
 									ex.printStackTrace();

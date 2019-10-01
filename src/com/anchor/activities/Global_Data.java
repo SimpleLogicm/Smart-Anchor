@@ -218,6 +218,7 @@ public class Global_Data {
     public static String Dealer_Code="";
     public static String state_code="";
     public static String click_flag="";
+    public static String Sub_shop_name="";
 	
 	//public static String GLOVEL_LONG_DESC="";
     

@@ -35,6 +35,7 @@ public class SubDealerModel {
     public String longi;
     public String distance;
 
+
     public String getDistance() {
         return distance;
     }
