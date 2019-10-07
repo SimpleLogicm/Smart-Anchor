@@ -101,6 +101,7 @@ public class LoginActivity extends Activity {
     ProgressDialog progress;
     private Bitmap bitmap = null;
     Handler h;
+    String abc="";
     public static final String Code = "codeKey";
     String devid, usr_name, pwd, usr_email;
     ArrayList<HashMap<String, String>> arraylist1, arraylist2;
