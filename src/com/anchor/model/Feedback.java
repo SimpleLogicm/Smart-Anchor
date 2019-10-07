@@ -1,25 +1,19 @@
 package com.anchor.model;
 
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 
-import io.reactivex.annotations.NonNull;
 
-@Entity(tableName = "feed_back_table")
 public class Feedback {
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
 
-    @ColumnInfo(name = "date")
+
     private String dateString;
 
-    @ColumnInfo(name = "feedback")
+
     private String feedback;
 //number of milliseconds from 1 jan 1970
-    @ColumnInfo(name = "time_stamp")
+
     private long timeStamp;
 
     public Feedback(String dateString, String feedback, long timeStamp) {

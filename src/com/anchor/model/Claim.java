@@ -1,28 +1,23 @@
 package com.anchor.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 
-import io.reactivex.annotations.NonNull;
 
-@Entity(tableName = "claims_table")
+
 public class Claim {
 
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
 
-    @ColumnInfo(name = "cost")
+
     private String cost;
 
-    @ColumnInfo(name = "description")
+
     private String description;
 
-    @ColumnInfo(name = "date_string")
+
     private String dateString;
 
-    @ColumnInfo(name = "time_stamp")
+
     private long timeStamp;
 
     public Claim(String cost, String description, String dateString, long timeStamp) {

@@ -1,25 +1,16 @@
 package com.anchor.model;
 
-
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-import io.reactivex.annotations.NonNull;
-
-@Entity(tableName = "complaint_table")
 public class Complaint {
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
 
-    @ColumnInfo(name = "date")
+
     private String dateString;
 
-    @ColumnInfo(name = "complaint")
+
     private String complaint;
     //number of milliseconds from 1 jan 1970
-    @ColumnInfo(name = "time_stamp")
+
     private long timeStamp;
 
     public Complaint(String dateString, String complaint, long timeStamp) {

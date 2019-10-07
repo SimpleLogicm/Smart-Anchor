@@ -1,36 +1,33 @@
 package com.anchor.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
 
 import java.io.Serializable;
 
-import io.reactivex.annotations.NonNull;
 
-@Entity(tableName = "new_launches")
+
+
 public class New_Launches implements Serializable{
 
-    @NonNull
-    @PrimaryKey(autoGenerate = true)
+
     private int id;
 
-    @ColumnInfo(name = "name")
+
     private String name;
 
-    @ColumnInfo(name = "file_path")
+
     private String file_path;
 
-    @ColumnInfo(name = "file_type")
+
     private String file_type;
 
-    @ColumnInfo(name = "date")
+
     private String date;
 
-    @ColumnInfo(name = "business_unit")
+
     private String business_unit;
 
-    @ColumnInfo(name = "doc_type")
+
     private String doc_type;
 
 

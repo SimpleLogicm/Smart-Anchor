@@ -54,8 +54,6 @@ import com.anchor.adapter.HorizontalRecyclerViewAdapter;
 import com.anchor.helper.MultipartUtility;
 import com.anchor.helper.PrefManager;
 import com.anchor.interfaces.Customer_S_Interface;
-import com.anchor.local.database.ComplaintDatabase;
-import com.anchor.local.repository.ComplaintRepository;
 import com.anchor.model.Complaint;
 import com.anchor.model.ImageModel;
 import com.android.volley.AuthFailureError;
@@ -88,24 +86,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import cpm.simplelogic.helper.ConnectionDetector;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class ComplaintsActivity extends Activity implements Customer_S_Interface,LocationListener {
     private ProgressDialog dialog;
@@ -135,8 +122,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
     private List<Complaint> complaintList = new ArrayList<>();
     private static final String TAG = "ComplaintTesting";
     ComplaintAdapter myAdapter;
-    ComplaintRepository complaintRepository;
-    CompositeDisposable compositeDisposable;
+
     private Toolbar toolbar;
     private CoordinatorLayout coordinatorLayout;
     ArrayList<String> product_list = new ArrayList<>();
@@ -438,10 +424,6 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
         c_spinner_area.setAdapter(dataAdapter3);
       //  c_spinner_area.setOnItemSelectedListener(this);
 
-        //creating the database
-        ComplaintDatabase complaintDatabase = ComplaintDatabase.getInstance(this);
-        //repository interacting with database
-        complaintRepository = new ComplaintRepository(complaintDatabase);
 
         //it will load data in the beginning of the activity
         //loadData();
@@ -727,7 +709,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
 
         //TextInputLayout textInputLayout = (TextInputLayout)findViewById(R.id.text_input_layout);
         //etNewComplaint.setHint("Hello");
-        compositeDisposable = new CompositeDisposable();
+
 
         prefManager = new PrefManager(this);
         custServiceType=prefManager.getCustomer_service_type();
@@ -737,99 +719,12 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
 
 
 
-    public void onComplaintSubmitClicked(View view) {
 
-        //checking if the complaint is empty
-        if(String.valueOf(text1_value.getText()).isEmpty()){
-            Toast.makeText(this, "Please fill the Complaint", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //getting the data from the UI
-        final String newComplaint = String.valueOf(text1_value.getText());
-        Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        final String currentDate = dateFormat.format(date).toString();
-        //checking if DateTime works
-        final long timeStamp = new Date().getTime();
-
-        //clearing the TextInputEditText
-        text1_value.setText("");
-        text1_value.clearFocus();
-//        numberOfNewLines(newComplaint);
-
-        /*
-        //adding the view at the top of the rv at runtime without a database
-        GlobalData.complaintListData.add(0,new Complaint(currentDate,newComplaint));
-        */
-
-        //we just have to add the data to the database the rest will automatically be taken care of
-        Disposable disposable = Observable
-                .create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                        complaintList.add(new Complaint(currentDate,newComplaint,timeStamp));
-                        Log.d(TAG, "subscribe: on submit clicked complaint list is being updated\n");
-                        complaintRepository.insertComplaint(new Complaint(currentDate,newComplaint,timeStamp));
-                        //loadData();
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        Toast.makeText(ComplaintsActivity.this, "Complaint added successfully", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(ComplaintsActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        compositeDisposable.add(disposable);
-
-    }
-    /*
-    //just for testing
-    private void numberOfNewLines(String x) {
-        int length = x.split("\r\n|\n|\r").length;
-//        System.out.println("\n\n\nnumber of new lines in " + x + " is = " + length + "\n\n\n");
-        Log.d(TAG, "\n\n\nnumberOfNewLines: in" + x + " is = " + length + "\n\n\n");
-//        String substring = x.substring(0,60);
-//        Log.d(TAG, "Substring is : \n" + substring);
-    }
-*/
-
-    private void deleteData() {
-        Disposable disposable = Observable
-                .create(new ObservableOnSubscribe<Object>() {
-                    @Override
-                    public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                        Log.d(TAG, "subscribe: on submit clicked feed list is being updated\n");
-                        complaintRepository.deleteAllComplaints();
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<Object>() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        Toast.makeText(ComplaintsActivity.this, "Complaints deleted successfully", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(ComplaintsActivity.this, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-        compositeDisposable.add(disposable);
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        compositeDisposable.clear();
+
         hidePDialog();
     }
 
