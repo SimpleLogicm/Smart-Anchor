@@ -67,6 +67,7 @@
             android:layout_marginLeft="7dp" />
 
         <TextView
+            android:id="@+id/textmrp"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

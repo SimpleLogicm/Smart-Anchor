@@ -327,6 +327,13 @@ public class LoginDataBaseAdapter {
     static final String DATABASE_CREATE_TABLE_PROMOTION_ACTIVITY = "CREATE TABLE IF NOT EXISTS " + "promotion_activity" +
             "( " + "ID" + " integer primary key autoincrement," + "email text, event_id text, meet_in text, meet_out text,description text,in_latitude text,in_longitude,in_address text,out_latitude text,out_longitude,out_address text, created_at text, created_by text, updated_at text, updated_by text,image_url text);";
 
+    static final String DATABASE_CREATE_SUB_ORDERS = "CREATE TABLE IF NOT EXISTS " + "sub_orders" +
+            "( " + "ID" + " integer primary key autoincrement," + "project_id text,order_id text, user_email text, sub_dealer_code text, sub_dealer_mobile text, sub_dealer_email text, dealer_id text, booked_at text, sub_dealer_shop_name text,latitude text,longitude text,order_type_code text,need_by_date text,shipment_pr_code text,name text,remarks text,signature text,image text,Ext_column1 text,Ext_column2 text,Ext_column3 text,Ext_column4 text " + ");";
+
+    static final String DATABASE_CREATE_SUB_ORDER_PRODUCTS = "CREATE TABLE IF NOT EXISTS " + "sub_order_products" +
+            "( " + "ID" + " integer primary key autoincrement," + "project_id text, customer_id text, order_id text, line_number text, category_id text, product_id text, product_variant_id text, product_pack_size_id text, scheme_id text, billed_qty text, free_qty text, " +
+            "total_qty text, retail_price text, MRP text, amount text, created_at text, updated_at text,customer_name text,scheme_amount text,item_number text,actual_discount text, product_name text);";
+
 
 //		//new product and customer for Girnar Monday Demo
 //		static final String DATABASE_CREATE_NEWCUSTOMER = "create table "+"new_customers"+
@@ -955,6 +962,70 @@ public class LoginDataBaseAdapter {
         // Insert the row into your table
         db.insert("orders", null, newValues);
     }
+
+    public void insertSUBOrders(String project_id, String order_id,String user_email,String sub_dealer_code,String sub_dealer_mobile,String sub_dealer_email,String dealer_id,String booked_at,String sub_dealer_shop_name,String latitude,String longitude,String order_type_code,String need_by_date,String shipment_pr_code,String name,String remarks,String signature,String image,String Ext_column1,String Ext_column2,String Ext_column3,String Ext_column4) {
+        ContentValues newValues = new ContentValues();
+        // Assign values for each row.
+        newValues.put("project_id", project_id);
+        newValues.put("order_id", order_id);
+        newValues.put("user_email", user_email);
+        newValues.put("sub_dealer_code", sub_dealer_code);
+        newValues.put("sub_dealer_mobile", sub_dealer_mobile);
+        newValues.put("sub_dealer_email", sub_dealer_email);
+        newValues.put("dealer_id", dealer_id);
+        newValues.put("booked_at", booked_at);
+        newValues.put("sub_dealer_shop_name", sub_dealer_shop_name);
+        newValues.put("latitude", latitude);
+        newValues.put("longitude", longitude);
+        newValues.put("order_type_code", order_type_code);
+        newValues.put("need_by_date", need_by_date);
+        newValues.put("shipment_pr_code", shipment_pr_code);
+        newValues.put("name", name);
+        newValues.put("remarks", remarks);
+        newValues.put("signature", signature);
+        newValues.put("image", image);
+        newValues.put("Ext_column1", Ext_column1);
+        newValues.put("Ext_column2", Ext_column2);
+        newValues.put("Ext_column3", Ext_column3);
+        newValues.put("Ext_column4", Ext_column4);
+
+        // Insert the row into your table
+        db.insert("sub_orders", null, newValues);
+    }
+
+
+    public void insertSUb_OrderProducts(String project_id, String customer_id, String order_id, String line_number,
+                                    String category_id, String product_id, String product_variant_id, String product_pack_size_id, String scheme_id,
+                                    String billed_qty, String free_qty, String total_qty, String retail_price, String MRP, String amount,
+                                    String create_at, String update_at, String customer_name, String scheme_amount, String item_number, String actual_discount, String product_name) {
+        ContentValues newValues = new ContentValues();
+        // Assign values for each row.
+        newValues.put("project_id", project_id);
+        newValues.put("customer_id", customer_id);
+        newValues.put("order_id", order_id);
+        newValues.put("line_number", line_number);
+        newValues.put("category_id", category_id);
+        newValues.put("product_id", product_id);
+        newValues.put("product_variant_id", product_variant_id);
+        newValues.put("product_pack_size_id", product_pack_size_id);
+        newValues.put("scheme_id", scheme_id);
+        newValues.put("billed_qty", billed_qty);
+        newValues.put("free_qty", free_qty);
+        newValues.put("total_qty", total_qty);
+        newValues.put("retail_price", retail_price);
+        newValues.put("MRP", MRP);
+        newValues.put("amount", amount);
+        newValues.put("created_at", create_at);
+        newValues.put("updated_at", update_at);
+        newValues.put("customer_name", customer_name);
+        newValues.put("scheme_amount", scheme_amount);
+        newValues.put("item_number", item_number);
+        newValues.put("actual_discount", actual_discount);
+        newValues.put("product_name", product_name);
+        // Insert the row into your table
+        db.insert("sub_order_products", null, newValues);
+    }
+
 
     public void insertPreviousOrders(String project_id, String order_id, String customer_id, String retailer_id, String user_id,
                                      String city_id, String beat_id, String latlon, String sync, String total_order_amount, String signature_path,

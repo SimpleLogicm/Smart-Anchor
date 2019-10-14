@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-//import com.simplelogic.slidingmenu.HomeFragment.LoadMobileEmailIdsAsyncTask;
+
 
 public class PreviewOrderSwipeActivity extends BaseActivity {
 	String str;

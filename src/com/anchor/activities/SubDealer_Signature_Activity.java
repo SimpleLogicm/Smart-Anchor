@@ -77,10 +77,7 @@ import java.util.Locale;
 
 import cpm.simplelogic.helper.GPSTracker;
 
-//import com.simplelogic.database.DatabaseHandler;
-//import com.simplelogic.webservice.GmailSender;
-
-public class CaptureSignature extends BaseActivity {
+public class SubDealer_Signature_Activity extends BaseActivity {
     private String Signature_path = "";
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath = "";
@@ -126,13 +123,8 @@ public class CaptureSignature extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        // this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         setContentView(R.layout.signature);
-
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
@@ -151,7 +143,6 @@ public class CaptureSignature extends BaseActivity {
         mClear.setBackgroundColor(Color.parseColor("#414042"));
         mGetSign = (Button) findViewById(R.id.getsign);
         mGetSign.setBackgroundColor(Color.parseColor("#414042"));
-        // mGetSign.setEnabled(false);
         mCancel = (Button) findViewById(R.id.cancel);
         mCancel.setBackgroundColor(Color.parseColor("#414042"));
         mView = mContent;
@@ -166,21 +157,8 @@ public class CaptureSignature extends BaseActivity {
         order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
         s_container_l = findViewById(R.id.s_container_l);
 
-        // s_container_l.fullScroll(ScrollView.FOCUS_UP);
-        // s_container_l.scrollTo(0, s_container_l.getBottom());
-
-//        // Wait until my scrollView is ready
-//        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                // Ready, move up
-//              //  s_container_l.fullScroll(View.FOCUS_UP);
-//            }
-//        });
-
-
-        Intent i = getIntent();
-        dataOrder = i.getParcelableArrayListExtra("productsList");
+        order_payment_term.setVisibility(View.GONE);
+        order_detail2.setVisibility(View.GONE);
 
         String user_name = "";
         if (!Global_Data.USER_FIRST_NAME.equalsIgnoreCase("null")) {
@@ -192,13 +170,7 @@ public class CaptureSignature extends BaseActivity {
 
         txtWelcomeUser.setText(user_name + " : " + Global_Data.emp_code);
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
-        detail1str = spf1.getString("var_detail1", "");
 
-        if (detail1str.length() > 0) {
-            order_detail1.setHint(detail1str);
-        } else {
-            order_detail1.setText("Detail 1");
-        }
 
         InputFilter[] Textfilters = new InputFilter[1];
         Textfilters[0] = new InputFilter() {
@@ -305,7 +277,7 @@ public class CaptureSignature extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
-                        DatePickerDialog picker = new DatePickerDialog(CaptureSignature.this, date, myCalendar
+                        DatePickerDialog picker = new DatePickerDialog(SubDealer_Signature_Activity.this, date, myCalendar
                                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                                 myCalendar.get(Calendar.DAY_OF_MONTH));
                         picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -330,7 +302,7 @@ public class CaptureSignature extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
-                        new DatePickerDialog(CaptureSignature.this, date1, myCalendar
+                        new DatePickerDialog(SubDealer_Signature_Activity.this, date1, myCalendar
                                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                     }
@@ -358,7 +330,7 @@ public class CaptureSignature extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
-                        new DatePickerDialog(CaptureSignature.this, date1, myCalendar
+                        new DatePickerDialog(SubDealer_Signature_Activity.this, date1, myCalendar
                                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
                     }
@@ -372,7 +344,7 @@ public class CaptureSignature extends BaseActivity {
             order_detail4.setHint("Remarks");
         }
 
-        SharedPreferences sp1 = CaptureSignature.this
+        SharedPreferences sp1 = SubDealer_Signature_Activity.this
                 .getSharedPreferences("SimpleLogic", 0);
 
         results_order_type.clear();
@@ -456,22 +428,6 @@ public class CaptureSignature extends BaseActivity {
 
         }
 
-//        // Wait until my scrollView is ready
-//        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                // Ready, move up
-//                 s_container_l.fullScroll(0);
-//
-//            }
-//        });
-
-
-        //s_container_l.pageScroll(View.FOCUS_UP);
-
-
-        // s_container_l.clearFocus();
-
 
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cc_code)) {
 
@@ -547,8 +503,8 @@ public class CaptureSignature extends BaseActivity {
                     b.setBackgroundColor(Color.parseColor("#910505"));
 
                     Log.v("log_tag", "Panel Saved");
-                    boolean error = captureSignature();
-                    // boolean error1 = captureSignature1();
+                    boolean error = SubDealer_Signature_Activity();
+                    // boolean error1 = SubDealer_Signature_Activity1();
 
                     if (!error) {
 
@@ -589,42 +545,35 @@ public class CaptureSignature extends BaseActivity {
         try {
             ActionBar mActionBar = getActionBar();
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            // mActionBar.setDisplayShowHomeEnabled(false);
-            // mActionBar.setDisplayShowTitleEnabled(false);
             LayoutInflater mInflater = LayoutInflater.from(this);
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-            mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
+           // mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-            // SharedPreferences sp = CaptureSignature.this.getSharedPreferences("SimpleLogic", 0);
-
-//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
-//        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
-//		}
-            try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
-                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
-                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
-                } else {
-                    int age = (int) Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
-                }
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-                todaysTarget.setText("Today's Target Acheived");
-            }
+//            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+//            try {
+//                int target = (int) Math.round(sp.getFloat("Target", 0));
+//                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+//                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+//                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+//                    int age = (int) Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+//                } else {
+//                    int age = (int) Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+//                }
+//
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
+//
+//                todaysTarget.setText("Today's Target Acheived");
+//            }
 
             mActionBar.setCustomView(mCustomView);
             mActionBar.setDisplayShowCustomEnabled(true);
@@ -643,7 +592,7 @@ public class CaptureSignature extends BaseActivity {
         super.onDestroy();
     }
 
-    private boolean captureSignature() {
+    private boolean SubDealer_Signature_Activity() {
         String message_flag = "";
         boolean error = false;
         String errorMessage = "";
@@ -660,29 +609,37 @@ public class CaptureSignature extends BaseActivity {
             errorMessage = errorMessage + "Please Enter " + detail1str;
             error = true;
 
-        } else if (strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase("")) {
-            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
-            order_detail2.requestFocus();
-            errorMessage = errorMessage + "Please Enter " + detail2str;
-            error = true;
+        }
 
-        } else if (strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6) {
-            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
-            order_detail2.requestFocus();
-            errorMessage = errorMessage + detail2str + " should be 6 digit number.";
-            error = true;
+//        else if (strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase("")) {
+//            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
+//            order_detail2.requestFocus();
+//            errorMessage = errorMessage + "Please Enter " + detail2str;
+//            error = true;
+//
+//        } else if (strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().length() < 6) {
+//            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
+//            order_detail2.requestFocus();
+//            errorMessage = errorMessage + detail2str + " should be 6 digit number.";
+//            error = true;
+//
+//        }
 
-        } else if (shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority")) {
+        else if (shipment_pri.getSelectedItem().toString().equalsIgnoreCase("Shipment Priority")) {
             s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
             shipment_pri.requestFocus();
             errorMessage = errorMessage + "Please Select Shipment Priority";
             error = true;
-        } else if (order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term")) {
+        }
 
-            order_payment_term.requestFocus();
-            errorMessage = errorMessage + "Please Select Payment Term";
-            error = true;
-        } else if (yourName.getText().toString().equalsIgnoreCase("")) {
+//        else if (order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term")) {
+//
+//            order_payment_term.requestFocus();
+//            errorMessage = errorMessage + "Please Select Payment Term";
+//            error = true;
+//        }
+
+        else if (yourName.getText().toString().equalsIgnoreCase("")) {
             yourName.requestFocus();
             errorMessage = errorMessage + "Please Enter your Name.";
             error = true;
@@ -703,16 +660,6 @@ public class CaptureSignature extends BaseActivity {
         return error;
     }
 
-    private String getTodaysDate() {
-
-        final Calendar c = Calendar.getInstance();
-        int todaysDate = (c.get(Calendar.YEAR) * 10000) +
-                ((c.get(Calendar.MONTH) + 1) * 100) +
-                (c.get(Calendar.DAY_OF_MONTH));
-        Log.w("DATE:", String.valueOf(todaysDate));
-        return (String.valueOf(todaysDate));
-
-    }
 
     private String getCurrentTime() {
 
@@ -758,16 +705,8 @@ public class CaptureSignature extends BaseActivity {
         if (!tempdir.exists())
             tempdir.mkdirs();
 
-        if (tempdir.isDirectory()) {/*
-            File[] files = tempdir.listFiles();
-            for (File file : files)
-            {
-                if (!file.delete())
-                {
-                    System.out.println("Failed to delete " + file);
-                }
-            }
-        */
+        if (tempdir.isDirectory()) {
+
         }
         return (tempdir.isDirectory());
     }
@@ -906,49 +845,6 @@ public class CaptureSignature extends BaseActivity {
     }
 
 
-    public void get_dialog() {
-        AlertDialog alertDialog = new AlertDialog.Builder(CaptureSignature.this).create(); //Read Update
-        alertDialog.setTitle("Confirmation");
-        alertDialog.setMessage("Your internet not working, Do you want to save order offline ?");
-        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Save", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-
-
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                } else
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Order generate successfully.", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-
-                Intent intent = new Intent(getApplicationContext(),
-                        Order.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right,
-                        R.anim.slide_out_left);
-
-            }
-        });
-
-        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // TODO Auto-generated method stub
-                dialog.cancel();
-            }
-        });
-
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-    }
-
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
@@ -963,35 +859,9 @@ public class CaptureSignature extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-//       if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
-//            if (resultCode == RESULT_OK) {
-//                previewCapturedImage();
-//
-//            } else if (resultCode == RESULT_CANCELED) {
-//                // user cancelled Image capture
-//                Toast.makeText(getApplicationContext(),
-//                        "User cancelled image capture", Toast.LENGTH_SHORT)
-//                        .show();
-//            } else {
-//                // failed to capture image
-//                Toast.makeText(getApplicationContext(),
-//                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
-//                        .show();
-//            }
-//        }
+
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-
-
-//            try {
-//                mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-            // Bundle extras = data.getExtras();
-            //  Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             try {
 
@@ -1001,7 +871,7 @@ public class CaptureSignature extends BaseActivity {
                 e.printStackTrace();
             }
 
-            //get_icon.setImageBitmap(imageBitmap);
+
         } else if (requestCode == 2 && resultCode == RESULT_OK) {
             try {
                 Uri selectedImage = data.getData();
@@ -1022,15 +892,7 @@ public class CaptureSignature extends BaseActivity {
 
                 c.close();
 
-//                String imageFileName = "Anchor";
-//                File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Anchor");
-//
-//                if (!storageDir.exists()) {
-//                    storageDir.mkdir();
-//                }
-//
-//                copyFileOrDirectory(pictureImagePath_new,storageDir.toString());
-                //new Expenses.LongOperation().execute();
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -1056,9 +918,9 @@ public class CaptureSignature extends BaseActivity {
                 storageDir      // directory
         );
 
-        // Save a file: path for use with ACTION_VIEW intents
+
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
-        // mCurrentPhotoPath = image.getAbsolutePath();
+
         return image;
     }
 
@@ -1122,7 +984,7 @@ public class CaptureSignature extends BaseActivity {
                                 final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
 
 
-                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(CaptureSignature.this);
+                                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(SubDealer_Signature_Activity.this);
 
                                 builder.setTitle("Add Photo!");
 
@@ -1226,16 +1088,16 @@ public class CaptureSignature extends BaseActivity {
                             //v.setBackgroundColor(Color.parseColor("#910505"));
 
                             if (m_sign_flag == 0) {
-                                Toast toast = Toast.makeText(CaptureSignature.this, "Please Sign.... ", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(SubDealer_Signature_Activity.this, "Please Sign.... ", Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 105, 50);
                                 toast.show();
                             } else {
-                                gps = new GPSTracker(CaptureSignature.this);
+                                gps = new GPSTracker(SubDealer_Signature_Activity.this);
                                 if (!gps.canGetLocation()) {
 
                                     gps.showSettingsAlertnew();
                                 } else {
-                                    AlertDialog alertDialog = new AlertDialog.Builder(CaptureSignature.this).create(); //Read Update
+                                    AlertDialog alertDialog = new AlertDialog.Builder(SubDealer_Signature_Activity.this).create(); //Read Update
                                     alertDialog.setTitle("Confirmation");
                                     alertDialog.setMessage(" Are you sure you want to continue?");
                                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
@@ -1309,24 +1171,15 @@ public class CaptureSignature extends BaseActivity {
                                                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                                             } else
                                                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-//								   InsertOrderAsyncTask insertOrderAsyncTask =new InsertOrderAsyncTask(CaptureSignature.this);
-//								   insertOrderAsyncTask.execute();
-
-//                                        File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
-//                                        storagePath.mkdirs();
 //
-//                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
-//
-//
-//                                        String uploadImage = "";
 
                                             try {
-                                                AppLocationManager appLocationManager = new AppLocationManager(CaptureSignature.this);
+                                                AppLocationManager appLocationManager = new AppLocationManager(SubDealer_Signature_Activity.this);
                                                 Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
                                                 Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
-                                                PlayService_Location PlayServiceManager = new PlayService_Location(CaptureSignature.this);
+                                                PlayService_Location PlayServiceManager = new PlayService_Location(SubDealer_Signature_Activity.this);
 
-                                                if (PlayServiceManager.checkPlayServices(CaptureSignature.this)) {
+                                                if (PlayServiceManager.checkPlayServices(SubDealer_Signature_Activity.this)) {
                                                     Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
 
                                                 } else if (!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)) {
@@ -1340,20 +1193,13 @@ public class CaptureSignature extends BaseActivity {
 
                                             try {
 
-
-//                                            FileOutputStream out = new FileOutputStream(myImage);
-//                                            bitmap.compress(Bitmap.CompressFormat.PNG, 10, out);
-//                                            out.flush();
-//                                            out.close();
-//                                            uploadImage = getStringImage(bitmap);
-
                                                 SaveImage(bitmap, "SI" + Global_Data.GLObalOrder_id);
 
                                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
 
-                                                    dbvoc.updateORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, order_asset_code);
+                                                    dbvoc.updateSub_ORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLOvel_SUB_GORDER_ID, order_detail1_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE);
                                                 } else {
-                                                    dbvoc.updateORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_detail2_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString(), order_asset_code);
+                                                    dbvoc.update_SUB_ORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString());
                                                 }
 
 
@@ -1362,32 +1208,19 @@ public class CaptureSignature extends BaseActivity {
                                                 e.printStackTrace();
                                             }
 
-//                                        try {
-//                                            //delete(mediaStorageDir);
-//                                            if (storagePath.isDirectory()) {
-//                                                String[] children = storagePath.list();
-//                                                for (int i = 0; i < children.length; i++) {
-//                                                    new File(storagePath, children[i]).delete();
-//                                                }
-//                                            }
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-
                                             isInternetPresent = cd.isConnectingToInternet();
 
 
                                             if (isInternetPresent) {
                                                 onDestroy();
-                                                getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
+                                                getServices.SYNSUBDEALERCORDER(SubDealer_Signature_Activity.this, Global_Data.GLOvel_GORDER_ID);
                                             } else {
-                                                //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
 
                                                 Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                                                //toast.setGravity(Gravity.CENTER, 0, 0);
                                                 toast.show();
 
-                                                get_dialog();
+
                                             }
 
 
@@ -1439,7 +1272,7 @@ public class CaptureSignature extends BaseActivity {
      * NOTE: Keep proper title and message depending on your app
      */
     private void showSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(CaptureSignature.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SubDealer_Signature_Activity.this);
         builder.setTitle("Need Permissions");
         builder.setCancelable(false);
         builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
@@ -1466,30 +1299,6 @@ public class CaptureSignature extends BaseActivity {
         Uri uri = Uri.fromParts("package", getPackageName(), null);
         intent.setData(uri);
         startActivityForResult(intent, 101);
-    }
-
-    public static void copyFileOrDirectory(String srcDir, String dstDir) {
-
-        try {
-            File src = new File(srcDir);
-            File dst = new File(dstDir, src.getName());
-
-            if (src.isDirectory()) {
-
-                String files[] = src.list();
-                int filesLength = files.length;
-                for (int i = 0; i < filesLength; i++) {
-                    String src1 = (new File(src, files[i]).getPath());
-                    String dst1 = dst.getPath();
-                    copyFileOrDirectory(src1, dst1);
-
-                }
-            } else {
-                copyFile(src, dst);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void copyFile(File sourceFile, File destFile) throws IOException {

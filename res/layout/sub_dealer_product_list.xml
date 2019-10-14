@@ -103,7 +103,27 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="9dp"
-                android:text="@string/Submit"
+                android:text="@string/Save"
+                android:background="#414042"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/buttonPreviewv"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/Preview_Order"
+                android:background="#414042"
+                android:textColor="#FFFFFF"
+
+                />
+
+            <Button
+                android:id="@+id/addmorenews"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="@string/Add_More_Items"
                 android:background="#414042"
                 android:textColor="#FFFFFF" />
 

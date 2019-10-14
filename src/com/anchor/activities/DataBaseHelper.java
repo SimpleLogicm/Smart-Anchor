@@ -17,7 +17,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
     // Database Name
     static final String DATABASE_NAME = "simple_logic.db";
-    static final int DATABASE_VERSION = 12;
+    static final int DATABASE_VERSION = 13;
     public static final String KEY_ID = "_id";
     public static final String FNAME = "name";
     private static final String TABLE_REG = "users";
@@ -224,6 +224,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_TABLE_ASSET_CODE);
         _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_TABLE_PROMOTION_ACTIVITY);
+        _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_SUB_ORDERS);
+        _db.execSQL(LoginDataBaseAdapter.DATABASE_CREATE_SUB_ORDER_PRODUCTS);
 
     }
 
@@ -1910,6 +1912,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery = "DELETE FROM " + TABLE_ORDER_PRODUCTS + " WHERE item_number " + " ='" + item_number + "'" + " AND order_id" + " ='" + order_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    // Getting All Local_Data
+    public void getDeleteTableorderproduct_byITEM_NUMBER_SUBDEALER(String item_number, String order_id) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM sub_order_products" + " WHERE item_number " + " ='" + item_number + "'" + " AND order_id" + " ='" + order_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    public void getDeleteTableSuborderproduct_byITEM_NUMBER(String item_number, String order_id) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM sub_order_products " + " WHERE item_number " + " ='" + item_number + "'" + " AND order_id" + " ='" + order_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -7303,6 +7328,39 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting product data
+    public List<Local_Data> GetSUB_Orders_BY_ORDER_ID(String order_id, String item_number) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "SELECT  order_id,customer_name,total_qty,MRP,amount,scheme_amount,item_number,actual_discount FROM " +" sub_order_products WHERE order_id" + " ='" + order_id + "'" + " AND item_number" + " ='" + item_number + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = null;
+        try {
+
+            cursor = db.rawQuery(selectQuery, null);
+
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
     public List<Local_Data> GetOrder_Product_BY_ORDER_ID(String order_id, String item_number) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
@@ -7430,12 +7488,43 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         db.close();
-        // Cursor cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
+        return contactList;
+    }
 
-        // looping through all rows and adding to list // " WHERE order_id = " + orderid ;
+    // Getting All Local_Data
+    public List<Local_Data> getItemName_SubDealer(String orderid) {
+        List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name,retail_price FROM sub_order_products " + " WHERE " + ORDER_ID + "='" + orderid + "'";
 
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        // return contact list?
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(selectQuery, null);// " WHERE " + ORDER_ID +"='" + orderid +"'";
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setProductId(cursor.getString(0));
+                    contact.setQty(cursor.getString(1));
+                    contact.setPrice(cursor.getString(2));
+                    contact.setAmount(cursor.getString(3));
+                    contact.set_category_ids(cursor.getString(4));
+                    contact.setProduct_nm(cursor.getString(5));
+                    contact.setRP(cursor.getString(6));
+
+                    // Adding contact to list
+
+                    contactList.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
         return contactList;
     }
 
@@ -7904,6 +7993,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting product data
+    public List<Local_Data> Get_OrderProducts_BYITEM_NUMBER_SubDealer(String Item_id, String order_id) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "SELECT order_id,customer_name,total_qty,MRP,amount,scheme_amount,item_number,actual_discount,product_name,retail_price,scheme_id FROM sub_order_products" + " WHERE item_number" + " ='" + Item_id + "'" + " AND order_id" + " ='" + order_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.set_category_code(cursor.getString(0));
+                    contact.set_custadr(cursor.getString(1));
+                    contact.set_stocks_product_quantity(cursor.getString(2));
+                    contact.setMRP(cursor.getString(3));
+                    contact.set_Claims_amount(cursor.getString(4));
+                    contact.set_Target_Text(cursor.getString(5));
+                    contact.set_delivery_product_id(cursor.getString(6));
+                    contact.set_stocks_product_text(cursor.getString(7));
+                    contact.set_product_status(cursor.getString(8));
+                    contact.setRP(cursor.getString(9));
+                    contact.setSche_code(cursor.getString(10));
+
+
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
     public List<Local_Data> Get_OrderProducts_BYITEM_NUMBERPre(String Item_id, String order_id) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
         // Select All Query
@@ -8081,6 +8212,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void update_item_SUBDEALER(String total_qty, String MRP, String amount, String scheme_amount, String actual_discount, String item_no, String order_id, String scheme_id) {
+
+        String selectQuery = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransactionNonExclusive();
+
+        selectQuery = "UPDATE sub_order_products" + " SET total_qty = '" + total_qty + "'," + "amount = '" + amount + "'," + "scheme_id = '" + scheme_id + "'," + "actual_discount = '" + actual_discount + "'" + " WHERE item_number = '" + item_no + "'" + " AND order_id" + " ='" + order_id + "'";
+        db.execSQL(selectQuery);
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+    }
+
     public void updateCustomerby_Createid(String CODE) {
 
         String selectQuery = "UPDATE " + TABLE_CUSTOMER_MASTER + " SET created_at = '" + " " + "'" + " WHERE LEGACY_CUSTOMER_CODE = '" + CODE + "'";
@@ -8134,6 +8279,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void updateORDER_SIGNATURENEW_WITHLATLONG(String signature, String order_id, String order_detail1_text, String order_detail2_text, String details3, String order_detail4_text, String order_category, String shipment_pri, String lat, String longs, String asset_code) {
         String selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '" + signature + "'," + "details1 = '" + order_detail1_text + "'," + "details2 = '" + order_detail2_text + "'," + "details3 = '" + details3 + "'," + "details4 = '" + order_detail4_text + "'," + "order_category = '" + order_category + "'," + "shipmet_priority = '" + shipment_pri + "'," + "latitude = '" + lat + "'," + "longitude = '" + longs + "'," + "asset_code = '" + asset_code + "'" + " WHERE order_id = '" + order_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    public void updateSub_ORDER_SIGNATURENEW_WITHLATLONG(String signature, String order_id, String order_detail1_text, String details3, String order_detail4_text, String order_category, String shipment_pri, String lat, String longs) {
+        String selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '" + signature + "'," + "need_by_date = '" + order_detail1_text + "'," + "'," + "name = '" + details3 + "'," + "remarks = '" + order_detail4_text + "'," + "order_type_code = '" + order_category + "'," + "shipment_pr_code = '" + shipment_pri + "'," + "latitude = '" + lat + "'," + "longitude = '" + longs  + "'" + " WHERE order_id = '" + order_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    public void update_SUB_ORDER_SIGNATURENEW(String signature, String order_id, String order_detail1_text, String details3, String order_detail4_text, String order_category, String shipment_pri) {
+        String selectQuery = "UPDATE " + TABLE_ORDERS + " SET signature_path = '" + signature + "'," + "details1 = '" + order_detail1_text + "',"  + "'," + "name = '" + details3 + "'," + "remarks = '" + order_detail4_text + "'," + "order_type_code = '" + order_category + "'," + "shipment_pr_code = '" + shipment_pri + "'" + " WHERE order_id = '" + order_id + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -8926,6 +9089,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.beginTransactionNonExclusive();
 
         selectQuery = "UPDATE " + TABLE_ORDER_PRODUCTS + " SET total_qty = '" + total_qty + "'," + "amount = '" + amount + "'" + " WHERE item_number = '" + item_no + "'" + " AND order_id" + " ='" + order_id + "'";
+        db.execSQL(selectQuery);
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+    }
+
+    public void update_itemamountandquantity_subDealer(String total_qty, String amount, String item_no, String order_id) {
+
+        String selectQuery = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransactionNonExclusive();
+
+        selectQuery = "UPDATE sub_order_products " + " SET total_qty = '" + total_qty + "'," + "amount = '" + amount + "'" + " WHERE item_number = '" + item_no + "'" + " AND order_id" + " ='" + order_id + "'";
         db.execSQL(selectQuery);
 
         db.setTransactionSuccessful();

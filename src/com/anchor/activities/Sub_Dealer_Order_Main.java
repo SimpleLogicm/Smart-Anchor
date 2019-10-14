@@ -76,7 +76,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String state_name = "";
     String city_name = "";
     String district_name = "";
-    Button s_submit,s_no_order;
+    Button s_submit,s_no_order,s_previous_order;
     Spinner s_state, s_district, s_city;
     String s[];
     ProgressDialog progressDialog;
@@ -139,6 +139,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         auto_scroll = findViewById(R.id.auto_scroll);
         s_submit = findViewById(R.id.s_submit);
         s_no_order = findViewById(R.id.s_no_order);
+        s_previous_order = findViewById(R.id.s_previous_order);
         s_state = findViewById(R.id.s_state);
         s_city = findViewById(R.id.s_city);
         s_district = findViewById(R.id.s_district);
@@ -170,6 +171,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         Global_Data.Customers_map.clear();
         Global_Data.spiner_list_modelListn.clear();
         Global_Data.state_code = "";
+        Global_Data.GLOvel_SUB_GORDER_ID = "";
+        dbvoc.getDeleteTable("sub_orders");
+        dbvoc.getDeleteTable("sub_order_products");
 
         if (!Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
             s_sub_dealer_search.setText(Global_Data.Sub_Dealer_name);

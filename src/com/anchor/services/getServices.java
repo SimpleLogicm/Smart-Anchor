@@ -950,10 +950,7 @@ public class getServices {
     public static void SYNCORDER_BYCustomer(Context contextn,String order_id){
   	 context = contextn;
 
-// Now formattedDate have current date/time
-       // Toast.makeText(this, formattedDate, Toast.LENGTH_SHORT).show();
-
-        dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+  	 dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
         if (dialog != null && dialog.isShowing()){
             dialog.dismiss();}
@@ -967,6 +964,24 @@ public class getServices {
 
 
  }
+
+    public static void SYNSUBDEALERCORDER(Context contextn,String order_id){
+        context = contextn;
+
+        dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+        if (dialog != null && dialog.isShowing()){
+            dialog.dismiss();}
+
+        dialog.setMessage("Order Sync in Progress, Please Wait");
+        dialog.setTitle("Smart Anchor App");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        new SubOrderAyncTask().execute();
+
+
+    }
 
     public static void SYNCORDER_AllOrders(Context contextn){
         context = contextn;
@@ -4552,6 +4567,425 @@ public class getServices {
                                                Toast.LENGTH_LONG).show();
                                    }
                                });
+
+                        } else if (error instanceof AuthFailureError) {
+
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context,
+                                            "Server AuthFailureError  Error",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        } else if (error instanceof ServerError) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context,
+                                            "Server   Error",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        } else if (error instanceof NetworkError) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context,
+                                            "your internet connection is not working, saving locally. Please sync when Internet is available",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        } else if (error instanceof ParseError) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context,
+                                            "ParseError   Error",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        }
+                        else
+                        {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        }
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            public void run() {
+
+                                dialog.dismiss();
+                            }
+                        });
+
+                        // finish();
+                    }
+                });
+
+                RequestQueue requestQueue = Volley.newRequestQueue(context);
+                // queue.add(jsObjRequest);
+                int socketTimeout = 30000;//30 seconds - change to what you want
+                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                jsObjRequest.setRetryPolicy(policy);
+                requestQueue.add(jsObjRequest);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                ((Activity) context).runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+            return null;
+        }
+    }
+
+    public static class SubOrderAyncTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+
+            String uploadImage = "";
+            dbvoc = new DataBaseHelper(context);
+
+            Calendar c = Calendar.getInstance();
+            System.out.println("Current time =&gt; "+c.getTime());
+
+            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            final String formattedDate = df.format(c.getTime());
+            JSONObject jsonBody = new JSONObject();
+
+            try {
+
+                JSONArray customer = new JSONArray();
+                JSONArray product = new JSONArray();
+                JSONArray order = new JSONArray();
+                JSONObject product_valuenew = new JSONObject();
+
+                int a = 0;
+                String s = "";
+
+
+
+                byte b5[];
+
+                List<Local_Data> contacts = dbvoc.GetOrders("Secondary Sales / Retail Sales", Global_Data.GLOvel_GORDER_ID);
+                //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
+
+                for (Local_Data cn : contacts)
+                {
+                    JSONObject product_value = new JSONObject();
+                    product_value.put("order_number", cn.get_category_code());
+
+                    Order_number = cn.get_category_code();
+                    // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
+                    // product_value.put("order_take_by", "");
+                    product_value.put("customer_code", cn.get_category_id());
+                    product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
+
+                        product_value.put("latitude", cn.getlatitude());
+                        product_value.put("longitude", cn.getlongitude());
+                    }
+                    else
+                    {
+                        product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                    }
+
+                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("details1", cn.getOrder_detail1());
+                    product_value.put("details2", cn.getOrder_detail2());
+                    product_value.put("details3", cn.getOrder_detail3());
+                    product_value.put("details4", cn.getOrder_detail4());
+                    product_value.put("order_category_code", cn.getOrder_category_type());
+                    product_value.put("shipment_priority", cn.getshipment_pri());
+                    product_value.put("payment_term_code", cn.getAsset_code());
+
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign()))
+                    {
+                        order_image_url = cn.getimg_ordersign().trim();
+                        // File filepath = new File(cn.getimg_ordersign());
+                        // String  path =  "file://"+filepath.getPath();
+                        try {
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getimg_ordersign()));
+                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
+                            mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
+                            b5 = bos5.toByteArray();
+
+                            String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
+                            product_value.put("order_image_string",getsign_str);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            product_value.put("order_image_string", "");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        product_value.put("order_image_string", "");
+                    }
+
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
+                    {
+                        order_image_url = cn.getSignature_image().trim();
+                        // File filepath = new File(cn.getimg_ordersign());
+                        // String  path =  "file://"+filepath.getPath();
+                        try {
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature_image()));
+                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
+                            mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
+                            b5 = bos5.toByteArray();
+
+                            String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
+                            product_value.put("signature_path",getsign_str);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            product_value.put("signature_path", "");
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        product_value.put("signature_path", "");
+                    }
+
+
+
+
+                    // product_value.put("signature_path", cn.getSignature_image());
+                    customer_id = cn.get_category_id();
+                    // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
+                    // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
+                    //product_value.put("signature_image_name", uploadImage);
+                    product_value.put("device_code", Global_Data.device_id);
+
+                    if(cn.get_shedule_payment_mode().equalsIgnoreCase("Secondary Sales / Retail Sales"))
+                    {
+                        s = "Retail Sales";
+                    }
+                    else
+                    {
+                        s = cn.get_shedule_payment_mode();
+                    }
+                    product_value.put("order_type", s);
+                    // product_value.put("conference_code", cn.getconference_id());
+                    order.put(product_value);
+                    Log.d("count", "a" + ++a);
+                    //delete_order_no = cn.getORDER_NUMBER();
+                    List<Local_Data> contactsproduct = dbvoc.Get_OrderProducts(cn.get_category_code());
+                    for (Local_Data cnp : contactsproduct) {
+                        JSONObject item = new JSONObject();
+                        item.put("order_number", cnp.get_category_code());
+                        item.put("item_number",cnp.get_delivery_product_id());
+                        item.put("total_qty", cnp.get_stocks_product_quantity());
+                        item.put("MRP", cnp.getMRP());
+                        item.put("amount", cnp.get_Claims_amount());
+                        item.put("scheme_code", cnp.getSche_code());
+
+                        total_ammount += Double.valueOf(cnp.get_Claims_amount());
+
+
+                        product.put(item);
+
+                    }
+                }
+
+
+
+                product_valuenew.put("orders", order);
+                product_valuenew.put("order_products", product);
+                product_valuenew.put("imei_no", Global_Data.device_id);
+                Log.d("customers",customer.toString());
+
+                Log.d("Orders", order.toString());
+
+                Log.d("order_products",product.toString());
+
+                Log.d("product_valuenew",product_valuenew.toString());
+
+                String  domain = context.getResources().getString(R.string.service_domain);
+                Log.i("volley", "domain: " + domain);
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain+"orders/save_orders", product_valuenew, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("volley", "response: " + response);
+
+
+                        String response_result = "";
+
+                        try {
+                            response_result = response.getString("result");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+
+                        if (response_result.equalsIgnoreCase("Device not found.")) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast toast = Toast.makeText(context, "Device Not Found", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    dialog.dismiss();
+
+
+                                }
+                            });
+
+                        } else {
+
+
+
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+
+
+                                }
+                            });
+
+                            mobile_numbers.clear();
+
+                            if (!Global_Data.customer_MobileNumber.equalsIgnoreCase(null) && !Global_Data.customer_MobileNumber.equalsIgnoreCase("null") && !Global_Data.customer_MobileNumber.equalsIgnoreCase("") && !Global_Data.customer_MobileNumber.equalsIgnoreCase(" ")) {
+                                mobile_numbers.add(Global_Data.customer_MobileNumber);
+                            }
+
+                            if (!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null") && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("") && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" ")) {
+                                mobile_numbers.add(Global_Data.cus_MAnager_mobile);
+                            }
+
+                            String gaddress = "";
+                            try {
+                                if (Global_Data.address.equalsIgnoreCase("null")) {
+                                    gaddress = "";
+                                } else {
+                                    gaddress = Global_Data.address;
+                                }
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    public void run() {
+
+
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                            List<Local_Data> contactsn = dbvoc.Getcustomer_email(customer_id);
+                            for (Local_Data cn : contactsn) {
+                                email_adress = cn.get_Description();
+                            }
+                            Global_Data.GLOvel_GORDER_ID = "";
+                            String val = "";
+                            dbvoc.updateCustomerby_CreateAt(val);
+                            dbvoc.getDeleteTableorder_bycustomer(Global_Data.order_retailer.trim(), "Secondary Sales / Retail Sales", Order_number);
+                            dbvoc.getDeleteTableorderproduct_bycustomer(Global_Data.order_retailer.trim(), "Secondary Sales / Retail Sales", Order_number);
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    dialog.dismiss();
+                                    final Dialog dialog1 = new Dialog(context);
+                                    dialog1.setCancelable(false);
+
+                                    //tell the Dialog to use the dialog.xml as it's layout description
+                                    dialog1.setContentView(R.layout.dialog);
+                                    dialog1.setTitle("Order Status :");
+
+                                    TextView txt = (TextView) dialog1.findViewById(R.id.txtOrderID);
+
+                                    txt.setText("Order is generated.");
+                                    TextView txtMessage = (TextView) dialog1.findViewById(R.id.txtMessage);
+                                    TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
+
+                                    txtEmail.setText("Mail will be sent to " + email_adress);
+                                    if (!mobile_numbers.isEmpty() && mobile_numbers.size() > 0) {
+                                        txtMessage.setText("Sms Send Successfully");
+                                    }
+
+
+                                    ImageView dialogButton = (ImageView) dialog1.findViewById(R.id.dialogButton);
+
+                                    dialogButton.setOnClickListener(new OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialog1.dismiss();
+                                            Intent intentn = new Intent(context, MainActivity.class);
+                                            context.startActivity(intentn);
+                                            ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                            ((Activity) context).finish();
+                                        }
+                                    });
+
+                                    dialog1.show();
+                                }
+                            });
+
+
+
+                        }
+                    }
+                },   new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(final VolleyError error) {
+
+
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast.makeText(context,
+                                            "your internet connection is not working, saving locally. Please sync when Internet is available",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            });
 
                         } else if (error instanceof AuthFailureError) {
 

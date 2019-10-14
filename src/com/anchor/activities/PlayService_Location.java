@@ -146,6 +146,7 @@ public class PlayService_Location implements LocationListener {
         {
             if (mGoogleApiClient == null) {
                 mGoogleApiClient = new GoogleApiClient.Builder(c_context).addApi(LocationServices.API)
+
                         .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                             @Override
                             public void onConnectionSuspended(int cause) {

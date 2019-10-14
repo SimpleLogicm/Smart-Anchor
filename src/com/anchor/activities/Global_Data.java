@@ -161,6 +161,7 @@ public class Global_Data {
 	public static String GLOvel_ITEM_NUMBER="";
 	public static String GLOvel_ITEM_NUMBER_RETURN="";
 	public static String GLOvel_GORDER_ID="";
+    public static String GLOvel_SUB_GORDER_ID="";
 	public static String GLOvel_GORDER_ID_RETURN="";
 	public static String GLOvel_REMARK="";
 	public static String GLOvel_USER_EMAIL="";

@@ -1,7 +1,10 @@
 package com.anchor.activities;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -212,63 +215,11 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
         SharedPreferences spf12 = SubDealer_NewOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
         Global_Data.app_sound = spf12.getBoolean("var_addmore", false);
 
-        //for BU
+
         result_bu.clear();
-        //result_bu.add("Select BU");
-
-
-        // Reading all
-
-
         try
         {
-//			if(!Global_Data.Search_business_unit_name.equalsIgnoreCase("") &&  !Global_Data.GLObalOrder_id.equalsIgnoreCase(""))
-//			{
-//				String str_bunit = "";
-//				result_bu.clear();
-//				List<Local_Data> contact_bu = dbvoc.getB_Unit_byName(Global_Data.Search_business_unit_name);
-//				result_bu.add("Select BU");
-//				for (Local_Data cn : contact_bu) {
-//					str_bunit = "" + cn.getBunit();
-//					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
-//						result_bu.add(str_bunit);
-//					}
-//				}
-//
-//				dataAdapterBu = new ArrayAdapter<String>(SubDealer_NewOrderActivity.this, R.layout.spinner_item, result_bu);
-//				dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
-//				spnBu.setAdapter(dataAdapterBu);
-//
-//				if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit) && !result_bu.isEmpty())
-//				{
-//					spnBu.setSelection(result_bu.indexOf(str_bunit));
-//				}
-//
-//				if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit.trim())) {
-//					result_bussiness.clear();
-//					result_bussiness.add("Select Business Division");
-//
-////					results_beat.clear();
-////					results_beat.add("Select Beat");
-//					List<Local_Data> contacts2 = dbvoc.getBdivByBunit(str_bunit.trim());
-//					for (Local_Data cn : contacts2) {
-//
-//						if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
-//							result_bussiness.add(cn.getprimary_category());
-//						}
-//
-//					}
-//
-//					dataAdapterBd = new ArrayAdapter<String>(SubDealer_NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
-//					dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-//					spnBusinessDiv.setAdapter(dataAdapterBd);
-//
-//
-//				}
-//
-//			}
-//			else
-//			{
+
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
 
                 result_bu.clear();
@@ -1589,23 +1540,52 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
         // TODO Auto-generated method stub
         //super.onBackPressed();
 
-        Global_Data.spiner_list_modelList.clear();
-        Global_Data.Search_business_unit_name= "";
-        Global_Data.GLOVEL_LONG_DESC = "";
-        Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-        Global_Data.GLOVEL_ITEM_MRP = "";
-        Global_Data.Search_business_unit_name = "";
-        Global_Data.Search_Category_name = "";
-        Global_Data.Search_BusinessCategory_name = "";
-        Global_Data.Search_brand_name = "";
-        Global_Data.spiner_list_modelList.clear();
-        Global_Data.array_of_pVarient.clear();
-        // Global_Data.productList.clear();
+        AlertDialog alertDialog = new AlertDialog.Builder(SubDealer_NewOrderActivity.this).create(); //Read Update
+        alertDialog.setTitle("Warning");
+        alertDialog.setMessage(" Are you sure you want to cancel?");
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
-        Intent i=new Intent(SubDealer_NewOrderActivity.this, Sub_Dealer_Order_Main.class);
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        startActivity(i);
-        finish();
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Global_Data.spiner_list_modelList.clear();
+                Global_Data.Search_business_unit_name= "";
+                Global_Data.GLOVEL_LONG_DESC = "";
+                Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                Global_Data.GLOVEL_ITEM_MRP = "";
+                Global_Data.Search_business_unit_name = "";
+                Global_Data.Search_Category_name = "";
+                Global_Data.Search_BusinessCategory_name = "";
+                Global_Data.Search_brand_name = "";
+                Global_Data.spiner_list_modelList.clear();
+                Global_Data.array_of_pVarient.clear();
+                // Global_Data.productList.clear();
+
+                Global_Data.GLOvel_SUB_GORDER_ID = "";
+                dbvoc.getDeleteTable("sub_orders");
+                dbvoc.getDeleteTable("sub_order_pr");
+
+                Intent i=new Intent(SubDealer_NewOrderActivity.this, Sub_Dealer_Order_Main.class);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                startActivity(i);
+                finish();
+
+            }
+        });
+
+        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+
+            }
+        });
+        alertDialog.show();
+
+
+
 
 
     }
