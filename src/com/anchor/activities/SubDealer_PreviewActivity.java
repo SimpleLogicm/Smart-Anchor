@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ActionMode;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,7 +36,7 @@ import com.anchor.animation.ActivitySwitcher;
 import com.anchor.model.Product;
 import com.anchor.swipelistview.BaseSwipeListViewListener;
 import com.anchor.swipelistview.SwipeListView;
-import com.anchor.swipelistview.sample.adapters.PackageAdapter;
+import com.anchor.swipelistview.sample.adapters.Sub_Dealer_Preview_Adapter;
 import com.anchor.swipelistview.sample.utils.SettingsManager;
 import com.anchor.webservice.ConnectionDetector;
 
@@ -57,7 +58,7 @@ public class SubDealer_PreviewActivity extends BaseActivity {
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     private static final int REQUEST_CODE_SETTINGS = 0;
     private ArrayList<String> Distributer_list = new ArrayList<String>();
-    private PackageAdapter adapter;
+    private Sub_Dealer_Preview_Adapter adapter;
     private ArrayList<Product> dataOrder;
     LoginDataBaseAdapter loginDataBaseAdapter;
     private SwipeListView swipeListView;
@@ -158,7 +159,7 @@ public class SubDealer_PreviewActivity extends BaseActivity {
             mActionBar.setDisplayHomeAsUpEnabled(true);
         }catch(Exception ex){ex.printStackTrace();}
 
-        adapter = new PackageAdapter(SubDealer_PreviewActivity.this, SwipeList);
+        adapter = new Sub_Dealer_Preview_Adapter(SubDealer_PreviewActivity.this, SwipeList);
 
 
         totalPrice=0.00f;
@@ -274,9 +275,20 @@ public class SubDealer_PreviewActivity extends BaseActivity {
                 {
                     firstLaunch=true;
 
-                    Intent order_home = new Intent(getApplicationContext(),SubDealer_Signature_Activity.class);
-                    startActivity(order_home);
-                    finish();
+                    if(!Global_Data.statusOrderActivity.equalsIgnoreCase("Yes"))
+                    {
+                        Intent order_home = new Intent(getApplicationContext(),SubDealer_Signature_Activity.class);
+                        startActivity(order_home);
+                        finish();
+                    }
+                    else
+                    {
+                        Toast toast = Toast.makeText(SubDealer_PreviewActivity.this, "Please update previous order or add more items if you want to sync this order.", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+
+
 
                     return true;
                 }
@@ -312,7 +324,7 @@ public class SubDealer_PreviewActivity extends BaseActivity {
                             dbvoc.getDeleteTable("sub_orders");
                             dbvoc.getDeleteTable("sub_order_products");
                             Toast.makeText(SubDealer_PreviewActivity.this, "Order Canceled Successfully", Toast.LENGTH_SHORT).show();
-                            Intent order_home = new Intent(getApplicationContext(),Order.class);
+                            Intent order_home = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(order_home);
                             finish();
                             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);

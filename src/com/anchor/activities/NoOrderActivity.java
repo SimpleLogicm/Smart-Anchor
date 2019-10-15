@@ -490,7 +490,7 @@ public class NoOrderActivity extends BaseActivity {
     }
 
 
-    public void                                                                                                                    call_service() {
+    public void call_service() {
         System.gc();
 
         Calendar c = Calendar.getInstance();
@@ -565,16 +565,26 @@ public class NoOrderActivity extends BaseActivity {
                     if (Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
                         String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 
-                        loginDataBaseAdapter.insertNoOrder("", Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_CUSTOMER_ID, "",
-                                Global_Data.GLOvel_USER_EMAIL, "", "", "", "no", "", "", "", Noorder_res, "Other", Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, PINString);
+                        cd = new ConnectionDetector(NoOrderActivity.this);
+                        isInternetPresent = cd.isConnectingToInternet();
+                        if (isInternetPresent) {
+                            reason_name = Noorder_res;
+                            reason_codes = "";
+                            new NoOrderActivity.Varientsave().execute();
+                        } else {
+                            loginDataBaseAdapter.insertNoOrder("", Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_CUSTOMER_ID, "",
+                                    Global_Data.GLOvel_USER_EMAIL, "", "", "", "no", "", "", "", Noorder_res, "Other", Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, PINString);
 
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "No Order Save Successfully", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        Intent a = new Intent(NoOrderActivity.this, Order.class);
-                        startActivity(a);
-                        finish();
+                            Toast toast = Toast.makeText(getApplicationContext(),
+                                    "No Order Save Successfully", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            Intent a = new Intent(NoOrderActivity.this, Order.class);
+                            startActivity(a);
+                            finish();
+                        }
+
+
                     } else {
 
                         reason_name = Noorder_res;
@@ -605,18 +615,28 @@ public class NoOrderActivity extends BaseActivity {
                     }
 
                     if (Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
-                        String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
-                        loginDataBaseAdapter.insertNoOrder("", Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_CUSTOMER_ID, "",
-                                Global_Data.GLOvel_USER_EMAIL, "", "", "", "no", "", "", "", reason_code, "", Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, PINString);
+
+                        cd = new ConnectionDetector(NoOrderActivity.this);
+                        isInternetPresent = cd.isConnectingToInternet();
+                        if (isInternetPresent) {
+                            reason_name = Noorder_res;
+                            reason_codes = "";
+                            new NoOrderActivity.Varientsave().execute();
+                        } else {
+                            String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
+                            loginDataBaseAdapter.insertNoOrder("", Global_Data.GLOvel_CUSTOMER_ID, Global_Data.GLOvel_CUSTOMER_ID, "",
+                                    Global_Data.GLOvel_USER_EMAIL, "", "", "", "no", "", "", "", reason_code, "", Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, PINString);
 
 
-                        Toast toast = Toast.makeText(getApplicationContext(),
-                                "No Order Save Successfully", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        Intent a = new Intent(NoOrderActivity.this, Order.class);
-                        startActivity(a);
-                        finish();
+                            Toast toast = Toast.makeText(getApplicationContext(),
+                                    "No Order Save Successfully", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            Intent a = new Intent(NoOrderActivity.this, Order.class);
+                            startActivity(a);
+                            finish();
+                        }
+
                     } else {
 
                         reason_name = "";
@@ -782,6 +802,8 @@ public class NoOrderActivity extends BaseActivity {
                     public void run() {
 
                         try {
+                            buttonnoOrderSave.setEnabled(false);
+                            buttonnoOrderSave.setText("Wait...");
                             AppLocationManager appLocationManager = new AppLocationManager(NoOrderActivity.this);
                             Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
                             Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
@@ -804,7 +826,6 @@ public class NoOrderActivity extends BaseActivity {
                 });
 
 
-
                 JSONArray no_order = new JSONArray();
                 JSONObject product_value = new JSONObject();
                 JSONObject product_valuenew = new JSONObject();
@@ -813,42 +834,89 @@ public class NoOrderActivity extends BaseActivity {
                 JSONObject no_order_object = new JSONObject();
 
                 try {
-                    String PINStrings = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
-                    no_order_object.put("order_number", PINStrings);
-                    no_order_object.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
-                    no_order_object.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
-                    no_order_object.put("sub_dealer_email", Global_Data.Sub_Email);
-                    no_order_object.put("dealer_id", Global_Data.Dealer_Code);
 
-                    if (!reason_name.equalsIgnoreCase("")) {
-                        no_order_object.put("reason_name", reason_name);
-                        no_order_object.put("reason_code", "");
+                    if (Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
+
+                        String PINStrings = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
+                        no_order_object.put("order_number", PINStrings);
+                        if (!reason_name.equalsIgnoreCase("")) {
+                            no_order_object.put("reason_name", reason_name);
+
+                        } else {
+                            no_order_object.put("reason_code", reason_codes);
+
+                        }
+                        no_order_object.put("user_email", Global_Data.GLOvel_USER_EMAIL);
+                        no_order_object.put("customer_code", Global_Data.GLOvel_CUSTOMER_ID);
+                        no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        no_order_object.put("longitude", Global_Data.GLOvel_LONGITUDE);
+
+                        no_order.put(no_order_object);
+
                     } else {
-                        no_order_object.put("reason_code", reason_codes);
-                        no_order_object.put("reason_name", "");
-                    }
-                    no_order_object.put("email", Global_Data.GLOvel_USER_EMAIL);
-                    no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
-                    no_order_object.put("longitude", Global_Data.GLOvel_LONGITUDE);
+                        String PINStrings = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
+                        no_order_object.put("order_number", PINStrings);
+                        no_order_object.put("sub_dealer_code", Global_Data.Sub_Dealer_Code);
+                        no_order_object.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
+                        no_order_object.put("sub_dealer_email", Global_Data.Sub_Email);
+                        no_order_object.put("dealer_id", Global_Data.Dealer_Code);
 
-                    no_order.put(no_order_object);
+                        if (!reason_name.equalsIgnoreCase("")) {
+                            no_order_object.put("reason_name", reason_name);
+                            no_order_object.put("reason_code", "");
+                        } else {
+                            no_order_object.put("reason_code", reason_codes);
+                            no_order_object.put("reason_name", "");
+                        }
+                        no_order_object.put("email", Global_Data.GLOvel_USER_EMAIL);
+                        no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
+                        no_order_object.put("longitude", Global_Data.GLOvel_LONGITUDE);
+
+                        no_order.put(no_order_object);
+                    }
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            buttonnoOrderSave.setEnabled(true);
+                            buttonnoOrderSave.setText("Submit");
+                            dialog.dismiss();
+
+                        }
+                    });
+
                 }
 
 
                 Double pp = 0.0;
                 try {
 
-
-                    product_valuenew.put("sub_dealer_no_order", no_order);
-                    product_valuenew.put("imei_no", Global_Data.device_id);
-                    Log.d("sub_dealer_no_order", no_order.toString());
-                    Log.d("product_valuenew", product_valuenew.toString());
-
                     String domain = NoOrderActivity.this.getResources().getString(R.string.service_domain);
+                    String service_url = "";
+                    if (Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
+                        service_url = domain + "no_orders/save_no_orders";
+                        product_valuenew.put("no_orders", no_order);
+                        product_valuenew.put("imei_no", Global_Data.device_id);
+                        Log.d("No Order", no_order.toString());
+                        //Log.d("product_valuenew", product_valuenew.toString());
+                    }
+                    else
+                    {
+                        service_url = domain + "sub_dealers/create_sub_delaer_no_order";
+                        product_valuenew.put("sub_dealer_no_order", no_order);
+                        product_valuenew.put("imei_no", Global_Data.device_id);
+                        Log.d("sub_dealer_no_order", no_order.toString());
+                        //Log.d("product_valuenew", product_valuenew.toString());
+                    }
+
+
+
+
+
                     Log.i("volley", "domain: " + domain);
-                    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "sub_dealers/create_sub_delaer_no_order", product_valuenew, new Response.Listener<JSONObject>() {
+                    JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, service_url, product_valuenew, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.i("volley", "response: " + response);
@@ -865,6 +933,8 @@ public class NoOrderActivity extends BaseActivity {
                                     public void run() {
 
                                         dialog.dismiss();
+                                        buttonnoOrderSave.setEnabled(true);
+                                        buttonnoOrderSave.setText("Submit");
                                     }
                                 });
                             }
@@ -877,6 +947,8 @@ public class NoOrderActivity extends BaseActivity {
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                         dialog.dismiss();
+                                        buttonnoOrderSave.setEnabled(true);
+                                        buttonnoOrderSave.setText("Submit");
 
 
                                     }
@@ -886,9 +958,12 @@ public class NoOrderActivity extends BaseActivity {
 
                                 runOnUiThread(new Runnable() {
                                     public void run() {
+                                        buttonnoOrderSave.setEnabled(true);
+                                        buttonnoOrderSave.setText("Submit");
 
                                         Toast.makeText(NoOrderActivity.this, response_result, Toast.LENGTH_LONG).show();
                                         finish();
+
 
                                         dialog.dismiss();
 
@@ -965,6 +1040,8 @@ public class NoOrderActivity extends BaseActivity {
                             }
                             runOnUiThread(new Runnable() {
                                 public void run() {
+                                    buttonnoOrderSave.setEnabled(true);
+                                    buttonnoOrderSave.setText("Submit");
 
                                     dialog.dismiss();
                                 }
@@ -983,13 +1060,29 @@ public class NoOrderActivity extends BaseActivity {
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            buttonnoOrderSave.setEnabled(true);
+                            buttonnoOrderSave.setText("Submit");
+                            dialog.dismiss();
+
+                        }
+                    });
                 }
             } else {
-                dialog.dismiss();
-                Toast.makeText(NoOrderActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+               // dialog.dismiss();
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        buttonnoOrderSave.setEnabled(true);
+                        buttonnoOrderSave.setText("Submit");
+
+                        dialog.dismiss();
+                        Toast.makeText(NoOrderActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
-
-
 
 
             return "Executed";
@@ -1006,7 +1099,6 @@ public class NoOrderActivity extends BaseActivity {
                     dialog.dismiss();
                 }
             });
-
 
 
         }

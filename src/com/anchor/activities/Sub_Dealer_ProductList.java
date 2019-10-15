@@ -98,7 +98,7 @@ public class Sub_Dealer_ProductList extends Activity {
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
     static final String TAG_STOCK = "PRODUCT_STOCK";
-    Button buttonPreviewAddMOre,buttonPreviewv,addmorenews;
+    Button buttonPreviewAddMOre, buttonPreviewv, addmorenews;
     public static final int SIGNATURE_ACTIVITY = 1;
     AutoCompleteTextView Product_Variant;
     RecyclerView spinner_recycleview;
@@ -237,13 +237,7 @@ public class Sub_Dealer_ProductList extends Activity {
                 try {
 
                     List<Local_Data> cont1 = dbvoc.getSearchProduct_with_name(Product_Variant.getText().toString());
-//
-//                        cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
-
-
                     if (cont1.size() <= 0) {
-                        // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
-
                         Sub_Dealer_ProductList.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Sorry No Record Found.", Toast.LENGTH_SHORT);
@@ -274,10 +268,8 @@ public class Sub_Dealer_ProductList extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
-                            //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
-
-                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
+                            List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_SUBORDER_ID(Global_Data.GLOvel_SUB_GORDER_ID, cnt1.getCode());
 
                             if (contactsn.size() > 0) {
                                 for (Local_Data cn : contactsn) {
@@ -365,7 +357,7 @@ public class Sub_Dealer_ProductList extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                if (!Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
+                if (!Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase("")) {
 
                     if (Global_Data.Order_hashmap.size() > 0) {
                         AlertDialog alertDialog = new AlertDialog.Builder(Sub_Dealer_ProductList.this).create(); //Read Update
@@ -459,7 +451,6 @@ public class Sub_Dealer_ProductList extends Activity {
                                 Global_Data.Order_hashmap.clear();
 
 
-
                                 Intent i = new Intent(Sub_Dealer_ProductList.this, SubDealer_NewOrderActivity.class);
                                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 startActivity(i);
@@ -478,9 +469,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
 
                         alertDialog.show();
-                    }
-                    else
-                    {
+                    } else {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
@@ -497,13 +486,11 @@ public class Sub_Dealer_ProductList extends Activity {
                         Global_Data.Order_hashmap.clear();
 
 
-
                         Intent i = new Intent(Sub_Dealer_ProductList.this, SubDealer_NewOrderActivity.class);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         startActivity(i);
                         finish();
                     }
-
 
 
                 }
@@ -512,12 +499,11 @@ public class Sub_Dealer_ProductList extends Activity {
         });
 
 
-
         buttonPreviewv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
 
-                if (!Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
+                if (!Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase("")) {
 
 
                     Global_Data.GLOVEL_LONG_DESC = "";
@@ -528,7 +514,7 @@ public class Sub_Dealer_ProductList extends Activity {
                     Global_Data.Search_BusinessCategory_name = "";
                     Global_Data.Search_brand_name = "";
 
-                    Intent i = new Intent(Sub_Dealer_ProductList.this, PreviewOrderSwipeActivity.class);
+                    Intent i = new Intent(Sub_Dealer_ProductList.this, SubDealer_PreviewActivity.class);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     startActivity(i);
                     finish();
@@ -542,8 +528,6 @@ public class Sub_Dealer_ProductList extends Activity {
 
             }
         });
-
-
 
 
     }
@@ -606,8 +590,34 @@ public class Sub_Dealer_ProductList extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
-                            list1.add("");
-                            list2.add("");
+
+
+
+                            if(!Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase(""))
+                            {
+                                List<Local_Data> contactsn = dbvoc.GetSUBOrder_Product_BY_ORDER_ID(Global_Data.GLOvel_SUB_GORDER_ID, cnt1.getCode());
+                                if (contactsn.size() > 0) {
+                                    for (Local_Data cn : contactsn) {
+
+                                        list1.add(cn.get_delivery_product_order_quantity());
+                                        list2.add("PRICE : " + cn.getAmount());
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                            pp += Double.valueOf(cn.getAmount());
+                                        }
+                                    }
+                                } else {
+                                    list1.add("");
+                                    list2.add("");
+                                }
+                            }
+                            else
+                            {
+                                list1.add("");
+                                list2.add("");
+                            }
+
+
+
                             //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             resultsvarient.add(cnt1.getProduct_variant());
@@ -631,7 +641,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                 // data into the
                                 // AutoCompleteTextView
                                 Product_Variant.setTextColor(Color.BLACK);
-                               // txttotalPreview.setText("Total : " + pp);
+                                 txttotalPreview.setText("Total : " + pp);
 
 
                             }
@@ -680,8 +690,28 @@ public class Sub_Dealer_ProductList extends Activity {
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                                 resultsvarient.add(cnt1.getProduct_variant());
-                                list1.add("");
-                                list2.add("");
+                                if(!Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase(""))
+                                {
+                                    List<Local_Data> contactsn = dbvoc.GetSUBOrder_Product_BY_ORDER_ID(Global_Data.GLOvel_SUB_GORDER_ID, cnt1.getCode());
+                                    if (contactsn.size() > 0) {
+                                        for (Local_Data cn : contactsn) {
+
+                                            list1.add(cn.get_delivery_product_order_quantity());
+                                            list2.add("PRICE : " + cn.getAmount());
+                                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
+                                                pp += Double.valueOf(cn.getAmount());
+                                            }
+                                        }
+                                    } else {
+                                        list1.add("");
+                                        list2.add("");
+                                    }
+                                }
+                                else
+                                {
+                                    list1.add("");
+                                    list2.add("");
+                                }
 
                                 SwipeList.add(mapp);
                             }
@@ -701,7 +731,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                     // data into the
                                     // AutoCompleteTextView
                                     Product_Variant.setTextColor(Color.BLACK);
-                                  //  txttotalPreview.setText("Total : " + pp);
+                                      txttotalPreview.setText("Total : " + pp);
 
 
                                 }
@@ -756,7 +786,7 @@ public class Sub_Dealer_ProductList extends Activity {
                                     adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
 
                                     swipeListView.setAdapter(adapter);
-                                  //  txttotalPreview.setText("Total : " + pp);
+                                    //  txttotalPreview.setText("Total : " + pp);
 
 
                                 }
@@ -871,9 +901,9 @@ public class Sub_Dealer_ProductList extends Activity {
 
             if (!p_id.isEmpty() && q_check.equalsIgnoreCase("yes")) {
 
-                cd = new ConnectionDetector(Sub_Dealer_ProductList.this);
-                isInternetPresent = cd.isConnectingToInternet();
-                if (isInternetPresent) {
+//                cd = new ConnectionDetector(Sub_Dealer_ProductList.this);
+//                isInternetPresent = cd.isConnectingToInternet();
+//                if (isInternetPresent) {
 
                     try {
                         AppLocationManager appLocationManager = new AppLocationManager(Sub_Dealer_ProductList.this);
@@ -897,72 +927,73 @@ public class Sub_Dealer_ProductList extends Activity {
 
                         String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
 
-                        if (Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase("")) {
+                        if (Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase("") ||  Global_Data.statusOrderActivity.equalsIgnoreCase("Yes")) {
 
                             Global_Data.GLOvel_SUB_GORDER_ID = "R" + PINString;
+                            Global_Data.statusOrderActivity = "";
 
                             loginDataBaseAdapter.insertSUBOrders("", Global_Data.GLOvel_SUB_GORDER_ID, Global_Data.GLOvel_USER_EMAIL, Global_Data.Sub_Dealer_Code, Global_Data.SUB_Mobile, Global_Data.Sub_Email, Global_Data.Dealer_Code, Global_Data.address, Global_Data.Sub_shop_name, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "", "", "", "", "", "", "", "", "", "", "");
 
                         }
 
-                            Double pp = 0.0;
-                            try {
-                                for (int k = 0; k < p_id.size(); k++) {
+                        Double pp = 0.0;
+                        try {
+                            for (int k = 0; k < p_id.size(); k++) {
 
 
-                                    List<Local_Data> contactsn = dbvoc.GetSUB_Orders_BY_ORDER_ID(Global_Data.GLOvel_SUB_GORDER_ID, p_id.get(k));
+                                List<Local_Data> contactsn = dbvoc.GetSUB_Orders_BY_ORDER_ID(Global_Data.GLOvel_SUB_GORDER_ID, p_id.get(k));
 
-                                    if (contactsn.size() > 0) {
+                                if (contactsn.size() > 0) {
 
-                                        for (Local_Data cn : contactsn) {
+                                    for (Local_Data cn : contactsn) {
 
-                                            if (!(p_q.get(k).equalsIgnoreCase(cn.get_delivery_product_order_quantity())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
-                                                dbvoc.update_itemamountandquantity_subDealer(String.valueOf(p_q.get(k)), String.valueOf(p_price.get(k)), p_id.get(k), Global_Data.GLObalOrder_id);
-                                            } else if (!(p_q.get(k).equalsIgnoreCase(cn.get_delivery_product_order_quantity())) && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k)))) {
-                                                dbvoc.getDeleteTableSuborderproduct_byITEM_NUMBER(p_id.get(k), Global_Data.GLObalOrder_id);
-                                            }
+                                        if (!(p_q.get(k).equalsIgnoreCase(cn.get_delivery_product_order_quantity())) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
+                                            dbvoc.update_itemamountandquantity_subDealer(String.valueOf(p_q.get(k)), String.valueOf(p_price.get(k)), p_id.get(k), Global_Data.GLOvel_SUB_GORDER_ID);
+                                        } else if (!(p_q.get(k).equalsIgnoreCase(cn.get_delivery_product_order_quantity())) && !(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k)))) {
+                                            dbvoc.getDeleteTableSuborderproduct_byITEM_NUMBER(p_id.get(k), Global_Data.GLOvel_SUB_GORDER_ID);
                                         }
-                                    } else {
-
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
-                                            loginDataBaseAdapter.insertSUb_OrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
-                                        }
-
-
                                     }
+                                } else {
 
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
-                                        pp += Double.valueOf(p_price.get(k));
+                                        loginDataBaseAdapter.insertSUb_OrderProducts(" ", " ", Global_Data.GLOvel_SUB_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
                                     }
-
-                                    q_check = "";
-                                    Global_Data.Order_hashmap.clear();
-                                    p_id.clear();
-                                    p_q.clear();
-                                    p_price.clear();
-                                    p_name.clear();
-                                    p_mrp.clear();
-                                    p_rp.clear();
-
-                                    runOnUiThread(new Runnable() {
-                                        public void run() {
-
-                                            Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items add successfully", Toast.LENGTH_LONG);
-                                            toast.setGravity(Gravity.CENTER, 0, 0);
-                                            toast.show();
-
-
-                                        }
-                                    });
-
 
 
                                 }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
+                                    pp += Double.valueOf(p_price.get(k));
+                                }
                             }
 
+                            q_check = "";
+                            Global_Data.Order_hashmap.clear();
+                            p_id.clear();
+                            p_q.clear();
+                            p_price.clear();
+                            p_name.clear();
+                            p_mrp.clear();
+                            p_rp.clear();
 
+                            runOnUiThread(new Runnable() {
+                                public void run() {
+
+                                    Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items add successfully", Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
+                                    buttonPreviewAddMOre.setEnabled(true);
+                                    buttonPreviewAddMOre.setText("Save");
+
+
+                                }
+                            });
+
+
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
 
 
                     } catch (Exception ex) {
@@ -970,10 +1001,10 @@ public class Sub_Dealer_ProductList extends Activity {
                     }
 
 
-                } else {
-                    dialog.dismiss();
-                    Toast.makeText(Sub_Dealer_ProductList.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    dialog.dismiss();
+//                    Toast.makeText(Sub_Dealer_ProductList.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+//                }
 
             } else {
 
@@ -1010,8 +1041,6 @@ public class Sub_Dealer_ProductList extends Activity {
                 public void run() {
 
 
-
-
                     buttonPreviewAddMOre.setEnabled(false);
                     buttonPreviewAddMOre.setText("Wait...");
                     if (dialog == null)
@@ -1045,7 +1074,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
     public static void updateSum(Double sum) {
 
-       // txttotalPreview.setText("Total		:		"+sum);
+        // txttotalPreview.setText("Total		:		"+sum);
         Double total = 0.0;
 
         if (!(Global_Data.Order_hashmap.isEmpty())) {
@@ -1068,7 +1097,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(key_value_price_array[0])) {
 
-                            total +=Double.valueOf(key_value_price_array[0]);
+                            total += Double.valueOf(key_value_price_array[0]);
 
 
                         }
@@ -1079,18 +1108,14 @@ public class Sub_Dealer_ProductList extends Activity {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            txttotalPreview.setText("Total		:		"+total);
+            txttotalPreview.setText("Total		:		" + total);
 
-        }
-        else
-        {
-            txttotalPreview.setText("Total		:		"+0.0);
+        } else {
+            txttotalPreview.setText("Total		:		" + 0.0);
         }
 
 
     }
-
-
 
 
     public View getViewByPosition(int pos, ListView listView) {

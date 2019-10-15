@@ -33,7 +33,9 @@ import com.anchor.activities.MainActivity;
 import com.anchor.activities.Order;
 import com.anchor.activities.PlayService_Location;
 import com.anchor.activities.R;
+import com.anchor.activities.Sub_Dealer_Order_Main;
 import com.anchor.activities.Youtube_Player_Activity;
+import com.anchor.model.Sub_Dealer_Order_Model;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -96,6 +98,7 @@ public class getServices {
     static LoginDataBaseAdapter loginDataBaseAdapter;
     Location location;
     static String email_adress = "";
+    static String Sub_MOBILE = "";
     
    // static String Account_Flag = "";
     static  String customer_id = "";
@@ -4699,24 +4702,19 @@ public class getServices {
 
                 byte b5[];
 
-                List<Local_Data> contacts = dbvoc.GetOrders("Secondary Sales / Retail Sales", Global_Data.GLOvel_GORDER_ID);
+                List<Sub_Dealer_Order_Model> contacts = dbvoc.GetSubOrders(Global_Data.GLOvel_SUB_GORDER_ID);
                 //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
 
-                for (Local_Data cn : contacts)
+                for (Sub_Dealer_Order_Model cn : contacts)
                 {
                     JSONObject product_value = new JSONObject();
-                    product_value.put("order_number", cn.get_category_code());
+                    product_value.put("order_number", cn.getOrder_id());
 
-                    Order_number = cn.get_category_code();
-                    // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
-                    // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", cn.get_category_id());
-                    product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
+                    Order_number = cn.getOrder_id();
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getLatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getLongitude())) {
 
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
-
-                        product_value.put("latitude", cn.getlatitude());
-                        product_value.put("longitude", cn.getlongitude());
+                        product_value.put("latitude", cn.getLatitude());
+                        product_value.put("longitude", cn.getLongitude());
                     }
                     else
                     {
@@ -4724,32 +4722,39 @@ public class getServices {
                         product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
                     }
 
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
-                    product_value.put("details1", cn.getOrder_detail1());
-                    product_value.put("details2", cn.getOrder_detail2());
-                    product_value.put("details3", cn.getOrder_detail3());
-                    product_value.put("details4", cn.getOrder_detail4());
-                    product_value.put("order_category_code", cn.getOrder_category_type());
-                    product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("payment_term_code", cn.getAsset_code());
+                    email_adress = cn.getSub_dealer_email();
+                    Sub_MOBILE =  cn.getSub_dealer_mobile();
+                    product_value.put("email",  cn.getUser_email());
+                    product_value.put("sub_dealer_code",  cn.getSub_dealer_code());
+                    product_value.put("sub_dealer_mobile",  cn.getSub_dealer_mobile());
+                    product_value.put("sub_dealer_email", cn.getSub_dealer_email());
+                    product_value.put("dealer_id", cn.getDealer_id());
+                    product_value.put("booked_at", cn.getBooked_at());
+                    product_value.put("sub_dealer_shop_name", cn.getSub_dealer_shop_name());
 
-                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign()))
+                    product_value.put("order_type", cn.getOrder_type_code());
+                    product_value.put("need_by_date", cn.getNeed_by_date());
+                    product_value.put("shipment_priority", cn.getShipment_pr_code());
+                    product_value.put("name", cn.getName());
+                    product_value.put("remarks", cn.getRemarks());
+
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getImage()))
                     {
-                        order_image_url = cn.getimg_ordersign().trim();
+                        order_image_url = cn.getImage().trim();
                         // File filepath = new File(cn.getimg_ordersign());
                         // String  path =  "file://"+filepath.getPath();
                         try {
-                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getimg_ordersign()));
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getImage()));
                             ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
                             mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
                             b5 = bos5.toByteArray();
 
                             String getsign_str= Base64.encodeToString(b5,Base64.DEFAULT);
-                            product_value.put("order_image_string",getsign_str);
+                            product_value.put("picture1",getsign_str);
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                            product_value.put("order_image_string", "");
+                            product_value.put("picture1", "");
                         }
 
 
@@ -4757,16 +4762,16 @@ public class getServices {
                     }
                     else
                     {
-                        product_value.put("order_image_string", "");
+                        product_value.put("picture1", "");
                     }
 
-                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image()))
+                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature()))
                     {
-                        order_image_url = cn.getSignature_image().trim();
+                        order_image_url = cn.getSignature().trim();
                         // File filepath = new File(cn.getimg_ordersign());
                         // String  path =  "file://"+filepath.getPath();
                         try {
-                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature_image()));
+                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature()));
                             ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
                             mImageBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos5);
                             b5 = bos5.toByteArray();
@@ -4779,46 +4784,24 @@ public class getServices {
                             product_value.put("signature_path", "");
                         }
 
-
-
                     }
                     else
                     {
                         product_value.put("signature_path", "");
                     }
 
-
-
-
-                    // product_value.put("signature_path", cn.getSignature_image());
-                    customer_id = cn.get_category_id();
-                    // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
-                    // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
-                    //product_value.put("signature_image_name", uploadImage);
-                    product_value.put("device_code", Global_Data.device_id);
-
-                    if(cn.get_shedule_payment_mode().equalsIgnoreCase("Secondary Sales / Retail Sales"))
-                    {
-                        s = "Retail Sales";
-                    }
-                    else
-                    {
-                        s = cn.get_shedule_payment_mode();
-                    }
-                    product_value.put("order_type", s);
-                    // product_value.put("conference_code", cn.getconference_id());
                     order.put(product_value);
                     Log.d("count", "a" + ++a);
                     //delete_order_no = cn.getORDER_NUMBER();
-                    List<Local_Data> contactsproduct = dbvoc.Get_OrderProducts(cn.get_category_code());
+                    List<Local_Data> contactsproduct = dbvoc.Get_SubOrderProducts(cn.getOrder_id());
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
-                        item.put("order_number", cnp.get_category_code());
-                        item.put("item_number",cnp.get_delivery_product_id());
+                       // item.put("order_number", cnp.get_category_code());
+                        item.put("product_code",cnp.get_delivery_product_id());
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
-                        item.put("scheme_code", cnp.getSche_code());
+                        //item.put("scheme_code", cnp.getSche_code());
 
                         total_ammount += Double.valueOf(cnp.get_Claims_amount());
 
@@ -4830,20 +4813,20 @@ public class getServices {
 
 
 
-                product_valuenew.put("orders", order);
-                product_valuenew.put("order_products", product);
+                product_valuenew.put("sub_dealer_order", order);
+                product_valuenew.put("sub_dealer_order_details", product);
                 product_valuenew.put("imei_no", Global_Data.device_id);
                 Log.d("customers",customer.toString());
 
-                Log.d("Orders", order.toString());
+              //  Log.d("sub_dealer_order", order.toString());
 
-                Log.d("order_products",product.toString());
+              //  Log.d("sub_dealer_order_details",product.toString());
 
-                Log.d("product_valuenew",product_valuenew.toString());
+                Log.d("sub_dealer_order_Array",product_valuenew.toString());
 
                 String  domain = context.getResources().getString(R.string.service_domain);
                 Log.i("volley", "domain: " + domain);
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain+"orders/save_orders", product_valuenew, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain+"sub_dealers/create_sub_dealer_order_details", product_valuenew, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("volley", "response: " + response);
@@ -4852,7 +4835,7 @@ public class getServices {
                         String response_result = "";
 
                         try {
-                            response_result = response.getString("result");
+                            response_result = response.getString("message");
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -4881,27 +4864,16 @@ public class getServices {
                         } else {
 
 
-
+                            final String finalResponse_result = response_result;
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 public void run() {
 
-                                    Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, finalResponse_result, Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
 
 
                                 }
                             });
-
-                            mobile_numbers.clear();
-
-                            if (!Global_Data.customer_MobileNumber.equalsIgnoreCase(null) && !Global_Data.customer_MobileNumber.equalsIgnoreCase("null") && !Global_Data.customer_MobileNumber.equalsIgnoreCase("") && !Global_Data.customer_MobileNumber.equalsIgnoreCase(" ")) {
-                                mobile_numbers.add(Global_Data.customer_MobileNumber);
-                            }
-
-                            if (!Global_Data.cus_MAnager_mobile.equalsIgnoreCase(null) && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("null") && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase("") && !Global_Data.cus_MAnager_mobile.equalsIgnoreCase(" ")) {
-                                mobile_numbers.add(Global_Data.cus_MAnager_mobile);
-                            }
-
                             String gaddress = "";
                             try {
                                 if (Global_Data.address.equalsIgnoreCase("null")) {
@@ -4919,15 +4891,11 @@ public class getServices {
                                     }
                                 });
                             }
-                            List<Local_Data> contactsn = dbvoc.Getcustomer_email(customer_id);
-                            for (Local_Data cn : contactsn) {
-                                email_adress = cn.get_Description();
-                            }
-                            Global_Data.GLOvel_GORDER_ID = "";
+
+                            Global_Data.GLOvel_SUB_GORDER_ID = "";
                             String val = "";
-                            dbvoc.updateCustomerby_CreateAt(val);
-                            dbvoc.getDeleteTableorder_bycustomer(Global_Data.order_retailer.trim(), "Secondary Sales / Retail Sales", Order_number);
-                            dbvoc.getDeleteTableorderproduct_bycustomer(Global_Data.order_retailer.trim(), "Secondary Sales / Retail Sales", Order_number);
+                            dbvoc.getDeleteTable("sub_orders");
+                            dbvoc.getDeleteTable("sub_order_products");
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 public void run() {
 
@@ -4946,7 +4914,7 @@ public class getServices {
                                     TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
-                                    if (!mobile_numbers.isEmpty() && mobile_numbers.size() > 0) {
+                                    if (!Sub_MOBILE.equalsIgnoreCase("")) {
                                         txtMessage.setText("Sms Send Successfully");
                                     }
 
@@ -4957,7 +4925,7 @@ public class getServices {
                                         @Override
                                         public void onClick(View v) {
                                             dialog1.dismiss();
-                                            Intent intentn = new Intent(context, MainActivity.class);
+                                            Intent intentn = new Intent(context, Sub_Dealer_Order_Main.class);
                                             context.startActivity(intentn);
                                             ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             ((Activity) context).finish();

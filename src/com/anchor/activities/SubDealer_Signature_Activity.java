@@ -52,6 +52,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.model.Product;
+import com.anchor.model.Sub_Dealer_Order_Model;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
 import com.karumi.dexter.Dexter;
@@ -349,26 +350,26 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
         results_order_type.clear();
 
-        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
-
-            List<Local_Data> contacts1 = dbvoc.getorder_category_bycodeArray(Global_Data.order_category_code_array);
-            results_order_type.add("Select Order Type");
-            for (Local_Data cn : contacts1) {
-                if (!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" ")) {
-                    String str_categ = "" + cn.getOrder_type_name();
-                    results_order_type.add(str_categ);
-                }
-            }
-        } else {
-            List<Local_Data> contacts1 = dbvoc.getorder_category();
-            results_order_type.add("Select Order Type");
-            for (Local_Data cn : contacts1) {
-                if (!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" ")) {
-                    String str_categ = "" + cn.getOrder_type_name();
-                    results_order_type.add(str_categ);
-                }
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
+//
+//            List<Local_Data> contacts1 = dbvoc.getorder_category_bycodeArray(Global_Data.order_category_code_array);
+//            results_order_type.add("Select Order Type");
+//            for (Local_Data cn : contacts1) {
+//                if (!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" ")) {
+//                    String str_categ = "" + cn.getOrder_type_name();
+//                    results_order_type.add(str_categ);
+//                }
+//            }
+//        } else {
+        List<Local_Data> contacts1 = dbvoc.getorder_category();
+        results_order_type.add("Select Order Type");
+        for (Local_Data cn : contacts1) {
+            if (!cn.getOrder_type_name().equalsIgnoreCase("") && !cn.getOrder_type_name().equalsIgnoreCase(" ")) {
+                String str_categ = "" + cn.getOrder_type_name();
+                results_order_type.add(str_categ);
             }
         }
+        // }
 
 
         dataAdapter_order_type = new ArrayAdapter<String>(this, R.layout.spinner_item, results_order_type);
@@ -404,20 +405,20 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
         String cc_code = "";
 
-        List<Local_Data> contacts = dbvoc.GetOrders_details("Secondary Sales / Retail Sales", Global_Data.GLOvel_GORDER_ID);
+        List<Sub_Dealer_Order_Model> contacts = dbvoc.GetSubOrders(Global_Data.GLOvel_SUB_GORDER_ID);
 
         String s_pri = "";
         String asset_code = "";
         if (contacts.size() > 0) {
 
-            for (Local_Data cn : contacts) {
-                yourName.setText(cn.getOrder_detail3());
-                order_detail1.setText(cn.getOrder_detail1());
-                order_detail2.setText(cn.getOrder_detail2());
-                order_detail4.setText(cn.getOrder_detail4());
-                cc_code = cn.getOrder_category_type().trim();
-                asset_code = cn.getAsset_code().trim();
-                s_pri = cn.getshipment_pri();
+            for (Sub_Dealer_Order_Model cn : contacts) {
+                yourName.setText(cn.getName());
+                order_detail1.setText(cn.getNeed_by_date());
+                //order_detail2.setText(cn.getOrder_detail2());
+                order_detail4.setText(cn.getRemarks());
+                cc_code = cn.getOrder_type_code().trim();
+                // asset_code = cn.getAsset_code().trim();
+                s_pri = cn.getShipment_pr_code();
             }
 
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(s_pri)) {
@@ -550,7 +551,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-           // mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
+            // mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
 
 //            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
 //            try {
@@ -838,10 +839,11 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        // TODO Auto-generated method stub
         super.onBackPressed();
+        Intent i = new Intent(SubDealer_Signature_Activity.this, SubDealer_PreviewActivity.class);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        startActivity(i);
         finish();
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 
@@ -860,12 +862,11 @@ public class SubDealer_Signature_Activity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
-
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             try {
 
-                dbvoc.updateORDER_order_image(mCurrentPhotoPath, Global_Data.GLObalOrder_id);
+                dbvoc.updateSUbORDER_order_image(mCurrentPhotoPath, Global_Data.GLOvel_SUB_GORDER_ID);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -886,7 +887,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
                 mCurrentPhotoPath = "file:" + c.getString(columnIndex);
 
-                dbvoc.updateORDER_order_image(mCurrentPhotoPath, Global_Data.GLObalOrder_id);
+                dbvoc.updateSUbORDER_order_image(mCurrentPhotoPath, Global_Data.GLOvel_SUB_GORDER_ID);
 
                 pictureImagePath_new = c.getString(columnIndex);
 
@@ -1193,13 +1194,13 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
                                             try {
 
-                                                SaveImage(bitmap, "SI" + Global_Data.GLObalOrder_id);
+                                                SaveImage(bitmap, "SI" + Global_Data.GLOvel_SUB_GORDER_ID);
 
                                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
 
                                                     dbvoc.updateSub_ORDER_SIGNATURENEW_WITHLATLONG(Signature_path, Global_Data.GLOvel_SUB_GORDER_ID, order_detail1_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE);
                                                 } else {
-                                                    dbvoc.update_SUB_ORDER_SIGNATURENEW(Signature_path, Global_Data.GLObalOrder_id, order_detail1_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString());
+                                                    dbvoc.update_SUB_ORDER_SIGNATURENEW(Signature_path, Global_Data.GLOvel_SUB_GORDER_ID, order_detail1_text, order_type_name, order_detail4_text, order_type_code, shipment_pri.getSelectedItem().toString());
                                                 }
 
 
@@ -1213,7 +1214,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
                                             if (isInternetPresent) {
                                                 onDestroy();
-                                                getServices.SYNSUBDEALERCORDER(SubDealer_Signature_Activity.this, Global_Data.GLOvel_GORDER_ID);
+                                                getServices.SYNSUBDEALERCORDER(SubDealer_Signature_Activity.this, Global_Data.GLOvel_SUB_GORDER_ID);
                                             } else {
 
 

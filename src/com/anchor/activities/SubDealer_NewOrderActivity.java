@@ -1563,7 +1563,7 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
 
                 Global_Data.GLOvel_SUB_GORDER_ID = "";
                 dbvoc.getDeleteTable("sub_orders");
-                dbvoc.getDeleteTable("sub_order_pr");
+                dbvoc.getDeleteTable("sub_order_products");
 
                 Intent i=new Intent(SubDealer_NewOrderActivity.this, Sub_Dealer_Order_Main.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

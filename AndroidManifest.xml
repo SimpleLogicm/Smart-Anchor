@@ -197,6 +197,17 @@
             android:name=".CaptureSignature"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SubDealer_Signature_Activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SubDealer_PreviewActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ReturnOrderActivity"
             android:label="@string/app_name"
@@ -313,6 +324,14 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
             android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".Sub_Dealer_Item_Edit"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"
+            android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".Sound_Act"
             android:label="@string/app_name"

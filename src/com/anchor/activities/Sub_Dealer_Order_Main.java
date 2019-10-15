@@ -2,6 +2,7 @@ package com.anchor.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -76,7 +78,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String state_name = "";
     String city_name = "";
     String district_name = "";
-    Button s_submit,s_no_order,s_previous_order;
+    Button s_submit, s_no_order, s_previous_order;
     Spinner s_state, s_district, s_city;
     String s[];
     ProgressDialog progressDialog;
@@ -95,8 +97,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String S_ID = "";
     String B_ID = "";
     SharedPreferences sp;
-
-    ArrayList<String> list_sub_dealers = new ArrayList<String>();
     private ArrayList<String> results_Beats = new ArrayList<String>();
     private ArrayList<String> results1 = new ArrayList<String>();
     private ArrayList<String> results2 = new ArrayList<String>();
@@ -129,6 +129,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     ArrayAdapter<String> adaptorBeats;
     String beat_click_flag = "";
     String spinner_flag = "";
+    LoginDataBaseAdapter loginDataBaseAdapter;
 
 
     @Override
@@ -167,6 +168,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //        customerAutoAdapter = new CustomerAutoAdapter(autolist,Sub_Dealer_Order_Main.this );
 //        auto_recycleview.setAdapter(customerAutoAdapter);
 
+        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter = loginDataBaseAdapter.open();
+
         Global_Data.Customers.clear();
         Global_Data.Customers_map.clear();
         Global_Data.spiner_list_modelListn.clear();
@@ -179,9 +183,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             s_sub_dealer_search.setText(Global_Data.Sub_Dealer_name);
             s_sub_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.close_product, 0);
         }
-
-
-
 
 
         s_sub_dealer_search.setOnTouchListener(new View.OnTouchListener() {
@@ -318,8 +319,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             public void afterTextChanged(Editable s) {
                 if (s_dealer_search.getText().toString().trim().length() == 0) {
 
-                    if(beat_click_flag.equalsIgnoreCase(""))
-                    {
+                    if (beat_click_flag.equalsIgnoreCase("")) {
                         final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 Global_Data.Customers);
@@ -330,13 +330,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         s_dealer_search.setTextColor(Color.BLACK);
 
                         Beat_search.setSelection(0);
-                    }
-                    else
-                    {
+                    } else {
                         beat_click_flag = "";
                     }
-
-
 
 
                 } else {
@@ -352,7 +348,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             @Override
             public void onItemClick(AdapterView<?> parent, View arg1, int pos, long id) {
 
-                spinner_flag= Beat_search.getSelectedItem().toString();
+                spinner_flag = Beat_search.getSelectedItem().toString();
                 Global_Data.hideSoftKeyboard(Sub_Dealer_Order_Main.this);
 
                 String name = s_dealer_search.getText().toString();
@@ -361,22 +357,19 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 List<Local_Data> contacts2 = dbvoc.getbeat_bycuname(name);
                 if (contacts2.size() > 0) {
                     for (Local_Data localData : contacts2) {
-                         beats_id = localData.getBEAT_ID();
+                        beats_id = localData.getBEAT_ID();
                     }
                 }
 
-                try
-                {
+                try {
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(beats_id)) {
                         String beat_name = Dealer_ma_CODE.get(beats_id);
                         int spinnerPosition = adaptorBeats.getPosition(beat_name);
                         Beat_search.setSelection(spinnerPosition);
                     }
-                }catch(Exception ex)
-                {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-
 
 
             }
@@ -409,16 +402,13 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-
-                else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+                } else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
                     Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-                else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
+                } else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
                     Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                             Toast.LENGTH_SHORT);
@@ -434,13 +424,12 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     //  sub_dealer_code = "";
 
 
-
                     if (AllresultSubDealer.size() > 0) {
                         for (SubDealerModel dataItem : AllresultSubDealer) {
                             if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
                                 sub_dealer_code = dataItem.code;
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile =  dataItem.proprietor_mobile1;
+                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
                                 Global_Data.Sub_Email = dataItem.proprietor_email1;
                                 Global_Data.Sub_shop_name = dataItem.shop_name;
                                 valid_sub_dealer_flag = "yes";
@@ -454,8 +443,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
 
-                            if(Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase(""))
-                            {
+                            if (Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                                 Global_Data.Dealer_Code = "";
                             }
                         } catch (Exception ex) {
@@ -466,38 +454,125 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                     if (Global_Data.Dealer_Code.equalsIgnoreCase("") || !valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
 
-                        if(!valid_sub_dealer_flag.equalsIgnoreCase("yes"))
-                        {
+                        if (!valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
                             Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                        }
-                        else
-                        if(Global_Data.Dealer_Code.equalsIgnoreCase(""))
-                        {
+                        } else if (Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                             Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                         }
 
-                    }
-                    else
-                    {
+                    } else {
+                        Global_Data.GLOvel_SUB_GORDER_ID = "";
+                        Global_Data.statusOrderActivity = "";
                         Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
                         startActivity(s_dub);
                         finish();
                     }
 
 
-
-
-
                 }
             }
         });
 
+        s_previous_order.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Beat_search.getSelectedItem().toString().equalsIgnoreCase("Select Beat")) {
+
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Beat",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
+
+                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                } else {
+
+                    String sub_dealer_name = "";
+                    String address_type = "";
+                    sub_dealer_name = s_sub_dealer_search.getText().toString().trim();
+
+                    valid_sub_dealer_flag = "";
+                    //  sub_dealer_code = "";
+
+
+                    if (AllresultSubDealer.size() > 0) {
+                        for (SubDealerModel dataItem : AllresultSubDealer) {
+                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.code;
+                                Global_Data.Sub_Dealer_Code = sub_dealer_code;
+                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
+                                Global_Data.Sub_Email = dataItem.proprietor_email1;
+                                Global_Data.Sub_shop_name = dataItem.shop_name;
+                                valid_sub_dealer_flag = "yes";
+                                break;
+                            }
+
+                        }
+                    }
+
+                    if (Global_Data.Customers_map.size() > 0) {
+                        try {
+                            Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+
+                            if (Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase("")) {
+                                Global_Data.Dealer_Code = "";
+                            }
+                        } catch (Exception ex) {
+                            Global_Data.Dealer_Code = "";
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    if (Global_Data.Dealer_Code.equalsIgnoreCase("") || !valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
+
+                        if (!valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        } else if (Global_Data.Dealer_Code.equalsIgnoreCase("")) {
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+
+                    } else {
+                        isInternetPresent = cd.isConnectingToInternet();
+                        if (isInternetPresent) {
+                            Global_Data.GLOvel_SUB_GORDER_ID = "";
+                            Global_Data.statusOrderActivity = "";
+                            getPrevious_OrderData(Global_Data.Dealer_Code, Global_Data.Sub_Dealer_Code);
+                        } else {
+                            // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+                            Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                    }
+
+                }
+
+            }
+
+        });
 
         s_no_order.setOnClickListener(new OnClickListener() {
             @Override
@@ -524,16 +599,13 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-
-                else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+                } else if (s_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
                     Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                }
-                else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
+                } else if (s_dealer_search.getText().toString().equalsIgnoreCase("")) {
 
                     Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                             Toast.LENGTH_SHORT);
@@ -546,7 +618,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
                                 sub_dealer_code = dataItem.code;
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile =  dataItem.proprietor_mobile1;
+                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
                                 Global_Data.Sub_Email = dataItem.proprietor_email1;
                                 Global_Data.Sub_Dealer_name = s_sub_dealer_search.getText().toString();
                                 Global_Data.Sub_shop_name = dataItem.shop_name;
@@ -560,8 +632,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     if (Global_Data.Customers_map.size() > 0) {
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
-                            if(Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase(""))
-                            {
+                            if (Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                                 Global_Data.Dealer_Code = "";
                             }
                         } catch (Exception ex) {
@@ -572,32 +643,25 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                     if (Global_Data.Dealer_Code.equalsIgnoreCase("") || !valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
 
-                        if(!valid_sub_dealer_flag.equalsIgnoreCase("yes"))
-                        {
+                        if (!valid_sub_dealer_flag.equalsIgnoreCase("yes")) {
                             Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Sub Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                        }
-                        else
-                        if(Global_Data.Dealer_Code.equalsIgnoreCase(""))
-                        {
+                        } else if (Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                             Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "Please Select Dealer From The List",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                         }
 
-                    }
-                    else
-                    {
+                    } else {
+                        Global_Data.GLOvel_SUB_GORDER_ID = "";
+                        Global_Data.statusOrderActivity = "";
                         Intent s_dub = new Intent(getApplicationContext(), NoOrderActivity.class);
                         startActivity(s_dub);
 
                     }
-
-
-
 
 
                 }
@@ -623,7 +687,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 String beats = localData.getStateName();
                 results_Beats.add(beats);
                 Dealer_map.put(localData.getStateName(), localData.getCode());
-                Dealer_ma_CODE.put(localData.getCode(),localData.getStateName());
+                Dealer_ma_CODE.put(localData.getCode(), localData.getStateName());
 
                 if (i == 0) {
                     ss.append("[");
@@ -640,13 +704,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
             }
             bs_check = ss.toString();
-        }
-        else
-        {
+        } else {
             bs_check = "[]";
         }
-
-
 
 
         adaptorBeats = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, results_Beats);
@@ -673,7 +733,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                     state_name = "";
 
-                    customer_OnlineData(bs_check,"All");
+                    customer_OnlineData(bs_check, "All");
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -933,42 +993,39 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //                    progressDialog.setCancelable(false);
 //                    progressDialog.show();
 
-                    try {
-                        List<String> Customers_n =new ArrayList<>();
-                        String customer_name = "";
-                        String beat_id = Dealer_map.get(items);
-                        List<Local_Data> contacts2 = dbvoc.getcustomerByCityName(beat_id);
-                        if (contacts2.size() > 0) {
-                            for (Local_Data localData : contacts2) {
-                                customer_name = localData.get_stocks_product_name();
-                                Customers_n.add(customer_name);
+                try {
+                    List<String> Customers_n = new ArrayList<>();
+                    String customer_name = "";
+                    String beat_id = Dealer_map.get(items);
+                    List<Local_Data> contacts2 = dbvoc.getcustomerByCityName(beat_id);
+                    if (contacts2.size() > 0) {
+                        for (Local_Data localData : contacts2) {
+                            customer_name = localData.get_stocks_product_name();
+                            Customers_n.add(customer_name);
 
-                            }
                         }
-
-                        final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                Customers_n);
-
-                        s_dealer_search.setThreshold(1);
-                        s_dealer_search.setAdapter(adapterstr);
-
-                        s_dealer_search.setTextColor(Color.BLACK);
-
-                        if(!spinner_flag.equalsIgnoreCase("Select Beat"))
-                        {
-                            s_dealer_search.setText("");
-                        }
-                        else
-                        {
-                            spinner_flag = "";
-                        }
-
-
-                        //customer_OnlineData(bs_check,"beat_click");
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
                     }
+
+                    final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            Customers_n);
+
+                    s_dealer_search.setThreshold(1);
+                    s_dealer_search.setAdapter(adapterstr);
+
+                    s_dealer_search.setTextColor(Color.BLACK);
+
+                    if (!spinner_flag.equalsIgnoreCase("Select Beat")) {
+                        s_dealer_search.setText("");
+                    } else {
+                        spinner_flag = "";
+                    }
+
+
+                    //customer_OnlineData(bs_check,"beat_click");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
 
 //                } else {
 //
@@ -1578,14 +1635,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
     }
 
-    public void customer_OnlineData(String beat_code,String beat_flag) {
+    public void customer_OnlineData(String beat_code, String beat_flag) {
 
         String domain = getResources().getString(R.string.service_domain);
         String service_domain = "";
 //        if(beat_flag.equalsIgnoreCase("beat_click"))
 //        {
         try {
-            service_domain = domain + "customers/get_statewise_customers?beat_code=" +  URLEncoder.encode(beat_code, "UTF-8");
+            service_domain = domain + "customers/get_statewise_customers?beat_code=" + URLEncoder.encode(beat_code, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -1594,7 +1651,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //        {
 //            service_domain = domain + "customers/get_statewise_customers?beat_code=" + beat_code;
 //        }
-
 
 
         Log.i("user list url", "order list url " + service_domain);
@@ -1736,9 +1792,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     } else {
 
 
-
-
-
                         for (int i = 0; i < City_JSON.length(); i++) {
 
                             JSONObject jsonObject = null;
@@ -1777,7 +1830,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                 s_dealer_search.setAdapter(adapterstr);
 
                                 s_dealer_search.setTextColor(Color.BLACK);
-
 
 
                             }
@@ -2196,6 +2248,127 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //        // auto_recycleview.setAlpha(0);
 //        //holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
 //    }
+
+    public void getPrevious_OrderData(String dealer_id,String Sub_Dealer_Code) {
+        SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
+        progressDialog = new ProgressDialog(Sub_Dealer_Order_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        progressDialog.setMessage("Please Wait....");
+        progressDialog.setTitle("Smart Anchor App");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        try {
+            //TODO USER EMAIL
+
+            String domain = getResources().getString(R.string.service_domain);
+
+            Log.i("volley", "domain: " + domain);
+            Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
+            Log.i("target url", "target url " + domain + "sub_dealers/previous_order?sub_dealer_code=" + Sub_Dealer_Code);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "sub_dealers/previous_order?sub_dealer_code="+Sub_Dealer_Code, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response);
+                    //  Log.i("volley", "response reg Length: " + response.length());
+                    try {
+
+                        String response_result = "";
+                        if (response.has("message")) {
+                            response_result = response.getString("message");
+							Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, response_result, Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.CENTER, 0, 0);
+							toast.show();
+                        } else {
+
+
+                            dbvoc.getDeleteTable("sub_orders");
+                            dbvoc.getDeleteTable("sub_order_products");
+
+                            //JSONArray previous_orders = response.getJSONArray("previous_orders");
+                            JSONArray previous_order_products = response.getJSONArray("order_products");
+
+                            //Log.i("volley", "response reg previous_orders Length: " + previous_orders.length());
+                            Log.i("volley", "response reg previous_order_products Length: " + previous_order_products.length());
+
+
+                            //	Log.d("States", "previous_orders" + previous_orders.toString());
+                            Log.d("States", "previous_order_products" + previous_order_products.toString());
+
+
+
+                            if (previous_order_products.length() <= 0) {
+                                progressDialog.dismiss();
+                                Toast toast = Toast.makeText(getApplicationContext(), "Previous order not found.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else {
+
+                                for (int i = 0; i < previous_order_products.length(); i++) {
+
+                                    JSONObject jsonObject = previous_order_products.getJSONObject(i);
+
+                                    Global_Data.GLOvel_SUB_GORDER_ID = jsonObject.getString("order_number").trim();
+                                   // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
+
+                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
+
+
+                                }
+
+                                Global_Data.statusOrderActivity = "Yes";
+                                Intent intent = new Intent(Sub_Dealer_Order_Main.this, SubDealer_PreviewActivity.class);
+                                startActivity(intent);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                finish();
+                                progressDialog.dismiss();
+                            }
+                            progressDialog.dismiss();
+
+                            //finish();
+
+                        }
+
+
+                        // }
+
+                        // output.setText(data);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        progressDialog.dismiss();
+                    }
+
+
+                    progressDialog.dismiss();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("volley", "error: " + error);
+                    //Toast.makeText(Order.this, "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    progressDialog.dismiss();
+
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(Sub_Dealer_Order_Main.this);
+            // queue.add(jsObjRequest);
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 200000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            progressDialog.dismiss();
+        }
+    }
 
 }
 

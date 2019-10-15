@@ -19,11 +19,11 @@ import android.widget.Toast;
 
 import com.anchor.activities.DataBaseHelper;
 import com.anchor.activities.Global_Data;
-import com.anchor.activities.Item_Edit_Activity;
 import com.anchor.activities.Local_Data;
 import com.anchor.activities.PreviewOrderSwipeActivity;
 import com.anchor.activities.R;
 import com.anchor.activities.SubDealer_PreviewActivity;
+import com.anchor.activities.Sub_Dealer_Item_Edit;
 import com.anchor.activities.Sub_Dealer_Order_Main;
 import com.anchor.swipelistview.SwipeListView;
 
@@ -103,7 +103,7 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
                 getData = dataAray.get(position);
                 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(TAG_ITEM_NUMBER).toString());
                 dbvoc = new DataBaseHelper(context);
-                List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER_SubDealer(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id);
+                List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER_SubDealer(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLOvel_SUB_GORDER_ID);
                 for (Local_Data cnp : cont1)
                 {
                     Global_Data.item_no = cnp.get_delivery_product_id();
@@ -127,7 +127,7 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
                 }
 
                 Global_Data.GLOVEL_ORDER_REJECT_FLAG = "";
-                Intent goToNewOrderActivity = new Intent(context,Item_Edit_Activity.class);
+                Intent goToNewOrderActivity = new Intent(context, Sub_Dealer_Item_Edit.class);
                 ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 //Intent order_home = new Intent(context,PreviewOrderSwipeActivity.class);
                 context.startActivity(goToNewOrderActivity);
@@ -156,12 +156,13 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
                         Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(TAG_ITEM_NUMBER).toString());
 
                         dbvoc = new DataBaseHelper(context);
-                        dbvoc.getDeleteTableorderproduct_byITEM_NUMBER_SUBDEALER(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id);
+                        dbvoc.getDeleteTableorderproduct_byITEM_NUMBER_SUBDEALER(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLOvel_SUB_GORDER_ID);
                         dataAray.remove(position);
                         notifyDataSetChanged();
 
                         if(dataAray.size() <= 0)
                         {
+                            Global_Data.statusOrderActivity = "";
                             Intent goToNewOrderActivity = new Intent(context, Sub_Dealer_Order_Main.class);
                             ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                             //Intent order_home = new Intent(context,PreviewOrderSwipeActivity.class);
@@ -170,7 +171,7 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
                         else
                         {
                             Double sum = 0.0;
-                            List<Local_Data> cont1 = dbvoc.getItemName(Global_Data.GLObalOrder_id);
+                            List<Local_Data> cont1 = dbvoc.getItemNameSub(Global_Data.GLOvel_SUB_GORDER_ID);
                             for (Local_Data cnt1 : cont1) {
                                 Amount_tpp.add(cnt1.getAmount());
 
@@ -180,6 +181,7 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
                             {
                                 sum += Double.valueOf(Amount_tpp.get(m));
                             }
+                            Global_Data.statusOrderActivity = "";
                             PreviewOrderSwipeActivity.updateSum(sum);
                             Intent goToNewOrderActivity = new Intent(context, SubDealer_PreviewActivity.class);
                             context.startActivity(goToNewOrderActivity);

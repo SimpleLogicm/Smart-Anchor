@@ -96,7 +96,7 @@ public class Order extends Activity implements OnItemSelectedListener {
     Button feedback_btn, comp_btn, Claims_btn, stock_btn, imag_btn, video_btn,
             buttonSchedule, buttoninvoice;
     Button buttonNewOrder, buttonPreviousOrder, buttonNoOrder,
-            buttonReturnOrder, adr_button;
+            buttonReturnOrder;
     Spinner city_spinner, state_spinner, beat_spinner;
     TextView selVersion, ocredit_limit, oamount_utstanding, oamount_overdue, customer_MObile;
     HttpGet httppst;
@@ -1115,7 +1115,6 @@ public class Order extends Activity implements OnItemSelectedListener {
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 } else {
-                    // Re_Text = autoCompleteTextView1.getText().toString();
                     String customer_name = "";
                     String address_type = "";
                     Global_Data.Search_business_unit_name = "";
@@ -2659,7 +2658,7 @@ public class Order extends Activity implements OnItemSelectedListener {
         loginDataBaseAdapter = new LoginDataBaseAdapter(Order.this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
         dialog = new ProgressDialog(Order.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please Wait Previous Sync....");
+        dialog.setMessage("Please Wait....");
         dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();

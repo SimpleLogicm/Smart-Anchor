@@ -161,7 +161,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/No_Order"
+                android:text="@string/Previous_Order"
                 android:background="#414042"
                 android:layout_marginLeft="10dp"
                 android:textColor="#FFFFFF"/>
@@ -172,7 +172,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="5dp"
             android:layout_marginTop="20dp" >
 
             <Button

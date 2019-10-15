@@ -9,11 +9,6 @@ public class SubDealerModel {
     public String description;
     public String shop_name;
     public String user_email;
-
-    public String territory_code;
-    public String market_name;
-    public String SubDealer_Code;
-
     public String firm_name;
     public String proprietor_name1;
     public String proprietor_mobile1;
@@ -22,15 +17,9 @@ public class SubDealerModel {
     public String proprietor_mobile2;
     public String proprietor_email2;
     public String code;
-    public String p_approval1;
-    public String p_approval2;
-    public String p_approval3;
     public String p_approved;
     public String remarks;
     public String State;
-    public String Stage;
-    public String remarks1;
-    public String remarks2;
     public String lati;
     public String longi;
     public String distance;
@@ -66,31 +55,6 @@ public class SubDealerModel {
 
     public void setState(String state) {
         State = state;
-    }
-
-
-    public String getRemarks1() {
-        return remarks1;
-    }
-
-    public void setRemarks1(String remarks1) {
-        this.remarks1 = remarks1;
-    }
-
-    public String getRemarks2() {
-        return remarks2;
-    }
-
-    public void setRemarks2(String remarks2) {
-        this.remarks2 = remarks2;
-    }
-
-    public String getStage() {
-        return Stage;
-    }
-
-    public void setStage(String stage) {
-        Stage = stage;
     }
 
     public String getProprietor_name2() {
@@ -133,31 +97,6 @@ public class SubDealerModel {
         this.remarks = remarks;
     }
 
-
-    public String getP_approval1() {
-        return p_approval1;
-    }
-
-    public void setP_approval1(String p_approval1) {
-        this.p_approval1 = p_approval1;
-    }
-
-    public String getP_approval2() {
-        return p_approval2;
-    }
-
-    public void setP_approval2(String p_approval2) {
-        this.p_approval2 = p_approval2;
-    }
-
-    public String getP_approval3() {
-        return p_approval3;
-    }
-
-    public void setP_approval3(String p_approval3) {
-        this.p_approval3 = p_approval3;
-    }
-
     public String getFirm_name() {
         return firm_name;
     }
@@ -178,38 +117,10 @@ public class SubDealerModel {
         return proprietor_email1;
     }
 
-    public void setProprietor_email1(String proprietor_email1) {
-        this.proprietor_email1 = proprietor_email1;
-    }
-
-    public void setProprietor_mobile1(String proprietor_mobile1) {
-        this.proprietor_mobile1 = proprietor_mobile1;
-    }
-
-    public void setProprietor_name1(String proprietor_name1) {
-        this.proprietor_name1 = proprietor_name1;
-    }
 
 
-    public String getSubDealer_Code() {
-        return SubDealer_Code;
-    }
 
-    public void setSubDealer_Code(String subDealer_Code) {
-        SubDealer_Code = subDealer_Code;
-    }
 
-    public String getTerritory_code() {
-        return territory_code;
-    }
-
-    public void setTerritory_code(String territory_code) {
-        this.territory_code = territory_code;
-    }
-
-    public String getMarket_name() {
-        return market_name;
-    }
 
     public String getCity() {
         return city;
@@ -219,18 +130,14 @@ public class SubDealerModel {
         this.city = city;
     }
 
-    public void setMarket_name(String market_name) {
-        this.market_name = market_name;
-    }
+
 
 
     public String getuser_email() {
         return user_email;
     }
 
-    public void setuser_email(String user_email) {
-        this.user_email = user_email;
-    }
+
 
 
     public SubDealerModel() {

@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -22,18 +25,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import cpm.simplelogic.helper.ConnectionDetector;
 
 public class Sub_Dealer_Item_Edit extends BaseActivity {
     int check = 0;
+    Boolean isInternetPresent = false;
+    ConnectionDetector cd;
     String scheme_code = "";
     String scheme_namen = "";
     private ArrayList<String> Scheme_array = new ArrayList<String>();
     String price = "";
     LoginDataBaseAdapter loginDataBaseAdapter;
     Spinner spnProductSpec, spnScheme;
-    TextView editTextRP, editTextMRP, txtPrice, txt_rp,editTextSQ,textmrp;
+    TextView editTextRP, editTextMRP, txtPrice, txt_rp, editTextSQ, textmrp;
     EditText txtDeleiveryQuantity1;
     static int quantity = 0;
     static float rp, mrp, totalprice;
@@ -76,7 +85,9 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
         editor.commit();
 
 
-        txtPrice =  findViewById(R.id.txtPrice);
+        cd = new ConnectionDetector(getApplicationContext());
+
+        txtPrice = findViewById(R.id.txtPrice);
         editTextSQ = findViewById(R.id.editTextSQ);
 
         editTextSQ.setText(Global_Data.item_SL);
@@ -243,15 +254,11 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
                     b.setBackgroundColor(Color.parseColor("#910505"));
 
 
-
                     int SQMO_Validator = 0;
 
-                    if(editTextQuantity.length() != 0)
-                    {
+                    if (editTextQuantity.length() != 0) {
                         SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
                     }
-
-
 
 
                     if (editTextQuantity.length() == 0) {
@@ -263,27 +270,63 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                         editTextQuantity.setText("");
-                    }
-
-                    else {
+                    } else {
                         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
                         String s_price[] = txtPrice.getText().toString().split(":");
                         String discount_type = "";
                         String discount_amount = "";
-                        dbvoc.update_item_SUBDEALER(editTextQuantity.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), discount_amount, discount_type, Global_Data.item_no, Global_Data.GLObalOrder_id, scheme_code);
+
+                        if (Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase("") || Global_Data.statusOrderActivity.equalsIgnoreCase("Yes")) {
+
+                            try {
+                                String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
+                                cd = new ConnectionDetector(Sub_Dealer_Item_Edit.this);
+                                isInternetPresent = cd.isConnectingToInternet();
+                                AppLocationManager appLocationManager = new AppLocationManager(Sub_Dealer_Item_Edit.this);
+                                Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
+                                Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
+                                PlayService_Location PlayServiceManager = new PlayService_Location(Sub_Dealer_Item_Edit.this);
+
+                                if (PlayServiceManager.checkPlayServices(Sub_Dealer_Item_Edit.this)) {
+                                    Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
+
+                                } else if (!String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(appLocationManager.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null) && !String.valueOf(appLocationManager.getLongitude()).equalsIgnoreCase(null)) {
+                                    Global_Data.GLOvel_LATITUDE = String.valueOf(appLocationManager.getLatitude());
+                                    Global_Data.GLOvel_LONGITUDE = String.valueOf(appLocationManager.getLongitude());
+                                }
+
+                                if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(Global_Data.GLOvel_LONGITUDE)) {
+                                    LocationAddress locationAddress = new LocationAddress();
+                                    LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+                                            getApplicationContext(), new Sub_Dealer_Item_Edit.GeocoderHandler());
+                                }
+
+                                Global_Data.GLOvel_SUB_GORDER_ID = "R" + PINString;
+                                Global_Data.statusOrderActivity = "";
+
+                                loginDataBaseAdapter.insertSUBOrders("", Global_Data.GLOvel_SUB_GORDER_ID, Global_Data.GLOvel_USER_EMAIL, Global_Data.Sub_Dealer_Code, Global_Data.SUB_Mobile, Global_Data.Sub_Email, Global_Data.Dealer_Code, Global_Data.address, Global_Data.Sub_shop_name, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "", "", "", "", "", "", "", "", "", "", "");
+
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+
+                            }
+
+                        }
+                        dbvoc.update_item_SUBDEALER(editTextQuantity.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), discount_amount, discount_type, Global_Data.item_no, Global_Data.GLOvel_SUB_GORDER_ID, scheme_code);
                         // Toast.makeText(Sub_Dealer_Item_Edit.this, "Item Update Successfully",Toast.LENGTH_LONG).show();
 
                         Toast toast = Toast.makeText(Sub_Dealer_Item_Edit.this, "Item Update Successfully", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
 
-
-                            Intent intent = new Intent(Sub_Dealer_Item_Edit.this, SubDealer_PreviewActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            startActivity(intent);
-                            finish();
+                        Global_Data.statusOrderActivity = "";
+                        Intent intent = new Intent(Sub_Dealer_Item_Edit.this, SubDealer_PreviewActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        startActivity(intent);
+                        finish();
 
                         return true;
 
@@ -294,7 +337,6 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
                 return false;
             }
         });
-
 
 
         editTextQuantity.addTextChangedListener(new TextWatcher() {
@@ -485,8 +527,35 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
         });
 
 
-
         dialognew.show();
+    }
+
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress = "";
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    //locationAddress = " ";
+            }
+            //  LOCATION.setText(locationAddress);
+
+
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(locationAddress)) {
+                Global_Data.address = locationAddress;
+                Log.d("GLOBEL ADDRESS G", "V" + locationAddress);
+
+            } else {
+                Global_Data.address = "";
+                Log.d("GLOBEL ADDRESS G", "address not found.");
+            }
+
+
+        }
     }
 
 }
