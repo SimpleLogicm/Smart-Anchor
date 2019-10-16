@@ -60,6 +60,7 @@ import java.util.List;
 import cpm.simplelogic.helper.ConnectionDetector;
 import cpm.simplelogic.helper.GPSTracker;
 
+
 public class Sub_Dealer_ProductList extends Activity {
 
     int pp = 0;
@@ -107,6 +108,7 @@ public class Sub_Dealer_ProductList extends Activity {
     Button list_ok;
     String response_result;
     LoginDataBaseAdapter loginDataBaseAdapter;
+    String save_flag = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -930,11 +932,18 @@ public class Sub_Dealer_ProductList extends Activity {
                         if (Global_Data.GLOvel_SUB_GORDER_ID.equalsIgnoreCase("") ||  Global_Data.statusOrderActivity.equalsIgnoreCase("Yes")) {
 
                             Global_Data.GLOvel_SUB_GORDER_ID = "R" + PINString;
-                            Global_Data.statusOrderActivity = "";
+
 
                             loginDataBaseAdapter.insertSUBOrders("", Global_Data.GLOvel_SUB_GORDER_ID, Global_Data.GLOvel_USER_EMAIL, Global_Data.Sub_Dealer_Code, Global_Data.SUB_Mobile, Global_Data.Sub_Email, Global_Data.Dealer_Code, Global_Data.address, Global_Data.Sub_shop_name, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "", "", "", "", "", "", "", "", "", "", "");
 
+                            if (Global_Data.statusOrderActivity.equalsIgnoreCase("Yes")) {
+
+                                dbvoc.update_ORDER_ID_SUBDEALER(Global_Data.GLOvel_SUB_GORDER_ID);
+                            }
+
                         }
+
+                        Global_Data.statusOrderActivity = "";
 
                         Double pp = 0.0;
                         try {
@@ -979,9 +988,21 @@ public class Sub_Dealer_ProductList extends Activity {
                             runOnUiThread(new Runnable() {
                                 public void run() {
 
-                                    Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items add successfully", Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
+                                    if(save_flag.equalsIgnoreCase(""))
+                                    {
+                                        save_flag = "Yes";
+                                        Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items add successfully", Toast.LENGTH_LONG);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }
+                                    else
+                                    {
+                                        Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items Updated successfully", Toast.LENGTH_LONG);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }
+
+
 
                                     buttonPreviewAddMOre.setEnabled(true);
                                     buttonPreviewAddMOre.setText("Save");
@@ -1019,9 +1040,21 @@ public class Sub_Dealer_ProductList extends Activity {
                 p_rp.clear();
                 buttonPreviewAddMOre.setEnabled(true);
                 buttonPreviewAddMOre.setText("Save");
-                Toast toast = Toast.makeText(getApplicationContext(), "Please enter quantity. ", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+
+                if(save_flag.equalsIgnoreCase(""))
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Please enter quantity. ", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(Sub_Dealer_ProductList.this, "Items Updated successfully", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+
             }
 
 

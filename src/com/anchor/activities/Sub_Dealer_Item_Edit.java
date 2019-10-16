@@ -303,9 +303,17 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
                                 }
 
                                 Global_Data.GLOvel_SUB_GORDER_ID = "R" + PINString;
-                                Global_Data.statusOrderActivity = "";
+
 
                                 loginDataBaseAdapter.insertSUBOrders("", Global_Data.GLOvel_SUB_GORDER_ID, Global_Data.GLOvel_USER_EMAIL, Global_Data.Sub_Dealer_Code, Global_Data.SUB_Mobile, Global_Data.Sub_Email, Global_Data.Dealer_Code, Global_Data.address, Global_Data.Sub_shop_name, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "", "", "", "", "", "", "", "", "", "", "");
+
+                                if (Global_Data.statusOrderActivity.equalsIgnoreCase("Yes")) {
+                                    //dbvoc.getDeleteTable("sub_order_products");
+
+//                                    loginDataBaseAdapter.insertSUb_OrderProducts(" ", " ", Global_Data.GLOvel_SUB_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, Global_Data.product_dec, " ", "", " ", "", editTextQuantity.getText().toString().trim(), editTextRP.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), "", "", Global_Data.order_retailer, " ", Global_Data.item_no, " ", Global_Data.product_dec);
+
+                                    dbvoc.update_ORDER_ID_SUBDEALER(Global_Data.GLOvel_SUB_GORDER_ID);
+                                }
 
 
                             } catch (Exception ex) {
@@ -314,7 +322,11 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
                             }
 
                         }
+
+
                         dbvoc.update_item_SUBDEALER(editTextQuantity.getText().toString().trim(), editTextMRP.getText().toString().trim(), s_price[1].trim(), discount_amount, discount_type, Global_Data.item_no, Global_Data.GLOvel_SUB_GORDER_ID, scheme_code);
+
+
                         // Toast.makeText(Sub_Dealer_Item_Edit.this, "Item Update Successfully",Toast.LENGTH_LONG).show();
 
                         Toast toast = Toast.makeText(Sub_Dealer_Item_Edit.this, "Item Update Successfully", Toast.LENGTH_SHORT);

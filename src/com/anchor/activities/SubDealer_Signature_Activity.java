@@ -28,7 +28,6 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 import android.provider.Settings;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.text.Spanned;
 import android.util.AttributeSet;
 import android.util.Base64;
@@ -264,86 +263,79 @@ public class SubDealer_Signature_Activity extends BaseActivity {
         order_detail4.setFilters(new InputFilter[]{filter});
 
 
-        if (strdetail1_edit.equalsIgnoreCase("true")) {
-            order_detail1.setEnabled(true);
+        order_detail1.setHint("Need By Date");
 
-            if (strdetail1_allow.equalsIgnoreCase("Text")) {
-                order_detail1.setInputType(InputType.TYPE_CLASS_TEXT);
-            } else if (strdetail1_allow.equalsIgnoreCase("Integer")) {
-                order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
-            } else {
-                order_detail1.setFocusableInTouchMode(false);
-                order_detail1.setOnClickListener(new OnClickListener() {
+        order_detail1.setEnabled(true);
+        order_detail1.setFocusableInTouchMode(false);
+        order_detail1.setOnClickListener(new OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        DatePickerDialog picker = new DatePickerDialog(SubDealer_Signature_Activity.this, date, myCalendar
-                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                myCalendar.get(Calendar.DAY_OF_MONTH));
-                        picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                        picker.show();
-
-                    }
-                });
-
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                DatePickerDialog picker = new DatePickerDialog(SubDealer_Signature_Activity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                picker.show();
 
             }
-        }
-        if (strdetail2_edit.equalsIgnoreCase("true")) {
-            order_detail2.setEnabled(true);
-
-            if (strdetail2_allow.equalsIgnoreCase("Text")) {
-                order_detail2.setInputType(InputType.TYPE_CLASS_TEXT);
-            } else if (strdetail2_allow.equalsIgnoreCase("Integer")) {
-                order_detail2.setInputType(InputType.TYPE_CLASS_NUMBER);
-            } else {
-                order_detail2.setFocusableInTouchMode(false);
-                order_detail2.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        new DatePickerDialog(SubDealer_Signature_Activity.this, date1, myCalendar
-                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
-            }
-        }
-
-        if (detail2str.length() > 0) {
-            order_detail2.setHint(detail2str);
-        } else {
-            order_detail2.setHint("Detail 2");
-        }
+        });
 
 
-        if (strdetail4_edit.equalsIgnoreCase("true")) {
-            order_detail4.setEnabled(true);
+//        if (strdetail2_edit.equalsIgnoreCase("true")) {
+//            order_detail2.setEnabled(true);
+//
+//            if (strdetail2_allow.equalsIgnoreCase("Text")) {
+//                order_detail2.setInputType(InputType.TYPE_CLASS_TEXT);
+//            } else if (strdetail2_allow.equalsIgnoreCase("Integer")) {
+//                order_detail2.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            } else {
+//                order_detail2.setFocusableInTouchMode(false);
+//                order_detail2.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // TODO Auto-generated method stub
+//                        new DatePickerDialog(SubDealer_Signature_Activity.this, date1, myCalendar
+//                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//                    }
+//                });
+//            }
+//        }
+//
+//        if (detail2str.length() > 0) {
+//            order_detail2.setHint(detail2str);
+//        } else {
+//            order_detail2.setHint("Detail 2");
+//        }
 
-            if (strdetail4_allow.equalsIgnoreCase("Text")) {
-                order_detail4.setInputType(InputType.TYPE_CLASS_TEXT);
-            } else if (strdetail4_allow.equalsIgnoreCase("Integer")) {
-                order_detail4.setInputType(InputType.TYPE_CLASS_NUMBER);
-            } else {
-                order_detail4.setFocusableInTouchMode(false);
-                order_detail4.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        new DatePickerDialog(SubDealer_Signature_Activity.this, date1, myCalendar
-                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
-            }
-        }
 
-        if (detail4str.length() > 0) {
-            order_detail4.setHint(detail4str);
-        } else {
-            order_detail4.setHint("Remarks");
-        }
+//        if (strdetail4_edit.equalsIgnoreCase("true")) {
+//            order_detail4.setEnabled(true);
+//
+//            if (strdetail4_allow.equalsIgnoreCase("Text")) {
+//                order_detail4.setInputType(InputType.TYPE_CLASS_TEXT);
+//            } else if (strdetail4_allow.equalsIgnoreCase("Integer")) {
+//                order_detail4.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            } else {
+//                order_detail4.setFocusableInTouchMode(false);
+//                order_detail4.setOnClickListener(new OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        // TODO Auto-generated method stub
+//                        new DatePickerDialog(SubDealer_Signature_Activity.this, date1, myCalendar
+//                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+//                    }
+//                });
+//            }
+//        }
+
+//        if (detail4str.length() > 0) {
+//            order_detail4.setHint(detail4str);
+//        } else {
+//            order_detail4.setHint("Remarks");
+//        }
 
         SharedPreferences sp1 = SubDealer_Signature_Activity.this
                 .getSharedPreferences("SimpleLogic", 0);
@@ -537,6 +529,9 @@ public class SubDealer_Signature_Activity extends BaseActivity {
                     Intent intent = new Intent();
                     intent.putExtras(b1);
                     setResult(RESULT_OK, intent);
+                    Intent i = new Intent(SubDealer_Signature_Activity.this, SubDealer_PreviewActivity.class);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    startActivity(i);
                     finish();
 
                 }
@@ -607,7 +602,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
         } else if (strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase("")) {
             s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
             order_detail1.requestFocus();
-            errorMessage = errorMessage + "Please Enter " + detail1str;
+            errorMessage = errorMessage + "Please Select Need By Date";
             error = true;
 
         }
@@ -646,7 +641,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
             error = true;
         } else if (strdetail4_mandate.equalsIgnoreCase("true") && order_detail4.getText().toString().equalsIgnoreCase("")) {
             order_detail4.requestFocus();
-            errorMessage = errorMessage + "Please Enter " + detail4str;
+            errorMessage = errorMessage + "Please Enter Remarks";
             error = true;
 
         }

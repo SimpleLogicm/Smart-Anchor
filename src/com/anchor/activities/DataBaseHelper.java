@@ -8419,6 +8419,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void update_ORDER_ID_SUBDEALER(String order_id) {
+
+        String selectQuery = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransactionNonExclusive();
+
+        selectQuery = "UPDATE sub_order_products" + " SET order_id = '" + order_id  + "'";
+        db.execSQL(selectQuery);
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+    }
+
     public void updateCustomerby_Createid(String CODE) {
 
         String selectQuery = "UPDATE " + TABLE_CUSTOMER_MASTER + " SET created_at = '" + " " + "'" + " WHERE LEGACY_CUSTOMER_CODE = '" + CODE + "'";

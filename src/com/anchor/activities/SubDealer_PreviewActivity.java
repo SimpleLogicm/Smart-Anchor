@@ -443,35 +443,41 @@ public class SubDealer_PreviewActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if(statusOrderActivity.equalsIgnoreCase("previous")){
+        if (Global_Data.statusOrderActivity.equalsIgnoreCase("Yes")) {
 
-            AlertDialog alertDialog = new AlertDialog.Builder(SubDealer_PreviewActivity.this).create(); //Read Update
-            alertDialog.setTitle("Warning");
-            alertDialog.setMessage(" Are you sure you want to cancel?");
-            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+//            AlertDialog alertDialog = new AlertDialog.Builder(SubDealer_PreviewActivity.this).create(); //Read Update
+//            alertDialog.setTitle("Warning");
+//            alertDialog.setMessage(" Are you sure you want to cancel?");
+//            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                    finish();
+//                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//
+//                }
+//            });
+//
+//            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                    dialog.cancel();
+//
+//                }
+//            });
+//            alertDialog.show();
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    finish();
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-
-                }
-            });
-
-            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    dialog.cancel();
-
-                }
-            });
-            alertDialog.show();
+            Intent intent = new Intent(SubDealer_PreviewActivity.this, Sub_Dealer_Order_Main.class);
+            startActivity(intent);
+            finish();
         }
         else
         {
+            Intent intent = new Intent(SubDealer_PreviewActivity.this, SubDealer_NewOrderActivity.class);
+            startActivity(intent);
             finish();
         }
     }
