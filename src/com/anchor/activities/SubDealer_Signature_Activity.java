@@ -14,13 +14,17 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -862,10 +866,12 @@ public class SubDealer_Signature_Activity extends BaseActivity {
             try {
 
                 dbvoc.updateSUbORDER_order_image(mCurrentPhotoPath, Global_Data.GLOvel_SUB_GORDER_ID);
+                new ActivityResultTask().execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
 
 
         } else if (requestCode == 2 && resultCode == RESULT_OK) {
@@ -885,6 +891,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
                 dbvoc.updateSUbORDER_order_image(mCurrentPhotoPath, Global_Data.GLOvel_SUB_GORDER_ID);
 
                 pictureImagePath_new = c.getString(columnIndex);
+                new ActivityResultTask().execute();
 
                 c.close();
 
@@ -1320,5 +1327,239 @@ public class SubDealer_Signature_Activity extends BaseActivity {
                 destination.close();
             }
         }
+    }
+
+
+    private class ActivityResultTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... response) {
+
+            try {
+
+                if (!mCurrentPhotoPath.equalsIgnoreCase("")) {
+                    try {
+                        // reduce_img_Qaulity(Uri.parse(outletsignboard_mCurrentPhotoPath));
+                        // compressImage(outletsignboard_mCurrentPhotoPath);
+                        String filePath = getRealPathFromURI(Uri.parse(mCurrentPhotoPath).getPath());
+                        Bitmap scaledBitmap = null;
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inJustDecodeBounds = true;
+                        Bitmap b = BitmapFactory.decodeFile(Uri.parse(mCurrentPhotoPath).getPath(), options);
+                        int actualHeight = options.outHeight;
+                        int actualWidth = options.outWidth;
+
+                        float maxHeight = 816.0f;
+                        float maxWidth = 612.0f;
+                        float imgRatio = actualWidth / actualHeight;
+                        float maxRatio = maxWidth / maxHeight;
+
+                        if (actualHeight > maxHeight || actualWidth > maxWidth) {
+                            if (imgRatio < maxRatio) {
+                                imgRatio = maxHeight / actualHeight;
+                                actualWidth = (int) (imgRatio * actualWidth);
+                                actualHeight = (int) maxHeight;
+                            } else if (imgRatio > maxRatio) {
+                                imgRatio = maxWidth / actualWidth;
+                                actualHeight = (int) (imgRatio * actualHeight);
+                                actualWidth = (int) maxWidth;
+                            } else {
+                                actualHeight = (int) maxHeight;
+                                actualWidth = (int) maxWidth;
+
+                            }
+                        }
+                        options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
+                        options.inJustDecodeBounds = false;
+                        options.inPurgeable = true;
+                        options.inInputShareable = true;
+                        options.inTempStorage = new byte[16 * 1024];
+                        try {
+//          load the bitmap from its path
+                            b = BitmapFactory.decodeFile(Uri.parse(mCurrentPhotoPath).getPath(), options);
+
+                        } catch (OutOfMemoryError exception) {
+                            exception.printStackTrace();
+
+                        }
+                        try {
+                            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
+                        } catch (OutOfMemoryError exception) {
+                            exception.printStackTrace();
+                        }
+                        float ratioX = actualWidth / (float) options.outWidth;
+                        float ratioY = actualHeight / (float) options.outHeight;
+                        float middleX = actualWidth / 2.0f;
+                        float middleY = actualHeight / 2.0f;
+
+                        Matrix scaleMatrix = new Matrix();
+                        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+                        Canvas canvas = new Canvas(scaledBitmap);
+                        canvas.setMatrix(scaleMatrix);
+                        canvas.drawBitmap(b, middleX - b.getWidth() / 2, middleY - b.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+                        ExifInterface exif = null;
+                        try {
+                            exif = new ExifInterface(Uri.parse(mCurrentPhotoPath).getPath());
+
+                            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                                    ExifInterface.ORIENTATION_UNDEFINED);
+                            Matrix matrix = new Matrix();
+                            if (orientation == 6) {
+                                matrix.postRotate(90);
+
+                            } else if (orientation == 3) {
+                                matrix.postRotate(180);
+
+                            } else if (orientation == 8) {
+                                matrix.postRotate(270);
+
+                            }
+                            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0,
+                                    scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,
+                                    true);
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+
+//                            Bitmap bmRotated = rotateBitmap(out, orientation);
+                        File file = new File(Uri.parse(mCurrentPhotoPath).getPath());
+//                            FileOutputStream fOut;
+                        FileOutputStream out = null;
+
+
+                        try {
+                            out = new FileOutputStream(file);
+
+//          write the compressed bitmap at the destination specified by filename.
+                            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
+
+//                                fOut = new FileOutputStream(file);
+//                                bmRotated.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+//                                fOut.flush();
+//                                fOut.close();
+//                                out.recycle();
+//                                b.recycle();
+//                                bmRotated.recycle();
+                        } catch (Exception e) {
+                        }
+
+
+//                        runOnUiThread(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//
+//                                Bitmap mImageBitmap = null;
+//                                try {
+//                                    mImageBitmap = MediaStore.Images.Media.getBitmap(SubDealer_Signature_Activity.this.getContentResolver(), Uri.parse(outletsignboard_mCurrentPhotoPath));
+//                                    outlet_signboard_pick.setImageBitmap(mImageBitmap);
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//
+//                            }
+//                        });
+
+                        // outlet_signboard_pick.setRotation(90);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+//                    try {
+//                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(mCurrentPhotoPath)) {
+//
+//
+//                            Uri uri = Uri.parse(mCurrentPhotoPath);
+//                            File fdelete = new File(uri.getPath());
+//                            if (fdelete.exists()) {
+//                                if (fdelete.delete()) {
+//                                    System.out.println("file Deleted :" + mCurrentPhotoPath);
+//                                    mCurrentPhotoPath = "";
+//                                } else {
+//                                    System.out.println("file not Deleted :" + mCurrentPhotoPath);
+//                                }
+//                            }
+//                        }
+//
+//                    } catch (Exception ex) {
+//                        ex.printStackTrace();
+//                    }
+                }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        if (dialog1.isShowing() || dialog1 != null) {
+//
+//            dialog1.dismiss();
+//        }
+
+
+//                }
+//            });
+
+        return "Executed";
+    }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+//        SubDealer_Signature_Activity.this.runOnUiThread(new Runnable() {
+//            public void run() {
+//                if (dialog1.isShowing() || dialog1 != null) {
+//                    dialog1.dismiss();
+//                }
+//            }
+//        });
+
+    }
+
+        @Override
+        protected void onPreExecute() {
+
+
+    }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+    }
+    }
+
+    private String getRealPathFromURI(String contentURI) {
+        Uri contentUri = Uri.parse(contentURI);
+        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        if (cursor == null) {
+            return contentUri.getPath();
+        } else {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(index);
+        }
+    }
+
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        final float totalPixels = width * height;
+        final float totalReqPixelsCap = reqWidth * reqHeight * 2;
+        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
+            inSampleSize++;
+        }
+
+        return inSampleSize;
     }
 }

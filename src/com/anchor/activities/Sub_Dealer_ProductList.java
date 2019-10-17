@@ -1108,7 +1108,7 @@ public class Sub_Dealer_ProductList extends Activity {
     public static void updateSum(Double sum) {
 
         // txttotalPreview.setText("Total		:		"+sum);
-        Double total = 0.0;
+        int total = 0;
 
         if (!(Global_Data.Order_hashmap.isEmpty())) {
 
@@ -1130,7 +1130,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(key_value_price_array[0])) {
 
-                            total += Double.valueOf(key_value_price_array[0]);
+                            total += Double.valueOf(key_value_array[0]);
 
 
                         }
@@ -1141,10 +1141,10 @@ public class Sub_Dealer_ProductList extends Activity {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            txttotalPreview.setText("Total		:		" + total);
+            txttotalPreview.setText("Total QTY	:		" + total);
 
         } else {
-            txttotalPreview.setText("Total		:		" + 0.0);
+            txttotalPreview.setText("Total QTY	:		" + 0);
         }
 
 

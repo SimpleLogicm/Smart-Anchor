@@ -104,6 +104,7 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
 
         txt_rp.setVisibility(View.GONE);
         textmrp.setVisibility(View.GONE);
+        txtPrice.setVisibility(View.GONE);
 
 
         //TODO FOR SCHEME ERROR

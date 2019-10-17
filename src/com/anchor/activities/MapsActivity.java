@@ -119,6 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private int visibleItemCount, totalItemCount, firstVisibleItemPosition, lastVisibleItem;
     public Marker marker;
     String click_flag = "";
+    String service_call_flag = "";
 
 
     @Override
@@ -445,19 +446,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onMapLoaded() {
                 //Your code where exception occurs goes here...
 
-                if (cd.isConnectedToInternet()) {
-                    dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
-                    dialog.setMessage("Please wait....");
-                    dialog.setTitle("Smart Anchor App");
-                    dialog.setCancelable(false);
-                    dialog.show();
 
-                    getUserGeoData();
-                } else {
-
-                    Toast.makeText(MapsActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
 //                List<LatLng> locations = new ArrayList<>();
 //                locations.add(new LatLng(24.821730, 67.024680));
 //                locations.add(new LatLng(24.823327, 67.028414));
@@ -560,6 +549,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //place marker at current position
         //mGoogleMap.clear();
+
+
         if (currLocationMarker != null) {
             currLocationMarker.remove();
         }
@@ -568,6 +559,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
 
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+            if(!String.valueOf(location.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(location.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(location.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(location.getLongitude()).equalsIgnoreCase(null))
+            {
+                Global_Data.GLOvel_LATITUDE = String.valueOf(location.getLatitude());
+                Global_Data.GLOvel_LONGITUDE = String.valueOf(location.getLongitude());
+            }
+
+            Log.d("MAP LATI",""+location.getLatitude());
+            Log.d("MAP LONGI",""+location.getLongitude());
+
             // InfoWindowData info = new InfoWindowData();
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
@@ -697,6 +698,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Exception e) {
             e.printStackTrace(); // getFromLocation() may sometimes fail
         }
+
+
+        if(service_call_flag.equalsIgnoreCase(""))
+        {
+            service_call_flag = "Yes";
+            try
+            { if (cd.isConnectedToInternet()) {
+                dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                dialog.setMessage("Please wait....");
+                dialog.setTitle("Smart Anchor App");
+                dialog.setCancelable(false);
+                dialog.show();
+
+                getUserGeoData();
+            } else {
+
+                Toast.makeText(MapsActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+
+
+
 
     }
 

@@ -4914,6 +4914,7 @@ public class getServices {
                                     TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
+                                    txtEmail.setVisibility(View.GONE);
                                     if (!Sub_MOBILE.equalsIgnoreCase("")) {
                                         txtMessage.setText("Sms Send Successfully");
                                     }

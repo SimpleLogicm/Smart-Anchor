@@ -40,7 +40,6 @@ import com.anchor.swipelistview.sample.adapters.Sub_Dealer_Preview_Adapter;
 import com.anchor.swipelistview.sample.utils.SettingsManager;
 import com.anchor.webservice.ConnectionDetector;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,13 +103,13 @@ public class SubDealer_PreviewActivity extends BaseActivity {
                 mapp.put(TAG_ITEM_NUMBER, cnt1.get_category_ids());
                 Log.d("ITEM_NUMBER N", "ITEM_NUMBER N"+cnt1.get_category_ids());
                 str += cnt1.getAmount();
-                Amount_tp.add(cnt1.getAmount());
+                Amount_tp.add(cnt1.getQty());
                 SwipeList.add(mapp);
             }
-            Double sum = 0.0;
+            int sum = 0;
             for(int m=0; m<Amount_tp.size(); m++)
             {
-                sum += Double.valueOf(Amount_tp.get(m));
+                sum += Integer.parseInt(Amount_tp.get(m));
             }
             updateSum(sum);
         }catch(Exception ex){ex.printStackTrace();}
@@ -482,8 +481,8 @@ public class SubDealer_PreviewActivity extends BaseActivity {
         }
     }
 
-    public static void updateSum(Double sum){
-        DecimalFormat df = new DecimalFormat("#0.00");
-        txttotalPreview.setText("Total		:		"+df.format(sum));
+    public static void updateSum(int sum){
+        //DecimalFormat df = new DecimalFormat("#0.00");
+        txttotalPreview.setText("Total QTY	:		"+sum);
     }
 }

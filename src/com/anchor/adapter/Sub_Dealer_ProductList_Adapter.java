@@ -59,7 +59,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
     private Context context;
 
     public Sub_Dealer_ProductList_Adapter(Context context, ArrayList<HashMap<String, String>> dataItem1, ArrayList<String> list1, ArrayList<String> list2) {
-        super(context, R.layout.all_varients_adapternew, dataItem1);
+        super(context, R.layout.sub_dealer_productlist_adapter, dataItem1);
         this.dataAray = dataItem1;
         this.list1 = list1;
         this.list2 = list2;
@@ -99,7 +99,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
         final ViewHolder holder;
         if (convertView == null) {
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = li.inflate(R.layout.all_varients_adapternew, parent, false);
+            convertView = li.inflate(R.layout.sub_dealer_productlist_adapter, parent, false);
             holder = new ViewHolder();
             holder.mWatcher1 = new MutableWatcher1();
             holder.mWatcher2 = new MutableWatcher2();

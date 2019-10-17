@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.anchor.activities.DataBaseHelper;
 import com.anchor.activities.Global_Data;
 import com.anchor.activities.Local_Data;
-import com.anchor.activities.PreviewOrderSwipeActivity;
 import com.anchor.activities.R;
 import com.anchor.activities.SubDealer_PreviewActivity;
 import com.anchor.activities.Sub_Dealer_Item_Edit;
@@ -57,7 +56,7 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
     private Context context;
 
     public Sub_Dealer_Preview_Adapter(Context context, ArrayList<HashMap<String, String>> dataItem1) {
-        super(context, R.layout.package_row, dataItem1);
+        super(context, R.layout.sub_dealer_preview_adapter, dataItem1);
         this.dataAray = dataItem1;
         this.context = context;
     }
@@ -73,7 +72,7 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
         final ViewHolder holder;
         if (convertView == null) {
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = li.inflate(R.layout.package_row, parent, false);
+            convertView = li.inflate(R.layout.sub_dealer_preview_adapter, parent, false);
             holder = new ViewHolder();
             holder.tvTitle = (TextView) convertView.findViewById(R.id.example_row_tv_title);
             holder.tvDescription = (TextView) convertView.findViewById(R.id.example_row_tv_description);
@@ -170,19 +169,19 @@ public class Sub_Dealer_Preview_Adapter extends ArrayAdapter<HashMap<String, Str
                         }
                         else
                         {
-                            Double sum = 0.0;
+                            int sum = 0;
                             List<Local_Data> cont1 = dbvoc.getItemNameSub(Global_Data.GLOvel_SUB_GORDER_ID);
                             for (Local_Data cnt1 : cont1) {
-                                Amount_tpp.add(cnt1.getAmount());
+                                Amount_tpp.add(cnt1.getQty());
 
                             }
 
                             for(int m=0; m<Amount_tpp.size(); m++)
                             {
-                                sum += Double.valueOf(Amount_tpp.get(m));
+                                sum += Integer.parseInt(Amount_tpp.get(m));
                             }
                             Global_Data.statusOrderActivity = "";
-                            PreviewOrderSwipeActivity.updateSum(sum);
+                            SubDealer_PreviewActivity.updateSum(sum);
                             Intent goToNewOrderActivity = new Intent(context, SubDealer_PreviewActivity.class);
                             context.startActivity(goToNewOrderActivity);
                         }
