@@ -14,7 +14,7 @@ public class SubDealer_Home extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_dealer__home);
 
-        add_new_dealer = (ImageView)findViewById(R.id.add_new_dealer);
+        add_new_dealer = findViewById(R.id.add_new_dealer);
         add_new_dealer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

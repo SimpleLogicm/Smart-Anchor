@@ -89,20 +89,20 @@ public class ReturnOrder3 extends BaseActivity {
         order=sp.getString("order", "");
 
  
-        mContent = (LinearLayout) findViewById(R.id.linearLayout);
+        mContent = findViewById(R.id.linearLayout);
         mSignature = new signature(this, null);
         mSignature.setBackgroundColor(Color.WHITE);
         mContent.addView(mSignature, LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        mClear = (Button)findViewById(R.id.clear);
+        mClear = findViewById(R.id.clear);
         mClear.setBackgroundColor(Color.parseColor("#414042"));
-        mGetSign = (Button)findViewById(R.id.getsign);
+        mGetSign = findViewById(R.id.getsign);
         mGetSign.setBackgroundColor(Color.parseColor("#414042"));
         //mGetSign.setEnabled(false);
-        mCancel = (Button)findViewById(R.id.cancel);
+        mCancel = findViewById(R.id.cancel);
         mCancel.setBackgroundColor(Color.parseColor("#414042"));
         mView = mContent;
  
-        yourName = (EditText) findViewById(R.id.yourName);
+        yourName = findViewById(R.id.yourName);
         
         Intent i=getIntent();
         dataOrder=i.getParcelableArrayListExtra("productsList");
@@ -296,7 +296,7 @@ public class ReturnOrder3 extends BaseActivity {
             Log.e("log_tag", "Height: " + v.getHeight());
             if(mBitmap == null)
             {
-                mBitmap =  Bitmap.createBitmap (mContent.getWidth(), mContent.getHeight(), Bitmap.Config.RGB_565);;
+                mBitmap =  Bitmap.createBitmap (mContent.getWidth(), mContent.getHeight(), Bitmap.Config.RGB_565);
             }
             Canvas canvas = new Canvas(mBitmap);
             try
@@ -504,7 +504,7 @@ public class ReturnOrder3 extends BaseActivity {
                         if (report.areAllPermissionsGranted()) {
                             mView.setDrawingCacheEnabled(true);
 
-                            LinearLayout content = (LinearLayout) findViewById(R.id.linearLayout);
+                            LinearLayout content = findViewById(R.id.linearLayout);
                             content.setDrawingCacheEnabled(true);
                             final Bitmap bitmap = content.getDrawingCache();
 
@@ -536,7 +536,7 @@ public class ReturnOrder3 extends BaseActivity {
                                         File storagePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), Config.IMAGE_DIRECTORY_NAME + "/" + Global_Data.GLOvel_CUSTOMER_ID);
                                         storagePath.mkdirs();
 
-                                        File myImage = new File(storagePath, Long.toString(System.currentTimeMillis()) + ".jpg");
+                                        File myImage = new File(storagePath, System.currentTimeMillis() + ".jpg");
 
 
                                         String uploadImage = "";

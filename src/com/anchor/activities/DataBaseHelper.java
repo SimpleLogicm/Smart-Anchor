@@ -1694,7 +1694,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery = "DELETE FROM " + tablename + " WHERE ids = '" + id + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -2871,7 +2870,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT code,name FROM " + TABLE_ITEM_MASTER + " WHERE product_variant = '" + pro_variant + "'" + " AND primary_category " + " ='" + pro_categ + "'" + " AND sub_category" + " ='" + pro_product + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         // Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -2975,7 +2973,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT code,name FROM " + TABLE_ITEM_MASTER + " WHERE product_variant = '" + pro_variant + "'" + " AND primary_category " + " ='" + pro_categ + "'" + " AND sub_category" + " ='" + pro_product + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -4195,7 +4192,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT  * FROM " + TABLE_PRODUCT_VARIENTS + " WHERE product_id = " + product_id;
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -4931,7 +4927,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT  customer_id,user_id,media_type,media_text,location,latitude,longitude,media_id FROM " + CUSTOMER_SERVICE_MEDIA + " WHERE media_type = '" + media_type + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -5338,7 +5333,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList2 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT  * FROM " + TABLE_BEATS + " WHERE name = '" + name + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         // Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -6503,7 +6497,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // Select All Query
         //String selectQuery = "SELECT "+ pcategary_name  + " FROM " + TABLE_ITEM_MASTER + " WHERE Primary_Sub_Category"+ " ='"+ invoice_name + "'" + " GROUP BY '"+ pcategary_name + "'" + " ORDER BY '"+ pcategary_name + "'";
         String selectQuery = "SELECT " + pcategary_name + " FROM " + TABLE_ITEM_MASTER + " WHERE Primary_Sub_Category" + " ='" + invoice_name + "'" + " ORDER BY '" + pcategary_name + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -6538,7 +6531,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //String selectQuery = "SELECT "+ pcategary_name  + " FROM " + TABLE_ITEM_MASTER + " WHERE Primary_Sub_Category"+ " ='"+ invoice_name + "'" + " GROUP BY '"+ pcategary_name + "'" + " ORDER BY '"+ pcategary_name + "'";
 
         String selectQuery = "SELECT " + pcategary_name + " FROM " + TABLE_ITEM_MASTER + " WHERE Primary_Sub_Category" + " ='" + invoice_name + "'" + " ORDER BY '" + pcategary_name + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -7759,7 +7751,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery = "SELECT product_id,total_qty,MRP,amount,item_number,product_name,retail_price,scheme_id FROM " + TABLE_PREVIOUS_ORDER_PRODUCTS + " WHERE " + ORDER_ID + "='" + orderid + "'" + " AND item_number" + " !='" + item_number + "'";
-        ;
 
         SQLiteDatabase db = this.getWritableDatabase();
 

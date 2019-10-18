@@ -99,9 +99,9 @@ public class NoOrderActivity extends BaseActivity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.no_order);
-        spinner1 = (Spinner) findViewById(R.id.spnReason);
-        edittextNoOrderreason = (EditText) findViewById(R.id.edittextNoOrderreason);
-        no_order_head = (TextView) findViewById(R.id.editTextTarget);
+        spinner1 = findViewById(R.id.spnReason);
+        edittextNoOrderreason = findViewById(R.id.edittextNoOrderreason);
+        no_order_head = findViewById(R.id.editTextTarget);
         Intent i = getIntent();
         String name = i.getStringExtra("retialer");
         cd = new ConnectionDetector(getApplicationContext());
@@ -129,8 +129,8 @@ public class NoOrderActivity extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             if (!Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
                 mTitleTextView.setText(Global_Data.Sub_Dealer_name);
                 todaysTarget.setVisibility(View.GONE);
@@ -142,15 +142,15 @@ public class NoOrderActivity extends BaseActivity {
 
             SharedPreferences sp = NoOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -231,7 +231,7 @@ public class NoOrderActivity extends BaseActivity {
             }
         });
 
-        buttonnoOrderSave = (Button) findViewById(R.id.buttonnoOrderSave);
+        buttonnoOrderSave = findViewById(R.id.buttonnoOrderSave);
         buttonnoOrderSave.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -273,7 +273,7 @@ public class NoOrderActivity extends BaseActivity {
 				
 			}
 		});*/
-        buttonnoOrdercancel = (Button) findViewById(R.id.buttonnoOrdercancel);
+        buttonnoOrdercancel = findViewById(R.id.buttonnoOrdercancel);
 
         buttonnoOrdercancel.setOnTouchListener(new OnTouchListener() {
 

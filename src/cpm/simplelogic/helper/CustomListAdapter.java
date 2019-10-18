@@ -52,12 +52,12 @@ public class CustomListAdapter extends BaseAdapter {
 
 		if (imageLoader == null)
 			imageLoader = AppController.getInstance().getImageLoader();
-		NetworkImageView thumbNail = (NetworkImageView) convertView
+		NetworkImageView thumbNail = convertView
 				.findViewById(R.id.thumbnail);
-		TextView title = (TextView) convertView.findViewById(R.id.title);
-		TextView rating = (TextView) convertView.findViewById(R.id.rating);
+		TextView title = convertView.findViewById(R.id.title);
+		TextView rating = convertView.findViewById(R.id.rating);
 		//TextView genre = (TextView) convertView.findViewById(R.id.genre);
-		TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+		TextView year = convertView.findViewById(R.id.releaseYear);
 
 		// getting movie data for the row
 		Movie m = movieItems.get(position);

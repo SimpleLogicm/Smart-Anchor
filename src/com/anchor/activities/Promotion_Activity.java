@@ -374,22 +374,22 @@ public class Promotion_Activity extends Activity {
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Promotional Activity");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Promotion_Activity.this.getSharedPreferences("SimpleLogic", 0);
 
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -702,14 +702,10 @@ public class Promotion_Activity extends Activity {
 
 
     private boolean isDeviceSupportCamera() {
-        if (getApplicationContext().getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA)) {
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
+        // this device has a camera
+        // no camera on this device
+        return getApplicationContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_CAMERA);
     }
 
     /**
@@ -990,7 +986,7 @@ public class Promotion_Activity extends Activity {
 
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(datenew)) {
                 try {
-                    String timenewarray[] = datenew.split("-");
+                    String[] timenewarray = datenew.split("-");
                     String month = getMonthForInt(Integer.parseInt(timenewarray[1]) - 1);
                     pro_date.setText("Date : " + timenewarray[0] + " " + month + " " + timenewarray[2]);
                 } catch (Exception ex) {
@@ -1035,7 +1031,7 @@ public class Promotion_Activity extends Activity {
                 try {
 
                     LocationAddress locationAddress = new LocationAddress();
-                    locationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
+                    LocationAddress.getAddressFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE),
                             Promotion_Activity.this, new GeocoderHandler());
                     Geocoder geo = new Geocoder(Promotion_Activity.this.getApplicationContext(), Locale.getDefault());
                     List<Address> addresses = geo.getFromLocation(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE), 1);
@@ -1690,7 +1686,7 @@ public class Promotion_Activity extends Activity {
                 .into(zoom_image);
 
 
-        Button cancelf = (Button) dialognew.findViewById(R.id.cancelf);
+        Button cancelf = dialognew.findViewById(R.id.cancelf);
         cancelf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

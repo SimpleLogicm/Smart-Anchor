@@ -86,7 +86,7 @@ public class Sound_Act extends Activity {
 //                null, null);
 
         count = musiccursor.getCount();
-        musiclist = (ListView) findViewById(R.id.PhoneMusicList);
+        musiclist = findViewById(R.id.PhoneMusicList);
 
         if (count > 0) {
             musiclist.setAdapter(new MusicAdapter(getApplicationContext()));

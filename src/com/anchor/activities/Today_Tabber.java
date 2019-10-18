@@ -49,10 +49,10 @@ public class Today_Tabber extends TabActivity {
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Today");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Today_Tabber.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -218,7 +218,7 @@ public class Today_Tabber extends TabActivity {
 //    
     private static View createTabView(final Context context, final String text) {
 		View view = LayoutInflater.from(context).inflate(R.layout.follow_tabbg, null);
-		TextView tv = (TextView) view.findViewById(R.id.follow_txt);
+		TextView tv = view.findViewById(R.id.follow_txt);
 		tv.setText(text);
 		return view;
 	}

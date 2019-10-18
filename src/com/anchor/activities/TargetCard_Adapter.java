@@ -59,12 +59,12 @@ public class TargetCard_Adapter extends RecyclerView.Adapter<TargetCard_Adapter.
 
         public ContactViewHolder(View v) {
             super(v);
-            product_value =  (TextView) v.findViewById(R.id.product_value);
-            product_Sub_value = (TextView)  v.findViewById(R.id.product_Sub_value);
-            target_value = (TextView)  v.findViewById(R.id.target_value);
-            achieved_value = (TextView) v.findViewById(R.id.achieved_value);
-            age_value = (TextView) v.findViewById(R.id.age_value);
-            target_date = (TextView) v.findViewById(R.id.target_date);
+            product_value = v.findViewById(R.id.product_value);
+            product_Sub_value = v.findViewById(R.id.product_Sub_value);
+            target_value = v.findViewById(R.id.target_value);
+            achieved_value = v.findViewById(R.id.achieved_value);
+            age_value = v.findViewById(R.id.age_value);
+            target_date = v.findViewById(R.id.target_date);
         }
     }
 }

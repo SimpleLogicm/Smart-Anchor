@@ -23,8 +23,8 @@ public class LoginThreadSales extends Thread {
 	Handler h;
 	public interface LoginInterfaceSales
 	{
-		public void onLogThreadDataReturned(boolean isSuccess,String msg);
-		public void onLogThreadErrorReturned();
+		void onLogThreadDataReturned(boolean isSuccess, String msg);
+		void onLogThreadErrorReturned();
 	}
 
 	private LoginInterfaceSales mLogThreadInterface;

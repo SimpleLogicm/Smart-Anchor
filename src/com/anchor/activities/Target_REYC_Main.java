@@ -53,7 +53,7 @@ public class Target_REYC_Main extends Activity implements OnItemSelectedListener
 
     Button view_target,targetS_Cancel;
     Spinner target_year, target_quarter, target_month,target_product_category,target_amount,target_grpby;
-    String s[];
+    String[] s;
     ProgressDialog dialog;
     ArrayAdapter<String> adapter_target_quarter;
     EditText target_month_to;
@@ -92,15 +92,15 @@ public class Target_REYC_Main extends Activity implements OnItemSelectedListener
         // lv=(ListView)findViewById(R.id.listView1);
         // customer_submit = (Button) findViewById(R.id.customer_submit);
 
-        view_target = (Button) findViewById(R.id.view_target);
-        targetS_Cancel = (Button) findViewById(R.id.targetS_Cancel);
-        target_year = (Spinner) findViewById(R.id.target_year);
-        target_quarter = (Spinner) findViewById(R.id.target_quarter);
-        target_month = (Spinner) findViewById(R.id.target_month);
-        target_product_category = (Spinner) findViewById(R.id.target_product_category);
-        target_month_to = (EditText) findViewById(R.id.target_month_to);
-        target_amount = (Spinner) findViewById(R.id.target_amount);
-        target_grpby = (Spinner) findViewById(R.id.target_grpby);
+        view_target = findViewById(R.id.view_target);
+        targetS_Cancel = findViewById(R.id.targetS_Cancel);
+        target_year = findViewById(R.id.target_year);
+        target_quarter = findViewById(R.id.target_quarter);
+        target_month = findViewById(R.id.target_month);
+        target_product_category = findViewById(R.id.target_product_category);
+        target_month_to = findViewById(R.id.target_month_to);
+        target_amount = findViewById(R.id.target_amount);
+        target_grpby = findViewById(R.id.target_grpby);
 
         quarter_list.add("Please Select Duration");
         quarter_list.add("Monthly");
@@ -316,11 +316,11 @@ public class Target_REYC_Main extends Activity implements OnItemSelectedListener
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color
                     .parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView
+            TextView mTitleTextView = mCustomView
                     .findViewById(R.id.screenname);
             mTitleTextView.setText("Target");
 
-            TextView todaysTarget = (TextView) mCustomView
+            TextView todaysTarget = mCustomView
                     .findViewById(R.id.todaysTarget);
             SharedPreferences sp = Target_REYC_Main.this
                     .getSharedPreferences("SimpleLogic", 0);
@@ -328,17 +328,17 @@ public class Target_REYC_Main extends Activity implements OnItemSelectedListener
 
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }

@@ -49,7 +49,7 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.filter_list);
-		alllist = (ListView) findViewById(R.id.list_all);
+		alllist = findViewById(R.id.list_all);
 		
 		Global_Data.GLOVEL_FILTER_FLAG = "";
 		//cable1 = (Button) findViewById(R.id.subcat1);
@@ -85,8 +85,8 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
 	        });
 		
 		//filter_btn = (Button) findViewById(R.id.filter_btn);
-		search_filter = (EditText) findViewById(R.id.search_filter);
-		brand_subcategaries = (LinearLayout) findViewById(R.id.brand_subcategaries);
+		search_filter = findViewById(R.id.search_filter);
+		brand_subcategaries = findViewById(R.id.brand_subcategaries);
 		
 		 dataArrayList=new ArrayList<HashMap<String, String>>();
 		 
@@ -157,7 +157,7 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
 
                 for(int i=0;i<product_value.size();i++)
                 {
-                    String playerName=product_value.get(i).toString();
+                    String playerName= product_value.get(i);
                     if(textLength<=playerName.length()){
                         //compare the String in EditText with Names in the ArrayList
                         if(searchString.equalsIgnoreCase(playerName.substring(0,textLength)))
@@ -180,7 +180,7 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
             }
         });
 		
-		search_filter = (EditText) findViewById(R.id.search_filter);
+		search_filter = findViewById(R.id.search_filter);
 		
 		
 //		filter_btn.setOnClickListener(new OnClickListener() {
@@ -243,10 +243,10 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Filter");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Filter_List.this.getSharedPreferences("SimpleLogic", 0);
 
 //       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -255,17 +255,17 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -304,7 +304,7 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
         	
         	for(int i=0; i<brand_subcategaries.getChildCount(); i++){
         	    if(brand_subcategaries.getChildAt(i) instanceof Button)
-        	        ((Button)brand_subcategaries.getChildAt(i)).
+        	        brand_subcategaries.getChildAt(i).
         	        setEnabled(true);
         	    //b.setEnabled(false);
         	}
@@ -319,11 +319,11 @@ public class Filter_List extends Activity implements OnItemSelectedListener{
         	//Toast.makeText(Filter_L ist.this, buttonText,Toast.LENGTH_SHORT).show();
         	 Log.d("Sub Categary name", buttonText);
         	 
-        	 Global_Data.GLOVEL_SUBCATEGORY_NAME = buttonText.toString().trim();
+        	 Global_Data.GLOVEL_SUBCATEGORY_NAME = buttonText.trim();
         	 
         	 product_value.clear();
         	 
-        	 List<Local_Data> contacts1 = dbvoc.ITEM_List(buttonText.toString().trim());
+        	 List<Local_Data> contacts1 = dbvoc.ITEM_List(buttonText.trim());
  	        
 	          for (Local_Data cn : contacts1) 
 	          {

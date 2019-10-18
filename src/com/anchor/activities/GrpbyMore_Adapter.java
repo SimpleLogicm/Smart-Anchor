@@ -108,14 +108,14 @@ public class GrpbyMore_Adapter extends RecyclerView.Adapter<GrpbyMore_Adapter.Co
 
         public ContactViewHolder(View v) {
             super(v);
-            prdcatg_more =  (TextView) v.findViewById(R.id.prdcatg_more);
-            month_grpby =  (TextView) v.findViewById(R.id.month_grpby);
-            target_more = (TextView)  v.findViewById(R.id.target_grpby);
-            achieved_more = (TextView) v.findViewById(R.id.achievd_grpby);
-            age_more = (TextView) v.findViewById(R.id.age_grpby);
-            month_more = (TextView) v.findViewById(R.id.month_top);
-            dfgnew = (LinearLayout) v.findViewById(R.id.dfgnew);
-            product_header2 = (LinearLayout) v.findViewById(R.id.product_header2);
+            prdcatg_more = v.findViewById(R.id.prdcatg_more);
+            month_grpby = v.findViewById(R.id.month_grpby);
+            target_more = v.findViewById(R.id.target_grpby);
+            achieved_more = v.findViewById(R.id.achievd_grpby);
+            age_more = v.findViewById(R.id.age_grpby);
+            month_more = v.findViewById(R.id.month_top);
+            dfgnew = v.findViewById(R.id.dfgnew);
+            product_header2 = v.findViewById(R.id.product_header2);
         }
     }
 }

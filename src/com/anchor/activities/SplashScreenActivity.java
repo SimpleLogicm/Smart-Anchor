@@ -37,7 +37,7 @@ public class SplashScreenActivity extends Activity {
 //        getActionBar().hide();
         setContentView(R.layout.activity_splash_screen);
 
-		splash_logo=(ImageView)findViewById(R.id.splash_logo);
+		splash_logo= findViewById(R.id.splash_logo);
 
 		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 		loginDataBaseAdapter=loginDataBaseAdapter.open();

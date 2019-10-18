@@ -181,7 +181,7 @@ public class LoginDataBaseAdapter {
 
 		/*static final String DATABASE_CREATE_CUSTOMER_SERVICE_COMPETITION = "create table "+"customer_service_competition_stocks"+
                 "( " +"ID"+" integer primary key autoincrement,"+ "project_id text, customer_id text, retailer_id text, user_id text, " +
-                		"category_id text, product_id text, product_variant_id text, product_pack_size_id text, competition_product_name text, competition_product_quantity text, competition_product_text, created_at text, updated_at text);"*/;
+                		"category_id text, product_id text, product_variant_id text, product_pack_size_id text, competition_product_name text, competition_product_quantity text, competition_product_text, created_at text, updated_at text);"*/
 
     static final String DATABASE_CREATE_CUSTOMER_SERVICE_COMPETITION = "CREATE TABLE IF NOT EXISTS " + "customer_service_competition_stocks" +
             "( " + "ID" + " integer primary key autoincrement," + "project_id text, customer_id text, retailer_id text, user_id text, " +
@@ -385,10 +385,10 @@ public class LoginDataBaseAdapter {
 //        	 }
 
     public Cursor queryName() {
-        String[] cols = {dbHelper.KEY_ID, dbHelper.FNAME,
+        String[] cols = {DataBaseHelper.KEY_ID, DataBaseHelper.FNAME,
         };
         //opnToWrite();
-        Cursor c = db.query(dbHelper.TABLE_STATES, cols, null, null, null, null, null);
+        Cursor c = db.query(DataBaseHelper.TABLE_STATES, cols, null, null, null, null, null);
         return c;
     }
 

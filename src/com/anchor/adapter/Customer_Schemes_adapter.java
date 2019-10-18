@@ -26,7 +26,7 @@ public class Customer_Schemes_adapter extends RecyclerView.Adapter<com.anchor.ad
     static Context mcontext;
     public Customer_Schemes_adapter(List<Customer_Info> contactList, Context context) {
         this.contactList = contactList;
-        this.mcontext = context;
+        mcontext = context;
         //this.contactListfilter.addAll(this.contactList);
     }
 
@@ -91,14 +91,14 @@ public class Customer_Schemes_adapter extends RecyclerView.Adapter<com.anchor.ad
         public ContactViewHolder(View v) {
             super(v);
 
-            c_header =  (TextView) v.findViewById(R.id.c_header);
-            c_detail1 =  (TextView) v.findViewById(R.id.c_detail1);
-            c_detail2 = (TextView)  v.findViewById(R.id.c_detail2);
-            c_detail3 = (TextView)  v.findViewById(R.id.c_detail3);
-            c_detail4 = (TextView)  v.findViewById(R.id.c_detail4);
-            c_detail5 = (TextView) v.findViewById(R.id.c_detail5);
-            c_detail6 = (TextView) v.findViewById(R.id.c_detail6);
-            c_detail7 = (TextView) v.findViewById(R.id.c_detail7);
+            c_header = v.findViewById(R.id.c_header);
+            c_detail1 = v.findViewById(R.id.c_detail1);
+            c_detail2 = v.findViewById(R.id.c_detail2);
+            c_detail3 = v.findViewById(R.id.c_detail3);
+            c_detail4 = v.findViewById(R.id.c_detail4);
+            c_detail5 = v.findViewById(R.id.c_detail5);
+            c_detail6 = v.findViewById(R.id.c_detail6);
+            c_detail7 = v.findViewById(R.id.c_detail7);
 
         }
 

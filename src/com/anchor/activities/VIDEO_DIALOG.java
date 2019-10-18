@@ -21,7 +21,7 @@ public class VIDEO_DIALOG extends Activity implements OnItemSelectedListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_view);
 		
-		videoPreview = (VideoView)findViewById(R.id.video_pre);
+		videoPreview = findViewById(R.id.video_pre);
 		getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 		
 		Intent i = getIntent();

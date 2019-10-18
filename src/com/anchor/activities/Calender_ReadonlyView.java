@@ -65,7 +65,7 @@ public class Calender_ReadonlyView extends BaseActivity{
     private DatePickerDialog fromDatePickerDialog,fromDatePickerDialog1;
     private SimpleDateFormat dateFormatter;
     private static final String tag = "Calendar_Event";
-    String popUpContents[];
+    String[] popUpContents;
     Boolean isInternetPresent = false;
     ConnectionDetector cd;
     PopupWindow popupWindowDogs;
@@ -98,12 +98,12 @@ public class Calender_ReadonlyView extends BaseActivity{
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         setContentView(R.layout.calender_readonlylayout);
-        from=(TextView)findViewById(R.id.from_details);
-        event_name=(TextView)findViewById(R.id.event_name);
-        to=(TextView)findViewById(R.id.to_details);
-        details=(EditText)findViewById(R.id.details);
-        submit=(Button)findViewById(R.id.submit_details);
-        submit_details_save = (Button)findViewById(R.id.submit_details_save);
+        from= findViewById(R.id.from_details);
+        event_name= findViewById(R.id.event_name);
+        to= findViewById(R.id.to_details);
+        details= findViewById(R.id.details);
+        submit= findViewById(R.id.submit_details);
+        submit_details_save = findViewById(R.id.submit_details_save);
 
         details.setFilters(new InputFilter[]{filter});
 

@@ -67,11 +67,11 @@ public class Target extends Activity implements OnItemSelectedListener {
 		T_TEXT = new ArrayList<String>();
 		T_ACH = new ArrayList<String>();
 		
-		list_target=(ListView)findViewById(R.id.list_target);
-		list_text = (TextView) findViewById(R.id.list_text); 
-		textViewm = (TextView) findViewById(R.id.textViewm);
-		textView1 = (TextView) findViewById(R.id.textView1);
-		type_spinner=(Spinner)findViewById(R.id.target);
+		list_target= findViewById(R.id.list_target);
+		list_text = findViewById(R.id.list_text);
+		textViewm = findViewById(R.id.textViewm);
+		textView1 = findViewById(R.id.textView1);
+		type_spinner= findViewById(R.id.target);
 		list_target.setTextFilterEnabled(true); 
 		
 		if(!elementsNew.isEmpty())
@@ -131,13 +131,13 @@ public class Target extends Activity implements OnItemSelectedListener {
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Target");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Target.this.getSharedPreferences("SimpleLogic", 0);
 
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			H_LOGO.setImageResource(R.drawable.tar);
 			H_LOGO.setVisibility(View.VISIBLE);
 

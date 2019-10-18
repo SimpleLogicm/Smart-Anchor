@@ -163,11 +163,9 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
 
         if (!Global_Data.Quantity_click_flag.equalsIgnoreCase("")) {
             Title_Text = "Scheme Shortfall(Ongoing)  " + " Quantity wise scheme   " + "Data as on ";
-            ;
             type = "quantity";
         } else {
             Title_Text = "Scheme Shortfall(Ongoing)   " + " Value wise scheme   " + "Data as on ";
-            ;
             type = "value";
         }
 
@@ -183,10 +181,10 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Title_Text);
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Customer_Schemes_New.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -195,17 +193,17 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
 //		}
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -235,7 +233,7 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
         registerReceiver(onComplete5,
                 new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
-        AllAngleExpandableButton button = (AllAngleExpandableButton) findViewById(R.id.button_expandable);
+        AllAngleExpandableButton button = findViewById(R.id.button_expandable);
         final List<ButtonData> buttonDatas = new ArrayList<>();
 //        int[] drawable = {R.drawable.plus, R.drawable.gmail, R.drawable.download, R.drawable.details};
 //        for (int i = 0; i < drawable.length; i++) {
@@ -1927,7 +1925,7 @@ public class Customer_Schemes_New extends Activity implements Scheme_Adapter.Use
                         String f_name = isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(document_url);
                         fileName = document_url.trim().substring(document_url.trim().lastIndexOf('/') + 1, f_name.trim().length());
 
-                        String file_array[];
+                        String[] file_array;
 
                         if (fileName.indexOf("?") > 0) {
                             file_array = fileName.split("\\?");

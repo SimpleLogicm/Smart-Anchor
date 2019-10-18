@@ -5,5 +5,5 @@ package cpm.simplelogic.helper;
  */
 
 public interface OnOptionSelected {
-    public void onOptionSelected(int position,int itemSelected);
+    void onOptionSelected(int position, int itemSelected);
 }

@@ -28,7 +28,7 @@ public class Customer_Media extends Activity implements OnItemSelectedListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.customer_claims);
 		
-		claims_submit=(Button)findViewById(R.id.claims_submit);
+		claims_submit= findViewById(R.id.claims_submit);
 		//feed_spinner=(Spinner)findViewById(R.id.comp_stock);
 		
 		  ArrayAdapter<String> adapter_state1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, feed_state);
@@ -70,7 +70,7 @@ public class Customer_Media extends Activity implements OnItemSelectedListener{
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			//  mTitleTextView.setText(Global_Data.retailer);
 
 	        /*TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);

@@ -80,7 +80,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String district_name = "";
     Button s_submit, s_no_order, s_previous_order;
     Spinner s_state, s_district, s_city;
-    String s[];
+    String[] s;
     ProgressDialog progressDialog;
     ArrayAdapter<String> adapter_state1;
     AutoCompleteTextView s_sub_dealer_search, s_dealer_search;
@@ -764,25 +764,25 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color
                     .parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView
+            TextView mTitleTextView = mCustomView
                     .findViewById(R.id.screenname);
             mTitleTextView.setText("Order");
 
-            TextView todaysTarget = (TextView) mCustomView
+            TextView todaysTarget = mCustomView
                     .findViewById(R.id.todaysTarget);
             SharedPreferences sp = Sub_Dealer_Order_Main.this
                     .getSharedPreferences("SimpleLogic", 0);
 
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }

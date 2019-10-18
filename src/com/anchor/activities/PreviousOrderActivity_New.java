@@ -47,7 +47,7 @@ public class PreviousOrderActivity_New extends Activity {
 		actionBar.setTitle(name);
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		 TableLayout tl=(TableLayout)findViewById(R.id.tablePrevious);    
+		 TableLayout tl= findViewById(R.id.tablePrevious);
 		 
 		 ArrayList<Product> productList=new ArrayList<Product>();
 		 Product p1=new Product("AP Deodorants", "MANGO 30", "50 GM",
@@ -94,8 +94,8 @@ public class PreviousOrderActivity_New extends Activity {
 			view.setBackgroundResource(R.drawable.line);
 			//view.setBackgroundColor(Color.BLACK);
 			tl.addView(view);
-			buttonPreviousAddMOre=(Button) findViewById(R.id.buttonPreviousAddMOre);
-			txtPreviousOrder=(TextView) findViewById(R.id.txtPreviousOrder);
+			buttonPreviousAddMOre= findViewById(R.id.buttonPreviousAddMOre);
+			txtPreviousOrder= findViewById(R.id.txtPreviousOrder);
 			 String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 	     
 			txtPreviousOrder.setText("Date : "+date);
@@ -120,7 +120,7 @@ public class PreviousOrderActivity_New extends Activity {
 				}
 			});
 			
-			buttonPreviousPreview=(Button) findViewById(R.id.buttonPreviousPreview);
+			buttonPreviousPreview= findViewById(R.id.buttonPreviousPreview);
 			buttonPreviousAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 			buttonPreviousPreview.setBackgroundColor(Color.parseColor("#414042"));
 			buttonPreviousPreview.setOnTouchListener(new OnTouchListener() {

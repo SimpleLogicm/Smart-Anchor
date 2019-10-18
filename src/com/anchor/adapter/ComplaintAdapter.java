@@ -47,7 +47,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
 
 
         if(noOfNewLines>2){
-            String parts[] = complaintEnteredComplete.split("\r\n|\n|\r");
+            String[] parts = complaintEnteredComplete.split("\r\n|\n|\r");
             String finalOutputText = parts[0]+"\n"+parts[1]+"...";
             holder.tvNewComplaint.setText(finalOutputText);
         }
@@ -75,7 +75,7 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
                 if (noOfNewLines2>2 || (noOfCharacters2>30 && noOfNewLines2>=1) || noOfCharacters2>60){
                     Dialog dialog = new Dialog(mContext);
                     dialog.setContentView(R.layout.dialog_complaint_card);
-                    TextView dialogText = (TextView) dialog.findViewById(R.id.tvComplaintDialog);
+                    TextView dialogText = dialog.findViewById(R.id.tvComplaintDialog);
                     dialogText.setText(complaintEnteredComplete);
                     dialog.show();
                 }

@@ -58,7 +58,7 @@ public class SendLocation extends BroadcastReceiver implements LocationListener 
 	public void onReceive(final Context mContext, Intent intent) {
 
 	    try {
-	        locationManager = (LocationManager) mContext.getSystemService(mContext.LOCATION_SERVICE);
+	        locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
 
 	        isGPSEnabled = locationManager
 	                .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -85,8 +85,8 @@ public class SendLocation extends BroadcastReceiver implements LocationListener 
 	                		geocoder = new Geocoder(mContext, Locale.getDefault());
 	                		addresses = geocoder.getFromLocation(latitude, longitude, 1);
 	                		Address address = addresses.get(0);
-	                		Global_Data.GLOvel_STATE_n =  addresses.get(0).getAdminArea();;
-	        	 		    Global_Data.GLOvel_CITY_n = address.getLocality();
+	                		Global_Data.GLOvel_STATE_n =  addresses.get(0).getAdminArea();
+                            Global_Data.GLOvel_CITY_n = address.getLocality();
 	                		// Here 1 represent max location result to returned, by documents it recommended 1 to 5
 	                		Global_Data.address = addresses.get(0).getAddressLine(1)+" "+addresses.get(0).getAddressLine(2); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
 	                    }

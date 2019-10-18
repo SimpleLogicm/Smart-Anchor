@@ -79,7 +79,7 @@ public class Expended_list_demo extends BaseActivity {
 	String Target_Year = "";
 	String Target_TO_YEAR = "";
 	String Target_TO_MONTHNEW = "";
-	String Target_TO_YEAR_ARRAY[];
+    String[] Target_TO_YEAR_ARRAY;
 
 	Double t_total = 0.0;
 	Double achived_total = 0.0;
@@ -112,15 +112,15 @@ public class Expended_list_demo extends BaseActivity {
 
 		setContentView(R.layout.expended_demo);
 
-		t_total_value = (TextView) findViewById(R.id.target_value_final);
-		a_total_value = (TextView) findViewById(R.id.achieved_value_final);
-		age_total_value = (TextView) findViewById(R.id.age_value_final);
-		T_from_date = (TextView) findViewById(R.id.T_from_date);
-		T_to_date = (TextView) findViewById(R.id.T_to_date);
-		ts2back = (Button) findViewById(R.id.ts2back);
-		ts2more = (Button) findViewById(R.id.ts2more);
+		t_total_value = findViewById(R.id.target_value_final);
+		a_total_value = findViewById(R.id.achieved_value_final);
+		age_total_value = findViewById(R.id.age_value_final);
+		T_from_date = findViewById(R.id.T_from_date);
+		T_to_date = findViewById(R.id.T_to_date);
+		ts2back = findViewById(R.id.ts2back);
+		ts2more = findViewById(R.id.ts2more);
 		// get the listview
-		expListView = (ExpandableListView) findViewById(R.id.lvExp);
+		expListView = findViewById(R.id.lvExp);
 
 		// Listview Group click listener
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -299,10 +299,10 @@ public class Expended_list_demo extends BaseActivity {
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Target");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Expended_list_demo.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -310,17 +310,17 @@ public class Expended_list_demo extends BaseActivity {
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -575,9 +575,9 @@ public class Expended_list_demo extends BaseActivity {
 
 									if(Global_Data.target_grpby.equalsIgnoreCase("By Product")) {
 
-										if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_sub_category").toString())) {
+										if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_sub_category"))) {
 											if (!jsonObject.getString("products_sub_category").equalsIgnoreCase("null") && !jsonObject.getString("products_sub_category").equalsIgnoreCase(null) & !jsonObject.getString("products_sub_category").equalsIgnoreCase("") & !jsonObject.getString("products_sub_category").equalsIgnoreCase(" ")) {
-												product_subcategory = jsonObject.getString("products_sub_category").toString();
+												product_subcategory = jsonObject.getString("products_sub_category");
 											} else {
 
 												product_subcategory = "";
@@ -586,11 +586,11 @@ public class Expended_list_demo extends BaseActivity {
 											ci.prdcatg_morestr = product_subcategory;
 										}
 
-										if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_primary_category").toString()))
+										if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_primary_category")))
 										{
 											if(!jsonObject.getString("products_primary_category").equalsIgnoreCase("null") && !jsonObject.getString("products_primary_category").equalsIgnoreCase(null) & !jsonObject.getString("products_primary_category").equalsIgnoreCase("") & !jsonObject.getString("products_primary_category").equalsIgnoreCase(" "))
 											{
-												product_category = jsonObject.getString("products_primary_category").toString();
+												product_category = jsonObject.getString("products_primary_category");
 											}
 											else
 											{
@@ -605,11 +605,11 @@ public class Expended_list_demo extends BaseActivity {
 									}
 									else
 									{
-										if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_primary_category").toString()))
+										if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_primary_category")))
 										{
 											if(!jsonObject.getString("products_primary_category").equalsIgnoreCase("null") && !jsonObject.getString("products_primary_category").equalsIgnoreCase(null) & !jsonObject.getString("products_primary_category").equalsIgnoreCase("") & !jsonObject.getString("products_primary_category").equalsIgnoreCase(" "))
 											{
-												product_category = jsonObject.getString("products_primary_category").toString();
+												product_category = jsonObject.getString("products_primary_category");
 											}
 											else
 											{
@@ -620,35 +620,35 @@ public class Expended_list_demo extends BaseActivity {
 											ci.prdcatg_morestr = product_category;
 										}
 
-										if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("year").toString()))
+										if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("year")))
 										{
 
-											ci.monthgrpmore_str = jsonObject.getString("month").toString() +" "+jsonObject.getString("year").toString();
+											ci.monthgrpmore_str = jsonObject.getString("month") +" "+ jsonObject.getString("year");
 											hs.add(ci.monthgrpmore_str);
 										}
 										else
 										{
-											ci.monthgrpmore_str = jsonObject.getString("month").toString();
+											ci.monthgrpmore_str = jsonObject.getString("month");
 											hs.add(ci.monthgrpmore_str);
 										}
 									}
 
-									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString()))
+									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target")))
 									{
 										if(!jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" "))
 										{
 											if(Global_Data.target_amount.equalsIgnoreCase("In Crores"))
 											{
-												t_total +=(Double.valueOf(jsonObject.getString("target").toString())/10000000);
-												target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target").toString())/10000000);
+												t_total +=(Double.valueOf(jsonObject.getString("target"))/10000000);
+												target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/10000000);
 											}else if(Global_Data.target_amount.equalsIgnoreCase("In Lakhs"))
 											{
-												t_total +=(Double.valueOf(jsonObject.getString("target").toString())/100000);
-												target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target").toString())/100000);
+												t_total +=(Double.valueOf(jsonObject.getString("target"))/100000);
+												target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/100000);
 											}else if(Global_Data.target_amount.equalsIgnoreCase("In Thousands"))
 											{
-												t_total +=(Double.valueOf(jsonObject.getString("target").toString())/1000);
-												target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target").toString())/1000);
+												t_total +=(Double.valueOf(jsonObject.getString("target"))/1000);
+												target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/1000);
 											}
 
 //                                                t_total +=Double.valueOf(jsonObject.getString("target").toString());
@@ -673,24 +673,24 @@ public class Expended_list_demo extends BaseActivity {
 
 
 
-									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString()))
+									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved")))
 									{
 										if(!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" "))
 										{
 											if(Global_Data.target_amount.equalsIgnoreCase("In Crores"))
 											{
-												achived_total +=(Double.valueOf(jsonObject.getString("achieved").toString())/10000000);
-												achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved").toString())/10000000);
+												achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/10000000);
+												achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/10000000);
 
 											}else if(Global_Data.target_amount.equalsIgnoreCase("In Lakhs"))
 											{
-												achived_total +=(Double.valueOf(jsonObject.getString("achieved").toString())/100000);
-												achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved").toString())/100000);
+												achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/100000);
+												achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/100000);
 
 											}else if(Global_Data.target_amount.equalsIgnoreCase("In Thousands"))
 											{
-												achived_total +=(Double.valueOf(jsonObject.getString("achieved").toString())/1000);
-												achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved").toString())/1000);
+												achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/1000);
+												achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/1000);
 											}
 //                                                achived_total +=Double.valueOf(jsonObject.getString("achieved").toString());
 //                                                //achieved_value = String.valueOf(Double.valueOf(jsonObject.getString("achieved").toString()));
@@ -714,19 +714,19 @@ public class Expended_list_demo extends BaseActivity {
 
 
 
-									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString()))
+									if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved")) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target")))
 									{
 
 										if(!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" ") && !jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" "))
 										{
-											Double age_n = ((Double.valueOf(jsonObject.getString("achieved").toString()))/(Double.valueOf(jsonObject.getString("target").toString())))*100;
+											Double age_n = ((Double.valueOf(jsonObject.getString("achieved")))/(Double.valueOf(jsonObject.getString("target"))))*100;
 
 											age_value = String.format("%.2f",age_n);
 //                                            agen_total +=  (Double.valueOf(jsonObject.getString("achieved").toString()))/(Double.valueOf(jsonObject.getString("target").toString()));
 										}
 										else
 										{
-											age_value =  String.valueOf("0.0");
+											age_value = "0.0";
 											agen_total +=  Double.valueOf("0.0");
 										}
 
@@ -734,7 +734,7 @@ public class Expended_list_demo extends BaseActivity {
 									}
 									else
 									{
-										age_value =  String.valueOf("0.0");
+										age_value = "0.0";
 										agen_total +=  Double.valueOf("0.0");
 										ci.agegrpmore_str = age_value+"%";
 									}

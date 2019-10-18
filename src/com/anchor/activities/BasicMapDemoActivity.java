@@ -149,11 +149,11 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         // prefManager = new PrefManager(this);
         cd = new ConnectionDetector(getApplicationContext());
         dialog = new ProgressDialog(BasicMapDemoActivity.this);
-        at_in = (Button) findViewById(R.id.at_in);
-        at_out = (Button) findViewById(R.id.at_out);
-        distance_la = (RelativeLayout) findViewById(R.id.distance_la);
-        show_distance_time = (TextView) findViewById(R.id.show_distance_time);
-        show_time = (TextView) findViewById(R.id.show_time);
+        at_in = findViewById(R.id.at_in);
+        at_out = findViewById(R.id.at_out);
+        distance_la = findViewById(R.id.distance_la);
+        show_distance_time = findViewById(R.id.show_distance_time);
+        show_time = findViewById(R.id.show_time);
 
         str = new StringBuilder();
         str.append(" ");
@@ -168,10 +168,10 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Location On Map");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = BasicMapDemoActivity.this.getSharedPreferences("SimpleLogic", 0);
 
 //           try
@@ -193,15 +193,15 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //				   todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
 //				}
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -550,7 +550,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             if (isInternetPresent) {
                 try {
                     LocationAddress locationAddress = new LocationAddress();
-                    locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
+                    LocationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
                             BasicMapDemoActivity.this, new BasicMapDemoActivity.GeocoderHandler());
                     Geocoder geo = new Geocoder(BasicMapDemoActivity.this.getApplicationContext(), Locale.getDefault());
                     List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -738,12 +738,12 @@ public class BasicMapDemoActivity extends FragmentActivity implements
         dialognew.setCancelable(false);
         dialognew.setContentView(R.layout.attendance_dialog);
 
-        TextView inh = (TextView) dialognew.findViewById(R.id.inh);
-        TextView att_time = (TextView) dialognew.findViewById(R.id.att_time);
-        TextView att_address = (TextView) dialognew.findViewById(R.id.att_address);
-        TextView att_lat = (TextView) dialognew.findViewById(R.id.att_lat);
-        TextView att_long = (TextView) dialognew.findViewById(R.id.att_long);
-        Button atok = (Button) dialognew.findViewById(R.id.atok);
+        TextView inh = dialognew.findViewById(R.id.inh);
+        TextView att_time = dialognew.findViewById(R.id.att_time);
+        TextView att_address = dialognew.findViewById(R.id.att_address);
+        TextView att_lat = dialognew.findViewById(R.id.att_lat);
+        TextView att_long = dialognew.findViewById(R.id.att_long);
+        Button atok = dialognew.findViewById(R.id.atok);
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
@@ -777,7 +777,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(datenew)) {
             try {
-                String timenewarray[] = datenew.split("-");
+                String[] timenewarray = datenew.split("-");
                 String month = getMonthForInt(Integer.parseInt(timenewarray[1]) - 1);
                 att_time.setText("Time : " + timenewarray[0] + "-" + month + "-" + timenewarray[2]);
             } catch (Exception ex) {

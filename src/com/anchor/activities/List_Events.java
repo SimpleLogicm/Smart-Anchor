@@ -35,7 +35,7 @@ public class List_Events extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_events);
-		event_list=(ListView)findViewById(R.id.event_list);
+		event_list= findViewById(R.id.event_list);
 		
 		new Thread(new Runnable() {
 			   public void run() {
@@ -191,7 +191,7 @@ public class List_Events extends Activity{
 						viewHolder=new ViewHolder();
 
 						//cache the views
-						viewHolder.name = (TextView) convertView.findViewById(R.id.textView1);				 
+						viewHolder.name = convertView.findViewById(R.id.textView1);
 						//viewHolder.img  = (ImageView) convertView.findViewById(R.id.icon);
 						
 						//link the cached views to the convertview
@@ -220,7 +220,7 @@ public class List_Events extends Activity{
 //					});
 							
 					//set the data to be displayed
-					viewHolder.name.setText(myData.get(position).get("details").toString());
+					viewHolder.name.setText(myData.get(position).get("details"));
 				
 					//ImageLoader.getInstance().displayImage(str,viewHolder.img);
 					//ImageLoader.getInstance().displayImage(myData.get(position).get("flag").toString(),viewHolder.flag);

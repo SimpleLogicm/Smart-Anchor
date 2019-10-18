@@ -38,11 +38,11 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
                 childPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context
-                    .getSystemService(context.LAYOUT_INFLATER_SERVICE);
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.child_item, null);
         }
-        TextView tv = (TextView) convertView.findViewById(R.id.country_name);
-        tv.setText(child.getName().toString());
+        TextView tv = convertView.findViewById(R.id.country_name);
+        tv.setText(child.getName());
 
         return convertView;
 
@@ -77,10 +77,10 @@ public class ExpandListAdapter extends BaseExpandableListAdapter {
         Group group = (Group) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) context
-                    .getSystemService(context.LAYOUT_INFLATER_SERVICE);
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inf.inflate(R.layout.group_item, null);
         }
-        TextView tv = (TextView) convertView.findViewById(R.id.group_name);
+        TextView tv = convertView.findViewById(R.id.group_name);
         tv.setText(group.getName());
         return convertView;
     }

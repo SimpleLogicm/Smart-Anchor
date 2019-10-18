@@ -46,6 +46,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,8 +80,8 @@ public class Survey_Main extends Activity implements OnOptionSelected {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.survey_layout);
-        mRecyclerView =(RecyclerView)findViewById(R.id.survey_List);
-        bAdd = (Button) findViewById(R.id.bAdd);
+        mRecyclerView = findViewById(R.id.survey_List);
+        bAdd = findViewById(R.id.bAdd);
         mRecyclerView.setHasFixedSize(true);
 
         cd = new ConnectionDetector(getApplicationContext());
@@ -149,7 +150,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
                     Iterator myVeryOwnIterator = Global_Data.quastionmap.keySet().iterator();
                     while(myVeryOwnIterator.hasNext()) {
                         String key=(String)myVeryOwnIterator.next();
-                        String value=(String)Global_Data.quastionmap.get(key);
+                        String value= Global_Data.quastionmap.get(key);
                         Log.d("map key","Map key"+key);
                         Log.d("map value","Map value"+value);
                         hashkey.add(key);
@@ -162,7 +163,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
                         {
                             if(hashvalue.get(i).equalsIgnoreCase(""))
                             {
-                                String code_value [] = hashkey.get(i).split(":");
+                                String[] code_value = hashkey.get(i).split(":");
                                // Toast.makeText(Survey_Main.this, "Please select at least one option of " +code_value[1] , Toast.LENGTH_LONG).show();
 
                                 Toast toast = Toast.makeText(Survey_Main.this, "Please select at least one option of " +code_value[1] , Toast.LENGTH_LONG);
@@ -206,7 +207,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
                         for(int i=0; i< hashkey.size(); i++)
                         {
-                            String code_value [] = hashkey.get(i).split(":");
+                            String[] code_value = hashkey.get(i).split(":");
 
                             Long randomPIN = System.currentTimeMillis();
                             String PINString = String.valueOf(randomPIN);
@@ -246,10 +247,10 @@ public class Survey_Main extends Activity implements OnOptionSelected {
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Market Survey");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Survey_Main.this.getSharedPreferences("SimpleLogic", 0);
 
 //	       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -258,17 +259,17 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -295,20 +296,20 @@ public class Survey_Main extends Activity implements OnOptionSelected {
         questionModels.get(position).setSeleectedAnswerPosition(itemSelected);
         switch (itemSelected){
             case 1:
-                ((QuestionModel)questionModels.get(position)).setOp1Sel(true);
+                questionModels.get(position).setOp1Sel(true);
                 break;
 
             case 2:
-                ((QuestionModel)questionModels.get(position)).setOp2Sel(true);
+                questionModels.get(position).setOp2Sel(true);
                 break;
             case 3:
-                ((QuestionModel)questionModels.get(position)).setOp3Sel(true);
+                questionModels.get(position).setOp3Sel(true);
                 break;
             case 4:
-                ((QuestionModel)questionModels.get(position)).setOp4Sel(true);
+                questionModels.get(position).setOp4Sel(true);
                 break;
             case 5:
-                ((QuestionModel)questionModels.get(position)).setOp5Sel(true);
+                questionModels.get(position).setOp5Sel(true);
                 break;
         }
         //questionAdapter.setQuestionModels(questionModels);
@@ -628,7 +629,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
                 for(int i=0; i< hashkey.size(); i++)
                 {
-                    String code_value [] = hashkey.get(i).split(":");
+                    String[] code_value = hashkey.get(i).split(":");
 
                     JSONObject picture = new JSONObject();
                     picture.put("quastion_code",code_value[0]);
@@ -719,12 +720,10 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
 
                         try {
-                            String responseBody = new String(error.networkResponse.data, "utf-8" );
+                            String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                             JSONObject jsonObject = new JSONObject( responseBody );
                         } catch ( JSONException e ) {
                             //Handle a malformed json response
-                        } catch (UnsupportedEncodingException errorn){
-
                         }
 
                         dialog.dismiss();

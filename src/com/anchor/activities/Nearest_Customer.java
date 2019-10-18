@@ -109,7 +109,7 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nearest_custlist);
-		listnearcust=(ListView)findViewById(R.id.list_nearest);
+		listnearcust= findViewById(R.id.list_nearest);
 		cd = new ConnectionDetector(this);
 		isInternetPresent = cd.isConnectingToInternet();
 		//searchbox=(EditText)findViewById(R.id.searchbox);
@@ -222,10 +222,10 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 				String name = i.getStringExtra("retialer");
 				View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 				mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-				TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+				TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 				mTitleTextView.setText("Nearest Customer");
 
-				TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+				TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 				SharedPreferences sp = Nearest_Customer.this.getSharedPreferences("SimpleLogic", 0);
 
 //		       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -234,17 +234,17 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 //				}
 				try
 				{
-					int target  = (int) Math.round(sp.getFloat("Target",0));
-					int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+					int target  = Math.round(sp.getFloat("Target",0));
+					int achieved  = Math.round(sp.getFloat("Achived",0));
 					Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 					if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 					{
-						int age = (int) Math.round(age_float);
+						int age = Math.round(age_float);
 
 						todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 					}else
 					{
-						int age = (int) Math.round(age_float);
+						int age = Math.round(age_float);
 
 						todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 					}
@@ -522,21 +522,21 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 	        //tell the Dialog to use the dialog.xml as it's layout description
 	        dialognew.setContentView(R.layout.customer_address_dialog); 
 
-	        final EditText userInput = (EditText) dialognew
+	        final EditText userInput = dialognew
 	                .findViewById(R.id.update_textdialog);
 	        
-	        final EditText distance = (EditText) dialognew
+	        final EditText distance = dialognew
 	                .findViewById(R.id.cu_distance);
 
 	         // item_description.setText("Address");
 	        
-	                final Button Submit = (Button) dialognew
+	                final Button Submit = dialognew
 	                        .findViewById(R.id.update_textdialogclick);
 	                
-	                final ImageView call_btn = (ImageView) dialognew
+	                final ImageView call_btn = dialognew
 	                        .findViewById(R.id.cust_adrs_call);
 
-		            final ImageView map_btn = (ImageView) dialognew
+		            final ImageView map_btn = dialognew
 				            .findViewById(R.id.cust_adrs_map);
 	                
 	                Submit.setText("OK");

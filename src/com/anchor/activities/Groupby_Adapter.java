@@ -55,10 +55,10 @@ public class Groupby_Adapter extends RecyclerView.Adapter<Groupby_Adapter.Contac
 
         public ContactViewHolder(View v) {
             super(v);
-            month_value =  (TextView) v.findViewById(R.id.month_grpby);
-            target_value = (TextView)  v.findViewById(R.id.target_grpby);
-            achieved_value = (TextView) v.findViewById(R.id.achievd_grpby);
-            age_value = (TextView) v.findViewById(R.id.age_grpby);
+            month_value = v.findViewById(R.id.month_grpby);
+            target_value = v.findViewById(R.id.target_grpby);
+            achieved_value = v.findViewById(R.id.achievd_grpby);
+            age_value = v.findViewById(R.id.age_grpby);
        }
     }
 }

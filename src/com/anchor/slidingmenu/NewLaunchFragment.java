@@ -68,7 +68,7 @@ public class NewLaunchFragment extends Fragment {
 				 selectedImage.setImageResource(mImageIds[position]);
 			}
         });*/
-        viewPager = (ViewPager) rootView.findViewById(R.id.pager);
+        viewPager = rootView.findViewById(R.id.pager);
 
         LoadNewLaunchesAsyncTask loadNewLaunchesAsyncTask=new LoadNewLaunchesAsyncTask(getActivity());
         loadNewLaunchesAsyncTask.execute();

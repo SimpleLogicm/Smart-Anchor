@@ -64,7 +64,7 @@ public class Video_Main_List extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_video_main);
 
-		listView = (ListView) findViewById(R.id.list);
+		listView = findViewById(R.id.list);
 		adapter = new CustomListAdapter(this, movieList);
 		listView.setAdapter(adapter);
 
@@ -72,13 +72,13 @@ public class Video_Main_List extends Activity {
 
 			public void onItemClick(AdapterView<?> parent, View view,
 									int position, long id) {
-				TextView c = (TextView) view.findViewById(R.id.rating);
+				TextView c = view.findViewById(R.id.rating);
 				Config.YOUTUBE_VIDEO_CODE = c.getText().toString();
 
-				TextView d = (TextView) view.findViewById(R.id.title);
+				TextView d = view.findViewById(R.id.title);
 				Config.YOUTUBE_VIDEO_DISCRIPTION = d.getText().toString();
 
-				TextView e = (TextView) view.findViewById(R.id.releaseYear);
+				TextView e = view.findViewById(R.id.releaseYear);
 				Config.YOUTUBE_VIDEO_DATE = e.getText().toString();
 
 				//Toast.makeText(Video_Main_List.this,Config.YOUTUBE_VIDEO_CODE, Toast.LENGTH_SHORT).show();
@@ -97,12 +97,12 @@ public class Video_Main_List extends Activity {
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Advertisement");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			todaysTarget.setVisibility(View.INVISIBLE);
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			SharedPreferences sp = Video_Main_List.this.getSharedPreferences("SimpleLogic", 0);
 
 			H_LOGO.setImageResource(R.drawable.video_imagenew);

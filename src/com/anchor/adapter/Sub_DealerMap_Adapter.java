@@ -67,7 +67,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
     MapsActivity mapsActivity;
     public Sub_DealerMap_Adapter(List<SubDealerModel> contactList, Context context,MapsActivity activity) {
         this.contactList = contactList;
-        this.mcontext = context;
+        mcontext = context;
         mapsActivity =activity;
         //this.contactListfilter.addAll(this.contactList);
     }

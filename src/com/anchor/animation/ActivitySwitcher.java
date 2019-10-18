@@ -18,7 +18,7 @@ public class ActivitySwitcher {
 		/**
 		 * Called when the animation is finished.
 		 */
-		public void onAnimationFinished();
+        void onAnimationFinished();
 	}
 
 	/* ----------------------------------------------- */

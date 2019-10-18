@@ -52,7 +52,7 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
     @Override
     public void onBindViewHolder(final MessageViewHolder holder, final int position) {
         final ImageModel model = imageModelArrayList.get(position);
-        MessageViewHolder messageViewHolder = (MessageViewHolder) holder;
+        MessageViewHolder messageViewHolder = holder;
 
         //messageViewHolder.imageView.setImageResource(model.getImagePath());
 

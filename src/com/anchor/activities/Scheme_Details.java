@@ -150,11 +150,9 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
 
         if (!Global_Data.Quantity_click_flag.equalsIgnoreCase("")) {
             Title_Text = "Schemes Earning(Closed)   " + " Quantity wise scheme   " + "Data as on ";
-            ;
             type = "quantity";
         } else {
             Title_Text = "Schemes Earning(Closed)   " + " Value wise scheme   " + "Data as on ";
-            ;
             type = "value";
         }
 
@@ -172,10 +170,10 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Title_Text);
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Scheme_Details.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -184,17 +182,17 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
 //		}
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -558,7 +556,7 @@ public class Scheme_Details extends Activity implements Scheme_Detail_Adapter.Us
 
 
         try {
-            service_url = domain + "customer_schemes/customer_scheme_earnings_index?email=" + Global_Data.CUSTOMER_EMAIL + "&start_date=" + scheme_period_value.getText().toString() + "&end_date=" + scheme_period_value2.getText().toString() + "&business_unit=" + URLEncoder.encode(business_unit, "UTF-8") + "&primary_category=" + URLEncoder.encode(business_category, "UTF-8") + "&business_category=" + URLEncoder.encode(business_division, "UTF-8") + "&sub_category=" + URLEncoder.encode(business_brand, "UTF-8") + "&type=" + URLEncoder.encode(type, "UTF-8") + "&period_type=" + period_type+"&page_type=show"+"&scheme_name="+URLEncoder.encode(Global_Data.close_scheme_name, "UTF-8");;
+            service_url = domain + "customer_schemes/customer_scheme_earnings_index?email=" + Global_Data.CUSTOMER_EMAIL + "&start_date=" + scheme_period_value.getText().toString() + "&end_date=" + scheme_period_value2.getText().toString() + "&business_unit=" + URLEncoder.encode(business_unit, "UTF-8") + "&primary_category=" + URLEncoder.encode(business_category, "UTF-8") + "&business_category=" + URLEncoder.encode(business_division, "UTF-8") + "&sub_category=" + URLEncoder.encode(business_brand, "UTF-8") + "&type=" + URLEncoder.encode(type, "UTF-8") + "&period_type=" + period_type+"&page_type=show"+"&scheme_name="+URLEncoder.encode(Global_Data.close_scheme_name, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

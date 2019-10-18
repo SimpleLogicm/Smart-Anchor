@@ -33,7 +33,7 @@ public class NEAREST_CU_Adapter extends ArrayAdapter<HashMap<String, String>> {
     String cust_mob_no;
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value1,String value2,View v,String value3);
+        void onButtonClickListner(int position, String value1, String value2, View v, String value3);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -57,16 +57,16 @@ public class NEAREST_CU_Adapter extends ArrayAdapter<HashMap<String, String>> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.nearest_cu_adapter, null);
             viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView
+            viewHolder.text = convertView
                     .findViewById(R.id.childTextViewnew);
 
 //            viewHolder.address = (TextView) convertView
 //                    .findViewById(R.id.address);
 //            
-            viewHolder.distance = (TextView) convertView
+            viewHolder.distance = convertView
                     .findViewById(R.id.distance);
 
-            viewHolder.childButtonnew = (Button) convertView
+            viewHolder.childButtonnew = convertView
                     .findViewById(R.id.childButtonnew);
 
 
@@ -80,7 +80,7 @@ public class NEAREST_CU_Adapter extends ArrayAdapter<HashMap<String, String>> {
 
 
 
-            if (getData.get(CUSTOMER_NAME).toString() != null && getData.get(CUSTOMER_NAME).toString() != "null") {
+            if (getData.get(CUSTOMER_NAME) != null && getData.get(CUSTOMER_NAME) != "null") {
                 viewHolder.text.setText(getData.get(CUSTOMER_NAME));
             }
 
@@ -88,7 +88,7 @@ public class NEAREST_CU_Adapter extends ArrayAdapter<HashMap<String, String>> {
 //                viewHolder.address.setText(getData.get(CUSTOMER_ADDRESS));
 //            }
 //            
-            if (getData.get(CUSTOMER_DISTANCE).toString() != null && getData.get(CUSTOMER_DISTANCE).toString() != "null") {
+            if (getData.get(CUSTOMER_DISTANCE) != null && getData.get(CUSTOMER_DISTANCE) != "null") {
                 viewHolder.distance.setText(getData.get(CUSTOMER_DISTANCE));
             }
         }
@@ -103,7 +103,7 @@ public class NEAREST_CU_Adapter extends ArrayAdapter<HashMap<String, String>> {
                     getData = dataArrayList.get(position);
 
                     if (customListner != null) {
-                        customListner.onButtonClickListner(position, getData.get(CUSTOMER_ADDRESS).toString(),getData.get(CUSTOMER_DISTANCE).toString(),v,getData.get(CUSTOMER_NAME).toString());
+                        customListner.onButtonClickListner(position, getData.get(CUSTOMER_ADDRESS), getData.get(CUSTOMER_DISTANCE),v, getData.get(CUSTOMER_NAME));
                     }
                 }
             });

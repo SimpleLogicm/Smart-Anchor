@@ -49,7 +49,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
     DataBaseHelper dbvoc;
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value, View v);
+        void onButtonClickListner(int position, String value, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -103,21 +103,21 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
             holder = new ViewHolder();
             holder.mWatcher1 = new MutableWatcher1();
             holder.mWatcher2 = new MutableWatcher2();
-            holder.Productnamerpmrp = (TextView) convertView.findViewById(R.id.Productnamerpmrp);
-            holder.pidp = (TextView) convertView.findViewById(R.id.pidp);
-            holder.pcode_new = (TextView) convertView.findViewById(R.id.pcode_new);
-            holder.productquantity = (EditText) convertView.findViewById(R.id.productquantityp);
-            holder.totalprice = (TextView) convertView.findViewById(R.id.totalpricep);
-            holder.mrpv = (TextView) convertView.findViewById(R.id.mrpv);
-            holder.mrpvs = (TextView) convertView.findViewById(R.id.mrpvs);
-            holder.mrpvnew = (TextView) convertView.findViewById(R.id.mrpvnew);
-            holder.rpv = (TextView) convertView.findViewById(R.id.rpv);
-            holder.PSQ = (TextView) convertView.findViewById(R.id.PSQ);
-            holder.PMQ = (TextView) convertView.findViewById(R.id.PMQ);
-            holder.PSQVALUE = (TextView) convertView.findViewById(R.id.PSQVALUE);
-            holder.PMQVALUE = (TextView) convertView.findViewById(R.id.PMQVALUE);
-            holder.PSTOCK = (TextView) convertView.findViewById(R.id.PSTOCK);
-            holder.quantity_error = (TextView) convertView.findViewById(R.id.quantity_error);
+            holder.Productnamerpmrp = convertView.findViewById(R.id.Productnamerpmrp);
+            holder.pidp = convertView.findViewById(R.id.pidp);
+            holder.pcode_new = convertView.findViewById(R.id.pcode_new);
+            holder.productquantity = convertView.findViewById(R.id.productquantityp);
+            holder.totalprice = convertView.findViewById(R.id.totalpricep);
+            holder.mrpv = convertView.findViewById(R.id.mrpv);
+            holder.mrpvs = convertView.findViewById(R.id.mrpvs);
+            holder.mrpvnew = convertView.findViewById(R.id.mrpvnew);
+            holder.rpv = convertView.findViewById(R.id.rpv);
+            holder.PSQ = convertView.findViewById(R.id.PSQ);
+            holder.PMQ = convertView.findViewById(R.id.PMQ);
+            holder.PSQVALUE = convertView.findViewById(R.id.PSQVALUE);
+            holder.PMQVALUE = convertView.findViewById(R.id.PMQVALUE);
+            holder.PSTOCK = convertView.findViewById(R.id.PSTOCK);
+            holder.quantity_error = convertView.findViewById(R.id.quantity_error);
             // holder.rpvnew = (TextView) convertView.findViewById(R.id.rpvnew);
 
             convertView.setTag(holder);
@@ -197,7 +197,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
                         if(SQMO_Validator == 0)
                         {
                             Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.rpv.getText().toString());
-                            holder.totalprice.setText("PRICE : " + String.valueOf(String.format("%.2f", value)));
+                            holder.totalprice.setText("PRICE : " + String.format("%.2f", value));
                             holder.quantity_error.setText("");
                            // Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() +"pq" + String.valueOf(value)+"pprice"+holder.Productnamerpmrp.getText().toString()+"pmrp"+holder.mrpv.getText().toString()+"prp"+holder.rpv.getText().toString());
                            // Global_Data.Some_list.set(position,holder.totalprice.getText().toString());
@@ -294,7 +294,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
 
                 HashMap<String, String> edit = new HashMap<>();
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(s.toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(getData.get(TAG_RP)) && Integer.parseInt(String.valueOf(s.toString()))>0) {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(s.toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(getData.get(TAG_RP)) && Integer.parseInt(s.toString())>0) {
                     edit.put("string", s.toString());
 
                     try
@@ -305,7 +305,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
                             Double value = Double.valueOf(s.toString()) * Double.valueOf(getData.get(TAG_RP));
                           //  holder.totalprice.setText("PRICE : " + String.valueOf(value));
                           //  holder.quantity_error.setText("");
-                            Global_Data.Order_hashmap.put(mPosition + "&" + getData.get(TAG_ITEM_NUMBER), s.toString() +"pq" + String.valueOf(value)+"pprice"+getData.get(TAG_ITEMNAME)+"pmrp"+getData.get(TAG_PRICE)+"prp"+getData.get(TAG_RP));
+                            Global_Data.Order_hashmap.put(mPosition + "&" + getData.get(TAG_ITEM_NUMBER), s.toString() +"pq" + value +"pprice"+getData.get(TAG_ITEMNAME)+"pmrp"+getData.get(TAG_PRICE)+"prp"+getData.get(TAG_RP));
                             // Global_Data.Some_list.set(position,holder.totalprice.getText().toString());
                         }
                         else

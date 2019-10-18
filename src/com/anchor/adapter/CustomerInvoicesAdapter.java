@@ -68,13 +68,13 @@ public class CustomerInvoicesAdapter extends RecyclerView.Adapter<CustomerInvoic
         public InvoiceViewHolder(View itemView) {
             super(itemView);
 
-            ic_name =  (TextView) itemView.findViewById(R.id.ic_name);
-            icustomer_code =  (TextView) itemView.findViewById(R.id.icustomer_code);
-            invoice_number = (TextView)  itemView.findViewById(R.id.invoice_number);
-            invoice_date = (TextView)  itemView.findViewById(R.id.invoice_date);
-            invoice_due_date = (TextView)  itemView.findViewById(R.id.invoice_due_date);
-            invoice_due_amount = (TextView) itemView.findViewById(R.id.invoice_due_amount);
-            invoice_amount = (TextView) itemView.findViewById(R.id.invoice_amount);
+            ic_name = itemView.findViewById(R.id.ic_name);
+            icustomer_code = itemView.findViewById(R.id.icustomer_code);
+            invoice_number = itemView.findViewById(R.id.invoice_number);
+            invoice_date = itemView.findViewById(R.id.invoice_date);
+            invoice_due_date = itemView.findViewById(R.id.invoice_due_date);
+            invoice_due_amount = itemView.findViewById(R.id.invoice_due_amount);
+            invoice_amount = itemView.findViewById(R.id.invoice_amount);
         }
     }
 }

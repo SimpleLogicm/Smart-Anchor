@@ -87,9 +87,9 @@ public class Previous_orderNew_S3 extends BaseActivity {
     GPSTracker gps;
     ImageView get_icon;
     Boolean B_flag;
-    String strdetail1_mandate,strdetail2_mandate,strdetail4_mandate;;
+    String strdetail1_mandate,strdetail2_mandate,strdetail4_mandate;
 
-    byte b5[];
+    byte[] b5;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ConnectionDetector cd;
 
@@ -106,7 +106,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     private Bitmap mBitmap;
     View mView;
-    String detail1str, detail2str,detail4str;;
+    String detail1str, detail2str,detail4str;
     int userID,cityID,beatID,retailerID,distID;
     TextView details1,details2;
     Calendar myCalendar;
@@ -146,28 +146,28 @@ public class Previous_orderNew_S3 extends BaseActivity {
         order=sp.getString("order", "");
 
 
-        txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
-        mContent = (LinearLayout) findViewById(R.id.linearLayout);
+        txtWelcomeUser= findViewById(R.id.txtWelcomeUser);
+        mContent = findViewById(R.id.linearLayout);
         mSignature = new signature(this, null);
         mSignature.setBackgroundColor(Color.WHITE);
         mContent.addView(mSignature, LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-        mClear = (Button)findViewById(R.id.clear);
+        mClear = findViewById(R.id.clear);
         mClear.setBackgroundColor(Color.parseColor("#414042"));
-        mGetSign = (Button)findViewById(R.id.getsign);
+        mGetSign = findViewById(R.id.getsign);
         mGetSign.setBackgroundColor(Color.parseColor("#414042"));
         // mGetSign.setEnabled(false);
-        mCancel = (Button)findViewById(R.id.cancel);
+        mCancel = findViewById(R.id.cancel);
         mCancel.setBackgroundColor(Color.parseColor("#414042"));
         mView = mContent;
 
-        yourName = (EditText) findViewById(R.id.yourName);
-        order_detail1 = (EditText) findViewById(R.id.order_detail1);
-        order_detail2 = (EditText) findViewById(R.id.order_detail2);
-        order_detail4 = (EditText) findViewById(R.id.yourRemarks);
-        get_icon = (ImageView) findViewById(R.id.get_icon);
-        order_type = (Spinner) findViewById(R.id.order_type);
-        shipment_pri = (Spinner) findViewById(R.id.shipment_pri);
-        order_payment_term = (Spinner) findViewById(R.id.order_payment_term);
+        yourName = findViewById(R.id.yourName);
+        order_detail1 = findViewById(R.id.order_detail1);
+        order_detail2 = findViewById(R.id.order_detail2);
+        order_detail4 = findViewById(R.id.yourRemarks);
+        get_icon = findViewById(R.id.get_icon);
+        order_type = findViewById(R.id.order_type);
+        shipment_pri = findViewById(R.id.shipment_pri);
+        order_payment_term = findViewById(R.id.order_payment_term);
         s_container_l =  findViewById(R.id.s_container_l);
 
 //        s_container_l.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -585,21 +585,21 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -711,26 +711,17 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
 
     private boolean isDeviceSupportCamera() {
-        if (getApplicationContext().getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA)) {
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
+        // this device has a camera
+        // no camera on this device
+        return getApplicationContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_CAMERA);
     }
 
     private boolean prepareDirectory()
     {
         try
         {
-            if (makedirs())
-            {
-                return true;
-            } else {
-                return false;
-            }
+            return makedirs();
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -789,7 +780,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
             Log.e("log_tag", "Height: " + v.getHeight());
             if(mBitmap == null)
             {
-                mBitmap =  Bitmap.createBitmap (mContent.getWidth(), mContent.getHeight(), Bitmap.Config.RGB_565);;
+                mBitmap =  Bitmap.createBitmap (mContent.getWidth(), mContent.getHeight(), Bitmap.Config.RGB_565);
             }
             Canvas canvas = new Canvas(mBitmap);
             try
@@ -1217,7 +1208,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
                             mView.setDrawingCacheEnabled(true);
-                            LinearLayout content = (LinearLayout) findViewById(R.id.linearLayout);
+                            LinearLayout content = findViewById(R.id.linearLayout);
                             content.setDrawingCacheEnabled(true);
                             final Bitmap bitmap = content.getDrawingCache();
                             //finish();

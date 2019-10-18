@@ -66,14 +66,14 @@ public class Schedule_List_Adapter extends RecyclerView.Adapter<Schedule_List_Ad
         public ContactViewHolder(View v) {
             super(v);
 
-            vName =  (TextView) v.findViewById(R.id.txtName);
-            vSurname = (TextView)  v.findViewById(R.id.txtSurname);
+            vName = v.findViewById(R.id.txtName);
+            vSurname = v.findViewById(R.id.txtSurname);
             //vEmail = (TextView)  v.findViewById(R.id.txtEmail);
-           vTitle = (TextView) v.findViewById(R.id.title);
+           vTitle = v.findViewById(R.id.title);
 
-            cche_id = (TextView) v.findViewById(R.id.cche_id);
+            cche_id = v.findViewById(R.id.cche_id);
 
-            customers_id = (TextView) v.findViewById(R.id.customers_id);
+            customers_id = v.findViewById(R.id.customers_id);
             //txtmrp = (TextView) v.findViewById(R.id.txtmrp);
 
             v.setOnClickListener(this);
@@ -86,7 +86,7 @@ public class Schedule_List_Adapter extends RecyclerView.Adapter<Schedule_List_Ad
            // ContactInfo ci = contactList.get(i);
             // We can access the data within the views
             String s = "";
-            String s_order[] = vName.getText().toString().split(":");
+            String[] s_order = vName.getText().toString().split(":");
             s = s_order[1];
 
             String customer_id = "";

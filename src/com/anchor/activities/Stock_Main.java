@@ -98,15 +98,15 @@ public class Stock_Main extends BaseActivity {
 
         cd  = new ConnectionDetector(getApplicationContext());
 
-        rlout_price = (RelativeLayout) findViewById(R.id.rlout_price);
-        rlout_stock = (RelativeLayout) findViewById(R.id.rlout_stock);
+        rlout_price = findViewById(R.id.rlout_price);
+        rlout_stock = findViewById(R.id.rlout_stock);
 
-        warehouse_list = (AutoCompleteTextView) findViewById(R.id.warehouse_list);
-        product_list = (AutoCompleteTextView) findViewById(R.id.product_list);
+        warehouse_list = findViewById(R.id.warehouse_list);
+        product_list = findViewById(R.id.product_list);
 
-        ware_result_button = (Button) findViewById(R.id.ware_result_button);
+        ware_result_button = findViewById(R.id.ware_result_button);
 
-        recList = (RecyclerView) findViewById(R.id.cardListn);
+        recList = findViewById(R.id.cardListn);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -182,10 +182,10 @@ public class Stock_Main extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Stock");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Stock_Main.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -193,17 +193,17 @@ public class Stock_Main extends BaseActivity {
 //		}
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -598,8 +598,8 @@ public class Stock_Main extends BaseActivity {
                 product_flagnew = 0;
                 String warehouse_flag = "";
                 String product_flag = "";
-                String city_state[];
-                String sub_caty[];
+                String[] city_state;
+                String[] sub_caty;
                 String state_name = "";
                 String city_name = "";
                 String state_code = "";
@@ -899,98 +899,95 @@ public class Stock_Main extends BaseActivity {
 
                                                 Stock_Info ci = new Stock_Info();
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_primary_category").toString())) {
-                                                    String product_category = String.valueOf(Html.fromHtml("<b>" + "PRODUCT : " + "</b>") + jsonObject.getString("product_primary_category").toString());
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_primary_category"))) {
+                                                    String product_category = Html.fromHtml("<b>" + "PRODUCT : " + "</b>") + jsonObject.getString("product_primary_category");
                                                     if (!jsonObject.getString("product_sub_category").equalsIgnoreCase("null") && !jsonObject.getString("product_sub_category").equalsIgnoreCase(null) & !jsonObject.getString("product_sub_category").equalsIgnoreCase("") & !jsonObject.getString("product_sub_category").equalsIgnoreCase(" ")) {
-                                                        product_category += " - " + jsonObject.getString("product_sub_category").toString();
-                                                        ;
+                                                        product_category += " - " + jsonObject.getString("product_sub_category");
                                                     }
 
                                                     if (!jsonObject.getString("product_variant").equalsIgnoreCase("null") && !jsonObject.getString("product_variant").equalsIgnoreCase(null) & !jsonObject.getString("product_variant").equalsIgnoreCase("") & !jsonObject.getString("product_variant").equalsIgnoreCase(" ")) {
-                                                        product_category += " - " + jsonObject.getString("product_variant").toString();
-                                                        ;
+                                                        product_category += " - " + jsonObject.getString("product_variant");
                                                     }
 
                                                     if (!jsonObject.getString("product_name").equalsIgnoreCase("null") && !jsonObject.getString("product_name").equalsIgnoreCase(null) & !jsonObject.getString("product_name").equalsIgnoreCase("") & !jsonObject.getString("product_name").equalsIgnoreCase(" ")) {
-                                                        product_category += " - " + jsonObject.getString("product_name").toString();
-                                                        ;
+                                                        product_category += " - " + jsonObject.getString("product_name");
                                                     }
 
 
                                                     ci.ss_product = product_category;
                                                 } else {
-                                                    ci.ss_product = String.valueOf(Html.fromHtml("<b>" + "PRODUCT : " + "</b>") + "");
+                                                    ci.ss_product = Html.fromHtml("<b>" + "PRODUCT : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_rp").toString())) {
-                                                    ci.ss_RP = String.valueOf(Html.fromHtml("<b>" + "RP : " + "</b>") + jsonObject.getString("product_rp").toString());
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_rp"))) {
+                                                    ci.ss_RP = Html.fromHtml("<b>" + "RP : " + "</b>") + jsonObject.getString("product_rp");
                                                 } else {
-                                                    ci.ss_RP = String.valueOf(Html.fromHtml("<b>" + "RP : " + "</b>") + "");
+                                                    ci.ss_RP = Html.fromHtml("<b>" + "RP : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_mrp").toString())) {
-                                                    ci.ss_MRP = String.valueOf(Html.fromHtml("<b>" + "MRP : " + "</b>") + jsonObject.getString("product_mrp").toString());
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("product_mrp"))) {
+                                                    ci.ss_MRP = Html.fromHtml("<b>" + "MRP : " + "</b>") + jsonObject.getString("product_mrp");
                                                 } else {
-                                                    ci.ss_MRP = String.valueOf(Html.fromHtml("<b>" + "MRP : " + "</b>") + "");
+                                                    ci.ss_MRP = Html.fromHtml("<b>" + "MRP : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_name").toString())) {
-                                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_type").toString())) {
-                                                        ci.ss_name = jsonObject.getString("wh_type").toString() + " - " + jsonObject.getString("wh_name").toString();
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_name"))) {
+                                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_type"))) {
+                                                        ci.ss_name = jsonObject.getString("wh_type") + " - " + jsonObject.getString("wh_name");
                                                     } else {
-                                                        ci.ss_name = jsonObject.getString("wh_name").toString();
+                                                        ci.ss_name = jsonObject.getString("wh_name");
                                                     }
 
                                                 } else {
                                                     ci.ss_name = "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_address").toString())) {
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_address"))) {
 
-                                                    ci.ss_address = String.valueOf(Html.fromHtml("<b>" + "ADDRESS : " + "</b>") + jsonObject.getString("wh_address").toString());
+                                                    ci.ss_address = Html.fromHtml("<b>" + "ADDRESS : " + "</b>") + jsonObject.getString("wh_address");
 
                                                 } else {
-                                                    ci.ss_address = String.valueOf(Html.fromHtml("<b>" + "ADDRESS : " + "</b>") + "");
+                                                    ci.ss_address = Html.fromHtml("<b>" + "ADDRESS : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("gross_stock").toString())) {
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("gross_stock"))) {
 
-                                                    ci.ss_grossstock = String.valueOf(Html.fromHtml("<b>" + "GROSS STOCK : " + "</b>") + jsonObject.getString("gross_stock").toString());
+                                                    ci.ss_grossstock = Html.fromHtml("<b>" + "GROSS STOCK : " + "</b>") + jsonObject.getString("gross_stock");
 
                                                 } else {
-                                                    ci.ss_grossstock = String.valueOf(Html.fromHtml("<b>" + "GROSS STOCK : " + "</b>") + "");
+                                                    ci.ss_grossstock = Html.fromHtml("<b>" + "GROSS STOCK : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("sellable_stock").toString())) {
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("sellable_stock"))) {
 
-                                                    ci.ss_sellable = String.valueOf(Html.fromHtml("<b>" + "SELLABLE : " + "</b>") + jsonObject.getString("sellable_stock").toString());
+                                                    ci.ss_sellable = Html.fromHtml("<b>" + "SELLABLE : " + "</b>") + jsonObject.getString("sellable_stock");
 
                                                 } else {
-                                                    ci.ss_sellable = String.valueOf(Html.fromHtml("<b>" + "SELLABLE : " + "</b>") + "");
+                                                    ci.ss_sellable = Html.fromHtml("<b>" + "SELLABLE : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("updated_at").toString())) {
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("updated_at"))) {
 
-                                                    ci.updated_at = String.valueOf(Html.fromHtml("<b>" + "UPDATED : " + "</b>") + jsonObject.getString("updated_at").toString());
+                                                    ci.updated_at = Html.fromHtml("<b>" + "UPDATED : " + "</b>") + jsonObject.getString("updated_at");
 
                                                 } else {
-                                                    ci.updated_at = String.valueOf(Html.fromHtml("<b>" + "UPDATED : " + "</b>") + "");
+                                                    ci.updated_at = Html.fromHtml("<b>" + "UPDATED : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_city_name").toString())) {
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_city_name"))) {
 
-                                                    ci.city = String.valueOf(Html.fromHtml("<b>" + "CITY : " + "</b>") + jsonObject.getString("wh_city_name").toString());
+                                                    ci.city = Html.fromHtml("<b>" + "CITY : " + "</b>") + jsonObject.getString("wh_city_name");
 
                                                 } else {
-                                                    ci.city = String.valueOf(Html.fromHtml("<b>" + "CITY : " + "</b>") + "");
+                                                    ci.city = Html.fromHtml("<b>" + "CITY : " + "</b>") + "";
                                                 }
 
-                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_state_name").toString())) {
+                                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("wh_state_name"))) {
 
-                                                    ci.state = String.valueOf(Html.fromHtml("<b>" + "STATE : " + "</b>") + jsonObject.getString("wh_state_name").toString());
+                                                    ci.state = Html.fromHtml("<b>" + "STATE : " + "</b>") + jsonObject.getString("wh_state_name");
 
                                                 } else {
-                                                    ci.state = String.valueOf(Html.fromHtml("<b>" + "STATE : " + "</b>") + "");
+                                                    ci.state = Html.fromHtml("<b>" + "STATE : " + "</b>") + "";
                                                 }
 
                                                 result.add(ci);

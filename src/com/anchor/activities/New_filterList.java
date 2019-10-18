@@ -66,8 +66,8 @@ public class New_filterList extends Activity implements OnItemSelectedListener{
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.new_filterlist);
-		alllist = (ListView) findViewById(R.id.list_all);
-		 short_record = (Button)findViewById(R.id.short_recordn);
+		alllist = findViewById(R.id.list_all);
+		 short_record = findViewById(R.id.short_recordn);
 		
 		 GetListFilter();
 		
@@ -149,7 +149,7 @@ public class New_filterList extends Activity implements OnItemSelectedListener{
 		
 		
 		
-		search_filter = (EditText) findViewById(R.id.search_filter);
+		search_filter = findViewById(R.id.search_filter);
 		
 		search_filter.addTextChangedListener(new TextWatcher() {
 
@@ -161,7 +161,7 @@ public class New_filterList extends Activity implements OnItemSelectedListener{
 
                 for(int i=0;i<product_value.size();i++)
                 {
-                    String playerName=product_value.get(i).toString();
+                    String playerName= product_value.get(i);
                     if(textLength<=playerName.length()){
                         //compare the String in EditText with Names in the ArrayList
                         if(searchString.equalsIgnoreCase(playerName.substring(0,textLength)))
@@ -244,9 +244,9 @@ public class New_filterList extends Activity implements OnItemSelectedListener{
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Filter");
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = New_filterList.this.getSharedPreferences("SimpleLogic", 0);
 
 //       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -255,17 +255,17 @@ public class New_filterList extends Activity implements OnItemSelectedListener{
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}

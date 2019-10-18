@@ -165,9 +165,9 @@ public class LoginActivity extends Activity {
             manager.createNotificationChannel(channel);
         }
 
-        logo_img = (ImageView) findViewById(R.id.imageView1);
+        logo_img = findViewById(R.id.imageView1);
         //app_clear_dat=(ImageView)findViewById(R.id.app_clear_dat);
-        link_fpwd = (TextView) findViewById(R.id.forget_pwd);
+        link_fpwd = findViewById(R.id.forget_pwd);
 
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
         String logostr = spf1.getString("logo_data", "");
@@ -238,12 +238,12 @@ public class LoginActivity extends Activity {
         cn = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         nf = cn.getActiveNetworkInfo();
 
-        textViewVersion = (TextView) findViewById(R.id.textViewVersion);
-        buttonLogin = (Button) findViewById(R.id.buttonLogin);
-        buttonReg = (Button) findViewById(R.id.buttonReg);
-        editText1 = (EditText) findViewById(R.id.editText1);
-        editText2 = (EditText) findViewById(R.id.editText2);
-        emp_code = (EditText) findViewById(R.id.emp_code);
+        textViewVersion = findViewById(R.id.textViewVersion);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        buttonReg = findViewById(R.id.buttonReg);
+        editText1 = findViewById(R.id.editText1);
+        editText2 = findViewById(R.id.editText2);
+        emp_code = findViewById(R.id.emp_code);
 
         sharedpreferences = getSharedPreferences("SimpleLogic",
                 Context.MODE_PRIVATE);
@@ -414,15 +414,11 @@ public class LoginActivity extends Activity {
 
         // ARE WE CONNECTED TO THE NET
 
-        if (conMgr.getActiveNetworkInfo() != null
+        return conMgr.getActiveNetworkInfo() != null
 
                 && conMgr.getActiveNetworkInfo().isAvailable()
 
-                && conMgr.getActiveNetworkInfo().isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
+                && conMgr.getActiveNetworkInfo().isConnected();
     }
 
     public class LoadDatabaseAsyncTask extends AsyncTask<Void, Void, Void> {

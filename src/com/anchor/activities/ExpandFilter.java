@@ -54,7 +54,7 @@ public class ExpandFilter extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filter_expand);
         
-        short_record = (Button)findViewById(R.id.short_record);
+        short_record = findViewById(R.id.short_record);
         
          // Secondary_Category.add("abcz");
 //        Secondary_Sub_Category.add("");
@@ -73,7 +73,7 @@ public class ExpandFilter extends Activity {
 		createCollection();
 
 
-       ExpandList = (ExpandableListView) findViewById(R.id.exp_list);
+       ExpandList = findViewById(R.id.exp_list);
 //        ExpListItems = SetStandardGroups();
 //        ExpAdapter = new ExpandListAdapter(ExpandFilter.this, ExpListItems);
 //        ExpandList.setAdapter(ExpAdapter);

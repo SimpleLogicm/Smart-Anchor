@@ -147,7 +147,7 @@ public class FileDownloader {
 
             while(myVeryOwnIterator.hasNext()) {
                 String key=(String)myVeryOwnIterator.next();
-                String value=(String)Global_Data.Download_hashmap.get(key);
+                String value= Global_Data.Download_hashmap.get(key);
                 Log.d("Map Key: ",key);
                 Log.d("Map Value: ",value);
 

@@ -56,12 +56,12 @@ public class Test extends Activity implements OnItemSelectedListener{
 		setContentView(R.layout.test);
 		
 		
-		button1 = (Button) findViewById(R.id.button1);
-		button2 = (Button) findViewById(R.id.button2);
-		button3 = (Button) findViewById(R.id.button3);
-		button4 = (Button) findViewById(R.id.button4);
-		button5 = (Button) findViewById(R.id.button5);
-		button6 = (Button) findViewById(R.id.button6);
+		button1 = findViewById(R.id.button1);
+		button2 = findViewById(R.id.button2);
+		button3 = findViewById(R.id.button3);
+		button4 = findViewById(R.id.button4);
+		button5 = findViewById(R.id.button5);
+		button6 = findViewById(R.id.button6);
 		
 		
 		button2.setOnClickListener(new OnClickListener() {

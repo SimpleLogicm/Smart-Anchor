@@ -26,8 +26,8 @@ public class Webview_Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_activity);
-        myWebView = (WebView) findViewById(R.id.webView1);
-        imageb = (ImageButton) findViewById(R.id.imageb);
+        myWebView = findViewById(R.id.webView1);
+        imageb = findViewById(R.id.imageb);
         // Configure related browser settings
 
         final ProgressDialog pd = new ProgressDialog(Webview_Activity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);

@@ -63,7 +63,7 @@ public class Image_Gellary extends FragmentActivity {
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        // setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
         loginDataBaseAdapter=new LoginDataBaseAdapter(Image_Gellary.this);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
@@ -112,7 +112,7 @@ public class Image_Gellary extends FragmentActivity {
                 {
                     if(!image_url.isEmpty()) {
 
-                        String strNew = image_url.toString();
+                        String strNew = image_url;
                         File yourFile = new File(strNew.trim());
                         Uri uri = Uri.fromFile(yourFile);
 
@@ -120,7 +120,7 @@ public class Image_Gellary extends FragmentActivity {
 //                        intent.setDataAndType(Uri.parse(image_url), "video/mp4");
 //                        startActivity(intent);
 
-                        String fileName =image_url.substring(image_url.lastIndexOf('/')+1, image_url.length());
+                        String fileName =image_url.substring(image_url.lastIndexOf('/')+1);
 
                         Intent intent1 = new Intent(android.content.Intent.ACTION_VIEW);
                         Uri data = Uri.parse("file://"+Environment.getExternalStorageDirectory().getPath()+"/Anchor_NewLaunch"
@@ -161,7 +161,7 @@ public class Image_Gellary extends FragmentActivity {
                 {
                     if(!image_url.isEmpty()) {
 
-                        String fileName =image_url.substring(image_url.lastIndexOf('/')+1, image_url.length());
+                        String fileName =image_url.substring(image_url.lastIndexOf('/')+1);
 
                         Intent intent1 = new Intent(android.content.Intent.ACTION_VIEW);
                         Uri data = Uri.parse("file://"+Environment.getExternalStorageDirectory().getPath()+"/Anchor_NewLaunch"
@@ -218,12 +218,12 @@ public class Image_Gellary extends FragmentActivity {
 
            View mCustomView = mInflater.inflate(R.layout.action_bar, null);
            mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-           TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+           TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
            mTitleTextView.setText("New Launches");
 
-           TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+           TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
            todaysTarget.setVisibility(View.INVISIBLE);
-           ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+           ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
            SharedPreferences sp = Image_Gellary.this.getSharedPreferences("SimpleLogic", 0);
 
            H_LOGO.setImageResource(R.drawable.video_imagenew);

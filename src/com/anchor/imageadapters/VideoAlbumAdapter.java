@@ -54,6 +54,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import cpm.simplelogic.helper.Upload;
@@ -78,10 +79,10 @@ public class VideoAlbumAdapter extends RecyclerView.Adapter<VideoAlbumAdapter.My
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+            title = view.findViewById(R.id.title);
+            count = view.findViewById(R.id.count);
+            thumbnail = view.findViewById(R.id.thumbnail);
+            overflow = view.findViewById(R.id.overflow);
 
         }
     }
@@ -500,15 +501,12 @@ public class VideoAlbumAdapter extends RecyclerView.Adapter<VideoAlbumAdapter.My
 
 
                         try {
-                            String responseBody = new String(error.networkResponse.data, "utf-8" );
+                            String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
                             JSONObject jsonObject = new JSONObject( responseBody );
                         }
                         catch ( JSONException e ) {
                             //Handle a malformed json response
-                        } catch (UnsupportedEncodingException errorn){
-
-                        }
-                        catch(Exception ex){
+                        } catch(Exception ex){
                             ex.printStackTrace();
                         }
 

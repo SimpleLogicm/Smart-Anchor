@@ -65,18 +65,18 @@ public class Schedule1 extends Activity{
 		//Toast.makeText(getApplicationContext(), order_id_get,Toast.LENGTH_SHORT).show();
 		Order_ID = order_id_get;
 		
-		 ListView listView = (ListView) findViewById(R.id.DProduct_List);
+		 ListView listView = findViewById(R.id.DProduct_List);
 		setListViewHeightBasedOnChildren(listView);
 
 
 		 
-		 DISP_DATE = (TextView) findViewById(R.id.DISP_DATE);
-		 EST_DATE = (TextView) findViewById(R.id.EST_DATE);
-		 D_CASH = (TextView) findViewById(R.id.D_CASH);
-		 DC_LIMIT = (TextView) findViewById(R.id.DC_LIMIT);
-		 PRE_OUTSTANDING = (TextView) findViewById(R.id.PRE_OUTSTANDING);
-		 DCU_ORDER = (TextView) findViewById(R.id.DCU_ORDER);
-		 DU_AMOUNT = (TextView) findViewById(R.id.DU_AMOUNT);
+		 DISP_DATE = findViewById(R.id.DISP_DATE);
+		 EST_DATE = findViewById(R.id.EST_DATE);
+		 D_CASH = findViewById(R.id.D_CASH);
+		 DC_LIMIT = findViewById(R.id.DC_LIMIT);
+		 PRE_OUTSTANDING = findViewById(R.id.PRE_OUTSTANDING);
+		 DCU_ORDER = findViewById(R.id.DCU_ORDER);
+		 DU_AMOUNT = findViewById(R.id.DU_AMOUNT);
 		
 		
 		//Toast.makeText(getApplicationContext(), abc[1], Toast.LENGTH_SHORT).show();
@@ -249,7 +249,7 @@ public class Schedule1 extends Activity{
        // @SuppressWarnings("rawtypes")
 
 
-		but_invoice=(Button)findViewById(R.id.but_invoice);
+		but_invoice= findViewById(R.id.but_invoice);
 		//scancel=(Button)findViewById(R.id.scancel);
 		
 		 but_invoice.setOnClickListener(new OnClickListener() {
@@ -288,13 +288,13 @@ public class Schedule1 extends Activity{
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Delivery Schedule");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Schedule1.this.getSharedPreferences("SimpleLogic", 0);
 
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			H_LOGO.setImageResource(R.drawable.timelist);
 			H_LOGO.setVisibility(View.VISIBLE);
 
@@ -305,17 +305,17 @@ public class Schedule1 extends Activity{
 
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}

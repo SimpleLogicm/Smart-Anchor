@@ -588,7 +588,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            if (isInternetPresent) {
             try {
                 LocationAddress locationAddress = new LocationAddress();
-                locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
+                LocationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
                         MapsActivity.this, new GeocoderHandler());
                 Geocoder geo = new Geocoder(MapsActivity.this.getApplicationContext(), Locale.getDefault());
                 List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -782,7 +782,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 return;
             }
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (LocationListener) this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

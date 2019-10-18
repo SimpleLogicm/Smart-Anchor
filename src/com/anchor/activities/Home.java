@@ -57,16 +57,16 @@ public class Home extends Fragment {
 		Global_Data.Stock_warehouse_flag_value_check = "";
         rootView = inflater.inflate(R.layout.fragment_logout, container, false);
                
-        order=(ImageView)rootView.findViewById(R.id.order);
-        calendar=(ImageView)rootView.findViewById(R.id.calendar);
+        order= rootView.findViewById(R.id.order);
+        calendar= rootView.findViewById(R.id.calendar);
         //custom_serve=(ImageView)rootView.findViewById(R.id.custom_serve);
-        expenses=(ImageView)rootView.findViewById(R.id.expenses);
-        target=(ImageView)rootView.findViewById(R.id.target);
-		pricing=(ImageView)rootView.findViewById(R.id.pricing);
-		add_retailernew=(ImageView)rootView.findViewById(R.id.add_retailernew);
-		marketing_data=(ImageView)rootView.findViewById(R.id.marketing_data);
-		syncmdata=(ImageView)rootView.findViewById(R.id.syncmdata);
-		txtWelcomeUser=(TextView) rootView.findViewById(R.id.txtWelcomeUser);
+        expenses= rootView.findViewById(R.id.expenses);
+        target= rootView.findViewById(R.id.target);
+		pricing= rootView.findViewById(R.id.pricing);
+		add_retailernew= rootView.findViewById(R.id.add_retailernew);
+		marketing_data= rootView.findViewById(R.id.marketing_data);
+		syncmdata= rootView.findViewById(R.id.syncmdata);
+		txtWelcomeUser= rootView.findViewById(R.id.txtWelcomeUser);
 
 
 		Global_Data.GLObalOrder_id = "";

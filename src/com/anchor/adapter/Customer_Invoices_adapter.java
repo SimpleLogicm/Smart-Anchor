@@ -25,7 +25,7 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
     static Context mcontext;
     public Customer_Invoices_adapter(List<Customer_Info> contactList, Context context) {
         this.contactList = contactList;
-        this.mcontext = context;
+        mcontext = context;
         //this.contactListfilter.addAll(this.contactList);
     }
 
@@ -71,13 +71,13 @@ public class Customer_Invoices_adapter extends RecyclerView.Adapter<com.anchor.a
         public ContactViewHolder(View v) {
             super(v);
 
-            ic_name =  (TextView) v.findViewById(R.id.ic_name);
-            icustomer_code =  (TextView) v.findViewById(R.id.icustomer_code);
-            invoice_number = (TextView)  v.findViewById(R.id.invoice_number);
-            invoice_date = (TextView)  v.findViewById(R.id.invoice_date);
-            invoice_due_date = (TextView)  v.findViewById(R.id.invoice_due_date);
-            invoice_due_amount = (TextView) v.findViewById(R.id.invoice_due_amount);
-            invoice_amount = (TextView) v.findViewById(R.id.invoice_amount);
+            ic_name = v.findViewById(R.id.ic_name);
+            icustomer_code = v.findViewById(R.id.icustomer_code);
+            invoice_number = v.findViewById(R.id.invoice_number);
+            invoice_date = v.findViewById(R.id.invoice_date);
+            invoice_due_date = v.findViewById(R.id.invoice_due_date);
+            invoice_due_amount = v.findViewById(R.id.invoice_due_amount);
+            invoice_amount = v.findViewById(R.id.invoice_amount);
 
         }
 

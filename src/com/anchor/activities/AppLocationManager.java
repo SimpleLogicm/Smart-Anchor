@@ -34,8 +34,8 @@ public class AppLocationManager implements LocationListener {
     private void setMostRecentLocation(Location lastKnownLocation) {
 
         try{
-            double lon = (double) (lastKnownLocation.getLongitude());/// * 1E6);
-            double lat = (double) (lastKnownLocation.getLatitude());// * 1E6);
+            double lon = lastKnownLocation.getLongitude();/// * 1E6);
+            double lat = lastKnownLocation.getLatitude();// * 1E6);
 
             latitude = lat + "";
             longitude = lon + "";
@@ -60,8 +60,8 @@ public class AppLocationManager implements LocationListener {
      */
     @Override
     public void onLocationChanged(Location location) {
-        double lon = (double) (location.getLongitude());/// * 1E6);
-        double lat = (double) (location.getLatitude());// * 1E6);
+        double lon = location.getLongitude();/// * 1E6);
+        double lat = location.getLatitude();// * 1E6);
 
 //      int lontitue = (int) lon;
 //      int latitute = (int) lat;

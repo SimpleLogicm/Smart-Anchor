@@ -31,8 +31,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         public MyViewHolder(View view) {
             super(view);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            pdf_name = (TextView) view.findViewById(R.id.pdf_name);
+            thumbnail = view.findViewById(R.id.thumbnail);
+            pdf_name = view.findViewById(R.id.pdf_name);
             //pDFView = (PDFView) view.findViewById(R.id.G_pdfView);
         }
     }

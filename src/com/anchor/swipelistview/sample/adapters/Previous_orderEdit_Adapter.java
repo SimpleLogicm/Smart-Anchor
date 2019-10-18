@@ -53,7 +53,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
     DataBaseHelper dbvoc;
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value, View v);
+        void onButtonClickListner(int position, String value, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -101,12 +101,12 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = li.inflate(R.layout.previous_orderedit_adapter, parent, false);
             holder = new ViewHolder();
-            holder.tvTitle = (TextView) convertView.findViewById(R.id.example_row_tv_title);
-            holder.tvDescription = (TextView) convertView.findViewById(R.id.example_row_tv_description);
-            holder.tvPriece = (TextView) convertView.findViewById(R.id.example_row_tv_price);
-            holder.order_idn = (TextView) convertView.findViewById(R.id.order_idn);
-            holder.bAction1 = (Button) convertView.findViewById(R.id.example_row_b_action_1);
-            holder.bAction2 = (Button) convertView.findViewById(R.id.example_row_b_action_2);
+            holder.tvTitle = convertView.findViewById(R.id.example_row_tv_title);
+            holder.tvDescription = convertView.findViewById(R.id.example_row_tv_description);
+            holder.tvPriece = convertView.findViewById(R.id.example_row_tv_price);
+            holder.order_idn = convertView.findViewById(R.id.order_idn);
+            holder.bAction1 = convertView.findViewById(R.id.example_row_b_action_1);
+            holder.bAction2 = convertView.findViewById(R.id.example_row_b_action_2);
 
             convertView.setTag(holder);
         } else {
@@ -170,7 +170,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
             @Override
             public void onClick(View v) {
                 getData = dataAray.get(position);
-                Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(TAG_ITEM_NUMBER).toString());
+                Log.d("ITEM_NUMBER", "ITEM_NUMBER"+ getData.get(TAG_ITEM_NUMBER));
 
 //				 String total_qty = "";
 //				 String MRP = "";
@@ -181,7 +181,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                 dbvoc = new DataBaseHelper(context);
 
                 if(Global_Data.Previous_Order_ServiceOrder_ID.equalsIgnoreCase(Global_Data.Previous_Order_UpdateOrder_ID)) {
-                    List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBERPre(getData.get(TAG_ITEM_NUMBER).toString(), Global_Data.Previous_Order_ServiceOrder_ID);
+                    List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBERPre(getData.get(TAG_ITEM_NUMBER), Global_Data.Previous_Order_ServiceOrder_ID);
                     for (Local_Data cnp : cont1) {
 
                         Global_Data.item_no = cnp.get_delivery_product_id();
@@ -207,7 +207,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                 else
                 {
 
-                    List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER(getData.get(TAG_ITEM_NUMBER).toString(), Global_Data.GLObalOrder_id);
+                    List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER(getData.get(TAG_ITEM_NUMBER), Global_Data.GLObalOrder_id);
                     for (Local_Data cnp : cont1) {
 
                         // tem.put("order_number", cnp.get_category_code());
@@ -262,7 +262,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
 
 
                         getData = dataAray.get(position);
-                        Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(TAG_ITEM_NUMBER).toString());
+                        Log.d("ITEM_NUMBER", "ITEM_NUMBER"+ getData.get(TAG_ITEM_NUMBER));
 
                         dbvoc = new DataBaseHelper(context);
 
@@ -279,7 +279,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                             }
                             else
                             {
-                                dbvoc.getDeleteTablePreviousorderproduct_byITEM_NUMBER(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.Previous_Order_UpdateOrder_ID);
+                                dbvoc.getDeleteTablePreviousorderproduct_byITEM_NUMBER(getData.get(TAG_ITEM_NUMBER),Global_Data.Previous_Order_UpdateOrder_ID);
                                 dataAray.remove(position);
                                 notifyDataSetChanged();
 
@@ -352,7 +352,7 @@ public class Previous_orderEdit_Adapter extends ArrayAdapter<HashMap<String, Str
                         else
                         {
 
-                            dbvoc.getDeleteTableorderproduct_byITEM_NUMBER(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id);
+                            dbvoc.getDeleteTableorderproduct_byITEM_NUMBER(getData.get(TAG_ITEM_NUMBER),Global_Data.GLObalOrder_id);
                             dataAray.remove(position);
                             notifyDataSetChanged();
 

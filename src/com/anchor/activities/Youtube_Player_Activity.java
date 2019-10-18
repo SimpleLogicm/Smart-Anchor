@@ -45,9 +45,9 @@ public class Youtube_Player_Activity extends YouTubeBaseActivity implements
 
         setContentView(R.layout.youtube_player);
 
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        et_date = (TextView) findViewById(R.id.video_date) ;
-        et_title = (TextView) findViewById(R.id.video_title) ;
+        youTubeView = findViewById(R.id.youtube_view);
+        et_date = findViewById(R.id.video_date);
+        et_title = findViewById(R.id.video_title);
 
         et_date.setText("Advertisement Date "+Config.YOUTUBE_VIDEO_DATE);
         et_title.setText("Product Description   "+Config.YOUTUBE_VIDEO_DISCRIPTION);
@@ -66,12 +66,12 @@ public class Youtube_Player_Activity extends YouTubeBaseActivity implements
 
                 View mCustomView = mInflater.inflate(R.layout.action_bar, null);
                 mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-                TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+                TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
                 mTitleTextView.setText("Advertisement");
 
-                TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+                TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
                 todaysTarget.setVisibility(View.INVISIBLE);
-                ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+                ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
                 SharedPreferences sp = Youtube_Player_Activity.this.getSharedPreferences("SimpleLogic", 0);
 
                 H_LOGO.setImageResource(R.drawable.video_imagenew);

@@ -77,9 +77,9 @@ public class PreviousOrderActivity extends BaseActivity {
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText(name);
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			sp = PreviousOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -87,17 +87,17 @@ public class PreviousOrderActivity extends BaseActivity {
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -126,8 +126,8 @@ public class PreviousOrderActivity extends BaseActivity {
 //    	retailerID=sp1.getInt("RetailerID", 0);
     	
 
-    	tl=(TableLayout)findViewById(R.id.tablePrevious); 
-    	linearPreviousOrderstatus=(LinearLayout) findViewById(R.id.linearPreviousOrderstatus);
+    	tl= findViewById(R.id.tablePrevious);
+    	linearPreviousOrderstatus= findViewById(R.id.linearPreviousOrderstatus);
     	size=0;
     	for (Iterator iterator = data.iterator(); iterator.hasNext();) {
 			final Product product = (Product) iterator.next();
@@ -179,8 +179,8 @@ public class PreviousOrderActivity extends BaseActivity {
 			tl.addView(view);
 			
     	}
-			buttonPreviousAddMOre=(Button) findViewById(R.id.buttonPreviousAddMOre);
-			txtPreviousOrder=(TextView) findViewById(R.id.txtPreviousOrder);
+			buttonPreviousAddMOre= findViewById(R.id.buttonPreviousAddMOre);
+			txtPreviousOrder= findViewById(R.id.txtPreviousOrder);
 			 //String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 	     
 			txtPreviousOrder.setText("Order Date : "+date);
@@ -220,7 +220,7 @@ public class PreviousOrderActivity extends BaseActivity {
 				}
 			});
 			
-			buttonPreviousPreview=(Button) findViewById(R.id.buttonPreviousPreview);
+			buttonPreviousPreview= findViewById(R.id.buttonPreviousPreview);
 			buttonPreviousAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 			buttonPreviousPreview.setBackgroundColor(Color.parseColor("#414042"));
 			buttonPreviousPreview.setOnTouchListener(new OnTouchListener() {
@@ -307,8 +307,8 @@ public class PreviousOrderActivity extends BaseActivity {
 //		        //question_value.setTypeface(null,Typeface.BOLD);
 //		       welcomeUser.setText(sp.getString("FirstName", "")+" "+ sp.getString("LastName", ""));
 		        
-			 tl=(TableLayout)findViewById(R.id.tablePrevious); 
-		    linearPreviousOrderstatus=(LinearLayout) findViewById(R.id.linearPreviousOrderstatus);
+			 tl= findViewById(R.id.tablePrevious);
+		    linearPreviousOrderstatus= findViewById(R.id.linearPreviousOrderstatus);
 			 for (Iterator iterator = data.iterator(); iterator.hasNext();) {
 					final Product product = (Product) iterator.next();
 					
@@ -360,8 +360,8 @@ public class PreviousOrderActivity extends BaseActivity {
 					
 		    	}
 			 
-			 buttonPreviousAddMOre=(Button) findViewById(R.id.buttonPreviousAddMOre);
-				txtPreviousOrder=(TextView) findViewById(R.id.txtPreviousOrder);
+			 buttonPreviousAddMOre= findViewById(R.id.buttonPreviousAddMOre);
+				txtPreviousOrder= findViewById(R.id.txtPreviousOrder);
 				 //String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		     
 				txtPreviousOrder.setText("Order Date : "+date);
@@ -401,7 +401,7 @@ public class PreviousOrderActivity extends BaseActivity {
 					}
 				});
 				
-				buttonPreviousPreview=(Button) findViewById(R.id.buttonPreviousPreview);
+				buttonPreviousPreview= findViewById(R.id.buttonPreviousPreview);
 				buttonPreviousAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 				buttonPreviousPreview.setBackgroundColor(Color.parseColor("#414042"));
 				buttonPreviousPreview.setOnTouchListener(new OnTouchListener() {

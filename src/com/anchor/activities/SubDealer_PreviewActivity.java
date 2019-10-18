@@ -82,16 +82,16 @@ public class SubDealer_PreviewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subdealer_previeactivity);
         cd  = new ConnectionDetector(getApplicationContext());
-        txttotalPreview=(TextView) findViewById(R.id.txttotalPreview);
-        swipeListView = (SwipeListView) findViewById(R.id.example_lv_list);
+        txttotalPreview= findViewById(R.id.txttotalPreview);
+        swipeListView = findViewById(R.id.example_lv_list);
         map = new HashMap<String, String>();
 
         SwipeList=new ArrayList<HashMap<String, String>>();
-        btn_subapprove=(Button) findViewById(R.id.btn_subapprove);
+        btn_subapprove= findViewById(R.id.btn_subapprove);
 
 
-        buttonPreviewCheckout=(Button) findViewById(R.id.buttonPreviewCheckout);
-        buttonPreviewCheckout1=(Button) findViewById(R.id.buttonPreviewCheckout1);
+        buttonPreviewCheckout= findViewById(R.id.buttonPreviewCheckout);
+        buttonPreviewCheckout1= findViewById(R.id.buttonPreviewCheckout1);
         try
         {
             List<Local_Data> cont1 = dbvoc.getItemName_SubDealer(Global_Data.GLOvel_SUB_GORDER_ID);
@@ -125,7 +125,7 @@ public class SubDealer_PreviewActivity extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 //            mTitleTextView.setText(Global_Data.order_retailer +" "+"("+Global_Data.AmountOutstanding+"/"+Global_Data.AmountOverdue+")");
 //            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
 //            SharedPreferences sp = SubDealer_PreviewActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -295,7 +295,7 @@ public class SubDealer_PreviewActivity extends BaseActivity {
             }
         });
 
-        buttonPreviewHome=(Button) findViewById(R.id.buttonPreviewHome);
+        buttonPreviewHome= findViewById(R.id.buttonPreviewHome);
         buttonPreviewHome.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -351,7 +351,7 @@ public class SubDealer_PreviewActivity extends BaseActivity {
             }
         });
 
-        buttonPreviewAddMOre=(Button) findViewById(R.id.buttonPreviewAddMOre);
+        buttonPreviewAddMOre= findViewById(R.id.buttonPreviewAddMOre);
         buttonPreviewCheckout.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewHome.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewAddMOre.setBackgroundColor(Color.parseColor("#414042"));

@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity {
 
         setContentView(R.layout.activity_menu);
         firstLaunch = false;
-        screenname = (TextView) findViewById(R.id.screenname);
+        screenname = findViewById(R.id.screenname);
         cd = new ConnectionDetector(getApplicationContext());
 
         Global_Data.GLOVEL_LONG_DESC = "";
@@ -190,7 +190,7 @@ public class MainActivity extends BaseActivity {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             //TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
-            todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -204,16 +204,16 @@ public class MainActivity extends BaseActivity {
                 }
             } else {
                 try {
-                    int target = (int) Math.round(sp.getFloat("Target", 0));
-                    int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                    int target = Math.round(sp.getFloat("Target", 0));
+                    int achieved = Math.round(sp.getFloat("Achived", 0));
                     Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
 
                     if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                        int age = (int) Math.round(age_float);
+                        int age = Math.round(age_float);
 
                         todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                     } else {
-                        int age = (int) Math.round(age_float);
+                        int age = Math.round(age_float);
 
                         todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                     }
@@ -245,7 +245,7 @@ public class MainActivity extends BaseActivity {
 
         mTitle = mDrawerTitle = getTitle();
         v = getActionBar().getCustomView();
-        screen_title = (TextView) v.findViewById(R.id.screenname);
+        screen_title = v.findViewById(R.id.screenname);
         // load slide menu items
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items);
 
@@ -253,8 +253,8 @@ public class MainActivity extends BaseActivity {
 //		navMenuIcons = getResources()
 //				.obtainTypedArray(R.array.nav_drawer_icons);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerList = findViewById(R.id.list_slidermenu);
 
         navDrawerItems = new ArrayList<NavDrawerItem>();
 
@@ -696,15 +696,15 @@ public class MainActivity extends BaseActivity {
 
 
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -886,20 +886,20 @@ public class MainActivity extends BaseActivity {
                                             jsonObject.getString("achieved"), "", "");
 
                                     if (jsonObject.getString("year").equalsIgnoreCase(String.valueOf(year))) {
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString())) {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target"))) {
                                             if (!jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" ")) {
-                                                t_total += Float.valueOf(jsonObject.getString("target").toString());
+                                                t_total += Float.valueOf(jsonObject.getString("target"));
                                             } else {
                                                 t_total += Float.valueOf("0.0");
                                             }
 
                                         }
 
-                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString())) {
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved"))) {
 
 
                                             if (!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" ")) {
-                                                achived_total += Float.valueOf(jsonObject.getString("achieved").toString());
+                                                achived_total += Float.valueOf(jsonObject.getString("achieved"));
                                             } else {
                                                 achived_total += Float.valueOf("0.0");
                                             }
@@ -919,8 +919,8 @@ public class MainActivity extends BaseActivity {
                                 editor.commit();
 
                                 try {
-                                    int target = (int) Math.round(t_total);
-                                    int achieved = (int) Math.round(achived_total);
+                                    int target = Math.round(t_total);
+                                    int achieved = Math.round(achived_total);
                                     Float age_float = (achived_total / t_total) * 100;
 
                                     //int age = (int) Math.round(age_float);
@@ -928,11 +928,11 @@ public class MainActivity extends BaseActivity {
                                     //	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 
                                     if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                                        int age = (int) Math.round(age_float);
+                                        int age = Math.round(age_float);
 
                                         todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                                     } else {
-                                        int age = (int) Math.round(age_float);
+                                        int age = Math.round(age_float);
 
                                         todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                                     }

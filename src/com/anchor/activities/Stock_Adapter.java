@@ -28,7 +28,7 @@ public class Stock_Adapter extends RecyclerView.Adapter<Stock_Adapter.ContactVie
     static Context mcontext;
     public Stock_Adapter(List<Stock_Info> contactList, Context context) {
         this.contactList = contactList;
-        this.mcontext = context;
+        mcontext = context;
         //this.contactListfilter.addAll(this.contactList);
     }
 
@@ -101,16 +101,16 @@ public class Stock_Adapter extends RecyclerView.Adapter<Stock_Adapter.ContactVie
         public ContactViewHolder(View v) {
             super(v);
 
-            ss_name =  (TextView) v.findViewById(R.id.ss_name);
-            ss_address =  (TextView) v.findViewById(R.id.ss_address);
-            ss_product = (TextView)  v.findViewById(R.id.ss_product);
-            ss_RP = (TextView)  v.findViewById(R.id.ss_RP);
-            ss_MRP = (TextView) v.findViewById(R.id.ss_MRP);
-            ss_grossstock = (TextView) v.findViewById(R.id.ss_grossstock);
-            ss_sellable = (TextView) v.findViewById(R.id.ss_sellable);
-            ss_update = (TextView) v.findViewById(R.id.ss_update);
-            ss_city = (TextView) v.findViewById(R.id.ss_city);
-            ss_state = (TextView) v.findViewById(R.id.ss_state);
+            ss_name = v.findViewById(R.id.ss_name);
+            ss_address = v.findViewById(R.id.ss_address);
+            ss_product = v.findViewById(R.id.ss_product);
+            ss_RP = v.findViewById(R.id.ss_RP);
+            ss_MRP = v.findViewById(R.id.ss_MRP);
+            ss_grossstock = v.findViewById(R.id.ss_grossstock);
+            ss_sellable = v.findViewById(R.id.ss_sellable);
+            ss_update = v.findViewById(R.id.ss_update);
+            ss_city = v.findViewById(R.id.ss_city);
+            ss_state = v.findViewById(R.id.ss_state);
 
 
 

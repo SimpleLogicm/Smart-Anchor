@@ -26,8 +26,8 @@ public class Address_activity extends Activity {
         if (gpsTracker.getIsGPSTrackingEnabled())
         {
             String stringLatitude = String.valueOf(gpsTracker.latitude);
-            textview = (TextView)findViewById(R.id.fieldLatitude);
-            buttonx = (Button)findViewById(R.id.buttonx);
+            textview = findViewById(R.id.fieldLatitude);
+            buttonx = findViewById(R.id.buttonx);
             textview.setText(stringLatitude);
 
             
@@ -35,23 +35,23 @@ public class Address_activity extends Activity {
 	   	         public void onClick(View view) {
 	   	        	 
 	   	        	 String stringLongitude = String.valueOf(gpsTracker.longitude);
-	   	            textview = (TextView)findViewById(R.id.fieldLongitude);
+	   	            textview = findViewById(R.id.fieldLongitude);
 	   	            textview.setText(stringLongitude);
 
 	   	            String country = gpsTracker.getCountryName(Address_activity.this);
-	   	            textview = (TextView)findViewById(R.id.fieldCountry);
+	   	            textview = findViewById(R.id.fieldCountry);
 	   	            textview.setText(country);
 
 	   	            String city = gpsTracker.getLocality(Address_activity.this);
-	   	            textview = (TextView)findViewById(R.id.fieldCity);
+	   	            textview = findViewById(R.id.fieldCity);
 	   	            textview.setText(city);
 
 	   	            String postalCode = gpsTracker.getPostalCode(Address_activity.this);
-	   	            textview = (TextView)findViewById(R.id.fieldPostalCode);
+	   	            textview = findViewById(R.id.fieldPostalCode);
 	   	            textview.setText(postalCode);
 
 	   	            String addressLine = gpsTracker.getAddressLine(Address_activity.this);
-	   	            textview = (TextView)findViewById(R.id.fieldAddressLine);
+	   	            textview = findViewById(R.id.fieldAddressLine);
 	   	            textview.setText(addressLine);
 	   	        	 
 	   	         }

@@ -50,7 +50,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
     static Context mcontext;
     public Customer_info_main_adapter(List<Customer_Info> contactList, Context context) {
         this.contactList = contactList;
-        this.mcontext = context;
+        mcontext = context;
         //this.contactListfilter.addAll(this.contactList);
     }
 
@@ -106,21 +106,21 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
         public ContactViewHolder(View v) {
             super(v);
 
-            c_name =  (TextView) v.findViewById(R.id.c_name);
-            c_code =  (TextView) v.findViewById(R.id.c_code);
-            c_name2 =  (TextView) v.findViewById(R.id.c_name2);
-            c_address = (TextView)  v.findViewById(R.id.c_address);
-            c_credit_profile = (TextView)  v.findViewById(R.id.c_credit_profile);
-            c_ammount1 = (TextView) v.findViewById(R.id.c_ammount1);
-            c_ammount2 = (TextView) v.findViewById(R.id.c_ammount2);
-            c_latlon = (TextView) v.findViewById(R.id.c_latlon);
-            c_mobile_number = (TextView) v.findViewById(R.id.c_mobile_number);
-            c_beat_name = (TextView) v.findViewById(R.id.c_beat_name);
-            c_call = (ImageView) v.findViewById(R.id.c_call);
-            c_city_name = (TextView) v.findViewById(R.id.c_city_name);
-            c_location = (ImageView) v.findViewById(R.id.c_location);
-            c_invoice = (ImageView) v.findViewById(R.id.c_invoice);
-            c_schemes = (ImageView) v.findViewById(R.id.c_schemes);
+            c_name = v.findViewById(R.id.c_name);
+            c_code = v.findViewById(R.id.c_code);
+            c_name2 = v.findViewById(R.id.c_name2);
+            c_address = v.findViewById(R.id.c_address);
+            c_credit_profile = v.findViewById(R.id.c_credit_profile);
+            c_ammount1 = v.findViewById(R.id.c_ammount1);
+            c_ammount2 = v.findViewById(R.id.c_ammount2);
+            c_latlon = v.findViewById(R.id.c_latlon);
+            c_mobile_number = v.findViewById(R.id.c_mobile_number);
+            c_beat_name = v.findViewById(R.id.c_beat_name);
+            c_call = v.findViewById(R.id.c_call);
+            c_city_name = v.findViewById(R.id.c_city_name);
+            c_location = v.findViewById(R.id.c_location);
+            c_invoice = v.findViewById(R.id.c_invoice);
+            c_schemes = v.findViewById(R.id.c_schemes);
 
             c_call.setOnClickListener(this);
             c_location.setOnClickListener(this);
@@ -148,7 +148,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(address)) {
                                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                                         Uri.parse("http://maps.google.com/maps?saddr=" + Global_Data.GLOvel_LATITUDE + "," + Global_Data.GLOvel_LONGITUDE + "&daddr=" + address + ""));
-                                ((Activity) view.getContext()).startActivity(intent);
+                                view.getContext().startActivity(intent);
                             } else {
                                 Toast.makeText(mcontext, "Address not found", Toast.LENGTH_SHORT).show();
                             }
@@ -167,7 +167,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(address)) {
                                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                                         Uri.parse("http://maps.google.com/maps?saddr=" + Global_Data.GLOvel_LATITUDE + "," + Global_Data.GLOvel_LONGITUDE + "&daddr=" + address + ""));
-                                ((Activity) view.getContext()).startActivity(intent);
+                                view.getContext().startActivity(intent);
                             } else {
                                 Toast.makeText(mcontext, "Address not found", Toast.LENGTH_SHORT).show();
                             }
@@ -179,7 +179,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
 
                     }
                 } else {
-                    Toast toast = Toast.makeText((Activity) view.getContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(view.getContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
@@ -221,12 +221,12 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
 
 
 
-        filter_submit = (Button) dialog1.findViewById(R.id.c_filter_submit);
-        filter_back = (Button) dialog1.findViewById(R.id.c_filter_back);
-        final RadioGroup c_radioGroup = (RadioGroup) dialog1.findViewById(R.id.c_radioGroup);
-        RadioButton s_management = (RadioButton) dialog1.findViewById(R.id.s_management);
-        RadioButton s_report = (RadioButton) dialog1.findViewById(R.id.s_report);
-        close_filter = (ImageView) dialog1.findViewById(R.id.close_filter);
+        filter_submit = dialog1.findViewById(R.id.c_filter_submit);
+        filter_back = dialog1.findViewById(R.id.c_filter_back);
+        final RadioGroup c_radioGroup = dialog1.findViewById(R.id.c_radioGroup);
+        RadioButton s_management = dialog1.findViewById(R.id.s_management);
+        RadioButton s_report = dialog1.findViewById(R.id.s_report);
+        close_filter = dialog1.findViewById(R.id.close_filter);
 
 
         filter_submit.setOnClickListener(new View.OnClickListener() {
@@ -242,7 +242,7 @@ public class Customer_info_main_adapter extends RecyclerView.Adapter<Customer_in
                     {
 
                         int selectedId = c_radioGroup.getCheckedRadioButtonId();
-                        RadioButton rb=(RadioButton) dialog1.findViewById(selectedId);
+                        RadioButton rb= dialog1.findViewById(selectedId);
                         String radioText=rb.getText().toString();
 
                         if(radioText.equalsIgnoreCase("Scheme Management"))

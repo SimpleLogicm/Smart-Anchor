@@ -33,7 +33,7 @@ public class DogsDropdownOnItemClickListener implements OnItemClickListener {
         //mainActivity.buttonShowDropDown.setText(selectedItemText);
          
         // get the id
-        String selectedItemTag = ((TextView) v).getTag().toString();
+        String selectedItemTag = v.getTag().toString();
         Toast.makeText(mContext, "Dog ID is: " + selectedItemTag+","+selectedItemText, Toast.LENGTH_SHORT).show();
         
       

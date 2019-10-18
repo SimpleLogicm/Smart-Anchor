@@ -75,7 +75,7 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 	GPSTracker gps;
 
 	ConnectionDetector cd;
-	String popUpContents[];
+    String[] popUpContents;
 	PopupWindow popupWindowDogs;
 	ProgressDialog dialog;
 	int spine_flag = 0;
@@ -92,14 +92,14 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.expenses);
 
-		type_spinner=(Spinner)findViewById(R.id.expenses);
-		exp_date=(EditText)findViewById(R.id.exp_date);
-		exp_cost=(EditText)findViewById(R.id.exp_cost);
-		exp_discr=(EditText)findViewById(R.id.exp_discr);
-		exp_from=(EditText)findViewById(R.id.exp_from);
-		exp_to=(EditText)findViewById(R.id.exp_to);
-		exp_mot=(EditText)findViewById(R.id.exp_mot);
-		exp_submit=(Button)findViewById(R.id.exp_submit);
+		type_spinner= findViewById(R.id.expenses);
+		exp_date= findViewById(R.id.exp_date);
+		exp_cost= findViewById(R.id.exp_cost);
+		exp_discr= findViewById(R.id.exp_discr);
+		exp_from= findViewById(R.id.exp_from);
+		exp_to= findViewById(R.id.exp_to);
+		exp_mot= findViewById(R.id.exp_mot);
+		exp_submit= findViewById(R.id.exp_submit);
 
 		exp_discr.setFilters(new InputFilter[]{filter});
 		exp_to.setFilters(new InputFilter[]{filter});
@@ -159,13 +159,13 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Expenses");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Expenses.this.getSharedPreferences("SimpleLogic", 0);
 
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			H_LOGO.setImageResource(R.drawable.rs);
 			H_LOGO.setVisibility(View.VISIBLE);
 
@@ -178,17 +178,17 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}

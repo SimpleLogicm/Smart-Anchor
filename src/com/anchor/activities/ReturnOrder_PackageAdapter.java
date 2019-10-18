@@ -43,7 +43,7 @@ import java.util.List;
     DataBaseHelper dbvoc;
     
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value, View v);
+        void onButtonClickListner(int position, String value, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -91,12 +91,12 @@ import java.util.List;
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = li.inflate(R.layout.prev_text, parent, false);
             holder = new ViewHolder();
-            holder.tvtext1 = (TextView) convertView.findViewById(R.id.txt1_prev); 
-            holder.tvtext2 = (TextView) convertView.findViewById(R.id.txt2_prev);
+            holder.tvtext1 = convertView.findViewById(R.id.txt1_prev);
+            holder.tvtext2 = convertView.findViewById(R.id.txt2_prev);
 //            holder.tvPriece = (TextView) convertView.findViewById(R.id.example_row_tv_price);
 //            holder.order_idn = (TextView) convertView.findViewById(R.id.order_idn);
-            holder.bAction1 = (Button) convertView.findViewById(R.id.example_row_b_action_1);
-            holder.bAction2 = (Button) convertView.findViewById(R.id.example_row_b_action_2);
+            holder.bAction1 = convertView.findViewById(R.id.example_row_b_action_1);
+            holder.bAction2 = convertView.findViewById(R.id.example_row_b_action_2);
            
             convertView.setTag(holder);
         } else {
@@ -163,7 +163,7 @@ import java.util.List;
             public void onClick(View v) {
             	getData = dataAray.get(position);
             	
-				 Log.d("EDIT ORDER ID", "EDIT ORDER ID"+getData.get(TAG_ORDERID).toString());
+				 Log.d("EDIT ORDER ID", "EDIT ORDER ID"+ getData.get(TAG_ORDERID));
 				 
 //				 String total_qty = "";
 //				 String MRP = "";
@@ -190,9 +190,9 @@ import java.util.List;
 //	   	          }
               dbvoc = new DataBaseHelper(context);
 	   	      Global_Data.GLOVEL_ORDER_REJECT_FLAG = "";  
-	   	      Global_Data.GLObalOrder_id_return = getData.get(TAG_ORDERID).toString();
+	   	      Global_Data.GLObalOrder_id_return = getData.get(TAG_ORDERID);
 	   	  
-	   	      Global_Data.GLOvel_GORDER_ID_RETURN = getData.get(TAG_ORDERID).toString();
+	   	      Global_Data.GLOvel_GORDER_ID_RETURN = getData.get(TAG_ORDERID);
 
                 List<Local_Data> contacts = dbvoc.GetOrdersBYORDER_IDRETURN(Global_Data.GLOvel_GORDER_ID_RETURN);
                 //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
@@ -281,10 +281,10 @@ import java.util.List;
 						
 						
 						 getData = dataAray.get(position);
-						 Log.d("DELETE ORDER ID", "DELETE ORDER ID"+getData.get(TAG_ORDERID).toString());
+						 Log.d("DELETE ORDER ID", "DELETE ORDER ID"+ getData.get(TAG_ORDERID));
 						
 						 dbvoc = new DataBaseHelper(context);
-						 dbvoc.getDeleteTableorder_byORDER_ID_return(getData.get(TAG_ORDERID).toString());
+						 dbvoc.getDeleteTableorder_byORDER_ID_return(getData.get(TAG_ORDERID));
 						 dataAray.remove(position);
 	                      notifyDataSetChanged();
 						 

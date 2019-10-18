@@ -85,21 +85,21 @@ public class ReturnOrder1 extends BaseActivity {
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
-        txtPrice = (TextView) findViewById(R.id.txtPrice1);
+        txtPrice = findViewById(R.id.txtPrice1);
 
-        spnCategory = (Spinner) findViewById(R.id.spnCategory);
-        spnProduct = (Spinner) findViewById(R.id.spnProduct);
-        Product_Variant = (AutoCompleteTextView) findViewById(R.id.Product_Variant);
+        spnCategory = findViewById(R.id.spnCategory);
+        spnProduct = findViewById(R.id.spnProduct);
+        Product_Variant = findViewById(R.id.Product_Variant);
 
-        spnScheme = (Spinner) findViewById(R.id.spnScheme1);
+        spnScheme = findViewById(R.id.spnScheme1);
 
 
-        editTextRP = (TextView) findViewById(R.id.editTextRP);
-        editTextMRP = (TextView) findViewById(R.id.editTextMRP);
+        editTextRP = findViewById(R.id.editTextRP);
+        editTextMRP = findViewById(R.id.editTextMRP);
 
-        editTextQuantity = (EditText) findViewById(R.id.editTextQuantity1);
+        editTextQuantity = findViewById(R.id.editTextQuantity1);
 
-        txt_rp = (TextView) findViewById(R.id.textRP);
+        txt_rp = findViewById(R.id.textRP);
 
         // for label RP change
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
@@ -262,7 +262,7 @@ public class ReturnOrder1 extends BaseActivity {
                     if (Integer.parseInt(String.valueOf(s)) <= 0) {
                         editTextQuantity.setText("");
                         txtPrice.setText("Total Price : " + "");
-                        price = String.valueOf("");
+                        price = "";
                     }
                 } else {
                     txtPrice.setText("Total Price : " + "");
@@ -454,23 +454,23 @@ public class ReturnOrder1 extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = ReturnOrder1.this.getSharedPreferences("SimpleLogic", 0);
 
 
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -492,7 +492,7 @@ public class ReturnOrder1 extends BaseActivity {
         }
 
 
-        buttonAddMOre = (Button) findViewById(R.id.buttonAddMOre);
+        buttonAddMOre = findViewById(R.id.buttonAddMOre);
         buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 
         buttonAddMOre.setOnTouchListener(new OnTouchListener() {
@@ -705,7 +705,7 @@ public class ReturnOrder1 extends BaseActivity {
             }
         });
 
-        buttonPreviewOrder = (Button) findViewById(R.id.buttonPreviewOrder);
+        buttonPreviewOrder = findViewById(R.id.buttonPreviewOrder);
         buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));
 
         buttonPreviewOrder.setOnTouchListener(new OnTouchListener() {

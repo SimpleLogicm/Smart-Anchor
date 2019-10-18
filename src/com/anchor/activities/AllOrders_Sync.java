@@ -42,12 +42,12 @@ public class AllOrders_Sync  extends Activity  {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.order_syncs);
 
-        lastsyncon=(TextView)findViewById(R.id.lastsyncon);
-        Totalsosync=(TextView)findViewById(R.id.Totalsosync);
-        angry_btn1=(Button)findViewById(R.id.angry_btn1);
-        angry_btn2=(Button)findViewById(R.id.angry_btn2);
-        angry_btn3=(Button)findViewById(R.id.angry_btn3);
-        angry_btn4=(Button)findViewById(R.id.angry_btn4);
+        lastsyncon= findViewById(R.id.lastsyncon);
+        Totalsosync= findViewById(R.id.Totalsosync);
+        angry_btn1= findViewById(R.id.angry_btn1);
+        angry_btn2= findViewById(R.id.angry_btn2);
+        angry_btn3= findViewById(R.id.angry_btn3);
+        angry_btn4= findViewById(R.id.angry_btn4);
 
         cd = new ConnectionDetector(AllOrders_Sync.this);
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -213,12 +213,12 @@ public class AllOrders_Sync  extends Activity  {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Sync Data");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             todaysTarget.setVisibility(View.INVISIBLE);
-            ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+            ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
             SharedPreferences sp = AllOrders_Sync.this.getSharedPreferences("SimpleLogic", 0);
 
             H_LOGO.setImageResource(R.drawable.video_imagenew);

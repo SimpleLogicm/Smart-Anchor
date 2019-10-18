@@ -12,7 +12,7 @@ public class SubDealer_Detail1 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_dealer__detail1);
-        mContent = (LinearLayout) findViewById(R.id.d_linearLayout);
+        mContent = findViewById(R.id.d_linearLayout);
 
     }
 

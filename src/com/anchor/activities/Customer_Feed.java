@@ -104,6 +104,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -208,39 +209,39 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 //				CP_NAME, Toast.LENGTH_LONG).show();
 
 		//feed_spinner = (Spinner) findViewById(R.id.feed_spinner);
-		new_feedback = (EditText) findViewById(R.id.new_feedback);
-		new_complaints = (EditText) findViewById(R.id.new_complaints);
-		claim_amount = (EditText) findViewById(R.id.claim_amount);
-		discription = (EditText) findViewById(R.id.discription);
+		new_feedback = findViewById(R.id.new_feedback);
+		new_complaints = findViewById(R.id.new_complaints);
+		claim_amount = findViewById(R.id.claim_amount);
+		discription = findViewById(R.id.discription);
 
 		//Toast.makeText(getApplicationContext(), new_feedback.getText().toString(), Toast.LENGTH_LONG).show();
 
 
 
 		/* claim list view code */
-		ListView listView = (ListView) findViewById(R.id.C_list);
+		ListView listView = findViewById(R.id.C_list);
 
 
 		/* end */
 
-		videoPreview = (VideoView) findViewById(R.id.videoPreview);
-		media_layout = (LinearLayout) findViewById(R.id.Media_Button);
-		m_viveo = (LinearLayout) findViewById(R.id.Media_Video);
-		emageview_option = (LinearLayout) findViewById(R.id.Emageview_option);
-		Take_pick = (ImageView) findViewById(R.id.Take_pick);
-		Crop_pick = (ImageView) findViewById(R.id.Crop_pick);
-		video_play = (ImageView) findViewById(R.id.Media_Play);
-		video_stop = (ImageView) findViewById(R.id.Media_STOP);
-		media_image = (ImageView) findViewById(R.id.Media_image_Button);
-		media_video = (ImageView) findViewById(R.id.Media_Video_Button);
+		videoPreview = findViewById(R.id.videoPreview);
+		media_layout = findViewById(R.id.Media_Button);
+		m_viveo = findViewById(R.id.Media_Video);
+		emageview_option = findViewById(R.id.Emageview_option);
+		Take_pick = findViewById(R.id.Take_pick);
+		Crop_pick = findViewById(R.id.Crop_pick);
+		video_play = findViewById(R.id.Media_Play);
+		video_stop = findViewById(R.id.Media_STOP);
+		media_image = findViewById(R.id.Media_image_Button);
+		media_video = findViewById(R.id.Media_Video_Button);
 		//Media_Takefromga = (ImageView) findViewById(R.id.Media_Takefromga);
-		imageview = (ImageView) findViewById(R.id.result_image);
+		imageview = findViewById(R.id.result_image);
 		imageview.setTag(R.drawable.white_background);
-		imageviewr = (ImageView) findViewById(R.id.result_imager);
-		button1 = (Button) findViewById(R.id.button1);
-		txt_label = (TextView) findViewById(R.id.txt_label);
-		Textview2 = (TextView) findViewById(R.id.textView2);
-		textview3 = (TextView) findViewById(R.id.TextView01);
+		imageviewr = findViewById(R.id.result_imager);
+		button1 = findViewById(R.id.button1);
+		txt_label = findViewById(R.id.txt_label);
+		Textview2 = findViewById(R.id.textView2);
+		textview3 = findViewById(R.id.TextView01);
 		txt_label.setText("Previous Feedback");
 
 
@@ -611,11 +612,11 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText(CP_NAME);
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			SharedPreferences sp = Customer_Feed.this.getSharedPreferences("SimpleLogic", 0);
 
 			H_LOGO.setImageResource(R.drawable.list);
@@ -627,17 +628,17 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 //			}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -922,14 +923,10 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 	 * Checking device has camera hardware or not
 	 */
 	private boolean isDeviceSupportCamera() {
-		if (getApplicationContext().getPackageManager().hasSystemFeature(
-				PackageManager.FEATURE_CAMERA)) {
-			// this device has a camera
-			return true;
-		} else {
-			// no camera on this device
-			return false;
-		}
+        // this device has a camera
+        // no camera on this device
+        return getApplicationContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_CAMERA);
 	}
 
 //    private void beginCrop(Uri source) {
@@ -2372,7 +2369,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 			poster.setEntity(entity );
 
 			client.execute(poster, new ResponseHandler<Object>() {
-				public Object handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+				public Object handleResponse(HttpResponse response) throws IOException {
 					HttpEntity respEntity = response.getEntity();
 					String responseString = EntityUtils.toString(respEntity);
 					// do something with the response string
@@ -2388,7 +2385,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 	public int uploadFile(){
 
 		//File sourceFile = new File(fileUri.getPath());
-		final String selectedFilePath = fileUri.getPath().toString();
+		final String selectedFilePath = fileUri.getPath();
 		int serverResponseCode = 0;
 
 		HttpURLConnection connection;
@@ -2583,7 +2580,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 						connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
 						connection.setRequestProperty("customer_code",Global_Data.GLOvel_CUSTOMER_ID);
 						connection.setRequestProperty("user_email",Global_Data.GLOvel_USER_EMAIL);
-						connection.setRequestProperty("media_type",CP_NAME.toString().trim());
+						connection.setRequestProperty("media_type", CP_NAME.trim());
 						connection.setRequestProperty("media_text", media_text);
 						connection.setRequestProperty("location",selectedFilePath);
 
@@ -3287,15 +3284,12 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 
 							try {
-								String responseBody = new String(error.networkResponse.data, "utf-8" );
+								String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
 								JSONObject jsonObject = new JSONObject( responseBody );
 							}
 							catch ( JSONException e ) {
 								//Handle a malformed json response
-							} catch (UnsupportedEncodingException errorn){
-
-							}
-							catch(Exception ex){
+							} catch(Exception ex){
 								ex.printStackTrace();
 							}
 
@@ -3586,15 +3580,12 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 
 						try {
-							String responseBody = new String(error.networkResponse.data, "utf-8" );
+							String responseBody = new String(error.networkResponse.data, StandardCharsets.UTF_8);
 							JSONObject jsonObject = new JSONObject( responseBody );
 						}
 						catch ( JSONException e ) {
 							//Handle a malformed json response
-						} catch (UnsupportedEncodingException errorn){
-
-						}
-						catch(Exception ex){
+						} catch(Exception ex){
 							ex.printStackTrace();
 						}
 

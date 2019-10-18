@@ -75,8 +75,8 @@ public class MyService extends Service implements LocationListener{
 	ArrayList<String> AT_results = new ArrayList<String>();
 	int timeOfDay;
 
-	DataBaseHelper dbvoc = new DataBaseHelper(this);;
-	//SharedPreferences spf=getSharedPreferences("SimpleLogic",0);
+	DataBaseHelper dbvoc = new DataBaseHelper(this);
+    //SharedPreferences spf=getSharedPreferences("SimpleLogic",0);
 //	SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(this);
 	private static final long INTERVAL = 1000 * 10;
 	private static final long FASTEST_INTERVAL = 10000 * 6;
@@ -194,7 +194,7 @@ public class MyService extends Service implements LocationListener{
 						editor.putString("LATVAL", String.valueOf(latitude));
 						editor.putString("LONGVAL", String.valueOf(longitude));
 
-						Log.d("GPS LOCATION","GPS LOCATION"+ String.valueOf(latitude)+String.valueOf(longitude));
+						Log.d("GPS LOCATION","GPS LOCATION"+ latitude + longitude);
 
 
 						editor.commit();
@@ -302,7 +302,7 @@ public class MyService extends Service implements LocationListener{
 							editor.putString("LATVAL", String.valueOf(latitude));
 							editor.putString("LONGVAL", String.valueOf(longitude));
 
-							Log.d("NETWORK LOCATION","NETWORK LOCATION"+ String.valueOf(latitude)+String.valueOf(longitude));
+							Log.d("NETWORK LOCATION","NETWORK LOCATION"+ latitude + longitude);
 
 							editor.commit();
 							if(timeOfDay >= 7 && timeOfDay <= 22){
@@ -364,7 +364,7 @@ public class MyService extends Service implements LocationListener{
 					editor.putString("LATVAL", String.valueOf(latitude));
 					editor.putString("LONGVAL", String.valueOf(longitude));
 
-					Log.d("NETWORK LOCATION","NETWORK LOCATION"+ String.valueOf(latitude)+String.valueOf(longitude));
+					Log.d("NETWORK LOCATION","NETWORK LOCATION"+ latitude + longitude);
 
 
 					editor.commit();
@@ -860,7 +860,7 @@ public class MyService extends Service implements LocationListener{
 		// I want to restart this service again in one hour
 		AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
 		alarm.set(
-				alarm.RTC_WAKEUP,
+                AlarmManager.RTC_WAKEUP,
 				System.currentTimeMillis() + (1000 * 60 * 5),
 				PendingIntent.getService(this, 0, new Intent(this, MyService.class), 0)
 		);

@@ -38,7 +38,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
 
 	@Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((RelativeLayout) object);
+        return view == object;
     }
 	
 	@Override
@@ -51,7 +51,7 @@ public class FullScreenImageAdapter extends PagerAdapter {
         View viewLayout = inflater.inflate(R.layout.layout_fullscreen_image, container,
                 false);
  
-        imgDisplay = (TouchImageView) viewLayout.findViewById(R.id.imgDisplay);
+        imgDisplay = viewLayout.findViewById(R.id.imgDisplay);
         
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -59,14 +59,14 @@ public class FullScreenImageAdapter extends PagerAdapter {
         imgDisplay.setImageBitmap(bitmap);
         
         
-        ((ViewPager) container).addView(viewLayout);
+        container.addView(viewLayout);
  
         return viewLayout;
 	}
 	
 	@Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager) container).removeView((RelativeLayout) object);
+        container.removeView((RelativeLayout) object);
  
     }
 

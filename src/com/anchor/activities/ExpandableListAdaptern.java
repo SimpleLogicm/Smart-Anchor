@@ -59,16 +59,16 @@ public class ExpandableListAdaptern extends BaseExpandableListAdapter {
 
 		TargetValue_info ci = contactList.get(groupPosition);
        // ++a;
-		TextView prdcatg_more = (TextView) convertView
+		TextView prdcatg_more = convertView
 				.findViewById(R.id.prdcatg_more);
 
-		TextView target_grpby = (TextView) convertView
+		TextView target_grpby = convertView
 				.findViewById(R.id.target_grpby);
 
-		TextView achievd_grpby = (TextView) convertView
+		TextView achievd_grpby = convertView
 				.findViewById(R.id.achievd_grpby);
 
-		TextView age_grpby = (TextView) convertView
+		TextView age_grpby = convertView
 				.findViewById(R.id.age_grpby);
 
 		prdcatg_more.setText(ci.prdcatg_morestr);
@@ -111,9 +111,9 @@ public class ExpandableListAdaptern extends BaseExpandableListAdapter {
 			convertView = infalInflater.inflate(R.layout.list_groupn, null);
 		}
 
-		TextView lblListHeader = (TextView) convertView
+		TextView lblListHeader = convertView
 				.findViewById(R.id.month_top);
-		TextView month_grpby = (TextView) convertView
+		TextView month_grpby = convertView
 				.findViewById(R.id.month_grpby);
 
 

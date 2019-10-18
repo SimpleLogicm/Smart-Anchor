@@ -193,17 +193,17 @@ public class CustomerInvoice extends AppCompatActivity {
 
         myCalendar = Calendar.getInstance();
 
-        filter_submit = (Button) dialog1.findViewById(R.id.filter_submit);
-        filter_clear = (Button) dialog1.findViewById(R.id.filter_clear);
-        c_start_date = (EditText) dialog1.findViewById(R.id.c_start_date);
-        c_end_date = (EditText) dialog1.findViewById(R.id.c_end_date);
+        filter_submit = dialog1.findViewById(R.id.filter_submit);
+        filter_clear = dialog1.findViewById(R.id.filter_clear);
+        c_start_date = dialog1.findViewById(R.id.c_start_date);
+        c_end_date = dialog1.findViewById(R.id.c_end_date);
 
-        final RadioButton c_all_dates = (RadioButton) dialog1.findViewById(R.id.c_all_dates);
-        final RadioGroup cashradioGroup = (RadioGroup) dialog1.findViewById(R.id.cashradioGroup);
-        final RadioButton radio_showall = (RadioButton) dialog1.findViewById(R.id.radio_showall);
-        RadioButton radio_overdue = (RadioButton) dialog1.findViewById(R.id.radio_overdue);
-        RadioButton radio_outstanding = (RadioButton) dialog1.findViewById(R.id.radio_outstanding);
-        close_filter = (ImageView) dialog1.findViewById(R.id.close_filter);
+        final RadioButton c_all_dates = dialog1.findViewById(R.id.c_all_dates);
+        final RadioGroup cashradioGroup = dialog1.findViewById(R.id.cashradioGroup);
+        final RadioButton radio_showall = dialog1.findViewById(R.id.radio_showall);
+        RadioButton radio_overdue = dialog1.findViewById(R.id.radio_overdue);
+        RadioButton radio_outstanding = dialog1.findViewById(R.id.radio_outstanding);
+        close_filter = dialog1.findViewById(R.id.close_filter);
 
 
         if (G_RadioG_valueC.equalsIgnoreCase("Show Overdue")) {
@@ -517,7 +517,7 @@ public class CustomerInvoice extends AppCompatActivity {
             partialInvoiceList.clear();
             Log.d(TAG, "updateRecyclerViewBasedOnEnteredInvoice: SATISFIED THE >=1 CONDITION");
             for (int i = 0; i < invoiceList.size(); i++) {
-                if (invoiceList.get(i).getInvoiceNumber().indexOf(partialInvoiceNumberEntered,0) == 0){
+                if (invoiceList.get(i).getInvoiceNumber().indexOf(partialInvoiceNumberEntered) == 0){
                     if(partialInvoiceNumberEntered == invoiceList.get(i).getInvoiceNumber()){
                         actvSearchInvoice.clearFocus();
                     }
@@ -526,7 +526,7 @@ public class CustomerInvoice extends AppCompatActivity {
                     partialInvoiceList.add(new Invoice(invoiceList.get(i)));
                 }
                 else
-                Log.d(TAG, "updateRecyclerViewBasedOnEnteredInvoice: " +String.valueOf(i)+ "FAILED THE SUBSTRING CONDITION" );
+                Log.d(TAG, "updateRecyclerViewBasedOnEnteredInvoice: " + i + "FAILED THE SUBSTRING CONDITION" );
             }
             rvAdapter.notifyDataSetChanged();
             Log.d(TAG, "updateRecyclerViewBasedOnEnteredInvoice: UPDATED THE RECYCLER VIEW");

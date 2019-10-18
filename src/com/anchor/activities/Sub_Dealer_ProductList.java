@@ -157,25 +157,25 @@ public class Sub_Dealer_ProductList extends Activity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Product List");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Sub_Dealer_ProductList.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
 //        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
 //		}
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -858,13 +858,13 @@ public class Sub_Dealer_ProductList extends Activity {
                                     Log.d("KEY", "Key: " + key + " Value: " + value);
                                     JSONObject item = new JSONObject();
 
-                                    String key_array[] = String.valueOf(key).split("&");
+                                    String[] key_array = String.valueOf(key).split("&");
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(String.valueOf(value))) {
 
-                                        String key_value_array[] = String.valueOf(value).split("pq");
-                                        String key_value_price_array[] = key_value_array[1].split("pprice");
-                                        String key_value_pname_array[] = key_value_price_array[1].split("pmrp");
-                                        String key_value_pmrp_array[] = key_value_pname_array[1].split("prp");
+                                        String[] key_value_array = String.valueOf(value).split("pq");
+                                        String[] key_value_price_array = key_value_array[1].split("pprice");
+                                        String[] key_value_pname_array = key_value_price_array[1].split("pmrp");
+                                        String[] key_value_pmrp_array = key_value_pname_array[1].split("prp");
 
                                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(key_value_price_array[0])) {
                                             q_check = "yes";
@@ -1121,11 +1121,11 @@ public class Sub_Dealer_ProductList extends Activity {
                     Log.d("KEY", "Key: " + key + " Value: " + value);
                     JSONObject item = new JSONObject();
 
-                    String key_array[] = String.valueOf(key).split("&");
+                    String[] key_array = String.valueOf(key).split("&");
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(String.valueOf(value))) {
 
-                        String key_value_array[] = String.valueOf(value).split("pq");
-                        String key_value_price_array[] = key_value_array[1].split("pprice");
+                        String[] key_value_array = String.valueOf(value).split("pq");
+                        String[] key_value_price_array = key_value_array[1].split("pprice");
 
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(key_value_price_array[0])) {

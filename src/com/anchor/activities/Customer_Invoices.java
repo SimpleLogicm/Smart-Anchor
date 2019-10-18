@@ -96,7 +96,7 @@ public class Customer_Invoices extends Activity {
     String City_id = "";
     String Beat_id = "";
     Customer_Invoices_adapter ca;
-    String s[];
+    String[] s;
     ArrayList<String> All_customers = new ArrayList<String>();
     EditText c_start_date,c_end_date;
     AutoCompleteTextView autoCompleteTextView1;
@@ -109,9 +109,9 @@ public class Customer_Invoices extends Activity {
 
         setContentView(R.layout.customer_invoices);
 
-        autoCompleteTextView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
-        recList = (RecyclerView) findViewById(R.id.c_info_card);
-        filter_btn = (ImageView) findViewById(R.id.filter_btn);
+        autoCompleteTextView1 = findViewById(R.id.autoCompleteTextView1);
+        recList = findViewById(R.id.c_info_card);
+        filter_btn = findViewById(R.id.filter_btn);
         // recList.addItemDecoration(new DividerItemDecoration(Customer_Invoices.this, DividerItemDecoration.VERTICAL_LIST));
 
         recList.setHasFixedSize(true);
@@ -134,25 +134,25 @@ public class Customer_Invoices extends Activity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Customer Invoice");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Customer_Invoices.this.getSharedPreferences("SimpleLogic", 0);
 
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -330,17 +330,17 @@ public class Customer_Invoices extends Activity {
 
         myCalendar = Calendar.getInstance();
 
-        filter_submit = (Button) dialog1.findViewById(R.id.filter_submit);
-        filter_clear = (Button) dialog1.findViewById(R.id.filter_clear);
-        c_start_date = (EditText) dialog1.findViewById(R.id.c_start_date);
-        c_end_date = (EditText) dialog1.findViewById(R.id.c_end_date);
+        filter_submit = dialog1.findViewById(R.id.filter_submit);
+        filter_clear = dialog1.findViewById(R.id.filter_clear);
+        c_start_date = dialog1.findViewById(R.id.c_start_date);
+        c_end_date = dialog1.findViewById(R.id.c_end_date);
 
-        final RadioButton c_all_dates = (RadioButton) dialog1.findViewById(R.id.c_all_dates);
-        final RadioGroup cashradioGroup = (RadioGroup) dialog1.findViewById(R.id.cashradioGroup);
-        final RadioButton radio_showall = (RadioButton) dialog1.findViewById(R.id.radio_showall);
-        RadioButton radio_overdue = (RadioButton) dialog1.findViewById(R.id.radio_overdue);
-        RadioButton radio_outstanding = (RadioButton) dialog1.findViewById(R.id.radio_outstanding);
-        close_filter = (ImageView) dialog1.findViewById(R.id.close_filter);
+        final RadioButton c_all_dates = dialog1.findViewById(R.id.c_all_dates);
+        final RadioGroup cashradioGroup = dialog1.findViewById(R.id.cashradioGroup);
+        final RadioButton radio_showall = dialog1.findViewById(R.id.radio_showall);
+        RadioButton radio_overdue = dialog1.findViewById(R.id.radio_overdue);
+        RadioButton radio_outstanding = dialog1.findViewById(R.id.radio_outstanding);
+        close_filter = dialog1.findViewById(R.id.close_filter);
 
 
         if (G_RadioG_valueC.equalsIgnoreCase("Show Overdue")) {

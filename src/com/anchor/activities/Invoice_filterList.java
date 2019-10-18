@@ -78,14 +78,14 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	public void onCreate(Bundle savedInstanceState) { 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.item_invoicedetail_list);
-		alllist = (ListView) findViewById(R.id.list_all);
+		alllist = findViewById(R.id.list_all);
 		//cable1 = (Button) findViewById(R.id.subcat1);
 		//cable2 = (Button) findViewById(R.id.subcat2);
 		//cable3 = (Button) findViewById(R.id.subcat3);
 		//cable4 = (Button) findViewById(R.id.subcat4);
 		//cable5 = (Button) findViewById(R.id.subcat5);
 		
-		search_filter = (EditText) findViewById(R.id.search_filter);
+		search_filter = findViewById(R.id.search_filter);
 		
 		if(Global_Data.GLOVEL_FILTER_FLAG == "TRUE")
 		{	
@@ -544,13 +544,13 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	                // Toast.makeText(getApplicationContext(),value,Toast.LENGTH_LONG).show();
 	 
 				      
-				      getListView(value.toString().trim());
+				      getListView(value.trim());
 				      
 				    }
 
 	        });
 		
-		filter_btn = (Button) findViewById(R.id.filter_btn);
+		filter_btn = findViewById(R.id.filter_btn);
 		
 		//brand_subcategaries = (LinearLayout) findViewById(R.id.brand_subcategaries);
 		
@@ -587,7 +587,7 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 
                 for(int i=0;i<product_value.size();i++)
                 {
-                    String playerName=product_value.get(i).toString();
+                    String playerName= product_value.get(i);
                     if(textLength<=playerName.length()){
                         //compare the String in EditText with Names in the ArrayList
                         if(searchString.equalsIgnoreCase(playerName.substring(0,textLength)))
@@ -610,7 +610,7 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
             }
         });
 		
-		search_filter = (EditText) findViewById(R.id.search_filter);
+		search_filter = findViewById(R.id.search_filter);
 		
 		
 		filter_btn.setOnClickListener(new OnClickListener() {
@@ -674,10 +674,10 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Filter");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Invoice_filterList.this.getSharedPreferences("SimpleLogic", 0);
 
 //       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -686,17 +686,17 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -799,13 +799,13 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	        //tell the Dialog to use the dialog.xml as it's layout description
 	        dialognew.setContentView(R.layout.update_dialog);
 
-	        final EditText userInput = (EditText) dialognew
+	        final EditText userInput = dialognew
 	                .findViewById(R.id.update_textdialog);
 
-	                final Button Submit = (Button) dialognew
+	                final Button Submit = dialognew
 	                        .findViewById(R.id.update_textdialogclick);
 	                
-	                final Button update_cancel = (Button) dialognew
+	                final Button update_cancel = dialognew
 	                        .findViewById(R.id.update_cancel);
 
 	        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(value))
@@ -824,13 +824,13 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 //	                {
 //	                    update_salesupdate.setText(userInput.getText().toString());
 //	                }
-	            	 String s[] = value.split("ITEM NUMBER");	
+                    String[] s = value.split("ITEM NUMBER");
 	            	 List<Local_Data> contacts1 = dbvoc.ITEM_description_byINVOICEID(s[1].trim());
 //				        
 				      for (Local_Data cn : contacts1) 
 				      {
-				    	  Global_Data.GLOVEL_LONG_DESC = cn.getVariant().toString().trim();
-				    	  Global_Data.GLOVEL_ITEM_MRP = cn.getMRP().toString().trim();
+				    	  Global_Data.GLOVEL_LONG_DESC = cn.getVariant().trim();
+				    	  Global_Data.GLOVEL_ITEM_MRP = cn.getMRP().trim();
 				    	  Global_Data.GLOvel_ITEM_NUMBER = s[1].trim();
 				      }
                        

@@ -27,7 +27,7 @@ object NotificationHelper {
         val mBuilder = NotificationCompat.Builder(context, LoginActivity.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setColor(Color.RED)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.anchor_logo))
+                .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.anchor_logo))
                 .setContentTitle(title)
                 .setContentText(body)
                 .setContentIntent(pendingIntent)

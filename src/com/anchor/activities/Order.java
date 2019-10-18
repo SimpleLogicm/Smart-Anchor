@@ -100,7 +100,7 @@ public class Order extends Activity implements OnItemSelectedListener {
     Spinner city_spinner, state_spinner, beat_spinner;
     TextView selVersion, ocredit_limit, oamount_utstanding, oamount_overdue, customer_MObile;
     HttpGet httppst;
-    String s[];
+    String[] s;
     int state_flag = 0;
     ProgressDialog dialog;
     ArrayAdapter<String> adapter_state1;
@@ -169,32 +169,32 @@ public class Order extends Activity implements OnItemSelectedListener {
         Global_Data.Search_business_unit_name = "";
         locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         //adr_button = (Button) findViewById(R.id.but_address);
-        city_spinner = (Spinner) findViewById(R.id.cust_city);
-        state_spinner = (Spinner) findViewById(R.id.cust_state);
-        beat_spinner = (Spinner) findViewById(R.id.cust_beat);
-        autoCompleteTextView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
-        rlout_order = (RelativeLayout) findViewById(R.id.rlout_order);
-        rlout_custserve = (RelativeLayout) findViewById(R.id.rlout_customer);
-        rlout_schedule = (RelativeLayout) findViewById(R.id.rlout_schedule);
+        city_spinner = findViewById(R.id.cust_city);
+        state_spinner = findViewById(R.id.cust_state);
+        beat_spinner = findViewById(R.id.cust_beat);
+        autoCompleteTextView1 = findViewById(R.id.autoCompleteTextView1);
+        rlout_order = findViewById(R.id.rlout_order);
+        rlout_custserve = findViewById(R.id.rlout_customer);
+        rlout_schedule = findViewById(R.id.rlout_schedule);
 
-        tabLayout = (LinearLayout) findViewById(R.id.tab_layout);
-        order_view = (LinearLayout) findViewById(R.id.order_view);
-        custserve_view = (LinearLayout) findViewById(R.id.customer_view);
-        schedule_view = (LinearLayout) findViewById(R.id.schedule_view);
-        credit_profile_layout = (LinearLayout) findViewById(R.id.credit_profile_layout);
+        tabLayout = findViewById(R.id.tab_layout);
+        order_view = findViewById(R.id.order_view);
+        custserve_view = findViewById(R.id.customer_view);
+        schedule_view = findViewById(R.id.schedule_view);
+        credit_profile_layout = findViewById(R.id.credit_profile_layout);
 
         order_view.setVisibility(View.VISIBLE);
         cd = new ConnectionDetector(getApplicationContext());
         rlout_custserve.setBackgroundResource(R.drawable.single_wtab);
         rlout_schedule.setBackgroundResource(R.drawable.single_wtab);
 
-        customer_address = (TextView) findViewById(R.id.customer_address);
+        customer_address = findViewById(R.id.customer_address);
 
-        ocredit_limit = (TextView) findViewById(R.id.ocredit_limit);
-        oamount_utstanding = (TextView) findViewById(R.id.oamount_utstanding);
-        oamount_overdue = (TextView) findViewById(R.id.oamount_overdue);
-        customer_MObile = (TextView) findViewById(R.id.customer_MObile);
-        schedule_txt = (TextView) findViewById(R.id.textView1sf);
+        ocredit_limit = findViewById(R.id.ocredit_limit);
+        oamount_utstanding = findViewById(R.id.oamount_utstanding);
+        oamount_overdue = findViewById(R.id.oamount_overdue);
+        customer_MObile = findViewById(R.id.customer_MObile);
+        schedule_txt = findViewById(R.id.textView1sf);
 
         // for label change
         SharedPreferences spf6 = this.getSharedPreferences("SimpleLogic", 0);
@@ -218,11 +218,11 @@ public class Order extends Activity implements OnItemSelectedListener {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color
                     .parseColor("#910505")));
-            mTitleTextView = (TextView) mCustomView
+            mTitleTextView = mCustomView
                     .findViewById(R.id.screenname);
             mTitleTextView.setText("Order");
 
-            TextView todaysTarget = (TextView) mCustomView
+            TextView todaysTarget = mCustomView
                     .findViewById(R.id.todaysTarget);
             SharedPreferences sp = Order.this
                     .getSharedPreferences("SimpleLogic", 0);
@@ -234,15 +234,15 @@ public class Order extends Activity implements OnItemSelectedListener {
 //		}
 
             try {
-                int target = (int) Math.round(sp.getFloat("Target", 0));
-                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
+                int target = Math.round(sp.getFloat("Target", 0));
+                int achieved = Math.round(sp.getFloat("Achived", 0));
                 Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
                 if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
                 } else {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
                 }
@@ -567,13 +567,13 @@ public class Order extends Activity implements OnItemSelectedListener {
 
         /* for cutomer navigation vinod */
 
-        buttonSchedule = (Button) findViewById(R.id.buttonSchedule);
-        buttoninvoice = (Button) findViewById(R.id.buttoninvoice);
+        buttonSchedule = findViewById(R.id.buttonSchedule);
+        buttoninvoice = findViewById(R.id.buttoninvoice);
 
-        buttonNewOrder = (Button) findViewById(R.id.but_neworder);
-        buttonNoOrder = (Button) findViewById(R.id.but_noorder);
-        buttonPreviousOrder = (Button) findViewById(R.id.but_preorder);
-        buttonReturnOrder = (Button) findViewById(R.id.but_returnorder);
+        buttonNewOrder = findViewById(R.id.but_neworder);
+        buttonNoOrder = findViewById(R.id.but_noorder);
+        buttonPreviousOrder = findViewById(R.id.but_preorder);
+        buttonReturnOrder = findViewById(R.id.but_returnorder);
 
         // for label change
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
@@ -605,12 +605,12 @@ public class Order extends Activity implements OnItemSelectedListener {
             buttonReturnOrder.setVisibility(View.GONE);
         }
 
-        stock_btn = (Button) findViewById(R.id.stock_btn);
-        feedback_btn = (Button) findViewById(R.id.feedback_btn);
-        comp_btn = (Button) findViewById(R.id.comp_btn);
-        Claims_btn = (Button) findViewById(R.id.Claims_btn);
-        video_btn = (Button) findViewById(R.id.video_btn);
-        imag_btn = (Button) findViewById(R.id.imag_btn);
+        stock_btn = findViewById(R.id.stock_btn);
+        feedback_btn = findViewById(R.id.feedback_btn);
+        comp_btn = findViewById(R.id.comp_btn);
+        Claims_btn = findViewById(R.id.Claims_btn);
+        video_btn = findViewById(R.id.video_btn);
+        imag_btn = findViewById(R.id.imag_btn);
 
         buttonSchedule.setOnClickListener(new OnClickListener() {
             @Override
@@ -2450,12 +2450,7 @@ public class Order extends Activity implements OnItemSelectedListener {
         ContentResolver contentResolver = getBaseContext().getContentResolver();
         boolean gpsStatus = Settings.Secure.isLocationProviderEnabled(
                 contentResolver, LocationManager.GPS_PROVIDER);
-        if (gpsStatus) {
-            return true;
-
-        } else {
-            return false;
-        }
+        return gpsStatus;
     }
 
 
@@ -2468,7 +2463,6 @@ public class Order extends Activity implements OnItemSelectedListener {
                     .toUpperCase());
             state_spinner.setSelection(sp_position);
             Global_Data.GLOvel_CITY = cityname.toUpperCase();
-            ;
             Global_Data.GLOvel_STATE = state_name.toUpperCase();
             dialog.dismiss();
         }

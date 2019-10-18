@@ -142,11 +142,11 @@ public class Ledger_Report extends Activity implements Ledger_Adapter.UserAdapte
         StrictMode.setVmPolicy(builder.build());
 
         prefManager = new PrefManager(this);
-        ImageView Header_logo = (ImageView) findViewById(R.id.Header_logo);
-         mTitleTextView = (TextView)findViewById(R.id.screenname);
+        ImageView Header_logo = findViewById(R.id.Header_logo);
+         mTitleTextView = findViewById(R.id.screenname);
         mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
 
-        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
+        TextView todaysTarget = findViewById(R.id.todaysTarget);
 
         SharedPreferences sp = Ledger_Report.this.getSharedPreferences("SimpleLogic", 0);
 

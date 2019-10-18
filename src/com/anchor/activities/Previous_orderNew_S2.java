@@ -93,12 +93,12 @@ public class Previous_orderNew_S2 extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_order_new_s2);
         cd  = new ConnectionDetector(getApplicationContext());
-        txttotalPreview=(TextView) findViewById(R.id.txttotalPreview);
-        swipeListView = (SwipeListView) findViewById(R.id.example_lv_list);
+        txttotalPreview= findViewById(R.id.txttotalPreview);
+        swipeListView = findViewById(R.id.example_lv_list);
         map = new HashMap<String, String>();
 
         SwipeList=new ArrayList<HashMap<String, String>>();
-        btn_subapprove=(Button) findViewById(R.id.btn_subapprove);
+        btn_subapprove= findViewById(R.id.btn_subapprove);
 
         btn_subapprove.setOnClickListener(new OnClickListener() {
             @Override
@@ -122,8 +122,8 @@ public class Previous_orderNew_S2 extends BaseActivity {
             }
         });
 
-        buttonPreviewCheckout=(Button) findViewById(R.id.buttonPreviewCheckout);
-        buttonPreviewCheckout1=(Button) findViewById(R.id.buttonPreviewCheckout1);
+        buttonPreviewCheckout= findViewById(R.id.buttonPreviewCheckout);
+        buttonPreviewCheckout1= findViewById(R.id.buttonPreviewCheckout1);
 
         if(Global_Data.sales_btnstring.equalsIgnoreCase("Institutional Sales"))
         {
@@ -260,9 +260,9 @@ public class Previous_orderNew_S2 extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText(Global_Data.order_retailer +" "+"("+Global_Data.AmountOutstanding+"/"+Global_Data.AmountOverdue+")");
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Previous_orderNew_S2.this.getSharedPreferences("SimpleLogic", 0);
             //Log.e("DATA", "PreviewOrderSwipeActivity-"+sp.getString("order", ""));
 
@@ -272,17 +272,17 @@ public class Previous_orderNew_S2 extends BaseActivity {
 //		}
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -497,7 +497,7 @@ public class Previous_orderNew_S2 extends BaseActivity {
 //                            }
 //                        }
 
-                        final Spinner spnDistributor = (Spinner) dialog.findViewById(R.id.spnDistributor);
+                        final Spinner spnDistributor = dialog.findViewById(R.id.spnDistributor);
                         //dataDistrubutorsAdapter = new ArrayAdapter<String>(PreviewOrderSwipeActivity.this,android.R.layout.simple_spinner_item, Global_Data.results3);
                         dataDistrubutorsAdapter = new ArrayAdapter<String>(Previous_orderNew_S2.this,android.R.layout.simple_spinner_item,Distributer_list);
                         dataDistrubutorsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -526,7 +526,7 @@ public class Previous_orderNew_S2 extends BaseActivity {
                             }
                         });
 
-                        Button dialogButtonOk = (Button) dialog.findViewById(R.id.dialogButtonOk);
+                        Button dialogButtonOk = dialog.findViewById(R.id.dialogButtonOk);
                         dialogButtonOk.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -573,7 +573,7 @@ public class Previous_orderNew_S2 extends BaseActivity {
                             }
                         });
 
-                        Button dialogButtonCancel = (Button) dialog.findViewById(R.id.dialogButtonCancel);
+                        Button dialogButtonCancel = dialog.findViewById(R.id.dialogButtonCancel);
                         dialogButtonCancel.setOnClickListener(new OnClickListener() {
 
                             @Override
@@ -594,7 +594,7 @@ public class Previous_orderNew_S2 extends BaseActivity {
             }
         });
 
-        buttonPreviewHome=(Button) findViewById(R.id.buttonPreviewHome);
+        buttonPreviewHome= findViewById(R.id.buttonPreviewHome);
         buttonPreviewHome.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -651,7 +651,7 @@ public class Previous_orderNew_S2 extends BaseActivity {
             }
         });
 
-        buttonPreviewAddMOre=(Button) findViewById(R.id.buttonPreviewAddMOre);
+        buttonPreviewAddMOre= findViewById(R.id.buttonPreviewAddMOre);
         buttonPreviewCheckout.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewHome.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewAddMOre.setBackgroundColor(Color.parseColor("#414042"));

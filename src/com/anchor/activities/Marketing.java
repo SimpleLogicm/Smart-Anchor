@@ -76,9 +76,9 @@ public class Marketing extends Activity implements OnItemSelectedListener{
         StrictMode.setThreadPolicy(policy);
         setContentView(R.layout.activity_marketing);
 
-        new_launch = (ImageView) findViewById(R.id.new_launch);
-        advertisement = (ImageView) findViewById(R.id.advertisement);
-        market_survey = (ImageView) findViewById(R.id.market_survey);
+        new_launch = findViewById(R.id.new_launch);
+        advertisement = findViewById(R.id.advertisement);
+        market_survey = findViewById(R.id.market_survey);
 
         cd = new ConnectionDetector(getApplicationContext());
         loginDataBaseAdapter=new LoginDataBaseAdapter(Marketing.this);
@@ -216,10 +216,10 @@ public class Marketing extends Activity implements OnItemSelectedListener{
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Marketing");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Marketing.this.getSharedPreferences("SimpleLogic", 0);
 
 //	       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -228,17 +228,17 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }
@@ -471,7 +471,7 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 //                                        images.add(image);
 
 
-                                                String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1, object.getString("large").trim().length());
+                                                String fileName = object.getString("large").trim().substring( object.getString("large").trim().lastIndexOf('/')+1);
 
                                                 if(fileName.indexOf("?") > 0)
                                                 {

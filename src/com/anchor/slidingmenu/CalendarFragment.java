@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 public class CalendarFragment extends Fragment implements OnClickListener {
 	private static final String tag = "MyCalendarActivity";
-	String popUpContents[];
+    String[] popUpContents;
 	Context context;
 	PopupWindow popupWindowDogs;
 	Button buttonShowDropDown;
@@ -74,7 +74,7 @@ public class CalendarFragment extends Fragment implements OnClickListener {
 //		nextMonth = (ImageView) this.findViewById(R.id.nextMonth);
 //		nextMonth.setOnClickListener(this);
 
-		calendarView = (GridView)rootView.findViewById(R.id.calendar);
+		calendarView = rootView.findViewById(R.id.calendar);
 
 		// Initialised
 		adapter = new GridCellAdapter(getActivity(),R.id.calendar_day_gridcell, month, year);
@@ -260,12 +260,11 @@ public class CalendarFragment extends Fragment implements OnClickListener {
 								+ " => "
 								+ getMonthAsString(prevMonth)
 								+ " "
-								+ String.valueOf((daysInPrevMonth
-										- trailingSpaces + DAY_OFFSET)
-										+ i));
-				list.add(String
-						.valueOf((daysInPrevMonth - trailingSpaces + DAY_OFFSET)
-								+ i)
+								+ ((daysInPrevMonth
+                                - trailingSpaces + DAY_OFFSET)
+                                + i));
+				list.add(((daysInPrevMonth - trailingSpaces + DAY_OFFSET)
+                        + i)
 						+ "-GREY"
 						+ "-"
 						+ getMonthAsString(prevMonth)
@@ -275,13 +274,13 @@ public class CalendarFragment extends Fragment implements OnClickListener {
 
 			// Current Month Days
 			for (int i = 1; i <= daysInMonth; i++) {
-				Log.d(currentMonthName, String.valueOf(i) + " "
+				Log.d(currentMonthName, i + " "
 						+ getMonthAsString(currentMonth) + " " + yy);
 				if (i == getCurrentDayOfMonth()) {
-					list.add(String.valueOf(i) + "-BLUE" + "-"
+					list.add(i + "-BLUE" + "-"
 							+ getMonthAsString(currentMonth) + "-" + yy);
 				} else {
-					list.add(String.valueOf(i) + "-WHITE" + "-"
+					list.add(i + "-WHITE" + "-"
 							+ getMonthAsString(currentMonth) + "-" + yy);
 				}
 			}
@@ -289,7 +288,7 @@ public class CalendarFragment extends Fragment implements OnClickListener {
 			// Leading Month days
 			for (int i = 0; i < list.size() % 7; i++) {
 				Log.d(tag, "NEXT MONTH:= " + getMonthAsString(nextMonth));
-				list.add(String.valueOf(i + 1) + "-GREY" + "-"
+				list.add((i + 1) + "-GREY" + "-"
 						+ getMonthAsString(nextMonth) + "-" + nextYear);
 			}
 		}
@@ -326,7 +325,7 @@ public class CalendarFragment extends Fragment implements OnClickListener {
 			}
 
 			// Get a reference to the Day gridcell
-			gridcell = (Button) row.findViewById(R.id.calendar_day_gridcell);
+			gridcell = row.findViewById(R.id.calendar_day_gridcell);
 			gridcell.setOnClickListener(this);
 
 			// ACCOUNT FOR SPACING
@@ -338,9 +337,9 @@ public class CalendarFragment extends Fragment implements OnClickListener {
 			String theyear = day_color[3];
 			if ((!eventsPerMonthMap.isEmpty()) && (eventsPerMonthMap != null)) {
 				if (eventsPerMonthMap.containsKey(theday)) {
-					num_events_per_day = (TextView) row
+					num_events_per_day = row
 							.findViewById(R.id.num_events_per_day);
-					Integer numEvents = (Integer) eventsPerMonthMap.get(theday);
+					Integer numEvents = eventsPerMonthMap.get(theday);
 					num_events_per_day.setText(numEvents.toString());
 				}
 			}

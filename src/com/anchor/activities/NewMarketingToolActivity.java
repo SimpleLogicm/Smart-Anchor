@@ -152,11 +152,11 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
         StrictMode.setVmPolicy(builder.build());
         prefManager = new PrefManager(this);
 
-        ImageView Header_logo = (ImageView) findViewById(R.id.Header_logo);
-        TextView mTitleTextView = (TextView)findViewById(R.id.screenname);
+        ImageView Header_logo = findViewById(R.id.Header_logo);
+        TextView mTitleTextView = findViewById(R.id.screenname);
          mTitleTextView.setText(prefManager.getCustomer_service_type());
 
-        TextView todaysTarget = (TextView)findViewById(R.id.todaysTarget);
+        TextView todaysTarget = findViewById(R.id.todaysTarget);
 
             SharedPreferences sp = NewMarketingToolActivity.this.getSharedPreferences("SimpleLogic", 0);
 
@@ -2149,7 +2149,6 @@ public class NewMarketingToolActivity extends Activity implements Customer_S_Int
             if (prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("marketing tool")) {
                 service_url = domain + "customer_service_complaints/populate_item_description?email=" +
                         URLEncoder.encode(prefManager.getUser_Email(), "UTF-8") + "&product_category=" + URLEncoder.encode(c_spinner_search_state.getSelectedItem().toString(), "UTF-8") + "&sub_category=" + URLEncoder.encode(c_spinner_area.getSelectedItem().toString(), "UTF-8") + "&type=" + URLEncoder.encode("marketing_tool", "UTF-8");
-                ;
             } else {
                 service_url = domain + "customer_service_complaints/populate_item_description?email=" +
                         URLEncoder.encode(prefManager.getUser_Email(), "UTF-8") + "&product_category=" + URLEncoder.encode(c_spinner_search_state.getSelectedItem().toString(), "UTF-8") + "&sub_category=" + URLEncoder.encode(c_spinner_area.getSelectedItem().toString(), "UTF-8") + "&type=" + URLEncoder.encode(prefManager.getCustomer_service_type().toLowerCase(), "UTF-8");

@@ -89,20 +89,20 @@ public class EditSwipeOrderItems extends BaseActivity {
 	    }
 	    
       
-		txtPrice = (TextView) findViewById(R.id.txtPrice);
-		txtDeleiveryQuantity = (TextView) findViewById(R.id.txtDeleiveryQuantity);
-		spnCategory = (Spinner) findViewById(R.id.spnCategory);
-		spnProduct = (Spinner) findViewById(R.id.spnProduct);
-		spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
-		spnScheme = (Spinner) findViewById(R.id.spnScheme);
+		txtPrice = findViewById(R.id.txtPrice);
+		txtDeleiveryQuantity = findViewById(R.id.txtDeleiveryQuantity);
+		spnCategory = findViewById(R.id.spnCategory);
+		spnProduct = findViewById(R.id.spnProduct);
+		spnProductSpec = findViewById(R.id.spnProductSpec);
+		spnScheme = findViewById(R.id.spnScheme);
 
 		spnScheme.setVisibility(View.GONE);
 		
 		
-		editTextRP = (TextView) findViewById(R.id.editTextRP);
-		editTextMRP = (TextView) findViewById(R.id.editTextMRP);
+		editTextRP = findViewById(R.id.editTextRP);
+		editTextMRP = findViewById(R.id.editTextMRP);
 
-		editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
+		editTextQuantity = findViewById(R.id.editTextQuantity);
 		
 
 		listProductSpec = new ArrayList<String>();
@@ -244,9 +244,9 @@ public class EditSwipeOrderItems extends BaseActivity {
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText(name);
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -255,17 +255,17 @@ public class EditSwipeOrderItems extends BaseActivity {
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -283,7 +283,7 @@ public class EditSwipeOrderItems extends BaseActivity {
 		}catch(Exception ex){ex.printStackTrace();}
 
 
-		buttonAddMOre = (Button) findViewById(R.id.buttonAddMOre);
+		buttonAddMOre = findViewById(R.id.buttonAddMOre);
 		buttonAddMOre.setVisibility(View.INVISIBLE);
 		buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 		
@@ -391,7 +391,7 @@ public class EditSwipeOrderItems extends BaseActivity {
 			}
 		});
 
-		buttonPreviewOrder = (Button) findViewById(R.id.buttonPreviewOrder);
+		buttonPreviewOrder = findViewById(R.id.buttonPreviewOrder);
 		buttonPreviewOrder.setText("Save");
 		//buttonPreviewOrder.setVisibility(View.INVISIBLE);
 		buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));

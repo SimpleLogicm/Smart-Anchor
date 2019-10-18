@@ -128,25 +128,25 @@ public class ReturnEditItem extends BaseActivity {
 //	          }
 	          
 	        
-	        TextView welcomeUser=(TextView)findViewById(R.id.txtWelcomeUser);
+	        TextView welcomeUser= findViewById(R.id.txtWelcomeUser);
 	        //question_value.setTypeface(null,Typeface.BOLD);
 	      // welcomeUser.setText(spf.getString("FirstName", "")+" "+ spf.getString("LastName", ""));
 		
-		txtPrice = (TextView) findViewById(R.id.txtPrice);
+		txtPrice = findViewById(R.id.txtPrice);
 		//txtDeleiveryQuantity = (TextView) findViewById(R.id.txtDeleiveryQuantity);
-		txtDeleiveryQuantity1 = (EditText) findViewById(R.id.txtDeleiveryQuantity);
+		txtDeleiveryQuantity1 = findViewById(R.id.txtDeleiveryQuantity);
 		//spnCategory = (Spinner) findViewById(R.id.spnCategory);
-		spnProduct = (EditText) findViewById(R.id.spnProduct);
-		spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
-		spnScheme = (Spinner) findViewById(R.id.spnScheme);
+		spnProduct = findViewById(R.id.spnProduct);
+		spnProductSpec = findViewById(R.id.spnProductSpec);
+		spnScheme = findViewById(R.id.spnScheme);
 
-		editTextRP = (TextView) findViewById(R.id.editTextRP);
-		editTextMRP = (TextView) findViewById(R.id.editTextMRP);
+		editTextRP = findViewById(R.id.editTextRP);
+		editTextMRP = findViewById(R.id.editTextMRP);
 
-		editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
+		editTextQuantity = findViewById(R.id.editTextQuantity);
 
 
-		txt_rp = (TextView) findViewById(R.id.textRP);
+		txt_rp = findViewById(R.id.textRP);
 		// for label RP change
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
 		String rpstr=spf1.getString("var_rp", "");
@@ -309,10 +309,10 @@ public class ReturnEditItem extends BaseActivity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(true);*/
        
-		buttonAddMOre = (Button) findViewById(R.id.buttonAddMOre);
+		buttonAddMOre = findViewById(R.id.buttonAddMOre);
 		buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 		
-		buttonEditBack = (Button) findViewById(R.id.buttonEditBack);
+		buttonEditBack = findViewById(R.id.buttonEditBack);
 		buttonEditBack.setBackgroundColor(Color.parseColor("#414042"));
 		
 //			buttonAddMOre.setOnTouchListener(new OnTouchListener() {
@@ -422,8 +422,8 @@ public class ReturnEditItem extends BaseActivity {
 							  
 	
 						     loginDataBaseAdapter=loginDataBaseAdapter.open();
-						     
-						     String s_price[] = txtPrice.getText().toString().split(":");
+
+                       String[] s_price = txtPrice.getText().toString().split(":");
 						     
 //	//					     //Reading all 
 //				   	         List<Local_Data> contacts = dbvoc.getRR();      
@@ -839,7 +839,7 @@ public class ReturnEditItem extends BaseActivity {
 					  else
 					  {
 						  txtPrice.setText("Total Price : " + "");
-						  price = String.valueOf("0");
+						  price = "0";
 					  }
 			    	  
 			      }
@@ -1152,18 +1152,18 @@ public class ReturnEditItem extends BaseActivity {
 	        //tell the Dialog to use the dialog.xml as it's layout description
 	        dialognew.setContentView(R.layout.update_dialog_edit);
 
-	        final EditText userInput = (EditText) dialognew
+	        final EditText userInput = dialognew
 	                .findViewById(R.id.update_textdialog);
 	        
-	        final TextView headertext = (TextView) dialognew
+	        final TextView headertext = dialognew
 	                .findViewById(R.id.item_description);
 	         headertext.setText("");
 	         headertext.setText("ITEM DESCRIPTION");
 
-	                final Button Submit = (Button) dialognew
+	                final Button Submit = dialognew
 	                        .findViewById(R.id.update_textdialogclick);
 	                
-	                final Button update_cancel = (Button) dialognew
+	                final Button update_cancel = dialognew
 	                        .findViewById(R.id.update_cancel);
 	                
 	                update_cancel.setVisibility(View.GONE);

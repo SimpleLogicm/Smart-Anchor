@@ -56,12 +56,12 @@ import java.util.Locale;
 @TargetApi(3)
 public class CalendarAct extends BaseActivity implements OnClickListener {
 	private static final String tag = "CalendarAct";
-	String popUpContents[];
+    String[] popUpContents;
 	PopupWindow popupWindowDogs;
 	Date date1;
 	Date date2;
 	String datenew;
-	String s[];
+    String[] s;
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
 	Button buttonShowDropDown,listevent_btn;
 	private TextView currentMonth;
@@ -84,7 +84,7 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_calendar);
 		
-		listevent_btn=(Button)findViewById(R.id.listevent_btn);
+		listevent_btn= findViewById(R.id.listevent_btn);
 
 		    SharedPreferences spf=CalendarAct.this.getSharedPreferences("SimpleLogic",0);        
 	        SharedPreferences.Editor editor=spf.edit();        
@@ -117,10 +117,10 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 
 
 		Calendar calendarold = Calendar.getInstance();
-		calendarold.add(calendarold.MONTH, -1);
-		int yearold = calendarold.get(calendarold.YEAR);
-		int monthold = calendarold.get(calendarold.MONTH);
-		int dayold = calendarold.get(calendarold.DAY_OF_MONTH);
+		calendarold.add(Calendar.MONTH, -1);
+		int yearold = calendarold.get(Calendar.YEAR);
+		int monthold = calendarold.get(Calendar.MONTH);
+		int dayold = calendarold.get(Calendar.DAY_OF_MONTH);
 
 		Formatter fmtt = new Formatter();
 		// fmt.format("%tB %tb %tm", calendar, calendar, calendar);
@@ -198,29 +198,29 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Calendar");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = CalendarAct.this.getSharedPreferences("SimpleLogic", 0);
 
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			H_LOGO.setImageResource(R.drawable.cal);
 			H_LOGO.setVisibility(View.VISIBLE);
 
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -250,21 +250,21 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 		Log.d(tag, "Calendar Instance:= " + "Month: " + month + " " + "Year: "
 				+ year);
 
-		selectedDayMonthYearButton = (Button) this
+		selectedDayMonthYearButton = this
 				.findViewById(R.id.selectedDayMonthYear);
 		selectedDayMonthYearButton.setText("Selected: ");
 
-		prevMonth = (ImageView) this.findViewById(R.id.prevMonth);
+		prevMonth = this.findViewById(R.id.prevMonth);
 		prevMonth.setOnClickListener(this);
 
-		currentMonth = (TextView) this.findViewById(R.id.currentMonth);
+		currentMonth = this.findViewById(R.id.currentMonth);
 		currentMonth.setText(DateFormat.format(dateTemplate,
 				_calendar.getTime()));
 
-		nextMonth = (ImageView) this.findViewById(R.id.nextMonth);
+		nextMonth = this.findViewById(R.id.nextMonth);
 		nextMonth.setOnClickListener(this);
 
-		calendarView = (GridView) this.findViewById(R.id.calendar);
+		calendarView = this.findViewById(R.id.calendar);
 
 		// Initialised
 		adapter = new GridCellAdapter(getApplicationContext(),
@@ -490,12 +490,11 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 								+ " => "
 								+ getMonthAsString(prevMonth)
 								+ " "
-								+ String.valueOf((daysInPrevMonth
-										- trailingSpaces + DAY_OFFSET)
-										+ i));
-				list.add(String
-						.valueOf((daysInPrevMonth - trailingSpaces + DAY_OFFSET)
-								+ i)
+								+ ((daysInPrevMonth
+                                - trailingSpaces + DAY_OFFSET)
+                                + i));
+				list.add(((daysInPrevMonth - trailingSpaces + DAY_OFFSET)
+                        + i)
 						+ "-GREY"
 						+ "-"
 						+ getMonthAsString(prevMonth)
@@ -505,13 +504,13 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 
 			// Current Month Days
 			for (int i = 1; i <= daysInMonth; i++) {
-				Log.d(currentMonthName, String.valueOf(i) + " "
+				Log.d(currentMonthName, i + " "
 						+ getMonthAsString(currentMonth) + " " + yy);
 				if (i == getCurrentDayOfMonth()) {
-					list.add(String.valueOf(i) + "-BLUE" + "-"
+					list.add(i + "-BLUE" + "-"
 							+ getMonthAsString(currentMonth) + "-" + yy);
 				} else {
-					list.add(String.valueOf(i) + "-WHITE" + "-"
+					list.add(i + "-WHITE" + "-"
 							+ getMonthAsString(currentMonth) + "-" + yy);
 				}
 			}
@@ -519,7 +518,7 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 			// Leading Month days
 			for (int i = 0; i < list.size() % 7; i++) {
 				Log.d(tag, "NEXT MONTH:= " + getMonthAsString(nextMonth));
-				list.add(String.valueOf(i + 1) + "-GREY" + "-"
+				list.add((i + 1) + "-GREY" + "-"
 						+ getMonthAsString(nextMonth) + "-" + nextYear);
 			}
 		}
@@ -556,7 +555,7 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 			}
 
 			// Get a reference to the Day gridcell
-			gridcell = (Button) row.findViewById(R.id.calendar_day_gridcell);
+			gridcell = row.findViewById(R.id.calendar_day_gridcell);
 			gridcell.setOnClickListener(this);
 
 			// ACCOUNT FOR SPACING
@@ -568,9 +567,9 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 			String theyear = day_color[3];
 			if ((!eventsPerMonthMap.isEmpty()) && (eventsPerMonthMap != null)) {
 				if (eventsPerMonthMap.containsKey(theday)) {
-					num_events_per_day = (TextView) row
+					num_events_per_day = row
 							.findViewById(R.id.num_events_per_day);
-					Integer numEvents = (Integer) eventsPerMonthMap.get(theday);
+					Integer numEvents = eventsPerMonthMap.get(theday);
 					num_events_per_day.setText(numEvents.toString());
 				}
 			}
@@ -657,7 +656,7 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 	        return popupWindow;
 	    }
 	 
-	 private ArrayAdapter<String> dogsAdapter(String dogsArray[]) {
+	 private ArrayAdapter<String> dogsAdapter(String[] dogsArray) {
 		 
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dogsArray) {
 	 
@@ -712,7 +711,7 @@ public class CalendarAct extends BaseActivity implements OnClickListener {
 		        //mainActivity.buttonShowDropDown.setText(selectedItemText);
 		         
 		        // get the id
-		        String selectedItemTag = ((TextView) v).getTag().toString();
+		        String selectedItemTag = v.getTag().toString();
 		       // Toast.makeText(mContext, "Calender ID is: " + selectedItemTag+","+selectedItemText, Toast.LENGTH_SHORT).show();
 		        
 		        Log.d("Calender ID is:", "Calender ID is: "+selectedItemText);

@@ -228,7 +228,7 @@ public class HomeFragment extends Fragment {
 			 list.add(databaseModel.getDesc());
 		}
 	
-        spinner1 = (Spinner) rootView. findViewById(R.id.spnCity); 
+        spinner1 = rootView. findViewById(R.id.spnCity);
         
     	//list.add("City2");
     	//list.add("City3");
@@ -236,18 +236,18 @@ public class HomeFragment extends Fragment {
     	dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     	spinner1.setAdapter(dataAdapter);
     	
-        spinner2 = (Spinner)rootView. findViewById(R.id.spnBeat);
+        spinner2 = rootView. findViewById(R.id.spnBeat);
         
         
         //TextView welcomeUser=(TextView)rootView.findViewById(R.id.txtWelcomeUser);
         //question_value.setTypeface(null,Typeface.BOLD);
 //        welcomeUser.setText(sp.getString("FirstName", "")+" "+ sp.getString("LastName", ""));
         
-        buttonNewOrder=(Button) rootView.findViewById(R.id.buttonNewOrder);
+        buttonNewOrder= rootView.findViewById(R.id.buttonNewOrder);
         
-        buttonPreviousOrder=(Button) rootView.findViewById(R.id.buttonPreviousOrder);
-        buttonNoOrder=(Button) rootView.findViewById(R.id.buttonNoOrder);
-        buttonReturnOrder=(Button) rootView.findViewById(R.id.buttonReturnOrder);
+        buttonPreviousOrder= rootView.findViewById(R.id.buttonPreviousOrder);
+        buttonNoOrder= rootView.findViewById(R.id.buttonNoOrder);
+        buttonReturnOrder= rootView.findViewById(R.id.buttonReturnOrder);
         
         buttonNewOrder.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviousOrder.setBackgroundColor(Color.parseColor("#414042"));
@@ -521,7 +521,7 @@ public class HomeFragment extends Fragment {
         listBeat = new ArrayList<String>();
         dataAdapterBeat = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, listBeat);
         dataAdapterBeat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner3 = (Spinner) rootView. findViewById(R.id.spnRetailer);
+        spinner3 = rootView. findViewById(R.id.spnRetailer);
     	listRetailer = new ArrayList<String>();
     	dataAdapterRetailer = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, listRetailer);
     	dataAdapterRetailer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

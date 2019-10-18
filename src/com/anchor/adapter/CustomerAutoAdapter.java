@@ -38,7 +38,7 @@ public class CustomerAutoAdapter extends RecyclerView.Adapter<CustomerAutoAdapte
     static Context mcontext;
     public CustomerAutoAdapter(List<Local_Data> contactList, Context context) {
         this.contactList = contactList;
-        this.mcontext = context;
+        mcontext = context;
 
     }
 

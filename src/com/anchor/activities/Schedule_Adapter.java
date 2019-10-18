@@ -23,7 +23,7 @@ public class Schedule_Adapter extends ArrayAdapter<HashMap<String, String>> {
 
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value, View v);
+        void onButtonClickListner(int position, String value, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -45,13 +45,13 @@ public class Schedule_Adapter extends ArrayAdapter<HashMap<String, String>> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.schedule_achtext, null);
             viewHolder = new ViewHolder();
-            viewHolder.textproduct = (TextView) convertView
+            viewHolder.textproduct = convertView
                     .findViewById(R.id.product);
 
-            viewHolder.textordered = (TextView) convertView
+            viewHolder.textordered = convertView
                     .findViewById(R.id.q_order);
 
-            viewHolder.textdilivered = (TextView) convertView
+            viewHolder.textdilivered = convertView
                     .findViewById(R.id.q_dilivered);
 
 
@@ -66,15 +66,15 @@ public class Schedule_Adapter extends ArrayAdapter<HashMap<String, String>> {
         try {
 
 //
-            if (getData.get(TAG_PRODUCT).toString() != null && getData.get(TAG_PRODUCT).toString() != "null") {
+            if (getData.get(TAG_PRODUCT) != null && getData.get(TAG_PRODUCT) != "null") {
                 viewHolder.textproduct.setText(getData.get(TAG_PRODUCT));
             }
 
-            if (getData.get(TAG_Q_ORDER).toString() != null && getData.get(TAG_Q_ORDER).toString() != "null") {
+            if (getData.get(TAG_Q_ORDER) != null && getData.get(TAG_Q_ORDER) != "null") {
                 viewHolder.textordered.setText(getData.get(TAG_Q_ORDER));
             }
 
-            if (getData.get(TAG_Q_DELIVERED).toString() != null && getData.get(TAG_Q_DELIVERED).toString() != "null") {
+            if (getData.get(TAG_Q_DELIVERED) != null && getData.get(TAG_Q_DELIVERED) != "null") {
                 viewHolder.textdilivered.setText(getData.get(TAG_Q_DELIVERED));
             }
 

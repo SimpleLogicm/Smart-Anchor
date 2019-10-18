@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -102,7 +103,7 @@ public class AutocompleteAdapternew extends ArrayAdapter<String> implements Filt
                                 URL url = new URL(mcontext.getResources().getString(R.string.service_domain) + "customers/get_statewise_customers?search_string=" + constraint.toString() + "&state_code=" + Global_Data.state_code);
                                 conn = (HttpURLConnection) url.openConnection();
                                 input = conn.getInputStream();
-                                InputStreamReader reader = new InputStreamReader(input, "UTF-8");
+                                InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
                                 BufferedReader buffer = new BufferedReader(reader, 8192);
                                 StringBuilder builder = new StringBuilder();
                                 String line;
@@ -115,7 +116,7 @@ public class AutocompleteAdapternew extends ArrayAdapter<String> implements Filt
 
                                 if (json.has("message")) {
                                     response_result = json.getString("message");
-                                    Log.d("volley", "response_result" + response_result.toString());
+                                    Log.d("volley", "response_result" + response_result);
                                 } else {
                                     List<Local_Data> ress = new ArrayList();
                                     JSONArray customers = json.getJSONArray("customers");

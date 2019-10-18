@@ -71,7 +71,7 @@ public class Calendar_Event extends BaseActivity{
 	private DatePickerDialog fromDatePickerDialog,fromDatePickerDialog1;
 	private SimpleDateFormat dateFormatter;
 	private static final String tag = "Calendar_Event";
-	String popUpContents[];
+    String[] popUpContents;
 	Boolean isInternetPresent = false;
 	ConnectionDetector cd;
 	PopupWindow popupWindowDogs;
@@ -105,13 +105,13 @@ public class Calendar_Event extends BaseActivity{
 		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 		setContentView(R.layout.calendar_event);
-		from=(TextView)findViewById(R.id.from_details);
-		to=(TextView)findViewById(R.id.to_details);
-		textView3=(TextView)findViewById(R.id.textView3);
-		details=(EditText)findViewById(R.id.details);
-		submit=(Button)findViewById(R.id.submit_details);
+		from= findViewById(R.id.from_details);
+		to= findViewById(R.id.to_details);
+		textView3= findViewById(R.id.textView3);
+		details= findViewById(R.id.details);
+		submit= findViewById(R.id.submit_details);
 		//submit_details_save = (Button)findViewById(R.id.submit_details_save);
-		submit_details_delete = (Button)findViewById(R.id.submit_details_delete);
+		submit_details_delete = findViewById(R.id.submit_details_delete);
 
 		details.setFilters(new InputFilter[]{filter});
 
@@ -412,12 +412,12 @@ public class Calendar_Event extends BaseActivity{
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText(Global_Data.calspinner);
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 
-			ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+			ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 			H_LOGO.setImageResource(R.drawable.cal);
 			H_LOGO.setVisibility(View.VISIBLE);
 
@@ -429,17 +429,17 @@ public class Calendar_Event extends BaseActivity{
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}

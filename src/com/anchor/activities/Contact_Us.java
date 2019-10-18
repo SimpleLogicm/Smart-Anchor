@@ -52,17 +52,17 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contact_us);
 
-        title = (TextView) findViewById(R.id.Metal_Header);
-        header = (TextView) findViewById(R.id.Metal_Header_descri);
-        sub_heading = (TextView) findViewById(R.id.title);
-        address = (TextView) findViewById(R.id.discriptionnew);
+        title = findViewById(R.id.Metal_Header);
+        header = findViewById(R.id.Metal_Header_descri);
+        sub_heading = findViewById(R.id.title);
+        address = findViewById(R.id.discriptionnew);
 
-        phonenext = (TextView) findViewById(R.id.phonenext);
-        phonenext2 = (TextView) findViewById(R.id.phonenext2);
-        email1 = (TextView) findViewById(R.id.email1);
-        email2 = (TextView) findViewById(R.id.email2);
-        webtext = (TextView) findViewById(R.id.webtext);
-        thumbnail = (ImageView) findViewById(R.id.thumbnail);
+        phonenext = findViewById(R.id.phonenext);
+        phonenext2 = findViewById(R.id.phonenext2);
+        email1 = findViewById(R.id.email1);
+        email2 = findViewById(R.id.email2);
+        webtext = findViewById(R.id.webtext);
+        thumbnail = findViewById(R.id.thumbnail);
 
         SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);
         String logostr=spf1.getString("logo_data", "");
@@ -276,10 +276,10 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Contact Us");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Contact_Us.this.getSharedPreferences("SimpleLogic", 0);
 
 //	       if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -288,17 +288,17 @@ public class Contact_Us extends Activity implements OnItemSelectedListener{
 
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }

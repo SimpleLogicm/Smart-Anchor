@@ -44,7 +44,7 @@ public class Previous_returnOrder extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.returnorder_prelist);
 		SwipeList=new ArrayList<HashMap<String, String>>();
-		swipeListView = (SwipeListView) findViewById(R.id.prev_list);
+		swipeListView = findViewById(R.id.prev_list);
 
         Global_Data.AmountOutstanding = "";
         Global_Data.AmountOverdue = "";
@@ -97,11 +97,11 @@ public class Previous_returnOrder extends Activity{
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color
                     .parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView
+            TextView mTitleTextView = mCustomView
                     .findViewById(R.id.screenname);
             mTitleTextView.setText("Return Order List");
 
-            TextView todaysTarget = (TextView) mCustomView
+            TextView todaysTarget = mCustomView
                     .findViewById(R.id.todaysTarget);
             SharedPreferences sp = Previous_returnOrder.this
                     .getSharedPreferences("SimpleLogic", 0);
@@ -114,17 +114,17 @@ public class Previous_returnOrder extends Activity{
 
             try
             {
-                int target  = (int) Math.round(sp.getFloat("Target",0));
-                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+                int target  = Math.round(sp.getFloat("Target",0));
+                int achieved  = Math.round(sp.getFloat("Achived",0));
                 Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
                 if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
                 }else
                 {
-                    int age = (int) Math.round(age_float);
+                    int age = Math.round(age_float);
 
                     todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
                 }

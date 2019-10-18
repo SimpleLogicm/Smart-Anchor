@@ -23,7 +23,7 @@ public class Target_Adapter extends ArrayAdapter<HashMap<String, String>> {
 
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value, View v);
+        void onButtonClickListner(int position, String value, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -45,13 +45,13 @@ public class Target_Adapter extends ArrayAdapter<HashMap<String, String>> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.target_achtxt, null);
             viewHolder = new ViewHolder();
-            viewHolder.textmonth = (TextView) convertView
+            viewHolder.textmonth = convertView
                     .findViewById(R.id.itemmonth);
 
-            viewHolder.texttarget = (TextView) convertView
+            viewHolder.texttarget = convertView
                     .findViewById(R.id.itemtarget);
 
-            viewHolder.textarchieved = (TextView) convertView
+            viewHolder.textarchieved = convertView
                     .findViewById(R.id.itemachieved);
 
 
@@ -66,15 +66,15 @@ public class Target_Adapter extends ArrayAdapter<HashMap<String, String>> {
         try {
 
 
-            if (getData.get(TAG_MONTH).toString() != null && getData.get(TAG_MONTH).toString() != "null") {
+            if (getData.get(TAG_MONTH) != null && getData.get(TAG_MONTH) != "null") {
                 viewHolder.textmonth.setText(getData.get(TAG_MONTH));
             }
 
-            if (getData.get(TAG_TARGET).toString() != null && getData.get(TAG_TARGET).toString() != "null") {
+            if (getData.get(TAG_TARGET) != null && getData.get(TAG_TARGET) != "null") {
                 viewHolder.texttarget.setText(getData.get(TAG_TARGET));
             }
 
-            if (getData.get(TAG_ACHIEVED).toString() != null && getData.get(TAG_ACHIEVED).toString() != "null") {
+            if (getData.get(TAG_ACHIEVED) != null && getData.get(TAG_ACHIEVED) != "null") {
                 viewHolder.textarchieved.setText(getData.get(TAG_ACHIEVED));
             }
 

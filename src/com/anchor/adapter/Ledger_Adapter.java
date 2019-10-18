@@ -79,7 +79,7 @@ public class Ledger_Adapter extends RecyclerView.Adapter<Ledger_Adapter.MyViewHo
         holder.lcr_value_hide.setText(ledger_model.getPerticulers());
 
 
-        String s =  ledger_model.getPerticulers().toString();
+        String s = ledger_model.getPerticulers();
 
         if (s.length()>50) {
             String s1 =  s.substring(0,50)+"...";

@@ -243,18 +243,18 @@ public class ElementListAdapter extends RecyclerView.Adapter<ElementListAdapter.
             super(itemView);
 
             view = itemView;
-            tvTitle = (TextView) itemView.findViewById(R.id.Q_text);
-            Q_code = (TextView) itemView.findViewById(R.id.Q_code);
+            tvTitle = itemView.findViewById(R.id.Q_text);
+            Q_code = itemView.findViewById(R.id.Q_code);
 
-            radioGroup = (RadioGroup) itemView.findViewById(R.id.myRadioGroup);
-            rb1 = (RadioButton) itemView.findViewById(R.id.option_1);
-            rb2 = (RadioButton) itemView.findViewById(R.id.option_2);
-            rb3 = (RadioButton) itemView.findViewById(R.id.option_3);
-            rb4 = (RadioButton) itemView.findViewById(R.id.option_4);
+            radioGroup = itemView.findViewById(R.id.myRadioGroup);
+            rb1 = itemView.findViewById(R.id.option_1);
+            rb2 = itemView.findViewById(R.id.option_2);
+            rb3 = itemView.findViewById(R.id.option_3);
+            rb4 = itemView.findViewById(R.id.option_4);
 
-            rb5 = (RadioButton) itemView.findViewById(R.id.option_5);
+            rb5 = itemView.findViewById(R.id.option_5);
 
-            rb6 = (RadioButton) itemView.findViewById(R.id.option_6);
+            rb6 = itemView.findViewById(R.id.option_6);
 
         }
     }

@@ -48,7 +48,7 @@ public class Pricing_Main extends BaseActivity {
     int check_product=0;
     int check_ProductSpec=0;
     AutoCompleteTextView Product_Variant;
-    Spinner spnCategory, spnProductSpec, spnScheme, spnProduct, spnBu, spnBusinessDiv;;
+    Spinner spnCategory, spnProductSpec, spnScheme, spnProduct, spnBu, spnBusinessDiv;
     static final String TAG_ITEMNAME = "product_name";
     static final String TAG_QTY = "total_qty";
     static final String TAG_PRICE = "MRP";
@@ -57,7 +57,7 @@ public class Pricing_Main extends BaseActivity {
     static final String TAG_ITEM_NUMBER = "item_number";
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
-    ArrayAdapter<String> dataAdapterCategory,dataAdapterProductSpec,dataAdapterProduct,dataAdapterBu,dataAdapterBd;;
+    ArrayAdapter<String> dataAdapterCategory,dataAdapterProductSpec,dataAdapterProduct,dataAdapterBu,dataAdapterBd;
     //ArrayList productList = new ArrayList();
     List<String> listProduct,listProductSpec;
     List<String> listScheme;
@@ -83,15 +83,15 @@ public class Pricing_Main extends BaseActivity {
 
         setContentView(R.layout.pricing);
 
-        spnCategory = (Spinner) findViewById(R.id.spnCategory);
-        spnProduct = (Spinner) findViewById(R.id.spnProduct);
-        spnBu = (Spinner) findViewById(R.id.spnBu);
-        spnBusinessDiv = (Spinner) findViewById(R.id.spnBusinessDiv);
-        Product_Variant = (AutoCompleteTextView) findViewById(R.id.Product_Variant);
-        rlout_price = (RelativeLayout) findViewById(R.id.rlout_price);
-        rlout_stock = (RelativeLayout) findViewById(R.id.rlout_stock);
+        spnCategory = findViewById(R.id.spnCategory);
+        spnProduct = findViewById(R.id.spnProduct);
+        spnBu = findViewById(R.id.spnBu);
+        spnBusinessDiv = findViewById(R.id.spnBusinessDiv);
+        Product_Variant = findViewById(R.id.Product_Variant);
+        rlout_price = findViewById(R.id.rlout_price);
+        rlout_stock = findViewById(R.id.rlout_stock);
 
-        recList = (RecyclerView) findViewById(R.id.cardList);
+        recList = findViewById(R.id.cardList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -181,23 +181,23 @@ public class Pricing_Main extends BaseActivity {
 
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             mTitleTextView.setText("Pricing");
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = Pricing_Main.this.getSharedPreferences("SimpleLogic", 0);
 
-            int target  = (int) Math.round(sp.getFloat("Target",0));
-            int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+            int target  = Math.round(sp.getFloat("Target",0));
+            int achieved  = Math.round(sp.getFloat("Achived",0));
             Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
             if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
             {
-                int age = (int) Math.round(age_float);
+                int age = Math.round(age_float);
 
                 todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
             }else
             {
-                int age = (int) Math.round(age_float);
+                int age = Math.round(age_float);
 
                 todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
             }

@@ -30,7 +30,7 @@ public class Status_Adapter extends ArrayAdapter<HashMap<String, String>> {
     String order_code = "";
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value1,String value2,View v);
+        void onButtonClickListner(int position, String value1, String value2, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -53,13 +53,13 @@ public class Status_Adapter extends ArrayAdapter<HashMap<String, String>> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.status_list_txt, null);
             viewHolder = new ViewHolder();
-            viewHolder.text = (TextView) convertView
+            viewHolder.text = convertView
                     .findViewById(R.id.ordername);
 
-            viewHolder.address = (TextView) convertView
+            viewHolder.address = convertView
                     .findViewById(R.id.status);
             
-            viewHolder.distance = (TextView) convertView
+            viewHolder.distance = convertView
                     .findViewById(R.id.remark);
 
 //            viewHolder.childButtonnew = (Button) convertView
@@ -74,15 +74,15 @@ public class Status_Adapter extends ArrayAdapter<HashMap<String, String>> {
         try {
 
 
-            if (getData.get(ORDER_ID).toString() != null && getData.get(ORDER_ID).toString() != "null") {
+            if (getData.get(ORDER_ID) != null && getData.get(ORDER_ID) != "null") {
                 viewHolder.text.setText(getData.get(ORDER_ID));
             }
 
-            if (getData.get(MANAGER_REMARK).toString() != null && getData.get(MANAGER_REMARK).toString() != "null") {
+            if (getData.get(MANAGER_REMARK) != null && getData.get(MANAGER_REMARK) != "null") {
                 viewHolder.address.setText(getData.get(MANAGER_REMARK));
             }
             
-            if (getData.get(ORDER_STATUS).toString() != null && getData.get(ORDER_STATUS).toString() != "null") {
+            if (getData.get(ORDER_STATUS) != null && getData.get(ORDER_STATUS) != "null") {
                 viewHolder.distance.setText(getData.get(ORDER_STATUS));
             }
         }

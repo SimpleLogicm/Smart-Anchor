@@ -21,8 +21,8 @@ public class AdvertisementFragment extends Fragment {
  
 		View rootView = inflater.inflate(R.layout.fragment_logout, container, false);
          
-        ImageView order=(ImageView) rootView.findViewById(R.id.order);
-        ImageView calendar=(ImageView) rootView.findViewById(R.id.calendar);
+        ImageView order= rootView.findViewById(R.id.order);
+        ImageView calendar= rootView.findViewById(R.id.calendar);
         
         calendar.setOnClickListener(new OnClickListener() {
   		  @Override

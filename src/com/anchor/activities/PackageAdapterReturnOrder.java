@@ -40,7 +40,7 @@ public class PackageAdapterReturnOrder extends ArrayAdapter<HashMap<String, Stri
     DataBaseHelper dbvoc;
     
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value, View v);
+        void onButtonClickListner(int position, String value, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -88,12 +88,12 @@ public class PackageAdapterReturnOrder extends ArrayAdapter<HashMap<String, Stri
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = li.inflate(R.layout.package_row, parent, false);
             holder = new ViewHolder();
-            holder.tvTitle = (TextView) convertView.findViewById(R.id.example_row_tv_title); 
-            holder.tvDescription = (TextView) convertView.findViewById(R.id.example_row_tv_description);
-            holder.tvPriece = (TextView) convertView.findViewById(R.id.example_row_tv_price);
-            holder.order_idn = (TextView) convertView.findViewById(R.id.order_idn);
-            holder.bAction1 = (Button) convertView.findViewById(R.id.example_row_b_action_1);
-            holder.bAction2 = (Button) convertView.findViewById(R.id.example_row_b_action_2);
+            holder.tvTitle = convertView.findViewById(R.id.example_row_tv_title);
+            holder.tvDescription = convertView.findViewById(R.id.example_row_tv_description);
+            holder.tvPriece = convertView.findViewById(R.id.example_row_tv_price);
+            holder.order_idn = convertView.findViewById(R.id.order_idn);
+            holder.bAction1 = convertView.findViewById(R.id.example_row_b_action_1);
+            holder.bAction2 = convertView.findViewById(R.id.example_row_b_action_2);
            
             convertView.setTag(holder);
         } else {
@@ -157,7 +157,7 @@ public class PackageAdapterReturnOrder extends ArrayAdapter<HashMap<String, Stri
             @Override
             public void onClick(View v) {
             	getData = dataAray.get(position);
-				 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(TAG_ITEM_NUMBER).toString());
+				 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+ getData.get(TAG_ITEM_NUMBER));
 				 
 //				 String total_qty = "";
 //				 String MRP = "";
@@ -166,7 +166,7 @@ public class PackageAdapterReturnOrder extends ArrayAdapter<HashMap<String, Stri
 //				 String actual_discount = "";
 //				 String product_dec = "";
 				 dbvoc = new DataBaseHelper(context);
-				 List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER_RETURN(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id_return);      
+				 List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER_RETURN(getData.get(TAG_ITEM_NUMBER),Global_Data.GLObalOrder_id_return);
 	   	          for (Local_Data cnp : cont1) 
 	   	          {
 	   	        	 
@@ -210,10 +210,10 @@ public class PackageAdapterReturnOrder extends ArrayAdapter<HashMap<String, Stri
 						
 						
 						 getData = dataAray.get(position);
-						 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(TAG_ITEM_NUMBER).toString());
+						 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+ getData.get(TAG_ITEM_NUMBER));
 						
 						 dbvoc = new DataBaseHelper(context);
-						 dbvoc.getDeleteTableorderproduct_byITEM_NUMBER_return(getData.get(TAG_ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id_return);
+						 dbvoc.getDeleteTableorderproduct_byITEM_NUMBER_return(getData.get(TAG_ITEM_NUMBER),Global_Data.GLObalOrder_id_return);
 						 dataAray.remove(position);
 	                      notifyDataSetChanged();
 						 

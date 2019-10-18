@@ -133,22 +133,22 @@ public class NewOrderActivity extends BaseActivity {
 		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 		loginDataBaseAdapter=loginDataBaseAdapter.open();
 
-		txtPrice = (TextView) findViewById(R.id.txtPrice1);
+		txtPrice = findViewById(R.id.txtPrice1);
 		//txtDeleiveryQuantity = (TextView) findViewById(R.id.txtDeleiveryQuantity1);
 		//txtDeleiveryQuantity1 = (EditText) findViewById(R.id.txtDeleiveryQuantity);
-		spnCategory = (Spinner) findViewById(R.id.spnCategory);
-		spnProduct = (Spinner) findViewById(R.id.spnProduct);
+		spnCategory = findViewById(R.id.spnCategory);
+		spnProduct = findViewById(R.id.spnProduct);
 		//spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
-		Product_Variant = (AutoCompleteTextView) findViewById(R.id.Product_Variant);
-		spnScheme = (Spinner) findViewById(R.id.spnScheme1);
-		spnBu = (Spinner) findViewById(R.id.spnBu);
-		spnBusinessDiv = (Spinner) findViewById(R.id.spnBusinessDiv);
+		Product_Variant = findViewById(R.id.Product_Variant);
+		spnScheme = findViewById(R.id.spnScheme1);
+		spnBu = findViewById(R.id.spnBu);
+		spnBusinessDiv = findViewById(R.id.spnBusinessDiv);
 
-		editTextRP = (TextView) findViewById(R.id.editTextRP);
-		editTextMRP = (TextView) findViewById(R.id.editTextMRP);
-		txt_rp = (TextView) findViewById(R.id.textRP);
-		editTextQuantity = (EditText) findViewById(R.id.editTextQuantity1);
-		txtWelcomeUser=(TextView) findViewById(R.id.txtWelcomeUser);
+		editTextRP = findViewById(R.id.editTextRP);
+		editTextMRP = findViewById(R.id.editTextMRP);
+		txt_rp = findViewById(R.id.textRP);
+		editTextQuantity = findViewById(R.id.editTextQuantity1);
+		txtWelcomeUser= findViewById(R.id.txtWelcomeUser);
 		Product_Variant_search = findViewById(R.id.Product_Variant_search);
 		list_ok = findViewById(R.id.list_ok);
 		spinner_recycleview = findViewById(R.id.spinner_recycleview);
@@ -459,7 +459,7 @@ public class NewOrderActivity extends BaseActivity {
 					//results2.add("Select Variant");
 					for (Local_Data s : scheme_name) {
 						Scheme_array.add(s.getSche_disname());
-						scheme_namen = s.getSche_disname().toString();
+						scheme_namen = s.getSche_disname();
 					}
 
 					//editTextQuantity.setFocusableInTouchMode(true);
@@ -631,7 +631,7 @@ public class NewOrderActivity extends BaseActivity {
 					{
 						editTextQuantity.setText("");
 						txtPrice.setText("Total Price : "+"");
-						price = String.valueOf("");
+						price = "";
 					}
 				}
 				else
@@ -652,7 +652,7 @@ public class NewOrderActivity extends BaseActivity {
 					Spiner_List_Model singleStudent = Global_Data.spiner_list_modelList.get(i);
 					if (singleStudent.isSelected() == true) {
 
-						data = singleStudent.getCode().toString();
+						data = singleStudent.getCode();
 						Log.d("Values","Values"+data+" "+singleStudent.isSelected());
 						Global_Data.array_of_pVarient.add(data);
 					}
@@ -978,10 +978,10 @@ public class NewOrderActivity extends BaseActivity {
 
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText(Global_Data.order_retailer +" "+"("+Global_Data.AmountOutstanding+"/"+Global_Data.AmountOverdue+")");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = NewOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
 
 //        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
@@ -989,17 +989,17 @@ public class NewOrderActivity extends BaseActivity {
 //		}
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -1022,7 +1022,7 @@ public class NewOrderActivity extends BaseActivity {
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(true);*/
 
-		buttonAddMOre = (Button) findViewById(R.id.buttonAddMOre);
+		buttonAddMOre = findViewById(R.id.buttonAddMOre);
 		buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 
 		buttonAddMOre.setOnTouchListener(new OnTouchListener() {
@@ -1336,7 +1336,7 @@ public class NewOrderActivity extends BaseActivity {
 			}
 		});
 
-		buttonPreviewOrder = (Button) findViewById(R.id.buttonPreviewOrder);
+		buttonPreviewOrder = findViewById(R.id.buttonPreviewOrder);
 		buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));
 
 		buttonPreviewOrder.setOnTouchListener(new OnTouchListener() {

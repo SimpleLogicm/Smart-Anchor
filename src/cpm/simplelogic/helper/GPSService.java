@@ -141,8 +141,8 @@ public class GPSService extends Service implements LocationListener {
 			catch (IllegalArgumentException e2) {
 				// Error message to post in the log
 				String errorString = "Illegal arguments "
-						+ Double.toString(mLatitude) + " , "
-						+ Double.toString(mLongitude)
+						+ mLatitude + " , "
+						+ mLongitude
 						+ " passed to address service";
 				e2.printStackTrace();
 				return errorString;
@@ -169,8 +169,8 @@ public class GPSService extends Service implements LocationListener {
 						// The country of the address
 						address.getCountryName());
 				//StateName= addresses.get(0).getAdminArea();
-				Global_Data.GLOvel_STATE =  addresses.get(0).getAdminArea();;
-	 		    Global_Data.GLOvel_CITY = address.getLocality();
+				Global_Data.GLOvel_STATE =  addresses.get(0).getAdminArea();
+                Global_Data.GLOvel_CITY = address.getLocality();
 	 		    Global_Data.GLOvel_ADDRESS = addressText;
 	 		    Global_Data.GLOvel_LATITUDE = String.valueOf(mLatitude);
 	 		    Global_Data.GLOvel_LONGITUDE = String.valueOf(mLongitude);

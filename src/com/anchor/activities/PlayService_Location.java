@@ -72,8 +72,8 @@ public class PlayService_Location implements LocationListener {
 
     private void setMostRecentLocation(Location lastKnownLocation) {
 
-        double lon = (double) (lastKnownLocation.getLongitude());/// * 1E6);
-        double lat = (double) (lastKnownLocation.getLatitude());// * 1E6);
+        double lon = lastKnownLocation.getLongitude();/// * 1E6);
+        double lat = lastKnownLocation.getLatitude();// * 1E6);
 
 //      int lontitue = (int) lon;
 //      int latitute = (int) lat;

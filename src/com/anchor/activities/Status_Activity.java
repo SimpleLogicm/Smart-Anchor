@@ -108,8 +108,8 @@ public class Status_Activity extends Activity implements customButtonListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.status_list);
 		
-		status_list=(ListView)findViewById(R.id.status_list);
-		cancel_list=(Button)findViewById(R.id.cancel_list);
+		status_list= findViewById(R.id.status_list);
+		cancel_list= findViewById(R.id.cancel_list);
 
 		SharedPreferences sp1 = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
 		 device_id = sp1.getString("devid", "");
@@ -149,10 +149,10 @@ public class Status_Activity extends Activity implements customButtonListener {
                public void onItemClick(AdapterView<?> parent, View view,
                                      int position, long id) {
             	 
-                 TextView contactId = (TextView) view.findViewById(R.id.ordername);
+                 TextView contactId = view.findViewById(R.id.ordername);
                  String str=contactId.getText().toString();
                  
-                 TextView contactstatus = (TextView) view.findViewById(R.id.remark);
+                 TextView contactstatus = view.findViewById(R.id.remark);
                  String strr=contactstatus.getText().toString();
                  
                  Global_Data.GLOvel_REMARK = strr;
@@ -180,25 +180,25 @@ public class Status_Activity extends Activity implements customButtonListener {
 			String name = i.getStringExtra("retialer");
 			View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 			mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-			TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+			TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 			mTitleTextView.setText("Order Status");
 
-			TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+			TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
 			SharedPreferences sp = Status_Activity.this.getSharedPreferences("SimpleLogic", 0);
 
 			try
 			{
-				int target  = (int) Math.round(sp.getFloat("Target",0));
-				int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+				int target  = Math.round(sp.getFloat("Target",0));
+				int achieved  = Math.round(sp.getFloat("Achived",0));
 				Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 				if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 				}else
 				{
-					int age = (int) Math.round(age_float);
+					int age = Math.round(age_float);
 
 					todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 				}
@@ -523,19 +523,19 @@ public class Status_Activity extends Activity implements customButtonListener {
 	        //tell the Dialog to use the dialog.xml as it's layout description
 	        dialognew.setContentView(R.layout.status_click);
 	        
-	        list_statusclick = (ListView) dialognew
+	        list_statusclick = dialognew
 	                        .findViewById(R.id.list_statusclick);
 	        
-	        but_listclick = (Button) dialognew
+	        but_listclick = dialognew
                     .findViewById(R.id.butback_listclick);
 	        
-	        butaprove_listclick = (Button) dialognew
+	        butaprove_listclick = dialognew
                     .findViewById(R.id.butapprove_listclick);
 	        
-	        spinner_click = (Spinner) dialognew
+	        spinner_click = dialognew
                     .findViewById(R.id.spinner_addmore);
 	        
-	        but_addmore = (Button) dialognew
+	        but_addmore = dialognew
                     .findViewById(R.id.but_addmore_click);
            String []customer_array = {"Select Quotation status","ordered", "lost", "pending"};
 	        
@@ -657,10 +657,10 @@ public class Status_Activity extends Activity implements customButtonListener {
 	        //tell the Dialog to use the dialog.xml as it's layout description
 	        dialognew.setContentView(R.layout.customer_address_dialog); 
 
-	        final EditText userInput = (EditText) dialognew
+	        final EditText userInput = dialognew
 	                .findViewById(R.id.update_textdialog);
 	        
-	        final EditText distance = (EditText) dialognew
+	        final EditText distance = dialognew
 	                .findViewById(R.id.cu_distance);
 	        
 	       
@@ -668,10 +668,10 @@ public class Status_Activity extends Activity implements customButtonListener {
 	         // item_description.setText("Address");
 	        
 
-	                final Button Submit = (Button) dialognew
+	                final Button Submit = dialognew
 	                        .findViewById(R.id.update_textdialogclick);
 	                
-	                final Button update_cancel = (Button) dialognew
+	                final Button update_cancel = dialognew
 	                        .findViewById(R.id.update_cancel);
 	                update_cancel.setVisibility(View.GONE);
 	                

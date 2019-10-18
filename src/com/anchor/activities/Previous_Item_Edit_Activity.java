@@ -112,17 +112,17 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         editor.commit();
 
 
-        txtPrice = (TextView) findViewById(R.id.txtPrice);
+        txtPrice = findViewById(R.id.txtPrice);
         //txtDeleiveryQuantity = (TextView) findViewById(R.id.txtDeleiveryQuantity);
-        txtDeleiveryQuantity1 = (EditText) findViewById(R.id.txtDeleiveryQuantity);
+        txtDeleiveryQuantity1 = findViewById(R.id.txtDeleiveryQuantity);
 
         editTextSQ = findViewById(R.id.editTextSQ);
 
         editTextSQ.setText(Global_Data.item_SL);
 
 
-        txt_rp = (TextView) findViewById(R.id.textRP);
-        t_error = (TextView) findViewById(R.id.t_error);
+        txt_rp = findViewById(R.id.textRP);
+        t_error = findViewById(R.id.t_error);
         // for label RP change
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
         String rpstr = spf1.getString("var_rp", "");
@@ -132,14 +132,14 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         //TODO FOR SCHEME ERROR
         txtDeleiveryQuantity1.setVisibility(View.INVISIBLE);
         //spnCategory = (Spinner) findViewById(R.id.spnCategory);
-        spnProduct = (EditText) findViewById(R.id.spnProduct);
-        spnProductSpec = (Spinner) findViewById(R.id.spnProductSpec);
-        spnScheme = (Spinner) findViewById(R.id.spnScheme);
+        spnProduct = findViewById(R.id.spnProduct);
+        spnProductSpec = findViewById(R.id.spnProductSpec);
+        spnScheme = findViewById(R.id.spnScheme);
 
-        editTextRP = (TextView) findViewById(R.id.editTextRP);
-        editTextMRP = (TextView) findViewById(R.id.editTextMRP);
+        editTextRP = findViewById(R.id.editTextRP);
+        editTextMRP = findViewById(R.id.editTextMRP);
 
-        editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
+        editTextQuantity = findViewById(R.id.editTextQuantity);
 
         editTextQuantity.addTextChangedListener(new TextWatcher() {
 
@@ -157,7 +157,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
                     if (Integer.parseInt(String.valueOf(s)) <= 0) {
                         editTextQuantity.setText("");
                         txtPrice.setText("Total Price : " + "");
-                        price = String.valueOf("");
+                        price = "";
                     }
                 } else {
                     txtPrice.setText("Total Price : " + "");
@@ -194,7 +194,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 
         for (Local_Data s : scheme_name) {
             Scheme_array.add(s.getSche_disname());
-            scheme_namen = s.getSche_disname().toString();
+            scheme_namen = s.getSche_disname();
 
 
         }
@@ -209,7 +209,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 //results2.add("Select Variant");
         for (Local_Data ss : schemeitem_name) {
 
-            if (!(ss.getSche_code().toString().equalsIgnoreCase(""))) {
+            if (!(ss.getSche_code().equalsIgnoreCase(""))) {
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(scheme_namen)) {
                     int spinnerPosition = Discount_Adapter.getPosition(scheme_namen);
                     spnScheme.setSelection(spinnerPosition);
@@ -253,10 +253,10 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         }
 
 
-        buttonAddMOre = (Button) findViewById(R.id.buttonAddMOre);
+        buttonAddMOre = findViewById(R.id.buttonAddMOre);
         buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
 
-        buttonEditBack = (Button) findViewById(R.id.buttonEditBack);
+        buttonEditBack = findViewById(R.id.buttonEditBack);
         buttonEditBack.setBackgroundColor(Color.parseColor("#414042"));
 
 //			buttonAddMOre.setOnTouchListener(new OnTouchListener() {
@@ -381,7 +381,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 
                     } else {
                         txtPrice.setText("Total Price : " + "");
-                        price = String.valueOf("0");
+                        price = "0";
                         t_error.setText("");
                     }
 
@@ -506,18 +506,18 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
         //tell the Dialog to use the dialog.xml as it's layout description
         dialognew.setContentView(R.layout.update_dialog_edit);
 
-        final EditText userInput = (EditText) dialognew
+        final EditText userInput = dialognew
                 .findViewById(R.id.update_textdialog);
 
-        final TextView headertext = (TextView) dialognew
+        final TextView headertext = dialognew
                 .findViewById(R.id.item_description);
         headertext.setText("");
         headertext.setText("ITEM DESCRIPTION");
 
-        final Button Submit = (Button) dialognew
+        final Button Submit = dialognew
                 .findViewById(R.id.update_textdialogclick);
 
-        final Button update_cancel = (Button) dialognew
+        final Button update_cancel = dialognew
                 .findViewById(R.id.update_cancel);
 
         update_cancel.setVisibility(View.GONE);
@@ -627,7 +627,7 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 
                                     loginDataBaseAdapter = loginDataBaseAdapter.open();
 
-                                    String s_price[] = txtPrice.getText().toString().split(":");
+                                    String[] s_price = txtPrice.getText().toString().split(":");
 
 //	//
 //				   	        	                             }

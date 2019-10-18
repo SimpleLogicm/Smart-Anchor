@@ -38,7 +38,7 @@ public class SDcard_VideoMain extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sdcard_images_main);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
         albumList = new ArrayList<>();
         adapter = new VideoAlbumAdapter(this, albumList);

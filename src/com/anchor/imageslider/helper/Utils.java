@@ -77,14 +77,11 @@ public class Utils {
 	 * @returns boolean
 	 */
 	private boolean IsSupportedFile(String filePath) {
-		String ext = filePath.substring((filePath.lastIndexOf(".") + 1),
-				filePath.length());
+		String ext = filePath.substring((filePath.lastIndexOf(".") + 1)
+        );
 
-		if (AppConstant.FILE_EXTN
-				.contains(ext.toLowerCase(Locale.getDefault())))
-			return true;
-		else
-			return false;
+        return AppConstant.FILE_EXTN
+                .contains(ext.toLowerCase(Locale.getDefault()));
 
 	}
 

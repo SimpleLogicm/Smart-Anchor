@@ -100,15 +100,15 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
         View rootView = inflater.inflate(R.layout.fragment_add_retailer, container, false);
         r=new Retailer();
        // TextView welcomeUser=(TextView)rootView.findViewById(R.id.txtWelcomeUser);
-        editTextRetailerName=(EditText)rootView.findViewById(R.id.editTextRetailerName);
-        editTextStoreName=(EditText)rootView.findViewById(R.id.editTextStoreName);
-        editTextAddress=(EditText)rootView.findViewById(R.id.editTextAddress);
-        editTextLandMark=(EditText)rootView.findViewById(R.id.editTextLandMark);
-        editTextPin=(EditText)rootView.findViewById(R.id.editTextPin);
-        editTextStreet=(EditText)rootView.findViewById(R.id.editTextStreet);
-        editTextContatVatINId=(EditText)rootView.findViewById(R.id.editTextContatVatINId);
-        editTextContatNo1=(EditText)rootView.findViewById(R.id.editTextContatNo1);
-        editTextContatMail=(EditText)rootView.findViewById(R.id.editTextContatMail);
+        editTextRetailerName= rootView.findViewById(R.id.editTextRetailerName);
+        editTextStoreName= rootView.findViewById(R.id.editTextStoreName);
+        editTextAddress= rootView.findViewById(R.id.editTextAddress);
+        editTextLandMark= rootView.findViewById(R.id.editTextLandMark);
+        editTextPin= rootView.findViewById(R.id.editTextPin);
+        editTextStreet= rootView.findViewById(R.id.editTextStreet);
+        editTextContatVatINId= rootView.findViewById(R.id.editTextContatVatINId);
+        editTextContatNo1= rootView.findViewById(R.id.editTextContatNo1);
+        editTextContatMail= rootView.findViewById(R.id.editTextContatMail);
         SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", 0);
 
         /*data_stateid=sp.getInt("StateID", 0);
@@ -157,7 +157,7 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
     	
 	    state_Adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, listState);
         state_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner3=(Spinner)rootView.findViewById(R.id.spnState);
+        spinner3= rootView.findViewById(R.id.spnState);
     	spinner3.setAdapter(state_Adapter);
     	spinner3.setOnItemSelectedListener(this);
     	
@@ -185,7 +185,7 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
         
 	    city_Adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, listCity);
 	    city_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    spinner2=(Spinner)rootView.findViewById(R.id.spnCity);
+	    spinner2= rootView.findViewById(R.id.spnCity);
     	spinner2.setAdapter(city_Adapter);
     	spinner2.setOnItemSelectedListener(this);
     	
@@ -227,7 +227,7 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
         
 	    beat_Adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, listBeat);
 	    beat_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    spinner1=(Spinner)rootView.findViewById(R.id.spnBeat);
+	    spinner1= rootView.findViewById(R.id.spnBeat);
     	spinner1.setAdapter(beat_Adapter);
     	spinner1.setOnItemSelectedListener(this);
     	
@@ -235,7 +235,7 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
     	
     	
       // welcomeUser.setText(sp.getString("FirstName", "")+" "+ sp.getString("LastName", ""));
-        buttonAddRetailerSave=(Button) rootView.findViewById(R.id.buttonAddRetailerSave);
+        buttonAddRetailerSave= rootView.findViewById(R.id.buttonAddRetailerSave);
         
         buttonAddRetailerSave.setOnTouchListener(new OnTouchListener() {
 			
@@ -442,7 +442,7 @@ public class AddRetailerFragment extends Fragment implements OnItemSelectedListe
 			public void onClick(View v) {}
 		});*/
         
-        buttonAddRetailerCancel=(Button) rootView.findViewById(R.id.buttonAddRetailerCancel);
+        buttonAddRetailerCancel= rootView.findViewById(R.id.buttonAddRetailerCancel);
         buttonAddRetailerCancel.setOnTouchListener(new OnTouchListener() {
 			
 			@Override

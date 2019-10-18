@@ -105,16 +105,16 @@ public class Customer_Stock extends Activity {
 			//Toast.makeText(getApplicationContext(),"Sorry, file path is missing!", Toast.LENGTH_LONG).show();
 		}
 				
-			claims_submit=(Button)findViewById(R.id.claims_submit);
-			edit_quantity=(EditText)findViewById(R.id.edit_quantity);
-			edit_details=(EditText)findViewById(R.id.edit_details);
+			claims_submit= findViewById(R.id.claims_submit);
+			edit_quantity= findViewById(R.id.edit_quantity);
+			edit_details= findViewById(R.id.edit_details);
 
 		    edit_details.setFilters(new InputFilter[]{filter});
 			
 			//feed_spinner=(Spinner)findViewById(R.id.comp_stock);
-			category_spinner=(Spinner)findViewById(R.id.category);
-			product_spinner=(Spinner)findViewById(R.id.product);
-			variant_spinner=(Spinner)findViewById(R.id.variant);
+			category_spinner= findViewById(R.id.category);
+			product_spinner= findViewById(R.id.product);
+			variant_spinner= findViewById(R.id.variant);
 			
 //    		category_spinner.setOnItemSelectedListener(this);
 //		    product_spinner.setOnItemSelectedListener(this);
@@ -358,11 +358,11 @@ public class Customer_Stock extends Activity {
 			*/
 				View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 				mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-				TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+				TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
 				mTitleTextView.setText(Global_Data.retailer);
 
-				TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-				ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+				TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
+				ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
 				H_LOGO.setImageResource(R.drawable.list);
 				H_LOGO.setVisibility(View.VISIBLE);
 				SharedPreferences sp = Customer_Stock.this.getSharedPreferences("SimpleLogic", 0);
@@ -373,17 +373,17 @@ public class Customer_Stock extends Activity {
 //			}
 				try
 				{
-					int target  = (int) Math.round(sp.getFloat("Target",0));
-					int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+					int target  = Math.round(sp.getFloat("Target",0));
+					int achieved  = Math.round(sp.getFloat("Achived",0));
 					Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 					if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 					{
-						int age = (int) Math.round(age_float);
+						int age = Math.round(age_float);
 
 						todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 					}else
 					{
-						int age = (int) Math.round(age_float);
+						int age = Math.round(age_float);
 
 						todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 					}

@@ -1200,7 +1200,7 @@ public class getServices {
                         ex.printStackTrace();
                     }
 
-                        String sms_body = "Dear " + Global_Data.CUSTOMER_NAME_NEW + " ," + "\n" + " " + Global_Data.order_retailer + " at " + Global_Data.CUSTOMER_ADDRESS_NEW + " at " + formattedDate + " has to return " + String.valueOf(items_count) + " items." + "\n\n" + " Thank you." + "\n" + " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME + "\n" + " " + gaddress;
+                        String sms_body = "Dear " + Global_Data.CUSTOMER_NAME_NEW + " ," + "\n" + " " + Global_Data.order_retailer + " at " + Global_Data.CUSTOMER_ADDRESS_NEW + " at " + formattedDate + " has to return " + items_count + " items." + "\n\n" + " Thank you." + "\n" + " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME + "\n" + " " + gaddress;
 
                         // dbvoc.getDeleteTable("order_products");
                         //dbvoc.getDeleteTable("orders");
@@ -1210,7 +1210,7 @@ public class getServices {
 
                         for (int i = 0; i < mobile_numbers.size(); i++) {
                             String message = sms_body;
-                            String tempMobileNumber = mobile_numbers.get(i).toString();
+                            String tempMobileNumber = mobile_numbers.get(i);
                             //String tempMobileNumber = "8454858739";
                             //Global_Data.sendSMS("8454858739",sms_body,context);
 
@@ -1237,18 +1237,18 @@ public class getServices {
                         dialog.setContentView(R.layout.dialog);
                         dialog.setTitle("Order Status :");
 
-                        TextView txt = (TextView) dialog.findViewById(R.id.txtOrderID);
+                        TextView txt = dialog.findViewById(R.id.txtOrderID);
 
                         txt.setText("Order is generated.");
-                    TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
-                    TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
+                    TextView txtMessage = dialog.findViewById(R.id.txtMessage);
+                    TextView txtEmail = dialog.findViewById(R.id.txtEmail);
 
                         txtEmail.setText("Mail has been sent to " + email_adress);
                         if (!mobile_numbers.isEmpty() && mobile_numbers.size() > 0) {
                             txtMessage.setText("Sms Send Successfully");
                     }
 
-                        ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
+                        ImageView dialogButton = dialog.findViewById(R.id.dialogButton);
 
                         dialogButton.setOnClickListener(new OnClickListener() {
                             @Override
@@ -2713,10 +2713,10 @@ public class getServices {
 
 
                                     Calendar calendarold = Calendar.getInstance();
-                                    calendarold.add(calendarold.MONTH, -1);
-                                    int yearold = calendarold.get(calendarold.YEAR);
-                                    int monthold = calendarold.get(calendarold.MONTH);
-                                    int dayold = calendarold.get(calendarold.DAY_OF_MONTH);
+                                    calendarold.add(Calendar.MONTH, -1);
+                                    int yearold = calendarold.get(Calendar.YEAR);
+                                    int monthold = calendarold.get(Calendar.MONTH);
+                                    int dayold = calendarold.get(Calendar.DAY_OF_MONTH);
 
                                     Formatter fmtt = new Formatter();
                                     // fmt.format("%tB %tb %tm", calendar, calendar, calendar);
@@ -2757,7 +2757,7 @@ public class getServices {
                                                     } else {
                                                         if(from_date.contains("-"))
                                                         {
-                                                            String from_date_Array [] = from_date.split("-");
+                                                            String[] from_date_Array = from_date.split("-");
                                                             String final_fromdate = from_date_Array[1]+"-"+from_date_Array[2];
 
                                                             if(final_fromdate.equalsIgnoreCase(cureent_month) || final_fromdate.equalsIgnoreCase(old_month))
@@ -3496,7 +3496,7 @@ public class getServices {
 
                             JSONObject jsonObject = users_emp.getJSONObject(i);
 
-                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address").toString())) {
+                            if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address"))) {
                                 dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"),jsonObject.getString("email"),jsonObject.getString("address"));
                             }
                             else
@@ -3867,14 +3867,14 @@ public class getServices {
 
                                 if(jsonObject.getString("year").equalsIgnoreCase(String.valueOf(year)))
                                 {
-                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString()))
+                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target")))
                                     {
-                                        t_total +=Float.valueOf(jsonObject.getString("target").toString());
+                                        t_total +=Float.valueOf(jsonObject.getString("target"));
                                     }
 
-                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString()))
+                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved")))
                                     {
-                                        achived_total +=Float.valueOf(jsonObject.getString("achieved").toString());
+                                        achived_total +=Float.valueOf(jsonObject.getString("achieved"));
                                     }
                                 }
 
@@ -4025,11 +4025,11 @@ public class getServices {
 
                                 if(jsonObject.getString("year").equalsIgnoreCase(String.valueOf(year)))
                                 {
-                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target").toString()))
+                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target")))
                                     {
                                         if(!jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" "))
                                         {
-                                            t_total +=Float.valueOf(jsonObject.getString("target").toString());
+                                            t_total +=Float.valueOf(jsonObject.getString("target"));
                                         }
                                         else
                                         {
@@ -4037,11 +4037,11 @@ public class getServices {
                                         }
                                     }
 
-                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved").toString()))
+                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved")))
                                     {
                                         if(!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" "))
                                         {
-                                            achived_total +=Float.valueOf(jsonObject.getString("achieved").toString());
+                                            achived_total +=Float.valueOf(jsonObject.getString("achieved"));
                                         }
                                         else
                                         {
@@ -4201,7 +4201,7 @@ public class getServices {
 
                 }
 
-                byte b5[];
+                byte[] b5;
 
                 List<Local_Data> contacts = dbvoc.GetOrders("Secondary Sales / Retail Sales", Global_Data.GLOvel_GORDER_ID);
                 //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
@@ -4452,7 +4452,7 @@ public class getServices {
                                     }
                                 });
                             }
-                            String sms_body = "Dear " + Global_Data.CUSTOMER_NAME_NEW + " ," + "\n" + " Thank you for your order for " + Global_Data.order_retailer + " at " + Global_Data.CUSTOMER_ADDRESS_NEW + " at " + formattedDate + " for Rs. " + String.valueOf(total_ammount) + "." + "\n\n" + " Thank you." + "\n" + " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME + "\n" + " " + gaddress;
+                            String sms_body = "Dear " + Global_Data.CUSTOMER_NAME_NEW + " ," + "\n" + " Thank you for your order for " + Global_Data.order_retailer + " at " + Global_Data.CUSTOMER_ADDRESS_NEW + " at " + formattedDate + " for Rs. " + total_ammount + "." + "\n\n" + " Thank you." + "\n" + " " + Global_Data.USER_FIRST_NAME + " " + Global_Data.USER_LAST_NAME + "\n" + " " + gaddress;
 
                             //sendSMS("8454858739",sms_body,context);
 
@@ -4464,7 +4464,7 @@ public class getServices {
 
                                 for (int i = 0; i < mobile_numbers.size(); i++) {
                                     String message = sms_body;
-                                    String tempMobileNumber = mobile_numbers.get(i).toString();
+                                    String tempMobileNumber = mobile_numbers.get(i);
                                     //  Global_Data.sendSMS(tempMobileNumber, message,context);
                                 }
                             }
@@ -4492,11 +4492,11 @@ public class getServices {
                                     dialog1.setContentView(R.layout.dialog);
                                     dialog1.setTitle("Order Status :");
 
-                                    TextView txt = (TextView) dialog1.findViewById(R.id.txtOrderID);
+                                    TextView txt = dialog1.findViewById(R.id.txtOrderID);
 
                                     txt.setText("Order is generated.");
-                                    TextView txtMessage = (TextView) dialog1.findViewById(R.id.txtMessage);
-                                    TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
+                                    TextView txtMessage = dialog1.findViewById(R.id.txtMessage);
+                                    TextView txtEmail = dialog1.findViewById(R.id.txtEmail);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
                                     if (!mobile_numbers.isEmpty() && mobile_numbers.size() > 0) {
@@ -4504,7 +4504,7 @@ public class getServices {
                                     }
 
 
-                                    ImageView dialogButton = (ImageView) dialog1.findViewById(R.id.dialogButton);
+                                    ImageView dialogButton = dialog1.findViewById(R.id.dialogButton);
 
                                     dialogButton.setOnClickListener(new OnClickListener() {
                                         @Override
@@ -4699,8 +4699,7 @@ public class getServices {
                 String s = "";
 
 
-
-                byte b5[];
+                byte[] b5;
 
                 List<Sub_Dealer_Order_Model> contacts = dbvoc.GetSubOrders(Global_Data.GLOvel_SUB_GORDER_ID);
                 //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
@@ -4907,11 +4906,11 @@ public class getServices {
                                     dialog1.setContentView(R.layout.dialog);
                                     dialog1.setTitle("Order Status :");
 
-                                    TextView txt = (TextView) dialog1.findViewById(R.id.txtOrderID);
+                                    TextView txt = dialog1.findViewById(R.id.txtOrderID);
 
                                     txt.setText("Order is generated.");
-                                    TextView txtMessage = (TextView) dialog1.findViewById(R.id.txtMessage);
-                                    TextView txtEmail = (TextView) dialog1.findViewById(R.id.txtEmail);
+                                    TextView txtMessage = dialog1.findViewById(R.id.txtMessage);
+                                    TextView txtEmail = dialog1.findViewById(R.id.txtEmail);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
                                     txtEmail.setVisibility(View.GONE);
@@ -4920,7 +4919,7 @@ public class getServices {
                                     }
 
 
-                                    ImageView dialogButton = (ImageView) dialog1.findViewById(R.id.dialogButton);
+                                    ImageView dialogButton = dialog1.findViewById(R.id.dialogButton);
 
                                     dialogButton.setOnClickListener(new OnClickListener() {
                                         @Override
@@ -5142,7 +5141,7 @@ public class getServices {
                 }
 
 
-                byte b5[];
+                byte[] b5;
                 List<Local_Data> contacts = dbvoc.GetAllOrders("Secondary Sales / Retail Sales");
 
                 if(contacts.size() > 0)

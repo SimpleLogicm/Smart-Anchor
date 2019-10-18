@@ -409,7 +409,7 @@ public class Electrician_Map extends FragmentActivity implements OnMapReadyCallb
 //            if (isInternetPresent) {
             try {
                 LocationAddress locationAddress = new LocationAddress();
-                locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
+                LocationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
                         Electrician_Map.this, new Electrician_Map.GeocoderHandler());
                 Geocoder geo = new Geocoder(Electrician_Map.this.getApplicationContext(), Locale.getDefault());
                 List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
@@ -546,7 +546,7 @@ public class Electrician_Map extends FragmentActivity implements OnMapReadyCallb
 
                 return;
             }
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
         }catch(Exception ex){ex.printStackTrace();}
 
     }

@@ -40,7 +40,7 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
     String order_code = "";
 
     public interface customButtonListener {
-        public void onButtonClickListner(int position, String value1,String value2,View v);
+        void onButtonClickListner(int position, String value1, String value2, View v);
     }
 
     public void setCustomButtonListner(customButtonListener listener) {
@@ -64,19 +64,19 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
             convertView = inflater.inflate(R.layout.status_clicktxt, null);
             viewHolder = new ViewHolder();
             
-            viewHolder.text1 = (TextView) convertView
+            viewHolder.text1 = convertView
                     .findViewById(R.id.stat_txt1); 
 
-            viewHolder.text2 = (TextView) convertView
+            viewHolder.text2 = convertView
                     .findViewById(R.id.stat_txt2);
             
-            viewHolder.text3 = (TextView) convertView
+            viewHolder.text3 = convertView
                     .findViewById(R.id.item_no);
             
-            viewHolder.edit = (Button) convertView
+            viewHolder.edit = convertView
                     .findViewById(R.id.edit_btn);
             
-            viewHolder.delete = (Button) convertView
+            viewHolder.delete = convertView
                     .findViewById(R.id.delete_btn);
             
             if(Global_Data.GLOvel_REMARK.equals("ordered") || Global_Data.GLOvel_REMARK.equals("lost"))
@@ -104,15 +104,15 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
         getData = dataArrayList.get(position);
         try {
 
-            if (getData.get(ITEM_DESC).toString() != null && getData.get(ITEM_DESC).toString() != "null") {
+            if (getData.get(ITEM_DESC) != null && getData.get(ITEM_DESC) != "null") {
                 viewHolder.text1.setText(getData.get(ITEM_DESC));
             }
 
-            if (getData.get(ITEM_AMOUNT).toString() != null && getData.get(ITEM_AMOUNT).toString() != "null") {
+            if (getData.get(ITEM_AMOUNT) != null && getData.get(ITEM_AMOUNT) != "null") {
                 viewHolder.text2.setText(getData.get(ITEM_AMOUNT));
             }
             
-            if (getData.get(ITEM_NUMBER).toString() != null && getData.get(ITEM_NUMBER).toString() != "null") {
+            if (getData.get(ITEM_NUMBER) != null && getData.get(ITEM_NUMBER) != "null") {
                 viewHolder.text3.setText(getData.get(ITEM_NUMBER));
             }
             
@@ -136,20 +136,20 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
        	        //tell the Dialog to use the dialog.xml as it's layout description
        	        dialognew.setContentView(R.layout.onclick_dialog);
 
-       	        final EditText userInput = (EditText) dialognew
+       	        final EditText userInput = dialognew
        	                .findViewById(R.id.prod_desc);
        	        
-       	        final TextView headertext = (TextView) dialognew
+       	        final TextView headertext = dialognew
        	                .findViewById(R.id.item_description);
        	        
        	        headertext.setText("PRODUCT DESCRIPTION");
 
        	         userInput.setText(getData.get(ITEM_DESC));
        	         
-       	                final Button Submit = (Button) dialognew
+       	                final Button Submit = dialognew
        	                        .findViewById(R.id.desc_ok);
        	                
-       	                final Button update_cancel = (Button) dialognew
+       	                final Button update_cancel = dialognew
        	                        .findViewById(R.id.adr_cancel);
        	                
        	                update_cancel.setVisibility(View.GONE);
@@ -173,7 +173,7 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
             public void onClick(View v) {
             	
             	 dbvoc = new DataBaseHelper(context);
-            	 List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER(getData.get(ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id);      
+            	 List<Local_Data> cont1 = dbvoc.Get_OrderProducts_BYITEM_NUMBER(getData.get(ITEM_NUMBER),Global_Data.GLObalOrder_id);
 	   	          for (Local_Data cnp : cont1) 
 	   	          {
 	   	        	 
@@ -215,7 +215,7 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
 						
 						
 						 getData = dataArrayList.get(position);
-						 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+getData.get(ITEM_NUMBER).toString());
+						 Log.d("ITEM_NUMBER", "ITEM_NUMBER"+ getData.get(ITEM_NUMBER));
 						
 
 						 
@@ -231,7 +231,7 @@ public class OrderStatus_Adapter extends ArrayAdapter<HashMap<String, String>> {
 						  else
 						  {
 							  dbvoc = new DataBaseHelper(context);
-							  dbvoc.getDeleteTableorderproduct_byITEM_NUMBER(getData.get(ITEM_NUMBER).toString(),Global_Data.GLObalOrder_id);
+							  dbvoc.getDeleteTableorderproduct_byITEM_NUMBER(getData.get(ITEM_NUMBER),Global_Data.GLObalOrder_id);
 							  dataArrayList.remove(position);
 							  notifyDataSetChanged();
 						  }

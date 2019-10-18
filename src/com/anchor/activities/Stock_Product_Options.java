@@ -52,7 +52,7 @@ public class Stock_Product_Options extends Activity  {
     Spinner spnCategory,spnProduct,Product_Variant;
     TextView selVersion;
     HttpGet httppst;
-    String s[];
+    String[] s;
     int state_flag = 0;
     ProgressDialog dialog;
     ArrayAdapter<String> adapter_state1;
@@ -107,18 +107,18 @@ public class Stock_Product_Options extends Activity  {
         // customer_submit = (Button) findViewById(R.id.customer_submit);
 
         locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        adr_button = (Button) findViewById(R.id.but_neworder);
-        spnCategory = (Spinner) findViewById(R.id.spnCategory);
-        spnProduct = (Spinner) findViewById(R.id.spnProduct);
-        Product_Variant = (Spinner) findViewById(R.id.Product_Variant);
+        adr_button = findViewById(R.id.but_neworder);
+        spnCategory = findViewById(R.id.spnCategory);
+        spnProduct = findViewById(R.id.spnProduct);
+        Product_Variant = findViewById(R.id.Product_Variant);
 
         spnCategory.setPopupBackgroundResource(R.drawable.spinner);
         spnProduct.setPopupBackgroundResource(R.drawable.spinner);
         Product_Variant.setPopupBackgroundResource(R.drawable.spinner);
 
-        rlout_order = (RelativeLayout) findViewById(R.id.rlout_order);
-        rlout_custserve = (RelativeLayout) findViewById(R.id.rlout_customer);
-        rlout_schedule = (RelativeLayout) findViewById(R.id.rlout_schedule);
+        rlout_order = findViewById(R.id.rlout_order);
+        rlout_custserve = findViewById(R.id.rlout_customer);
+        rlout_schedule = findViewById(R.id.rlout_schedule);
 
 
         Global_Data.GLObalOrder_id_return = "";

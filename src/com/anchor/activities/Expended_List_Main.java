@@ -34,7 +34,7 @@ public class Expended_List_Main extends BaseActivity {
         setContentView(R.layout.ex_main);
         Global_Data.CALENDER_READONLY_Address = "";
         Global_Data.CALENDER_READONLY_Date = "";
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expandableListView = findViewById(R.id.expandableListView);
         expandableListDetail = ExpandableListDataPump.getData(Expended_List_Main.this);
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
@@ -54,7 +54,7 @@ public class Expended_List_Main extends BaseActivity {
 
                 Calendar calendar = Calendar.getInstance();
                 int year = calendar.get(Calendar.YEAR);
-                String st[] =  expandableListTitle.get(groupPosition).split(" ");
+                String[] st = expandableListTitle.get(groupPosition).split(" ");
                 String finaldate = st[0]+"-"+st[1]+"-"+year;
                 List<Local_Data> contactsDetail = dbvoc.getCalender_EventValue_byFDATE(finaldate,"NO");
 
@@ -119,7 +119,7 @@ public class Expended_List_Main extends BaseActivity {
             String name = i.getStringExtra("retialer");
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
-            TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.screenname);
+            TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
             // int month = calendar.get(Calendar.MONTH);
@@ -135,11 +135,11 @@ public class Expended_List_Main extends BaseActivity {
             mTitleTextView.setTextSize(15);
 
 
-            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             todaysTarget.setVisibility(View.INVISIBLE);
             SharedPreferences sp = Expended_List_Main.this.getSharedPreferences("SimpleLogic", 0);
 
-            ImageView H_LOGO = (ImageView) mCustomView.findViewById(R.id.Header_logo);
+            ImageView H_LOGO = mCustomView.findViewById(R.id.Header_logo);
             H_LOGO.setImageResource(R.drawable.cal);
             H_LOGO.setVisibility(View.VISIBLE);
 

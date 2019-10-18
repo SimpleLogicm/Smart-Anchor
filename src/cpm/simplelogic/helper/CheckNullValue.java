@@ -4,14 +4,7 @@ public class CheckNullValue {
 	public static boolean findNullValue(String Value)
 	{
 		String compare=Value;
-		if(compare==null || compare.length()==0 || compare.equalsIgnoreCase("null") || compare.equalsIgnoreCase("") || compare.equalsIgnoreCase(" "))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+        return compare == null || compare.length() == 0 || compare.equalsIgnoreCase("null") || compare.equalsIgnoreCase("") || compare.equalsIgnoreCase(" ");
 	}
 
 	public static boolean isWhitespace(String str) {

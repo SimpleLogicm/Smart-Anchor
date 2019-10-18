@@ -52,7 +52,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			convertView = inflater.inflate(R.layout.exchild_item, null);
 		}
 		
-		TextView item = (TextView) convertView.findViewById(R.id.laptop);
+		TextView item = convertView.findViewById(R.id.laptop);
 		
 		// delete = (CheckBox) convertView.findViewById(R.id.delete);
 		// delete.setChecked(false);
@@ -205,7 +205,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 			convertView = infalInflater.inflate(R.layout.expen_group_item,
 					null);
 		}
-		TextView item = (TextView) convertView.findViewById(R.id.laptop);
+		TextView item = convertView.findViewById(R.id.laptop);
 		item.setTypeface(null, Typeface.BOLD);
 		item.setText(laptopName);
 		return convertView;

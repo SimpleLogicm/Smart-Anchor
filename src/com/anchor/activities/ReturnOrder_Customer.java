@@ -56,7 +56,7 @@ public class ReturnOrder_Customer extends Activity implements OnItemSelectedList
 	Spinner city_spinner, state_spinner, beat_spinner;
 	TextView selVersion;
 	HttpGet httppst;
-	String s[];
+    String[] s;
 	int state_flag = 0;
 	ProgressDialog dialog;
 	ArrayAdapter<String> adapter_state1;
@@ -123,14 +123,14 @@ public class ReturnOrder_Customer extends Activity implements OnItemSelectedList
 		// customer_submit = (Button) findViewById(R.id.customer_submit);
 
 		locationMangaer = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		adr_button = (Button) findViewById(R.id.but_neworder);
-		city_spinner = (Spinner) findViewById(R.id.cust_city);
-		state_spinner = (Spinner) findViewById(R.id.cust_state);
-		beat_spinner = (Spinner) findViewById(R.id.cust_beat);
-		autoCompleteTextView1 = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
-		rlout_order = (RelativeLayout) findViewById(R.id.rlout_order);
-		rlout_custserve = (RelativeLayout) findViewById(R.id.rlout_customer);
-		rlout_schedule = (RelativeLayout) findViewById(R.id.rlout_schedule);
+		adr_button = findViewById(R.id.but_neworder);
+		city_spinner = findViewById(R.id.cust_city);
+		state_spinner = findViewById(R.id.cust_state);
+		beat_spinner = findViewById(R.id.cust_beat);
+		autoCompleteTextView1 = findViewById(R.id.autoCompleteTextView1);
+		rlout_order = findViewById(R.id.rlout_order);
+		rlout_custserve = findViewById(R.id.rlout_customer);
+		rlout_schedule = findViewById(R.id.rlout_schedule);
 
 		Global_Data.GLObalOrder_id_return = "";
 
@@ -428,11 +428,11 @@ public class ReturnOrder_Customer extends Activity implements OnItemSelectedList
 		View mCustomView = mInflater.inflate(R.layout.action_bar, null);
 		mCustomView.setBackgroundDrawable(new ColorDrawable(Color
 				.parseColor("#910505")));
-		TextView mTitleTextView = (TextView) mCustomView
+		TextView mTitleTextView = mCustomView
 				.findViewById(R.id.screenname);
 		mTitleTextView.setText("Return Order");
 
-		TextView todaysTarget = (TextView) mCustomView
+		TextView todaysTarget = mCustomView
 				.findViewById(R.id.todaysTarget);
 		SharedPreferences sp = ReturnOrder_Customer.this
 				.getSharedPreferences("SimpleLogic", 0);
@@ -445,17 +445,17 @@ public class ReturnOrder_Customer extends Activity implements OnItemSelectedList
 
 		try
 		{
-			int target  = (int) Math.round(sp.getFloat("Target",0));
-			int achieved  = (int) Math.round(sp.getFloat("Achived",0));
+			int target  = Math.round(sp.getFloat("Target",0));
+			int achieved  = Math.round(sp.getFloat("Achived",0));
 			Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
 			if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
 			{
-				int age = (int) Math.round(age_float);
+				int age = Math.round(age_float);
 
 				todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
 			}else
 			{
-				int age = (int) Math.round(age_float);
+				int age = Math.round(age_float);
 
 				todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
 			}
