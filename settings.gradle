@@ -1,2 +1,2 @@
-include ':cropping', ':LibAndroidCrop'
+include ':LibAndroidCrop'
 include ':imageResizer'

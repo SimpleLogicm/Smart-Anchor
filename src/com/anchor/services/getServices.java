@@ -4911,9 +4911,11 @@ public class getServices {
                                     txt.setText("Order is generated.");
                                     TextView txtMessage = dialog1.findViewById(R.id.txtMessage);
                                     TextView txtEmail = dialog1.findViewById(R.id.txtEmail);
+                                    ImageView image = dialog1.findViewById(R.id.image);
 
                                     txtEmail.setText("Mail will be sent to " + email_adress);
                                     txtEmail.setVisibility(View.GONE);
+                                    image.setVisibility(View.GONE);
                                     if (!Sub_MOBILE.equalsIgnoreCase("")) {
                                         txtMessage.setText("Sms Send Successfully");
                                     }

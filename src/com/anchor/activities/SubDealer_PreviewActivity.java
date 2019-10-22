@@ -126,32 +126,10 @@ public class SubDealer_PreviewActivity extends BaseActivity {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
-//            mTitleTextView.setText(Global_Data.order_retailer +" "+"("+Global_Data.AmountOutstanding+"/"+Global_Data.AmountOverdue+")");
-//            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-//            SharedPreferences sp = SubDealer_PreviewActivity.this.getSharedPreferences("SimpleLogic", 0);
-//
-//            try
-//            {
-//                int target  = (int) Math.round(sp.getFloat("Target",0));
-//                int achieved  = (int) Math.round(sp.getFloat("Achived",0));
-//                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-//                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-//                {
-//                    int age = (int) Math.round(age_float);
-//
-//                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-//                }else
-//                {
-//                    int age = (int) Math.round(age_float);
-//
-//                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-//                }
-//
-//            }catch(Exception ex){ex.printStackTrace();}
-//            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-//
-//                todaysTarget.setText("Today's Target Acheived");
-//            }
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            mTitleTextView.setText("Retailer Order");
+            todaysTarget.setText(Global_Data.Sub_Dealer_name);
+
             mActionBar.setCustomView(mCustomView);
             mActionBar.setDisplayShowCustomEnabled(true);
             mActionBar.setHomeButtonEnabled(true);

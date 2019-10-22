@@ -928,36 +928,13 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
-            mTitleTextView.setText("Sub Dealer Order");
-
-            TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+            mTitleTextView.setText("Retailer Order");
+            todaysTarget.setText(Global_Data.Sub_Dealer_name);
             SharedPreferences sp = SubDealer_NewOrderActivity.this.getSharedPreferences("SimpleLogic", 0);
 
-//        if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)>=0) {
-//        	todaysTarget.setText("Today's Target : Rs "+String.format("%.2f", (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)))+"");
-//		}
-            try
-            {
-                int target  = Math.round(sp.getFloat("Target",0));
-                int achieved  = Math.round(sp.getFloat("Achived",0));
-                Float age_float = (sp.getFloat("Achived",0)/sp.getFloat("Target",0))*100;
-                if(String.valueOf(age_float).equalsIgnoreCase("infinity"))
-                {
-                    int age = Math.round(age_float);
 
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+"infinity")+"%"+"]");
-                }else
-                {
-                    int age = Math.round(age_float);
 
-                    todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-                }
-
-            }catch(Exception ex){ex.printStackTrace();}
-            if (sp.getFloat("Target", 0.00f)-sp.getFloat("Current_Target", 0.00f)<0) {
-//        	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
-                todaysTarget.setText("Today's Target Acheived");
-            }
 
             mActionBar.setCustomView(mCustomView);
             mActionBar.setDisplayShowCustomEnabled(true);

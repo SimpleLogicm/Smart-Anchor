@@ -371,6 +371,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
         dataAdapter_order_type = new ArrayAdapter<String>(this, R.layout.spinner_item, results_order_type);
         dataAdapter_order_type.setDropDownViewResource(R.layout.spinner_item);
         order_type.setAdapter(dataAdapter_order_type);
+        order_type.setVisibility(View.GONE);
 
         results_shipment_pri.clear();
 
@@ -550,30 +551,9 @@ public class SubDealer_Signature_Activity extends BaseActivity {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
-            // mTitleTextView.setText(Global_Data.order_retailer + " " + "(" + Global_Data.AmountOutstanding + "/" + Global_Data.AmountOverdue + ")");
-
-//            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
-//            try {
-//                int target = (int) Math.round(sp.getFloat("Target", 0));
-//                int achieved = (int) Math.round(sp.getFloat("Achived", 0));
-//                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
-//                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-//                    int age = (int) Math.round(age_float);
-//
-//                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
-//                } else {
-//                    int age = (int) Math.round(age_float);
-//
-//                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
-//                }
-//
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
-//
-//                todaysTarget.setText("Today's Target Acheived");
-//            }
+            TextView todaysTarget = (TextView) mCustomView.findViewById(R.id.todaysTarget);
+             mTitleTextView.setText("Retailer Order");
+            todaysTarget.setText(Global_Data.Sub_Dealer_name);
 
             mActionBar.setCustomView(mCustomView);
             mActionBar.setDisplayShowCustomEnabled(true);
@@ -598,12 +578,14 @@ public class SubDealer_Signature_Activity extends BaseActivity {
         String errorMessage = "";
 
 
-        if (order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type")) {
-            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
-            order_type.requestFocus();
-            errorMessage = errorMessage + "Please Select Order Type.";
-            error = true;
-        } else if (strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase("")) {
+//        if (order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type")) {
+//            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
+//            order_type.requestFocus();
+//            errorMessage = errorMessage + "Please Select Order Type.";
+//            error = true;
+//        } else
+
+            if (strdetail1_mandate.equalsIgnoreCase("true") && order_detail1.getText().toString().equalsIgnoreCase("")) {
             s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
             order_detail1.requestFocus();
             errorMessage = errorMessage + "Please Select Need By Date";
@@ -1136,17 +1118,17 @@ public class SubDealer_Signature_Activity extends BaseActivity {
                                                 order_type_name = yourName.getText().toString().trim();
                                             }
 
-                                            if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
-
-                                                order_type_text = order_type.getSelectedItem().toString();
-                                                List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
-
-                                                for (Local_Data cn : contacts1) {
-
-                                                    order_type_code = cn.getOrder_type_code();
-                                                }
-
-                                            }
+//                                            if (!(order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type"))) {
+//
+//                                                order_type_text = order_type.getSelectedItem().toString();
+//                                                List<Local_Data> contacts1 = dbvoc.get_order_category_code(order_type_text);
+//
+//                                                for (Local_Data cn : contacts1) {
+//
+//                                                    order_type_code = cn.getOrder_type_code();
+//                                                }
+//
+//                                            }
 
                                             try {
                                                 if (!(order_payment_term.getSelectedItem().toString().equalsIgnoreCase("Select Payment Term"))) {

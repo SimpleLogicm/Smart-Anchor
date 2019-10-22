@@ -766,35 +766,35 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     .parseColor("#910505")));
             TextView mTitleTextView = mCustomView
                     .findViewById(R.id.screenname);
-            mTitleTextView.setText("Order");
+            mTitleTextView.setText("Retailer Order");
 
             TextView todaysTarget = mCustomView
                     .findViewById(R.id.todaysTarget);
             SharedPreferences sp = Sub_Dealer_Order_Main.this
                     .getSharedPreferences("SimpleLogic", 0);
 
-            try {
-                int target = Math.round(sp.getFloat("Target", 0));
-                int achieved = Math.round(sp.getFloat("Achived", 0));
-                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
-                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                    int age = Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
-                } else {
-                    int age = Math.round(age_float);
-
-                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
-                }
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
-                // todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target",
-                // 0.00f)-sp.getFloat("Target", 0.00f))+"");
-                todaysTarget.setText("Today's Target Acheived");
-            }
+//            try {
+//                int target = Math.round(sp.getFloat("Target", 0));
+//                int achieved = Math.round(sp.getFloat("Achived", 0));
+//                Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+//                if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+//                    int age = Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+//                } else {
+//                    int age = Math.round(age_float);
+//
+//                    todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+//                }
+//
+//            } catch (Exception ex) {
+//                ex.printStackTrace();
+//            }
+//            if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
+//                // todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target",
+//                // 0.00f)-sp.getFloat("Target", 0.00f))+"");
+//                todaysTarget.setText("Today's Target Acheived");
+//            }
 
             mActionBar.setCustomView(mCustomView);
             mActionBar.setDisplayShowCustomEnabled(true);
