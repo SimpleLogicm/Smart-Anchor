@@ -4927,7 +4927,7 @@ public class getServices {
                                         @Override
                                         public void onClick(View v) {
                                             dialog1.dismiss();
-                                            Intent intentn = new Intent(context, Sub_Dealer_Order_Main.class);
+                                            Intent intentn = new Intent(context, MainActivity.class);
                                             context.startActivity(intentn);
                                             ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             ((Activity) context).finish();

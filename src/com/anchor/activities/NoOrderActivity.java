@@ -971,7 +971,17 @@ public class NoOrderActivity extends BaseActivity {
                                         buttonnoOrdercancel.setEnabled(true);
 
                                         Toast.makeText(NoOrderActivity.this, response_result, Toast.LENGTH_LONG).show();
-                                        finish();
+                                        if (!Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
+                                            Global_Data.Sub_Dealer_name = "";
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            finish();
+                                        }
+
 
 
                                         dialog.dismiss();
