@@ -1,11 +1,5 @@
 package com.anchor.activities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,19 +11,25 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Invoice_filterList extends Activity implements OnItemSelectedListener{ 
 	Button filter_btn, cable1,cable2,cable3,cable4,cable5;
@@ -37,12 +37,9 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	ArrayAdapter adapter;
 	DataBaseHelper dbvoc = new DataBaseHelper(this);
 	 // Array of strings...
-	
+
     private ArrayList<HashMap<String, String>> dataArrayList;
-	String[] Cable1Array = {"ARIAL BUNCHED CABLE","CONTROL CABLE","EXTRA HIGH VOLTAGE","INSTRUMENTS CABLES","POWER CABLES","SERVICE CABLES","SOLAR CABLES","TELEPHONE CABLES(ARM)","THERMOCOUPLE/COMPENSATING"};
-	String[] Cable2Array = {"BUILDING MANAGEMENT SYSTEM","FLEXIBLE-MULTI CORE","FLEXIBLE-SINGLE CORE","FLEXIBLE-TWIN TWISTED","OPTICAL FIBRE CABLE","RUBBER CABLE","WELDING CABLE"};
-	String[] Cable3Array = {"COXIAL CABLE","HOUSE WIRE 180M","HOUSE WIRE 180MPP","HOUSE WIRE 200MPP","HOUSE WIRE 300MPP","HOUSE WIRE 90M","SPEAKER CABLE","SUBMERSIBLE","SWITCHBOARD CABLE","TWIN FLAT"};
-	String[] Cable4Array = {"X"};
+
 	 ArrayList <String> product_value = new ArrayList<String>();
 	 ArrayList <String> searchResults = new ArrayList<String>();
 	EditText search_filter;
@@ -267,7 +264,7 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	                //Log.d("delete barcode","DBAR"+str);
 	            }
 	            Secondary_Sub_Category_f = commaSepValueBuilder1.toString();
-	            Log.d("Secondary_Sub_Category_f","Secondary_Sub_Category_f"+ Secondary_Sub_Category_f);
+	            Log.d("Secory_Sub_Categ_f","Secondary_Sub_Category_f"+ Secondary_Sub_Category_f);
 
 	        }catch(Exception e){e.printStackTrace();}
 	        
@@ -483,7 +480,7 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	                //Log.d("delete barcode","DBAR"+str);
 	            }
 	            PLANNING_MAKE_BUY_CODE_f = commaSepValueBuilder10.toString();
-	            Log.d("PLANNING_MAKE_BUY_CODE_f","PLANNING_MAKE_BUY_CODE_f"+ PLANNING_MAKE_BUY_CODE_f);
+	            Log.d("PLANG_KE_BUY_DE_","PLANNING_MAKE_BUY_CODE_f"+ PLANNING_MAKE_BUY_CODE_f);
 
 	        }catch(Exception e){e.printStackTrace();}
 	        
@@ -493,7 +490,7 @@ public class Invoice_filterList extends Activity implements OnItemSelectedListen
 	        if(Secondary_Category_f.equalsIgnoreCase("") && Secondary_Sub_Category_f.equalsIgnoreCase("") && Size1_f.equalsIgnoreCase("")&& Size2_f.equalsIgnoreCase("")&& Voltage_Watts_Amps_f.equalsIgnoreCase("")&& Colour_f.equalsIgnoreCase("")&& Metal_Aluminum_Wt_f.equalsIgnoreCase("")&& Metal_Copper_Wt_f.equalsIgnoreCase("")&& Product_Weight_f.equalsIgnoreCase("")&& Bending_Radius_f.equalsIgnoreCase("")&& PLANNING_MAKE_BUY_CODE_f.equalsIgnoreCase(""))
 	        {
 	        	GetListINVOICE(Global_Data.GLOVEL_INVOICE_VALUE);
-	        	Log.d("Filter value not selected ", "any");
+	        	Log.d("Filter value not sele", "any");
 	        	
 	        }
 	        else

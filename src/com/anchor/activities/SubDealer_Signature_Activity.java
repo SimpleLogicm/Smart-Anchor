@@ -924,14 +924,14 @@ public class SubDealer_Signature_Activity extends BaseActivity {
     // Call this whn the user has chosen the date and set the Date in the EditText in format that you wish
     private void updateLabel() {
 
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         order_detail1.setText(sdf.format(myCalendar.getTime()));
     }
 
     private void updateLabel1() {
 
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         order_detail2.setText(sdf.format(myCalendar.getTime()));
     }

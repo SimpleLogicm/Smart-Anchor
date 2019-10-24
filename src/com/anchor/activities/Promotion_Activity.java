@@ -1727,9 +1727,6 @@ public class Promotion_Activity extends Activity {
 
                 MultipartUtility multipart = new MultipartUtility(urlString, charset);
 
-//            multipart.addHeaderField("User-Agent", "CodeJava");
-//            multipart.addHeaderField("Test-Header", "Header-Value");
-
                 multipart.addFormField("email", Global_Data.GLOvel_USER_EMAIL);
                 multipart.addFormField("event_id", event_id);
                 multipart.addFormField("meet_in", inDateTime);
