@@ -1737,6 +1737,64 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    // Getting All Local_Data
+    public void getDeleteCtredit_Profile(String customer_id,String business_unit) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " + TABLE_CREDIT_PROFILE + " WHERE customer_id " + " = '" + customer_id + "'" + " AND business_unit = "+ business_unit + "'" ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    public void updateshop_details_Did(String customer_id,String business_unit,String project_id,String retailer_id,String created_by,String created_at,String updated_at,String code,String credit_limit,String amount_outstanding,String amount_overdue) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("project_id", project_id); //These Fields should be your String values of actual column names
+        cv.put("retailer_id", retailer_id);
+        cv.put("created_by", created_by);
+        cv.put("created_at", created_at);
+        cv.put("updated_at", updated_at);
+        cv.put("code", code);
+        cv.put("credit_limit", credit_limit);
+        cv.put("amount_outstanding", amount_outstanding);
+        cv.put("amount_overdue", amount_overdue);
+
+
+        db.update("credit_profile", cv, "customer_id" + " = ? AND business_unit" + " = ?", new String[]{customer_id, business_unit});
+
+        db.close();
+
+    }
+
+    // Getting All Local_Data
+    public void getDeleteCustomer(String code) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " + TABLE_CUSTOMER_MASTER + " WHERE LEGACY_CUSTOMER_CODE " + " = '" + code + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    // Getting All Local_Data
+    public void getDeleteSTATE_BYCODE(String code) {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " + TABLE_STATES + " WHERE code " + " = '" + code + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
 
     // Getting All Local_Data
     public void getDeleteNOOrder(String code) {
@@ -2187,6 +2245,40 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return contactList1;
     }
 
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllList_CodeS() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT code FROM " + TABLE_STATES;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
     // Getting All Local_Data
     public List<Local_Data> getstate(String State_id) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
@@ -2303,6 +2395,39 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 do {
                     Local_Data contact = new Local_Data();
                     contact.setStateName(cursor.getString(4));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllCity_CODE() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT code FROM " + TABLE_CITIES;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
                     //contact.setPwd(cursor.getString(2));
                     //contact.setImei(cursor.getString(3));
 
@@ -2804,6 +2929,39 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
         String selectQuery1 = "SELECT * FROM " + TABLE_CUSTOMER_MASTER;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> checkCustomer_CODE() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE FROM " + TABLE_CUSTOMER_MASTER;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -4058,6 +4216,41 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
                     //contact.setPwd(cursor.getString(2));
                     //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                    Log.d("ConTACT", "ConTACT" + contactList1);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+
+        // return contact list?
+        return contactList1;
+    }
+
+
+    // Getting All Local_Data for Credit Limit
+    public List<Local_Data> getCreditprofileData() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT customer_id,business_unit FROM " + TABLE_CREDIT_PROFILE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setBunit(cursor.getString(1));
 
                     // Adding contact to list
                     contactList1.add(contact);

@@ -362,7 +362,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="2dp"
-                android:layout_weight="1.20" >
+                android:layout_weight="1.50" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -372,6 +372,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginTop="30dp"
                     android:gravity="center"
                     android:text="@string/Promotional_Activity"
                     android:textColor="#111111"

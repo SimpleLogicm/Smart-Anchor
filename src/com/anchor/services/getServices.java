@@ -3064,6 +3064,14 @@ public class getServices {
         @Override
         protected String doInBackground(String... response) {
             try {
+                List<Local_Data> checkproducts = dbvoc.HSS_DescriptionITEM();
+                //List<Local_Data> checkstates= dbvoc.getAllList_CodeS();
+                // List<Local_Data> checkcity= dbvoc.getAllCity_CODE();
+                // List<Local_Data> checkbeat= dbvoc.getAllBeats();
+                List<Local_Data> checkcustomer = dbvoc.checkCustomer_CODE();
+                List<Local_Data> checkcredit_profile = dbvoc.getCreditprofileData();
+
+
                 final Calendar c = Calendar.getInstance();
                 JSONObject json = new JSONObject(final_response);
                 try {
@@ -3133,12 +3141,15 @@ public class getServices {
                         dbvoc.getDeleteTable("cities");
                         dbvoc.getDeleteTable("states");
                         dbvoc.getDeleteTable("beats");
-                        dbvoc.getDeleteTable("customer_master");
+                        //dbvoc.getDeleteTable("customer_master");
                         dbvoc.getDeleteTable("distributors");
                         dbvoc.getDeleteTable("Survey_Questions");
                         dbvoc.getDeleteTable("distributor_beats");
 
-                        dbvoc.getDeletecredit_limitsAll();
+                        // dbvoc.getDeletecredit_limitsAll();
+
+                        // SQLiteDatabase database = dbvoc.getWritableDatabase();
+                        // database.beginTransaction();
 
                         // JSONArray scheme = json.getJSONArray("scheme");
 
@@ -3178,355 +3189,398 @@ public class getServices {
                         // Log.d("customers", "customers" + customers.toString());
                         // Log.d("devices", "devices" + devices.toString());
 
-                        List<Local_Data> checkproducts = dbvoc.HSS_DescriptionITEM();
+
                         // List<Local_Data> checkproducts =  dbvoc.HSS_DescriptionITEM();
                         // List<Local_Data> checkproducts =  dbvoc.HSS_DescriptionITEM();
 
-                        for (int i = 0; i < label_acc.length(); i++) {
+                        try {
 
-                            JSONObject jsonObject = label_acc.getJSONObject(i);
-                            loginDataBaseAdapter.insertLABEL_CHANGES(jsonObject.getString("variable_name"), jsonObject.getString("new_label"), jsonObject.getString("editable"), jsonObject.getString("mandatory"), jsonObject.getString("allow"));
+                            for (int i = 0; i < label_acc.length(); i++) {
 
-                            Global_Data.Var_Label = jsonObject.getString("variable_name");
-                            Global_Data.editable = jsonObject.getString("editable");
-                            Global_Data.mandatory = jsonObject.getString("mandatory");
-                            Global_Data.allow = jsonObject.getString("allow");
+                                JSONObject jsonObject = label_acc.getJSONObject(i);
+                                loginDataBaseAdapter.insertLABEL_CHANGES(jsonObject.getString("variable_name"), jsonObject.getString("new_label"), jsonObject.getString("editable"), jsonObject.getString("mandatory"), jsonObject.getString("allow"));
 
-
-                            if (Global_Data.Var_Label.equalsIgnoreCase("no_order")) {
-                                // Global_Data.New_Label =jsonObject.getString("new_label");
-                                // Global_Data.editable =jsonObject.getString("editable");
-                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_norder", jsonObject.getString("new_label"));
-                                editor.commit();
-                            }
-
-                            if (Global_Data.Var_Label.equalsIgnoreCase("return_order")) {
-                                //Global_Data.New_Label =jsonObject.getString("new_label");
-                                // Global_Data.editable =jsonObject.getString("editable");
-
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_retorder", jsonObject.getString("new_label"));
-                                editor.commit();
-                            }
-
-                            if (Global_Data.Var_Label.equalsIgnoreCase("rp")) {
-                                //Global_Data.New_Label = jsonObject.getString("new_label");
-                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_rp", jsonObject.getString("new_label"));
-                                editor.commit();
-                            }
-
-                            if (Global_Data.Var_Label.equalsIgnoreCase("schedule")) {
-                                // Global_Data.New_Label = jsonObject.getString("new_label");
-                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_schedule", jsonObject.getString("new_label"));
-                                editor.commit();
-                            }
+                                Global_Data.Var_Label = jsonObject.getString("variable_name");
+                                Global_Data.editable = jsonObject.getString("editable");
+                                Global_Data.mandatory = jsonObject.getString("mandatory");
+                                Global_Data.allow = jsonObject.getString("allow");
 
 
-                            if (Global_Data.Var_Label.equalsIgnoreCase("detail1")) {
-                                //Global_Data.New_Label = jsonObject.getString("new_label");
-                                // Global_Data.editable = jsonObject.getString("editable");
+                                if (Global_Data.Var_Label.equalsIgnoreCase("no_order")) {
+                                    // Global_Data.New_Label =jsonObject.getString("new_label");
+                                    // Global_Data.editable =jsonObject.getString("editable");
+                                    // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
 
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_detail1", jsonObject.getString("new_label"));
-                                editor.commit();
-
-                                SharedPreferences spf1 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor1 = spf1.edit();
-                                editor1.putString("var_detail1_edit", jsonObject.getString("editable"));
-                                editor1.commit();
-
-                                SharedPreferences spf2 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor2 = spf2.edit();
-                                editor2.putString("var_detail1_mandate", jsonObject.getString("mandatory"));
-                                editor2.commit();
-
-                                SharedPreferences spf3 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor3 = spf3.edit();
-                                editor3.putString("var_detail1_allow", jsonObject.getString("allow"));
-                                editor3.commit();
-                            }
-
-                            if (Global_Data.Var_Label.equalsIgnoreCase("detail2")) {
-                                // Global_Data.New_Label = jsonObject.getString("new_label");
-                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_detail2", jsonObject.getString("new_label"));
-                                editor.commit();
-
-                                SharedPreferences spf1 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor1 = spf1.edit();
-                                editor1.putString("var_detail2_edit", jsonObject.getString("editable"));
-                                editor1.commit();
-
-                                SharedPreferences spf2 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor2 = spf2.edit();
-                                editor2.putString("var_detail2_mandate", jsonObject.getString("mandatory"));
-                                editor2.commit();
-
-                                SharedPreferences spf3 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor3 = spf3.edit();
-                                editor3.putString("var_detail2_allow", jsonObject.getString("allow"));
-                                editor3.commit();
-
-                            }
-
-                            if (Global_Data.Var_Label.equalsIgnoreCase("details4")) {
-                                //Global_Data.New_Label = jsonObject.getString("new_label");
-                                // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
-
-                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("var_detail4", jsonObject.getString("new_label"));
-                                editor.commit();
-
-                                SharedPreferences spf1 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor1 = spf1.edit();
-                                editor1.putString("var_detail4_edit", jsonObject.getString("editable"));
-                                editor1.commit();
-
-                                SharedPreferences spf2 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor2 = spf2.edit();
-                                editor2.putString("var_detail4_mandate", jsonObject.getString("mandatory"));
-                                editor2.commit();
-
-                                SharedPreferences spf3 = context.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor3 = spf3.edit();
-                                editor3.putString("var_detail4_allow", jsonObject.getString("allow"));
-                                editor3.commit();
-
-                            }
-
-                        }
-
-                        List<Local_Data> cont_lab = dbvoc.getAllLabels();
-                        //results.add("Select Beat");
-                        for (Local_Data cn : cont_lab)
-
-                            for (int z = 0; z < logo_img.length(); z++) {
-                                JSONObject logo_imgjobj = logo_img.getJSONObject(z);
-                                str = logo_imgjobj.getString("name");
-                                strr = logo_imgjobj.getString("data_image_string");
-                                if (str.equalsIgnoreCase("logo")) {
                                     SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
                                     SharedPreferences.Editor editor = spf.edit();
-                                    editor.putString("logo_data", strr);
+                                    editor.putString("var_norder", jsonObject.getString("new_label"));
                                     editor.commit();
                                 }
-                                if (str.equalsIgnoreCase("splash")) {
+
+                                if (Global_Data.Var_Label.equalsIgnoreCase("return_order")) {
+                                    //Global_Data.New_Label =jsonObject.getString("new_label");
+                                    // Global_Data.editable =jsonObject.getString("editable");
+
                                     SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
                                     SharedPreferences.Editor editor = spf.edit();
-                                    editor.putString("splash_data", strr);
+                                    editor.putString("var_retorder", jsonObject.getString("new_label"));
                                     editor.commit();
                                 }
+
+                                if (Global_Data.Var_Label.equalsIgnoreCase("rp")) {
+                                    //Global_Data.New_Label = jsonObject.getString("new_label");
+                                    // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
+
+                                    SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("var_rp", jsonObject.getString("new_label"));
+                                    editor.commit();
+                                }
+
+                                if (Global_Data.Var_Label.equalsIgnoreCase("schedule")) {
+                                    // Global_Data.New_Label = jsonObject.getString("new_label");
+                                    // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
+
+                                    SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("var_schedule", jsonObject.getString("new_label"));
+                                    editor.commit();
+                                }
+
+
+                                if (Global_Data.Var_Label.equalsIgnoreCase("detail1")) {
+                                    //Global_Data.New_Label = jsonObject.getString("new_label");
+                                    // Global_Data.editable = jsonObject.getString("editable");
+
+                                    SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("var_detail1", jsonObject.getString("new_label"));
+                                    editor.commit();
+
+                                    SharedPreferences spf1 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor1 = spf1.edit();
+                                    editor1.putString("var_detail1_edit", jsonObject.getString("editable"));
+                                    editor1.commit();
+
+                                    SharedPreferences spf2 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor2 = spf2.edit();
+                                    editor2.putString("var_detail1_mandate", jsonObject.getString("mandatory"));
+                                    editor2.commit();
+
+                                    SharedPreferences spf3 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor3 = spf3.edit();
+                                    editor3.putString("var_detail1_allow", jsonObject.getString("allow"));
+                                    editor3.commit();
+                                }
+
+                                if (Global_Data.Var_Label.equalsIgnoreCase("detail2")) {
+                                    // Global_Data.New_Label = jsonObject.getString("new_label");
+                                    // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
+
+                                    SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("var_detail2", jsonObject.getString("new_label"));
+                                    editor.commit();
+
+                                    SharedPreferences spf1 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor1 = spf1.edit();
+                                    editor1.putString("var_detail2_edit", jsonObject.getString("editable"));
+                                    editor1.commit();
+
+                                    SharedPreferences spf2 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor2 = spf2.edit();
+                                    editor2.putString("var_detail2_mandate", jsonObject.getString("mandatory"));
+                                    editor2.commit();
+
+                                    SharedPreferences spf3 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor3 = spf3.edit();
+                                    editor3.putString("var_detail2_allow", jsonObject.getString("allow"));
+                                    editor3.commit();
+
+                                }
+
+                                if (Global_Data.Var_Label.equalsIgnoreCase("details4")) {
+                                    //Global_Data.New_Label = jsonObject.getString("new_label");
+                                    // Prefs.SavePreferences("VAR_NOOREDER", cn.getVarLabel_account());
+
+                                    SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("var_detail4", jsonObject.getString("new_label"));
+                                    editor.commit();
+
+                                    SharedPreferences spf1 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor1 = spf1.edit();
+                                    editor1.putString("var_detail4_edit", jsonObject.getString("editable"));
+                                    editor1.commit();
+
+                                    SharedPreferences spf2 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor2 = spf2.edit();
+                                    editor2.putString("var_detail4_mandate", jsonObject.getString("mandatory"));
+                                    editor2.commit();
+
+                                    SharedPreferences spf3 = context.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor3 = spf3.edit();
+                                    editor3.putString("var_detail4_allow", jsonObject.getString("allow"));
+                                    editor3.commit();
+
+                                }
+
+                            }
+
+                            List<Local_Data> cont_lab = dbvoc.getAllLabels();
+                            //results.add("Select Beat");
+                            for (Local_Data cn : cont_lab)
+
+                                for (int z = 0; z < logo_img.length(); z++) {
+                                    JSONObject logo_imgjobj = logo_img.getJSONObject(z);
+                                    str = logo_imgjobj.getString("name");
+                                    strr = logo_imgjobj.getString("data_image_string");
+                                    if (str.equalsIgnoreCase("logo")) {
+                                        SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                        SharedPreferences.Editor editor = spf.edit();
+                                        editor.putString("logo_data", strr);
+                                        editor.commit();
+                                    }
+                                    if (str.equalsIgnoreCase("splash")) {
+                                        SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                        SharedPreferences.Editor editor = spf.edit();
+                                        editor.putString("splash_data", strr);
+                                        editor.commit();
+                                    }
+                                }
+
+
+                            for (int i = 0; i < users_emp.length(); i++) {
+
+                                JSONObject jsonObject = users_emp.getJSONObject(i);
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address"))) {
+                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), jsonObject.getString("address"));
+                                } else {
+                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), "");
+                                }
+
+
+                            }
+                            for (int i = 0; i < l1_contacts.length(); i++) {
+                                dbvoc.getDeleteTable("L1_Contact");
+
+                                JSONObject jsonObject = l1_contacts.getJSONObject(i);
+                                loginDataBaseAdapter.insert_L1_CONTACT("", jsonObject.getString("title"), jsonObject.getString("heading"), jsonObject.getString("sub_heading"), jsonObject.getString("address"), jsonObject.getString("contact_no1"), jsonObject.getString("contact_no2"), jsonObject.getString("email_id1"), jsonObject.getString("email_id2"), jsonObject.getString("website"), "", "", "");
+
+                            }
+
+                            for (int i = 0; i < Order_Category.length(); i++) {
+                                //dbvoc.getDeleteTable("scheme_new");
+
+                                JSONObject jsonObject = Order_Category.getJSONObject(i);
+                                loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "");
+
+                            }
+
+                            for (int i = 0; i < payment_terms.length(); i++) {
+
+                                JSONObject jsonObject = payment_terms.getJSONObject(i);
+                                loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "", "", "");
+
+                            }
+
+                            for (int i = 0; i < schemes.length(); i++) {
+                                //dbvoc.getDeleteTable("scheme_new");
+
+                                JSONObject jsonObject = schemes.getJSONObject(i);
+                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
+
+                            }
+
+                            for (int i = 0; i < warehouse.length(); i++) {
+                                //dbvoc.getDeleteTable("scheme_new");
+
+                                JSONObject jsonObject = warehouse.getJSONObject(i);
+                                loginDataBaseAdapter.insert_Warehouse("", jsonObject.getString("code"), "", jsonObject.getString("name"), "", jsonObject.getString("city_code"), jsonObject.getString("state_code"), "", "", "", "", "");
+
                             }
 
 
-                        for (int i = 0; i < users_emp.length(); i++) {
+                            if (checkproducts.size() <= 0) {
+                                Log.d("FIRST SYNC", "FIRST SYNC");
+                                for (int i = 0; i < items.length(); i++) {
 
-                            JSONObject jsonObject = users_emp.getJSONObject(i);
+                                    JSONObject jsonObject = items.getJSONObject(i);
 
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address"))) {
-                                dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), jsonObject.getString("address"));
-                            } else {
-                                dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), "");
-                            }
-
-
-                        }
-                        for (int i = 0; i < l1_contacts.length(); i++) {
-                            dbvoc.getDeleteTable("L1_Contact");
-
-                            JSONObject jsonObject = l1_contacts.getJSONObject(i);
-                            loginDataBaseAdapter.insert_L1_CONTACT("", jsonObject.getString("title"), jsonObject.getString("heading"), jsonObject.getString("sub_heading"), jsonObject.getString("address"), jsonObject.getString("contact_no1"), jsonObject.getString("contact_no2"), jsonObject.getString("email_id1"), jsonObject.getString("email_id2"), jsonObject.getString("website"), "", "", "");
-
-                        }
-
-                        for (int i = 0; i < Order_Category.length(); i++) {
-                            //dbvoc.getDeleteTable("scheme_new");
-
-                            JSONObject jsonObject = Order_Category.getJSONObject(i);
-                            loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "");
-
-                        }
-
-                        for (int i = 0; i < payment_terms.length(); i++) {
-
-                            JSONObject jsonObject = payment_terms.getJSONObject(i);
-                            loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "", "", "");
-
-                        }
-
-                        for (int i = 0; i < schemes.length(); i++) {
-                            //dbvoc.getDeleteTable("scheme_new");
-
-                            JSONObject jsonObject = schemes.getJSONObject(i);
-                            loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
-
-                        }
-
-                        for (int i = 0; i < warehouse.length(); i++) {
-                            //dbvoc.getDeleteTable("scheme_new");
-
-                            JSONObject jsonObject = warehouse.getJSONObject(i);
-                            loginDataBaseAdapter.insert_Warehouse("", jsonObject.getString("code"), "", jsonObject.getString("name"), "", jsonObject.getString("city_code"), jsonObject.getString("state_code"), "", "", "", "", "");
-
-                        }
-
-
-                        if (checkproducts.size() <= 0) {
-                            Log.d("FIRST SYNC", "FIRST SYNC");
-                            for (int i = 0; i < items.length(); i++) {
-
-                                JSONObject jsonObject = items.getJSONObject(i);
-
-                                loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
-                                        jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
-                                        jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                        jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
-
-
-                            }
-
-                        } else {
-                            for (int i = 0; i < items.length(); i++) {
-
-                                JSONObject jsonObject = items.getJSONObject(i);
-
-                                dbvoc.getDeletePRODUCT(jsonObject.getString("code"));
-
-                                if (jsonObject.getString("status").equalsIgnoreCase("active")) {
                                     loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                             jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                             jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
                                             jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
+
+
+                                }
+
+                            } else {
+                                for (int i = 0; i < items.length(); i++) {
+
+                                    JSONObject jsonObject = items.getJSONObject(i);
+
+                                    dbvoc.getDeletePRODUCT(jsonObject.getString("code"));
+
+                                    if (jsonObject.getString("status").equalsIgnoreCase("active")) {
+                                        loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
+                                                jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
+                                                jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
+                                                jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
+                                    }
+
+                                }
+                            }
+
+
+                            if (checkcustomer.size() <= 0) {
+                                for (int i = 0; i < customers.length(); i++) {
+
+                                    JSONObject jsonObject = customers.getJSONObject(i);
+                                    loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                            jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
+//
+
+                                }
+                            } else {
+                                for (int i = 0; i < customers.length(); i++) {
+
+                                    JSONObject jsonObject = customers.getJSONObject(i);
+                                    dbvoc.getDeleteCustomer(jsonObject.getString("code"));
+
+                                    if (jsonObject.getString("status").equalsIgnoreCase("active")) {
+                                        loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
+                                    }
+
+
+//
+
+                                }
+                            }
+
+
+                            for (int i = 0; i < distributors.length(); i++) {
+
+                                JSONObject jsonObject = distributors.getJSONObject(i);
+
+
+                                loginDataBaseAdapter.insertDistributors(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"),
+                                        jsonObject.getString("address1"), jsonObject.getString("address2"), jsonObject.getString("street"),
+                                        jsonObject.getString("landmark"), jsonObject.getString("state_code"),
+                                        jsonObject.getString("city_code"), jsonObject.getString("pincode"),
+                                        jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"),
+                                        jsonObject.getString("email"), jsonObject.getString("status"));
+
+
+                            }
+
+
+                            for (int i = 0; i < reasons.length(); i++) {
+
+                                JSONObject jsonObject = reasons.getJSONObject(i);
+
+                                if (!jsonObject.getString("status").equalsIgnoreCase("active")) {
+                                    dbvoc.getDeleteNOOrder(jsonObject.getString("code"));
+                                }
+
+
+                                if (jsonObject.getString("status").equalsIgnoreCase("active")) {
+                                    loginDataBaseAdapter.insertno_orderReason(jsonObject.getString("code"), jsonObject.getString("desc"));
+                                }
+
+
+                            }
+
+                            //if (checkstates.size() <= 0) {
+                            for (int i = 0; i < states.length(); i++) {
+
+                                JSONObject jsonObject = states.getJSONObject(i);
+
+                                loginDataBaseAdapter.insertStates("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("status"), "",
+                                        "", "", jsonObject.getString("code"));
+
+                            }
+//                        }
+//                        else
+//                        {
+//                            for (int i = 0; i < states.length(); i++) {
+//
+//                                JSONObject jsonObject = states.getJSONObject(i);
+//
+//                                dbvoc.getDeleteSTATE_BYCODE(jsonObject.getString("code"));
+//
+//                                if (jsonObject.getString("status").equalsIgnoreCase("active")) {
+//
+//                                    loginDataBaseAdapter.insertStates("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("status"), "",
+//                                            "", "", jsonObject.getString("code"));
+//                                }
+//
+//
+//
+//                            }
+//                        }
+
+
+                            for (int i = 0; i < cities.length(); i++) {
+
+                                JSONObject jsonObject = cities.getJSONObject(i);
+
+                                loginDataBaseAdapter.insertCities("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("status"), "",
+                                        "", "", "", jsonObject.getString("code"));
+
+                            }
+
+                            for (int i = 0; i < beats.length(); i++) {
+
+                                JSONObject jsonObject = beats.getJSONObject(i);
+                                loginDataBaseAdapter.insertBeats("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("status"), "",
+                                        "", "", "", jsonObject.getString("code"));
+
+                            }
+
+                            for (int i = 0; i < Survey_Questions.length(); i++) {
+
+                                JSONObject jsonObject = Survey_Questions.getJSONObject(i);
+
+                                loginDataBaseAdapter.insert_Survey_Questions(jsonObject.getString("survey_code"), jsonObject.getString("question_code"), jsonObject.getString("active_from"), jsonObject.getString("active_to"), jsonObject.getString("question"), jsonObject.getString("option1"), jsonObject.getString("option2"), jsonObject.getString("option3"), jsonObject.getString("option4"), jsonObject.getString("option5"), "", "");
+
+                            }
+
+                            for (int i = 0; i < distributor_beats.length(); i++) {
+
+                                JSONObject jsonObject = distributor_beats.getJSONObject(i);
+
+                                loginDataBaseAdapter.insert_DistriButorBeat(jsonObject.getString("code"), jsonObject.getString("distributor_code"), jsonObject.getString("beat_code"), jsonObject.getString("status"));
+
+                            }
+
+                            if (checkcredit_profile.size() <= 0) {
+
+                                for (int i = 0; i < credit_profile.length(); i++) {
+
+                                    JSONObject jsonObject = credit_profile.getJSONObject(i);
+
+                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+
+
+                                }
+
+                            } else {
+
+                                for (int i = 0; i < credit_profile.length(); i++) {
+
+                                    JSONObject jsonObject = credit_profile.getJSONObject(i);
+
+                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"),"",jsonObject.getString("customer_code"),"","","","",jsonObject.getString("credit_limit"),jsonObject.getString("amount_outstanding"),jsonObject.getString("amount_overdue"));
+
+
+
                                 }
 
                             }
-                        }
 
-
-                        for (int i = 0; i < customers.length(); i++) {
-
-                            JSONObject jsonObject = customers.getJSONObject(i);
-//                            List<Local_Data> contactsr =  dbvoc.getCustomer_BYID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
-//
-//                            if(contactsr.size() <= 0)
-//                            {
-//                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-//                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","",jsonObject.getString("latitude"),jsonObject.getString("longitude"));
-
-                            loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                    jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
-//                            }
-//                            else
-//                            {
-//                                dbvoc.deletesalesupdatebyID(jsonObject.getString("name"),jsonObject.getString("shop_name"));
-//                                loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-//                                        jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"),jsonObject.getString("beat_code"),jsonObject.getString("vatin"),"","","","");
-//
-//                            }
-
-                        }
-
-
-                        for (int i = 0; i < distributors.length(); i++) {
-
-                            JSONObject jsonObject = distributors.getJSONObject(i);
-
-
-                            loginDataBaseAdapter.insertDistributors(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"),
-                                    jsonObject.getString("address1"), jsonObject.getString("address2"), jsonObject.getString("street"),
-                                    jsonObject.getString("landmark"), jsonObject.getString("state_code"),
-                                    jsonObject.getString("city_code"), jsonObject.getString("pincode"),
-                                    jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"),
-                                    jsonObject.getString("email"), jsonObject.getString("status"));
-
-
-                        }
-
-
-                        for (int i = 0; i < reasons.length(); i++) {
-
-                            JSONObject jsonObject = reasons.getJSONObject(i);
-
-                            if (!jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                dbvoc.getDeleteNOOrder(jsonObject.getString("code"));
-                            }
-
-
-                            if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                loginDataBaseAdapter.insertno_orderReason(jsonObject.getString("code"), jsonObject.getString("desc"));
-                            }
-
-
-                        }
-
-                        for (int i = 0; i < states.length(); i++) {
-
-                            JSONObject jsonObject = states.getJSONObject(i);
-
-                            loginDataBaseAdapter.insertStates("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("status"), "",
-                                    "", "", jsonObject.getString("code"));
-
-                        }
-
-                        for (int i = 0; i < cities.length(); i++) {
-
-                            JSONObject jsonObject = cities.getJSONObject(i);
-
-                            loginDataBaseAdapter.insertCities("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("status"), "",
-                                    "", "", "", jsonObject.getString("code"));
-
-                        }
-
-                        for (int i = 0; i < beats.length(); i++) {
-
-                            JSONObject jsonObject = beats.getJSONObject(i);
-                            loginDataBaseAdapter.insertBeats("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("status"), "",
-                                    "", "", "", jsonObject.getString("code"));
-
-                        }
-
-                        for (int i = 0; i < Survey_Questions.length(); i++) {
-
-                            JSONObject jsonObject = Survey_Questions.getJSONObject(i);
-
-                            loginDataBaseAdapter.insert_Survey_Questions(jsonObject.getString("survey_code"), jsonObject.getString("question_code"), jsonObject.getString("active_from"), jsonObject.getString("active_to"), jsonObject.getString("question"), jsonObject.getString("option1"), jsonObject.getString("option2"), jsonObject.getString("option3"), jsonObject.getString("option4"), jsonObject.getString("option5"), "", "");
-
-                        }
-
-                        for (int i = 0; i < distributor_beats.length(); i++) {
-
-                            JSONObject jsonObject = distributor_beats.getJSONObject(i);
-
-                            loginDataBaseAdapter.insert_DistriButorBeat(jsonObject.getString("code"), jsonObject.getString("distributor_code"), jsonObject.getString("beat_code"), jsonObject.getString("status"));
-
-                        }
-
-                        for (int i = 0; i < credit_profile.length(); i++) {
-
-                            JSONObject jsonObject = credit_profile.getJSONObject(i);
-
-                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
-
-
-                        }
 
 //                        for (int i = 0; i < scheme.length(); i++) {
 //
@@ -3554,19 +3608,25 @@ public class getServices {
 
 //                        loginDataBaseAdapter.insert_itemScheme("s001","RUPEE DISCOUNT","11 rupees discount on purchase of 10 no of 200 ml Shampoo","11 rupees discount on  10","a001","10","11","");
 
-                        //dbvoc.update_stockChecks(s_code,s_stock);
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-                        SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm:ss");
+                            //dbvoc.update_stockChecks(s_code,s_stock);
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+                            SimpleDateFormat sdf_time = new SimpleDateFormat("hh:mm:ss");
 
-                        String Current_Date = sdf.format(c.getTime());
-                        String Current_Time = sdf_time.format(c.getTime());
+                            String Current_Date = sdf.format(c.getTime());
+                            String Current_Time = sdf_time.format(c.getTime());
 
 
-                        dbvoc.getDeleteTable("order_details");
-                        LoginDataBaseAdapter loginDataBaseAdapter = new LoginDataBaseAdapter(context);
-                        loginDataBaseAdapter = loginDataBaseAdapter.open();
+                            dbvoc.getDeleteTable("order_details");
+                            LoginDataBaseAdapter loginDataBaseAdapter = new LoginDataBaseAdapter(context);
+                            loginDataBaseAdapter = loginDataBaseAdapter.open();
 
-                        loginDataBaseAdapter.insert_order_details(Current_Date, Current_Time);
+                            loginDataBaseAdapter.insert_order_details(Current_Date, Current_Time);
+
+                            // database.setTransactionSuccessful();
+
+                        } finally {
+                            // database.endTransaction();
+                        }
 
                         final String finalResponse_result1 = response_result;
                         ((Activity) context).runOnUiThread(new Runnable() {
@@ -4485,58 +4545,58 @@ public class getServices {
 
                 String charset = "UTF-8";
 
-                String  domain = context.getResources().getString(R.string.service_domain);
+                String domain = context.getResources().getString(R.string.service_domain);
 
                 try {
 
-                MultipartUtility multipart = new MultipartUtility(domain + "sub_dealers/create_sub_dealer_order_details", charset);
+                    MultipartUtility multipart = new MultipartUtility(domain + "sub_dealers/create_sub_dealer_order_details", charset);
 
-                int a = 0;
-                String s = "";
-
-
-                byte[] b5;
-
-                List<Sub_Dealer_Order_Model> contacts = dbvoc.GetSubOrders(Global_Data.GLOvel_SUB_GORDER_ID);
-                //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
-
-                for (Sub_Dealer_Order_Model cn : contacts) {
-                    JSONObject product_value = new JSONObject();
-
-                    multipart.addFormField("order_number", cn.getOrder_id());
-
-                    Order_number = cn.getOrder_id();
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getLatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getLongitude())) {
-
-                        multipart.addFormField("latitude", cn.getLatitude());
-                        multipart.addFormField("longitude", cn.getLongitude());
-
-                    } else {
-                        multipart.addFormField("latitude", Global_Data.GLOvel_LATITUDE);
-                        multipart.addFormField("longitude", Global_Data.GLOvel_LONGITUDE);
-                    }
-
-                    email_adress = cn.getSub_dealer_email();
-                    Sub_MOBILE = cn.getSub_dealer_mobile();
-
-                    multipart.addFormField("sub_dealer_order", cn.getUser_email());
-                    multipart.addFormField("sub_dealer_code", cn.getSub_dealer_code());
-                    multipart.addFormField("sub_dealer_mobile", cn.getSub_dealer_mobile());
-                    multipart.addFormField("sub_dealer_email", cn.getSub_dealer_email());
-                    multipart.addFormField("dealer_id", cn.getDealer_id());
-                    multipart.addFormField("booked_at", cn.getBooked_at());
-                    multipart.addFormField("sub_dealer_shop_name", cn.getSub_dealer_shop_name());
-                    multipart.addFormField("email", cn.getOrder_type_code());
-                    multipart.addFormField("need_by_date", cn.getNeed_by_date());
-                    multipart.addFormField("shipment_priority", cn.getShipment_pr_code());
-                    multipart.addFormField("name", cn.getName());
-                    multipart.addFormField("remarks", cn.getRemarks());
+                    int a = 0;
+                    String s = "";
 
 
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getImage())) {
-                        order_image_url = cn.getImage().trim();
-                        // File filepath = new File(cn.getimg_ordersign());
-                        // String  path =  "file://"+filepath.getPath();
+                    byte[] b5;
+
+                    List<Sub_Dealer_Order_Model> contacts = dbvoc.GetSubOrders(Global_Data.GLOvel_SUB_GORDER_ID);
+                    //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
+
+                    for (Sub_Dealer_Order_Model cn : contacts) {
+                        JSONObject product_value = new JSONObject();
+
+                        multipart.addFormField("order_number", cn.getOrder_id());
+
+                        Order_number = cn.getOrder_id();
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getLatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getLongitude())) {
+
+                            multipart.addFormField("latitude", cn.getLatitude());
+                            multipart.addFormField("longitude", cn.getLongitude());
+
+                        } else {
+                            multipart.addFormField("latitude", Global_Data.GLOvel_LATITUDE);
+                            multipart.addFormField("longitude", Global_Data.GLOvel_LONGITUDE);
+                        }
+
+                        email_adress = cn.getSub_dealer_email();
+                        Sub_MOBILE = cn.getSub_dealer_mobile();
+
+                        multipart.addFormField("sub_dealer_order", cn.getUser_email());
+                        multipart.addFormField("sub_dealer_code", cn.getSub_dealer_code());
+                        multipart.addFormField("sub_dealer_mobile", cn.getSub_dealer_mobile());
+                        multipart.addFormField("sub_dealer_email", cn.getSub_dealer_email());
+                        multipart.addFormField("dealer_id", cn.getDealer_id());
+                        multipart.addFormField("booked_at", cn.getBooked_at());
+                        multipart.addFormField("sub_dealer_shop_name", cn.getSub_dealer_shop_name());
+                        multipart.addFormField("email", cn.getOrder_type_code());
+                        multipart.addFormField("need_by_date", cn.getNeed_by_date());
+                        multipart.addFormField("shipment_priority", cn.getShipment_pr_code());
+                        multipart.addFormField("name", cn.getName());
+                        multipart.addFormField("remarks", cn.getRemarks());
+
+
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getImage())) {
+                            order_image_url = cn.getImage().trim();
+                            // File filepath = new File(cn.getimg_ordersign());
+                            // String  path =  "file://"+filepath.getPath();
 //                        try {
 //                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getImage()));
 //                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
@@ -4552,14 +4612,14 @@ public class getServices {
 //                        }
 
 
-                    } else {
-                        product_value.put("picture1", "");
-                    }
+                        } else {
+                            product_value.put("picture1", "");
+                        }
 
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature())) {
-                        order_image_url2 = cn.getSignature().trim();
-                        // File filepath = new File(cn.getimg_ordersign());
-                        // String  path =  "file://"+filepath.getPath();
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature())) {
+                            order_image_url2 = cn.getSignature().trim();
+                            // File filepath = new File(cn.getimg_ordersign());
+                            // String  path =  "file://"+filepath.getPath();
 //                        try {
 //                            Bitmap mImageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.parse(cn.getSignature()));
 //                            ByteArrayOutputStream bos5 = new ByteArrayOutputStream();
@@ -4574,45 +4634,43 @@ public class getServices {
 //                            product_value.put("signature_path", "");
 //                        }
 
-                    } else {
-                        product_value.put("signature_path", "");
+                        } else {
+                            product_value.put("signature_path", "");
+                        }
+
+                        // order.put(product_value);
+                        Log.d("count", "a" + ++a);
+                        //delete_order_no = cn.getORDER_NUMBER();
+                        List<Local_Data> contactsproduct = dbvoc.Get_SubOrderProducts(cn.getOrder_id());
+                        for (Local_Data cnp : contactsproduct) {
+                            JSONObject item = new JSONObject();
+                            // item.put("order_number", cnp.get_category_code());
+                            item.put("product_code", cnp.get_delivery_product_id());
+                            item.put("total_qty", cnp.get_stocks_product_quantity());
+                            item.put("MRP", cnp.getMRP());
+                            item.put("amount", cnp.get_Claims_amount());
+                            //item.put("scheme_code", cnp.getSche_code());
+
+                            total_ammount += Double.valueOf(cnp.get_Claims_amount());
+
+
+                            product.put(item);
+
+                        }
                     }
 
-                   // order.put(product_value);
-                    Log.d("count", "a" + ++a);
-                    //delete_order_no = cn.getORDER_NUMBER();
-                    List<Local_Data> contactsproduct = dbvoc.Get_SubOrderProducts(cn.getOrder_id());
-                    for (Local_Data cnp : contactsproduct) {
-                        JSONObject item = new JSONObject();
-                        // item.put("order_number", cnp.get_category_code());
-                        item.put("product_code", cnp.get_delivery_product_id());
-                        item.put("total_qty", cnp.get_stocks_product_quantity());
-                        item.put("MRP", cnp.getMRP());
-                        item.put("amount", cnp.get_Claims_amount());
-                        //item.put("scheme_code", cnp.getSche_code());
 
-                        total_ammount += Double.valueOf(cnp.get_Claims_amount());
+                    // product_valuenew.put("sub_dealer_order", order);
+                    product_valuenew.put("sub_dealer_order_details", product);
+                    // product_valuenew.put("imei_no", Global_Data.device_id);
+                    Log.d("customers", customer.toString());
 
+                    //  Log.d("sub_dealer_order", order.toString());
 
-                        product.put(item);
+                    //  Log.d("sub_dealer_order_details",product.toString());
 
-                    }
-                }
-
-
-                // product_valuenew.put("sub_dealer_order", order);
-                product_valuenew.put("sub_dealer_order_details", product);
-               // product_valuenew.put("imei_no", Global_Data.device_id);
-                Log.d("customers", customer.toString());
-
-                //  Log.d("sub_dealer_order", order.toString());
-
-                //  Log.d("sub_dealer_order_details",product.toString());
-
-                Log.d("sub_dealer_order_Array", product_valuenew.toString());
-                Log.i("volley", "domain: " + domain);
-
-
+                    Log.d("sub_dealer_order_Array", product_valuenew.toString());
+                    Log.i("volley", "domain: " + domain);
 
 
                     Uri uri1 = Uri.parse(order_image_url);
@@ -4623,7 +4681,6 @@ public class getServices {
 
 
                     //File uploadFile1 = new File("/sdcard/myvideo.mp4");
-
 
 
                     multipart.addFormField("sub_dealer_order_details", product.toString());
