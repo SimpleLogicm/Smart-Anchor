@@ -398,6 +398,10 @@ public class Customer_info_main extends Activity {
 
                     All_customers.add(cn.getCUSTOMER_SHOPNAME());
 
+                    Double credit_data = 0.0;
+                    Double outstanding_data = 0.0;
+                    Double overdue_data = 0.0;
+
                     List<Local_Data> cityi = dbvoc.getcityByState_idn(City_id);
                     if(cityi.size() > 0)
                     {
@@ -422,40 +426,60 @@ public class Customer_info_main extends Activity {
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.get_credit_limit())) {
                                 Double credit_limit =  ((Double.valueOf(cnn.get_credit_limit())));
-                                ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit : "+ "</b>"+String.format("%.2f",credit_limit)));
-                            } else {
-                                ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
+                                credit_data +=credit_limit;
+
                             }
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.get_shedule_outstanding_amount())) {
                                 Double amt_outstanding =  ((Double.valueOf(cnn.get_shedule_outstanding_amount())));
-                                ci.amount1 = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding : "+ "</b>"+String.format("%.2f",amt_outstanding)));
+                                outstanding_data +=amt_outstanding;
 
-
-                            } else {
-
-                                ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
                             }
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cnn.getAmmount_overdue())) {
                                 Double amt_overdue =  ((Double.valueOf(cnn.getAmmount_overdue())));
-                                ci.amount2 = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue : "+ "</b>"+String.format("%.2f",amt_overdue)));
-
-
-                            } else {
-                                ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
+                                overdue_data +=amt_overdue;
 
                             }
 
 
                         }
                     }
-                    else
-                    {
-                        ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
-                        ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
-                        ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
+
+
+                    try{
+                        if(credit_data != 0.0)
+                        {
+                            ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit : "+ "</b>"+String.format("%.2f",credit_data)));
+                        }
+                        else
+                        {
+                            ci.credit_limit = String.valueOf(Html.fromHtml("<b>" +"Credit Limit Not Found"+ "</b>"));
+                        }
+
+                        if(outstanding_data != 0.0)
+                        {
+                            ci.amount1 = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding : "+ "</b>"+String.format("%.2f",outstanding_data)));
+                        }
+                        else
+                        {
+                            ci.amount1  = String.valueOf(Html.fromHtml("<b>" +"Amount Outstanding Not Found"+ "</b>"));
+                        }
+
+                        if(overdue_data != 0.0)
+                        {
+                            ci.amount2 = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue : "+ "</b>"+String.format("%.2f",overdue_data)));
+                        }
+                        else
+                        {
+                            ci.amount2  = String.valueOf(Html.fromHtml("<b>" +"Amount Overdue Not Found"+ "</b>"));
+                        }
+
+                    }catch(Exception ex){
+                        ex.printStackTrace();
                     }
+
+
 
                     result.add(ci);
                     Allresult.add(ci);

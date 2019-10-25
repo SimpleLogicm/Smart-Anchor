@@ -3573,8 +3573,10 @@ public class getServices {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
+                                   // dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"));
                                     dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"),"",jsonObject.getString("customer_code"),"","","","",jsonObject.getString("credit_limit"),jsonObject.getString("amount_outstanding"),jsonObject.getString("amount_overdue"));
 
+//                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                                 }
