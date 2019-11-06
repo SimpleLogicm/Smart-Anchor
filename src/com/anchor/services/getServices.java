@@ -1510,25 +1510,25 @@ public class getServices {
 //   					txt.setText("Order is generated.");
 //   					TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
 //   					TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
-//   					
+//
 //   					txtEmail.setText("Mail has been sent to " + email_adress );
 //
-//                       
+//
 //   					ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
-//   									
+//
 //   					dialogButton.setOnClickListener(new OnClickListener() {
 //   						@Override
 //   						public void onClick(View v) {
 //   							dialog.dismiss();
-//   							
-//   						
-//   							
+//
+//
+//
 //   							//overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //   							Intent intentn = new Intent(context, MainActivity.class);
 //   							context.startActivity(intentn);
 //   							((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //   							((Activity) context).finish();
-//   						   
+//
 //   						}
 //   					});
 //
@@ -1793,25 +1793,25 @@ public class getServices {
 //  					txt.setText("Order is generated.");
 //  					TextView txtMessage = (TextView) dialog.findViewById(R.id.txtMessage);
 //  					TextView txtEmail = (TextView) dialog.findViewById(R.id.txtEmail);
-//  					
+//
 //  					txtEmail.setText("Mail has been sent to " + email_adress );
 //
-//                      
+//
 //  					ImageView dialogButton = (ImageView) dialog.findViewById(R.id.dialogButton);
-//  									
+//
 //  					dialogButton.setOnClickListener(new OnClickListener() {
 //  						@Override
 //  						public void onClick(View v) {
 //  							dialog.dismiss();
-//  							
-//  						
-//  							
+//
+//
+//
 //  							//overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //  							Intent intentn = new Intent(context, MainActivity.class);
 //  							context.startActivity(intentn);
 //  							((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 //  							((Activity) context).finish();
-//  						   
+//
 //  						}
 //  					});
 //
@@ -3573,7 +3573,7 @@ public class getServices {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                                   // dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"));
+                                    // dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"));
                                     dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"),"",jsonObject.getString("customer_code"),"","","","",jsonObject.getString("credit_limit"),jsonObject.getString("amount_outstanding"),jsonObject.getString("amount_overdue"));
 
 //                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));

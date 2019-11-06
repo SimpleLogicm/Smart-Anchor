@@ -9,7 +9,6 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -29,7 +28,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -171,7 +169,8 @@ public class MainActivity extends BaseActivity {
         if (Global_Data.LOCATION_SERVICE_HIT.equalsIgnoreCase("TRUE")) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(new Intent(this, MyService.class));
+                //startForegroundService(new Intent(this, MyService.class));
+                startService(new Intent(this, MyService.class));
             } else {
                 startService(new Intent(this, MyService.class));
             }

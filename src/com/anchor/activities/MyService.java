@@ -948,11 +948,7 @@ public class MyService extends Service implements LocationListener{
 		return sb.toString();
 	}
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		startForeground(1,new Notification());
-	}
+
 
 
 }
