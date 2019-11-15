@@ -71,7 +71,7 @@ public class AllOrders_Sync  extends Activity  {
 
                 isInternetPresent = cd.isConnectingToInternet();
 
-                if (isInternetPresent)
+                if (Global_Data.isNetworkAvailable(AllOrders_Sync.this))
                 {
 //                    AlertDialog alertDialog = new AlertDialog.Builder(AllOrders_Sync.this).create(); //Read Update
 //                    alertDialog.setTitle("Confirmation");
@@ -143,7 +143,7 @@ public class AllOrders_Sync  extends Activity  {
 
                 isInternetPresent = cd.isConnectingToInternet();
 
-                if (isInternetPresent)
+                if (Global_Data.isNetworkAvailable(AllOrders_Sync.this))
                 {
 
                     getServices.sendRequestnew(AllOrders_Sync.this, "Please wait...");
@@ -166,7 +166,7 @@ public class AllOrders_Sync  extends Activity  {
 
                 isInternetPresent = cd.isConnectingToInternet();
 
-                if (isInternetPresent)
+                if (Global_Data.isNetworkAvailable(AllOrders_Sync.this))
                 {
 
                     getServices.SyncDataToServercommon(AllOrders_Sync.this);
@@ -188,7 +188,7 @@ public class AllOrders_Sync  extends Activity  {
 
                 isInternetPresent = cd.isConnectingToInternet();
 
-                if (isInternetPresent)
+                if (Global_Data.isNetworkAvailable(AllOrders_Sync.this))
                 {
 
                     getServices.SyncDataToServerCustomer(AllOrders_Sync.this);

@@ -27,7 +27,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,6 +34,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.ProductSearchAdapter;
 import com.anchor.model.Product;
 import com.anchor.swipelistview.sample.adapters.Product_AllVarient_Adapter;
 import com.karumi.dexter.Dexter;
@@ -66,6 +66,8 @@ public class Preorder_Proall_Varient extends Activity {
     HashMap<String, String> map;
     ArrayList<String> list1 = new ArrayList<String>();
     ArrayList<String> list2 = new ArrayList<String>();
+    ArrayList<String> Glist1 = new ArrayList<String>();
+    ArrayList<String> Glist2 = new ArrayList<String>();
     Boolean isInternetPresent = false;
 
     private   ArrayList<String> p_id = new ArrayList<String>();
@@ -79,6 +81,7 @@ public class Preorder_Proall_Varient extends Activity {
 
     ConnectionDetector cd;
     ArrayList<HashMap<String, String>> SwipeList;
+    ArrayList<HashMap<String, String>> GSwipeList;
     ArrayList<String> Amount_tp = new ArrayList<String>();
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     private static final int REQUEST_CODE_SETTINGS = 0;
@@ -105,6 +108,7 @@ public class Preorder_Proall_Varient extends Activity {
     Button  buttonPreviewAddMOre, buttonPreviewHome, addmorenews;
     public static final int SIGNATURE_ACTIVITY = 1;
     AutoCompleteTextView Product_Variant;
+    ProductSearchAdapter productSearchAdapter;
 
 
 
@@ -135,6 +139,11 @@ public class Preorder_Proall_Varient extends Activity {
         //txttotalPreview.setText("Total		:		"+"");
 
         SwipeList = new ArrayList<HashMap<String, String>>();
+        GSwipeList = new ArrayList<HashMap<String, String>>();
+
+
+        productSearchAdapter = new ProductSearchAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        Product_Variant.setAdapter(productSearchAdapter);
 
 
         SharedPreferences spf = Preorder_Proall_Varient.this.getSharedPreferences("SimpleLogic", 0);
@@ -250,9 +259,9 @@ public class Preorder_Proall_Varient extends Activity {
                         });
 
                     } else {
-                        SwipeList.clear();
-                        list1.clear();
-                        list2.clear();
+                        GSwipeList.clear();
+                        Glist1.clear();
+                        Glist2.clear();
                         pp=0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
@@ -263,7 +272,8 @@ public class Preorder_Proall_Varient extends Activity {
                             mapp.put(TAG_ITEM_NUMBER, cnt1.getCode());
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
-                           // Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+                            mapp.put(TAG_STOCK, "");
+                            //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
 
 
@@ -272,25 +282,25 @@ public class Preorder_Proall_Varient extends Activity {
                             if (contactsn.size() > 0) {
                                 for (Local_Data cn : contactsn) {
 
-                                    list1.add(cn.get_delivery_product_order_quantity());
-                                    list2.add("PRICE : " + cn.getAmount());
+                                    Glist1.add(cn.get_delivery_product_order_quantity());
+                                    Glist2.add("PRICE : " + cn.getAmount());
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
                                         pp += Double.valueOf(cn.getAmount());
                                     }
                                 }
                             } else {
-                                list1.add("");
-                                list2.add("");
+                                Glist1.add("");
+                                Glist2.add("");
                             }
 
-                            SwipeList.add(mapp);
+                            GSwipeList.add(mapp);
                         }
 
                         Preorder_Proall_Varient.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Product_AllVarient_Adapter(Preorder_Proall_Varient.this, SwipeList, list1, list2);
+                                adapter = new Product_AllVarient_Adapter(Preorder_Proall_Varient.this, GSwipeList, Glist1, Glist2);
 
                                 swipeListView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -322,7 +332,9 @@ public class Preorder_Proall_Varient extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if(Product_Variant.getText().toString().trim().length() == 0) {
-                    new VarientASN().execute();
+                    adapter = new Product_AllVarient_Adapter(Preorder_Proall_Varient.this, SwipeList, list1, list2);
+                    swipeListView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
                 }
 
@@ -690,13 +702,13 @@ public class Preorder_Proall_Varient extends Activity {
 
                                 swipeListView.setAdapter(adapter);
 
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Preorder_Proall_Varient.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
-                                Product_Variant.setThreshold(1);// will start working from
-                                // first character
-                                Product_Variant.setAdapter(adapter);// setting the adapter
-                                // data into the
-                                // AutoCompleteTextView
-                                Product_Variant.setTextColor(Color.BLACK);
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Preorder_Proall_Varient.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+//                                Product_Variant.setThreshold(1);// will start working from
+//                                // first character
+//                                Product_Variant.setAdapter(adapter);// setting the adapter
+//                                // data into the
+//                                // AutoCompleteTextView
+//                                Product_Variant.setTextColor(Color.BLACK);
                                 txttotalPreview.setText("Total : " + pp);
 
 
@@ -778,13 +790,13 @@ public class Preorder_Proall_Varient extends Activity {
 
                                     swipeListView.setAdapter(adapter);
 
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Preorder_Proall_Varient.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
-                                    Product_Variant.setThreshold(1);// will start working from
-                                    // first character
-                                    Product_Variant.setAdapter(adapter);// setting the adapter
-                                    // data into the
-                                    // AutoCompleteTextView
-                                    Product_Variant.setTextColor(Color.BLACK);
+//                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Preorder_Proall_Varient.this,android.R.layout.simple_spinner_dropdown_item,resultsvarient);
+//                                    Product_Variant.setThreshold(1);// will start working from
+//                                    // first character
+//                                    Product_Variant.setAdapter(adapter);// setting the adapter
+//                                    // data into the
+//                                    // AutoCompleteTextView
+//                                    Product_Variant.setTextColor(Color.BLACK);
                                     txttotalPreview.setText("Total : " + pp);
 
 

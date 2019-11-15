@@ -787,18 +787,18 @@ public class MainActivity extends BaseActivity {
         calendarn = Calendar.getInstance();
         year = calendarn.get(Calendar.YEAR);
 
-        dialog = new ProgressDialog(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.setCancelable(false);
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+//        dialog = new ProgressDialog(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//        dialog.setMessage("Please wait Target Sync....");
+//        dialog.setTitle("Smart Anchor App");
+//        dialog.setCancelable(false);
+//        dialog.setCancelable(false);
+//        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        dialog.show();
 
         String user_email = "";
 
@@ -960,10 +960,10 @@ public class MainActivity extends BaseActivity {
 
                             //todaysTarget.setText("T/A : Rs "+t_total+"/"+achived_total);
 
-                            if(dialog != null || dialog.isShowing())
-                            {
-                                dialog.dismiss();
-                            }
+//                            if(dialog != null || dialog.isShowing())
+//                            {
+//                                dialog.dismiss();
+//                            }
 
                             //finish();
 
@@ -975,17 +975,17 @@ public class MainActivity extends BaseActivity {
                         // output.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        if(dialog != null || dialog.isShowing())
-                        {
-                            dialog.dismiss();
-                        }
+//                        if(dialog != null || dialog.isShowing())
+//                        {
+//                            dialog.dismiss();
+//                        }
                     }
 
 
-                    if(dialog != null || dialog.isShowing())
-                    {
-                        dialog.dismiss();
-                    }
+//                    if(dialog != null || dialog.isShowing())
+//                    {
+//                        dialog.dismiss();
+//                    }
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -995,10 +995,10 @@ public class MainActivity extends BaseActivity {
 //					Toast toast = Toast.makeText(MainActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
 //					toast.setGravity(Gravity.CENTER, 0, 0);
 //					toast.show();
-                    if(dialog != null || dialog.isShowing())
-                    {
-                        dialog.dismiss();
-                    }
+//                    if(dialog != null || dialog.isShowing())
+//                    {
+//                        dialog.dismiss();
+//                    }
 
                 }
             });
@@ -1018,10 +1018,10 @@ public class MainActivity extends BaseActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            if(dialog != null || dialog.isShowing())
-            {
-                dialog.dismiss();
-            }
+//            if(dialog != null || dialog.isShowing())
+//            {
+//                dialog.dismiss();
+//            }
 
 
         }

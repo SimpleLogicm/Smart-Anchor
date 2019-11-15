@@ -23,7 +23,7 @@ buildscript {
     ext.kotlin_version = '1.3.21'
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath 'com.google.gms:google-services:4.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'io.fabric.tools:gradle:1.28.0'
@@ -130,6 +130,7 @@ dependencies {
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.felixsoares:ImageZoom:1.0'
+
 }
 
 android {
@@ -166,8 +167,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         multiDexEnabled = true
-        versionCode 27
-        versionName "1.7.8"
+        versionCode 28
+        versionName "1.7.9"
         resConfigs "en"
     }
 

@@ -3091,7 +3091,7 @@ public class getServices {
                             public void run() {
                                 Toast.makeText(context.getApplicationContext(), finalResponse_result, Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
-                                getTargetDataservice(context);
+                               // getTargetDataservice(context);
                             }
                         });
                     } else if (response_result.equalsIgnoreCase("Device not registered")) {
@@ -3574,7 +3574,7 @@ public class getServices {
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
                                     // dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"));
-                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"),"",jsonObject.getString("customer_code"),"","","","",jsonObject.getString("credit_limit"),jsonObject.getString("amount_outstanding"),jsonObject.getString("amount_overdue"));
+                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"), "", jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
 
 //                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
@@ -3635,9 +3635,15 @@ public class getServices {
                             public void run() {
                                 Toast.makeText(context, "items Sync Successfully.", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
+
+                                Intent intentn = new Intent(context, MainActivity.class);
+                                context.startActivity(intentn);
+                                //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                ((Activity) context).finish();
+
                                 t_total = 0;
                                 achived_total = 0;
-                                getTargetDataservice(context);
+                                //getTargetDataservice(context);
 
                             }
                         });
@@ -3685,153 +3691,6 @@ public class getServices {
         }
     }
 
-    public static void getTargetDataservicenew(final Context contextn) {
-        SharedPreferences sp = contextn.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-        device_id = sp.getString("devid", "");
-
-        calendarn = Calendar.getInstance();
-        year = calendarn.get(Calendar.YEAR);
-        loginDataBaseAdapter = new LoginDataBaseAdapter(contextn);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
-        dbvoc = new DataBaseHelper(contextn);
-        dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.show();
-
-        try {
-
-            String domain = contextn.getResources().getString(R.string.service_domain);
-
-            Log.i("volley", "domain: " + domain);
-            Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "targets?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.i("volley", "response: " + response);
-                    //  Log.i("volley", "response reg Length: " + response.length());
-
-
-                    try {
-
-
-                        //   for (int a = 0; a < response.length(); a++) {
-
-//	                        JSONObject person = (JSONObject) response.getJSONArray(response);
-                        //
-                        //   String name = response.getString("result44");
-
-                        String response_result = "";
-                        if (response.has("result")) {
-                            response_result = response.getString("result");
-                        } else {
-                            response_result = "data";
-                        }
-
-
-                        if (response_result.equalsIgnoreCase("User doesn't exist")) {
-
-                            Toast.makeText(contextn, response_result, Toast.LENGTH_LONG).show();
-
-                        } else {
-
-                            dbvoc.getDeleteTable("targets");
-
-                            JSONArray targets = response.getJSONArray("targets");
-
-
-                            Log.i("volley", "response reg targets Length: " + targets.length());
-
-                            Log.d("States", "targets" + targets.toString());
-
-                            //
-                            for (int i = 0; i < targets.length(); i++) {
-
-                                JSONObject jsonObject = targets.getJSONObject(i);
-
-//
-                                loginDataBaseAdapter.insertTargets("", "", "",
-                                        jsonObject.getString("year"), jsonObject.getString("month"), jsonObject.getString("target"),
-                                        jsonObject.getString("achieved"), "", "");
-
-                                if (jsonObject.getString("year").equalsIgnoreCase(String.valueOf(year))) {
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target"))) {
-                                        t_total += Float.valueOf(jsonObject.getString("target"));
-                                    }
-
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("achieved"))) {
-                                        achived_total += Float.valueOf(jsonObject.getString("achieved"));
-                                    }
-                                }
-
-
-                            }
-
-
-                            SharedPreferences spf = contextn.getSharedPreferences("SimpleLogic", 0);
-                            SharedPreferences.Editor editor = spf.edit();
-                            //editor.putString("UserID", "admin");
-                            //editor.putString("pwd", "test");
-                            editor.putFloat("Target", t_total);
-                            editor.putFloat("Achived", achived_total);
-                            //editor.putString("SimID", simSerial);
-                            editor.commit();
-                            dialog.dismiss();
-
-
-//                            Intent intent = new Intent(getActivity(), Target.class);
-//                            startActivity(intent);
-//                            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-
-                            //finish();
-
-                        }
-
-
-                        // }
-
-                        // output.setText(data);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        dialog.dismiss();
-
-
-                    }
-
-
-                    dialog.dismiss();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                    Log.i("volley", "error: " + error);
-                    //Toast.makeText(contextn, "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
-
-                    dialog.dismiss();
-
-                }
-            });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(contextn);
-            // queue.add(jsObjRequest);
-            jsObjRequest.setShouldCache(false);
-            int socketTimeout = 200000;//30 seconds - change to what you want
-            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            jsObjRequest.setRetryPolicy(policy);
-            requestQueue.add(jsObjRequest);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            dialog.dismiss();
-
-
-        }
-    }
 
     public static void getTargetDataservice(final Context contextn) {
         t_total = 0;
@@ -3845,11 +3704,11 @@ public class getServices {
         loginDataBaseAdapter = new LoginDataBaseAdapter(contextn);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
         dbvoc = new DataBaseHelper(contextn);
-        dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please wait Target Sync....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.show();
+//        dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+//        dialog.setMessage("Please wait Target Sync....");
+//        dialog.setTitle("Smart Anchor App");
+//        dialog.setCancelable(false);
+//        dialog.show();
 
         try {
 
@@ -3933,11 +3792,11 @@ public class getServices {
                             editor.putFloat("Achived", achived_total);
                             //editor.putString("SimID", simSerial);
                             editor.commit();
-                            dialog.dismiss();
-                            Intent intentn = new Intent(context, MainActivity.class);
-                            context.startActivity(intentn);
-                            //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            ((Activity) context).finish();
+                            //  dialog.dismiss();
+//                            Intent intentn = new Intent(context, MainActivity.class);
+//                            context.startActivity(intentn);
+//                            //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                            ((Activity) context).finish();
 
 //                            Intent intent = new Intent(getActivity(), Target.class);
 //                            startActivity(intent);
@@ -3954,16 +3813,16 @@ public class getServices {
                         // output.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        dialog.dismiss();
-                        Intent intentn = new Intent(context, MainActivity.class);
-                        context.startActivity(intentn);
-                        //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        ((Activity) context).finish();
+                        // dialog.dismiss();
+//                        Intent intentn = new Intent(context, MainActivity.class);
+//                        context.startActivity(intentn);
+//                        //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                        ((Activity) context).finish();
 
                     }
 
 
-                    dialog.dismiss();
+                    //dialog.dismiss();
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -3971,11 +3830,11 @@ public class getServices {
 
                     Log.i("volley", "error: " + error);
                     //Toast.makeText(contextn, "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
-                    Intent intentn = new Intent(context, MainActivity.class);
-                    context.startActivity(intentn);
-                    // ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    ((Activity) context).finish();
-                    dialog.dismiss();
+//                    Intent intentn = new Intent(context, MainActivity.class);
+//                    context.startActivity(intentn);
+//                    // ((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    ((Activity) context).finish();
+//                    dialog.dismiss();
 
                 }
             });
@@ -3990,7 +3849,7 @@ public class getServices {
 
         } catch (Exception e) {
             e.printStackTrace();
-            dialog.dismiss();
+            //dialog.dismiss();
 
         }
     }
@@ -4364,7 +4223,11 @@ public class getServices {
                                             dialog1.dismiss();
 
                                             //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                            getTargetDataservice(context);
+                                            //getTargetDataservice(context);
+
+                                            Intent intentn = new Intent(context, MainActivity.class);
+                                            context.startActivity(intentn);
+                                            ((Activity) context).finish();
 
 
                                         }

@@ -1365,11 +1365,12 @@ public class CaptureSignature extends BaseActivity {
 //                                            e.printStackTrace();
 //                                        }
 
+                                            cd = new ConnectionDetector(getApplicationContext());
                                             isInternetPresent = cd.isConnectingToInternet();
 
 
-                                            if (isInternetPresent) {
-                                                onDestroy();
+                                            if (Global_Data.isNetworkAvailable(CaptureSignature.this)) {
+                                               // onDestroy();
                                                 getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
                                             } else {
                                                 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
@@ -1507,4 +1508,6 @@ public class CaptureSignature extends BaseActivity {
             }
         }
     }
+
+
 }

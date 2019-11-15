@@ -148,6 +148,11 @@ public class LoginActivity extends Activity {
 
         FirebaseApp.initializeApp(this);
 
+        String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        Log.d("Android ID","Android ID"+android_id);
+
+
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
@@ -253,11 +258,11 @@ public class LoginActivity extends Activity {
         }
 
 
-        editText1.setText("sadanand");
-        editText2.setText("PASSWORD");
+//        editText1.setText("sadanand");
+//        editText2.setText("PASSWORD");
 
-//        editText1.setText("Sadanand 1");
-//        editText2.setText("sadanand12345");
+        editText1.setText("sadanand");
+        editText2.setText("sadanand8730739");
 
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");

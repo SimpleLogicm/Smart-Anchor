@@ -1,6 +1,9 @@
 package com.anchor.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import com.anchor.model.Spiner_List_Model;
@@ -214,6 +217,7 @@ public class Global_Data {
     public static ArrayList<String> Some_list = new ArrayList<String>();
 
     public static String Sub_Dealer_Code="";
+    public static String Product_Array="";
     public static String Sub_Dealer_name="";
     public static String Sub_Email="";
     public static String SUB_Mobile="";
@@ -235,5 +239,11 @@ public class Global_Data {
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
 }
