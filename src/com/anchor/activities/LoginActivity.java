@@ -148,9 +148,8 @@ public class LoginActivity extends Activity {
 
         FirebaseApp.initializeApp(this);
 
-        String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-
-        Log.d("Android ID","Android ID"+android_id);
+//        String android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+//        Log.d("Android ID","Android ID"+android_id);
 
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {

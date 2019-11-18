@@ -69,7 +69,7 @@ public class Forget_Pwd extends Activity {
             View mCustomView = mInflater.inflate(R.layout.action_bar, null);
             mCustomView.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));
             TextView mTitleTextView = mCustomView.findViewById(R.id.screenname);
-            mTitleTextView.setText("Forget Password");
+            mTitleTextView.setText("Forgot Password");
 
             TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);

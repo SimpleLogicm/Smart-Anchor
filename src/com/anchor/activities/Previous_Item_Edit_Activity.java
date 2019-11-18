@@ -600,7 +600,11 @@ public class Previous_Item_Edit_Activity extends BaseActivity {
 
                                 gps.showSettingsAlertnew();
                             } else {
-                                int SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
+                                int SQMO_Validator = 0;
+                                if(editTextQuantity.length() != 0)
+                                {
+                                    SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
+                                }
 
                                 if (editTextQuantity.getText().toString().length() == 0) {
                                     Toast toast = Toast.makeText(Previous_Item_Edit_Activity.this, "Please enter Quantity", Toast.LENGTH_SHORT);
