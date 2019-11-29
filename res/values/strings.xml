@@ -29,7 +29,7 @@
 
     <string name="title_logo">NEW LAUNCH</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
-    <string name="link"><a href="">Forget Password</a></string>
+    <string name="link"><a href="">Forgot Password</a></string>
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item>Home</item>
@@ -49,6 +49,7 @@
         <item>Settings</item>
         <item>Contact Us</item>
         <item>About Metal</item>
+        <item>Change Password</item>
         <!--<item>Advertisement</item>-->
         <!--<item>New Launch</item>-->
         <item>Log Out</item>

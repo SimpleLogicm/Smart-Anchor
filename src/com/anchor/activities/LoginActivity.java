@@ -25,13 +25,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.multidex.MultiDex;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.text.InputType;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -133,6 +137,7 @@ public class LoginActivity extends Activity {
     public static String CHANNEL_ID = "SmartAnchor";
     String CHANNEL_NAME = "SmartAnchor";
     String CHANNEL_DESC = "Anchor App";
+    private int passwordNotVisible=1;
 
     @SuppressLint("InlinedApi")
     @Override
@@ -257,11 +262,11 @@ public class LoginActivity extends Activity {
         }
 
 
-//        editText1.setText("sadanand");
-//        editText2.setText("PASSWORD");
-
         editText1.setText("sadanand");
-        editText2.setText("sadanand8730739");
+        editText2.setText("PASSWORD");
+
+//        editText1.setText("sadanand");
+//        editText2.setText("sadanand8730739");
 
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
@@ -289,101 +294,42 @@ public class LoginActivity extends Activity {
             System.out.println("Local Values:-" + Global_Data.local_user + "," + Global_Data.local_pwd);
             //Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
         }
-        //manager=(TelephonyManager) getSystemService(TELEPHONY_SERVICE);
-        //int simState=manager.getSimState();
 
-//		SharedPreferences pref_usrnm = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//		usr_email=pref_usrnm.getString("login_email", "");
-//
-//		if(devid.length()>0)
-//		{
-//			link_fpwd.setVisibility(View.VISIBLE);
-//		}else{
-//			link_fpwd.setVisibility(View.GONE);
-//		}
+        editText2.setOnTouchListener(new View.OnTouchListener() {
 
-//		link_fpwd.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View view)
-//			{
-//				if (isInternetPresent)
-//				{
-//
-//				}
-//				else
-//				{
-//					// Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
-//					Toast toast = Toast.makeText(LoginActivity.this,"You don't have internet connection.", Toast.LENGTH_LONG);
-//					toast.setGravity(Gravity.CENTER, 0, 0);
-//					toast.show();
-//				}
-//
-////				Boolean compare_computed = BCrypt.checkpw(usr_name, pwd);
-////				//Boolean compare_computed = BCrypt.checkpw(test_passwd, test_hash);
-////				String s = String.valueOf(compare_computed);
-////
-//////				String phoneNo = textPhoneNo.getText().toString();
-//////				String sms = "Your Password is "+password;
-////
-////				try {
-////					SmsManager smsManager = SmsManager.getDefault();
-////					//smsManager.sendTextMessage(phoneNo, null, sms, null, null);
-////					Toast.makeText(getApplicationContext(), "SMS Sent!",
-////							Toast.LENGTH_LONG).show();
-////				} catch (Exception e) {
-////					Toast.makeText(getApplicationContext(),
-////							"SMS faild, please try again later!",
-////							Toast.LENGTH_LONG).show();
-////					e.printStackTrace();
-////				}
-//			}
-//		});
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
 
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (editText2.getRight() - editText2.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
-//		app_clear_dat.setOnClickListener(new OnClickListener() {
-//			public void onClick(View view)
-//			{
-//				AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-//
-//
-//				builder.setMessage("Do you want to Clear app Data ?")
-//						.setCancelable(false)
-//						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int id) {
-//
-//								File cache = getCacheDir();
-//								File appDir = new File(cache.getParent());
-//								if(appDir.exists()) {
-//									String[] children = appDir.list();
-//									for (String s : children) {
-//										if (!s.equals("lib")) {
-//											deleteDir(new File(appDir, s));
-//											Log.i("TAG", "File /data/data/APP_PACKAGE/" + s + " DELETED");
-//
-//											editText1.setText("");
-//											editText2.setText("");
-//											emp_code.setText("");
-//											Toast.makeText(LoginActivity.this, "App Data Clear Successfully, Please click Sign Up Button.", Toast.LENGTH_SHORT).show();
-//										}
-//									}
-//								}
-//
-//							}
-//						})
-//						.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog, int id) {
-//								dialog.cancel();
-//
-//							}
-//						});
-//
-//				//Creating dialog box
-//				AlertDialog alert = builder.create();
-//				//Setting the title manually
-//				alert.setTitle("Smart Anchor");
-//				alert.show();
-//			}
-//		});
+                        View view = LoginActivity.this.getCurrentFocus();
+                        if (view != null) {
+                           // InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                           // imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                        //autoCompleteTextView1.setText("");
+                        if (passwordNotVisible == 1) {
+                            editText2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_visibility_black_24dp), null);
+                            editText2.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                            passwordNotVisible = 0;
+
+                        } else {
+                            editText2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_visibility_off_black_24dp), null);
+                            editText2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                            passwordNotVisible = 1;
+
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         buttonReg.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {

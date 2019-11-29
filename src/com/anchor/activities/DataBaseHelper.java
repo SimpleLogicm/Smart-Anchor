@@ -6458,6 +6458,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting product data
+    public List<Local_Data> getBusinee_category_Name_BYBUsiness_UNIT(String business_unit) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        Cursor cursor = db.rawQuery("select DISTINCT b_business_c FROM item_master WHERE b_unit = ?",
+                new String[]{business_unit});
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setbusiness_category(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
     public List<Local_Data> getBusinee_subcategory_Name(String business_unit, String primary_categore, String business_category) {
         List<Local_Data> contactList14 = new ArrayList<Local_Data>();
 
@@ -6467,6 +6498,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("select DISTINCT sub_category FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ?",
                 new String[]{business_unit, primary_categore, business_category});
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setSubcateg(cursor.getString(0));
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Local_Data> getBusinee_subcategory_W_PrimaryCate(String business_unit, String business_category) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+
+        Cursor cursor = db.rawQuery("select DISTINCT sub_category FROM item_master WHERE b_unit = ? AND b_business_c = ?",
+                new String[]{business_unit, business_category});
 
         // looping through all rows and adding to list
         try {
@@ -9208,6 +9270,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY product_variant limit 200",
                 new String[]{business_unit, primary_category, business_category, sub_category});
+
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setStateName(cursor.getString(0));
+                    contact.setMRP(cursor.getString(1));
+                    contact.set_Description(cursor.getString(2));
+                    contact.set_Claims(cursor.getString(3));
+                    contact.setProduct_nm(cursor.getString(4));
+                    contact.setCode(cursor.getString(5));
+                    contact.setCategory(cursor.getString(6));
+                    contact.setSubcateg(cursor.getString(7));
+                    contact.setProduct_variant(cursor.getString(8));
+                    contact.setSQ(cursor.getString(9));
+                    contact.setMQ(cursor.getString(10));
+                    //contact.set_stocks_product_name(cursor.getString(11));
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Local_Data> getProductvarientWithoutCategory(String business_unit, String business_category, String sub_category) {
+        List<Local_Data> contactList14 = new ArrayList<Local_Data>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE b_unit = ? AND b_business_c = ? AND sub_category = ? GROUP BY product_variant limit 200",
+                new String[]{business_unit, business_category, sub_category});
 
 
         // looping through all rows and adding to list

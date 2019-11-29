@@ -145,7 +145,7 @@ public class Forget_Pwd extends Activity {
                                 } else {
                                     try {
                                         resultstr = response.getString("result");
-                                        if (resultstr.equalsIgnoreCase("Password updated successfully")) {
+                                        if (resultstr.equalsIgnoreCase("Password successfully sent to email Id and Mobile No.")) {
                                             String password = response.getString("password");
                                             dbvoc.update_password(password, email_id.getText().toString().trim());
 

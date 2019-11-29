@@ -112,7 +112,6 @@ public class Previous_orderNew_S1 extends BaseActivity {
     RecyclerView spinner_recycleview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -753,24 +752,43 @@ public class Previous_orderNew_S1 extends BaseActivity {
 //
 //				}
 
+//                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
+//                            result_Business.clear();
+//                            result_Business.add("Select Business Division");
+//
+////					results_beat.clear();
+////					results_beat.add("Select Beat");
+//                            List<Local_Data> contacts2 = dbvoc.getBdivByBunit(items);
+//                            for (Local_Data cn : contacts2) {
+//
+//                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
+//                                    result_Business.add(cn.getprimary_category());
+//                                }
+//
+//                            }
+//
+//                            dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
+//                            dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+//                            spnBusinessDiv.setAdapter(dataAdapterBd);
+//
+//
+//                        }
+
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
-                            result_Business.clear();
-                            result_Business.add("Select Business Division");
 
-//					results_beat.clear();
-//					results_beat.add("Select Beat");
-                            List<Local_Data> contacts2 = dbvoc.getBdivByBunit(items);
+                            results1.clear();
+                            results1.add("Select Business Category");
+                            List<Local_Data> contacts2 = dbvoc.getBusinee_category_Name_BYBUsiness_UNIT(items);
                             for (Local_Data cn : contacts2) {
-
-                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
-                                    result_Business.add(cn.getprimary_category());
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getbusiness_category())) {
+                                    String str_categ = "" + cn.getbusiness_category();
+                                    results1.add(str_categ);
                                 }
-
                             }
 
-                            dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
-                            dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-                            spnBusinessDiv.setAdapter(dataAdapterBd);
+                            adapter_state1 = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, results1);
+                            adapter_state1.setDropDownViewResource(R.layout.spinner_item);
+                            spnCategory.setAdapter(adapter_state1);
 
 
                         }
@@ -1446,7 +1464,8 @@ public class Previous_orderNew_S1 extends BaseActivity {
 
                         results.clear();
                         //List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_ID(Global_Data.GLOVEL_CATEGORY_ID);
-                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_Name(spnBu.getSelectedItem().toString(),spnBusinessDiv.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
+//                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_Name(spnBu.getSelectedItem().toString(),spnBusinessDiv.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
+                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_W_PrimaryCate(spnBu.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
                         results.add("Select Brand");
                         for (Local_Data cn : contacts22) {
 

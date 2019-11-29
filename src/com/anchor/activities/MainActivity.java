@@ -174,7 +174,7 @@ public class MainActivity extends BaseActivity {
             } else {
                 startService(new Intent(this, MyService.class));
             }
-           // startService(new Intent(this, MyService.class));
+            // startService(new Intent(this, MyService.class));
             Global_Data.LOCATION_SERVICE_HIT = "";
         }
 
@@ -273,6 +273,7 @@ public class MainActivity extends BaseActivity {
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[7]));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[8]));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[9]));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[10]));
         // navDrawerItems.add(new NavDrawerItem(navMenuTitles[10]));
 //
 //		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7]));
@@ -557,6 +558,12 @@ public class MainActivity extends BaseActivity {
                 fragment = new Home();
                 break;
             case 9:
+                Intent ChangePass = new Intent(MainActivity.this, ChangePassword.class);
+                startActivity(ChangePass);
+                //finish();
+                fragment = new Home();
+                break;
+            case 10:
                 onBackPressed();
                 fragment = new Home();
                 break;
@@ -669,7 +676,6 @@ public class MainActivity extends BaseActivity {
             alertDialog.setCancelable(false);
             alertDialog.show();
         }
-
 
 
         if (firstLaunch) {
