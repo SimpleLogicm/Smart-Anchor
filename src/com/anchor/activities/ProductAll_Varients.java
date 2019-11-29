@@ -278,7 +278,7 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
-                         //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+                            //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
 
 
@@ -375,7 +375,7 @@ public class ProductAll_Varients extends Activity {
                     Global_Data.GLOVEL_LONG_DESC = "";
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
-                   // Global_Data.Search_business_unit_name = "";
+                    // Global_Data.Search_business_unit_name = "";
                     Global_Data.Search_Category_name = "";
                     Global_Data.Search_BusinessCategory_name = "";
                     Global_Data.Search_brand_name = "";
@@ -415,7 +415,7 @@ public class ProductAll_Varients extends Activity {
                                 Global_Data.GLOVEL_LONG_DESC = "";
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
-                               // Global_Data.Search_business_unit_name = "";
+                                // Global_Data.Search_business_unit_name = "";
                                 Global_Data.Search_Category_name = "";
                                 Global_Data.Search_BusinessCategory_name = "";
                                 Global_Data.Search_brand_name = "";
@@ -448,7 +448,7 @@ public class ProductAll_Varients extends Activity {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
-                       // Global_Data.Search_business_unit_name = "";
+                        // Global_Data.Search_business_unit_name = "";
                         Global_Data.Search_Category_name = "";
                         Global_Data.Search_BusinessCategory_name = "";
                         Global_Data.Search_brand_name = "";
@@ -482,7 +482,7 @@ public class ProductAll_Varients extends Activity {
                                 Global_Data.GLOVEL_LONG_DESC = "";
                                 Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                                 Global_Data.GLOVEL_ITEM_MRP = "";
-                             //   Global_Data.Search_business_unit_name = "";
+                                //   Global_Data.Search_business_unit_name = "";
                                 Global_Data.Search_Category_name = "";
                                 Global_Data.Search_BusinessCategory_name = "";
                                 Global_Data.Search_brand_name = "";
@@ -520,7 +520,7 @@ public class ProductAll_Varients extends Activity {
                         Global_Data.GLOVEL_LONG_DESC = "";
                         Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                         Global_Data.GLOVEL_ITEM_MRP = "";
-                      //  Global_Data.Search_business_unit_name = "";
+                        //  Global_Data.Search_business_unit_name = "";
                         Global_Data.Search_Category_name = "";
                         Global_Data.Search_BusinessCategory_name = "";
                         Global_Data.Search_brand_name = "";
@@ -587,19 +587,19 @@ public class ProductAll_Varients extends Activity {
 //
 //                        alertDialog.show();
 //                    } else {
-                        Global_Data.GLOVEL_LONG_DESC = "";
-                        Global_Data.GLOVEL_CATEGORY_SELECTION = "";
-                        Global_Data.GLOVEL_ITEM_MRP = "";
-                     //   Global_Data.Search_business_unit_name = "";
-                        Global_Data.Search_Category_name = "";
-                        Global_Data.Search_BusinessCategory_name = "";
-                        Global_Data.Search_brand_name = "";
+                    Global_Data.GLOVEL_LONG_DESC = "";
+                    Global_Data.GLOVEL_CATEGORY_SELECTION = "";
+                    Global_Data.GLOVEL_ITEM_MRP = "";
+                    //   Global_Data.Search_business_unit_name = "";
+                    Global_Data.Search_Category_name = "";
+                    Global_Data.Search_BusinessCategory_name = "";
+                    Global_Data.Search_brand_name = "";
 
-                        Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        startActivity(i);
-                        finish();
-                 //   }
+                    Intent i = new Intent(ProductAll_Varients.this, PreviewOrderSwipeActivity.class);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    startActivity(i);
+                    finish();
+                    //   }
 
 
                     //NewOrderFragment.this.startActivity(i);
@@ -680,7 +680,7 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_STOCK, "");
                             //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
-                           // resultsvarient.add(cnt1.getProduct_variant());
+                            // resultsvarient.add(cnt1.getProduct_variant());
 
                             List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 
@@ -729,13 +729,9 @@ public class ProductAll_Varients extends Activity {
                 }
                 else
                 {
-//                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
 
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name)) {
-
-//                        List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
-
-                        List<Local_Data> cont1 = dbvoc.getProductvarientWithoutCategory(Global_Data.Search_business_unit_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
+                        List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name);
 
                         if (cont1.size() <= 0) {
                             // Toast.makeText(Schedule_List.this, "Sorry No Record Found.", Toast.LENGTH_SHORT).show();
@@ -772,7 +768,7 @@ public class ProductAll_Varients extends Activity {
                                 mapp.put(TAG_STOCK, "");
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
-                               // resultsvarient.add(cnt1.getProduct_variant());
+                                // resultsvarient.add(cnt1.getProduct_variant());
 
                                 List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 
@@ -1003,7 +999,7 @@ public class ProductAll_Varients extends Activity {
 
             if (!p_id.isEmpty() && q_check.equalsIgnoreCase("yes")) {
 
-               // Long randomPIN = System.currentTimeMillis();
+                // Long randomPIN = System.currentTimeMillis();
                 String PINString = new SimpleDateFormat("yyMdHms").format(Calendar.getInstance().getTime());
                 if (Global_Data.GLOvel_GORDER_ID.equalsIgnoreCase("")) {
                     if (Global_Data.sales_btnstring.equalsIgnoreCase("Secondary Sales / Retail Sales")) {
@@ -1075,7 +1071,7 @@ public class ProductAll_Varients extends Activity {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(p_q.get(k))) {
                                 loginDataBaseAdapter.insertOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID, "", Global_Data.Search_Category_name, Global_Data.Search_Product_name, p_name.get(k), " ", "", " ", "", p_q.get(k), p_rp.get(k), p_mrp.get(k), p_price.get(k), "", "", Global_Data.order_retailer, " ", p_id.get(k), " ", p_name.get(k));//Reading all
 
-                               // Log.d("pPRIZE","Pprize"+ p_price.get(k));
+                                // Log.d("pPRIZE","Pprize"+ p_price.get(k));
                             }
 
 
@@ -1254,7 +1250,7 @@ public class ProductAll_Varients extends Activity {
                     Global_Data.GLOVEL_LONG_DESC = "";
                     Global_Data.GLOVEL_CATEGORY_SELECTION = "";
                     Global_Data.GLOVEL_ITEM_MRP = "";
-                  //  Global_Data.Search_business_unit_name = "";
+                    //  Global_Data.Search_business_unit_name = "";
                     Global_Data.Search_Category_name = "";
                     Global_Data.Search_BusinessCategory_name = "";
                     Global_Data.Search_brand_name = "";
@@ -1290,7 +1286,7 @@ public class ProductAll_Varients extends Activity {
             Global_Data.GLOVEL_LONG_DESC = "";
             Global_Data.GLOVEL_CATEGORY_SELECTION = "";
             Global_Data.GLOVEL_ITEM_MRP = "";
-           // Global_Data.Search_business_unit_name = "";
+            // Global_Data.Search_business_unit_name = "";
             Global_Data.Search_Category_name = "";
             Global_Data.Search_BusinessCategory_name = "";
             Global_Data.Search_brand_name = "";

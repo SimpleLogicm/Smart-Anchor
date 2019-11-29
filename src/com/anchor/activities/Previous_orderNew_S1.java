@@ -112,6 +112,7 @@ public class Previous_orderNew_S1 extends BaseActivity {
     RecyclerView spinner_recycleview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -218,7 +219,7 @@ public class Previous_orderNew_S1 extends BaseActivity {
         // Reading all
         try
         {
-           // if(!Global_Data.Search_business_unit_name.equalsIgnoreCase(""))
+            // if(!Global_Data.Search_business_unit_name.equalsIgnoreCase(""))
 //            {
 //                String str_bunit = "";
 //                result_bu.clear();
@@ -264,51 +265,51 @@ public class Previous_orderNew_S1 extends BaseActivity {
 //                }
 //
 //            }
-           // else
-           // {
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-                    result_bu.clear();
-                    List<Local_Data> contact_bu = dbvoc.getAllB_Unit_BYBU(Global_Data.Business_unit_code_array);
-                    result_bu.add("Select BU");
-                    for (Local_Data cn : contact_bu) {
-                        String str_bunit = "" + cn.getBunit();
-                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
-                            result_bu.add(str_bunit);
-                        }
+            // else
+            // {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
+                result_bu.clear();
+                List<Local_Data> contact_bu = dbvoc.getAllB_Unit_BYBU(Global_Data.Business_unit_code_array);
+                result_bu.add("Select BU");
+                for (Local_Data cn : contact_bu) {
+                    String str_bunit = "" + cn.getBunit();
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+                        result_bu.add(str_bunit);
                     }
-
-                    dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
-                    dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
-                    spnBu.setAdapter(dataAdapterBu);
-
-                    result_Business.clear();
-                    result_Business.add("Select Business Division");
-                    dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
-                    dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-                    spnBusinessDiv.setAdapter(dataAdapterBd);
                 }
-                else
-                {
-                    result_bu.clear();
-                    List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
-                    result_bu.add("Select BU");
-                    for (Local_Data cn : contact_bu) {
-                        String str_bunit = "" + cn.getBunit();
-                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
-                            result_bu.add(str_bunit);
-                        }
+
+                dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
+                dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+                spnBu.setAdapter(dataAdapterBu);
+
+                result_Business.clear();
+                result_Business.add("Select Business Division");
+                dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
+                dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+                spnBusinessDiv.setAdapter(dataAdapterBd);
+            }
+            else
+            {
+                result_bu.clear();
+                List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
+                result_bu.add("Select BU");
+                for (Local_Data cn : contact_bu) {
+                    String str_bunit = "" + cn.getBunit();
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+                        result_bu.add(str_bunit);
                     }
-
-                    dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
-                    dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
-                    spnBu.setAdapter(dataAdapterBu);
-
-                    result_Business.clear();
-                    result_Business.add("Select Business Division");
-                    dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
-                    dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-                    spnBusinessDiv.setAdapter(dataAdapterBd);
                 }
+
+                dataAdapterBu = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_bu);
+                dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+                spnBu.setAdapter(dataAdapterBu);
+
+                result_Business.clear();
+                result_Business.add("Select Business Division");
+                dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
+                dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+                spnBusinessDiv.setAdapter(dataAdapterBd);
+            }
 
             //}
         }catch(Exception ex){ex.printStackTrace();}
@@ -752,43 +753,24 @@ public class Previous_orderNew_S1 extends BaseActivity {
 //
 //				}
 
-//                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
-//                            result_Business.clear();
-//                            result_Business.add("Select Business Division");
-//
-////					results_beat.clear();
-////					results_beat.add("Select Beat");
-//                            List<Local_Data> contacts2 = dbvoc.getBdivByBunit(items);
-//                            for (Local_Data cn : contacts2) {
-//
-//                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
-//                                    result_Business.add(cn.getprimary_category());
-//                                }
-//
-//                            }
-//
-//                            dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
-//                            dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-//                            spnBusinessDiv.setAdapter(dataAdapterBd);
-//
-//
-//                        }
-
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(items)) {
+                            result_Business.clear();
+                            result_Business.add("Select Business Division");
 
-                            results1.clear();
-                            results1.add("Select Business Category");
-                            List<Local_Data> contacts2 = dbvoc.getBusinee_category_Name_BYBUsiness_UNIT(items);
+//					results_beat.clear();
+//					results_beat.add("Select Beat");
+                            List<Local_Data> contacts2 = dbvoc.getBdivByBunit(items);
                             for (Local_Data cn : contacts2) {
-                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getbusiness_category())) {
-                                    String str_categ = "" + cn.getbusiness_category();
-                                    results1.add(str_categ);
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getprimary_category())) {
+                                    result_Business.add(cn.getprimary_category());
                                 }
+
                             }
 
-                            adapter_state1 = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, results1);
-                            adapter_state1.setDropDownViewResource(R.layout.spinner_item);
-                            spnCategory.setAdapter(adapter_state1);
+                            dataAdapterBd = new ArrayAdapter<String>(Previous_orderNew_S1.this, R.layout.spinner_item, result_Business);
+                            dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+                            spnBusinessDiv.setAdapter(dataAdapterBd);
 
 
                         }
@@ -1464,8 +1446,7 @@ public class Previous_orderNew_S1 extends BaseActivity {
 
                         results.clear();
                         //List<Local_Data> contacts22 = dbvoc.HSS_DescriptionITEM1_ID(Global_Data.GLOVEL_CATEGORY_ID);
-//                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_Name(spnBu.getSelectedItem().toString(),spnBusinessDiv.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
-                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_W_PrimaryCate(spnBu.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
+                        List<Local_Data> contacts22 = dbvoc.getBusinee_subcategory_Name(spnBu.getSelectedItem().toString(),spnBusinessDiv.getSelectedItem().toString(),parent.getItemAtPosition(pos).toString().trim());
                         results.add("Select Brand");
                         for (Local_Data cn : contacts22) {
 
@@ -1623,7 +1604,7 @@ public class Previous_orderNew_S1 extends BaseActivity {
     public void onResume() {
         // TODO Auto-generated method stubs
         super.onResume();
-       // Global_Data.spiner_list_modelList.clear();
+        // Global_Data.spiner_list_modelList.clear();
         Global_Data.array_of_pVarient.clear();
         buttonAddMOre.setBackgroundColor(Color.parseColor("#414042"));
         buttonPreviewOrder.setBackgroundColor(Color.parseColor("#414042"));

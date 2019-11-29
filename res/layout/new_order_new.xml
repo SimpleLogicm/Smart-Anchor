@@ -1,6 +1,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/containerNewOrder"
+    android:id="@+id/containerNewOrder"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -67,7 +67,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:visibility="gone"
         android:layout_below="@+id/spnBu"
         android:layout_centerHorizontal="true"
         android:hint="@string/business_division"
@@ -143,7 +142,7 @@
         android:visibility="gone"
         android:orientation="horizontal"
         android:paddingTop="10dp"
-         >
+        >
 
         <TextView
             android:id="@+id/textRP"
@@ -176,7 +175,7 @@
             android:id="@+id/editTextMRP"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" 
+            android:layout_gravity="center"
             android:layout_marginLeft="5dp"/>
     </LinearLayout>
 
@@ -193,7 +192,7 @@
         android:paddingTop="10dp" >
     </EditText>
 
-     <Spinner
+    <Spinner
         android:id="@+id/spnScheme1"
         android:visibility="gone"
         android:layout_width="250dp"
@@ -201,7 +200,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:hint="@string/scheme"
-         android:paddingTop="10dp" />
+        android:paddingTop="10dp" />
 
     <EditText
         android:id="@+id/txtDeleiveryQuantity"
@@ -216,8 +215,8 @@
         android:textSize="17dp">
     </EditText>
 
-  
-     <TextView
+
+    <TextView
         android:id="@+id/txtPrice1"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
