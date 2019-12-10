@@ -263,7 +263,7 @@ public class LoginActivity extends Activity {
 
 
         editText1.setText("sadanand");
-        editText2.setText("PASSWORD");
+        editText2.setText("Sada@123");
 
 //        editText1.setText("sadanand");
 //        editText2.setText("sadanand8730739");

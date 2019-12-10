@@ -1784,6 +1784,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting All Local_Data
+    public void getDeleteCustomerWhereBeatnotExist() {
+        // List<Local_Data> contactList = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery = "DELETE FROM " + TABLE_CUSTOMER_MASTER + " WHERE BEAT NOT IN ( SELECT code from beats )";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        //db.close();
+    }
+
+    // Getting All Local_Data
     public void getDeleteSTATE_BYCODE(String code) {
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
@@ -3509,7 +3521,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Local_Data> getAllCustomer() {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT DISTINCT CUSTOMER_SHOPNAME FROM " + TABLE_CUSTOMER_MASTER;
+        String selectQuery1 = "SELECT DISTINCT CUSTOMER_SHOPNAME FROM " + TABLE_CUSTOMER_MASTER ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);

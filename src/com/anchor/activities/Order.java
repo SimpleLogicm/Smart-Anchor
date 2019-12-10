@@ -2287,6 +2287,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                         // data into the
                         // AutoCompleteTextView
                         autoCompleteTextView1.setTextColor(Color.BLACK);
+
                     }
                 }
             }

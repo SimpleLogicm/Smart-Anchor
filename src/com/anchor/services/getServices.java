@@ -448,8 +448,6 @@ public class getServices {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //showJSON(response);
-                        // Log.d("jV", "JV" + response);
                         Log.d("jV", "JV length" + response.length());
                         final_response = response;
                         Context mActivity = context;
@@ -3617,7 +3615,7 @@ public class getServices {
                             String Current_Date = sdf.format(c.getTime());
                             String Current_Time = sdf_time.format(c.getTime());
 
-
+                            dbvoc.getDeleteCustomerWhereBeatnotExist();
                             dbvoc.getDeleteTable("order_details");
                             LoginDataBaseAdapter loginDataBaseAdapter = new LoginDataBaseAdapter(context);
                             loginDataBaseAdapter = loginDataBaseAdapter.open();
@@ -4084,6 +4082,7 @@ public class getServices {
 
 
                         String response_result = "";
+
                         //if (response.has("result")) {
                         try {
                             response_result = response.getString("result");
@@ -4106,11 +4105,13 @@ public class getServices {
                             });
                         }
 
-                        if (response_result.equalsIgnoreCase("Device not found.")) {
+                        final String result_text = response_result;
+
+                        if (!response_result.equalsIgnoreCase("Orders created successfully.")) {
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 public void run() {
 
-                                    Toast toast = Toast.makeText(context, "Device Not Found", Toast.LENGTH_LONG);
+                                    Toast toast = Toast.makeText(context, result_text, Toast.LENGTH_LONG);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
                                     dialog.dismiss();
@@ -4129,7 +4130,7 @@ public class getServices {
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 public void run() {
 
-                                    Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, result_text, Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
 
 
