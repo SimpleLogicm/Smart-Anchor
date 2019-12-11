@@ -35,7 +35,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -1638,8 +1637,6 @@ public class LoginActivity extends Activity {
                                 if (contacts2.size() > 0) {
                                     Validate_Email_Pass(editText1.getText().toString().trim(), editText2.getText().toString().trim());
                                 } else {
-                                    //  Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_SHORT).show();
-
                                     Toast toast = Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();

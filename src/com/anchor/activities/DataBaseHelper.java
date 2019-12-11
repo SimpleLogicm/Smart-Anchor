@@ -2809,13 +2809,56 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Local_Data> getCustomerCode(String Customer_Name) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array,order_category_code_array FROM " + TABLE_CUSTOMER_MASTER + " WHERE CUSTOMER_SHOPNAME = '" + Customer_Name + "'";
-
         SQLiteDatabase db = this.getWritableDatabase();
         // Cursor cursor = db.rawQuery(selectQuery1, null);
 
         Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array,order_category_code_array from customer_master WHERE CUSTOMER_SHOPNAME = ?",
                 new String[]{Customer_Name});
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCust_Code(cursor.getString(0));
+                    contact.setAddress(cursor.getString(1));
+                    contact.setMOBILE_NO(cursor.getString(2));
+                    contact.setCUSTOMER_NAME(cursor.getString(3));
+                    contact.setSTATE_ID(cursor.getString(4));
+                    contact.setCITY_ID(cursor.getString(5));
+                    contact.setBEAT_ID(cursor.getString(6));
+                    contact.setCUSTOMER_SHOPNAME(cursor.getString(7));
+                    contact.setlatitude(cursor.getString(8));
+                    contact.setlongitude(cursor.getString(9));
+                    contact.setCust_email(cursor.getString(10));
+                    contact.setBusiness_unit_code_array(cursor.getString(11));
+                    contact.setOrder_category_code_array(cursor.getString(12));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    public List<Local_Data> getCustomerCode_ByBeatCodeAnd_Name(String Customer_Name,String Beat_Code) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        Cursor cursor = db.rawQuery("select LEGACY_CUSTOMER_CODE,ADDRESS,MOBILE_NO,CUSTOMER_NAME,STATE,CITY,BEAT,CUSTOMER_SHOPNAME,lat,long,EMAIL_ADDRESS,business_unit_code_array,order_category_code_array from customer_master WHERE CUSTOMER_SHOPNAME = ? AND BEAT = ?",
+                new String[]{Customer_Name,Beat_Code});
 
         // looping through all rows and adding to list
         try {

@@ -76,6 +76,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -150,6 +151,7 @@ public class Order extends Activity implements OnItemSelectedListener {
     private Boolean flag = false;
     TextView customer_address;
     String schedulestr;
+    String customer_names = "";
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -348,9 +350,10 @@ public class Order extends Activity implements OnItemSelectedListener {
                             "Customer Not Found", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
+                    customer_names = "";
                 } else {
                     for (Local_Data cn : contacts) {
-
+                        customer_names = customer_name;
                         Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
                         Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
                         Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
@@ -656,13 +659,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                         customer_name = autoCompleteTextView1.getText().toString().trim();
                     }
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -829,13 +833,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -850,20 +855,16 @@ public class Order extends Activity implements OnItemSelectedListener {
                         }
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-                           Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("[\\[\\](){}]","");
+                            Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("[\\[\\](){}]", "");
 
-                        }
-                        else
-                        {
+                        } else {
                             Global_Data.Business_unit_code_array = "";
                         }
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
-                            Global_Data.order_category_code_array = Global_Data.order_category_code_array.replaceAll("[\\[\\](){}]","");
+                            Global_Data.order_category_code_array = Global_Data.order_category_code_array.replaceAll("[\\[\\](){}]", "");
 
-                        }
-                        else
-                        {
+                        } else {
                             Global_Data.order_category_code_array = "";
                         }
 
@@ -932,13 +933,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -955,20 +957,16 @@ public class Order extends Activity implements OnItemSelectedListener {
 
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-                            Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("[\\[\\](){}]","");
+                            Global_Data.Business_unit_code_array = Global_Data.Business_unit_code_array.replaceAll("[\\[\\](){}]", "");
 
-                        }
-                        else
-                        {
+                        } else {
                             Global_Data.Business_unit_code_array = "";
                         }
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.order_category_code_array)) {
-                            Global_Data.order_category_code_array = Global_Data.order_category_code_array.replaceAll("[\\[\\](){}]","");
+                            Global_Data.order_category_code_array = Global_Data.order_category_code_array.replaceAll("[\\[\\](){}]", "");
 
-                        }
-                        else
-                        {
+                        } else {
                             Global_Data.order_category_code_array = "";
                         }
 
@@ -1052,13 +1050,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -1127,25 +1126,24 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
 
-                            //Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
                             Global_Data.GLOvel_CUSTOMER_ID = cn.getCust_Code();
                             Global_Data.customer_MobileNumber = cn.getMOBILE_NO();
                             Global_Data.CUSTOMER_NAME_NEW = cn.getCUSTOMER_NAME();
                             Global_Data.CUSTOMER_ADDRESS_NEW = cn.getAddress();
 
                         }
-
 
                         Global_Data.GLOVEL_ORDER_REJECT_FLAG = "FALSE";
                         Global_Data.order_city = city_spinner.getSelectedItem()
@@ -1212,13 +1210,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -1291,13 +1290,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -1369,13 +1369,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -1449,13 +1450,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -1528,13 +1530,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        autoCompleteTextView1.setText("");
                     } else {
 
                         for (Local_Data cn : contacts) {
@@ -1608,15 +1611,15 @@ public class Order extends Activity implements OnItemSelectedListener {
                     }
 
 
-                    List<Local_Data> contacts = dbvoc.getCustomerCode(customer_name);
+                    List<Local_Data> contacts = dbvoc.getCustomerCode_ByBeatCodeAnd_Name(customer_name, Global_Data.Glovel_BEAT_ID);
 
                     if (contacts.size() <= 0) {
-
                         Toast toast = Toast.makeText(Order.this,
-                                "Customer Not Found", Toast.LENGTH_SHORT);
+                                "Customer Not Found In Selected Beat", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                    } else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue")){
+                        autoCompleteTextView1.setText("");
+                    } else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue")) {
 
                         for (Local_Data cn : contacts) {
 
@@ -1643,7 +1646,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                         intent.putExtra("RE_TEXT", Re_Text);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    }else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme")){
+                    } else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme")) {
 
                         for (Local_Data cn : contacts) {
 
@@ -1670,7 +1673,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                         intent.putExtra("RE_TEXT", Re_Text);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    } else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report")){
+                    } else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report")) {
 
                         for (Local_Data cn : contacts) {
 
@@ -1697,7 +1700,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                         intent.putExtra("RE_TEXT", Re_Text);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    } else if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")){
+                    } else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")) {
 
                         for (Local_Data cn : contacts) {
 
@@ -1724,9 +1727,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                         intent.putExtra("RE_TEXT", Re_Text);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    }
-
-                    else{
+                    } else {
 
                         for (Local_Data cn : contacts) {
 
@@ -1789,7 +1790,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             schedule_view.setVisibility(View.VISIBLE);
             // rlout_schedule.setVisibility(View.INVISIBLE);
-        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")) {
+        } else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Outstanding/Overdue") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")) {
             mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
             custserve_view.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.GONE);
@@ -1801,7 +1802,7 @@ public class Order extends Activity implements OnItemSelectedListener {
             // rlout_order.setVisibility(View.VISIBLE);
             schedule_view.setVisibility(View.GONE);
             // rlout_schedule.setVisibility(View.VISIBLE);
-        }else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report")) {
+        } else if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Scheme") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report")) {
             mTitleTextView.setText(Global_Data.CUSTOMER_SERVICE_FLAG);
             custserve_view.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.GONE);
@@ -1813,8 +1814,7 @@ public class Order extends Activity implements OnItemSelectedListener {
             // rlout_order.setVisibility(View.VISIBLE);
             schedule_view.setVisibility(View.GONE);
             // rlout_schedule.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             if (Global_Data.sales_btnstring.equalsIgnoreCase("Institutional Sales")) {
                 mTitleTextView.setText("Quote");
             } else {
@@ -2045,6 +2045,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
 
                     autoCompleteTextView1.setText("");
+                    //  customer_names = "";
                     // String []customer_array = {"Apple", "Banana", "Cherry",
                     // "Date", "Grape", "Kiwi", "Mango", "Pear"};
                     list_cities.clear();
@@ -2149,6 +2150,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                     beat_spinner.setOnItemSelectedListener(this);
 
                     autoCompleteTextView1.setText("");
+                    //customer_names = "";
                     // String []customer_array = {"Apple", "Banana", "Cherry",
                     // "Date", "Grape", "Kiwi", "Mango", "Pear"};
                     list_cities.clear();
@@ -2168,16 +2170,26 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                 } else {
 
+                    results_beat.clear();
+                    results_beat.add("Select Beat");
                     String items = city_spinner.getSelectedItem().toString().trim();
                     //String C_ID = "";
                     Log.i("Selected item : ", items);
 
                     List<Local_Data> contacts = dbvoc.getCity_id(items);
-                    for (Local_Data cn : contacts) {
+                    if(contacts.size() > 0)
+                    {
+                        for (Local_Data cn : contacts) {
 
-                        C_ID = cn.getCITY_ID();
+                            C_ID = cn.getCITY_ID();
 
+                        }
                     }
+                    else
+                    {
+                        C_ID = "";
+                    }
+
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(C_ID)) {
 //					results_beat.clear();
@@ -2187,15 +2199,23 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                             results_beat.add(cn.getCityName());
                         }
-                        adapter_beat = new ArrayAdapter<String>(Order.this,
-                                android.R.layout.simple_spinner_item, results_beat);
-                        adapter_beat
-                                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        beat_spinner.setAdapter(adapter_beat);
-                        beat_spinner.setOnItemSelectedListener(this);
+                    }
+                    else
+                    {
+                        beat_name = "";
+                    }
 
-                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(beat_name)) {
-                            int spinnerPosition = adapter_beat.getPosition(beat_name);
+                    adapter_beat = new ArrayAdapter<String>(Order.this,
+                            android.R.layout.simple_spinner_item, results_beat);
+                    adapter_beat
+                            .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    beat_spinner.setAdapter(adapter_beat);
+                    beat_spinner.setOnItemSelectedListener(this);
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(beat_name)) {
+                        int spinnerPosition = adapter_beat.getPosition(beat_name);
+                        if(spinnerPosition != -1)
+                        {
                             beat_spinner.setSelection(spinnerPosition);
                         }
 
@@ -2231,6 +2251,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                     beat_name = "";
 
                     autoCompleteTextView1.setText("");
+                    //customer_names = "";
                     // String []customer_array = {"Apple", "Banana", "Cherry",
                     // "Date", "Grape", "Kiwi", "Mango", "Pear"};
                     list_cities.clear();
@@ -2278,6 +2299,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 //					}
 
                         }
+
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                                 android.R.layout.simple_spinner_dropdown_item,
                                 list_cities);
@@ -2287,6 +2309,17 @@ public class Order extends Activity implements OnItemSelectedListener {
                         // data into the
                         // AutoCompleteTextView
                         autoCompleteTextView1.setTextColor(Color.BLACK);
+
+//                        if(!customer_names.equalsIgnoreCase(""))
+//                        {
+//                            autoCompleteTextView1.setText(customer_names);
+//                            customer_names = "";
+//                        }
+//                        else
+//                        {
+//                            autoCompleteTextView1.setText("");
+//                            customer_names = "";
+//                        }
 
                     }
                 }
@@ -2315,14 +2348,13 @@ public class Order extends Activity implements OnItemSelectedListener {
         // TODO Auto-generated method stub
         // super.onBackPressed();
 
-        if(Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN"))
-        {
+        if (Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Ledger Report") || Global_Data.CUSTOMER_SERVICE_FLAG.equalsIgnoreCase("Invoices/CN/DN")) {
             Intent i = new Intent(Order.this, OtherInfoActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             startActivity(i);
             finish();
-        }else{
+        } else {
             Intent i = new Intent(Order.this, Sales_Dash.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -2584,7 +2616,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"),jsonObject.getString("business_unit"));
+                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                                 }
@@ -2665,8 +2697,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
