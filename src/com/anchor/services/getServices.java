@@ -3089,7 +3089,7 @@ public class getServices {
                             public void run() {
                                 Toast.makeText(context.getApplicationContext(), finalResponse_result, Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
-                               // getTargetDataservice(context);
+                                // getTargetDataservice(context);
                             }
                         });
                     } else if (response_result.equalsIgnoreCase("Device not registered")) {
@@ -3554,6 +3554,8 @@ public class getServices {
 
                             }
 
+                            Log.d("credit", "credit" + checkcredit_profile.size());
+                            Log.d("credit L", "credit L" + credit_profile.length());
                             if (checkcredit_profile.size() <= 0) {
 
                                 for (int i = 0; i < credit_profile.length(); i++) {
@@ -3571,10 +3573,15 @@ public class getServices {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                                    // dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"),jsonObject.getString("business_unit"));
-                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"), "", jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
+                                    try {
+                                        dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"));
+//                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"), "", jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
 
-//                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                                        loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+
+                                    } catch (Exception ex) {
+                                        ex.printStackTrace();
+                                    }
 
 
                                 }

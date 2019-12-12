@@ -2,19 +2,19 @@
 <resources>
 
     <!-- SIMPLE LOGIC UAT URL -->
-    <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>
+<!--    <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
 <!--    <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
 
     <!-- Anchor PRODUCTion NEW URL -->
-<!--    <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
+    <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>
 
     <!--Sub Dealer PRODUCTION-->
-<!--    <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
+    <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>
 
     <!--ANCHOR NEW SUB DEALER UAT-->
-    <string name="service_domain_sub_dealer">http://subdealer.anchor-group.in/metal/api/v1/</string>
+<!--    <string name="service_domain_sub_dealer">http://subdealer.anchor-group.in/metal/api/v1/</string>-->
 
     <!--<string name="service_domain">http://fa9c1bfb.ngrok.io/metal/api/v1/</string>-->
 
