@@ -26,7 +26,8 @@
             android:textSize="16dp"/>
 
     <RelativeLayout
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/c_name"
         android:background="@drawable/rounded_corner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
