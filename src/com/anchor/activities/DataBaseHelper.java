@@ -9718,9 +9718,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //                new String[]{product_variant});
         Cursor cursor;
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit IN (" + Global_Data.Business_unit_code_array + ") AND product_variant " + " like '%" + product_variant + "%'" + "LIMIT 100", null);
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit IN (" + Global_Data.Business_unit_code_array + ") AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
         } else {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + "LIMIT 100", null);
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100 ORDER BY code asc", null);
         }
 
         try {
@@ -9752,11 +9752,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor;
         if (Global_Data.array_of_pVarient.size() > 0) {
-            cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master " + "where code IN (" + Global_Data.Product_Array + ") AND product_variant " + " like '%" + product_variant + "%'" + "LIMIT 100", null);
+            cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master " + "where code IN (" + Global_Data.Product_Array + ") AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
 
         } else {
 
-            cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master where b_unit= '" + Global_Data.Search_business_unit_name + "'" + " AND primary_category= '" + Global_Data.Search_Category_name + "'" + " AND b_business_c= '" + Global_Data.Search_BusinessCategory_name + "'" + " AND sub_category= '" + Global_Data.Search_brand_name + "'" + " AND product_variant " + " like '%" + product_variant + "%'" + "LIMIT 100", null);
+            cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master where b_unit= '" + Global_Data.Search_business_unit_name + "'" + " AND primary_category= '" + Global_Data.Search_Category_name + "'" + " AND b_business_c= '" + Global_Data.Search_BusinessCategory_name + "'" + " AND sub_category= '" + Global_Data.Search_brand_name + "'" + " AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
         }
 
         try {

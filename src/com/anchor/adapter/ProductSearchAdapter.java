@@ -26,7 +26,7 @@ public class ProductSearchAdapter extends ArrayAdapter<String> implements Filter
     Context mcontext;
     Spinner_List_Adapter spinner_list_adapter;
     RecyclerView recyclerView;
-    Spinner spnBusinessDiv, spnCategory, spnProduct,spnBu;
+    Spinner spnBusinessDiv, spnCategory, spnProduct, spnBu;
     DataBaseHelper dbvoc;
     Button list_ok;
     ArrayList<String> suggestions;
@@ -56,13 +56,12 @@ public class ProductSearchAdapter extends ArrayAdapter<String> implements Filter
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
-               // recyclerView = ((Activity) mcontext).findViewById(R.id.spinner_recycleview);
                 if (constraint != null) {
 
                     try {
 
-                        Log.d("SearchS","SearchS "+constraint.toString());
-                         suggestions = new ArrayList<>();
+                        Log.d("SearchS", "SearchS " + constraint.toString());
+                        suggestions = new ArrayList<>();
 
                         List<Local_Data> cont1 = dbvoc.ListProduct(constraint.toString());
                         suggestions.clear();
@@ -72,35 +71,19 @@ public class ProductSearchAdapter extends ArrayAdapter<String> implements Filter
                                 Local_Data spiner_list_model = new Local_Data();
                                 cnt1.getProduct_variant();
 
-//                                if(!suggestions.contains(cnt1.getProduct_variant()))
-//                                {
-                                    suggestions.add(cnt1.getProduct_variant());
-                              //  }
 
+                                suggestions.add(cnt1.getProduct_variant());
 
-                               // String pro_varient = cnt1.getProduct_variant();
-                               // String term = pro_varient;
-                                //suggestions.add(term);
                             }
 
 
-                            results.values =suggestions;
-                            results.count =suggestions.size();
+                            results.values = suggestions;
+                            results.count = suggestions.size();
 
                             ((Activity) mcontext).runOnUiThread(new Runnable() {
                                 public void run() {
 
-//                                    View view = ((Activity)mcontext).getCurrentFocus();
-//                                    if (view != null) {
-//                                        InputMethodManager imm = (InputMethodManager)mcontext.getSystemService(Context.INPUT_METHOD_SERVICE);
-//                                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                                    }
-
-
                                     AutoCompleteTextView s = ((Activity) mcontext).findViewById(R.id.Product_Variant);
-
-
-                                   // s.dismissDropDown();
 
 
                                 }
@@ -111,24 +94,14 @@ public class ProductSearchAdapter extends ArrayAdapter<String> implements Filter
                         } else {
                             ((Activity) mcontext).runOnUiThread(new Runnable() {
                                 public void run() {
-//                                    recyclerView.setVisibility(View.GONE);
-//                                    list_ok.setVisibility(View.GONE);
-//                                    spnBusinessDiv.setVisibility(View.VISIBLE);
-//                                    spnCategory.setVisibility(View.VISIBLE);
-//                                    spnProduct.setVisibility(View.VISIBLE);
-//                                    spnBu.setVisibility(View.VISIBLE);
+
                                 }
                             });
                         }
                     } catch (Exception ex) {
                         ((Activity) mcontext).runOnUiThread(new Runnable() {
                             public void run() {
-//                                recyclerView.setVisibility(View.GONE);
-//                                list_ok.setVisibility(View.GONE);
-//                                spnBusinessDiv.setVisibility(View.VISIBLE);
-//                                spnCategory.setVisibility(View.VISIBLE);
-//                                spnProduct.setVisibility(View.VISIBLE);
-//                                spnBu.setVisibility(View.VISIBLE);
+
                             }
                         });
                         ex.printStackTrace();
@@ -139,12 +112,7 @@ public class ProductSearchAdapter extends ArrayAdapter<String> implements Filter
                 } else {
                     ((Activity) mcontext).runOnUiThread(new Runnable() {
                         public void run() {
-//                            recyclerView.setVisibility(View.GONE);
-//                            list_ok.setVisibility(View.GONE);
-//                            spnBusinessDiv.setVisibility(View.VISIBLE);
-//                            spnCategory.setVisibility(View.VISIBLE);
-//                            spnProduct.setVisibility(View.VISIBLE);
-//                            spnBu.setVisibility(View.VISIBLE);
+
                         }
                     });
                 }

@@ -261,11 +261,11 @@ public class LoginActivity extends Activity {
         }
 
 
-        editText1.setText("Sadanand");
-        editText2.setText("Sadanand2589322");
+//        editText1.setText("Sadanand");
+//        editText2.setText("Sadanand2589322");
 
-//        editText1.setText("sadanand");
-//        editText2.setText("sadanand8730739");
+        editText1.setText("sadanand");
+        editText2.setText("sadanand1092460");
 
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
