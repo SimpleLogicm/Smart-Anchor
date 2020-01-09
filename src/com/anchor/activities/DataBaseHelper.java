@@ -9720,7 +9720,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
             cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit IN (" + Global_Data.Business_unit_code_array + ") AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
         } else {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100 ORDER BY code asc", null);
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
         }
 
         try {
