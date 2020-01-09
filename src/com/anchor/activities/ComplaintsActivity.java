@@ -1124,6 +1124,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                 {
                     multipart.addFormField("type",prefManager.getCustomer_service_type().toLowerCase());
                     multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
+                    multipart.addFormField("user_email", Global_Data.GLOvel_USER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                    // multipart.addFormField("area_complaint",areaTypeItem);
                   //  multipart.addFormField("product", productItem);
@@ -1136,6 +1137,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                 {
                     multipart.addFormField("type",prefManager.getCustomer_service_type().toLowerCase());
                     multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
+                    multipart.addFormField("user_email", Global_Data.GLOvel_USER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                     multipart.addFormField("product_category", type_spinner.getSelectedItem().toString());
                     multipart.addFormField("sub_category", c_spinner_area.getSelectedItem().toString());
@@ -1153,6 +1155,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                 {
                     multipart.addFormField("type",prefManager.getCustomer_service_type().toLowerCase());
                     multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
+                    multipart.addFormField("user_email", Global_Data.GLOvel_USER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                     multipart.addFormField("product_category", type_spinner.getSelectedItem().toString());
                     multipart.addFormField("sub_category", c_spinner_area.getSelectedItem().toString());
@@ -1170,6 +1173,7 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
                 {
                     multipart.addFormField("type","marketing_tool");
                     multipart.addFormField("email", Global_Data.CUSTOMER_EMAIL);
+                    multipart.addFormField("user_email", Global_Data.GLOvel_USER_EMAIL);
                     multipart.addFormField("type_complaint", product_spinner.getSelectedItem().toString());
                     multipart.addFormField("business_unit", type_spinner.getSelectedItem().toString());
                     multipart.addFormField("brand", c_spinner_area.getSelectedItem().toString());
