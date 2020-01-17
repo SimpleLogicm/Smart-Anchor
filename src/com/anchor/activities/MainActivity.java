@@ -179,6 +179,10 @@ public class MainActivity extends BaseActivity {
         }
 
         Global_Data.PREVIOUS_ORDER_BACK_FLAG = "";
+
+        /* background service check delete flag table delete */
+        dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
+
         try {
             ActionBar mActionBar = getActionBar();
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#910505")));

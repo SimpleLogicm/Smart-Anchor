@@ -304,12 +304,22 @@ public class CaptureSignature extends BaseActivity {
 
                     @Override
                     public void onClick(View v) {
-                        // TODO Auto-generated method stub
+
+                        myCalendar  = Calendar.getInstance();
+
+//                        int years  = myCalendar.get(Calendar.YEAR);
+//                        int months  = myCalendar.get(Calendar.MONTH);
+//                        int days  = myCalendar.get(Calendar.DAY_OF_MONTH);
+
                         DatePickerDialog picker = new DatePickerDialog(CaptureSignature.this, date, myCalendar
                                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                                 myCalendar.get(Calendar.DAY_OF_MONTH));
                         picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                       // picker.getDatePicker().setActivated(false);
+                        picker.getDatePicker().setCalendarViewShown(false);
                         picker.show();
+
+
 
                     }
                 });

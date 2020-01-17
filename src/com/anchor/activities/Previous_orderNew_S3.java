@@ -311,6 +311,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
                                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                                 myCalendar.get(Calendar.DAY_OF_MONTH));
                         picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                        picker.getDatePicker().setCalendarViewShown(false);
                         picker.show();
 
                     }

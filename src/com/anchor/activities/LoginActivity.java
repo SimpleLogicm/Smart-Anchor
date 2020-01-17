@@ -261,11 +261,11 @@ public class LoginActivity extends Activity {
         }
 
 
-//        editText1.setText("Sadanand");
-//        editText2.setText("Sadanand2589322");
+//        editText1.setText("Sadanand 21");
+//        editText2.setText("Sadanand28287958");
 
-        editText1.setText("sadanand");
-        editText2.setText("sadanand1092460");
+        editText1.setText("Sadanand 1");
+        editText2.setText("sadanand12345");
 
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
@@ -1058,8 +1058,6 @@ public class LoginActivity extends Activity {
 
 
                         if (response_result.equalsIgnoreCase("Device not registered")) {
-
-                            // Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
 
                             Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
