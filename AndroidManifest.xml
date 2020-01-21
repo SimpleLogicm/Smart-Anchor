@@ -71,6 +71,11 @@
         android:name="cpm.simplelogic.helper.DataProvider.WRITE_DATABASE"
         android:protectionLevel="signature" />
 
+    <!-- Testing Permission */ -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE"/>
+    <uses-permission android:name="com.huawei.permission.external_app_settings.USE_COMPONENT"/>
+
     <application
         android:name="com.anchor.App.AppController"
         android:allowBackup="true"
@@ -88,14 +93,13 @@
 
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.anchor.activities.SplashScreenActivity"
             android:label="@string/app_name"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -659,6 +663,10 @@
         <service
             android:name=".MyService"
             android:enabled="true" />
+
+        <service
+            android:name=".JobScheduleMyService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name="cpm.simplelogic.helper.OnClearFromRecentService"
             android:stopWithTask="false" />
@@ -717,6 +725,16 @@
             </intent-filter>
         </service>
 
+        <service android:name="com.anchor.services.TestJobService"
+            android:label="Word Service"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            />
+
+        <receiver android:name="com.anchor.helper.JobSchedularServiceReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
 
     </application>

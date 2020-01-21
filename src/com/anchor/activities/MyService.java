@@ -2,11 +2,15 @@ package  com.anchor.activities;
 
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,8 +19,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -198,7 +202,7 @@ public class MyService extends Service implements LocationListener{
 
 						editor.commit();
 
-						isInternetPresent = cd.isConnectingToInternet();
+						//isInternetPresent = cd.isConnectingToInternet();
 
 //						if(timeOfDay >= 7 && timeOfDay <= 22){
 //
@@ -489,7 +493,7 @@ public class MyService extends Service implements LocationListener{
 					//List<Local_Data> background = dbvoc.getBACKGROUND_SERVICE_CHECK_DATA();
 
 //					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && background.size() <= 0) {
-					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22) {
+					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
 						//Reading all
 						List<Local_Data> contacts = dbvoc.getemaIL();
 						for (Local_Data cn : contacts) {
@@ -601,8 +605,8 @@ public class MyService extends Service implements LocationListener{
 							System.out.println(dateFormat.format(date));
 
 							JSONObject picture = new JSONObject();
-							picture.put("latitude",Global_Data.GLOvel_LATITUDE);
-							picture.put("longitude", Global_Data.GLOvel_LONGITUDE);
+							picture.put("latitude",latitude);
+							picture.put("longitude", longitude);
 
 							if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE))) {
 								try
@@ -681,6 +685,7 @@ public class MyService extends Service implements LocationListener{
 
 //					Log.i("volley", "Service url: " + domain+"update_user_with_current_location?lat="+sp.getString("LATVAL",null)+"&lon="+sp.getString("LONGVAL",null)+"&device_id="+Global_Data.device_id+"&address="+URLEncoder.encode(Global_Data.address, "UTF-8")+"&email="+Global_Data.GLOvel_USER_EMAIL);
 
+						Log.i("volley", "Service url: " + domain+"update_user_with_current_location");
 						Log.i("volley", "Service url: " + domain+"update_user_with_current_location");
 //
 //					JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST,domain+"update_user_with_current_location?lat="+sp.getString("LATVAL",null)+"&lon="+sp.getString("LONGVAL",null)+"&device_id="+Global_Data.device_id+"&address="+URLEncoder.encode(Global_Data.address, "UTF-8")+"&email="+Global_Data.GLOvel_USER_EMAIL, product_value_n, new Response.Listener<JSONObject>() {
@@ -812,7 +817,12 @@ public class MyService extends Service implements LocationListener{
 
 		Log.d("service start","service start");
 		//Toast.makeText(this, " SaleService Created ", Toast.LENGTH_LONG).show();
-		stopSelf();
+		//stopSelf();
+
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//			startMyOwnForeground();
+//		else
+//			startForeground(1, new Notification());
 
 		return START_NOT_STICKY;
 	}
@@ -951,6 +961,34 @@ public class MyService extends Service implements LocationListener{
 	}
 
 
+//	@Override
+//	public void onCreate() {
+//		super.onCreate();
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+//			startMyOwnForeground();
+//		else
+//			startForeground(1, new Notification());
+//
+//	}
 
+	private void startMyOwnForeground(){
+		String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
+		String channelName = "My Background Service";
+		NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+		chan.setLightColor(Color.BLUE);
+		chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+		NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		assert manager != null;
+		manager.createNotificationChannel(chan);
+
+		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+		Notification notification = notificationBuilder.setOngoing(true)
+				.setSmallIcon(R.drawable.camera_icon)
+				.setContentTitle("App is running in background")
+				.setPriority(NotificationManager.IMPORTANCE_MIN)
+				.setCategory(Notification.CATEGORY_SERVICE)
+				.build();
+		startForeground(2, notification);
+	}
 
 }

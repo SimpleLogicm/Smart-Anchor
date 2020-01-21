@@ -1074,7 +1074,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
                                     gps.showSettingsAlertnew();
                                 } else {
-                                    AlertDialog alertDialog = new AlertDialog.Builder(SubDealer_Signature_Activity.this).create(); //Read Update
+                                    AlertDialog alertDialog = new AlertDialog.Builder(SubDealer_Signature_Activity.this).create(); //Read Updat
                                     alertDialog.setTitle("Confirmation");
                                     alertDialog.setMessage(" Are you sure you want to continue?");
                                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {

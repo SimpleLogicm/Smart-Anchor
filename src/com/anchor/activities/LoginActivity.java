@@ -260,7 +260,6 @@ public class LoginActivity extends Activity {
             emp_code.setText(Global_Data.emp_code);
         }
 
-
 //        editText1.setText("Sadanand 21");
 //        editText2.setText("Sadanand28287958");
 
@@ -273,8 +272,8 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-//		editText1.setText("HP0POW001");
-//		editText2.setText("naresh12345");
+//		editText1.setText("Dnyanada");
+//		editText2.setText("Dnyanada9400324");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);

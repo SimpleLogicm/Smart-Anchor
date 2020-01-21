@@ -12,10 +12,14 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -44,6 +48,7 @@ import com.anchor.animation.ActivitySwitcher;
 import com.anchor.model.Promotional_Model;
 import com.anchor.service.LocationServices;
 import com.anchor.service.StartLocationAlert;
+import com.anchor.services.TestJobService;
 import com.anchor.slidingmenu.adapter.NavDrawerListAdapter;
 import com.anchor.slidingmenu.model.NavDrawerItem;
 import com.anchor.webservice.ConnectionDetector;
@@ -168,11 +173,22 @@ public class MainActivity extends BaseActivity {
 
         if (Global_Data.LOCATION_SERVICE_HIT.equalsIgnoreCase("TRUE")) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                //startForegroundService(new Intent(this, MyService.class));
-                startService(new Intent(this, MyService.class));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // startForegroundService(new Intent(this, MyService.class));
+               // startService(new Intent(this, MyService.class));
+//                ComponentName jobService =
+//                        new ComponentName(getPackageName(), TestJobService.class.getName());
+              //  startService(new Intent(this, MyService.class));
+
+                JobScheduler jobScheduler =
+                        (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+                jobScheduler.schedule(new JobInfo.Builder(1,
+                        new ComponentName(this, TestJobService.class))
+                        .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                        .build());
+
             } else {
-                startService(new Intent(this, MyService.class));
+               startService(new Intent(this, MyService.class));
             }
             // startService(new Intent(this, MyService.class));
             Global_Data.LOCATION_SERVICE_HIT = "";
@@ -1333,6 +1349,56 @@ public class MainActivity extends BaseActivity {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(1, b.build());
 
+    }
+
+    private void enableAutoStart() {
+          final Intent[] POWERMANAGER_INTENTS = {
+                new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity")),
+                new Intent().setComponent(new ComponentName("com.letv.android.letvsafe", "com.letv.android.letvsafe.AutobootManageActivity")),
+                new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.startupmgr.ui.StartupNormalAppListActivity")),
+                new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.optimize.process.ProtectActivity")),
+                new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity")),
+                new Intent().setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.permission.startup.StartupAppListActivity")),
+                new Intent().setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.startupapp.StartupAppListActivity")),
+                new Intent().setComponent(new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity")),
+                new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity")),
+                new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager")),
+                new Intent().setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity")),
+                new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity")),
+                new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity")),
+                new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.MainActivity"))
+        };
+
+        for (Intent intent : POWERMANAGER_INTENTS)
+            if (getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+                alertDialog.setTitle("Confirmation");
+                alertDialog.setMessage(" Are you sure you want to logout?");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (Intent intent : POWERMANAGER_INTENTS)
+                            if (getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+                                startActivity(intent);
+                                break;
+                            }
+                    }
+                });
+
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        dialog.cancel();
+                    }
+                });
+
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+                break;
+            }
     }
 
 
