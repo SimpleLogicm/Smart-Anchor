@@ -2,9 +2,11 @@ package com.anchor.activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -22,11 +24,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -115,11 +124,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     RecyclerView marker_rview;
     Sub_DealerMap_Adapter ca;
     List<SubDealerModel> Allresult = new ArrayList<SubDealerModel>();
+    List<SubDealerModel> Allresultsearch = new ArrayList<SubDealerModel>();
+
     LinearLayoutManager llm;
     private int visibleItemCount, totalItemCount, firstVisibleItemPosition, lastVisibleItem;
     public Marker marker;
     String click_flag = "";
     String service_call_flag = "";
+    AutoCompleteTextView map_sub_dealer_search;
 
 
     @Override
@@ -133,6 +145,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.content_maps);
 
         marker_rview = findViewById(R.id.marker_rview);
+        map_sub_dealer_search = findViewById(R.id.map_sub_dealer_search);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, SubDealer_List);
+        map_sub_dealer_search.setThreshold(1);// will start working from
+        map_sub_dealer_search.setAdapter(adapter);// setting the adapter
+        map_sub_dealer_search.setTextColor(Color.BLACK);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -155,6 +174,131 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // map_add_toast_flag = "";
 
         cd = new ConnectionDetector(getApplicationContext());
+
+
+        map_sub_dealer_search.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+
+
+                    if (event.getRawX() >= (map_sub_dealer_search.getRight() - map_sub_dealer_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                        View view = MapsActivity.this.getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                        if (!map_sub_dealer_search.getText().toString().equalsIgnoreCase("")) {
+                            map_sub_dealer_search.setText("");
+                            map_sub_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
+                        }
+
+                        //autoCompleteTextView1.setText("");
+                        map_sub_dealer_search.showDropDown();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+        map_sub_dealer_search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+                if (map_sub_dealer_search.getText().toString().trim().length() == 0) {
+
+                    try {
+                        if (cd.isConnectedToInternet()) {
+                            marker_rview.setVisibility(View.GONE);
+                            dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                            dialog.setMessage("Please wait....");
+                            dialog.setTitle("Smart Anchor App");
+                            dialog.setCancelable(false);
+                            dialog.show();
+
+                            getUserGeoData();
+                        } else {
+
+                            Toast.makeText(MapsActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (map_sub_dealer_search.getText().toString().trim().length() == 0) {
+                } else {
+                    map_sub_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.close_product, 0);
+                }
+
+            }
+        });
+
+        map_sub_dealer_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int pos,
+                                    long id) {
+                Global_Data.hideSoftKeyboard(MapsActivity.this);
+
+                String name = map_sub_dealer_search.getText().toString();
+                Allresultsearch.clear();
+
+                for (int i = 0; i < Allresult.size(); i++) {
+                    if (name.equalsIgnoreCase(Allresult.get(i).shop_name)) {
+
+                        SubDealerModel di = new SubDealerModel();
+                        di.lati = Allresult.get(i).lati;
+                        di.longi = Allresult.get(i).longi;
+                        di.address = Allresult.get(i).address;
+                        di.name = Allresult.get(i).name;
+                        di.shop_name = Allresult.get(i).shop_name;
+                        di.distance = Allresult.get(i).distance;
+                        di.proprietor_mobile1 = Allresult.get(i).proprietor_mobile1;
+                        di.code = Allresult.get(i).code;
+
+                        Allresultsearch.add(di);
+
+                        ca = new Sub_DealerMap_Adapter(Allresultsearch, MapsActivity.this, MapsActivity.this);
+                        marker_rview.setAdapter(ca);
+                        ca.notifyDataSetChanged();
+
+                        marker_rview.setVisibility(View.VISIBLE);
+                        marker_rview.getLayoutManager().scrollToPosition(i);
+
+                        Log.d("C IN","C in"+Allresultsearch.size());
+
+                        new GetReportedUserData_Offline().execute();
+                        break;
+                    }
+                }
+
+
+            }
+
+        });
 
 
     }
@@ -235,12 +379,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     };
 
     @Override
-    public void onInfoWindowClick(Marker marker) {
+    public void onInfoWindowClick(final Marker marker) {
 
-        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+      final  InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
 
-
-        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile())) {
+      if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile())) {
             requestPHONEPermission(infoWindowData.getCmobile());
         }
     }
@@ -371,28 +514,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             }
 
-                            try {
-                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                                for (Marker markers : Global_Data.mMarkers) {
-                                    builder.include(markers.getPosition());
-                                }
-
-                                LatLngBounds bounds = builder.build();
-                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
-                                mMap.moveCamera(cu);
-
-//                                LatLngBounds bounds = buildern.build();
+//                            try {
+//                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//                                for (Marker markers : Global_Data.mMarkers) {
+//                                    builder.include(markers.getPosition());
+//                                }
 //
-//                                int width = getResources().getDisplayMetrics().widthPixels;
-//                                int height = getResources().getDisplayMetrics().heightPixels;
-//                                int padding = (int) (width * 0.005); // offset from edges of the map 10% of
-//                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-//                                mMap.animateCamera(cu);
-
-
-                            } catch (Exception ex) {
-
-                            }
+//                                LatLngBounds bounds = builder.build();
+//                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+//                                mMap.moveCamera(cu);
+//
+////                                LatLngBounds bounds = buildern.build();
+////
+////                                int width = getResources().getDisplayMetrics().widthPixels;
+////                                int height = getResources().getDisplayMetrics().heightPixels;
+////                                int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+////                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+////                                mMap.animateCamera(cu);
+//
+//
+//                            } catch (Exception ex) {
+//
+//                            }
 
                         }
 
@@ -408,29 +551,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 //
 //                @Override
-//                public void onInfoWindowClick(Marker arg0) {
+//                public void onInfoWindowClick(final Marker arg0) {
 //
-//                    // InfoWindowData infoWindowData = (InfoWindowData) arg0.getTag();
-//                    // arg0.hideInfoWindow();
-//                    marker_rview.setVisibility(View.VISIBLE);
-////                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(infoWindowData.getS_code())) {
-////                        String code = infoWindowData.getS_code();
-////                        int position = -1;
-////                        for (int i = 0; i < Allresult.size(); i++) {
-////                            if (Allresult.get(i).getCode() == code) {
-////                                position = i;
-////                                 break;  // uncomment to get the first instance
-////                            }
-////                        }
-////
-////                        if(position != -1)
-////                        {
-////                            marker_rview.getLayoutManager().scrollToPosition(position);
-////                        }
-////
-////
-////                    }
-//                    Log.d("id", "gfhgfh" + arg0.getId());
+//                    new Handler().postDelayed(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(arg0.getPosition(), 300));
+//                        }
+//                    }, 300);
 //
 //
 //                }
@@ -560,14 +689,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-            if(!String.valueOf(location.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(location.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(location.getLongitude()).equalsIgnoreCase(null)  && !String.valueOf(location.getLongitude()).equalsIgnoreCase(null))
-            {
+            if (!String.valueOf(location.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(location.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(location.getLongitude()).equalsIgnoreCase(null) && !String.valueOf(location.getLongitude()).equalsIgnoreCase(null)) {
                 Global_Data.GLOvel_LATITUDE = String.valueOf(location.getLatitude());
                 Global_Data.GLOvel_LONGITUDE = String.valueOf(location.getLongitude());
             }
 
-            Log.d("MAP LATI",""+location.getLatitude());
-            Log.d("MAP LONGI",""+location.getLongitude());
+            Log.d("MAP LATI", "" + location.getLatitude());
+            Log.d("MAP LONGI", "" + location.getLongitude());
 
             // InfoWindowData info = new InfoWindowData();
             MarkerOptions markerOptions = new MarkerOptions();
@@ -700,30 +828,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        if(service_call_flag.equalsIgnoreCase(""))
-        {
+        if (service_call_flag.equalsIgnoreCase("")) {
             service_call_flag = "Yes";
-            try
-            { if (cd.isConnectedToInternet()) {
-                dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
-                dialog.setMessage("Please wait....");
-                dialog.setTitle("Smart Anchor App");
-                dialog.setCancelable(false);
-                dialog.show();
+            try {
+                if (cd.isConnectedToInternet()) {
+                    dialog = new ProgressDialog(MapsActivity.this, ProgressDialog.THEME_HOLO_LIGHT);
+                    dialog.setMessage("Please wait....");
+                    dialog.setTitle("Smart Anchor App");
+                    dialog.setCancelable(false);
+                    dialog.show();
 
-                getUserGeoData();
-            } else {
+                    getUserGeoData();
+                } else {
 
-                Toast.makeText(MapsActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+                    Toast.makeText(MapsActivity.this, "You don't have internet connection.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
-
 
 
     }
@@ -922,6 +1047,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             try {
+                MapsActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        mMap.clear();
+                    }
+                });
                 JSONObject response = new JSONObject(final_response);
                 if (response.has("message")) {
                     response_result = response.getString("message");
@@ -968,8 +1098,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         Allresult.clear();
                         locations = new ArrayList<>();
+                        address.clear();
+                        name.clear();
+                        distance.clear();
+                        mobile.clear();
+                        code.clear();
                         AllresultSubDealer.clear();
                         SubDealer_List.clear();
+                        Global_Data.mMarkers.clear();
 
                         for (int i = 0; i < data.length(); i++) {
 
@@ -1134,6 +1270,224 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 // output.setText(data);
             } catch (JSONException e) {
+                e.printStackTrace();
+
+                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+                MapsActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+
+
+            MapsActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+
+                    dialog.dismiss();
+                }
+            });
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            MapsActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    dialog.dismiss();
+                }
+            });
+
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+
+    private class GetReportedUserData_Offline extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... responsenew) {
+
+
+            try {
+                MapsActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        mMap.clear();
+                    }
+                });
+                locations = new ArrayList<>();
+                address.clear();
+                name.clear();
+                distance.clear();
+                mobile.clear();
+                code.clear();
+                Global_Data.mMarkers.clear();
+
+                for (int i = 0; i < Allresultsearch.size(); i++) {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(Allresultsearch.get(i).lati) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(Allresultsearch.get(i).longi)) {
+
+                        SubDealerModel di = new SubDealerModel();
+
+                        locations.add(new LatLng(Double.valueOf(Allresultsearch.get(i).lati), Double.valueOf(Allresultsearch.get(i).longi)));
+
+                        address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).address));
+                       // name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).name));
+                        name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).shop_name));
+                        distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).distance));
+                        mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).proprietor_mobile1));
+                        code.add(Allresultsearch.get(i).code);
+                        //status.add("Approved");
+
+
+//                                //di.name = jsonObject.getString("customer_name").trim();
+//                                di.proprietor_mobile1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no"));
+//                                //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
+//                                di.proprietor_email1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("sub_dealer_email"));
+//                                di.address = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_address"));
+//                                //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
+//                                // di.proprietor_name2 = jsonObject.getString("distance").trim();
+//                                // di.proprietor_email2 = jsonObject.getString("distance").trim();
+//                                di.shop_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name"));
+//                                di.distance = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance"));
+//                                di.code = jsonObject.getString("code").trim();
+//
+//                                di.lati = jsonObject.getString("latitude").trim();
+//                                di.longi = jsonObject.getString("longitude").trim();
+//
+//                                ArrayList<String> names = new ArrayList<>();
+//                                names.add(di.shop_name);
+//                                Allresult.add(di);
+//                                AllresultSubDealer.add(di);
+//                                SubDealer_List.add(jsonObject.getString("customer_name"));
+
+
+                    }
+
+
+                }
+
+
+                MapsActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        dialog.dismiss();
+
+                        if (locations.size() > 0) {
+                            int a = 0;
+                            for (LatLng latLng : locations) {
+
+                                //   mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(MapsActivity.this,"Name : "+name.get(a),
+//                                                "Address : "+address.get(a)));
+
+//                                        Marker marker = mMap.addMarker(new MarkerOptions()
+//                                                .position(latLng)
+//                                                .title("Name : "+name.get(a))
+//                                                .snippet("Address : "+address.get(a)));
+
+                                MarkerOptions markerOptions = new MarkerOptions();
+
+                                markerOptions.position(latLng)
+                                        .title("Name : " + name.get(a))
+                                        .snippet("Address : " + address.get(a))
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+
+                                // InfoWindowData info = new InfoWindowData();
+                                // info.setCdistance("Distance : " + distance.get(a));
+                                // info.setCmobile("Mobile No : " + mobile.get(a));
+                                // info.setCmobilenew(mobile.get(a));
+                                // info.setS_code(code.get(a));
+
+                                //CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
+                                //  mMap.setInfoWindowAdapter(customInfoWindow);
+
+                                m = mMap.addMarker(markerOptions);
+                                m.setTag(code.get(a));
+                                Global_Data.mMarkers.add(m);
+
+
+                                //  m.showInfoWindow();
+
+                                //.icon(BitmapDescriptorFactory
+                                //   .fromResource(R.drawable.marker)));
+
+                                //  marker.showInfoWindow();
+
+                                // mMap.addMarker(new MarkerOptions().position(latLng).title("Name : "+name.get(a)+ " Address : "+address.get(a)));
+                                a++;
+                            }
+
+
+                            LatLngBounds.Builder buildern = new LatLngBounds.Builder();
+
+                            try {
+                                buildern.include(m.getPosition());
+                            } catch (Exception ex) {
+
+                            }
+
+
+                            try {
+
+                                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                                for (Marker marker : Global_Data.mMarkers) {
+                                    builder.include(marker.getPosition());
+                                }
+
+                                LatLngBounds bounds = builder.build();
+                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+                                mMap.moveCamera(cu);
+
+//                                        LatLngBounds bounds = buildern.build();
+//
+//                                        int width = getResources().getDisplayMetrics().widthPixels;
+//                                        int height = getResources().getDisplayMetrics().heightPixels;
+//                                        int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+//                                        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+//                                        mMap.animateCamera(cu);
+
+
+                            } catch (Exception ex) {
+
+                            }
+
+
+//                                    ca = new Sub_DealerMap_Adapter(Allresult, MapsActivity.this, MapsActivity.this);
+//                                    marker_rview.setAdapter(ca);
+//                                    ca.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(MapsActivity.this, "Sub Dealer Not Found.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+
+                    }
+                });
+
+
+                MapsActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+
+                        dialog.dismiss();
+                    }
+                });
+
+
+            } catch (Exception e) {
                 e.printStackTrace();
 
                 Intent intent = new Intent(MapsActivity.this, MainActivity.class);

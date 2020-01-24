@@ -18,6 +18,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <AutoCompleteTextView
+            android:id="@+id/map_sub_dealer_search"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:inputType="textMultiLine"
+            android:scrollbars="none"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:ems="10"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/rounded_corner"
+            android:layout_alignParentTop="true"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:drawableRight="@drawable/search_icon"
+            android:textSize="15dp"
+            android:hint="@string/Search_Subdealer" >
+            <requestFocus />
+        </AutoCompleteTextView>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/marker_rview"
             android:visibility="gone"
@@ -26,6 +50,8 @@
             android:layout_height="wrap_content"
             />
     </RelativeLayout>
+
+
 
 
 </LinearLayout>
