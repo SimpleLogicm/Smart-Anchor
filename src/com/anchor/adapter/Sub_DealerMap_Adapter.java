@@ -7,6 +7,7 @@ package com.anchor.adapter;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,6 +90,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         contactViewHolder.p_mobi.setText(ci.proprietor_mobile1);
         //contactViewHolder.p_proprietor_name1.setText("proprietor Name : " + ci.proprietor_name1);
         contactViewHolder.p_proprietor_email1.setText("proprietor Email : " + ci.proprietor_email1);
+        contactViewHolder.p_proprietor_gst_no.setText("Gst No : " + ci.gst_no);
 
 
        // contactViewHolder.p_dealer_city.setText("City : " + ci.city);
@@ -217,6 +219,43 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             }
         });
 
+        contactViewHolder.pro_click_edit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent mIntent = mcontext.getPackageManager().getLaunchIntentForPackage("subdealer.anchor.com.anchorsubdealer_registration");
+                if (mIntent != null) {
+                    try {
+
+                        mcontext.startActivity(mIntent);
+
+                    } catch (ActivityNotFoundException err) {
+                        err.printStackTrace();
+                        Toast.makeText(mcontext, "Please install bar", Toast.LENGTH_SHORT).show();
+                        try{
+                            final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
+                            mcontext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        }catch(Exception ex){ex.printStackTrace();
+                            Toast.makeText(mcontext, "App Not available in google play.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    try{
+                        final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
+                        mcontext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                    }catch(Exception ex){ex.printStackTrace();
+                        Toast.makeText(mcontext, "App Not available in google play.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+        });
+
       
 
     }
@@ -238,11 +277,12 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         protected TextView p_proprietor_mobile1;
       //  protected TextView p_proprietor_name1;
         protected TextView p_proprietor_email1;
+        protected TextView p_proprietor_gst_no;
        // protected TextView p_dealer_city;
         protected TextView p_dealer_code;
         protected TextView p_stages,p_lati,p_longi,p_mobi;
         RelativeLayout sub_h_container;
-        Button pro_mobile_click,pro_check_distance,pro_click_order;
+        Button pro_mobile_click,pro_check_distance,pro_click_order,pro_click_edit;
       
 
         public ContactViewHolder(View v) {
@@ -255,6 +295,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             p_proprietor_mobile1 = v.findViewById(R.id.p_proprietor_mobile1);
            // p_proprietor_name1 = v.findViewById(R.id.p_proprietor_name1);
             p_proprietor_email1 = v.findViewById(R.id.p_proprietor_email1);
+            p_proprietor_gst_no = v.findViewById(R.id.p_proprietor_gst_no);
           //  p_dealer_city = v.findViewById(R.id.p_dealer_city);
             p_dealer_code = v.findViewById(R.id.p_dealer_code);
             p_stages = v.findViewById(R.id.p_stages);
@@ -265,6 +306,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             pro_mobile_click = v.findViewById(R.id.pro_mobile_click);
             pro_check_distance = v.findViewById(R.id.pro_check_distance);
             pro_click_order = v.findViewById(R.id.pro_click_order);
+            pro_click_edit = v.findViewById(R.id.pro_click_edit);
            
 
          

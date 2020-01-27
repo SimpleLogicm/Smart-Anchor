@@ -84,6 +84,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -104,6 +105,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<String> mobile = new ArrayList<>();
     ArrayList<String> code = new ArrayList<>();
     ArrayList<String> status = new ArrayList<>();
+    ArrayList<String> gst_no = new ArrayList<>();
+
     Boolean isInternetPresent = false;
     ConnectionDetector cd;
     static String final_response = "";
@@ -132,6 +135,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String click_flag = "";
     String service_call_flag = "";
     AutoCompleteTextView map_sub_dealer_search;
+
+    private HashMap<Integer, Marker> markerMap = new HashMap<Integer, Marker>();
 
 
     @Override
@@ -276,6 +281,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         di.name = Allresult.get(i).name;
                         di.shop_name = Allresult.get(i).shop_name;
                         di.distance = Allresult.get(i).distance;
+                        di.gst_no = Allresult.get(i).gst_no;
                         di.proprietor_mobile1 = Allresult.get(i).proprietor_mobile1;
                         di.code = Allresult.get(i).code;
 
@@ -322,6 +328,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String longi = Allresult.get(lastVisibleItem - 1).getLongi();
             String name = Allresult.get(lastVisibleItem - 1).getName();
             String distance = Allresult.get(lastVisibleItem - 1).getDescription();
+            String gst_no = Allresult.get(lastVisibleItem - 1).getGst_no();
 
             Log.d("Last_Visible", "Last_Visible " + lastVisibleItem);
             Log.d("First_Visible", "First_Visible " + firstVisibleItemPosition);
@@ -339,6 +346,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLngBounds.Builder buildern = new LatLngBounds.Builder();
 
                 try {
+                    marker.showInfoWindow();
                     buildern.include(marker.getPosition());
                     Global_Data.mMarkers.get(lastVisibleItem - 1).showInfoWindow();
                     //infowindow.open(map,marker);
@@ -715,6 +723,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            isInternetPresent = cd.isConnectingToInternet();
 //            if (isInternetPresent) {
             try {
+
                 LocationAddress locationAddress = new LocationAddress();
                 LocationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
                         MapsActivity.this, new GeocoderHandler());
@@ -763,6 +772,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             // }
+
+//            try
+//            {
+//                Marker marker = markerMap .get(0);
+//                marker.remove();
+//                markerMap .remove(0);
+//
+//            }catch (Exception ex)
+//            {
+//                ex.printStackTrace();
+//            }
 
 
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
@@ -883,11 +903,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // info.setCdistance("");
                 //  info.setCmobile("");
 
+
+//                try
+//                {
+//                    Marker marker = markerMap .get(0);
+//                    marker.remove();
+//                    markerMap .remove(0);
+//
+//                }catch (Exception ex)
+//                {
+//                    ex.printStackTrace();
+//                }
+
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.GLOvel_ADDRESS)) {
                     markerOptions.title(Global_Data.GLOvel_ADDRESS);
                 } else {
                     markerOptions.title("Current Position");
                 }
+
 
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                 //  CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
@@ -1101,6 +1134,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         address.clear();
                         name.clear();
                         distance.clear();
+                        gst_no.clear();
                         mobile.clear();
                         code.clear();
                         AllresultSubDealer.clear();
@@ -1120,6 +1154,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_address")));
                                 name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name")));
                                 distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")));
+                                gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")));
                                 mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no")));
                                 code.add(jsonObject.getString("code"));
                                 //status.add("Approved");
@@ -1135,6 +1170,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 // di.proprietor_email2 = jsonObject.getString("distance").trim();
                                 di.shop_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name"));
                                 di.distance = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance"));
+                                di.gst_no = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no"));
                                 di.code = jsonObject.getString("code").trim();
 
                                 di.lati = jsonObject.getString("latitude").trim();
@@ -1172,10 +1208,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                         MarkerOptions markerOptions = new MarkerOptions();
 
-                                        markerOptions.position(latLng)
-                                                .title("Name : " + name.get(a))
-                                                .snippet("Address : " + address.get(a))
-                                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(gst_no.get(a))) {
+                                            markerOptions.position(latLng)
+                                                    .title("Name : " + name.get(a))
+                                                    .snippet("Address : " + address.get(a))
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                                        }
+                                        else
+                                        {
+                                            markerOptions.position(latLng)
+                                                    .title("Name : " + name.get(a))
+                                                    .snippet("Address : " + address.get(a))
+                                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                        }
+
 
 
                                         // InfoWindowData info = new InfoWindowData();
@@ -1190,6 +1236,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         m = mMap.addMarker(markerOptions);
                                         m.setTag(code.get(a));
                                         Global_Data.mMarkers.add(m);
+
 
 
                                         //  m.showInfoWindow();
@@ -1218,6 +1265,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         LatLngBounds.Builder builder = new LatLngBounds.Builder();
                                         for (Marker marker : Global_Data.mMarkers) {
                                             builder.include(marker.getPosition());
+
                                         }
 
                                         LatLngBounds bounds = builder.build();
@@ -1333,6 +1381,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 address.clear();
                 name.clear();
                 distance.clear();
+                gst_no.clear();
                 mobile.clear();
                 code.clear();
                 Global_Data.mMarkers.clear();
@@ -1348,6 +1397,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                        // name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).name));
                         name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).shop_name));
                         distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).distance));
+                        gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).gst_no));
                         mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).proprietor_mobile1));
                         code.add(Allresultsearch.get(i).code);
                         //status.add("Approved");
@@ -1400,10 +1450,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 MarkerOptions markerOptions = new MarkerOptions();
 
-                                markerOptions.position(latLng)
-                                        .title("Name : " + name.get(a))
-                                        .snippet("Address : " + address.get(a))
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(gst_no.get(a))) {
+                                    markerOptions.position(latLng)
+                                            .title("Name : " + name.get(a))
+                                            .snippet("Address : " + address.get(a))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                                }
+                                else
+                                {
+                                    markerOptions.position(latLng)
+                                            .title("Name : " + name.get(a))
+                                            .snippet("Address : " + address.get(a))
+                                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                }
 
 
                                 // InfoWindowData info = new InfoWindowData();
@@ -1415,9 +1474,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
                                 //  mMap.setInfoWindowAdapter(customInfoWindow);
 
+                                try
+                                {
+                                    Marker marker = markerMap.get(0);
+                                    marker.remove();
+                                    markerMap.remove(0);
+
+                                }catch (Exception ex)
+                                {
+                                    ex.printStackTrace();
+                                }
+
+
+//                                try
+//                                {
+//
+//                                    LatLng latLngcurrent = new LatLng(Double.valueOf(Global_Data.GLOvel_LATITUDE), Double.valueOf(Global_Data.GLOvel_LONGITUDE));
+//
+//                                    MarkerOptions markerOptions2 = new MarkerOptions();
+//                                    markerOptions2.position(latLngcurrent);
+//                                    markerOptions2.title(str.toString());
+//                                    markerOptions2.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+//                                    mMap.addMarker(markerOptions2);
+//                                    Global_Data.mMarkers.add(mMap.addMarker(markerOptions2));
+//
+//                                    markerMap.put(0,mMap.addMarker(markerOptions2));
+//                                }catch (Exception ex)
+//                                {
+//                                    ex.printStackTrace();
+//                                }
+
+
+
                                 m = mMap.addMarker(markerOptions);
                                 m.setTag(code.get(a));
                                 Global_Data.mMarkers.add(m);
+
 
 
                                 //  m.showInfoWindow();
@@ -1436,6 +1528,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             try {
                                 buildern.include(m.getPosition());
+                                buildern.include(m.getPosition());
                             } catch (Exception ex) {
 
                             }
@@ -1446,6 +1539,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                                 for (Marker marker : Global_Data.mMarkers) {
                                     builder.include(marker.getPosition());
+                                    marker.showInfoWindow();
                                 }
 
                                 LatLngBounds bounds = builder.build();

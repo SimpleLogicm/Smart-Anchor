@@ -23,6 +23,17 @@ public class SubDealerModel {
     public String lati;
     public String longi;
     public String distance;
+    public String gst_no;
+
+
+    public String getGst_no() {
+        return gst_no;
+    }
+
+    public void setGst_no(String gst_no) {
+        this.gst_no = gst_no;
+    }
+
 
 
     public String getDistance() {
