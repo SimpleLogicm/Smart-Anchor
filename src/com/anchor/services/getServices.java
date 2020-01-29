@@ -7,6 +7,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.net.Uri;
@@ -431,6 +433,17 @@ public class getServices {
         dialog.setCancelable(false);
         dialog.show();
 
+        PackageInfo pInfo = null;
+        String version = "";
+        try {
+            pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            version = pInfo.versionName;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            //textViewVersion.setText("Mobile Sales App, v. 1.3.1");
+        }
+
         domain = context.getResources().getString(R.string.service_domain);
 
         // Global_Val global_Val = new Global_Val();
@@ -442,7 +455,7 @@ public class getServices {
 //            domain = URL.toString();
 //        }
 
-        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id);
+        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version);
         StringRequest stringRequest = null;
         stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id,
                 new Response.Listener<String>() {
