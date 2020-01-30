@@ -457,7 +457,7 @@ public class getServices {
 
         Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version);
         StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id,
+        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
