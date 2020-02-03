@@ -28,7 +28,7 @@ public class JobSchedular_helper {
             ComponentName serviceComponent = new ComponentName(context, TestJobService.class);
             JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent);
             builder.setPeriodic(300000);
-            builder.setOverrideDeadline(3 * 700000);
+           // builder.setOverrideDeadline(3 * 700000);
             JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
             jobScheduler.schedule(builder.build());
 
