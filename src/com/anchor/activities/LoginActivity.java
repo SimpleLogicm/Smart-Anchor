@@ -263,17 +263,17 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Sadanand 21");
 //        editText2.setText("Sadanand28287958");
 
-        editText1.setText("Sadanand 1");
-        editText2.setText("sadanand12345");
-
+//
+     //   editText1.setText("Sadanand 1");
+//        editText2.setText("sadanand12345");
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
 
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-//		editText1.setText("Dnyanada");
-//		editText2.setText("Dnyanada9400324");
+		editText1.setText("Sadanand");
+		editText2.setText("Sadanand7315903");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);

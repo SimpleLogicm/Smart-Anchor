@@ -31,13 +31,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.ProductSearchAdapter;
 import com.anchor.adapter.Spinner_List_Adapter;
 import com.anchor.adapter.Sub_Dealer_ProductList_Adapter;
 import com.anchor.model.Spiner_List_Model;
@@ -85,6 +85,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
     ConnectionDetector cd;
     ArrayList<HashMap<String, String>> SwipeList;
+    ArrayList<HashMap<String, String>> GSwipeList;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
     private Sub_Dealer_ProductList_Adapter adapter;
     private ListView swipeListView;
@@ -109,6 +110,9 @@ public class Sub_Dealer_ProductList extends Activity {
     String response_result;
     LoginDataBaseAdapter loginDataBaseAdapter;
     String save_flag = "";
+    ProductSearchAdapter productSearchAdapter;
+    ArrayList<String> Glist1 = new ArrayList<String>();
+    ArrayList<String> Glist2 = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +143,7 @@ public class Sub_Dealer_ProductList extends Activity {
 
         map = new HashMap<String, String>();
         SwipeList = new ArrayList<HashMap<String, String>>();
+        GSwipeList = new ArrayList<HashMap<String, String>>();
 
 
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
@@ -174,6 +179,8 @@ public class Sub_Dealer_ProductList extends Activity {
             ex.printStackTrace();
         }
 
+        productSearchAdapter = new ProductSearchAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        Product_Variant.setAdapter(productSearchAdapter);
 
         Product_Variant.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -236,10 +243,9 @@ public class Sub_Dealer_ProductList extends Activity {
                         });
 
                     } else {
-                        SwipeList.clear();
-                        list1.clear();
-                        list2.clear();
-                        list3.clear();
+                        GSwipeList.clear();
+                        Glist1.clear();
+                        Glist2.clear();
                         pp = 0;
                         for (Local_Data cnt1 : cont1) {
                             HashMap<String, String> mapp = new HashMap<String, String>();
@@ -257,26 +263,25 @@ public class Sub_Dealer_ProductList extends Activity {
                             if (contactsn.size() > 0) {
                                 for (Local_Data cn : contactsn) {
 
-                                    list1.add(cn.get_delivery_product_order_quantity());
-                                    list2.add("PRICE : " + cn.getAmount());
+                                    Glist1.add(cn.get_delivery_product_order_quantity());
+                                    Glist2.add("PRICE : " + cn.getAmount());
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getAmount())) {
                                         pp += Double.valueOf(cn.getAmount());
                                     }
                                 }
                             } else {
-                                list1.add("");
-                                list2.add("");
+                                Glist1.add("");
+                                Glist2.add("");
                             }
 
-
-                            SwipeList.add(mapp);
+                            GSwipeList.add(mapp);
                         }
 
                         Sub_Dealer_ProductList.this.runOnUiThread(new Runnable() {
                             public void run() {
                                 swipeListView.setItemsCanFocus(true);
 
-                                adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+                                adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, GSwipeList, Glist1, Glist2);
 
                                 swipeListView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -308,7 +313,11 @@ public class Sub_Dealer_ProductList extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (Product_Variant.getText().toString().trim().length() == 0) {
-                    new Sub_Dealer_ProductList.VarientASN().execute();
+
+                    adapter = new Sub_Dealer_ProductList_Adapter(Sub_Dealer_ProductList.this, SwipeList, list1, list2);
+                    swipeListView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                   // new Sub_Dealer_ProductList.VarientASN().execute();
 
                 }
 
@@ -617,13 +626,13 @@ public class Sub_Dealer_ProductList extends Activity {
 
                                 swipeListView.setAdapter(adapter);
 
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
-                                Product_Variant.setThreshold(1);// will start working from
-                                // first character
-                                Product_Variant.setAdapter(adapter);// setting the adapter
-                                // data into the
-                                // AutoCompleteTextView
-                                Product_Variant.setTextColor(Color.BLACK);
+//                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
+//                                Product_Variant.setThreshold(1);// will start working from
+//                                // first character
+//                                Product_Variant.setAdapter(adapter);// setting the adapter
+//                                // data into the
+//                                // AutoCompleteTextView
+//                                Product_Variant.setTextColor(Color.BLACK);
                                  txttotalPreview.setText("Total : " + pp);
 
 
@@ -634,6 +643,7 @@ public class Sub_Dealer_ProductList extends Activity {
                     }
                 } else {
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_business_unit_name) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Search_Category_name)) {
+
 
                         List<Local_Data> cont1 = dbvoc.getProductvarientbycategoryandproduct(Global_Data.Search_business_unit_name, Global_Data.Search_Category_name, Global_Data.Search_BusinessCategory_name, Global_Data.Search_brand_name);
 
@@ -707,13 +717,13 @@ public class Sub_Dealer_ProductList extends Activity {
 
                                     swipeListView.setAdapter(adapter);
 
-                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
-                                    Product_Variant.setThreshold(1);// will start working from
-                                    // first character
-                                    Product_Variant.setAdapter(adapter);// setting the adapter
-                                    // data into the
-                                    // AutoCompleteTextView
-                                    Product_Variant.setTextColor(Color.BLACK);
+//                                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(Sub_Dealer_ProductList.this, android.R.layout.simple_spinner_dropdown_item, resultsvarient);
+//                                    Product_Variant.setThreshold(1);// will start working from
+//                                    // first character
+//                                    Product_Variant.setAdapter(adapter);// setting the adapter
+//                                    // data into the
+//                                    // AutoCompleteTextView
+//                                    Product_Variant.setTextColor(Color.BLACK);
                                       txttotalPreview.setText("Total : " + pp);
 
 
