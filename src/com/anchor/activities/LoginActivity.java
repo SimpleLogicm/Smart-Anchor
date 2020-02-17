@@ -260,11 +260,11 @@ public class LoginActivity extends Activity {
             emp_code.setText(Global_Data.emp_code);
         }
 
-//        editText1.setText("Sadanand 21");
-//        editText2.setText("Sadanand28287958");
+        editText1.setText("PRIYA SHOP");
+        editText2.setText("PRIYANKA3073911");
 
 //
-     //   editText1.setText("Sadanand 1");
+//        editText1.setText("Sadanand 1");
 //        editText2.setText("sadanand12345");
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
@@ -272,8 +272,8 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-		editText1.setText("Sadanand");
-		editText2.setText("Sadanand7315903");
+//		editText1.setText("Sadanand");
+//		editText2.setText("Sadanand7315903");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -1045,7 +1045,6 @@ public class LoginActivity extends Activity {
                 @Override
                 public void onResponse(JSONObject response) {
                     Log.i("volley", "response: " + response.toString());
-                    //  Log.i("volley", "response reg Length: " + response.length());
 
                     try {
                         String response_result = "";
@@ -1064,7 +1063,7 @@ public class LoginActivity extends Activity {
 
                         } else {
 
-                            dbvoc.getDeleteTable("USERS");
+                            dbvoc.getDeleteTable("users");
 
                             JSONArray users = response.getJSONArray("users");
 //	                           

@@ -212,7 +212,8 @@ public class Global_Data {
 
     public static List<String> Customers =new ArrayList<>();
     public static HashMap<String,String> Customers_map = new HashMap<String,String>();
-   public static List<SubDealerModel> AllresultSubDealer = new ArrayList<SubDealerModel>();
+
+    public static List<SubDealerModel> AllresultSubDealer = new ArrayList<SubDealerModel>();
     public static List<String> SubDealer_List = new ArrayList<>();
     public static ArrayList<String> Some_list = new ArrayList<String>();
 
@@ -222,6 +223,7 @@ public class Global_Data {
     public static String Sub_Email="";
     public static String SUB_Mobile="";
     public static String Dealer_Code="";
+    public static String Dealer_EMAIL="";
     public static String state_code="";
     public static String click_flag="";
     public static String Sub_shop_name="";

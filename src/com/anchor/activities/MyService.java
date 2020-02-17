@@ -255,8 +255,10 @@ public class MyService extends Service implements LocationListener{
 				{
 					Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
 
-					latitude = Double.valueOf(Global_Data.GLOvel_LATITUDE);
-					longitude = Double.valueOf(Global_Data.GLOvel_LONGITUDE);
+					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+						latitude = Double.valueOf(Global_Data.GLOvel_LATITUDE);
+						longitude = Double.valueOf(Global_Data.GLOvel_LONGITUDE);
+					}
 
 //					if(timeOfDay >= 7 && timeOfDay <= 22){
 //

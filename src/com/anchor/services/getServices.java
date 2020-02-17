@@ -4375,9 +4375,9 @@ public class getServices {
                                                 TextView txtEmail = dialog1.findViewById(R.id.txtEmail);
                                                 ImageView image = dialog1.findViewById(R.id.image);
 
-                                                txtEmail.setText("Mail will be sent to " + email_adress);
-                                                txtEmail.setVisibility(View.GONE);
-                                                image.setVisibility(View.GONE);
+                                                txtEmail.setText("Mail will be sent to " +  Global_Data.Dealer_EMAIL);
+                                                //txtEmail.setVisibility(View.GONE);
+                                               // image.setVisibility(View.GONE);
                                                 if (!Sub_MOBILE.equalsIgnoreCase("")) {
                                                     txtMessage.setText("Sms Send Successfully");
                                                 }

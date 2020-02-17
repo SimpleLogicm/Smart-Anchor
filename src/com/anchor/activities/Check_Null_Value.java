@@ -12,7 +12,7 @@ public class Check_Null_Value {
 	}
 
 	public static boolean isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(final String string) {
-        return string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null") && !string.equalsIgnoreCase("0");
+        return string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null") && !string.equalsIgnoreCase("0") && !string.equalsIgnoreCase("0.0");
 	}
 
 	public static String isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(final String string) {

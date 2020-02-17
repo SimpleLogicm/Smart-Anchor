@@ -130,6 +130,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
     String beat_click_flag = "";
     String spinner_flag = "";
     LoginDataBaseAdapter loginDataBaseAdapter;
+    HashMap<String,String> Customers_map_EMAIL = new HashMap<String,String>();
 
 
     @Override
@@ -442,6 +443,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     if (Global_Data.Customers_map.size() > 0) {
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+                            Global_Data.Dealer_EMAIL = Customers_map_EMAIL.get(s_dealer_search.getText().toString().trim());
 
                             if (Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                                 Global_Data.Dealer_Code = "";
@@ -529,7 +531,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     if (Global_Data.Customers_map.size() > 0) {
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
-
+                            Global_Data.Dealer_EMAIL = Customers_map_EMAIL.get(s_dealer_search.getText().toString().trim());
                             if (Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                                 Global_Data.Dealer_Code = "";
                             }
@@ -632,6 +634,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     if (Global_Data.Customers_map.size() > 0) {
                         try {
                             Global_Data.Dealer_Code = Global_Data.Customers_map.get(s_dealer_search.getText().toString().trim());
+                            Global_Data.Dealer_EMAIL = Customers_map_EMAIL.get(s_dealer_search.getText().toString().trim());
                             if (Global_Data.Dealer_Code.equalsIgnoreCase(null) || Global_Data.Dealer_Code.equalsIgnoreCase("null") || Global_Data.Dealer_Code.equalsIgnoreCase("")) {
                                 Global_Data.Dealer_Code = "";
                             }
@@ -1743,6 +1746,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 Global_Data.Customers.clear();
                 Global_Data.Customers_map.clear();
+               Customers_map_EMAIL.clear();
 
                 if (response.has("message")) {
                     response_result = response.getString("message");
@@ -1807,6 +1811,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("shop_name").trim())) {
                                             Global_Data.Customers.add(jsonObject.getString("shop_name"));
                                             Global_Data.Customers_map.put(jsonObject.getString("shop_name"), jsonObject.getString("id"));
+                                            Global_Data.Customers_map.put(jsonObject.getString("shop_name"), jsonObject.getString("id"));
+                                            Customers_map_EMAIL.put(jsonObject.getString("shop_name"), jsonObject.getString("email"));
                                         }
                                     }
 
