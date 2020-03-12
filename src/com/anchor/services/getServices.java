@@ -4203,6 +4203,8 @@ public class getServices {
                         multipart.addFormField("shipment_priority", cn.getShipment_pr_code());
                         multipart.addFormField("name", cn.getName());
                         multipart.addFormField("remarks", cn.getRemarks());
+                        multipart.addFormField("manual_address",  Global_Data.Sub_Dealer_address);
+
 
 
                         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getImage())) {

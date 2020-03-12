@@ -34,11 +34,21 @@ public class AppLocationManager implements LocationListener {
     private void setMostRecentLocation(Location lastKnownLocation) {
 
         try{
-            double lon = lastKnownLocation.getLongitude();/// * 1E6);
-            double lat = lastKnownLocation.getLatitude();// * 1E6);
 
-            latitude = lat + "";
-            longitude = lon + "";
+            if (!String.valueOf(lastKnownLocation.getLatitude()).equalsIgnoreCase("null") && !String.valueOf(lastKnownLocation.getLatitude()).equalsIgnoreCase(null) && !String.valueOf(lastKnownLocation.getLongitude()).equalsIgnoreCase(null) && !String.valueOf(lastKnownLocation.getLongitude()).equalsIgnoreCase(null))
+            {
+                double lon = lastKnownLocation.getLongitude();/// * 1E6);
+                double lat = lastKnownLocation.getLatitude();// * 1E6);
+
+                latitude = lat + "";
+                longitude = lon + "";
+            }
+            else
+            {
+                latitude = "";
+                longitude = "";
+            }
+
         }catch(Exception ex){ex.printStackTrace();}
 
     }

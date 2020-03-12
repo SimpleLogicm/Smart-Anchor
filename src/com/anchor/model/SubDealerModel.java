@@ -4,6 +4,7 @@ public class SubDealerModel {
 
     public String name;
     public String address;
+    public String address2;
     public String city;
     public String beat;
     public String description;
@@ -26,6 +27,14 @@ public class SubDealerModel {
     public String gst_no;
 
 
+    public String getaddress2() {
+        return address2;
+    }
+
+    public void setaddress2(String address2) {
+        this.address2 = address2;
+    }
+
     public String getGst_no() {
         return gst_no;
     }
@@ -33,8 +42,6 @@ public class SubDealerModel {
     public void setGst_no(String gst_no) {
         this.gst_no = gst_no;
     }
-
-
 
     public String getDistance() {
         return distance;

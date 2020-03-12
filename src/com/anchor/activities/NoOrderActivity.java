@@ -864,6 +864,7 @@ public class NoOrderActivity extends BaseActivity {
                         no_order_object.put("sub_dealer_mobile", Global_Data.SUB_Mobile);
                         no_order_object.put("sub_dealer_email", Global_Data.Sub_Email);
                         no_order_object.put("sub_dealer_shop_name", Global_Data.Sub_shop_name);
+                        no_order_object.put("manual_address",  Global_Data.Sub_Dealer_address);
                         no_order_object.put("dealer_id", Global_Data.Dealer_Code);
 
                         if (!reason_name.equalsIgnoreCase("")) {

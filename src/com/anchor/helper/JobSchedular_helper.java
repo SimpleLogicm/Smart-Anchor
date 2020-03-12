@@ -29,8 +29,14 @@ public class JobSchedular_helper {
             JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent);
             builder.setPeriodic(300000);
            // builder.setOverrideDeadline(3 * 700000);
-            JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
-            jobScheduler.schedule(builder.build());
+            try
+            {
+                JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
+                jobScheduler.schedule(builder.build());
+            }catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
 
 
         }

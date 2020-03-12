@@ -83,6 +83,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         final SubDealerModel ci = contactList.get(i);
         contactViewHolder.d_name.setText("Shop Name : " + ci.shop_name);
         final String shopname =ci.shop_name;
+        final String address =ci.address2;
         contactViewHolder.p_delaer_address.setText("Address : " + ci.address);
         contactViewHolder.p_distance.setText("Distance : " + ci.distance);
         //contactViewHolder.p_delaer_name.setText("Firm Name : " + ci.name);
@@ -114,6 +115,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
            //     Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
 
                 Global_Data.Sub_Dealer_name = shopname;
+                Global_Data.Sub_Dealer_address = address;
                 Global_Data.Sub_Dealer_Code = contactViewHolder.p_dealer_code.getText().toString();
 
          //       Global_Data.Sub_Dealer_Email=ci.proprietor_email1;

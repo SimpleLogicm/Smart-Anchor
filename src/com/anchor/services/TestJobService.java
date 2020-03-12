@@ -28,7 +28,13 @@ public class TestJobService extends JobService {
             }
         }
 
-        JobSchedular_helper.scheduleJob(getApplicationContext()); // reschedule the job
+        try
+        {
+            JobSchedular_helper.scheduleJob(getApplicationContext()); // reschedule the job
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         return true;
     }
 

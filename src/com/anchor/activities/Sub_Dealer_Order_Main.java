@@ -433,6 +433,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                 Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
                                 Global_Data.Sub_Email = dataItem.proprietor_email1;
                                 Global_Data.Sub_shop_name = dataItem.shop_name;
+                                Global_Data.Sub_Dealer_address = dataItem.address2;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -521,6 +522,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                 Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
                                 Global_Data.Sub_Email = dataItem.proprietor_email1;
                                 Global_Data.Sub_shop_name = dataItem.shop_name;
+                                Global_Data.Sub_Dealer_address = dataItem.address2;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -624,6 +626,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                 Global_Data.Sub_Email = dataItem.proprietor_email1;
                                 Global_Data.Sub_Dealer_name = s_sub_dealer_search.getText().toString();
                                 Global_Data.Sub_shop_name = dataItem.shop_name;
+                                Global_Data.Sub_Dealer_address = dataItem.address2;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }

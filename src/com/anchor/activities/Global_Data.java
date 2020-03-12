@@ -220,6 +220,7 @@ public class Global_Data {
     public static String Sub_Dealer_Code="";
     public static String Product_Array="";
     public static String Sub_Dealer_name="";
+    public static String Sub_Dealer_address="";
     public static String Sub_Email="";
     public static String SUB_Mobile="";
     public static String Dealer_Code="";

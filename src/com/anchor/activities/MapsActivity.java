@@ -17,7 +17,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
@@ -79,6 +78,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1165,6 +1165,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
                                 di.proprietor_email1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("sub_dealer_email"));
                                 di.address = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_address"));
+                                di.address2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("manual_address"));
                                 //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
                                 // di.proprietor_name2 = jsonObject.getString("distance").trim();
                                 // di.proprietor_email2 = jsonObject.getString("distance").trim();
