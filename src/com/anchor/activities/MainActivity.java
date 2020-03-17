@@ -112,6 +112,9 @@ public class MainActivity extends BaseActivity {
     PlayService_Location PlayServiceManager;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+
+    Fragment fragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,11 +177,11 @@ public class MainActivity extends BaseActivity {
         if (Global_Data.LOCATION_SERVICE_HIT.equalsIgnoreCase("TRUE")) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // startForegroundService(new Intent(this, MyService.class));
-               // startService(new Intent(this, MyService.class));
+                // startForegroundService(new Intent(this, MyService.class));
+                // startService(new Intent(this, MyService.class));
 //                ComponentName jobService =
 //                        new ComponentName(getPackageName(), TestJobService.class.getName());
-              //  startService(new Intent(this, MyService.class));
+                //  startService(new Intent(this, MyService.class));
 
                 JobScheduler jobScheduler =
                         (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
@@ -188,7 +191,7 @@ public class MainActivity extends BaseActivity {
                         .build());
 
             } else {
-               startService(new Intent(this, MyService.class));
+                startService(new Intent(this, MyService.class));
             }
             // startService(new Intent(this, MyService.class));
             Global_Data.LOCATION_SERVICE_HIT = "";
@@ -197,7 +200,7 @@ public class MainActivity extends BaseActivity {
         Global_Data.PREVIOUS_ORDER_BACK_FLAG = "";
 
         /* background service check delete flag table delete */
-     //   dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
+        //   dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 
         try {
             ActionBar mActionBar = getActionBar();
@@ -411,7 +414,7 @@ public class MainActivity extends BaseActivity {
      */
     public void displayView(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = null;
+
         switch (position) {
             case 0:
 
@@ -754,43 +757,52 @@ public class MainActivity extends BaseActivity {
         // TODO Auto-generated method stub
         //super.onBackPressed();
 
-        if (fragmentPoistion == 0 || fragmentPoistion == 3) {
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
-            alertDialog.setTitle("Confirmation");
-            alertDialog.setMessage(" Are you sure you want to logout?");
-            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+        //Fragment fragment = new Home();
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
+        boolean isUpstatuss = ((Home) fragment).isUpStatus();
+        if (isUpstatuss == true) {
+            ((Home) fragment).slideDownnew();
+        } else {
+            if (fragmentPoistion == 0 || fragmentPoistion == 3) {
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+                alertDialog.setTitle("Confirmation");
+                alertDialog.setMessage(" Are you sure you want to logout?");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                    dbvoc.getDeleteTable("user_email");
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
 
-                    loginDataBaseAdapter.insert_user_email(Global_Data.GLOvel_USER_EMAIL, "Logout");
+                        dbvoc.getDeleteTable("user_email");
 
-                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                    startActivity(i);
-                    stopService(new Intent(MainActivity.this, LocationServices.class));
-                    finishAffinity();
-                    finish();
-                }
-            });
+                        loginDataBaseAdapter.insert_user_email(Global_Data.GLOvel_USER_EMAIL, "Logout");
 
-            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                        startActivity(i);
+                        stopService(new Intent(MainActivity.this, LocationServices.class));
+                        finishAffinity();
+                        finish();
+                    }
+                });
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // TODO Auto-generated method stub
-                    dialog.cancel();
-                }
-            });
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
 
-            alertDialog.setCancelable(false);
-            alertDialog.show();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                        dialog.cancel();
+                    }
+                });
+
+                alertDialog.setCancelable(false);
+                alertDialog.show();
+            }
         }
+
+
     }
 
     private void scheduleNotify() {
@@ -1352,7 +1364,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void enableAutoStart() {
-          final Intent[] POWERMANAGER_INTENTS = {
+        final Intent[] POWERMANAGER_INTENTS = {
                 new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity")),
                 new Intent().setComponent(new ComponentName("com.letv.android.letvsafe", "com.letv.android.letvsafe.AutobootManageActivity")),
                 new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.startupmgr.ui.StartupNormalAppListActivity")),

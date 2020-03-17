@@ -260,12 +260,12 @@ public class LoginActivity extends Activity {
             emp_code.setText(Global_Data.emp_code);
         }
 
-        editText1.setText("PRIYA SHOP");
-        editText2.setText("PRIYANKA3073911");
+//        editText1.setText("PRIYA SHOP");
+//        editText2.setText("PRIYANKA3073911");
 
 //
-//        editText1.setText("Sadanand 1");
-//        editText2.setText("sadanand12345");
+        editText1.setText("Sadanand 1");
+        editText2.setText("sadanand12345");
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
 

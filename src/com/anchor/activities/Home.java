@@ -9,7 +9,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.Html;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,8 +50,10 @@ public class Home extends Fragment {
     DataBaseHelper dbvoc;
     View rootView;
     ImageView order, calendar, custom_serve, expenses, target, schedule, logout, pricing, add_retailernew, marketing_data, syncmdata;
-    Button my_button, my_buttonfghf;
-    RelativeLayout main_my_view;
+    ImageView top_arrow;
+    ImageView down_arrow;
+    CardView main_my_view;
+    TextView my_text;
     CardView main_bottomcard;
     boolean isUp;
 
@@ -76,12 +80,15 @@ public class Home extends Fragment {
         marketing_data = rootView.findViewById(R.id.marketing_data);
         syncmdata = rootView.findViewById(R.id.syncmdata);
         txtWelcomeUser = rootView.findViewById(R.id.txtWelcomeUser);
-        my_button = rootView.findViewById(R.id.my_button);
-        my_buttonfghf = rootView.findViewById(R.id.my_buttonfghf);
+        top_arrow = rootView.findViewById(R.id.my_button);
+        down_arrow = rootView.findViewById(R.id.my_buttonfghf);
         main_my_view = rootView.findViewById(R.id.main_my_view);
         main_bottomcard = rootView.findViewById(R.id.main_bottomcard);
+        my_text = rootView.findViewById(R.id.my_text);
 
         main_my_view.setVisibility(View.INVISIBLE);
+
+        my_text.setText(Html.fromHtml("Rank : 2<sup>nd</sup>"));
 
         isUp = false;
 
@@ -113,7 +120,7 @@ public class Home extends Fragment {
         dbvoc = new DataBaseHelper(getActivity());
         cd = new ConnectionDetector(getActivity());
 
-        my_button.setOnClickListener(new OnClickListener() {
+        top_arrow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -126,12 +133,12 @@ public class Home extends Fragment {
             }
         });
 
-        my_buttonfghf.setOnClickListener(new OnClickListener() {
+        down_arrow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
-            	slideDown(main_my_view);
-            	isUp = false;
+                slideDown(main_my_view);
+                isUp = false;
             }
         });
 
@@ -297,7 +304,7 @@ public class Home extends Fragment {
 
     // slide the view from its current position to below itself
     public void slideDown(View view) {
-       // main_my_view.setVisibility(View.GONE);
+        // main_my_view.setVisibility(View.GONE);
         main_bottomcard.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
                 0,                 // fromXDelta
@@ -309,12 +316,57 @@ public class Home extends Fragment {
         view.startAnimation(animate);
     }
 
+    // slide the view from its current position to below itself
+    public void slideDownnew() {
+        if(isUp == true)
+        {
+            isUp = false;
+            main_my_view.setVisibility(View.GONE);
+            main_bottomcard.setVisibility(View.VISIBLE);
+            TranslateAnimation animate = new TranslateAnimation(
+                    0,                 // fromXDelta
+                    0,                 // toXDelta
+                    0,                 // fromYDelta
+                    main_my_view.getHeight()); // toYDelta
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            main_my_view.startAnimation(animate);
+        }
+
+    }
+
+    public boolean isUpStatus() {
+        return  isUp;
+    }
+
+
+
     @Override
     public void onResume() {
-        // TODO Auto-generated method stub
         super.onResume();
 
-
+//        if(getView() == null){
+//            return;
+//        }
+//
+//        getView().setFocusableInTouchMode(true);
+//        getView().requestFocus();
+//        getView().setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//
+//                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+//                    if(isUp == true)
+//                    {
+//                        slideDown(main_my_view);
+//                        isUp = false;
+//                    }
+//
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
     }
 
 }
