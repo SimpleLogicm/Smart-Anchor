@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/r_adapter_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:tag="cards main container">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/r_valuedate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_header_mm"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:text="fdf"
+                android:textColor="@color/rank_text_color"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/r_valuescore"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="fdf"
+                android:textColor="@color/rank_text_color"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/user_header_mm"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+
+                />
+
+
+            <TextView
+                android:id="@+id/r_valuerank"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="fdf"
+                android:textColor="@color/rank_text_color"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/user_header_mm"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingRight="5dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+</LinearLayout>
