@@ -28,11 +28,14 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.adapter.RankAdapter;
+import com.anchor.adapter.RankDetailAdapter;
 import com.anchor.model.RankDataModel;
+import com.anchor.model.RankDetailModel;
 import com.anchor.slidingmenu.CalendarAct;
 import com.anchor.webservice.ConnectionDetector;
 import com.github.mikephil.charting.charts.PieChart;
@@ -49,7 +52,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Home extends Fragment implements OnChartValueSelectedListener,RankAdapter.EventListener {
+public class Home extends Fragment implements OnChartValueSelectedListener, RankAdapter.EventListener {
 
 
     BufferedReader in = null;
@@ -77,14 +80,18 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
     TextView header_rank_text;
     RelativeLayout main_bottomcard;
     boolean isUp;
-    RecyclerView rank_list_recycleview;
+    RecyclerView rank_list_recycleview,rank_ldetail_recycleview;
     private RecyclerView.LayoutManager layoutManager;
     private static ArrayList<RankDataModel> data;
+    private static ArrayList<RankDetailModel> detailsdata;
     private static RecyclerView.Adapter adapter;
-    CardView recycleviewr_header,recycleviewr_container;
+    private static RecyclerView.Adapter detailadapter;
+    CardView recycleviewr_header, recycleviewr_container,detail_view_container;
     PieChart r_piechart;
     ImageView r_arrow_left;
-    TextView r_pi_date;
+    Button r_details;
+    ScrollView home_scroller;
+    static String left_arrow_click = "";
 
     public Home() {
     }
@@ -116,15 +123,16 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
         my_text = rootView.findViewById(R.id.my_text);
         header_rank_text = rootView.findViewById(R.id.header_rank_text);
         rank_list_recycleview = rootView.findViewById(R.id.rank_list_recycleview);
-
+        rank_ldetail_recycleview = rootView.findViewById(R.id.rank_ldetail_recycleview);
         recycleviewr_header = rootView.findViewById(R.id.recycleviewr_header);
         recycleviewr_container = rootView.findViewById(R.id.recycleviewr_container);
+        detail_view_container = rootView.findViewById(R.id.detail_view_container);
         r_piechart = rootView.findViewById(R.id.rr_piechart);
         r_arrow_left = rootView.findViewById(R.id.r_arrow_left);
-        r_pi_date = rootView.findViewById(R.id.r_pi_date);
+        r_details = rootView.findViewById(R.id.r_details);
+        home_scroller = rootView.findViewById(R.id.home_scroller);
 
         r_piechart.setUsePercentValues(true);
-
 
 
         rank_list_recycleview.setHasFixedSize(true);
@@ -140,19 +148,53 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
 
         rank_list_recycleview.setItemAnimator(new DefaultItemAnimator());
 
+
+        rank_ldetail_recycleview.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        rank_ldetail_recycleview.setLayoutManager(layoutManager);
+
+        DividerItemDecoration horizontalDecoration2 = new DividerItemDecoration(rank_ldetail_recycleview.getContext(),
+                DividerItemDecoration.VERTICAL);
+        Drawable horizontalDivider2 = ContextCompat.getDrawable(getActivity(), R.drawable.horizontal_divider_detail);
+        horizontalDecoration2.setDrawable(horizontalDivider2);
+
+//        DividerItemDecoration verticalDecoration = new DividerItemDecoration(rank_ldetail_recycleview.getContext(),
+//                DividerItemDecoration.HORIZONTAL);
+//        Drawable verticalDivider = ContextCompat.getDrawable(getActivity(), R.drawable.vertical_divider_detils);
+//        verticalDecoration.setDrawable(verticalDivider);
+//        rank_ldetail_recycleview.addItemDecoration(verticalDecoration);
+
+        rank_ldetail_recycleview.addItemDecoration(horizontalDecoration2);
+
+        rank_ldetail_recycleview.setItemAnimator(new DefaultItemAnimator());
+
+
         data = new ArrayList<RankDataModel>();
         for (int i = 0; i < 20; i++) {
             data.add(new RankDataModel(
                     "20-02-2020",
                     "13222",
-                   "2"
+                    "2"
+            ));
+        }
+
+        detailsdata = new ArrayList<RankDetailModel>();
+        for (int i = 0; i < 20; i++) {
+            detailsdata.add(new RankDetailModel(
+                    "No of Call Mode",
+                    "10",
+                    "10",
+                    "100"
             ));
         }
 
 
-
-        adapter = new RankAdapter(data,getActivity(),this);
+        adapter = new RankAdapter(data, getActivity(), this);
         rank_list_recycleview.setAdapter(adapter);
+
+        detailadapter = new RankDetailAdapter(detailsdata, getActivity());
+        rank_ldetail_recycleview.setAdapter(detailadapter);
 
 
         main_my_view.setVisibility(View.INVISIBLE);
@@ -191,6 +233,19 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
         cd = new ConnectionDetector(getActivity());
 
 
+        r_details.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                left_arrow_click = "details";
+                detail_view_container.setVisibility(View.VISIBLE);
+                r_details.setVisibility(View.GONE);
+                recycleviewr_header.setVisibility(View.GONE);
+                recycleviewr_container.setVisibility(View.GONE);
+                r_piechart.setVisibility(View.GONE);
+                r_arrow_left.setVisibility(View.VISIBLE);
+            }
+        });
 
         top_arrow.setOnClickListener(new OnClickListener() {
             @Override
@@ -208,11 +263,29 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
         r_arrow_left.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                recycleviewr_header.setVisibility(View.VISIBLE);
-                recycleviewr_container.setVisibility(View.VISIBLE);
-                r_piechart.setVisibility(View.GONE);
-                r_arrow_left.setVisibility(View.GONE);
-                r_pi_date.setVisibility(View.GONE);
+
+                if(left_arrow_click.equalsIgnoreCase("details"))
+                {
+                    left_arrow_click = "piechart";
+                    recycleviewr_header.setVisibility(View.GONE);
+                    recycleviewr_container.setVisibility(View.GONE);
+                    detail_view_container.setVisibility(View.GONE);
+                    r_piechart.setVisibility(View.VISIBLE);
+                    r_details.setVisibility(View.VISIBLE);
+                    r_arrow_left.setVisibility(View.VISIBLE);
+                    home_scroller.setVisibility(View.GONE);
+                }
+                else
+                {
+                    recycleviewr_header.setVisibility(View.VISIBLE);
+                    recycleviewr_container.setVisibility(View.VISIBLE);
+                    detail_view_container.setVisibility(View.GONE);
+                    r_piechart.setVisibility(View.GONE);
+                    r_arrow_left.setVisibility(View.GONE);
+                    r_details.setVisibility(View.GONE);
+                    home_scroller.setVisibility(View.GONE);
+                }
+
             }
         });
 
@@ -223,8 +296,10 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
                 recycleviewr_header.setVisibility(View.VISIBLE);
                 recycleviewr_container.setVisibility(View.VISIBLE);
                 r_piechart.setVisibility(View.GONE);
+                r_details.setVisibility(View.GONE);
                 r_arrow_left.setVisibility(View.GONE);
-                r_pi_date.setVisibility(View.GONE);
+                r_details.setVisibility(View.GONE);
+                home_scroller.setVisibility(View.GONE);
 
                 slideDown(main_my_view);
                 isUp = false;
@@ -381,6 +456,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
     public void slideUp(View view) {
         view.setVisibility(View.VISIBLE);
         main_bottomcard.setVisibility(View.GONE);
+        home_scroller.setVisibility(View.GONE);
         TranslateAnimation animate = new TranslateAnimation(
                 0,                 // fromXDelta
                 0,                 // toXDelta
@@ -393,8 +469,9 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
 
     // slide the view from its current position to below itself
     public void slideDown(View view) {
-        //
+
         main_bottomcard.setVisibility(View.VISIBLE);
+        home_scroller.setVisibility(View.VISIBLE);
         TranslateAnimation animate = new TranslateAnimation(
                 0,                 // fromXDelta
                 0,                 // toXDelta
@@ -403,21 +480,28 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
         animate.setDuration(500);
         animate.setFillAfter(true);
         view.startAnimation(animate);
-        main_my_view.setVisibility(View.GONE);
+        // main_my_view.setVisibility(View.GONE);
+
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
     }
 
     // slide the view from its current position to below itself
     public void slideDownnew() {
-        if(isUp == true)
-        {
+        if (isUp == true) {
             isUp = false;
-            main_my_view.setVisibility(View.GONE);
+//            main_my_view.setVisibility(View.GONE);
+//            main_bottomcard.setVisibility(View.VISIBLE);
+//            recycleviewr_header.setVisibility(View.VISIBLE);
+//            recycleviewr_container.setVisibility(View.VISIBLE);
+//            home_scroller.setVisibility(View.VISIBLE);
+//            r_piechart.setVisibility(View.GONE);
+//            r_arrow_left.setVisibility(View.GONE);
+//            r_pi_date.setVisibility(View.GONE);
+
             main_bottomcard.setVisibility(View.VISIBLE);
-            recycleviewr_header.setVisibility(View.VISIBLE);
-            recycleviewr_container.setVisibility(View.VISIBLE);
-            r_piechart.setVisibility(View.GONE);
-            r_arrow_left.setVisibility(View.GONE);
-            r_pi_date.setVisibility(View.GONE);
+            home_scroller.setVisibility(View.VISIBLE);
+
             TranslateAnimation animate = new TranslateAnimation(
                     0,                 // fromXDelta
                     0,                 // toXDelta
@@ -426,12 +510,16 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
             animate.setDuration(500);
             animate.setFillAfter(true);
             main_my_view.startAnimation(animate);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            //getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//
         }
 
     }
 
-    public void pieChartData(String date)
-    {
+    public void pieChartData(String date) {
 
         ArrayList<Entry> yvalues = new ArrayList<Entry>();
         yvalues.add(new Entry(8f, 0));
@@ -478,9 +566,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
     }
 
     public boolean isUpStatus() {
-        return  isUp;
+        return isUp;
     }
-
 
 
     @Override
@@ -530,12 +617,15 @@ public class Home extends Fragment implements OnChartValueSelectedListener,RankA
 
     @Override
     public void onEvent(String date) {
+        left_arrow_click = "piechart";
         recycleviewr_header.setVisibility(View.GONE);
         recycleviewr_container.setVisibility(View.GONE);
+        detail_view_container.setVisibility(View.GONE);
         r_piechart.setVisibility(View.VISIBLE);
+        r_details.setVisibility(View.VISIBLE);
         r_arrow_left.setVisibility(View.VISIBLE);
-      //  r_pi_date.setVisibility(View.VISIBLE);
-        r_pi_date.setText(date);
+        //  r_pi_date.setVisibility(View.VISIBLE);
+
 
         pieChartData(date);
 
