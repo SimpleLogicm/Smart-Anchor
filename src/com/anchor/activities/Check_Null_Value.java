@@ -36,4 +36,20 @@ public class Check_Null_Value {
 	}
 
 
+	public static String ranknullcheck(final String string) {
+		if (string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null")) {
+			return string;
+		} else {
+			return " ";
+		}
+	}
+
+	public static String ranknullcheckfloat(final String string) {
+		if (string != null && !string.isEmpty() && !string.trim().isEmpty() && !string.equalsIgnoreCase("null")) {
+			return string;
+		} else {
+			return "0.0";
+		}
+	}
+
 }

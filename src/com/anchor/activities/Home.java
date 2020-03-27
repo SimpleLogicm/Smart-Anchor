@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -38,6 +40,13 @@ import com.anchor.model.RankDataModel;
 import com.anchor.model.RankDetailModel;
 import com.anchor.slidingmenu.CalendarAct;
 import com.anchor.webservice.ConnectionDetector;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -48,9 +57,16 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Home extends Fragment implements OnChartValueSelectedListener, RankAdapter.EventListener {
 
@@ -93,6 +109,18 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     ScrollView home_scroller;
     static String left_arrow_click = "";
 
+    ImageView user_mm,user_header_mm;
+    TextView rank_loading_message,r_total_value;
+    ProgressBar rank_progressBar,recycle_rank_progressBar,piechart_rank_progressBar,detils_rank_progressBar;
+    private RequestQueue requestQueue;
+
+    ArrayList<Entry> yvalues = new ArrayList<Entry>();
+    ArrayList<String> xVals = new ArrayList<String>();
+    String service_flag = "";
+    String month_rank = "";
+    String selected_day = "";
+
+
     public Home() {
     }
 
@@ -132,6 +160,15 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         r_details = rootView.findViewById(R.id.r_details);
         home_scroller = rootView.findViewById(R.id.home_scroller);
 
+        user_mm = rootView.findViewById(R.id.user_mm);
+        user_header_mm = rootView.findViewById(R.id.user_header_mm);
+        rank_loading_message = rootView.findViewById(R.id.rank_loading_message);
+        r_total_value = rootView.findViewById(R.id.r_total_value);
+        rank_progressBar = rootView.findViewById(R.id.rank_progressBar);
+        recycle_rank_progressBar = rootView.findViewById(R.id.recycle_rank_progressBar);
+        piechart_rank_progressBar = rootView.findViewById(R.id.piechart_rank_progressBar);
+        detils_rank_progressBar = rootView.findViewById(R.id.detils_rank_progressBar);
+
         r_piechart.setUsePercentValues(true);
 
 
@@ -169,25 +206,69 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         rank_ldetail_recycleview.setItemAnimator(new DefaultItemAnimator());
 
+        try
+        {
+            SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+            String ranks = sp.getString("rank", "");
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(ranks)) {
+                user_mm.setVisibility(View.VISIBLE);
+                rank_loading_message.setVisibility(View.GONE);
+                rank_progressBar.setVisibility(View.GONE);
+                my_text.setVisibility(View.VISIBLE);
+                my_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>nd</sup>"));
+                header_rank_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>nd</sup>"));
+                if(ranks.equalsIgnoreCase("1"))
+                {
+                    user_mm.setBackgroundResource(R.drawable.rrank1);
+                    user_header_mm.setBackgroundResource(R.drawable.rrank1);
+
+                }
+                else
+                if(ranks.equalsIgnoreCase("2"))
+                {
+                    user_mm.setBackgroundResource(R.drawable.rrank2);
+                    user_header_mm.setBackgroundResource(R.drawable.rrank2);
+                }
+                else
+                {
+                    user_mm.setBackgroundResource(R.drawable.rdrank3);
+                    user_header_mm.setBackgroundResource(R.drawable.rdrank3);
+                }
+
+            }
+            else
+            {
+                cd = new ConnectionDetector(getActivity());
+                isInternetPresent = cd.isConnectingToInternet();
+                if (isInternetPresent) {
+                    user_mm.setVisibility(View.GONE);
+                    rank_loading_message.setVisibility(View.VISIBLE);
+                    rank_progressBar.setVisibility(View.VISIBLE);
+                    my_text.setVisibility(View.GONE);
+                   // service_flag = "yes";
+                    if(service_flag.equalsIgnoreCase(""))
+                    {
+                        getRankData();
+                    }
+
+                } else {
+                    // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+                    Toast toast = Toast.makeText(getActivity(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+            }
+        }catch (Exception ex)
+        {
+
+        }
+
 
         data = new ArrayList<RankDataModel>();
-        for (int i = 0; i < 20; i++) {
-            data.add(new RankDataModel(
-                    "20-02-2020",
-                    "13222",
-                    "2"
-            ));
-        }
-
         detailsdata = new ArrayList<RankDetailModel>();
-        for (int i = 0; i < 20; i++) {
-            detailsdata.add(new RankDetailModel(
-                    "No of Call Mode",
-                    "10",
-                    "10",
-                    "100"
-            ));
-        }
+
 
 
         adapter = new RankAdapter(data, getActivity(), this);
@@ -199,8 +280,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         main_my_view.setVisibility(View.INVISIBLE);
 
-        my_text.setText(Html.fromHtml("Rank : 2<sup>nd</sup>"));
-        header_rank_text.setText(Html.fromHtml("Rank : 2<sup>nd</sup>"));
+
 
         isUp = false;
 
@@ -237,13 +317,28 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             @Override
             public void onClick(View v) {
 
-                left_arrow_click = "details";
-                detail_view_container.setVisibility(View.VISIBLE);
-                r_details.setVisibility(View.GONE);
-                recycleviewr_header.setVisibility(View.GONE);
-                recycleviewr_container.setVisibility(View.GONE);
-                r_piechart.setVisibility(View.GONE);
-                r_arrow_left.setVisibility(View.VISIBLE);
+                cd = new ConnectionDetector(getActivity());
+                isInternetPresent = cd.isConnectingToInternet();
+                if (isInternetPresent) {
+                    left_arrow_click = "details";
+                    detils_rank_progressBar.setVisibility(View.VISIBLE);
+                    rank_ldetail_recycleview.setVisibility(View.GONE);
+                    detail_view_container.setVisibility(View.VISIBLE);
+                    r_details.setVisibility(View.GONE);
+                    recycleviewr_header.setVisibility(View.GONE);
+                    recycleviewr_container.setVisibility(View.GONE);
+                    r_piechart.setVisibility(View.GONE);
+
+                    getRankDaySummary(selected_day);
+                } else {
+                    // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+                    Toast toast = Toast.makeText(getActivity(), "You don't have internet connection.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+
+
             }
         });
 
@@ -454,17 +549,34 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
     // slide the view from below itself to the current position
     public void slideUp(View view) {
-        view.setVisibility(View.VISIBLE);
-        main_bottomcard.setVisibility(View.GONE);
-        home_scroller.setVisibility(View.GONE);
-        TranslateAnimation animate = new TranslateAnimation(
-                0,                 // fromXDelta
-                0,                 // toXDelta
-                view.getHeight(),  // fromYDelta
-                0);                // toYDelta
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        view.startAnimation(animate);
+
+        cd = new ConnectionDetector(getActivity());
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            view.setVisibility(View.VISIBLE);
+            main_bottomcard.setVisibility(View.GONE);
+            home_scroller.setVisibility(View.GONE);
+            TranslateAnimation animate = new TranslateAnimation(
+                    0,                 // fromXDelta
+                    0,                 // toXDelta
+                    view.getHeight(),  // fromYDelta
+                    0);                // toYDelta
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            view.startAnimation(animate);
+
+            if(service_flag.equalsIgnoreCase(""))
+            {
+                getRankData();
+            }
+        } else {
+            // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
+
+            Toast toast = Toast.makeText(getActivity(), "You don't have internet connection.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+
     }
 
     // slide the view from its current position to below itself
@@ -513,32 +625,20 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
-            //getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//
+
         }
+
+    }
+
+    public void updateRankData()
+    {
 
     }
 
     public void pieChartData(String date) {
 
-        ArrayList<Entry> yvalues = new ArrayList<Entry>();
-        yvalues.add(new Entry(8f, 0));
-        yvalues.add(new Entry(15f, 1));
-        yvalues.add(new Entry(12f, 2));
-        yvalues.add(new Entry(25f, 3));
-        yvalues.add(new Entry(23f, 4));
-        yvalues.add(new Entry(17f, 5));
 
         PieDataSet dataSet = new PieDataSet(yvalues, "");
-
-        ArrayList<String> xVals = new ArrayList<String>();
-
-        xVals.add("January");
-        xVals.add("February");
-        xVals.add("March");
-        xVals.add("April");
-        xVals.add("May");
-        xVals.add("June");
 
         PieData data = new PieData(xVals, dataSet);
         // In Percentage
@@ -617,17 +717,521 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
     @Override
     public void onEvent(String date) {
-        left_arrow_click = "piechart";
-        recycleviewr_header.setVisibility(View.GONE);
-        recycleviewr_container.setVisibility(View.GONE);
-        detail_view_container.setVisibility(View.GONE);
-        r_piechart.setVisibility(View.VISIBLE);
-        r_details.setVisibility(View.VISIBLE);
-        r_arrow_left.setVisibility(View.VISIBLE);
-        //  r_pi_date.setVisibility(View.VISIBLE);
+
+        selected_day = date;
+        cd = new ConnectionDetector(getActivity());
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            left_arrow_click = "piechart";
+            recycleviewr_header.setVisibility(View.GONE);
+            recycleviewr_container.setVisibility(View.GONE);
+            detail_view_container.setVisibility(View.GONE);
+
+            r_arrow_left.setVisibility(View.VISIBLE);
+            //  r_pi_date.setVisibility(View.VISIBLE);
+
+            piechart_rank_progressBar.setVisibility(View.VISIBLE);
+
+            getchartData(date);
 
 
-        pieChartData(date);
+        } else {
+            // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 
+            Toast toast = Toast.makeText(getActivity(), "You don't have internet connection.", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+
+
+    }
+
+    public void getRankData() {
+
+        service_flag = "yes";
+        SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
+
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+
+            String domain = getResources().getString(R.string.service_domain);
+            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email+"&date="+"";
+
+            Log.i("volley", "email: " + user_email);
+            Log.i("rank url", "rank url " + url);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response);
+                    //  Log.i("volley", "response reg Length: " + response.length());
+
+                    try {
+                        String response_result = "";
+                        if (response.has("result")) {
+                            response_result = response.getString("result");
+                            Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            service_flag = "";
+                            user_mm.setVisibility(View.VISIBLE);
+                            rank_loading_message.setVisibility(View.GONE);
+                            rank_progressBar.setVisibility(View.GONE);
+                            my_text.setVisibility(View.VISIBLE);
+                        } else {
+
+                            month_rank = "";
+                            data = new ArrayList<RankDataModel>();
+                            JSONArray data1 = response.getJSONArray("records");
+                            Log.i("volley", "response reg data1 Length: " + data1.length());
+                            Log.d("data1", "data1" + data1.toString());
+
+                            if (data1.length() > 0) {
+                                for (int i = 0; i < data1.length(); i++) {
+
+                                    JSONObject jsonObject = data1.getJSONObject(i);
+
+                                    data.add(new RankDataModel(
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("date")),
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("score")),
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"))
+                                    ));
+
+                                    month_rank = Check_Null_Value.ranknullcheck(jsonObject.getString("month_rank"));
+                                    adapter.notifyDataSetChanged();
+
+                                }
+
+                            }
+                            else
+                            {
+                                Toast toast = Toast.makeText(getActivity(), "Data Not Found", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                slideDown(main_my_view);
+                                isUp = false;
+                            }
+
+
+
+                            if (!month_rank.equalsIgnoreCase("")) {
+                                SharedPreferences spf = getActivity().getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("rank", month_rank.trim());
+
+                                editor.commit();
+
+                                try
+                                {
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(month_rank.trim())) {
+                                        user_mm.setVisibility(View.VISIBLE);
+                                        rank_loading_message.setVisibility(View.GONE);
+                                        rank_progressBar.setVisibility(View.GONE);
+                                        my_text.setVisibility(View.VISIBLE);
+                                        my_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>nd</sup>"));
+                                        header_rank_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>nd</sup>"));
+                                        if(month_rank.trim().equalsIgnoreCase("1"))
+                                        {
+                                            user_mm.setBackgroundResource(R.drawable.rrank1);
+                                            user_header_mm.setBackgroundResource(R.drawable.rrank1);
+
+                                        }
+                                        else
+                                        if(month_rank.trim().equalsIgnoreCase("2"))
+                                        {
+                                            user_mm.setBackgroundResource(R.drawable.rrank2);
+                                            user_header_mm.setBackgroundResource(R.drawable.rrank2);
+                                        }
+                                        else
+                                        {
+                                            user_mm.setBackgroundResource(R.drawable.rdrank3);
+                                            user_header_mm.setBackgroundResource(R.drawable.rdrank3);
+                                        }
+
+                                        rank_list_recycleview.setVisibility(View.VISIBLE);
+                                        recycle_rank_progressBar.setVisibility(View.GONE);
+
+                                    }
+                                }catch(Exception ex)
+                                {
+                                    service_flag = "";
+                                    user_mm.setVisibility(View.VISIBLE);
+                                    rank_loading_message.setVisibility(View.GONE);
+                                    rank_progressBar.setVisibility(View.GONE);
+                                    my_text.setVisibility(View.VISIBLE);
+                                    ex.printStackTrace();
+                                }
+
+
+                            }
+
+                            service_flag = "";
+
+
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        service_flag = "";
+                        user_mm.setVisibility(View.VISIBLE);
+                        rank_loading_message.setVisibility(View.GONE);
+                        rank_progressBar.setVisibility(View.GONE);
+                        my_text.setVisibility(View.VISIBLE);
+
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("volley", "error: " + error);
+                    service_flag = "";
+                    user_mm.setVisibility(View.VISIBLE);
+                    rank_loading_message.setVisibility(View.GONE);
+                    rank_progressBar.setVisibility(View.GONE);
+                    my_text.setVisibility(View.VISIBLE);
+                    //Toast.makeText(MainActivity.this, "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
+//					Toast toast = Toast.makeText(MainActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+//					toast.setGravity(Gravity.CENTER, 0, 0);
+//					toast.show();
+//                    if(dialog != null || dialog.isShowing())
+//                    {
+//                        dialog.dismiss();
+//                    }
+
+                }
+            });
+
+
+
+            if (requestQueue == null) {
+                requestQueue = Volley.newRequestQueue(getActivity());
+                Log.d("new error", "Setting a new request queue");
+            }
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 050000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            service_flag = "";
+            user_mm.setVisibility(View.VISIBLE);
+            rank_loading_message.setVisibility(View.GONE);
+            rank_progressBar.setVisibility(View.GONE);
+            my_text.setVisibility(View.VISIBLE);
+            e.printStackTrace();
+//            if(dialog != null || dialog.isShowing())
+//            {
+//                dialog.dismiss();
+//            }
+
+
+        }
+    }
+
+
+    public void getchartData(final String dates) {
+
+        service_flag = "yes";
+        SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
+
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+
+            String domain = getResources().getString(R.string.service_domain);
+            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email+"&date="+dates;
+
+            Log.i("volley", "email: " + user_email);
+            Log.i("chart url", "chart url " + url);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response);
+                    //  Log.i("volley", "response reg Length: " + response.length());
+
+
+                    try {
+
+                        String response_result = "";
+                        if (response.has("result")) {
+                            response_result = response.getString("result");
+                            Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            recycle_rank_progressBar.setVisibility(View.GONE);
+                        } else {
+
+                            yvalues = new ArrayList<Entry>();
+                            xVals = new ArrayList<String>();
+
+
+                            JSONArray chartdata = response.getJSONArray("chartdata");
+
+
+                            Log.i("volley", "response reg chartdata Length: " + chartdata.length());
+                            Log.d("chartdata", "chartdata" + chartdata.toString());
+
+                            if (chartdata.length() > 0) {
+                                for (int i = 0; i < chartdata.length(); i++) {
+
+                                    JSONObject jsonObject = chartdata.getJSONObject(i);
+
+                                    yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
+                                    xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
+
+                                }
+
+                                r_details.setVisibility(View.VISIBLE);
+                                r_piechart.setVisibility(View.VISIBLE);
+                                piechart_rank_progressBar.setVisibility(View.GONE);
+                                pieChartData(dates);
+
+                            }
+                            else
+                            {
+                                Toast toast = Toast.makeText(getActivity(), "Data Not Found", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                recycleviewr_header.setVisibility(View.VISIBLE);
+                                recycleviewr_container.setVisibility(View.VISIBLE);
+                                detail_view_container.setVisibility(View.GONE);
+                                r_piechart.setVisibility(View.GONE);
+                                r_arrow_left.setVisibility(View.GONE);
+                                r_details.setVisibility(View.GONE);
+                                home_scroller.setVisibility(View.GONE);
+                                piechart_rank_progressBar.setVisibility(View.GONE);
+                            }
+
+
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        recycle_rank_progressBar.setVisibility(View.GONE);
+
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("volley", "error: " + error);
+                    recycle_rank_progressBar.setVisibility(View.GONE);
+
+
+                }
+            });
+
+
+
+            if (requestQueue == null) {
+                requestQueue = Volley.newRequestQueue(getActivity());
+                Log.d("new error", "Setting a new request queue");
+            }
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 050000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            recycle_rank_progressBar.setVisibility(View.GONE);
+
+
+
+        }
+    }
+
+    public void getRankDaySummary(String dates) {
+
+        service_flag = "yes";
+        SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
+
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+
+            String domain = getResources().getString(R.string.service_domain);
+            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email+"&date="+dates;
+
+            Log.i("volley", "email: " + user_email);
+            Log.i("rank url", "rank url " + url);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response);
+                    //  Log.i("volley", "response reg Length: " + response.length());
+
+                    try {
+                        String response_result = "";
+                        if (response.has("result")) {
+                            response_result = response.getString("result");
+                            Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            detils_rank_progressBar.setVisibility(View.GONE);
+                            rank_ldetail_recycleview.setVisibility(View.GONE);
+                        } else {
+
+
+                            int total =0;
+                            detailsdata = new ArrayList<RankDetailModel>();
+                            JSONArray data2 = response.getJSONArray("records");
+                            Log.i("volley", "response reg data2 Length: " + data2.length());
+                            Log.d("data2", "data2" + data2.toString());
+
+                            if (data2.length() > 0) {
+                                for (int i = 0; i < data2.length(); i++) {
+
+                                    JSONObject jsonObject = data2.getJSONObject(i);
+
+                                    detailsdata.add(new RankDetailModel(
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("parameter")),
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("weightage")),
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("obtained")),
+                                            Check_Null_Value.ranknullcheck(jsonObject.getString("calculated"))
+                                    ));
+
+                                    try
+                                    {
+                                        total = total+ Integer.parseInt(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("calculated")));
+                                    }catch(Exception ex)
+                                    {
+                                        ex.printStackTrace();
+                                    }
+
+                                }
+
+                                r_total_value.setText(total);
+                                detils_rank_progressBar.setVisibility(View.GONE);
+                                rank_ldetail_recycleview.setVisibility(View.VISIBLE);
+                                detailadapter.notifyDataSetChanged();
+
+                            }
+                            else
+                            {
+                                Toast toast = Toast.makeText(getActivity(), "Data Not Found", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                left_arrow_click = "piechart";
+                                recycleviewr_header.setVisibility(View.GONE);
+                                recycleviewr_container.setVisibility(View.GONE);
+                                detail_view_container.setVisibility(View.GONE);
+                                r_piechart.setVisibility(View.VISIBLE);
+                                r_details.setVisibility(View.VISIBLE);
+                                r_arrow_left.setVisibility(View.VISIBLE);
+                                home_scroller.setVisibility(View.GONE);
+                            }
+
+
+
+
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        service_flag = "";
+                        user_mm.setVisibility(View.VISIBLE);
+                        rank_loading_message.setVisibility(View.GONE);
+                        rank_progressBar.setVisibility(View.GONE);
+                        my_text.setVisibility(View.VISIBLE);
+
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("volley", "error: " + error);
+                    service_flag = "";
+                    user_mm.setVisibility(View.VISIBLE);
+                    rank_loading_message.setVisibility(View.GONE);
+                    rank_progressBar.setVisibility(View.GONE);
+                    my_text.setVisibility(View.VISIBLE);
+                    //Toast.makeText(MainActivity.this, "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
+//					Toast toast = Toast.makeText(MainActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+//					toast.setGravity(Gravity.CENTER, 0, 0);
+//					toast.show();
+//                    if(dialog != null || dialog.isShowing())
+//                    {
+//                        dialog.dismiss();
+//                    }
+
+                }
+            });
+
+
+
+            if (requestQueue == null) {
+                requestQueue = Volley.newRequestQueue(getActivity());
+                Log.d("new error", "Setting a new request queue");
+            }
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 050000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            service_flag = "";
+            user_mm.setVisibility(View.VISIBLE);
+            rank_loading_message.setVisibility(View.GONE);
+            rank_progressBar.setVisibility(View.GONE);
+            my_text.setVisibility(View.VISIBLE);
+            e.printStackTrace();
+//            if(dialog != null || dialog.isShowing())
+//            {
+//                dialog.dismiss();
+//            }
+
+
+        }
     }
 }

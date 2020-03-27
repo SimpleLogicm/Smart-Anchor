@@ -385,7 +385,7 @@
                     android:layout_centerVertical="true"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:src="@drawable/rrank2"
+
 
                     />
 
@@ -397,7 +397,7 @@
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    android:text="fdf"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
@@ -423,6 +423,20 @@
                     android:layout_below="@+id/r_details"
                     android:layout_margin="5dp"
                     android:visibility="gone" />
+
+                <ProgressBar
+                    android:id="@+id/piechart_rank_progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    android:indeterminateDrawable="@drawable/progress"
+                    >
+                </ProgressBar>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/recycleviewr_header"
@@ -522,10 +536,24 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/backgroundscale">
 
+                        <ProgressBar
+                            android:id="@+id/recycle_rank_progressBar"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="visible"
+                            android:indeterminateDrawable="@drawable/progress"
+                            >
+                        </ProgressBar>
+
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rank_list_recycleview"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:visibility="gone"
                             android:layout_margin="1dp"
                             android:scrollbars="vertical" />
                     </RelativeLayout>
@@ -651,7 +679,21 @@
                             android:layout_above="@+id/r_hori2"
                             android:layout_marginLeft="2dp"
                             android:layout_marginRight="2dp"
+                            android:visibility="gone"
                             android:scrollbars="vertical" />
+
+                        <ProgressBar
+                            android:id="@+id/detils_rank_progressBar"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:visibility="visible"
+                            android:indeterminateDrawable="@drawable/progress"
+                            >
+                        </ProgressBar>
 
                         <View
                             android:id="@+id/r_hori2"
@@ -698,7 +740,7 @@
                                 android:paddingTop="6dp"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="5dp"
-                                android:text="Weightage"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="12dp"
                                 android:textStyle="bold"
@@ -737,12 +779,40 @@
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
+            android:visibility="gone"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:src="@drawable/rrank2"
+
 
             />
 
+        <TextView
+            android:id="@+id/rank_loading_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Rank Loading"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/rank_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            android:indeterminateDrawable="@drawable/progress"
+             >
+        </ProgressBar>
 
         <TextView
             android:id="@+id/my_text"
@@ -751,9 +821,10 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="Rank : 2"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="18dp"
+            android:visibility="gone"
             android:textStyle="bold" />
 
         <TextView

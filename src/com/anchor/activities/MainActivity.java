@@ -825,19 +825,6 @@ public class MainActivity extends BaseActivity {
         calendarn = Calendar.getInstance();
         year = calendarn.get(Calendar.YEAR);
 
-//        dialog = new ProgressDialog(MainActivity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-//        dialog.setMessage("Please wait Target Sync....");
-//        dialog.setTitle("Smart Anchor App");
-//        dialog.setCancelable(false);
-//        dialog.setCancelable(false);
-//        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
-
         String user_email = "";
 
         try {
@@ -874,6 +861,13 @@ public class MainActivity extends BaseActivity {
                             response_result = "data";
                         }
 
+                        if (response.has("rank")) {
+                            SharedPreferences spf = MainActivity.this.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("rank", response.getString("rank"));
+
+                            editor.commit();
+                        }
 
                         if (response_result.equalsIgnoreCase("User doesn't exist")) {
 
@@ -952,7 +946,6 @@ public class MainActivity extends BaseActivity {
                                 //editor.putString("pwd", "test");
                                 editor.putFloat("Target", t_total);
                                 editor.putFloat("Achived", achived_total);
-                                //editor.putString("SimID", simSerial);
                                 editor.commit();
 
                                 try {

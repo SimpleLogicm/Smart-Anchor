@@ -131,6 +131,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.felixsoares:ImageZoom:1.0'
 
+
 }
 
 android {
