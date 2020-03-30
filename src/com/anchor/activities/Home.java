@@ -1,8 +1,10 @@
 package com.anchor.activities;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -36,6 +38,7 @@ import android.widget.Toast;
 
 import com.anchor.adapter.RankAdapter;
 import com.anchor.adapter.RankDetailAdapter;
+import com.anchor.helper.ActualValueFormater;
 import com.anchor.model.RankDataModel;
 import com.anchor.model.RankDetailModel;
 import com.anchor.slidingmenu.CalendarAct;
@@ -52,6 +55,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -119,6 +123,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     String service_flag = "";
     String month_rank = "";
     String selected_day = "";
+    Home context;
 
 
     public Home() {
@@ -243,12 +248,19 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                 if (isInternetPresent) {
                     user_mm.setVisibility(View.GONE);
                     rank_loading_message.setVisibility(View.VISIBLE);
+                   // rank_loading_message.setText("Rank Not Found,Click Arrow To Refresh");
                     rank_progressBar.setVisibility(View.VISIBLE);
                     my_text.setVisibility(View.GONE);
                    // service_flag = "yes";
-                    if(service_flag.equalsIgnoreCase(""))
+                    if(Global_Data.rank_service_call_flag.equalsIgnoreCase("TRUE"))
                     {
                         getRankData();
+                        Global_Data.rank_service_call_flag = "";
+                    }
+                    else
+                    {
+                        rank_loading_message.setText("Rank Not Found,Click Arrow To Refresh");
+                        rank_progressBar.setVisibility(View.GONE);
                     }
 
                 } else {
@@ -269,7 +281,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         data = new ArrayList<RankDataModel>();
         detailsdata = new ArrayList<RankDetailModel>();
 
-
+        context = this;
 
         adapter = new RankAdapter(data, getActivity(), this);
         rank_list_recycleview.setAdapter(adapter);
@@ -375,6 +387,9 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                     recycleviewr_header.setVisibility(View.VISIBLE);
                     recycleviewr_container.setVisibility(View.VISIBLE);
                     detail_view_container.setVisibility(View.GONE);
+                    rank_list_recycleview.setVisibility(View.VISIBLE);
+                    recycle_rank_progressBar.setVisibility(View.GONE);
+                    piechart_rank_progressBar.setVisibility(View.GONE);
                     r_piechart.setVisibility(View.GONE);
                     r_arrow_left.setVisibility(View.GONE);
                     r_details.setVisibility(View.GONE);
@@ -641,17 +656,21 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         PieDataSet dataSet = new PieDataSet(yvalues, "");
 
         PieData data = new PieData(xVals, dataSet);
+
+       // data.getYValueSum();
         // In Percentage
         data.setValueFormatter(new PercentFormatter());
         // Default value
-        //data.setValueFormatter(new DefaultValueFormatter(0));
+       // data.setValueFormatter(new DefaultValueFormatter(0));
+        //data.setValueFormatter(new ActualValueFormater());
         r_piechart.setData(data);
+       // r_piechart.setCenterTextRadiusPercent(20);
         r_piechart.setDescription("Rank Data");
         r_piechart.setDrawHoleEnabled(true);
         r_piechart.setTransparentCircleRadius(58f);
 
-        r_piechart.setHoleRadius(58f);
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        r_piechart.setHoleRadius(70f);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         data.setValueTextSize(13f);
         data.setValueTextColor(Color.MAGENTA);
@@ -660,10 +679,20 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         r_piechart.setCenterText(date);
         r_piechart.invalidate();
 
-        r_piechart.invalidate();
+
+       // r_piechart.setUsePercentValues(true);
+       // r_piechart.setDrawValues(false);
+       // r_piechart.setDrawSliceText(false);
 
         r_piechart.setOnChartValueSelectedListener(this);
+
+
+
+
+
     }
+
+
 
     public boolean isUpStatus() {
         return isUp;
@@ -780,8 +809,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                     try {
                         String response_result = "";
-                        if (response.has("result")) {
-                            response_result = response.getString("result");
+                        if (response.has("message")) {
+                            response_result = response.getString("message");
                             Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -790,6 +819,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                             rank_loading_message.setVisibility(View.GONE);
                             rank_progressBar.setVisibility(View.GONE);
                             my_text.setVisibility(View.VISIBLE);
+                            slideDown(main_my_view);
+                            isUp = false;
                         } else {
 
                             month_rank = "";
@@ -810,6 +841,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                     ));
 
                                     month_rank = Check_Null_Value.ranknullcheck(jsonObject.getString("month_rank"));
+                                    adapter = new RankAdapter(data, getActivity(), context);
+                                    rank_list_recycleview.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
 
                                 }
@@ -817,7 +850,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                             }
                             else
                             {
-                                Toast toast = Toast.makeText(getActivity(), "Data Not Found", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(getActivity(), "Rank Not Found", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 slideDown(main_my_view);
@@ -863,6 +896,14 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                         rank_list_recycleview.setVisibility(View.VISIBLE);
                                         recycle_rank_progressBar.setVisibility(View.GONE);
 
+                                    }
+                                    else
+                                    {
+                                        Toast toast = Toast.makeText(getActivity(), "Rank Not Found", Toast.LENGTH_LONG);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                        slideDown(main_my_view);
+                                        isUp = false;
                                     }
                                 }catch(Exception ex)
                                 {
@@ -967,7 +1008,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email+"&date="+dates;
+            String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email+"&date="+dates;
 
             Log.i("volley", "email: " + user_email);
             Log.i("chart url", "chart url " + url);
@@ -982,8 +1023,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                     try {
 
                         String response_result = "";
-                        if (response.has("result")) {
-                            response_result = response.getString("result");
+                        if (response.has("message")) {
+                            response_result = response.getString("message");
                             Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -994,7 +1035,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                             xVals = new ArrayList<String>();
 
 
-                            JSONArray chartdata = response.getJSONArray("chartdata");
+                            JSONArray chartdata = response.getJSONArray("record");
 
 
                             Log.i("volley", "response reg chartdata Length: " + chartdata.length());
@@ -1005,8 +1046,12 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                                     JSONObject jsonObject = chartdata.getJSONObject(i);
 
-                                    yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
-                                    xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
+                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(jsonObject.getString("value")))
+                                    {
+                                        yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
+                                        xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
+                                    }
+
 
                                 }
 
@@ -1095,7 +1140,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email+"&date="+dates;
+            String url = domain + "dms_rankings/daily_rank_details_of_user?email=" + user_email+"&date="+dates;
 
             Log.i("volley", "email: " + user_email);
             Log.i("rank url", "rank url " + url);
@@ -1108,8 +1153,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                     try {
                         String response_result = "";
-                        if (response.has("result")) {
-                            response_result = response.getString("result");
+                        if (response.has("message")) {
+                            response_result = response.getString("message");
                             Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
@@ -1118,9 +1163,9 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                         } else {
 
 
-                            int total =0;
+                            double total =0;
                             detailsdata = new ArrayList<RankDetailModel>();
-                            JSONArray data2 = response.getJSONArray("records");
+                            JSONArray data2 = response.getJSONArray("record");
                             Log.i("volley", "response reg data2 Length: " + data2.length());
                             Log.d("data2", "data2" + data2.toString());
 
@@ -1136,9 +1181,14 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                             Check_Null_Value.ranknullcheck(jsonObject.getString("calculated"))
                                     ));
 
+
+
+                                }
+
+                                if (response.has("total")) {
                                     try
                                     {
-                                        total = total+ Integer.parseInt(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("calculated")));
+                                        total = total+ Double.valueOf(Check_Null_Value.ranknullcheckfloat(response.getString("total")));
                                     }catch(Exception ex)
                                     {
                                         ex.printStackTrace();
@@ -1146,9 +1196,11 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                                 }
 
-                                r_total_value.setText(total);
+                                r_total_value.setText(String.valueOf(total));
                                 detils_rank_progressBar.setVisibility(View.GONE);
                                 rank_ldetail_recycleview.setVisibility(View.VISIBLE);
+                                detailadapter = new RankDetailAdapter(detailsdata, getActivity());
+                                rank_ldetail_recycleview.setAdapter(detailadapter);
                                 detailadapter.notifyDataSetChanged();
 
                             }

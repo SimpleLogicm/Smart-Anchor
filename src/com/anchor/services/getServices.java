@@ -72,6 +72,8 @@ import java.util.List;
 
 import cpm.simplelogic.helper.Config;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * Created by vinod on 21-03-2016.
  */
@@ -170,6 +172,18 @@ public class getServices {
             //textViewVersion.setText("Mobile Sales App, v. 1.3.1");
         }
 
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         domain = context.getResources().getString(R.string.service_domain);
 
         // Global_Val global_Val = new Global_Val();
@@ -181,9 +195,9 @@ public class getServices {
 //            domain = URL.toString();
 //        }
 
-        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version);
+        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version+"&email=" + user_email);
         StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version,
+        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version+"&email=" + user_email,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -2818,6 +2832,17 @@ public class getServices {
                         response_result = json.getString("result");
                     } else {
                         response_result = "data";
+                    }
+
+                    String user_ranks = "";
+                    if (json.has("month_rank")) {
+                        user_ranks = json.getString("month_rank");
+
+                        SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                        SharedPreferences.Editor editor = spf.edit();
+                        editor.putString("rank", user_ranks);
+
+                        editor.commit();
                     }
 
                     if (response_result.equalsIgnoreCase("Data is up to date.")) {

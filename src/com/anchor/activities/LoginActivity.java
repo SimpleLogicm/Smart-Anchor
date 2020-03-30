@@ -1550,6 +1550,7 @@ public class LoginActivity extends Activity {
                             gps = new GPSTracker(LoginActivity.this);
 
                             Global_Data.LOCATION_SERVICE_HIT = "TRUE";
+                            Global_Data.rank_service_call_flag = "TRUE";
 
                             if (!gps.canGetLocation()) {
                                 // can't get location
