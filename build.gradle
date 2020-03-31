@@ -76,7 +76,7 @@ dependencies {
 
     implementation 'org.apache.httpcomponents:httpcore:4.4.1'
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.5'
 
 
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
@@ -130,6 +130,7 @@ dependencies {
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.felixsoares:ImageZoom:1.0'
+
 
 
 }

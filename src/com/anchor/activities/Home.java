@@ -174,7 +174,11 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         piechart_rank_progressBar = rootView.findViewById(R.id.piechart_rank_progressBar);
         detils_rank_progressBar = rootView.findViewById(R.id.detils_rank_progressBar);
 
-        r_piechart.setUsePercentValues(true);
+       // r_piechart.setUsePercentValues(true);
+
+        r_piechart.setHoleRadius(25f);
+        r_piechart.setTransparentCircleAlpha(0);
+        r_piechart.setCenterTextSize(10);
 
 
         rank_list_recycleview.setHasFixedSize(true);
@@ -323,6 +327,22 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         dbvoc = new DataBaseHelper(getActivity());
         cd = new ConnectionDetector(getActivity());
+
+//        r_piechart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+//
+//            @Override
+//            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+//                String employee = xVals.get(dataSetIndex);
+//                Toast.makeText(getActivity(),  employee , Toast.LENGTH_LONG).show();
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected() {
+//
+//            }
+//        });
+
 
 
         r_details.setOnClickListener(new OnClickListener() {
@@ -655,14 +675,32 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         PieDataSet dataSet = new PieDataSet(yvalues, "");
 
+        //dataSet.setSliceSpace(10);
+        dataSet.setSliceSpace(2);
+        dataSet.setValueTextSize(14);
+        dataSet.setSliceSpace(3f);
+
+        dataSet.setSelectionShift(5f);
+
+
+       // dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setValueLinePart1OffsetPercentage(50f); /** When valuePosition is OutsideSlice, indicates offset as percentage out of the slice size */
+        dataSet.setValueLinePart1Length(0.2f); /** When valuePosition is OutsideSlice, indicates length of first half of the line */
+        dataSet.setValueLinePart2Length(0.2f);
+
         PieData data = new PieData(xVals, dataSet);
+
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.BLACK);
+
 
        // data.getYValueSum();
         // In Percentage
-        data.setValueFormatter(new PercentFormatter());
+        //data.setValueFormatter(new PercentFormatter());
         // Default value
        // data.setValueFormatter(new DefaultValueFormatter(0));
-        //data.setValueFormatter(new ActualValueFormater());
+        data.setValueFormatter(new ActualValueFormater());
         r_piechart.setData(data);
        // r_piechart.setCenterTextRadiusPercent(20);
         r_piechart.setDescription("Rank Data");
@@ -670,14 +708,46 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         r_piechart.setTransparentCircleRadius(58f);
 
         r_piechart.setHoleRadius(70f);
+
+        //add colors to dataset
+//        ArrayList<Integer> colors = new ArrayList<>();
+//        colors.add(Color.GRAY);
+//        colors.add(Color.BLUE);
+//        colors.add(Color.RED);
+//        colors.add(Color.GREEN);
+//        colors.add(Color.CYAN);
+//        colors.add(Color.YELLOW);
+//        colors.add(Color.MAGENTA);
+//
+//        dataSet.setColors(colors);
+
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         data.setValueTextSize(13f);
-        data.setValueTextColor(Color.MAGENTA);
+        data.setValueTextColor(Color.BLACK);
 
         r_piechart.highlightValues(null);
         r_piechart.setCenterText(date);
+        r_piechart.setCenterTextSize(14);
+
+
+        //add legend to chart
+//        Legend legend = r_piechart.getLegend();
+//        legend.setWordWrapEnabled(true);
+//        legend.setForm(Legend.LegendForm.CIRCLE);
+//        legend.setPosition(Legend.LegendPosition.ABOVE_CHART_CENTER);
+
+        r_piechart.setExtraBottomOffset(20f);
+        r_piechart.setExtraLeftOffset(20f);
+        r_piechart.setExtraRightOffset(20f);
+
+        r_piechart.getLegend().setEnabled(false);
+
+
+
         r_piechart.invalidate();
+
+        r_piechart.animateXY(1400, 1400);
 
 
        // r_piechart.setUsePercentValues(true);
@@ -685,8 +755,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
        // r_piechart.setDrawSliceText(false);
 
         r_piechart.setOnChartValueSelectedListener(this);
-
-
 
 
 
@@ -873,8 +941,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                         rank_loading_message.setVisibility(View.GONE);
                                         rank_progressBar.setVisibility(View.GONE);
                                         my_text.setVisibility(View.VISIBLE);
-                                        my_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>nd</sup>"));
-                                        header_rank_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>nd</sup>"));
+                                        my_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>st</sup>"));
+                                        header_rank_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>st</sup>"));
                                         if(month_rank.trim().equalsIgnoreCase("1"))
                                         {
                                             user_mm.setBackgroundResource(R.drawable.rrank1);
@@ -1045,12 +1113,13 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                 for (int i = 0; i < chartdata.length(); i++) {
 
                                     JSONObject jsonObject = chartdata.getJSONObject(i);
-
+//
                                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(jsonObject.getString("value")))
                                     {
                                         yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
                                         xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
                                     }
+
 
 
                                 }
