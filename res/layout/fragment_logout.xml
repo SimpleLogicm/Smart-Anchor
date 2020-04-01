@@ -365,6 +365,22 @@
                 android:src="@drawable/cleftarrow"
                 android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/rank_current_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text=""
+                android:textColor="@color/rank_datecolor"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
             <ImageView
                 android:id="@+id/my_buttonfghf"
                 android:layout_width="35dp"
@@ -380,11 +396,12 @@
                 android:id="@+id/user_header_mm"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_below="@+id/my_buttonfghf"
+                android:layout_below="@+id/rank_current_date"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
+
 
 
                 />
@@ -429,7 +446,6 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-
                 android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"

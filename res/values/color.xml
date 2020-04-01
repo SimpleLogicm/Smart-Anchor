@@ -61,5 +61,6 @@
     <color name="details_color">#5a66a2</color>
     <color name="rank_text_color">#a8a8a8</color>
     <color name="rank_r_recycle_card">#b1420a</color>
+    <color name="rank_datecolor">#92c0e4</color>
 
 </resources>

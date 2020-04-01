@@ -66,9 +66,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -114,7 +116,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     static String left_arrow_click = "";
 
     ImageView user_mm,user_header_mm;
-    TextView rank_loading_message,r_total_value;
+    TextView rank_loading_message,r_total_value,rank_current_date;
     ProgressBar rank_progressBar,recycle_rank_progressBar,piechart_rank_progressBar,detils_rank_progressBar;
     private RequestQueue requestQueue;
 
@@ -124,6 +126,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     String month_rank = "";
     String selected_day = "";
     Home context;
+    Calendar myCalendar;
 
 
     public Home() {
@@ -169,6 +172,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         user_header_mm = rootView.findViewById(R.id.user_header_mm);
         rank_loading_message = rootView.findViewById(R.id.rank_loading_message);
         r_total_value = rootView.findViewById(R.id.r_total_value);
+        rank_current_date = rootView.findViewById(R.id.rank_current_date);
         rank_progressBar = rootView.findViewById(R.id.rank_progressBar);
         recycle_rank_progressBar = rootView.findViewById(R.id.recycle_rank_progressBar);
         piechart_rank_progressBar = rootView.findViewById(R.id.piechart_rank_progressBar);
@@ -176,9 +180,11 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
        // r_piechart.setUsePercentValues(true);
 
-        r_piechart.setHoleRadius(25f);
+        r_piechart.setHoleRadius(50f);
         r_piechart.setTransparentCircleAlpha(0);
         r_piechart.setCenterTextSize(10);
+
+
 
 
         rank_list_recycleview.setHasFixedSize(true);
@@ -401,6 +407,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                     r_details.setVisibility(View.VISIBLE);
                     r_arrow_left.setVisibility(View.VISIBLE);
                     home_scroller.setVisibility(View.GONE);
+                    rank_current_date.setVisibility(View.INVISIBLE);
                 }
                 else
                 {
@@ -648,6 +655,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
             main_bottomcard.setVisibility(View.VISIBLE);
             home_scroller.setVisibility(View.VISIBLE);
+            rank_current_date.setVisibility(View.INVISIBLE);
 
             TranslateAnimation animate = new TranslateAnimation(
                     0,                 // fromXDelta
@@ -683,8 +691,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         dataSet.setSelectionShift(5f);
 
 
-       // dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+      //  dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        //dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setValueLinePart1OffsetPercentage(50f); /** When valuePosition is OutsideSlice, indicates offset as percentage out of the slice size */
         dataSet.setValueLinePart1Length(0.2f); /** When valuePosition is OutsideSlice, indicates length of first half of the line */
         dataSet.setValueLinePart2Length(0.2f);
@@ -707,7 +715,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         r_piechart.setDrawHoleEnabled(true);
         r_piechart.setTransparentCircleRadius(58f);
 
-        r_piechart.setHoleRadius(70f);
+
 
         //add colors to dataset
 //        ArrayList<Integer> colors = new ArrayList<>();
@@ -1113,12 +1121,18 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                 for (int i = 0; i < chartdata.length(); i++) {
 
                                     JSONObject jsonObject = chartdata.getJSONObject(i);
-//
+
                                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(jsonObject.getString("value")))
                                     {
                                         yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
                                         xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
                                     }
+//                                    else
+//                                    {
+//                                        yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat("7")), i));
+//                                        xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
+//                                    }
+
 
 
 
@@ -1221,6 +1235,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                     //  Log.i("volley", "response reg Length: " + response.length());
 
                     try {
+
+
                         String response_result = "";
                         if (response.has("message")) {
                             response_result = response.getString("message");
@@ -1251,6 +1267,23 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                     ));
 
 
+
+                                }
+
+
+
+                                if (response.has("call_cut_off")) {
+                                    try
+                                    {
+                                        rank_current_date.setVisibility(View.VISIBLE);
+                                        myCalendar = Calendar.getInstance();
+                                        String myFormat = "dd/MM/yyyy"; //In which you need put here
+                                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                                        rank_current_date.setText("Date : "+sdf.format(myCalendar.getTime()) + "\n"+"Cut-off value for Calls: "+Check_Null_Value.ranknullcheckfloat(response.getString("call_cut_off")));
+                                    }catch(Exception ex)
+                                    {
+                                        ex.printStackTrace();
+                                    }
 
                                 }
 
