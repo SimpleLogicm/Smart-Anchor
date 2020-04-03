@@ -439,7 +439,16 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/r_details"
                 android:layout_margin="5dp"
+                android:background="@color/white"
                 android:visibility="gone" />
+
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/chart"
+                android:layout_below="@+id/r_details"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <ProgressBar
                 android:id="@+id/piechart_rank_progressBar"

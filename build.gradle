@@ -130,6 +130,7 @@ dependencies {
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
     implementation 'com.github.felixsoares:ImageZoom:1.0'
+    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
 
 
 

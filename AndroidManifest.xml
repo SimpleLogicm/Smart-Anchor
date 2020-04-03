@@ -703,14 +703,14 @@
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
         <!--&lt;!&ndash; Production &ndash;&gt;-->
-<!--        <meta-data-->
-<!--        android:name="com.google.android.maps.v2.API_KEY"-->
-<!--        android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
+        <meta-data
+        android:name="com.google.android.maps.v2.API_KEY"
+        android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />
 
 <!--         UAT -->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />
+<!--        <meta-data-->
+<!--            android:name="com.google.android.maps.v2.API_KEY"-->
+<!--            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />-->
 
         <!-- UAT FOR MACBBOK-->
 <!--        <meta-data-->

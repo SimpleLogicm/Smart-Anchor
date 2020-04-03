@@ -71,6 +71,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.view.PieChartView;
+
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -122,11 +126,15 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
     ArrayList<Entry> yvalues = new ArrayList<Entry>();
     ArrayList<String> xVals = new ArrayList<String>();
+    ArrayList<String> hellodatatext = new ArrayList<String>();
+    ArrayList<String> hellodatavalue = new ArrayList<String>();
     String service_flag = "";
     String month_rank = "";
     String selected_day = "";
     Home context;
     Calendar myCalendar;
+    PieChartView pieChartView;
+
 
 
     public Home() {
@@ -141,6 +149,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         Global_Data.Stock_product_flag_value_check = "";
         Global_Data.Stock_warehouse_flag_value_check = "";
         rootView = inflater.inflate(R.layout.fragment_logout, container, false);
+        pieChartView = rootView.findViewById(R.id.chart);
 
         order = rootView.findViewById(R.id.order);
         calendar = rootView.findViewById(R.id.calendar);
@@ -230,8 +239,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                 rank_loading_message.setVisibility(View.GONE);
                 rank_progressBar.setVisibility(View.GONE);
                 my_text.setVisibility(View.VISIBLE);
-                my_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>nd</sup>"));
-                header_rank_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>nd</sup>"));
+                my_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>st</sup>"));
+                header_rank_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>st</sup>"));
                 if(ranks.equalsIgnoreCase("1"))
                 {
                     user_mm.setBackgroundResource(R.drawable.rrank1);
@@ -243,6 +252,12 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                 {
                     user_mm.setBackgroundResource(R.drawable.rrank2);
                     user_header_mm.setBackgroundResource(R.drawable.rrank2);
+                }
+                else
+                if (ranks.trim().equalsIgnoreCase("") || ranks.trim().equalsIgnoreCase(null) || ranks.trim().equalsIgnoreCase("null") || ranks.trim().equalsIgnoreCase("0")|| ranks.trim().equalsIgnoreCase("0.0") || ranks.trim().equalsIgnoreCase(" ")) {
+
+                    my_text.setText(Html.fromHtml("Rank : NA"));
+                    header_rank_text.setText(Html.fromHtml("Rank : NA"));
                 }
                 else
                 {
@@ -684,15 +699,14 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         PieDataSet dataSet = new PieDataSet(yvalues, "");
 
         //dataSet.setSliceSpace(10);
-        dataSet.setSliceSpace(2);
+       // dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(14);
         dataSet.setSliceSpace(3f);
 
         dataSet.setSelectionShift(5f);
 
-
-      //  dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-        //dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
         dataSet.setValueLinePart1OffsetPercentage(50f); /** When valuePosition is OutsideSlice, indicates offset as percentage out of the slice size */
         dataSet.setValueLinePart1Length(0.2f); /** When valuePosition is OutsideSlice, indicates length of first half of the line */
         dataSet.setValueLinePart2Length(0.2f);
@@ -740,10 +754,10 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
 
         //add legend to chart
-//        Legend legend = r_piechart.getLegend();
-//        legend.setWordWrapEnabled(true);
-//        legend.setForm(Legend.LegendForm.CIRCLE);
-//        legend.setPosition(Legend.LegendPosition.ABOVE_CHART_CENTER);
+        Legend legend = r_piechart.getLegend();
+        legend.setWordWrapEnabled(true);
+        legend.setForm(Legend.LegendForm.CIRCLE);
+        legend.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_CENTER);
 
         r_piechart.setExtraBottomOffset(20f);
         r_piechart.setExtraLeftOffset(20f);
@@ -751,7 +765,10 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         r_piechart.getLegend().setEnabled(false);
 
+       // r_piechart.setBackgroundColor(Color.TRANSPARENT); //set whatever color you prefer
+       // r_piechart.setDrawGridBackground(false);
 
+       // r_piechart.setMinAngleForSlices(36f);
 
         r_piechart.invalidate();
 
@@ -766,6 +783,44 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
 
 
+    }
+
+    public void helloChart(String date)
+    {
+        List pieData = new ArrayList<>();
+        List<Integer> piecolors= new ArrayList<>();
+        piecolors.add(Color.BLUE);
+        piecolors.add(Color.RED);
+        piecolors.add(Color.MAGENTA);
+        piecolors.add(Color.DKGRAY);
+        piecolors.add(Color.YELLOW);
+        piecolors.add(Color.GREEN);
+        piecolors.add(Color.MAGENTA);
+        piecolors.add(Color.CYAN);
+        piecolors.add(Color.BLACK);
+        piecolors.add(Color.BLUE);
+        piecolors.add(Color.GREEN);
+        piecolors.add(Color.GREEN);
+
+        for(int i=0; i<hellodatatext.size();i++)
+        {
+            //Math.round(Float.valueOf(hellodatavalue.get(i)))
+
+            pieData.add(new SliceValue(20, piecolors.get(i)).setLabel(hellodatatext.get(i)+"\n"+hellodatavalue.get(i)));
+        }
+//
+//        pieData.add(new SliceValue(25, Color.GRAY).setLabel("dsfsfsdfsdf: 4"));
+//        pieData.add(new SliceValue(10, Color.RED).setLabel("sfsfsf: 2"));
+//        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("sfsfsf: 8"));
+//        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("dfsdfs: 2"));
+//        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("sfsf: 1"));
+//        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("sdfsdf: 0"));
+//        pieData.add(new SliceValue(60, Color.MAGENTA).setLabel("Qs4: 0"));
+
+        PieChartData pieChartData = new PieChartData(pieData);
+        pieChartData.setHasLabels(true).setValueLabelTextSize(14);
+        pieChartData.setHasCenterCircle(true).setCenterText1(date).setCenterText1FontSize(20).setCenterText1Color(Color.parseColor("#0097A7"));
+        pieChartView.setPieChartData(pieChartData);
     }
 
 
@@ -964,6 +1019,12 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                             user_header_mm.setBackgroundResource(R.drawable.rrank2);
                                         }
                                         else
+                                        if (month_rank.trim().equalsIgnoreCase("") || month_rank.trim().equalsIgnoreCase(null) || month_rank.trim().equalsIgnoreCase("null") || month_rank.trim().equalsIgnoreCase("0")|| month_rank.trim().equalsIgnoreCase("0.0") || month_rank.trim().equalsIgnoreCase(" ")) {
+
+                                            my_text.setText(Html.fromHtml("Rank : NA"));
+                                            header_rank_text.setText(Html.fromHtml("Rank : NA"));
+                                        }
+                                        else
                                         {
                                             user_mm.setBackgroundResource(R.drawable.rdrank3);
                                             user_header_mm.setBackgroundResource(R.drawable.rdrank3);
@@ -1084,7 +1145,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email+"&date="+dates;
+            String url = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/dms_rankings/daily_details_graph_of_rank?email=dnyanada.patil@simplelogic.in&date";
+            //String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email+"&date="+dates;
 
             Log.i("volley", "email: " + user_email);
             Log.i("chart url", "chart url " + url);
@@ -1109,6 +1171,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                             yvalues = new ArrayList<Entry>();
                             xVals = new ArrayList<String>();
+                            hellodatatext = new ArrayList<String>();
+                            hellodatavalue = new ArrayList<String>();
 
 
                             JSONArray chartdata = response.getJSONArray("record");
@@ -1126,6 +1190,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                     {
                                         yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
                                         xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
+                                        hellodatatext.add(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("name")));
+                                        hellodatavalue.add(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value")));
                                     }
 //                                    else
 //                                    {
@@ -1142,6 +1208,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                 r_piechart.setVisibility(View.VISIBLE);
                                 piechart_rank_progressBar.setVisibility(View.GONE);
                                 pieChartData(dates);
+                                //helloChart(dates);
 
                             }
                             else
