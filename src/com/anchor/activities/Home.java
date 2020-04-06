@@ -66,9 +66,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import lecho.lib.hellocharts.model.PieChartData;
@@ -965,11 +967,29 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                                     JSONObject jsonObject = data1.getJSONObject(i);
 
-                                    data.add(new RankDataModel(
-                                            Check_Null_Value.ranknullcheck(jsonObject.getString("date")),
-                                            Check_Null_Value.ranknullcheck(jsonObject.getString("score")),
-                                            Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"))
-                                    ));
+
+                                    try
+                                    {
+                                        String myFormat = "yyyy-MM-dd"; //In which you need put here
+                                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                                        Date date = sdf.parse(Check_Null_Value.ranknullcheck(jsonObject.getString("date")));
+                                        String myFormatnew = "dd-MM-yyyy";
+                                        SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
+
+                                        data.add(new RankDataModel(datenew.format(date),
+                                                Check_Null_Value.ranknullcheck(jsonObject.getString("score")),
+                                                Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"))
+                                        ));
+                                    }catch (Exception ex)
+                                    {
+                                        data.add(new RankDataModel(
+                                                Check_Null_Value.ranknullcheck(jsonObject.getString("date")),
+                                                Check_Null_Value.ranknullcheck(jsonObject.getString("score")),
+                                                Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"))
+                                        ));
+                                        ex.printStackTrace();
+                                    }
+
 
                                     month_rank = Check_Null_Value.ranknullcheck(jsonObject.getString("month_rank"));
                                     adapter = new RankAdapter(data, getActivity(), context);
@@ -1062,7 +1082,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
 
 
-                    } catch (JSONException e) {
+                    } catch (JSONException  e) {
                         e.printStackTrace();
                         service_flag = "";
                         user_mm.setVisibility(View.VISIBLE);
@@ -1145,8 +1165,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/dms_rankings/daily_details_graph_of_rank?email=dnyanada.patil@simplelogic.in&date";
-            //String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email+"&date="+dates;
+           // String url = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/dms_rankings/daily_details_graph_of_rank?email=dnyanada.patil@simplelogic.in&date";
+            String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email+"&date="+dates;
 
             Log.i("volley", "email: " + user_email);
             Log.i("chart url", "chart url " + url);
