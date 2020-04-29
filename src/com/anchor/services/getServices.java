@@ -2835,14 +2835,45 @@ public class getServices {
                     }
 
                     String user_ranks = "";
-                    if (json.has("month_rank")) {
-                        user_ranks = json.getString("month_rank");
-
+                    if (json.has("rank")) {
+                        user_ranks = json.getString("rank");
                         SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
                         SharedPreferences.Editor editor = spf.edit();
                         editor.putString("rank", user_ranks);
 
                         editor.commit();
+                    }
+
+                    String user_ranks_date = "";
+                    if (json.has("rank_date")) {
+                        user_ranks_date = json.getString("rank_date");
+
+                        try
+                        {
+                            String myFormat = "yyyy-MM-dd"; //In which you need put here
+                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                            Date date = sdf.parse(Check_Null_Value.ranknullcheck(user_ranks_date));
+                            String myFormatnew = "dd-MM-yyyy";
+                            SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
+
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("rank_date", datenew.format(date));
+
+                            editor.commit();
+
+                        }catch (Exception ex)
+                        {
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("rank_date", user_ranks_date);
+
+                            editor.commit();
+
+                            ex.printStackTrace();
+                        }
+
+
                     }
 
                     if (response_result.equalsIgnoreCase("Data is up to date.")) {

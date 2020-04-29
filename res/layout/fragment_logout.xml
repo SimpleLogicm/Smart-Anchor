@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -369,17 +368,17 @@
                 android:id="@+id/rank_current_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:gravity="center"
                 android:layout_alignParentTop="true"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:text=""
                 android:textColor="@color/rank_datecolor"
                 android:textSize="14dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/my_buttonfghf"
@@ -403,27 +402,46 @@
                 android:paddingBottom="5dp"
 
 
-
                 />
 
-            <TextView
-                android:id="@+id/header_rank_text"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+            <LinearLayout
+                android:id="@+id/renk_header_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/user_header_mm"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/header_rank_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/my_header_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12dp"
+                    android:visibility="visible" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/r_details"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/header_rank_text"
+                android:layout_below="@+id/renk_header_text_container"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:background="@drawable/roundedbutton"
@@ -433,22 +451,31 @@
 
                 />
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rankgridrecycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/r_details"
+                android:layout_margin="5dp"
+                android:scrollbars="vertical"
+                android:visibility="gone"></android.support.v7.widget.RecyclerView>
+
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/rr_piechart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/r_details"
+                android:layout_below="@+id/rankgridrecycler_view"
                 android:layout_margin="5dp"
                 android:background="@color/white"
                 android:visibility="gone" />
 
             <lecho.lib.hellocharts.view.PieChartView
                 android:id="@+id/chart"
-                android:layout_below="@+id/r_details"
-                android:layout_margin="5dp"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rankgridrecycler_view"
+                android:layout_margin="5dp"
+                android:visibility="gone" />
 
             <ProgressBar
                 android:id="@+id/piechart_rank_progressBar"
@@ -465,7 +492,7 @@
                 android:id="@+id/recycleviewr_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/header_rank_text"
+                android:layout_below="@+id/renk_header_text_container"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:elevation="4dp"
@@ -585,7 +612,7 @@
                 android:id="@+id/detail_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/header_rank_text"
+                android:layout_below="@+id/renk_header_text_container"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:elevation="2dp"
@@ -834,32 +861,38 @@
             android:indeterminateDrawable="@drawable/progress"
             android:visibility="visible"></ProgressBar>
 
-        <TextView
-            android:id="@+id/my_text"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
+        <LinearLayout
+            android:id="@+id/renk_text_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text=""
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView
-            android:id="@+id/my_text2"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="-5dp"
-            android:layout_toRightOf="@+id/my_text"
-            android:gravity="center"
-            android:text="nd"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            <TextView
+                android:id="@+id/my_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:gravity="center"
+                android:text="RANK"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/my_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="sdfsf"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:visibility="visible" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/my_button"

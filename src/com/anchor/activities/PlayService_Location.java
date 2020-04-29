@@ -223,7 +223,7 @@ public class PlayService_Location implements LocationListener {
         //Toast.makeText(c_context, "LOCATION"+getFusedLatitude()+" "+getFusedLongitude(), Toast.LENGTH_LONG).show();
 
         //Log.d("NEW LOCATION RECEIVED","NEW LOCATION RECEIVED");
-        Log.d("LOCATION","LOCATION"+getFusedLatitude()+" "+getFusedLongitude());
+        //Log.d("LOCATION","LOCATION"+getFusedLatitude()+" "+getFusedLongitude());
 
 
     }

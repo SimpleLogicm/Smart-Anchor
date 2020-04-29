@@ -63,4 +63,17 @@
     <color name="rank_r_recycle_card">#b1420a</color>
     <color name="rank_datecolor">#92c0e4</color>
 
+
+    <color name="chart_color1">#ff1744</color>
+    <color name="chart_color2">#880e4f</color>
+    <color name="chart_color3">#00838f</color>
+    <color name="chart_color4">#b71c1c</color>
+    <color name="chart_color5">#ff5252</color>
+    <color name="chart_color6">#AEEA00</color>
+    <color name="chart_color7">#ef9a9a</color>
+    <color name="chart_color8">#5D4037</color>
+    <color name="chart_color9">#FF80AB</color>
+    <color name="chart_color10">#004D40</color>
+    <color name="chart_color11">#B388FF</color>
+
 </resources>
