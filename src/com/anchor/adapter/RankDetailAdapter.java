@@ -2,7 +2,9 @@ package com.anchor.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +23,11 @@ public class RankDetailAdapter extends RecyclerView.Adapter<RankDetailAdapter.My
     private ArrayList<RankDetailModel> dataSet;
     private Context mContext;
 
-//    EventListener listener;
-//
-//    public interface EventListener {
-//        void onEvent(String data);
-//    }
+    DialogViewListener listener;
+
+    public interface DialogViewListener {
+        void onClickDialog(String data);
+    }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -45,10 +47,10 @@ public class RankDetailAdapter extends RecyclerView.Adapter<RankDetailAdapter.My
         }
     }
 
-    public RankDetailAdapter(ArrayList<RankDetailModel> data,Context context) {
+    public RankDetailAdapter(ArrayList<RankDetailModel> data,Context context,DialogViewListener listener) {
         this.dataSet = data;
         this.mContext = context;
-       // this.listener = listener;
+        this.listener = listener;
     }
 
     @Override
@@ -68,15 +70,16 @@ public class RankDetailAdapter extends RecyclerView.Adapter<RankDetailAdapter.My
         holder.r_weighttage_value.setText(dataSet.get(listPosition).getR_weighttage_value());
         holder.r_obtained_value.setText(dataSet.get(listPosition).getR_obtained_value());
         holder.r_calculated_value.setText(dataSet.get(listPosition).getR_calculated_value());
+        //holder.r_parameter_value.setMovementMethod(LinkMovementMethod.getInstance());
+        holder.r_parameter_value.setPaintFlags(holder.r_parameter_value.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
 
-//        holder.r_adapter_container.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                listener.onEvent(dataSet.get(listPosition).getDate());
-//
-//            }
-//        });
+        holder.r_parameter_value.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onClickDialog(dataSet.get(listPosition).getR_parameter_value());
 
+            }
+        });
 
     }
 

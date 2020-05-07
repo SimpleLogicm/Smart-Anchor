@@ -23,7 +23,7 @@
             android:layout_weight="1.3"
             android:gravity="center"
             android:text="fdf"
-            android:textColor="@color/black"
+            android:textColor="@color/rank_r_recycle_card"
             android:textSize="12dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"

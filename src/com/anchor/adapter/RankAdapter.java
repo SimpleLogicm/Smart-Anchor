@@ -24,7 +24,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyViewHolder> 
     EventListener listener;
 
     public interface EventListener {
-        void onEvent(String data);
+        void onEvent(String data,String rank);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +74,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyViewHolder> 
         holder.r_adapter_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onEvent(dataSet.get(listPosition).getDate());
+                listener.onEvent(dataSet.get(listPosition).getDate(),dataSet.get(listPosition).getRank());
 
             }
         });

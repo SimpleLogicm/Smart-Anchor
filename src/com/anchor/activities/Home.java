@@ -1,10 +1,8 @@
 package com.anchor.activities;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -23,7 +21,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,9 +38,12 @@ import android.widget.Toast;
 import com.anchor.adapter.AnimalsAdapter;
 import com.anchor.adapter.RankAdapter;
 import com.anchor.adapter.RankDetailAdapter;
+import com.anchor.adapter.RenlDetail_Dialog_Adapter;
 import com.anchor.helper.ActualValueFormater;
+import com.anchor.helper.CustomRenkViewDialog;
 import com.anchor.model.RankDataModel;
 import com.anchor.model.RankDetailModel;
+import com.anchor.model.RenkDialogModel;
 import com.anchor.slidingmenu.CalendarAct;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
@@ -58,8 +58,6 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.formatter.DefaultValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -69,21 +67,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.text.ParseException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
-
 import static android.content.Context.MODE_PRIVATE;
 
-public class Home extends Fragment implements OnChartValueSelectedListener, RankAdapter.EventListener,AnimalsAdapter.GraphListListener {
+public class Home extends Fragment implements OnChartValueSelectedListener, RankAdapter.EventListener, AnimalsAdapter.GraphListListener, RankDetailAdapter.DialogViewListener {
 
 
     BufferedReader in = null;
@@ -107,26 +104,27 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     ImageView top_arrow;
     ImageView down_arrow;
     RelativeLayout main_my_view;
-    TextView my_text,my_text2;
-    TextView header_rank_text,my_header_text2;
+    TextView my_text, my_text2;
+    TextView header_rank_text, my_header_text2;
     RelativeLayout main_bottomcard;
     boolean isUp;
-    RecyclerView rank_list_recycleview,rank_ldetail_recycleview;
+    RecyclerView rank_list_recycleview, rank_ldetail_recycleview;
     private RecyclerView.LayoutManager layoutManager;
     private static ArrayList<RankDataModel> data;
     private static ArrayList<RankDetailModel> detailsdata;
+    private static ArrayList<RenkDialogModel> renkDialogModels;
     private static RecyclerView.Adapter adapter;
     private static RecyclerView.Adapter detailadapter;
-    CardView recycleviewr_header, recycleviewr_container,detail_view_container;
+    CardView recycleviewr_header, recycleviewr_container, detail_view_container;
     PieChart r_piechart;
     ImageView r_arrow_left;
     Button r_details;
     ScrollView home_scroller;
     static String left_arrow_click = "";
 
-    ImageView user_mm,user_header_mm;
-    TextView rank_loading_message,r_total_value,rank_current_date;
-    ProgressBar rank_progressBar,recycle_rank_progressBar,piechart_rank_progressBar,detils_rank_progressBar;
+    ImageView user_mm, user_header_mm;
+    TextView rank_loading_message, r_total_value, rank_current_date;
+    ProgressBar rank_progressBar, recycle_rank_progressBar, piechart_rank_progressBar, detils_rank_progressBar;
     private RequestQueue requestQueue;
 
     ArrayList<Entry> yvalues = new ArrayList<Entry>();
@@ -147,7 +145,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     private RecyclerView.LayoutManager rankgridmLayoutManager;
     ArrayList<String> mDataSet = new ArrayList<String>();
     LinearLayout renk_text_container;
-
+    JSONObject RjsonObject = null;
 
 
     public Home() {
@@ -204,13 +202,11 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         piechart_rank_progressBar = rootView.findViewById(R.id.piechart_rank_progressBar);
         detils_rank_progressBar = rootView.findViewById(R.id.detils_rank_progressBar);
 
-       // r_piechart.setUsePercentValues(true);
+        // r_piechart.setUsePercentValues(true);
 
         r_piechart.setHoleRadius(50f);
         r_piechart.setTransparentCircleAlpha(0);
         r_piechart.setCenterTextSize(10);
-
-
 
 
         rank_list_recycleview.setHasFixedSize(true);
@@ -247,8 +243,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         rank_ldetail_recycleview.setItemAnimator(new DefaultItemAnimator());
 
-        try
-        {
+        try {
             SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
             String ranks = sp.getString("rank", "");
             String ranks_date = sp.getString("rank_date", "");
@@ -258,81 +253,63 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                 rank_progressBar.setVisibility(View.GONE);
                 renk_text_container.setVisibility(View.VISIBLE);
 
-                try
-                {
-                    my_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>"+ordinal_suffix_of(Integer.parseInt(ranks))+"</sup>"));
-                    header_rank_text.setText(Html.fromHtml("Rank : "+ranks+"<sup>"+ordinal_suffix_of(Integer.parseInt(ranks))+"</sup>"));
-                    my_text2.setText(Html.fromHtml("Date : "+ranks_date));
-                    my_header_text2.setText(Html.fromHtml("Date : "+ranks_date));
-                }
-                catch(Exception ex)
-                {
-                    my_text.setText(Html.fromHtml("Rank : "+ranks));
-                    header_rank_text.setText(Html.fromHtml("Rank : "+ranks));
-                    my_text2.setText(Html.fromHtml("Date : "+ranks_date));
-                    my_header_text2.setText(Html.fromHtml("Date : "+ranks_date));
+                try {
+                    my_text.setText(Html.fromHtml("Rank : " + ranks + "<sup>" + ordinal_suffix_of(Integer.parseInt(ranks)) + "</sup>"));
+                    header_rank_text.setText(Html.fromHtml("Rank : " + ranks + "<sup>" + ordinal_suffix_of(Integer.parseInt(ranks)) + "</sup>"));
+                    my_text2.setText(Html.fromHtml("Date : " + ranks_date));
+                    my_header_text2.setText(Html.fromHtml("Date : " + ranks_date));
+                } catch (Exception ex) {
+                    my_text.setText(Html.fromHtml("Rank : " + ranks));
+                    header_rank_text.setText(Html.fromHtml("Rank : " + ranks));
+                    my_text2.setText(Html.fromHtml("Date : " + ranks_date));
+                    my_header_text2.setText(Html.fromHtml("Date : " + ranks_date));
 
                     ex.printStackTrace();
 
                 }
 
-                if(ranks.equalsIgnoreCase("1"))
-                {
+                if (ranks.equalsIgnoreCase("1")) {
                     user_mm.setBackgroundResource(R.drawable.rrank1);
                     user_header_mm.setBackgroundResource(R.drawable.rrank1);
 
-                }
-                else
-                if(ranks.equalsIgnoreCase("2"))
-                {
+                } else if (ranks.equalsIgnoreCase("2")) {
                     user_mm.setBackgroundResource(R.drawable.rrank2);
                     user_header_mm.setBackgroundResource(R.drawable.rrank2);
-                }
-                else
-                if (ranks.trim().equalsIgnoreCase("") || ranks.trim().equalsIgnoreCase(null) || ranks.trim().equalsIgnoreCase("null") || ranks.trim().equalsIgnoreCase("0")|| ranks.trim().equalsIgnoreCase("0.0") || ranks.trim().equalsIgnoreCase(" ")) {
+                } else if (ranks.trim().equalsIgnoreCase("") || ranks.trim().equalsIgnoreCase(null) || ranks.trim().equalsIgnoreCase("null") || ranks.trim().equalsIgnoreCase("0") || ranks.trim().equalsIgnoreCase("0.0") || ranks.trim().equalsIgnoreCase(" ")) {
 
                     my_text.setText(Html.fromHtml("Rank : NA"));
                     header_rank_text.setText(Html.fromHtml("Rank : NA"));
 
-                    try
-                    {
+                    try {
 
-                        my_text2.setText(Html.fromHtml("Date : "+ranks_date));
-                        my_header_text2.setText(Html.fromHtml("Date : "+ranks_date));
+                        my_text2.setText(Html.fromHtml("Date : " + ranks_date));
+                        my_header_text2.setText(Html.fromHtml("Date : " + ranks_date));
 
-                    }catch (Exception ex)
-                    {
-                        my_text2.setText(Html.fromHtml("Date : "+ranks_date));
-                        my_header_text2.setText(Html.fromHtml("Date : "+ranks_date));
+                    } catch (Exception ex) {
+                        my_text2.setText(Html.fromHtml("Date : " + ranks_date));
+                        my_header_text2.setText(Html.fromHtml("Date : " + ranks_date));
                         ex.printStackTrace();
                     }
 
-                }
-                else
-                {
+                } else {
                     user_mm.setBackgroundResource(R.drawable.rdrank3);
                     user_header_mm.setBackgroundResource(R.drawable.rdrank3);
                 }
 
-            }
-            else
-            {
+            } else {
                 cd = new ConnectionDetector(getActivity());
                 isInternetPresent = cd.isConnectingToInternet();
                 if (isInternetPresent) {
                     user_mm.setVisibility(View.GONE);
                     rank_loading_message.setVisibility(View.VISIBLE);
-                   // rank_loading_message.setText("Rank Not Found,Click Arrow To Refresh");
+                    // rank_loading_message.setText("Rank Not Found,Click Arrow To Refresh");
                     rank_progressBar.setVisibility(View.VISIBLE);
                     renk_text_container.setVisibility(View.GONE);
-                   // service_flag = "yes";
-                    if(Global_Data.rank_service_call_flag.equalsIgnoreCase("TRUE"))
-                    {
+                    // service_flag = "yes";
+                    if (Global_Data.rank_service_call_flag.equalsIgnoreCase("TRUE")) {
                         getRankData();
                         Global_Data.rank_service_call_flag = "";
-                    }
-                    else
-                    {
+                    } else {
                         rank_loading_message.setText("Rank Not Found,Click Arrow To Refresh");
                         rank_progressBar.setVisibility(View.GONE);
                     }
@@ -346,26 +323,25 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                 }
 
             }
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
 
         }
 
 
         data = new ArrayList<RankDataModel>();
         detailsdata = new ArrayList<RankDetailModel>();
+        renkDialogModels = new ArrayList<RenkDialogModel>();
 
         context = this;
 
         adapter = new RankAdapter(data, getActivity(), this);
         rank_list_recycleview.setAdapter(adapter);
 
-        detailadapter = new RankDetailAdapter(detailsdata, getActivity());
+        detailadapter = new RankDetailAdapter(detailsdata, getActivity(), context);
         rank_ldetail_recycleview.setAdapter(detailadapter);
 
 
         main_my_view.setVisibility(View.INVISIBLE);
-
 
 
         isUp = false;
@@ -412,7 +388,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 //
 //            }
 //        });
-
 
 
         r_details.setOnClickListener(new OnClickListener() {
@@ -462,8 +437,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             @Override
             public void onClick(View v) {
 
-                if(left_arrow_click.equalsIgnoreCase("details"))
-                {
+                if (left_arrow_click.equalsIgnoreCase("details")) {
                     left_arrow_click = "piechart";
                     recycleviewr_header.setVisibility(View.GONE);
                     recycleviewr_container.setVisibility(View.GONE);
@@ -474,9 +448,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                     r_arrow_left.setVisibility(View.VISIBLE);
                     home_scroller.setVisibility(View.GONE);
                     rank_current_date.setVisibility(View.INVISIBLE);
-                }
-                else
-                {
+                } else {
                     recycleviewr_header.setVisibility(View.VISIBLE);
                     recycleviewr_container.setVisibility(View.VISIBLE);
                     detail_view_container.setVisibility(View.GONE);
@@ -488,6 +460,39 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                     r_arrow_left.setVisibility(View.GONE);
                     r_details.setVisibility(View.GONE);
                     home_scroller.setVisibility(View.GONE);
+
+                    try {
+                        my_text.setText(Html.fromHtml("Rank : " + month_rank.trim() + "<sup>" + ordinal_suffix_of(Integer.parseInt(month_rank.trim())) + "</sup>"));
+                        header_rank_text.setText(Html.fromHtml("Rank : " + month_rank.trim() + "<sup>" + ordinal_suffix_of(Integer.parseInt(month_rank.trim())) + "</sup>"));
+                        my_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                        my_header_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                    } catch (Exception ex) {
+                        my_text.setText(Html.fromHtml("Rank : " + month_rank.trim()));
+                        header_rank_text.setText(Html.fromHtml("Rank : " + month_rank.trim()));
+                        my_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                        my_header_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+
+                        ex.printStackTrace();
+
+                    }
+                    if (month_rank.trim().equalsIgnoreCase("1")) {
+                        user_mm.setBackgroundResource(R.drawable.rrank1);
+                        user_header_mm.setBackgroundResource(R.drawable.rrank1);
+
+                    } else if (month_rank.trim().equalsIgnoreCase("2")) {
+                        user_mm.setBackgroundResource(R.drawable.rrank2);
+                        user_header_mm.setBackgroundResource(R.drawable.rrank2);
+                    } else if (month_rank.trim().equalsIgnoreCase("") || month_rank.trim().equalsIgnoreCase(null) || month_rank.trim().equalsIgnoreCase("null") || month_rank.trim().equalsIgnoreCase("0") || month_rank.trim().equalsIgnoreCase("0.0") || month_rank.trim().equalsIgnoreCase(" ")) {
+
+                        my_text.setText(Html.fromHtml("Rank : NA"));
+                        header_rank_text.setText(Html.fromHtml("Rank : NA"));
+                        my_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                        my_header_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                    } else {
+                        user_mm.setBackgroundResource(R.drawable.rdrank3);
+                        user_header_mm.setBackgroundResource(R.drawable.rdrank3);
+                    }
+
                 }
 
             }
@@ -675,8 +680,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             animate.setFillAfter(true);
             view.startAnimation(animate);
 
-            if(service_flag.equalsIgnoreCase(""))
-            {
+            if (service_flag.equalsIgnoreCase("")) {
                 getRankData();
             }
         } else {
@@ -741,8 +745,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
     }
 
-    public void updateRankData()
-    {
+    public void updateRankData() {
 
     }
 
@@ -752,7 +755,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         PieDataSet dataSet = new PieDataSet(yvalues, "");
 
         //dataSet.setSliceSpace(10);
-       // dataSet.setSliceSpace(2);
+        // dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(14);
         dataSet.setSliceSpace(3f);
 
@@ -771,18 +774,17 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         data.setValueTextColor(Color.BLACK);
 
 
-       // data.getYValueSum();
+        // data.getYValueSum();
         // In Percentage
         //data.setValueFormatter(new PercentFormatter());
         // Default value
-       // data.setValueFormatter(new DefaultValueFormatter(0));
+        // data.setValueFormatter(new DefaultValueFormatter(0));
         data.setValueFormatter(new ActualValueFormater());
         r_piechart.setData(data);
-       // r_piechart.setCenterTextRadiusPercent(20);
+        // r_piechart.setCenterTextRadiusPercent(20);
         r_piechart.setDescription("Rank Data");
         r_piechart.setDrawHoleEnabled(true);
         r_piechart.setTransparentCircleRadius(58f);
-
 
 
         //add colors to dataset
@@ -823,20 +825,19 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         r_piechart.getLegend().setEnabled(false);
 
-       // r_piechart.setBackgroundColor(Color.TRANSPARENT); //set whatever color you prefer
-       // r_piechart.setDrawGridBackground(false);
+        // r_piechart.setBackgroundColor(Color.TRANSPARENT); //set whatever color you prefer
+        // r_piechart.setDrawGridBackground(false);
 
-       // r_piechart.setMinAngleForSlices(36f);
+        // r_piechart.setMinAngleForSlices(36f);
 
         r_piechart.invalidate();
 
         r_piechart.animateXY(1400, 1400);
 
 
-       // r_piechart.setUsePercentValues(true);
-       // r_piechart.setDrawValues(false);
-       // r_piechart.setDrawSliceText(false);
-
+        // r_piechart.setUsePercentValues(true);
+        // r_piechart.setDrawValues(false);
+        // r_piechart.setDrawSliceText(false);
 
 
         r_piechart.setOnChartValueSelectedListener(this);
@@ -844,14 +845,11 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 //        r_piechart.setCenterText("BMI:"+df.format(bmi));
 
 
-
-
     }
 
-    public void helloChart(String date)
-    {
+    public void helloChart(String date) {
         List pieData = new ArrayList<>();
-        List<Integer> piecolors= new ArrayList<>();
+        List<Integer> piecolors = new ArrayList<>();
         piecolors.add(getResources().getColor(R.color.chart_color1));
         piecolors.add(getResources().getColor(R.color.chart_color2));
         piecolors.add(getResources().getColor(R.color.chart_color3));
@@ -864,11 +862,10 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         piecolors.add(getResources().getColor(R.color.chart_color10));
         piecolors.add(getResources().getColor(R.color.chart_color11));
 
-        for(int i=0; i<hellodatatext.size();i++)
-        {
+        for (int i = 0; i < hellodatatext.size(); i++) {
             //Math.round(Float.valueOf(hellodatavalue.get(i)))
 
-            pieData.add(new SliceValue(20, piecolors.get(i)).setLabel(hellodatatext.get(i)+"\n"+hellodatavalue.get(i)));
+            pieData.add(new SliceValue(20, piecolors.get(i)).setLabel(hellodatatext.get(i) + "\n" + hellodatavalue.get(i)));
         }
 //
 //        pieData.add(new SliceValue(25, Color.GRAY).setLabel("dsfsfsdfsdf: 4"));
@@ -884,7 +881,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         pieChartData.setHasCenterCircle(true).setCenterText1(date).setCenterText1FontSize(20).setCenterText1Color(Color.parseColor("#0097A7"));
         pieChartView.setPieChartData(pieChartData);
     }
-
 
 
     public boolean isUpStatus() {
@@ -938,7 +934,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
     }
 
     @Override
-    public void onEvent(String date) {
+    public void onEvent(String date, String Rank) {
 
         selected_day = date;
         cd = new ConnectionDetector(getActivity());
@@ -955,6 +951,30 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             piechart_rank_progressBar.setVisibility(View.VISIBLE);
 
             getchartData(date);
+
+            try {
+
+                header_rank_text.setText(Html.fromHtml("Rank : " + Rank.trim() + "<sup>" + ordinal_suffix_of(Integer.parseInt(Rank.trim())) + "</sup>"));
+                my_header_text2.setText(Html.fromHtml("Date : " + date));
+            } catch (Exception ex) {
+                header_rank_text.setText(Html.fromHtml("Rank : " + Rank.trim()));
+                my_header_text2.setText(Html.fromHtml("Date : " + date));
+
+                ex.printStackTrace();
+
+            }
+            if (Rank.trim().equalsIgnoreCase("1")) {
+                user_header_mm.setBackgroundResource(R.drawable.rrank1);
+
+            } else if (Rank.trim().equalsIgnoreCase("2")) {
+                user_header_mm.setBackgroundResource(R.drawable.rrank2);
+            } else if (Rank.trim().equalsIgnoreCase("") || Rank.trim().equalsIgnoreCase(null) || Rank.trim().equalsIgnoreCase("null") || Rank.trim().equalsIgnoreCase("0") || Rank.trim().equalsIgnoreCase("0.0") || Rank.trim().equalsIgnoreCase(" ")) {
+
+                header_rank_text.setText(Html.fromHtml("Rank : NA"));
+                my_header_text2.setText(Html.fromHtml("Date : " + date));
+            } else {
+                user_header_mm.setBackgroundResource(R.drawable.rdrank3);
+            }
 
 
         } else {
@@ -989,7 +1009,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email+"&date="+"";
+            String url = domain + "dms_rankings/rank_dashboard?email=" + user_email + "&date=" + "";
 
             Log.i("volley", "email: " + user_email);
             Log.i("rank url", "rank url " + url);
@@ -1029,30 +1049,26 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                     JSONObject jsonObject = data1.getJSONObject(i);
 
 
-                                    try
-                                    {
+                                    try {
                                         String myFormat = "yyyy-MM-dd"; //In which you need put here
                                         SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
                                         Date date = sdf.parse(Check_Null_Value.ranknullcheck(jsonObject.getString("date")));
                                         String myFormatnew = "dd-MM-yyyy";
                                         SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
 
-                                        if(i ==0)
-                                        {
+                                        if (i == 0) {
                                             month_rank = Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"));
-                                            m_ranks_date  = datenew.format(date);
+                                            m_ranks_date = datenew.format(date);
                                         }
 
                                         data.add(new RankDataModel(datenew.format(date),
                                                 Check_Null_Value.ranknullcheck(jsonObject.getString("score")),
                                                 Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"))
                                         ));
-                                    }catch (Exception ex)
-                                    {
-                                        if(i ==0)
-                                        {
+                                    } catch (Exception ex) {
+                                        if (i == 0) {
                                             month_rank = Check_Null_Value.ranknullcheck(jsonObject.getString("day_rank"));
-                                            m_ranks_date  = Check_Null_Value.ranknullcheck(jsonObject.getString("date"));
+                                            m_ranks_date = Check_Null_Value.ranknullcheck(jsonObject.getString("date"));
                                         }
                                         data.add(new RankDataModel(
                                                 Check_Null_Value.ranknullcheck(jsonObject.getString("date")),
@@ -1063,23 +1079,19 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                     }
 
 
-
                                     adapter = new RankAdapter(data, getActivity(), context);
                                     rank_list_recycleview.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
 
                                 }
 
-                            }
-                            else
-                            {
+                            } else {
                                 Toast toast = Toast.makeText(getActivity(), "Rank Not Found", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 slideDown(main_my_view);
                                 isUp = false;
                             }
-
 
 
                             if (!month_rank.equalsIgnoreCase("")) {
@@ -1090,53 +1102,41 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                                 editor.commit();
 
-                                try
-                                {
+                                try {
                                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(month_rank.trim())) {
                                         user_mm.setVisibility(View.VISIBLE);
                                         rank_loading_message.setVisibility(View.GONE);
                                         rank_progressBar.setVisibility(View.GONE);
                                         renk_text_container.setVisibility(View.VISIBLE);
 
-                                        try
-                                        {
-                                            my_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>"+ordinal_suffix_of(Integer.parseInt(month_rank.trim()))+"</sup>"));
-                                            header_rank_text.setText(Html.fromHtml("Rank : "+month_rank.trim()+"<sup>"+ordinal_suffix_of(Integer.parseInt(month_rank.trim()))+"</sup>"));
-                                            my_text2.setText(Html.fromHtml("Date : "+m_ranks_date));
-                                            my_header_text2.setText(Html.fromHtml("Date : "+m_ranks_date));
-                                        }
-                                        catch(Exception ex)
-                                        {
-                                            my_text.setText(Html.fromHtml("Rank : "+month_rank.trim()));
-                                            header_rank_text.setText(Html.fromHtml("Rank : "+month_rank.trim()));
-                                            my_text2.setText(Html.fromHtml("Date : "+m_ranks_date));
-                                            my_header_text2.setText(Html.fromHtml("Date : "+m_ranks_date));
+                                        try {
+                                            my_text.setText(Html.fromHtml("Rank : " + month_rank.trim() + "<sup>" + ordinal_suffix_of(Integer.parseInt(month_rank.trim())) + "</sup>"));
+                                            header_rank_text.setText(Html.fromHtml("Rank : " + month_rank.trim() + "<sup>" + ordinal_suffix_of(Integer.parseInt(month_rank.trim())) + "</sup>"));
+                                            my_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                                            my_header_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                                        } catch (Exception ex) {
+                                            my_text.setText(Html.fromHtml("Rank : " + month_rank.trim()));
+                                            header_rank_text.setText(Html.fromHtml("Rank : " + month_rank.trim()));
+                                            my_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                                            my_header_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
 
                                             ex.printStackTrace();
 
                                         }
-                                        if(month_rank.trim().equalsIgnoreCase("1"))
-                                        {
+                                        if (month_rank.trim().equalsIgnoreCase("1")) {
                                             user_mm.setBackgroundResource(R.drawable.rrank1);
                                             user_header_mm.setBackgroundResource(R.drawable.rrank1);
 
-                                        }
-                                        else
-                                        if(month_rank.trim().equalsIgnoreCase("2"))
-                                        {
+                                        } else if (month_rank.trim().equalsIgnoreCase("2")) {
                                             user_mm.setBackgroundResource(R.drawable.rrank2);
                                             user_header_mm.setBackgroundResource(R.drawable.rrank2);
-                                        }
-                                        else
-                                        if (month_rank.trim().equalsIgnoreCase("") || month_rank.trim().equalsIgnoreCase(null) || month_rank.trim().equalsIgnoreCase("null") || month_rank.trim().equalsIgnoreCase("0")|| month_rank.trim().equalsIgnoreCase("0.0") || month_rank.trim().equalsIgnoreCase(" ")) {
+                                        } else if (month_rank.trim().equalsIgnoreCase("") || month_rank.trim().equalsIgnoreCase(null) || month_rank.trim().equalsIgnoreCase("null") || month_rank.trim().equalsIgnoreCase("0") || month_rank.trim().equalsIgnoreCase("0.0") || month_rank.trim().equalsIgnoreCase(" ")) {
 
                                             my_text.setText(Html.fromHtml("Rank : NA"));
                                             header_rank_text.setText(Html.fromHtml("Rank : NA"));
-                                            my_text2.setText(Html.fromHtml("Date : "+m_ranks_date));
-                                            my_header_text2.setText(Html.fromHtml("Date : "+m_ranks_date));
-                                        }
-                                        else
-                                        {
+                                            my_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                                            my_header_text2.setText(Html.fromHtml("Date : " + m_ranks_date));
+                                        } else {
                                             user_mm.setBackgroundResource(R.drawable.rdrank3);
                                             user_header_mm.setBackgroundResource(R.drawable.rdrank3);
                                         }
@@ -1144,17 +1144,14 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                         rank_list_recycleview.setVisibility(View.VISIBLE);
                                         recycle_rank_progressBar.setVisibility(View.GONE);
 
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         Toast toast = Toast.makeText(getActivity(), "Rank Not Found", Toast.LENGTH_LONG);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                         slideDown(main_my_view);
                                         isUp = false;
                                     }
-                                }catch(Exception ex)
-                                {
+                                } catch (Exception ex) {
                                     service_flag = "";
                                     user_mm.setVisibility(View.VISIBLE);
                                     rank_loading_message.setVisibility(View.GONE);
@@ -1172,8 +1169,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                         }
 
 
-
-                    } catch (JSONException  e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                         service_flag = "";
                         user_mm.setVisibility(View.VISIBLE);
@@ -1205,7 +1201,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                 }
             });
-
 
 
             if (requestQueue == null) {
@@ -1256,8 +1251,8 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-           // String url = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/dms_rankings/daily_details_graph_of_rank?email=dnyanada.patil@simplelogic.in&date";
-            String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email+"&date="+dates;
+            // String url = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/dms_rankings/daily_details_graph_of_rank?email=dnyanada.patil@simplelogic.in&date";
+            String url = domain + "dms_rankings/daily_details_graph_of_rank?email=" + user_email + "&date=" + dates;
 
             Log.i("volley", "email: " + user_email);
             Log.i("chart url", "chart url " + url);
@@ -1287,7 +1282,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                             mDataSet.clear();
 
 
-
                             JSONArray chartdata = response.getJSONArray("record");
 
 
@@ -1299,8 +1293,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                                     JSONObject jsonObject = chartdata.getJSONObject(i);
 
-                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(jsonObject.getString("value")))
-                                    {
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(jsonObject.getString("value"))) {
                                         yvalues.add(new Entry(Float.valueOf(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("value"))), i));
                                         xVals.add(Check_Null_Value.ranknullcheck(jsonObject.getString("name")));
                                         hellodatatext.add(Check_Null_Value.ranknullcheckfloat(jsonObject.getString("name")));
@@ -1315,29 +1308,25 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 //                                    }
 
 
-
-
                                 }
 
 
                                 r_details.setVisibility(View.VISIBLE);
-                               //r_piechart.setVisibility(View.VISIBLE);
+                                //r_piechart.setVisibility(View.VISIBLE);
                                 pieChartView.setVisibility(View.VISIBLE);
                                 piechart_rank_progressBar.setVisibility(View.GONE);
-                               // pieChartData(dates);
+                                // pieChartData(dates);
                                 helloChart(dates);
 
-                                rankgridmLayoutManager = new GridLayoutManager(getActivity(),4);
+                                rankgridmLayoutManager = new GridLayoutManager(getActivity(), 4);
                                 rankgrid_recycleview.setLayoutManager(rankgridmLayoutManager);
 
                                 // Initialize a new instance of RecyclerView Adapter instance
-                                rankgridmAdapter = new AnimalsAdapter(getActivity(),mDataSet,context);
+                                rankgridmAdapter = new AnimalsAdapter(getActivity(), mDataSet, context);
                                 rankgrid_recycleview.setAdapter(rankgridmAdapter);
                                 rankgridmAdapter.notifyDataSetChanged();
 
-                            }
-                            else
-                            {
+                            } else {
                                 Toast toast = Toast.makeText(getActivity(), "Data Not Found", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
@@ -1354,7 +1343,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
 
                         }
-
 
 
                     } catch (JSONException e) {
@@ -1376,7 +1364,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             });
 
 
-
             if (requestQueue == null) {
                 requestQueue = Volley.newRequestQueue(getActivity());
                 Log.d("new error", "Setting a new request queue");
@@ -1389,7 +1376,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
         } catch (Exception e) {
             recycle_rank_progressBar.setVisibility(View.GONE);
-
 
 
         }
@@ -1416,7 +1402,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "dms_rankings/daily_rank_details_of_user?email=" + user_email+"&date="+dates;
+            String url = domain + "dms_rankings/daily_rank_details_of_user?email=" + user_email + "&date=" + dates;
 
             Log.i("volley", "email: " + user_email);
             Log.i("rank url", "rank url " + url);
@@ -1441,7 +1427,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                         } else {
 
 
-                            double total =0;
+                            double total = 0;
                             detailsdata = new ArrayList<RankDetailModel>();
                             JSONArray data2 = response.getJSONArray("record");
                             Log.i("volley", "response reg data2 Length: " + data2.length());
@@ -1460,32 +1446,26 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                     ));
 
 
-
                                 }
-
-
-
                                 if (response.has("call_cut_off")) {
-                                    try
-                                    {
+                                    try {
                                         rank_current_date.setVisibility(View.VISIBLE);
                                         myCalendar = Calendar.getInstance();
                                         String myFormat = "dd/MM/yyyy"; //In which you need put here
                                         SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
-                                        rank_current_date.setText("Date : "+sdf.format(myCalendar.getTime()) + "\n"+"Cut-off value for Calls: "+Check_Null_Value.ranknullcheckfloat(response.getString("call_cut_off")));
-                                    }catch(Exception ex)
-                                    {
+                                        //rank_current_date.setText("Date : "+sdf.format(myCalendar.getTime()) + "\n"+"Cut-off value for Calls: "+Check_Null_Value.ranknullcheckfloat(response.getString("call_cut_off")));
+                                        rank_current_date.setText("Cut-off value for Calls: " + Check_Null_Value.ranknullcheckfloat(response.getString("call_cut_off")));
+
+                                    } catch (Exception ex) {
                                         ex.printStackTrace();
                                     }
 
                                 }
 
                                 if (response.has("total")) {
-                                    try
-                                    {
-                                        total = total+ Double.valueOf(Check_Null_Value.ranknullcheckfloat(response.getString("total")));
-                                    }catch(Exception ex)
-                                    {
+                                    try {
+                                        total = total + Double.valueOf(Check_Null_Value.ranknullcheckfloat(response.getString("total")));
+                                    } catch (Exception ex) {
                                         ex.printStackTrace();
                                     }
 
@@ -1494,13 +1474,11 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                 r_total_value.setText(String.valueOf(total));
                                 detils_rank_progressBar.setVisibility(View.GONE);
                                 rank_ldetail_recycleview.setVisibility(View.VISIBLE);
-                                detailadapter = new RankDetailAdapter(detailsdata, getActivity());
+                                detailadapter = new RankDetailAdapter(detailsdata, getActivity(), context);
                                 rank_ldetail_recycleview.setAdapter(detailadapter);
                                 detailadapter.notifyDataSetChanged();
 
-                            }
-                            else
-                            {
+                            } else {
                                 Toast toast = Toast.makeText(getActivity(), "Data Not Found", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
@@ -1508,7 +1486,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                                 recycleviewr_header.setVisibility(View.GONE);
                                 recycleviewr_container.setVisibility(View.GONE);
                                 detail_view_container.setVisibility(View.GONE);
-                               // r_piechart.setVisibility(View.VISIBLE);
+                                // r_piechart.setVisibility(View.VISIBLE);
                                 pieChartView.setVisibility(View.VISIBLE);
                                 r_details.setVisibility(View.VISIBLE);
                                 r_arrow_left.setVisibility(View.VISIBLE);
@@ -1516,10 +1494,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
                             }
 
 
-
-
                         }
-
 
 
                     } catch (JSONException e) {
@@ -1556,7 +1531,6 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             });
 
 
-
             if (requestQueue == null) {
                 requestQueue = Volley.newRequestQueue(getActivity());
                 Log.d("new error", "Setting a new request queue");
@@ -1583,14 +1557,139 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         }
     }
 
-    @Override
-    public void GraphListListener(String data,int index) {
+    public void getRankDaySummarydailog(final String parameter_name) {
 
+        service_flag = "yes";
+        SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        String device_id = sp.getString("devid", "");
+
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+
+            String domain = getResources().getString(R.string.service_domain);
+            String url = domain + "dms_rankings/daily_rank_details_of_user?email=" + user_email + "&date=" + selected_day + "&parameter" + URLEncoder.encode(parameter_name, "UTF-8");
+
+            Log.i("volley", "email: " + user_email);
+            Log.i("rank url", "rank url " + url);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response);
+                    //  Log.i("volley", "response reg Length: " + response.length());
+
+                    try {
+
+
+                        String response_result = "";
+                        if (response.has("message")) {
+                            response_result = response.getString("message");
+                            Toast toast = Toast.makeText(getActivity(), response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                            detils_rank_progressBar.setVisibility(View.GONE);
+
+                        } else {
+
+                            detailsdata = new ArrayList<RankDetailModel>();
+//                            JSONArray data2 = response.getJSONArray("record");
+//                            Log.i("volley", "response reg data2 Length: " + data2.length());
+//                            Log.d("data2", "data2" + data2.toString());
+                            renkDialogModels.clear();
+                            RjsonObject = response.getJSONObject("recources");
+                            Log.i("volley", "response recources Length: " + RjsonObject.toString());
+
+                            if (RjsonObject.names().length() <= 0) {
+
+                                Toast toast = Toast.makeText(getActivity(), "Record Not Found.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                detils_rank_progressBar.setVisibility(View.GONE);
+
+                            } else {
+
+                                for (int i = 0; i < RjsonObject.names().length(); i++) {
+
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(RjsonObject.get(RjsonObject.names().getString(i)).toString())) {
+                                        renkDialogModels.add(new RenkDialogModel(RjsonObject.names().getString(i).toString(), RjsonObject.get(RjsonObject.names().getString(i)).toString()));
+
+                                    }
+                                   else
+                                    {
+                                        renkDialogModels.add(new RenkDialogModel(RjsonObject.names().getString(i).toString(), ""));
+
+                                    }
+
+
+                                }
+                                detils_rank_progressBar.setVisibility(View.GONE);
+                                RenlDetail_Dialog_Adapter dataAdapter = new RenlDetail_Dialog_Adapter(renkDialogModels);
+                                CustomRenkViewDialog customDialog = new CustomRenkViewDialog(getActivity(), dataAdapter, parameter_name);
+
+                                customDialog.show();
+                                customDialog.setCanceledOnTouchOutside(false);
+
+                            }
+
+
+                        }
+
+                        detils_rank_progressBar.setVisibility(View.GONE);
+                    } catch (JSONException e) {
+                        detils_rank_progressBar.setVisibility(View.GONE);
+                        e.printStackTrace();
+
+
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    detils_rank_progressBar.setVisibility(View.GONE);
+                    Log.i("volley", "error: " + error);
+
+
+                }
+            });
+
+
+            if (requestQueue == null) {
+                requestQueue = Volley.newRequestQueue(getActivity());
+                Log.d("new error", "Setting a new request queue");
+            }
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 050000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            detils_rank_progressBar.setVisibility(View.GONE);
+            e.printStackTrace();
+
+        }
+    }
+
+    @Override
+    public void GraphListListener(String data, int index) {
 
 
         r_piechart.highlightValue(index, index, true);
         //data.setDrawValues(false);
-      //  r_piechart.setDrawSliceText(true);
+        //  r_piechart.setDrawSliceText(true);
         r_piechart.invalidate();
 
     }
@@ -1608,5 +1707,14 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
             return "rd";
         }
         return "th";
+    }
+
+    @Override
+    public void onClickDialog(String data) {
+
+        detils_rank_progressBar.setVisibility(View.VISIBLE);
+        getRankDaySummarydailog(data);
+
+
     }
 }
