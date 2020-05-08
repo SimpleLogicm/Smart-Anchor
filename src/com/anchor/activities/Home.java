@@ -61,6 +61,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -1559,6 +1560,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
     public void getRankDaySummarydailog(final String parameter_name) {
 
+        String type = "";
         service_flag = "yes";
         SharedPreferences sp = getActivity().getSharedPreferences("SimpleLogic", MODE_PRIVATE);
         String device_id = sp.getString("devid", "");
@@ -1566,6 +1568,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         String user_email = "";
 
         try {
+             type  = parameter_name.replaceAll("[^a-zA-Z0-9 ]", "");
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
                 user_email = sp.getString("USER_EMAIL", "");
             } else {
@@ -1578,7 +1581,7 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "dms_rankings/daily_rank_details_of_user?email=" + user_email + "&date=" + selected_day + "&parameter" + URLEncoder.encode(parameter_name, "UTF-8");
+            String url = domain + "dms_rankings/rank_dashboard_details?email=" + user_email + "&date=" + selected_day + "&type=" + URLEncoder.encode(type.trim(), "UTF-8");
 
             Log.i("volley", "email: " + user_email);
             Log.i("rank url", "rank url " + url);
@@ -1607,10 +1610,15 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 //                            Log.i("volley", "response reg data2 Length: " + data2.length());
 //                            Log.d("data2", "data2" + data2.toString());
                             renkDialogModels.clear();
-                            RjsonObject = response.getJSONObject("recources");
-                            Log.i("volley", "response recources Length: " + RjsonObject.toString());
+                           // RjsonObject = response.getJSONObject("recources");
+                            JSONArray record = response.getJSONArray("record");
+                            Log.i("volley", "response record Length: " + record.length());
+                            Log.d("volley", "record" + record.toString());
 
-                            if (RjsonObject.names().length() <= 0) {
+
+                            // Log.i("volley", "response recources Length: " + RjsonObject.toString());
+
+                            if (record.length() <= 0) {
 
                                 Toast toast = Toast.makeText(getActivity(), "Record Not Found.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1619,15 +1627,26 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
 
                             } else {
 
-                                for (int i = 0; i < RjsonObject.names().length(); i++) {
+                                for (int i = 0; i < record.length(); i++) {
+                                    JSONObject jsonObject = record.getJSONObject(i);
 
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(RjsonObject.get(RjsonObject.names().getString(i)).toString())) {
-                                        renkDialogModels.add(new RenkDialogModel(RjsonObject.names().getString(i).toString(), RjsonObject.get(RjsonObject.names().getString(i)).toString()));
+//                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(RjsonObject.get(RjsonObject.names().getString(i)).toString())) {
+//                                        renkDialogModels.add(new RenkDialogModel(RjsonObject.names().getString(i).toString(), RjsonObject.get(RjsonObject.names().getString(i)).toString()));
+//
+//                                    }
+//                                   else
+//                                    {
+//                                        renkDialogModels.add(new RenkDialogModel(RjsonObject.names().getString(i).toString(), ""));
+//
+//                                    }
+
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("value"))) {
+                                        renkDialogModels.add(new RenkDialogModel(jsonObject.getString("key"), jsonObject.getString("value")));
 
                                     }
-                                   else
+                                    else
                                     {
-                                        renkDialogModels.add(new RenkDialogModel(RjsonObject.names().getString(i).toString(), ""));
+                                        renkDialogModels.add(new RenkDialogModel(jsonObject.getString("key"), " "));
 
                                     }
 
