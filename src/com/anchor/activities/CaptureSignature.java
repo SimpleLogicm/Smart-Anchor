@@ -194,11 +194,11 @@ public class CaptureSignature extends BaseActivity {
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
         detail1str = spf1.getString("var_detail1", "");
 
-        if (detail1str.length() > 0) {
-            order_detail1.setHint(detail1str);
-        } else {
-            order_detail1.setText("Detail 1");
-        }
+//        if (detail1str.length() > 0) {
+//            order_detail1.setHint(detail1str);
+//        } else {
+//            order_detail1.setText("Detail 1");
+//        }
 
         InputFilter[] Textfilters = new InputFilter[1];
         Textfilters[0] = new InputFilter() {
@@ -290,43 +290,69 @@ public class CaptureSignature extends BaseActivity {
         };
         order_detail4.setFilters(new InputFilter[]{filter});
 
+        order_detail1.setEnabled(true);
+        order_detail1.setFocusableInTouchMode(false);
+        order_detail1.setOnClickListener(new OnClickListener() {
 
-        if (strdetail1_edit.equalsIgnoreCase("true")) {
-            order_detail1.setEnabled(true);
+            @Override
+            public void onClick(View v) {
 
-            if (strdetail1_allow.equalsIgnoreCase("Text")) {
-                order_detail1.setInputType(InputType.TYPE_CLASS_TEXT);
-            } else if (strdetail1_allow.equalsIgnoreCase("Integer")) {
-                order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
-            } else {
-                order_detail1.setFocusableInTouchMode(false);
-                order_detail1.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        myCalendar  = Calendar.getInstance();
+                myCalendar  = Calendar.getInstance();
 
 //                        int years  = myCalendar.get(Calendar.YEAR);
 //                        int months  = myCalendar.get(Calendar.MONTH);
 //                        int days  = myCalendar.get(Calendar.DAY_OF_MONTH);
 
-                        DatePickerDialog picker = new DatePickerDialog(CaptureSignature.this, date, myCalendar
-                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                myCalendar.get(Calendar.DAY_OF_MONTH));
-                        picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                       // picker.getDatePicker().setActivated(false);
-                        picker.getDatePicker().setCalendarViewShown(false);
-                        picker.show();
+                DatePickerDialog picker = new DatePickerDialog(CaptureSignature.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                // picker.getDatePicker().setActivated(false);
+                picker.getDatePicker().setCalendarViewShown(false);
+                picker.show();
 
-
-
-                    }
-                });
 
 
             }
-        }
+        });
+
+
+//        if (strdetail1_edit.equalsIgnoreCase("true")) {
+//            order_detail1.setEnabled(true);
+//
+//            if (strdetail1_allow.equalsIgnoreCase("Text")) {
+//                order_detail1.setInputType(InputType.TYPE_CLASS_TEXT);
+//            } else if (strdetail1_allow.equalsIgnoreCase("Integer")) {
+//                order_detail1.setInputType(InputType.TYPE_CLASS_NUMBER);
+//            } else {
+//                order_detail1.setFocusableInTouchMode(false);
+//                order_detail1.setOnClickListener(new OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        myCalendar  = Calendar.getInstance();
+//
+////                        int years  = myCalendar.get(Calendar.YEAR);
+////                        int months  = myCalendar.get(Calendar.MONTH);
+////                        int days  = myCalendar.get(Calendar.DAY_OF_MONTH);
+//
+//                        DatePickerDialog picker = new DatePickerDialog(CaptureSignature.this, date, myCalendar
+//                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+//                                myCalendar.get(Calendar.DAY_OF_MONTH));
+//                        picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+//                       // picker.getDatePicker().setActivated(false);
+//                        picker.getDatePicker().setCalendarViewShown(false);
+//                        picker.show();
+//
+//
+//
+//                    }
+//                });
+//
+//
+//            }
+//        }
         if (strdetail2_edit.equalsIgnoreCase("true")) {
             order_detail2.setEnabled(true);
 
