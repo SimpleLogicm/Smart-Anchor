@@ -72,7 +72,6 @@ import static com.anchor.activities.Global_Data.AllresultSubDealer;
 import static com.anchor.activities.Global_Data.SubDealer_List;
 
 public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedListener {
-    private String Re_Text = "";
     Boolean isInternetPresent = false;
     ConnectionDetector cd;
     String state_name = "";
