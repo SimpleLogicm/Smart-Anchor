@@ -2,6 +2,7 @@ package com.anchor.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -12,8 +13,9 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.anchor.activities.R
+import com.anchor.activities.RetailerTDCustomerList
+import com.anchor.activities.TodoEditCustomer
 import com.anchor.model.RCTOData
-import com.anchor.model.RTODODATA
 import cpm.simplelogic.helper.Check_Null_Value
 import java.text.DecimalFormat
 
@@ -45,13 +47,19 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val (id, name, address, card_color_code) = rtododatalist[position]
+        val (id, name, address, card_color_code,mobile,email) = rtododatalist[position]
         holder.rtc_name.text = name
         holder.rtc_address.text = address
         holder.rt_id.text = id
         holder.rtcodo_containercard.setCardBackgroundColor(Color.parseColor(card_color_code))
         holder.rtcodo_container.setOnClickListener {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rt_id.text.toString())) {
+
+                val i = Intent(mContext, TodoEditCustomer::class.java)
+                i.putExtra("id", holder.rt_id.text.toString().trim { it <= ' ' })
+                i.putExtra("cardcolor", card_color_code)
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                mContext.startActivity(i)
             }
         }
     }

@@ -75,5 +75,9 @@
     <color name="chart_color9">#FF80AB</color>
     <color name="chart_color10">#004D40</color>
     <color name="chart_color11">#B388FF</color>
+    <color name="todo_yellow">#D8AB1E</color>
+    <color name="todo_red">#BB2B20</color>
+    <color name="todo_green1">#3A921A</color>
+    <color name="todo_green2">#26600B</color>
 
 </resources>
