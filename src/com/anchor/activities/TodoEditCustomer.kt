@@ -1,25 +1,31 @@
 package com.anchor.activities
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.view.Window
+import android.widget.*
+import com.anchor.adapter.Todo_list_adaptor
+import com.anchor.model.Todo_model
 import com.anchor.webservice.ConnectionDetector
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
+import kotlinx.android.synthetic.main.activity_todo_list.*
+import kotlinx.android.synthetic.main.custom_dialog_todolist.*
 import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
 import java.util.ArrayList
 
 
 class TodoEditCustomer : Activity() {
-
+    var list: ArrayList<Todo_model>? = null
+    var adaptor: Todo_list_adaptor? = null
     var id = "";
     var coardcolor = "";
     var cd: ConnectionDetector? = null
@@ -34,6 +40,10 @@ class TodoEditCustomer : Activity() {
 
         context = RetailerTDCustomerList@this
         cd = ConnectionDetector(context)
+
+        list = ArrayList<Todo_model>()
+
+
 
         try {
             id = intent.getStringExtra("id")
@@ -102,6 +112,8 @@ class TodoEditCustomer : Activity() {
             else
             if(coardcolor.equals("#26600B"))
             {
+
+
                 todoe_shop_name.setBackgroundResource(R.drawable.todarkgreen)
                 todoe_mobile.setBackgroundResource(R.drawable.todarkgreen)
                 todoe_gst.setBackgroundResource(R.drawable.todarkgreen)
@@ -122,6 +134,38 @@ class TodoEditCustomer : Activity() {
         }catch (e:Exception)
         {
             e.printStackTrace()
+        }
+
+        locationimg.setOnClickListener {
+            val dialog = Dialog(this@TodoEditCustomer)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.custom_dialog_todolist)
+            dialog.show()
+
+            val yesBtn = dialog.findViewById(R.id.buttonnoOrderSave) as Button
+            val noBtn = dialog.findViewById(R.id.buttonnoOrdercancel) as Button
+            var rv=dialog.findViewById(R.id.rv) as RecyclerView
+            rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+
+
+            list!!.add(Todo_model("Abc,67786677"))
+            list!!.add(Todo_model("Abc,67786677"))
+            list!!.add(Todo_model("Abc,67786677"))
+            list!!.add(Todo_model("Abc,67786677"))
+            list!!.add(Todo_model("Abc,67786677"))
+            list!!.add(Todo_model("Abc,67786677"))
+            list!!.add(Todo_model("Abc,67786677"))
+
+            adaptor = Todo_list_adaptor(this, list!!)
+            rv.adapter = adaptor
+            noBtn.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            yesBtn.setOnClickListener {
+                Toast.makeText(this@TodoEditCustomer,"submit",Toast.LENGTH_SHORT).show()
+            }
         }
 
 

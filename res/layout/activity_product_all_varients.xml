@@ -10,18 +10,19 @@
     <AutoCompleteTextView
         android:id="@+id/newProduct_varient"
         android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:inputType="textMultiLine"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="4dp"
         android:completionThreshold="1"
-        android:imeOptions="actionDone"
-        android:ems="10"
-        android:singleLine="true"
-        android:textSize="15dp"
         android:drawableRight="@drawable/search_icon"
-        android:hint="@string/Search_Variants" >
+        android:ems="10"
+        android:hint="@string/Search_Variants"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
+        android:singleLine="true"
+        android:textSize="15dp">
+
         <requestFocus />
     </AutoCompleteTextView>
 
