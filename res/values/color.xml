@@ -79,5 +79,9 @@
     <color name="todo_red">#BB2B20</color>
     <color name="todo_green1">#3A921A</color>
     <color name="todo_green2">#26600B</color>
+    <color name="retailer_light_brown">#F4F4F4</color>
+    <color name="retailer_dark_brown">#C8C8C8</color>
+    <color name="retailer_light_green">#FF73AACC</color>
+
 
 </resources>

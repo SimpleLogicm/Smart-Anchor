@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TodoEditCustomer">
+    tools:context=".TODOAddRetailer">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,99 +11,167 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/todoe_shop_name_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Shop Name"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
+
         <EditText
             android:id="@+id/todoe_shop_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/todo_back"
-            android:hint="Shop Name"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
 
         </EditText>
+
+        <TextView
+            android:id="@+id/todoe_mobile_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Mobile"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
 
         <EditText
             android:id="@+id/todoe_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back"
-            android:hint="Mobile Number"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
 
         </EditText>
+
+        <TextView
+            android:id="@+id/todoe_gst_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="GST"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
 
         <EditText
             android:id="@+id/todoe_gst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back"
-            android:hint="GST No"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
             android:padding="5dp"
             android:paddingLeft="10dp"
-
             android:textColor="@color/black">
 
         </EditText>
 
+        <TextView
+            android:id="@+id/todoe_aadhar_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Aadhar"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
         <EditText
             android:id="@+id/todoe_aadhar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back"
-            android:hint="Aadhar No"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
 
         </EditText>
+
+        <TextView
+            android:id="@+id/todoe_pan_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Pan Card"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
 
         <EditText
             android:id="@+id/todoe_pan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back"
-            android:hint="Pan No"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
 
         </EditText>
 
-
+        <TextView
+            android:id="@+id/todoe_state_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="State"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
         <Spinner
             android:id="@+id/todoe_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
-            android:background="@drawable/spinner_background_yellow"
-            android:layout_marginTop="10dp">
+            android:background="@drawable/add_retailer_spinner"
+            >
 
         </Spinner>
 
 
+        <TextView
+            android:id="@+id/todoe_city_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="State"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
         <Spinner
             android:id="@+id/todoe_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/spinner_background_yellow"
+            android:background="@drawable/add_retailer_spinner"
             android:paddingRight="10dp">
 
         </Spinner>
+
+        <TextView
+            android:id="@+id/todoe_address_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Pan Card"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
 
         <EditText
             android:id="@+id/todoe_address"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back"
+            android:background="@drawable/add_retailer_edittext"
             android:gravity="left"
             android:hint="@string/Addressn"
             android:padding="5dp"
@@ -111,13 +179,22 @@
 
         </EditText>
 
+        <TextView
+            android:id="@+id/todoe_geocordinates_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Geo Cordinates"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
         <EditText
             android:id="@+id/todoe_geocordinates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back_for_editablefalse_yellow"
-            android:hint="GEO Cordinates"
+            android:backgroundTint="@color/retailer_dark_brown"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -129,6 +206,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:background="@drawable/todo_back_for_editablefalse_yellow"
             android:hint="TSI Code"
             android:padding="5dp"
@@ -147,9 +225,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/todo_back"
+                android:background="@drawable/add_retailer_llayout"
                 android:orientation="vertical"
                 android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/todoe_powerdealer_h"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:text="Power Dealer"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/retailer_light_green" />
 
                 <Spinner
                     android:id="@+id/todoe_powerdealer"
@@ -157,21 +245,41 @@
                     android:layout_height="wrap_content"
                     android:paddingRight="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/spinner_background_yellow"
-                    android:layout_marginTop="15dp">
+                    android:background="@drawable/add_retailer_spinner"
+                   >
 
                 </Spinner>
 
+                <TextView
+                    android:id="@+id/todoe_iaqdealer_h"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    android:text="IAQ Dealer"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/retailer_light_green" />
                 <Spinner
                     android:id="@+id/todoe_iaqdealer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="10dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/spinner_background_yellow"
-                    android:layout_marginTop="10dp">
+                    android:background="@drawable/add_retailer_spinner"
+                    >
 
                 </Spinner>
+
+
+                <TextView
+                    android:id="@+id/todoe_lightingdealer_h"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    android:text="Lighting Dealer"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/retailer_light_green" />
 
                 <Spinner
                     android:id="@+id/todoe_lightingdealer"
@@ -180,8 +288,8 @@
                     android:paddingRight="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/spinner_background_yellow"
-                    android:layout_marginTop="10dp">
+                    android:background="@drawable/add_retailer_spinner"
+                   >
 
                 </Spinner>
             </LinearLayout>
@@ -192,6 +300,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="15dp"
                 android:background="#ffffff"
+                android:textColor="@color/retailer_light_green"
                 android:text=" Dealer "
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -236,16 +345,7 @@
                 android:text="@string/Submit"
                 android:textColor="#FFFFFF" />
 
-            <ImageView
-                android:id="@+id/merge_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:visibility="gone"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/merge">
 
-            </ImageView>
         </LinearLayout>
 
 

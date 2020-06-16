@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
 import java.util.ArrayList
 
 
-class TodoEditCustomer : Activity() {
+class TODOAddRetailer : Activity() {
     var list: ArrayList<Todo_model>? = null
     var adaptor: Todo_list_adaptor? = null
     var id = "";
@@ -45,7 +45,7 @@ class TodoEditCustomer : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_todo_editcustomer)
+        setContentView(R.layout.todoadd_retailer)
 
         context = RetailerTDCustomerList@this
         cd = ConnectionDetector(context)
@@ -57,135 +57,14 @@ class TodoEditCustomer : Activity() {
         try {
             id = intent.getStringExtra("id")
             coardcolor = intent.getStringExtra("cardcolor")
-            if(coardcolor.equals("#D8AB1E"))
-            {
-                todoe_shop_name.setBackgroundResource(R.drawable.todo_back)
-                todoe_mobile.setBackgroundResource(R.drawable.todo_back)
-                todoe_gst.setBackgroundResource(R.drawable.todo_back)
-                todoe_aadhar.setBackgroundResource(R.drawable.todo_back)
-                todoe_pan.setBackgroundResource(R.drawable.todo_back)
-                todoe_dealer_container.setBackgroundResource(R.drawable.todo_back)
-                todoe_address.setBackgroundResource(R.drawable.todo_back)
 
-                todoe_state.setBackgroundResource(R.drawable.spinner_background_yellow)
-                todoe_city.setBackgroundResource(R.drawable.spinner_background_yellow)
-                todoe_powerdealer.setBackgroundResource(R.drawable.spinner_background_yellow)
-                todoe_iaqdealer.setBackgroundResource(R.drawable.spinner_background_yellow)
-                todoe_lightingdealer.setBackgroundResource(R.drawable.spinner_background_yellow)
-
-                todoe_geocordinates.setBackgroundResource(R.drawable.todo_back_for_editablefalse_yellow)
-                todoe_tsi_code.setBackgroundResource(R.drawable.todo_back_for_editablefalse_yellow)
-            }
-            else
-            if(coardcolor.equals("#BB2B20"))
-            {
-                todoe_shop_name.setBackgroundResource(R.drawable.todored)
-                todoe_mobile.setBackgroundResource(R.drawable.todored)
-                todoe_gst.setBackgroundResource(R.drawable.todored)
-                todoe_aadhar.setBackgroundResource(R.drawable.todored)
-                todoe_pan.setBackgroundResource(R.drawable.todored)
-                todoe_dealer_container.setBackgroundResource(R.drawable.todored)
-                todoe_address.setBackgroundResource(R.drawable.todored)
-
-                todoe_state.setBackgroundResource(R.drawable.spinner_background_red)
-                todoe_city.setBackgroundResource(R.drawable.spinner_background_red)
-                todoe_powerdealer.setBackgroundResource(R.drawable.spinner_background_red)
-                todoe_iaqdealer.setBackgroundResource(R.drawable.spinner_background_red)
-                todoe_lightingdealer.setBackgroundResource(R.drawable.spinner_background_red)
-
-                todoe_geocordinates.setBackgroundResource(R.drawable.todo_back_for_editablefalse_red)
-                todoe_tsi_code.setBackgroundResource(R.drawable.todo_back_for_editablefalse_red)
-
-
-            }
-            else
-            if(coardcolor.equals("#3A921A"))
-            {
-                todoe_shop_name.setBackgroundResource(R.drawable.todogreen)
-                todoe_mobile.setBackgroundResource(R.drawable.todogreen)
-                todoe_gst.setBackgroundResource(R.drawable.todogreen)
-                todoe_aadhar.setBackgroundResource(R.drawable.todogreen)
-                todoe_pan.setBackgroundResource(R.drawable.todogreen)
-                todoe_dealer_container.setBackgroundResource(R.drawable.todogreen)
-                todoe_address.setBackgroundResource(R.drawable.todogreen)
-
-                todoe_state.setBackgroundResource(R.drawable.spinner_background_green)
-                todoe_city.setBackgroundResource(R.drawable.spinner_background_green)
-                todoe_powerdealer.setBackgroundResource(R.drawable.spinner_background_green)
-                todoe_iaqdealer.setBackgroundResource(R.drawable.spinner_background_green)
-                todoe_lightingdealer.setBackgroundResource(R.drawable.spinner_background_green)
-
-                todoe_geocordinates.setBackgroundResource(R.drawable.todo_back_for_editablefalse_green)
-                todoe_tsi_code.setBackgroundResource(R.drawable.todo_back_for_editablefalse_green)
-            }
-            else
-            if(coardcolor.equals("#26600B"))
-            {
-
-
-                todoe_shop_name.setBackgroundResource(R.drawable.todarkgreen)
-                todoe_mobile.setBackgroundResource(R.drawable.todarkgreen)
-                todoe_gst.setBackgroundResource(R.drawable.todarkgreen)
-                todoe_aadhar.setBackgroundResource(R.drawable.todarkgreen)
-                todoe_pan.setBackgroundResource(R.drawable.todarkgreen)
-                todoe_dealer_container.setBackgroundResource(R.drawable.todarkgreen)
-                todoe_address.setBackgroundResource(R.drawable.todarkgreen)
-
-                todoe_state.setBackgroundResource(R.drawable.spinner_background_darkgreen)
-                todoe_city.setBackgroundResource(R.drawable.spinner_background_darkgreen)
-                todoe_powerdealer.setBackgroundResource(R.drawable.spinner_background_darkgreen)
-                todoe_iaqdealer.setBackgroundResource(R.drawable.spinner_background_darkgreen)
-                todoe_lightingdealer.setBackgroundResource(R.drawable.spinner_background_darkgreen)
-
-                todoe_geocordinates.setBackgroundResource(R.drawable.todo_back_for_editablefalse_darkgreen)
-                todoe_tsi_code.setBackgroundResource(R.drawable.todo_back_for_editablefalse_darkgreen)
-            }
         }catch (e:Exception)
         {
             e.printStackTrace()
         }
 
         locationimg.setOnClickListener {
-            val dialog = Dialog(this@TodoEditCustomer)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(false)
-            dialog.setContentView(R.layout.custom_dialog_todolist)
-            dialog.show()
 
-            val yesBtn = dialog.findViewById(R.id.buttonnoOrderSave) as Button
-            val noBtn = dialog.findViewById(R.id.buttonnoOrdercancel) as Button
-            var rv=dialog.findViewById(R.id.rv) as RecyclerView
-            rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-
-
-            list!!.add(Todo_model("Abc fksdjfksjdfksh kjhsfhkshfsdfffdffsf,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc dsdsgdsgdsgsg,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-
-            adaptor = Todo_list_adaptor(this, list!!)
-            rv.adapter = adaptor
-            noBtn.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            yesBtn.setOnClickListener {
-                Toast.makeText(this@TodoEditCustomer,"submit",Toast.LENGTH_SHORT).show()
-            }
         }
 
 
@@ -323,7 +202,7 @@ class TodoEditCustomer : Activity() {
             val mCustomView = mInflater.inflate(R.layout.action_bar, null)
             mCustomView.setBackground(ColorDrawable(Color.parseColor("#910505")))
             val mTitleTextView = mCustomView.findViewById<TextView>(R.id.screenname)
-            mTitleTextView.text = "TO DO List"
+            mTitleTextView.text = "Add Retailer"
             val todaysTarget = mCustomView.findViewById<TextView>(R.id.todaysTarget)
             val sp = getSharedPreferences("SimpleLogic", 0)
 

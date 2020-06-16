@@ -35,6 +35,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -135,6 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String click_flag = "";
     String service_call_flag = "";
     AutoCompleteTextView map_sub_dealer_search;
+    ImageView add_retailer_icon;
 
     private HashMap<Integer, Marker> markerMap = new HashMap<Integer, Marker>();
 
@@ -151,6 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         marker_rview = findViewById(R.id.marker_rview);
         map_sub_dealer_search = findViewById(R.id.map_sub_dealer_search);
+        add_retailer_icon = findViewById(R.id.add_retailer_icon);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, SubDealer_List);
@@ -174,6 +177,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         marker_rview.setLayoutManager(llm);
 
         marker_rview.addOnScrollListener(onScrollListener);
+
+
+        add_retailer_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(MapsActivity.this, TODOAddRetailer.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         // map_add_toast_flag = "";
@@ -294,7 +308,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         marker_rview.setVisibility(View.VISIBLE);
                         marker_rview.getLayoutManager().scrollToPosition(i);
 
-                        Log.d("C IN","C in"+Allresultsearch.size());
+                        Log.d("C IN", "C in" + Allresultsearch.size());
 
                         new GetReportedUserData_Offline().execute();
                         break;
@@ -389,9 +403,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onInfoWindowClick(final Marker marker) {
 
-      final  InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+        final InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
 
-      if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile())) {
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(infoWindowData.getCmobile())) {
             requestPHONEPermission(infoWindowData.getCmobile());
         }
     }
@@ -1214,15 +1228,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                                     .title("Name : " + name.get(a))
                                                     .snippet("Address : " + address.get(a))
                                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             markerOptions.position(latLng)
                                                     .title("Name : " + name.get(a))
                                                     .snippet("Address : " + address.get(a))
                                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                                         }
-
 
 
                                         // InfoWindowData info = new InfoWindowData();
@@ -1237,7 +1248,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         m = mMap.addMarker(markerOptions);
                                         m.setTag(code.get(a));
                                         Global_Data.mMarkers.add(m);
-
 
 
                                         //  m.showInfoWindow();
@@ -1395,7 +1405,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         locations.add(new LatLng(Double.valueOf(Allresultsearch.get(i).lati), Double.valueOf(Allresultsearch.get(i).longi)));
 
                         address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).address));
-                       // name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).name));
+                        // name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).name));
                         name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).shop_name));
                         distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).distance));
                         gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).gst_no));
@@ -1456,9 +1466,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             .title("Name : " + name.get(a))
                                             .snippet("Address : " + address.get(a))
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                                }
-                                else
-                                {
+                                } else {
                                     markerOptions.position(latLng)
                                             .title("Name : " + name.get(a))
                                             .snippet("Address : " + address.get(a))
@@ -1475,14 +1483,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 //CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
                                 //  mMap.setInfoWindowAdapter(customInfoWindow);
 
-                                try
-                                {
+                                try {
                                     Marker marker = markerMap.get(0);
                                     marker.remove();
                                     markerMap.remove(0);
 
-                                }catch (Exception ex)
-                                {
+                                } catch (Exception ex) {
                                     ex.printStackTrace();
                                 }
 
@@ -1506,11 +1512,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                                }
 
 
-
                                 m = mMap.addMarker(markerOptions);
                                 m.setTag(code.get(a));
                                 Global_Data.mMarkers.add(m);
-
 
 
                                 //  m.showInfoWindow();

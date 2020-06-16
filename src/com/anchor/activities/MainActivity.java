@@ -476,7 +476,7 @@ public class MainActivity extends BaseActivity {
                             //Toast.makeText(getApplicationContext(), "not blank ", Toast.LENGTH_LONG).show();
 
                             //getServices.View_NearestCustomer(MainActivity.this,Global_Data.GLOvel_ADDRESS,Global_Data.GLOvel_LATITUDE,Global_Data.GLOvel_LONGITUDE);
-                            Intent a = new Intent(MainActivity.this, RetailerTDList.class);
+                            Intent a = new Intent(MainActivity.this, Nearest_Customer.class);
                             startActivity(a);
                             finish();
                         }

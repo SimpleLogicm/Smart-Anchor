@@ -50,12 +50,14 @@
 
             <ImageView
                 android:id="@+id/rtc_mobile"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="right"
-                android:layout_margin="5dp"
-                android:layout_marginRight="0dp"
-                android:src="@drawable/callnew"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/todocall"
 
                 />
 

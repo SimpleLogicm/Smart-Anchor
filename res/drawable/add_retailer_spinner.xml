@@ -6,19 +6,19 @@
             <gradient
                 android:angle="45"
                 android:centerX="35%"
-                android:centerColor="@color/white"
-                android:startColor="@color/white"
-                android:endColor="@color/white"
+                android:centerColor="@color/retailer_light_brown"
+                android:startColor="@color/retailer_light_brown"
+                android:endColor="@color/retailer_light_brown"
                 android:type="linear"
                 />
 
-            <stroke android:width="1dp" android:color="@color/todo_green2" />
+            <stroke android:width="1dp" android:color="@color/retailer_dark_brown" />
 
-            <corners android:radius="2dp" />
+            <corners android:radius="6dp" />
 
             <size
                 android:width="270dp"
-                android:height="40dp"
+                android:height="30dp"
                 />
 
             <padding android:bottom="0dp" android:left="0dp" android:right="10dp" android:top="0dp" />
