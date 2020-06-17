@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/todo_back"
-            android:hint="Mobile Number"
+            android:hint="Mobile No"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/todo_back_for_editablefalse_yellow"
-            android:hint="GEO Cordinates"
+            android:hint="Geo Coordinates"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">

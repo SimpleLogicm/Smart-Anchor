@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".TODOAddRetailer">
 
+
     <LinearLayout
+        android:id="@+id/add_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
@@ -21,7 +23,7 @@
             android:textColor="@color/retailer_light_green" />
 
         <EditText
-            android:id="@+id/todoe_shop_name"
+            android:id="@+id/todoe_shop_namea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
@@ -43,11 +45,13 @@
             android:textColor="@color/retailer_light_green" />
 
         <EditText
-            android:id="@+id/todoe_mobile"
+            android:id="@+id/todoe_mobilea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
             android:hint=""
+            android:inputType="number"
+            android:maxLength="10"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -65,7 +69,7 @@
             android:textColor="@color/retailer_light_green" />
 
         <EditText
-            android:id="@+id/todoe_gst"
+            android:id="@+id/todoe_gsta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
@@ -86,7 +90,7 @@
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <EditText
-            android:id="@+id/todoe_aadhar"
+            android:id="@+id/todoe_aadhara"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
@@ -108,7 +112,7 @@
             android:textColor="@color/retailer_light_green" />
 
         <EditText
-            android:id="@+id/todoe_pan"
+            android:id="@+id/todoe_pana"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
@@ -145,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="State"
+            android:text="City"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <Spinner
@@ -163,7 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Pan Card"
+            android:text="@string/Addressn"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
 
@@ -173,7 +177,7 @@
             android:layout_height="90dp"
             android:background="@drawable/add_retailer_edittext"
             android:gravity="left"
-            android:hint="@string/Addressn"
+            android:hint=""
             android:padding="5dp"
             android:textColor="@color/black">
 
@@ -185,16 +189,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Geo Cordinates"
+            android:text="Geo Coordinates"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <EditText
-            android:id="@+id/todoe_geocordinates"
+            android:id="@+id/todoe_geocordinatesa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/retailer_dark_brown"
             android:background="@drawable/add_retailer_edittext"
             android:hint=""
+            android:enabled="false"
+            android:clickable="true"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -306,7 +312,7 @@
         </RelativeLayout>
 
         <ImageView
-            android:id="@+id/locationimg"
+            android:id="@+id/locationimgadd"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
@@ -314,8 +320,18 @@
 
         </ImageView>
 
+        <ProgressBar
+            android:id="@+id/piechart_rank_progressBarar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="1500dp"
+            android:layout_height="1500dp"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="gone"></ProgressBar>
+
 
         <LinearLayout
+            android:id="@+id/aad_bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -323,8 +339,9 @@
             android:orientation="horizontal"
             android:paddingTop="5dp">
 
+
             <Button
-                android:id="@+id/buttonnoOrdercancel"
+                android:id="@+id/buttonnoadd_cancel"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -335,7 +352,7 @@
 
             <Button
 
-                android:id="@+id/buttonnoOrderSave"
+                android:id="@+id/buttonnoaddr_save"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
