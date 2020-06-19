@@ -30,7 +30,6 @@
         android:layout_centerHorizontal="true"
         android:imeOptions="actionDone"
         android:ems="10"
-        android:textColor="?attr/spinBars"
         android:singleLine="true"
         android:textSize="15dp"
         android:layout_below="@+id/txtWelcomeUser"

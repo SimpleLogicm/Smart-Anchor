@@ -22,7 +22,8 @@ import com.anchor.webservice.ConnectionDetector;
 //how to give voice for icon when swipe in android
 public class Sales_Dash extends Activity implements OnItemSelectedListener{ 
 	//Button retail_sales, institute_sales;
-	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn,sub_delaer_order,pro_activity_click,C_todo_list;
+	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn,sub_delaer_order,pro_activity_click;
+	//ImageView C_todo_list;
 	ConnectionDetector cd;
 	Boolean isInternetPresent = false;
 	TextView schedule_txt,textView1sf;
@@ -47,7 +48,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		otherInfoBtn = findViewById(R.id.otherinfo_btn);
 		sub_delaer_order = findViewById(R.id.sub_delaer_order);
 		pro_activity_click = findViewById(R.id.pro_activity_click);
-		C_todo_list = findViewById(R.id.C_todo_list);
+		//C_todo_list = findViewById(R.id.C_todo_list);
 
 		txtWelcomeUser= findViewById(R.id.txtWelcomeUser);
 		cd = new ConnectionDetector(getApplicationContext());
@@ -114,14 +115,14 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			}
 		});
 
-		C_todo_list.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getApplicationContext(), RetailerTDList.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-			}
-		});
+//		C_todo_list.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(getApplicationContext(), RetailerTDList.class);
+//				startActivity(intent);
+//				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//			}
+//		});
 	
     institute_sales.setOnClickListener(new OnClickListener() {
 		@Override
