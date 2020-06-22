@@ -2,6 +2,7 @@ package com.anchor.activities
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -23,6 +24,7 @@ import android.widget.Toast
 import com.anchor.adapter.Todo_list_adaptor
 import com.anchor.helper.VerhoeffAlgorithm
 import com.anchor.model.Todo_model
+import com.anchor.service.LocationServices
 import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
@@ -444,7 +446,7 @@ class TODOAddRetailer : Activity() {
                 toast.show()
             }
             else
-            if (todoe_state!!.selectedItem.toString().equals("Select City"))
+            if (todoe_city!!.selectedItem.toString().equals("Select City"))
             {
                 val toast = Toast.makeText(context,
                         "Please Select City.", Toast.LENGTH_SHORT)
@@ -544,7 +546,7 @@ class TODOAddRetailer : Activity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+       // super.onBackPressed()
         var alert_dialog_flag = ""
 
         if (!todoe_shop_namea!!.text.toString().trim().equals(""))
@@ -567,7 +569,7 @@ class TODOAddRetailer : Activity() {
         alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_state!!.selectedItem.toString().equals("Select City"))
+        if (!todoe_city!!.selectedItem.toString().equals("Select City"))
         {
         alert_dialog_flag = "yes";
         }
@@ -584,20 +586,18 @@ class TODOAddRetailer : Activity() {
 
         if(alert_dialog_flag.equals("yes"))
         {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Warning")
-            builder.setMessage("Your enter data will be Lost")
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-            builder.setPositiveButton("Yes"){dialogInterface, which ->
+            val alertDialog = AlertDialog.Builder(context).create() //Read Update
+
+            alertDialog.setTitle("Confirmation")
+            alertDialog.setMessage(" Are you sure you want to Cancel?")
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
                 finish()
             }
 
-            builder.setNeutralButton("Cancel"){dialogInterface , which ->
-                dialogInterface.dismiss()
+            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
+                dialog.cancel()
             }
 
-            val alertDialog: AlertDialog = builder.create()
-            // Set other dialog properties
             alertDialog.setCancelable(false)
             alertDialog.show()
         }
@@ -683,7 +683,7 @@ class TODOAddRetailer : Activity() {
                 val product_value_n = JSONObject()
                 val retailer_object = JSONObject()
 
-                product_value_n.put("email", user_email)
+                //product_value_n.put("email", user_email)
                 product_value_n.put("state_code", state_id)
                 product_value_n.put("city_code", city_id)
                 product_value_n.put("power_dealer", dpower_id)
@@ -697,8 +697,8 @@ class TODOAddRetailer : Activity() {
                 product_value_n.put("address", todoe_address.text.toString())
                 product_value_n.put("latitude", latitude)
                 product_value_n.put("longitude", longitude)
-
                 retailer_object.put("retailer",product_value_n)
+                retailer_object.put("email",user_email)
 
 
                 Log.d("Retailer save Service", retailer_object.toString())

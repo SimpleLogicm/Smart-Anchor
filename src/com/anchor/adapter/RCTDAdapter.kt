@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.anchor.activities.R
 import com.anchor.activities.RetailerTDCustomerList
 import com.anchor.activities.TodoEditCustomer
@@ -26,7 +27,9 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
         var rtc_name: TextView
         var rtc_address: TextView
         var rt_id: TextView
-        var rtc_mobile:ImageView
+        var rtc_mobile_hidden: TextView
+        var rtc_email_hidden: TextView
+        var rtc_mobile: ImageView
         var rtcodo_container: RelativeLayout
         var rtcodo_containercard: CardView
 
@@ -35,6 +38,8 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
             rtc_address = view.findViewById(R.id.rtc_address)
             rtc_mobile = view.findViewById(R.id.rtc_mobile)
             rt_id = view.findViewById(R.id.rt_id)
+            rtc_mobile_hidden = view.findViewById(R.id.rtc_mobile_hidden)
+            rtc_email_hidden = view.findViewById(R.id.rtc_email_hidden)
             rtcodo_container = view.findViewById(R.id.rtcodo_container)
             rtcodo_containercard = view.findViewById(R.id.rtcodo_containercard)
         }
@@ -47,10 +52,12 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val (id, name, address, card_color_code,mobile,email) = rtododatalist[position]
+        val (id, name, address, card_color_code, mobile, email) = rtododatalist[position]
         holder.rtc_name.text = name
         holder.rtc_address.text = address
         holder.rt_id.text = id
+        holder.rtc_mobile_hidden.text = mobile
+        holder.rtc_email_hidden.text = email
         holder.rtcodo_containercard.setCardBackgroundColor(Color.parseColor(card_color_code))
         holder.rtcodo_container.setOnClickListener {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rt_id.text.toString())) {
@@ -61,6 +68,22 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 mContext.startActivity(i)
             }
+        }
+
+        holder.rtcodo_container.setOnClickListener {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rtc_mobile_hidden.text.toString())) {
+
+                try {
+                    (mContext as RetailerTDCustomerList).CaalF(holder.rtc_mobile_hidden.text.toString())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+
+            } else {
+                Toast.makeText(mContext, "Contact No Not Found.", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 

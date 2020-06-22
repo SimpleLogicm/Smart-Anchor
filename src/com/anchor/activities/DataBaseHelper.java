@@ -2426,6 +2426,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting All Local_Data
+    public List<Local_Data> getAllCityOrderbyname() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT code,name FROM " + TABLE_CITIES + " GROUP BY name ORDER BY name";;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
+                    contact.setName(cursor.getString(1));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
     public List<Local_Data> getAllCity_CODE() {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query

@@ -62,6 +62,22 @@
                 />
 
             <TextView
+                android:id="@+id/rtc_mobile_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_marginRight="0dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/rtc_email_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_marginRight="0dp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/rt_id"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
