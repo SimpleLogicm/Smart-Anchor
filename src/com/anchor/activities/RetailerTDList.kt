@@ -18,8 +18,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.TextView
 import android.widget.Toast
 import com.anchor.adapter.RTODOList_Adapter
@@ -28,7 +26,6 @@ import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.android.gms.maps.model.LatLng
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -38,7 +35,6 @@ import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.retailertdlist.*
 import org.json.JSONException
 import org.json.JSONObject
-import java.lang.Double
 import java.util.*
 
 class RetailerTDList : Activity() {
@@ -49,7 +45,7 @@ class RetailerTDList : Activity() {
     var mLayoutManager: RecyclerView.LayoutManager? = null
     var ca: RTODOList_Adapter? = null
     var Allresult: MutableList<RTODODATA> = ArrayList<RTODODATA>()
-    var context:Context? = null
+    var context: Context? = null
     var final_response = ""
     var response_result = ""
 
@@ -58,7 +54,7 @@ class RetailerTDList : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.retailertdlist)
 
-        context = RetailerTDList@this
+        context = RetailerTDList@ this
         cd = ConnectionDetector(context)
 
 
@@ -117,8 +113,7 @@ class RetailerTDList : Activity() {
         isInternetPresent = cd!!.isConnectingToInternet
         if (isInternetPresent) {
             getTODOListData()
-        }
-        else {
+        } else {
 
             val toast = Toast.makeText(context,
                     "Internet Not Available. ", Toast.LENGTH_SHORT)
@@ -128,7 +123,6 @@ class RetailerTDList : Activity() {
         }
 
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -143,7 +137,7 @@ class RetailerTDList : Activity() {
 
     override fun onBackPressed() {
 
-        val i = Intent(this@RetailerTDList, MainActivity::class.java)
+        val i = Intent(this@RetailerTDList, Sales_Dash::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(i)
         finish()
@@ -200,11 +194,24 @@ class RetailerTDList : Activity() {
     }
 
     fun getTODOListData() {
+        todolist_progress.visibility = View.VISIBLE
         val domain = resources.getString(R.string.service_domain)
-        // val url = domain + "users/get_battery_status_of_users?email=athul.nambiar@simplelogic.in" + "&type=reporting"
-        val url = domain + "users/get_battery_status_of_users?email="+Global_Data.GLOvel_USER_EMAIL+"&type=reporting"
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
+        val url = domain + "retailers/to_do_list_count?email=" + user_email
         Log.i("volley", "URL: $url")
-        Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL)
+        Log.i("volley", "email: " + user_email)
 
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -251,8 +258,8 @@ class RetailerTDList : Activity() {
         requestQueue.add(jsObjRequest)
     }
 
-     inner class GetTODOResponseData : AsyncTask<String?, Void?, String>() {
-         override fun doInBackground(vararg p0: String?): String? {
+    inner class GetTODOResponseData : AsyncTask<String?, Void?, String>() {
+        override fun doInBackground(vararg p0: String?): String? {
             try {
                 val response = JSONObject(final_response)
                 if (response.has("message")) {
@@ -265,48 +272,33 @@ class RetailerTDList : Activity() {
                         finish()
                     }.toString()
 
-                } else { //dbvoc.getDeleteTable("delivery_products");
-                    val users = response.getJSONArray("records")
-                    Log.i("volley", "response users Length: " + users.length())
-                    Log.d("volley", "users$users")
-                    //
-                    if (users.length() <= 0) {
+                } else {
+
+                    Allresult.clear()
+
+                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20"))
+                    Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E"))
+                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PRESENT MAPPING : INCOMPLETE", "#28720D", "#3A921A"))
+                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PRESENT MAPPING : COMPLETE", "#1C4908", "#26600B"))
+
+                    runOnUiThread {
+
+                        todolist_progress.visibility = View.GONE
+
                         runOnUiThread {
+
                             todolist_progress.visibility = View.GONE
-                            val toast = Toast.makeText(context, "Record doesn't exist", Toast.LENGTH_LONG)
-                            toast.setGravity(Gravity.CENTER, 0, 0)
-                            toast.show()
-                            finish()
+                            ca = RTODOList_Adapter(context, Allresult);
+                            rtolist.setAdapter(ca);
+                            ca!!.notifyDataSetChanged();
+
+
                         }
-                    } else {
-                        Allresult.clear()
-                        for (i in 0 until users.length()) {
-                            var user_cirname = ""
-                           val jsonObject = users.getJSONObject(i)
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("latitude")) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("longitude"))) {
 
-                               // batteryModellist!!.add(BatteryModel(user_cirname, "address", jsonObject!!.getString("last_synce"), battery_text, jsonObject!!.getString("email"), jsonObject!!.getString("user_name")));
-
-
-
-                                Allresult.add(RTODODATA("4", "4", "PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE","#831A14","#BB2B20"))
-                                Allresult.add(RTODODATA("2", "2", "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE","#BF9003","#D8AB1E"))
-                                Allresult.add(RTODODATA("5", "5", "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PRESENT MAPPING : INCOMPLETE","#28720D","#3A921A"))
-                                Allresult.add(RTODODATA("3", "3", "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PRESENT MAPPING : COMPLETE","#1C4908","#26600B"))
-                            }
-                            runOnUiThread {
-
-                                todolist_progress.visibility = View.GONE
-                                ca = RTODOList_Adapter(context, Allresult);
-                                rtolist.setAdapter(ca);
-                                ca!!.notifyDataSetChanged();
-
-
-                            }
-                        }
-                        runOnUiThread { todolist_progress.visibility = View.GONE }.toString()
 
                     }
+
+
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()

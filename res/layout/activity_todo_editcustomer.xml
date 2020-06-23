@@ -6,6 +6,7 @@
     tools:context=".TodoEditCustomer">
 
     <LinearLayout
+        android:id="@+id/add_containerredit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
@@ -30,6 +31,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/todo_back"
             android:hint="Mobile No"
+            android:inputType="number"
+            android:maxLength="10"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -87,6 +90,15 @@
 
         </Spinner>
 
+        <ProgressBar
+            android:id="@+id/citys_loaderedit"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="gone"></ProgressBar>
+
 
         <Spinner
             android:id="@+id/todoe_city"
@@ -118,6 +130,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/todo_back_for_editablefalse_yellow"
             android:hint="Geo Coordinates"
+            android:enabled="false"
+            android:clickable="false"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -131,6 +145,8 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/todo_back_for_editablefalse_yellow"
             android:hint="TSI Code"
+            android:enabled="false"
+            android:clickable="false"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">
@@ -205,8 +221,18 @@
 
         </ImageView>
 
+        <ProgressBar
+            android:id="@+id/piechart_rank_progressBararredit"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress"
+            android:visibility="gone"></ProgressBar>
+
 
         <LinearLayout
+            android:id="@+id/aad_bottom_layoutredit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -215,7 +241,7 @@
             android:paddingTop="5dp">
 
             <Button
-                android:id="@+id/buttonnoOrdercancel"
+                android:id="@+id/buttontodocecancel"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -226,7 +252,7 @@
 
             <Button
 
-                android:id="@+id/buttonnoOrderSave"
+                android:id="@+id/buttontodoceSave"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

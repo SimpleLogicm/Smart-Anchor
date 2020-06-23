@@ -726,6 +726,36 @@ class TODOAddRetailer : Activity() {
                             startActivity(a)
                             finish()
                         }
+                        else
+                        if (response_result.equals("Retailer Duplicate record found.", ignoreCase = true)) {
+
+                            piechart_rank_progressBarar.visibility = View.GONE
+                            aad_bottom_layout.visibility = View.VISIBLE
+                            add_container.isEnabled = true
+
+                            var retailer_code = response.getString("retailer_code")
+
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                            val alertDialog = AlertDialog.Builder(context).create() //Read Update
+
+                            alertDialog.setTitle("Confirmation")
+                            alertDialog.setMessage("If you want to merge, Please click on yes button Or if you want to delete, Please click on no button  ")
+                            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
+                                dialog.cancel()
+                                RetailerDuplicateData(retailer_code,"Yes")
+                            }
+
+                            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
+                                dialog.cancel()
+                                RetailerDuplicateData(retailer_code,"No")
+                            }
+
+                            alertDialog.setCancelable(false)
+                            alertDialog.show()
+                        }
                         else {
                             piechart_rank_progressBarar.visibility = View.GONE
                             aad_bottom_layout.visibility = View.VISIBLE
@@ -735,6 +765,128 @@ class TODOAddRetailer : Activity() {
                             toast.show()
 
                         }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        piechart_rank_progressBarar.visibility = View.GONE
+                        aad_bottom_layout.visibility = View.VISIBLE
+                        add_container.isEnabled = true
+                    }
+
+                }, Response.ErrorListener { error ->
+                    Log.i("volley", "error: $error")
+                    val toast = Toast.makeText(context, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
+                    }
+                    piechart_rank_progressBarar.visibility = View.GONE
+                    aad_bottom_layout.visibility = View.VISIBLE
+                    add_container.isEnabled = true
+                })
+                val requestQueue = Volley.newRequestQueue(context)
+                val socketTimeout = 2000000 //90 seconds - change to what you want
+                val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+                jsObjRequest.retryPolicy = policy
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false)
+                requestQueue.cache.clear()
+                requestQueue.add(jsObjRequest)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                piechart_rank_progressBarar.visibility = View.GONE
+                aad_bottom_layout.visibility = View.VISIBLE
+                add_container.isEnabled = true
+            }
+
+
+
+        } catch (e: java.lang.Exception) {
+            // TODO: handle exception
+            Log.e("DATA", e.message)
+        }
+    }
+
+    fun RetailerDuplicateData(retailer_code:String,flag:String) {
+        System.gc()
+        val reason_code = ""
+        try {
+            piechart_rank_progressBarar.visibility = View.VISIBLE
+            aad_bottom_layout.visibility = View.GONE
+            add_container.isEnabled = false
+
+            var user_email: String? = ""
+            val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+            try {
+                user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                    sp.getString("USER_EMAIL", "")
+                } else {
+                    Global_Data.GLOvel_USER_EMAIL
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
+            var domain = ""
+            var url = ""
+            domain = resources.getString(R.string.service_domain)
+            var jsObjRequest: JsonObjectRequest? = null
+            try {
+                url = domain + "retailers/merge_duplicate_retailer"
+                Log.d("Server url", "Server url" + url)
+                val SURVEY = JSONArray()
+                val product_value_n = JSONObject()
+                val retailer_object = JSONObject()
+
+
+                retailer_object.put("retailer_code", retailer_code)
+                retailer_object.put("flag", flag.toLowerCase())
+                retailer_object.put("email",user_email)
+
+                Log.d("Retailer merge Service", retailer_object.toString())
+                jsObjRequest = JsonObjectRequest(Request.Method.POST,url , retailer_object, Response.Listener { response ->
+                    Log.i("volley", "response: $response")
+                    Log.d("jV", "JV length" + response.length())
+                    //JSONObject json = new JSONObject(new JSONTokener(response));
+                    try {
+                        var response_result = ""
+                         if (response.has("message")) {
+                             response_result = response.getString("message")
+
+                            piechart_rank_progressBarar.visibility = View.GONE
+                            aad_bottom_layout.visibility = View.VISIBLE
+                            add_container.isEnabled = true
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                             finish()
+                        }
+//                        if (response_result.equals("Retailer created successfully.", ignoreCase = true)) {
+//
+//                            piechart_rank_progressBarar.visibility = View.GONE
+//                            aad_bottom_layout.visibility = View.VISIBLE
+//                            add_container.isEnabled = true
+//
+//                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+//                            toast.setGravity(Gravity.CENTER, 0, 0)
+//                            toast.show()
+//                            val a = Intent(context, MapsActivity::class.java)
+//                            startActivity(a)
+//                            finish()
+//                        }
+//
+//                        else {
+//                            piechart_rank_progressBarar.visibility = View.GONE
+//                            aad_bottom_layout.visibility = View.VISIBLE
+//                            add_container.isEnabled = true
+//                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+//                            toast.setGravity(Gravity.CENTER, 0, 0)
+//                            toast.show()
+//
+//                        }
                     } catch (e: JSONException) {
                         e.printStackTrace()
                         piechart_rank_progressBarar.visibility = View.GONE
