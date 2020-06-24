@@ -52,25 +52,41 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
-        val (id, name, address, card_color_code, mobile, email) = rtododatalist[position]
-        holder.rtc_name.text = name
-        holder.rtc_address.text = address
-        holder.rt_id.text = id
-        holder.rtc_mobile_hidden.text = mobile
-        holder.rtc_email_hidden.text = email
-        holder.rtcodo_containercard.setCardBackgroundColor(Color.parseColor(card_color_code))
+        val data = rtododatalist[position]
+        holder.rtc_name.text = data.shop_name
+        holder.rtc_address.text = data.address
+        holder.rt_id.text = data.code
+        holder.rtc_mobile_hidden.text = data.mobile
+        holder.rtc_email_hidden.text = data.email
+        holder.rtcodo_containercard.setCardBackgroundColor(Color.parseColor(data.card_color_code))
         holder.rtcodo_container.setOnClickListener {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rt_id.text.toString())) {
 
                 val i = Intent(mContext, TodoEditCustomer::class.java)
-                i.putExtra("id", holder.rt_id.text.toString().trim { it <= ' ' })
-                i.putExtra("cardcolor", card_color_code)
+                i.putExtra("code", data.code)
+                i.putExtra("shop_name", data.shop_name)
+                i.putExtra("address", data.address)
+                i.putExtra("state_code", data.state_code)
+                i.putExtra("city_code", data.city_code)
+                i.putExtra("mobile_no", data.mobile)
+                i.putExtra("email", data.email)
+                i.putExtra("tsi_code", data.tsi_code)
+                i.putExtra("gst_no", data.gst_no)
+                i.putExtra("aadhar_no", data.aadhar_no)
+                i.putExtra("pan_no", data.pan_no)
+                i.putExtra("latitude", data.latitude)
+                i.putExtra("longitude", data.longitude)
+                i.putExtra("power_dealer", data.power_dealer)
+                i.putExtra("lighting_dealer", data.lighting_dealer)
+                i.putExtra("iaq_dealer", data.iaq_dealer)
+                i.putExtra("source_of_data", data.source_of_data)
+                i.putExtra("cardcolor", data.card_color_code)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 mContext.startActivity(i)
             }
         }
 
-        holder.rtcodo_container.setOnClickListener {
+        holder.rtc_mobile.setOnClickListener {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rtc_mobile_hidden.text.toString())) {
 
                 try {

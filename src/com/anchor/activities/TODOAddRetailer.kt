@@ -24,18 +24,19 @@ import android.widget.Toast
 import com.anchor.adapter.Todo_list_adaptor
 import com.anchor.helper.VerhoeffAlgorithm
 import com.anchor.model.Todo_model
-import com.anchor.service.LocationServices
 import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_lightingdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_powerdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_state
 import kotlinx.android.synthetic.main.todoadd_retailer.*
+import kotlinx.android.synthetic.main.todoadd_retailer.todoe_address
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -398,7 +399,7 @@ class TODOAddRetailer : Activity() {
                 toast.show()
             }
             else
-            if (todoe_mobilea!!.text.toString().trim().equals("") || todoe_mobilea!!.text.length < 10)
+            if (todoe_mobilea!!.text.toString().trim().equals("") || todoe_mobilea!!.text.length < 10 || todoe_mobilea!!.text.startsWith("0"))
             {
                 val toast = Toast.makeText(context,
                         "Please Enter Valid Mobile No", Toast.LENGTH_SHORT)
@@ -661,6 +662,21 @@ class TODOAddRetailer : Activity() {
             aad_bottom_layout.visibility = View.GONE
             add_container.isEnabled = false
 
+            try {
+                val appLocationManager = AppLocationManager(context)
+                Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.latitude + " " + appLocationManager.longitude)
+                Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE)
+                val PlayServiceManager = PlayService_Location(context)
+                if (PlayServiceManager.checkPlayServices(context)) {
+                    Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE)
+                } else if (!appLocationManager.latitude.toString().equals("null", ignoreCase = true) && !appLocationManager.latitude.toString().equals(null, ignoreCase = true) && !appLocationManager.longitude.toString().equals(null, ignoreCase = true) && !appLocationManager.longitude.toString().equals(null, ignoreCase = true)) {
+                    Global_Data.GLOvel_LATITUDE = appLocationManager.latitude.toString()
+                    Global_Data.GLOvel_LONGITUDE = appLocationManager.longitude.toString()
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
+
             var user_email: String? = ""
             val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
             try {
@@ -697,6 +713,8 @@ class TODOAddRetailer : Activity() {
                 product_value_n.put("address", todoe_address.text.toString())
                 product_value_n.put("latitude", latitude)
                 product_value_n.put("longitude", longitude)
+                product_value_n.put("current_location_latitude",  Global_Data.GLOvel_LATITUDE)
+                product_value_n.put("current_location_longitude",  Global_Data.GLOvel_LONGITUDE)
                 retailer_object.put("retailer",product_value_n)
                 retailer_object.put("email",user_email)
 
@@ -943,14 +961,14 @@ class TODOAddRetailer : Activity() {
     }
 
     fun validateGSTNumber(gstNumber: String?): Boolean {
-        val aadharPattern: Pattern = Pattern.compile("/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}\$/")
+        val aadharPattern: Pattern = Pattern.compile("^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+\$")
         var isValidateGST: Boolean = aadharPattern.matcher(gstNumber).matches()
 
-        if (validGSTIN(gstNumber!!))
-            return  true
-        else
-            return false
-       // return isValidateGST
+//        if (validGSTIN(gstNumber!!))
+//            return  true
+//        else
+//            return false
+        return isValidateGST
     }
 
     fun validatePANNumber(panNumber: String?): Boolean {
@@ -963,9 +981,22 @@ class TODOAddRetailer : Activity() {
 
     fun states_details() {
         citys_loader.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
+        var url = domain+"retailers/get_all_states?email="+user_email
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_all_states"
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -1094,9 +1125,22 @@ class TODOAddRetailer : Activity() {
 
     fun citydealer_details(state_id:String) {
         citys_loader.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_statewise_cities?state_code="+state_id
+        var url = domain+"retailers/get_statewise_cities?state_code="+state_id+"&email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->

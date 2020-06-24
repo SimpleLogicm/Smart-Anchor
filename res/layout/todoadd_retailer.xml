@@ -95,6 +95,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
             android:hint=""
+            android:maxLength="12"
+            android:inputType="number"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:textColor="@color/black">

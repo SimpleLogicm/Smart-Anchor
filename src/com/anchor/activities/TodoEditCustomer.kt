@@ -52,7 +52,6 @@ import java.util.regex.Pattern
 class TodoEditCustomer : Activity() {
     var list: ArrayList<Todo_model>? = null
     var adaptor: Todo_list_adaptor? = null
-    var id = "";
     var coardcolor = "";
     var cd: ConnectionDetector? = null
     var isInternetPresent = false
@@ -75,6 +74,12 @@ class TodoEditCustomer : Activity() {
     var iaqspinnerMap = HashMap<String, String>()
     var lightingspinnerMap = HashMap<String, String>()
 
+    var statespinnerMapReverse = HashMap<String, String>()
+    var cityspinnerMapReverse = HashMap<String, String>()
+    var powerspinnerMapReverse = HashMap<String, String>()
+    var iaqspinnerMapReverse = HashMap<String, String>()
+    var lightingspinnerMapReverse = HashMap<String, String>()
+
     var final_response = ""
     var response_result = ""
     var state_id:String? = "";
@@ -84,6 +89,24 @@ class TodoEditCustomer : Activity() {
     var dlighting_id:String? = "";
     var latitude:String? = "";
     var longitude:String? = "";
+
+    var code = "";
+    var shop_name = "";
+    var address = "";
+    var state_code = "";
+    var city_code = "";
+    var mobile_no = "";
+    var email = "";
+    var gst_no = "";
+    var aadhar_no = "";
+    var pan_no = "";
+    var latitudes = "";
+    var longitudes = "";
+    var power_dealer = "";
+    var lighting_dealer = "";
+    var iaq_dealer = "";
+    var source_of_data = "";
+    var tsi_code = "";
 
     val GSTINFORMAT_REGEX = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
     val GSTN_CODEPOINT_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -100,8 +123,35 @@ class TodoEditCustomer : Activity() {
 
 
         try {
-            id = intent.getStringExtra("id")
+            code = intent.getStringExtra("code")
+            shop_name = intent.getStringExtra("shop_name")
+            address = intent.getStringExtra("address")
+            state_code = intent.getStringExtra("state_code")
+            city_code = intent.getStringExtra("city_code")
+            mobile_no = intent.getStringExtra("mobile_no")
+            email = intent.getStringExtra("email")
+            gst_no = intent.getStringExtra("gst_no")
+            aadhar_no = intent.getStringExtra("aadhar_no")
+            pan_no = intent.getStringExtra("pan_no")
+            latitudes = intent.getStringExtra("latitude")
+            longitudes = intent.getStringExtra("longitude")
+            power_dealer = intent.getStringExtra("power_dealer")
+            lighting_dealer = intent.getStringExtra("lighting_dealer")
+            iaq_dealer = intent.getStringExtra("iaq_dealer")
+            source_of_data = intent.getStringExtra("source_of_data")
+            tsi_code = intent.getStringExtra("tsi_code")
             coardcolor = intent.getStringExtra("cardcolor")
+
+            todoe_shop_name.setText(shop_name.trim())
+            todoe_mobile.setText(mobile_no.trim())
+            todoe_gst.setText(gst_no.trim())
+            todoe_aadhar.setText(aadhar_no.trim())
+            todoe_pan.setText(pan_no.trim())
+            todoe_address.setText(address.trim())
+            todoe_geocordinates.setText(latitudes.trim()+","+longitudes.trim())
+            todoe_tsi_code.setText(tsi_code.trim())
+
+
             if(coardcolor.equals("#D8AB1E"))
             {
                 todoe_shop_name.setBackgroundResource(R.drawable.todo_back)
@@ -569,76 +619,76 @@ class TodoEditCustomer : Activity() {
                 toast.show()
             }
             else
-                if (todoe_mobile!!.text.toString().trim().equals("") || todoe_mobile!!.text.length < 10)
+                if (todoe_mobile!!.text.toString().trim().equals("") || todoe_mobile!!.text.length < 10 || todoe_mobile!!.text.startsWith("0"))
                 {
-                val toast = Toast.makeText(context,
-                "Please Enter Valid Mobile No", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Enter Valid Mobile No", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (todoe_gst!!.text.toString().trim().equals("") && todoe_aadhar!!.text.toString().trim().equals("") && todoe_pan!!.text.toString().trim().equals(""))
                 {
-                val toast = Toast.makeText(context,
-                "Please Enter GST No. or  Aadhar No. or Pan No.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Enter GST No. or  Aadhar No. or Pan No.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (!todoe_gst!!.text.toString().trim().equals("") && !validateGSTNumber(todoe_gst!!.text.toString().trim()))
                 {
-                val toast = Toast.makeText(context,
-                "Please Enter Valid GST No.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Enter Valid GST No.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (!todoe_aadhar!!.text.toString().trim().equals("") && !validateAadharNumber(todoe_aadhar!!.text.toString().trim()))
                 {
-                val toast = Toast.makeText(context,
-                "Please Enter Valid Aadhar No.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Enter Valid Aadhar No.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (!todoe_pan!!.text.toString().trim().equals("") && !validatePANNumber(todoe_pan!!.text.toString().trim()))
                 {
-                val toast = Toast.makeText(context,
-                "Please Enter Valid Pan Card No.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Enter Valid Pan Card No.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (todoe_state!!.selectedItem.toString().equals("Select State"))
                 {
-                val toast = Toast.makeText(context,
-                "Please Select State.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Select State.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (todoe_city!!.selectedItem.toString().equals("Select City"))
                 {
-                val toast = Toast.makeText(context,
-                "Please Select City.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Select City.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (todoe_geocordinates!!.text.toString().trim().equals(""))
                 {
-                val toast = Toast.makeText(context,
-                "Please Select Gps ", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Select Gps ", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 if (todoe_powerdealer!!.selectedItem.toString().equals("Select Power Dealer") && todoe_iaqdealer!!.selectedItem.toString().equals("Select IAQ Dealer") && todoe_lightingdealer!!.selectedItem.toString().equals("Select Lighting Dealer"))
                 {
-                val toast = Toast.makeText(context,
-                "Please Select Power Dealer or IAQ Dealer or Lighting Dealer.", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
+                    val toast = Toast.makeText(context,
+                    "Please Select Power Dealer or IAQ Dealer or Lighting Dealer.", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 }
                 else
                 {
@@ -665,37 +715,37 @@ class TodoEditCustomer : Activity() {
         //super.onBackPressed()
         var alert_dialog_flag = ""
 
-        if (!todoe_shop_name!!.text.toString().trim().equals(""))
+        if (!todoe_shop_name!!.text.toString().trim().equals(shop_name) && !todoe_shop_name!!.text.toString().trim().equals(""))
         {
             alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_mobile!!.text.toString().trim().equals(""))
+        if (!todoe_mobile!!.text.toString().trim().equals(mobile_no) && !todoe_mobile!!.text.toString().trim().equals(""))
         {
             alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_gst!!.text.toString().trim().equals("") || !todoe_aadhar!!.text.toString().trim().equals("") || !todoe_pan!!.text.toString().trim().equals(""))
+        if ((!todoe_gst!!.text.toString().trim().equals(gst_no) &&!todoe_gst!!.text.toString().trim().equals("")) || (!todoe_aadhar!!.text.toString().trim().equals(aadhar_no) && !todoe_aadhar!!.text.toString().trim().equals("")) || (!todoe_pan!!.text.toString().trim().equals(pan_no) &&!todoe_pan!!.text.toString().trim().equals("")))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+        if (!state_id.equals(""))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+        if (!city_id.equals(""))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_geocordinates!!.text.toString().trim().equals(""))
+        if (!latitude.toString().trim().equals("") || !longitudes.toString().trim().equals(""))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_powerdealer!!.selectedItem.toString().equals("Select Power Dealer") || !todoe_iaqdealer!!.selectedItem.toString().equals("Select IAQ Dealer") || !todoe_lightingdealer!!.selectedItem.toString().equals("Select Lighting Dealer"))
+        if (!dpower_id.equals("") || !diaq_id.toString().equals("") || !dlighting_id.equals(""))
         {
             alert_dialog_flag = "yes";
         }
@@ -770,9 +820,22 @@ class TodoEditCustomer : Activity() {
 
     fun states_details() {
         citys_loaderedit.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_all_states"
+        var url = domain+"retailers/get_all_states?email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -842,6 +905,7 @@ class TodoEditCustomer : Activity() {
                     list_CState.clear()
                     list_CState.add("Select State")
                     statespinnerMap.clear()
+                    statespinnerMapReverse.clear()
 
                     for (i in 0 until states.length()) {
                         val jsonObject = states.getJSONObject(i)
@@ -850,6 +914,8 @@ class TodoEditCustomer : Activity() {
                                 run {
                                     list_CState.add(jsonObject.getString("name"))
                                     statespinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                    statespinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("name"))
+
                                 }
                             }
                         } catch (e: JSONException) {
@@ -864,7 +930,19 @@ class TodoEditCustomer : Activity() {
 
                         adapter_CState!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_state.setAdapter(adapter_CState)
-                        // dialog.dismiss()
+
+
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(state_code)) {
+                                var s_name = statespinnerMapReverse.get(state_code)
+                                todoe_state.setSelection(adapter_CState!!.getPosition(s_name))
+
+                                state_code = ""
+                            }
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
                     })
                     runOnUiThread(Runnable {
                         citys_loaderedit.visibility = View.GONE
@@ -895,9 +973,21 @@ class TodoEditCustomer : Activity() {
 
     fun citydealer_details(state_id:String) {
         citys_loaderedit.visibility = View.VISIBLE
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_statewise_cities?state_code="+state_id
+        var url = domain+"retailers/get_statewise_cities?state_code="+state_id+"&email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -982,18 +1072,22 @@ class TodoEditCustomer : Activity() {
                     list_CCity.clear()
                     list_CCity.add("Select City")
                     cityspinnerMap.clear()
+                    cityspinnerMapReverse.clear()
 
                     list_CPowerDealer.clear()
                     list_CPowerDealer.add("Select Power Dealer")
                     powerspinnerMap.clear()
+                    powerspinnerMapReverse.clear()
 
                     list_CIaqDealer.clear()
                     list_CIaqDealer.add("Select IAQ Dealer")
                     iaqspinnerMap.clear()
+                    iaqspinnerMapReverse.clear()
 
                     list_CLightingDealer.clear()
                     list_CLightingDealer.add("Select Lighting Dealer")
                     lightingspinnerMap.clear()
+                    lightingspinnerMapReverse.clear()
 
                     for (i in 0 until cities.length()) {
                         val jsonObject = cities.getJSONObject(i)
@@ -1002,6 +1096,8 @@ class TodoEditCustomer : Activity() {
                                 run {
                                     list_CCity.add(jsonObject.getString("name"))
                                     cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                    cityspinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("name"))
+
                                 }
                             }
                         } catch (e: JSONException) {
@@ -1016,6 +1112,8 @@ class TodoEditCustomer : Activity() {
                                 run {
                                     list_CPowerDealer.add(jsonObject.getString("shop_name"))
                                     powerspinnerMap.put(jsonObject.getString("shop_name"),jsonObject.getString("code"))
+                                    powerspinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("shop_name"))
+
                                 }
                             }
                         } catch (e: JSONException) {
@@ -1030,6 +1128,7 @@ class TodoEditCustomer : Activity() {
                                 run {
                                     list_CIaqDealer.add(jsonObject.getString("shop_name"))
                                     iaqspinnerMap.put(jsonObject.getString("shop_name"),jsonObject.getString("code"))
+                                    iaqspinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("shop_name"))
                                 }
                             }
                         } catch (e: JSONException) {
@@ -1044,6 +1143,8 @@ class TodoEditCustomer : Activity() {
                                 run {
                                     list_CLightingDealer.add(jsonObject.getString("shop_name"))
                                     lightingspinnerMap.put(jsonObject.getString("shop_name"),jsonObject.getString("code"))
+                                    lightingspinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("shop_name"))
+
                                 }
                             }
                         } catch (e: JSONException) {
@@ -1072,6 +1173,54 @@ class TodoEditCustomer : Activity() {
                                 android.R.layout.simple_spinner_item, list_CLightingDealer)
                         adapter_CLightingDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_lightingdealer.setAdapter(adapter_CLightingDealer)
+
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(city_code)) {
+                                var c_name = cityspinnerMapReverse.get(city_code)
+                                todoe_city.setSelection(adapter_CCity!!.getPosition(c_name))
+
+                                city_code = ""
+                            }
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(power_dealer)) {
+                                var p_name = powerspinnerMapReverse.get(power_dealer)
+                                todoe_powerdealer.setSelection(adapter_CPowerDealer!!.getPosition(p_name))
+
+                                power_dealer = ""
+                            }
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(iaq_dealer)) {
+                                var iaq_name = iaqspinnerMapReverse.get(iaq_dealer)
+                                todoe_iaqdealer.setSelection(adapter_CIaqDealer!!.getPosition(iaq_name))
+
+                                iaq_dealer = ""
+                            }
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(lighting_dealer)) {
+                                var l_name = lightingspinnerMapReverse.get(lighting_dealer)
+                                todoe_lightingdealer.setSelection(adapter_CLightingDealer!!.getPosition(l_name))
+
+                                lighting_dealer = ""
+                            }
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
 
 
                     })
@@ -1116,14 +1265,14 @@ class TodoEditCustomer : Activity() {
     }
 
     fun validateGSTNumber(gstNumber: String?): Boolean {
-        val aadharPattern: Pattern = Pattern.compile("/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}\$/")
+        val aadharPattern: Pattern = Pattern.compile("^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+\$")
         var isValidateGST: Boolean = aadharPattern.matcher(gstNumber).matches()
 
-        if (validGSTIN(gstNumber!!))
-            return  true
-        else
-            return false
-        // return isValidateGST
+//        if (validGSTIN(gstNumber!!))
+//            return  true
+//        else
+//            return false
+        return isValidateGST
     }
 
     fun validatePANNumber(panNumber: String?): Boolean {
@@ -1213,6 +1362,92 @@ class TodoEditCustomer : Activity() {
             aad_bottom_layoutredit.visibility = View.GONE
             add_containerredit.isEnabled = false
 
+            try {
+                if(!todoe_state.selectedItem.toString().equals("Select State"))
+                {
+                    state_id = statespinnerMap.get(todoe_state.selectedItem.toString())
+
+                }
+                else
+                {
+                    state_id = ""
+                }
+
+            }catch (e:Exception)
+            {
+                state_id = "";
+                e.printStackTrace()
+            }
+
+            try {
+                if(!todoe_city.selectedItem.toString().equals("Select City"))
+                {
+                    city_id = cityspinnerMap.get(todoe_city.selectedItem.toString())
+
+                }
+                else
+                {
+                    city_id = ""
+                }
+
+            }catch (e:Exception)
+            {
+                city_id = "";
+                e.printStackTrace()
+            }
+
+            try {
+                if(!todoe_powerdealer.selectedItem.toString().equals("Select Power Dealer"))
+                {
+                    dpower_id = powerspinnerMap.get(todoe_powerdealer.selectedItem.toString())
+
+                }
+                else
+                {
+                    dpower_id = ""
+                }
+
+            }catch (e:Exception)
+            {
+                dpower_id = "";
+                e.printStackTrace()
+            }
+
+            try {
+                if(!todoe_iaqdealer.selectedItem.toString().equals("Select IAQ Dealer"))
+                {
+                    diaq_id = iaqspinnerMap.get(todoe_iaqdealer.selectedItem.toString())
+
+                }
+                else
+                {
+                    diaq_id = ""
+                }
+
+            }catch (e:Exception)
+            {
+                diaq_id = "";
+                e.printStackTrace()
+            }
+
+            try {
+                if(!todoe_lightingdealer.selectedItem.toString().equals("Select Lighting Dealer"))
+                {
+                    dlighting_id = lightingspinnerMap.get(todoe_lightingdealer.selectedItem.toString())
+
+                }
+                else
+                {
+                    dlighting_id = ""
+                }
+
+            }catch (e:Exception)
+            {
+                dlighting_id = "";
+                e.printStackTrace()
+            }
+
+
             var user_email: String? = ""
             val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
             try {
@@ -1241,11 +1476,11 @@ class TodoEditCustomer : Activity() {
                 product_value_n.put("power_dealer", dpower_id)
                 product_value_n.put("iaq_dealer", diaq_id)
                 product_value_n.put("lighting_dealer", dlighting_id)
-                product_value_n.put("shop_name", todoe_shop_namea.text.toString())
-                product_value_n.put("mobile_no", todoe_mobilea.text.toString())
-                product_value_n.put("gst_no", todoe_gsta.text.toString())
-                product_value_n.put("aadhar_no", todoe_aadhara.text.toString())
-                product_value_n.put("pan_no", todoe_pana.text.toString())
+                product_value_n.put("shop_name", todoe_shop_name.text.toString())
+                product_value_n.put("mobile_no", todoe_mobile.text.toString())
+                product_value_n.put("gst_no", todoe_gst.text.toString())
+                product_value_n.put("aadhar_no", todoe_aadhar.text.toString())
+                product_value_n.put("pan_no", todoe_pan.text.toString())
                 product_value_n.put("address", todoe_address.text.toString())
                 product_value_n.put("latitude", latitude)
                 product_value_n.put("longitude", longitude)

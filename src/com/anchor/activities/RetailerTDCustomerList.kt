@@ -47,13 +47,13 @@ class RetailerTDCustomerList : Activity() {
     var mLayoutManager: RecyclerView.LayoutManager? = null
     var ca: RCTDAdapter? = null
     var Allresult: MutableList<RCTOData> = ArrayList<RCTOData>()
-    var context:Context? = null
+    var context: Context? = null
     var id = "";
     var coardcolor = "";
 
     var list_Cfilter: MutableList<String> = ArrayList<String>()
     var CfilterspinnerMap = HashMap<String, String>()
-    var city_id:String? = "";
+    var city_id: String? = "";
     var adapter_Cfilter: ArrayAdapter<String>? = null
     var final_response = ""
     var response_result = ""
@@ -64,14 +64,13 @@ class RetailerTDCustomerList : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reatilertdcustomerlist)
 
-        context = RetailerTDCustomerList@this
+        context = RetailerTDCustomerList@ this
         cd = ConnectionDetector(context)
 
         try {
             id = intent.getStringExtra("id")
             coardcolor = intent.getStringExtra("cardcolor")
-        }catch (e:Exception)
-        {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
@@ -88,24 +87,53 @@ class RetailerTDCustomerList : Activity() {
         val contacts2 = dbvoc.getAllCityOrderbyname()
         for (cn in contacts2) {
             list_Cfilter.add(cn.getName())
-            CfilterspinnerMap.put(cn.getName(),cn.getCode())
+            CfilterspinnerMap.put(cn.getName(), cn.getCode())
         }
         adapter_Cfilter = ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, list_Cfilter)
 
         adapter_Cfilter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         rtocustomerlist_filter.setAdapter(adapter_Cfilter)
-        rtocustomerlist_filter?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        rtocustomerlist_filter?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
-                Toast.makeText(context,parent!!.getItemAtPosition(position).toString(),Toast.LENGTH_LONG).show()
                 if (parent!!.getItemAtPosition(position).toString()
                                 .equals("Self", ignoreCase = true)) {
 
+                    isInternetPresent = cd!!.isConnectingToInternet
+                    if (isInternetPresent) {
+                        getTODOCustomerListData("")
+                    } else {
+
+                        val toast = Toast.makeText(context,
+                                "Internet Not Available. ", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        finish()
+                    }
+
+                } else {
+                    isInternetPresent = cd!!.isConnectingToInternet
+                    if (isInternetPresent) {
+
+                        try {
+                            val city_code = CfilterspinnerMap.get(parent!!.getItemAtPosition(position).toString())
+                            getTODOCustomerListData(city_code!!)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+
+                    } else {
+
+                        val toast = Toast.makeText(context,
+                                "Internet Not Available. ", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        finish()
+                    }
                 }
 
             }
@@ -156,20 +184,19 @@ class RetailerTDCustomerList : Activity() {
             ex.printStackTrace()
         }
 
-        isInternetPresent = cd!!.isConnectingToInternet
-        if (isInternetPresent) {
-            getTODOCustomerListData()
-        }
-        else {
-
-            val toast = Toast.makeText(context,
-                    "Internet Not Available. ", Toast.LENGTH_SHORT)
-            toast.setGravity(Gravity.CENTER, 0, 0)
-            toast.show()
-            finish()
-        }
+//        isInternetPresent = cd!!.isConnectingToInternet
+//        if (isInternetPresent) {
+//            getTODOCustomerListData("")
+//        }
+//        else {
+//
+//            val toast = Toast.makeText(context,
+//                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+//            toast.setGravity(Gravity.CENTER, 0, 0)
+//            toast.show()
+//            finish()
+//        }
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -240,10 +267,38 @@ class RetailerTDCustomerList : Activity() {
         startActivityForResult(intent, 101)
     }
 
-    fun getTODOCustomerListData() {
+    fun getTODOCustomerListData(city_code: String) {
+
+        todolist_progress_customer.visibility = View.VISIBLE
+        rtocustomerlist.visibility = View.GONE
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
-        // val url = domain + "users/get_battery_status_of_users?email=athul.nambiar@simplelogic.in" + "&type=reporting"
-        val url = domain + "users/get_battery_status_of_users?email="+Global_Data.GLOvel_USER_EMAIL+"&type=reporting"
+        var url = ""
+
+        if (id.equals("1")) {
+            url = domain + "retailers/to_do_red_list?email=" + user_email + "&city_code=" + city_code
+        } else
+            if (id.equals("2")) {
+                url = domain + "retailers/to_do_yellow_list?email=" + user_email + "&city_code=" + city_code
+            } else
+                if (id.equals("3")) {
+                    url = domain + "retailers/to_do_light_green_list?email=" + user_email + "&city_code=" + city_code
+                } else
+                    if (id.equals("4")) {
+                        url = domain + "retailers/to_do_dark_green_list?email=" + user_email + "&city_code=" + city_code
+                    }
+
         Log.i("volley", "URL: $url")
         Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL)
 
@@ -254,8 +309,6 @@ class RetailerTDCustomerList : Activity() {
             GetTODOCustomerResponseData().execute(response)
         },
                 Response.ErrorListener { error ->
-                    todolist_progress_customer.visibility = View.GONE
-                    finish()
                     //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
                     if (error is TimeoutError || error is NoConnectionError) {
                         Toast.makeText(applicationContext,
@@ -281,6 +334,8 @@ class RetailerTDCustomerList : Activity() {
                         Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                     }
                     todolist_progress_customer.visibility = View.GONE
+                    rtocustomerlist.visibility = View.GONE
+                    finish()
 
                 })
         val requestQueue = Volley.newRequestQueue(applicationContext)
@@ -300,74 +355,76 @@ class RetailerTDCustomerList : Activity() {
                     response_result = response.getString("message")
                     runOnUiThread {
                         todolist_progress_customer.visibility = View.GONE
+                        rtocustomerlist.visibility = View.GONE
                         val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
-                        finish()
+                        //finish()
                     }.toString()
 
                 } else { //dbvoc.getDeleteTable("delivery_products");
-                    val users = response.getJSONArray("records")
-                    Log.i("volley", "response users Length: " + users.length())
-                    Log.d("volley", "users$users")
+                    val retailers = response.getJSONArray("retailers")
+                    Log.i("volley", "response retailers Length: " + retailers.length())
+                    Log.d("volley", "retailers$retailers")
                     //
-                    if (users.length() <= 0) {
+                    if (retailers.length() <= 0) {
                         runOnUiThread {
                             todolist_progress_customer.visibility = View.GONE
+                            rtocustomerlist.visibility = View.GONE
                             val toast = Toast.makeText(context, "Record doesn't exist", Toast.LENGTH_LONG)
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
-                            finish()
+                            // finish()
                         }
                     } else {
                         Allresult.clear()
-                        for (i in 0 until users.length()) {
+                        for (i in 0 until retailers.length()) {
                             var user_cirname = ""
-                            val jsonObject = users.getJSONObject(i)
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("latitude")) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("longitude"))) {
+                            val jsonObject = retailers.getJSONObject(i)
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("code"))) {
 
-                                // batteryModellist!!.add(BatteryModel(user_cirname, "address", jsonObject!!.getString("last_synce"), battery_text, jsonObject!!.getString("email"), jsonObject!!.getString("user_name")));
-
-                                Allresult.add(RCTOData(id, "ABC Electronics", "123 shop no 3 mumbai 47327",coardcolor,"8454858739","abc@gmail.com"))
-                                Allresult.add(RCTOData(id, "ABC Electronics", "123 shop no 3 mumbai 47327",coardcolor,"8454858739","abc@gmail.com"))
-                                Allresult.add(RCTOData(id, "ABC Electronics", "123 shop no 3 mumbai 47327",coardcolor,"8454858739","abc@gmail.com"))
-                                Allresult.add(RCTOData(id, "ABC Electronics", "123 shop no 3 mumbai 47327",coardcolor,"8454858739","abc@gmail.com"))
-                            }
-                            runOnUiThread {
-
-                                todolist_progress_customer.visibility = View.GONE
-                                ca = RCTDAdapter(context!!, Allresult);
-                                rtocustomerlist.setAdapter(ca);
-                                ca!!.notifyDataSetChanged();
+                                Allresult.add(RCTOData("", jsonObject!!.getString("code"), "", jsonObject!!.getString("shop_name"), jsonObject!!.getString("address"), jsonObject!!.getString("state_code"), jsonObject!!.getString("city_code"), jsonObject!!.getString("pincode"), "", jsonObject!!.getString("mobile_no"), jsonObject!!.getString("email"), "", jsonObject!!.getString("proprietor_name"), jsonObject!!.getString("gst_no"), jsonObject!!.getString("aadhar_no"), jsonObject!!.getString("pan_no"), jsonObject!!.getString("latitude"), jsonObject!!.getString("longitude"), jsonObject!!.getString("power_dealer"), jsonObject!!.getString("lighting_dealer"), jsonObject!!.getString("iaq_dealer"), jsonObject!!.getString("source_of_data"), "", "",jsonObject!!.getString("tsi_code"), coardcolor))
 
 
                             }
                         }
-                        runOnUiThread { todolist_progress_customer.visibility = View.GONE }.toString()
+                        runOnUiThread {
+                            todolist_progress_customer.visibility = View.GONE
+                            rtocustomerlist.visibility = View.VISIBLE
+                            ca = RCTDAdapter(context!!, Allresult);
+                            rtocustomerlist.setAdapter(ca);
+                            ca!!.notifyDataSetChanged();
+
+                        }.toString()
 
                     }
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()
-                runOnUiThread { todolist_progress_customer.visibility = View.GONE }
+                runOnUiThread {
+                    todolist_progress_customer.visibility = View.GONE
+                    rtocustomerlist.visibility = View.GONE
+                }
             }
-            runOnUiThread { todolist_progress_customer.visibility = View.GONE }
+            runOnUiThread {
+                todolist_progress_customer.visibility = View.GONE
+            }
             return "Executed"
         }
 
         override fun onPostExecute(result: String) {
-            runOnUiThread { todolist_progress_customer.visibility = View.GONE }
+            runOnUiThread {
+                todolist_progress_customer.visibility = View.GONE
+            }
         }
 
         override fun onPreExecute() {}
 
     }
 
-    fun CaalF(Mobilenumber:String)
-    {
+    fun CaalF(Mobilenumber: String) {
         requestPhoneCallPermission(Mobilenumber.trim({ it <= ' ' }))
     }
-
 
 
 }

@@ -7,11 +7,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.anchor.activities.R;
 import com.anchor.activities.RetailerTDCustomerList;
 import com.anchor.model.Ledger_Model;
@@ -77,11 +80,34 @@ public class RTODOList_Adapter extends RecyclerView.Adapter<RTODOList_Adapter.My
 
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rt_id.getText().toString()))
                 {
-                    Intent i = new Intent(mContext, RetailerTDCustomerList.class);
-                    i.putExtra("id", holder.rt_id.getText().toString().trim());
-                    i.putExtra("cardcolor", rtododatam.getCard_color_code());
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    mContext.startActivity(i);
+                    try {
+                       int count = Integer.parseInt(holder.rt_count.getText().toString());
+
+                       if(count > 0)
+                       {
+                           Intent i = new Intent(mContext, RetailerTDCustomerList.class);
+                           i.putExtra("id", holder.rt_id.getText().toString().trim());
+                           i.putExtra("cardcolor", rtododatam.getCard_color_code());
+                           i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                           mContext.startActivity(i);
+                       }
+                       else
+                       {
+                           Toast toast = Toast.makeText(mContext, "Customer Not Found.", Toast.LENGTH_SHORT);
+                           toast.setGravity(Gravity.CENTER, 0, 0);
+                           toast.show();
+                       }
+                    }catch (Exception e) {
+                        e.printStackTrace();
+
+                        Intent i = new Intent(mContext, RetailerTDCustomerList.class);
+                        i.putExtra("id", holder.rt_id.getText().toString().trim());
+                        i.putExtra("cardcolor", rtododatam.getCard_color_code());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        mContext.startActivity(i);
+
+                    }
+
                 }
 
             }
