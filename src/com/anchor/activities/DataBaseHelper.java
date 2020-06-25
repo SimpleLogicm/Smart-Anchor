@@ -8785,14 +8785,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void updateUserEMPNO_BY_EMILID(String emp_code, String email_id, String address) {
 
-        // address = address.replaceAll("'","\'");
-
-
-        //String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
-
         SQLiteDatabase db = this.getWritableDatabase();
-
-        //db.execSQL(selectQuery);
 
         ContentValues cv = new ContentValues();
         cv.put("emp_code", emp_code); //These Fields should be your String values of actual column names
