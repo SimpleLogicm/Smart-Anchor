@@ -798,7 +798,7 @@ class TodoEditCustomer : Activity() {
 
                         }
 
-                        todoe_geocordinatesa!!.setText(str)
+                        todoe_geocordinates!!.setText(str)
                     } else {
                         val toast = Toast.makeText(context,
                                 "Gps Coordinates Not Found ", Toast.LENGTH_SHORT)
@@ -1464,13 +1464,14 @@ class TodoEditCustomer : Activity() {
             domain = resources.getString(R.string.service_domain)
             var jsObjRequest: JsonObjectRequest? = null
             try {
-                url = domain + "retailers/create_retailers"
+                url = domain + "retailers/update_retailer"
                 Log.d("Server url", "Server url" + url)
                 val SURVEY = JSONArray()
                 val product_value_n = JSONObject()
                 val retailer_object = JSONObject()
 
                 //product_value_n.put("email", user_email)
+                product_value_n.put("code", code)
                 product_value_n.put("state_code", state_id)
                 product_value_n.put("city_code", city_id)
                 product_value_n.put("power_dealer", dpower_id)
@@ -1482,13 +1483,21 @@ class TodoEditCustomer : Activity() {
                 product_value_n.put("aadhar_no", todoe_aadhar.text.toString())
                 product_value_n.put("pan_no", todoe_pan.text.toString())
                 product_value_n.put("address", todoe_address.text.toString())
-                product_value_n.put("latitude", latitude)
-                product_value_n.put("longitude", longitude)
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude)) {
+                    product_value_n.put("latitude", latitude)
+                    product_value_n.put("longitude", longitude)
+                }
+                else{
+                    product_value_n.put("latitude", latitudes)
+                    product_value_n.put("longitude", longitudes)
+                }
+
                 retailer_object.put("retailer",product_value_n)
                 retailer_object.put("email",user_email)
 
 
-                Log.d("Retailer save Service", retailer_object.toString())
+                Log.d("Retailer update Service", retailer_object.toString())
                 jsObjRequest = JsonObjectRequest(Request.Method.POST,url , retailer_object, Response.Listener { response ->
                     Log.i("volley", "response: $response")
                     Log.d("jV", "JV length" + response.length())
@@ -1500,7 +1509,7 @@ class TodoEditCustomer : Activity() {
                         } else {
                             "data"
                         }
-                        if (response_result.equals("Retailer created successfully.", ignoreCase = true)) {
+                        if (response_result.equals("Retailer updated successfully.", ignoreCase = true)) {
 
                             piechart_rank_progressBararredit.visibility = View.GONE
                             aad_bottom_layoutredit.visibility = View.VISIBLE
@@ -1509,40 +1518,40 @@ class TodoEditCustomer : Activity() {
                             val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
-                            val a = Intent(context, MapsActivity::class.java)
+                            val a = Intent(context, RetailerTDList::class.java)
                             startActivity(a)
                             finish()
                         }
-                        else
-                            if (response_result.equals("Retailer Duplicate record found.", ignoreCase = true)) {
-
-                                piechart_rank_progressBararredit.visibility = View.GONE
-                                aad_bottom_layoutredit.visibility = View.VISIBLE
-                                add_containerredit.isEnabled = true
-
-                                var retailer_code = response.getString("retailer_code")
-
-                                val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
-                                toast.setGravity(Gravity.CENTER, 0, 0)
-                                toast.show()
-
-                                val alertDialog = AlertDialog.Builder(context).create() //Read Update
-
-                                alertDialog.setTitle("Confirmation")
-                                alertDialog.setMessage("If you want to merge, Please click on yes button Or if you want to delete, Please click on no button  ")
-                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
-                                    dialog.cancel()
-                                    RetailerDuplicateData(retailer_code,"Yes")
-                                }
-
-                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
-                                    dialog.cancel()
-                                    RetailerDuplicateData(retailer_code,"No")
-                                }
-
-                                alertDialog.setCancelable(false)
-                                alertDialog.show()
-                            }
+//                        else
+//                            if (response_result.equals("Retailer Duplicate record found.", ignoreCase = true)) {
+//
+//                                piechart_rank_progressBararredit.visibility = View.GONE
+//                                aad_bottom_layoutredit.visibility = View.VISIBLE
+//                                add_containerredit.isEnabled = true
+//
+//                                var retailer_code = response.getString("retailer_code")
+//
+//                                val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+//                                toast.setGravity(Gravity.CENTER, 0, 0)
+//                                toast.show()
+//
+//                                val alertDialog = AlertDialog.Builder(context).create() //Read Update
+//
+//                                alertDialog.setTitle("Confirmation")
+//                                alertDialog.setMessage("If you want to merge, Please click on yes button Or if you want to delete, Please click on no button  ")
+//                                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
+//                                    dialog.cancel()
+//                                    RetailerDuplicateData(retailer_code,"Yes")
+//                                }
+//
+//                                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
+//                                    dialog.cancel()
+//                                    RetailerDuplicateData(retailer_code,"No")
+//                                }
+//
+//                                alertDialog.setCancelable(false)
+//                                alertDialog.show()
+//                            }
                             else {
                                 piechart_rank_progressBararredit.visibility = View.GONE
                                 aad_bottom_layoutredit.visibility = View.VISIBLE

@@ -6,6 +6,7 @@ package com.anchor.adapter;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -30,6 +31,7 @@ import com.anchor.activities.Global_Data;
 import com.anchor.activities.MapsActivity;
 import com.anchor.activities.R;
 import com.anchor.activities.Sub_Dealer_Order_Main;
+import com.anchor.model.RCTOData;
 import com.anchor.model.SubDealerModel;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -55,8 +57,8 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
     static ConnectionDetector cd;
     static Boolean isInternetPresent = false;
-    private List<SubDealerModel> contactList;
-    private List<SubDealerModel> contactListfilter;
+    private List<RCTOData> contactList;
+    private List<RCTOData> contactListfilter;
     String name = "";
     DataBaseHelper dbvoc;
     String activity_name = "";
@@ -66,7 +68,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
     static Context mcontext;
     MapsActivity mapsActivity;
-    public Sub_DealerMap_Adapter(List<SubDealerModel> contactList, Context context,MapsActivity activity) {
+    public Sub_DealerMap_Adapter(List<RCTOData> contactList, Context context,MapsActivity activity) {
         this.contactList = contactList;
         mcontext = context;
         mapsActivity =activity;
@@ -79,26 +81,28 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
     }
 
     @Override
-    public void onBindViewHolder(final ContactViewHolder contactViewHolder, final int i) {
-        final SubDealerModel ci = contactList.get(i);
-        contactViewHolder.d_name.setText("Shop Name : " + ci.shop_name);
-        final String shopname =ci.shop_name;
-        final String address =ci.address2;
-        contactViewHolder.p_delaer_address.setText("Address : " + ci.address);
-        contactViewHolder.p_distance.setText("Distance : " + ci.distance);
+    public void onBindViewHolder(final ContactViewHolder contactViewHolder, @SuppressLint("RecyclerView") final int i) {
+        final RCTOData ci = contactList.get(i);
+        contactViewHolder.d_name.setText("Shop Name : " + ci.getShop_name());
+        final String shopname =ci.getShop_name();
+        final String address =ci.getAddress();
+        contactViewHolder.p_delaer_address.setText("Address : " + ci.getAddress());
+        contactViewHolder.p_distance.setText("Distance : " + ci.getDistance());
         //contactViewHolder.p_delaer_name.setText("Firm Name : " + ci.name);
-        contactViewHolder.p_proprietor_mobile1.setText("Proprietor Mobile : " + ci.proprietor_mobile1);
-        contactViewHolder.p_mobi.setText(ci.proprietor_mobile1);
+        contactViewHolder.p_proprietor_mobile1.setText("Proprietor Mobile : " + ci.getMobile());
+        contactViewHolder.p_mobi.setText(ci.getMobile());
         //contactViewHolder.p_proprietor_name1.setText("proprietor Name : " + ci.proprietor_name1);
-        contactViewHolder.p_proprietor_email1.setText("proprietor Email : " + ci.proprietor_email1);
-        contactViewHolder.p_proprietor_gst_no.setText("Gst No : " + ci.gst_no);
+        contactViewHolder.p_proprietor_email1.setText("proprietor Email : " + ci.getEmail());
+        contactViewHolder.p_proprietor_gst_no.setText("GST No : " + ci.getGst_no());
+        contactViewHolder.p_proprietor_aadhar_no.setText("AAdhar No : " + ci.getAadhar_no());
+        contactViewHolder.p_proprietor_pan_no.setText("Pan No : " + ci.getPan_no());
 
 
        // contactViewHolder.p_dealer_city.setText("City : " + ci.city);
       //  contactViewHolder.p_stages.setText("Stage : " + ci.Stage);
-        contactViewHolder.p_dealer_code.setText(ci.code);
-        contactViewHolder.p_lati.setText(ci.lati);
-        contactViewHolder.p_longi.setText(ci.longi);
+        contactViewHolder.p_dealer_code.setText(ci.getGst_no());
+        contactViewHolder.p_lati.setText(ci.getLatitude());
+        contactViewHolder.p_longi.setText(ci.getLongitude());
 
 
 
@@ -279,7 +283,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         protected TextView p_proprietor_mobile1;
       //  protected TextView p_proprietor_name1;
         protected TextView p_proprietor_email1;
-        protected TextView p_proprietor_gst_no;
+        protected TextView p_proprietor_gst_no,p_proprietor_aadhar_no,p_proprietor_pan_no;
        // protected TextView p_dealer_city;
         protected TextView p_dealer_code;
         protected TextView p_stages,p_lati,p_longi,p_mobi;
@@ -298,6 +302,8 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
            // p_proprietor_name1 = v.findViewById(R.id.p_proprietor_name1);
             p_proprietor_email1 = v.findViewById(R.id.p_proprietor_email1);
             p_proprietor_gst_no = v.findViewById(R.id.p_proprietor_gst_no);
+            p_proprietor_aadhar_no = v.findViewById(R.id.p_proprietor_aadhar_no);
+            p_proprietor_pan_no = v.findViewById(R.id.p_proprietor_pan_no);
           //  p_dealer_city = v.findViewById(R.id.p_dealer_city);
             p_dealer_code = v.findViewById(R.id.p_dealer_code);
             p_stages = v.findViewById(R.id.p_stages);

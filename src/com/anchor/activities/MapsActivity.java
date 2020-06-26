@@ -42,6 +42,7 @@ import android.widget.Toast;
 import com.anchor.adapter.Sub_DealerMap_Adapter;
 import com.anchor.helper.PrefManager;
 import com.anchor.model.InfoWindowData;
+import com.anchor.model.RCTOData;
 import com.anchor.model.SubDealerModel;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -107,6 +108,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<String> code = new ArrayList<>();
     ArrayList<String> status = new ArrayList<>();
     ArrayList<String> gst_no = new ArrayList<>();
+    ArrayList<String> aadhar_no = new ArrayList<>();
+    ArrayList<String> pan_no = new ArrayList<>();
 
     Boolean isInternetPresent = false;
     ConnectionDetector cd;
@@ -127,8 +130,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker m;
     RecyclerView marker_rview;
     Sub_DealerMap_Adapter ca;
-    List<SubDealerModel> Allresult = new ArrayList<SubDealerModel>();
-    List<SubDealerModel> Allresultsearch = new ArrayList<SubDealerModel>();
+    List<RCTOData> Allresult = new ArrayList<RCTOData>();
+    List<RCTOData> Allresultsearch = new ArrayList<RCTOData>();
 
     LinearLayoutManager llm;
     private int visibleItemCount, totalItemCount, firstVisibleItemPosition, lastVisibleItem;
@@ -286,20 +289,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Allresultsearch.clear();
 
                 for (int i = 0; i < Allresult.size(); i++) {
-                    if (name.equalsIgnoreCase(Allresult.get(i).shop_name)) {
+                    if (name.equalsIgnoreCase(Allresult.get(i).getShop_name())) {
 
-                        SubDealerModel di = new SubDealerModel();
-                        di.lati = Allresult.get(i).lati;
-                        di.longi = Allresult.get(i).longi;
-                        di.address = Allresult.get(i).address;
-                        di.name = Allresult.get(i).name;
-                        di.shop_name = Allresult.get(i).shop_name;
-                        di.distance = Allresult.get(i).distance;
-                        di.gst_no = Allresult.get(i).gst_no;
-                        di.proprietor_mobile1 = Allresult.get(i).proprietor_mobile1;
-                        di.code = Allresult.get(i).code;
-
-                        Allresultsearch.add(di);
+                        Allresultsearch.add(new RCTOData("",Allresult.get(i).getCode(),"",Allresult.get(i).getShop_name(),Allresult.get(i).
+                                getAddress(),Allresult.get(i).getState_code(),Allresult.get(i).getCity_code(),Allresult.get(i).getPincode(),
+                                "",Allresult.get(i).getMobile(),Allresult.get(i).getEmail(),Allresult.get(i).getStatus(),Allresult.get(i).getProprietor_name()
+                                ,Allresult.get(i).getGst_no(),Allresult.get(i).getAadhar_no(),Allresult.get(i).getPan_no(),Allresult.get(i).getLatitude(),Allresult.get(i).getLongitude(),
+                                Allresult.get(i).getPower_dealer(),Allresult.get(i).getLighting_dealer(),Allresult.get(i).getIaq_dealer(),
+                                Allresult.get(i).getSource_of_data(),"","",Allresult.get(i).getTsi_code(),"",Allresult.get(i).getDistance()));
 
                         ca = new Sub_DealerMap_Adapter(Allresultsearch, MapsActivity.this, MapsActivity.this);
                         marker_rview.setAdapter(ca);
@@ -338,10 +335,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lastVisibleItem = firstVisibleItemPosition + visibleItemCount;
 
             String code = Allresult.get(lastVisibleItem - 1).getCode();
-            String lati = Allresult.get(lastVisibleItem - 1).getLati();
-            String longi = Allresult.get(lastVisibleItem - 1).getLongi();
-            String name = Allresult.get(lastVisibleItem - 1).getName();
-            String distance = Allresult.get(lastVisibleItem - 1).getDescription();
+            String lati = Allresult.get(lastVisibleItem - 1).getLatitude();
+            String longi = Allresult.get(lastVisibleItem - 1).getLongitude();
+            String name = Allresult.get(lastVisibleItem - 1).getShop_name();
+            String distance = Allresult.get(lastVisibleItem - 1).getDistance();
             String gst_no = Allresult.get(lastVisibleItem - 1).getGst_no();
 
             Log.d("Last_Visible", "Last_Visible " + lastVisibleItem);
@@ -505,8 +502,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             if (Allresult.get(i).getCode() == code) {
                                 positionn = i;
 
-                                lati = Allresult.get(i).getLati();
-                                longi = Allresult.get(i).getLongi();
+                                lati = Allresult.get(i).getLatitude();
+                                longi = Allresult.get(i).getLongitude();
 
                                 break;  // uncomment to get the first instance
                             }
@@ -1149,6 +1146,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         name.clear();
                         distance.clear();
                         gst_no.clear();
+                        aadhar_no.clear();
+                        pan_no.clear();
                         mobile.clear();
                         code.clear();
                         AllresultSubDealer.clear();
@@ -1161,7 +1160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("latitude")) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("longitude"))) {
 
-                                SubDealerModel di = new SubDealerModel();
+                                //SubDealerModel di = new SubDealerModel();
 
                                 locations.add(new LatLng(Double.valueOf(jsonObject.getString("latitude")), Double.valueOf(jsonObject.getString("longitude"))));
 
@@ -1169,32 +1168,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name")));
                                 distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")));
                                 gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")));
-                                mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no")));
+                                aadhar_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("aadhar_no")));
+                                pan_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")));
+                                mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("pan_no")));
                                 code.add(jsonObject.getString("code"));
                                 //status.add("Approved");
 
+                                Allresult.add(new RCTOData("", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("code")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("shop_name")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("state_code")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("city_code")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("pincode")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("email")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("proprietor_name")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("aadhar_no")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("pan_no")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("latitude"))
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("longitude")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("power_dealer")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("lighting_dealer"))
+                                        , Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("iaq_dealer")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance"))));
 
-                                //di.name = jsonObject.getString("customer_name").trim();
-                                di.proprietor_mobile1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no"));
-                                //  di.proprietor_name1 = jsonObject.getString("customer_address").trim();
-                                di.proprietor_email1 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("sub_dealer_email"));
-                                di.address = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_address"));
-                                di.address2 = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("manual_address"));
-                                //  di.proprietor_mobile2 = jsonObject.getString("mobile_no").trim();
-                                // di.proprietor_name2 = jsonObject.getString("distance").trim();
-                                // di.proprietor_email2 = jsonObject.getString("distance").trim();
-                                di.shop_name = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("customer_name"));
-                                di.distance = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance"));
-                                di.gst_no = Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no"));
-                                di.code = jsonObject.getString("code").trim();
-
-                                di.lati = jsonObject.getString("latitude").trim();
-                                di.longi = jsonObject.getString("longitude").trim();
 
                                 ArrayList<String> names = new ArrayList<>();
-                                names.add(di.shop_name);
-                                Allresult.add(di);
-                                AllresultSubDealer.add(di);
+                                names.add(jsonObject.getString("shop_name"));
+                                AllresultSubDealer.add(new RCTOData("", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("code")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("shop_name")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("state_code")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("city_code")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("pincode")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("mobile_no")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("email")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("proprietor_name")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("aadhar_no")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("pan_no")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("latitude"))
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("longitude")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("power_dealer")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("lighting_dealer"))
+                                        , Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("iaq_dealer")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance"))));
+
                                 SubDealer_List.add(jsonObject.getString("customer_name"));
 
 
@@ -1393,24 +1403,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 name.clear();
                 distance.clear();
                 gst_no.clear();
+                aadhar_no.clear();
+                pan_no.clear();
                 mobile.clear();
                 code.clear();
                 Global_Data.mMarkers.clear();
 
                 for (int i = 0; i < Allresultsearch.size(); i++) {
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(Allresultsearch.get(i).lati) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(Allresultsearch.get(i).longi)) {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(Allresultsearch.get(i).getLatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(Allresultsearch.get(i).getLongitude())) {
 
-                        SubDealerModel di = new SubDealerModel();
+                        locations.add(new LatLng(Double.valueOf(Allresultsearch.get(i).getLatitude()), Double.valueOf(Allresultsearch.get(i).getLongitude())));
 
-                        locations.add(new LatLng(Double.valueOf(Allresultsearch.get(i).lati), Double.valueOf(Allresultsearch.get(i).longi)));
-
-                        address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).address));
+                        address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getAddress()));
                         // name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).name));
-                        name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).shop_name));
-                        distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).distance));
-                        gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).gst_no));
-                        mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).proprietor_mobile1));
-                        code.add(Allresultsearch.get(i).code);
+                        name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getShop_name()));
+                        distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getDistance()));
+                        gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getGst_no()));
+                        aadhar_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getAddress()));
+                        pan_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getPan_no()));
+                        mobile.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getMobile()));
+                        code.add(Allresultsearch.get(i).getCode());
                         //status.add("Approved");
 
 
@@ -1451,14 +1463,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             int a = 0;
                             for (LatLng latLng : locations) {
 
-                                //   mMap.setInfoWindowAdapter(new MyInfoWindowAdapter(MapsActivity.this,"Name : "+name.get(a),
-//                                                "Address : "+address.get(a)));
-
-//                                        Marker marker = mMap.addMarker(new MarkerOptions()
-//                                                .position(latLng)
-//                                                .title("Name : "+name.get(a))
-//                                                .snippet("Address : "+address.get(a)));
-
                                 MarkerOptions markerOptions = new MarkerOptions();
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(gst_no.get(a))) {
@@ -1472,16 +1476,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             .snippet("Address : " + address.get(a))
                                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                                 }
-
-
-                                // InfoWindowData info = new InfoWindowData();
-                                // info.setCdistance("Distance : " + distance.get(a));
-                                // info.setCmobile("Mobile No : " + mobile.get(a));
-                                // info.setCmobilenew(mobile.get(a));
-                                // info.setS_code(code.get(a));
-
-                                //CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(MapsActivity.this);
-                                //  mMap.setInfoWindowAdapter(customInfoWindow);
 
                                 try {
                                     Marker marker = markerMap.get(0);

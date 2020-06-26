@@ -96,6 +96,32 @@
                 />
 
             <TextView
+                android:id="@+id/p_proprietor_aadhar_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/p_proprietor_gst_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                />
+
+            <TextView
+                android:id="@+id/p_proprietor_pan_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/p_proprietor_aadhar_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                />
+
+            <TextView
                 android:id="@+id/p_stages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,7 +188,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/p_proprietor_gst_no"
+                android:layout_below="@+id/p_proprietor_pan_no"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="5dp">
 
