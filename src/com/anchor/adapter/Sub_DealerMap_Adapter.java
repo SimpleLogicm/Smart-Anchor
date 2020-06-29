@@ -31,6 +31,7 @@ import com.anchor.activities.Global_Data;
 import com.anchor.activities.MapsActivity;
 import com.anchor.activities.R;
 import com.anchor.activities.Sub_Dealer_Order_Main;
+import com.anchor.activities.TodoEditCustomer;
 import com.anchor.model.RCTOData;
 import com.anchor.model.SubDealerModel;
 import com.google.android.gms.maps.CameraUpdate;
@@ -100,7 +101,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
        // contactViewHolder.p_dealer_city.setText("City : " + ci.city);
       //  contactViewHolder.p_stages.setText("Stage : " + ci.Stage);
-        contactViewHolder.p_dealer_code.setText(ci.getGst_no());
+        contactViewHolder.p_dealer_code.setText(ci.getCode());
         contactViewHolder.p_lati.setText(ci.getLatitude());
         contactViewHolder.p_longi.setText(ci.getLongitude());
 
@@ -230,33 +231,30 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             @Override
             public void onClick(View arg0) {
 
-                Intent mIntent = mcontext.getPackageManager().getLaunchIntentForPackage("subdealer.anchor.com.anchorsubdealer_registration");
-                if (mIntent != null) {
-                    try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(ci.getCode())) {
 
-                        mcontext.startActivity(mIntent);
-
-                    } catch (ActivityNotFoundException err) {
-                        err.printStackTrace();
-                        Toast.makeText(mcontext, "Please install bar", Toast.LENGTH_SHORT).show();
-                        try{
-                            final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
-                            mcontext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                        }catch(Exception ex){ex.printStackTrace();
-                            Toast.makeText(mcontext, "App Not available in google play.", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                }
-                else
-                {
-                    try{
-                        final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
-                        mcontext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                    }catch(Exception ex){ex.printStackTrace();
-                        Toast.makeText(mcontext, "App Not available in google play.", Toast.LENGTH_SHORT).show();
-                    }
+                    Intent i = new Intent(mcontext, TodoEditCustomer.class);
+                    i.putExtra("code", ci.getCode());
+                    i.putExtra("shop_name", ci.getShop_name());
+                    i.putExtra("address", ci.getAddress());
+                    i.putExtra("state_code", ci.getState_code());
+                    i.putExtra("city_code", ci.getCity_code());
+                    i.putExtra("mobile_no", ci.getMobile());
+                    i.putExtra("email", ci.getEmail());
+                    i.putExtra("tsi_code", ci.getTsi_code());
+                    i.putExtra("gst_no", ci.getGst_no());
+                    i.putExtra("aadhar_no", ci.getAadhar_no());
+                    i.putExtra("pan_no", ci.getPan_no());
+                    i.putExtra("latitude", ci.getLatitude());
+                    i.putExtra("longitude", ci.getLongitude());
+                    i.putExtra("power_dealer", ci.getPower_dealer());
+                    i.putExtra("lighting_dealer", ci.getLighting_dealer());
+                    i.putExtra("iaq_dealer", ci.getIaq_dealer());
+                    i.putExtra("source_of_data", ci.getSource_of_data());
+                    i.putExtra("cardcolor", ci.getCard_color_code());
+                    i.putExtra("from_flag", "map");
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mcontext.startActivity(i);
                 }
 
             }

@@ -37,6 +37,7 @@ import android.widget.Toast;
 import com.anchor.adapter.AutoCompleteContactArrayAdapter;
 import com.anchor.adapter.AutocompleteAdapternew;
 import com.anchor.adapter.CustomerAutoAdapter;
+import com.anchor.model.RCTOData;
 import com.anchor.model.SubDealerModel;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -254,8 +255,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 String name = s_sub_dealer_search.getText().toString();
 
                 for (int i = 0; i < AllresultSubDealer.size(); i++) {
-                    if (name.equalsIgnoreCase(AllresultSubDealer.get(i).name)) {
-                        Global_Data.Sub_Dealer_Code = AllresultSubDealer.get(i).code;
+                    if (name.equalsIgnoreCase(AllresultSubDealer.get(i).getShop_name())) {
+                        Global_Data.Sub_Dealer_Code = AllresultSubDealer.get(i).getCode();
                         break;
                     }
                 }
@@ -425,14 +426,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
 
                     if (AllresultSubDealer.size() > 0) {
-                        for (SubDealerModel dataItem : AllresultSubDealer) {
-                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.code;
+                        for (RCTOData dataItem : AllresultSubDealer) {
+                            if (dataItem.getShop_name().equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.getCode();
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
-                                Global_Data.Sub_Email = dataItem.proprietor_email1;
-                                Global_Data.Sub_shop_name = dataItem.shop_name;
-                                Global_Data.Sub_Dealer_address = dataItem.address2;
+                                Global_Data.SUB_Mobile = dataItem.getMobile();
+                                Global_Data.Sub_Email = dataItem.getEmail();
+                                Global_Data.Sub_shop_name = dataItem.getShop_name();
+                                Global_Data.Sub_Dealer_address = dataItem.getAddress();
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -514,14 +515,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
 
                     if (AllresultSubDealer.size() > 0) {
-                        for (SubDealerModel dataItem : AllresultSubDealer) {
-                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.code;
+                        for (RCTOData dataItem : AllresultSubDealer) {
+                            if (dataItem.getShop_name().equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.getCode();
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
-                                Global_Data.Sub_Email = dataItem.proprietor_email1;
-                                Global_Data.Sub_shop_name = dataItem.shop_name;
-                                Global_Data.Sub_Dealer_address = dataItem.address2;
+                                Global_Data.SUB_Mobile = dataItem.getMobile();
+                                Global_Data.Sub_Email = dataItem.getEmail();
+                                Global_Data.Sub_shop_name = dataItem.getShop_name();
+                                Global_Data.Sub_Dealer_address = dataItem.getAddress();
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -617,15 +618,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 } else {
                     valid_sub_dealer_flag = "";
                     if (AllresultSubDealer.size() > 0) {
-                        for (SubDealerModel dataItem : AllresultSubDealer) {
-                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.code;
+                        for (RCTOData dataItem : AllresultSubDealer) {
+                            if (dataItem.getShop_name().equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.getCode();
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
-                                Global_Data.Sub_Email = dataItem.proprietor_email1;
-                                Global_Data.Sub_Dealer_name = s_sub_dealer_search.getText().toString();
-                                Global_Data.Sub_shop_name = dataItem.shop_name;
-                                Global_Data.Sub_Dealer_address = dataItem.address2;
+                                Global_Data.SUB_Mobile = dataItem.getMobile();
+                                Global_Data.Sub_Email = dataItem.getEmail();
+                                Global_Data.Sub_shop_name = dataItem.getShop_name();
+                                Global_Data.Sub_Dealer_address = dataItem.getAddress();
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }

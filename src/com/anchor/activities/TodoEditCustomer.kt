@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.GradientDrawable
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
@@ -30,17 +29,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_address
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_dealer_container
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_lightingdealer
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_powerdealer
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_state
-import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_tsi_code
-import kotlinx.android.synthetic.main.custom_dialog_todolist.*
-import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
-import kotlinx.android.synthetic.main.todoadd_retailer.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -107,6 +95,11 @@ class TodoEditCustomer : Activity() {
     var iaq_dealer = "";
     var source_of_data = "";
     var tsi_code = "";
+    var from_flag = ""
+    var id = ""
+
+
+
 
     val GSTINFORMAT_REGEX = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
     val GSTN_CODEPOINT_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -115,7 +108,7 @@ class TodoEditCustomer : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo_editcustomer)
 
-        context = RetailerTDCustomerList@this
+        context = TodoEditCustomer@this
         cd = ConnectionDetector(context)
 
         list = ArrayList<Todo_model>()
@@ -142,6 +135,8 @@ class TodoEditCustomer : Activity() {
             tsi_code = intent.getStringExtra("tsi_code")
             coardcolor = intent.getStringExtra("cardcolor")
 
+            from_flag = intent.getStringExtra("from_flag")
+
             todoe_shop_name.setText(shop_name.trim())
             todoe_mobile.setText(mobile_no.trim())
             todoe_gst.setText(gst_no.trim())
@@ -154,6 +149,7 @@ class TodoEditCustomer : Activity() {
 
             if(coardcolor.equals("#D8AB1E"))
             {
+                id = "1"
                 todoe_shop_name.setBackgroundResource(R.drawable.todo_back)
                 todoe_mobile.setBackgroundResource(R.drawable.todo_back)
                 todoe_gst.setBackgroundResource(R.drawable.todo_back)
@@ -172,8 +168,9 @@ class TodoEditCustomer : Activity() {
                 todoe_tsi_code.setBackgroundResource(R.drawable.todo_back_for_editablefalse_yellow)
             }
             else
-            if(coardcolor.equals("#BB2B20"))
+            if(coardcolor.equals("#BB2B20") || coardcolor.equals("red"))
             {
+                id = "2"
                 todoe_shop_name.setBackgroundResource(R.drawable.todored)
                 todoe_mobile.setBackgroundResource(R.drawable.todored)
                 todoe_gst.setBackgroundResource(R.drawable.todored)
@@ -194,8 +191,10 @@ class TodoEditCustomer : Activity() {
 
             }
             else
-            if(coardcolor.equals("#3A921A"))
+            if(coardcolor.equals("#3A921A") || coardcolor.equals("green"))
             {
+                id = "3"
+
                 todoe_shop_name.setBackgroundResource(R.drawable.todogreen)
                 todoe_mobile.setBackgroundResource(R.drawable.todogreen)
                 todoe_gst.setBackgroundResource(R.drawable.todogreen)
@@ -214,10 +213,10 @@ class TodoEditCustomer : Activity() {
                 todoe_tsi_code.setBackgroundResource(R.drawable.todo_back_for_editablefalse_green)
             }
             else
-            if(coardcolor.equals("#26600B"))
+            if(coardcolor.equals("#26600B") || coardcolor.equals("darkgreen"))
             {
 
-
+                id = "4"
                 todoe_shop_name.setBackgroundResource(R.drawable.todarkgreen)
                 todoe_mobile.setBackgroundResource(R.drawable.todarkgreen)
                 todoe_gst.setBackgroundResource(R.drawable.todarkgreen)
@@ -757,7 +756,19 @@ class TodoEditCustomer : Activity() {
             alertDialog.setTitle("Confirmation")
             alertDialog.setMessage(" Are you sure you want to Cancel?")
             alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
-                finish()
+                if(from_flag.equals("map"))
+                {
+                    val i = Intent(context, MapsActivity::class.java)
+                    startActivity(i)
+                    finish()
+                }else
+                {
+                    val i = Intent(context, RetailerTDCustomerList::class.java)
+                    i.putExtra("id",id)
+                    i.putExtra("cardcolor",coardcolor)
+                    startActivity(i)
+                    finish()
+                }
             }
 
             alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
@@ -768,7 +779,20 @@ class TodoEditCustomer : Activity() {
             alertDialog.show()
         }
         else{
-            finish()
+            if(from_flag.equals("map"))
+            {
+                val i = Intent(context, MapsActivity::class.java)
+                startActivity(i)
+                finish()
+            }else
+            {
+                val i = Intent(context, RetailerTDCustomerList::class.java)
+                i.putExtra("id",id)
+                i.putExtra("cardcolor",coardcolor)
+                startActivity(i)
+                finish()
+            }
+
         }
     }
 
@@ -1518,9 +1542,19 @@ class TodoEditCustomer : Activity() {
                             val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
-                            val a = Intent(context, RetailerTDList::class.java)
-                            startActivity(a)
-                            finish()
+
+                            if(from_flag.equals("map"))
+                            {
+                                val i = Intent(context, MapsActivity::class.java)
+                                startActivity(i)
+                                finish()
+                            }else
+                            {
+                                val i = Intent(context, RetailerTDList::class.java)
+                                startActivity(i)
+                                finish()
+                            }
+
                         }
 //                        else
 //                            if (response_result.equals("Retailer Duplicate record found.", ignoreCase = true)) {
@@ -1658,7 +1692,17 @@ class TodoEditCustomer : Activity() {
                             val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
-                            finish()
+                            if(from_flag.equals("map"))
+                            {
+                                val i = Intent(context, MapsActivity::class.java)
+                                startActivity(i)
+                                finish()
+                            }else
+                            {
+                                val i = Intent(context, RetailerTDList::class.java)
+                                startActivity(i)
+                                finish()
+                            }
                         }
 //                        if (response_result.equals("Retailer created successfully.", ignoreCase = true)) {
 //

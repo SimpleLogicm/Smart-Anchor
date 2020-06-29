@@ -81,6 +81,7 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
                 i.putExtra("iaq_dealer", data.iaq_dealer)
                 i.putExtra("source_of_data", data.source_of_data)
                 i.putExtra("cardcolor", data.card_color_code)
+                i.putExtra("from_flag", "todo")
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 mContext.startActivity(i)
             }
