@@ -47,7 +47,7 @@
                 android:layout_gravity="center"
                 android:enabled="false"
                 android:drawableRight="@drawable/ic_date_range_black_24dp"
-                android:hint="@string/detail1"
+                android:hint="Date"
                 android:layout_marginTop="10dp"
                 android:imeOptions="actionDone"
                 android:singleLine="true">
