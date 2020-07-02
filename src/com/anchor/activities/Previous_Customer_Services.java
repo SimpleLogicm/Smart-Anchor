@@ -249,6 +249,8 @@ public class Previous_Customer_Services extends Activity {
     {
         String domain = getResources().getString(R.string.service_domain);
 
+       // String domain = "https://ecart.anchor-group.in/metal/api/v1/";
+
         Log.i("volley", "domain: " + domain);
         //Log.i("volley", "email: " + Global_Data.CityName);
 
@@ -256,6 +258,8 @@ public class Previous_Customer_Services extends Activity {
         String service_url = "";
 
         //service_url = domain + "beats/beats_performance?imei_no=" + Global_Data.CityName + "&email=" + Global_Data.CityName;
+
+        //Global_Data.CUSTOMER_EMAIL = "priyanka.konka@simplelogic.in";
 
         if(prefManager.getCustomer_service_type().toLowerCase().equalsIgnoreCase("Marketing Tool"))
         {
@@ -323,7 +327,7 @@ public class Previous_Customer_Services extends Activity {
                 });
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        int socketTimeout = 300000;//30 seconds - change to what you want
+        int socketTimeout = 600000;//30 seconds - change to what you want
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         jsObjRequest.setRetryPolicy(policy);
         // requestQueue.se
