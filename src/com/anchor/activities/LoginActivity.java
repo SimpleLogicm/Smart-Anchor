@@ -1065,7 +1065,6 @@ public class LoginActivity extends Activity {
                             dbvoc.getDeleteTable("users");
 
                             JSONArray users = response.getJSONArray("users");
-//	                           
                             Log.i("volley", "response reg users Length: " + users.length());
 
                             if (users.length() <= 0) {

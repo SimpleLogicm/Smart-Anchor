@@ -11,6 +11,7 @@ import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
@@ -94,6 +95,8 @@ class TODOAddRetailer : Activity() {
 
         list = ArrayList<Todo_model>()
 
+        todoe_gsta.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
+        todoe_pana.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
 
 
         try {

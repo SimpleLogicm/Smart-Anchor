@@ -159,59 +159,86 @@ public class ReturnOrder1 extends BaseActivity {
                                     long id) {
                 //Toast.makeText(Order.this," selected", Toast.LENGTH_LONG).show();
 
-                Global_Data.hideSoftKeyboard(ReturnOrder1.this);
+                try
+                {
+                    Global_Data.hideSoftKeyboard(ReturnOrder1.this);
 
-                editTextQuantity.setFocusableInTouchMode(true);
-                editTextQuantity.setEnabled(true);
+                    editTextQuantity.setFocusableInTouchMode(true);
+                    editTextQuantity.setEnabled(true);
 
-                List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
-                //results2.add("Select Variant");
-                for (Local_Data cn1 : cont) {
-                    String str_var = "" + cn1.getStateName();
-                    String str_var1 = "" + cn1.getMRP();
-                    String str_var2 = "" + cn1.get_Description();
-                    String str_var3 = "" + cn1.get_Claims();
-                    Global_Data.amnt = "" + cn1.get_Description();
-                    Global_Data.amnt1 = "" + cn1.get_Claims();
+                    editTextQuantity.setText("");
+                    txtPrice.setText("");
+                    price = "";
 
-                    categ_name = cn1.getCategory();
-                    subcateg_name = cn1.getSubcateg();
+                    List<Local_Data> cont = dbvoc.getProductByCat(Product_Variant.getText().toString().trim());
+                    //results2.add("Select Variant");
+                    for (Local_Data cn1 : cont) {
+                        String str_var = "" + cn1.getStateName();
+                        String str_var1 = "" + cn1.getMRP();
+                        String str_var2 = "" + cn1.get_Description();
+                        String str_var3 = "" + cn1.get_Claims();
+                        Global_Data.amnt = "" + cn1.get_Description();
+                        Global_Data.amnt1 = "" + cn1.get_Claims();
 
-                    editTextRP.setText(str_var);
-                    editTextMRP.setText(str_var1);
+                        categ_name = cn1.getCategory();
+                        subcateg_name = cn1.getSubcateg();
 
-                    txtPrice.setText("Total Price : " + "");
+                        editTextRP.setText(str_var);
+                        editTextMRP.setText(str_var1);
 
-                    if (editTextQuantity.getText().toString().length() != 0) {
-                        if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
-                            long final_mrp = (Long.valueOf(editTextRP.getText().toString())) * (Long.valueOf(editTextQuantity.getText().toString().trim()));
-                            txtPrice.setText("Total Price : " + final_mrp);
-                            price = String.valueOf(final_mrp);
+                        txtPrice.setText("Total Price : " + "");
 
-                            // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                        } else {
-                            if (!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextMRP.getText().toString().equalsIgnoreCase(null) && !editTextMRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
-                                // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-                                // txtPrice.setText("Total Price : "+final_mrp);
-                                // price = String.valueOf(final_mrp);
-                                //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                            }
-                        }
+//                    if (editTextQuantity.getText().toString().length() != 0) {
+//                        if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
+//                            try
+//                            {
+//                                double final_mrp = (Double.valueOf(editTextRP.getText().toString())) * (Double.valueOf(editTextQuantity.getText().toString().trim()));
+//                                txtPrice.setText("Total Price : " + final_mrp);
+//                                price = String.valueOf(final_mrp);
+//                            }catch (Exception ex)
+//                            {
+//                                ex.printStackTrace();
+//                            }
+//
+//                            // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+//                        } else {
+//                            if (!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextRP.getText().toString().equalsIgnoreCase(null) && !editTextRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
+//                                // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
+//                                // txtPrice.setText("Total Price : "+final_mrp);
+//                                // price = String.valueOf(final_mrp);
+//                                //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+//                            }
+//
+//                        }
+//                    }
                     }
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
                 }
 
-                adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spnCategory.setAdapter(adapter_state1);
-                //spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
 
-                adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spnProduct.setAdapter(adapter_state2);
-                //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)) {
-                    int spinnerPosition = adapter_state1.getPosition(categ_name);
-                    spnCategory.setSelection(spinnerPosition);
+                try
+                {
+                    adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spnCategory.setAdapter(adapter_state1);
+                    //spnCategory.setOnItemSelectedListener(NewOrderActivity.this);
+
+                    adapter_state2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spnProduct.setAdapter(adapter_state2);
+                    //spnProduct.setOnItemSelectedListener(NewOrderActivity.this);
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(categ_name)) {
+                        int spinnerPosition = adapter_state1.getPosition(categ_name);
+                        spnCategory.setSelection(spinnerPosition);
+                    }
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
                 }
+
+
             }
         });
 
@@ -227,20 +254,26 @@ public class ReturnOrder1 extends BaseActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                listScheme.clear();
-                listScheme.add("Select Scheme");
+                try {
+//                    listScheme.clear();
+//                    listScheme.add("Select Scheme");
+//
+//                    dataAdapterScheme.notifyDataSetChanged();
+//                    dataAdapterScheme.setDropDownViewResource(R.layout.spinner_item);
+//                    spnScheme.setAdapter(dataAdapterScheme);
+//                    rp = 0.00f;
+//                    mrp = 0.00f;
+//                    productprice = rp;
+//
+//                    editTextRP.setText("" + rp);
+//                    editTextMRP.setText("" + mrp);
+//                    editTextQuantity.setFocusableInTouchMode(false);
+//                    editTextQuantity.setEnabled(false);
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
 
-                dataAdapterScheme.notifyDataSetChanged();
-                dataAdapterScheme.setDropDownViewResource(R.layout.spinner_item);
-                spnScheme.setAdapter(dataAdapterScheme);
-                rp = 0.00f;
-                mrp = 0.00f;
-                productprice = rp;
-
-                editTextRP.setText("" + rp);
-                editTextMRP.setText("" + mrp);
-                editTextQuantity.setFocusableInTouchMode(false);
-                editTextQuantity.setEnabled(false);
                 //txtPrice.setText("Total Price : ");
 
             }
@@ -258,16 +291,23 @@ public class ReturnOrder1 extends BaseActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (!String.valueOf(s).equalsIgnoreCase("")) {
-                    if (Integer.parseInt(String.valueOf(s)) <= 0) {
-                        editTextQuantity.setText("");
+                try
+                {
+                    if (!String.valueOf(s).equalsIgnoreCase("")) {
+                        if (Integer.parseInt(String.valueOf(s)) <= 0) {
+                            editTextQuantity.setText("");
+                            txtPrice.setText("Total Price : " + "");
+                            price = "";
+                        }
+                    } else {
                         txtPrice.setText("Total Price : " + "");
-                        price = "";
+                        //price = String.valueOf(" ");
                     }
-                } else {
-                    txtPrice.setText("Total Price : " + "");
-                    //price = String.valueOf(" ");
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
                 }
+
 
             }
         });
@@ -675,7 +715,7 @@ public class ReturnOrder1 extends BaseActivity {
                                 toast.show();
 
                                 //loginDataBaseAdapter.insertOrderProducts("", "",  Global_Data.GLOvel_GORDER_ID, "", spnCategory.getSelectedItem().toString() , spnProduct.getText().toString() , Global_Data.order_variant , " " , spnScheme.getSelectedItem().toString() , " ", "", editTextQuantity.getText().toString() , Global_Data.variant_rr,editTextMRP.getText().toString(), price, "", "",Global_Data.order_retailer,discount_amount,Global_Data.GLOvel_ITEM_NUMBER,discount_type);//Reading all
-                                loginDataBaseAdapter.insertReturnOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID_RETURN, "", spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString(), Global_Data.order_variant, " ", spnScheme.getSelectedItem().toString(), " ", "", editTextQuantity.getText().toString(), Global_Data.variant_rr, Global_Data.variant_mrp, price, "", "", Global_Data.order_retailer, " ", Global_Data.item_code_return, " ", item_name);//Reading all
+                                loginDataBaseAdapter.insertReturnOrderProducts(" ", " ", Global_Data.GLOvel_GORDER_ID_RETURN, "", spnCategory.getSelectedItem().toString(), spnProduct.getSelectedItem().toString(), Global_Data.order_variant, " ", "", " ", "", editTextQuantity.getText().toString(), Global_Data.variant_rr, Global_Data.variant_mrp, price, "", "", Global_Data.order_retailer, " ", Global_Data.item_code_return, " ", item_name);//Reading all
                             }
                         }
 
@@ -910,9 +950,17 @@ public class ReturnOrder1 extends BaseActivity {
                         if (editTextQuantity.getText().toString().length() != 0) {
 
                             if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
-                                double final_mrp = (Double.valueOf(editTextRP.getText().toString())) * (Double.valueOf(editTextQuantity.getText().toString().trim()));
-                                txtPrice.setText("Total Price : " + final_mrp);
-                                price = String.valueOf(final_mrp);
+
+                                try
+                                {
+                                    double final_mrp = (Double.valueOf(editTextRP.getText().toString())) * (Double.valueOf(editTextQuantity.getText().toString().trim()));
+                                    txtPrice.setText("Total Price : " + final_mrp);
+                                    price = String.valueOf(final_mrp);
+                                }catch (Exception ex)
+                                {
+                                    ex.printStackTrace();
+                                }
+
 
                                 // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
                             } else {
@@ -944,47 +992,47 @@ public class ReturnOrder1 extends BaseActivity {
                 // TODO Auto-generated method stub
                 productScheme = parent.getItemAtPosition(pos).toString();
 
-                if (parent.getItemAtPosition(pos).toString()
-                        .equalsIgnoreCase("Select Scheme")) {
-
-
-                    if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
-                        long final_mrp = (Long.valueOf(editTextRP.getText().toString())) * (Long.valueOf(editTextQuantity.getText().toString().trim()));
-                        txtPrice.setText("Total Price : " + final_mrp);
-                        price = String.valueOf(final_mrp);
-
-                        // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                    } else {
-                        if (!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextRP.getText().toString().equalsIgnoreCase(null) && !editTextRP.getText().toString().equalsIgnoreCase("null") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
-//							Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
-//							txtPrice.setText("Total Price : "+final_mrp);
-//							price = String.valueOf(final_mrp);
-                            //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
-                        }
-
-                    }
-
-                } else {
-
-                    productprice = Float.valueOf(editTextMRP.getText().toString());
-
-                    totalprice = productprice * quantity;
-
-                    Global_Data.order_amount = totalprice;
-                    //Toast.makeText(NewOrderActivity.this, ""+Global_Data.order_amount ,Toast.LENGTH_SHORT).show();
-
-                    int aaa = Integer.parseInt(Global_Data.amnt);
-
-                    totalprc_scheme = ((quantity / productprice) * aaa);
-
-                    totalprice1 = (quantity + ((quantity / productprice) * aaa));
-
-                    txtPrice.setText("Total Price : " + String.format("%.2f", totalprc_scheme));
-
-                    txtDeleiveryQuantity.setText("Delivery Quantity : " + String.format("%.2f", totalprice1));
-
-
-                }
+//                if (parent.getItemAtPosition(pos).toString()
+//                        .equalsIgnoreCase("Select Scheme")) {
+//
+//
+//                    if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
+//                        double final_mrp = (Double.valueOf(editTextRP.getText().toString())) * (Double.valueOf(editTextQuantity.getText().toString().trim()));
+//                        txtPrice.setText("Total Price : " + final_mrp);
+//                        price = String.valueOf(final_mrp);
+//
+//                        // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+//                    } else {
+//                        if (!editTextMRP.getText().toString().equalsIgnoreCase("") && !editTextRP.getText().toString().equalsIgnoreCase(null) && !editTextRP.getText().toString().equalsIgnoreCase("null") && !editTextMRP.getText().toString().equalsIgnoreCase("0.0")) {
+//                            // Float final_mrp = (Float.valueOf(editTextMRP.getText().toString()));
+//                            // txtPrice.setText("Total Price : "+final_mrp);
+//                            // price = String.valueOf(final_mrp);
+//                            //txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());
+//                        }
+//
+//                    }
+//
+//                } else {
+//
+//                    productprice = Float.valueOf(editTextMRP.getText().toString());
+//
+//                    totalprice = productprice * quantity;
+//
+//                    Global_Data.order_amount = totalprice;
+//                    //Toast.makeText(NewOrderActivity.this, ""+Global_Data.order_amount ,Toast.LENGTH_SHORT).show();
+//
+//                    int aaa = Integer.parseInt(Global_Data.amnt);
+//
+//                    totalprc_scheme = ((quantity / productprice) * aaa);
+//
+//                    totalprice1 = (quantity + ((quantity / productprice) * aaa));
+//
+//                    txtPrice.setText("Total Price : " + String.format("%.2f", totalprc_scheme));
+//
+//                    txtDeleiveryQuantity.setText("Delivery Quantity : " + String.format("%.2f", totalprice1));
+//
+//
+//                }
 
 
             }

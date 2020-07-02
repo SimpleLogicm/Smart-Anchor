@@ -47,7 +47,7 @@
                 android:layout_gravity="center"
                 android:enabled="false"
                 android:drawableRight="@drawable/ic_date_range_black_24dp"
-                android:hint="@string/detail1"
+                android:hint="Date"
                 android:layout_marginTop="10dp"
                 android:imeOptions="actionDone"
                 android:singleLine="true">
@@ -128,7 +128,7 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:weightSum="2.0"
-        android:layout_height="200dp">
+        android:layout_height="300dp">
 
         <TextView
             android:id="@+id/textView2"

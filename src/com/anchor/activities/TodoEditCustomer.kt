@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
@@ -83,6 +84,8 @@ class TodoEditCustomer : Activity() {
     var address = "";
     var state_code = "";
     var city_code = "";
+    var state_codeback = "";
+    var city_codeback = "";
     var mobile_no = "";
     var email = "";
     var gst_no = "";
@@ -93,6 +96,9 @@ class TodoEditCustomer : Activity() {
     var power_dealer = "";
     var lighting_dealer = "";
     var iaq_dealer = "";
+    var power_dealerback = "";
+    var lighting_dealerback = "";
+    var iaq_dealerback = "";
     var source_of_data = "";
     var tsi_code = "";
     var from_flag = ""
@@ -113,6 +119,11 @@ class TodoEditCustomer : Activity() {
 
         list = ArrayList<Todo_model>()
 
+        todoe_gst.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
+        todoe_pan.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
+
+
+
 
 
         try {
@@ -121,6 +132,8 @@ class TodoEditCustomer : Activity() {
             address = intent.getStringExtra("address")
             state_code = intent.getStringExtra("state_code")
             city_code = intent.getStringExtra("city_code")
+            state_codeback = intent.getStringExtra("state_code")
+            city_codeback = intent.getStringExtra("city_code")
             mobile_no = intent.getStringExtra("mobile_no")
             email = intent.getStringExtra("email")
             gst_no = intent.getStringExtra("gst_no")
@@ -131,20 +144,56 @@ class TodoEditCustomer : Activity() {
             power_dealer = intent.getStringExtra("power_dealer")
             lighting_dealer = intent.getStringExtra("lighting_dealer")
             iaq_dealer = intent.getStringExtra("iaq_dealer")
+            power_dealerback = intent.getStringExtra("power_dealer")
+            lighting_dealerback = intent.getStringExtra("lighting_dealer")
+            iaq_dealerback = intent.getStringExtra("iaq_dealer")
             source_of_data = intent.getStringExtra("source_of_data")
             tsi_code = intent.getStringExtra("tsi_code")
             coardcolor = intent.getStringExtra("cardcolor")
 
             from_flag = intent.getStringExtra("from_flag")
 
-            todoe_shop_name.setText(shop_name.trim())
-            todoe_mobile.setText(mobile_no.trim())
-            todoe_gst.setText(gst_no.trim())
-            todoe_aadhar.setText(aadhar_no.trim())
-            todoe_pan.setText(pan_no.trim())
-            todoe_address.setText(address.trim())
-            todoe_geocordinates.setText(latitudes.trim()+","+longitudes.trim())
-            todoe_tsi_code.setText(tsi_code.trim())
+            if(!shop_name.equals(""))
+            {
+                todoe_shop_name.setText(shop_name.trim())
+            }
+
+            if(!mobile_no.equals(""))
+            {
+                todoe_mobile.setText(mobile_no.trim())
+            }
+
+            if(!gst_no.equals(""))
+            {
+                todoe_gst.setText(gst_no.trim())
+            }
+
+            if(!aadhar_no.equals(""))
+            {
+                todoe_aadhar.setText(aadhar_no.trim())
+            }
+
+            if(!pan_no.equals(""))
+            {
+                todoe_pan.setText(pan_no.trim())
+            }
+
+            if(!address.equals(""))
+            {
+                todoe_address.setText(address.trim())
+            }
+
+            if(!latitudes.equals("") && !longitudes.equals(""))
+            {
+                todoe_geocordinates.setText(latitudes.trim()+","+longitudes.trim())
+            }
+
+            if(!tsi_code.equals(""))
+            {
+                todoe_tsi_code.setText(tsi_code.trim())
+            }
+
+
 
 
             if(coardcolor.equals("#D8AB1E"))
@@ -729,22 +778,22 @@ class TodoEditCustomer : Activity() {
           alert_dialog_flag = "yes";
         }
         else
-        if (!state_id.equals(""))
+        if (!state_id.equals("") && !state_id.equals(state_codeback))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!city_id.equals(""))
+        if (!city_id.equals("") && !city_id.equals(city_codeback))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!latitude.toString().trim().equals("") || !longitudes.toString().trim().equals(""))
+        if (!latitude.toString().trim().equals("") || !longitude.toString().trim().equals(""))
         {
           alert_dialog_flag = "yes";
         }
         else
-        if (!dpower_id.equals("") || !diaq_id.toString().equals("") || !dlighting_id.equals(""))
+        if ((!dpower_id.equals("") && !dpower_id.equals(power_dealerback)) || (!diaq_id.toString().equals("") && !diaq_id.equals(iaq_dealerback))|| (!dlighting_id.equals("") && !dlighting_id.equals(lighting_dealerback)))
         {
             alert_dialog_flag = "yes";
         }
@@ -784,7 +833,8 @@ class TodoEditCustomer : Activity() {
                 val i = Intent(context, MapsActivity::class.java)
                 startActivity(i)
                 finish()
-            }else
+            }
+            else
             {
                 val i = Intent(context, RetailerTDCustomerList::class.java)
                 i.putExtra("id",id)
