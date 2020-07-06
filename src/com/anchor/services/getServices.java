@@ -138,6 +138,11 @@ public class getServices {
     static Context context;
     static String device_id = "";
     static String Order_number = "";
+    static String detail1 = "";
+    static String detail2 = "";
+    static String detail3 = "";
+    static String detail4 = "";
+
     static ArrayList<String> s_code = new ArrayList<String>();
     static ArrayList<String> s_stock = new ArrayList<String>();
 
@@ -683,8 +688,12 @@ public class getServices {
 //      requestQueue.add(stringRequest);
     }
 
-    public static void SYNCORDER_BYCustomer(Context contextn, String order_id) {
+    public static void SYNCORDER_BYCustomer(Context contextn, String order_id,String order_detail1_text,String order_detail2_text,String order_detail3_text,String order_detail4_text) {
         context = contextn;
+        detail1 = order_detail1_text;
+        detail2 = order_detail2_text;
+        detail3 = order_detail3_text;
+        detail4 = order_detail4_text;
 
         dialog = new ProgressDialog(contextn, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
@@ -3755,10 +3764,10 @@ public class getServices {
                     }
 
                     product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
-                    product_value.put("details1", cn.getOrder_detail1());
-                    product_value.put("details2", cn.getOrder_detail2());
-                    product_value.put("details3", cn.getOrder_detail3());
-                    product_value.put("details4", cn.getOrder_detail4());
+                    product_value.put("details1", detail1);
+                    product_value.put("details2", detail2);
+                    product_value.put("details3", detail3);
+                    product_value.put("details4", detail4);
                     product_value.put("order_category_code", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
                     product_value.put("payment_term_code", cn.getAsset_code());

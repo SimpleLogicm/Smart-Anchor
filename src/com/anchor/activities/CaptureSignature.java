@@ -1407,7 +1407,7 @@ public class CaptureSignature extends BaseActivity {
 
                                             if (Global_Data.isNetworkAvailable(CaptureSignature.this)) {
                                                // onDestroy();
-                                                getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID);
+                                                getServices.SYNCORDER_BYCustomer(CaptureSignature.this, Global_Data.GLOvel_GORDER_ID,order_detail1_text, order_detail2_text, order_type_name, order_detail4_text);
                                             } else {
                                                 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 
