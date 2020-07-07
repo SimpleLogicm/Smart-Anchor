@@ -126,6 +126,72 @@
         </EditText>
 
         <TextView
+            android:id="@+id/todoe_address_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="@string/shop_no"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
+
+        <EditText
+            android:id="@+id/todoe_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_retailer_edittext"
+            android:gravity="left"
+            android:hint=""
+            android:padding="5dp"
+            android:textColor="@color/black">
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/todoe_area_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="@string/Area"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
+
+        <EditText
+            android:id="@+id/todoe_areaa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_retailer_edittext"
+            android:gravity="left"
+            android:hint=""
+            android:padding="5dp"
+            android:textColor="@color/black">
+
+        </EditText>
+
+        <TextView
+        android:id="@+id/todoe_landmark_h"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:text="@string/Landmark"
+        android:paddingLeft="5dp"
+        android:textColor="@color/retailer_light_green" />
+
+        <EditText
+            android:id="@+id/todoe_landmarka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_retailer_edittext"
+            android:gravity="left"
+            android:hint=""
+            android:padding="5dp"
+            android:textColor="@color/black">
+
+        </EditText>
+
+        <TextView
             android:id="@+id/todoe_state_h"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -172,22 +238,25 @@
 
         </Spinner>
 
+
         <TextView
-            android:id="@+id/todoe_address_h"
+            android:id="@+id/todoe_pincode_h"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="@string/Addressn"
+            android:text="@string/PIN_Code"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
 
         <EditText
-            android:id="@+id/todoe_address"
+            android:id="@+id/todoe_pincodea"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/add_retailer_edittext"
             android:gravity="left"
+            android:inputType="number"
+            android:maxLength="6"
             android:hint=""
             android:padding="5dp"
             android:textColor="@color/black">

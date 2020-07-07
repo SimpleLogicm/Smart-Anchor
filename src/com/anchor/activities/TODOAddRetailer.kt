@@ -49,7 +49,7 @@ import java.util.regex.Pattern
 class TODOAddRetailer : Activity() {
     var list: ArrayList<Todo_model>? = null
     var adaptor: Todo_list_adaptor? = null
-    var id = "";
+   // var id = "";
     var coardcolor = "";
     var cd: ConnectionDetector? = null
     var isInternetPresent = false
@@ -100,7 +100,7 @@ class TODOAddRetailer : Activity() {
 
 
         try {
-            id = intent.getStringExtra("id")
+           // id = intent.getStringExtra("id")
             coardcolor = intent.getStringExtra("cardcolor")
 
         }catch (e:Exception)
@@ -360,7 +360,49 @@ class TODOAddRetailer : Activity() {
         todoe_geocordinatesa.setOnClickListener {
             if (!todoe_address!!.text.toString().trim().equals(""))
             {
-                getCordinates()
+                if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
+                {
+                    var address = ""
+
+                    if (!todoe_address!!.text.toString().trim().equals(""))
+                    {
+                        address += " " +todoe_address!!.text.toString().trim()
+                    }
+
+                    if (!todoe_areaa!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_areaa!!.text.toString().trim()
+                    }
+
+                    if (!todoe_landmarka!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_landmarka!!.text.toString().trim()
+                    }
+
+                    if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+                    {
+                        address += " " + todoe_state!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+                    {
+                        address += " " + todoe_city!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_pincodea!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_pincodea!!.text.toString().trim()
+                    }
+
+                    getCordinates(address)
+                }
+                else
+                {
+                    val toast = Toast.makeText(context,
+                            "Please Enter Address", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
             }
             else
             {
@@ -374,9 +416,41 @@ class TODOAddRetailer : Activity() {
 
         locationimgadd.setOnClickListener {
 
-            if (!todoe_address!!.text.toString().trim().equals(""))
+            if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
             {
-                getCordinates()
+                var address = ""
+
+                if (!todoe_address!!.text.toString().trim().equals(""))
+                {
+                    address += " " +todoe_address!!.text.toString().trim()
+                }
+
+                if (!todoe_areaa!!.text.toString().trim().equals(""))
+                {
+                    address += " " + todoe_areaa!!.text.toString().trim()
+                }
+
+                if (!todoe_landmarka!!.text.toString().trim().equals(""))
+                {
+                    address += " " + todoe_landmarka!!.text.toString().trim()
+                }
+
+                if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+                {
+                    address += " " + todoe_state!!.selectedItem.toString().trim()
+                }
+
+                if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+                {
+                    address += " " + todoe_city!!.selectedItem.toString().trim()
+                }
+
+                if (!todoe_pincodea!!.text.toString().trim().equals(""))
+                {
+                    address += " " + todoe_pincodea!!.text.toString().trim()
+                }
+
+                getCordinates(address)
             }
             else
             {
@@ -611,16 +685,19 @@ class TODOAddRetailer : Activity() {
 
     }
 
-    fun getCordinates()
+    fun getCordinates(addresss:String)
     {
         var str: String = "";
         isInternetPresent = cd!!.isConnectingToInternet
         if (isInternetPresent) {
             try {
                 val geo = Geocoder(context, Locale.getDefault())
-                val addresses = geo.getFromLocationName(todoe_address.text.toString(),1)
-                if (addresses.isEmpty()) { //yourtextfieldname.setText("Waiting for Location");
-
+                val addresses = geo.getFromLocationName(addresss.trim(),1)
+                if (addresses.isEmpty()) {
+                    val toast = Toast.makeText(context,
+                            "Gps Coordinates Not Found ", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 } else {
                     if (addresses.size > 0) {
 
@@ -647,6 +724,10 @@ class TODOAddRetailer : Activity() {
                 }
             } catch (ex: Exception) {
                 ex.printStackTrace()
+                val toast = Toast.makeText(context,
+                        "Gps Coordinates Not Found ", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
             }
         } else {
 
@@ -713,7 +794,10 @@ class TODOAddRetailer : Activity() {
                 product_value_n.put("gst_no", todoe_gsta.text.toString())
                 product_value_n.put("aadhar_no", todoe_aadhara.text.toString())
                 product_value_n.put("pan_no", todoe_pana.text.toString())
-                product_value_n.put("address", todoe_address.text.toString())
+                product_value_n.put("address_line1", todoe_address.text.toString())
+                product_value_n.put("address_line2", todoe_areaa.text.toString())
+                product_value_n.put("landmark", todoe_landmarka.text.toString())
+                product_value_n.put("pincode", todoe_pincodea.text.toString())
                 product_value_n.put("latitude", latitude)
                 product_value_n.put("longitude", longitude)
                 product_value_n.put("current_location_latitude",  Global_Data.GLOvel_LATITUDE)

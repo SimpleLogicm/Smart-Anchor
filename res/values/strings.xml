@@ -438,4 +438,9 @@ INDIA.</string>
     <string name="MORE">MORE</string>
     <string name="INVOICE_DESCRIPTION">INVOICE DESCRIPTION</string>
 
+    <string name="shop_no">Shop No, Building, Company, Apartment</string>
+    <string name="Area">Area, Colony, Street, Sector, Village</string>
+    <string name="Landmark">Landmark</string>
+    <string name="PIN_Code">PIN Code</string>
+
 </resources>

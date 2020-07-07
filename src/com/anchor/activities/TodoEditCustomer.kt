@@ -30,6 +30,15 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_address
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_dealer_container
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_lightingdealer
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_powerdealer
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_state
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_tsi_code
+import kotlinx.android.synthetic.main.todoadd_retailer.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -82,6 +91,9 @@ class TodoEditCustomer : Activity() {
     var code = "";
     var shop_name = "";
     var address = "";
+    var address_line2 = "";
+    var pincode = "";
+    var landmark = "";
     var state_code = "";
     var city_code = "";
     var state_codeback = "";
@@ -130,6 +142,9 @@ class TodoEditCustomer : Activity() {
             code = intent.getStringExtra("code")
             shop_name = intent.getStringExtra("shop_name")
             address = intent.getStringExtra("address")
+            address_line2 = intent.getStringExtra("address_line2")
+            pincode = intent.getStringExtra("pincode")
+            landmark = intent.getStringExtra("landmark")
             state_code = intent.getStringExtra("state_code")
             city_code = intent.getStringExtra("city_code")
             state_codeback = intent.getStringExtra("state_code")
@@ -181,6 +196,21 @@ class TodoEditCustomer : Activity() {
             if(!address.equals(""))
             {
                 todoe_address.setText(address.trim())
+            }
+
+            if(!address_line2.equals(""))
+            {
+                todoe_area.setText(address_line2.trim())
+            }
+
+            if(!landmark.equals(""))
+            {
+                todoe_landmark.setText(landmark.trim())
+            }
+
+            if(!pincode.equals(""))
+            {
+                todoe_pincode.setText(pincode.trim())
             }
 
             if(!latitudes.equals("") && !longitudes.equals(""))
@@ -1556,7 +1586,10 @@ class TodoEditCustomer : Activity() {
                 product_value_n.put("gst_no", todoe_gst.text.toString())
                 product_value_n.put("aadhar_no", todoe_aadhar.text.toString())
                 product_value_n.put("pan_no", todoe_pan.text.toString())
-                product_value_n.put("address", todoe_address.text.toString())
+                product_value_n.put("address_line1", todoe_address.text.toString())
+                product_value_n.put("address_line2", todoe_area.text.toString())
+                product_value_n.put("landmark", todoe_landmark.text.toString())
+                product_value_n.put("pincode", todoe_pincode.text.toString())
 
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude)) {
                     product_value_n.put("latitude", latitude)
