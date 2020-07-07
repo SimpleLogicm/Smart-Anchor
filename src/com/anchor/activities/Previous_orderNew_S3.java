@@ -1356,7 +1356,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                                             isInternetPresent = cd.isConnectingToInternet();
                                             if (isInternetPresent) {
-                                                getServices.SYNCORDER_BYCustomer(Previous_orderNew_S3.this, Global_Data.GLOvel_GORDER_ID);
+                                                getServices.SYNCORDER_BYCustomer(Previous_orderNew_S3.this, Global_Data.GLOvel_GORDER_ID,order_detail1_text, order_detail2_text, order_type_name, order_detail4_text);
                                             } else {
                                                 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 
