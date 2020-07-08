@@ -237,6 +237,9 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
                     i.putExtra("code", ci.getCode());
                     i.putExtra("shop_name", ci.getShop_name());
                     i.putExtra("address", ci.getAddress());
+                    i.putExtra("address_line2", ci.getAddress_line2());
+                    i.putExtra("pincode", ci.getPincode());
+                    i.putExtra("landmark",ci.getLandmark());
                     i.putExtra("state_code", ci.getState_code());
                     i.putExtra("city_code", ci.getCity_code());
                     i.putExtra("mobile_no", ci.getMobile());

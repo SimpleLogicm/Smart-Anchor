@@ -229,6 +229,7 @@ public class Global_Data {
     public static String state_code="";
     public static String click_flag="";
     public static String Sub_shop_name="";
+    public static String merge_retailer_code="";
 	
 	//public static String GLOVEL_LONG_DESC="";
     

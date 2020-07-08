@@ -93,7 +93,7 @@ public class RTODOList_Adapter extends RecyclerView.Adapter<RTODOList_Adapter.My
                        }
                        else
                        {
-                           Toast toast = Toast.makeText(mContext, "Customer Not Found.", Toast.LENGTH_SHORT);
+                           Toast toast = Toast.makeText(mContext, "Retailer Not Found.", Toast.LENGTH_SHORT);
                            toast.setGravity(Gravity.CENTER, 0, 0);
                            toast.show();
                        }

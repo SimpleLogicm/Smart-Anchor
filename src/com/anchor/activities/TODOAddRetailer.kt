@@ -374,10 +374,10 @@ class TODOAddRetailer : Activity() {
                         address += " " + todoe_areaa!!.text.toString().trim()
                     }
 
-                    if (!todoe_landmarka!!.text.toString().trim().equals(""))
-                    {
-                        address += " " + todoe_landmarka!!.text.toString().trim()
-                    }
+//                    if (!todoe_landmarka!!.text.toString().trim().equals(""))
+//                    {
+//                        address += " " + todoe_landmarka!!.text.toString().trim()
+//                    }
 
                     if (!todoe_state!!.selectedItem.toString().equals("Select State"))
                     {
@@ -430,10 +430,10 @@ class TODOAddRetailer : Activity() {
                     address += " " + todoe_areaa!!.text.toString().trim()
                 }
 
-                if (!todoe_landmarka!!.text.toString().trim().equals(""))
-                {
-                    address += " " + todoe_landmarka!!.text.toString().trim()
-                }
+//                if (!todoe_landmarka!!.text.toString().trim().equals(""))
+//                {
+//                    address += " " + todoe_landmarka!!.text.toString().trim()
+//                }
 
                 if (!todoe_state!!.selectedItem.toString().equals("Select State"))
                 {

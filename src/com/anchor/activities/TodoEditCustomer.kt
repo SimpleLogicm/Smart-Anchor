@@ -3,6 +3,7 @@ package com.anchor.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -16,13 +17,12 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.Window
+import android.view.*
 import android.widget.*
+import com.anchor.adapter.RCTDAdapter
 import com.anchor.adapter.Todo_list_adaptor
 import com.anchor.helper.VerhoeffAlgorithm
+import com.anchor.model.RCTOData
 import com.anchor.model.Todo_model
 import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
@@ -38,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_lightingd
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_powerdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_state
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_tsi_code
+import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
 import kotlinx.android.synthetic.main.todoadd_retailer.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -48,7 +49,8 @@ import java.util.regex.Pattern
 
 
 class TodoEditCustomer : Activity() {
-    var list: ArrayList<Todo_model>? = null
+   // lateinit var merge_retailer_code: Any
+    var Allresult: MutableList<RCTOData> = ArrayList<RCTOData>()
     var adaptor: Todo_list_adaptor? = null
     var coardcolor = "";
     var cd: ConnectionDetector? = null
@@ -115,9 +117,7 @@ class TodoEditCustomer : Activity() {
     var tsi_code = "";
     var from_flag = ""
     var id = ""
-
-
-
+    var dialog: ProgressDialog? = null
 
     val GSTINFORMAT_REGEX = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
     val GSTN_CODEPOINT_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -129,7 +129,6 @@ class TodoEditCustomer : Activity() {
         context = TodoEditCustomer@this
         cd = ConnectionDetector(context)
 
-        list = ArrayList<Todo_model>()
 
         todoe_gst.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
         todoe_pan.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
@@ -139,6 +138,7 @@ class TodoEditCustomer : Activity() {
 
 
         try {
+            Global_Data.merge_retailer_code = ""
             code = intent.getStringExtra("code")
             shop_name = intent.getStringExtra("shop_name")
             address = intent.getStringExtra("address")
@@ -223,12 +223,33 @@ class TodoEditCustomer : Activity() {
                 todoe_tsi_code.setText(tsi_code.trim())
             }
 
+            if(!source_of_data.equals("") && source_of_data.equals("DMS"))
+            {
+
+                try {
+                    isInternetPresent = cd!!.isConnectingToInternet
+                    if (isInternetPresent) {
+                        dialog = ProgressDialog(context, ProgressDialog.THEME_HOLO_LIGHT)
+                        dialog!!.setMessage("Please wait....")
+                        dialog!!.setTitle("Smart Anchor App")
+                        dialog!!.setCancelable(false)
+                        dialog!!.show()
+                        getNearestRetailer()
+                    } else {
+                        Toast.makeText(context, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                } catch (ex: java.lang.Exception) {
+                    ex.printStackTrace()
+                }
+            }
+
 
 
 
             if(coardcolor.equals("#D8AB1E"))
             {
-                id = "1"
+                id = "2"
                 todoe_shop_name.setBackgroundResource(R.drawable.todo_back)
                 todoe_mobile.setBackgroundResource(R.drawable.todo_back)
                 todoe_gst.setBackgroundResource(R.drawable.todo_back)
@@ -236,6 +257,9 @@ class TodoEditCustomer : Activity() {
                 todoe_pan.setBackgroundResource(R.drawable.todo_back)
                 todoe_dealer_container.setBackgroundResource(R.drawable.todo_back)
                 todoe_address.setBackgroundResource(R.drawable.todo_back)
+                todoe_area.setBackgroundResource(R.drawable.todo_back)
+                todoe_landmark.setBackgroundResource(R.drawable.todo_back)
+                todoe_pincode.setBackgroundResource(R.drawable.todo_back)
 
                 todoe_state.setBackgroundResource(R.drawable.spinner_background_yellow)
                 todoe_city.setBackgroundResource(R.drawable.spinner_background_yellow)
@@ -249,7 +273,7 @@ class TodoEditCustomer : Activity() {
             else
             if(coardcolor.equals("#BB2B20") || coardcolor.equals("red"))
             {
-                id = "2"
+                id = "1"
                 todoe_shop_name.setBackgroundResource(R.drawable.todored)
                 todoe_mobile.setBackgroundResource(R.drawable.todored)
                 todoe_gst.setBackgroundResource(R.drawable.todored)
@@ -257,6 +281,9 @@ class TodoEditCustomer : Activity() {
                 todoe_pan.setBackgroundResource(R.drawable.todored)
                 todoe_dealer_container.setBackgroundResource(R.drawable.todored)
                 todoe_address.setBackgroundResource(R.drawable.todored)
+                todoe_area.setBackgroundResource(R.drawable.todored)
+                todoe_landmark.setBackgroundResource(R.drawable.todored)
+                todoe_pincode.setBackgroundResource(R.drawable.todored)
 
                 todoe_state.setBackgroundResource(R.drawable.spinner_background_red)
                 todoe_city.setBackgroundResource(R.drawable.spinner_background_red)
@@ -281,6 +308,9 @@ class TodoEditCustomer : Activity() {
                 todoe_pan.setBackgroundResource(R.drawable.todogreen)
                 todoe_dealer_container.setBackgroundResource(R.drawable.todogreen)
                 todoe_address.setBackgroundResource(R.drawable.todogreen)
+                todoe_area.setBackgroundResource(R.drawable.todogreen)
+                todoe_landmark.setBackgroundResource(R.drawable.todogreen)
+                todoe_pincode.setBackgroundResource(R.drawable.todogreen)
 
                 todoe_state.setBackgroundResource(R.drawable.spinner_background_green)
                 todoe_city.setBackgroundResource(R.drawable.spinner_background_green)
@@ -303,6 +333,9 @@ class TodoEditCustomer : Activity() {
                 todoe_pan.setBackgroundResource(R.drawable.todarkgreen)
                 todoe_dealer_container.setBackgroundResource(R.drawable.todarkgreen)
                 todoe_address.setBackgroundResource(R.drawable.todarkgreen)
+                todoe_area.setBackgroundResource(R.drawable.todarkgreen)
+                todoe_landmark.setBackgroundResource(R.drawable.todarkgreen)
+                todoe_pincode.setBackgroundResource(R.drawable.todarkgreen)
 
                 todoe_state.setBackgroundResource(R.drawable.spinner_background_darkgreen)
                 todoe_city.setBackgroundResource(R.drawable.spinner_background_darkgreen)
@@ -318,7 +351,7 @@ class TodoEditCustomer : Activity() {
             e.printStackTrace()
         }
 
-        locationimg.setOnClickListener {
+        merge_icon.setOnClickListener {
             val dialog = Dialog(this@TodoEditCustomer)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setCancelable(false)
@@ -327,37 +360,45 @@ class TodoEditCustomer : Activity() {
 
             val yesBtn = dialog.findViewById(R.id.buttonnoOrderSave) as Button
             val noBtn = dialog.findViewById(R.id.buttonnoOrdercancel) as Button
+            val progressBarMerge = dialog.findViewById(R.id.progressBarMerge) as ProgressBar
+            val btnlayout = dialog.findViewById(R.id.btnlayout) as LinearLayout
+
             var rv=dialog.findViewById(R.id.rv) as RecyclerView
             rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
 
-            list!!.add(Todo_model("Abc fksdjfksjdfksh kjhsfhkshfsdfffdffsf,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc dsdsgdsgdsgsg,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-            list!!.add(Todo_model("Abc,67786677"))
-
-            adaptor = Todo_list_adaptor(this, list!!)
+            adaptor = Todo_list_adaptor(this, Allresult!!)
             rv.adapter = adaptor
+
             noBtn.setOnClickListener {
+                Global_Data.merge_retailer_code = ""
                 dialog.dismiss()
             }
 
             yesBtn.setOnClickListener {
-                Toast.makeText(this@TodoEditCustomer,"submit",Toast.LENGTH_SHORT).show()
+
+                isInternetPresent = cd!!.isConnectingToInternet
+                if (isInternetPresent) {
+                    if(Global_Data.merge_retailer_code.toString().equals(""))
+                    {
+                        val toast = Toast.makeText(context,
+                                "Please Select Retailer. ", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                    else
+                    {
+                        RetailerMerge(Merge_retailercode=Global_Data.merge_retailer_code.toString(),progress_bar = progressBarMerge,submit_button = btnlayout)
+
+                    }
+                }
+                else {
+
+                    val toast = Toast.makeText(context,
+                            "Internet Not Available. ", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
             }
         }
 
@@ -655,7 +696,49 @@ class TodoEditCustomer : Activity() {
         todoe_geocordinates.setOnClickListener {
             if (!todoe_address!!.text.toString().trim().equals(""))
             {
-                getCordinates()
+                if (!todoe_address!!.text.toString().trim().equals("") || !todoe_area!!.text.toString().trim().equals(""))
+                {
+                    var address = ""
+
+                    if (!todoe_address!!.text.toString().trim().equals(""))
+                    {
+                        address += " " +todoe_address!!.text.toString().trim()
+                    }
+
+                    if (!todoe_area!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_area!!.text.toString().trim()
+                    }
+
+//                    if (!todoe_landmark!!.text.toString().trim().equals(""))
+//                    {
+//                        address += " " + todoe_landmark!!.text.toString().trim()
+//                    }
+
+                    if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+                    {
+                        address += " " + todoe_state!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+                    {
+                        address += " " + todoe_city!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_pincode!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_pincode!!.text.toString().trim()
+                    }
+
+                    getCordinates(address)
+                }
+                else
+                {
+                    val toast = Toast.makeText(context,
+                            "Please Enter Address", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
             }
             else
             {
@@ -671,7 +754,49 @@ class TodoEditCustomer : Activity() {
 
             if (!todoe_address!!.text.toString().trim().equals(""))
             {
-                getCordinates()
+                if (!todoe_address!!.text.toString().trim().equals("") || !todoe_area!!.text.toString().trim().equals(""))
+                {
+                    var address = ""
+
+                    if (!todoe_address!!.text.toString().trim().equals(""))
+                    {
+                        address += " " +todoe_address!!.text.toString().trim()
+                    }
+
+                    if (!todoe_area!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_area!!.text.toString().trim()
+                    }
+
+//                    if (!todoe_landmark!!.text.toString().trim().equals(""))
+//                    {
+//                        address += " " + todoe_landmark!!.text.toString().trim()
+//                    }
+
+                    if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+                    {
+                        address += " " + todoe_state!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+                    {
+                        address += " " + todoe_city!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_pincode!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_pincode!!.text.toString().trim()
+                    }
+
+                    getCordinates(address)
+                }
+                else
+                {
+                    val toast = Toast.makeText(context,
+                            "Please Enter Address", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
             }
             else
             {
@@ -789,6 +914,15 @@ class TodoEditCustomer : Activity() {
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun onBackPressed() {
         //super.onBackPressed()
         var alert_dialog_flag = ""
@@ -876,14 +1010,14 @@ class TodoEditCustomer : Activity() {
         }
     }
 
-    fun getCordinates()
+    fun getCordinates(addresss:String)
     {
         var str: String = "";
         isInternetPresent = cd!!.isConnectingToInternet
         if (isInternetPresent) {
             try {
                 val geo = Geocoder(context, Locale.getDefault())
-                val addresses = geo.getFromLocationName(todoe_address.text.toString(),1)
+                val addresses = geo.getFromLocationName(addresss.trim(),1)
                 if (addresses.isEmpty()) { //yourtextfieldname.setText("Waiting for Location");
 
                 } else {
@@ -1852,6 +1986,369 @@ class TodoEditCustomer : Activity() {
 
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
+            Log.e("DATA", e.message)
+        }
+    }
+
+    fun getNearestRetailer() {
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        val domain = resources.getString(R.string.service_domain)
+        Log.i("volley", "domain: $domain")
+
+        try {
+            var jsObjRequest: StringRequest? = null
+            var service_url = ""
+
+            var user_email: String? = ""
+            val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+            try {
+                user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                    sp.getString("USER_EMAIL", "")
+                } else {
+                    Global_Data.GLOvel_USER_EMAIL
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
+            service_url = (domain + "retailers/get_nearest_retailers_for_megre?email=" + user_email + "&latitude="
+                    + Global_Data.GLOvel_LATITUDE + "&longitude="
+                    + Global_Data.GLOvel_LONGITUDE)+"&retailer_code="+code
+            Log.i("user list url", "user list url $service_url")
+            jsObjRequest = StringRequest(service_url, Response.Listener { response ->
+                Log.i("volley", "response: $response")
+                final_response = response
+                getNearestRetailerResponse().execute(response)
+            },
+                    Response.ErrorListener { error ->
+                        dialog!!.dismiss()
+                        finish()
+                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        if (error is TimeoutError || error is NoConnectionError) {
+                            Toast.makeText(applicationContext,
+                                    "Network Error",
+                                    Toast.LENGTH_LONG).show()
+                        } else if (error is AuthFailureError) {
+                            Toast.makeText(applicationContext,
+                                    "Server AuthFailureError  Error",
+                                    Toast.LENGTH_LONG).show()
+                        } else if (error is ServerError) {
+                            Toast.makeText(applicationContext,
+                                    "Server   Error",
+                                    Toast.LENGTH_LONG).show()
+                        } else if (error is NetworkError) {
+                            Toast.makeText(applicationContext,
+                                    "Network   Error",
+                                    Toast.LENGTH_LONG).show()
+                        } else if (error is ParseError) {
+                            Toast.makeText(applicationContext,
+                                    "ParseError   Error",
+                                    Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                        }
+                        dialog!!.dismiss()
+                        // finish();
+                    })
+            val requestQueue = Volley.newRequestQueue(applicationContext)
+            val socketTimeout = 300000 //30 seconds - change to what you want
+            val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+            jsObjRequest.retryPolicy = policy
+            // requestQueue.se
+            //requestQueue.add(jsObjRequest);
+            jsObjRequest.setShouldCache(false)
+            requestQueue.cache.clear()
+            requestQueue.add(jsObjRequest)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    public inner class getNearestRetailerResponse : AsyncTask<String?, Void?, String>() {
+        protected override fun doInBackground(vararg p0: String?): String? {
+            try {
+                val response = JSONObject(final_response)
+                if (response.has("message")) {
+                    response_result = response.getString("message")
+                    runOnUiThread {
+
+                        merge_icon.visibility = View.GONE
+                        try {
+                            dialog!!.dismiss()
+                        }catch (e:Exception)
+                        {
+                            e.printStackTrace()
+                        }
+//                        todolist_progress_customer.visibility = View.GONE
+//                        rtocustomerlist.visibility = View.GONE
+//                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+                        //finish()
+                    }.toString()
+
+                } else { //dbvoc.getDeleteTable("delivery_products");
+                    val retailers = response.getJSONArray("retailers")
+                    Log.i("volley", "response retailers Length: " + retailers.length())
+                    Log.d("volley", "retailers$retailers")
+                    //
+                    if (retailers.length() <= 0) {
+                        runOnUiThread {
+                            merge_icon.visibility = View.GONE
+                            try {
+                                dialog!!.dismiss()
+                            }catch (e:Exception)
+                            {
+                                e.printStackTrace()
+                            }
+                        }
+                    } else {
+                        Allresult.clear()
+                        for (i in 0 until retailers.length()) {
+                            var user_cirname = ""
+                            val jsonObject = retailers.getJSONObject(i)
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("code"))) {
+
+                                Allresult.add(RCTOData("", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("code")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line1")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("state_code")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("city_code")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("pincode")),
+                                        "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("mobile_no")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("email")), "",
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("proprietor_name")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("gst_no")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("aadhar_no")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("pan_no")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("latitude")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("longitude")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("power_dealer")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("lighting_dealer")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("iaq_dealer")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("source_of_data")),
+                                        "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("tsi_code")),
+                                        coardcolor,"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark"))))
+
+
+                            }
+                        }
+                        runOnUiThread {
+                            merge_icon.visibility = View.VISIBLE
+                           // ca = RCTDAdapter(context!!, Allresult);
+                            //rtocustomerlist.setAdapter(ca);
+                            //ca!!.notifyDataSetChanged();
+
+                        }.toString()
+
+                        runOnUiThread {
+                            try {
+                                dialog!!.dismiss()
+                            }catch (e:Exception)
+                            {
+                                e.printStackTrace()
+                            }
+                        }
+
+                    }
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+                runOnUiThread {
+                    try {
+                        dialog!!.dismiss()
+                    }catch (e:Exception)
+                    {
+                        e.printStackTrace()
+                    }
+                    //todolist_progress_customer.visibility = View.GONE
+                   // rtocustomerlist.visibility = View.GONE
+                }
+            }
+            runOnUiThread {
+                try {
+                    dialog!!.dismiss()
+                }catch (e:Exception)
+                {
+                    e.printStackTrace()
+                }
+            }
+            return "Executed"
+        }
+
+        override fun onPostExecute(result: String) {
+            runOnUiThread {
+                try {
+                    if(dialog != null)
+                    {
+                        dialog!!.dismiss()
+                    }
+                }catch (e:Exception)
+                {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+        override fun onPreExecute() {}
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        try {
+            if(dialog != null)
+            {
+                dialog!!.dismiss()
+            }
+        }catch (e:Exception)
+        {
+            e.printStackTrace()
+        }
+    }
+
+    fun RetailerMerge(Merge_retailercode:String,progress_bar:ProgressBar,submit_button:LinearLayout) {
+        System.gc()
+        val reason_code = ""
+        try {
+            progress_bar.visibility = View.VISIBLE
+            submit_button.visibility = View.GONE
+            add_containerredit.isEnabled = false
+            var user_email: String? = ""
+            val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+            try {
+                user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                    sp.getString("USER_EMAIL", "")
+                } else {
+                    Global_Data.GLOvel_USER_EMAIL
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
+            var domain = ""
+            var url = ""
+            domain = resources.getString(R.string.service_domain)
+            var jsObjRequest: JsonObjectRequest? = null
+            try {
+                url = domain + "retailers/update_retailer"
+                Log.d("Server url", "Server url" + url)
+                val SURVEY = JSONArray()
+                val product_value_n = JSONObject()
+                val retailer_object = JSONObject()
+
+                //product_value_n.put("email", user_email)
+                product_value_n.put("code", code)
+                product_value_n.put("state_code", state_id)
+                product_value_n.put("city_code", city_id)
+                product_value_n.put("power_dealer", dpower_id)
+                product_value_n.put("iaq_dealer", diaq_id)
+                product_value_n.put("lighting_dealer", dlighting_id)
+                product_value_n.put("shop_name", todoe_shop_name.text.toString())
+                product_value_n.put("mobile_no", todoe_mobile.text.toString())
+                product_value_n.put("gst_no", todoe_gst.text.toString())
+                product_value_n.put("aadhar_no", todoe_aadhar.text.toString())
+                product_value_n.put("pan_no", todoe_pan.text.toString())
+                product_value_n.put("address_line1", todoe_address.text.toString())
+                product_value_n.put("address_line2", todoe_area.text.toString())
+                product_value_n.put("landmark", todoe_landmark.text.toString())
+                product_value_n.put("pincode", todoe_pincode.text.toString())
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude)) {
+                    product_value_n.put("latitude", latitude)
+                    product_value_n.put("longitude", longitude)
+                }
+                else{
+                    product_value_n.put("latitude", latitudes)
+                    product_value_n.put("longitude", longitudes)
+                }
+
+                retailer_object.put("retailer",product_value_n)
+                retailer_object.put("email",user_email)
+
+
+                Log.d("Retailer update Service", retailer_object.toString())
+                jsObjRequest = JsonObjectRequest(Request.Method.POST,url , retailer_object, Response.Listener { response ->
+                    Log.i("volley", "response: $response")
+                    Log.d("jV", "JV length" + response.length())
+                    //JSONObject json = new JSONObject(new JSONTokener(response));
+                    try {
+                        var response_result = ""
+                        response_result = if (response.has("message")) {
+                            response.getString("message")
+                        } else {
+                            "data"
+                        }
+                        if (response_result.equals("Retailer merge successfully.", ignoreCase = true)) {
+
+                            progress_bar.visibility = View.GONE
+                            submit_button.visibility = View.VISIBLE
+
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                            if(from_flag.equals("map"))
+                            {
+                                val i = Intent(context, MapsActivity::class.java)
+                                startActivity(i)
+                                finish()
+                            }else
+                            {
+                                val i = Intent(context, RetailerTDList::class.java)
+                                startActivity(i)
+                                finish()
+                            }
+
+                        }
+                        else {
+                            progress_bar.visibility = View.GONE
+                            submit_button.visibility = View.VISIBLE
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        progress_bar.visibility = View.GONE
+                        submit_button.visibility = View.VISIBLE
+                    }
+
+                }, Response.ErrorListener { error ->
+                    Log.i("volley", "error: $error")
+                    val toast = Toast.makeText(context, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
+                    }
+                    progress_bar.visibility = View.GONE
+                    submit_button.visibility = View.VISIBLE
+                })
+                val requestQueue = Volley.newRequestQueue(context)
+                val socketTimeout = 2000000 //90 seconds - change to what you want
+                val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+                jsObjRequest.retryPolicy = policy
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false)
+                requestQueue.cache.clear()
+                requestQueue.add(jsObjRequest)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                progress_bar.visibility = View.GONE
+                submit_button.visibility = View.VISIBLE
+            }
+
+
+
+        } catch (e: java.lang.Exception) {
+            progress_bar.visibility = View.GONE
+            submit_button.visibility = View.VISIBLE
             Log.e("DATA", e.message)
         }
     }

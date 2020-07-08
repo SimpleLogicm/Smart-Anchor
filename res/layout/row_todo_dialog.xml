@@ -19,6 +19,18 @@
         android:layout_height="wrap_content">
 
     </TextView>
+
+    <TextView
+        android:id="@+id/tv_code"
+        android:layout_width="1dp"
+        android:textSize="14sp"
+        android:text=""
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
     <Button
         android:id="@+id/btn"
         android:layout_width="0dp"
