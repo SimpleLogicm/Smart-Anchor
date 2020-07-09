@@ -2231,7 +2231,7 @@ class TodoEditCustomer : Activity() {
             domain = resources.getString(R.string.service_domain)
             var jsObjRequest: JsonObjectRequest? = null
             try {
-                url = domain + "retailers/update_retailer"
+                url = domain + "retailers/merge_retailer"
                 Log.d("Server url", "Server url" + url)
                 val SURVEY = JSONArray()
                 val product_value_n = JSONObject()
@@ -2241,29 +2241,18 @@ class TodoEditCustomer : Activity() {
                 product_value_n.put("code", code)
                 product_value_n.put("state_code", state_id)
                 product_value_n.put("city_code", city_id)
-                product_value_n.put("power_dealer", dpower_id)
-                product_value_n.put("iaq_dealer", diaq_id)
-                product_value_n.put("lighting_dealer", dlighting_id)
-                product_value_n.put("shop_name", todoe_shop_name.text.toString())
-                product_value_n.put("mobile_no", todoe_mobile.text.toString())
-                product_value_n.put("gst_no", todoe_gst.text.toString())
-                product_value_n.put("aadhar_no", todoe_aadhar.text.toString())
-                product_value_n.put("pan_no", todoe_pan.text.toString())
-                product_value_n.put("address_line1", todoe_address.text.toString())
-                product_value_n.put("address_line2", todoe_area.text.toString())
-                product_value_n.put("landmark", todoe_landmark.text.toString())
-                product_value_n.put("pincode", todoe_pincode.text.toString())
+//
+//                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude)) {
+//                    product_value_n.put("latitude", latitude)
+//                    product_value_n.put("longitude", longitude)
+//                }
+//                else{
+//                    product_value_n.put("latitude", latitudes)
+//                    product_value_n.put("longitude", longitudes)
+//                }
 
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude)) {
-                    product_value_n.put("latitude", latitude)
-                    product_value_n.put("longitude", longitude)
-                }
-                else{
-                    product_value_n.put("latitude", latitudes)
-                    product_value_n.put("longitude", longitudes)
-                }
-
-                retailer_object.put("retailer",product_value_n)
+                retailer_object.put("current_retailer",code)
+                retailer_object.put("existing_retailer",Merge_retailercode)
                 retailer_object.put("email",user_email)
 
 
@@ -2279,7 +2268,7 @@ class TodoEditCustomer : Activity() {
                         } else {
                             "data"
                         }
-                        if (response_result.equals("Retailer merge successfully.", ignoreCase = true)) {
+                        if (response_result.equals("Retailer Merge successfully.", ignoreCase = true)) {
 
                             progress_bar.visibility = View.GONE
                             submit_button.visibility = View.VISIBLE
