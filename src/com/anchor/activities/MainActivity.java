@@ -149,6 +149,7 @@ public class MainActivity extends BaseActivity {
         Global_Data.target_amount = "";
         Global_Data.target_grpby = "";
         Global_Data.Search_business_unit_name = "";
+        Global_Data.Business_unit_code_array = "";
         Global_Data.Search_Category_name = "";
         Global_Data.Search_BusinessCategory_name = "";
         Global_Data.Search_brand_name = "";

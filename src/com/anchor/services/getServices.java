@@ -3152,14 +3152,16 @@ public class getServices {
                                 }
 
 
+                            /* IDS column used for BU Head */
+
                             for (int i = 0; i < users_emp.length(); i++) {
 
                                 JSONObject jsonObject = users_emp.getJSONObject(i);
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address"))) {
-                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), jsonObject.getString("address"));
+                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), jsonObject.getString("address"),jsonObject.getString("BU_heads"));
                                 } else {
-                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), "");
+                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), "",jsonObject.getString("BU_heads"));
                                 }
 
 

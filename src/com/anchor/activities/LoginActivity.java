@@ -1076,13 +1076,15 @@ public class LoginActivity extends Activity {
                             } else {
                                 Log.d("users", "users" + users.toString());
 
+                                /* IDS column used for BU Head */
+
                                 for (int i = 0; i < users.length(); i++) {
 
                                     JSONObject jsonObject = users.getJSONObject(i);
 
                                     loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
                                             jsonObject.getString("first_name"), jsonObject.getString("last_name"), "", "", "", "", "",
-                                            "", Device_id, "", jsonObject.getString("address"), "", "", "", "", "", jsonObject.getString("emp_code"));
+                                            "", Device_id, "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
                                 }
 
                                 //Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
