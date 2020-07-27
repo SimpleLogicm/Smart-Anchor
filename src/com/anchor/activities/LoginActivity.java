@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
 import androidx.multidex.MultiDex;
@@ -34,6 +35,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -90,6 +92,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -137,6 +140,12 @@ public class LoginActivity extends Activity {
     String CHANNEL_NAME = "SmartAnchor";
     String CHANNEL_DESC = "Anchor App";
     private int passwordNotVisible=1;
+    static int otp_hit = 0;
+    Dialog dialognew;
+
+    String otp_verify_flag = "";
+    String otp_verify_time_flag = "";
+    HashMap<String, Integer> otp_hit_validator = new HashMap<String, Integer>();
 
     @SuppressLint("InlinedApi")
     @Override
@@ -1624,6 +1633,7 @@ public class LoginActivity extends Activity {
 //					}
                             else {
 
+                                showDialog();
                                 SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
                                 String Device_id = pref_devid.getString("devid", "");
                                 Global_Data.device_id = Device_id;
@@ -1729,6 +1739,137 @@ public class LoginActivity extends Activity {
 //			});
         } catch (Exception ignored) {
         }
+    }
+
+    public void showDialog() {
+        dialognew = new Dialog(LoginActivity.this);
+        dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialognew.setCancelable(false);
+        dialognew.setContentView(R.layout.mobile_otp_screen);
+
+        final EditText sub_otp = dialognew.findViewById(R.id.sub_otp);
+        final EditText otp_mobile_value = dialognew.findViewById(R.id.otp_mobile_value);
+        final TextView otp_time_remaining = dialognew.findViewById(R.id.otp_time_remaining);
+
+       // otp_mobile_value.setText(input_mobno1.getText().toString());
+        otp_verify_time_flag = "yes";
+
+        Button otp_submit = dialognew.findViewById(R.id.otp_submit);
+        Button otp_Resend = dialognew.findViewById(R.id.otp_Resend);
+        Button otp_Cancel = dialognew.findViewById(R.id.otp_Cancel);
+
+        try {
+
+            //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            // Date date = simpleDateFormat.parse((itemList.get(listPosition).getText1()));
+            //  System.out.println("date : " + simpleDateFormat.format(date));
+            //  long service_date_time = date.getTime();
+
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            String today1 = format.format(new Date());
+            Date today = new Date(today1);
+            final long currentTime = today.getTime();
+
+            // String today1 = format.format(System.currentTimeMillis()+15*60*1000);
+            Date service_plusf = format.parse(today1);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(service_plusf);
+            cal.add(Calendar.MINUTE, 5);
+            Date new_date = cal.getTime();
+
+            final long s_time = new_date.getTime();
+            long expiryTime = s_time - currentTime;
+
+            CountDownTimer timer = new CountDownTimer(expiryTime, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    //holder.Text1.setText("" + millisUntilFinished/1000 + " Sec");
+
+                    otp_time_remaining.setText("" + String.format("%d:%d Mins Remaining",
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                }
+
+                public void onFinish() {
+                    otp_verify_time_flag = "";
+                    otp_time_remaining.setText("00:00:00");
+
+                }
+            }.start();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        otp_Resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+//                if (dialog == null) {
+//                    dialog = new ProgressDialog(ShopDetails.this, ProgressDialog.THEME_HOLO_LIGHT);
+//                }
+//
+//                dialog.setMessage("Please wait....");
+//                dialog.setTitle("Sub Dealer App");
+//                dialog.setCancelable(false);
+//                dialog.show();
+//                send_sub_dealer_otp("resend", otp_mobile_value.getText().toString());
+
+            }
+        });
+
+        otp_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                if(otp_hit_validator.get(otp_mobile_value.getText().toString()) > 3)
+//                {
+//
+//                }
+//                else
+//                {
+//
+//                }
+                if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
+                    if (!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sub_otp.getText().toString())) {
+                        sub_otp.requestFocus();
+                        //Globel_Data.Custom_Toast(ShopDetails.this, "Please Enter OTP", "");
+
+                    } else {
+                        //dialognew.dismiss();
+//                        if (dialog == null) {
+//                            dialog = new ProgressDialog(ShopDetails.this, ProgressDialog.THEME_HOLO_LIGHT);
+//                        }
+//                        dialog.setMessage("Please wait....");
+//                        dialog.setTitle("Sub Dealer App");
+//                        dialog.setCancelable(false);
+//                        dialog.show();
+//
+//                        otp_validation(otp_mobile_value.getText().toString(), sub_otp.getText().toString());
+                    }
+                } else {
+                   // Globel_Data.Custom_Toast(ShopDetails.this, "Please click resend otp button", "");
+
+                }
+
+
+            }
+        });
+
+
+        otp_Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                otp_hit_validator.clear();
+
+                dialognew.dismiss();
+            }
+        });
+
+        dialognew.show();
+
     }
 
 }
