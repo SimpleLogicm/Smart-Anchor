@@ -3,8 +3,9 @@ package com.anchor.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,7 @@ import android.widget.TextView;
 
 import com.anchor.activities.Global_Data;
 import com.anchor.activities.R;
-import com.anchor.activities.TodoEditCustomer;
 import com.anchor.model.RCTOData;
-import com.anchor.model.Todo_model;
 
 import java.util.List;
 

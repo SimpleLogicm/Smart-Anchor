@@ -16,7 +16,7 @@
 
     </TextView>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.appcompat.widget.RecyclerView
         android:layout_marginTop="10dp"
         android:id="@+id/rv"
         android:layout_above="@+id/btnlayout"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.appcompat.widget.RecyclerView>
 
 
     <ProgressBar

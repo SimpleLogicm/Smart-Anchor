@@ -46,7 +46,7 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.appcompat.widget.RecyclerView
         android:id="@+id/c_info_card"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/rel"

@@ -170,7 +170,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.appcompat.widget.RecyclerView
             android:id="@+id/list_outstanding"
             android:layout_width="match_parent"
             android:layout_height="227dp"
@@ -305,7 +305,7 @@
                 android:layout_weight="0.33"
                 android:gravity="center">
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_seedetails"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
@@ -329,7 +329,7 @@
                 android:layout_marginLeft="5dp"
                 android:gravity="center">
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_paynow"
                     android:layout_width="100dp"
                     android:layout_height="40dp"

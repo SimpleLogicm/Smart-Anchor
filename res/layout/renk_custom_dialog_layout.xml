@@ -23,7 +23,7 @@
         android:layout_height="2dp"
         android:layout_below="@+id/renk_dialog_title"
         android:background="#898989" />
-    <android.support.v7.widget.RecyclerView
+    <androidx.appcompat.widget.RecyclerView
         android:id="@+id/renk_dialog_recycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

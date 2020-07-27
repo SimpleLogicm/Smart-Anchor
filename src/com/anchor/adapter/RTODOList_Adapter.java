@@ -4,9 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.anchor.activities.R;
 import com.anchor.activities.RetailerTDCustomerList;
-import com.anchor.model.Ledger_Model;
 import com.anchor.model.RTODODATA;
 
 import java.text.DecimalFormat;

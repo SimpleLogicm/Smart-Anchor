@@ -11,8 +11,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -20,6 +19,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anchor.adapter.RTODOList_Adapter
 import com.anchor.model.RTODODATA
 import com.anchor.webservice.ConnectionDetector
@@ -69,7 +70,7 @@ class RetailerTDList : Activity() {
 
         try {
             val mActionBar = actionBar
-            mActionBar.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
+            mActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
             // mActionBar.setDisplayShowHomeEnabled(false);
             // mActionBar.setDisplayShowTitleEnabled(false);
             val mInflater = LayoutInflater.from(this)
@@ -102,7 +103,7 @@ class RetailerTDList : Activity() {
             if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
                 todaysTarget.text = "Today's Target Acheived"
             }
-            mActionBar.customView = mCustomView
+            mActionBar!!.customView = mCustomView
             mActionBar.setDisplayShowCustomEnabled(true)
             mActionBar.setHomeButtonEnabled(true)
             mActionBar.setDisplayHomeAsUpEnabled(true)

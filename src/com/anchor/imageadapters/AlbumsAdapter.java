@@ -15,7 +15,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,6 +28,8 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.anchor.activities.Customer_Feed;
 import com.anchor.activities.DataBaseHelper;
@@ -50,7 +52,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 

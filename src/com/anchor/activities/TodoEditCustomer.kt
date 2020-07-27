@@ -1,5 +1,6 @@
 package com.anchor.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
@@ -11,14 +12,14 @@ import android.graphics.drawable.ColorDrawable
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anchor.adapter.RCTDAdapter
 import com.anchor.adapter.Todo_list_adaptor
 import com.anchor.helper.VerhoeffAlgorithm
@@ -122,6 +123,7 @@ class TodoEditCustomer : Activity() {
     val GSTINFORMAT_REGEX = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
     val GSTN_CODEPOINT_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_todo_editcustomer)
@@ -364,7 +366,7 @@ class TodoEditCustomer : Activity() {
             val btnlayout = dialog.findViewById(R.id.btnlayout) as LinearLayout
 
             var rv=dialog.findViewById(R.id.rv) as RecyclerView
-            rv.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+            rv.layoutManager = LinearLayoutManager(context!!, LinearLayout.VERTICAL, false)
 
 
             adaptor = Todo_list_adaptor(this, Allresult!!)
@@ -404,7 +406,7 @@ class TodoEditCustomer : Activity() {
 
 
         list_CState.add("Select State")
-        adapter_CState = ArrayAdapter<String>(context,
+        adapter_CState = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_spinner_item, list_CState)
 
         adapter_CState!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -433,22 +435,22 @@ class TodoEditCustomer : Activity() {
                 lightingspinnerMap.clear()
 
 
-                adapter_CCity = ArrayAdapter<String>(context,
+                adapter_CCity = ArrayAdapter<String>(context!!,
                         android.R.layout.simple_spinner_item, list_CCity)
                 adapter_CCity!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 todoe_city.setAdapter(adapter_CCity)
 
-                adapter_CPowerDealer = ArrayAdapter<String>(context,
+                adapter_CPowerDealer = ArrayAdapter<String>(context!!,
                         android.R.layout.simple_spinner_item, list_CPowerDealer)
                 adapter_CPowerDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 todoe_powerdealer.setAdapter(adapter_CPowerDealer)
 
-                adapter_CIaqDealer = ArrayAdapter<String>(context,
+                adapter_CIaqDealer = ArrayAdapter<String>(context!!,
                         android.R.layout.simple_spinner_item, list_CIaqDealer)
                 adapter_CIaqDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 todoe_iaqdealer.setAdapter(adapter_CIaqDealer)
 
-                adapter_CLightingDealer = ArrayAdapter<String>(context,
+                adapter_CLightingDealer = ArrayAdapter<String>(context!!,
                         android.R.layout.simple_spinner_item, list_CLightingDealer)
                 adapter_CLightingDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 todoe_lightingdealer.setAdapter(adapter_CLightingDealer)
@@ -488,7 +490,7 @@ class TodoEditCustomer : Activity() {
 
 
         list_CCity.add("Select City")
-        adapter_CCity = ArrayAdapter<String>(context,
+        adapter_CCity = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_spinner_item, list_CCity)
 
         adapter_CCity!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -522,7 +524,7 @@ class TodoEditCustomer : Activity() {
         }
 
         list_CPowerDealer.add("Select Power Dealer")
-        adapter_CPowerDealer = ArrayAdapter<String>(context,
+        adapter_CPowerDealer = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_spinner_item, list_CPowerDealer)
 
         adapter_CPowerDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -555,7 +557,7 @@ class TodoEditCustomer : Activity() {
         }
 
         list_CIaqDealer.add("Select IAQ Dealer")
-        adapter_CIaqDealer = ArrayAdapter<String>(context,
+        adapter_CIaqDealer = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_spinner_item, list_CIaqDealer)
 
         adapter_CIaqDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -589,7 +591,7 @@ class TodoEditCustomer : Activity() {
         }
 
         list_CLightingDealer.add("Select Lighting Dealer")
-        adapter_CLightingDealer = ArrayAdapter<String>(context,
+        adapter_CLightingDealer = ArrayAdapter<String>(context!!,
                 android.R.layout.simple_spinner_item, list_CLightingDealer)
 
         adapter_CLightingDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -624,7 +626,7 @@ class TodoEditCustomer : Activity() {
 
         try {
             val mActionBar = actionBar
-            mActionBar.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
+            mActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
             // mActionBar.setDisplayShowHomeEnabled(false);
             // mActionBar.setDisplayShowTitleEnabled(false);
             val mInflater = LayoutInflater.from(this)
@@ -658,7 +660,7 @@ class TodoEditCustomer : Activity() {
 //	       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
                 todaysTarget.text = "Today's Target Acheived"
             }
-            mActionBar.customView = mCustomView
+            mActionBar!!.customView = mCustomView
             mActionBar.setDisplayShowCustomEnabled(true)
             mActionBar.setHomeButtonEnabled(true)
             mActionBar.setDisplayHomeAsUpEnabled(true)
@@ -672,7 +674,7 @@ class TodoEditCustomer : Activity() {
         }
         else {
 
-            val toast = Toast.makeText(context,
+            val toast = Toast.makeText(context!!,
                     "Internet Not Available. ", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
@@ -1163,7 +1165,7 @@ class TodoEditCustomer : Activity() {
 
                     runOnUiThread(Runnable {
 
-                        adapter_CState = ArrayAdapter<String>(context,
+                        adapter_CState = ArrayAdapter<String>(context!!,
                                 android.R.layout.simple_spinner_item, list_CState)
 
                         adapter_CState!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -1392,22 +1394,22 @@ class TodoEditCustomer : Activity() {
 
                     runOnUiThread(Runnable {
 
-                        adapter_CCity = ArrayAdapter<String>(context,
+                        adapter_CCity = ArrayAdapter<String>(context!!,
                                 android.R.layout.simple_spinner_item, list_CCity)
                         adapter_CCity!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_city.setAdapter(adapter_CCity)
 
-                        adapter_CPowerDealer = ArrayAdapter<String>(context,
+                        adapter_CPowerDealer = ArrayAdapter<String>(context!!,
                                 android.R.layout.simple_spinner_item, list_CPowerDealer)
                         adapter_CPowerDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_powerdealer.setAdapter(adapter_CPowerDealer)
 
-                        adapter_CIaqDealer = ArrayAdapter<String>(context,
+                        adapter_CIaqDealer = ArrayAdapter<String>(context!!,
                                 android.R.layout.simple_spinner_item, list_CIaqDealer)
                         adapter_CIaqDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_iaqdealer.setAdapter(adapter_CIaqDealer)
 
-                        adapter_CLightingDealer = ArrayAdapter<String>(context,
+                        adapter_CLightingDealer = ArrayAdapter<String>(context!!,
                                 android.R.layout.simple_spinner_item, list_CLightingDealer)
                         adapter_CLightingDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_lightingdealer.setAdapter(adapter_CLightingDealer)

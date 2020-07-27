@@ -269,7 +269,7 @@
                             android:layout_height="match_parent"
                             >
 
-                            <android.support.v7.widget.AppCompatButton
+                            <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/btn_close"
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
@@ -291,7 +291,7 @@
                             android:layout_marginLeft="10dp"
                             android:gravity="center">
 
-                            <android.support.v7.widget.AppCompatButton
+                            <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/btn_Ongoing"
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
@@ -323,7 +323,7 @@
                             android:layout_height="match_parent"
                             >
 
-                            <android.support.v7.widget.AppCompatButton
+                            <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/btn_Quantity"
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
@@ -344,7 +344,7 @@
                             android:layout_marginLeft="10dp"
                             android:gravity="center">
 
-                            <android.support.v7.widget.AppCompatButton
+                            <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/btn_Value"
                                 android:layout_width="110dp"
                                 android:layout_height="45dp"
@@ -432,7 +432,7 @@
                 android:layout_below="@+id/spinner_container2"
                 >
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_apply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -11,8 +11,6 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -22,6 +20,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anchor.adapter.RCTDAdapter
 import com.anchor.model.RCTOData
 import com.anchor.webservice.ConnectionDetector
@@ -89,8 +89,7 @@ class RetailerTDCustomerList : Activity() {
             list_Cfilter.add(cn.getName())
             CfilterspinnerMap.put(cn.getName(), cn.getCode())
         }
-        adapter_Cfilter = ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, list_Cfilter)
+        adapter_Cfilter = ArrayAdapter<String>(RetailerTDCustomerList@this,android.R.layout.simple_spinner_item, list_Cfilter)
 
         adapter_Cfilter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         rtocustomerlist_filter.setAdapter(adapter_Cfilter)
@@ -142,7 +141,7 @@ class RetailerTDCustomerList : Activity() {
 
         try {
             val mActionBar = actionBar
-            mActionBar.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
+            mActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
             // mActionBar.setDisplayShowHomeEnabled(false);
             // mActionBar.setDisplayShowTitleEnabled(false);
             val mInflater = LayoutInflater.from(this)
@@ -176,7 +175,7 @@ class RetailerTDCustomerList : Activity() {
 //	       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
                 todaysTarget.text = "Today's Target Acheived"
             }
-            mActionBar.customView = mCustomView
+            mActionBar!!.customView = mCustomView
             mActionBar.setDisplayShowCustomEnabled(true)
             mActionBar.setHomeButtonEnabled(true)
             mActionBar.setDisplayHomeAsUpEnabled(true)
@@ -411,7 +410,7 @@ class RetailerTDCustomerList : Activity() {
                         runOnUiThread {
                             todolist_progress_customer.visibility = View.GONE
                             rtocustomerlist.visibility = View.VISIBLE
-                            ca = RCTDAdapter(context!!, Allresult);
+                            ca = RCTDAdapter(this@RetailerTDCustomerList, Allresult);
                             rtocustomerlist.setAdapter(ca);
                             ca!!.notifyDataSetChanged();
 

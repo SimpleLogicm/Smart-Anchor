@@ -84,7 +84,7 @@
             />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -107,7 +107,7 @@
 
 
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.appcompat.widget.RecyclerView
                 android:id="@+id/rvComplaint"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
@@ -119,8 +119,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/complaint_card">
 
-            </android.support.v7.widget.RecyclerView>
-            <android.support.v4.widget.NestedScrollView
+            </androidx.appcompat.widget.RecyclerView>
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/c_horizontalRecyclerView"
@@ -390,9 +390,9 @@
 
                     </RelativeLayout>
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.appcompat.widget.RecyclerView
                 android:id="@+id/c_horizontalRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -433,6 +433,6 @@
                 android:text="@string/Submit"
                 android:textColor="@color/white" />
         </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
