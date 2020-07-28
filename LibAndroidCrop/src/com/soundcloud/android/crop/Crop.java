@@ -245,7 +245,7 @@ public class Crop {
             showImagePickerError(context);
         }
     }
-    
+
 //    public static void pickImage(Context context., android.support.v4.app.Fragment fragment, int requestCode) {
 //        try {
 //            fragment.startActivityForResult(getImagePicker(), requestCode);
@@ -253,7 +253,7 @@ public class Crop {
 //            showImagePickerError(context);
 //        }
 //    }
-    
+
 
     private static Intent getImagePicker() {
         return new Intent(Intent.ACTION_GET_CONTENT).setType("image/*");
