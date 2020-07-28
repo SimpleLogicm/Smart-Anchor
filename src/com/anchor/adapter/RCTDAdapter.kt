@@ -54,7 +54,7 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val data = rtododatalist[position]
         holder.rtc_name.text = data.shop_name
-        holder.rtc_address.text = data.address
+        holder.rtc_address.text = data.full_address
         holder.rt_id.text = data.code
         holder.rtc_mobile_hidden.text = data.mobile
         holder.rtc_email_hidden.text = data.email
