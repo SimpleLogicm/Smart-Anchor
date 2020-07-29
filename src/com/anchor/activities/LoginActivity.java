@@ -47,10 +47,17 @@ import com.anchor.model.User;
 import com.anchor.service.LocationServices;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -146,6 +153,9 @@ public class LoginActivity extends Activity {
     String otp_verify_flag = "";
     String otp_verify_time_flag = "";
     HashMap<String, Integer> otp_hit_validator = new HashMap<String, Integer>();
+
+    Button otp_submit,otp_Resend,otp_Cancel;
+
 
     @SuppressLint("InlinedApi")
     @Override
@@ -1748,22 +1758,17 @@ public class LoginActivity extends Activity {
         dialognew.setContentView(R.layout.mobile_otp_screen);
 
         final EditText sub_otp = dialognew.findViewById(R.id.sub_otp);
-        final EditText otp_mobile_value = dialognew.findViewById(R.id.otp_mobile_value);
+        final EditText otp_user_name = dialognew.findViewById(R.id.otp_user_name);
         final TextView otp_time_remaining = dialognew.findViewById(R.id.otp_time_remaining);
 
        // otp_mobile_value.setText(input_mobno1.getText().toString());
         otp_verify_time_flag = "yes";
 
-        Button otp_submit = dialognew.findViewById(R.id.otp_submit);
-        Button otp_Resend = dialognew.findViewById(R.id.otp_Resend);
-        Button otp_Cancel = dialognew.findViewById(R.id.otp_Cancel);
+         otp_submit = dialognew.findViewById(R.id.otp_submit);
+         otp_Resend = dialognew.findViewById(R.id.otp_Resend);
+         otp_Cancel = dialognew.findViewById(R.id.otp_Cancel);
 
         try {
-
-            //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            // Date date = simpleDateFormat.parse((itemList.get(listPosition).getText1()));
-            //  System.out.println("date : " + simpleDateFormat.format(date));
-            //  long service_date_time = date.getTime();
 
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             String today1 = format.format(new Date());
@@ -1783,8 +1788,6 @@ public class LoginActivity extends Activity {
 
             CountDownTimer timer = new CountDownTimer(expiryTime, 1000) {
                 public void onTick(long millisUntilFinished) {
-                    //holder.Text1.setText("" + millisUntilFinished/1000 + " Sec");
-
                     otp_time_remaining.setText("" + String.format("%d:%d Mins Remaining",
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
                             TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
@@ -1806,16 +1809,16 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                if (CheckNullValue.findNullValue(otp_user_name.getText().toString().trim()) == true) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                 }
+                else
+                {
+                    Generate_Otp("resend", otp_user_name.getText().toString());
+                }
 
-//                if (dialog == null) {
-//                    dialog = new ProgressDialog(ShopDetails.this, ProgressDialog.THEME_HOLO_LIGHT);
-//                }
-//
-//                dialog.setMessage("Please wait....");
-//                dialog.setTitle("Sub Dealer App");
-//                dialog.setCancelable(false);
-//                dialog.show();
-//                send_sub_dealer_otp("resend", otp_mobile_value.getText().toString());
 
             }
         });
@@ -1847,7 +1850,7 @@ public class LoginActivity extends Activity {
 //                        dialog.setCancelable(false);
 //                        dialog.show();
 //
-//                        otp_validation(otp_mobile_value.getText().toString(), sub_otp.getText().toString());
+                       // Generate_Otp(otp_mobile_value.getText().toString(), sub_otp.getText().toString());
                     }
                 } else {
                    // Globel_Data.Custom_Toast(ShopDetails.this, "Please click resend otp button", "");
@@ -1870,6 +1873,145 @@ public class LoginActivity extends Activity {
 
         dialognew.show();
 
+    }
+
+    public void Generate_Otp(final String Click_Flag, final String User_Name) {
+        System.gc();
+        String reason_code = "";
+        try {
+
+            JsonObjectRequest jsObjRequest = null;
+            try {
+
+                SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+                String devid = sp.getString("devid", "");
+                String USER_EMAIL = sp.getString("USER_EMAIL", "");
+
+                String domain = getResources().getString(R.string.service_domain);
+
+                Log.d("Server url", "Server url" + domain + "menus/genrate_otp");
+
+                JSONObject SINOBJECT = new JSONObject();
+
+                SINOBJECT.put("user_name", User_Name);
+
+                Log.d("user_dealer Service", SINOBJECT.toString());
+
+                jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "sub_dealers/generate_otp", SINOBJECT, new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("volle y", "response: " + response);
+
+                        Log.d("jV", "JV length" + response.length());
+                        try {
+
+                            String response_result = "";
+                            if (response.has("message")) {
+                                response_result = response.getString("message");
+                            } else {
+                                response_result = "data";
+                            }
+
+
+                            if (response_result.equalsIgnoreCase("OTP Sent Successfully")) {
+
+                               // dialog.dismiss();
+                                otp_verify_time_flag = "yes";
+                                otp_Resend.setText("Resend OTP");
+
+                                Toast toast = Toast.makeText(LoginActivity.this,
+                                        response_result, Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                                otp_hit_validator.clear();
+//                                if (Click_Flag.equalsIgnoreCase("generate")) {
+//                                    showDialog();
+//                                } else {
+//
+//                                    dialognew.dismiss();
+//                                    showDialog();
+//                                }
+
+//
+
+
+                            } else {
+
+                                //dialog.dismiss();
+
+                                Toast toast = Toast.makeText(LoginActivity.this,
+                                        response_result, Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //dialog.dismiss();
+                        }
+
+
+
+
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Network Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Server AuthFailureError  Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Server   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof NetworkError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Network   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "ParseError   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        //dialog.dismiss();
+                        // finish();
+                    }
+                });
+
+
+                RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+
+                int socketTimeout = 300000;//90 seconds - change to what you want
+                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                jsObjRequest.setRetryPolicy(policy);
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false);
+                requestQueue.getCache().clear();
+                requestQueue.add(jsObjRequest);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                dialog.dismiss();
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            Log.e("DATA", e.getMessage());
+        }
     }
 
 }

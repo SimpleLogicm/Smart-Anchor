@@ -30,7 +30,7 @@
 
 
         <EditText
-            android:id="@+id/otp_mobile_value"
+            android:id="@+id/otp_user_name"
             android:layout_width="fill_parent"
             android:paddingLeft="10dp"
             android:layout_height="40dp"
@@ -62,6 +62,7 @@
             android:maxLength="4"
             android:textColor="@color/black"
             android:text=""
+            android:visibility="gone"
             android:textColorHint="@color/black"
             android:hint="Enter OTP"
             android:inputType="number"
@@ -92,21 +93,24 @@
             android:background="#414042"
             android:textColor="#FFFFFF"
             android:text="Submit"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:padding="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+
             />
 
         <Button
             android:id="@+id/otp_Resend"
-            android:layout_width="110dp"
+            android:layout_width="140dp"
             android:layout_height="40dp"
             android:background="#414042"
             android:textColor="#FFFFFF"
-            android:text="Resend OTP"
+            android:text="Generate OTP"
             android:padding="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
