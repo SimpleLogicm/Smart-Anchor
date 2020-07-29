@@ -15,7 +15,7 @@
         android:layout_height="50dp"
         android:weightSum="1"
         android:layout_marginTop="2dp">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="280dp"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true">
@@ -34,7 +34,7 @@
             android:textSize="15dp">
 
         </AutoCompleteTextView>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <ImageView
             android:id="@+id/ivFilter_btn"
             android:layout_width="35dp"
