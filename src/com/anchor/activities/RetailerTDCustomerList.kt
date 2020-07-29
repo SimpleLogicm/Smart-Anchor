@@ -351,6 +351,10 @@ class RetailerTDCustomerList : Activity() {
 
     fun getTODOCustomerListData(city_code: String) {
 
+        Retailer_List.clear()
+        td_Retailer_search.setText("");
+        td_Retailer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0)
+
         todolist_progress_customer.visibility = View.VISIBLE
         rtocustomerlist.visibility = View.GONE
         var user_email: String? = ""
@@ -432,6 +436,7 @@ class RetailerTDCustomerList : Activity() {
     public inner class GetTODOCustomerResponseData : AsyncTask<String?, Void?, String>() {
         protected override fun doInBackground(vararg p0: String?): String? {
             try {
+
                 val response = JSONObject(final_response)
                 if (response.has("message")) {
                     response_result = response.getString("message")
@@ -496,6 +501,8 @@ class RetailerTDCustomerList : Activity() {
                                     full_address += " " + jsonObject!!.getString("pincode")
                                 }
 
+
+
                                 Allresult.add(RCTOData("", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("code")), "",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line1")),
@@ -518,6 +525,7 @@ class RetailerTDCustomerList : Activity() {
                                         coardcolor, "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),full_address))
 
+                                        Retailer_List.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")))
 
                             }
                         }
@@ -527,6 +535,12 @@ class RetailerTDCustomerList : Activity() {
                             ca = RCTDAdapter(context!!, Allresult);
                             rtocustomerlist.setAdapter(ca);
                             ca!!.notifyDataSetChanged();
+
+                            val adapter = ArrayAdapter(context,
+                                    android.R.layout.simple_spinner_dropdown_item,Retailer_List)
+                            td_Retailer_search.setThreshold(1) // will start working from
+                            td_Retailer_search.setAdapter(adapter) // setting the adapter
+                            td_Retailer_search.setTextColor(Color.BLACK)
 
                         }.toString()
 
