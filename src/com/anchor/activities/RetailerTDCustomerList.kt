@@ -478,30 +478,33 @@ class RetailerTDCustomerList : Activity() {
                                 }
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("address_line2")))
                                 {
-                                    full_address += " " + jsonObject!!.getString("address_line2")
+                                    full_address += "," + jsonObject!!.getString("address_line2")
                                 }
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("landmark")))
                                 {
-                                    full_address += " " + jsonObject!!.getString("landmark")
+                                    full_address += "," + jsonObject!!.getString("landmark")
                                 }
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("state")))
                                 {
-                                    full_address += " " + jsonObject!!.getString("state")
+                                    full_address += "," + jsonObject!!.getString("state")
                                 }
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("city")))
                                 {
-                                    full_address += " " + jsonObject!!.getString("city")
+                                    full_address += "," + jsonObject!!.getString("city")
                                 }
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject!!.getString("pincode")))
                                 {
-                                    full_address += " " + jsonObject!!.getString("pincode")
+                                    full_address += "," + jsonObject!!.getString("pincode")
                                 }
 
-
+                                try {
+                                    full_address = if (full_address.startsWith(",")) full_address.substring(1) else full_address
+                                    full_address = if (full_address.endsWith(",")) full_address.substring(full_address.length-1) else full_address
+                                }catch (e:Exception) {e.printStackTrace()}
 
                                 Allresult.add(RCTOData("", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("code")), "",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")),
