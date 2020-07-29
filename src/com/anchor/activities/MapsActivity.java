@@ -174,19 +174,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
       try
       {
-          int height = 100;
-          int width = 100;
-          BitmapDrawable bitmared = (BitmapDrawable)getResources().getDrawable(R.drawable.red_maps);
-          Bitmap b = bitmared.getBitmap();
-          red_icon = Bitmap.createScaledBitmap(b, width, height, false);
-
-          BitmapDrawable bitmagreen = (BitmapDrawable)getResources().getDrawable(R.drawable.green_maps);
-          Bitmap bg = bitmagreen.getBitmap();
-          green_icon = Bitmap.createScaledBitmap(bg, width, height, false);
-
-          BitmapDrawable bitmadarkgreen = (BitmapDrawable)getResources().getDrawable(R.drawable.dgreen_maps);
-          Bitmap bdg = bitmadarkgreen.getBitmap();
-          darkgreen_icon = Bitmap.createScaledBitmap(bdg, width, height, false);
+//          int height = 100;
+//          int width = 100;
+//          BitmapDrawable bitmared = (BitmapDrawable)getResources().getDrawable(R.drawable.red_maps);
+//          Bitmap b = bitmared.getBitmap();
+//          red_icon = Bitmap.createScaledBitmap(b, width, height, false);
+//
+//          BitmapDrawable bitmagreen = (BitmapDrawable)getResources().getDrawable(R.drawable.green_maps);
+//          Bitmap bg = bitmagreen.getBitmap();
+//          green_icon = Bitmap.createScaledBitmap(bg, width, height, false);
+//
+//          BitmapDrawable bitmadarkgreen = (BitmapDrawable)getResources().getDrawable(R.drawable.dgreen_maps);
+//          Bitmap bdg = bitmadarkgreen.getBitmap();
+//          darkgreen_icon = Bitmap.createScaledBitmap(bdg, width, height, false);
       }catch (Exception ex)
       {
           ex.printStackTrace();
@@ -1426,7 +1426,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             markerOptions.position(latLng)
                                                     .title("Name : " + name.get(a))
                                                     .snippet("Address : " +address.get(a))
-                                                    .icon(BitmapDescriptorFactory.fromBitmap(red_icon));
+                                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_mark));
                                         }
                                         else
                                         if (retailer_type.get(a).equalsIgnoreCase("green"))
@@ -1435,7 +1435,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             markerOptions.position(latLng)
                                                     .title("Name : " + name.get(a))
                                                     .snippet("Address : " +address.get(a))
-                                                    .icon(BitmapDescriptorFactory.fromBitmap(green_icon));
+                                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.light_green_mark));
                                        }
                                        else
                                         if (retailer_type.get(a).equalsIgnoreCase("darkgreen"))
@@ -1445,7 +1445,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                             markerOptions.position(latLng)
                                                     .title("Name : " + name.get(a))
                                                     .snippet("Address : " +address.get(a))
-                                                    .icon(BitmapDescriptorFactory.fromBitmap(darkgreen_icon));
+                                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.dark_green_mark));
 
 
                                         }
