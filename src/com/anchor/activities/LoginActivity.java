@@ -40,6 +40,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -155,6 +157,10 @@ public class LoginActivity extends Activity {
     HashMap<String, Integer> otp_hit_validator = new HashMap<String, Integer>();
 
     Button otp_submit,otp_Resend,otp_Cancel;
+    ProgressBar otp_progressBarar;
+    LinearLayout otp_bottom_layout;
+    EditText sub_otp,otp_user_name;
+    TextView otp_time_remaining;
 
 
     @SuppressLint("InlinedApi")
@@ -1757,13 +1763,15 @@ public class LoginActivity extends Activity {
         dialognew.setCancelable(false);
         dialognew.setContentView(R.layout.mobile_otp_screen);
 
-        final EditText sub_otp = dialognew.findViewById(R.id.sub_otp);
-        final EditText otp_user_name = dialognew.findViewById(R.id.otp_user_name);
-        final TextView otp_time_remaining = dialognew.findViewById(R.id.otp_time_remaining);
+          sub_otp = dialognew.findViewById(R.id.sub_otp);
+          otp_user_name = dialognew.findViewById(R.id.otp_user_name);
+          otp_time_remaining = dialognew.findViewById(R.id.otp_time_remaining);
 
        // otp_mobile_value.setText(input_mobno1.getText().toString());
         otp_verify_time_flag = "yes";
 
+         otp_progressBarar = dialognew.findViewById(R.id.otp_progressBarar);
+         otp_bottom_layout = dialognew.findViewById(R.id.otp_bottom_layout);
          otp_submit = dialognew.findViewById(R.id.otp_submit);
          otp_Resend = dialognew.findViewById(R.id.otp_Resend);
          otp_Cancel = dialognew.findViewById(R.id.otp_Cancel);
@@ -1795,8 +1803,22 @@ public class LoginActivity extends Activity {
                 }
 
                 public void onFinish() {
-                    otp_verify_time_flag = "";
+
                     otp_time_remaining.setText("00:00:00");
+
+                    if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
+                        otp_Resend.setVisibility(View.VISIBLE);
+                        otp_Resend.setText("Resend OTP");
+                        otp_submit.setVisibility(View.GONE);
+                        sub_otp.setVisibility(View.GONE);
+                        otp_verify_time_flag = "";
+                    }
+                    else
+                    {
+                        otp_verify_time_flag = "";
+                    }
+
+
 
                 }
             }.start();
@@ -1816,6 +1838,8 @@ public class LoginActivity extends Activity {
                  }
                 else
                 {
+                    otp_progressBarar.setVisibility(View.VISIBLE);
+                    otp_bottom_layout.setVisibility(View.GONE);
                     Generate_Otp("resend", otp_user_name.getText().toString());
                 }
 
@@ -1918,6 +1942,11 @@ public class LoginActivity extends Activity {
                                // dialog.dismiss();
                                 otp_verify_time_flag = "yes";
                                 otp_Resend.setText("Resend OTP");
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                otp_submit.setVisibility(View.VISIBLE);
+                                sub_otp.setVisibility(View.VISIBLE);
+                                otp_Resend.setVisibility(View.GONE);
 
                                 Toast toast = Toast.makeText(LoginActivity.this,
                                         response_result, Toast.LENGTH_SHORT);
@@ -1938,7 +1967,8 @@ public class LoginActivity extends Activity {
 
                             } else {
 
-                                //dialog.dismiss();
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
 
                                 Toast toast = Toast.makeText(LoginActivity.this,
                                         response_result, Toast.LENGTH_SHORT);
@@ -1950,7 +1980,8 @@ public class LoginActivity extends Activity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //dialog.dismiss();
+                            otp_progressBarar.setVisibility(View.GONE);
+                            otp_bottom_layout.setVisibility(View.VISIBLE);
                         }
 
 
@@ -1986,7 +2017,8 @@ public class LoginActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                        //dialog.dismiss();
+                        otp_progressBarar.setVisibility(View.GONE);
+                        otp_bottom_layout.setVisibility(View.VISIBLE);
                         // finish();
                     }
                 });
