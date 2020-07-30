@@ -327,7 +327,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 "",Allresult.get(i).getMobile(),Allresult.get(i).getEmail(),Allresult.get(i).getStatus(),Allresult.get(i).getProprietor_name()
                                 ,Allresult.get(i).getGst_no(),Allresult.get(i).getAadhar_no(),Allresult.get(i).getPan_no(),Allresult.get(i).getLatitude(),Allresult.get(i).getLongitude(),
                                 Allresult.get(i).getPower_dealer(),Allresult.get(i).getLighting_dealer(),Allresult.get(i).getIaq_dealer(),
-                                Allresult.get(i).getSource_of_data(),"","",Allresult.get(i).getTsi_code(),Allresult.get(i).getCard_color_code(),Allresult.get(i).getDistance(),Allresult.get(i).getAddress_line2(),Allresult.get(i).getLandmark(),""));
+                                Allresult.get(i).getSource_of_data(),"","",Allresult.get(i).getTsi_code(),Allresult.get(i).getCard_color_code(),Allresult.get(i).getDistance(),Allresult.get(i).getAddress_line2(),Allresult.get(i).getLandmark(),Allresult.get(i).getFull_address()));
 
                         ca = new Sub_DealerMap_Adapter(Allresultsearch, MapsActivity.this, MapsActivity.this);
                         marker_rview.setAdapter(ca);
@@ -398,28 +398,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                 try {
+                    LatLngBounds bounds = buildern.build();
 
-                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                    for (Marker marker : Global_Data.mMarkers) {
-                        builder.include(marker.getPosition());
-                    }
-
-                    LatLngBounds bounds = builder.build();
-                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
-                    mMap.moveCamera(cu);
-
-//                    LatLngBounds bounds = buildern.build();
-//
-//                    int width = getResources().getDisplayMetrics().widthPixels;
-//                    int height = getResources().getDisplayMetrics().heightPixels;
-//                    int padding = (int) (width * 0.005); // offset from edges of the map 10% of
-//                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
-//                    mMap.animateCamera(cu);
-
+                    int width = getResources().getDisplayMetrics().widthPixels;
+                    int height = getResources().getDisplayMetrics().heightPixels;
+                    int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+                    mMap.animateCamera(cu);
 
                 } catch (Exception ex) {
 
                 }
+
+
+//                try {
+//
+//                    LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//                    for (Marker marker : Global_Data.mMarkers) {
+//                        builder.include(marker.getPosition());
+//                    }
+//
+//                    LatLngBounds bounds = builder.build();
+//                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+//                    mMap.moveCamera(cu);
+//
+////                    LatLngBounds bounds = buildern.build();
+////
+////                    int width = getResources().getDisplayMetrics().widthPixels;
+////                    int height = getResources().getDisplayMetrics().heightPixels;
+////                    int padding = (int) (width * 0.005); // offset from edges of the map 10% of
+////                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+////                    mMap.animateCamera(cu);
+//
+//
+//                } catch (Exception ex) {
+//
+//                }
             } else {
                 click_flag = "";
             }
@@ -1214,10 +1228,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 //SubDealerModel di = new SubDealerModel();
 
+                                String full_address = "";
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("address_line1")))
+                                {
+                                    full_address += " " + jsonObject.getString("address_line1");
+                                }
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("address_line2")))
+                                {
+                                    full_address += "," + jsonObject.getString("address_line2");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("landmark")))
+                                {
+                                    full_address += "," + jsonObject.getString("landmark");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("state")))
+                                {
+                                    full_address += "," + jsonObject.getString("state");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("city")))
+                                {
+                                    full_address += "," + jsonObject.getString("city");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("pincode")))
+                                {
+                                    full_address += "," + jsonObject.getString("pincode");
+                                }
+
+                                try {
+                                    full_address =  (full_address.startsWith(",")) ? full_address.substring(1) : full_address;
+                                    full_address =  (full_address.endsWith(",")) ? full_address.substring(full_address.length()-1) : full_address;
+                                }catch (Exception e) {e.printStackTrace();}
+
                                 locations.add(new LatLng(Double.valueOf(jsonObject.getString("latitude")), Double.valueOf(jsonObject.getString("longitude"))));
 
-                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line1"))+ " "+
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")));
+                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(full_address));
                                 name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("shop_name")));
                                 distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")));
                                 gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")));
@@ -1242,7 +1291,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "red",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),""));
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address));
 
 
                                 ArrayList<String> names = new ArrayList<>();
@@ -1261,7 +1310,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "red",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),""));
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
 
@@ -1281,10 +1330,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 //SubDealerModel di = new SubDealerModel();
 
+                                String full_address = "";
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("address_line1")))
+                                {
+                                    full_address += " " + jsonObject.getString("address_line1");
+                                }
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("address_line2")))
+                                {
+                                    full_address += "," + jsonObject.getString("address_line2");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("landmark")))
+                                {
+                                    full_address += "," + jsonObject.getString("landmark");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("state")))
+                                {
+                                    full_address += "," + jsonObject.getString("state");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("city")))
+                                {
+                                    full_address += "," + jsonObject.getString("city");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("pincode")))
+                                {
+                                    full_address += "," + jsonObject.getString("pincode");
+                                }
+
+                                try {
+                                    full_address =  (full_address.startsWith(",")) ? full_address.substring(1) : full_address;
+                                    full_address =  (full_address.endsWith(",")) ? full_address.substring(full_address.length()-1) : full_address;
+                                }catch (Exception e) {e.printStackTrace();}
+
                                 locations.add(new LatLng(Double.valueOf(jsonObject.getString("latitude")), Double.valueOf(jsonObject.getString("longitude"))));
 
-                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line1"))+" "+
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")));
+                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(full_address));
                                 name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("shop_name")));
                                 distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")));
                                 gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")));
@@ -1311,7 +1395,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "green",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),""));
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address));
 
 
                                 ArrayList<String> names = new ArrayList<>();
@@ -1330,7 +1414,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "green",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),""));
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
 
@@ -1350,10 +1434,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 //SubDealerModel di = new SubDealerModel();
 
+                                String full_address = "";
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("address_line1")))
+                                {
+                                    full_address += " " + jsonObject.getString("address_line1");
+                                }
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("address_line2")))
+                                {
+                                    full_address += "," + jsonObject.getString("address_line2");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("landmark")))
+                                {
+                                    full_address += "," + jsonObject.getString("landmark");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("state")))
+                                {
+                                    full_address += "," + jsonObject.getString("state");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("city")))
+                                {
+                                    full_address += "," + jsonObject.getString("city");
+                                }
+
+                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(jsonObject.getString("pincode")))
+                                {
+                                    full_address += "," + jsonObject.getString("pincode");
+                                }
+
+                                try {
+                                    full_address =  (full_address.startsWith(",")) ? full_address.substring(1) : full_address;
+                                    full_address =  (full_address.endsWith(",")) ? full_address.substring(full_address.length()-1) : full_address;
+                                }catch (Exception e) {e.printStackTrace();}
+
                                 locations.add(new LatLng(Double.valueOf(jsonObject.getString("latitude")), Double.valueOf(jsonObject.getString("longitude"))));
 
-                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line1"))+" "+
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")));
+                                address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(full_address));
                                 name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("shop_name")));
                                 distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")));
                                 gst_no.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("gst_no")));
@@ -1380,7 +1499,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "darkgreen",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),""));
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address));
 
 
                                 ArrayList<String> names = new ArrayList<>();
@@ -1399,7 +1518,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("source_of_data")), "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("tsi_code")), "darkgreen",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),""));
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
 

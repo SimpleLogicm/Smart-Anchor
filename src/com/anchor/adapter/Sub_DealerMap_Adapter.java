@@ -87,7 +87,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         contactViewHolder.d_name.setText("Shop Name : " + ci.getShop_name());
         final String shopname =ci.getShop_name();
         final String address =ci.getAddress();
-        contactViewHolder.p_delaer_address.setText("Address : " + ci.getAddress());
+        contactViewHolder.p_delaer_address.setText("Address : " + ci.getFull_address());
         contactViewHolder.p_distance.setText("Distance : " + ci.getDistance());
         //contactViewHolder.p_delaer_name.setText("Firm Name : " + ci.name);
         contactViewHolder.p_proprietor_mobile1.setText("Proprietor Mobile : " + ci.getMobile());
