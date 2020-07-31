@@ -1636,7 +1636,41 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         // return contact list?
         return contactList1;
-    }//
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getSyncDate() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT cur_date FROM " + TABLE_REG ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCur_date(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
 
     // Getting All Local_Data
     public List<Local_Data> get_email(String device_id) {

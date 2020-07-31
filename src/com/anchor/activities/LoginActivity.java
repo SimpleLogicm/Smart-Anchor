@@ -161,6 +161,7 @@ public class LoginActivity extends Activity {
     LinearLayout otp_bottom_layout;
     EditText sub_otp,otp_user_name;
     TextView otp_time_remaining;
+    CountDownTimer timer;
 
 
     @SuppressLint("InlinedApi")
@@ -380,7 +381,47 @@ public class LoginActivity extends Activity {
 
         buttonLogin.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                requestGPSPermissionsignlogin();
+                List<Local_Data> conta = dbvoc.getSyncDate();
+                for (Local_Data cn1 : conta) {
+                    current_date = cn1.getCur_date();
+
+                }
+                SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+                String  TCODE = pref_devid.getString("TCODE", "");
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                String formattedDate = df.format(c.getTime());
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(TCODE)) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                    Date date1 = null;
+                    try {
+                        date1 = sdf.parse(current_date);
+                        Date to_ddd = df.parse(formattedDate);
+                        if (to_ddd.compareTo(date1) > 0)
+                        {
+                            dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                            showDialog();
+
+
+                        }
+                        else
+                        {
+                            requestGPSPermissionsignlogin();
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+
+                    dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                    showDialog();
+
+                }
+
+
 
             }
         });
@@ -438,9 +479,8 @@ public class LoginActivity extends Activity {
             // TODO Auto-generated method stub
             try {
 
-                //simSerailDB=myDbHelper.createDataBase(simSerial,getDateTime());
-                //myDbHelper.openDataBase();
-                expired = false;//myDbHelper.checkExipry(getDateTime());
+
+                expired = false;
 
 
             } catch (Exception e) {
@@ -1649,21 +1689,21 @@ public class LoginActivity extends Activity {
 //					}
                             else {
 
-                                showDialog();
-                                SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                                String Device_id = pref_devid.getString("devid", "");
-                                Global_Data.device_id = Device_id;
-                                Global_Data.imei_no = Device_id;
+                                Validate_Email_Pass(editText1.getText().toString().trim(), editText2.getText().toString().trim());
 
-                                List<Local_Data> contacts2 = dbvoc.getUSERBY_Device(Global_Data.imei_no);
+//                                SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+//                                String Device_id = pref_devid.getString("devid", "");
+//                                Global_Data.device_id = Device_id;
+//                                Global_Data.imei_no = Device_id;
 
-                                if (contacts2.size() > 0) {
-                                    Validate_Email_Pass(editText1.getText().toString().trim(), editText2.getText().toString().trim());
-                                } else {
-                                    Toast toast = Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-                                }
+//                                List<Local_Data> contacts2 = dbvoc.getUSERBY_Device(Global_Data.imei_no);
+//
+//                                if (contacts2.size() > 0) {
+//                                } else {
+//                                    Toast toast = Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
+//                                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                                    toast.show();
+//                                }
                             }
                         }
 
@@ -1794,7 +1834,7 @@ public class LoginActivity extends Activity {
             final long s_time = new_date.getTime();
             long expiryTime = s_time - currentTime;
 
-            CountDownTimer timer = new CountDownTimer(expiryTime, 1000) {
+             timer = new CountDownTimer(expiryTime, 1000) {
                 public void onTick(long millisUntilFinished) {
                     otp_time_remaining.setText("" + String.format("%d:%d Mins Remaining",
                             TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
@@ -1821,7 +1861,7 @@ public class LoginActivity extends Activity {
 
 
                 }
-            }.start();
+            };
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -1831,6 +1871,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                timer.start();
                 if (CheckNullValue.findNullValue(otp_user_name.getText().toString().trim()) == true) {
                     Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1840,7 +1881,8 @@ public class LoginActivity extends Activity {
                 {
                     otp_progressBarar.setVisibility(View.VISIBLE);
                     otp_bottom_layout.setVisibility(View.GONE);
-                    Generate_Otp("resend", otp_user_name.getText().toString());
+
+                  //  Generate_Otp("resend", otp_user_name.getText().toString());
                 }
 
 
@@ -1952,6 +1994,7 @@ public class LoginActivity extends Activity {
                                         response_result, Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
+                               // timer.start();
 
                                 otp_hit_validator.clear();
 //                                if (Click_Flag.equalsIgnoreCase("generate")) {
