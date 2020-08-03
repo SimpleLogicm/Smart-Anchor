@@ -1739,8 +1739,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         locations.add(new LatLng(Double.valueOf(Allresultsearch.get(i).getLatitude()), Double.valueOf(Allresultsearch.get(i).getLongitude())));
 
-                        address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getAddress())
-                                +""+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getAddress_line2()));
+
+                        address.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getFull_address()));
                         // name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).name));
                         name.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getShop_name()));
                         distance.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(Allresultsearch.get(i).getDistance()));
@@ -1774,7 +1774,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.position(latLng)
                                             .title("Name : " + name.get(a))
                                             .snippet("Address : " +address.get(a))
-                                            .icon(BitmapDescriptorFactory.fromBitmap(red_icon));
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_mark));
                                 }
                                 else
                                 if (retailer_type.get(a).equalsIgnoreCase("green"))
@@ -1783,7 +1783,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.position(latLng)
                                             .title("Name : " + name.get(a))
                                             .snippet("Address : " +address.get(a))
-                                            .icon(BitmapDescriptorFactory.fromBitmap(green_icon));
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.light_green_mark));
                                 }
                                 else
                                 if (retailer_type.get(a).equalsIgnoreCase("darkgreen"))
@@ -1793,7 +1793,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.position(latLng)
                                             .title("Name : " + name.get(a))
                                             .snippet("Address : " +address.get(a))
-                                            .icon(BitmapDescriptorFactory.fromBitmap(darkgreen_icon));
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.dark_green_mark));
 
 
                                 }
