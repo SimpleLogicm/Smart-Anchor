@@ -289,16 +289,16 @@ public class LoginActivity extends Activity {
 //        editText2.setText("PRIYANKA3073911");
 
 //
-        editText1.setText("Sadanand 1");
-        editText2.setText("sadanand12345");
+//        editText1.setText("Sadanand 1");
+//        editText2.setText("sadanand12345");
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
 
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-//		editText1.setText("Sadanand");
-//		editText2.setText("Sadanand7315903");
+		editText1.setText("sadanand");
+		editText2.setText("sada@1234");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -367,7 +367,7 @@ public class LoginActivity extends Activity {
                     toast.show();
                 } else {
                     if (isInternetPresent) {
-                        requestPhoneStatePermission();
+                        //requestPhoneStatePermission();
 
                     } else {
                         // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
@@ -381,47 +381,55 @@ public class LoginActivity extends Activity {
 
         buttonLogin.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                List<Local_Data> conta = dbvoc.getSyncDate();
-                for (Local_Data cn1 : conta) {
-                    current_date = cn1.getCur_date();
+                if (CheckNullValue.findNullValue(editText1.getText().toString().trim()) == true) {
+                    // Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_SHORT).show();
 
-                }
-                SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                String  TCODE = pref_devid.getString("TCODE", "");
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                String formattedDate = df.format(c.getTime());
-
-                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(TCODE)) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                    Date date1 = null;
-                    try {
-                        date1 = sdf.parse(current_date);
-                        Date to_ddd = df.parse(formattedDate);
-                        if (to_ddd.compareTo(date1) > 0)
-                        {
-                            dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
-                            showDialog();
-
-
-                        }
-                        else
-                        {
-                            requestGPSPermissionsignlogin();
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
                 else
                 {
+                    List<Local_Data> conta = dbvoc.getSyncDate(editText1.getText().toString().trim());
+                    for (Local_Data cn1 : conta) {
+                        current_date = cn1.getCur_date();
 
-                    dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
-                    showDialog();
+                    }
+                    SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+                    String  TCODE = pref_devid.getString("TCODE", "");
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                    String formattedDate = df.format(c.getTime());
 
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(TCODE)) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        Date date1 = null;
+                        try {
+                            date1 = sdf.parse(current_date);
+                            Date to_ddd = df.parse(formattedDate);
+                            if (to_ddd.compareTo(date1) > 0)
+                            {
+                                // dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                                showDialog();
+
+
+                            }
+                            else
+                            {
+                                requestGPSPermissionsignlogin();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+
+                        //dbvoc.update_user_createD(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                        showDialog();
+
+                    }
                 }
-
-
 
             }
         });
@@ -711,259 +719,12 @@ public class LoginActivity extends Activity {
 
             }
 
-//			if (registredUser.getUserID()==0) {
-//				AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create(); //Read Update
-//			    alertDialog.setTitle("Warning");
-//			    alertDialog.setMessage("Application is not registerd with this Device."); 
-//			    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
-//					
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						System.exit(0);
-//					}
-//				});
-//
-//			    alertDialog.setCancelable(false);
-//			    alertDialog.setCanceledOnTouchOutside(false);
-//			    alertDialog.show(); 
-//			
-//			}
-			
-			/*else {
-				new InsertRegistredUserAsycTask(LoginActivity.this).execute();
-			}*/
-
         }
     }
 
-    /*public class InsertRegistredUserAsycTask extends AsyncTask<Void, Void, Void> {
-
-     *//** progress dialog to show user that the backup is processing. *//*
-		private ProgressDialog dialog;
-		*/
-
-    /**
-     * application context.
-     *//*
-		private Activity activity;
-		
-		private Context context;
-		
-		private boolean userExists;
-		
-		user registredUser;
-		
-	
-
-		public InsertRegistredUserAsycTask(Activity activity) {
-			this.activity = activity;
-			context=activity;
-			dialog = new ProgressDialog(context);
-			userExists=false;
-			registredUser=new user();
-		}
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			this.dialog.setMessage("Please wait");
-			this.dialog.setCancelable(false);
-			this.dialog.show();
-			
-
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			try {
-				HttpClient httpclient = new DefaultHttpClient();
-				 
-				 Read User Start
-				HttpResponse response = httpclient.execute(new HttpGet("http://114.143.196.137/MS/XML/Test/user.xml"));
-	             HttpEntity entity = response.getEntity();
-				 String responseString = EntityUtils.toString(entity, "UTF-8");
-				 userParsing up = new userParsing();
-				 up.parsingUserXMLData(responseString);
-				 ArrayList<user> listUser  = up.getListUser();
-				 for (Iterator iterator = listUser.iterator(); iterator
-						.hasNext();) {
-					user u = (user) iterator.next();
-					if (u.getIMEINo().equalsIgnoreCase(manager.getDeviceId())) {
-						registredUser=u;
-						break;
-					}
-					
-				}
-					
-			} catch (Exception e) {
-				// TODO: handle exception
-				
-				Log.e("DATA", "Exception-"+e.toString());
-			}
-			
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			if (dialog.isShowing()) {
-				dialog.dismiss();
-				
-			}
-			
-			if (registredUser.getUserId()==0) {
-				AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create(); //Read Update
-			    alertDialog.setTitle("Warning");
-			    alertDialog.setMessage("Application is not registerd with this Device."); 
-			    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Continue",new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						System.exit(0);
-					}
-				});
-
-			  
-			    alertDialog.setCancelable(false);
-			    alertDialog.setCanceledOnTouchOutside(false);
-			    alertDialog.show(); 
-			}
-			
-			else {
-				new InsertRegistredUserAsycTask(LoginActivity.this).execute();
-			}
-		}
-	}*/
-
-    public class LoadUserInfoAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        /**
-         * progress dialog to show user that the backup is processing.
-         */
-        private ProgressDialog dialog;
-        /**
-         * application context.
-         */
-        private Activity activity;
-
-        private Context context;
-
-        private boolean webServiceResponse;
-
-        public LoadUserInfoAsyncTask(Activity activity) {
-            this.activity = activity;
-            context = activity;
-            dialog = new ProgressDialog(context);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-            this.dialog.setMessage("Please wait");
-            this.dialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO Auto-generated method stub
-            try {
-                //Log.e("DATA", "manager.getDeviceId() : "+manager.getDeviceId());
-
-                //u=myDbHelper.cheeckUserdetails(editText1.getText().toString(),editText2.getText().toString(),"911305401754123",getDateTime());//manager.getDeviceId() = 911305401754123
-                //Log.e("DATA", u.toString());
-
-            } catch (Exception e) {
-                // TODO: handle exception
-                Log.e("DATA", "Exception - " + e.toString());
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-
-            }
-
-            if (u.getUserID() != 0) {
-                finish();
-//	     		
-//	     		 SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
-//			        SharedPreferences.Editor editor=spf.edit();        
-//			        //editor.putString("UserID", userid);
-//			        editor.putInt("UserID", u.getUserID());
-//			        editor.putInt("StateID", u.getStateID());
-//			        editor.putInt("cityID", u.getCityID());
-//			        //editor.putInt("beatID", u.getBeatID());
-//			        editor.putString("userbeatIDs", u.getBeatID());
-//			        editor.putString("SimID", u.getSimID());
-//			        editor.putString("FirstName", u.getFirstName());
-//			        editor.putString("LastName", u.getLastName());
-//			        editor.putFloat("Target", u.getTarget());
-//			        editor.putFloat("Current_Target", u.getCurrent_target());
-//			        editor.commit();
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                startActivity(i);
-
-                Intent j = new Intent(getApplicationContext(), LocationServices.class);
-                startService(j);
-
-                //Toast.makeText(getApplicationContext(), "Login Successful", 1000).show();
-				/*SendLatLongAsyncTask sendLatLongAsyncTask=new SendLatLongAsyncTask(LoginActivity.this);
-				sendLatLongAsyncTask.execute();*/
-                Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            } else {
-                //Toast.makeText(getApplicationContext(), "Login failed", 1000).show();
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
-
-            /* for blank*/
-			/*finish();
-     		
-    		 SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
-		        SharedPreferences.Editor editor=spf.edit();        
-		        //editor.putString("UserID", userid);
-		        editor.putInt("UserID", 1);
-		        editor.commit();
-		        Intent i=new Intent(getApplicationContext(), MainActivity.class);
-		       // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-		        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-			startActivity(i);*/
-            /* for blank*/
 
 
-        }
-    }
 
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
-    }
 
     @Override
     protected void onResume() {
@@ -1231,6 +992,8 @@ public class LoginActivity extends Activity {
                     SharedPreferences.Editor editor = spf.edit();
                     editor.putString("USER_EMAIL", cn.getuser_email());
                     editor.putString("USER_NAMEs", cn.getfirst_name() + " " + cn.getlast_name());
+                    editor.putString("USER_Login", cn.getUser().trim());
+                    String user_name = cn.getUser().trim();
 
                     //editor.commit();
 
@@ -1306,7 +1069,7 @@ public class LoginActivity extends Activity {
                                         }
                                     });
 
-                                    List<Local_Data> conta = dbvoc.getDateBY_Device(Global_Data.imei_no, Global_Data.GLOvel_USER_EMAIL);
+                                    List<Local_Data> conta = dbvoc.getSyncDate(user_name);
                                     for (Local_Data cn1 : conta) {
                                         current_date = cn1.getCur_date();
                                         //current_date="28/02/2017";
@@ -1327,7 +1090,7 @@ public class LoginActivity extends Activity {
                                             isInternetPresent = cd.isConnectingToInternet();
                                             if (isInternetPresent) {
 
-                                                dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                                                dbvoc.update_user_createD(formattedDate, user_name);
 
                                                 LoginActivity.this.runOnUiThread(new Runnable() {
                                                     public void run() {
@@ -1364,7 +1127,7 @@ public class LoginActivity extends Activity {
 
                                         if (isInternetPresent) {
 
-                                            dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                                            dbvoc.update_user_createD(formattedDate, user_name);
 
 
                                             LoginActivity.this.runOnUiThread(new Runnable() {
@@ -1560,46 +1323,7 @@ public class LoginActivity extends Activity {
                 .check();
     }
 
-    private void requestPhoneStatePermission() {
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.READ_PHONE_STATE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
 
-                        TelephonyManager tm = (TelephonyManager) LoginActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
-
-                        String Device_id = tm.getDeviceId();
-
-                        SharedPreferences pref = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor edit = pref.edit();
-                        edit.putString("devid", Device_id);
-                        edit.commit();
-
-                        Global_Data.device_id = Device_id;
-
-                        Global_Data.imei_no = Device_id;
-
-                        getserviceData();
-                        return;
-
-
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        // check for permanent denial of permission
-                        if (response.isPermanentlyDenied()) {
-                            showSettingsDialog(LoginActivity.this);
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
-    }
 
     private void requestGPSPermissionsigna() {
 
@@ -1648,7 +1372,7 @@ public class LoginActivity extends Activity {
                 .check();
     }
 
-    private void requestGPSPermissionsignlogin() {
+    private void   requestGPSPermissionsignlogin() {
 
         Dexter.withActivity(this)
                 .withPermissions(
@@ -1691,19 +1415,6 @@ public class LoginActivity extends Activity {
 
                                 Validate_Email_Pass(editText1.getText().toString().trim(), editText2.getText().toString().trim());
 
-//                                SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-//                                String Device_id = pref_devid.getString("devid", "");
-//                                Global_Data.device_id = Device_id;
-//                                Global_Data.imei_no = Device_id;
-
-//                                List<Local_Data> contacts2 = dbvoc.getUSERBY_Device(Global_Data.imei_no);
-//
-//                                if (contacts2.size() > 0) {
-//                                } else {
-//                                    Toast toast = Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
-//                                    toast.setGravity(Gravity.CENTER, 0, 0);
-//                                    toast.show();
-//                                }
                             }
                         }
 
@@ -1828,7 +1539,7 @@ public class LoginActivity extends Activity {
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(service_plusf);
-            cal.add(Calendar.MINUTE, 5);
+            cal.add(Calendar.MINUTE, 2);
             Date new_date = cal.getTime();
 
             final long s_time = new_date.getTime();
@@ -1871,7 +1582,6 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                timer.start();
                 if (CheckNullValue.findNullValue(otp_user_name.getText().toString().trim()) == true) {
                     Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1882,7 +1592,7 @@ public class LoginActivity extends Activity {
                     otp_progressBarar.setVisibility(View.VISIBLE);
                     otp_bottom_layout.setVisibility(View.GONE);
 
-                  //  Generate_Otp("resend", otp_user_name.getText().toString());
+                    Generate_Otp("resend", otp_user_name.getText().toString());
                 }
 
 
@@ -1893,34 +1603,37 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-//                if(otp_hit_validator.get(otp_mobile_value.getText().toString()) > 3)
-//                {
+//                if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
+//                    if (!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sub_otp.getText().toString())) {
+//                        sub_otp.requestFocus();
+//                        //Globel_Data.Custom_Toast(ShopDetails.this, "Please Enter OTP", "");
+//
+//                    } else {
+//
+//                    }
+//                } else {
+//
 //
 //                }
-//                else
-//                {
-//
-//                }
-                if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
-                    if (!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sub_otp.getText().toString())) {
-                        sub_otp.requestFocus();
-                        //Globel_Data.Custom_Toast(ShopDetails.this, "Please Enter OTP", "");
 
-                    } else {
-                        //dialognew.dismiss();
-//                        if (dialog == null) {
-//                            dialog = new ProgressDialog(ShopDetails.this, ProgressDialog.THEME_HOLO_LIGHT);
-//                        }
-//                        dialog.setMessage("Please wait....");
-//                        dialog.setTitle("Sub Dealer App");
-//                        dialog.setCancelable(false);
-//                        dialog.show();
-//
-                       // Generate_Otp(otp_mobile_value.getText().toString(), sub_otp.getText().toString());
-                    }
-                } else {
-                   // Globel_Data.Custom_Toast(ShopDetails.this, "Please click resend otp button", "");
 
+                if (CheckNullValue.findNullValue(otp_user_name.getText().toString().trim()) == true) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                if (CheckNullValue.findNullValue(sub_otp.getText().toString().trim()) == true) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter OTP", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+                    otp_progressBarar.setVisibility(View.VISIBLE);
+                    otp_bottom_layout.setVisibility(View.GONE);
+
+                    submit_OTP(otp_user_name.getText().toString(), sub_otp.getText().toString(),dialognew);
                 }
 
 
@@ -1949,13 +1662,11 @@ public class LoginActivity extends Activity {
             JsonObjectRequest jsObjRequest = null;
             try {
 
-                SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-                String devid = sp.getString("devid", "");
-                String USER_EMAIL = sp.getString("USER_EMAIL", "");
 
                 String domain = getResources().getString(R.string.service_domain);
+                String url = domain+"menus/genrate_otp";
 
-                Log.d("Server url", "Server url" + domain + "menus/genrate_otp");
+                Log.d("Server url", "Server url" + url);
 
                 JSONObject SINOBJECT = new JSONObject();
 
@@ -1963,7 +1674,7 @@ public class LoginActivity extends Activity {
 
                 Log.d("user_dealer Service", SINOBJECT.toString());
 
-                jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "sub_dealers/generate_otp", SINOBJECT, new com.android.volley.Response.Listener<JSONObject>() {
+                jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, SINOBJECT, new com.android.volley.Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.i("volle y", "response: " + response);
@@ -1972,14 +1683,14 @@ public class LoginActivity extends Activity {
                         try {
 
                             String response_result = "";
-                            if (response.has("message")) {
-                                response_result = response.getString("message");
+                            if (response.has("result")) {
+                                response_result = response.getString("result");
                             } else {
                                 response_result = "data";
                             }
 
 
-                            if (response_result.equalsIgnoreCase("OTP Sent Successfully")) {
+                            if (response_result.equalsIgnoreCase("OTP Sent Successfully.")) {
 
                                // dialog.dismiss();
                                 otp_verify_time_flag = "yes";
@@ -1994,19 +1705,9 @@ public class LoginActivity extends Activity {
                                         response_result, Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
-                               // timer.start();
+                                timer.start();
 
                                 otp_hit_validator.clear();
-//                                if (Click_Flag.equalsIgnoreCase("generate")) {
-//                                    showDialog();
-//                                } else {
-//
-//                                    dialognew.dismiss();
-//                                    showDialog();
-//                                }
-
-//
-
 
                             } else {
 
@@ -2088,5 +1789,132 @@ public class LoginActivity extends Activity {
             Log.e("DATA", e.getMessage());
         }
     }
+
+    public void submit_OTP(final String user_name, String otp, final Dialog dialogdis) {
+
+        try {
+
+            String domain = getResources().getString(R.string.service_domain);
+            String url = domain+"menus/verify_otp?user_name=" + URLEncoder.encode(user_name, "UTF-8")+"&otp="+otp;
+            Log.i("volley", "url: " + url);
+            Log.i("volley", "user_name: " + user_name);
+            Log.i("volley", "otp: " + otp);
+
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+                // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response.toString());
+
+                    try {
+                        String response_result = "";
+                        if (response.has("result")) {
+                            response_result = response.getString("result");
+                        } else {
+                            response_result = "data";
+                        }
+
+
+                        if (response_result.equalsIgnoreCase("User Verified Successfully.")) {
+
+                            dbvoc.getDeleteTable("users");
+
+                            JSONArray users = response.getJSONArray("users");
+                            Log.i("volley", "response reg users Length: " + users.length());
+
+                            if (users.length() <= 0) {
+                               // dialogdis.dismiss();
+                                //Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_SHORT).show();
+                                Toast toast = Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                            } else {
+                                Log.d("users", "users" + users.toString());
+
+                                /* IDS column used for BU Head */
+
+                                for (int i = 0; i < users.length(); i++) {
+
+                                    JSONObject jsonObject = users.getJSONObject(i);
+
+                                    loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
+                                            jsonObject.getString("first_name"), jsonObject.getString("last_name"), "", "", "", "", "",
+                                            "", "", "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
+                                }
+
+                                SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("TCODE", "Yes");
+                                editor.commit();
+
+                                Calendar c = Calendar.getInstance();
+                                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                                String formattedDate = df.format(c.getTime());
+                                dbvoc.update_user_createD(formattedDate, user_name);
+
+                                timer.cancel();
+
+
+                                Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                dialogdis.dismiss();
+                            }
+
+
+
+                        } else {
+                            otp_progressBarar.setVisibility(View.GONE);
+                            otp_bottom_layout.setVisibility(View.VISIBLE);
+                            Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        otp_progressBarar.setVisibility(View.GONE);
+                        otp_bottom_layout.setVisibility(View.VISIBLE);
+
+                    }
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("volley", "error: " + error);
+                    // Toast.makeText(getApplicationContext(), "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(LoginActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    otp_progressBarar.setVisibility(View.GONE);
+                    otp_bottom_layout.setVisibility(View.VISIBLE);
+
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            // queue.add(jsObjRequest);
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 3000000;//3000 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            otp_progressBarar.setVisibility(View.GONE);
+            otp_bottom_layout.setVisibility(View.VISIBLE);
+        }
+    }
+
 
 }
