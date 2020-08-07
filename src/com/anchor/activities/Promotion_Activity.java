@@ -35,6 +35,8 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.FileProvider;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -756,8 +758,15 @@ public class Promotion_Activity extends Activity {
                                                 }
                                                 // Continue only if the File was successfully created
                                                 if (photoFile != null) {
-                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    Uri photoURI = FileProvider.getUriForFile(Promotion_Activity.this,
+                                                            BuildConfig.APPLICATION_ID + ".provider",
+                                                            photoFile);
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                                    cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+
+//                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+//                                                    startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                                                 }
                                             }
 
@@ -765,7 +774,7 @@ public class Promotion_Activity extends Activity {
 
                                             // image_check = "gallery";
                                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
+                                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                             startActivityForResult(intent, 2);
 
 

@@ -52,6 +52,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+
 import com.anchor.model.Product;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
@@ -1134,7 +1136,13 @@ public class Previous_orderNew_S3 extends BaseActivity {
                                                 }
                                                 // Continue only if the File was successfully created
                                                 if (photoFile != null) {
-                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    Uri photoURI = FileProvider.getUriForFile(Previous_orderNew_S3.this,
+                                                            BuildConfig.APPLICATION_ID + ".provider",
+                                                            photoFile);
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                                    cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+//                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                                                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                                                 }
                                             }
@@ -1146,7 +1154,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                                             // image_check = "gallery";
                                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
+                                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                             startActivityForResult(intent, 2);
 
 

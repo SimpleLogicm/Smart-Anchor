@@ -297,8 +297,11 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-		editText1.setText("sadanand");
-		editText2.setText("sada@1234");
+//		editText1.setText("sadanand");
+//		editText2.setText("sada@1234");
+
+        editText1.setText("Kartik");
+        editText2.setText("Kartik7999425");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);

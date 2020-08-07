@@ -94,7 +94,7 @@
                 android:layout_height="match_parent"
                 >
 
-                <androidx.appcompat.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvComplaint"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
@@ -106,7 +106,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:listitem="@layout/complaint_card">
 
-                </androidx.appcompat.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

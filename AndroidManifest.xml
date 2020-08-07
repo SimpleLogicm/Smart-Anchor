@@ -738,9 +738,15 @@
 <!--            android:value="AIzaSyCZ0V_EyLti7MktVyiirh757xc1Uzwtb68" />-->
 
         <!-- UAT FOR Vinod MACBBOK-->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.maps.v2.API_KEY"-->
+<!--            android:value="AIzaSyCwG6XZPN4KhKkwKvK0rnXH12G5RWgyDpc" />-->
+
+<!--        Kartik Laptop-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCwG6XZPN4KhKkwKvK0rnXH12G5RWgyDpc" />
+            android:value="AIzaSyCUQun-o2aWvFRyU73jo9wYIvhaI58IuXk" />
+
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -762,6 +768,16 @@
             </intent-filter>
         </receiver>
 
+
+        <provider
+            android:name=".GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
     </application>
 
