@@ -381,6 +381,7 @@ public class LoginActivity extends Activity {
 
         buttonLogin.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
+
                 if (CheckNullValue.findNullValue(editText1.getText().toString().trim()) == true) {
                     // Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_SHORT).show();
 

@@ -450,257 +450,6 @@ public class getServices {
         requestQueue.add(stringRequest);
     }
 
-    public static void SYNCORDER_BYORDER_ID(Context contextn) {
-
-        context = contextn;
-        final ProgressDialog dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        String uploadImage = "";
-        dbvoc = new DataBaseHelper(contextn);
-
-//  List<Local_Data> contacts2 = dbvoc.getAllOrderby_cusID("1012");
-//      List<Local_Data> contacts2 = dbvoc.getAllOrderby_cusID(Global_Val.customer_id);
-//      int ln = contacts2.size();
-//
-//
-//      for (Local_Data cn : contacts2) {
-//
-//          CUSTOMER_NAME = cn.getStateName();
-//
-//      }
-
-        //filePath =  new Uri(android.os.Environment.getExternalStorageDirectory(), "SIYARAMS"+"/" + "vinod" + "/" + CUSTOMER_NAME);
-
-//      try
-//      {
-//          String filename = CUSTOMER_NAME+".png";
-//          String path = "/mnt/sdcard/"+"SIYARAMS"+"/" + "vinod" + "/" + CUSTOMER_NAME + filename;
-//          File f = new File(android.os.Environment.getExternalStorageDirectory(), "SIYARAMS"+"/" + "vinod" + "/" + CUSTOMER_NAME+"/"+filename);  //
-//          Uri imageUri = Uri.fromFile(f);
-//
-//          bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-//          uploadImage = getStringImage(bitmap);
-//
-//      }
-//      catch (Exception  e)
-//      {
-//          e.printStackTrace();
-//      }
-
-        JSONObject jsonBody = new JSONObject();
-        try {
-
-            JSONArray product = new JSONArray();
-            JSONArray order = new JSONArray();
-            JSONObject product_valuenew = new JSONObject();
-
-            int a = 0;
-
-            List<Local_Data> contacts = dbvoc.GetOrders("", "");
-            //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
-            for (Local_Data cn : contacts) {
-                JSONObject product_value = new JSONObject();
-                product_value.put("order_number", cn.get_category_code());
-                // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
-                product_value.put("order_take_by", cn.get_custadr());
-                // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
-                // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
-                //product_value.put("signature_image_name", uploadImage);
-                product_value.put("device_code", Global_Data.device_id);
-                product_value.put("order_type", cn.get_shedule_payment_mode());
-                // product_value.put("conference_code", cn.getconference_id());
-                order.put(product_value);
-                Log.d("count", "a" + ++a);
-                //delete_order_no = cn.getORDER_NUMBER();
-                List<Local_Data> contactsproduct = dbvoc.Get_OrderProducts(cn.get_category_code());
-                for (Local_Data cnp : contactsproduct) {
-
-                    JSONObject item = new JSONObject();
-                    item.put("order_number", cnp.get_category_code());
-                    item.put("customer_name", cnp.get_custadr());
-                    item.put("total_qty", cnp.get_stocks_product_quantity());
-                    item.put("MRP", cnp.getMRP());
-                    item.put("amount", cnp.get_Claims_amount());
-                    item.put("scheme_amount", cnp.get_Target_Text());
-                    product.put(item);
-                    //Log.d("quantity","quantity"+cnp.getquantity());
-                }
-            }
-
-//          for (int i = 0; i < 10; i++)
-//          {
-//
-//
-//
-//          }
-
-            product_valuenew.put("orders", order);
-            product_valuenew.put("order_products", product);
-            product_valuenew.put("imei_no", Global_Data.device_id);
-            Log.d("Orders", order.toString());
-
-            Log.d("order_products", product.toString());
-
-            // HashMap<String, String> params = new HashMap<String, String>();
-            //params.put("token", json.toString());
-
-            dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Siyaram");
-            dialog.setCancelable(false);
-            dialog.show();
-
-            // RequestQueue queue = Volley.newRequestQueue(getBaseContext());
-            // PreferencesHelper Prefs = new PreferencesHelper(MasterSyncData.this);
-
-            //String URL = Prefs.GetPreferences("URL");
-            String domain = context.getResources().getString(R.string.service_domain);
-
-            Log.i("volley", "domain: " + domain);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "api/orders", product_valuenew, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.i("volley", "response: " + response);
-
-                    String response_result = "";
-                    //if (response.has("result")) {
-                    try {
-                        response_result = response.getString("result");
-
-//                          if (response_result.equalsIgnoreCase("Device not found.")) {
-//                              Toast toast = Toast.makeText(context, "Device Not Found", Toast.LENGTH_LONG);
-//                              toast.setGravity(Gravity.CENTER, 0, 0);
-//                              toast.show();
-//                              dialog.dismiss();
-//                          }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (response_result.equalsIgnoreCase("Device not found.")) {
-                        Toast toast = Toast.makeText(context, "Device Not Found", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        dialog.dismiss();
-
-
-                    } else {
-//                  else
-//                  {
-//                      response_result = "data";
-//                  }
-
-
-                        Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
-
-                        // dbvoc.getDeleteTable("order_products");
-                        //dbvoc.getDeleteTable("orders");
-
-                        // dbvoc.getDeleteTableorder_bycustomer(Global_Data.order_retailer.trim());
-                        //dbvoc.getDeleteTableorderproduct_bycustomer(Global_Data.order_retailer.trim());
-//                  List<Local_Data> contacts = dbvoc.GetOrders(Global_Val.customer_id);
-//                  for (Local_Data cn : contacts)
-//                  {
-//                      // JSONObject product_value = new JSONObject();
-//                      //product_value.put("order_number", cn.getORDER_NUMBER());
-//
-//                      dbvoc.deleteOrderproductByOCID(cn.getORDER_NUMBER());
-//                      dbvoc.deleteOrderTABLE_QuantityValue(cn.getORDER_NUMBER());
-//                      dbvoc.deleteBarcode_ByOrder(cn.getORDER_NUMBER());
-//                      dbvoc.deleteORDERSNEW(cn.getORDER_NUMBER());
-//
-//                  }
-
-
-                        //dbvoc.deleteOrderByOCID(Global_Val.customer_id);
-                        //dbvoc.getDeleteTable("DESIGN_CHECK");
-
-//                  Intent i = new Intent(MasterSyncData.this, MyAndroidAppActivity.class);
-//                  //				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                  i.putExtra("user_name", user_name);
-//                  i.putExtra("confrence_name", confrence_name);
-//                  i.putExtra("BackFlag", "nothing");
-//                  Global_Val.STOCK_SERVICE_FLAG = "TRUE";
-                        //				i.putExtra("Barcode_Number", userInput.getText().toString());
-                        //				i.putExtra("BackFlag","Barcode");
-//                  startActivity(i);
-//                  MasterSyncData.this.finish();
-                        dialog.dismiss();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i("volley", "error: " + error);
-                    Toast.makeText(context, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG).show();
-                    dialog.dismiss();
-                }
-            });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
-            // queue.add(jsObjRequest);
-            int socketTimeout = 30000;//30 seconds - change to what you want
-            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            jsObjRequest.setRetryPolicy(policy);
-            requestQueue.add(jsObjRequest);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-
-        }
-
-//add the request object to the queue to be executed
-        //ApplicationController.getInstance().addToRequestQueue(req);
-
-
-//      StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://cb899c5b.ngrok.io/siyarams/api/orders",
-//              new Response.Listener<String>() {
-//                  @Override
-//                  public void onResponse(String response) {
-//                      Toast.makeText(MasterSyncData.this,response,Toast.LENGTH_LONG).show();
-//                  }
-//              },
-//              new Response.ErrorListener() {
-//                  @Override
-//                  public void onErrorResponse(VolleyError error) {
-//                      Toast.makeText(MasterSyncData.this,error.toString(),Toast.LENGTH_LONG).show();
-//                  }
-//              }){
-//          @Override
-//          protected Map<String,String> getParams(){
-//
-//              try {
-//
-//                  JSONObject json = new JSONObject();
-//                  json.put("name", "student");
-//
-//                  JSONArray array = new JSONArray();
-//                  JSONObject item = new JSONObject();
-//                  item.put("information", "test");
-//                  item.put("id", 3);
-//                  item.put("name", "course1");
-//                  array.put(item);
-//
-//                  json.put("course", array);
-//
-//                 // message = json.toString();
-//
-//              }catch (Exception e){}
-//
-//
-//              Map<String,String> params = new HashMap<String, String>();
-//              params.put("user","user1");
-//              params.put("name","name");
-//             // params.put(KEY_EMAIL, email);
-//              return params;
-//          }
-//
-//      };
-//
-//      RequestQueue requestQueue = Volley.newRequestQueue(this);
-//      requestQueue.add(stringRequest);
-    }
-
     public static void SYNCORDER_BYCustomer(Context contextn, String order_id,String order_detail1_text,String order_detail2_text,String order_detail3_text,String order_detail4_text) {
         context = contextn;
         detail1 = order_detail1_text;
@@ -752,9 +501,23 @@ public class getServices {
     }
 
     public static void SYNCORDER_BYCustomer_Return(Context contextn) {
+
         context = contextn;
         Calendar c = Calendar.getInstance();
         System.out.println("Current time =&gt; " + c.getTime());
+
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -827,7 +590,9 @@ public class getServices {
                 // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                 // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
                 //product_value.put("signature_image_name", uploadImage);
-                product_value.put("device_code", Global_Data.device_id);
+                product_value.put("device_code", "");
+                product_value.put("email", user_email);
+
 
 
                 if (cn.get_shedule_payment_mode().equalsIgnoreCase("Secondary Sales / Retail Sales")) {
@@ -868,7 +633,8 @@ public class getServices {
             product_valuenew.put("return_orders", order);
             product_valuenew.put("return_order_products", product);
             product_valuenew.put("customers", customer);
-            product_valuenew.put("imei_no", Global_Data.device_id);
+            product_valuenew.put("imei_no", "");
+            product_valuenew.put("email",user_email);
 
             Log.d("customers", customer.toString());
 
@@ -1102,6 +868,21 @@ public class getServices {
         dbvoc = new DataBaseHelper(contextn);
 
 
+
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         JSONObject jsonBody = new JSONObject();
 
         try {
@@ -1199,7 +980,8 @@ public class getServices {
             product_valuenew.put("customers", CUSTOMERSN);
             product_valuenew.put("quotations", order);
             product_valuenew.put("quotation_products", product);
-            product_valuenew.put("imei_no", Global_Data.device_id);
+            product_valuenew.put("imei_no", "");
+            product_valuenew.put("email",user_email);
 
             Log.d("customers", CUSTOMERSN.toString());
             Log.d("quotations", order.toString());
@@ -1372,6 +1154,19 @@ public class getServices {
         String uploadImage = "";
         dbvoc = new DataBaseHelper(contextn);
 
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         try {
             AppLocationManager appLocationManager = new AppLocationManager(context);
             Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
@@ -1463,7 +1258,8 @@ public class getServices {
 
             product_valuenew.put("quotations", order);
             product_valuenew.put("quotation_products", product);
-            product_valuenew.put("imei_no", Global_Data.device_id);
+            product_valuenew.put("imei_no", "");
+            product_valuenew.put("email",user_email);
 
             Log.d("quotations", order.toString());
 
@@ -1653,6 +1449,18 @@ public class getServices {
         String reason_code = "";
         try {
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 //			DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 //			DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
 //			Date date1 = originalFormat.parse(getDateTime());
@@ -1669,7 +1477,6 @@ public class getServices {
             String device_id = "";
 
 
-            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
             device_id = sp.getString("devid", "");
             domain = context.getResources().getString(R.string.service_domain);
 
@@ -1863,7 +1670,8 @@ public class getServices {
                     // product_value_n.put("customer_service_competition_stocks", COMPS);
                     // product_value_n.put("customer_service_media", PICTURE);
                     // product_value_n.put("imei_no", Global_Data.device_id);
-                    product_value_n.put("imei_no", Global_Data.device_id);
+                    product_value_n.put("imei_no", "");
+                    product_value_n.put("email",user_email);
 
                     Log.d("customers", product_value_n.toString());
                     //Log.d("expenses_travels",product_value_n.toString());
@@ -1995,6 +1803,19 @@ public class getServices {
 //			Date date1 = originalFormat.parse(getDateTime());
 //			String formattedDate = targetFormat.format(date1);
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
@@ -2006,7 +1827,6 @@ public class getServices {
             String device_id = "";
 
 
-            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
             device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
@@ -2281,9 +2101,9 @@ public class getServices {
                 product_value_n.put("claims", CLAIM);
                 product_value_n.put("stocks", COMPS);
                 // product_value_n.put("customer_service_media", PICTURE);
-                product_value_n.put("imei_no", Global_Data.device_id);
+                product_value_n.put("imei_no","");
                 product_value_n.put("emp_code", Global_Data.emp_code);
-                product_value_n.put("email", Global_Data.GLOvel_USER_EMAIL);
+                product_value_n.put("email",user_email);
 
                 // Log.d("customers",product_value_n.toString());
 
@@ -2531,6 +2351,19 @@ public class getServices {
         String reason_code = "";
         try {
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
             dialog.setTitle("Smart Anchor App");
@@ -2541,8 +2374,8 @@ public class getServices {
             String device_id = "";
 
 
-            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-            device_id = sp.getString("devid", "");
+            //SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            //device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
 
@@ -2570,7 +2403,8 @@ public class getServices {
                 PICTURE.put(picture);
 
                 product_value_n.put("customer_service_media", PICTURE);
-                product_value_n.put("imei_no", Global_Data.device_id);
+                product_value_n.put("imei_no", "");
+                product_value_n.put("email",user_email);
 
                 Log.d("customers Service", product_value_n.toString());
 
@@ -3547,6 +3381,19 @@ public class getServices {
         protected Void doInBackground(Void... params) {
 
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             String uploadImage = "";
             dbvoc = new DataBaseHelper(context);
 
@@ -3724,7 +3571,8 @@ public class getServices {
                 product_valuenew.put("orders", order);
                 product_valuenew.put("order_products", product);
                 product_valuenew.put("customers", customer);
-                product_valuenew.put("imei_no", Global_Data.device_id);
+                product_valuenew.put("imei_no", "");
+                product_valuenew.put("email", user_email);
                 Log.d("customers", customer.toString());
 
                 Log.d("Orders", order.toString());
@@ -4064,6 +3912,20 @@ public class getServices {
             String uploadImage = "";
             dbvoc = new DataBaseHelper(context);
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+
             Calendar c = Calendar.getInstance();
             System.out.println("Current time =&gt; " + c.getTime());
 
@@ -4221,7 +4083,8 @@ public class getServices {
 
 
                     multipart.addFormField("sub_dealer_order_details", product.toString());
-                    multipart.addFormField("imei_no", Global_Data.device_id);
+                    multipart.addFormField("imei_no", "");
+                    multipart.addFormField("email",user_email);
 
                     if (!order_image_url.equalsIgnoreCase("")) {
                         multipart.addFormField("is_picture1", "true");
@@ -4429,6 +4292,19 @@ public class getServices {
             final Calendar c = Calendar.getInstance();
 
             //String strDate = sdf.format(c.getTime());
+
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
 
             final ArrayList<String> order_results = new ArrayList<String>();
@@ -4732,7 +4608,8 @@ public class getServices {
                     product_valuenew.put("return_order_products", product_return);
                     product_valuenew.put("no_orders", no_orders);
                     product_valuenew.put("customers", customer);
-                    product_valuenew.put("imei_no", Global_Data.device_id);
+                    product_valuenew.put("imei_no", "");
+                    product_valuenew.put("email",user_email);
 
                     Log.d("Orders", order.toString());
                     Log.d("order_products", product.toString());

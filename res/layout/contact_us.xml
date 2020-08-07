@@ -4,7 +4,7 @@
     android:fillViewport="true"
     android:orientation="vertical" >
 
-    <androidx.appcompat.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="500dp"
         >
@@ -171,5 +171,5 @@
                 android:textSize="15dp"
                 />
         </RelativeLayout>>
-    </androidx.appcompat.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </ScrollView>

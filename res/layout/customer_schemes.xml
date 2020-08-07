@@ -25,7 +25,7 @@
         </AutoCompleteTextView>
 
 
-    <androidx.appcompat.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/c_info_card"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/autoCompleteTextView1"

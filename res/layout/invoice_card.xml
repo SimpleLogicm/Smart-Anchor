@@ -1,4 +1,4 @@
-<androidx.appcompat.widget.CardView
+<androidx.cardview.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -109,7 +109,7 @@
 
         </RelativeLayout>
     </RelativeLayout>
-</androidx.appcompat.widget.CardView>
+</androidx.cardview.widget.CardView>
 <!--
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
