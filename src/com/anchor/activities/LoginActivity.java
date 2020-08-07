@@ -410,7 +410,7 @@ public class LoginActivity extends Activity {
                             if (to_ddd.compareTo(date1) > 0)
                             {
                                 // dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
-                                showDialog();
+                                showDialogs(editText1.getText().toString().trim());
 
 
                             }
@@ -426,7 +426,7 @@ public class LoginActivity extends Activity {
                     {
 
                         //dbvoc.update_user_createD(formattedDate, Global_Data.GLOvel_USER_EMAIL);
-                        showDialog();
+                        showDialogs(editText1.getText().toString().trim());
 
                     }
                 }
@@ -830,7 +830,7 @@ public class LoginActivity extends Activity {
         return result;
     }
 
-    public void getserviceData(String user_name, final Dialog dialogdis) {
+    public void getserviceData(final String user_name, final Dialog dialogdis) {
 //        dialog.setMessage("Please wait Data Sync....");
 //        dialog.setTitle("Smart Anchor App");
 //        dialog.setCancelable(false);
@@ -903,6 +903,17 @@ public class LoginActivity extends Activity {
                                 }
 
 
+
+                                SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("TCODE", "Yes");
+                                editor.putString("FirstLogin", "Yes");
+                                editor.commit();
+
+                                Calendar c = Calendar.getInstance();
+                                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                                String formattedDate = df.format(c.getTime());
+                                dbvoc.update_user_createD(formattedDate, user_name);
 
                                 Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
@@ -1061,31 +1072,37 @@ public class LoginActivity extends Activity {
                                         }
                                     });
 
-                                    List<Local_Data> conta = dbvoc.getSyncDate(user_name);
-                                    for (Local_Data cn1 : conta) {
-                                        current_date = cn1.getCur_date();
-                                        //current_date="28/02/2017";
-                                    }
+//                                    List<Local_Data> conta = dbvoc.getSyncDate(user_name);
+//                                    for (Local_Data cn1 : conta) {
+//                                        current_date = cn1.getCur_date();
+//                                        //current_date="28/02/2017";
+//                                    }
 
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date)) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                                        Date date1 = sdf.parse(current_date);
+                                    final SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+                                    String FirstLogin_Flag = sp.getString("FirstLogin", "");
 
-                                        Calendar c = Calendar.getInstance();
-                                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                                        String formattedDate = df.format(c.getTime());
-                                        Date to_ddd = df.parse(formattedDate);
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(FirstLogin_Flag)) {
+//                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//                                        Date date1 = sdf.parse(current_date);
+//
+//                                        Calendar c = Calendar.getInstance();
+//                                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//                                        String formattedDate = df.format(c.getTime());
+//                                        Date to_ddd = df.parse(formattedDate);
                                         //String formattedDate = df.format(c.getTime());
 
-                                        if (to_ddd.compareTo(date1) > 0) {
+                                        if (FirstLogin_Flag.equalsIgnoreCase("Yes")) {
 //											finish();
                                             isInternetPresent = cd.isConnectingToInternet();
                                             if (isInternetPresent) {
 
-                                                dbvoc.update_user_createD(formattedDate, user_name);
+                                               // dbvoc.update_user_createD(formattedDate, user_name);
 
                                                 LoginActivity.this.runOnUiThread(new Runnable() {
                                                     public void run() {
+                                                        SharedPreferences.Editor editora = sp.edit();
+                                                        editora.putString("FirstLogin", "NO");
+                                                        editora.commit();
                                                         getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
                                                     }
                                                 });
@@ -1102,6 +1119,9 @@ public class LoginActivity extends Activity {
                                             }
                                         } else {
                                             dialog.dismiss();
+                                            SharedPreferences.Editor editora = sp.edit();
+                                            editora.putString("FirstLogin", "NO");
+                                            editora.commit();
                                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             finish();
@@ -1117,25 +1137,32 @@ public class LoginActivity extends Activity {
                                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                                         String formattedDate = df.format(c.getTime());
 
-                                        if (isInternetPresent) {
+                                        SharedPreferences.Editor editora = sp.edit();
+                                        editora.putString("FirstLogin", "NO");
+                                        editora.commit();
+                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        finish();
 
-                                            dbvoc.update_user_createD(formattedDate, user_name);
-
-
-                                            LoginActivity.this.runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
-                                                }
-                                            });
-                                        } else {
-                                            LoginActivity.this.runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                                    toast.show();
-                                                }
-                                            });
-                                        }
+//                                        if (isInternetPresent) {
+//
+//                                            dbvoc.update_user_createD(formattedDate, user_name);
+//
+//
+//                                            LoginActivity.this.runOnUiThread(new Runnable() {
+//                                                public void run() {
+//                                                    getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
+//                                                }
+//                                            });
+//                                        } else {
+//                                            LoginActivity.this.runOnUiThread(new Runnable() {
+//                                                public void run() {
+//                                                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+//                                                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                                                    toast.show();
+//                                                }
+//                                            });
+//                                        }
                                     }
 
                                 } else {
@@ -1164,7 +1191,7 @@ public class LoginActivity extends Activity {
                                 });
                             }
 
-                        } catch (ParseException ex) {
+                        } catch (Exception ex) {
                             ex.printStackTrace();
                             LoginActivity.this.runOnUiThread(new Runnable() {
                                 public void run() {
@@ -1500,7 +1527,7 @@ public class LoginActivity extends Activity {
         }
     }
 
-    public void showDialog() {
+    public void showDialogs(String user_name) {
         dialognew = new Dialog(LoginActivity.this);
         dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialognew.setCancelable(false);
@@ -1509,6 +1536,7 @@ public class LoginActivity extends Activity {
           sub_otp = dialognew.findViewById(R.id.sub_otp);
           otp_user_name = dialognew.findViewById(R.id.otp_user_name);
           otp_time_remaining = dialognew.findViewById(R.id.otp_time_remaining);
+          otp_user_name.setText(user_name);
 
        // otp_mobile_value.setText(input_mobno1.getText().toString());
         otp_verify_time_flag = "yes";
@@ -1554,6 +1582,7 @@ public class LoginActivity extends Activity {
                         otp_Resend.setText("Resend OTP");
                         otp_submit.setVisibility(View.GONE);
                         sub_otp.setVisibility(View.GONE);
+                        sub_otp.setText("");
                         otp_verify_time_flag = "";
                     }
                     else
@@ -1656,7 +1685,7 @@ public class LoginActivity extends Activity {
 
 
                 String domain = getResources().getString(R.string.service_domain);
-                String url = domain+"menus/genrate_otp";
+                String url = domain+"menus/generate_otp";
 
                 Log.d("Server url", "Server url" + url);
 
@@ -1817,6 +1846,7 @@ public class LoginActivity extends Activity {
                                     SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
                                     SharedPreferences.Editor editor = spf.edit();
                                     editor.putString("TCODE", "Yes");
+                                    editor.putString("FirstLogin", "Yes");
                                     editor.commit();
 
                                     Calendar c = Calendar.getInstance();
@@ -1837,16 +1867,6 @@ public class LoginActivity extends Activity {
                                 {
                                     Log.d("New User","New U");
                                     Log.d("Existing User","Existing U");
-                                    SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
-                                    SharedPreferences.Editor editor = spf.edit();
-                                    editor.putString("TCODE", "Yes");
-                                    editor.commit();
-
-                                    Calendar c = Calendar.getInstance();
-                                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                                    String formattedDate = df.format(c.getTime());
-                                    dbvoc.update_user_createD(formattedDate, user_name);
-
                                     timer.cancel();
                                     getserviceData(user_name, dialogdis);
                                 }
