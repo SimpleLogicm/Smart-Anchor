@@ -227,7 +227,7 @@ public class Status_Activity extends Activity implements customButtonListener {
     {
 
 		SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-		 device_id = sp.getString("devid", "");
+		// device_id = sp.getString("devid", "");
         
          loginDataBaseAdapter=new LoginDataBaseAdapter(Status_Activity.this);
 	     loginDataBaseAdapter=loginDataBaseAdapter.open();
@@ -246,7 +246,7 @@ public class Status_Activity extends Activity implements customButtonListener {
         
         domain =  getResources().getString(R.string.service_domain);
         
-        Log.d("url", "url customer"+domain+"quotations/send_quotation_status?customer_code="+cust_id+"&imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL);
+        Log.d("url", "url customer"+domain+"quotations/send_quotation_status?customer_code="+cust_id+"&imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL);
 
        // Global_Val global_Val = new Global_Val();
 //        if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {

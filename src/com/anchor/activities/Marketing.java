@@ -362,16 +362,27 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
                 //downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                String device_id = sp.getString("devid", "");
+                String user_email = "";
+
+                try {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                        user_email = sp.getString("USER_EMAIL", "");
+                    } else {
+                        user_email = Global_Data.GLOvel_USER_EMAIL;
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+               // String device_id = sp.getString("devid", "");
 
                 String domain = "";
 
                 domain = getResources().getString(R.string.service_domain);
 
-                Log.d("Server url","Server url"+domain+"new_launches?imei_no="+device_id);
+                Log.d("Server url","Server url"+domain+"new_launches?email="+user_email);
 
                 StringRequest stringRequest = null;
-                stringRequest = new StringRequest(domain+"new_launches?imei_no="+device_id,
+                stringRequest = new StringRequest(domain+"new_launches?email="+user_email,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

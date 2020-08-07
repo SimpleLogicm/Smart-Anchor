@@ -790,7 +790,7 @@ public class Stock_Main extends BaseActivity {
                         Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
                         String service_url = "";
 
-                        service_url = domain + "wh_stocks/send_stocks?imei_no=" + device_id + "&warehouse_code=" + warehouse_code + "&product_code=" + product_code + "&state_code=" + state_code + "&city_code=" + city_code + "&primary_category=" + URLEncoder.encode(caategory_code, "UTF-8") + "&sub_category=" + URLEncoder.encode(sub_caategory_code, "UTF-8");
+                        service_url = domain + "wh_stocks/send_stocks?email=" + Global_Data.GLOvel_USER_EMAIL + "&warehouse_code=" + warehouse_code + "&product_code=" + product_code + "&state_code=" + state_code + "&city_code=" + city_code + "&primary_category=" + URLEncoder.encode(caategory_code, "UTF-8") + "&sub_category=" + URLEncoder.encode(sub_caategory_code, "UTF-8");
 
 
                         Log.i("target url", "target url " + service_url);

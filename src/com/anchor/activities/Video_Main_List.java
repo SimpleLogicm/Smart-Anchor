@@ -288,11 +288,23 @@ public class Video_Main_List extends Activity {
 //        }F
 
 
+		String user_email = "";
 
-		Log.d("Server url","Server url"+domain+"advertisements/send_advertisements?imei_no="+device_id);
+		try {
+			if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+				user_email = sp.getString("USER_EMAIL", "");
+			} else {
+				user_email = Global_Data.GLOvel_USER_EMAIL;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+
+		Log.d("Server url","Server url"+domain+"advertisements/send_advertisements?email="+user_email);
 
 		StringRequest stringRequest = null;
-		stringRequest = new StringRequest(domain+"advertisements/send_advertisements?imei_no="+device_id,
+		stringRequest = new StringRequest(domain+"advertisements/send_advertisements?email="+user_email,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {

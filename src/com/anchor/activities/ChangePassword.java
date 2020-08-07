@@ -285,11 +285,11 @@ public class ChangePassword extends Activity {
     {
         SharedPreferences spf = ChangePassword.this.getSharedPreferences("SimpleLogic", 0);
         String user_email = spf.getString("USER_EMAIL",null);
-        String Device_id = spf.getString("devid", "");
+        //String Device_id = spf.getString("devid", "");
 
         String domain = getResources().getString(R.string.service_domain);
         RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
-        String url = domain + "users/change_passowd?email=" + user_email+"&imei_no=" +Device_id;
+        String url = domain + "users/change_passowd?email=" + user_email+"&imei_no=";
         Log.d("Chan Pass","CHA URl"+url);
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {

@@ -821,7 +821,7 @@ public class MainActivity extends BaseActivity {
         t_total = 0;
         achived_total = 0;
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
+        //String device_id = sp.getString("devid", "");
 
         calendarn = Calendar.getInstance();
         year = calendarn.get(Calendar.YEAR);
@@ -844,8 +844,8 @@ public class MainActivity extends BaseActivity {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + user_email);
-            Log.i("target url", "target url " + domain + "targets?imei_no=" + device_id + "&email=" + user_email);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + device_id + "&email=" + user_email, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "targets?imei_no=" + "" + "&email=" + user_email);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + "" + "&email=" + user_email, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {

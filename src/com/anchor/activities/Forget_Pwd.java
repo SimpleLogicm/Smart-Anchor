@@ -73,7 +73,7 @@ public class Forget_Pwd extends Activity {
 
             TextView todaysTarget = mCustomView.findViewById(R.id.todaysTarget);
             SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-            devid = sp.getString("devid", "");
+          //  devid = sp.getString("devid", "");
 
             forgetpwd_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,7 +120,7 @@ public class Forget_Pwd extends Activity {
         if (email_id.getText().toString().length() > 0) {
             try {
                 String domain = getResources().getString(R.string.service_domain);
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "/users/forgot_password?imei_no=" + URLEncoder.encode(devid, "UTF-8") + "&email=" + email_id.getText().toString(), null, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "/users/forgot_password?imei_no=" + "" + "&email=" + email_id.getText().toString(), null, new Response.Listener<JSONObject>() {
                     // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
 
                     @Override

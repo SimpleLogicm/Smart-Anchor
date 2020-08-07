@@ -817,6 +817,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 
         try {
+
+
             //  product_value.put("order_number", Global_Data.Order_Id);
 
             // product_value.put("user_id", user_email);
@@ -836,7 +838,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
             Log.d("attendances value", product_valuenew.toString());
 
-            String service_domain = domain + "attendances?imei_no=" + Global_Data.device_id + "&email=" + user_email;
+            String service_domain = domain + "attendances?imei_no=" + "" + "&email=" + user_email;
 
             Log.i("volley", "domain: " + service_domain);
 

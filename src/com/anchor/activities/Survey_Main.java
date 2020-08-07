@@ -381,10 +381,10 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
         domain = getResources().getString(R.string.service_domain);
 
-        Log.d("Server url","Server url"+domain+"advertisements/send_advertisements?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL);
+        Log.d("Server url","Server url"+domain+"advertisements/send_advertisements?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL);
 
         StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain+"advertisements/send_advertisements?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL,
+        stringRequest = new StringRequest(domain+"advertisements/send_advertisements?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

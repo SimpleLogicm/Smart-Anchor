@@ -200,9 +200,9 @@ public class getServices {
 //            domain = URL.toString();
 //        }
 
-        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version+"&email=" + user_email);
+        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + ""+"&app_version="+version+"&email=" + user_email);
         StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version+"&email=" + user_email,
+        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + ""+"&app_version="+version+"&email=" + user_email,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -294,8 +294,21 @@ public class getServices {
 //            domain = URL.toString();
 //        }
 
+
+        String user_email = "";
+
         try {
-            Log.d("Server url", "Server url" + domain + "menus/sync_stocks?imei_no=" + device_id + "&latitude="
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            Log.d("Server url", "Server url" + domain + "menus/sync_stocks?email=" + user_email + "&latitude="
                     + URLEncoder.encode(latitude, "UTF-8") + "&longitude="
                     + URLEncoder.encode(longitude, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
@@ -304,7 +317,7 @@ public class getServices {
 
         StringRequest stringRequest = null;
         try {
-            stringRequest = new StringRequest(domain + "menus/sync_stocks?imei_no=" + device_id + "&latitude="
+            stringRequest = new StringRequest(domain + "menus/sync_stocks?email=" + user_email + "&latitude="
                     + URLEncoder.encode(latitude, "UTF-8") + "&longitude="
                     + URLEncoder.encode(longitude, "UTF-8"),
                     new Response.Listener<String>() {
@@ -2661,164 +2674,7 @@ public class getServices {
         }
     }
 
-    public static void GetNewLaunch_Data(Context contextn) {
-        context = contextn;
-        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-        device_id = sp.getString("devid", "");
-        loginDataBaseAdapter = new LoginDataBaseAdapter(context);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
-        dbvoc = new DataBaseHelper(context);
 
-        //PreferencesHelper Prefs = new PreferencesHelper(context);
-        //String URL = Prefs.GetPreferences("URL");
-        String domain = "";
-
-        dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please wait....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.show();
-
-        domain = context.getResources().getString(R.string.service_domain);
-
-        // Global_Val global_Val = new Global_Val();
-//        if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
-//            domain = context.getResources().getString(R.string.service_domain);
-//        }
-//        else
-//        {
-//            domain = URL.toString();
-//        }F
-
-
-        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id);
-
-        StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //showJSON(response);
-                        // Log.d("jV", "JV" + response);
-                        Log.d("jV", "JV length" + response.length());
-                        // JSONObject person = (JSONObject) (response);
-                        try {
-                            JSONObject json = new JSONObject(new JSONTokener(response));
-                            try {
-
-                                String response_result = "";
-                                if (json.has("result")) {
-                                    response_result = json.getString("result");
-                                } else {
-                                    response_result = "data";
-                                }
-
-
-                                if (response_result.equalsIgnoreCase("Data is up to date.")) {
-
-                                    Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-
-                                } else if (response_result.equalsIgnoreCase("Device not registered")) {
-
-                                    Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-
-                                } else {
-
-                                    JSONArray users = json.getJSONArray("users");
-//
-                                    Log.i("volley", "response reg users Length: " + users.length());
-//
-                                    Log.d("users", "users" + users.toString());
-//
-                                    //
-
-                                    for (int i = 0; i < users.length(); i++) {
-
-                                        JSONObject jsonObject = users.getJSONObject(i);
-
-                                        Config.YOUTUBE_VIDEO_CODE = jsonObject.getString("user_name");
-
-                                        Config.YOUTUBE_VIDEO_DATE = jsonObject.getString("user_name");
-                                        Config.YOUTUBE_VIDEO_DISCRIPTION = jsonObject.getString("user_name");
-
-//                                        loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
-//                                                jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
-//                                                "", Device_id, "", jsonObject.getString("address"),"","", jsonObject.getString("id"));
-                                    }
-
-                                    Intent launch = new Intent(context, Youtube_Player_Activity.class);
-                                    context.startActivity(launch);
-
-                                    dialog.dismiss();
-                                    //finish();
-
-                                }
-
-                                //  finish();
-                                // }
-
-                                // output.setText(data);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                dialog.dismiss();
-                            }
-
-
-                            dialog.dismiss();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            //  finish();
-                            dialog.dismiss();
-                        }
-                        dialog.dismiss();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                            Toast.makeText(context,
-                                    "Network Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof AuthFailureError) {
-                            Toast.makeText(context,
-                                    "Server AuthFailureError  Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof ServerError) {
-                            Toast.makeText(context,
-                                    "Server   Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof NetworkError) {
-                            Toast.makeText(context,
-                                    "Network   Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof ParseError) {
-                            Toast.makeText(context,
-                                    "ParseError   Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                        }
-                        dialog.dismiss();
-                        // finish();
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-        int socketTimeout = 300000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        stringRequest.setRetryPolicy(policy);
-        // requestQueue.se
-        //requestQueue.add(jsObjRequest);
-        stringRequest.setShouldCache(false);
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
-    }
 
     private static class LongOperation extends AsyncTask<String, Void, String> {
         @Override
@@ -3527,8 +3383,8 @@ public class getServices {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "targets?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "targets?imei_no=" + "" + "&email=" + Global_Data.GLOvel_USER_EMAIL);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + "" + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {

@@ -2503,7 +2503,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
     public void getScheduleData() {
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
+        //String device_id = sp.getString("devid", "");
 
         loginDataBaseAdapter = new LoginDataBaseAdapter(Order.this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
@@ -2527,8 +2527,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + "" + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + "" + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -2679,7 +2679,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
     public void getPrevious_OrderData() {
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
+       // String device_id = sp.getString("devid", "");
         //calendarn = Calendar.getInstance();
         //year = calendarn.get(Calendar.YEAR);
         loginDataBaseAdapter = new LoginDataBaseAdapter(Order.this);
@@ -2697,8 +2697,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + "" + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + "" + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {

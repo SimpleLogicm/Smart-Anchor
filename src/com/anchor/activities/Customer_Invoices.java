@@ -565,7 +565,18 @@ public class Customer_Invoices extends Activity {
         isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent)
         {			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-            String device_id = sp.getString("devid", "");
+                   String device_id = sp.getString("devid", "");
+                    String user_email = "";
+
+                    try {
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                            user_email = sp.getString("USER_EMAIL", "");
+                        } else {
+                            user_email = Global_Data.GLOvel_USER_EMAIL;
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
 
             dialog = new ProgressDialog(Customer_Invoices.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please Wait....");

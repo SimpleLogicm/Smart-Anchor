@@ -830,41 +830,25 @@ public class LoginActivity extends Activity {
         return result;
     }
 
-    public void getserviceData() {
-        dialog.setMessage("Please wait Data Sync....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.show();
+    public void getserviceData(String user_name, final Dialog dialogdis) {
+//        dialog.setMessage("Please wait Data Sync....");
+//        dialog.setTitle("Smart Anchor App");
+//        dialog.setCancelable(false);
+//        dialog.show();
 
         try {
-            SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-            devid = pref_devid.getString("devid", "");
-            final String Device_id = pref_devid.getString("devid", "");
+          //  SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            //devid = pref_devid.getString("devid", "");
+            //final String Device_id = pref_devid.getString("devid", "");
 
             String domain = getResources().getString(R.string.service_domain);
+            String url = domain+ "menus/registration?user_name=" + URLEncoder.encode(user_name, "UTF-8");
+
+            Log.i("volley", "url: " + url);
+            Log.i("volley", "user_name: " + user_name);
 
 
-            if (devid.length() > 0) {
-                link_fpwd.setVisibility(View.VISIBLE);
-            } else {
-                link_fpwd.setVisibility(View.GONE);
-            }
-
-//	            Global_Val global_Val = new Global_Val();
-//	            if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
-//	                domain = getResources().getString(R.string.service_domain);
-//	            }
-//	            else
-//	            {
-//	                domain = URL.toString();
-//	            }
-
-            Log.i("volley", "domain: " + domain);
-            Log.i("volley", "Device_id: " + Device_id);
-            // Log.i("volley", "Sim_Number: " + Global_Val.Sim_Number);
-            Log.i("volley", "Service url: " + domain + "menus/registration?imei_no=" + URLEncoder.encode(Device_id, "UTF-8"));
-
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "menus/registration?imei_no=" + URLEncoder.encode(Device_id, "UTF-8"), null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
                 // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
 
                 @Override
@@ -880,11 +864,15 @@ public class LoginActivity extends Activity {
                         }
 
 
-                        if (response_result.equalsIgnoreCase("Device not registered")) {
+                        if (response_result.equalsIgnoreCase("User not registered")) {
 
                             Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
+
+                            otp_progressBarar.setVisibility(View.GONE);
+                            otp_bottom_layout.setVisibility(View.VISIBLE);
+                            dialogdis.dismiss();
 
                         } else {
 
@@ -894,11 +882,12 @@ public class LoginActivity extends Activity {
                             Log.i("volley", "response reg users Length: " + users.length());
 
                             if (users.length() <= 0) {
-                                dialog.dismiss();
-                                //Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_SHORT).show();
                                 Toast toast = Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                dialogdis.dismiss();
                             } else {
                                 Log.d("users", "users" + users.toString());
 
@@ -910,27 +899,28 @@ public class LoginActivity extends Activity {
 
                                     loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
                                             jsonObject.getString("first_name"), jsonObject.getString("last_name"), "", "", "", "", "",
-                                            "", Device_id, "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
+                                            "", "", "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
                                 }
 
-                                //Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
 
 
                                 Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
-                                dialog.dismiss();
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                dialogdis.dismiss();
                             }
-//	                          	                            //finish();
+
                         }
 
-                        // }
 
-                        // output.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        dialog.dismiss();
-                        finish();
+                        otp_progressBarar.setVisibility(View.GONE);
+                        otp_bottom_layout.setVisibility(View.VISIBLE);
+                        dialogdis.dismiss();
+
                     }
 
 
@@ -944,7 +934,9 @@ public class LoginActivity extends Activity {
                     Toast toast = Toast.makeText(LoginActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    dialog.dismiss();
+                    otp_progressBarar.setVisibility(View.GONE);
+                    otp_bottom_layout.setVisibility(View.VISIBLE);
+                    dialogdis.dismiss();
 
                 }
             });
@@ -959,7 +951,7 @@ public class LoginActivity extends Activity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            dialog.dismiss();
+
         }
     }
 
@@ -1645,7 +1637,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 otp_hit_validator.clear();
-
+                timer.cancel();
                 dialognew.dismiss();
             }
         });
@@ -1818,56 +1810,50 @@ public class LoginActivity extends Activity {
 
                         if (response_result.equalsIgnoreCase("User Verified Successfully.")) {
 
-                            dbvoc.getDeleteTable("users");
+                               List<Local_Data> conta = dbvoc.getAllMain();
+                                if(conta.size() > 0)
+                                {
+                                    Log.d("Existing User","Existing U");
+                                    SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("TCODE", "Yes");
+                                    editor.commit();
 
-                            JSONArray users = response.getJSONArray("users");
-                            Log.i("volley", "response reg users Length: " + users.length());
+                                    Calendar c = Calendar.getInstance();
+                                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                                    String formattedDate = df.format(c.getTime());
+                                    dbvoc.update_user_createD(formattedDate, user_name);
 
-                            if (users.length() <= 0) {
-                               // dialogdis.dismiss();
-                                //Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_SHORT).show();
-                                Toast toast = Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                            } else {
-                                Log.d("users", "users" + users.toString());
+                                    timer.cancel();
 
-                                /* IDS column used for BU Head */
 
-                                for (int i = 0; i < users.length(); i++) {
+                                    Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
 
-                                    JSONObject jsonObject = users.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
-                                            jsonObject.getString("first_name"), jsonObject.getString("last_name"), "", "", "", "", "",
-                                            "", "", "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
+                                }
+                                else
+                                {
+                                    Log.d("New User","New U");
+                                    Log.d("Existing User","Existing U");
+                                    SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("TCODE", "Yes");
+                                    editor.commit();
+
+                                    Calendar c = Calendar.getInstance();
+                                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                                    String formattedDate = df.format(c.getTime());
+                                    dbvoc.update_user_createD(formattedDate, user_name);
+
+                                    timer.cancel();
+                                    getserviceData(user_name, dialogdis);
                                 }
 
-                                SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
-                                SharedPreferences.Editor editor = spf.edit();
-                                editor.putString("TCODE", "Yes");
-                                editor.commit();
 
-                                Calendar c = Calendar.getInstance();
-                                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                                String formattedDate = df.format(c.getTime());
-                                dbvoc.update_user_createD(formattedDate, user_name);
-
-                                timer.cancel();
-
-
-                                Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-
-                                otp_progressBarar.setVisibility(View.GONE);
-                                otp_bottom_layout.setVisibility(View.VISIBLE);
-                                dialogdis.dismiss();
                             }
-
-
-
-                        } else {
+                          else {
                             otp_progressBarar.setVisibility(View.GONE);
                             otp_bottom_layout.setVisibility(View.VISIBLE);
                             Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);

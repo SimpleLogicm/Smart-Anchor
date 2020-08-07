@@ -421,7 +421,7 @@ public class Expended_list_demo extends BaseActivity {
 	public void getTargetDataSummary2()
 	{
 		SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-		String device_id = sp.getString("devid", "");
+		//String device_id = sp.getString("devid", "");
 
 		listDataHeader = new ArrayList<String>();
 		listDataChild = new HashMap<String, List<String>>();
@@ -470,11 +470,11 @@ public class Expended_list_demo extends BaseActivity {
 			if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
 			{
 
-				service_url = domain+"targets/get_targets_by_product?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_sub_category=true";
+				service_url = domain+"targets/get_targets_by_product?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_sub_category=true";
 			}
 			else
 			{
-				service_url = domain+"targets/get_targets?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_category=true";
+				service_url = domain+"targets/get_targets?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_category=true";
 			}
 
 
