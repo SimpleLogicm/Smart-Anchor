@@ -254,6 +254,8 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
                     i.putExtra("lighting_dealer", ci.getLighting_dealer());
                     i.putExtra("iaq_dealer", ci.getIaq_dealer());
                     i.putExtra("source_of_data", ci.getSource_of_data());
+                    i.putExtra("district_id", ci.getDist_code());
+                    i.putExtra("proprietor_name", ci.getProprietor_name());
                     i.putExtra("cardcolor", ci.getCard_color_code());
                     i.putExtra("from_flag", "map");
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

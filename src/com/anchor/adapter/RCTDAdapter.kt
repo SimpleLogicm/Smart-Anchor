@@ -53,7 +53,7 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
 
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val data = rtododatalist[position]
-        holder.rtc_name.text = data.shop_name
+        holder.rtc_name.text = data.code +" - "+data.shop_name
         holder.rtc_address.text = data.full_address
         holder.rt_id.text = data.code
         holder.rtc_mobile_hidden.text = data.mobile
@@ -83,6 +83,8 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
                 i.putExtra("lighting_dealer", data.lighting_dealer)
                 i.putExtra("iaq_dealer", data.iaq_dealer)
                 i.putExtra("source_of_data", data.source_of_data)
+                i.putExtra("district_id", data.dist_code)
+                i.putExtra("proprietor_name", data.proprietor_name)
                 i.putExtra("cardcolor", data.card_color_code)
                 i.putExtra("from_flag", "todo")
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

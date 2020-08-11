@@ -56,7 +56,8 @@ class TODOAddRetailer : Activity() {
     var context: Context? = null
     var list_CCity: MutableList<String> = ArrayList<String>()
     var adapter_CCity: ArrayAdapter<String>? = null
-
+    var list_CDist: MutableList<String> = ArrayList<String>()
+    var adapter_CDist: ArrayAdapter<String>? = null
     var list_CState: MutableList<String> = ArrayList<String>()
     var adapter_CState: ArrayAdapter<String>? = null
 
@@ -69,6 +70,7 @@ class TODOAddRetailer : Activity() {
 
     var statespinnerMap = HashMap<String, String>()
     var cityspinnerMap = HashMap<String, String>()
+    var distspinnerMap = HashMap<String, String>()
     var powerspinnerMap = HashMap<String, String>()
     var iaqspinnerMap = HashMap<String, String>()
     var lightingspinnerMap = HashMap<String, String>()
@@ -76,6 +78,7 @@ class TODOAddRetailer : Activity() {
     var response_result = ""
     var state_id:String? = "";
     var city_id:String? = "";
+    var dist_id:String? = "";
     var dpower_id:String? = "";
     var diaq_id:String? = "";
     var dlighting_id:String? = "";
@@ -101,7 +104,7 @@ class TODOAddRetailer : Activity() {
 
         try {
            // id = intent.getStringExtra("id")
-            coardcolor = intent.getStringExtra("cardcolor")
+           // coardcolor = intent.getStringExtra("cardcolor")
 
         }catch (e:Exception)
         {
@@ -124,6 +127,10 @@ class TODOAddRetailer : Activity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
+                list_CDist.clear()
+                list_CDist.add("Select District")
+                distspinnerMap.clear()
+
                 list_CCity.clear()
                 list_CCity.add("Select City")
                 cityspinnerMap.clear()
@@ -140,6 +147,10 @@ class TODOAddRetailer : Activity() {
                 list_CLightingDealer.add("Select Lighting Dealer")
                 lightingspinnerMap.clear()
 
+                adapter_CDist = ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_item, list_CDist)
+                adapter_CDist!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                todoe_dist.setAdapter(adapter_CDist)
 
                 adapter_CCity = ArrayAdapter<String>(context,
                         android.R.layout.simple_spinner_item, list_CCity)
@@ -174,10 +185,66 @@ class TODOAddRetailer : Activity() {
 
                         try {
                             state_id = statespinnerMap.get(parent!!.getItemAtPosition(position).toString())
-                            state_id?.let { citydealer_details(it) }
+                            state_id?.let { distdealer_details(it) }
                         }catch (e:Exception)
                         {
                             state_id = "";
+                            e.printStackTrace()
+                        }
+
+                    }
+                    else {
+
+                        val toast = Toast.makeText(context,
+                                "Internet Not Available. ", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                }
+
+            }
+        }
+
+        list_CDist.add("Select District")
+        adapter_CDist = ArrayAdapter<String>(context,
+                android.R.layout.simple_spinner_item, list_CDist)
+
+        adapter_CDist!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        todoe_dist.setAdapter(adapter_CDist)
+        todoe_dist?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                list_CCity.clear()
+                list_CCity.add("Select City")
+                cityspinnerMap.clear()
+
+
+                adapter_CCity = ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_item, list_CCity)
+                adapter_CCity!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                todoe_city.setAdapter(adapter_CCity)
+
+
+                if (parent!!.getItemAtPosition(position).toString()
+                                .equals("Select District", ignoreCase = true)) {
+
+                    dist_id = "";
+                }
+                else
+                {
+                    isInternetPresent = cd!!.isConnectingToInternet
+                    if (isInternetPresent) {
+
+                        try {
+                            dist_id = distspinnerMap.get(parent!!.getItemAtPosition(position).toString())
+                            dist_id?.let { citydealer_details(it) }
+                        }catch (e:Exception)
+                        {
+                            dist_id = "";
                             e.printStackTrace()
                         }
 
@@ -524,6 +591,14 @@ class TODOAddRetailer : Activity() {
                 toast.show()
             }
             else
+            if (todoe_dist!!.selectedItem.toString().equals("Select District"))
+            {
+                val toast = Toast.makeText(context,
+                        "Please Select District.", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            }
+            else
             if (todoe_city!!.selectedItem.toString().equals("Select City"))
             {
                 val toast = Toast.makeText(context,
@@ -785,11 +860,13 @@ class TODOAddRetailer : Activity() {
 
                 //product_value_n.put("email", user_email)
                 product_value_n.put("state_code", state_id)
+                product_value_n.put("district_id", dist_id)
                 product_value_n.put("city_code", city_id)
                 product_value_n.put("power_dealer", dpower_id)
                 product_value_n.put("iaq_dealer", diaq_id)
                 product_value_n.put("lighting_dealer", dlighting_id)
                 product_value_n.put("shop_name", todoe_shop_namea.text.toString())
+                product_value_n.put("proprietor_name", todoe_proprietor_namea.text.toString())
                 product_value_n.put("mobile_no", todoe_mobilea.text.toString())
                 product_value_n.put("gst_no", todoe_gsta.text.toString())
                 product_value_n.put("aadhar_no", todoe_aadhara.text.toString())
@@ -1210,7 +1287,7 @@ class TODOAddRetailer : Activity() {
 
     }
 
-    fun citydealer_details(state_id:String) {
+    fun distdealer_details(state_id:String) {
         citys_loader.visibility = View.VISIBLE
 
         var user_email: String? = ""
@@ -1227,40 +1304,65 @@ class TODOAddRetailer : Activity() {
 
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_statewise_cities?state_code="+state_id+"&email="+user_email
+        var url = domain+"retailers/get_statewise_districts?state_code="+state_id+"&email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
             Log.i("volley", "response: $response")
             final_response = response
-            getstatewise_CityDealer().execute(response)
+            getstatewise_DistDealer().execute(response)
         },
                 Response.ErrorListener { error ->
                     //dialog.dismiss()
 
-                    if (error is TimeoutError || error is NoConnectionError) {
-                        Toast.makeText(applicationContext,
-                                "Network Error",
-                                Toast.LENGTH_LONG).show()
-                    } else if (error is AuthFailureError) {
-                        Toast.makeText(applicationContext,
-                                "Server AuthFailureError  Error",
-                                Toast.LENGTH_LONG).show()
-                    } else if (error is ServerError) {
-                        Toast.makeText(applicationContext,
-                                "Server   Error",
-                                Toast.LENGTH_LONG).show()
-                    } else if (error is NetworkError) {
-                        Toast.makeText(applicationContext,
-                                "Network   Error",
-                                Toast.LENGTH_LONG).show()
-                    } else if (error is ParseError) {
-                        Toast.makeText(applicationContext,
-                                "ParseError   Error",
-                                Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+
+                        var response_result = ""
+                        if (jsonObject.has("message")) {
+                            response_result = jsonObject.getString("message")
+
+                            piechart_rank_progressBarar.visibility = View.GONE
+                            aad_bottom_layout.visibility = View.VISIBLE
+                            add_container.isEnabled = true
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                        }
+                        else
+                        {
+                            if (error is TimeoutError || error is NoConnectionError) {
+                                Toast.makeText(applicationContext,
+                                        "Network Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is AuthFailureError) {
+                                Toast.makeText(applicationContext,
+                                        "Server AuthFailureError  Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ServerError) {
+                                Toast.makeText(applicationContext,
+                                        "Server   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is NetworkError) {
+                                Toast.makeText(applicationContext,
+                                        "Network   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ParseError) {
+                                Toast.makeText(applicationContext,
+                                        "ParseError   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
                     }
+
+
                     citys_loader.visibility = View.GONE
 
                 })
@@ -1275,7 +1377,7 @@ class TODOAddRetailer : Activity() {
         requestQueue.add(jsObjRequest)
     }
 
-    public inner class getstatewise_CityDealer : AsyncTask<String?, Void?, String>() {
+    public inner class getstatewise_DistDealer : AsyncTask<String?, Void?, String>() {
         override fun doInBackground(vararg p0: String?): String? {
             try {
                 val response = JSONObject(final_response)
@@ -1285,29 +1387,33 @@ class TODOAddRetailer : Activity() {
                     runOnUiThread(Runnable {
                         citys_loader.visibility = View.GONE
                         //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
-                        val toast = Toast.makeText(context, "States doesn't exist", Toast.LENGTH_LONG)
+                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
                     })
                 }
                 else {
-                    val cities: JSONArray = response.getJSONArray("cities")
-                    Log.i("volley", "response cities Length: " + cities.length())
-                    Log.d("volley", "cities$cities")
+                    val district: JSONArray = response.getJSONArray("districts")
+                    Log.i("volley", "response District Length: " + district.length())
+                    Log.d("volley", "District$district")
 
 
                     val p_dealer: JSONArray = response.getJSONArray("power_dealers")
-                    Log.i("volley", "response p_dealer Length: " + cities.length())
-                    Log.d("volley", "p_dealer$cities")
+                    Log.i("volley", "response p_dealer Length: " + p_dealer.length())
+                    Log.d("volley", "p_dealer$p_dealer")
 
                     val i_dealer: JSONArray = response.getJSONArray("iaq_dealers")
-                    Log.i("volley", "response i_dealer Length: " + cities.length())
-                    Log.d("volley", "i_dealer$cities")
+                    Log.i("volley", "response i_dealer Length: " + i_dealer.length())
+                    Log.d("volley", "i_dealer$i_dealer")
 
                     val l_delaer: JSONArray = response.getJSONArray("lighting_dealers")
                     Log.i("volley", "response l_delaer Length: " + l_delaer.length())
-                    Log.d("volley", "l_delaer$cities")
+                    Log.d("volley", "l_delaer$l_delaer")
 
+
+                    list_CDist.clear()
+                    list_CDist.add("Select District")
+                    distspinnerMap.clear()
 
                     list_CCity.clear()
                     list_CCity.add("Select City")
@@ -1325,13 +1431,13 @@ class TODOAddRetailer : Activity() {
                     list_CLightingDealer.add("Select Lighting Dealer")
                     lightingspinnerMap.clear()
 
-                    for (i in 0 until cities.length()) {
-                        val jsonObject = cities.getJSONObject(i)
+                    for (i in 0 until district.length()) {
+                        val jsonObject = district.getJSONObject(i)
                         try {
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(district.getString(i))) {
                                 run {
-                                    list_CCity.add(jsonObject.getString("name"))
-                                    cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                    list_CDist.add(jsonObject.getString("name"))
+                                    distspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("id"))
                                 }
                             }
                         } catch (e: JSONException) {
@@ -1383,6 +1489,11 @@ class TODOAddRetailer : Activity() {
 
                     runOnUiThread(Runnable {
 
+                        adapter_CDist = ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_item, list_CDist)
+                        adapter_CDist!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        todoe_dist.setAdapter(adapter_CDist)
+
                         adapter_CCity = ArrayAdapter<String>(context,
                                 android.R.layout.simple_spinner_item, list_CCity)
                         adapter_CCity!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -1403,6 +1514,173 @@ class TODOAddRetailer : Activity() {
                         adapter_CLightingDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         todoe_lightingdealer.setAdapter(adapter_CLightingDealer)
 
+
+                    })
+                    runOnUiThread(Runnable {
+                        citys_loader.visibility = View.GONE
+                    })
+
+                }
+
+
+
+
+            } catch (e: JSONException) {
+                e.printStackTrace()
+                runOnUiThread(Runnable {
+                    citys_loader.visibility = View.GONE
+                })
+            }
+            runOnUiThread(Runnable {
+                citys_loader.visibility = View.GONE
+            })
+            return "Executed"
+        }
+
+        override fun onPostExecute(result: String) {
+            runOnUiThread(Runnable {
+                citys_loader.visibility = View.GONE
+            })
+        }
+
+        override fun onPreExecute() {}
+
+    }
+
+    fun citydealer_details(dist_id:String) {
+        citys_loader.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
+        val domain = resources.getString(R.string.service_domain)
+        Log.i("volley", "domain: $domain")
+        var url = domain+"retailers/get_districtwise_cities?district_id="+dist_id+"&email="+user_email
+        Log.i("user list url", "user list url " +url)
+        var jsObjRequest: StringRequest? = null
+        jsObjRequest = StringRequest(url, Response.Listener { response ->
+            Log.i("volley", "response: $response")
+            final_response = response
+            getstatewise_CityDealer().execute(response)
+        },
+                Response.ErrorListener { error ->
+                    //dialog.dismiss()
+
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+
+                        var response_result = ""
+                        if (jsonObject.has("message")) {
+                            response_result = jsonObject.getString("message")
+
+                            piechart_rank_progressBarar.visibility = View.GONE
+                            aad_bottom_layout.visibility = View.VISIBLE
+                            add_container.isEnabled = true
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                        }
+                        else
+                        {
+                            if (error is TimeoutError || error is NoConnectionError) {
+                                Toast.makeText(applicationContext,
+                                        "Network Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is AuthFailureError) {
+                                Toast.makeText(applicationContext,
+                                        "Server AuthFailureError  Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ServerError) {
+                                Toast.makeText(applicationContext,
+                                        "Server   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is NetworkError) {
+                                Toast.makeText(applicationContext,
+                                        "Network   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ParseError) {
+                                Toast.makeText(applicationContext,
+                                        "ParseError   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
+                    }
+                    citys_loader.visibility = View.GONE
+
+                })
+        val requestQueue = Volley.newRequestQueue(applicationContext)
+        val socketTimeout = 300000 //30 seconds - change to what you want
+        val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        jsObjRequest.retryPolicy = policy
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        jsObjRequest.setShouldCache(false)
+        requestQueue.cache.clear()
+        requestQueue.add(jsObjRequest)
+    }
+
+    public inner class getstatewise_CityDealer : AsyncTask<String?, Void?, String>() {
+        override fun doInBackground(vararg p0: String?): String? {
+            try {
+                val response = JSONObject(final_response)
+                if (response.has("message")) {
+                    response_result = response.getString("message")
+
+                    runOnUiThread(Runnable {
+                        citys_loader.visibility = View.GONE
+                        //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
+                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    })
+                }
+                else {
+                    val cities: JSONArray = response.getJSONArray("cities")
+                    Log.i("volley", "response cities Length: " + cities.length())
+                    Log.d("volley", "cities$cities")
+
+                    list_CCity.clear()
+                    list_CCity.add("Select City")
+                    cityspinnerMap.clear()
+
+
+
+                    for (i in 0 until cities.length()) {
+                        val jsonObject = cities.getJSONObject(i)
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
+                                run {
+                                    list_CCity.add(jsonObject.getString("name"))
+                                    cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                    runOnUiThread(Runnable {
+
+                        adapter_CCity = ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_item, list_CCity)
+                        adapter_CCity!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        todoe_city.setAdapter(adapter_CCity)
 
                     })
                     runOnUiThread(Runnable {

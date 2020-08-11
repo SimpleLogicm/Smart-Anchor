@@ -1762,7 +1762,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void getDeleteCtredit_Profile(String customer_id, String business_unit) {
         // List<Local_Data> contactList = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery = "DELETE FROM " + TABLE_CREDIT_PROFILE + " WHERE customer_id " + " = '" + customer_id + "'" + " AND business_unit = " + business_unit + "'";
+        String selectQuery = "DELETE FROM " + TABLE_CREDIT_PROFILE + " WHERE customer_id " + " = '" + customer_id + "'" + " AND business_unit = '" + business_unit + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
