@@ -394,6 +394,7 @@ public class LoginActivity extends Activity {
                 }
                 else
                 {
+
                     List<Local_Data> conta = dbvoc.getSyncDate(editText1.getText().toString().trim());
                     for (Local_Data cn1 : conta) {
                         current_date = cn1.getCur_date();
@@ -1843,7 +1844,9 @@ public class LoginActivity extends Activity {
 
                         if (response_result.equalsIgnoreCase("User Verified Successfully.")) {
 
-                               List<Local_Data> conta = dbvoc.getAllMain();
+                                //List<Local_Data> conta = dbvoc.getAllMain();
+                                List<Local_Data> conta = dbvoc.getSyncDate(user_name);
+
                                 if(conta.size() > 0)
                                 {
                                     Log.d("Existing User","Existing U");
@@ -1861,9 +1864,12 @@ public class LoginActivity extends Activity {
                                     timer.cancel();
 
 
+
                                     Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
+                                    dialogdis.dismiss();
+
 
 
                                 }

@@ -754,6 +754,7 @@ public class Promotion_Activity extends Activity {
                                                 } catch (Exception ex) {
                                                     // Error occurred while creating the File
                                                     Log.i("Image TAG", "IOException");
+                                                     ex.printStackTrace();
                                                     mCurrentPhotoPath = "";
                                                 }
                                                 // Continue only if the File was successfully created
