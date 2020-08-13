@@ -67,7 +67,7 @@
         android:layout_gravity="center"
         android:linksClickable="true"
         android:autoLink="all"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/forget_pwd" />
 
     <Button

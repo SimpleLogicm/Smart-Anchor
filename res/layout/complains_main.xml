@@ -316,7 +316,7 @@
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
 
-                <androidx.appcompat.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/c_horizontalRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"

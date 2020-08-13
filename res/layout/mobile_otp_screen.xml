@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:layout_gravity="center"
-    android:layout_width="wrap_content"
+    android:layout_width="300dp"
     android:layout_height="wrap_content">
 
     <TextView
@@ -54,7 +54,7 @@
 
         <EditText
             android:id="@+id/sub_otp"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:paddingLeft="10dp"
             android:layout_height="40dp"
             android:drawableTint="@color/colorPrimary"
@@ -77,7 +77,6 @@
     <ProgressBar
         android:id="@+id/otp_progressBarar"
         style="?android:attr/progressBarStyle"
-        android:layout_alignParentBottom="true"
         android:layout_marginTop="10dp"
         android:layout_width="100dp"
         android:layout_height="100dp"

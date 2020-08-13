@@ -214,11 +214,11 @@ public class LoginActivity extends Activity {
         SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
         devid = pref_devid.getString("devid", "");
 
-        if (devid.length() > 0) {
-            link_fpwd.setVisibility(View.VISIBLE);
-        } else {
-            link_fpwd.setVisibility(View.GONE);
-        }
+//        if (devid.length() > 0) {
+//            link_fpwd.setVisibility(View.VISIBLE);
+//        } else {
+//            link_fpwd.setVisibility(View.GONE);
+//        }
 
         link_fpwd.setOnClickListener(new OnClickListener() {
             @Override
@@ -299,7 +299,7 @@ public class LoginActivity extends Activity {
 
 //		editText1.setText("sadanand");
 //		editText2.setText("sada@1234");
-
+//
         editText1.setText("Kartik");
         editText2.setText("Kartik7999425");
 

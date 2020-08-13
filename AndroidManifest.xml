@@ -722,11 +722,17 @@
 
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
-        <!--&lt;!&ndash; Production &ndash;&gt;-->
+        <!-- Production -->
 <!--        <meta-data-->
 <!--        android:name="com.google.android.maps.v2.API_KEY"-->
 <!--        android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
 
+
+
+<!--kartik webnew-->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.maps.v2.API_KEY"-->
+<!--            android:value="AIzaSyCVmQPKxFAFzarBGqhdIhVuPGLn-X3oAaQ" />-->
 <!--         UAT -->
 <!--        <meta-data-->
 <!--            android:name="com.google.android.maps.v2.API_KEY"-->

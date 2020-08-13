@@ -903,17 +903,18 @@ public class NoOrderActivity extends BaseActivity {
                     String domain = NoOrderActivity.this.getResources().getString(R.string.service_domain);
                     String service_url = "";
                     if (Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
-                        service_url = domain + "no_orders/save_no_orders";
+                        service_url = domain + "no_orders/save_no_orders"+"?email="+ Global_Data.GLOvel_USER_EMAIL;
                         product_valuenew.put("no_orders", no_order);
-                        product_valuenew.put("imei_no", Global_Data.device_id);
+                     //   product_valuenew.put("imei_no", Global_Data.device_id);
                         Log.d("No Order", no_order.toString());
+                        Log.d("server", service_url.toString());
                         //Log.d("product_valuenew", product_valuenew.toString());
                     }
                     else
                     {
                         service_url = domain + "sub_dealers/create_sub_delaer_no_order";
                         product_valuenew.put("sub_dealer_no_order", no_order);
-                        product_valuenew.put("imei_no", Global_Data.device_id);
+                       // product_valuenew.put("imei_no", Global_Data.device_id);
                         Log.d("sub_dealer_no_order", no_order.toString());
                         //Log.d("product_valuenew", product_valuenew.toString());
                     }
