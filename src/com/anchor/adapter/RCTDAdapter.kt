@@ -87,6 +87,7 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
                 i.putExtra("proprietor_name", data.proprietor_name)
                 i.putExtra("cardcolor", data.card_color_code)
                 i.putExtra("from_flag", "todo")
+                i.putExtra("is_approved", data.is_approved)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 mContext.startActivity(i)
             }

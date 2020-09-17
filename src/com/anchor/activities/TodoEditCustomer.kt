@@ -124,6 +124,7 @@ class TodoEditCustomer : Activity() {
     var tsi_code = "";
     var from_flag = ""
     var id = ""
+    var is_approved = ""
     var dialog: ProgressDialog? = null
 
     val GSTINFORMAT_REGEX = "[0-9]{2}[a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9A-Za-z]{1}[Z]{1}[0-9a-zA-Z]{1}"
@@ -178,59 +179,128 @@ class TodoEditCustomer : Activity() {
 
             from_flag = intent.getStringExtra("from_flag")
 
+            is_approved = intent.getStringExtra("is_approved")
+
             if(!shop_name.equals(""))
             {
                 todoe_shop_name.setText(shop_name.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_shop_name.isEnabled = false
+                    todoe_shop_name.isClickable = false
+                }
             }
+
 
             if(!proprietor_name.equals(""))
             {
                 todoe_proprietor_name.setText(proprietor_name.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_proprietor_name.isEnabled = false
+                    todoe_proprietor_name.isClickable = false
+                }
             }
 
             if(!mobile_no.equals(""))
             {
                 todoe_mobile.setText(mobile_no.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_mobile.isEnabled = false
+                    todoe_mobile.isClickable = false
+                }
             }
 
             if(!gst_no.equals(""))
             {
                 todoe_gst.setText(gst_no.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_gst.isEnabled = false
+                    todoe_gst.isClickable = false
+                }
             }
 
             if(!aadhar_no.equals(""))
             {
                 todoe_aadhar.setText(aadhar_no.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_aadhar.isEnabled = false
+                    todoe_aadhar.isClickable = false
+                }
             }
 
             if(!pan_no.equals(""))
             {
                 todoe_pan.setText(pan_no.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_pan.isEnabled = false
+                    todoe_pan.isClickable = false
+                }
             }
 
             if(!address.equals(""))
             {
                 todoe_address.setText(address.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_address.isEnabled = false
+                    todoe_address.isClickable = false
+                }
             }
 
             if(!address_line2.equals(""))
             {
                 todoe_area.setText(address_line2.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_area.isEnabled = false
+                    todoe_area.isClickable = false
+                }
             }
 
             if(!landmark.equals(""))
             {
                 todoe_landmark.setText(landmark.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_landmark.isEnabled = false
+                    todoe_landmark.isClickable = false
+                }
             }
 
             if(!pincode.equals(""))
             {
                 todoe_pincode.setText(pincode.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    todoe_pincode.isEnabled = false
+                    todoe_pincode.isClickable = false
+                }
             }
 
             if(!latitudes.equals("") && !longitudes.equals(""))
             {
                 todoe_geocordinates.setText(latitudes.trim()+","+longitudes.trim())
+
+                if(is_approved.equals("true"))
+                {
+                    locationimg.isEnabled = false
+                    locationimg.isClickable = false
+                }
             }
 
             if(!tsi_code.equals(""))
@@ -1276,6 +1346,12 @@ class TodoEditCustomer : Activity() {
                                 var s_name = statespinnerMapReverse.get(state_code)
                                 todoe_state.setSelection(adapter_CState!!.getPosition(s_name))
 
+                                if(is_approved.equals("true"))
+                                {
+                                    todoe_state.isEnabled = false
+                                    todoe_state.isClickable = false
+                                }
+
                                 state_code = ""
                             }
 
@@ -1528,6 +1604,12 @@ class TodoEditCustomer : Activity() {
                                 var c_name = distspinnerMapReverse.get(dist_code)
                                 todo_dist.setSelection(adapter_CDist!!.getPosition(c_name))
 
+                                if(is_approved.equals("true"))
+                                {
+                                    todo_dist.isEnabled = false
+                                    todo_dist.isClickable = false
+                                }
+
                                 dist_code = ""
                             }
 
@@ -1539,6 +1621,12 @@ class TodoEditCustomer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(power_dealer)) {
                                 var p_name = powerspinnerMapReverse.get(power_dealer)
                                 todoe_powerdealer.setSelection(adapter_CPowerDealer!!.getPosition(p_name))
+
+                                if(is_approved.equals("true"))
+                                {
+                                    todoe_powerdealer.isEnabled = false
+                                    todoe_powerdealer.isClickable = false
+                                }
 
                                 power_dealer = ""
                             }
@@ -1552,6 +1640,12 @@ class TodoEditCustomer : Activity() {
                                 var iaq_name = iaqspinnerMapReverse.get(iaq_dealer)
                                 todoe_iaqdealer.setSelection(adapter_CIaqDealer!!.getPosition(iaq_name))
 
+                                if(is_approved.equals("true"))
+                                {
+                                    todoe_iaqdealer.isEnabled = false
+                                    todoe_iaqdealer.isClickable = false
+                                }
+
                                 iaq_dealer = ""
                             }
 
@@ -1563,6 +1657,12 @@ class TodoEditCustomer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(lighting_dealer)) {
                                 var l_name = lightingspinnerMapReverse.get(lighting_dealer)
                                 todoe_lightingdealer.setSelection(adapter_CLightingDealer!!.getPosition(l_name))
+
+                                if(is_approved.equals("true"))
+                                {
+                                    todoe_lightingdealer.isEnabled = false
+                                    todoe_lightingdealer.isClickable = false
+                                }
 
                                 lighting_dealer = ""
                             }
@@ -1724,6 +1824,12 @@ class TodoEditCustomer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(city_code)) {
                                 var c_name = cityspinnerMapReverse.get(city_code)
                                 todoe_city.setSelection(adapter_CCity!!.getPosition(c_name))
+
+                                if(is_approved.equals("true"))
+                                {
+                                    todoe_city.isEnabled = false
+                                    todoe_city.isClickable = false
+                                }
 
                                 city_code = ""
                             }
@@ -2286,7 +2392,7 @@ class TodoEditCustomer : Activity() {
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("source_of_data")),
                                         "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("tsi_code")),
                                         coardcolor,"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),"","",""))
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),"","","",""))
 
 
                             }

@@ -258,6 +258,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
                     i.putExtra("proprietor_name", ci.getProprietor_name());
                     i.putExtra("cardcolor", ci.getCard_color_code());
                     i.putExtra("from_flag", "map");
+                    i.putExtra("is_approved", ci.is_approved());
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     mcontext.startActivity(i);
                 }

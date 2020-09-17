@@ -2514,7 +2514,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Local_Data> getAllState() {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT name FROM " + TABLE_STATES + " GROUP BY name ORDER BY name";
+        String selectQuery1 = "SELECT name,code FROM " + TABLE_STATES + " GROUP BY name ORDER BY name";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -2525,6 +2525,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 do {
                     Local_Data contact = new Local_Data();
                     contact.setStateName(cursor.getString(0));
+                    contact.setCode(cursor.getString(1));
                     //contact.setPwd(cursor.getString(2));
                     //contact.setImei(cursor.getString(3));
 

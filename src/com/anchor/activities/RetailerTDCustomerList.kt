@@ -37,8 +37,11 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
+import kotlinx.android.synthetic.main.todoadd_retailer.*
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 class RetailerTDCustomerList : Activity() {
@@ -62,6 +65,7 @@ class RetailerTDCustomerList : Activity() {
     var response_result = ""
     var dbvoc = DataBaseHelper(this)
     var Retailer_List: MutableList<String> = ArrayList()
+    var state_code = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,16 +98,109 @@ class RetailerTDCustomerList : Activity() {
         list_Cfilter.clear()
         CfilterspinnerMap.clear()
         list_Cfilter.add("Self")
-        val contacts2 = dbvoc.getAllCityOrderbyname()
-        for (cn in contacts2) {
-            list_Cfilter.add(cn.getName())
-            CfilterspinnerMap.put(cn.getName(), cn.getCode())
-        }
-        adapter_Cfilter = ArrayAdapter<String>(context,
-                android.R.layout.simple_spinner_item, list_Cfilter)
+//        val contacts2 = dbvoc.getAllCityOrderbyname()
+//        for (cn in contacts2) {
+//            list_Cfilter.add(cn.getName())
+//            CfilterspinnerMap.put(cn.getName(), cn.getCode())
+//        }
 
-        adapter_Cfilter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        rtocustomerlist_filter.setAdapter(adapter_Cfilter)
+
+        // customer_submit.setOnClickListener(new OnClickListener() {
+        // @Override
+        // public void onClick(View v) {
+        //
+        // // if
+        // (city_spinner.getSelectedItem().toString().equalsIgnoreCase("Select City"))
+        // {
+        // //
+        // // Toast toast =
+        // Toast.makeText(Customer_Service.this,"Please Select City",
+        // Toast.LENGTH_SHORT);
+        // // toast.setGravity(Gravity.CENTER, 0, 0);
+        // // toast.show();
+        // // }
+        // //
+        // // else if
+        // (beat_spinner.getSelectedItem().toString().equalsIgnoreCase("Select Beat"))
+        // {
+        // // Toast toast =
+        // Toast.makeText(Customer_Service.this,"Please Select Beat",
+        // Toast.LENGTH_SHORT);
+        // // toast.setGravity(Gravity.CENTER, 0, 0);
+        // // toast.show();
+        // // }
+        // //
+        // // else if
+        // (retail_spinner.getSelectedItem().toString().equalsIgnoreCase("Select Retailer"))
+        // {
+        // //
+        // // Toast toast =
+        // Toast.makeText(Customer_Service.this,"Please Select Retailer",
+        // Toast.LENGTH_SHORT);
+        // // toast.setGravity(Gravity.CENTER, 0, 0);
+        // // toast.show();
+        // // }
+        // //
+        // // else {
+        //
+        // // new Thread(new Runnable() {
+        // // public void run() {
+        // // Flwg();
+        // // }
+        // // }).start();
+        //
+        // Global_Data.retailer= retail_spinner.getSelectedItem().toString();
+        // Intent intent = new Intent(Order.this, NewOrderActivity.class);
+        // startActivity(intent);
+        // // Intent intent = new Intent(Customer_Service.this,
+        // Customer_Feed.class);
+        // // startActivity(intent);
+        // overridePendingTransition(R.anim.slide_in_right,
+        // R.anim.slide_out_left);
+        //
+        // // }
+        // }
+        // });
+
+        // //Reading all
+        // List<Local_Data> contacts = dbvoc.getAllList();
+        // results.add("Select City");
+        // for (Local_Data cn : contacts) {
+        // String str_state = ""+cn.getStateName();
+        // //Global_Data.local_pwd = ""+cn.getPwd();
+        //
+        // results.add(str_state);
+        // //System.out.println("Local Values:-"+Global_Data.local_user);
+        // //Toast.makeText(LoginActivity.this,
+        // "Login Invalid"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
+        // }
+
+        // Reading all
+        val contacts1 = dbvoc.allState
+        for (cn in contacts1) {
+            state_code =  cn.code
+            Log.d("State Name","S Name "+cn.stateName)
+            Log.d("State Code","S Code "+cn.code)
+
+        }
+        isInternetPresent = cd!!.isConnectingToInternet
+        if (isInternetPresent) {
+            userStateCities();
+        } else {
+
+            val toast = Toast.makeText(context,
+                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+            finish()
+        }
+
+
+//        adapter_Cfilter = ArrayAdapter<String>(context,
+//                android.R.layout.simple_spinner_item, list_Cfilter)
+//
+//        adapter_Cfilter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        rtocustomerlist_filter.setAdapter(adapter_Cfilter)
         rtocustomerlist_filter?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
@@ -209,7 +306,7 @@ class RetailerTDCustomerList : Activity() {
                             "", Allresult[i].mobile, Allresult[i].email, Allresult[i].status, Allresult[i].proprietor_name
                             , Allresult[i].gst_no, Allresult[i].aadhar_no, Allresult[i].pan_no, Allresult[i].latitude, Allresult[i].longitude,
                             Allresult[i].power_dealer, Allresult[i].lighting_dealer, Allresult[i].iaq_dealer,
-                            Allresult[i].source_of_data, "", "", Allresult[i].tsi_code, Allresult[i].card_color_code, Allresult[i].distance, Allresult[i].address_line2, Allresult[i].landmark, Allresult[i].full_address,Allresult[i].dist_code,Allresult[i].dist_name))
+                            Allresult[i].source_of_data, "", "", Allresult[i].tsi_code, Allresult[i].card_color_code, Allresult[i].distance, Allresult[i].address_line2, Allresult[i].landmark, Allresult[i].full_address,Allresult[i].dist_code,Allresult[i].dist_name,Allresult[i].is_approved))
 
                     todolist_progress_customer.visibility = View.GONE
                     rtocustomerlist.visibility = View.VISIBLE
@@ -279,6 +376,7 @@ class RetailerTDCustomerList : Activity() {
 //            finish()
 //        }
     }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -527,9 +625,9 @@ class RetailerTDCustomerList : Activity() {
                                         "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("tsi_code")),
                                         coardcolor, "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),full_address
-                                        , Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")), ""))
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")), "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))))
 
-                                Retailer_List.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")))
+                                      Retailer_List.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")))
 
                             }
                         }
@@ -575,6 +673,169 @@ class RetailerTDCustomerList : Activity() {
 
     fun CaalF(Mobilenumber: String) {
         requestPhoneCallPermission(Mobilenumber.trim({ it <= ' ' }))
+    }
+
+    fun userStateCities() {
+        todolist_progress_customer.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
+        val domain = resources.getString(R.string.service_domain)
+        Log.i("volley", "domain: $domain")
+        var url = domain+"retailers/get_statewise_cities?state_code="+state_code+"&email="+user_email
+        Log.i("get_cities url", "user list url " +url)
+        var jsObjRequest: StringRequest? = null
+        jsObjRequest = StringRequest(url, Response.Listener { response ->
+            Log.i("volley", "response: $response")
+            final_response = response
+            getstatewise_City().execute(response)
+        },
+                Response.ErrorListener { error ->
+                    //dialog.dismiss()
+
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+
+                        var response_result = ""
+                        if (jsonObject.has("message")) {
+                            response_result = jsonObject.getString("message")
+
+                            todolist_progress_customer.visibility = View.GONE
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                        }
+                        else
+                        {
+                            if (error is TimeoutError || error is NoConnectionError) {
+                                Toast.makeText(applicationContext,
+                                        "Network Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is AuthFailureError) {
+                                Toast.makeText(applicationContext,
+                                        "Server AuthFailureError  Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ServerError) {
+                                Toast.makeText(applicationContext,
+                                        "Server   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is NetworkError) {
+                                Toast.makeText(applicationContext,
+                                        "Network   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ParseError) {
+                                Toast.makeText(applicationContext,
+                                        "ParseError   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
+                    }
+                    todolist_progress_customer.visibility = View.GONE
+
+                })
+        val requestQueue = Volley.newRequestQueue(applicationContext)
+        val socketTimeout = 300000 //30 seconds - change to what you want
+        val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        jsObjRequest.retryPolicy = policy
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        jsObjRequest.setShouldCache(false)
+        requestQueue.cache.clear()
+        requestQueue.add(jsObjRequest)
+    }
+
+    public inner class getstatewise_City : AsyncTask<String?, Void?, String>() {
+        override fun doInBackground(vararg p0: String?): String? {
+            try {
+                val response = JSONObject(final_response)
+                if (response.has("message")) {
+                    response_result = response.getString("message")
+
+                    runOnUiThread(Runnable {
+                        todolist_progress_customer.visibility = View.GONE
+                        //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
+                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    })
+                }
+                else {
+                    val cities: JSONArray = response.getJSONArray("cities")
+                    Log.i("volley", "response cities Length: " + cities.length())
+                    Log.d("volley", "cities$cities")
+
+                    //list_CCity.clear()
+                    //list_CCity.add("Select City")
+                    //cityspinnerMap.clear()
+
+
+
+                    for (i in 0 until cities.length()) {
+                        val jsonObject = cities.getJSONObject(i)
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
+                                run {
+                                    list_Cfilter.add(jsonObject.getString("name"))
+                                    CfilterspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                    runOnUiThread(Runnable {
+
+                        adapter_Cfilter = ArrayAdapter<String>(context,
+                                android.R.layout.simple_spinner_item, list_Cfilter)
+
+                        adapter_Cfilter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        rtocustomerlist_filter.setAdapter(adapter_Cfilter)
+
+                    })
+                    runOnUiThread(Runnable {
+                        todolist_progress_customer.visibility = View.GONE
+                    })
+
+                }
+
+            } catch (e: JSONException) {
+                e.printStackTrace()
+                runOnUiThread(Runnable {
+                    todolist_progress_customer.visibility = View.GONE
+                })
+            }
+            runOnUiThread(Runnable {
+                todolist_progress_customer.visibility = View.GONE
+            })
+            return "Executed"
+        }
+
+        override fun onPostExecute(result: String) {
+            runOnUiThread(Runnable {
+                todolist_progress_customer.visibility = View.GONE
+            })
+        }
+
+        override fun onPreExecute() {}
+
     }
 
 

@@ -171,8 +171,6 @@ class TODOAddRetailer : Activity() {
                         android.R.layout.simple_spinner_item, list_CLightingDealer)
                 adapter_CLightingDealer!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 todoe_lightingdealer.setAdapter(adapter_CLightingDealer)
-
-
                 if (parent!!.getItemAtPosition(position).toString()
                                 .equals("Select State", ignoreCase = true)) {
 

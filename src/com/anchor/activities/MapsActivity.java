@@ -327,7 +327,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 "",Allresult.get(i).getMobile(),Allresult.get(i).getEmail(),Allresult.get(i).getStatus(),Allresult.get(i).getProprietor_name()
                                 ,Allresult.get(i).getGst_no(),Allresult.get(i).getAadhar_no(),Allresult.get(i).getPan_no(),Allresult.get(i).getLatitude(),Allresult.get(i).getLongitude(),
                                 Allresult.get(i).getPower_dealer(),Allresult.get(i).getLighting_dealer(),Allresult.get(i).getIaq_dealer(),
-                                Allresult.get(i).getSource_of_data(),"","",Allresult.get(i).getTsi_code(),Allresult.get(i).getCard_color_code(),Allresult.get(i).getDistance(),Allresult.get(i).getAddress_line2(),Allresult.get(i).getLandmark(),Allresult.get(i).getFull_address(),Allresult.get(i).getDist_code(),Allresult.get(i).getDist_name()));
+                                Allresult.get(i).getSource_of_data(),"","",Allresult.get(i).getTsi_code(),Allresult.get(i).getCard_color_code(),Allresult.get(i).getDistance(),Allresult.get(i).getAddress_line2(),Allresult.get(i).getLandmark(),Allresult.get(i).getFull_address(),Allresult.get(i).getDist_code(),Allresult.get(i).getDist_name(),Allresult.get(i).is_approved()));
 
                         ca = new Sub_DealerMap_Adapter(Allresultsearch, MapsActivity.this, MapsActivity.this);
                         marker_rview.setAdapter(ca);
@@ -1292,7 +1292,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),""));
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))));
 
 
                                 ArrayList<String> names = new ArrayList<>();
@@ -1312,7 +1312,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),""));
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
 
@@ -1398,7 +1398,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),""));
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))));
 
 
                                 ArrayList<String> names = new ArrayList<>();
@@ -1418,7 +1418,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),""));
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
 
@@ -1504,7 +1504,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),""));
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))));
 
 
                                 ArrayList<String> names = new ArrayList<>();
@@ -1524,7 +1524,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("distance")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),""));
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
 
