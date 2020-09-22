@@ -1,9 +1,5 @@
 package com.anchor.API;
 
-import com.anchor.activities.Global_Data;
-import com.anchor.helper.UnsafeOkHttpClient;
-import okhttp3.OkHttpClient;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -19,7 +15,6 @@ public class ApiClient {
 
     public static Retrofit getClient(){
         if(retrofit == null){
-            OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 //            //integrating okHttp
 //            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 //            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -30,7 +25,7 @@ public class ApiClient {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(okHttpClient)
+                   // .client(okHttpClient)
                     .build();
         }
         return retrofit;
