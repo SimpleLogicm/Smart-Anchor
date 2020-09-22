@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import com.anchor.adapter.RCTDAdapter
+import com.anchor.helper.AutoSuggestAdapter
 import com.anchor.model.RCTOData
 import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
@@ -41,6 +42,7 @@ import kotlinx.android.synthetic.main.todoadd_retailer.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.util.*
 
@@ -263,9 +265,13 @@ class RetailerTDCustomerList : Activity() {
                         td_Retailer_search.setText("")
                         td_Retailer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0)
                     }
+                    else
+                    {
+                        td_Retailer_search.showDropDown()
+
+                    }
 
                     //autoCompleteTextView1.setText("");
-                    td_Retailer_search.showDropDown()
                     return@OnTouchListener true
                 }
             }
@@ -301,7 +307,7 @@ class RetailerTDCustomerList : Activity() {
             todolist_progress_customer.visibility = View.VISIBLE
             rtocustomerlist.visibility = View.GONE
             for (i in Allresult.indices) {
-                if (name.equals(Allresult[i].shop_name, ignoreCase = true)) {
+                if (name.equals(Allresult[i].code+" - "+Allresult[i].shop_name, ignoreCase = true)) {
                     Allresultsearch.add(RCTOData("", Allresult[i].code, "", Allresult[i].shop_name, Allresult[i].address, Allresult[i].state_code, Allresult[i].city_code, Allresult[i].pincode,
                             "", Allresult[i].mobile, Allresult[i].email, Allresult[i].status, Allresult[i].proprietor_name
                             , Allresult[i].gst_no, Allresult[i].aadhar_no, Allresult[i].pan_no, Allresult[i].latitude, Allresult[i].longitude,
@@ -471,16 +477,16 @@ class RetailerTDCustomerList : Activity() {
         var url = ""
 
         if (id.equals("1")) {
-            url = domain + "retailers/to_do_red_list?email=" + user_email + "&city_code=" + city_code
+            url = domain + "retailers/to_do_red_list?email=" + user_email + "&city_code=" + URLEncoder.encode(city_code, "UTF-8")
         } else
             if (id.equals("2")) {
-                url = domain + "retailers/to_do_yellow_list?email=" + user_email + "&city_code=" + city_code
+                url = domain + "retailers/to_do_yellow_list?email=" + user_email + "&city_code=" +  URLEncoder.encode(city_code, "UTF-8")
             } else
                 if (id.equals("3")) {
-                    url = domain + "retailers/to_do_light_green_list?email=" + user_email + "&city_code=" + city_code
+                    url = domain + "retailers/to_do_light_green_list?email=" + user_email + "&city_code=" +  URLEncoder.encode(city_code, "UTF-8")
                 } else
                     if (id.equals("4")) {
-                        url = domain + "retailers/to_do_dark_green_list?email=" + user_email + "&city_code=" + city_code
+                        url = domain + "retailers/to_do_dark_green_list?email=" + user_email + "&city_code=" +  URLEncoder.encode(city_code, "UTF-8")
                     }
 
         Log.i("volley", "URL: $url")
@@ -627,7 +633,7 @@ class RetailerTDCustomerList : Activity() {
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),full_address
                                         ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")), "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))))
 
-                                      Retailer_List.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")))
+                                      Retailer_List.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("code"))+" - "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")))
 
                             }
                         }
@@ -638,10 +644,12 @@ class RetailerTDCustomerList : Activity() {
                             rtocustomerlist.setAdapter(ca);
                             ca!!.notifyDataSetChanged();
 
-                            val adapter = ArrayAdapter(context,
-                                    android.R.layout.simple_spinner_dropdown_item,Retailer_List)
+                            val adapterauto = AutoSuggestAdapter(context, android.R.layout.simple_spinner_dropdown_item, Retailer_List)
+                            //rtocustomerlist_filter.setThreshold(1) // will start working from
+
+                           // val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,Retailer_List)
                             td_Retailer_search.setThreshold(1) // will start working from
-                            td_Retailer_search.setAdapter(adapter) // setting the adapter
+                            td_Retailer_search.setAdapter(adapterauto) // setting the adapter
                             td_Retailer_search.setTextColor(Color.BLACK)
 
                         }.toString()
