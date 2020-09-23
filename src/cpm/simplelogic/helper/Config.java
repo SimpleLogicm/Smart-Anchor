@@ -8,7 +8,6 @@ public class Config {
     // Replace this key with your's AIzaSyCecip9PemdWTBbypNO8F79VeksAxQTJ9Y
 //    public static final String DEVELOPER_KEY = "AIzaSyBBVQp4TJDUAjbhvJcp9pdYNZjkU_O265M";
 
-    public static final String DEVELOPER_KEY = "AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc";
 
     // YouTube video id
     public static  String YOUTUBE_VIDEO_CODE = "_oEA18Y8gM0";
