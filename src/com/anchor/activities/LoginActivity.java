@@ -41,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.HttpsTrustManager;
 import com.anchor.model.User;
 import com.anchor.service.LocationServices;
 import com.anchor.services.getServices;
@@ -74,13 +75,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -92,9 +102,13 @@ import java.util.List;
 import java.util.Locale;
 
 
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManagerFactory;
+
 import cpm.simplelogic.helper.BCrypt;
 import cpm.simplelogic.helper.CheckNullValue;
 import cpm.simplelogic.helper.GPSTracker;
+import okhttp3.OkHttpClient;
 
 public class LoginActivity extends Activity {
     ProgressDialog progress;
@@ -143,7 +157,11 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-
+        try {
+            HttpsTrustManager.allowAllSSL();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         FirebaseApp.initializeApp(this);
 
@@ -1692,6 +1710,7 @@ public class LoginActivity extends Activity {
         intent.setData(uri);
         startActivityForResult(intent, 101);
     }
+
 
 
 
