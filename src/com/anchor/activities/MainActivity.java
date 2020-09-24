@@ -33,6 +33,9 @@ import android.provider.Settings;
 import androidx.legacy.app.ActionBarDrawerToggle;
 import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,6 +48,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.animation.ActivitySwitcher;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Promotional_Model;
 import com.anchor.service.LocationServices;
 import com.anchor.service.StartLocationAlert;
@@ -75,6 +79,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity {
     private RequestQueue requestQueue;
@@ -158,6 +163,11 @@ public class MainActivity extends BaseActivity {
         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
         //scheduleNotify();
+
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                MyPeriodicwork.class, 15, TimeUnit.MINUTES
+        ).build();
+        WorkManager.getInstance().enqueue(periodicWorkRequest);
 
         Calendar c1 = Calendar.getInstance();
         //System.out.println("Current time => " + c.getTime());
