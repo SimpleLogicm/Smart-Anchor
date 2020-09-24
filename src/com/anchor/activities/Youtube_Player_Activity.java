@@ -53,7 +53,7 @@ public class Youtube_Player_Activity extends YouTubeBaseActivity implements
         et_title.setText("Product Description   "+Config.YOUTUBE_VIDEO_DISCRIPTION);
 
         // Initializing video player with developer key
-        youTubeView.initialize(Config.DEVELOPER_KEY, Youtube_Player_Activity.this);
+        youTubeView.initialize(getString(R.string.google_api_key), Youtube_Player_Activity.this);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         {try
@@ -131,7 +131,7 @@ public class Youtube_Player_Activity extends YouTubeBaseActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RECOVERY_DIALOG_REQUEST) {
             // Retry initialization if user performed a recovery action
-            getYouTubePlayerProvider().initialize(Config.DEVELOPER_KEY, this);
+            getYouTubePlayerProvider().initialize(getString(R.string.google_api_key), this);
         }
     }
 

@@ -45,6 +45,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.HttpsTrustManager;
 import com.anchor.model.User;
 import com.anchor.service.LocationServices;
 import com.anchor.services.getServices;
@@ -174,6 +175,11 @@ public class LoginActivity extends Activity {
 
         /* SSL CONFIG */
         handleSSLHandshake();
+        try {
+            HttpsTrustManager.allowAllSSL();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         FirebaseApp.initializeApp(this);
 
@@ -1658,6 +1664,13 @@ public class LoginActivity extends Activity {
                 {
                     otp_progressBarar.setVisibility(View.VISIBLE);
                     otp_bottom_layout.setVisibility(View.GONE);
+
+                    String otp = sub_otp.getText().toString();
+                    SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                    SharedPreferences.Editor editor = spf.edit();
+                    editor.putString("OTP", otp);
+                    editor.commit();
+
 
                     submit_OTP(otp_user_name.getText().toString(), sub_otp.getText().toString(),dialognew);
                 }
