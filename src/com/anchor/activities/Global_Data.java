@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class Global_Data {
 
+    public static Context context = null;
     public static String rank_service_call_flag = "";
     public static String year_value = "";
     public static String halfyear_value = "";

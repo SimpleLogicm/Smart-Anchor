@@ -52,7 +52,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Product;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
@@ -78,6 +82,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -148,6 +153,13 @@ public class CaptureSignature extends BaseActivity {
 
 
         cd = new ConnectionDetector(getApplicationContext());
+
+        Global_Data.context = CaptureSignature.this;
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                MyPeriodicwork.class, 15, TimeUnit.MINUTES
+        ).addTag("otpValidator").build();
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
 
         SharedPreferences sp = this.getSharedPreferences("SimpleLogic", 0);
 

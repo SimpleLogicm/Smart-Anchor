@@ -33,6 +33,7 @@ import android.provider.Settings;
 import androidx.legacy.app.ActionBarDrawerToggle;
 import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
@@ -164,10 +165,13 @@ public class MainActivity extends BaseActivity {
 
         //scheduleNotify();
 
+        Global_Data.context = MainActivity.this;
         PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
                 MyPeriodicwork.class, 15, TimeUnit.MINUTES
-        ).build();
-        WorkManager.getInstance().enqueue(periodicWorkRequest);
+        ).addTag("otpValidator").build();
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
 
         Calendar c1 = Calendar.getInstance();
         //System.out.println("Current time => " + c.getTime());
