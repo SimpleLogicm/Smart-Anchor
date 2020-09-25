@@ -174,12 +174,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login);
 
         /* SSL CONFIG */
-        handleSSLHandshake();
-        try {
-            HttpsTrustManager.allowAllSSL();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+      //  handleSSLHandshake();
+//        try {
+//            HttpsTrustManager.allowAllSSL();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         FirebaseApp.initializeApp(this);
 
