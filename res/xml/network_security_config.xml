@@ -3,7 +3,7 @@
     <base-config cleartextTrafficPermitted="false" />
 
     <domain-config>
-        <domain includeSubdomains="true">https://ecart.anchor-group.in/</domain>
+        <domain includeSubdomains="true">http://150.242.140.105:8006/</domain>
         <trust-anchors>
             <!-- Trust a debug certificate in addition to the system certificates -->
             <certificates src="system" />
