@@ -175,11 +175,11 @@ public class LoginActivity extends Activity {
 
         /* SSL CONFIG */
       //  handleSSLHandshake();
-//        try {
-//            HttpsTrustManager.allowAllSSL();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            HttpsTrustManager.allowAllSSL();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         FirebaseApp.initializeApp(this);
 
