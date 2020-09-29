@@ -59,6 +59,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -111,6 +116,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
@@ -198,6 +204,20 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 		loginDataBaseAdapter = loginDataBaseAdapter.open();
 
 		dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+		Global_Data.context = Customer_Feed.this;
+
+		try {
+			PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+					MyPeriodicwork.class, 15, TimeUnit.MINUTES
+			).addTag("otpValidator").build();
+			WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+					ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
 
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");

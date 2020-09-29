@@ -20,6 +20,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by sujit on 3/8/2017.
@@ -55,6 +61,20 @@ public class Forget_Pwd extends Activity {
         str_email = email_id.getText().toString().trim();
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
+
+        Global_Data.context = Forget_Pwd.this;
+        try{
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+
 
         dialog = new ProgressDialog(Forget_Pwd.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         try
@@ -120,7 +140,7 @@ public class Forget_Pwd extends Activity {
         if (email_id.getText().toString().length() > 0) {
             try {
                 String domain = getResources().getString(R.string.service_domain);
-                JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "/users/forgot_password?imei_no=" + "" + "&email=" + email_id.getText().toString(), null, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "users/forgot_password?imei_no=" + "" + "&email=" + email_id.getText().toString(), null, new Response.Listener<JSONObject>() {
                     // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
 
                     @Override
@@ -138,7 +158,17 @@ public class Forget_Pwd extends Activity {
                                     Toast toast = Toast.makeText(Forget_Pwd.this, resultstr, Toast.LENGTH_LONG);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
-                                } else if (resultstr.equalsIgnoreCase("User does not exist")) {
+                                }else if(resultstr.equalsIgnoreCase("User not found.")){
+                                    dialog.dismiss();
+                                    // Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
+
+                                    Toast toast = Toast.makeText(Forget_Pwd.this, resultstr, Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                }
+
+
+                                else if (resultstr.equalsIgnoreCase("User does not exist")) {
                                     Toast toast = Toast.makeText(Forget_Pwd.this, resultstr, Toast.LENGTH_LONG);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();

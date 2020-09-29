@@ -28,8 +28,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import com.anchor.App.AppController;
 import com.anchor.helper.FileDownloader;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.imageadapters.Image;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -54,6 +59,7 @@ import org.json.JSONTokener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Marketing extends Activity implements OnItemSelectedListener{
     //Button retail_sales, institute_sales;
@@ -85,6 +91,19 @@ public class Marketing extends Activity implements OnItemSelectedListener{
         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
         pDialog = new ProgressDialog(Marketing.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+        Global_Data.context = Marketing.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
 //        registerReceiver(onComplete,
 //                new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));

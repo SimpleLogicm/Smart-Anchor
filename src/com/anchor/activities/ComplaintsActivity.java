@@ -30,6 +30,10 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -51,6 +55,7 @@ import android.widget.Toast;
 import com.anchor.adapter.ComplaintAdapter;
 import com.anchor.adapter.HorizontalRecyclerViewAdapter;
 import com.anchor.helper.MultipartUtility;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.helper.PrefManager;
 import com.anchor.interfaces.Customer_S_Interface;
 import com.anchor.model.Complaint;
@@ -93,6 +98,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.ConnectionDetector;
 
@@ -169,6 +175,19 @@ public class ComplaintsActivity extends Activity implements Customer_S_Interface
         c_horizontalRecyclerView =  findViewById(R.id.c_horizontalRecyclerView);
 
         dialog = new ProgressDialog(ComplaintsActivity.this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+        Global_Data.context = ComplaintsActivity.this;
+        try{
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         init();
         getLocation();

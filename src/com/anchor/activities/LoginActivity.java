@@ -307,7 +307,7 @@ public class LoginActivity extends Activity {
 //		editText2.setText("sada@1234");
 //
         editText1.setText("Kartik");
-        editText2.setText("Kartik7999425");
+        editText2.setText("Kartik2126922");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -326,6 +326,10 @@ public class LoginActivity extends Activity {
             System.out.println("Local Values:-" + Global_Data.local_user + "," + Global_Data.local_pwd);
             //Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
         }
+
+
+
+
 
         editText2.setOnTouchListener(new View.OnTouchListener() {
 
@@ -926,7 +930,7 @@ public class LoginActivity extends Activity {
                                 String formattedDate = df.format(c.getTime());
                                 dbvoc.update_user_createD(formattedDate, user_name);
 
-                                Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(LoginActivity.this, "Register successfully Please login.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 otp_progressBarar.setVisibility(View.GONE);

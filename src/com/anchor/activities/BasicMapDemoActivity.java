@@ -25,6 +25,10 @@ import android.os.Message;
 import android.provider.Settings;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,6 +44,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.DistanceData;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -95,6 +100,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.ConnectionDetector;
 import cpm.simplelogic.helper.GPSTracker;
@@ -159,6 +165,20 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         str = new StringBuilder();
         str.append(" ");
+
+        Global_Data.context = BasicMapDemoActivity.this;
+        try{
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         try
         {
             android.app.ActionBar mActionBar = getActionBar();

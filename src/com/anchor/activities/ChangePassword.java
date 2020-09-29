@@ -73,6 +73,9 @@ public class ChangePassword extends Activity {
             ex.printStackTrace();
         }
 
+
+
+
         oldPassword = (EditText)findViewById(R.id.old_password);
         newPassword = (EditText)findViewById(R.id.new_password);
         confirmPassword = (EditText)findViewById(R.id.confirm_passwrod);

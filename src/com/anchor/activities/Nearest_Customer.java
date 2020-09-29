@@ -31,7 +31,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import com.anchor.activities.NEAREST_CU_Adapter.customButtonListener;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -70,6 +75,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class Nearest_Customer extends Activity implements customButtonListener {
@@ -120,6 +126,20 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 //		}
 //		else
 //		{
+
+		Global_Data.context = Nearest_Customer.this;
+
+		try {
+			PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+					MyPeriodicwork.class, 15, TimeUnit.MINUTES
+			).addTag("otpValidator").build();
+			WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+					ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
 		try
 		{
 			AppLocationManager appLocationManager = new AppLocationManager(Nearest_Customer.this);

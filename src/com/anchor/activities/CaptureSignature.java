@@ -155,11 +155,16 @@ public class CaptureSignature extends BaseActivity {
         cd = new ConnectionDetector(getApplicationContext());
 
         Global_Data.context = CaptureSignature.this;
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
-                MyPeriodicwork.class, 15, TimeUnit.MINUTES
-        ).addTag("otpValidator").build();
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
-                ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
         SharedPreferences sp = this.getSharedPreferences("SimpleLogic", 0);
 

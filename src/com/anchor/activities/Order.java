@@ -25,6 +25,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -49,6 +53,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -80,6 +85,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 @SuppressLint("DefaultLocale")
 public class Order extends Activity implements OnItemSelectedListener {
@@ -207,6 +213,20 @@ public class Order extends Activity implements OnItemSelectedListener {
         } else {
             schedule_txt.setText("Schedule");
         }
+
+        Global_Data.context = Order.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         try {
             ActionBar mActionBar = getActionBar();

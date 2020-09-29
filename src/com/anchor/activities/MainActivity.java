@@ -166,11 +166,16 @@ public class MainActivity extends BaseActivity {
         //scheduleNotify();
 
         Global_Data.context = MainActivity.this;
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
-                MyPeriodicwork.class, 15, TimeUnit.MINUTES
-        ).addTag("otpValidator").build();
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
-                ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
 
         Calendar c1 = Calendar.getInstance();

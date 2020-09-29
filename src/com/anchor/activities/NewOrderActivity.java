@@ -184,6 +184,7 @@ public class NewOrderActivity extends BaseActivity {
 		spinner_recycleview.setAdapter(spinner_list_adapter);
 
 
+
 		mpplayer = new MediaPlayer();
 		// for label RP change
 		SharedPreferences spf1=this.getSharedPreferences("SimpleLogic",0);

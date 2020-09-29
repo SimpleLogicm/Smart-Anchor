@@ -49,11 +49,17 @@ public class AllOrders_Sync  extends Activity  {
         setContentView(R.layout.order_syncs);
 
         Global_Data.context = AllOrders_Sync.this;
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
-                MyPeriodicwork.class, 15, TimeUnit.MINUTES
-        ).addTag("otpValidator").build();
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
-                ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
         lastsyncon= findViewById(R.id.lastsyncon);
         Totalsosync= findViewById(R.id.Totalsosync);

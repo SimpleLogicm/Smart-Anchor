@@ -53,7 +53,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Product;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
@@ -75,13 +79,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
 //import com.simplelogic.database.DatabaseHandler;
 //import com.simplelogic.webservice.GmailSender;
 
-public class Previous_orderNew_S3 extends BaseActivity {
+public class
+Previous_orderNew_S3 extends BaseActivity {
     private String mCurrentPhotoPath = "";
     private String pictureImagePath_new = "";
     private String Signature_path = "";
@@ -142,6 +148,20 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
 
         cd  = new ConnectionDetector(getApplicationContext());
+
+        Global_Data.context = Previous_orderNew_S3.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         SharedPreferences  sp=this.getSharedPreferences("SimpleLogic", 0);
 

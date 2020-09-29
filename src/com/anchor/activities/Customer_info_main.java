@@ -87,6 +87,9 @@ public class Customer_info_main extends Activity {
         SharedPreferences.Editor editor = spf.edit();
         editor.putString("order", "new");
         editor.commit();
+
+
+
         try
         {
             ActionBar mActionBar = getActionBar();
