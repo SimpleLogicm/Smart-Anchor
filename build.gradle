@@ -170,15 +170,15 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         multiDexEnabled = true
-        versionCode 35
-        versionName "2.1.4"
+        versionCode 37
+        versionName "2.1.5"
         resConfigs "en"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
 //            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
