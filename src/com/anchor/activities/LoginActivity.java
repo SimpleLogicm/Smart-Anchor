@@ -277,8 +277,8 @@ public class LoginActivity extends Activity {
 //        editText2.setText("PRIYANKA3073911");
 
 //
-        editText1.setText("Sadanand 1");
-        editText2.setText("sadanand12345");
+//        editText1.setText("Sadanand 1");
+//        editText2.setText("sadanand12345");
 //        editText1.setText("Jaya");
 //        editText2.setText("Jaya4861167");
 
@@ -286,7 +286,7 @@ public class LoginActivity extends Activity {
 //        editText2.setText("amol12345");
 
 //		editText1.setText("Sadanand");
-//		editText2.setText("Sadanand7315903");
+//		editText2.setText("Sadu$123");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -1103,7 +1103,7 @@ public class LoginActivity extends Activity {
                                 //Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
 
 
-                                Toast toast = Toast.makeText(LoginActivity.this, "Register successfully.", Toast.LENGTH_LONG);
+                                Toast toast = Toast.makeText(LoginActivity.this, "Register successfully Please login.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 dialog.dismiss();

@@ -2528,7 +2528,8 @@ public class Order extends Activity implements OnItemSelectedListener {
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
             Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+          //  URLEncoder.encode(Device_id, "UTF-8")
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" +URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
