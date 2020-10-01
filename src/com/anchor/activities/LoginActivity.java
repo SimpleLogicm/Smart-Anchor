@@ -161,7 +161,7 @@ public class LoginActivity extends Activity {
 
         try {
 
-            installServiceProviderIfNeeded(LoginActivity.this);
+            //installServiceProviderIfNeeded(LoginActivity.this);
            // getAcceptedIssuers();
         } catch (Exception e) {
             e.printStackTrace();
