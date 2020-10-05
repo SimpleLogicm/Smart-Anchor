@@ -62,17 +62,6 @@ public class Forget_Pwd extends Activity {
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
-        Global_Data.context = Forget_Pwd.this;
-        try{
-            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
-                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
-            ).addTag("otpValidator").build();
-            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
-                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
-
-        }catch(Exception ex) {
-            ex.printStackTrace();
-        }
 
 
 
@@ -174,6 +163,21 @@ public class Forget_Pwd extends Activity {
                                     toast.show();
                                 } else {
                                     try {
+
+//                                        Global_Data.context = Forget_Pwd.this;
+//                                        Global_Data.GLOvel_USER_EMAIL=email_id.getText().toString();
+//                                        try{
+//                                            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+//                                                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+//                                            ).addTag("otpValidator").build();
+//                                            WorkManager.getInstance(Forget_Pwd.this).enqueueUniquePeriodicWork("Work",
+//                                                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+//
+//                                        }catch(Exception ex) {
+//                                            ex.printStackTrace();
+//                                        }
+
+
                                         resultstr = response.getString("result");
                                         if (resultstr.equalsIgnoreCase("Password successfully sent to email Id and Mobile No.")) {
                                             String password = response.getString("password");

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="false" />
-
-    <domain-config>
-        <domain includeSubdomains="true">https://ecart.anchor-group.in/</domain>
-        <domain includeSubdomains="true">http://150.242.140.105:8006/</domain>
-        <trust-anchors>
-            <!-- Trust a debug certificate in addition to the system certificates -->
-            <certificates src="system" />
-            <certificates src="@raw/star_anchor_group_in" />
-        </trust-anchors>
-    </domain-config>
-
+<domain-config>
+    <domain includeSubdomains="true">ecart.anchor-group.in</domain>
+    <domain includeSubdomains="true">http://150.242.140.105:8006/</domain>
+    <domain includeSubdomains="true">https://mumuatsmadms01.anchor-group.in</domain>
+    <trust-anchors>
+        <certificates src="@raw/star_anchor_group_in"/>
+    </trust-anchors>
+</domain-config>
 </network-security-config>

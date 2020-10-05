@@ -79,6 +79,7 @@ public class MyPeriodicwork extends Worker {
                         }
                          OTP = sp.getString("OTP","");
 
+                        Log.d("user","user"+user_email);
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
