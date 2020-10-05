@@ -20,14 +20,14 @@ public class JobSchedular_helper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             ComponentName serviceComponent = new ComponentName(context, TestJobService.class);
             JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent);
-            builder.setMinimumLatency(300000);
+            builder.setMinimumLatency(900000);
             builder.setOverrideDeadline(3 * 700000);
             JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
             jobScheduler.schedule(builder.build());
         } else {
             ComponentName serviceComponent = new ComponentName(context, TestJobService.class);
             JobInfo.Builder builder = new JobInfo.Builder(1, serviceComponent);
-            builder.setPeriodic(300000);
+            builder.setPeriodic(900000);
            // builder.setOverrideDeadline(3 * 700000);
             try
             {

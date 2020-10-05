@@ -457,7 +457,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //
 //        }
 
-        Log.i("sendlocation","Every 5 minutes it will appear in Log Console"+latitude+" "+longitude);
+        Log.i("sendlocation","Every 15 minutes it will appear in Log Console"+latitude+" "+longitude);
         //Toast.makeText(getApplicationContext(), "Location successfully.", Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(),"ADRS:"+ Prefs.GetPreferences("ADDRESS"), Toast.LENGTH_LONG).show();
         new Thread(new Runnable() {
@@ -494,7 +494,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
                     //List<Local_Data> background = dbvoc.getBACKGROUND_SERVICE_CHECK_DATA();
 
 //					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && background.size() <= 0) {
-                    if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
+                    if (isInternetPresent && timeOfDay >= 9 && timeOfDay <= 18 && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
                         //Reading all
                         List<Local_Data> contacts = dbvoc.getemaIL();
                         for (Local_Data cn : contacts) {
