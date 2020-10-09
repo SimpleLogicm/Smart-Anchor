@@ -2597,21 +2597,32 @@ public class getServices {
 
                     String user_ranks_date = "";
                     if (json.has("rank_date")) {
-                        user_ranks_date = json.getString("rank_date");
 
                         try
                         {
-                            String myFormat = "yyyy-MM-dd"; //In which you need put here
-                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
-                            Date date = sdf.parse(Check_Null_Value.ranknullcheck(user_ranks_date));
-                            String myFormatnew = "dd-MM-yyyy";
-                            SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(json.getString("rank_date"))) {
+                                user_ranks_date = json.getString("rank_date");
+                                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                                SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                                Date date = sdf.parse(Check_Null_Value.ranknullcheck(user_ranks_date));
+                                String myFormatnew = "dd-MM-yyyy";
+                                SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
 
-                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                            SharedPreferences.Editor editor = spf.edit();
-                            editor.putString("rank_date", datenew.format(date));
+                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("rank_date", datenew.format(date));
 
-                            editor.commit();
+                                editor.commit();
+                            }
+                            else
+                            {
+                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("rank_date", user_ranks_date);
+
+                                editor.commit();
+                            }
+
 
                         }catch (Exception ex)
                         {
@@ -3187,6 +3198,7 @@ public class getServices {
                         final String finalResponse_result1 = response_result;
                         ((Activity) context).runOnUiThread(new Runnable() {
                             public void run() {
+                                Global_Data.LOCATION_SERVICE_HIT = "TRUE";
                                 Toast.makeText(context, "items Sync Successfully.", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
 

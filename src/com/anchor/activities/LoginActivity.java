@@ -163,6 +163,7 @@ public class LoginActivity extends Activity {
     EditText sub_otp,otp_user_name;
     TextView otp_time_remaining;
     CountDownTimer timer;
+    PlayService_Location PlayServiceManager;
 
 
     @SuppressLint("InlinedApi")
@@ -195,6 +196,15 @@ public class LoginActivity extends Activity {
 //			getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("fb", newToken).apply();
             }
         });
+
+        try
+        {
+            PlayServiceManager = new PlayService_Location(LoginActivity.this);
+
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
 
         //creating notification channel if android version is greater than or equals to oreo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
