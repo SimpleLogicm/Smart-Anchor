@@ -1,4 +1,4 @@
-package  com.anchor.activities;
+package com.anchor.activities;
 
 
 import android.app.AlarmManager;
@@ -20,7 +20,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+
 import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 import android.widget.TextView;
 
@@ -48,7 +50,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -68,141 +72,156 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 //import org.apache.http.client.methods.HttpPost;
 //import org.apache.http.impl.client.DefaultHttpClient;
 
-public class MyService extends Service implements LocationListener{
-	private static final String TAG = "LocationActivity";
+public class MyService extends Service implements LocationListener {
+    private static final String TAG = "LocationActivity";
 
-	//LoginDataBaseAdapter loginDataBaseAdapter;
-	ArrayList<String> results = new ArrayList<String>();
-	String user_name = "";
+    //LoginDataBaseAdapter loginDataBaseAdapter;
+    ArrayList<String> results = new ArrayList<String>();
+    String user_name = "";
 
-	ArrayList<String> AT_results = new ArrayList<String>();
-	int timeOfDay;
+    ArrayList<String> AT_results = new ArrayList<String>();
+    int timeOfDay;
 
-	DataBaseHelper dbvoc = new DataBaseHelper(this);
+    DataBaseHelper dbvoc = new DataBaseHelper(this);
     //SharedPreferences spf=getSharedPreferences("SimpleLogic",0);
 //	SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(this);
-	private static final long INTERVAL = 1000 * 10;
-	private static final long FASTEST_INTERVAL = 10000 * 6;
-	TextView btnFusedLocation,cancel_loc;
-	LocationRequest mLocationRequest;
-	GoogleApiClient mGoogleApiClient;
-	Location mCurrentLocation;
-	String mLastUpdateTime;
-	private FirebaseAnalytics mFirebaseAnalytics;
+    private static final long INTERVAL = 1000 * 10;
+    private static final long FASTEST_INTERVAL = 10000 * 6;
+    TextView btnFusedLocation, cancel_loc;
+    LocationRequest mLocationRequest;
+    Date start;
+    Date end;
+    String timenew;
+    Date userDate;
 
-	protected void createLocationRequest() {
-		mLocationRequest = new LocationRequest();
-		mLocationRequest.setInterval(INTERVAL);
-		mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
-		mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-	}
+    int inter;
+    GoogleApiClient mGoogleApiClient;
+    Location mCurrentLocation;
+    String mLastUpdateTime;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
-	Geocoder geocoder;
-	String line;
-	//PreferencesHelper Prefs;
-	SharedPreferences sp ;
-	BufferedReader in = null;
-	String lat_val,long_val;
-	//    HttpPost http_post;
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    Geocoder geocoder;
+    String line;
+    //PreferencesHelper Prefs;
+    SharedPreferences sp;
+    BufferedReader in = null;
+    String lat_val, long_val;
+    //    HttpPost http_post;
 //    HttpResponse http_resp;
 //    HttpClient http_client;
 //    List<NameValuePair> http_nmvalpair;
 //    HttpEntity http_entity;
-	public LocationManager locationManager;
-	// flag for GPS status
-	boolean isGPSEnabled = false;
+    public LocationManager locationManager;
+    // flag for GPS status
+    boolean isGPSEnabled = false;
 
-	// flag for network status
-	boolean isNetworkEnabled = false;
-	private String provider;
-	// flag for GPS status
-	boolean canGetLocation = false;
-	Boolean isInternetPresent = false;
+    // flag for network status
+    boolean isNetworkEnabled = false;
+    private String provider;
+    // flag for GPS status
+    boolean canGetLocation = false;
+    Boolean isInternetPresent = false;
 
-	ConnectionDetector cd;
-	Location location; // location
-	public double latitude; // latitude
-	public double longitude; // longitude
-	// The minimum distance to change Updates in meters
-	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 0 meters
+    ConnectionDetector cd;
+    Location location; // location
+    public double latitude; // latitude
+    public double longitude; // longitude
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 0 meters
 
-	// The minimum time between updates in milliseconds
-	private static final long MIN_TIME_BW_UPDATES = 35000 ; // 1 second
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		// Query the database and show alarm if it applies
-		//	Prefs = new PreferencesHelper(this);
-		sp= this.getSharedPreferences("SimpleLogic", 0);
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 35000; // 1 second
 
-		try {
-			if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
-				user_name = sp.getString("USER_EMAIL", "");
-			} else {
-				user_name = Global_Data.GLOvel_USER_EMAIL;
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // Query the database and show alarm if it applies
+        //	Prefs = new PreferencesHelper(this);
+        sp = this.getSharedPreferences("SimpleLogic", 0);
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_name = sp.getString("USER_EMAIL", "");
+            } else {
+                user_name = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
 
+        cd = new ConnectionDetector(this);
 
-		cd = new ConnectionDetector(this);
+        latitude = 0.0;
+        longitude = 0.0;
+        // I don't want this service to stay in memory, so I stop it
+        // immediately after doing what I wanted it to do.
 
-		latitude = 0.0;
-		longitude = 0.0;
-		// I don't want this service to stay in memory, so I stop it
-		// immediately after doing what I wanted it to do.
+        Calendar c = Calendar.getInstance();
+        timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        DateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
+        final Date date2 = new Date();
 
-		Calendar c = Calendar.getInstance();
-		timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        timenew = dateFormat2.format(date2).toString();
+        try {
+            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+            userDate = parser.parse(timenew);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
 
-		Date date = new Date();
-		System.out.println(dateFormat.format(date));
-
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //		loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 //		loginDataBaseAdapter=loginDataBaseAdapter.open();
 
-		try {
+        try {
 
-			isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-			// If GPS enabled, get latitude/longitude using GPS Services
-			if (isGPSEnabled) {
-				locationManager.requestLocationUpdates(
-						LocationManager.GPS_PROVIDER,
-						MIN_TIME_BW_UPDATES,
-						MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-				Log.d("GPS Enabled", "GPS Enabled");
+            // If GPS enabled, get latitude/longitude using GPS Services
+            if (isGPSEnabled) {
+                locationManager.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER,
+                        MIN_TIME_BW_UPDATES,
+                        MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                Log.d("GPS Enabled", "GPS Enabled");
 
-				if (locationManager != null) {
-					location = locationManager
-							.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-					if (location != null) {
-						latitude = location.getLatitude();
-						longitude = location.getLongitude();
-						//isLocationAvailable = true; // setting a flag that
-						// location is available
+                if (locationManager != null) {
+                    location = locationManager
+                            .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                        //isLocationAvailable = true; // setting a flag that
+                        // location is available
 
-						Global_Data.GLOvel_LATITUDE =  String.valueOf(latitude);
-						Global_Data.GLOvel_LONGITUDE =  String.valueOf(longitude);
+                        Global_Data.GLOvel_LATITUDE = String.valueOf(latitude);
+                        Global_Data.GLOvel_LONGITUDE = String.valueOf(longitude);
 
-						//Global_Val.lat_val = Double.toString(c);
-						//Global_Val.long_val = Double.toString(d);
-						SharedPreferences spf=this.getSharedPreferences("SimpleLogic",0);
-						SharedPreferences.Editor editor=spf.edit();
-						//editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
-						editor.putString("LATVAL", String.valueOf(latitude));
-						editor.putString("LONGVAL", String.valueOf(longitude));
+                        //Global_Val.lat_val = Double.toString(c);
+                        //Global_Val.long_val = Double.toString(d);
+                        SharedPreferences spf = this.getSharedPreferences("SimpleLogic", 0);
+                        SharedPreferences.Editor editor = spf.edit();
+                        //editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
+                        editor.putString("LATVAL", String.valueOf(latitude));
+                        editor.putString("LONGVAL", String.valueOf(longitude));
 
-						Log.d("GPS LOCATION","GPS LOCATION"+ latitude + longitude);
+                        Log.d("GPS LOCATION", "GPS LOCATION" + latitude + longitude);
 
 
-						editor.commit();
+                        editor.commit();
 
-						//isInternetPresent = cd.isConnectingToInternet();
+                        //isInternetPresent = cd.isConnectingToInternet();
 
 //						if(timeOfDay >= 7 && timeOfDay <= 22){
 //
@@ -235,30 +254,27 @@ public class MyService extends Service implements LocationListener{
 //						}
 
 
-
 //						LocationAddress locationAddress = new LocationAddress();
 //						locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
 //								getApplicationContext(), new GeocoderHandler());
 
-					}
-				}
-			}
+                    }
+                }
+            }
 
-			isNetworkEnabled = locationManager
-					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            isNetworkEnabled = locationManager
+                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-			try
-			{
+            try {
 
-				PlayService_Location PlayServiceManager = new PlayService_Location(this);
-				if(PlayServiceManager.checkPlayServices(this) && (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0")))
-				{
-					Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                PlayService_Location PlayServiceManager = new PlayService_Location(this);
+                if (PlayServiceManager.checkPlayServices(this) && (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0"))) {
+                    Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
 
-					if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
-						latitude = Double.valueOf(Global_Data.GLOvel_LATITUDE);
-						longitude = Double.valueOf(Global_Data.GLOvel_LONGITUDE);
-					}
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+                        latitude = Double.valueOf(Global_Data.GLOvel_LATITUDE);
+                        longitude = Double.valueOf(Global_Data.GLOvel_LONGITUDE);
+                    }
 
 //					if(timeOfDay >= 7 && timeOfDay <= 22){
 //
@@ -286,32 +302,30 @@ public class MyService extends Service implements LocationListener{
 //						}
 //					}
 
-				}
-				else
-				{
-					if (isNetworkEnabled && !isGPSEnabled) {
-						location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-						//
-						// location = locationManager.getLastKnownLocation(provider);
+                } else {
+                    if (isNetworkEnabled && !isGPSEnabled) {
+                        location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        //
+                        // location = locationManager.getLastKnownLocation(provider);
 
-						if (location != null) {
-							latitude = location.getLatitude();
-							longitude = location.getLongitude();
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
 
-							Global_Data.GLOvel_LATITUDE = String.valueOf(latitude);
-							Global_Data.GLOvel_LONGITUDE = String.valueOf(longitude);
+                            Global_Data.GLOvel_LATITUDE = String.valueOf(latitude);
+                            Global_Data.GLOvel_LONGITUDE = String.valueOf(longitude);
 
-							//Global_Val.lat_val = Double.toString(c);
-							//Global_Val.long_val = Double.toString(d);
-							SharedPreferences spf = this.getSharedPreferences("SimpleLogic", 0);
-							SharedPreferences.Editor editor = spf.edit();
-							//editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
-							editor.putString("LATVAL", String.valueOf(latitude));
-							editor.putString("LONGVAL", String.valueOf(longitude));
+                            //Global_Val.lat_val = Double.toString(c);
+                            //Global_Val.long_val = Double.toString(d);
+                            SharedPreferences spf = this.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            //editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
+                            editor.putString("LATVAL", String.valueOf(latitude));
+                            editor.putString("LONGVAL", String.valueOf(longitude));
 
-							Log.d("NETWORK LOCATION","NETWORK LOCATION"+ latitude + longitude);
+                            Log.d("NETWORK LOCATION", "NETWORK LOCATION" + latitude + longitude);
 
-							editor.commit();
+                            editor.commit();
 //							if(timeOfDay >= 7 && timeOfDay <= 22){
 //								isInternetPresent = cd.isConnectingToInternet();
 //
@@ -341,40 +355,38 @@ public class MyService extends Service implements LocationListener{
 //							LocationAddress locationAddress = new LocationAddress();
 //							locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
 //									getApplicationContext(), new GeocoderHandler());
-						}
-					}
-				}
-			}catch(Exception es){es.printStackTrace();}
+                        }
+                    }
+                }
+            } catch (Exception es) {
+                es.printStackTrace();
+            }
 
 
+            if (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0")) {
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                //
+                // location = locationManager.getLastKnownLocation(provider);
+
+                if (location != null) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+
+                    Global_Data.GLOvel_LATITUDE = String.valueOf(latitude);
+                    Global_Data.GLOvel_LONGITUDE = String.valueOf(longitude);
+
+                    //Global_Val.lat_val = Double.toString(c);
+                    //Global_Val.long_val = Double.toString(d);
+                    SharedPreferences spf = this.getSharedPreferences("SimpleLogic", 0);
+                    SharedPreferences.Editor editor = spf.edit();
+                    //editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
+                    editor.putString("LATVAL", String.valueOf(latitude));
+                    editor.putString("LONGVAL", String.valueOf(longitude));
+
+                    Log.d("NETWORK LOCATION", "NETWORK LOCATION" + latitude + longitude);
 
 
-
-
-			if (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0")) {
-				location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				//
-				// location = locationManager.getLastKnownLocation(provider);
-
-				if (location != null) {
-					latitude = location.getLatitude();
-					longitude = location.getLongitude();
-
-					Global_Data.GLOvel_LATITUDE = String.valueOf(latitude);
-					Global_Data.GLOvel_LONGITUDE = String.valueOf(longitude);
-
-					//Global_Val.lat_val = Double.toString(c);
-					//Global_Val.long_val = Double.toString(d);
-					SharedPreferences spf = this.getSharedPreferences("SimpleLogic", 0);
-					SharedPreferences.Editor editor = spf.edit();
-					//editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
-					editor.putString("LATVAL", String.valueOf(latitude));
-					editor.putString("LONGVAL", String.valueOf(longitude));
-
-					Log.d("NETWORK LOCATION","NETWORK LOCATION"+ latitude + longitude);
-
-
-					editor.commit();
+                    editor.commit();
 
 //					if(timeOfDay >= 7 && timeOfDay <= 22){
 //						isInternetPresent = cd.isConnectingToInternet();
@@ -406,17 +418,15 @@ public class MyService extends Service implements LocationListener{
 //					LocationAddress locationAddress = new LocationAddress();
 //					locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
 //							getApplicationContext(), new GeocoderHandler());
-				}
-			}
+                }
+            }
 
 
-
-
-			//Toast.makeText(this,"vals:++++++++++++++++++++++++++++++++>"+latitude+" "+longitude, Toast.LENGTH_SHORT).show();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// dialogGPS(this.getContext()); // lets the user know there is a problem with the gps
-		}
+            //Toast.makeText(this,"vals:++++++++++++++++++++++++++++++++>"+latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // dialogGPS(this.getContext()); // lets the user know there is a problem with the gps
+        }
 
 //        try {
 //            locationManager = (LocationManager) this.getSystemService(this.LOCATION_SERVICE);
@@ -458,24 +468,23 @@ public class MyService extends Service implements LocationListener{
 //
 //        }
 
-		Log.i("sendlocation","Every 15 minutes it will appear in Log Console"+latitude+" "+longitude);
-		//Toast.makeText(getApplicationContext(), "Location successfully.", Toast.LENGTH_LONG).show();
-		//Toast.makeText(getApplicationContext(),"ADRS:"+ Prefs.GetPreferences("ADDRESS"), Toast.LENGTH_LONG).show();
-		new Thread(new Runnable() {
-			public void run() {
-				try
-				{
-					// Obtain the FirebaseAnalytics instance.
-					mFirebaseAnalytics = FirebaseAnalytics.getInstance(getBaseContext());
-					Bundle bundle = new Bundle();
-					bundle.putString(FirebaseAnalytics.Param.ITEM_ID,  sp.getString("USER_EMAIL", ""));
-					bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,sp.getString("USER_NAMEs", ""));
+        Log.i("sendlocation", "Every 15 minutes it will appear in Log Console" + latitude + " " + longitude);
+        //Toast.makeText(getApplicationContext(), "Location successfully.", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"ADRS:"+ Prefs.GetPreferences("ADDRESS"), Toast.LENGTH_LONG).show();
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    // Obtain the FirebaseAnalytics instance.
+                    mFirebaseAnalytics = FirebaseAnalytics.getInstance(getBaseContext());
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, sp.getString("USER_EMAIL", ""));
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, sp.getString("USER_NAMEs", ""));
 
-					mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-					/* Firebase Code End */
+                    /* Firebase Code End */
 
-					String domain = getResources().getString(R.string.service_domain);
+                    String domain = getResources().getString(R.string.service_domain);
 
 //            Global_Val global_Val = new Global_Val();
 //            if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
@@ -484,37 +493,73 @@ public class MyService extends Service implements LocationListener{
 //            else
 //            {
 //                domain = URL.toString();
-					SharedPreferences spf= getSharedPreferences("SimpleLogic",0);
-					Global_Data.device_id = spf.getString("devid", "");
+                    SharedPreferences spf = getSharedPreferences("SimpleLogic", 0);
+                    Global_Data.device_id = spf.getString("devid", "");
 //            }
-					Log.i("volley", "domain: " + domain);
-					Log.i("volley", "Device_id: " + Global_Data.device_id);
+                    Log.i("volley", "domain: " + domain);
+                    Log.i("volley", "Device_id: " + Global_Data.device_id);
 
-					isInternetPresent = cd.isConnectingToInternet();
+                    isInternetPresent = cd.isConnectingToInternet();
 
-					//List<Local_Data> background = dbvoc.getBACKGROUND_SERVICE_CHECK_DATA();
+                    //List<Local_Data> background = dbvoc.getBACKGROUND_SERVICE_CHECK_DATA();
 
 //					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && background.size() <= 0) {
-					if (isInternetPresent && timeOfDay >= 9 && timeOfDay <= 18 && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
-						//Reading all
-						List<Local_Data> contacts = dbvoc.getemaIL();
-						for (Local_Data cn : contacts) {
-							Global_Data.GLOvel_USER_EMAIL = cn.getemail();
-
-						}
+                    SharedPreferences spf2 = getApplicationContext().getSharedPreferences("SimpleLogic", 0);
+                    String StartTime = spf2.getString("StartTime", null);
+                    String Endtime = spf2.getString("Endtime", null);
+                  //  String Interval = spf2.getString("Interval", null);
 
 
+                    try {
+                        if (StartTime.equalsIgnoreCase("")) {
+                            String starttime = "09:00";
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            start = parser.parse(starttime);
+
+                        } else {
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            start = parser.parse(StartTime);
+
+                        }
+                        if (Endtime.equalsIgnoreCase("")) {
+                            String endtim = "18:00";
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            end = parser.parse(endtim);
+
+                        } else {
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            end = parser.parse(Endtime);
+
+                        }
+
+                    }catch (Exception e) {
+                        String endtim = "18:00";
+                        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                        end = parser.parse(endtim);
+
+                        String starttime = "09:00";
+                        start = parser.parse(starttime);
+                        e.printStackTrace();
+                    }
+
+                    if (isInternetPresent && userDate.after(start) && userDate.before(end) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
+                        //Reading all
+                        List<Local_Data> contacts = dbvoc.getemaIL();
+                        for (Local_Data cn : contacts) {
+                            Global_Data.GLOvel_USER_EMAIL = cn.getemail();
+
+                        }
 
 
-						JSONArray PICTURE = new JSONArray();
-						//JSONObject product_value = new JSONObject();
-						JSONObject product_value_n = new JSONObject();
-						JSONArray product_imei = new JSONArray();
-						JSONArray at_array = new JSONArray();
+                        JSONArray PICTURE = new JSONArray();
+                        //JSONObject product_value = new JSONObject();
+                        JSONObject product_value_n = new JSONObject();
+                        JSONArray product_imei = new JSONArray();
+                        JSONArray at_array = new JSONArray();
 
-					//	List<Local_Data> geo = dbvoc.getGEo_DATA();
-						//List<Local_Data> attendance = dbvoc.getAllAttendance_Data();
-						//if (geo.size() > 0)
+                        //	List<Local_Data> geo = dbvoc.getGEo_DATA();
+                        //List<Local_Data> attendance = dbvoc.getAllAttendance_Data();
+                        //if (geo.size() > 0)
 //						{
 //							for (final Local_Data g : geo) {
 //
@@ -599,20 +644,19 @@ public class MyService extends Service implements LocationListener{
 ////								}
 ////							}
 //						}
-						//else
-						//{
+                        //else
+                        //{
 
-							DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-							Date date = new Date();
-							System.out.println(dateFormat.format(date));
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                        Date date = new Date();
+                        System.out.println(dateFormat.format(date));
 
-							JSONObject picture = new JSONObject();
-							picture.put("latitude",latitude);
-							picture.put("longitude", longitude);
+                        JSONObject picture = new JSONObject();
+                        picture.put("latitude", latitude);
+                        picture.put("longitude", longitude);
 
-							if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE))) {
-								try
-								{
+                        if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE))) {
+                            try {
 //									new Handler(Looper.getMainLooper()).post(new Runnable() {
 //										public void run() {
 //											LocationAddress locationAddress = new LocationAddress();
@@ -621,18 +665,18 @@ public class MyService extends Service implements LocationListener{
 //										}
 //									});
 
-									picture.put("address", "");
-								}catch(Exception ex){
-									ex.printStackTrace();
-									//addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
-									picture.put("address", "");
-								}
-							} else {
-								picture.put("address", "");
-							}
+                                picture.put("address", "");
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                //addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
+                                picture.put("address", "");
+                            }
+                        } else {
+                            picture.put("address", "");
+                        }
 
-							picture.put("location_date", dateFormat.format(date));
-							PICTURE.put(picture);
+                        picture.put("location_date", dateFormat.format(date));
+                        PICTURE.put(picture);
 
 //							if (attendance.size() > 0) {
 //								for (Local_Data a : attendance) {
@@ -672,63 +716,58 @@ public class MyService extends Service implements LocationListener{
 //								}
 //							}
 
-							//loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, dateFormat.format(date));
+                        //loginDataBaseAdapter.insert_ACKGROUND_SERVICE_CHECK(Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, dateFormat.format(date));
 
-						//}
+                        //}
 
 
-
-						product_value_n.put("user_location_histories", PICTURE);
-						//product_value_n.put("attendances", at_array);
-						product_value_n.put("imei_no", Global_Data.device_id);
-						product_value_n.put("email", user_name);
-						Log.d("user_location_histories",product_value_n.toString());
+                        product_value_n.put("user_location_histories", PICTURE);
+                        //product_value_n.put("attendances", at_array);
+                        product_value_n.put("imei_no", Global_Data.device_id);
+                        product_value_n.put("email", user_name);
+                        Log.d("user_location_histories", product_value_n.toString());
 
 
 //					Log.i("volley", "Service url: " + domain+"update_user_with_current_location?lat="+sp.getString("LATVAL",null)+"&lon="+sp.getString("LONGVAL",null)+"&device_id="+Global_Data.device_id+"&address="+URLEncoder.encode(Global_Data.address, "UTF-8")+"&email="+Global_Data.GLOvel_USER_EMAIL);
 
-						Log.i("volley", "Service url: " + domain+"update_user_with_current_location");
-						Log.i("volley", "Service url: " + domain+"update_user_with_current_location");
+                        Log.i("volley", "Service url: " + domain + "update_user_with_current_location");
+                        Log.i("volley", "Service url: " + domain + "update_user_with_current_location");
 //
 //					JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST,domain+"update_user_with_current_location?lat="+sp.getString("LATVAL",null)+"&lon="+sp.getString("LONGVAL",null)+"&device_id="+Global_Data.device_id+"&address="+URLEncoder.encode(Global_Data.address, "UTF-8")+"&email="+Global_Data.GLOvel_USER_EMAIL, product_value_n, new Response.Listener<JSONObject>() {
 //
 //						@Override
 //						public void onResponse(JSONObject response) {
 
-						JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST,domain+"update_user_with_current_location", product_value_n, new Response.Listener<JSONObject>() {
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "update_user_with_current_location", product_value_n, new Response.Listener<JSONObject>() {
 
-							@Override
-							public void onResponse(JSONObject response) {
+                            @Override
+                            public void onResponse(JSONObject response) {
 
-								Log.i("volley", "response: " + response.toString());
-								//  Log.i("volley", "response reg Length: " + response.length());
+                                Log.i("volley", "response: " + response.toString());
+                                //  Log.i("volley", "response reg Length: " + response.length());
 
-								try{
-									//   for (int a = 0; a < response.length(); a++) {
+                                try {
+                                    //   for (int a = 0; a < response.length(); a++) {
 
 //                        JSONObject person = (JSONObject) response.getJSONArray(response);
 //
-									//   String name = response.getString("result44");
+                                    //   String name = response.getString("result44");
 
-									String response_result = "";
-									if(response.has("result"))
-									{
-										response_result = response.getString("result");
-										// dbvoc.getDeleteTable("geo_data");
-									}
-									else
-									{
-										response_result = "data";
-									}
+                                    String response_result = "";
+                                    if (response.has("result")) {
+                                        response_result = response.getString("result");
+                                        // dbvoc.getDeleteTable("geo_data");
+                                    } else {
+                                        response_result = "data";
+                                    }
 
 
-									if(response_result.equalsIgnoreCase("Device not found")) {
+                                    if (response_result.equalsIgnoreCase("Device not found")) {
 
-										//Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-										Log.d("LOC RESULT","LOC RESULT"+response_result);
+                                        //Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
+                                        Log.d("LOC RESULT", "LOC RESULT" + response_result);
 
-									}
-									else {
+                                    } else {
 
 //										if(!results.isEmpty())
 //										{
@@ -748,120 +787,117 @@ public class MyService extends Service implements LocationListener{
 //
 //										dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 
-										//dbvoc.getDeleteTable("geo_data");
-										Log.d("LOC RESULT","LOC RESULT"+response_result);
-										//LocationAddress locationAddress = new LocationAddress();
+                                        //dbvoc.getDeleteTable("geo_data");
+                                        Log.d("LOC RESULT", "LOC RESULT" + response_result);
+                                        //LocationAddress locationAddress = new LocationAddress();
 
 //
-									}
-									// }
+                                    }
+                                    // }
 
-									// output.setText(data);
-								}catch(JSONException e) {
-									//dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
-									e.printStackTrace();
+                                    // output.setText(data);
+                                } catch (JSONException e) {
+                                    //dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
+                                    e.printStackTrace();
 
-									//dialog.dismiss();
-									//finish();
-								}
-
-
-								// dialog.dismiss();
-							}
-						},  new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								//Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-								//dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
-
-								if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-
-									Log.d("BACK Error","Network Error");
-								} else if (error instanceof AuthFailureError) {
-
-									Log.d("BACK Error","Server AuthFailureError");
-								} else if (error instanceof ServerError) {
-									Log.d("BACK Error","Server   Error");
-								} else if (error instanceof NetworkError) {
-									Log.d("BACK Error","Network Error");
-
-								} else if (error instanceof ParseError) {
-									Log.d("BACK Error","ParseError   Error");
-								}
-								else
-								{
-									Log.d("BACK Error",error.getMessage());
-								}
-								//dialog.dismiss();
-								// finish();
-							}
-						});
-
-						RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
-						// queue.add(jsObjRequest);
-						jsObjRequest.setShouldCache(false);
-						int socketTimeout = 400000;//30 seconds - change to what you want
-						RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-						jsObjRequest.setRetryPolicy(policy);
-						requestQueue.add(jsObjRequest);
-					}
+                                    //dialog.dismiss();
+                                    //finish();
+                                }
 
 
+                                // dialog.dismiss();
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					//dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
-					//dialog.dismiss();
-				}
-			}
-		}).start();
+                                //dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 
-		Log.d("service start","service start");
-		//Toast.makeText(this, " SaleService Created ", Toast.LENGTH_LONG).show();
-		//stopSelf();
+                                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                                    Log.d("BACK Error", "Network Error");
+                                } else if (error instanceof AuthFailureError) {
+
+                                    Log.d("BACK Error", "Server AuthFailureError");
+                                } else if (error instanceof ServerError) {
+                                    Log.d("BACK Error", "Server   Error");
+                                } else if (error instanceof NetworkError) {
+                                    Log.d("BACK Error", "Network Error");
+
+                                } else if (error instanceof ParseError) {
+                                    Log.d("BACK Error", "ParseError   Error");
+                                } else {
+                                    Log.d("BACK Error", error.getMessage());
+                                }
+                                //dialog.dismiss();
+                                // finish();
+                            }
+                        });
+
+                        RequestQueue requestQueue = Volley.newRequestQueue(getBaseContext());
+                        // queue.add(jsObjRequest);
+                        jsObjRequest.setShouldCache(false);
+                        int socketTimeout = 400000;//30 seconds - change to what you want
+                        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                        jsObjRequest.setRetryPolicy(policy);
+                        requestQueue.add(jsObjRequest);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
+                    //dialog.dismiss();
+                }
+            }
+        }).start();
+
+        Log.d("service start", "service start");
+        //Toast.makeText(this, " SaleService Created ", Toast.LENGTH_LONG).show();
+        //stopSelf();
 
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
 //			startMyOwnForeground();
 //		else
 //			startForeground(1, new Notification());
 
-		return START_NOT_STICKY;
-	}
+        return START_NOT_STICKY;
+    }
 
-	private class GeocoderHandler extends Handler {
-		@Override
-		public void handleMessage(Message message) {
-			String locationAddress = "";
-			switch (message.what) {
-				case 1:
-					Bundle bundle = message.getData();
-					locationAddress = bundle.getString("address");
-					break;
-				default:
-					//locationAddress = " ";
-			}
-			//  LOCATION.setText(locationAddress);
-
-
-			if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(locationAddress)) {
-				Global_Data.address = locationAddress;
-				Log.d("GLOBEL ADDRESS G", "V" + locationAddress);
-
-			} else {
-				Global_Data.address = "";
-				Log.d("GLOBEL ADDRESS G", "address not found.");
-			}
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress = "";
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    break;
+                default:
+                    //locationAddress = " ";
+            }
+            //  LOCATION.setText(locationAddress);
 
 
-		}
-	}
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewwithzeron(locationAddress)) {
+                Global_Data.address = locationAddress;
+                Log.d("GLOBEL ADDRESS G", "V" + locationAddress);
+
+            } else {
+                Global_Data.address = "";
+                Log.d("GLOBEL ADDRESS G", "address not found.");
+            }
 
 
-	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
-	}
+        }
+    }
+
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
 //    @Override
 //    public void onLocationChanged(Location arg0) {
@@ -869,44 +905,53 @@ public class MyService extends Service implements LocationListener{
 //
 //    }
 
-	@Override
-	public void onDestroy() {
-		// I want to restart this service again in one hour
-		AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
-		alarm.set(
+    @Override
+    public void onDestroy() {
+        SharedPreferences spf2 = getApplicationContext().getSharedPreferences("SimpleLogic", 0);
+        String interval = spf2.getString("Interval", null);
+
+        if (interval.equalsIgnoreCase("")){
+            inter = 15;
+        }else{
+            inter = Integer.parseInt(interval);
+        }
+
+        // I want to restart this service again in one hour
+        AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarm.set(
                 AlarmManager.RTC_WAKEUP,
-				System.currentTimeMillis() + (1000 * 60 * 15),
-				PendingIntent.getService(this, 0, new Intent(this, MyService.class), 0)
-		);
-	}
+                System.currentTimeMillis() + (1000 * 60 * inter),
+                PendingIntent.getService(this, 0, new Intent(this, MyService.class), 0)
+        );
+    }
 
-	@Override
-	public void onLocationChanged(Location location) {
+    @Override
+    public void onLocationChanged(Location location) {
 
-		//int lat = (int) (location.getLatitude());
-		//int lng = (int) (location.getLongitude());
+        //int lat = (int) (location.getLatitude());
+        //int lng = (int) (location.getLongitude());
 
-		Global_Data.GLOvel_LATITUDE =  String.valueOf(location.getLatitude());
-		Global_Data.GLOvel_LONGITUDE =  String.valueOf(location.getLongitude());
+        Global_Data.GLOvel_LATITUDE = String.valueOf(location.getLatitude());
+        Global_Data.GLOvel_LONGITUDE = String.valueOf(location.getLongitude());
 
-		Log.d("Location change","CHANGE "+Global_Data.GLOvel_LATITUDE+" "+Global_Data.GLOvel_LONGITUDE);
+        Log.d("Location change", "CHANGE " + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
 
-	}
+    }
 
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-	}
+    }
 
-	@Override
-	public void onProviderEnabled(String provider) {
+    @Override
+    public void onProviderEnabled(String provider) {
 
-	}
+    }
 
-	@Override
-	public void onProviderDisabled(String provider) {
+    @Override
+    public void onProviderDisabled(String provider) {
 
-	}
+    }
 
 //    @Override
 //    public void onConnected(Bundle bundle) {
@@ -923,44 +968,40 @@ public class MyService extends Service implements LocationListener{
 //
 //    }
 
-	public String addressn(Double lat, Double longi) {
-		Geocoder geocoder;
-		List<Address> addresses;
-		geocoder = new Geocoder(this, Locale.getDefault());
-		StringBuilder sb = new StringBuilder();
-		sb.append("");
+    public String addressn(Double lat, Double longi) {
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+        StringBuilder sb = new StringBuilder();
+        sb.append("");
 
-		try {
-			addresses = geocoder.getFromLocation(latitude, longitude, 1);
-			sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0))+" ");
-			if(!(sb.indexOf(addresses.get(0).getLocality()) > 0))
-			{
-				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality())+" ");
-			}
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0)) + " ");
+            if (!(sb.indexOf(addresses.get(0).getLocality()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality()) + " ");
+            }
 
-			if(!(sb.indexOf(addresses.get(0).getAdminArea()) > 0))
-			{
-				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea())+" ");
-			}
+            if (!(sb.indexOf(addresses.get(0).getAdminArea()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea()) + " ");
+            }
 
-			if(!(sb.indexOf(addresses.get(0).getCountryName()) > 0))
-			{
-				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName())+" ");
-			}
+            if (!(sb.indexOf(addresses.get(0).getCountryName()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName()) + " ");
+            }
 
-			if(!(sb.indexOf(addresses.get(0).getPostalCode()) > 0))
-			{
-				sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode())+" ");
-			}
-			//String knownName = addresses.get(0).getFeatureName();
+            if (!(sb.indexOf(addresses.get(0).getPostalCode()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode()) + " ");
+            }
+            //String knownName = addresses.get(0).getFeatureName();
 
-			Global_Data.address = sb.toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            Global_Data.address = sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
 
 //	@Override
@@ -973,24 +1014,24 @@ public class MyService extends Service implements LocationListener{
 //
 //	}
 
-	private void startMyOwnForeground(){
-		String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
-		String channelName = "My Background Service";
-		NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-		chan.setLightColor(Color.BLUE);
-		chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-		NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		assert manager != null;
-		manager.createNotificationChannel(chan);
+    private void startMyOwnForeground() {
+        String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
+        String channelName = "My Background Service";
+        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+        chan.setLightColor(Color.BLUE);
+        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        assert manager != null;
+        manager.createNotificationChannel(chan);
 
-		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-		Notification notification = notificationBuilder.setOngoing(true)
-				.setSmallIcon(R.drawable.camera_icon)
-				.setContentTitle("App is running in background")
-				.setPriority(NotificationManager.IMPORTANCE_MIN)
-				.setCategory(Notification.CATEGORY_SERVICE)
-				.build();
-		startForeground(2, notification);
-	}
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        Notification notification = notificationBuilder.setOngoing(true)
+                .setSmallIcon(R.drawable.camera_icon)
+                .setContentTitle("App is running in background")
+                .setPriority(NotificationManager.IMPORTANCE_MIN)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .build();
+        startForeground(2, notification);
+    }
 
 }

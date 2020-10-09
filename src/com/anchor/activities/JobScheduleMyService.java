@@ -1,4 +1,4 @@
-package  com.anchor.activities;
+package com.anchor.activities;
 
 
 import android.app.Notification;
@@ -19,7 +19,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+
 import androidx.core.app.NotificationCompat;
+
 import android.util.Log;
 import android.widget.TextView;
 
@@ -46,7 +48,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,7 +71,7 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 //import org.apache.http.client.methods.HttpPost;
 //import org.apache.http.impl.client.DefaultHttpClient;
 
-public class JobScheduleMyService extends Service implements LocationListener{
+public class JobScheduleMyService extends Service implements LocationListener {
     private static final String TAG = "LocationActivity";
 
     //LoginDataBaseAdapter loginDataBaseAdapter;
@@ -82,12 +86,16 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //	SharedPreferences spf = PreferenceManager.getDefaultSharedPreferences(this);
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 10000 * 6;
-    TextView btnFusedLocation,cancel_loc;
+    TextView btnFusedLocation, cancel_loc;
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
     Location mCurrentLocation;
     String mLastUpdateTime;
     private FirebaseAnalytics mFirebaseAnalytics;
+    Date start;
+    Date end;
+    String timenew;
+    Date userDate;
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -99,9 +107,9 @@ public class JobScheduleMyService extends Service implements LocationListener{
     Geocoder geocoder;
     String line;
     //PreferencesHelper Prefs;
-    SharedPreferences sp ;
+    SharedPreferences sp;
     BufferedReader in = null;
-    String lat_val,long_val;
+    String lat_val, long_val;
     //    HttpPost http_post;
 //    HttpResponse http_resp;
 //    HttpClient http_client;
@@ -126,12 +134,13 @@ public class JobScheduleMyService extends Service implements LocationListener{
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 0 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 35000 ; // 1 second
+    private static final long MIN_TIME_BW_UPDATES = 35000; // 1 second
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Query the database and show alarm if it applies
         //	Prefs = new PreferencesHelper(this);
-        sp= this.getSharedPreferences("SimpleLogic", 0);
+        sp = this.getSharedPreferences("SimpleLogic", 0);
 
         try {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
@@ -144,7 +153,6 @@ public class JobScheduleMyService extends Service implements LocationListener{
         }
 
 
-
         cd = new ConnectionDetector(this);
 
         latitude = 0.0;
@@ -154,6 +162,19 @@ public class JobScheduleMyService extends Service implements LocationListener{
 
         Calendar c = Calendar.getInstance();
         timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+        //  String hourMinute = T.Now.ToString("HH:mm");
+        DateFormat dateFormat2 = new SimpleDateFormat("HH:mm");
+        final Date date2 = new Date();
+
+        timenew = dateFormat2.format(date2).toString();
+        try {
+            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+            userDate = parser.parse(timenew);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Log.i("time now", "Time " + timenew);
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -185,18 +206,18 @@ public class JobScheduleMyService extends Service implements LocationListener{
                         //isLocationAvailable = true; // setting a flag that
                         // location is available
 
-                        Global_Data.GLOvel_LATITUDE =  String.valueOf(latitude);
-                        Global_Data.GLOvel_LONGITUDE =  String.valueOf(longitude);
+                        Global_Data.GLOvel_LATITUDE = String.valueOf(latitude);
+                        Global_Data.GLOvel_LONGITUDE = String.valueOf(longitude);
 
                         //Global_Val.lat_val = Double.toString(c);
                         //Global_Val.long_val = Double.toString(d);
-                        SharedPreferences spf=this.getSharedPreferences("SimpleLogic",0);
-                        SharedPreferences.Editor editor=spf.edit();
+                        SharedPreferences spf = this.getSharedPreferences("SimpleLogic", 0);
+                        SharedPreferences.Editor editor = spf.edit();
                         //editor.putString("USER_EMAIL", Global_Data.GLOvel_USER_EMAIL);
                         editor.putString("LATVAL", String.valueOf(latitude));
                         editor.putString("LONGVAL", String.valueOf(longitude));
 
-                        Log.d("GPS LOCATION","GPS LOCATION"+ latitude + longitude);
+                        Log.d("GPS LOCATION", "GPS LOCATION" + latitude + longitude);
 
 
                         editor.commit();
@@ -234,7 +255,6 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //						}
 
 
-
 //						LocationAddress locationAddress = new LocationAddress();
 //						locationAddress.getAddressFromLocation(location.getLatitude(), location.getLongitude(),
 //								getApplicationContext(), new GeocoderHandler());
@@ -246,13 +266,11 @@ public class JobScheduleMyService extends Service implements LocationListener{
             isNetworkEnabled = locationManager
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            try
-            {
+            try {
 
                 PlayService_Location PlayServiceManager = new PlayService_Location(this);
-                if(PlayServiceManager.checkPlayServices(this) && (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0")))
-                {
-                    Log.d("Play LAT LOG","Play LAT LOG"+Global_Data.GLOvel_LATITUDE+" "+ Global_Data.GLOvel_LONGITUDE);
+                if (PlayServiceManager.checkPlayServices(this) && (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0"))) {
+                    Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
                         latitude = Double.valueOf(Global_Data.GLOvel_LATITUDE);
@@ -285,9 +303,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //						}
 //					}
 
-                }
-                else
-                {
+                } else {
                     if (isNetworkEnabled && !isGPSEnabled) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         //
@@ -308,7 +324,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
                             editor.putString("LATVAL", String.valueOf(latitude));
                             editor.putString("LONGVAL", String.valueOf(longitude));
 
-                            Log.d("NETWORK LOCATION","NETWORK LOCATION"+ latitude + longitude);
+                            Log.d("NETWORK LOCATION", "NETWORK LOCATION" + latitude + longitude);
 
                             editor.commit();
 //							if(timeOfDay >= 7 && timeOfDay <= 22){
@@ -343,11 +359,9 @@ public class JobScheduleMyService extends Service implements LocationListener{
                         }
                     }
                 }
-            }catch(Exception es){es.printStackTrace();}
-
-
-
-
+            } catch (Exception es) {
+                es.printStackTrace();
+            }
 
 
             if (String.valueOf(latitude).equalsIgnoreCase("0.0") || String.valueOf(latitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("") || String.valueOf(longitude).equalsIgnoreCase("0.0")) {
@@ -370,7 +384,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
                     editor.putString("LATVAL", String.valueOf(latitude));
                     editor.putString("LONGVAL", String.valueOf(longitude));
 
-                    Log.d("NETWORK LOCATION","NETWORK LOCATION"+ latitude + longitude);
+                    Log.d("NETWORK LOCATION", "NETWORK LOCATION" + latitude + longitude);
 
 
                     editor.commit();
@@ -407,8 +421,6 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //							getApplicationContext(), new GeocoderHandler());
                 }
             }
-
-
 
 
             //Toast.makeText(this,"vals:++++++++++++++++++++++++++++++++>"+latitude+" "+longitude, Toast.LENGTH_SHORT).show();
@@ -457,18 +469,17 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //
 //        }
 
-        Log.i("sendlocation","Every 15 minutes it will appear in Log Console"+latitude+" "+longitude);
+        Log.i("sendlocation", "Every 15 minutes it will appear in Log Console" + latitude + " " + longitude);
         //Toast.makeText(getApplicationContext(), "Location successfully.", Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(),"ADRS:"+ Prefs.GetPreferences("ADDRESS"), Toast.LENGTH_LONG).show();
         new Thread(new Runnable() {
             public void run() {
-                try
-                {
+                try {
                     // Obtain the FirebaseAnalytics instance.
                     mFirebaseAnalytics = FirebaseAnalytics.getInstance(getBaseContext());
                     Bundle bundle = new Bundle();
-                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID,  sp.getString("USER_EMAIL", ""));
-                    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,sp.getString("USER_NAMEs", ""));
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, sp.getString("USER_EMAIL", ""));
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, sp.getString("USER_NAMEs", ""));
 
                     mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
@@ -483,7 +494,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //            else
 //            {
 //                domain = URL.toString();
-                    SharedPreferences spf= getSharedPreferences("SimpleLogic",0);
+                    SharedPreferences spf = getSharedPreferences("SimpleLogic", 0);
                     Global_Data.device_id = spf.getString("devid", "");
 //            }
                     Log.i("volley", "domain: " + domain);
@@ -491,19 +502,54 @@ public class JobScheduleMyService extends Service implements LocationListener{
 
                     isInternetPresent = cd.isConnectingToInternet();
 
+                    SharedPreferences spf2 = getApplicationContext().getSharedPreferences("SimpleLogic", 0);
+                    String StartTime = spf2.getString("StartTime", null);
+                    String Endtime = spf2.getString("Endtime", null);
+
+                    try {
+                        if (StartTime.equalsIgnoreCase("")) {
+                            String starttime = "09:00";
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            start = parser.parse(starttime);
+
+                        } else {
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            start = parser.parse(StartTime);
+
+                        }
+                        if (Endtime.equalsIgnoreCase("")) {
+                            String endtim = "18:00";
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            end = parser.parse(endtim);
+
+                        } else {
+                            SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                            end = parser.parse(Endtime);
+
+                        }
+
+                    }catch (Exception e) {
+                        String endtim = "18:00";
+                        SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
+                        end = parser.parse(endtim);
+
+                        String starttime = "09:00";
+                        start = parser.parse(starttime);
+                        e.printStackTrace();
+                    }
+
+
                     //List<Local_Data> background = dbvoc.getBACKGROUND_SERVICE_CHECK_DATA();
 
 //					if (isInternetPresent && timeOfDay >= 7 && timeOfDay <= 22 && background.size() <= 0) {
-                    if (isInternetPresent && timeOfDay >= 9 && timeOfDay <= 18 && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
+                    if (isInternetPresent && userDate.after(start) && userDate.before(end) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(latitude)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck_b(String.valueOf(longitude))) {
                         //Reading all
                         List<Local_Data> contacts = dbvoc.getemaIL();
                         for (Local_Data cn : contacts) {
                             Global_Data.GLOvel_USER_EMAIL = cn.getemail();
 
                         }
-
-
-
+Log.i("Yes","yesgone");
 
                         JSONArray PICTURE = new JSONArray();
                         //JSONObject product_value = new JSONObject();
@@ -606,12 +652,11 @@ public class JobScheduleMyService extends Service implements LocationListener{
                         System.out.println(dateFormat.format(date));
 
                         JSONObject picture = new JSONObject();
-                        picture.put("latitude",latitude);
+                        picture.put("latitude", latitude);
                         picture.put("longitude", longitude);
 
                         if (isInternetPresent && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LATITUDE)) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(Global_Data.GLOvel_LONGITUDE))) {
-                            try
-                            {
+                            try {
 //									new Handler(Looper.getMainLooper()).post(new Runnable() {
 //										public void run() {
 //											LocationAddress locationAddress = new LocationAddress();
@@ -621,7 +666,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //									});
 
                                 picture.put("address", "");
-                            }catch(Exception ex){
+                            } catch (Exception ex) {
                                 ex.printStackTrace();
                                 //addressn(Double.valueOf(Global_Data.GLOvel_LATITUDE),Double.valueOf(Global_Data.GLOvel_LONGITUDE));
                                 picture.put("address", "");
@@ -676,25 +721,24 @@ public class JobScheduleMyService extends Service implements LocationListener{
                         //}
 
 
-
                         product_value_n.put("user_location_histories", PICTURE);
                         //product_value_n.put("attendances", at_array);
                         product_value_n.put("imei_no", Global_Data.device_id);
                         product_value_n.put("email", user_name);
-                        Log.d("user_location_histories",product_value_n.toString());
+                        Log.d("user_location_histories", product_value_n.toString());
 
 
 //					Log.i("volley", "Service url: " + domain+"update_user_with_current_location?lat="+sp.getString("LATVAL",null)+"&lon="+sp.getString("LONGVAL",null)+"&device_id="+Global_Data.device_id+"&address="+URLEncoder.encode(Global_Data.address, "UTF-8")+"&email="+Global_Data.GLOvel_USER_EMAIL);
 
-                        Log.i("volley", "Service url: " + domain+"update_user_with_current_location");
-                        Log.i("volley", "Service url: " + domain+"update_user_with_current_location");
+                        Log.i("volley", "Service url: " + domain + "update_user_with_current_location");
+                        Log.i("volley", "Service url: " + domain + "update_user_with_current_location");
 //
 //					JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST,domain+"update_user_with_current_location?lat="+sp.getString("LATVAL",null)+"&lon="+sp.getString("LONGVAL",null)+"&device_id="+Global_Data.device_id+"&address="+URLEncoder.encode(Global_Data.address, "UTF-8")+"&email="+Global_Data.GLOvel_USER_EMAIL, product_value_n, new Response.Listener<JSONObject>() {
 //
 //						@Override
 //						public void onResponse(JSONObject response) {
 
-                        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST,domain+"update_user_with_current_location", product_value_n, new Response.Listener<JSONObject>() {
+                        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "update_user_with_current_location", product_value_n, new Response.Listener<JSONObject>() {
 
                             @Override
                             public void onResponse(JSONObject response) {
@@ -702,7 +746,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
                                 Log.i("volley", "response: " + response.toString());
                                 //  Log.i("volley", "response reg Length: " + response.length());
 
-                                try{
+                                try {
                                     //   for (int a = 0; a < response.length(); a++) {
 
 //                        JSONObject person = (JSONObject) response.getJSONArray(response);
@@ -710,24 +754,20 @@ public class JobScheduleMyService extends Service implements LocationListener{
                                     //   String name = response.getString("result44");
 
                                     String response_result = "";
-                                    if(response.has("result"))
-                                    {
+                                    if (response.has("result")) {
                                         response_result = response.getString("result");
                                         // dbvoc.getDeleteTable("geo_data");
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         response_result = "data";
                                     }
 
 
-                                    if(response_result.equalsIgnoreCase("Device not found")) {
+                                    if (response_result.equalsIgnoreCase("Device not found")) {
 
                                         //Toast.makeText(getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-                                        Log.d("LOC RESULT","LOC RESULT"+response_result);
+                                        Log.d("LOC RESULT", "LOC RESULT" + response_result);
 
-                                    }
-                                    else {
+                                    } else {
 
 //										if(!results.isEmpty())
 //										{
@@ -748,7 +788,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 //										dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
 
                                         //dbvoc.getDeleteTable("geo_data");
-                                        Log.d("LOC RESULT","LOC RESULT"+response_result);
+                                        Log.d("LOC RESULT", "LOC RESULT" + response_result);
                                         //LocationAddress locationAddress = new LocationAddress();
 
 //
@@ -756,7 +796,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
                                     // }
 
                                     // output.setText(data);
-                                }catch(JSONException e) {
+                                } catch (JSONException e) {
                                     //dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
                                     e.printStackTrace();
 
@@ -767,7 +807,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 
                                 // dialog.dismiss();
                             }
-                        },  new Response.ErrorListener() {
+                        }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
@@ -776,21 +816,19 @@ public class JobScheduleMyService extends Service implements LocationListener{
 
                                 if (error instanceof TimeoutError || error instanceof NoConnectionError) {
 
-                                    Log.d("BACK Error","Network Error");
+                                    Log.d("BACK Error", "Network Error");
                                 } else if (error instanceof AuthFailureError) {
 
-                                    Log.d("BACK Error","Server AuthFailureError");
+                                    Log.d("BACK Error", "Server AuthFailureError");
                                 } else if (error instanceof ServerError) {
-                                    Log.d("BACK Error","Server   Error");
+                                    Log.d("BACK Error", "Server   Error");
                                 } else if (error instanceof NetworkError) {
-                                    Log.d("BACK Error","Network Error");
+                                    Log.d("BACK Error", "Network Error");
 
                                 } else if (error instanceof ParseError) {
-                                    Log.d("BACK Error","ParseError   Error");
-                                }
-                                else
-                                {
-                                    Log.d("BACK Error",error.getMessage());
+                                    Log.d("BACK Error", "ParseError   Error");
+                                } else {
+                                    Log.d("BACK Error", error.getMessage());
                                 }
                                 //dialog.dismiss();
                                 // finish();
@@ -807,7 +845,6 @@ public class JobScheduleMyService extends Service implements LocationListener{
                     }
 
 
-
                 } catch (Exception e) {
                     e.printStackTrace();
                     //dbvoc.getDeleteBACKGROUND_SERVICE_CHECK();
@@ -816,7 +853,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
             }
         }).start();
 
-        Log.d("service start","service start");
+        Log.d("service start", "service start");
         //Toast.makeText(this, " SaleService Created ", Toast.LENGTH_LONG).show();
         //stopSelf();
 
@@ -885,10 +922,10 @@ public class JobScheduleMyService extends Service implements LocationListener{
         //int lat = (int) (location.getLatitude());
         //int lng = (int) (location.getLongitude());
 
-        Global_Data.GLOvel_LATITUDE =  String.valueOf(location.getLatitude());
-        Global_Data.GLOvel_LONGITUDE =  String.valueOf(location.getLongitude());
+        Global_Data.GLOvel_LATITUDE = String.valueOf(location.getLatitude());
+        Global_Data.GLOvel_LONGITUDE = String.valueOf(location.getLongitude());
 
-        Log.d("Location change","CHANGE "+Global_Data.GLOvel_LATITUDE+" "+Global_Data.GLOvel_LONGITUDE);
+        Log.d("Location change", "CHANGE " + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE);
 
     }
 
@@ -931,25 +968,21 @@ public class JobScheduleMyService extends Service implements LocationListener{
 
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0))+" ");
-            if(!(sb.indexOf(addresses.get(0).getLocality()) > 0))
-            {
-                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality())+" ");
+            sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAddressLine(0)) + " ");
+            if (!(sb.indexOf(addresses.get(0).getLocality()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getLocality()) + " ");
             }
 
-            if(!(sb.indexOf(addresses.get(0).getAdminArea()) > 0))
-            {
-                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea())+" ");
+            if (!(sb.indexOf(addresses.get(0).getAdminArea()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getAdminArea()) + " ");
             }
 
-            if(!(sb.indexOf(addresses.get(0).getCountryName()) > 0))
-            {
-                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName())+" ");
+            if (!(sb.indexOf(addresses.get(0).getCountryName()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getCountryName()) + " ");
             }
 
-            if(!(sb.indexOf(addresses.get(0).getPostalCode()) > 0))
-            {
-                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode())+" ");
+            if (!(sb.indexOf(addresses.get(0).getPostalCode()) > 0)) {
+                sb.append(isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(addresses.get(0).getPostalCode()) + " ");
             }
             //String knownName = addresses.get(0).getFeatureName();
 
@@ -972,7 +1005,7 @@ public class JobScheduleMyService extends Service implements LocationListener{
 
     }
 
-    private void startMyOwnForeground(){
+    private void startMyOwnForeground() {
         String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
         String channelName = "My Background Service";
         NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
@@ -991,7 +1024,6 @@ public class JobScheduleMyService extends Service implements LocationListener{
                 .build();
         startForeground(2, notification);
     }
-
 
 
 }

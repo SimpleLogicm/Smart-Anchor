@@ -41,9 +41,9 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:protectionLevel="signature" />
-<!--    <uses-permission-->
-<!--        android:name="android.permission.READ_PHONE_STATE"-->
-<!--        android:protectionLevel="signature" />-->
+    <!--    <uses-permission-->
+    <!--        android:name="android.permission.READ_PHONE_STATE"-->
+    <!--        android:protectionLevel="signature" />-->
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -76,7 +76,7 @@
     <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE"/>
     <uses-permission android:name="com.huawei.permission.external_app_settings.USE_COMPONENT"/>
 
-<!--    android:networkSecurityConfig="@xml/network_security_config"-->
+    <!--    android:networkSecurityConfig="@xml/network_security_config"-->
 
 
     <application
@@ -85,8 +85,7 @@
         android:hardwareAccelerated="false"
         android:icon="@drawable/anchor_logo"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -151,12 +150,14 @@
         <activity
             android:name=".BasicMapDemoActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable" />
 
         <activity
             android:name=".MapsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable" />
 
         <activity
             android:name=".Test"
@@ -736,35 +737,35 @@
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
         <!-- Production -->
-<!--        <meta-data-->
-<!--        android:name="com.google.android.maps.v2.API_KEY"-->
-<!--        android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
+        <!--        <meta-data-->
+        <!--        android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--        android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
 
 
 
-<!--kartik webnew-->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCVmQPKxFAFzarBGqhdIhVuPGLn-X3oAaQ" />
-<!--         UAT -->
+        <!--kartik webnew-->
 <!--        <meta-data-->
 <!--            android:name="com.google.android.maps.v2.API_KEY"-->
-<!--            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />-->
+<!--            android:value="AIzaSyCVmQPKxFAFzarBGqhdIhVuPGLn-X3oAaQ" />-->
+        <!--         UAT -->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--            android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" />-->
 
         <!-- UAT FOR MACBBOK-->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.maps.v2.API_KEY"-->
-<!--            android:value="AIzaSyCZ0V_EyLti7MktVyiirh757xc1Uzwtb68" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--            android:value="AIzaSyCZ0V_EyLti7MktVyiirh757xc1Uzwtb68" />-->
 
         <!-- UAT FOR Vinod MACBBOK-->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.maps.v2.API_KEY"-->
-<!--            android:value="AIzaSyCwG6XZPN4KhKkwKvK0rnXH12G5RWgyDpc" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--            android:value="AIzaSyCwG6XZPN4KhKkwKvK0rnXH12G5RWgyDpc" />-->
 
-<!--        Kartik Laptop-->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.maps.v2.API_KEY"-->
-<!--            android:value="AIzaSyCUQun-o2aWvFRyU73jo9wYIvhaI58IuXk" />-->
+        <!--        Kartik Laptop-->
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY"
+                    android:value="AIzaSyCUQun-o2aWvFRyU73jo9wYIvhaI58IuXk" />
 
 
         <meta-data

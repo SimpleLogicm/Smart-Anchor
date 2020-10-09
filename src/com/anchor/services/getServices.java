@@ -2543,6 +2543,58 @@ public class getServices {
                         editor.commit();
                     }
 
+                    String starttime="";
+                    if (json.has("location_schedule_start_time")) {
+                        starttime=json.getString("location_schedule_start_time");
+                        try {
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("StartTime", starttime);
+                            editor.commit();
+
+                        }catch (Exception ex){
+                            ex.printStackTrace();
+
+                        }
+
+
+                    }
+                    String endtime="";
+                    if (json.has("location_schedule_end_time")) {
+                        endtime=json.getString("location_schedule_end_time");
+                        try{
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("Endtime", endtime);
+
+                            editor.commit();
+
+                        }catch (Exception ex){
+                        ex.printStackTrace();
+
+                    }
+
+
+                    }
+                    String intervaltime="";
+                    if (json.has("location_schedule_interval_time")) {
+                        intervaltime=json.getString("location_schedule_interval_time");
+                        try {
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("Interval", intervaltime);
+                            editor.commit();
+
+                        }catch (Exception ex){
+                            ex.printStackTrace();
+
+                        }
+
+
+                    }
+
+
+
                     String user_ranks_date = "";
                     if (json.has("rank_date")) {
                         user_ranks_date = json.getString("rank_date");
@@ -2598,6 +2650,7 @@ public class getServices {
                         // Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
 
                     } else {
+
 
                         JSONArray items = json.getJSONArray("products");
                         JSONArray customers = json.getJSONArray("customers");
