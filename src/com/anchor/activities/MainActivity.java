@@ -759,48 +759,56 @@ public class MainActivity extends BaseActivity {
 
         //Fragment fragment = new Home();
 
-        boolean isUpstatuss = ((Home) fragment).isUpStatus();
-        if (isUpstatuss == true) {
-            ((Home) fragment).slideDownnew();
-        } else {
-            if (fragmentPoistion == 0 || fragmentPoistion == 3) {
-                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
-                alertDialog.setTitle("Confirmation");
-                alertDialog.setMessage(" Are you sure you want to logout?");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+        try
+        {
+            boolean isUpstatuss = ((Home) fragment).isUpStatus();
+            if (isUpstatuss == true) {
+                ((Home) fragment).slideDownnew();
+            } else {
+                if (fragmentPoistion == 0 || fragmentPoistion == 3) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+                    alertDialog.setTitle("Confirmation");
+                    alertDialog.setMessage(" Are you sure you want to logout?");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO Auto-generated method stub
 
-                        dbvoc.getDeleteTable("user_email");
+                            dbvoc.getDeleteTable("user_email");
 
-                        loginDataBaseAdapter.insert_user_email(Global_Data.GLOvel_USER_EMAIL, "Logout");
+                            loginDataBaseAdapter.insert_user_email(Global_Data.GLOvel_USER_EMAIL, "Logout");
 
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-                        startActivity(i);
-                        stopService(new Intent(MainActivity.this, LocationServices.class));
-                        finishAffinity();
-                        finish();
-                    }
-                });
+                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                            startActivity(i);
+                            stopService(new Intent(MainActivity.this, LocationServices.class));
+                            finishAffinity();
+                            finish();
+                        }
+                    });
 
-                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        dialog.cancel();
-                    }
-                });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO Auto-generated method stub
+                            dialog.cancel();
+                        }
+                    });
 
-                alertDialog.setCancelable(false);
-                alertDialog.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
+                }
             }
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
         }
+
+
 
 
     }
