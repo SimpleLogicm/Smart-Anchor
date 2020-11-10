@@ -2317,7 +2317,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 				entity.addPart("video", new FileBody(sourceFile));
 
 				// Extra parameters if you want to pass to server
-				entity.addPart("customer_code",
+				entity.addPart("customer_id",
 						new StringBody(Global_Data.GLOvel_CUSTOMER_ID));
 				entity.addPart("media_type", new StringBody("video"));
 				entity.addPart("user_code", new StringBody(Global_Data.GLOvel_USER_EMAIL));
@@ -3148,9 +3148,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 						product_value.put("mobile_no", cn.getMOBILE_NO());
 						product_value.put("email", cn.getEMAIL_ADDRESS());
 						product_value.put("status", cn.getSTATUS());
-						product_value.put("state_code", cn.getSTATE_ID());
-						product_value.put("city_code", cn.getCITY_ID());
-						product_value.put("beat_code", cn.getBEAT_ID());
+						product_value.put("state_id", cn.getSTATE_ID());
+						product_value.put("city_id", cn.getCITY_ID());
+						product_value.put("beat_id", cn.getBEAT_ID());
 						product_value.put("vatin", cn.getvatin());
 						product_value.put("latitude", cn.getlatitude());
 						product_value.put("longitude", cn.getlongitude());
@@ -3163,7 +3163,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 					JSONObject picture = new JSONObject();
 					picture.put("code", PINString);
-					picture.put("customer_code",response[3]);
+					picture.put("customer_id",response[3]);
 					picture.put("user_email", response[4]);
 					picture.put("media_type", response[0]);
 					picture.put("media_text", response[2]);
@@ -3483,9 +3483,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 					product_value.put("mobile_no", cn.getMOBILE_NO());
 					product_value.put("email", cn.getEMAIL_ADDRESS());
 					product_value.put("status", cn.getSTATUS());
-					product_value.put("state_code", cn.getSTATE_ID());
-					product_value.put("city_code", cn.getCITY_ID());
-					product_value.put("beat_code", cn.getBEAT_ID());
+					product_value.put("state_id", cn.getSTATE_ID());
+					product_value.put("city_id", cn.getCITY_ID());
+					product_value.put("beat_id", cn.getBEAT_ID());
 					product_value.put("vatin", cn.getvatin());
 					product_value.put("latitude", cn.getlatitude());
 					product_value.put("longitude", cn.getlongitude());
@@ -3497,7 +3497,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 				JSONObject picture = new JSONObject();
 				picture.put("code",PINString);
-				picture.put("customer_code",CUSTOMER_ID);
+				picture.put("customer_id",CUSTOMER_ID);
 				picture.put("user_email", GLOvel_USER_EMAIL);
 				picture.put("media_type", media_type);
 				picture.put("media_text", discription);

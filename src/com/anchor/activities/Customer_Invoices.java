@@ -629,11 +629,11 @@ public class Customer_Invoices extends Activity {
                 G_Filter_Flag = "true";
                 if(c_value.equalsIgnoreCase(""))
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code;
                 }
                 else
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&filter_value="+c_value;
                 }
 
             }
@@ -644,11 +644,11 @@ public class Customer_Invoices extends Activity {
 
                 if(c_value.equalsIgnoreCase(""))
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
                 }
                 else
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&filter_value="+c_value+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
                 }
 
 
@@ -658,12 +658,12 @@ public class Customer_Invoices extends Activity {
                 if(c_value.equalsIgnoreCase(""))
                 {
                     G_Filter_Flag = "";
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code;
                 }
                 else
                 {
                     G_Filter_Flag = "true";
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&filter_value="+c_value;
                 }
 
             }

@@ -564,7 +564,7 @@ public class NoOrderActivity extends BaseActivity {
 
 
                 if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Other")) {
-                    Log.d("Server url", "Server url" + domain + "no_orders/save_no_orders?customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&reason_name=" + Noorder_res + "&user_email=" + Global_Data.GLOvel_USER_EMAIL);
+                    Log.d("Server url", "Server url" + domain + "no_orders/save_no_orders?customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&reason_name=" + Noorder_res + "&user_email=" + Global_Data.GLOvel_USER_EMAIL);
 
                     try {
                         AppLocationManager appLocationManager = new AppLocationManager(NoOrderActivity.this);
@@ -867,11 +867,11 @@ public class NoOrderActivity extends BaseActivity {
                             no_order_object.put("reason_name", reason_name);
 
                         } else {
-                            no_order_object.put("reason_code", reason_codes);
+                            no_order_object.put("reason_id", reason_codes);
 
                         }
                         no_order_object.put("user_email", Global_Data.GLOvel_USER_EMAIL);
-                        no_order_object.put("customer_code", Global_Data.GLOvel_CUSTOMER_ID);
+                        no_order_object.put("customer_id", Global_Data.GLOvel_CUSTOMER_ID);
                         no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
                         no_order_object.put("longitude", Global_Data.GLOvel_LONGITUDE);
 
@@ -889,9 +889,9 @@ public class NoOrderActivity extends BaseActivity {
 
                         if (!reason_name.equalsIgnoreCase("")) {
                             no_order_object.put("reason_name", reason_name);
-                            no_order_object.put("reason_code", "");
+                            no_order_object.put("reason_id", "");
                         } else {
-                            no_order_object.put("reason_code", reason_codes);
+                            no_order_object.put("reason_id", reason_codes);
                             no_order_object.put("reason_name", "");
                         }
                         no_order_object.put("email", Global_Data.GLOvel_USER_EMAIL);

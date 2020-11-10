@@ -1154,7 +1154,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = delivery_products.getJSONObject(i);
 
-                            loginDataBaseAdapter.insertDeliveryProducts("", jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("order_quantity"), jsonObject.getString("delivered_quantity"), jsonObject.getString("truck_number"), jsonObject.getString("transporter_details"), "", "", jsonObject.getString("product_name") + "" + "" + "");
+                            loginDataBaseAdapter.insertDeliveryProducts("", jsonObject.getString("customer_id"), jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("order_quantity"), jsonObject.getString("delivered_quantity"), jsonObject.getString("truck_number"), jsonObject.getString("transporter_details"), "", "", jsonObject.getString("product_name") + "" + "" + "");
 
 
                         }
@@ -1163,7 +1163,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = delivery_schedules.getJSONObject(i);
 
-                            loginDataBaseAdapter.insertDeliverySchedule("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", jsonObject.getString("user_email"), jsonObject.getString("dispatch_date"), jsonObject.getString("delivery_date"), jsonObject.getString("order_amount"), jsonObject.getString("accepted_payment_mode"), "", jsonObject.getString("collected_amount"), jsonObject.getString("outstanding_amount"), "", "", jsonObject.getString("customer_address"));
+                            loginDataBaseAdapter.insertDeliverySchedule("", jsonObject.getString("customer_id"), jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", jsonObject.getString("user_email"), jsonObject.getString("dispatch_date"), jsonObject.getString("delivery_date"), jsonObject.getString("order_amount"), jsonObject.getString("accepted_payment_mode"), "", jsonObject.getString("collected_amount"), jsonObject.getString("outstanding_amount"), "", "", jsonObject.getString("customer_address"));
 
 
                         }
@@ -1173,7 +1173,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                         }

@@ -559,9 +559,9 @@ public class getServices {
                 product_value.put("mobile_no", cn.getMOBILE_NO());
                 product_value.put("email", cn.getEMAIL_ADDRESS());
                 product_value.put("status", cn.getSTATUS());
-                product_value.put("state_code", cn.getSTATE_ID());
-                product_value.put("city_code", cn.getCITY_ID());
-                product_value.put("beat_code", cn.getBEAT_ID());
+                product_value.put("state_id", cn.getSTATE_ID());
+                product_value.put("city_id", cn.getCITY_ID());
+                product_value.put("beat_id", cn.getBEAT_ID());
                 product_value.put("vatin", cn.getvatin());
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
@@ -578,7 +578,7 @@ public class getServices {
                 Order_number = cn.get_category_code();
                 // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                 // product_value.put("order_take_by", "");
-                product_value.put("customer_code", cn.get_category_id());
+                product_value.put("customer_id", cn.get_category_id());
 
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
@@ -609,7 +609,7 @@ public class getServices {
                 for (Local_Data cnp : contactsproduct) {
                     JSONObject item = new JSONObject();
                     item.put("order_number", cnp.get_category_code());
-                    item.put("item_number", cnp.get_delivery_product_id());
+                    item.put("item_id", cnp.get_delivery_product_id());
                     item.put("total_return_qty", cnp.get_stocks_product_quantity());
                     item.put("MRP", cnp.getMRP());
                     item.put("amount", cnp.get_Claims_amount());
@@ -910,9 +910,9 @@ public class getServices {
                 product_value.put("mobile_no", cn.getMOBILE_NO());
                 product_value.put("email", cn.getEMAIL_ADDRESS());
                 product_value.put("status", cn.getSTATUS());
-                product_value.put("state_code", cn.getSTATE_ID());
-                product_value.put("city_code", cn.getCITY_ID());
-                product_value.put("beat_code", cn.getBEAT_ID());
+                product_value.put("state_id", cn.getSTATE_ID());
+                product_value.put("city_id", cn.getCITY_ID());
+                product_value.put("beat_id", cn.getBEAT_ID());
                 product_value.put("vatin", cn.getvatin());
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
@@ -929,7 +929,7 @@ public class getServices {
                 //product_value.put("aasm_state", "");
                 // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                 // product_value.put("order_take_by", "");
-                product_value.put("customer_code", cn.get_category_id());
+                product_value.put("customer_id", cn.get_category_id());
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
@@ -961,7 +961,7 @@ public class getServices {
                     item.put("MRP", cnp.getMRP());
                     item.put("amount", cnp.get_Claims_amount());
                     item.put("scheme_amount", cnp.get_Target_Text());
-                    item.put("item_number", cnp.get_delivery_product_id());
+                    item.put("item_id", cnp.get_delivery_product_id());
                     item.put("discount_type", cnp.get_stocks_product_text());
                     product.put(item);
                     //Log.d("quantity","quantity"+cnp.getquantity());
@@ -1209,7 +1209,7 @@ public class getServices {
                 product_value.put("quote_number", PINString);
                 product_value.put("original_quote_number", cn.get_category_code());
                 product_value.put("aasm_state", Quote_status);
-                product_value.put("customer_code", cn.get_category_id());
+                product_value.put("customer_id", cn.get_category_id());
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
                 product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
                 product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
@@ -1240,7 +1240,7 @@ public class getServices {
                     item.put("MRP", cnp.getMRP());
                     item.put("amount", cnp.get_Claims_amount());
                     // item.put("scheme_amount", cnp.get_Target_Text());
-                    item.put("item_number", cnp.get_delivery_product_id());
+                    item.put("item_id", cnp.get_delivery_product_id());
                     // item.put("discount_type", cnp.get_stocks_product_text());
                     product.put(item);
                     //Log.d("quantity","quantity"+cnp.getquantity());
@@ -1520,9 +1520,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -1876,9 +1876,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -1900,8 +1900,8 @@ public class getServices {
                     markets.put("user_email", cn.getuser_email());
                     markets.put("answer_date", cn.getanswer_date());
                     markets.put("survey_code", cn.getsurvey_code());
-                    markets.put("customer_code", cn.getCust_Code());
-                    markets.put("question_code", cn.getquestion_code());
+                    markets.put("customer_id", cn.getCust_Code());
+                    markets.put("question_id", cn.getquestion_code());
                     markets.put("customer_choice", cn.getcustomer_choice());
                     markets.put("latitude", cn.getlatitude());
                     markets.put("longitude", cn.getlongitude());
@@ -1982,7 +1982,7 @@ public class getServices {
                 for (Local_Data cn : confeed) {
                     JSONObject Feed = new JSONObject();
                     Feed.put("code", cn.getCode());
-                    Feed.put("customer_code", cn.getCust_Code());
+                    Feed.put("customer_id", cn.getCust_Code());
                     Feed.put("user_email", cn.getEMAIL_ADDRESS());
                     Feed.put("date", cn.getC_Date());
                     Feed.put("text", cn.get_Description());
@@ -2001,7 +2001,7 @@ public class getServices {
                 for (Local_Data cn : concomp) {
                     JSONObject cm = new JSONObject();
                     cm.put("code", cn.getCode());
-                    cm.put("customer_code", cn.getCust_Code());
+                    cm.put("customer_id", cn.getCust_Code());
                     cm.put("user_email", cn.getEMAIL_ADDRESS());
                     cm.put("date", cn.getC_Date());
                     cm.put("text", cn.get_Description());
@@ -2020,7 +2020,7 @@ public class getServices {
                 for (Local_Data cn : conclaims) {
                     JSONObject cl = new JSONObject();
                     cl.put("code", cn.getCode());
-                    cl.put("customer_code", cn.getCust_Code());
+                    cl.put("customer_id", cn.getCust_Code());
                     cl.put("user_email", cn.getEMAIL_ADDRESS());
                     cl.put("date", cn.getC_Date());
                     cl.put("text", cn.get_Description());
@@ -2040,7 +2040,7 @@ public class getServices {
                 for (Local_Data cn : conccomss) {
                     JSONObject cll = new JSONObject();
                     cll.put("code", cn.getCode());
-                    cll.put("customer_code", cn.getCust_Code());
+                    cll.put("customer_id", cn.getCust_Code());
                     cll.put("user_email", cn.getEMAIL_ADDRESS());
                     //cll.put("category_id", cn.get_category_id());
                     // cll.put("product_id", cn.get_product_code());
@@ -2394,7 +2394,7 @@ public class getServices {
                 final DataBaseHelper dbvoc = new DataBaseHelper(context);
 
                 JSONObject picture = new JSONObject();
-                picture.put("customer_code", CUSTOMER_ID);
+                picture.put("customer_id", CUSTOMER_ID);
                 picture.put("user_email", GLOvel_USER_EMAIL);
                 picture.put("media_type", media_type);
                 picture.put("media_text", discription);
@@ -2932,14 +2932,14 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = Order_Category.getJSONObject(i);
-                                loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "");
+                                loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("id"), jsonObject.getString("name"), "", "", "", "");
 
                             }
 
                             for (int i = 0; i < payment_terms.length(); i++) {
 
                                 JSONObject jsonObject = payment_terms.getJSONObject(i);
-                                loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "", "", "");
+                                loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("id"), jsonObject.getString("name"), "", "", "", "", "", "");
 
                             }
 
@@ -2947,7 +2947,7 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = schemes.getJSONObject(i);
-                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
+                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
 
                             }
 
@@ -2955,7 +2955,7 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = warehouse.getJSONObject(i);
-                                loginDataBaseAdapter.insert_Warehouse("", jsonObject.getString("code"), "", jsonObject.getString("name"), "", jsonObject.getString("city_code"), jsonObject.getString("state_code"), "", "", "", "", "");
+                                loginDataBaseAdapter.insert_Warehouse("", jsonObject.getString("id"), "", jsonObject.getString("name"), "", jsonObject.getString("city_id"), jsonObject.getString("state_id"), "", "", "", "", "");
 
                             }
 
@@ -2966,7 +2966,7 @@ public class getServices {
 
                                     JSONObject jsonObject = items.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
+                                    loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                             jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                             jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
                                             jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
@@ -2979,10 +2979,10 @@ public class getServices {
 
                                     JSONObject jsonObject = items.getJSONObject(i);
 
-                                    dbvoc.getDeletePRODUCT(jsonObject.getString("code"));
+                                    dbvoc.getDeletePRODUCT(jsonObject.getString("id"));
 
                                     if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                        loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
+                                        loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                                 jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                                 jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
                                                 jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
@@ -2996,8 +2996,8 @@ public class getServices {
                                 for (int i = 0; i < customers.length(); i++) {
 
                                     JSONObject jsonObject = customers.getJSONObject(i);
-                                    loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                            jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
+                                    loginDataBaseAdapter.insertCustMaster(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                            jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("beat_id"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
 //
 
                                 }
@@ -3005,11 +3005,11 @@ public class getServices {
                                 for (int i = 0; i < customers.length(); i++) {
 
                                     JSONObject jsonObject = customers.getJSONObject(i);
-                                    dbvoc.getDeleteCustomer(jsonObject.getString("code"));
+                                    dbvoc.getDeleteCustomer(jsonObject.getString("id"));
 
                                     if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                        loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
+                                        loginDataBaseAdapter.insertCustMaster(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("beat_id"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
                                     }
 
 
@@ -3024,10 +3024,10 @@ public class getServices {
                                 JSONObject jsonObject = distributors.getJSONObject(i);
 
 
-                                loginDataBaseAdapter.insertDistributors(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"),
+                                loginDataBaseAdapter.insertDistributors(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"),
                                         jsonObject.getString("address1"), jsonObject.getString("address2"), jsonObject.getString("street"),
-                                        jsonObject.getString("landmark"), jsonObject.getString("state_code"),
-                                        jsonObject.getString("city_code"), jsonObject.getString("pincode"),
+                                        jsonObject.getString("landmark"), jsonObject.getString("state_id"),
+                                        jsonObject.getString("city_id"), jsonObject.getString("pincode"),
                                         jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"),
                                         jsonObject.getString("email"), jsonObject.getString("status"));
 
@@ -3040,12 +3040,12 @@ public class getServices {
                                 JSONObject jsonObject = reasons.getJSONObject(i);
 
                                 if (!jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                    dbvoc.getDeleteNOOrder(jsonObject.getString("code"));
+                                    dbvoc.getDeleteNOOrder(jsonObject.getString("id"));
                                 }
 
 
                                 if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                    loginDataBaseAdapter.insertno_orderReason(jsonObject.getString("code"), jsonObject.getString("desc"));
+                                    loginDataBaseAdapter.insertno_orderReason(jsonObject.getString("id"), jsonObject.getString("desc"));
                                 }
 
 
@@ -3056,8 +3056,8 @@ public class getServices {
 
                                 JSONObject jsonObject = states.getJSONObject(i);
 
-                                loginDataBaseAdapter.insertStates("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("status"), "",
-                                        "", "", jsonObject.getString("code"));
+                                loginDataBaseAdapter.insertStates("", "", jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("status"), "",
+                                        "", "", jsonObject.getString("id"));
 
                             }
 //                        }
@@ -3085,16 +3085,16 @@ public class getServices {
 
                                 JSONObject jsonObject = cities.getJSONObject(i);
 
-                                loginDataBaseAdapter.insertCities("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("status"), "",
-                                        "", "", "", jsonObject.getString("code"));
+                                loginDataBaseAdapter.insertCities("", "", jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("state_id"), jsonObject.getString("status"), "",
+                                        "", "", "", jsonObject.getString("id"));
 
                             }
 
                             for (int i = 0; i < beats.length(); i++) {
 
                                 JSONObject jsonObject = beats.getJSONObject(i);
-                                loginDataBaseAdapter.insertBeats("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("status"), "",
-                                        "", "", "", jsonObject.getString("code"));
+                                loginDataBaseAdapter.insertBeats("", "", jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("status"), "",
+                                        "", "", "", jsonObject.getString("id"));
 
                             }
 
@@ -3102,7 +3102,7 @@ public class getServices {
 
                                 JSONObject jsonObject = Survey_Questions.getJSONObject(i);
 
-                                loginDataBaseAdapter.insert_Survey_Questions(jsonObject.getString("survey_code"), jsonObject.getString("question_code"), jsonObject.getString("active_from"), jsonObject.getString("active_to"), jsonObject.getString("question"), jsonObject.getString("option1"), jsonObject.getString("option2"), jsonObject.getString("option3"), jsonObject.getString("option4"), jsonObject.getString("option5"), "", "");
+                                loginDataBaseAdapter.insert_Survey_Questions(jsonObject.getString("survey_id"), jsonObject.getString("question_id"), jsonObject.getString("active_from"), jsonObject.getString("active_to"), jsonObject.getString("question"), jsonObject.getString("option1"), jsonObject.getString("option2"), jsonObject.getString("option3"), jsonObject.getString("option4"), jsonObject.getString("option5"), "", "");
 
                             }
 
@@ -3110,7 +3110,7 @@ public class getServices {
 
                                 JSONObject jsonObject = distributor_beats.getJSONObject(i);
 
-                                loginDataBaseAdapter.insert_DistriButorBeat(jsonObject.getString("code"), jsonObject.getString("distributor_code"), jsonObject.getString("beat_code"), jsonObject.getString("status"));
+                                loginDataBaseAdapter.insert_DistriButorBeat(jsonObject.getString("id"), jsonObject.getString("distributor_id"), jsonObject.getString("beat_id"), jsonObject.getString("status"));
 
                             }
 
@@ -3122,7 +3122,7 @@ public class getServices {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_id"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                                 }
@@ -3134,10 +3134,10 @@ public class getServices {
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
                                     try {
-                                        dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"));
+                                        dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_id"), jsonObject.getString("business_unit"));
 //                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"), "", jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
 
-                                        loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                                        loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_id"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
                                     } catch (Exception ex) {
                                         ex.printStackTrace();
@@ -3499,9 +3499,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -3521,7 +3521,7 @@ public class getServices {
                     Order_number = cn.get_category_code();
                     // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                     // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", cn.get_category_id());
+                    product_value.put("customer_id", cn.get_category_id());
                     product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
@@ -3533,14 +3533,14 @@ public class getServices {
                         product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
                     }
 
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
                     product_value.put("details1", detail1);
                     product_value.put("details2", detail2);
                     product_value.put("details3", detail3);
                     product_value.put("details4", detail4);
-                    product_value.put("order_category_code", cn.getOrder_category_type());
+                    product_value.put("order_category_id", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("payment_term_code", cn.getAsset_code());
+                    product_value.put("payment_term_id", cn.getAsset_code());
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign())) {
                         order_image_url = cn.getimg_ordersign().trim();
@@ -3610,7 +3610,7 @@ public class getServices {
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
                         item.put("order_number", cnp.get_category_code());
-                        item.put("item_number", cnp.get_delivery_product_id());
+                        item.put("item_id", cnp.get_delivery_product_id());
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
@@ -4109,7 +4109,7 @@ public class getServices {
                         for (Local_Data cnp : contactsproduct) {
                             JSONObject item = new JSONObject();
                             // item.put("order_number", cnp.get_category_code());
-                            item.put("product_code", cnp.get_delivery_product_id());
+                            item.put("product_id", cnp.get_delivery_product_id());
                             item.put("total_qty", cnp.get_stocks_product_quantity());
                             item.put("MRP", cnp.getMRP());
                             item.put("amount", cnp.get_Claims_amount());
@@ -4414,9 +4414,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -4444,16 +4444,16 @@ public class getServices {
                     ++order_count;
                     // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                     // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", cn.get_category_id());
+                    product_value.put("customer_id", cn.get_category_id());
 
                     product_value.put("email", cn.getuser_email());
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
 
                     product_value.put("details1", cn.getOrder_detail1());
                     product_value.put("details2", cn.getOrder_detail2());
                     product_value.put("details3", cn.getOrder_detail3());
                     product_value.put("details4", cn.getOrder_detail4());
-                    product_value.put("order_category_code", cn.getOrder_category_type());
+                    product_value.put("order_category_id", cn.getOrder_category_type());
 
 
                     // product_value.put("signature", cn.getSignature_image());
@@ -4475,7 +4475,7 @@ public class getServices {
                     }
 
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("payment_term_code", cn.getAsset_code());
+                    product_value.put("payment_term_id", cn.getAsset_code());
                     // product_value.put("signature_path", cn.getSignature_image());
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image())) {
@@ -4539,7 +4539,7 @@ public class getServices {
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
                         item.put("order_number", cnp.get_category_code());
-                        item.put("item_number", cnp.get_delivery_product_id());
+                        item.put("item_id", cnp.get_delivery_product_id());
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
@@ -4579,7 +4579,7 @@ public class getServices {
                     customer_id = cn.get_category_id();
                     // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                     // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", customer_id);
+                    product_value.put("customer_id", customer_id);
 
                     product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
@@ -4587,7 +4587,7 @@ public class getServices {
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
                     product_value.put("signature_path", cn.getSignature_image());
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
                     // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                     // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
                     //product_value.put("signature_image_name", uploadImage);
@@ -4608,7 +4608,7 @@ public class getServices {
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
                         item.put("order_number", cnp.get_category_code());
-                        item.put("item_number", cnp.get_delivery_product_id());
+                        item.put("item_id", cnp.get_delivery_product_id());
                         item.put("total_return_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
@@ -4632,13 +4632,13 @@ public class getServices {
 
                 for (Local_Data cn : no_order_con) {
                     JSONObject product_value = new JSONObject();
-                    product_value.put("customer_code", cn.getLEGACY_CUSTOMER_CODE());
+                    product_value.put("customer_id", cn.getLEGACY_CUSTOMER_CODE());
                     product_value.put("order_number", cn.getorder_number());
 
                     if (cn.getreason_type().equalsIgnoreCase("Other")) {
                         product_value.put("reason_name", cn.getreason_code());
                     } else {
-                        product_value.put("reason_code", cn.getreason_code());
+                        product_value.put("reason_id", cn.getreason_code());
                     }
 
 

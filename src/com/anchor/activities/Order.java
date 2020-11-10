@@ -2717,8 +2717,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + "" + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + "" + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + "" + "&customer_id=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + "" + "&customer_id=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
