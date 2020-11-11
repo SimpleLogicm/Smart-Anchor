@@ -586,7 +586,7 @@ public class getServices {
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
                 product_value.put("signature_path", cn.getSignature_image());
-                product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
                 // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                 // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
                 //product_value.put("signature_image_name", uploadImage);
@@ -655,7 +655,7 @@ public class getServices {
 
             //String URL = Prefs.GetPreferences("URL");
             String domain = context.getResources().getString(R.string.service_domain);
-            Log.i("volley", "domain: " + domain);
+            Log.i("volley", "domain: " + domain+ "return_orders/save_return_orders"+product_valuenew);
             JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "return_orders/save_return_orders", product_valuenew, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -1899,7 +1899,7 @@ public class getServices {
                     // markets.put("code", cn.getCode());
                     markets.put("user_email", cn.getuser_email());
                     markets.put("answer_date", cn.getanswer_date());
-                    markets.put("survey_code", cn.getsurvey_code());
+                    markets.put("survey_id", cn.getsurvey_code());
                     markets.put("customer_id", cn.getCust_Code());
                     markets.put("question_id", cn.getquestion_code());
                     markets.put("customer_choice", cn.getcustomer_choice());
@@ -2044,7 +2044,7 @@ public class getServices {
                     cll.put("user_email", cn.getEMAIL_ADDRESS());
                     //cll.put("category_id", cn.get_category_id());
                     // cll.put("product_id", cn.get_product_code());
-                    cll.put("product_code", cn.get_variants_code());
+                    cll.put("product_id", cn.get_variants_code());
                     cll.put("competition_product_text", cn.get_Description());
                     cll.put("competition_product_quantity", cn.get_stocks_product_quantity());
                     cll.put("latitude", cn.getlatitude());
@@ -3614,7 +3614,7 @@ public class getServices {
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
-                        item.put("scheme_code", cnp.getSche_code());
+                        item.put("scheme_id", cnp.getSche_code());
 
                         total_ammount += Double.valueOf(cnp.get_Claims_amount());
 
@@ -3656,7 +3656,8 @@ public class getServices {
 
                 //String URL = Prefs.GetPreferences("URL");
                 String domain = context.getResources().getString(R.string.service_domain);
-                Log.i("volley", "domain: " + domain);
+                Log.i("volley", "domain: " + domain+"orders/save_orders"+product_valuenew);
+
                 JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "orders/save_orders", product_valuenew, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -4543,7 +4544,7 @@ public class getServices {
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
-                        item.put("scheme_code", cnp.getSche_code());
+                        item.put("scheme_id", cnp.getSche_code());
 
                         PRODUCTOrder_ids.add(cnp.get_category_code());
 

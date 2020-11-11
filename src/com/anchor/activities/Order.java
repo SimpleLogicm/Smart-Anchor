@@ -2547,8 +2547,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + "" + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + "" + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + "" + "&customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + "" + "&customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -2572,8 +2572,13 @@ public class Order extends Activity implements OnItemSelectedListener {
                             response_result = "data";
                         }
 
+                        if (response_result.equalsIgnoreCase("Customer not found")){
+                            Toast toast = Toast.makeText(Order.this, response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
 
-                        if (response_result.equalsIgnoreCase("Schedule doesn't exist")) {
+                        else if (response_result.equalsIgnoreCase("Schedule doesn't exist")) {
 
 
                             //Toast.makeText(Order.this, response_result, Toast.LENGTH_LONG).show();
