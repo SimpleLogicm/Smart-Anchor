@@ -192,9 +192,9 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
                 android:text="@string/Preview_Order"
-                android:textColor="#FFFFFF"
-                android:layout_marginLeft="5dp" />
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
