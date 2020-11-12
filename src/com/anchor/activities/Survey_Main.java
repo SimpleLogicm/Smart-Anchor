@@ -375,7 +375,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
         dialog = new ProgressDialog(Survey_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Smart Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -595,7 +595,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
             dialog = new ProgressDialog(Survey_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Smart Anchor");
             dialog.setCancelable(false);
             dialog.show();
 

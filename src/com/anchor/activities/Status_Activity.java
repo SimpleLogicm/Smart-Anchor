@@ -240,7 +240,7 @@ public class Status_Activity extends Activity implements customButtonListener {
 
         dialog = new ProgressDialog(Status_Activity.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Smart Anchor");
         dialog.setCancelable(false);
         dialog.show();
         

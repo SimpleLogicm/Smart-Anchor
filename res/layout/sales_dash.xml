@@ -159,18 +159,18 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="@string/TODO_List"
+                    android:text="@string/CUSTOMER_PROFILE"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/C_todo_list"
+                    android:id="@+id/C_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/todolist" />
+                    android:src="@drawable/visit" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -276,20 +276,20 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="30dp"
                     android:gravity="center"
-                    android:text="@string/CUSTOMER_PROFILE"
+                    android:text="@string/order_info"
                     android:textColor="#111111"
                     android:textSize="16dp" />
 
                 <ImageView
-                    android:id="@+id/C_profile"
+                    android:id="@+id/otherinfo_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/visit" />
+                    android:src="@drawable/other_info" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -362,7 +362,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="2dp"
-                android:layout_weight="1.50" >
+                android:layout_weight="1.20" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -372,7 +372,6 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginTop="30dp"
                     android:gravity="center"
                     android:text="@string/Promotional_Activity"
                     android:textColor="#111111"
@@ -393,43 +392,14 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginLeft="5dp"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginRight="10dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/lout_fifth"
             android:layout_marginTop="30dp"
             android:orientation="horizontal" >
 
-            <RelativeLayout
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1.20" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:text="@string/order_info"
-                    android:textColor="#111111"
-                    android:textSize="16dp" />
-
-                <ImageView
-                    android:id="@+id/otherinfo_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="70dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/other_info" />
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="20dp"

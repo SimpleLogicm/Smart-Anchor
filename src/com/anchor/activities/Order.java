@@ -2535,7 +2535,7 @@ public class Order extends Activity implements OnItemSelectedListener {
             dialog.setMessage("Please Wait Schedule Sync...");
         }
 
-        dialog.setTitle("Metal App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 

@@ -12,9 +12,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.cursoradapter.widget.SimpleCursorAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,10 +32,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.anchor.adapter.AutoCompleteContactArrayAdapter;
 import com.anchor.adapter.AutocompleteAdapternew;
 import com.anchor.adapter.CustomerAutoAdapter;
-import com.anchor.model.RCTOData;
 import com.anchor.model.SubDealerModel;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -178,7 +177,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         Global_Data.spiner_list_modelListn.clear();
         Global_Data.state_code = "";
         Global_Data.GLOvel_SUB_GORDER_ID = "";
-        Global_Data.Business_unit_code_array = "";
         dbvoc.getDeleteTable("sub_orders");
         dbvoc.getDeleteTable("sub_order_products");
 
@@ -257,8 +255,8 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 String name = s_sub_dealer_search.getText().toString();
 
                 for (int i = 0; i < AllresultSubDealer.size(); i++) {
-                    if (name.equalsIgnoreCase(AllresultSubDealer.get(i).getShop_name())) {
-                        Global_Data.Sub_Dealer_Code = AllresultSubDealer.get(i).getCode();
+                    if (name.equalsIgnoreCase(AllresultSubDealer.get(i).name)) {
+                        Global_Data.Sub_Dealer_Code = AllresultSubDealer.get(i).code;
                         break;
                     }
                 }
@@ -428,14 +426,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
 
                     if (AllresultSubDealer.size() > 0) {
-                        for (RCTOData dataItem : AllresultSubDealer) {
-                            if (dataItem.getShop_name().equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.getCode();
+                        for (SubDealerModel dataItem : AllresultSubDealer) {
+                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.code;
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile = dataItem.getMobile();
-                                Global_Data.Sub_Email = dataItem.getEmail();
-                                Global_Data.Sub_shop_name = dataItem.getShop_name();
-                                Global_Data.Sub_Dealer_address = dataItem.getAddress();
+                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
+                                Global_Data.Sub_Email = dataItem.proprietor_email1;
+                                Global_Data.Sub_shop_name = dataItem.shop_name;
+                                Global_Data.Sub_Dealer_address = dataItem.address2;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -474,48 +472,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     } else {
                         Global_Data.GLOvel_SUB_GORDER_ID = "";
                         Global_Data.statusOrderActivity = "";
-
-                        String user_email = "";
-                        sp = getSharedPreferences("SimpleLogic", 0);
-                        try {
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
-                                user_email = sp.getString("USER_EMAIL", "");
-                            } else {
-                                user_email = Global_Data.GLOvel_USER_EMAIL;
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-
-                        List<Local_Data> contacts = dbvoc.getUSERBY_Email(user_email);
-
-                        if (contacts.size() <= 0) {
-                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "User Not Found ", Toast.LENGTH_LONG);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                        }
-                        else
-                        {
-                            for (Local_Data cn : contacts) {
-                                Global_Data.Business_unit_code_array = cn.getBunit();
-                            }
-
-                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-
-                                Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
-                                startActivity(s_dub);
-                                finish();
-                            } else {
-                                Global_Data.Business_unit_code_array = "";
-                                Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "No Prodct Found ", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                            }
-
-
-                        }
-
-
+                        Intent s_dub = new Intent(getApplicationContext(), SubDealer_NewOrderActivity.class);
+                        startActivity(s_dub);
+                        finish();
                     }
 
 
@@ -556,14 +515,14 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
 
                     if (AllresultSubDealer.size() > 0) {
-                        for (RCTOData dataItem : AllresultSubDealer) {
-                            if (dataItem.getShop_name().equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.getCode();
+                        for (SubDealerModel dataItem : AllresultSubDealer) {
+                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.code;
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile = dataItem.getMobile();
-                                Global_Data.Sub_Email = dataItem.getEmail();
-                                Global_Data.Sub_shop_name = dataItem.getShop_name();
-                                Global_Data.Sub_Dealer_address = dataItem.getAddress();
+                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
+                                Global_Data.Sub_Email = dataItem.proprietor_email1;
+                                Global_Data.Sub_shop_name = dataItem.shop_name;
+                                Global_Data.Sub_Dealer_address = dataItem.address2;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -603,44 +562,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         if (isInternetPresent) {
                             Global_Data.GLOvel_SUB_GORDER_ID = "";
                             Global_Data.statusOrderActivity = "";
-                            String user_email = "";
-                            sp = getSharedPreferences("SimpleLogic", 0);
-                            try {
-                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
-                                    user_email = sp.getString("USER_EMAIL", "");
-                                } else {
-                                    user_email = Global_Data.GLOvel_USER_EMAIL;
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-
-                            List<Local_Data> contacts = dbvoc.getUSERBY_Email(user_email);
-
-                            if (contacts.size() <= 0) {
-                                Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "User Not Found ", Toast.LENGTH_LONG);
-                                toast.setGravity(Gravity.CENTER, 0, 0);
-                                toast.show();
-                            }
-                            else
-                            {
-                                for (Local_Data cn : contacts) {
-                                    Global_Data.Business_unit_code_array = cn.getBunit();
-                                }
-
-                                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-
-                                    getPrevious_OrderData(Global_Data.Dealer_Code, Global_Data.Sub_Dealer_Code);
-
-                                } else {
-                                    Global_Data.Business_unit_code_array = "";
-                                    Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, "No Prodct Found ", Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-                                }
-
-
-                            }
+                            getPrevious_OrderData(Global_Data.Dealer_Code, Global_Data.Sub_Dealer_Code);
                         } else {
                             // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 
@@ -696,14 +618,15 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 } else {
                     valid_sub_dealer_flag = "";
                     if (AllresultSubDealer.size() > 0) {
-                        for (RCTOData dataItem : AllresultSubDealer) {
-                            if (dataItem.getShop_name().equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
-                                sub_dealer_code = dataItem.getCode();
+                        for (SubDealerModel dataItem : AllresultSubDealer) {
+                            if (dataItem.shop_name.equalsIgnoreCase(s_sub_dealer_search.getText().toString())) {
+                                sub_dealer_code = dataItem.code;
                                 Global_Data.Sub_Dealer_Code = sub_dealer_code;
-                                Global_Data.SUB_Mobile = dataItem.getMobile();
-                                Global_Data.Sub_Email = dataItem.getEmail();
-                                Global_Data.Sub_shop_name = dataItem.getShop_name();
-                                Global_Data.Sub_Dealer_address = dataItem.getAddress();
+                                Global_Data.SUB_Mobile = dataItem.proprietor_mobile1;
+                                Global_Data.Sub_Email = dataItem.proprietor_email1;
+                                Global_Data.Sub_Dealer_name = s_sub_dealer_search.getText().toString();
+                                Global_Data.Sub_shop_name = dataItem.shop_name;
+                                Global_Data.Sub_Dealer_address = dataItem.address2;
                                 valid_sub_dealer_flag = "yes";
                                 break;
                             }
@@ -1189,7 +1112,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        String domain = getResources().getString(R.string.service_domain);
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
         String service_domain = domain + "menus/get_states_for_sub_dealer_sync?email=" + user_email;
 
 
@@ -1460,7 +1383,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             ex.printStackTrace();
         }
 
-        String domain = getResources().getString(R.string.service_domain);
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
         String service_domain = domain + "sub_dealers/sync_districts?email=" + user_email + "&state_code=" + state_code;
 
 
@@ -1725,7 +1648,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //        if(beat_flag.equalsIgnoreCase("beat_click"))
 //        {
         try {
-            service_domain = domain + "customers/get_statewise_customers?beat_code=" + URLEncoder.encode(beat_code, "UTF-8");
+            service_domain = domain + "customers/get_statewise_customers?beat_ids=" + URLEncoder.encode(beat_code, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -1826,7 +1749,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 Global_Data.Customers.clear();
                 Global_Data.Customers_map.clear();
-               Customers_map_EMAIL.clear();
+                Customers_map_EMAIL.clear();
 
                 if (response.has("message")) {
                     response_result = response.getString("message");
@@ -2010,7 +1933,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
             ex.printStackTrace();
         }
 
-        String domain = getResources().getString(R.string.service_domain);
+        String domain = getResources().getString(R.string.service_domain_sub_dealer);
         String service_domain = null;
         try {
 //            service_domain = domain + "sub_dealers/get_sub_dealers_for_sub_dealer_order?city_code=" + city_code+"&lat="
@@ -2363,9 +2286,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         String response_result = "";
                         if (response.has("message")) {
                             response_result = response.getString("message");
-							Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, response_result, Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
                         } else {
 
 
@@ -2396,7 +2319,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                     JSONObject jsonObject = previous_order_products.getJSONObject(i);
 
                                     Global_Data.GLOvel_SUB_GORDER_ID = jsonObject.getString("order_number").trim();
-                                   // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
+                                    // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
 
                                     loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
 

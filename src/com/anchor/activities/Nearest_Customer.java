@@ -303,7 +303,7 @@ public class Nearest_Customer extends Activity implements customButtonListener {
 
         dialog = new ProgressDialog(Nearest_Customer.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Smart Anchor");
         dialog.setCancelable(false);
         dialog.show();
         
