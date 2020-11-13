@@ -122,7 +122,7 @@ public class Forget_Pwd extends Activity {
 
     public void Fun_Fpwd() {
         dialog.setMessage("Please wait...");
-        dialog.setTitle("Metal App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
