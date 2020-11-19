@@ -2321,7 +2321,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                     Global_Data.GLOvel_SUB_GORDER_ID = jsonObject.getString("order_number").trim();
                                     // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
 
-                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
+                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_id"), " ", jsonObject.getString("product_name"));
 
 
                                 }

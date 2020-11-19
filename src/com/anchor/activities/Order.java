@@ -2795,7 +2795,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                                     Global_Data.Previous_Order_UpdateOrder_ID = jsonObject.getString("order_number").trim();
                                     Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
 
-                                    loginDataBaseAdapter.insertPreviousOrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("scheme_code"), " ", "", jsonObject.getString("total_qty"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("amount"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
+                                    loginDataBaseAdapter.insertPreviousOrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("scheme_code"), " ", "", jsonObject.getString("total_qty"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("amount"), "", "", "", " ", jsonObject.getString("product_id"), " ", jsonObject.getString("product_name"));
 
 
                                 }
