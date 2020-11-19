@@ -174,13 +174,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        /* SSL CONFIG */
-      //  handleSSLHandshake();
-//        try {
-//            HttpsTrustManager.allowAllSSL();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         FirebaseApp.initializeApp(this);
 
@@ -313,11 +306,11 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-//		editText1.setText("sadanand");
-//		editText2.setText("sada@1234");
-//
-        editText1.setText("Kartik");
-        editText2.setText("Kartik2732867");
+		editText1.setText("Kartik");
+		editText2.setText("Kartik4882263");
+
+//        editText1.setText("Kartik");
+//        editText2.setText("Kartik2732867");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -1519,38 +1512,7 @@ public class LoginActivity extends Activity {
         startActivityForResult(intent, 101);
     }
 
-    /**
-     * Enables https connections
-     */
-    @SuppressLint("TrulyRandom")
-    public static void handleSSLHandshake() {
-        try {
-            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
 
-                @Override
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                }
-            }};
-
-            SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, trustAllCerts, new SecureRandom());
-            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-//			HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-//				@Override
-//				public boolean verify(String arg0, SSLSession arg1) {
-//					return true;
-//				}
-//			});
-        } catch (Exception ignored) {
-        }
-    }
 
     public void showDialogs(String user_name) {
         dialognew = new Dialog(LoginActivity.this);
@@ -1958,6 +1920,9 @@ public class LoginActivity extends Activity {
             otp_bottom_layout.setVisibility(View.VISIBLE);
         }
     }
+
+
+
 
 
 }
