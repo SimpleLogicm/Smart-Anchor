@@ -53,6 +53,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.AutoSuggestAdapter;
 import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
@@ -306,12 +307,15 @@ public class Order extends Activity implements OnItemSelectedListener {
         for (Local_Data cn : contacts2) {
             list_cities.add(cn.get_stocks_product_name());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                list_cities);
+
+        AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
         autoCompleteTextView1.setThreshold(1);// will start working from
         // first character
-        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+        autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
         // data into the
         // AutoCompleteTextView
         autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2073,12 +2077,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     for (Local_Data cn : contacts2) {
                         list_cities.add(cn.get_stocks_product_name());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            list_cities);
+                    AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                     autoCompleteTextView1.setThreshold(1);// will start working from
                     // first character
-                    autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                    autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                     // data into the
                     // AutoCompleteTextView
                     autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2178,12 +2184,15 @@ public class Order extends Activity implements OnItemSelectedListener {
                     for (Local_Data cn : contacts2) {
                         list_cities.add(cn.get_stocks_product_name());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            list_cities);
+
+                    AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                     autoCompleteTextView1.setThreshold(1);// will start working from
                     // first character
-                    autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                    autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                     // data into the
                     // AutoCompleteTextView
                     autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2279,12 +2288,15 @@ public class Order extends Activity implements OnItemSelectedListener {
                     for (Local_Data cn : contacts2) {
                         list_cities.add(cn.get_stocks_product_name());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            list_cities);
+
+                    AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                     autoCompleteTextView1.setThreshold(1);// will start working from
                     // first character
-                    autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                    autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                     // data into the
                     // AutoCompleteTextView
                     autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2320,12 +2332,14 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                         }
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                list_cities);
+                        AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                         autoCompleteTextView1.setThreshold(1);// will start working from
                         // first character
-                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                        autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                         // data into the
                         // AutoCompleteTextView
                         autoCompleteTextView1.setTextColor(Color.BLACK);

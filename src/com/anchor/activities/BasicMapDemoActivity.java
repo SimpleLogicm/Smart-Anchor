@@ -308,7 +308,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 if (adb==1){
 
                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                    alertDialog.setTitle("Anchor");
+                    alertDialog.setTitle("Smart Anchor App");
                     alertDialog.setMessage("Your Developer options is enabled would you like to disable Developer option.");
                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
@@ -342,7 +342,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 }else {
 
                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                    alertDialog.setTitle("Anchor");
+                    alertDialog.setTitle("Smart Anchor App");
                     alertDialog.setMessage("Would you like to punch in attendance ?");
                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
@@ -400,7 +400,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                 if (adb2==1){
 
                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                    alertDialog.setTitle("Anchor");
+                    alertDialog.setTitle("Smart Anchor App");
                     alertDialog.setMessage("Your Developer options is enabled would you like to disable Developer option.");
                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
@@ -436,7 +436,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 
                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                    alertDialog.setTitle("Anchor");
+                    alertDialog.setTitle("Smart Anchor App");
                     alertDialog.setMessage("Would you like to punch out attendance ?");
                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
@@ -469,7 +469,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 
                                             dialog.setMessage("Please wait....");
-                                            dialog.setTitle("Metal App");
+                                            dialog.setTitle("Smart Anchor App");
                                             dialog.setCancelable(false);
                                             dialog.show();
 
@@ -1340,7 +1340,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                     dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                                    alertDialog.setTitle("Metal");
+                                    alertDialog.setTitle("Smart Anchor App");
                                     alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
                                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
@@ -1402,7 +1402,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                         AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                                        alertDialog.setTitle("Metal");
+                                        alertDialog.setTitle("Smart Anchor App");
                                         alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
                                         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
@@ -1467,7 +1467,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                         AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                                        alertDialog.setTitle("Metal");
+                                        alertDialog.setTitle("Smart Anchor App");
                                         alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
                                         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 

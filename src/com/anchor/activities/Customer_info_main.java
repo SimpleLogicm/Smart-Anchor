@@ -36,6 +36,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.AutoSuggestAdapter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -514,11 +516,21 @@ public class Customer_info_main extends Activity {
                         dialog.dismiss();
                         recList.setAdapter(ca);
                         ca.notifyDataSetChanged();
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_info_main.this, android.R.layout.simple_spinner_dropdown_item,
-                                All_customers);
+//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_info_main.this, android.R.layout.simple_spinner_dropdown_item,
+//                                All_customers);
+//                        autoCompleteTextView1.setThreshold(1);// will start working from
+//                        // first character
+//                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+//                        // data into the
+//                        // AutoCompleteTextView
+//                        autoCompleteTextView1.setTextColor(Color.BLACK);
+
+                        AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(Customer_info_main.this, android.R.layout.simple_spinner_dropdown_item, All_customers);
+
+//
                         autoCompleteTextView1.setThreshold(1);// will start working from
                         // first character
-                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                        autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                         // data into the
                         // AutoCompleteTextView
                         autoCompleteTextView1.setTextColor(Color.BLACK);

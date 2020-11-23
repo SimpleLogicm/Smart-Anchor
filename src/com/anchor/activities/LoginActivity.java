@@ -104,11 +104,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
 import cpm.simplelogic.helper.BCrypt;
 import cpm.simplelogic.helper.CheckNullValue;
 import cpm.simplelogic.helper.GPSTracker;
