@@ -12,8 +12,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -398,13 +398,13 @@ public class Target_Summary1 extends BaseActivity {
             if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
             {
                 date_flag = "false";
-                service_url = domain+"targets/get_targets_by_product?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8");
+                service_url = domain+"targets/get_targets_by_product?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8");
             }
             else
             {
                 date_flag = "true";
 
-                service_url = domain+"targets/get_targets?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8");
+                service_url = domain+"targets/get_targets?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8");
             }
 
 

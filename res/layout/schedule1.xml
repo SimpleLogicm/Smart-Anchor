@@ -268,7 +268,7 @@
              android:background="#d3d3d3" >
          </RelativeLayout>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_marginTop="10dp"
             android:background="#ffffff"
             android:layout_width="match_parent"
@@ -463,7 +463,7 @@
 
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
         <EditText

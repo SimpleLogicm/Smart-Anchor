@@ -17,12 +17,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by admin on 06-09-2016.
@@ -41,6 +47,19 @@ public class AllOrders_Sync  extends Activity  {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.order_syncs);
+
+        Global_Data.context = AllOrders_Sync.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
         lastsyncon= findViewById(R.id.lastsyncon);
         Totalsosync= findViewById(R.id.Totalsosync);

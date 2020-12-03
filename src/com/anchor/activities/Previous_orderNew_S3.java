@@ -52,6 +52,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Product;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
@@ -73,13 +79,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
 //import com.simplelogic.database.DatabaseHandler;
 //import com.simplelogic.webservice.GmailSender;
 
-public class Previous_orderNew_S3 extends BaseActivity {
+public class
+Previous_orderNew_S3 extends BaseActivity {
     private String mCurrentPhotoPath = "";
     private String pictureImagePath_new = "";
     private String Signature_path = "";
@@ -140,6 +148,20 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
 
         cd  = new ConnectionDetector(getApplicationContext());
+
+        Global_Data.context = Previous_orderNew_S3.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         SharedPreferences  sp=this.getSharedPreferences("SimpleLogic", 0);
 
@@ -1134,7 +1156,13 @@ public class Previous_orderNew_S3 extends BaseActivity {
                                                 }
                                                 // Continue only if the File was successfully created
                                                 if (photoFile != null) {
-                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    Uri photoURI = FileProvider.getUriForFile(Previous_orderNew_S3.this,
+                                                            BuildConfig.APPLICATION_ID + ".provider",
+                                                            photoFile);
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                                    cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+//                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                                                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                                                 }
                                             }
@@ -1146,7 +1174,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                                             // image_check = "gallery";
                                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
+                                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                             startActivityForResult(intent, 2);
 
 
@@ -1356,7 +1384,7 @@ public class Previous_orderNew_S3 extends BaseActivity {
 
                                             isInternetPresent = cd.isConnectingToInternet();
                                             if (isInternetPresent) {
-                                                getServices.SYNCORDER_BYCustomer(Previous_orderNew_S3.this, Global_Data.GLOvel_GORDER_ID,order_detail1_text, order_detail2_text, order_type_name, order_detail4_text);
+                                                getServices.SYNCORDER_BYCustomer(Previous_orderNew_S3.this, Global_Data.GLOvel_GORDER_ID,order_detail1_text, order_detail2_text,order_type_name,order_detail4_text);
                                             } else {
                                                 //Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
 

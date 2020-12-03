@@ -451,14 +451,14 @@
 
                 />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rankgridrecycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_below="@+id/r_details"
                 android:layout_margin="5dp"
                 android:scrollbars="vertical"
-                android:visibility="gone"></android.support.v7.widget.RecyclerView>
+                android:visibility="gone"></androidx.recyclerview.widget.RecyclerView>
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/rr_piechart"
@@ -488,7 +488,7 @@
                 android:indeterminateDrawable="@drawable/progress"
                 android:visibility="gone"></ProgressBar>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/recycleviewr_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -563,9 +563,9 @@
                 </LinearLayout>
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/recycleviewr_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -598,7 +598,7 @@
                         android:indeterminateDrawable="@drawable/progress"
                         android:visibility="visible"></ProgressBar>
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rank_list_recycleview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -606,9 +606,9 @@
                         android:scrollbars="vertical"
                         android:visibility="gone" />
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/detail_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -724,7 +724,7 @@
                         android:layout_below="@+id/r_detail_header_container"
                         android:background="#898989" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rank_ldetail_recycleview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -802,7 +802,7 @@
 
                     </LinearLayout>
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
 
         </RelativeLayout>

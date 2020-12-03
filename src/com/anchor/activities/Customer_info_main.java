@@ -16,8 +16,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -35,6 +35,8 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.anchor.adapter.AutoSuggestAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -87,6 +89,9 @@ public class Customer_info_main extends Activity {
         SharedPreferences.Editor editor = spf.edit();
         editor.putString("order", "new");
         editor.commit();
+
+
+
         try
         {
             ActionBar mActionBar = getActionBar();
@@ -511,11 +516,21 @@ public class Customer_info_main extends Activity {
                         dialog.dismiss();
                         recList.setAdapter(ca);
                         ca.notifyDataSetChanged();
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_info_main.this, android.R.layout.simple_spinner_dropdown_item,
-                                All_customers);
+//                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Customer_info_main.this, android.R.layout.simple_spinner_dropdown_item,
+//                                All_customers);
+//                        autoCompleteTextView1.setThreshold(1);// will start working from
+//                        // first character
+//                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+//                        // data into the
+//                        // AutoCompleteTextView
+//                        autoCompleteTextView1.setTextColor(Color.BLACK);
+
+                        AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(Customer_info_main.this, android.R.layout.simple_spinner_dropdown_item, All_customers);
+
+//
                         autoCompleteTextView1.setThreshold(1);// will start working from
                         // first character
-                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                        autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                         // data into the
                         // AutoCompleteTextView
                         autoCompleteTextView1.setTextColor(Color.BLACK);

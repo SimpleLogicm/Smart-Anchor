@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,9 +22,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -72,6 +74,9 @@ public class ChangePassword extends Activity {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+
+
 
         oldPassword = (EditText)findViewById(R.id.old_password);
         newPassword = (EditText)findViewById(R.id.new_password);
@@ -285,11 +290,11 @@ public class ChangePassword extends Activity {
     {
         SharedPreferences spf = ChangePassword.this.getSharedPreferences("SimpleLogic", 0);
         String user_email = spf.getString("USER_EMAIL",null);
-        String Device_id = spf.getString("devid", "");
+        //String Device_id = spf.getString("devid", "");
 
         String domain = getResources().getString(R.string.service_domain);
-        RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
-        String url = domain + "users/change_passowd?email=" + user_email+"&imei_no=" +Device_id;
+       // RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
+        String url = domain + "users/change_passowd?email=" + user_email+"&imei_no=";
         Log.d("Chan Pass","CHA URl"+url);
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -354,6 +359,16 @@ public class ChangePassword extends Activity {
                 return params;
             }
         };
-        queue.add(strRequest);
+       /// queue.add(strRequest);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ChangePassword.this);
+        int socketTimeout = 300000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        strRequest.setRetryPolicy(policy);
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        strRequest.setShouldCache(false);
+        requestQueue.getCache().clear();
+        requestQueue.add(strRequest);
     }
 }

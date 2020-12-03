@@ -59,6 +59,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -111,6 +116,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
@@ -198,6 +204,20 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 		loginDataBaseAdapter = loginDataBaseAdapter.open();
 
 		dialog = new ProgressDialog(Customer_Feed.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+		Global_Data.context = Customer_Feed.this;
+
+		try {
+			PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+					MyPeriodicwork.class, 15, TimeUnit.MINUTES
+			).addTag("otpValidator").build();
+			WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+					ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
 
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
@@ -2297,7 +2317,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 				entity.addPart("video", new FileBody(sourceFile));
 
 				// Extra parameters if you want to pass to server
-				entity.addPart("customer_code",
+				entity.addPart("customer_id",
 						new StringBody(Global_Data.GLOvel_CUSTOMER_ID));
 				entity.addPart("media_type", new StringBody("video"));
 				entity.addPart("user_code", new StringBody(Global_Data.GLOvel_USER_EMAIL));
@@ -3128,9 +3148,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 						product_value.put("mobile_no", cn.getMOBILE_NO());
 						product_value.put("email", cn.getEMAIL_ADDRESS());
 						product_value.put("status", cn.getSTATUS());
-						product_value.put("state_code", cn.getSTATE_ID());
-						product_value.put("city_code", cn.getCITY_ID());
-						product_value.put("beat_code", cn.getBEAT_ID());
+						product_value.put("state_id", cn.getSTATE_ID());
+						product_value.put("city_id", cn.getCITY_ID());
+						product_value.put("beat_id", cn.getBEAT_ID());
 						product_value.put("vatin", cn.getvatin());
 						product_value.put("latitude", cn.getlatitude());
 						product_value.put("longitude", cn.getlongitude());
@@ -3143,7 +3163,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 					JSONObject picture = new JSONObject();
 					picture.put("code", PINString);
-					picture.put("customer_code",response[3]);
+					picture.put("customer_id",response[3]);
 					picture.put("user_email", response[4]);
 					picture.put("media_type", response[0]);
 					picture.put("media_text", response[2]);
@@ -3463,9 +3483,9 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 					product_value.put("mobile_no", cn.getMOBILE_NO());
 					product_value.put("email", cn.getEMAIL_ADDRESS());
 					product_value.put("status", cn.getSTATUS());
-					product_value.put("state_code", cn.getSTATE_ID());
-					product_value.put("city_code", cn.getCITY_ID());
-					product_value.put("beat_code", cn.getBEAT_ID());
+					product_value.put("state_id", cn.getSTATE_ID());
+					product_value.put("city_id", cn.getCITY_ID());
+					product_value.put("beat_id", cn.getBEAT_ID());
 					product_value.put("vatin", cn.getvatin());
 					product_value.put("latitude", cn.getlatitude());
 					product_value.put("longitude", cn.getlongitude());
@@ -3477,7 +3497,7 @@ public class Customer_Feed extends Activity implements OnItemSelectedListener,Me
 
 				JSONObject picture = new JSONObject();
 				picture.put("code",PINString);
-				picture.put("customer_code",CUSTOMER_ID);
+				picture.put("customer_id",CUSTOMER_ID);
 				picture.put("user_email", GLOvel_USER_EMAIL);
 				picture.put("media_type", media_type);
 				picture.put("media_text", discription);

@@ -138,12 +138,13 @@ public class getServices {
     static Context context;
     static String device_id = "";
     static String Order_number = "";
-    static ArrayList<String> s_code = new ArrayList<String>();
-    static ArrayList<String> s_stock = new ArrayList<String>();
     static String detail1 = "";
     static String detail2 = "";
     static String detail3 = "";
     static String detail4 = "";
+
+    static ArrayList<String> s_code = new ArrayList<String>();
+    static ArrayList<String> s_stock = new ArrayList<String>();
 
 
     public static void sendRequestnew(Context contextn, String wait) {
@@ -199,9 +200,9 @@ public class getServices {
 //            domain = URL.toString();
 //        }
 
-        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version+"&email=" + user_email);
+        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + ""+"&app_version="+version+"&email=" + user_email);
         StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id+"&app_version="+version+"&email=" + user_email,
+        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + ""+"&app_version="+version+"&email=" + user_email,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -293,8 +294,21 @@ public class getServices {
 //            domain = URL.toString();
 //        }
 
+
+        String user_email = "";
+
         try {
-            Log.d("Server url", "Server url" + domain + "menus/sync_stocks?imei_no=" + device_id + "&latitude="
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            Log.d("Server url", "Server url" + domain + "menus/sync_stocks?email=" + user_email + "&latitude="
                     + URLEncoder.encode(latitude, "UTF-8") + "&longitude="
                     + URLEncoder.encode(longitude, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
@@ -303,7 +317,7 @@ public class getServices {
 
         StringRequest stringRequest = null;
         try {
-            stringRequest = new StringRequest(domain + "menus/sync_stocks?imei_no=" + device_id + "&latitude="
+            stringRequest = new StringRequest(domain + "menus/sync_stocks?email=" + user_email + "&latitude="
                     + URLEncoder.encode(latitude, "UTF-8") + "&longitude="
                     + URLEncoder.encode(longitude, "UTF-8"),
                     new Response.Listener<String>() {
@@ -436,257 +450,6 @@ public class getServices {
         requestQueue.add(stringRequest);
     }
 
-    public static void SYNCORDER_BYORDER_ID(Context contextn) {
-
-        context = contextn;
-        final ProgressDialog dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        String uploadImage = "";
-        dbvoc = new DataBaseHelper(contextn);
-
-//  List<Local_Data> contacts2 = dbvoc.getAllOrderby_cusID("1012");
-//      List<Local_Data> contacts2 = dbvoc.getAllOrderby_cusID(Global_Val.customer_id);
-//      int ln = contacts2.size();
-//
-//
-//      for (Local_Data cn : contacts2) {
-//
-//          CUSTOMER_NAME = cn.getStateName();
-//
-//      }
-
-        //filePath =  new Uri(android.os.Environment.getExternalStorageDirectory(), "SIYARAMS"+"/" + "vinod" + "/" + CUSTOMER_NAME);
-
-//      try
-//      {
-//          String filename = CUSTOMER_NAME+".png";
-//          String path = "/mnt/sdcard/"+"SIYARAMS"+"/" + "vinod" + "/" + CUSTOMER_NAME + filename;
-//          File f = new File(android.os.Environment.getExternalStorageDirectory(), "SIYARAMS"+"/" + "vinod" + "/" + CUSTOMER_NAME+"/"+filename);  //
-//          Uri imageUri = Uri.fromFile(f);
-//
-//          bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-//          uploadImage = getStringImage(bitmap);
-//
-//      }
-//      catch (Exception  e)
-//      {
-//          e.printStackTrace();
-//      }
-
-        JSONObject jsonBody = new JSONObject();
-        try {
-
-            JSONArray product = new JSONArray();
-            JSONArray order = new JSONArray();
-            JSONObject product_valuenew = new JSONObject();
-
-            int a = 0;
-
-            List<Local_Data> contacts = dbvoc.GetOrders("", "");
-            //List<Local_Data> contacts = dbvoc.getAllOrderby_cusID("1012");
-            for (Local_Data cn : contacts) {
-                JSONObject product_value = new JSONObject();
-                product_value.put("order_number", cn.get_category_code());
-                // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
-                product_value.put("order_take_by", cn.get_custadr());
-                // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
-                // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
-                //product_value.put("signature_image_name", uploadImage);
-                product_value.put("device_code", Global_Data.device_id);
-                product_value.put("order_type", cn.get_shedule_payment_mode());
-                // product_value.put("conference_code", cn.getconference_id());
-                order.put(product_value);
-                Log.d("count", "a" + ++a);
-                //delete_order_no = cn.getORDER_NUMBER();
-                List<Local_Data> contactsproduct = dbvoc.Get_OrderProducts(cn.get_category_code());
-                for (Local_Data cnp : contactsproduct) {
-
-                    JSONObject item = new JSONObject();
-                    item.put("order_number", cnp.get_category_code());
-                    item.put("customer_name", cnp.get_custadr());
-                    item.put("total_qty", cnp.get_stocks_product_quantity());
-                    item.put("MRP", cnp.getMRP());
-                    item.put("amount", cnp.get_Claims_amount());
-                    item.put("scheme_amount", cnp.get_Target_Text());
-                    product.put(item);
-                    //Log.d("quantity","quantity"+cnp.getquantity());
-                }
-            }
-
-//          for (int i = 0; i < 10; i++)
-//          {
-//
-//
-//
-//          }
-
-            product_valuenew.put("orders", order);
-            product_valuenew.put("order_products", product);
-            product_valuenew.put("imei_no", Global_Data.device_id);
-            Log.d("Orders", order.toString());
-
-            Log.d("order_products", product.toString());
-
-            // HashMap<String, String> params = new HashMap<String, String>();
-            //params.put("token", json.toString());
-
-            dialog.setMessage("Order Sync in Progress, Please Wait");
-            dialog.setTitle("Siyaram");
-            dialog.setCancelable(false);
-            dialog.show();
-
-            // RequestQueue queue = Volley.newRequestQueue(getBaseContext());
-            // PreferencesHelper Prefs = new PreferencesHelper(MasterSyncData.this);
-
-            //String URL = Prefs.GetPreferences("URL");
-            String domain = context.getResources().getString(R.string.service_domain);
-
-            Log.i("volley", "domain: " + domain);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "api/orders", product_valuenew, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.i("volley", "response: " + response);
-
-                    String response_result = "";
-                    //if (response.has("result")) {
-                    try {
-                        response_result = response.getString("result");
-
-//                          if (response_result.equalsIgnoreCase("Device not found.")) {
-//                              Toast toast = Toast.makeText(context, "Device Not Found", Toast.LENGTH_LONG);
-//                              toast.setGravity(Gravity.CENTER, 0, 0);
-//                              toast.show();
-//                              dialog.dismiss();
-//                          }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    if (response_result.equalsIgnoreCase("Device not found.")) {
-                        Toast toast = Toast.makeText(context, "Device Not Found", Toast.LENGTH_LONG);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-                        dialog.dismiss();
-
-
-                    } else {
-//                  else
-//                  {
-//                      response_result = "data";
-//                  }
-
-
-                        Toast.makeText(context, "Order Sync Successfully", Toast.LENGTH_LONG).show();
-
-                        // dbvoc.getDeleteTable("order_products");
-                        //dbvoc.getDeleteTable("orders");
-
-                        // dbvoc.getDeleteTableorder_bycustomer(Global_Data.order_retailer.trim());
-                        //dbvoc.getDeleteTableorderproduct_bycustomer(Global_Data.order_retailer.trim());
-//                  List<Local_Data> contacts = dbvoc.GetOrders(Global_Val.customer_id);
-//                  for (Local_Data cn : contacts)
-//                  {
-//                      // JSONObject product_value = new JSONObject();
-//                      //product_value.put("order_number", cn.getORDER_NUMBER());
-//
-//                      dbvoc.deleteOrderproductByOCID(cn.getORDER_NUMBER());
-//                      dbvoc.deleteOrderTABLE_QuantityValue(cn.getORDER_NUMBER());
-//                      dbvoc.deleteBarcode_ByOrder(cn.getORDER_NUMBER());
-//                      dbvoc.deleteORDERSNEW(cn.getORDER_NUMBER());
-//
-//                  }
-
-
-                        //dbvoc.deleteOrderByOCID(Global_Val.customer_id);
-                        //dbvoc.getDeleteTable("DESIGN_CHECK");
-
-//                  Intent i = new Intent(MasterSyncData.this, MyAndroidAppActivity.class);
-//                  //				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                  i.putExtra("user_name", user_name);
-//                  i.putExtra("confrence_name", confrence_name);
-//                  i.putExtra("BackFlag", "nothing");
-//                  Global_Val.STOCK_SERVICE_FLAG = "TRUE";
-                        //				i.putExtra("Barcode_Number", userInput.getText().toString());
-                        //				i.putExtra("BackFlag","Barcode");
-//                  startActivity(i);
-//                  MasterSyncData.this.finish();
-                        dialog.dismiss();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i("volley", "error: " + error);
-                    Toast.makeText(context, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG).show();
-                    dialog.dismiss();
-                }
-            });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(context);
-            // queue.add(jsObjRequest);
-            int socketTimeout = 30000;//30 seconds - change to what you want
-            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            jsObjRequest.setRetryPolicy(policy);
-            requestQueue.add(jsObjRequest);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-
-        }
-
-//add the request object to the queue to be executed
-        //ApplicationController.getInstance().addToRequestQueue(req);
-
-
-//      StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://cb899c5b.ngrok.io/siyarams/api/orders",
-//              new Response.Listener<String>() {
-//                  @Override
-//                  public void onResponse(String response) {
-//                      Toast.makeText(MasterSyncData.this,response,Toast.LENGTH_LONG).show();
-//                  }
-//              },
-//              new Response.ErrorListener() {
-//                  @Override
-//                  public void onErrorResponse(VolleyError error) {
-//                      Toast.makeText(MasterSyncData.this,error.toString(),Toast.LENGTH_LONG).show();
-//                  }
-//              }){
-//          @Override
-//          protected Map<String,String> getParams(){
-//
-//              try {
-//
-//                  JSONObject json = new JSONObject();
-//                  json.put("name", "student");
-//
-//                  JSONArray array = new JSONArray();
-//                  JSONObject item = new JSONObject();
-//                  item.put("information", "test");
-//                  item.put("id", 3);
-//                  item.put("name", "course1");
-//                  array.put(item);
-//
-//                  json.put("course", array);
-//
-//                 // message = json.toString();
-//
-//              }catch (Exception e){}
-//
-//
-//              Map<String,String> params = new HashMap<String, String>();
-//              params.put("user","user1");
-//              params.put("name","name");
-//             // params.put(KEY_EMAIL, email);
-//              return params;
-//          }
-//
-//      };
-//
-//      RequestQueue requestQueue = Volley.newRequestQueue(this);
-//      requestQueue.add(stringRequest);
-    }
-
     public static void SYNCORDER_BYCustomer(Context contextn, String order_id,String order_detail1_text,String order_detail2_text,String order_detail3_text,String order_detail4_text) {
         context = contextn;
         detail1 = order_detail1_text;
@@ -738,9 +501,23 @@ public class getServices {
     }
 
     public static void SYNCORDER_BYCustomer_Return(Context contextn) {
+
         context = contextn;
         Calendar c = Calendar.getInstance();
         System.out.println("Current time =&gt; " + c.getTime());
+
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
 
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -782,9 +559,9 @@ public class getServices {
                 product_value.put("mobile_no", cn.getMOBILE_NO());
                 product_value.put("email", cn.getEMAIL_ADDRESS());
                 product_value.put("status", cn.getSTATUS());
-                product_value.put("state_code", cn.getSTATE_ID());
-                product_value.put("city_code", cn.getCITY_ID());
-                product_value.put("beat_code", cn.getBEAT_ID());
+                product_value.put("state_id", cn.getSTATE_ID());
+                product_value.put("city_id", cn.getCITY_ID());
+                product_value.put("beat_id", cn.getBEAT_ID());
                 product_value.put("vatin", cn.getvatin());
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
@@ -801,7 +578,7 @@ public class getServices {
                 Order_number = cn.get_category_code();
                 // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                 // product_value.put("order_take_by", "");
-                product_value.put("customer_code", cn.get_category_id());
+                product_value.put("customer_id", cn.get_category_id());
 
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
@@ -809,11 +586,13 @@ public class getServices {
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
                 product_value.put("signature_path", cn.getSignature_image());
-                product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
                 // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                 // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
                 //product_value.put("signature_image_name", uploadImage);
-                product_value.put("device_code", Global_Data.device_id);
+                product_value.put("device_code", "");
+                product_value.put("email", user_email);
+
 
 
                 if (cn.get_shedule_payment_mode().equalsIgnoreCase("Secondary Sales / Retail Sales")) {
@@ -830,7 +609,7 @@ public class getServices {
                 for (Local_Data cnp : contactsproduct) {
                     JSONObject item = new JSONObject();
                     item.put("order_number", cnp.get_category_code());
-                    item.put("item_number", cnp.get_delivery_product_id());
+                    item.put("item_id", cnp.get_delivery_product_id());
                     item.put("total_return_qty", cnp.get_stocks_product_quantity());
                     item.put("MRP", cnp.getMRP());
                     item.put("amount", cnp.get_Claims_amount());
@@ -854,7 +633,8 @@ public class getServices {
             product_valuenew.put("return_orders", order);
             product_valuenew.put("return_order_products", product);
             product_valuenew.put("customers", customer);
-            product_valuenew.put("imei_no", Global_Data.device_id);
+            product_valuenew.put("imei_no", "");
+            product_valuenew.put("email",user_email);
 
             Log.d("customers", customer.toString());
 
@@ -875,7 +655,7 @@ public class getServices {
 
             //String URL = Prefs.GetPreferences("URL");
             String domain = context.getResources().getString(R.string.service_domain);
-            Log.i("volley", "domain: " + domain);
+            Log.i("volley", "domain: " + domain+ "return_orders/save_return_orders"+product_valuenew);
             JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "return_orders/save_return_orders", product_valuenew, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -1088,6 +868,21 @@ public class getServices {
         dbvoc = new DataBaseHelper(contextn);
 
 
+
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         JSONObject jsonBody = new JSONObject();
 
         try {
@@ -1115,9 +910,9 @@ public class getServices {
                 product_value.put("mobile_no", cn.getMOBILE_NO());
                 product_value.put("email", cn.getEMAIL_ADDRESS());
                 product_value.put("status", cn.getSTATUS());
-                product_value.put("state_code", cn.getSTATE_ID());
-                product_value.put("city_code", cn.getCITY_ID());
-                product_value.put("beat_code", cn.getBEAT_ID());
+                product_value.put("state_id", cn.getSTATE_ID());
+                product_value.put("city_id", cn.getCITY_ID());
+                product_value.put("beat_id", cn.getBEAT_ID());
                 product_value.put("vatin", cn.getvatin());
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
@@ -1134,7 +929,7 @@ public class getServices {
                 //product_value.put("aasm_state", "");
                 // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                 // product_value.put("order_take_by", "");
-                product_value.put("customer_code", cn.get_category_id());
+                product_value.put("customer_id", cn.get_category_id());
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
                 product_value.put("latitude", cn.getlatitude());
                 product_value.put("longitude", cn.getlongitude());
@@ -1166,7 +961,7 @@ public class getServices {
                     item.put("MRP", cnp.getMRP());
                     item.put("amount", cnp.get_Claims_amount());
                     item.put("scheme_amount", cnp.get_Target_Text());
-                    item.put("item_number", cnp.get_delivery_product_id());
+                    item.put("item_id", cnp.get_delivery_product_id());
                     item.put("discount_type", cnp.get_stocks_product_text());
                     product.put(item);
                     //Log.d("quantity","quantity"+cnp.getquantity());
@@ -1185,7 +980,8 @@ public class getServices {
             product_valuenew.put("customers", CUSTOMERSN);
             product_valuenew.put("quotations", order);
             product_valuenew.put("quotation_products", product);
-            product_valuenew.put("imei_no", Global_Data.device_id);
+            product_valuenew.put("imei_no", "");
+            product_valuenew.put("email",user_email);
 
             Log.d("customers", CUSTOMERSN.toString());
             Log.d("quotations", order.toString());
@@ -1358,6 +1154,19 @@ public class getServices {
         String uploadImage = "";
         dbvoc = new DataBaseHelper(contextn);
 
+        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         try {
             AppLocationManager appLocationManager = new AppLocationManager(context);
             Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.getLatitude() + " " + appLocationManager.getLongitude());
@@ -1400,7 +1209,7 @@ public class getServices {
                 product_value.put("quote_number", PINString);
                 product_value.put("original_quote_number", cn.get_category_code());
                 product_value.put("aasm_state", Quote_status);
-                product_value.put("customer_code", cn.get_category_id());
+                product_value.put("customer_id", cn.get_category_id());
                 product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
                 product_value.put("latitude", Global_Data.GLOvel_LATITUDE);
                 product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
@@ -1431,7 +1240,7 @@ public class getServices {
                     item.put("MRP", cnp.getMRP());
                     item.put("amount", cnp.get_Claims_amount());
                     // item.put("scheme_amount", cnp.get_Target_Text());
-                    item.put("item_number", cnp.get_delivery_product_id());
+                    item.put("item_id", cnp.get_delivery_product_id());
                     // item.put("discount_type", cnp.get_stocks_product_text());
                     product.put(item);
                     //Log.d("quantity","quantity"+cnp.getquantity());
@@ -1449,7 +1258,8 @@ public class getServices {
 
             product_valuenew.put("quotations", order);
             product_valuenew.put("quotation_products", product);
-            product_valuenew.put("imei_no", Global_Data.device_id);
+            product_valuenew.put("imei_no", "");
+            product_valuenew.put("email",user_email);
 
             Log.d("quotations", order.toString());
 
@@ -1639,6 +1449,18 @@ public class getServices {
         String reason_code = "";
         try {
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 //			DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 //			DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
 //			Date date1 = originalFormat.parse(getDateTime());
@@ -1655,7 +1477,6 @@ public class getServices {
             String device_id = "";
 
 
-            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
             device_id = sp.getString("devid", "");
             domain = context.getResources().getString(R.string.service_domain);
 
@@ -1699,9 +1520,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -1849,7 +1670,8 @@ public class getServices {
                     // product_value_n.put("customer_service_competition_stocks", COMPS);
                     // product_value_n.put("customer_service_media", PICTURE);
                     // product_value_n.put("imei_no", Global_Data.device_id);
-                    product_value_n.put("imei_no", Global_Data.device_id);
+                    product_value_n.put("imei_no", "");
+                    product_value_n.put("email",user_email);
 
                     Log.d("customers", product_value_n.toString());
                     //Log.d("expenses_travels",product_value_n.toString());
@@ -1981,6 +1803,19 @@ public class getServices {
 //			Date date1 = originalFormat.parse(getDateTime());
 //			String formattedDate = targetFormat.format(date1);
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
 
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
@@ -1992,7 +1827,6 @@ public class getServices {
             String device_id = "";
 
 
-            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
             device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
@@ -2042,9 +1876,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -2065,9 +1899,9 @@ public class getServices {
                     // markets.put("code", cn.getCode());
                     markets.put("user_email", cn.getuser_email());
                     markets.put("answer_date", cn.getanswer_date());
-                    markets.put("survey_code", cn.getsurvey_code());
-                    markets.put("customer_code", cn.getCust_Code());
-                    markets.put("question_code", cn.getquestion_code());
+                    markets.put("survey_id", cn.getsurvey_code());
+                    markets.put("customer_id", cn.getCust_Code());
+                    markets.put("question_id", cn.getquestion_code());
                     markets.put("customer_choice", cn.getcustomer_choice());
                     markets.put("latitude", cn.getlatitude());
                     markets.put("longitude", cn.getlongitude());
@@ -2148,7 +1982,7 @@ public class getServices {
                 for (Local_Data cn : confeed) {
                     JSONObject Feed = new JSONObject();
                     Feed.put("code", cn.getCode());
-                    Feed.put("customer_code", cn.getCust_Code());
+                    Feed.put("customer_id", cn.getCust_Code());
                     Feed.put("user_email", cn.getEMAIL_ADDRESS());
                     Feed.put("date", cn.getC_Date());
                     Feed.put("text", cn.get_Description());
@@ -2167,7 +2001,7 @@ public class getServices {
                 for (Local_Data cn : concomp) {
                     JSONObject cm = new JSONObject();
                     cm.put("code", cn.getCode());
-                    cm.put("customer_code", cn.getCust_Code());
+                    cm.put("customer_id", cn.getCust_Code());
                     cm.put("user_email", cn.getEMAIL_ADDRESS());
                     cm.put("date", cn.getC_Date());
                     cm.put("text", cn.get_Description());
@@ -2186,7 +2020,7 @@ public class getServices {
                 for (Local_Data cn : conclaims) {
                     JSONObject cl = new JSONObject();
                     cl.put("code", cn.getCode());
-                    cl.put("customer_code", cn.getCust_Code());
+                    cl.put("customer_id", cn.getCust_Code());
                     cl.put("user_email", cn.getEMAIL_ADDRESS());
                     cl.put("date", cn.getC_Date());
                     cl.put("text", cn.get_Description());
@@ -2206,11 +2040,11 @@ public class getServices {
                 for (Local_Data cn : conccomss) {
                     JSONObject cll = new JSONObject();
                     cll.put("code", cn.getCode());
-                    cll.put("customer_code", cn.getCust_Code());
+                    cll.put("customer_id", cn.getCust_Code());
                     cll.put("user_email", cn.getEMAIL_ADDRESS());
                     //cll.put("category_id", cn.get_category_id());
                     // cll.put("product_id", cn.get_product_code());
-                    cll.put("product_code", cn.get_variants_code());
+                    cll.put("product_id", cn.get_variants_code());
                     cll.put("competition_product_text", cn.get_Description());
                     cll.put("competition_product_quantity", cn.get_stocks_product_quantity());
                     cll.put("latitude", cn.getlatitude());
@@ -2267,9 +2101,9 @@ public class getServices {
                 product_value_n.put("claims", CLAIM);
                 product_value_n.put("stocks", COMPS);
                 // product_value_n.put("customer_service_media", PICTURE);
-                product_value_n.put("imei_no", Global_Data.device_id);
+                product_value_n.put("imei_no","");
                 product_value_n.put("emp_code", Global_Data.emp_code);
-                product_value_n.put("email", Global_Data.GLOvel_USER_EMAIL);
+                product_value_n.put("email",user_email);
 
                 // Log.d("customers",product_value_n.toString());
 
@@ -2517,6 +2351,19 @@ public class getServices {
         String reason_code = "";
         try {
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
             dialog.setTitle("Smart Anchor App");
@@ -2527,8 +2374,8 @@ public class getServices {
             String device_id = "";
 
 
-            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-            device_id = sp.getString("devid", "");
+            //SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            //device_id = sp.getString("devid", "");
 
             domain = context.getResources().getString(R.string.service_domain);
 
@@ -2547,7 +2394,7 @@ public class getServices {
                 final DataBaseHelper dbvoc = new DataBaseHelper(context);
 
                 JSONObject picture = new JSONObject();
-                picture.put("customer_code", CUSTOMER_ID);
+                picture.put("customer_id", CUSTOMER_ID);
                 picture.put("user_email", GLOvel_USER_EMAIL);
                 picture.put("media_type", media_type);
                 picture.put("media_text", discription);
@@ -2556,7 +2403,8 @@ public class getServices {
                 PICTURE.put(picture);
 
                 product_value_n.put("customer_service_media", PICTURE);
-                product_value_n.put("imei_no", Global_Data.device_id);
+                product_value_n.put("imei_no", "");
+                product_value_n.put("email",user_email);
 
                 Log.d("customers Service", product_value_n.toString());
 
@@ -2660,164 +2508,7 @@ public class getServices {
         }
     }
 
-    public static void GetNewLaunch_Data(Context contextn) {
-        context = contextn;
-        SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-        device_id = sp.getString("devid", "");
-        loginDataBaseAdapter = new LoginDataBaseAdapter(context);
-        loginDataBaseAdapter = loginDataBaseAdapter.open();
-        dbvoc = new DataBaseHelper(context);
 
-        //PreferencesHelper Prefs = new PreferencesHelper(context);
-        //String URL = Prefs.GetPreferences("URL");
-        String domain = "";
-
-        dialog = new ProgressDialog(context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-        dialog.setMessage("Please wait....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.show();
-
-        domain = context.getResources().getString(R.string.service_domain);
-
-        // Global_Val global_Val = new Global_Val();
-//        if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
-//            domain = context.getResources().getString(R.string.service_domain);
-//        }
-//        else
-//        {
-//            domain = URL.toString();
-//        }F
-
-
-        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + device_id);
-
-        StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + device_id,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //showJSON(response);
-                        // Log.d("jV", "JV" + response);
-                        Log.d("jV", "JV length" + response.length());
-                        // JSONObject person = (JSONObject) (response);
-                        try {
-                            JSONObject json = new JSONObject(new JSONTokener(response));
-                            try {
-
-                                String response_result = "";
-                                if (json.has("result")) {
-                                    response_result = json.getString("result");
-                                } else {
-                                    response_result = "data";
-                                }
-
-
-                                if (response_result.equalsIgnoreCase("Data is up to date.")) {
-
-                                    Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-
-                                } else if (response_result.equalsIgnoreCase("Device not registered")) {
-
-                                    Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
-
-                                } else {
-
-                                    JSONArray users = json.getJSONArray("users");
-//
-                                    Log.i("volley", "response reg users Length: " + users.length());
-//
-                                    Log.d("users", "users" + users.toString());
-//
-                                    //
-
-                                    for (int i = 0; i < users.length(); i++) {
-
-                                        JSONObject jsonObject = users.getJSONObject(i);
-
-                                        Config.YOUTUBE_VIDEO_CODE = jsonObject.getString("user_name");
-
-                                        Config.YOUTUBE_VIDEO_DATE = jsonObject.getString("user_name");
-                                        Config.YOUTUBE_VIDEO_DISCRIPTION = jsonObject.getString("user_name");
-
-//                                        loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
-//                                                jsonObject.getString("first_name"), jsonObject.getString("last_name"),"", "", "", "", "",
-//                                                "", Device_id, "", jsonObject.getString("address"),"","", jsonObject.getString("id"));
-                                    }
-
-                                    Intent launch = new Intent(context, Youtube_Player_Activity.class);
-                                    context.startActivity(launch);
-
-                                    dialog.dismiss();
-                                    //finish();
-
-                                }
-
-                                //  finish();
-                                // }
-
-                                // output.setText(data);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                dialog.dismiss();
-                            }
-
-
-                            dialog.dismiss();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            //  finish();
-                            dialog.dismiss();
-                        }
-                        dialog.dismiss();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                            Toast.makeText(context,
-                                    "Network Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof AuthFailureError) {
-                            Toast.makeText(context,
-                                    "Server AuthFailureError  Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof ServerError) {
-                            Toast.makeText(context,
-                                    "Server   Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof NetworkError) {
-                            Toast.makeText(context,
-                                    "Network   Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else if (error instanceof ParseError) {
-                            Toast.makeText(context,
-                                    "ParseError   Error",
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
-
-                        }
-                        dialog.dismiss();
-                        // finish();
-                    }
-                });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-        int socketTimeout = 300000;//30 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        stringRequest.setRetryPolicy(policy);
-        // requestQueue.se
-        //requestQueue.add(jsObjRequest);
-        stringRequest.setShouldCache(false);
-        requestQueue.getCache().clear();
-        requestQueue.add(stringRequest);
-    }
 
     private static class LongOperation extends AsyncTask<String, Void, String> {
         @Override
@@ -2852,23 +2543,86 @@ public class getServices {
                         editor.commit();
                     }
 
+                    String starttime="";
+                    if (json.has("location_schedule_start_time")) {
+                        starttime=json.getString("location_schedule_start_time");
+                        try {
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("StartTime", starttime);
+                            editor.commit();
+
+                        }catch (Exception ex){
+                            ex.printStackTrace();
+
+                        }
+
+
+                    }
+                    String endtime="";
+                    if (json.has("location_schedule_end_time")) {
+                        endtime=json.getString("location_schedule_end_time");
+                        try{
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("Endtime", endtime);
+
+                            editor.commit();
+
+                        }catch (Exception ex){
+                        ex.printStackTrace();
+
+                    }
+
+
+                    }
+                    String intervaltime="";
+                    if (json.has("location_schedule_interval_time")) {
+                        intervaltime=json.getString("location_schedule_interval_time");
+                        try {
+                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                            SharedPreferences.Editor editor = spf.edit();
+                            editor.putString("Interval", intervaltime);
+                            editor.commit();
+
+                        }catch (Exception ex){
+                            ex.printStackTrace();
+
+                        }
+
+
+                    }
+
+
+
                     String user_ranks_date = "";
                     if (json.has("rank_date")) {
-                        user_ranks_date = json.getString("rank_date");
 
                         try
                         {
-                            String myFormat = "yyyy-MM-dd"; //In which you need put here
-                            SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
-                            Date date = sdf.parse(Check_Null_Value.ranknullcheck(user_ranks_date));
-                            String myFormatnew = "dd-MM-yyyy";
-                            SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(json.getString("rank_date"))) {
+                                user_ranks_date = json.getString("rank_date");
+                                String myFormat = "yyyy-MM-dd"; //In which you need put here
+                                SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+                                Date date = sdf.parse(Check_Null_Value.ranknullcheck(user_ranks_date));
+                                String myFormatnew = "dd-MM-yyyy";
+                                SimpleDateFormat datenew = new SimpleDateFormat(myFormatnew);
 
-                            SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
-                            SharedPreferences.Editor editor = spf.edit();
-                            editor.putString("rank_date", datenew.format(date));
+                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("rank_date", datenew.format(date));
 
-                            editor.commit();
+                                editor.commit();
+                            }
+                            else
+                            {
+                                SharedPreferences spf = context.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("rank_date", user_ranks_date);
+
+                                editor.commit();
+                            }
+
 
                         }catch (Exception ex)
                         {
@@ -2907,6 +2661,7 @@ public class getServices {
                         // Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
 
                     } else {
+
 
                         JSONArray items = json.getJSONArray("products");
                         JSONArray customers = json.getJSONArray("customers");
@@ -3151,14 +2906,16 @@ public class getServices {
                                 }
 
 
+                            /* IDS column used for BU Head */
+
                             for (int i = 0; i < users_emp.length(); i++) {
 
                                 JSONObject jsonObject = users_emp.getJSONObject(i);
 
                                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("address"))) {
-                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), jsonObject.getString("address"));
+                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), jsonObject.getString("address"),jsonObject.getString("BU_heads"));
                                 } else {
-                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), "");
+                                    dbvoc.updateUserEMPNO_BY_EMILID(jsonObject.getString("emp_code"), jsonObject.getString("email"), "",jsonObject.getString("BU_heads"));
                                 }
 
 
@@ -3175,14 +2932,14 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = Order_Category.getJSONObject(i);
-                                loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "");
+                                loginDataBaseAdapter.insert_ORDER_CATEGORY(jsonObject.getString("id"), jsonObject.getString("name"), "", "", "", "");
 
                             }
 
                             for (int i = 0; i < payment_terms.length(); i++) {
 
                                 JSONObject jsonObject = payment_terms.getJSONObject(i);
-                                loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("code"), jsonObject.getString("name"), "", "", "", "", "", "");
+                                loginDataBaseAdapter.insert_asset_code_table_data(jsonObject.getString("id"), jsonObject.getString("name"), "", "", "", "", "", "");
 
                             }
 
@@ -3190,7 +2947,7 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = schemes.getJSONObject(i);
-                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
+                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
 
                             }
 
@@ -3198,7 +2955,7 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = warehouse.getJSONObject(i);
-                                loginDataBaseAdapter.insert_Warehouse("", jsonObject.getString("code"), "", jsonObject.getString("name"), "", jsonObject.getString("city_code"), jsonObject.getString("state_code"), "", "", "", "", "");
+                                loginDataBaseAdapter.insert_Warehouse("", jsonObject.getString("id"), "", jsonObject.getString("name"), "", jsonObject.getString("city_id"), jsonObject.getString("state_id"), "", "", "", "", "");
 
                             }
 
@@ -3209,7 +2966,7 @@ public class getServices {
 
                                     JSONObject jsonObject = items.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
+                                    loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                             jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                             jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
                                             jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
@@ -3222,10 +2979,10 @@ public class getServices {
 
                                     JSONObject jsonObject = items.getJSONObject(i);
 
-                                    dbvoc.getDeletePRODUCT(jsonObject.getString("code"));
+                                    dbvoc.getDeletePRODUCT(jsonObject.getString("id"));
 
                                     if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                        loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
+                                        loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                                 jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                                 jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
                                                 jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
@@ -3239,8 +2996,8 @@ public class getServices {
                                 for (int i = 0; i < customers.length(); i++) {
 
                                     JSONObject jsonObject = customers.getJSONObject(i);
-                                    loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                            jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
+                                    loginDataBaseAdapter.insertCustMaster(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                            jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("beat_id"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
 //
 
                                 }
@@ -3248,11 +3005,11 @@ public class getServices {
                                 for (int i = 0; i < customers.length(); i++) {
 
                                     JSONObject jsonObject = customers.getJSONObject(i);
-                                    dbvoc.getDeleteCustomer(jsonObject.getString("code"));
+                                    dbvoc.getDeleteCustomer(jsonObject.getString("id"));
 
                                     if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                        loginDataBaseAdapter.insertCustMaster(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
-                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("beat_code"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
+                                        loginDataBaseAdapter.insertCustMaster(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
+                                                jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("beat_id"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
                                     }
 
 
@@ -3267,10 +3024,10 @@ public class getServices {
                                 JSONObject jsonObject = distributors.getJSONObject(i);
 
 
-                                loginDataBaseAdapter.insertDistributors(jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("shop_name"),
+                                loginDataBaseAdapter.insertDistributors(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"),
                                         jsonObject.getString("address1"), jsonObject.getString("address2"), jsonObject.getString("street"),
-                                        jsonObject.getString("landmark"), jsonObject.getString("state_code"),
-                                        jsonObject.getString("city_code"), jsonObject.getString("pincode"),
+                                        jsonObject.getString("landmark"), jsonObject.getString("state_id"),
+                                        jsonObject.getString("city_id"), jsonObject.getString("pincode"),
                                         jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"),
                                         jsonObject.getString("email"), jsonObject.getString("status"));
 
@@ -3283,12 +3040,12 @@ public class getServices {
                                 JSONObject jsonObject = reasons.getJSONObject(i);
 
                                 if (!jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                    dbvoc.getDeleteNOOrder(jsonObject.getString("code"));
+                                    dbvoc.getDeleteNOOrder(jsonObject.getString("id"));
                                 }
 
 
                                 if (jsonObject.getString("status").equalsIgnoreCase("active")) {
-                                    loginDataBaseAdapter.insertno_orderReason(jsonObject.getString("code"), jsonObject.getString("desc"));
+                                    loginDataBaseAdapter.insertno_orderReason(jsonObject.getString("id"), jsonObject.getString("desc"));
                                 }
 
 
@@ -3299,8 +3056,8 @@ public class getServices {
 
                                 JSONObject jsonObject = states.getJSONObject(i);
 
-                                loginDataBaseAdapter.insertStates("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("status"), "",
-                                        "", "", jsonObject.getString("code"));
+                                loginDataBaseAdapter.insertStates("", "", jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("status"), "",
+                                        "", "", jsonObject.getString("id"));
 
                             }
 //                        }
@@ -3328,16 +3085,16 @@ public class getServices {
 
                                 JSONObject jsonObject = cities.getJSONObject(i);
 
-                                loginDataBaseAdapter.insertCities("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("status"), "",
-                                        "", "", "", jsonObject.getString("code"));
+                                loginDataBaseAdapter.insertCities("", "", jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("state_id"), jsonObject.getString("status"), "",
+                                        "", "", "", jsonObject.getString("id"));
 
                             }
 
                             for (int i = 0; i < beats.length(); i++) {
 
                                 JSONObject jsonObject = beats.getJSONObject(i);
-                                loginDataBaseAdapter.insertBeats("", "", jsonObject.getString("code"), jsonObject.getString("name"), jsonObject.getString("state_code"), jsonObject.getString("city_code"), jsonObject.getString("status"), "",
-                                        "", "", "", jsonObject.getString("code"));
+                                loginDataBaseAdapter.insertBeats("", "", jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("status"), "",
+                                        "", "", "", jsonObject.getString("id"));
 
                             }
 
@@ -3345,7 +3102,7 @@ public class getServices {
 
                                 JSONObject jsonObject = Survey_Questions.getJSONObject(i);
 
-                                loginDataBaseAdapter.insert_Survey_Questions(jsonObject.getString("survey_code"), jsonObject.getString("question_code"), jsonObject.getString("active_from"), jsonObject.getString("active_to"), jsonObject.getString("question"), jsonObject.getString("option1"), jsonObject.getString("option2"), jsonObject.getString("option3"), jsonObject.getString("option4"), jsonObject.getString("option5"), "", "");
+                                loginDataBaseAdapter.insert_Survey_Questions(jsonObject.getString("survey_id"), jsonObject.getString("question_id"), jsonObject.getString("active_from"), jsonObject.getString("active_to"), jsonObject.getString("question"), jsonObject.getString("option1"), jsonObject.getString("option2"), jsonObject.getString("option3"), jsonObject.getString("option4"), jsonObject.getString("option5"), "", "");
 
                             }
 
@@ -3353,7 +3110,7 @@ public class getServices {
 
                                 JSONObject jsonObject = distributor_beats.getJSONObject(i);
 
-                                loginDataBaseAdapter.insert_DistriButorBeat(jsonObject.getString("code"), jsonObject.getString("distributor_code"), jsonObject.getString("beat_code"), jsonObject.getString("status"));
+                                loginDataBaseAdapter.insert_DistriButorBeat(jsonObject.getString("id"), jsonObject.getString("distributor_id"), jsonObject.getString("beat_id"), jsonObject.getString("status"));
 
                             }
 
@@ -3365,7 +3122,7 @@ public class getServices {
 
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_id"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                                 }
@@ -3377,10 +3134,10 @@ public class getServices {
                                     JSONObject jsonObject = credit_profile.getJSONObject(i);
 
                                     try {
-                                        dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"));
+                                        dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_id"), jsonObject.getString("business_unit"));
 //                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"), "", jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
 
-                                        loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                                        loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_id"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
                                     } catch (Exception ex) {
                                         ex.printStackTrace();
@@ -3441,6 +3198,7 @@ public class getServices {
                         final String finalResponse_result1 = response_result;
                         ((Activity) context).runOnUiThread(new Runnable() {
                             public void run() {
+                                Global_Data.LOCATION_SERVICE_HIT = "TRUE";
                                 Toast.makeText(context, "items Sync Successfully.", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
 
@@ -3524,8 +3282,8 @@ public class getServices {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "targets?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + device_id + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "targets?imei_no=" + "" + "&email=" + Global_Data.GLOvel_USER_EMAIL);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + "" + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -3688,6 +3446,19 @@ public class getServices {
         protected Void doInBackground(Void... params) {
 
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             String uploadImage = "";
             dbvoc = new DataBaseHelper(context);
 
@@ -3728,9 +3499,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -3750,7 +3521,7 @@ public class getServices {
                     Order_number = cn.get_category_code();
                     // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                     // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", cn.get_category_id());
+                    product_value.put("customer_id", cn.get_category_id());
                     product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlatitude()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(cn.getlongitude())) {
@@ -3762,14 +3533,14 @@ public class getServices {
                         product_value.put("longitude", Global_Data.GLOvel_LONGITUDE);
                     }
 
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
                     product_value.put("details1", detail1);
                     product_value.put("details2", detail2);
                     product_value.put("details3", detail3);
                     product_value.put("details4", detail4);
-                    product_value.put("order_category_code", cn.getOrder_category_type());
+                    product_value.put("order_category_id", cn.getOrder_category_type());
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("payment_term_code", cn.getAsset_code());
+                    product_value.put("payment_term_id", cn.getAsset_code());
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getimg_ordersign())) {
                         order_image_url = cn.getimg_ordersign().trim();
@@ -3839,11 +3610,11 @@ public class getServices {
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
                         item.put("order_number", cnp.get_category_code());
-                        item.put("item_number", cnp.get_delivery_product_id());
+                        item.put("item_id", cnp.get_delivery_product_id());
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
-                        item.put("scheme_code", cnp.getSche_code());
+                        item.put("scheme_id", cnp.getSche_code());
 
                         total_ammount += Double.valueOf(cnp.get_Claims_amount());
 
@@ -3865,7 +3636,8 @@ public class getServices {
                 product_valuenew.put("orders", order);
                 product_valuenew.put("order_products", product);
                 product_valuenew.put("customers", customer);
-                product_valuenew.put("imei_no", Global_Data.device_id);
+                product_valuenew.put("imei_no", "");
+                product_valuenew.put("email", user_email);
                 Log.d("customers", customer.toString());
 
                 Log.d("Orders", order.toString());
@@ -3884,7 +3656,8 @@ public class getServices {
 
                 //String URL = Prefs.GetPreferences("URL");
                 String domain = context.getResources().getString(R.string.service_domain);
-                Log.i("volley", "domain: " + domain);
+                Log.i("volley", "domain: " + domain+"orders/save_orders"+product_valuenew);
+
                 JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, domain + "orders/save_orders", product_valuenew, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -4205,6 +3978,20 @@ public class getServices {
             String uploadImage = "";
             dbvoc = new DataBaseHelper(context);
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+
             Calendar c = Calendar.getInstance();
             System.out.println("Current time =&gt; " + c.getTime());
 
@@ -4323,7 +4110,7 @@ public class getServices {
                         for (Local_Data cnp : contactsproduct) {
                             JSONObject item = new JSONObject();
                             // item.put("order_number", cnp.get_category_code());
-                            item.put("product_code", cnp.get_delivery_product_id());
+                            item.put("product_id", cnp.get_delivery_product_id());
                             item.put("total_qty", cnp.get_stocks_product_quantity());
                             item.put("MRP", cnp.getMRP());
                             item.put("amount", cnp.get_Claims_amount());
@@ -4362,7 +4149,8 @@ public class getServices {
 
 
                     multipart.addFormField("sub_dealer_order_details", product.toString());
-                    multipart.addFormField("imei_no", Global_Data.device_id);
+                    multipart.addFormField("imei_no", "");
+                    multipart.addFormField("email",user_email);
 
                     if (!order_image_url.equalsIgnoreCase("")) {
                         multipart.addFormField("is_picture1", "true");
@@ -4571,6 +4359,19 @@ public class getServices {
 
             //String strDate = sdf.format(c.getTime());
 
+            SharedPreferences sp = context.getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            String user_email = "";
+
+            try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                    user_email = sp.getString("USER_EMAIL", "");
+                } else {
+                    user_email = Global_Data.GLOvel_USER_EMAIL;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
 
             final ArrayList<String> order_results = new ArrayList<String>();
 
@@ -4614,9 +4415,9 @@ public class getServices {
                     product_value.put("mobile_no", cn.getMOBILE_NO());
                     product_value.put("email", cn.getEMAIL_ADDRESS());
                     product_value.put("status", cn.getSTATUS());
-                    product_value.put("state_code", cn.getSTATE_ID());
-                    product_value.put("city_code", cn.getCITY_ID());
-                    product_value.put("beat_code", cn.getBEAT_ID());
+                    product_value.put("state_id", cn.getSTATE_ID());
+                    product_value.put("city_id", cn.getCITY_ID());
+                    product_value.put("beat_id", cn.getBEAT_ID());
                     product_value.put("vatin", cn.getvatin());
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
@@ -4644,16 +4445,16 @@ public class getServices {
                     ++order_count;
                     // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                     // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", cn.get_category_id());
+                    product_value.put("customer_id", cn.get_category_id());
 
                     product_value.put("email", cn.getuser_email());
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
 
                     product_value.put("details1", cn.getOrder_detail1());
                     product_value.put("details2", cn.getOrder_detail2());
                     product_value.put("details3", cn.getOrder_detail3());
                     product_value.put("details4", cn.getOrder_detail4());
-                    product_value.put("order_category_code", cn.getOrder_category_type());
+                    product_value.put("order_category_id", cn.getOrder_category_type());
 
 
                     // product_value.put("signature", cn.getSignature_image());
@@ -4675,7 +4476,7 @@ public class getServices {
                     }
 
                     product_value.put("shipment_priority", cn.getshipment_pri());
-                    product_value.put("payment_term_code", cn.getAsset_code());
+                    product_value.put("payment_term_id", cn.getAsset_code());
                     // product_value.put("signature_path", cn.getSignature_image());
 
                     if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cn.getSignature_image())) {
@@ -4739,11 +4540,11 @@ public class getServices {
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
                         item.put("order_number", cnp.get_category_code());
-                        item.put("item_number", cnp.get_delivery_product_id());
+                        item.put("item_id", cnp.get_delivery_product_id());
                         item.put("total_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
-                        item.put("scheme_code", cnp.getSche_code());
+                        item.put("scheme_id", cnp.getSche_code());
 
                         PRODUCTOrder_ids.add(cnp.get_category_code());
 
@@ -4779,7 +4580,7 @@ public class getServices {
                     customer_id = cn.get_category_id();
                     // product_value.put("order_date", cn.getCUSTOMER_ORDER_DATE());
                     // product_value.put("order_take_by", "");
-                    product_value.put("customer_code", customer_id);
+                    product_value.put("customer_id", customer_id);
 
                     product_value.put("email", Global_Data.GLOvel_USER_EMAIL);
 
@@ -4787,7 +4588,7 @@ public class getServices {
                     product_value.put("latitude", cn.getlatitude());
                     product_value.put("longitude", cn.getlongitude());
                     product_value.put("signature_path", cn.getSignature_image());
-                    product_value.put("distributor_code", cn.getDISTRIBUTER_ID());
+                    product_value.put("distributor_id", cn.getDISTRIBUTER_ID());
                     // product_value.put("customer_account_code", cn.getCUSTOMER_ID());
                     // product_value.put("remarks", cn.getCUSTOMER_REMARKS());
                     //product_value.put("signature_image_name", uploadImage);
@@ -4808,7 +4609,7 @@ public class getServices {
                     for (Local_Data cnp : contactsproduct) {
                         JSONObject item = new JSONObject();
                         item.put("order_number", cnp.get_category_code());
-                        item.put("item_number", cnp.get_delivery_product_id());
+                        item.put("item_id", cnp.get_delivery_product_id());
                         item.put("total_return_qty", cnp.get_stocks_product_quantity());
                         item.put("MRP", cnp.getMRP());
                         item.put("amount", cnp.get_Claims_amount());
@@ -4832,13 +4633,13 @@ public class getServices {
 
                 for (Local_Data cn : no_order_con) {
                     JSONObject product_value = new JSONObject();
-                    product_value.put("customer_code", cn.getLEGACY_CUSTOMER_CODE());
+                    product_value.put("customer_id", cn.getLEGACY_CUSTOMER_CODE());
                     product_value.put("order_number", cn.getorder_number());
 
                     if (cn.getreason_type().equalsIgnoreCase("Other")) {
                         product_value.put("reason_name", cn.getreason_code());
                     } else {
-                        product_value.put("reason_code", cn.getreason_code());
+                        product_value.put("reason_id", cn.getreason_code());
                     }
 
 
@@ -4873,7 +4674,8 @@ public class getServices {
                     product_valuenew.put("return_order_products", product_return);
                     product_valuenew.put("no_orders", no_orders);
                     product_valuenew.put("customers", customer);
-                    product_valuenew.put("imei_no", Global_Data.device_id);
+                    product_valuenew.put("imei_no", "");
+                    product_valuenew.put("email",user_email);
 
                     Log.d("Orders", order.toString());
                     Log.d("order_products", product.toString());

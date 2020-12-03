@@ -394,6 +394,65 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting All Local_Data
+    public List<Local_Data> getBunit(String bunit) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("select DISTINCT b_unit FROM item_master WHERE b_unit = ? GROUP BY name ORDER BY name",
+                new String[]{bunit});
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setBunit(cursor.getString(0));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        return contactList1;
+    }
+
+    // Getting product data
+    public List<Spiner_List_Model> getAllProducta_BU_Wise(String bunit) {
+        List<Spiner_List_Model> contactList14 = new ArrayList<Spiner_List_Model>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master WHERE b_unit = ?" + " LIMIT 200",  new String[]{bunit});
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Spiner_List_Model contact = new Spiner_List_Model();
+                    contact.setCode(cursor.getString(0));
+                    contact.setProduct_variant(cursor.getString(1));
+                    contact.setBusiness_unit(cursor.getString(2));
+
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting All Local_Data
     public List<Local_Data> getB_Unit_byName(String BUSINESS_UNIT) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
@@ -559,41 +618,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return contactList1;
     }
 
-    // Getting All Local_Data
-    public List<Local_Data> getBunit_id(String bunit) {
-        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
-        // Select All Query
-        String selectQuery1 = "SELECT code FROM " + TABLE_ITEM_MASTER + " WHERE b_unit = '" + bunit + "'";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        // Cursor cursor = db.rawQuery(selectQuery1, null);
-
-        Cursor cursor = db.rawQuery("select code FROM item_master WHERE b_unit = ? GROUP BY name ORDER BY name",
-                new String[]{bunit});
-
-        // looping through all rows and adding to list
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    Local_Data contact = new Local_Data();
-                    contact.setSTATE_ID(cursor.getString(0));
-                    //contact.setPwd(cursor.getString(2));
-                    //contact.setImei(cursor.getString(3));
-
-                    // Adding contact to list
-                    contactList1.add(contact);
-                } while (cursor.moveToNext());
-            }
-        } finally {
-            // this gets called even if there is an exception somewhere above
-            if (cursor != null)
-                cursor.close();
-        }
-
-        db.close();
-        // return contact list?
-        return contactList1;
-    }
 
     // Getting All Account Data
     public List<Local_Data> getAllLabels() {
@@ -1191,16 +1216,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Getting All Local_Data
-    public List<Local_Data> getUSERAddressBY_Email(String email) {
+    public List<Local_Data> getUSERBY_Email(String email) {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
-        // Select All Query
-//        String selectQuery1 = "SELECT  username,password,email_id,ids,reporting_to,first_name,last_name FROM " + TABLE_REG + " WHERE username = '" +  name + "'" + " GROUP BY username ORDER BY username";
 
         SQLiteDatabase db = this.getWritableDatabase();
-        // Cursor cursor = db.rawQuery(selectQuery1, null);
-
-
-        Cursor cursor = db.rawQuery("select username,city_id FROM users WHERE email_id = ? GROUP BY email_id ORDER BY email_id",
+        Cursor cursor = db.rawQuery("select username,city_id,ids FROM users WHERE email_id = ? GROUP BY email_id ORDER BY email_id",
                 new String[]{email});
 
 
@@ -1211,6 +1231,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     Local_Data contact = new Local_Data();
                     contact.setUser(cursor.getString(0));
                     contact.setAddress(cursor.getString(1));
+                    contact.setBunit(cursor.getString(2));
 
                     contactList1.add(contact);
                 } while (cursor.moveToNext());
@@ -1573,9 +1594,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return contactList1;
     }
 
+
+
     public void update_user_createDate(String cur_date, String email_id) {
 
         String selectQuery = "UPDATE " + TABLE_REG + " SET cur_date = '" + cur_date + "'" + " WHERE email_id = '" + email_id + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.execSQL(selectQuery);
+        db.close();
+    }
+
+    public void update_user_createD(String cur_date, String username) {
+
+        String selectQuery = "UPDATE " + TABLE_REG + " SET cur_date = '" + cur_date + "'" + " WHERE username = '" + username + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -1615,7 +1648,41 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         // return contact list?
         return contactList1;
-    }//
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getSyncDate(String username) {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT cur_date FROM " + TABLE_REG + " WHERE username = '" + username + "'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        // looping through all rows and adding to list
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCur_date(cursor.getString(0));
+                    //contact.setPwd(cursor.getString(1));
+                    //contact.setPwd(cursor.getString(2));
+                    //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
 
     // Getting All Local_Data
     public List<Local_Data> get_email(String device_id) {
@@ -2409,6 +2476,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     contact.setStateName(cursor.getString(4));
                     //contact.setPwd(cursor.getString(2));
                     //contact.setImei(cursor.getString(3));
+
+                    // Adding contact to list
+                    contactList1.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList1;
+    }
+
+    // Getting All Local_Data
+    public List<Local_Data> getAllCityOrderbyname() {
+        List<Local_Data> contactList1 = new ArrayList<Local_Data>();
+        // Select All Query
+        String selectQuery1 = "SELECT code,name FROM " + TABLE_CITIES + " GROUP BY name ORDER BY name";;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery1, null);
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Local_Data contact = new Local_Data();
+                    contact.setCode(cursor.getString(0));
+                    contact.setName(cursor.getString(1));
 
                     // Adding contact to list
                     contactList1.add(contact);
@@ -8752,20 +8850,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateUserEMPNO_BY_EMILID(String emp_code, String email_id, String address) {
-
-        // address = address.replaceAll("'","\'");
-
-
-        //String selectQuery = "UPDATE " + TABLE_REG + " SET emp_code = '" +  emp_code  + "'," + "city_id = '"  +  address + "'" + " WHERE email_id = '" +  email_id    + "'";
+    public void updateUserEMPNO_BY_EMILID(String emp_code, String email_id, String address,String BU_heads) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-
-        //db.execSQL(selectQuery);
 
         ContentValues cv = new ContentValues();
         cv.put("emp_code", emp_code); //These Fields should be your String values of actual column names
         cv.put("city_id", address);
+        cv.put("ids", BU_heads);
         db.update(TABLE_REG, cv, "email_id" + " = ?", new String[]{email_id});
 
 
@@ -9719,6 +9811,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor;
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
             cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit IN (" + Global_Data.Business_unit_code_array + ") AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
+        } else {
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
+        }
+
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    Spiner_List_Model contact = new Spiner_List_Model();
+                    contact.setCode(cursor.getString(0));
+                    contact.setProduct_variant(cursor.getString(1));
+                    contact.setBusiness_unit(cursor.getString(2));
+
+                    // Adding contact to list
+                    contactList14.add(contact);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            // this gets called even if there is an exception somewhere above
+            if (cursor != null)
+                cursor.close();
+        }
+
+        db.close();
+        // return contact list?
+        return contactList14;
+    }
+
+    // Getting product data
+    public List<Spiner_List_Model> varientserchRetailer(String product_variant) {
+        List<Spiner_List_Model> contactList14 = new ArrayList<Spiner_List_Model>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor = db.rawQuery(selectQuery, null);
+
+//        Cursor cursor = db.rawQuery("select code,product_variant FROM item_master WHERE product_variant = ? GROUP BY product_variant",
+//                new String[]{product_variant});
+        Cursor cursor;
+        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit = ? AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100",  new String[]{Global_Data.Business_unit_code_array});
         } else {
             cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
         }

@@ -10,12 +10,17 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,11 +28,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.adapter.OutstandingAdapter;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.helper.MyValueFormatter;
 import com.anchor.helper.PrefManager;
 import com.anchor.helper.SimpleDividerItemDecoration;
@@ -58,6 +63,8 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import cpm.simplelogic.helper.ConnectionDetector;
 
 import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString;
@@ -132,6 +139,21 @@ public class OutstandingActivity extends Activity {
 ////                finish();
 ////            }
 ////        });
+
+
+        Global_Data.context = OutstandingActivity.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
 
         try

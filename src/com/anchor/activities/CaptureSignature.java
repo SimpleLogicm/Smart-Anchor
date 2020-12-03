@@ -51,6 +51,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Product;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
@@ -68,12 +74,17 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cpm.simplelogic.helper.GPSTracker;
 
@@ -81,6 +92,10 @@ import cpm.simplelogic.helper.GPSTracker;
 //import com.simplelogic.webservice.GmailSender;
 
 public class CaptureSignature extends BaseActivity {
+    private static final String DATE_PATTERN =
+            "(0?[1-9]|1[012]) [/.-] (0?[1-9]|[12][0-9]|3[01]) [/.-] ((19|20)\\d\\d)";
+    private Matcher matcher;
+    private Pattern pattern;
     private String Signature_path = "";
     private Bitmap mImageBitmap;
     private String mCurrentPhotoPath = "";
@@ -138,6 +153,18 @@ public class CaptureSignature extends BaseActivity {
 
 
         cd = new ConnectionDetector(getApplicationContext());
+
+        Global_Data.context = CaptureSignature.this;
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
         SharedPreferences sp = this.getSharedPreferences("SimpleLogic", 0);
 
@@ -683,7 +710,7 @@ public class CaptureSignature extends BaseActivity {
         String message_flag = "";
         boolean error = false;
         String errorMessage = "";
-
+        matcher = Pattern.compile(DATE_PATTERN).matcher(order_detail1.getText().toString());
 
         if (order_type.getSelectedItem().toString().equalsIgnoreCase("Select Order Type")) {
             s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
@@ -696,7 +723,17 @@ public class CaptureSignature extends BaseActivity {
             errorMessage = errorMessage + "Please Enter " + detail1str;
             error = true;
 
-        } else if (strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase("")) {
+        }else if(!isValid(order_detail1.getText().toString()))
+        {
+            s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
+            order_detail1.requestFocus();
+            errorMessage = errorMessage + "Please Enter Valid " + detail1str;
+            error = true;
+
+        }
+
+
+        else if (strdetail2_mandate.equalsIgnoreCase("true") && order_detail2.getText().toString().equalsIgnoreCase("")) {
             s_container_l.smoothScrollTo(txtWelcomeUser.getScrollX(), txtWelcomeUser.getScrollY());
             order_detail2.requestFocus();
             errorMessage = errorMessage + "Please Enter " + detail2str;
@@ -1173,7 +1210,12 @@ public class CaptureSignature extends BaseActivity {
                                                 }
                                                 // Continue only if the File was successfully created
                                                 if (photoFile != null) {
-                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    Uri photoURI = FileProvider.getUriForFile(CaptureSignature.this,
+                                                            BuildConfig.APPLICATION_ID + ".provider",
+                                                            photoFile);
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                                    cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                                //    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                                                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                                                 }
                                             }
@@ -1182,7 +1224,7 @@ public class CaptureSignature extends BaseActivity {
 
                                             // image_check = "gallery";
                                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
+                                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                             startActivityForResult(intent, 2);
 
 
@@ -1546,4 +1588,68 @@ public class CaptureSignature extends BaseActivity {
     }
 
 
+    public boolean validate(final String date){
+
+        matcher = pattern.matcher(date);
+
+        if(matcher.matches()){
+            matcher.reset();
+
+            if(matcher.find()){
+                String day = matcher.group(1);
+                String month = matcher.group(2);
+                int year = Integer.parseInt(matcher.group(3));
+
+                if (day.equals("31") &&
+                        (month.equals("4") || month .equals("6") || month.equals("9") ||
+                                month.equals("11") || month.equals("04") || month .equals("06") ||
+                                month.equals("09"))) {
+                    return false; // only 1,3,5,7,8,10,12 has 31 days
+                }
+
+                else if (month.equals("2") || month.equals("02")) {
+                    //leap year
+                    if(year % 4==0){
+                        if(day.equals("30") || day.equals("31")){
+                            return false;
+                        }
+                        else{
+                            return true;
+                        }
+                    }
+                    else{
+                        if(day.equals("29")||day.equals("30")||day.equals("31")){
+                            return false;
+                        }
+                        else{
+                            return true;
+                        }
+                    }
+                }
+
+                else{
+                    return true;
+                }
+            }
+
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+//
+public boolean isValid(String dateStr) {
+    DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+    sdf.setLenient(false);
+    try {
+        sdf.parse(dateStr);
+    } catch (ParseException e) {
+        return false;
+    }
+    return true;
+}
 }

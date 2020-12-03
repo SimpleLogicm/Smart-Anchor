@@ -2,7 +2,7 @@ package cpm.simplelogic.helper;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.view.MotionEventCompat;
+import androidx.core.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;

@@ -30,9 +30,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.widget.DrawerLayout;
+import androidx.legacy.app.ActionBarDrawerToggle;
+import androidx.core.app.NotificationCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,6 +49,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.animation.ActivitySwitcher;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Promotional_Model;
 import com.anchor.service.LocationServices;
 import com.anchor.service.StartLocationAlert;
@@ -75,6 +80,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity {
     private RequestQueue requestQueue;
@@ -149,6 +155,7 @@ public class MainActivity extends BaseActivity {
         Global_Data.target_amount = "";
         Global_Data.target_grpby = "";
         Global_Data.Search_business_unit_name = "";
+        Global_Data.Business_unit_code_array = "";
         Global_Data.Search_Category_name = "";
         Global_Data.Search_BusinessCategory_name = "";
         Global_Data.Search_brand_name = "";
@@ -157,6 +164,19 @@ public class MainActivity extends BaseActivity {
         loginDataBaseAdapter = loginDataBaseAdapter.open();
 
         //scheduleNotify();
+
+        Global_Data.context = MainActivity.this;
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         Calendar c1 = Calendar.getInstance();
         //System.out.println("Current time => " + c.getTime());
@@ -219,33 +239,33 @@ public class MainActivity extends BaseActivity {
 //        	todaysTarget.setText("Target/Acheived : Rs "+String.format(sp.getFloat("Target",0)+"/"+sp.getFloat("Achived", 0)));
 //		}
 
-            if (sp.getFloat("Target", 0) == 0.0) {
+//            if (sp.getFloat("Target", 0) == 0.0) {
                 isInternetPresent = cd.isConnectingToInternet();
                 if (isInternetPresent) {
                     getTargetDatamain();
                 }
-            } else {
-                try {
-                    int target = Math.round(sp.getFloat("Target", 0));
-                    int achieved = Math.round(sp.getFloat("Achived", 0));
-                    Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
-
-                    if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
-                        int age = Math.round(age_float);
-
-                        todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
-                    } else {
-                        int age = Math.round(age_float);
-
-                        todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
-                    }
-
-                    //	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
+//            } else {
+//                try {
+//                    int target = Math.round(sp.getFloat("Target", 0));
+//                    int achieved = Math.round(sp.getFloat("Achived", 0));
+//                    Float age_float = (sp.getFloat("Achived", 0) / sp.getFloat("Target", 0)) * 100;
+//
+//                    if (String.valueOf(age_float).equalsIgnoreCase("infinity")) {
+//                        int age = Math.round(age_float);
+//
+//                        todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + "infinity") + "%" + "]");
+//                    } else {
+//                        int age = Math.round(age_float);
+//
+//                        todaysTarget.setText("T/A : Rs " + String.format(target + "/" + achieved + " [" + age) + "%" + "]");
+//                    }
+//
+//                    //	todaysTarget.setText("T/A : Rs "+String.format(target+"/"+achieved+" ["+age)+"%"+"]");
+//
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
 
             Log.d("pre value", "Pre value" + sp.getFloat("Target", 0));
 
@@ -828,7 +848,7 @@ public class MainActivity extends BaseActivity {
         t_total = 0;
         achived_total = 0;
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
+        //String device_id = sp.getString("devid", "");
 
         calendarn = Calendar.getInstance();
         year = calendarn.get(Calendar.YEAR);
@@ -851,8 +871,8 @@ public class MainActivity extends BaseActivity {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + user_email);
-            Log.i("target url", "target url " + domain + "targets?imei_no=" + device_id + "&email=" + user_email);
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + device_id + "&email=" + user_email, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "targets?imei_no=" + "" + "&email=" + user_email);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "targets?imei_no=" + "" + "&email=" + user_email, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -1142,7 +1162,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = delivery_products.getJSONObject(i);
 
-                            loginDataBaseAdapter.insertDeliveryProducts("", jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("order_quantity"), jsonObject.getString("delivered_quantity"), jsonObject.getString("truck_number"), jsonObject.getString("transporter_details"), "", "", jsonObject.getString("product_name") + "" + "" + "");
+                            loginDataBaseAdapter.insertDeliveryProducts("", jsonObject.getString("customer_id"), jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("order_quantity"), jsonObject.getString("delivered_quantity"), jsonObject.getString("truck_number"), jsonObject.getString("transporter_details"), "", "", jsonObject.getString("product_name") + "" + "" + "");
 
 
                         }
@@ -1151,7 +1171,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = delivery_schedules.getJSONObject(i);
 
-                            loginDataBaseAdapter.insertDeliverySchedule("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", jsonObject.getString("user_email"), jsonObject.getString("dispatch_date"), jsonObject.getString("delivery_date"), jsonObject.getString("order_amount"), jsonObject.getString("accepted_payment_mode"), "", jsonObject.getString("collected_amount"), jsonObject.getString("outstanding_amount"), "", "", jsonObject.getString("customer_address"));
+                            loginDataBaseAdapter.insertDeliverySchedule("", jsonObject.getString("customer_id"), jsonObject.getString("customer_code"), jsonObject.getString("order_number"), "", jsonObject.getString("user_email"), jsonObject.getString("dispatch_date"), jsonObject.getString("delivery_date"), jsonObject.getString("order_amount"), jsonObject.getString("accepted_payment_mode"), "", jsonObject.getString("collected_amount"), jsonObject.getString("outstanding_amount"), "", "", jsonObject.getString("customer_address"));
 
 
                         }
@@ -1161,7 +1181,7 @@ public class MainActivity extends BaseActivity {
 
                             JSONObject jsonObject = credit_profile.getJSONObject(i);
 
-                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_code"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+                            loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
 
 
                         }
@@ -1302,7 +1322,7 @@ public class MainActivity extends BaseActivity {
      * NOTE: Keep proper title and message depending on your app
      */
     private void showSettingsDialog() {
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MainActivity.this);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Need Permissions");
         builder.setCancelable(false);
         builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");

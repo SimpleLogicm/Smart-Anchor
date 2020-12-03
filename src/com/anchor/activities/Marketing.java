@@ -28,8 +28,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import com.anchor.App.AppController;
 import com.anchor.helper.FileDownloader;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.imageadapters.Image;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -54,6 +59,7 @@ import org.json.JSONTokener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Marketing extends Activity implements OnItemSelectedListener{
     //Button retail_sales, institute_sales;
@@ -85,6 +91,19 @@ public class Marketing extends Activity implements OnItemSelectedListener{
         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
         pDialog = new ProgressDialog(Marketing.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+        Global_Data.context = Marketing.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
 //        registerReceiver(onComplete,
 //                new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
@@ -362,16 +381,27 @@ public class Marketing extends Activity implements OnItemSelectedListener{
 
                 //downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
                 SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                String device_id = sp.getString("devid", "");
+                String user_email = "";
+
+                try {
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                        user_email = sp.getString("USER_EMAIL", "");
+                    } else {
+                        user_email = Global_Data.GLOvel_USER_EMAIL;
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+               // String device_id = sp.getString("devid", "");
 
                 String domain = "";
 
                 domain = getResources().getString(R.string.service_domain);
 
-                Log.d("Server url","Server url"+domain+"new_launches?imei_no="+device_id);
+                Log.d("Server url","Server url"+domain+"new_launches?email="+user_email);
 
                 StringRequest stringRequest = null;
-                stringRequest = new StringRequest(domain+"new_launches?imei_no="+device_id,
+                stringRequest = new StringRequest(domain+"new_launches?email="+user_email,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

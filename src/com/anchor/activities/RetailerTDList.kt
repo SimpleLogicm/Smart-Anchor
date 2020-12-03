@@ -8,19 +8,25 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.TextView
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.anchor.adapter.RTODOList_Adapter
 import com.anchor.model.RTODODATA
 import com.anchor.webservice.ConnectionDetector
+import com.android.volley.*
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -28,6 +34,8 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.retailertdlist.*
+import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 
 class RetailerTDList : Activity() {
@@ -38,22 +46,17 @@ class RetailerTDList : Activity() {
     var mLayoutManager: RecyclerView.LayoutManager? = null
     var ca: RTODOList_Adapter? = null
     var Allresult: MutableList<RTODODATA> = ArrayList<RTODODATA>()
-    var context:Context? = null
+    var context: Context? = null
+    var final_response = ""
+    var response_result = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.retailertdlist)
 
-        context = RetailerTDList@this
+        context = RetailerTDList@ this
         cd = ConnectionDetector(context)
-
-
-        Allresult.add(RTODODATA("4", "4", "PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE","#831A14","#BB2B20"))
-        Allresult.add(RTODODATA("2", "2", "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE","#BF9003","#D8AB1E"))
-        Allresult.add(RTODODATA("5", "5", "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PRESENT MAPPING : INCOMPLETE","#28720D","#3A921A"))
-        Allresult.add(RTODODATA("3", "3", "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PRESENT MAPPING : COMPLETE","#1C4908","#26600B"))
-
 
 
         rtolist.setHasFixedSize(true)
@@ -67,7 +70,7 @@ class RetailerTDList : Activity() {
 
         try {
             val mActionBar = actionBar
-            mActionBar.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
+            mActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
             // mActionBar.setDisplayShowHomeEnabled(false);
             // mActionBar.setDisplayShowTitleEnabled(false);
             val mInflater = LayoutInflater.from(this)
@@ -98,18 +101,29 @@ class RetailerTDList : Activity() {
                 ex.printStackTrace()
             }
             if (sp.getFloat("Target", 0.00f) - sp.getFloat("Current_Target", 0.00f) < 0) {
-//	       	todaysTarget.setText("Today's Target Acheived: Rs "+(sp.getFloat("Current_Target", 0.00f)-sp.getFloat("Target", 0.00f))+"");
                 todaysTarget.text = "Today's Target Acheived"
             }
-            mActionBar.customView = mCustomView
+            mActionBar!!.customView = mCustomView
             mActionBar.setDisplayShowCustomEnabled(true)
             mActionBar.setHomeButtonEnabled(true)
             mActionBar.setDisplayHomeAsUpEnabled(true)
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-    }
 
+        isInternetPresent = cd!!.isConnectingToInternet
+        if (isInternetPresent) {
+            getTODOListData()
+        } else {
+
+            val toast = Toast.makeText(context,
+                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+            finish()
+        }
+
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -124,7 +138,7 @@ class RetailerTDList : Activity() {
 
     override fun onBackPressed() {
 
-        val i = Intent(this@RetailerTDList, MainActivity::class.java)
+        val i = Intent(this@RetailerTDList, Sales_Dash::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(i)
         finish()
@@ -178,5 +192,128 @@ class RetailerTDList : Activity() {
         val uri = Uri.fromParts("package", packageName, null)
         intent.data = uri
         startActivityForResult(intent, 101)
+    }
+
+    fun getTODOListData() {
+        todolist_progress.visibility = View.VISIBLE
+        val domain = resources.getString(R.string.service_domain)
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
+        val url = domain + "retailers/to_do_list_count?email=" + user_email
+        Log.i("volley", "URL: $url")
+        Log.i("volley", "email: " + user_email)
+
+        var jsObjRequest: StringRequest? = null
+        jsObjRequest = StringRequest(url, Response.Listener { response ->
+            Log.i("volley", "response: $response")
+            final_response = response
+            GetTODOResponseData().execute(response)
+        },
+                Response.ErrorListener { error ->
+                    todolist_progress.visibility = View.GONE
+                    finish()
+                    //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    if (error is TimeoutError || error is NoConnectionError) {
+                        Toast.makeText(applicationContext,
+                                "Network Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is AuthFailureError) {
+                        Toast.makeText(applicationContext,
+                                "Server AuthFailureError  Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is ServerError) {
+                        Toast.makeText(applicationContext,
+                                "Server   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is NetworkError) {
+                        Toast.makeText(applicationContext,
+                                "Network   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is ParseError) {
+                        Toast.makeText(applicationContext,
+                                "ParseError   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                    }
+                    todolist_progress.visibility = View.GONE
+
+                })
+        val requestQueue = Volley.newRequestQueue(applicationContext)
+        val socketTimeout = 300000 //30 seconds - change to what you want
+        val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        jsObjRequest.retryPolicy = policy
+        jsObjRequest.setShouldCache(false)
+        requestQueue.cache.clear()
+        requestQueue.add(jsObjRequest)
+    }
+
+    inner class GetTODOResponseData : AsyncTask<String?, Void?, String>() {
+        override fun doInBackground(vararg p0: String?): String? {
+            try {
+                val response = JSONObject(final_response)
+                if (response.has("message")) {
+                    response_result = response.getString("message")
+                    runOnUiThread {
+                        todolist_progress.visibility = View.GONE
+                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        finish()
+                    }.toString()
+
+                } else {
+
+                    Allresult.clear()
+
+                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20"))
+                    Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E"))
+                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PRESENT MAPPING : INCOMPLETE", "#28720D", "#3A921A"))
+                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PRESENT MAPPING : COMPLETE", "#1C4908", "#26600B"))
+
+                    runOnUiThread {
+
+                        todolist_progress.visibility = View.GONE
+
+                        runOnUiThread {
+
+                            todolist_progress.visibility = View.GONE
+                            ca = RTODOList_Adapter(context, Allresult);
+                            rtolist.setAdapter(ca);
+                            ca!!.notifyDataSetChanged();
+
+
+                        }
+
+
+                    }
+
+
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+                runOnUiThread { todolist_progress.visibility = View.GONE }
+            }
+            runOnUiThread { todolist_progress.visibility = View.GONE }
+            return "Executed"
+        }
+
+        override fun onPostExecute(result: String) {
+            runOnUiThread { todolist_progress.visibility = View.GONE }
+        }
+
+        override fun onPreExecute() {}
+
     }
 }

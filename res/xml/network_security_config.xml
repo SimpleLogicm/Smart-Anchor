@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config>
-        <domain includeSubdomains="true">ecart.anchor-group.in</domain>
-        <trust-anchors>
-            <certificates src="@raw/star_anchor_group_in"/>
-        </trust-anchors>
-    </domain-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
+<domain-config>
+    <domain includeSubdomains="true">ecart.anchor-group.in</domain>
+    <domain includeSubdomains="true">http://150.242.140.105:8006/</domain>
+    <trust-anchors>
+        <certificates src="@raw/star_anchor_group_in"/>
+    </trust-anchors>
+</domain-config>
+<domain-config>
+    <domain includeSubdomains="true">mumuatsmadms01.anchor-group.in</domain>
+    <trust-anchors>
+        <certificates src="@raw/anchor"/>
+    </trust-anchors>
+</domain-config>
+
+
+<base-config cleartextTrafficPermitted="true">
+    <trust-anchors>
+        <certificates src="system" />
+    </trust-anchors>
+</base-config>
+
 
 </network-security-config>

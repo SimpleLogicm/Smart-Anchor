@@ -38,6 +38,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -64,6 +69,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
@@ -109,6 +115,19 @@ public class Expenses extends Activity implements OnItemSelectedListener {
 		dateFormatter = new SimpleDateFormat("MMMM-yyyy", Locale.US);
 		Calendar newCalendar = Calendar.getInstance();
 		cd = new ConnectionDetector(Expenses.this);
+
+		Global_Data.context = Expenses.this;
+
+		try {
+			PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+					MyPeriodicwork.class, 15, TimeUnit.MINUTES
+			).addTag("otpValidator").build();
+			WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+					ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
 
 
 

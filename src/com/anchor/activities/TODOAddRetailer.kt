@@ -2,6 +2,7 @@ package com.anchor.activities
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -10,6 +11,7 @@ import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
@@ -28,12 +30,14 @@ import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_lightingdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_powerdealer
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_state
 import kotlinx.android.synthetic.main.todoadd_retailer.*
+import kotlinx.android.synthetic.main.todoadd_retailer.todoe_address
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -45,7 +49,7 @@ import java.util.regex.Pattern
 class TODOAddRetailer : Activity() {
     var list: ArrayList<Todo_model>? = null
     var adaptor: Todo_list_adaptor? = null
-    var id = "";
+   // var id = "";
     var coardcolor = "";
     var cd: ConnectionDetector? = null
     var isInternetPresent = false
@@ -91,10 +95,12 @@ class TODOAddRetailer : Activity() {
 
         list = ArrayList<Todo_model>()
 
+        todoe_gsta.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
+        todoe_pana.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
 
 
         try {
-            id = intent.getStringExtra("id")
+           // id = intent.getStringExtra("id")
             coardcolor = intent.getStringExtra("cardcolor")
 
         }catch (e:Exception)
@@ -354,7 +360,49 @@ class TODOAddRetailer : Activity() {
         todoe_geocordinatesa.setOnClickListener {
             if (!todoe_address!!.text.toString().trim().equals(""))
             {
-                getCordinates()
+                if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
+                {
+                    var address = ""
+
+                    if (!todoe_address!!.text.toString().trim().equals(""))
+                    {
+                        address += " " +todoe_address!!.text.toString().trim()
+                    }
+
+                    if (!todoe_areaa!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_areaa!!.text.toString().trim()
+                    }
+
+//                    if (!todoe_landmarka!!.text.toString().trim().equals(""))
+//                    {
+//                        address += " " + todoe_landmarka!!.text.toString().trim()
+//                    }
+
+                    if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+                    {
+                        address += " " + todoe_state!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+                    {
+                        address += " " + todoe_city!!.selectedItem.toString().trim()
+                    }
+
+                    if (!todoe_pincodea!!.text.toString().trim().equals(""))
+                    {
+                        address += " " + todoe_pincodea!!.text.toString().trim()
+                    }
+
+                    getCordinates(address)
+                }
+                else
+                {
+                    val toast = Toast.makeText(context,
+                            "Please Enter Address", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                }
             }
             else
             {
@@ -368,9 +416,41 @@ class TODOAddRetailer : Activity() {
 
         locationimgadd.setOnClickListener {
 
-            if (!todoe_address!!.text.toString().trim().equals(""))
+            if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
             {
-                getCordinates()
+                var address = ""
+
+                if (!todoe_address!!.text.toString().trim().equals(""))
+                {
+                    address += " " +todoe_address!!.text.toString().trim()
+                }
+
+                if (!todoe_areaa!!.text.toString().trim().equals(""))
+                {
+                    address += " " + todoe_areaa!!.text.toString().trim()
+                }
+
+//                if (!todoe_landmarka!!.text.toString().trim().equals(""))
+//                {
+//                    address += " " + todoe_landmarka!!.text.toString().trim()
+//                }
+
+                if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+                {
+                    address += " " + todoe_state!!.selectedItem.toString().trim()
+                }
+
+                if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+                {
+                    address += " " + todoe_city!!.selectedItem.toString().trim()
+                }
+
+                if (!todoe_pincodea!!.text.toString().trim().equals(""))
+                {
+                    address += " " + todoe_pincodea!!.text.toString().trim()
+                }
+
+                getCordinates(address)
             }
             else
             {
@@ -396,7 +476,7 @@ class TODOAddRetailer : Activity() {
                 toast.show()
             }
             else
-            if (todoe_mobilea!!.text.toString().trim().equals("") || todoe_mobilea!!.text.length < 10)
+            if (todoe_mobilea!!.text.toString().trim().equals("") || todoe_mobilea!!.text.length < 10 || todoe_mobilea!!.text.startsWith("0"))
             {
                 val toast = Toast.makeText(context,
                         "Please Enter Valid Mobile No", Toast.LENGTH_SHORT)
@@ -444,7 +524,7 @@ class TODOAddRetailer : Activity() {
                 toast.show()
             }
             else
-            if (todoe_state!!.selectedItem.toString().equals("Select City"))
+            if (todoe_city!!.selectedItem.toString().equals("Select City"))
             {
                 val toast = Toast.makeText(context,
                         "Please Select City.", Toast.LENGTH_SHORT)
@@ -544,7 +624,7 @@ class TODOAddRetailer : Activity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+       // super.onBackPressed()
         var alert_dialog_flag = ""
 
         if (!todoe_shop_namea!!.text.toString().trim().equals(""))
@@ -567,7 +647,7 @@ class TODOAddRetailer : Activity() {
         alert_dialog_flag = "yes";
         }
         else
-        if (!todoe_state!!.selectedItem.toString().equals("Select City"))
+        if (!todoe_city!!.selectedItem.toString().equals("Select City"))
         {
         alert_dialog_flag = "yes";
         }
@@ -584,20 +664,18 @@ class TODOAddRetailer : Activity() {
 
         if(alert_dialog_flag.equals("yes"))
         {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Warning")
-            builder.setMessage("Your enter data will be Lost")
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
-            builder.setPositiveButton("Yes"){dialogInterface, which ->
+            val alertDialog = AlertDialog.Builder(context).create() //Read Update
+
+            alertDialog.setTitle("Confirmation")
+            alertDialog.setMessage(" Are you sure you want to Cancel?")
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
                 finish()
             }
 
-            builder.setNeutralButton("Cancel"){dialogInterface , which ->
-                dialogInterface.dismiss()
+            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
+                dialog.cancel()
             }
 
-            val alertDialog: AlertDialog = builder.create()
-            // Set other dialog properties
             alertDialog.setCancelable(false)
             alertDialog.show()
         }
@@ -607,16 +685,19 @@ class TODOAddRetailer : Activity() {
 
     }
 
-    fun getCordinates()
+    fun getCordinates(addresss:String)
     {
         var str: String = "";
         isInternetPresent = cd!!.isConnectingToInternet
         if (isInternetPresent) {
             try {
                 val geo = Geocoder(context, Locale.getDefault())
-                val addresses = geo.getFromLocationName(todoe_address.text.toString(),1)
-                if (addresses.isEmpty()) { //yourtextfieldname.setText("Waiting for Location");
-
+                val addresses = geo.getFromLocationName(addresss.trim(),1)
+                if (addresses.isEmpty()) {
+                    val toast = Toast.makeText(context,
+                            "Gps Coordinates Not Found ", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
                 } else {
                     if (addresses.size > 0) {
 
@@ -643,6 +724,10 @@ class TODOAddRetailer : Activity() {
                 }
             } catch (ex: Exception) {
                 ex.printStackTrace()
+                val toast = Toast.makeText(context,
+                        "Gps Coordinates Not Found ", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
             }
         } else {
 
@@ -660,6 +745,21 @@ class TODOAddRetailer : Activity() {
             piechart_rank_progressBarar.visibility = View.VISIBLE
             aad_bottom_layout.visibility = View.GONE
             add_container.isEnabled = false
+
+            try {
+                val appLocationManager = AppLocationManager(context)
+                Log.d("Class LAT LOG", "Class LAT LOG" + appLocationManager.latitude + " " + appLocationManager.longitude)
+                Log.d("Service LAT LOG", "Service LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE)
+                val PlayServiceManager = PlayService_Location(context)
+                if (PlayServiceManager.checkPlayServices(context)) {
+                    Log.d("Play LAT LOG", "Play LAT LOG" + Global_Data.GLOvel_LATITUDE + " " + Global_Data.GLOvel_LONGITUDE)
+                } else if (!appLocationManager.latitude.toString().equals("null", ignoreCase = true) && !appLocationManager.latitude.toString().equals(null, ignoreCase = true) && !appLocationManager.longitude.toString().equals(null, ignoreCase = true) && !appLocationManager.longitude.toString().equals(null, ignoreCase = true)) {
+                    Global_Data.GLOvel_LATITUDE = appLocationManager.latitude.toString()
+                    Global_Data.GLOvel_LONGITUDE = appLocationManager.longitude.toString()
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
 
             var user_email: String? = ""
             val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
@@ -683,7 +783,7 @@ class TODOAddRetailer : Activity() {
                 val product_value_n = JSONObject()
                 val retailer_object = JSONObject()
 
-                product_value_n.put("email", user_email)
+                //product_value_n.put("email", user_email)
                 product_value_n.put("state_code", state_id)
                 product_value_n.put("city_code", city_id)
                 product_value_n.put("power_dealer", dpower_id)
@@ -694,11 +794,16 @@ class TODOAddRetailer : Activity() {
                 product_value_n.put("gst_no", todoe_gsta.text.toString())
                 product_value_n.put("aadhar_no", todoe_aadhara.text.toString())
                 product_value_n.put("pan_no", todoe_pana.text.toString())
-                product_value_n.put("address", todoe_address.text.toString())
+                product_value_n.put("address_line1", todoe_address.text.toString())
+                product_value_n.put("address_line2", todoe_areaa.text.toString())
+                product_value_n.put("landmark", todoe_landmarka.text.toString())
+                product_value_n.put("pincode", todoe_pincodea.text.toString())
                 product_value_n.put("latitude", latitude)
                 product_value_n.put("longitude", longitude)
-
+                product_value_n.put("current_location_latitude",  Global_Data.GLOvel_LATITUDE)
+                product_value_n.put("current_location_longitude",  Global_Data.GLOvel_LONGITUDE)
                 retailer_object.put("retailer",product_value_n)
+                retailer_object.put("email",user_email)
 
 
                 Log.d("Retailer save Service", retailer_object.toString())
@@ -725,6 +830,36 @@ class TODOAddRetailer : Activity() {
                             val a = Intent(context, MapsActivity::class.java)
                             startActivity(a)
                             finish()
+                        }
+                        else
+                        if (response_result.equals("Retailer Duplicate record found.", ignoreCase = true)) {
+
+                            piechart_rank_progressBarar.visibility = View.GONE
+                            aad_bottom_layout.visibility = View.VISIBLE
+                            add_container.isEnabled = true
+
+                            var retailer_code = response.getString("retailer_code")
+
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                            val alertDialog = AlertDialog.Builder(context).create() //Read Update
+
+                            alertDialog.setTitle("Confirmation")
+                            alertDialog.setMessage("If you want to merge, Please click on yes button Or if you want to delete, Please click on no button  ")
+                            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes") { dialog, which -> // TODO Auto-generated method stub
+                                dialog.cancel()
+                                RetailerDuplicateData(retailer_code,"Yes")
+                            }
+
+                            alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No") { dialog, which -> // TODO Auto-generated method stub
+                                dialog.cancel()
+                                RetailerDuplicateData(retailer_code,"No")
+                            }
+
+                            alertDialog.setCancelable(false)
+                            alertDialog.show()
                         }
                         else {
                             piechart_rank_progressBarar.visibility = View.GONE
@@ -781,6 +916,128 @@ class TODOAddRetailer : Activity() {
         }
     }
 
+    fun RetailerDuplicateData(retailer_code:String,flag:String) {
+        System.gc()
+        val reason_code = ""
+        try {
+            piechart_rank_progressBarar.visibility = View.VISIBLE
+            aad_bottom_layout.visibility = View.GONE
+            add_container.isEnabled = false
+
+            var user_email: String? = ""
+            val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+            try {
+                user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                    sp.getString("USER_EMAIL", "")
+                } else {
+                    Global_Data.GLOvel_USER_EMAIL
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
+            var domain = ""
+            var url = ""
+            domain = resources.getString(R.string.service_domain)
+            var jsObjRequest: JsonObjectRequest? = null
+            try {
+                url = domain + "retailers/merge_duplicate_retailer"
+                Log.d("Server url", "Server url" + url)
+                val SURVEY = JSONArray()
+                val product_value_n = JSONObject()
+                val retailer_object = JSONObject()
+
+
+                retailer_object.put("retailer_code", retailer_code)
+                retailer_object.put("flag", flag.toLowerCase())
+                retailer_object.put("email",user_email)
+
+                Log.d("Retailer merge Service", retailer_object.toString())
+                jsObjRequest = JsonObjectRequest(Request.Method.POST,url , retailer_object, Response.Listener { response ->
+                    Log.i("volley", "response: $response")
+                    Log.d("jV", "JV length" + response.length())
+                    //JSONObject json = new JSONObject(new JSONTokener(response));
+                    try {
+                        var response_result = ""
+                         if (response.has("message")) {
+                             response_result = response.getString("message")
+
+                            piechart_rank_progressBarar.visibility = View.GONE
+                            aad_bottom_layout.visibility = View.VISIBLE
+                            add_container.isEnabled = true
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                             finish()
+                        }
+//                        if (response_result.equals("Retailer created successfully.", ignoreCase = true)) {
+//
+//                            piechart_rank_progressBarar.visibility = View.GONE
+//                            aad_bottom_layout.visibility = View.VISIBLE
+//                            add_container.isEnabled = true
+//
+//                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+//                            toast.setGravity(Gravity.CENTER, 0, 0)
+//                            toast.show()
+//                            val a = Intent(context, MapsActivity::class.java)
+//                            startActivity(a)
+//                            finish()
+//                        }
+//
+//                        else {
+//                            piechart_rank_progressBarar.visibility = View.GONE
+//                            aad_bottom_layout.visibility = View.VISIBLE
+//                            add_container.isEnabled = true
+//                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+//                            toast.setGravity(Gravity.CENTER, 0, 0)
+//                            toast.show()
+//
+//                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        piechart_rank_progressBarar.visibility = View.GONE
+                        aad_bottom_layout.visibility = View.VISIBLE
+                        add_container.isEnabled = true
+                    }
+
+                }, Response.ErrorListener { error ->
+                    Log.i("volley", "error: $error")
+                    val toast = Toast.makeText(context, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
+                    }
+                    piechart_rank_progressBarar.visibility = View.GONE
+                    aad_bottom_layout.visibility = View.VISIBLE
+                    add_container.isEnabled = true
+                })
+                val requestQueue = Volley.newRequestQueue(context)
+                val socketTimeout = 2000000 //90 seconds - change to what you want
+                val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+                jsObjRequest.retryPolicy = policy
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false)
+                requestQueue.cache.clear()
+                requestQueue.add(jsObjRequest)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                piechart_rank_progressBarar.visibility = View.GONE
+                aad_bottom_layout.visibility = View.VISIBLE
+                add_container.isEnabled = true
+            }
+
+
+
+        } catch (e: java.lang.Exception) {
+            // TODO: handle exception
+            Log.e("DATA", e.message)
+        }
+    }
+
     fun validateAadharNumber(aadharNumber: String?): Boolean {
         val aadharPattern: Pattern = Pattern.compile("\\d{12}")
         var isValidAadhar: Boolean = aadharPattern.matcher(aadharNumber).matches()
@@ -791,14 +1048,14 @@ class TODOAddRetailer : Activity() {
     }
 
     fun validateGSTNumber(gstNumber: String?): Boolean {
-        val aadharPattern: Pattern = Pattern.compile("/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}\$/")
+        val aadharPattern: Pattern = Pattern.compile("^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+\$")
         var isValidateGST: Boolean = aadharPattern.matcher(gstNumber).matches()
 
-        if (validGSTIN(gstNumber!!))
-            return  true
-        else
-            return false
-       // return isValidateGST
+//        if (validGSTIN(gstNumber!!))
+//            return  true
+//        else
+//            return false
+        return isValidateGST
     }
 
     fun validatePANNumber(panNumber: String?): Boolean {
@@ -811,9 +1068,22 @@ class TODOAddRetailer : Activity() {
 
     fun states_details() {
         citys_loader.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
+        var url = domain+"retailers/get_all_states?email="+user_email
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_all_states"
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -942,9 +1212,22 @@ class TODOAddRetailer : Activity() {
 
     fun citydealer_details(state_id:String) {
         citys_loader.visibility = View.VISIBLE
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_statewise_cities?state_code="+state_id
+        var url = domain+"retailers/get_statewise_cities?state_code="+state_id+"&email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->

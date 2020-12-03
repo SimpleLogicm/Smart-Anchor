@@ -54,6 +54,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Product;
 import com.anchor.model.Sub_Dealer_Order_Model;
 import com.anchor.services.getServices;
@@ -78,6 +84,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
@@ -171,6 +178,20 @@ public class SubDealer_Signature_Activity extends BaseActivity {
                 user_name += " " + Global_Data.USER_LAST_NAME.trim();
             }
         }
+
+        Global_Data.context = SubDealer_Signature_Activity.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         txtWelcomeUser.setText(user_name + " : " + Global_Data.emp_code);
         SharedPreferences spf1 = this.getSharedPreferences("SimpleLogic", 0);
@@ -985,7 +1006,12 @@ public class SubDealer_Signature_Activity extends BaseActivity {
                                                 }
                                                 // Continue only if the File was successfully created
                                                 if (photoFile != null) {
-                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                                    Uri photoURI = FileProvider.getUriForFile(SubDealer_Signature_Activity.this,
+                                                            BuildConfig.APPLICATION_ID + ".provider",
+                                                            photoFile);
+                                                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                                                    cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                                    //cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
                                                     startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
                                                 }
                                             }
@@ -994,7 +1020,7 @@ public class SubDealer_Signature_Activity extends BaseActivity {
 
                                             // image_check = "gallery";
                                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
+                                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                             startActivityForResult(intent, 2);
 
 

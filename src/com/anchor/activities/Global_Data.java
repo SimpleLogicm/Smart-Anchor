@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import com.anchor.model.RCTOData;
 import com.anchor.model.Spiner_List_Model;
 import com.anchor.model.SubDealerModel;
 import com.google.android.gms.maps.model.Marker;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 public class Global_Data {
 
+    public static Context context = null;
     public static String rank_service_call_flag = "";
     public static String year_value = "";
     public static String halfyear_value = "";
@@ -228,6 +230,7 @@ public class Global_Data {
     public static String state_code="";
     public static String click_flag="";
     public static String Sub_shop_name="";
+    public static String merge_retailer_code="";
 	
 	//public static String GLOVEL_LONG_DESC="";
     

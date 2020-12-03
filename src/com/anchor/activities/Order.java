@@ -24,7 +24,11 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.widget.SimpleCursorAdapter;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -49,6 +53,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.adapter.AutoSuggestAdapter;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -80,6 +86,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 @SuppressLint("DefaultLocale")
 public class Order extends Activity implements OnItemSelectedListener {
@@ -208,6 +215,20 @@ public class Order extends Activity implements OnItemSelectedListener {
             schedule_txt.setText("Schedule");
         }
 
+        Global_Data.context = Order.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         try {
             ActionBar mActionBar = getActionBar();
             mActionBar.setBackgroundDrawable(new ColorDrawable(Color
@@ -286,12 +307,15 @@ public class Order extends Activity implements OnItemSelectedListener {
         for (Local_Data cn : contacts2) {
             list_cities.add(cn.get_stocks_product_name());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                list_cities);
+
+        AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
         autoCompleteTextView1.setThreshold(1);// will start working from
         // first character
-        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+        autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
         // data into the
         // AutoCompleteTextView
         autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2053,12 +2077,14 @@ public class Order extends Activity implements OnItemSelectedListener {
                     for (Local_Data cn : contacts2) {
                         list_cities.add(cn.get_stocks_product_name());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            list_cities);
+                    AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                     autoCompleteTextView1.setThreshold(1);// will start working from
                     // first character
-                    autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                    autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                     // data into the
                     // AutoCompleteTextView
                     autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2158,12 +2184,15 @@ public class Order extends Activity implements OnItemSelectedListener {
                     for (Local_Data cn : contacts2) {
                         list_cities.add(cn.get_stocks_product_name());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            list_cities);
+
+                    AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                     autoCompleteTextView1.setThreshold(1);// will start working from
                     // first character
-                    autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                    autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                     // data into the
                     // AutoCompleteTextView
                     autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2259,12 +2288,15 @@ public class Order extends Activity implements OnItemSelectedListener {
                     for (Local_Data cn : contacts2) {
                         list_cities.add(cn.get_stocks_product_name());
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            list_cities);
+
+                    AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                     autoCompleteTextView1.setThreshold(1);// will start working from
                     // first character
-                    autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                    autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                     // data into the
                     // AutoCompleteTextView
                     autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2300,12 +2332,14 @@ public class Order extends Activity implements OnItemSelectedListener {
 
                         }
 
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                list_cities);
+                        AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_cities);
+
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_dropdown_item,
+//                list_cities);
                         autoCompleteTextView1.setThreshold(1);// will start working from
                         // first character
-                        autoCompleteTextView1.setAdapter(adapter);// setting the adapter
+                        autoCompleteTextView1.setAdapter(adapterauto);// setting the adapter
                         // data into the
                         // AutoCompleteTextView
                         autoCompleteTextView1.setTextColor(Color.BLACK);
@@ -2503,7 +2537,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
     public void getScheduleData() {
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
+        //String device_id = sp.getString("devid", "");
 
         loginDataBaseAdapter = new LoginDataBaseAdapter(Order.this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
@@ -2515,7 +2549,7 @@ public class Order extends Activity implements OnItemSelectedListener {
             dialog.setMessage("Please Wait Schedule Sync...");
         }
 
-        dialog.setTitle("Metal App");
+        dialog.setTitle("Smart Anchor App");
         dialog.setCancelable(false);
         dialog.show();
 
@@ -2527,9 +2561,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
-          //  URLEncoder.encode(Device_id, "UTF-8")
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + device_id + "&customer_code=" +URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "delivery_schedules?imei_no=" + "" + "&customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "delivery_schedules?imei_no=" + "" + "&customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&email=" + Global_Data.GLOvel_USER_EMAIL, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -2553,8 +2586,13 @@ public class Order extends Activity implements OnItemSelectedListener {
                             response_result = "data";
                         }
 
+                        if (response_result.equalsIgnoreCase("Customer not found")){
+                            Toast toast = Toast.makeText(Order.this, response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
 
-                        if (response_result.equalsIgnoreCase("Schedule doesn't exist")) {
+                        else if (response_result.equalsIgnoreCase("Schedule doesn't exist")) {
 
 
                             //Toast.makeText(Order.this, response_result, Toast.LENGTH_LONG).show();
@@ -2680,7 +2718,7 @@ public class Order extends Activity implements OnItemSelectedListener {
 
     public void getPrevious_OrderData() {
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-        String device_id = sp.getString("devid", "");
+       // String device_id = sp.getString("devid", "");
         //calendarn = Calendar.getInstance();
         //year = calendarn.get(Calendar.YEAR);
         loginDataBaseAdapter = new LoginDataBaseAdapter(Order.this);
@@ -2698,8 +2736,8 @@ public class Order extends Activity implements OnItemSelectedListener {
 
             Log.i("volley", "domain: " + domain);
             Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
-            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + device_id + "&customer_code=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
+            Log.i("target url", "target url " + domain + "customers/previous_order?imei_no=" + "" + "&customer_id=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"));
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "customers/previous_order?imei_no=" + "" + "&customer_id=" + URLEncoder.encode(Global_Data.GLOvel_CUSTOMER_ID, "UTF-8") + "&email=" + URLEncoder.encode(Global_Data.GLOvel_USER_EMAIL, "UTF-8"), null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -2771,7 +2809,7 @@ public class Order extends Activity implements OnItemSelectedListener {
                                     Global_Data.Previous_Order_UpdateOrder_ID = jsonObject.getString("order_number").trim();
                                     Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
 
-                                    loginDataBaseAdapter.insertPreviousOrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("scheme_code"), " ", "", jsonObject.getString("total_qty"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("amount"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
+                                    loginDataBaseAdapter.insertPreviousOrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "", jsonObject.getString("scheme_code"), " ", "", jsonObject.getString("total_qty"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("amount"), "", "", "", " ", jsonObject.getString("product_id"), " ", jsonObject.getString("product_name"));
 
 
                                 }

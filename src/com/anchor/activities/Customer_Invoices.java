@@ -13,8 +13,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -39,6 +43,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.adapter.Customer_Invoices_adapter;
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -66,6 +71,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.Customer_Info;
 
@@ -123,6 +129,20 @@ public class Customer_Invoices extends Activity {
         SharedPreferences.Editor editor = spf.edit();
         editor.putString("order", "new");
         editor.commit();
+
+        Global_Data.context = Customer_Invoices.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
 
         try
         {
@@ -565,7 +585,18 @@ public class Customer_Invoices extends Activity {
         isInternetPresent = cd.isConnectingToInternet();
         if (isInternetPresent)
         {			SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
-            String device_id = sp.getString("devid", "");
+                   String device_id = sp.getString("devid", "");
+                    String user_email = "";
+
+                    try {
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                            user_email = sp.getString("USER_EMAIL", "");
+                        } else {
+                            user_email = Global_Data.GLOvel_USER_EMAIL;
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
 
             dialog = new ProgressDialog(Customer_Invoices.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please Wait....");
@@ -598,11 +629,11 @@ public class Customer_Invoices extends Activity {
                 G_Filter_Flag = "true";
                 if(c_value.equalsIgnoreCase(""))
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code;
                 }
                 else
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&filter_value="+c_value;
                 }
 
             }
@@ -613,11 +644,11 @@ public class Customer_Invoices extends Activity {
 
                 if(c_value.equalsIgnoreCase(""))
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
                 }
                 else
                 {
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&filter_value="+c_value+"&start_date="+G_c_start_date_value+"&end_date="+G_c_end_date_value;
                 }
 
 
@@ -627,12 +658,12 @@ public class Customer_Invoices extends Activity {
                 if(c_value.equalsIgnoreCase(""))
                 {
                     G_Filter_Flag = "";
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code;
                 }
                 else
                 {
                     G_Filter_Flag = "true";
-                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_code="+Global_Data.customer_code+"&filter_value="+c_value;
+                    url = domain+"invoices?imei_no="+device_id+"&email="+Global_Data.CUSTOMER_EMAIL+"&customer_id="+Global_Data.customer_code+"&filter_value="+c_value;
                 }
 
             }

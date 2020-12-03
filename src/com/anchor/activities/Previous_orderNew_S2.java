@@ -458,10 +458,10 @@ public class Previous_orderNew_S2 extends BaseActivity {
                         //distrubutorsMap=new HashMap<String, String>();
                         //tell the Dialog to use the dialog.xml as it's layout description
                         dialog.setContentView(R.layout.distributor_dilogue);
-                        dialog.setTitle("Distributors");
+                        dialog.setTitle("Warehouse");
 
                         Distributer_list.clear();
-                        Distributer_list.add("Select Distributor");
+                        Distributer_list.add("Select Warehouse");
 
                         String beat_id = "";
                         String dis_id = "";
@@ -531,8 +531,8 @@ public class Previous_orderNew_S2 extends BaseActivity {
                             @Override
                             public void onClick(View v) {
 
-                                if (spnDistributor.getSelectedItem().toString().equalsIgnoreCase("Select distributor")) {
-                                    Toast toast = Toast.makeText(Previous_orderNew_S2.this,"Please Select distributor", Toast.LENGTH_SHORT);
+                                if (spnDistributor.getSelectedItem().toString().equalsIgnoreCase("Select Warehouse")) {
+                                    Toast toast = Toast.makeText(Previous_orderNew_S2.this,"Please Select Warehouse", Toast.LENGTH_SHORT);
                                     toast.setGravity(Gravity.CENTER, 0, 0);
                                     toast.show();
                                 }

@@ -2,8 +2,9 @@ package com.anchor.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Html;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;

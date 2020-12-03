@@ -13,9 +13,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -182,6 +182,7 @@ public class NewOrderActivity extends BaseActivity {
 		spinner_recycleview.setLayoutManager(new LinearLayoutManager(NewOrderActivity.this));
 		spinner_list_adapter = new Spinner_List_Adapter(NewOrderActivity.this, snlist);
 		spinner_recycleview.setAdapter(spinner_list_adapter);
+
 
 
 		mpplayer = new MediaPlayer();

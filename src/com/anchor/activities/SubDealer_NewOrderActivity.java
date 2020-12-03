@@ -13,9 +13,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -36,6 +34,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.anchor.adapter.AutoCompleteAdapter;
 import com.anchor.adapter.Spinner_List_Adapter;
@@ -1571,7 +1573,7 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
     public void onResume() {
         // TODO Auto-generated method stubs
         super.onResume();
-       // Global_Data.spiner_list_modelList.clear();
+        // Global_Data.spiner_list_modelList.clear();
         Global_Data.array_of_pVarient.clear();
 
     }

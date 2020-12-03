@@ -14,8 +14,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -34,6 +38,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -50,6 +55,7 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.ContactInfo;
 import cpm.simplelogic.helper.Stock_Info;
@@ -114,6 +120,20 @@ public class Stock_Main extends BaseActivity {
 
         dialog = new ProgressDialog(Stock_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
+
+
+        Global_Data.context = Stock_Main.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
 
 
 
@@ -790,7 +810,7 @@ public class Stock_Main extends BaseActivity {
                         Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL);
                         String service_url = "";
 
-                        service_url = domain + "wh_stocks/send_stocks?imei_no=" + device_id + "&warehouse_code=" + warehouse_code + "&product_code=" + product_code + "&state_code=" + state_code + "&city_code=" + city_code + "&primary_category=" + URLEncoder.encode(caategory_code, "UTF-8") + "&sub_category=" + URLEncoder.encode(sub_caategory_code, "UTF-8");
+                        service_url = domain + "wh_stocks/send_stocks?email=" + Global_Data.GLOvel_USER_EMAIL + "&warehouse_code=" + warehouse_code + "&product_code=" + product_code + "&state_code=" + state_code + "&city_code=" + city_code + "&primary_category=" + URLEncoder.encode(caategory_code, "UTF-8") + "&sub_category=" + URLEncoder.encode(sub_caategory_code, "UTF-8");
 
 
                         Log.i("target url", "target url " + service_url);

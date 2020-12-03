@@ -16,7 +16,7 @@ import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,6 +29,8 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.anchor.activities.Customer_Feed;
 import com.anchor.activities.DataBaseHelper;
@@ -53,7 +55,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 

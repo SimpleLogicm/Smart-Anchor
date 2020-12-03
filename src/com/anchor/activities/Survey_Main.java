@@ -11,8 +11,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -45,7 +45,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -376,16 +375,16 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
         dialog = new ProgressDialog(Survey_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         dialog.setMessage("Please wait....");
-        dialog.setTitle("Metal");
+        dialog.setTitle("Smart Anchor");
         dialog.setCancelable(false);
         dialog.show();
 
         domain = getResources().getString(R.string.service_domain);
 
-        Log.d("Server url","Server url"+domain+"advertisements/send_advertisements?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL);
+        Log.d("Server url","Server url"+domain+"advertisements/send_advertisements?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL);
 
         StringRequest stringRequest = null;
-        stringRequest = new StringRequest(domain+"advertisements/send_advertisements?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL,
+        stringRequest = new StringRequest(domain+"advertisements/send_advertisements?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -596,7 +595,7 @@ public class Survey_Main extends Activity implements OnOptionSelected {
 
             dialog = new ProgressDialog(Survey_Main.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             dialog.setMessage("Please wait....");
-            dialog.setTitle("Metal");
+            dialog.setTitle("Smart Anchor");
             dialog.setCancelable(false);
             dialog.show();
 

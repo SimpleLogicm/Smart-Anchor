@@ -12,111 +12,111 @@
         android:isScrollContainer="false"
         android:fillViewport="true"
         android:orientation="vertical" >
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:focusableInTouchMode="true"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtWelcomeUser"
+        <LinearLayout
             android:layout_width="fill_parent"
+            android:focusableInTouchMode="true"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:background="#BDBDBD"
-            android:gravity="center"
-            android:textSize="15sp"  >
-        </TextView>
+            android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/order_type"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="@string/Select_Categories"
-            android:layout_gravity="center"
-            android:inputType="textPersonName"
-            android:paddingTop="20dp"
-            android:layout_marginTop="10dp"></Spinner>
+            <TextView
+                android:id="@+id/txtWelcomeUser"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:background="#BDBDBD"
+                android:gravity="center"
+                android:textSize="15sp"  >
+            </TextView>
 
-        <EditText
-            android:id="@+id/order_detail1"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:enabled="false"
-            android:drawableRight="@drawable/ic_date_range_black_24dp"
-            android:hint="Need By Date"
-            android:layout_marginTop="10dp"
-            android:imeOptions="actionDone"
-            android:singleLine="true">
+            <Spinner
+                android:id="@+id/order_type"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:hint="@string/Select_Categories"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"
+                android:paddingTop="20dp"
+                android:layout_marginTop="10dp"></Spinner>
 
-            <requestFocus />
-        </EditText>
+            <EditText
+                android:id="@+id/order_detail1"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="false"
+                android:drawableRight="@drawable/ic_date_range_black_24dp"
+                android:hint="Need By Date"
+                android:layout_marginTop="10dp"
+                android:imeOptions="actionDone"
+                android:singleLine="true">
 
-        <EditText
-            android:id="@+id/order_detail2"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:enabled="false"
-            android:inputType="number"
-            android:maxLength="6"
-            android:hint="@string/detail2"
-            android:layout_marginTop="10dp"
-            android:imeOptions="actionDone"
-            android:singleLine="true">
+                <requestFocus />
+            </EditText>
 
-            <requestFocus />
-        </EditText>
+            <EditText
+                android:id="@+id/order_detail2"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:enabled="false"
+                android:inputType="number"
+                android:maxLength="6"
+                android:hint="@string/detail2"
+                android:layout_marginTop="10dp"
+                android:imeOptions="actionDone"
+                android:singleLine="true">
 
-        <Spinner
-            android:id="@+id/shipment_pri"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="@string/Select_Categories"
-            android:layout_gravity="center"
-            android:inputType="textPersonName"
-            android:paddingTop="20dp"
-            android:layout_marginTop="10dp"></Spinner>
+                <requestFocus />
+            </EditText>
 
-        <Spinner
-            android:id="@+id/order_payment_term"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:hint="@string/select_payment_term"
-            android:layout_gravity="center"
-            android:inputType="textPersonName"
-            android:paddingTop="20dp"
-            android:layout_marginTop="10dp"></Spinner>
+            <Spinner
+                android:id="@+id/shipment_pri"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:hint="@string/Select_Categories"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"
+                android:paddingTop="20dp"
+                android:layout_marginTop="10dp"></Spinner>
 
-        <EditText
-            android:id="@+id/yourName"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:hint="@string/Name"
-            android:layout_marginTop="10dp"
-            android:imeOptions="actionNext"
-            android:singleLine="true">
-            <requestFocus />
-        </EditText>
+            <Spinner
+                android:id="@+id/order_payment_term"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:hint="@string/select_payment_term"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"
+                android:paddingTop="20dp"
+                android:layout_marginTop="10dp"></Spinner>
 
-        <EditText
-            android:id="@+id/yourRemarks"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:hint="@string/ERemarks"
-            android:inputType="textLongMessage"
-            android:layout_marginTop="10dp"
-            android:imeOptions="actionDone"
-            android:singleLine="true">
-            <requestFocus />
-        </EditText>
+            <EditText
+                android:id="@+id/yourName"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:hint="@string/Name"
+                android:layout_marginTop="10dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true">
+                <requestFocus />
+            </EditText>
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/yourRemarks"
+                android:layout_width="250dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:hint="@string/ERemarks"
+                android:inputType="textLongMessage"
+                android:layout_marginTop="10dp"
+                android:imeOptions="actionDone"
+                android:singleLine="true">
+                <requestFocus />
+            </EditText>
+
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
@@ -138,62 +138,62 @@
             android:layout_marginTop="10dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:layout_weight="1.9"
-        android:orientation="horizontal" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:layout_weight="1.9"
+            android:orientation="horizontal" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-         >
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            >
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight=".12"
-            android:text="@string/Cancel"
-            android:layout_marginLeft="2dp"
-            android:textColor="#FFFFFF"/>
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".12"
+                android:text="@string/Cancel"
+                android:layout_marginLeft="2dp"
+                android:textColor="#FFFFFF"/>
 
-        <Button
-            android:id="@+id/clear"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight=".12"
-            android:text="@string/Clear"
-            android:layout_marginLeft="2dp"
-            android:textColor="#FFFFFF"/>
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".12"
+                android:text="@string/Clear"
+                android:layout_marginLeft="2dp"
+                android:textColor="#FFFFFF"/>
 
-        <ImageView
-            android:id="@+id/get_icon"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight=".12"
-            android:text=""
-            android:src="@drawable/cam_iconn"
-            android:background="#414042"
-            android:layout_marginLeft="2dp"
+            <ImageView
+                android:id="@+id/get_icon"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".12"
+                android:text=""
+                android:src="@drawable/cam_iconn"
+                android:background="#414042"
+                android:layout_marginLeft="2dp"
 
-            />
+                />
 
-        <Button
-            android:id="@+id/getsign"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight=".12"
-            android:text="@string/Continue"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/getsign"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight=".12"
+                android:text="@string/Continue"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

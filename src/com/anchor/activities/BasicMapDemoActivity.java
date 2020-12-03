@@ -23,8 +23,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,6 +44,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.DistanceData;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -95,6 +100,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.ConnectionDetector;
 import cpm.simplelogic.helper.GPSTracker;
@@ -113,6 +119,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
     String map_firstvisit_flag = "true";
     GPSTracker gps;
     String datenn;
+    int adb;
+    int adb2;
     String in_out_flag = "";
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -157,6 +165,20 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
         str = new StringBuilder();
         str.append(" ");
+
+        Global_Data.context = BasicMapDemoActivity.this;
+        try{
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         try
         {
             android.app.ActionBar mActionBar = getActionBar();
@@ -272,37 +294,89 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                alertDialog.setTitle("Anchor");
-                alertDialog.setMessage("Would you like to punch in attendance ?");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog1, int which) {
-                        // TODO Auto-generated method stub
-                        dialog1.dismiss();
-                        requestGPSPermissionsigna();
-
-                    }
-                });
+                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
 
-                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                        dialog.cancel();
-                    }
-                });
-
-
-                try {
-                    alertDialog.show();
-                } catch(Exception e){
-                    // WindowManager$BadTokenException will be caught and the app would not display
-                    // the 'Force Close' message
+                if (currentapiVersion >= 17) {
+                     adb = Settings.Secure.getInt(BasicMapDemoActivity.this.getContentResolver(),
+                            Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0);
+                } else {
+                     adb = Settings.Secure.getInt(BasicMapDemoActivity.this.getContentResolver(), Settings.Secure.ADB_ENABLED, 0);
                 }
+
+                if (adb==1){
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                    alertDialog.setTitle("Smart Anchor App");
+                    alertDialog.setMessage("Your Developer options is enabled would you like to disable Developer option.");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            // TODO Auto-generated method stub
+                            dialog1.dismiss();
+                            startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
+
+
+                        }
+                    });
+
+
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO Auto-generated method stub
+                            dialog.cancel();
+                        }
+                    });
+
+
+                    try {
+                        alertDialog.show();
+                    } catch(Exception e){
+                        // WindowManager$BadTokenException will be caught and the app would not display
+                        // the 'Force Close' message
+                    }
+                }else {
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                    alertDialog.setTitle("Smart Anchor App");
+                    alertDialog.setMessage("Would you like to punch in attendance ?");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            // TODO Auto-generated method stub
+                            dialog1.dismiss();
+                            requestGPSPermissionsigna();
+
+                        }
+                    });
+
+
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO Auto-generated method stub
+                            dialog.cancel();
+                        }
+                    });
+
+
+                    try {
+                        alertDialog.show();
+                    } catch(Exception e){
+                        // WindowManager$BadTokenException will be caught and the app would not display
+                        // the 'Force Close' message
+                    }
+
+
+
+                }
+
 
 
 
@@ -313,48 +387,96 @@ public class BasicMapDemoActivity extends FragmentActivity implements
             @Override
             public void onClick(View v) {
 
-                AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                alertDialog.setTitle("Anchor");
-                alertDialog.setMessage("Would you like to punch out attendance ?");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 
-                    @Override
-                    public void onClick(DialogInterface dialog1, int which) {
-                        // TODO Auto-generated method stub
-                        try {
-                            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
+
+                if (currentapiVersion >= 17) {
+                    adb2 = Settings.Secure.getInt(BasicMapDemoActivity.this.getContentResolver(),
+                            Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0);
+                } else {
+                    adb2 = Settings.Secure.getInt(BasicMapDemoActivity.this.getContentResolver(), Settings.Secure.ADB_ENABLED, 0);
+                }
+
+                if (adb2==1){
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                    alertDialog.setTitle("Smart Anchor App");
+                    alertDialog.setMessage("Your Developer options is enabled would you like to disable Developer option.");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            // TODO Auto-generated method stub
                             dialog1.dismiss();
+                            startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
+
+
+                        }
+                    });
+
+
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // TODO Auto-generated method stub
+                            dialog.cancel();
+                        }
+                    });
+
+
+                    try {
+                        alertDialog.show();
+                    } catch(Exception e){
+                        // WindowManager$BadTokenException will be caught and the app would not display
+                        // the 'Force Close' message
+                    }
+                }else {
+
+
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
+                    alertDialog.setTitle("Smart Anchor App");
+                    alertDialog.setMessage("Would you like to punch out attendance ?");
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Yes",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            // TODO Auto-generated method stub
                             try {
+                                LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, BasicMapDemoActivity.this);
+                                dialog1.dismiss();
+                                try {
 
-                                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
-                                DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
-                                Date date = new Date();
-                                String daten = sdf.format(date);
-                                String date_only_s = date_only.format(date);
-                                String datenn = sdf.format(date);
+                                    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a yyyy-MM-dd");
+                                    DateFormat date_only = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date date = new Date();
+                                    String daten = sdf.format(date);
+                                    String date_only_s = date_only.format(date);
+                                    String datenn = sdf.format(date);
 
-                                String a_check_data = "";
-                                List<Local_Data> a_check = dbvoc.getAllAttendanceF_Data();
-                                if (a_check.size() > 0) {
-                                    for (Local_Data cn : a_check) {
-                                        a_check_data = cn.getName();
+                                    String a_check_data = "";
+                                    List<Local_Data> a_check = dbvoc.getAllAttendanceF_Data();
+                                    if (a_check.size() > 0) {
+                                        for (Local_Data cn : a_check) {
+                                            a_check_data = cn.getName();
+                                        }
                                     }
-                                }
 
-                                if (a_check_data.equalsIgnoreCase("true")) {
-                                    isInternetPresent = cd.isConnectingToInternet();
-                                    if (isInternetPresent) {
+                                    if (a_check_data.equalsIgnoreCase("true")) {
+                                        isInternetPresent = cd.isConnectingToInternet();
+                                        if (isInternetPresent) {
 
 
-                                        dialog.setMessage("Please wait....");
-                                        dialog.setTitle("Metal App");
-                                        dialog.setCancelable(false);
-                                        dialog.show();
+                                            dialog.setMessage("Please wait....");
+                                            dialog.setTitle("Smart Anchor App");
+                                            dialog.setCancelable(false);
+                                            dialog.show();
 
-                                        in_out_flag = "OUT";
-                                        Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address);
-                                        //break;
-                                    } else {
+                                            in_out_flag = "OUT";
+                                            Attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address);
+                                            //break;
+                                        } else {
 //                                        in_out_flag = "OUT";
 //                                        loginDataBaseAdapter.insert_attendance_data(Global_Data.GLOvel_USER_EMAIL, daten, Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, "OUT", Global_Data.address, "false", date_only_s);
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Out successfully.", Toast.LENGTH_SHORT).show();
@@ -364,42 +486,52 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 //
 //                                        showDialogn(daten, str.toString());
 
-                                        Toast.makeText(BasicMapDemoActivity.this, " Internet not available.", Toast.LENGTH_SHORT).show();
-                                        // break;
+                                            Toast.makeText(BasicMapDemoActivity.this, " Internet not available.", Toast.LENGTH_SHORT).show();
+                                            // break;
+                                        }
+                                    } else {
+                                        Toast.makeText(BasicMapDemoActivity.this, "Please Press IN Button", Toast.LENGTH_SHORT).show();
+                                        // prefManager.setATTENDANCE_FLAG("false");
                                     }
-                                } else {
-                                    Toast.makeText(BasicMapDemoActivity.this, "Please Press IN Button", Toast.LENGTH_SHORT).show();
-                                    // prefManager.setATTENDANCE_FLAG("false");
+
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
                                 }
 
                             } catch (Exception ex) {
                                 ex.printStackTrace();
                             }
 
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
                         }
+                    });
 
+
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog1, int which) {
+                            // TODO Auto-generated method stub
+                            dialog1.cancel();
+                        }
+                    });
+
+
+                    try {
+                        alertDialog.show();
+                    } catch(Exception e){
+                        // WindowManager$BadTokenException will be caught and the app would not display
+                        // the 'Force Close' message
                     }
-                });
 
 
-                alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "No",new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog1, int which) {
-                        // TODO Auto-generated method stub
-                        dialog1.cancel();
-                    }
-                });
-
-
-                try {
-                    alertDialog.show();
-                } catch(Exception e){
-                    // WindowManager$BadTokenException will be caught and the app would not display
-                    // the 'Force Close' message
                 }
+
+
+
+
+
+
 
 
 
@@ -817,6 +949,8 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
 
         try {
+
+
             //  product_value.put("order_number", Global_Data.Order_Id);
 
             // product_value.put("user_id", user_email);
@@ -836,7 +970,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
 
             Log.d("attendances value", product_valuenew.toString());
 
-            String service_domain = domain + "attendances?imei_no=" + Global_Data.device_id + "&email=" + user_email;
+            String service_domain = domain + "attendances?imei_no=" + "" + "&email=" + user_email;
 
             Log.i("volley", "domain: " + service_domain);
 
@@ -1206,7 +1340,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                     dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                     AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                                    alertDialog.setTitle("Metal");
+                                    alertDialog.setTitle("Smart Anchor App");
                                     alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
                                     alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
@@ -1268,7 +1402,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                         AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                                        alertDialog.setTitle("Metal");
+                                        alertDialog.setTitle("Smart Anchor App");
                                         alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
                                         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
@@ -1333,7 +1467,7 @@ public class BasicMapDemoActivity extends FragmentActivity implements
                                         dialog.dismiss();
 //                                        Toast.makeText(BasicMapDemoActivity.this, "Please punch attendance after 0.5 km ", Toast.LENGTH_SHORT).show();
                                         AlertDialog alertDialog = new AlertDialog.Builder(BasicMapDemoActivity.this).create(); //Read Update
-                                        alertDialog.setTitle("Metal");
+                                        alertDialog.setTitle("Smart Anchor App");
                                         alertDialog.setMessage("You should be at least 0.5 KM away from your base address- " + user_address);
                                         alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 

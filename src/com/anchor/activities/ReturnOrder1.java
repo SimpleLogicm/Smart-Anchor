@@ -13,7 +13,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.widget.SimpleCursorAdapter;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -269,10 +269,10 @@ public class ReturnOrder1 extends BaseActivity {
 //                    editTextMRP.setText("" + mrp);
 //                    editTextQuantity.setFocusableInTouchMode(false);
 //                    editTextQuantity.setEnabled(false);
-            }catch (Exception ex)
-            {
-                ex.printStackTrace();
-            }
+                }catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
 
                 //txtPrice.setText("Total Price : ");
 
@@ -951,15 +951,15 @@ public class ReturnOrder1 extends BaseActivity {
 
                             if (!editTextQuantity.getText().toString().equalsIgnoreCase("") && !editTextQuantity.getText().toString().equalsIgnoreCase(null) && !editTextQuantity.getText().toString().equalsIgnoreCase("null") && !editTextQuantity.getText().toString().equalsIgnoreCase("0.0") && !editTextRP.getText().toString().equalsIgnoreCase("0.0")) {
 
-                               try
-                               {
-                                   double final_mrp = (Double.valueOf(editTextRP.getText().toString())) * (Double.valueOf(editTextQuantity.getText().toString().trim()));
-                                   txtPrice.setText("Total Price : " + final_mrp);
-                                   price = String.valueOf(final_mrp);
-                               }catch (Exception ex)
-                               {
-                                   ex.printStackTrace();
-                               }
+                                try
+                                {
+                                    double final_mrp = (Double.valueOf(editTextRP.getText().toString())) * (Double.valueOf(editTextQuantity.getText().toString().trim()));
+                                    txtPrice.setText("Total Price : " + final_mrp);
+                                    price = String.valueOf(final_mrp);
+                                }catch (Exception ex)
+                                {
+                                    ex.printStackTrace();
+                                }
 
 
                                 // txtDeleiveryQuantity.setText("Delivery Quantity:"+editTextQuantity.getText().toString());

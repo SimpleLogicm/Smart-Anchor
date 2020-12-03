@@ -58,7 +58,7 @@
             android:layout_marginBottom="30dp"
             android:src="@drawable/plus_cust"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/marker_rview"
             android:visibility="gone"
             android:layout_width="match_parent"

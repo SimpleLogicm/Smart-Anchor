@@ -12,8 +12,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,7 +32,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.anchor.adapter.AutoCompleteContactArrayAdapter;
+import com.anchor.adapter.AutoSuggestAdapter;
 import com.anchor.adapter.AutocompleteAdapternew;
 import com.anchor.adapter.CustomerAutoAdapter;
 import com.anchor.model.SubDealerModel;
@@ -320,13 +322,23 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                 if (s_dealer_search.getText().toString().trim().length() == 0) {
 
                     if (beat_click_flag.equalsIgnoreCase("")) {
-                        final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
-                                android.R.layout.simple_spinner_dropdown_item,
-                                Global_Data.Customers);
 
-                        s_dealer_search.setThreshold(1);
-                        s_dealer_search.setAdapter(adapterstr);
 
+//                        final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+//                                android.R.layout.simple_spinner_dropdown_item,
+//                                Global_Data.Customers);
+//
+//                        s_dealer_search.setThreshold(1);
+//                        s_dealer_search.setAdapter(adapterstr);
+//
+//                        s_dealer_search.setTextColor(Color.BLACK);
+
+                        final AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(Sub_Dealer_Order_Main.this, android.R.layout.simple_spinner_dropdown_item, Global_Data.Customers);
+                        s_dealer_search.setThreshold(1);// will start working from
+// first character
+                        s_dealer_search.setAdapter(adapterauto);// setting the adapter
+// data into the
+// AutoCompleteTextView
                         s_dealer_search.setTextColor(Color.BLACK);
 
                         Beat_search.setSelection(0);
@@ -968,15 +980,26 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                     .equalsIgnoreCase("Select Beat")) {
 
                 s_dealer_search.setText("");
-                final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
-                        android.R.layout.simple_spinner_dropdown_item,
-                        Global_Data.Customers);
+//                final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+//                        android.R.layout.simple_spinner_dropdown_item,
+//                        Global_Data.Customers);
+//
+//                s_dealer_search.setThreshold(1);
+//                s_dealer_search.setAdapter(adapterstr);
+//
+//                s_dealer_search.setTextColor(Color.BLACK);
+//                s_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
 
-                s_dealer_search.setThreshold(1);
-                s_dealer_search.setAdapter(adapterstr);
-
+                final AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(Sub_Dealer_Order_Main.this, android.R.layout.simple_spinner_dropdown_item, Global_Data.Customers);
+                s_dealer_search.setThreshold(1);// will start working from
+// first character
+                s_dealer_search.setAdapter(adapterauto);// setting the adapter
+// data into the
+// AutoCompleteTextView
                 s_dealer_search.setTextColor(Color.BLACK);
+
                 s_dealer_search.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.search_icon, 0);
+
 
             } else {
                 beat_click_flag = "yes";
@@ -1011,13 +1034,21 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         }
                     }
 
-                    final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            Customers_n);
+//                    final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+//                            android.R.layout.simple_spinner_dropdown_item,
+//                            Customers_n);
+//
+//                    s_dealer_search.setThreshold(1);
+//                    s_dealer_search.setAdapter(adapterstr);
+//
+//                    s_dealer_search.setTextColor(Color.BLACK);
 
-                    s_dealer_search.setThreshold(1);
-                    s_dealer_search.setAdapter(adapterstr);
-
+                    final AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(Sub_Dealer_Order_Main.this, android.R.layout.simple_spinner_dropdown_item, Customers_n);
+                    s_dealer_search.setThreshold(1);// will start working from
+// first character
+                    s_dealer_search.setAdapter(adapterauto);// setting the adapter
+// data into the
+// AutoCompleteTextView
                     s_dealer_search.setTextColor(Color.BLACK);
 
                     if (!spinner_flag.equalsIgnoreCase("Select Beat")) {
@@ -1647,7 +1678,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 //        if(beat_flag.equalsIgnoreCase("beat_click"))
 //        {
         try {
-            service_domain = domain + "customers/get_statewise_customers?beat_code=" + URLEncoder.encode(beat_code, "UTF-8");
+            service_domain = domain + "customers/get_statewise_customers?beat_ids=" + URLEncoder.encode(beat_code, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -1748,7 +1779,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
 
                 Global_Data.Customers.clear();
                 Global_Data.Customers_map.clear();
-               Customers_map_EMAIL.clear();
+                Customers_map_EMAIL.clear();
 
                 if (response.has("message")) {
                     response_result = response.getString("message");
@@ -1830,13 +1861,21 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         Sub_Dealer_Order_Main.this.runOnUiThread(new Runnable() {
                             public void run() {
 
-                                final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
-                                        android.R.layout.simple_spinner_dropdown_item,
-                                        Global_Data.Customers);
+//                                final ArrayAdapter<String> adapterstr = new ArrayAdapter<String>(Sub_Dealer_Order_Main.this,
+//                                        android.R.layout.simple_spinner_dropdown_item,
+//                                        Global_Data.Customers);
+//
+//                                s_dealer_search.setThreshold(1);
+//                                s_dealer_search.setAdapter(adapterstr);
+//
+//                                s_dealer_search.setTextColor(Color.BLACK);
 
-                                s_dealer_search.setThreshold(1);
-                                s_dealer_search.setAdapter(adapterstr);
-
+                                final AutoSuggestAdapter adapterauto = new AutoSuggestAdapter(Sub_Dealer_Order_Main.this, android.R.layout.simple_spinner_dropdown_item, Global_Data.Customers);
+                                s_dealer_search.setThreshold(1);// will start working from
+// first character
+                                s_dealer_search.setAdapter(adapterauto);// setting the adapter
+// data into the
+// AutoCompleteTextView
                                 s_dealer_search.setTextColor(Color.BLACK);
 
 
@@ -2285,9 +2324,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                         String response_result = "";
                         if (response.has("message")) {
                             response_result = response.getString("message");
-							Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, response_result, Toast.LENGTH_LONG);
-							toast.setGravity(Gravity.CENTER, 0, 0);
-							toast.show();
+                            Toast toast = Toast.makeText(Sub_Dealer_Order_Main.this, response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
                         } else {
 
 
@@ -2318,9 +2357,9 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                     JSONObject jsonObject = previous_order_products.getJSONObject(i);
 
                                     Global_Data.GLOvel_SUB_GORDER_ID = jsonObject.getString("order_number").trim();
-                                   // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
+                                    // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
 
-                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
+                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_id"), " ", jsonObject.getString("product_name"));
 
 
                                 }

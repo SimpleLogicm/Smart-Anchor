@@ -13,7 +13,11 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,6 +29,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -47,6 +52,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.TargetValue_info;
 
@@ -121,6 +127,21 @@ public class Expended_list_demo extends BaseActivity {
 		ts2more = findViewById(R.id.ts2more);
 		// get the listview
 		expListView = findViewById(R.id.lvExp);
+
+
+		Global_Data.context = Expended_list_demo.this;
+
+		try {
+			PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+					MyPeriodicwork.class, 15, TimeUnit.MINUTES
+			).addTag("otpValidator").build();
+			WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+					ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+
 
 		// Listview Group click listener
 		expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -421,7 +442,7 @@ public class Expended_list_demo extends BaseActivity {
 	public void getTargetDataSummary2()
 	{
 		SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-		String device_id = sp.getString("devid", "");
+		//String device_id = sp.getString("devid", "");
 
 		listDataHeader = new ArrayList<String>();
 		listDataChild = new HashMap<String, List<String>>();
@@ -470,11 +491,11 @@ public class Expended_list_demo extends BaseActivity {
 			if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
 			{
 
-				service_url = domain+"targets/get_targets_by_product?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_sub_category=true";
+				service_url = domain+"targets/get_targets_by_product?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_sub_category=true";
 			}
 			else
 			{
-				service_url = domain+"targets/get_targets?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_category=true";
+				service_url = domain+"targets/get_targets?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_category=true";
 			}
 
 

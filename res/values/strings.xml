@@ -2,7 +2,7 @@
 <resources>
 
     <!-- SIMPLE LOGIC UAT URL -->
-    <!--    <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
+<!--        <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
 <!--    <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
@@ -102,11 +102,9 @@
 
     <string name="Metal_Description">METAL facilitates the field sales organisation to interact with their respective offices in a structured and efficient manner. Thus automating the activities of the field sales using this android based field sales automation tool. This will help you to have better outlook of your targets and achievers at the same time have well coordinated field sales operation.</string>
     <string name="Simple_Logic_full_name">Simple Logic IT Private Ltd.</string>
-    <string name="Simple_Logic_address">609, Damji Shamji Corporate Square,
-Melville Estate, Next to KBC,
-Ghatkopar Andheri Link Road,
-Ghatkopar (E), Mumbai - 400 075.
-INDIA.</string>
+    <string name="Simple_Logic_address">401-402, Sai Enclave,
+        C Wing Plot No.252 A. Hariyali Village,
+        Vikhroli, Mumbai, Maharashtra 400083 INDIA.</string>
     <string name="Call_us">Call us :</string>
     <string name="Call">Call</string>
     <string name="Shop_Distance">Direction</string>
@@ -148,7 +146,7 @@ INDIA.</string>
 
     <string name="Select_Customer">Select Customer</string>
     <string name="Search_Customer">Search Customer</string>
-    <string name="Search_Subdealer">Search Subdealer</string>
+    <string name="Search_Subdealer">Search Retailer</string>
     <string name="Search_Dealer">Search Dealer</string>
     <string name="STARTs">START</string>
 
@@ -437,5 +435,10 @@ INDIA.</string>
     <string name="AGE">% AGE</string>
     <string name="MORE">MORE</string>
     <string name="INVOICE_DESCRIPTION">INVOICE DESCRIPTION</string>
+
+    <string name="shop_no">Shop No, Building, Company, Apartment</string>
+    <string name="Area">Area, Colony, Street, Sector, Village</string>
+    <string name="Landmark">Landmark</string>
+    <string name="PIN_Code">PIN Code</string>
 
 </resources>

@@ -22,10 +22,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.multidex.MultiDex;
-import android.support.v4.content.ContextCompat;
+import androidx.multidex.MultiDex;
+import androidx.core.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.util.Base64;
@@ -34,31 +35,38 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anchor.helper.HttpsTrustManager;
 import com.anchor.model.User;
 import com.anchor.service.LocationServices;
 import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.javiersantos.appupdater.AppUpdaterUtils;
 import com.github.javiersantos.appupdater.enums.AppUpdaterError;
 import com.github.javiersantos.appupdater.objects.Update;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -79,26 +87,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
-import java.security.KeyFactory;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
+import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -107,6 +102,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.BCrypt;
 import cpm.simplelogic.helper.CheckNullValue;
@@ -149,23 +145,30 @@ public class LoginActivity extends Activity {
     String CHANNEL_NAME = "SmartAnchor";
     String CHANNEL_DESC = "Anchor App";
     private int passwordNotVisible=1;
+    static int otp_hit = 0;
+    Dialog dialognew;
+
+    String otp_verify_flag = "";
+    String otp_verify_time_flag = "";
+    HashMap<String, Integer> otp_hit_validator = new HashMap<String, Integer>();
+
+    Button otp_submit,otp_Resend,otp_Cancel;
+    ProgressBar otp_progressBarar;
+    LinearLayout otp_bottom_layout;
+    EditText sub_otp,otp_user_name;
+    TextView otp_time_remaining;
+    CountDownTimer timer;
+    PlayService_Location PlayServiceManager;
+
 
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         MultiDex.install(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        try {
-
-            //installServiceProviderIfNeeded(LoginActivity.this);
-           // getAcceptedIssuers();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         FirebaseApp.initializeApp(this);
 
@@ -181,6 +184,15 @@ public class LoginActivity extends Activity {
 //			getActivity().getPreferences(Context.MODE_PRIVATE).edit().putString("fb", newToken).apply();
             }
         });
+
+        try
+        {
+            PlayServiceManager = new PlayService_Location(LoginActivity.this);
+
+        }catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
 
         //creating notification channel if android version is greater than or equals to oreo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -206,11 +218,11 @@ public class LoginActivity extends Activity {
         SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
         devid = pref_devid.getString("devid", "");
 
-        if (devid.length() > 0) {
-            link_fpwd.setVisibility(View.VISIBLE);
-        } else {
-            link_fpwd.setVisibility(View.GONE);
-        }
+//        if (devid.length() > 0) {
+//            link_fpwd.setVisibility(View.VISIBLE);
+//        } else {
+//            link_fpwd.setVisibility(View.GONE);
+//        }
 
         link_fpwd.setOnClickListener(new OnClickListener() {
             @Override
@@ -289,8 +301,11 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-		editText1.setText("rajeev.dubey@in.panasonic.com");
-		editText2.setText("password");
+//		editText1.setText("Kartik");
+//		editText2.setText("Kartik4882263");
+
+//        editText1.setText("Kartik");
+//        editText2.setText("Kartik2732867");
 
 
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -309,6 +324,10 @@ public class LoginActivity extends Activity {
             System.out.println("Local Values:-" + Global_Data.local_user + "," + Global_Data.local_pwd);
             //Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
         }
+
+
+
+
 
         editText2.setOnTouchListener(new View.OnTouchListener() {
 
@@ -359,7 +378,7 @@ public class LoginActivity extends Activity {
                     toast.show();
                 } else {
                     if (isInternetPresent) {
-                        requestPhoneStatePermission();
+                        //requestPhoneStatePermission();
 
                     } else {
                         // Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG).show();
@@ -373,7 +392,57 @@ public class LoginActivity extends Activity {
 
         buttonLogin.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
-                requestGPSPermissionsignlogin();
+
+                if (CheckNullValue.findNullValue(editText1.getText().toString().trim()) == true) {
+                    // Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_SHORT).show();
+
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+
+                    List<Local_Data> conta = dbvoc.getSyncDate(editText1.getText().toString().trim());
+                    for (Local_Data cn1 : conta) {
+                        current_date = cn1.getCur_date();
+
+                    }
+                    SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+                    String  TCODE = pref_devid.getString("TCODE", "");
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                    String formattedDate = df.format(c.getTime());
+
+                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(TCODE)) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                        Date date1 = null;
+                        try {
+                            date1 = sdf.parse(current_date);
+                            Date to_ddd = df.parse(formattedDate);
+                            if (to_ddd.compareTo(date1) > 0)
+                            {
+                                // dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                                showDialogs(editText1.getText().toString().trim());
+
+
+                            }
+                            else
+                            {
+                                requestGPSPermissionsignlogin();
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+
+                        //dbvoc.update_user_createD(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                        showDialogs(editText1.getText().toString().trim());
+
+                    }
+                }
 
             }
         });
@@ -431,9 +500,8 @@ public class LoginActivity extends Activity {
             // TODO Auto-generated method stub
             try {
 
-                //simSerailDB=myDbHelper.createDataBase(simSerial,getDateTime());
-                //myDbHelper.openDataBase();
-                expired = false;//myDbHelper.checkExipry(getDateTime());
+
+                expired = false;
 
 
             } catch (Exception e) {
@@ -664,259 +732,12 @@ public class LoginActivity extends Activity {
 
             }
 
-//			if (registredUser.getUserID()==0) {
-//				AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create(); //Read Update
-//			    alertDialog.setTitle("Warning");
-//			    alertDialog.setMessage("Application is not registerd with this Device."); 
-//			    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
-//					
-//					@Override
-//					public void onClick(DialogInterface dialog, int which) {
-//						System.exit(0);
-//					}
-//				});
-//
-//			    alertDialog.setCancelable(false);
-//			    alertDialog.setCanceledOnTouchOutside(false);
-//			    alertDialog.show(); 
-//			
-//			}
-			
-			/*else {
-				new InsertRegistredUserAsycTask(LoginActivity.this).execute();
-			}*/
-
         }
     }
 
-    /*public class InsertRegistredUserAsycTask extends AsyncTask<Void, Void, Void> {
-
-     *//** progress dialog to show user that the backup is processing. *//*
-		private ProgressDialog dialog;
-		*/
-
-    /**
-     * application context.
-     *//*
-		private Activity activity;
-		
-		private Context context;
-		
-		private boolean userExists;
-		
-		user registredUser;
-		
-	
-
-		public InsertRegistredUserAsycTask(Activity activity) {
-			this.activity = activity;
-			context=activity;
-			dialog = new ProgressDialog(context);
-			userExists=false;
-			registredUser=new user();
-		}
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			this.dialog.setMessage("Please wait");
-			this.dialog.setCancelable(false);
-			this.dialog.show();
-			
-
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			try {
-				HttpClient httpclient = new DefaultHttpClient();
-				 
-				 Read User Start
-				HttpResponse response = httpclient.execute(new HttpGet("http://114.143.196.137/MS/XML/Test/user.xml"));
-	             HttpEntity entity = response.getEntity();
-				 String responseString = EntityUtils.toString(entity, "UTF-8");
-				 userParsing up = new userParsing();
-				 up.parsingUserXMLData(responseString);
-				 ArrayList<user> listUser  = up.getListUser();
-				 for (Iterator iterator = listUser.iterator(); iterator
-						.hasNext();) {
-					user u = (user) iterator.next();
-					if (u.getIMEINo().equalsIgnoreCase(manager.getDeviceId())) {
-						registredUser=u;
-						break;
-					}
-					
-				}
-					
-			} catch (Exception e) {
-				// TODO: handle exception
-				
-				Log.e("DATA", "Exception-"+e.toString());
-			}
-			
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			if (dialog.isShowing()) {
-				dialog.dismiss();
-				
-			}
-			
-			if (registredUser.getUserId()==0) {
-				AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create(); //Read Update
-			    alertDialog.setTitle("Warning");
-			    alertDialog.setMessage("Application is not registerd with this Device."); 
-			    alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Continue",new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						System.exit(0);
-					}
-				});
-
-			  
-			    alertDialog.setCancelable(false);
-			    alertDialog.setCanceledOnTouchOutside(false);
-			    alertDialog.show(); 
-			}
-			
-			else {
-				new InsertRegistredUserAsycTask(LoginActivity.this).execute();
-			}
-		}
-	}*/
-
-    public class LoadUserInfoAsyncTask extends AsyncTask<Void, Void, Void> {
-
-        /**
-         * progress dialog to show user that the backup is processing.
-         */
-        private ProgressDialog dialog;
-        /**
-         * application context.
-         */
-        private Activity activity;
-
-        private Context context;
-
-        private boolean webServiceResponse;
-
-        public LoadUserInfoAsyncTask(Activity activity) {
-            this.activity = activity;
-            context = activity;
-            dialog = new ProgressDialog(context);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-            this.dialog.setMessage("Please wait");
-            this.dialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // TODO Auto-generated method stub
-            try {
-                //Log.e("DATA", "manager.getDeviceId() : "+manager.getDeviceId());
-
-                //u=myDbHelper.cheeckUserdetails(editText1.getText().toString(),editText2.getText().toString(),"911305401754123",getDateTime());//manager.getDeviceId() = 911305401754123
-                //Log.e("DATA", u.toString());
-
-            } catch (Exception e) {
-                // TODO: handle exception
-                Log.e("DATA", "Exception - " + e.toString());
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            // TODO Auto-generated method stub
-            super.onPostExecute(result);
-            if (dialog.isShowing()) {
-                dialog.dismiss();
-
-            }
-
-            if (u.getUserID() != 0) {
-                finish();
-//	     		
-//	     		 SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
-//			        SharedPreferences.Editor editor=spf.edit();        
-//			        //editor.putString("UserID", userid);
-//			        editor.putInt("UserID", u.getUserID());
-//			        editor.putInt("StateID", u.getStateID());
-//			        editor.putInt("cityID", u.getCityID());
-//			        //editor.putInt("beatID", u.getBeatID());
-//			        editor.putString("userbeatIDs", u.getBeatID());
-//			        editor.putString("SimID", u.getSimID());
-//			        editor.putString("FirstName", u.getFirstName());
-//			        editor.putString("LastName", u.getLastName());
-//			        editor.putFloat("Target", u.getTarget());
-//			        editor.putFloat("Current_Target", u.getCurrent_target());
-//			        editor.commit();
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                startActivity(i);
-
-                Intent j = new Intent(getApplicationContext(), LocationServices.class);
-                startService(j);
-
-                //Toast.makeText(getApplicationContext(), "Login Successful", 1000).show();
-				/*SendLatLongAsyncTask sendLatLongAsyncTask=new SendLatLongAsyncTask(LoginActivity.this);
-				sendLatLongAsyncTask.execute();*/
-                Toast toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            } else {
-                //Toast.makeText(getApplicationContext(), "Login failed", 1000).show();
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Login failed", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-            }
-
-            /* for blank*/
-			/*finish();
-     		
-    		 SharedPreferences spf=LoginActivity.this.getSharedPreferences("SimpleLogic",0);        
-		        SharedPreferences.Editor editor=spf.edit();        
-		        //editor.putString("UserID", userid);
-		        editor.putInt("UserID", 1);
-		        editor.commit();
-		        Intent i=new Intent(getApplicationContext(), MainActivity.class);
-		       // overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-		        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-			startActivity(i);*/
-            /* for blank*/
 
 
-        }
-    }
 
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
-    }
 
     @Override
     protected void onResume() {
@@ -1022,41 +843,25 @@ public class LoginActivity extends Activity {
         return result;
     }
 
-    public void getserviceData() {
-        dialog.setMessage("Please wait Data Sync....");
-        dialog.setTitle("Smart Anchor App");
-        dialog.setCancelable(false);
-        dialog.show();
+    public void getserviceData(final String user_name, final Dialog dialogdis) {
+//        dialog.setMessage("Please wait Data Sync....");
+//        dialog.setTitle("Smart Anchor App");
+//        dialog.setCancelable(false);
+//        dialog.show();
 
         try {
-            SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-            devid = pref_devid.getString("devid", "");
-            final String Device_id = pref_devid.getString("devid", "");
+          //  SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+            //devid = pref_devid.getString("devid", "");
+            //final String Device_id = pref_devid.getString("devid", "");
 
             String domain = getResources().getString(R.string.service_domain);
+            String url = domain+ "menus/registration?user_name=" + URLEncoder.encode(user_name, "UTF-8");
+
+            Log.i("volley", "url: " + url);
+            Log.i("volley", "user_name: " + user_name);
 
 
-            if (devid.length() > 0) {
-                link_fpwd.setVisibility(View.VISIBLE);
-            } else {
-                link_fpwd.setVisibility(View.GONE);
-            }
-
-//	            Global_Val global_Val = new Global_Val();
-//	            if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
-//	                domain = getResources().getString(R.string.service_domain);
-//	            }
-//	            else
-//	            {
-//	                domain = URL.toString();
-//	            }
-
-            Log.i("volley", "domain: " + domain);
-            Log.i("volley", "Device_id: " + Device_id);
-            // Log.i("volley", "Sim_Number: " + Global_Val.Sim_Number);
-            Log.i("volley", "Service url: " + domain + "menus/registration?imei_no=" + URLEncoder.encode(Device_id, "UTF-8"));
-
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain + "menus/registration?imei_no=" + URLEncoder.encode(Device_id, "UTF-8"), null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
                 // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
 
                 @Override
@@ -1072,28 +877,34 @@ public class LoginActivity extends Activity {
                         }
 
 
-                        if (response_result.equalsIgnoreCase("Device not registered")) {
+                        if (response_result.equalsIgnoreCase("User not registered")) {
 
                             Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
+
+                            otp_progressBarar.setVisibility(View.GONE);
+                            otp_bottom_layout.setVisibility(View.VISIBLE);
+                            dialogdis.dismiss();
 
                         } else {
 
                             dbvoc.getDeleteTable("users");
 
                             JSONArray users = response.getJSONArray("users");
-//	                           
                             Log.i("volley", "response reg users Length: " + users.length());
 
                             if (users.length() <= 0) {
-                                dialog.dismiss();
-                                //Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_SHORT).show();
                                 Toast toast = Toast.makeText(LoginActivity.this, "User not found, Please contact with it team.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                dialogdis.dismiss();
                             } else {
                                 Log.d("users", "users" + users.toString());
+
+                                /* IDS column used for BU Head */
 
                                 for (int i = 0; i < users.length(); i++) {
 
@@ -1101,27 +912,39 @@ public class LoginActivity extends Activity {
 
                                     loginDataBaseAdapter.insertEntry(jsonObject.getString("user_name"), jsonObject.getString("encrypted_password"), jsonObject.getString("date_of_joining"), jsonObject.getString("mob_no"), jsonObject.getString("email"), jsonObject.getString("reporting_to"),
                                             jsonObject.getString("first_name"), jsonObject.getString("last_name"), "", "", "", "", "",
-                                            "", Device_id, "", jsonObject.getString("address"), "", "", "", "", "", jsonObject.getString("emp_code"));
+                                            "", "", "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
                                 }
 
-                                //Toast.makeText(getApplicationContext(), "Register successfully.", Toast.LENGTH_LONG).show();
 
+
+                                SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                                SharedPreferences.Editor editor = spf.edit();
+                                editor.putString("TCODE", "Yes");
+                                editor.putString("FirstLogin", "Yes");
+                                editor.commit();
+
+                                Calendar c = Calendar.getInstance();
+                                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                                String formattedDate = df.format(c.getTime());
+                                dbvoc.update_user_createD(formattedDate, user_name);
 
                                 Toast toast = Toast.makeText(LoginActivity.this, "Register successfully Please login.", Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
-                                dialog.dismiss();
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                dialogdis.dismiss();
                             }
-//	                          	                            //finish();
+
                         }
 
-                        // }
 
-                        // output.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        dialog.dismiss();
-                        finish();
+                        otp_progressBarar.setVisibility(View.GONE);
+                        otp_bottom_layout.setVisibility(View.VISIBLE);
+                        dialogdis.dismiss();
+
                     }
 
 
@@ -1135,7 +958,9 @@ public class LoginActivity extends Activity {
                     Toast toast = Toast.makeText(LoginActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                    dialog.dismiss();
+                    otp_progressBarar.setVisibility(View.GONE);
+                    otp_bottom_layout.setVisibility(View.VISIBLE);
+                    dialogdis.dismiss();
 
                 }
             });
@@ -1150,7 +975,7 @@ public class LoginActivity extends Activity {
 
         } catch (Exception e) {
             e.printStackTrace();
-            dialog.dismiss();
+
         }
     }
 
@@ -1183,6 +1008,8 @@ public class LoginActivity extends Activity {
                     SharedPreferences.Editor editor = spf.edit();
                     editor.putString("USER_EMAIL", cn.getuser_email());
                     editor.putString("USER_NAMEs", cn.getfirst_name() + " " + cn.getlast_name());
+                    editor.putString("USER_Login", cn.getUser().trim());
+                    String user_name = cn.getUser().trim();
 
                     //editor.commit();
 
@@ -1258,31 +1085,37 @@ public class LoginActivity extends Activity {
                                         }
                                     });
 
-                                    List<Local_Data> conta = dbvoc.getDateBY_Device(Global_Data.imei_no, Global_Data.GLOvel_USER_EMAIL);
-                                    for (Local_Data cn1 : conta) {
-                                        current_date = cn1.getCur_date();
-                                        //current_date="28/02/2017";
-                                    }
+//                                    List<Local_Data> conta = dbvoc.getSyncDate(user_name);
+//                                    for (Local_Data cn1 : conta) {
+//                                        current_date = cn1.getCur_date();
+//                                        //current_date="28/02/2017";
+//                                    }
 
-                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(current_date)) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                                        Date date1 = sdf.parse(current_date);
+                                    final SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
+                                    String FirstLogin_Flag = sp.getString("FirstLogin", "");
 
-                                        Calendar c = Calendar.getInstance();
-                                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-                                        String formattedDate = df.format(c.getTime());
-                                        Date to_ddd = df.parse(formattedDate);
+                                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(FirstLogin_Flag)) {
+//                                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//                                        Date date1 = sdf.parse(current_date);
+//
+//                                        Calendar c = Calendar.getInstance();
+//                                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//                                        String formattedDate = df.format(c.getTime());
+//                                        Date to_ddd = df.parse(formattedDate);
                                         //String formattedDate = df.format(c.getTime());
 
-                                        if (to_ddd.compareTo(date1) > 0) {
+                                        if (FirstLogin_Flag.equalsIgnoreCase("Yes")) {
 //											finish();
                                             isInternetPresent = cd.isConnectingToInternet();
                                             if (isInternetPresent) {
 
-                                                dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
+                                               // dbvoc.update_user_createD(formattedDate, user_name);
 
                                                 LoginActivity.this.runOnUiThread(new Runnable() {
                                                     public void run() {
+                                                        SharedPreferences.Editor editora = sp.edit();
+                                                        editora.putString("FirstLogin", "NO");
+                                                        editora.commit();
                                                         getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
                                                     }
                                                 });
@@ -1299,6 +1132,9 @@ public class LoginActivity extends Activity {
                                             }
                                         } else {
                                             dialog.dismiss();
+                                            SharedPreferences.Editor editora = sp.edit();
+                                            editora.putString("FirstLogin", "NO");
+                                            editora.commit();
                                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                             finish();
@@ -1314,25 +1150,32 @@ public class LoginActivity extends Activity {
                                         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                                         String formattedDate = df.format(c.getTime());
 
-                                        if (isInternetPresent) {
+                                        SharedPreferences.Editor editora = sp.edit();
+                                        editora.putString("FirstLogin", "NO");
+                                        editora.commit();
+                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        finish();
 
-                                            dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
-
-
-                                            LoginActivity.this.runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
-                                                }
-                                            });
-                                        } else {
-                                            LoginActivity.this.runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
-                                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                                    toast.show();
-                                                }
-                                            });
-                                        }
+//                                        if (isInternetPresent) {
+//
+//                                            dbvoc.update_user_createD(formattedDate, user_name);
+//
+//
+//                                            LoginActivity.this.runOnUiThread(new Runnable() {
+//                                                public void run() {
+//                                                    getServices.sendRequestnew(LoginActivity.this, "First Login of the day, Please wait for Data download...");
+//                                                }
+//                                            });
+//                                        } else {
+//                                            LoginActivity.this.runOnUiThread(new Runnable() {
+//                                                public void run() {
+//                                                    Toast toast = Toast.makeText(getApplicationContext(), "You don't have internet connection.", Toast.LENGTH_LONG);
+//                                                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                                                    toast.show();
+//                                                }
+//                                            });
+//                                        }
                                     }
 
                                 } else {
@@ -1361,7 +1204,7 @@ public class LoginActivity extends Activity {
                                 });
                             }
 
-                        } catch (ParseException ex) {
+                        } catch (Exception ex) {
                             ex.printStackTrace();
                             LoginActivity.this.runOnUiThread(new Runnable() {
                                 public void run() {
@@ -1512,46 +1355,7 @@ public class LoginActivity extends Activity {
                 .check();
     }
 
-    private void requestPhoneStatePermission() {
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.READ_PHONE_STATE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
 
-                        TelephonyManager tm = (TelephonyManager) LoginActivity.this.getSystemService(Context.TELEPHONY_SERVICE);
-
-                        String Device_id = tm.getDeviceId();
-
-                        SharedPreferences pref = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor edit = pref.edit();
-                        edit.putString("devid", Device_id);
-                        edit.commit();
-
-                        Global_Data.device_id = Device_id;
-
-                        Global_Data.imei_no = Device_id;
-
-                        getserviceData();
-                        return;
-
-
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        // check for permanent denial of permission
-                        if (response.isPermanentlyDenied()) {
-                            showSettingsDialog(LoginActivity.this);
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
-    }
 
     private void requestGPSPermissionsigna() {
 
@@ -1600,7 +1404,7 @@ public class LoginActivity extends Activity {
                 .check();
     }
 
-    private void requestGPSPermissionsignlogin() {
+    private void   requestGPSPermissionsignlogin() {
 
         Dexter.withActivity(this)
                 .withPermissions(
@@ -1641,20 +1445,8 @@ public class LoginActivity extends Activity {
 //					}
                             else {
 
-                                SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                                String Device_id = pref_devid.getString("devid", "");
-                                Global_Data.device_id = Device_id;
-                                Global_Data.imei_no = Device_id;
+                                Validate_Email_Pass(editText1.getText().toString().trim(), editText2.getText().toString().trim());
 
-                                List<Local_Data> contacts2 = dbvoc.getUSERBY_Device(Global_Data.imei_no);
-
-                                if (contacts2.size() > 0) {
-                                    Validate_Email_Pass(editText1.getText().toString().trim(), editText2.getText().toString().trim());
-                                } else {
-                                    Toast toast = Toast.makeText(LoginActivity.this, "Your Device id not found in database, Please register first.", Toast.LENGTH_LONG);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-                                }
                             }
                         }
 
@@ -1715,19 +1507,416 @@ public class LoginActivity extends Activity {
         startActivityForResult(intent, 101);
     }
 
-    public static void installServiceProviderIfNeeded(Context context) {
+
+
+    public void showDialogs(String user_name) {
+        dialognew = new Dialog(LoginActivity.this);
+        dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialognew.setCancelable(false);
+        dialognew.setContentView(R.layout.mobile_otp_screen);
+
+          sub_otp = dialognew.findViewById(R.id.sub_otp);
+          otp_user_name = dialognew.findViewById(R.id.otp_user_name);
+          otp_time_remaining = dialognew.findViewById(R.id.otp_time_remaining);
+          otp_user_name.setText(user_name);
+
+       // otp_mobile_value.setText(input_mobno1.getText().toString());
+        otp_verify_time_flag = "yes";
+
+         otp_progressBarar = dialognew.findViewById(R.id.otp_progressBarar);
+         otp_bottom_layout = dialognew.findViewById(R.id.otp_bottom_layout);
+         otp_submit = dialognew.findViewById(R.id.otp_submit);
+         otp_Resend = dialognew.findViewById(R.id.otp_Resend);
+         otp_Cancel = dialognew.findViewById(R.id.otp_Cancel);
+
         try {
-            ProviderInstaller.installIfNeeded(context);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
 
-            // Prompt the user to install/update/enable Google Play services.
-            GooglePlayServicesUtil.showErrorNotification(e.getConnectionStatusCode(), context);
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            String today1 = format.format(new Date());
+            Date today = new Date(today1);
+            final long currentTime = today.getTime();
 
-        } catch (GooglePlayServicesNotAvailableException e) {
+            // String today1 = format.format(System.currentTimeMillis()+15*60*1000);
+            Date service_plusf = format.parse(today1);
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(service_plusf);
+            cal.add(Calendar.MINUTE, 2);
+            Date new_date = cal.getTime();
+
+            final long s_time = new_date.getTime();
+            long expiryTime = s_time - currentTime;
+
+             timer = new CountDownTimer(expiryTime, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    otp_time_remaining.setText("" + String.format("%d:%d Mins Remaining",
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+                }
+
+                public void onFinish() {
+
+                    otp_time_remaining.setText("00:00:00");
+
+                    if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
+                        otp_Resend.setVisibility(View.VISIBLE);
+                        otp_Resend.setText("Resend OTP");
+                        otp_submit.setVisibility(View.GONE);
+                        sub_otp.setVisibility(View.GONE);
+                        sub_otp.setText("");
+                        otp_verify_time_flag = "";
+                    }
+                    else
+                    {
+                        otp_verify_time_flag = "";
+                    }
+
+
+
+                }
+            };
+
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        otp_Resend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (CheckNullValue.findNullValue(otp_user_name.getText().toString().trim()) == true) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                 }
+                else
+                {
+                    otp_progressBarar.setVisibility(View.VISIBLE);
+                    otp_bottom_layout.setVisibility(View.GONE);
+
+                    Generate_Otp("resend", otp_user_name.getText().toString());
+                }
+
+
+            }
+        });
+
+        otp_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
+//                    if (!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sub_otp.getText().toString())) {
+//                        sub_otp.requestFocus();
+//                        //Globel_Data.Custom_Toast(ShopDetails.this, "Please Enter OTP", "");
+//
+//                    } else {
+//
+//                    }
+//                } else {
+//
+//
+//                }
+
+
+                if (CheckNullValue.findNullValue(otp_user_name.getText().toString().trim()) == true) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                if (CheckNullValue.findNullValue(sub_otp.getText().toString().trim()) == true) {
+                    Toast toast = Toast.makeText(LoginActivity.this, "Please Enter OTP", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+                    otp_progressBarar.setVisibility(View.VISIBLE);
+                    otp_bottom_layout.setVisibility(View.GONE);
+
+                    String otp = sub_otp.getText().toString();
+                    SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                    SharedPreferences.Editor editor = spf.edit();
+                    editor.putString("OTP", otp);
+                    editor.commit();
+
+
+                    submit_OTP(otp_user_name.getText().toString(), sub_otp.getText().toString(),dialognew);
+                }
+
+
+            }
+        });
+
+
+        otp_Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                otp_hit_validator.clear();
+                timer.cancel();
+                dialognew.dismiss();
+            }
+        });
+
+        dialognew.show();
+
     }
+
+    public void Generate_Otp(final String Click_Flag, final String User_Name) {
+        System.gc();
+        String reason_code = "";
+        try {
+
+            JsonObjectRequest jsObjRequest = null;
+            try {
+
+
+                String domain = getResources().getString(R.string.service_domain);
+                String url = domain+"menus/generate_otp";
+
+                Log.d("Server url", "Server url" + url);
+
+                JSONObject SINOBJECT = new JSONObject();
+
+                SINOBJECT.put("user_name", User_Name);
+
+                Log.d("user_dealer Service", SINOBJECT.toString());
+
+                jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, SINOBJECT, new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("volle y", "response: " + response);
+
+                        Log.d("jV", "JV length" + response.length());
+                        try {
+
+                            String response_result = "";
+                            if (response.has("result")) {
+                                response_result = response.getString("result");
+                            } else {
+                                response_result = "data";
+                            }
+
+
+                            if (response_result.equalsIgnoreCase("OTP Sent Successfully.")) {
+
+                               // dialog.dismiss();
+                                otp_verify_time_flag = "yes";
+                                otp_Resend.setText("Resend OTP");
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+                                otp_submit.setVisibility(View.VISIBLE);
+                                sub_otp.setVisibility(View.VISIBLE);
+                                otp_Resend.setVisibility(View.GONE);
+
+                                Toast toast = Toast.makeText(LoginActivity.this,
+                                        response_result, Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                timer.start();
+
+                                otp_hit_validator.clear();
+
+                            } else {
+
+                                otp_progressBarar.setVisibility(View.GONE);
+                                otp_bottom_layout.setVisibility(View.VISIBLE);
+
+                                Toast toast = Toast.makeText(LoginActivity.this,
+                                        response_result, Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            otp_progressBarar.setVisibility(View.GONE);
+                            otp_bottom_layout.setVisibility(View.VISIBLE);
+                        }
+
+
+
+
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Network Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Server AuthFailureError  Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Server   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof NetworkError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Network   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(getApplicationContext(),
+                                    "ParseError   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        otp_progressBarar.setVisibility(View.GONE);
+                        otp_bottom_layout.setVisibility(View.VISIBLE);
+                        // finish();
+                    }
+                });
+
+
+                RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+
+                int socketTimeout = 300000;//90 seconds - change to what you want
+                RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+                jsObjRequest.setRetryPolicy(policy);
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false);
+                requestQueue.getCache().clear();
+                requestQueue.add(jsObjRequest);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                dialog.dismiss();
+            }
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            Log.e("DATA", e.getMessage());
+        }
+    }
+
+    public void submit_OTP(final String user_name, String otp, final Dialog dialogdis) {
+
+        try {
+
+            String domain = getResources().getString(R.string.service_domain);
+            String url = domain+"menus/verify_otp?user_name=" + URLEncoder.encode(user_name, "UTF-8")+"&otp="+otp;
+            Log.i("volley", "url: " + url);
+            Log.i("volley", "user_name: " + user_name);
+            Log.i("volley", "otp: " + otp);
+
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+                // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.i("volley", "response: " + response.toString());
+
+                    try {
+                        String response_result = "";
+                        if (response.has("result")) {
+                            response_result = response.getString("result");
+                        } else {
+                            response_result = "data";
+                        }
+
+
+                        if (response_result.equalsIgnoreCase("User Verified Successfully.")) {
+
+                                //List<Local_Data> conta = dbvoc.getAllMain();
+                                List<Local_Data> conta = dbvoc.getSyncDate(user_name);
+
+                                if(conta.size() > 0)
+                                {
+                                    Log.d("Existing User","Existing U");
+                                    SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
+                                    SharedPreferences.Editor editor = spf.edit();
+                                    editor.putString("TCODE", "Yes");
+                                    editor.putString("FirstLogin", "Yes");
+                                    editor.commit();
+
+                                    Calendar c = Calendar.getInstance();
+                                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                                    String formattedDate = df.format(c.getTime());
+                                    dbvoc.update_user_createD(formattedDate, user_name);
+
+                                    timer.cancel();
+
+
+
+                                    Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+                                    dialogdis.dismiss();
+
+
+
+                                }
+                                else
+                                {
+                                    Log.d("New User","New U");
+                                    Log.d("Existing User","Existing U");
+                                    timer.cancel();
+                                    getserviceData(user_name, dialogdis);
+                                }
+
+
+                            }
+                          else {
+                            otp_progressBarar.setVisibility(View.GONE);
+                            otp_bottom_layout.setVisibility(View.VISIBLE);
+                            Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        otp_progressBarar.setVisibility(View.GONE);
+                        otp_bottom_layout.setVisibility(View.VISIBLE);
+
+                    }
+
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("volley", "error: " + error);
+                    // Toast.makeText(getApplicationContext(), "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
+                    Toast toast = Toast.makeText(LoginActivity.this, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    otp_progressBarar.setVisibility(View.GONE);
+                    otp_bottom_layout.setVisibility(View.VISIBLE);
+
+                }
+            });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            // queue.add(jsObjRequest);
+            jsObjRequest.setShouldCache(false);
+            int socketTimeout = 3000000;//3000 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            jsObjRequest.setRetryPolicy(policy);
+            requestQueue.add(jsObjRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            otp_progressBarar.setVisibility(View.GONE);
+            otp_bottom_layout.setVisibility(View.VISIBLE);
+        }
+    }
+
+
 
 
 

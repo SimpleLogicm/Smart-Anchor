@@ -32,6 +32,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+
+import com.anchor.helper.MyPeriodicwork;
 import com.anchor.model.Reason;
 import com.anchor.webservice.ConnectionDetector;
 import com.android.volley.AuthFailureError;
@@ -68,6 +73,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import cpm.simplelogic.helper.GPSTracker;
 
@@ -117,6 +123,20 @@ public class NoOrderActivity extends BaseActivity {
             no_order_head.setText(norderstr);
         } else {
             no_order_head.setText("No Order");
+        }
+
+
+        Global_Data.context = NoOrderActivity.this;
+
+        try {
+            PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(
+                    MyPeriodicwork.class, 15, TimeUnit.MINUTES
+            ).addTag("otpValidator").build();
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork("Work",
+                    ExistingPeriodicWorkPolicy.REPLACE,periodicWorkRequest);
+
+        }catch(Exception ex) {
+            ex.printStackTrace();
         }
 
 
@@ -544,7 +564,7 @@ public class NoOrderActivity extends BaseActivity {
 
 
                 if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Other")) {
-                    Log.d("Server url", "Server url" + domain + "no_orders/save_no_orders?customer_code=" + Global_Data.GLOvel_CUSTOMER_ID + "&reason_name=" + Noorder_res + "&user_email=" + Global_Data.GLOvel_USER_EMAIL);
+                    Log.d("Server url", "Server url" + domain + "no_orders/save_no_orders?customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&reason_name=" + Noorder_res + "&user_email=" + Global_Data.GLOvel_USER_EMAIL);
 
                     try {
                         AppLocationManager appLocationManager = new AppLocationManager(NoOrderActivity.this);
@@ -847,11 +867,11 @@ public class NoOrderActivity extends BaseActivity {
                             no_order_object.put("reason_name", reason_name);
 
                         } else {
-                            no_order_object.put("reason_code", reason_codes);
+                            no_order_object.put("reason_id", reason_codes);
 
                         }
                         no_order_object.put("user_email", Global_Data.GLOvel_USER_EMAIL);
-                        no_order_object.put("customer_code", Global_Data.GLOvel_CUSTOMER_ID);
+                        no_order_object.put("customer_id", Global_Data.GLOvel_CUSTOMER_ID);
                         no_order_object.put("latitude", Global_Data.GLOvel_LATITUDE);
                         no_order_object.put("longitude", Global_Data.GLOvel_LONGITUDE);
 
@@ -869,9 +889,9 @@ public class NoOrderActivity extends BaseActivity {
 
                         if (!reason_name.equalsIgnoreCase("")) {
                             no_order_object.put("reason_name", reason_name);
-                            no_order_object.put("reason_code", "");
+                            no_order_object.put("reason_id", "");
                         } else {
-                            no_order_object.put("reason_code", reason_codes);
+                            no_order_object.put("reason_id", reason_codes);
                             no_order_object.put("reason_name", "");
                         }
                         no_order_object.put("email", Global_Data.GLOvel_USER_EMAIL);
@@ -903,17 +923,18 @@ public class NoOrderActivity extends BaseActivity {
                     String domain = NoOrderActivity.this.getResources().getString(R.string.service_domain);
                     String service_url = "";
                     if (Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
-                        service_url = domain + "no_orders/save_no_orders";
+                        service_url = domain + "no_orders/save_no_orders"+"?email="+ Global_Data.GLOvel_USER_EMAIL;
                         product_valuenew.put("no_orders", no_order);
-                        product_valuenew.put("imei_no", Global_Data.device_id);
+                     //   product_valuenew.put("imei_no", Global_Data.device_id);
                         Log.d("No Order", no_order.toString());
+                        Log.d("server", service_url.toString());
                         //Log.d("product_valuenew", product_valuenew.toString());
                     }
                     else
                     {
                         service_url = domain + "sub_dealers/create_sub_delaer_no_order";
                         product_valuenew.put("sub_dealer_no_order", no_order);
-                        product_valuenew.put("imei_no", Global_Data.device_id);
+                       // product_valuenew.put("imei_no", Global_Data.device_id);
                         Log.d("sub_dealer_no_order", no_order.toString());
                         //Log.d("product_valuenew", product_valuenew.toString());
                     }

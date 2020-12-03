@@ -13,8 +13,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -285,7 +285,7 @@ public class Target_REYCLE extends BaseActivity {
     public void getTargetDataProductWise()
     {
         SharedPreferences sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-       String device_id = sp.getString("devid", "");
+      // String device_id = sp.getString("devid", "");
 
         result.clear();
         loginDataBaseAdapter=new LoginDataBaseAdapter(Target_REYCLE.this);
@@ -329,11 +329,11 @@ public class Target_REYCLE extends BaseActivity {
             if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
             {
 
-                service_url = domain+"targets/get_targets_by_product?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&date=true";
+                service_url = domain+"targets/get_targets_by_product?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&date=true";
             }
             else
             {
-                service_url = domain+"targets/get_targets?imei_no="+device_id+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_sub_category=true";
+                service_url = domain+"targets/get_targets?imei_no="+""+"&email="+Global_Data.GLOvel_USER_EMAIL+"&from_year="+Target_Year+"&from_month="+T_FROM_MONTH+"&to_year="+Target_TO_YEAR+"&to_month="+T_TO_MONTH+"&primary_category="+URLEncoder.encode(product_category_final, "UTF-8")+"&product_sub_category=true";
             }
 
 

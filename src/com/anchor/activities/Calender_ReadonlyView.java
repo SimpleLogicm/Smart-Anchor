@@ -111,6 +111,8 @@ public class Calender_ReadonlyView extends BaseActivity{
         dateFormatter = new SimpleDateFormat("MMMM-yyyy", Locale.US);
 
 
+
+
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
         String strDate = sdf.format(c.getTime());
