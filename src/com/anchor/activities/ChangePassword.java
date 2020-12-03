@@ -22,9 +22,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -291,7 +293,7 @@ public class ChangePassword extends Activity {
         //String Device_id = spf.getString("devid", "");
 
         String domain = getResources().getString(R.string.service_domain);
-        RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
+       // RequestQueue queue = Volley.newRequestQueue(ChangePassword.this);
         String url = domain + "users/change_passowd?email=" + user_email+"&imei_no=";
         Log.d("Chan Pass","CHA URl"+url);
         StringRequest strRequest = new StringRequest(Request.Method.POST, url,
@@ -357,6 +359,16 @@ public class ChangePassword extends Activity {
                 return params;
             }
         };
-        queue.add(strRequest);
+       /// queue.add(strRequest);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(ChangePassword.this);
+        int socketTimeout = 300000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        strRequest.setRetryPolicy(policy);
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        strRequest.setShouldCache(false);
+        requestQueue.getCache().clear();
+        requestQueue.add(strRequest);
     }
 }
