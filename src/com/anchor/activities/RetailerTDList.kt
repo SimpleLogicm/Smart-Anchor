@@ -18,6 +18,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import android.widget.Toast
 import com.anchor.adapter.RTODOList_Adapter
@@ -48,7 +49,9 @@ class RetailerTDList : Activity() {
     var context: Context? = null
     var final_response = ""
     var response_result = ""
-
+    //var drawer: DrawerLayout? = null
+    var myView: View? = null
+    var isUp = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +59,24 @@ class RetailerTDList : Activity() {
 
         context = RetailerTDList@ this
         cd = ConnectionDetector(context)
-
-
+        //drawer = findViewById(R.id.drawer_layout)
         rtolist.setHasFixedSize(true)
         val llm = LinearLayoutManager(this)
         llm.orientation = LinearLayoutManager.VERTICAL
         rtolist.setLayoutManager(llm)
+
+        myView = findViewById(R.id.my_view)
+
+        myView!!.setVisibility(View.INVISIBLE);
+       // myButton.setText("Slide up");
+        isUp = false;
+
+//        Allresult.clear()
+//
+//        Allresult.add(RTODODATA("1", "4", "PRIMARY DATA : INCOMPLETE \n PARENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20","pending","yes"))
+//        Allresult.add(RTODODATA("2", "2", "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E","approved","no"))
+//        Allresult.add(RTODODATA("3", "5", "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PARENT MAPPING : INCOMPLETE", "#28720D", "#3A921A","rejected","yes"))
+//        Allresult.add(RTODODATA("4", "3", "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PARENT MAPPING : COMPLETE", "#1C4908", "#26600B","incomplete","no"))
 
         ca = RTODOList_Adapter(TicketListActivity@ this, Allresult);
         rtolist.setAdapter(ca);
@@ -110,20 +125,29 @@ class RetailerTDList : Activity() {
             ex.printStackTrace()
         }
 
-        isInternetPresent = cd!!.isConnectingToInternet
-        if (isInternetPresent) {
-            getTODOListData()
-        } else {
 
-            val toast = Toast.makeText(context,
-                    "Internet Not Available. ", Toast.LENGTH_SHORT)
-            toast.setGravity(Gravity.CENTER, 0, 0)
-            toast.show()
-            finish()
-        }
+//        isInternetPresent = cd!!.isConnectingToInternet
+//        if (isInternetPresent) {
+//            getTODOListData()
+//        } else {
+//
+//            val toast = Toast.makeText(context,
+//                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+//            toast.setGravity(Gravity.CENTER, 0, 0)
+//            toast.show()
+//            finish()
+//        }
+
+//        todo_filter.setOnClickListener {
+////            if (drawer!!.isDrawerOpen(Gravity.RIGHT)) {
+////                drawer!!.closeDrawer(Gravity.RIGHT);
+////            } else {
+////                drawer!!.openDrawer(Gravity.RIGHT);
+////            }
+////            Toast.makeText(applicationContext, "Network   Error", Toast.LENGTH_LONG).show()
+//        }
 
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -276,10 +300,10 @@ class RetailerTDList : Activity() {
 
                     Allresult.clear()
 
-                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PARENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20"))
-                    Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E"))
-                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PARENT MAPPING : INCOMPLETE", "#28720D", "#3A921A"))
-                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PARENT MAPPING : COMPLETE", "#1C4908", "#26600B"))
+                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PARENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20","pending","yes"))
+                    Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E","approved","no"))
+                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PARENT MAPPING : INCOMPLETE", "#28720D", "#3A921A","rejected","yes"))
+                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PARENT MAPPING : COMPLETE", "#1C4908", "#26600B","incomplete","no"))
 
                     runOnUiThread {
 
@@ -314,5 +338,42 @@ class RetailerTDList : Activity() {
 
         override fun onPreExecute() {}
 
+    }
+
+
+    // slide the view from below itself to the current position
+    fun slideUp(view: View) {
+        view.visibility = View.VISIBLE
+        val animate = TranslateAnimation(
+                view.height.toFloat(),  // fromXDelta
+                0F,  // toXDelta
+                0F,  // fromYDelta
+                0F) // toYDelta
+        animate.setDuration(500)
+        animate.setFillAfter(true)
+        view.startAnimation(animate)
+    }
+
+    // slide the view from its current position to below itself
+    fun slideDown(view: View) {
+        val animate = TranslateAnimation(
+                0F,  // fromXDelta
+                view.height.toFloat(),  // toXDelta
+                0F,  // fromYDelta
+                0F) // toYDelta
+        animate.setDuration(500)
+        animate.setFillAfter(true)
+        view.startAnimation(animate)
+    }
+
+    fun onSlideViewButtonClick(view: View?) {
+        if (isUp) {
+            slideDown(myView!!)
+            //todo_filter.setText("Slide up")
+        } else {
+            slideUp(myView!!)
+            //todo_filter.setText("Slide down")
+        }
+        isUp = !isUp
     }
 }

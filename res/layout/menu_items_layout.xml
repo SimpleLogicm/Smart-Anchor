@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp">
+
+            <RelativeLayout
+                android:id="@+id/rlout_abc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/abc_ticketdetails1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:visibility="visible"
+                    android:gravity="left|center"
+                    android:paddingRight="10dp"
+                    android:text="Filter By"
+                    android:textColor="#306FA2"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+            <CheckBox
+                android:id="@+id/checkbox_reactive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlout_abc"
+                android:layout_marginTop="10dp"
+                android:text="All" />
+
+            <CheckBox
+                android:id="@+id/checkbox_proactive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkbox_reactive"
+                android:text="Approved" />
+
+            <CheckBox
+                android:id="@+id/checkbox_informative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_proactive"
+                android:text="Rejected" />
+
+            <CheckBox
+                android:id="@+id/checkbox_informativeq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_informative"
+                android:text="Pending" />
+
+            <CheckBox
+                android:id="@+id/checkbox_informativeqa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_informativeq"
+                android:text="Incomplete" />
+
+            <TextView
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Reset"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#306FA2"
+                android:textSize="16dp"
+                android:layout_below="@+id/checkbox_informativeqa"
+                />
+
+            <TextView
+                android:id="@+id/done_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#306FA2"
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/reset_btn"
+
+                android:layout_below="@+id/checkbox_informativeqa"
+                />
+
+            <ProgressBar
+                android:id="@+id/filter_progressBars"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:indeterminateDrawable="@drawable/progress"
+                android:visibility="gone"></ProgressBar>
+
+         </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

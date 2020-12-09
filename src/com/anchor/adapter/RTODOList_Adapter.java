@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,14 +28,13 @@ import cpm.simplelogic.helper.Check_Null_Value;
 public class RTODOList_Adapter extends RecyclerView.Adapter<RTODOList_Adapter.MyViewHolder> {
     private List<RTODODATA> rtododatalist;
     private Context mContext;
-
-
     DecimalFormat formatter = new DecimalFormat("#,##,##,###.00");
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView rt_count,rt_text,rt_id;
         public RelativeLayout rtodo_container;
         public CardView rtodo_containercard;
+        public ImageView approvalStatus,verifiedStatus;
 
         public MyViewHolder(View view) {
             super(view);
@@ -43,8 +43,8 @@ public class RTODOList_Adapter extends RecyclerView.Adapter<RTODOList_Adapter.My
             rt_id = view.findViewById(R.id.rt_id);
             rtodo_container = view.findViewById(R.id.rtodo_container);
             rtodo_containercard = view.findViewById(R.id.rtodo_containercard);
-
-
+            approvalStatus = view.findViewById(R.id.approval_status_icon);
+            verifiedStatus = view.findViewById(R.id.verified_status_icon);
         }
     }
 
@@ -72,6 +72,24 @@ public class RTODOList_Adapter extends RecyclerView.Adapter<RTODOList_Adapter.My
         holder.rt_id.setText(rtododatam.getId());
         holder.rt_count.setBackgroundColor(Color.parseColor(rtododatam.getCount_color_code()));
         holder.rtodo_containercard.setCardBackgroundColor(Color.parseColor(rtododatam.getCard_color_code()));
+
+        if(rtododatam.getApproval_status().equalsIgnoreCase("pending"))
+        {
+            holder.approvalStatus.setImageResource(R.drawable.pending_approval);
+        }else if(rtododatam.getApproval_status().equalsIgnoreCase("approved")){
+            holder.approvalStatus.setImageResource(R.drawable.approved);
+        }else if(rtododatam.getApproval_status().equalsIgnoreCase("rejected")){
+            holder.approvalStatus.setImageResource(R.drawable.rejected);
+        }else if(rtododatam.getApproval_status().equalsIgnoreCase("incomplete")){
+            holder.approvalStatus.setImageResource(R.drawable.incomplete);
+        }
+
+        if(rtododatam.getVerified_status().equalsIgnoreCase("yes"))
+        {
+            holder.verifiedStatus.setImageResource(R.drawable.verified_yes);
+        }else{
+            holder.verifiedStatus.setImageResource(R.drawable.verified_no);
+        }
 
 
         holder.rtodo_container.setOnClickListener(new View.OnClickListener() {

@@ -35,18 +35,45 @@
                 android:textColor="@color/white"
                 android:textSize="14dp" />
 
-            <TextView
-                android:id="@+id/rt_text"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="0dp"
-                android:layout_marginRight="0dp"
-                android:layout_weight="1.75"
-                android:gravity="center"
-                android:padding="@dimen/card_margin"
-                android:text="PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE"
-                android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:layout_weight="1.75">
+
+                <TextView
+                    android:id="@+id/rt_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+                    android:gravity="center|left"
+                    android:padding="@dimen/card_margin"
+                    android:text="PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/approval_status_icon"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_alignParentBottom="true"
+                    android:src="@drawable/pending_approval"/>
+
+                <ImageView
+                    android:id="@+id/verified_status_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/verified_yes"/>
+
+
+            </RelativeLayout>
+
+
+
+
 
             <TextView
                 android:id="@+id/rt_id"
