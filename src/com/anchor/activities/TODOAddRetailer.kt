@@ -857,9 +857,9 @@ class TODOAddRetailer : Activity() {
                 val retailer_object = JSONObject()
 
                 //product_value_n.put("email", user_email)
-                product_value_n.put("state_code", state_id)
+                product_value_n.put("state_id", state_id)
                 product_value_n.put("district_id", dist_id)
-                product_value_n.put("city_code", city_id)
+                product_value_n.put("city_id", city_id)
                 product_value_n.put("power_dealer", dpower_id)
                 product_value_n.put("iaq_dealer", diaq_id)
                 product_value_n.put("lighting_dealer", dlighting_id)
@@ -1235,7 +1235,7 @@ class TODOAddRetailer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(states.getString(i))) {
                                 run {
                                     list_CState.add(jsonObject.getString("name"))
-                                    statespinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                    statespinnerMap.put(jsonObject.getString("name"),jsonObject.getString("id"))
                                 }
                             }
                         } catch (e: JSONException) {
@@ -1302,7 +1302,7 @@ class TODOAddRetailer : Activity() {
 
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_statewise_districts?state_code="+state_id+"&email="+user_email
+        var url = domain+"retailers/get_statewise_districts?state_id="+state_id+"&email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -1665,7 +1665,7 @@ class TODOAddRetailer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
                                 run {
                                     list_CCity.add(jsonObject.getString("name"))
-                                    cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                    cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("id"))
                                 }
                             }
                         } catch (e: JSONException) {

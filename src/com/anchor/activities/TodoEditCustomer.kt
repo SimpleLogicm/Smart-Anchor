@@ -1319,8 +1319,8 @@ class TodoEditCustomer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(states.getString(i))) {
                                 run {
                                     list_CState.add(jsonObject.getString("name"))
-                                    statespinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
-                                    statespinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("name"))
+                                    statespinnerMap.put(jsonObject.getString("name"),jsonObject.getString("id"))
+                                    statespinnerMapReverse.put(jsonObject.getString("id"),jsonObject.getString("name"))
 
                                 }
                             }
@@ -1399,7 +1399,7 @@ class TodoEditCustomer : Activity() {
 
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"retailers/get_statewise_districts?state_code="+state_id+"&email="+user_email
+        var url = domain+"retailers/get_statewise_districts?state_id="+state_id+"&email="+user_email
         Log.i("user list url", "user list url " +url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
@@ -1798,8 +1798,8 @@ class TodoEditCustomer : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
                                 run {
                                     list_CCity.add(jsonObject.getString("name"))
-                                    cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
-                                    cityspinnerMapReverse.put(jsonObject.getString("code"),jsonObject.getString("name"))
+                                    cityspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("id"))
+                                    cityspinnerMapReverse.put(jsonObject.getString("id"),jsonObject.getString("name"))
 
                                 }
                             }
@@ -2100,9 +2100,9 @@ class TodoEditCustomer : Activity() {
 
                 //product_value_n.put("email", user_email)
                 product_value_n.put("code", code)
-                product_value_n.put("state_code", state_id)
+                product_value_n.put("state_id", state_id)
                 product_value_n.put("district_id", dist_id)
-                product_value_n.put("city_code", city_id)
+                product_value_n.put("city_id", city_id)
                 product_value_n.put("power_dealer", dpower_id)
                 product_value_n.put("iaq_dealer", diaq_id)
                 product_value_n.put("lighting_dealer", dlighting_id)
@@ -2372,8 +2372,8 @@ class TodoEditCustomer : Activity() {
                                 Allresult.add(RCTOData("", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("code")), "",
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line1")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("state_code")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("city_code")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("state_id")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("city_id")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("pincode")),
                                         "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("mobile_no")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("email")), "",
@@ -2500,8 +2500,8 @@ class TodoEditCustomer : Activity() {
 
                 //product_value_n.put("email", user_email)
                 product_value_n.put("code", code)
-                product_value_n.put("state_code", state_id)
-                product_value_n.put("city_code", city_id)
+                product_value_n.put("state_id", state_id)
+                product_value_n.put("city_id", city_id)
 //
 //                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(latitude)) {
 //                    product_value_n.put("latitude", latitude)
