@@ -382,7 +382,7 @@ class TODOAddRetailer : Activity() {
                 else
                 {
                     try {
-                        dlighting_id = powerspinnerMap.get(parent!!.getItemAtPosition(position).toString())
+                        dlighting_id = lightingspinnerMap.get(parent!!.getItemAtPosition(position).toString())
 
                     }catch (e:Exception)
                     {
