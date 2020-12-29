@@ -20,17 +20,17 @@ import android.widget.TextView;
 
 import com.anchor.webservice.ConnectionDetector;
 //how to give voice for icon when swipe in android
-public class Sales_Dash extends Activity implements OnItemSelectedListener{ 
+public class Sales_Dash extends Activity implements OnItemSelectedListener{
 	//Button retail_sales, institute_sales;
 	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn,sub_delaer_order,pro_activity_click;
-	//ImageView C_todo_list;
+	ImageView C_todo_list;
 	ConnectionDetector cd;
 	Boolean isInternetPresent = false;
 	TextView schedule_txt,textView1sf;
 	TextView txtWelcomeUser;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) { 
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sales_dash);
 		Global_Data.CUSTOMER_SERVICE_FLAG = "";
@@ -48,7 +48,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		otherInfoBtn = findViewById(R.id.otherinfo_btn);
 		sub_delaer_order = findViewById(R.id.sub_delaer_order);
 		pro_activity_click = findViewById(R.id.pro_activity_click);
-		//C_todo_list = findViewById(R.id.C_todo_list);
+		C_todo_list = findViewById(R.id.C_todo_list);
 
 		txtWelcomeUser= findViewById(R.id.txtWelcomeUser);
 		cd = new ConnectionDetector(getApplicationContext());
@@ -83,7 +83,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 				Intent intent = new Intent(getApplicationContext(), Order.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-	    	}
+			}
 		});
 
 		sub_delaer_order.setOnClickListener(new OnClickListener() {
@@ -115,36 +115,36 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			}
 		});
 
-//		C_todo_list.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(getApplicationContext(), RetailerTDList.class);
-//				startActivity(intent);
-//				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//			}
-//		});
-	
-    institute_sales.setOnClickListener(new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Global_Data.sales_btnstring="Institutional Sales";
-			Global_Data.CUSTOMER_SERVICE_FLAG = "" ;
-			Intent intent = new Intent(getApplicationContext(), Order.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-    	}
-	});
+		C_todo_list.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), RetailerTDList.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			}
+		});
+
+		institute_sales.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Global_Data.sales_btnstring="Institutional Sales";
+				Global_Data.CUSTOMER_SERVICE_FLAG = "" ;
+				Intent intent = new Intent(getApplicationContext(), Order.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			}
+		});
 
 		customer_services.setOnClickListener(new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Global_Data.sales_btnstring="Secondary Sales / Retail Sales";
-			Global_Data.CUSTOMER_SERVICE_FLAG = "CUSTOMER_SERVICE" ;
-			Intent intent = new Intent(getApplicationContext(), Order.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-		}
-	});
+			@Override
+			public void onClick(View v) {
+				Global_Data.sales_btnstring="Secondary Sales / Retail Sales";
+				Global_Data.CUSTOMER_SERVICE_FLAG = "CUSTOMER_SERVICE" ;
+				Intent intent = new Intent(getApplicationContext(), Order.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			}
+		});
 
 //		quote_status.setOnClickListener(new OnClickListener() {
 //		@Override
@@ -170,15 +170,15 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 //	});
 
 		schedule_listn.setOnClickListener(new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			Global_Data.sales_btnstring="Secondary Sales / Retail Sales";
-			Global_Data.CUSTOMER_SERVICE_FLAG = "SCHEDULE" ;
-			Intent intent = new Intent(getApplicationContext(), Order.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-		}
-	});
+			@Override
+			public void onClick(View v) {
+				Global_Data.sales_btnstring="Secondary Sales / Retail Sales";
+				Global_Data.CUSTOMER_SERVICE_FLAG = "SCHEDULE" ;
+				Intent intent = new Intent(getApplicationContext(), Order.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			}
+		});
 
 		outstandingBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -301,41 +301,41 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			mActionBar.setDisplayHomeAsUpEnabled(true);
 		}catch(Exception ex){ex.printStackTrace();}
 
-		}
+	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-			long arg3) {
+							   long arg3) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			onBackPressed();
-			return true;
+			case android.R.id.home:
+				onBackPressed();
+				return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
- @Override
+	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		//super.onBackPressed();
-		
-	 Intent i = new Intent(Sales_Dash.this,MainActivity.class);
-	 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-     startActivity(i);
-	 finish();
+
+		Intent i = new Intent(Sales_Dash.this,MainActivity.class);
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+		startActivity(i);
+		finish();
 	}
 
 }

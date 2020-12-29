@@ -55,7 +55,7 @@
                 android:visibility="gone"
                 android:layout_margin="0dp"
                 android:layout_marginRight="0dp"
-                 />
+                />
 
 
         </LinearLayout>

@@ -6,6 +6,7 @@ package com.anchor.adapter;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -31,6 +32,8 @@ import com.anchor.activities.Global_Data;
 import com.anchor.activities.MapsActivity;
 import com.anchor.activities.R;
 import com.anchor.activities.Sub_Dealer_Order_Main;
+import com.anchor.activities.TodoEditCustomer;
+import com.anchor.model.RCTOData;
 import com.anchor.model.SubDealerModel;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -56,8 +59,8 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
     static ConnectionDetector cd;
     static Boolean isInternetPresent = false;
-    private List<SubDealerModel> contactList;
-    private List<SubDealerModel> contactListfilter;
+    private List<RCTOData> contactList;
+    private List<RCTOData> contactListfilter;
     String name = "";
     DataBaseHelper dbvoc;
     String activity_name = "";
@@ -67,7 +70,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 
     static Context mcontext;
     MapsActivity mapsActivity;
-    public Sub_DealerMap_Adapter(List<SubDealerModel> contactList, Context context,MapsActivity activity) {
+    public Sub_DealerMap_Adapter(List<RCTOData> contactList, Context context,MapsActivity activity) {
         this.contactList = contactList;
         mcontext = context;
         mapsActivity =activity;
@@ -80,26 +83,28 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
     }
 
     @Override
-    public void onBindViewHolder(final ContactViewHolder contactViewHolder, final int i) {
-        final SubDealerModel ci = contactList.get(i);
-        contactViewHolder.d_name.setText("Shop Name : " + ci.shop_name);
-        final String shopname =ci.shop_name;
-        final String address =ci.address2;
-        contactViewHolder.p_delaer_address.setText("Address : " + ci.address);
-        contactViewHolder.p_distance.setText("Distance : " + ci.distance);
+    public void onBindViewHolder(final ContactViewHolder contactViewHolder, @SuppressLint("RecyclerView") final int i) {
+        final RCTOData ci = contactList.get(i);
+        contactViewHolder.d_name.setText("Shop Name : " + ci.getShop_name());
+        final String shopname =ci.getShop_name();
+        final String address =ci.getAddress();
+        contactViewHolder.p_delaer_address.setText("Address : " + ci.getFull_address());
+        contactViewHolder.p_distance.setText("Distance : " + ci.getDistance());
         //contactViewHolder.p_delaer_name.setText("Firm Name : " + ci.name);
-        contactViewHolder.p_proprietor_mobile1.setText("Proprietor Mobile : " + ci.proprietor_mobile1);
-        contactViewHolder.p_mobi.setText(ci.proprietor_mobile1);
+        contactViewHolder.p_proprietor_mobile1.setText("Proprietor Mobile : " + ci.getMobile());
+        contactViewHolder.p_mobi.setText(ci.getMobile());
         //contactViewHolder.p_proprietor_name1.setText("proprietor Name : " + ci.proprietor_name1);
-        contactViewHolder.p_proprietor_email1.setText("proprietor Email : " + ci.proprietor_email1);
-        contactViewHolder.p_proprietor_gst_no.setText("Gst No : " + ci.gst_no);
+        contactViewHolder.p_proprietor_email1.setText("proprietor Email : " + ci.getEmail());
+        contactViewHolder.p_proprietor_gst_no.setText("GST No : " + ci.getGst_no());
+        contactViewHolder.p_proprietor_aadhar_no.setText("AAdhar No : " + ci.getAadhar_no());
+        contactViewHolder.p_proprietor_pan_no.setText("Pan No : " + ci.getPan_no());
 
 
-       // contactViewHolder.p_dealer_city.setText("City : " + ci.city);
-      //  contactViewHolder.p_stages.setText("Stage : " + ci.Stage);
-        contactViewHolder.p_dealer_code.setText(ci.code);
-        contactViewHolder.p_lati.setText(ci.lati);
-        contactViewHolder.p_longi.setText(ci.longi);
+        // contactViewHolder.p_dealer_city.setText("City : " + ci.city);
+        //  contactViewHolder.p_stages.setText("Stage : " + ci.Stage);
+        contactViewHolder.p_dealer_code.setText(ci.getCode());
+        contactViewHolder.p_lati.setText(ci.getLatitude());
+        contactViewHolder.p_longi.setText(ci.getLongitude());
 
 
 
@@ -107,20 +112,20 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
 //            contactViewHolder.d_name.setBackgroundColor(Color.parseColor("#cc2303"));
 //        else
 //            contactViewHolder.d_name.setBackgroundColor(Color.parseColor("#1D3A58"));
-       
+
 
         contactViewHolder.pro_click_order.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-           //     Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
+                //     Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
 
                 Global_Data.Sub_Dealer_name = shopname;
                 Global_Data.Sub_Dealer_address = address;
                 Global_Data.Sub_Dealer_Code = contactViewHolder.p_dealer_code.getText().toString();
 
-         //       Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
-               // String subdealer_name =contactViewHolder.d_name.getText().toString();
+                //       Global_Data.Sub_Dealer_Email=ci.proprietor_email1;
+                // String subdealer_name =contactViewHolder.d_name.getText().toString();
 
                 mcontext.startActivity(new Intent(mcontext, Sub_Dealer_Order_Main.class));
                 ((Activity)mcontext).finish();
@@ -227,39 +232,42 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             @Override
             public void onClick(View arg0) {
 
-                Intent mIntent = mcontext.getPackageManager().getLaunchIntentForPackage("subdealer.anchor.com.anchorsubdealer_registration");
-                if (mIntent != null) {
-                    try {
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(ci.getCode())) {
 
-                        mcontext.startActivity(mIntent);
-
-                    } catch (ActivityNotFoundException err) {
-                        err.printStackTrace();
-                        Toast.makeText(mcontext, "Please install bar", Toast.LENGTH_SHORT).show();
-                        try{
-                            final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
-                            mcontext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                        }catch(Exception ex){ex.printStackTrace();
-                            Toast.makeText(mcontext, "App Not available in google play.", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                }
-                else
-                {
-                    try{
-                        final String appPackageName = "subdealer.anchor.com.anchorsubdealer_registration"; // Can also use getPackageName(), as below
-                        mcontext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                    }catch(Exception ex){ex.printStackTrace();
-                        Toast.makeText(mcontext, "App Not available in google play.", Toast.LENGTH_SHORT).show();
-                    }
+                    Intent i = new Intent(mcontext, TodoEditCustomer.class);
+                    i.putExtra("code", ci.getCode());
+                    i.putExtra("shop_name", ci.getShop_name());
+                    i.putExtra("address", ci.getAddress());
+                    i.putExtra("address_line2", ci.getAddress_line2());
+                    i.putExtra("pincode", ci.getPincode());
+                    i.putExtra("landmark",ci.getLandmark());
+                    i.putExtra("state_code", ci.getState_code());
+                    i.putExtra("city_code", ci.getCity_code());
+                    i.putExtra("mobile_no", ci.getMobile());
+                    i.putExtra("email", ci.getEmail());
+                    i.putExtra("tsi_code", ci.getTsi_code());
+                    i.putExtra("gst_no", ci.getGst_no());
+                    i.putExtra("aadhar_no", ci.getAadhar_no());
+                    i.putExtra("pan_no", ci.getPan_no());
+                    i.putExtra("latitude", ci.getLatitude());
+                    i.putExtra("longitude", ci.getLongitude());
+                    i.putExtra("power_dealer", ci.getPower_dealer());
+                    i.putExtra("lighting_dealer", ci.getLighting_dealer());
+                    i.putExtra("iaq_dealer", ci.getIaq_dealer());
+                    i.putExtra("source_of_data", ci.getSource_of_data());
+                    i.putExtra("district_id", ci.getDist_code());
+                    i.putExtra("proprietor_name", ci.getProprietor_name());
+                    i.putExtra("cardcolor", ci.getCard_color_code());
+                    i.putExtra("from_flag", "map");
+                    i.putExtra("is_approved", ci.is_approved());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mcontext.startActivity(i);
                 }
 
             }
         });
 
-      
+
 
     }
 
@@ -276,17 +284,17 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         protected TextView d_name;
         protected TextView p_delaer_address;
         protected TextView p_distance;
-       // protected TextView p_delaer_name;
+        // protected TextView p_delaer_name;
         protected TextView p_proprietor_mobile1;
-      //  protected TextView p_proprietor_name1;
+        //  protected TextView p_proprietor_name1;
         protected TextView p_proprietor_email1;
-        protected TextView p_proprietor_gst_no;
-       // protected TextView p_dealer_city;
+        protected TextView p_proprietor_gst_no,p_proprietor_aadhar_no,p_proprietor_pan_no;
+        // protected TextView p_dealer_city;
         protected TextView p_dealer_code;
         protected TextView p_stages,p_lati,p_longi,p_mobi;
         RelativeLayout sub_h_container;
         Button pro_mobile_click,pro_check_distance,pro_click_order,pro_click_edit;
-      
+
 
         public ContactViewHolder(View v) {
             super(v);
@@ -294,12 +302,14 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             d_name = v.findViewById(R.id.d_name);
             p_delaer_address = v.findViewById(R.id.p_delaer_address);
             p_distance = v.findViewById(R.id.p_distance);
-           // p_delaer_name = v.findViewById(R.id.p_delaer_name);
+            // p_delaer_name = v.findViewById(R.id.p_delaer_name);
             p_proprietor_mobile1 = v.findViewById(R.id.p_proprietor_mobile1);
-           // p_proprietor_name1 = v.findViewById(R.id.p_proprietor_name1);
+            // p_proprietor_name1 = v.findViewById(R.id.p_proprietor_name1);
             p_proprietor_email1 = v.findViewById(R.id.p_proprietor_email1);
             p_proprietor_gst_no = v.findViewById(R.id.p_proprietor_gst_no);
-          //  p_dealer_city = v.findViewById(R.id.p_dealer_city);
+            p_proprietor_aadhar_no = v.findViewById(R.id.p_proprietor_aadhar_no);
+            p_proprietor_pan_no = v.findViewById(R.id.p_proprietor_pan_no);
+            //  p_dealer_city = v.findViewById(R.id.p_dealer_city);
             p_dealer_code = v.findViewById(R.id.p_dealer_code);
             p_stages = v.findViewById(R.id.p_stages);
             p_lati = v.findViewById(R.id.p_lati);
@@ -310,9 +320,9 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
             pro_check_distance = v.findViewById(R.id.pro_check_distance);
             pro_click_order = v.findViewById(R.id.pro_click_order);
             pro_click_edit = v.findViewById(R.id.pro_click_edit);
-           
 
-         
+
+
         }
 
         // Handles the row being being clicked
@@ -387,7 +397,7 @@ public class Sub_DealerMap_Adapter extends RecyclerView.Adapter<Sub_DealerMap_Ad
         intent.setData(uri);
         ((Activity)mcontext).startActivityForResult(intent, 101);
     }
-   
 
-  
+
+
 }

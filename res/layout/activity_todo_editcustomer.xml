@@ -25,6 +25,19 @@
         </EditText>
 
         <EditText
+            android:id="@+id/todoe_proprietor_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/todo_back"
+            android:hint="Proprietor Name"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black">
+
+        </EditText>
+
+        <EditText
             android:id="@+id/todoe_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,6 +135,16 @@
 
         <Spinner
             android:id="@+id/todoe_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:background="@drawable/spinner_background_yellow"
+            android:layout_marginTop="10dp">
+
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/todo_dist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"

@@ -13,7 +13,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,11 +34,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.anchor.adapter.AutoCompleteAdapter;
+import com.anchor.adapter.RetailerProductSearchAdapter;
 import com.anchor.adapter.Spinner_List_Adapter;
 import com.anchor.animation.ActivitySwitcher;
 import com.anchor.model.Spiner_List_Model;
@@ -109,7 +109,7 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
 
     SimpleCursorAdapter cursorAdapter;
     DataBaseHelper dbvoc = new DataBaseHelper(this);
-    AutoCompleteAdapter adapter;
+    RetailerProductSearchAdapter adapter;
     Spinner_List_Adapter spinner_list_adapter;
     List<Spiner_List_Model> snlist = new ArrayList<>();
     Button list_ok;
@@ -157,10 +157,10 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
 
         spinner_recycleview.setLayoutManager(new LinearLayoutManager(SubDealer_NewOrderActivity.this));
 
-        adapter = new AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
+        adapter = new RetailerProductSearchAdapter(this, android.R.layout.simple_dropdown_item_1line);
         Product_Variant_search.setAdapter(adapter);
 
-        List<Spiner_List_Model> cont1 = dbvoc.getAllProducta();
+        List<Spiner_List_Model> cont1 = dbvoc.getAllProducta_BU_Wise(Global_Data.Business_unit_code_array);
 
         if (cont1.size() > 0) {
             Global_Data.spiner_list_modelList.clear();
@@ -225,7 +225,7 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
 
                 result_bu.clear();
-                List<Local_Data> contact_bu = dbvoc.getAllB_Unit_BYBU(Global_Data.Business_unit_code_array);
+                List<Local_Data> contact_bu = dbvoc.getBunit(Global_Data.Business_unit_code_array);
                 result_bu.add("Select BU");
                 for (Local_Data cn : contact_bu) {
                     String str_bunit = "" + cn.getBunit();
@@ -246,25 +246,28 @@ public class SubDealer_NewOrderActivity extends BaseActivity {
             }
             else
             {
-                result_bu.clear();
-                List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
-                result_bu.add("Select BU");
-                for (Local_Data cn : contact_bu) {
-                    String str_bunit = "" + cn.getBunit();
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
-                        result_bu.add(str_bunit);
-                    }
-                }
-
-                dataAdapterBu = new ArrayAdapter<String>(SubDealer_NewOrderActivity.this, R.layout.spinner_item, result_bu);
-                dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
-                spnBu.setAdapter(dataAdapterBu);
-
-                result_bussiness.clear();
-                result_bussiness.add("Select Business Division");
-                dataAdapterBd = new ArrayAdapter<String>(SubDealer_NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
-                dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
-                spnBusinessDiv.setAdapter(dataAdapterBd);
+                Toast toast = Toast.makeText(SubDealer_NewOrderActivity.this, "No Prodct Found ", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+//                result_bu.clear();
+//                List<Local_Data> contact_bu = dbvoc.getAllB_Unit();
+//                result_bu.add("Select BU");
+//                for (Local_Data cn : contact_bu) {
+//                    String str_bunit = "" + cn.getBunit();
+//                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(str_bunit)) {
+//                        result_bu.add(str_bunit);
+//                    }
+//                }
+//
+//                dataAdapterBu = new ArrayAdapter<String>(SubDealer_NewOrderActivity.this, R.layout.spinner_item, result_bu);
+//                dataAdapterBu.setDropDownViewResource(R.layout.spinner_item);
+//                spnBu.setAdapter(dataAdapterBu);
+//
+//                result_bussiness.clear();
+//                result_bussiness.add("Select Business Division");
+//                dataAdapterBd = new ArrayAdapter<String>(SubDealer_NewOrderActivity.this, R.layout.spinner_item, result_bussiness);
+//                dataAdapterBd.setDropDownViewResource(R.layout.spinner_item);
+//                spnBusinessDiv.setAdapter(dataAdapterBd);
             }
 
             //}

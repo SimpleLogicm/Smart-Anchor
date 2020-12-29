@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.Settings
-
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -104,9 +103,9 @@ class RetailerTDList : Activity() {
                 todaysTarget.text = "Today's Target Acheived"
             }
             mActionBar!!.customView = mCustomView
-            mActionBar.setDisplayShowCustomEnabled(true)
-            mActionBar.setHomeButtonEnabled(true)
-            mActionBar.setDisplayHomeAsUpEnabled(true)
+            mActionBar!!.setDisplayShowCustomEnabled(true)
+            mActionBar!!.setHomeButtonEnabled(true)
+            mActionBar!!.setDisplayHomeAsUpEnabled(true)
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -277,10 +276,10 @@ class RetailerTDList : Activity() {
 
                     Allresult.clear()
 
-                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20"))
+                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PARENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20"))
                     Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E"))
-                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PRESENT MAPPING : INCOMPLETE", "#28720D", "#3A921A"))
-                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PRESENT MAPPING : COMPLETE", "#1C4908", "#26600B"))
+                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PARENT MAPPING : INCOMPLETE", "#28720D", "#3A921A"))
+                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PARENT MAPPING : COMPLETE", "#1C4908", "#26600B"))
 
                     runOnUiThread {
 

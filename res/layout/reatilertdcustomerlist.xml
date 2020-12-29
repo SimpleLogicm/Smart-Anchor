@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
 
@@ -22,6 +21,32 @@
         android:layout_marginBottom="5dp"
         />
 
+    <AutoCompleteTextView
+        android:id="@+id/td_Retailer_search"
+        android:layout_below="@+id/rtocustomerlist_filter"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:inputType="textMultiLine"
+        android:scrollbars="none"
+        android:completionThreshold="1"
+        android:imeOptions="actionDone"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/rounded_corner"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:drawableRight="@drawable/search_icon"
+        android:textSize="15dp"
+        android:hint="@string/Search_Subdealer" >
+        <requestFocus />
+    </AutoCompleteTextView>
+
 
 
     <ProgressBar
@@ -35,7 +60,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rtocustomerlist"
-        android:layout_below="@+id/rtocustomerlist_filter"
+        android:layout_below="@+id/td_Retailer_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

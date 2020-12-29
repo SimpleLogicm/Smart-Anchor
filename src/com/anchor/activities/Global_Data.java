@@ -215,7 +215,7 @@ public class Global_Data {
     public static List<String> Customers =new ArrayList<>();
     public static HashMap<String,String> Customers_map = new HashMap<String,String>();
 
-    public static List<SubDealerModel> AllresultSubDealer = new ArrayList<SubDealerModel>();
+    public static List<RCTOData> AllresultSubDealer = new ArrayList<RCTOData>();
     public static List<String> SubDealer_List = new ArrayList<>();
     public static ArrayList<String> Some_list = new ArrayList<String>();
 

@@ -35,6 +35,27 @@
         </EditText>
 
         <TextView
+            android:id="@+id/todoe_proprietor_name_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Proprietor Name"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
+
+        <EditText
+            android:id="@+id/todoe_proprietor_namea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_retailer_edittext"
+            android:hint=""
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black">
+
+        </EditText>
+
+        <TextView
             android:id="@+id/todoe_mobile_h"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,14 +191,14 @@
         </EditText>
 
         <TextView
-        android:id="@+id/todoe_landmark_h"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:text="@string/Landmark"
-        android:paddingLeft="5dp"
-        android:textColor="@color/retailer_light_green" />
+            android:id="@+id/todoe_landmark_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="@string/Landmark"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
 
         <EditText
             android:id="@+id/todoe_landmarka"
@@ -202,6 +223,25 @@
             android:textColor="@color/retailer_light_green" />
         <Spinner
             android:id="@+id/todoe_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:background="@drawable/add_retailer_spinner"
+            >
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/todoe_dist_h"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="District"
+            android:paddingLeft="5dp"
+            android:textColor="@color/retailer_light_green" />
+        <Spinner
+            android:id="@+id/todoe_dist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
@@ -332,7 +372,7 @@
                     android:paddingRight="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/add_retailer_spinner"
-                   >
+                    >
 
                 </Spinner>
 
@@ -375,7 +415,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/add_retailer_spinner"
-                   >
+                    >
 
                 </Spinner>
             </LinearLayout>

@@ -3,18 +3,20 @@ package com.anchor.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.anchor.activities.Global_Data;
 import com.anchor.activities.R;
+import com.anchor.activities.TodoEditCustomer;
 import com.anchor.model.RCTOData;
+import com.anchor.model.Todo_model;
 
 import java.util.List;
 
@@ -54,14 +56,14 @@ public class Todo_list_adaptor extends RecyclerView.Adapter<Todo_list_adaptor.Vi
             viewHolder.btn.setTextColor(Color.parseColor("#737373"));
 
         }
-      viewHolder.btn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              selectedPosition=i;
-              notifyDataSetChanged();
-              Global_Data.merge_retailer_code = array.get(i).getCode();
-          }
-      });
+        viewHolder.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedPosition=i;
+                notifyDataSetChanged();
+                Global_Data.merge_retailer_code = array.get(i).getCode();
+            }
+        });
     }
 
     @Override
