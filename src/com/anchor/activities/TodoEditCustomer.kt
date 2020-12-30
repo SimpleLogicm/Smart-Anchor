@@ -2271,6 +2271,7 @@ class TodoEditCustomer : Activity() {
             } catch (ex: java.lang.Exception) {
                 ex.printStackTrace()
             }
+            //service_url = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/retailers/get_nearest_retailers_for_megre?email=priyanka.konka@simplelogic.in&latitude=19.1123&longitude=72.9332&retailer_code=MHMCTES0021"
             service_url = (domain + "retailers/get_nearest_retailers_for_megre?email=" + user_email + "&latitude="
                     + Global_Data.GLOvel_LATITUDE + "&longitude="
                     + Global_Data.GLOvel_LONGITUDE)+"&retailer_code="+code
@@ -2386,8 +2387,8 @@ class TodoEditCustomer : Activity() {
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("power_dealer")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("lighting_dealer")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("iaq_dealer")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("source_of_data")),
-                                        "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("tsi_code")),
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("data_source_master_id")),
+                                        "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(""),
                                         coardcolor,"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),"","","",""))
 

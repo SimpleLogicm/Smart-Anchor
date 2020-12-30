@@ -1074,8 +1074,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             service_url = domain + "retailers/get_nearest_retailers?email="+user_email+"&latitude="
-                    + Global_Data.GLOvel_LATITUDE + "&longitude="
-                    + Global_Data.GLOvel_LONGITUDE;
+                    + "19.1123" + "&longitude="
+                    + "72.9332";
 
 
             Log.i("user list url", "user list url " + service_url);
