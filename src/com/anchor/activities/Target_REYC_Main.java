@@ -158,28 +158,28 @@ public class Target_REYC_Main extends Activity implements OnItemSelectedListener
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-                else if(target_product_category.getSelectedItem().toString().equalsIgnoreCase("Select Product Category"))
-                {
-                    Toast toast = Toast.makeText(Target_REYC_Main.this,"Select Product Category",
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
+//                else if(target_product_category.getSelectedItem().toString().equalsIgnoreCase("Select Product Category"))
+//                {
+//                    Toast toast = Toast.makeText(Target_REYC_Main.this,"Select Product Category",
+//                            Toast.LENGTH_SHORT);
+//                    toast.setGravity(Gravity.CENTER, 0, 0);
+//                    toast.show();
+//                }
                 else{
 
-                    List<Local_Data> contacts2 = dbvoc.HSS_DescriptionITEM_ID(target_product_category.getSelectedItem().toString().trim());
-                    //results.add("Select Product");
-                    for (Local_Data cn : contacts2)
-                    {
-                        product_category_code = cn.getCust_Code();
-                    }
+//                    List<Local_Data> contacts2 = dbvoc.HSS_DescriptionITEM_ID(target_product_category.getSelectedItem().toString().trim());
+//                    //results.add("Select Product");
+//                    for (Local_Data cn : contacts2)
+//                    {
+//                        product_category_code = cn.getCust_Code();
+//                    }
 
                     Intent intent = new Intent(getApplicationContext(),
                             Target_Summary1.class);
 
                     intent.putExtra("Target_From_Month",target_month.getSelectedItem().toString().trim());
                     intent.putExtra("Target_To_Month",target_month_to.getText().toString().trim());
-                    intent.putExtra("Target_Product_Category",target_product_category.getSelectedItem().toString().trim());
+                   /// intent.putExtra("Target_Product_Category",target_product_category.getSelectedItem().toString().trim());
                     intent.putExtra("Target_Year",target_year.getSelectedItem().toString().trim());
 
                     Global_Data.Target_From_Month = target_month.getSelectedItem().toString().trim();
@@ -302,6 +302,13 @@ public class Target_REYC_Main extends Activity implements OnItemSelectedListener
         adapter_target_month.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         target_month.setAdapter(adapter_target_month);
         target_month.setOnItemSelectedListener(this);
+
+        target_quarter.setEnabled(false);
+        target_quarter.setClickable(false);
+        target_year.setEnabled(false);
+        target_year.setClickable(false);
+        target_month.setEnabled(false);
+        target_month.setClickable(false);
 
         try
         {

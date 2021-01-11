@@ -114,10 +114,13 @@ public class Target_Summary1 extends BaseActivity {
         cd  = new ConnectionDetector(getApplicationContext());
 
 
-        if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
-        {
-            TS1month.setText("PRODUCT CATEGORY");
-        }
+        /* change for rank target */
+//        if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
+//        {
+//            TS1month.setText("PRODUCT CATEGORY");
+//        }
+
+        /* change for rank target End */
 
         ts1back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -499,25 +502,27 @@ public class Target_Summary1 extends BaseActivity {
 
                                     TargetValue_info ci = new TargetValue_info();
 
-                                    if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
-                                    {
-                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_primary_category")))
-                                        {
-                                            if(!jsonObject.getString("products_primary_category").equalsIgnoreCase("null") && !jsonObject.getString("products_primary_category").equalsIgnoreCase(null) & !jsonObject.getString("products_primary_category").equalsIgnoreCase("") & !jsonObject.getString("products_primary_category").equalsIgnoreCase(" "))
-                                            {
-                                                product_category = jsonObject.getString("products_primary_category");
-                                            }
-                                            else
-                                            {
+                                    /* change for rank target */
 
-                                                product_category = "";
-                                            }
-
-                                            ci.monthgrp_str = product_category;
-                                        }
-                                    }
-                                    else
-                                    {
+//                                    if(Global_Data.target_grpby.equalsIgnoreCase("By Product"))
+//                                    {
+//                                        if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_primary_category")))
+//                                        {
+//                                            if(!jsonObject.getString("products_primary_category").equalsIgnoreCase("null") && !jsonObject.getString("products_primary_category").equalsIgnoreCase(null) & !jsonObject.getString("products_primary_category").equalsIgnoreCase("") & !jsonObject.getString("products_primary_category").equalsIgnoreCase(" "))
+//                                            {
+//                                                product_category = jsonObject.getString("products_primary_category");
+//                                            }
+//                                            else
+//                                            {
+//
+//                                                product_category = "";
+//                                            }
+//
+//                                            ci.monthgrp_str = product_category;
+//                                        }
+//                                    }
+//                                    else
+//                                    {
                                         if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("year")))
                                         {
                                             ci.monthgrp_str = jsonObject.getString("month") +" "+ jsonObject.getString("year");
@@ -526,49 +531,33 @@ public class Target_Summary1 extends BaseActivity {
                                         {
                                             ci.monthgrp_str = jsonObject.getString("month");
                                         }
-                                    }
+                                   // }
 
 
-
-
-//                                    if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("products_sub_category").toString()))
-//                                    {
-//                                        if(!jsonObject.getString("products_sub_category").equalsIgnoreCase("null") && !jsonObject.getString("products_sub_category").equalsIgnoreCase(null) & !jsonObject.getString("products_sub_category").equalsIgnoreCase("") & !jsonObject.getString("products_sub_category").equalsIgnoreCase(" "))
-//                                        {
-//                                            product_subcategory = jsonObject.getString("products_sub_category").toString();
-//                                        }
-//                                        else
-//                                        {
-//
-//                                            product_subcategory = "";
-//                                        }
-//
-//                                        ci.product_Sub_value = product_subcategory;
-//                                    }
 
 
                                     if(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(jsonObject.getString("target")))
                                     {
                                         if(!jsonObject.getString("target").equalsIgnoreCase("null") && !jsonObject.getString("target").equalsIgnoreCase(null) & !jsonObject.getString("target").equalsIgnoreCase("") & !jsonObject.getString("target").equalsIgnoreCase(" "))
                                         {
-                                            if(Global_Data.target_amount.equalsIgnoreCase("In Crores"))
-                                            {
-                                                t_total +=(Double.valueOf(jsonObject.getString("target"))/10000000);
-                                                target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/10000000);
-                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Lakhs"))
-                                            {
-                                                t_total +=(Double.valueOf(jsonObject.getString("target"))/100000);
-                                                target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/100000);
-                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Thousands"))
-                                            {
-                                                t_total +=(Double.valueOf(jsonObject.getString("target"))/1000);
-                                                target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/1000);
-                                            }
-                                            else if(Global_Data.target_amount.equalsIgnoreCase("In Ruppes"))
-                                            {
+//                                            if(Global_Data.target_amount.equalsIgnoreCase("In Crores"))
+//                                            {
+//                                                t_total +=(Double.valueOf(jsonObject.getString("target"))/10000000);
+//                                                target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/10000000);
+//                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Lakhs"))
+//                                            {
+//                                                t_total +=(Double.valueOf(jsonObject.getString("target"))/100000);
+//                                                target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/100000);
+//                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Thousands"))
+//                                            {
+//                                                t_total +=(Double.valueOf(jsonObject.getString("target"))/1000);
+//                                                target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target"))/1000);
+//                                            }
+//                                            else if(Global_Data.target_amount.equalsIgnoreCase("In Ruppes"))
+//                                            {
                                                 t_total +=(Double.valueOf(jsonObject.getString("target")));
                                                 target_value = String.format("%.2f",Double.valueOf(jsonObject.getString("target")));
-                                            }
+                                            //}
 
 //                                                t_total +=Double.valueOf(jsonObject.getString("target").toString());
 //                                               // target_value = String.valueOf(Double.valueOf(jsonObject.getString("target").toString()));
@@ -596,26 +585,28 @@ public class Target_Summary1 extends BaseActivity {
                                     {
                                         if(!jsonObject.getString("achieved").equalsIgnoreCase("null") && !jsonObject.getString("achieved").equalsIgnoreCase(null) & !jsonObject.getString("achieved").equalsIgnoreCase("") & !jsonObject.getString("achieved").equalsIgnoreCase(" "))
                                         {
-                                            if(Global_Data.target_amount.equalsIgnoreCase("In Crores"))
-                                            {
-                                                achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/10000000);
-                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/10000000);
-
-                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Lakhs"))
-                                            {
-                                                achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/100000);
-                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/100000);
-
-                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Thousands"))
-                                            {
-                                                achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/1000);
-                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/1000);
-                                            }
-                                            else if(Global_Data.target_amount.equalsIgnoreCase("In Ruppes"))
-                                            {
+//                                            if(Global_Data.target_amount.equalsIgnoreCase("In Crores"))
+//                                            {
+//                                                achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/10000000);
+//                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/10000000);
+//
+//                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Lakhs"))
+//                                            {
+//                                                achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/100000);
+//                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/100000);
+//
+//                                            }else if(Global_Data.target_amount.equalsIgnoreCase("In Thousands"))
+//                                            {
+//                                                achived_total +=(Double.valueOf(jsonObject.getString("achieved"))/1000);
+//                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved"))/1000);
+//                                            }
+//                                            else if(Global_Data.target_amount.equalsIgnoreCase("In Ruppes"))
+//                                            {
                                                 achived_total +=(Double.valueOf(jsonObject.getString("achieved")));
                                                 achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved")));
-                                            }
+
+                                            /* change for rank target End */
+                                           // }
 //                                                achived_total +=Double.valueOf(jsonObject.getString("achieved").toString());
 //                                                //achieved_value = String.valueOf(Double.valueOf(jsonObject.getString("achieved").toString()));
 //                                                achieved_value = String.format("%.2f",Double.valueOf(jsonObject.getString("achieved").toString()));

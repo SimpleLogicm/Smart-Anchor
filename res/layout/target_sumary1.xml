@@ -404,6 +404,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/MORE"
+            android:visibility="gone"
             android:background="#414042"
             android:textColor="#FFFFFF"
             android:layout_marginLeft="5dp" />
