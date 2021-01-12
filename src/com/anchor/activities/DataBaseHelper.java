@@ -6514,7 +6514,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Local_Data> getAllVariant() {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT DISTINCT product_variant FROM " + TABLE_ITEM_MASTER  + " ORDER BY s_code";
+        String selectQuery1 = "SELECT DISTINCT product_variant FROM " + TABLE_ITEM_MASTER  + "  ORDER BY s_code";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
