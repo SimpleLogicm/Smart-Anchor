@@ -6482,7 +6482,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
 
-        Cursor cursor = db.rawQuery("select DISTINCT product_variant FROM item_master WHERE primary_category = ? AND sub_category = ?",
+        Cursor cursor = db.rawQuery("select DISTINCT product_variant FROM item_master WHERE primary_category = ? AND sub_category = ?  ORDER BY s_code",
                 new String[]{category_name, product_name});
 
         // looping through all rows and adding to list
@@ -6514,7 +6514,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Local_Data> getAllVariant() {
         List<Local_Data> contactList1 = new ArrayList<Local_Data>();
         // Select All Query
-        String selectQuery1 = "SELECT DISTINCT product_variant FROM " + TABLE_ITEM_MASTER;
+        String selectQuery1 = "SELECT DISTINCT product_variant FROM " + TABLE_ITEM_MASTER  + "ORDER BY s_code";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -9811,9 +9811,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //                new String[]{product_variant});
         Cursor cursor;
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit IN (" + Global_Data.Business_unit_code_array + ") AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit IN (" + Global_Data.Business_unit_code_array + ") AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY s_code asc LIMIT 100", null);
         } else {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY s_code asc LIMIT 100", null);
         }
 
         try {
@@ -9849,9 +9849,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //                new String[]{product_variant});
         Cursor cursor;
         if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(Global_Data.Business_unit_code_array)) {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit = ? AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100",  new String[]{Global_Data.Business_unit_code_array});
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where b_unit = ? AND product_variant " + " like '%" + product_variant + "%'" + " ORDER BY s_code asc LIMIT 100",  new String[]{Global_Data.Business_unit_code_array});
         } else {
-            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY code asc LIMIT 100", null);
+            cursor = db.rawQuery("select code,product_variant,b_unit FROM item_master " + "where product_variant " + " like '%" + product_variant + "%'" + " ORDER BY s_code asc LIMIT 100", null);
         }
 
         try {
