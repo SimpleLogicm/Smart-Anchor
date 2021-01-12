@@ -72,6 +72,7 @@ public class SplashScreenActivity extends Activity {
 		int version_twintee_check = 0;
 		int version_twintee_one_check = 0;
 		int version_twintee_two_check = 0;
+		int version_forty_one_check = 0;
 
 // Reading all
 		List<Local_Data> contacts1 = dbvoc.getVersioninfo();
@@ -121,6 +122,11 @@ public class SplashScreenActivity extends Activity {
 					version_twintee_two_check = 1;
 				}
 
+				if(ver_code == 41)
+				{
+					version_forty_one_check = 1;
+				}
+
 				if(ver_code == versionCode)
 				{
 					version_c_check = 1;
@@ -160,6 +166,11 @@ public class SplashScreenActivity extends Activity {
 			if(version_twintee_two_check != 1)
 			{
 				check_Columns_order_category_code_customer_master();
+			}
+
+			if(version_forty_one_check != 1)
+			{
+				check_Columns_s_code_item_master();
 			}
 
 			if(version_c_check != 1)
@@ -362,6 +373,21 @@ public class SplashScreenActivity extends Activity {
 
 	}
 
+
+	public void check_Columns_s_code_item_master()
+	{
+		boolean column_check = dbvoc.isColumnExists("item_master","s_code");
+		if(!column_check)
+		{
+			try {
+				dbvoc.alter_Columns("item_master","s_code");
+			} catch (SQLiteException ex) {
+				Log.w("Alter Table", "item_master " + "s_code" + ": " + ex.getMessage());
+			}
+		}
+
+
+	}
 
     
 }

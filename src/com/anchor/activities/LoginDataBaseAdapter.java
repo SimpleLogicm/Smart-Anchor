@@ -238,7 +238,7 @@ public class LoginDataBaseAdapter {
 
     static final String DATABASE_CREATE_ITEMMASTER = "CREATE TABLE IF NOT EXISTS " + "item_master" +
             "( " + "ID" + " integer primary key autoincrement," + "code text, name text, primary_category text, sub_category text, " +
-            "product_variant text, retail_price text, mrp text, qualifying_qty text, free_qty text, status text, b_unit text, b_business_c text, sq text, mq text);";
+            "product_variant text, retail_price text, mrp text, qualifying_qty text, free_qty text, status text, b_unit text, b_business_c text, sq text, mq text,s_code text);";
 
     static final String DATABASE_CREATE_ITEMSCHEME = "CREATE TABLE IF NOT EXISTS " + "scheme" +
             "( " + "ID" + " integer primary key autoincrement," + "code text, name text, description text, display_name text, " +
@@ -2921,7 +2921,7 @@ public class LoginDataBaseAdapter {
     }
 
     public void insertEntryITEM_MASTER(String code, String name, String primary_category, String sub_category,
-                                       String product_variant, String retail_price, String mrp, String qualifying_qty, String free_qty, String status, String b_unit, String b_business_c, String sq, String mq) {
+                                       String product_variant, String retail_price, String mrp, String qualifying_qty, String free_qty, String status, String b_unit, String b_business_c, String sq, String mq, String s_code) {
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("code", code);
@@ -2938,6 +2938,7 @@ public class LoginDataBaseAdapter {
         newValues.put("b_business_c", b_business_c);
         newValues.put("sq", sq);
         newValues.put("mq", mq);
+        newValues.put("s_code", s_code);
         //newValues.put("product_stock", product_stock);
 
         // Insert the row into your table
