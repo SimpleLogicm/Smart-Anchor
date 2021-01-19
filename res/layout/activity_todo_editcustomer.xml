@@ -37,20 +37,41 @@
 
         </EditText>
 
-        <EditText
-            android:id="@+id/todoe_mobile"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/todo_back"
-            android:hint="Mobile No"
-            android:inputType="number"
-            android:maxLength="10"
-            android:padding="5dp"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black">
+            android:layout_height="wrap_content">
 
-        </EditText>
+            <EditText
+                android:id="@+id/todoe_mobile"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/todo_back"
+                android:hint="Mobile No"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="5dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"></EditText>
+
+            <Button
+                android:id="@+id/btn_generateotp"
+                android:layout_width="136dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/todoe_mobile"
+                android:background="@drawable/todo_back"
+                android:padding="5dp"
+                android:text="OTP Verification"
+                android:textColor="#576382"
+                android:textSize="13dp"
+
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
 
         <EditText
             android:id="@+id/todoe_gst"

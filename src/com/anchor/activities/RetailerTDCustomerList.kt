@@ -16,6 +16,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.view.View.OnTouchListener
+import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
@@ -38,6 +39,9 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
+import kotlinx.android.synthetic.main.reatilertdcustomerlist.done_btn
+import kotlinx.android.synthetic.main.reatilertdcustomerlist.reset_btn
+import kotlinx.android.synthetic.main.retailertdlist.*
 import kotlinx.android.synthetic.main.todoadd_retailer.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -58,17 +62,21 @@ class RetailerTDCustomerList : Activity() {
     var context: Context? = null
     var id = "";
     var coardcolor = "";
-
+    var myView: View? = null
+    var isUp = false
+    var approved: String? = ""
+    var rejected: String? = ""
+    var pending: String? = ""
+    var incomplete: String? = ""
     var list_Cfilter: MutableList<String> = ArrayList<String>()
     var CfilterspinnerMap = HashMap<String, String>()
-    var city_id: String? = "";
+    var city_id: String? = ""
     var adapter_Cfilter: ArrayAdapter<String>? = null
     var final_response = ""
     var response_result = ""
     var dbvoc = DataBaseHelper(this)
     var Retailer_List: MutableList<String> = ArrayList()
     var state_code = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +92,10 @@ class RetailerTDCustomerList : Activity() {
             e.printStackTrace()
         }
 
+        myView = findViewById(R.id.my_view)
+        myView!!.setVisibility(View.INVISIBLE);
+        // myButton.setText("Slide up");
+        isUp = false;
 
         val adapter = ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,Retailer_List)
@@ -96,7 +108,6 @@ class RetailerTDCustomerList : Activity() {
         llm.orientation = LinearLayoutManager.VERTICAL
         rtocustomerlist.setLayoutManager(llm)
 
-
         list_Cfilter.clear()
         CfilterspinnerMap.clear()
         list_Cfilter.add("Self")
@@ -106,7 +117,47 @@ class RetailerTDCustomerList : Activity() {
 //            CfilterspinnerMap.put(cn.getName(), cn.getCode())
 //        }
 
+        done_btn.setOnClickListener {
+            if(checkbox_approved.isChecked)
+            {
+                approved="approved"
+            }
+            if(checkbox_rejected.isChecked)
+            {
+                rejected="rejected"
+            }
+            if(checkbox_pending.isChecked)
+            {
+                pending="pending"
+            }
+            if(checkbox_incomplete.isChecked)
+            {
+                incomplete="incomplete"
+            }
+           // getTODOCustomerListData("")
+            if (isUp) {
+                slideDown(myView!!)
+                //todo_filter.setText("Slide up")
+            } else {
+                slideUp(myView!!)
+                //todo_filter.setText("Slide down")
+            }
+            isUp = !isUp
+            getTODOCustomerListData("")
 
+        }
+
+        reset_btn.setOnClickListener {
+            approved=""
+            incomplete=""
+            rejected=""
+            pending=""
+            Global_Data.filterValue=""
+            checkbox_approved.isChecked=false
+            checkbox_incomplete.isChecked=false
+            checkbox_rejected.isChecked=false
+            checkbox_pending.isChecked=false
+        }
         // customer_submit.setOnClickListener(new OnClickListener() {
         // @Override
         // public void onClick(View v) {
@@ -245,9 +296,7 @@ class RetailerTDCustomerList : Activity() {
                         finish()
                     }
                 }
-
             }
-
         }
 
         td_Retailer_search.setOnTouchListener(OnTouchListener { v, event ->
@@ -313,7 +362,7 @@ class RetailerTDCustomerList : Activity() {
                             "", Allresult[i].mobile, Allresult[i].email, Allresult[i].status, Allresult[i].proprietor_name
                             , Allresult[i].gst_no, Allresult[i].aadhar_no, Allresult[i].pan_no, Allresult[i].latitude, Allresult[i].longitude,
                             Allresult[i].power_dealer, Allresult[i].lighting_dealer, Allresult[i].iaq_dealer,
-                            Allresult[i].source_of_data, "", "", Allresult[i].tsi_code, Allresult[i].card_color_code, Allresult[i].distance, Allresult[i].address_line2, Allresult[i].landmark, Allresult[i].full_address,Allresult[i].dist_code,Allresult[i].dist_name,Allresult[i].is_approved))
+                            Allresult[i].source_of_data, "", "", Allresult[i].tsi_code, Allresult[i].card_color_code, Allresult[i].distance, Allresult[i].address_line2, Allresult[i].landmark, Allresult[i].full_address,Allresult[i].dist_code,Allresult[i].dist_name,Allresult[i].is_approved,Allresult[i].bucket_name))
 
                     todolist_progress_customer.visibility = View.GONE
                     rtocustomerlist.visibility = View.VISIBLE
@@ -477,18 +526,78 @@ class RetailerTDCustomerList : Activity() {
         val domain = resources.getString(R.string.service_domain)
         var url = ""
 
+        if (approved!!.length>0 || rejected!!.length>0 || pending!!.length>0 || incomplete!!.length>0) {
+
+            if(approved!!.length>0 && rejected!!.length>0 && pending!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+rejected+","+pending+","+incomplete
+            }else if(rejected!!.length>0 && pending!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=rejected+","+pending+","+incomplete
+            }else if(pending!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=pending+","+incomplete
+            }else if(approved!!.length>0 && rejected!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+rejected
+            }else if(approved!!.length>0 && pending!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+pending
+            }else if(approved!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+incomplete
+            }else if(rejected!!.length>0 && pending!!.length>0)
+            {
+                Global_Data.filterValue=rejected+","+pending
+            }else if(rejected!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=rejected+","+incomplete
+            }else if(pending!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=pending+","+incomplete
+            }else if(approved!!.length>0 && rejected!!.length>0 && pending!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+rejected+","+pending
+            }else if(approved!!.length>0 && pending!!.length>0 && incomplete!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+pending+","+incomplete
+            }
+            else if(incomplete!!.length>0)
+            {
+                Global_Data.filterValue=incomplete
+            }else if(pending!!.length>0)
+            {
+                Global_Data.filterValue=pending
+            }else if(rejected!!.length>0)
+            {
+                Global_Data.filterValue=rejected
+            }else if(approved!!.length>0)
+            {
+                Global_Data.filterValue=approved
+            }
+
+
+            url = domain + "retailers/filtered_retailers?email=" + user_email + "&filters=" + Global_Data.filterValue
+            approved=""
+            incomplete=""
+            rejected=""
+            pending=""
+            Global_Data.filterValue=""
+        } else {
+
         if (id.equals("1")) {
             url = domain + "retailers/to_do_red_list?email=" + user_email + "&city_code=" + URLEncoder.encode(city_code, "UTF-8")
         } else
             if (id.equals("2")) {
-                url = domain + "retailers/to_do_yellow_list?email=" + user_email + "&city_code=" +  URLEncoder.encode(city_code, "UTF-8")
+                url = domain + "retailers/to_do_yellow_list?email=" + user_email + "&city_code=" + URLEncoder.encode(city_code, "UTF-8")
             } else
                 if (id.equals("3")) {
-                    url = domain + "retailers/to_do_light_green_list?email=" + user_email + "&city_code=" +  URLEncoder.encode(city_code, "UTF-8")
+                    url = domain + "retailers/to_do_light_green_list?email=" + user_email + "&city_code=" + URLEncoder.encode(city_code, "UTF-8")
                 } else
                     if (id.equals("4")) {
-                        url = domain + "retailers/to_do_dark_green_list?email=" + user_email + "&city_code=" +  URLEncoder.encode(city_code, "UTF-8")
+                        url = domain + "retailers/to_do_dark_green_list?email=" + user_email + "&city_code=" + URLEncoder.encode(city_code, "UTF-8")
                     }
+    }
 
         Log.i("volley", "URL: $url")
         Log.i("volley", "email: " + Global_Data.GLOvel_USER_EMAIL)
@@ -632,7 +741,7 @@ class RetailerTDCustomerList : Activity() {
                                         "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("tsi_code")),
                                         coardcolor, "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),full_address
-                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")), "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved"))))
+                                        ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")), "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved")),Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("bucket_name"))))
 
                                 Retailer_List.add(Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("code"))+" - "+Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("shop_name")))
 
@@ -847,5 +956,39 @@ class RetailerTDCustomerList : Activity() {
 
     }
 
+    // slide the view from below itself to the current position
+    fun slideUp(view: View) {
+        view.visibility = View.VISIBLE
+        val animate = TranslateAnimation(
+                view.height.toFloat(),  // fromXDelta
+                0F,  // toXDelta
+                0F,  // fromYDelta
+                0F) // toYDelta
+        animate.setDuration(500)
+        animate.setFillAfter(true)
+        view.startAnimation(animate)
+    }
 
+    // slide the view from its current position to below itself
+    fun slideDown(view: View) {
+        val animate = TranslateAnimation(
+                0F,  // fromXDelta
+                view.height.toFloat(),  // toXDelta
+                0F,  // fromYDelta
+                0F) // toYDelta
+        animate.setDuration(500)
+        animate.setFillAfter(true)
+        view.startAnimation(animate)
+    }
+
+    fun onSlideViewButtonClick(view: View?) {
+        if (isUp) {
+            slideDown(myView!!)
+            //todo_filter.setText("Slide up")
+        } else {
+            slideUp(myView!!)
+            //todo_filter.setText("Slide down")
+        }
+        isUp = !isUp
+    }
 }

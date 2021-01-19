@@ -48,18 +48,51 @@
                 android:textColor="@color/white"
                 android:textSize="14dp" />
 
-            <ImageView
-                android:id="@+id/rtc_mobile"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="right"
-                android:padding="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:src="@drawable/todocall"
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-                />
+    <ImageView
+        android:id="@+id/approval_status_icon"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/gps_status"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="145dp"
+        android:gravity="center"
+        android:textSize="11dp"
+        android:layout_marginTop="3dp"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        android:text="GPS Incomplete" />
+
+    <ImageView
+        android:id="@+id/verified_status_icon"
+        android:layout_width="90dp"
+        android:layout_height="24dp"
+        android:layout_alignRight="@+id/rtc_mobile"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="6dp"
+        />
+
+    <ImageView
+        android:id="@+id/rtc_mobile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/todocall" />
+
+</RelativeLayout>
+
+
+
+
 
             <TextView
                 android:id="@+id/rtc_mobile_hidden"

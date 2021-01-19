@@ -22,7 +22,9 @@ import java.text.DecimalFormat
 
 class RCTDAdapter(private val mContext: Context, private val rtododatalist: List<RCTOData>) : RecyclerView.Adapter<RCTDAdapter.MyViewHolder>() {
     var formatter = DecimalFormat("#,##,##,###.00")
-
+    var approvalStatus: ImageView? = null
+    var verifiedStatus: ImageView? = null
+    var GPSStatus: TextView? = null
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var rtc_name: TextView
         var rtc_address: TextView
@@ -42,6 +44,9 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
             rtc_email_hidden = view.findViewById(R.id.rtc_email_hidden)
             rtcodo_container = view.findViewById(R.id.rtcodo_container)
             rtcodo_containercard = view.findViewById(R.id.rtcodo_containercard)
+            approvalStatus = view.findViewById(R.id.approval_status_icon)
+            verifiedStatus = view.findViewById(R.id.verified_status_icon)
+            GPSStatus = view.findViewById(R.id.gps_status)
         }
     }
 
@@ -59,6 +64,30 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
         holder.rtc_mobile_hidden.text = data.mobile
         holder.rtc_email_hidden.text = data.email
         holder.rtcodo_containercard.setCardBackgroundColor(Color.parseColor(data.card_color_code))
+
+        if (data.is_approved.equals("true", ignoreCase = true)) {
+            verifiedStatus!!.setImageResource(R.drawable.verified_yes)
+        } else {
+           // verifiedStatus!!.setImageResource(R.drawable.verified_no)
+        }
+
+        if (com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("approved", ignoreCase = true)) {
+            approvalStatus!!.setImageResource(R.drawable.approved)
+        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("incomplete", ignoreCase = true)) {
+            approvalStatus!!.setImageResource(R.drawable.incomplete)
+        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("rejected", ignoreCase = true)) {
+            approvalStatus!!.setImageResource(R.drawable.rejected)
+        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("pending", ignoreCase = true)) {
+            approvalStatus!!.setImageResource(R.drawable.pending_approval)
+        }
+
+        if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.latitude).equals("", ignoreCase = true) && com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.longitude).equals("", ignoreCase = true)) {
+            GPSStatus!!.visibility=View.VISIBLE
+        }else{
+            GPSStatus!!.visibility=View.INVISIBLE
+        }
+
+
         holder.rtcodo_container.setOnClickListener {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rt_id.text.toString())) {
 
@@ -101,7 +130,6 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
 
             } else {
                 Toast.makeText(mContext, "Contact No Not Found.", Toast.LENGTH_LONG).show()

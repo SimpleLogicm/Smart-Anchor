@@ -36,7 +36,7 @@ public class Global_Data {
     public static String Value_click_flag = "";
     public static String close_click_flag = "";
     public static String Ongoing_click_flag = "";
-
+    public static String filterValue = "";
     public static String GLOvel_BU = "";
     public static String CUSTOMER_EMAIL="";
     public static HashMap<Integer,String> p_cus_services_status_check = new HashMap<>();

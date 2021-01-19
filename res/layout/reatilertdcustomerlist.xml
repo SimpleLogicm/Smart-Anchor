@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <Spinner
         android:id="@+id/rtocustomerlist_filter"
         android:layout_width="match_parent"
@@ -47,7 +45,15 @@
         <requestFocus />
     </AutoCompleteTextView>
 
-
+    <ImageView
+        android:id="@+id/todo_filter"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/td_Retailer_search"
+        android:layout_marginRight="10dp"
+        android:onClick="onSlideViewButtonClick"
+        android:src="@drawable/todo_filter"/>
 
     <ProgressBar
         android:id="@+id/todolist_progress_customer"
@@ -60,7 +66,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rtocustomerlist"
-        android:layout_below="@+id/td_Retailer_search"
+        android:layout_below="@+id/todo_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -70,5 +76,119 @@
         android:layout_marginBottom="5dp"
         android:clipToPadding="false" />
 
+    <LinearLayout
+        android:id="@+id/my_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp">
+
+            <RelativeLayout
+                android:id="@+id/rlout_abc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/abc_ticketdetails1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:clickable="true"
+                    android:visibility="visible"
+                    android:gravity="left|center"
+                    android:paddingRight="10dp"
+                    android:text="Filter By"
+                    android:textColor="#306FA2"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+
+            <CheckBox
+                android:id="@+id/checkbox_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlout_abc"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="All" />
+
+            <CheckBox
+                android:id="@+id/checkbox_approved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/checkbox_all"
+                android:text="Approved" />
+
+            <CheckBox
+                android:id="@+id/checkbox_rejected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_approved"
+                android:text="Rejected" />
+
+            <CheckBox
+                android:id="@+id/checkbox_pending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_rejected"
+                android:text="Pending" />
+
+            <CheckBox
+                android:id="@+id/checkbox_incomplete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_pending"
+                android:text="Incomplete" />
+
+            <TextView
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Reset"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#306FA2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/checkbox_incomplete"
+                />
+
+            <TextView
+                android:id="@+id/done_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#306FA2"
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/reset_btn"
+                android:layout_below="@+id/checkbox_incomplete"
+                />
+
+            <ProgressBar
+                android:id="@+id/filter_progressBars"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:indeterminateDrawable="@drawable/progress"
+                android:visibility="gone"></ProgressBar>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
