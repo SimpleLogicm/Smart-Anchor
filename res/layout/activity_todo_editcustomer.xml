@@ -12,6 +12,12 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Shop Name *"/>
+
         <EditText
             android:id="@+id/todoe_shop_name"
             android:layout_width="match_parent"
@@ -37,6 +43,13 @@
 
         </EditText>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="Mobile *"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -45,8 +58,6 @@
                 android:id="@+id/todoe_mobile"
                 android:layout_width="232dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
                 android:background="@drawable/todo_back"
                 android:hint="Mobile No"
                 android:inputType="number"
@@ -59,7 +70,6 @@
                 android:id="@+id/btn_generateotp"
                 android:layout_width="136dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/todoe_mobile"
                 android:background="@drawable/todo_back"
                 android:padding="5dp"
@@ -114,12 +124,18 @@
 
         </EditText>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="Shop No, Building, Company, Apartment *"/>
+
 
         <EditText
             android:id="@+id/todoe_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@drawable/todo_back"
             android:gravity="left"
             android:hint="@string/shop_no"
@@ -154,23 +170,34 @@
 
         </EditText>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="State *"/>
+
         <Spinner
             android:id="@+id/todoe_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
             android:background="@drawable/spinner_background_yellow"
-            android:layout_marginTop="10dp">
+            >
 
         </Spinner>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="District *"/>
         <Spinner
             android:id="@+id/todo_dist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
-            android:background="@drawable/spinner_background_yellow"
-            android:layout_marginTop="10dp">
+            android:background="@drawable/spinner_background_yellow">
 
         </Spinner>
 
@@ -183,12 +210,17 @@
             android:indeterminateDrawable="@drawable/progress"
             android:visibility="gone"></ProgressBar>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="City *"/>
 
         <Spinner
             android:id="@+id/todoe_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:background="@drawable/spinner_background_yellow"
             android:paddingRight="10dp">
 
@@ -241,16 +273,19 @@
 
         </EditText>
 
-        <RelativeLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Lighting Dealer *"/>
+         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/todoe_dealer_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/todo_back"
                 android:orientation="vertical"
                 android:padding="15dp">
@@ -330,24 +365,32 @@
 
             <Button
                 android:id="@+id/buttontodocecancel"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#414042"
-
+                android:layout_marginRight="5dp"
                 android:text="@string/Cancel"
                 android:textColor="#FFFFFF" />
 
             <Button
+                android:id="@+id/buttontodoedit"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#414042"
+                android:layout_marginLeft="5dp"
+                android:text="@string/Edit"
+                android:textColor="#FFFFFF" />
 
+            <Button
                 android:id="@+id/buttontodoceSave"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-
                 android:background="#414042"
-                android:text="@string/Submit"
+                android:text="@string/Update"
                 android:textColor="#FFFFFF" />
 
             <ImageView

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Shop Name"
+            android:text="Shop Name *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
 
@@ -61,23 +61,42 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Mobile"
+            android:text="Mobile *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
 
-        <EditText
-            android:id="@+id/todoe_mobilea"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/add_retailer_edittext"
-            android:hint=""
-            android:inputType="number"
-            android:maxLength="10"
-            android:padding="5dp"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black">
+            android:layout_height="wrap_content">
 
-        </EditText>
+            <EditText
+                android:id="@+id/todoe_mobilea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add_retailer_edittext"
+                android:hint=""
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="5dp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black">
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_addretgenerateotp"
+                android:layout_width="136dp"
+                android:layout_height="35dp"
+                android:layout_toRightOf="@+id/todoe_mobilea"
+                android:background="@drawable/add_retailer_edittext"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:text="OTP Verification"
+                android:textColor="@color/retailer_light_green"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/todoe_gst_h"
@@ -152,7 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="@string/shop_no"
+            android:text="Shop No, Building, Company, Apartment *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
 
@@ -218,7 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="State"
+            android:text="State *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <Spinner
@@ -237,7 +256,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="District"
+            android:text="District *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <Spinner
@@ -266,7 +285,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="City"
+            android:text="City *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <Spinner
@@ -309,7 +328,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Geo Coordinates"
+            android:text="Geo Coordinates *"
             android:paddingLeft="5dp"
             android:textColor="@color/retailer_light_green" />
         <EditText

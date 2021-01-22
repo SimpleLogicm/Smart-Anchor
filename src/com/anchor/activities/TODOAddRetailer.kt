@@ -3,25 +3,22 @@ package com.anchor.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Geocoder
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import com.anchor.adapter.Todo_list_adaptor
 import com.anchor.helper.VerhoeffAlgorithm
 import com.anchor.model.Todo_model
@@ -30,6 +27,7 @@ import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import cpm.simplelogic.helper.CheckNullValue
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
@@ -41,15 +39,33 @@ import kotlinx.android.synthetic.main.todoadd_retailer.todoe_address
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 
 class TODOAddRetailer : Activity() {
+    var dialognew: Dialog? = null
+    var dialog: ProgressDialog? = null
+    var sub_otp: EditText? = null
+    var otp_mobileno: EditText? = null
+    var otp_time_remaining: TextView? = null
+    var otp_verify_time_flag = ""
+    var otp_hit_validator = HashMap<String, Int>()
+
+    var otp_submit: Button? = null
+    var otp_Resend:android.widget.Button? = null
+    var otp_Cancel:android.widget.Button? = null
+    var timer: CountDownTimer? = null
     var list: ArrayList<Todo_model>? = null
     var adaptor: Todo_list_adaptor? = null
     // var id = "";
+    var otp_progressBarar: ProgressBar? = null
+    var otp_bottom_layout: LinearLayout? = null
     var coardcolor = "";
     var cd: ConnectionDetector? = null
     var isInternetPresent = false
@@ -112,7 +128,9 @@ class TODOAddRetailer : Activity() {
         }
 
 
-
+//        btn_addretgenerateotp.setOnClickListener {
+//            showDialogs(todoe_mobilea!!.text.toString().trim())
+//        }
 
         list_CState.add("Select State")
         adapter_CState = ArrayAdapter<String>(context!!,
@@ -1783,4 +1801,294 @@ class TODOAddRetailer : Activity() {
         }
     }
 
+    fun showDialogs(otpmobileno: String?) {
+        dialognew = Dialog(this@TODOAddRetailer)
+        dialognew!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialognew!!.setCancelable(false)
+        dialognew!!.setContentView(R.layout.retailer_otp_verification)
+        sub_otp = dialognew!!.findViewById(R.id.sub_otp)
+        otp_mobileno = dialognew!!.findViewById(R.id.otp_mobile)
+        otp_time_remaining = dialognew!!.findViewById(R.id.otp_time_remaining)
+        otp_mobileno!!.setText(otpmobileno)
+
+        // otp_mobile_value.setText(input_mobno1.getText().toString());
+        otp_verify_time_flag = "yes"
+        otp_progressBarar = dialognew!!.findViewById(R.id.otp_progressBarar)
+        otp_bottom_layout = dialognew!!.findViewById(R.id.otp_bottom_layout)
+        otp_submit = dialognew!!.findViewById(R.id.otp_submit)
+        otp_Resend = dialognew!!.findViewById(R.id.otp_Resend)
+        otp_Cancel = dialognew!!.findViewById(R.id.otp_Cancel)
+        try {
+            val format = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+            val today1 = format.format(Date())
+            val today = Date(today1)
+            val currentTime = today.time
+
+            // String today1 = format.format(System.currentTimeMillis()+15*60*1000);
+            val service_plusf = format.parse(today1)
+            val cal = Calendar.getInstance()
+            cal.time = service_plusf
+            cal.add(Calendar.MINUTE, 2)
+            val new_date = cal.time
+            val s_time = new_date.time
+            val expiryTime = s_time - currentTime
+            timer = object : CountDownTimer(expiryTime, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    otp_time_remaining!!.setText("" + String.format("%d:%d Mins Remaining",
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))))
+                }
+
+                override fun onFinish() {
+                    otp_time_remaining!!.setText("00:00:00")
+                    if (otp_verify_time_flag.equals("yes", ignoreCase = true)) {
+                        otp_Resend!!.setVisibility(View.VISIBLE)
+                        otp_Resend!!.setText("Resend OTP")
+                        otp_submit!!.setVisibility(View.GONE)
+                        sub_otp!!.setVisibility(View.GONE)
+                        sub_otp!!.setText("")
+                        otp_verify_time_flag = ""
+                    } else {
+                        otp_verify_time_flag = ""
+                    }
+                }
+            }
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        otp_Resend!!.setOnClickListener(View.OnClickListener {
+            if (CheckNullValue.findNullValue(otp_mobileno!!.getText().toString().trim({ it <= ' ' })) == true) {
+                val toast = Toast.makeText(this@TODOAddRetailer, "Please Enter Mobile No", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            } else {
+                otp_progressBarar!!.setVisibility(View.VISIBLE)
+                otp_bottom_layout!!.setVisibility(View.GONE)
+                Generate_Otp("resend", otp_mobileno!!.getText().toString())
+            }
+        })
+        otp_submit!!.setOnClickListener(View.OnClickListener { //                if (otp_verify_time_flag.equalsIgnoreCase("yes")) {
+//                    if (!Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sub_otp.getText().toString())) {
+//                        sub_otp.requestFocus();
+//                        //Globel_Data.Custom_Toast(ShopDetails.this, "Please Enter OTP", "");
+//
+//                    } else {
+//
+//                    }
+//                } else {
+//
+//
+//                }
+            if (CheckNullValue.findNullValue(otp_mobileno!!.getText().toString().trim({ it <= ' ' })) == true) {
+                val toast = Toast.makeText(this@TODOAddRetailer, "Please Enter UserName", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            } else if (CheckNullValue.findNullValue(sub_otp!!.getText().toString().trim({ it <= ' ' })) == true) {
+                val toast = Toast.makeText(this@TODOAddRetailer, "Please Enter OTP", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+            } else {
+                otp_progressBarar!!.setVisibility(View.VISIBLE)
+                otp_bottom_layout!!.setVisibility(View.GONE)
+                val otp: String = sub_otp!!.getText().toString()
+                val spf: SharedPreferences = this@TODOAddRetailer.getSharedPreferences("SimpleLogic", 0)
+                val editor = spf.edit()
+                editor.putString("OTP", otp)
+                editor.commit()
+                submit_OTP(otp_mobileno!!.getText().toString(), sub_otp!!.getText().toString(), dialognew!!)
+            }
+        })
+        otp_Cancel!!.setOnClickListener(View.OnClickListener {
+            otp_hit_validator.clear()
+            timer!!.cancel()
+            dialognew!!.dismiss()
+        })
+        dialognew!!.show()
+    }
+
+    fun Generate_Otp(Click_Flag: String?, mobileno: String?) {
+        System.gc()
+        val reason_code = ""
+        try {
+            var jsObjRequest: JsonObjectRequest? = null
+            try {
+                val domain = resources.getString(R.string.service_domain)
+                val url = domain + "retailers/generate_otp"
+                Log.d("Server url", "Server url$url")
+                val SINOBJECT = JSONObject()
+
+                SINOBJECT.put("email", Global_Data.GLOvel_USER_EMAIL)
+                SINOBJECT.put("mobile_no", mobileno)
+                Log.d("user_dealer Service", SINOBJECT.toString())
+                jsObjRequest = JsonObjectRequest(Request.Method.POST, url, SINOBJECT, Response.Listener { response ->
+                    Log.i("volle y", "response: $response")
+                    Log.d("jV", "JV length" + response.length())
+                    try {
+                        var response_result = ""
+                        response_result = if (response.has("result")) {
+                            response.getString("result")
+                        } else {
+                            "data"
+                        }
+                        if (response_result.equals("OTP Sent Successfully.", ignoreCase = true)) {
+
+                            // dialog.dismiss();
+                            otp_verify_time_flag = "yes"
+                            otp_Resend!!.text = "Resend OTP"
+                            otp_progressBarar!!.visibility = View.GONE
+                            otp_bottom_layout!!.visibility = View.VISIBLE
+                            otp_submit!!.visibility = View.VISIBLE
+                            sub_otp!!.visibility = View.VISIBLE
+                            otp_Resend!!.visibility = View.GONE
+                            val toast = Toast.makeText(this@TODOAddRetailer,
+                                    response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                            timer!!.start()
+                            otp_hit_validator.clear()
+                        } else {
+                            otp_progressBarar!!.visibility = View.GONE
+                            otp_bottom_layout!!.visibility = View.VISIBLE
+                            val toast = Toast.makeText(this@TODOAddRetailer,
+                                    response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        otp_progressBarar!!.visibility = View.GONE
+                        otp_bottom_layout!!.visibility = View.VISIBLE
+                    }
+                }, Response.ErrorListener { error ->
+                    if (error is TimeoutError || error is NoConnectionError) {
+                        Toast.makeText(applicationContext,
+                                "Network Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is AuthFailureError) {
+                        Toast.makeText(applicationContext,
+                                "Server AuthFailureError  Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is ServerError) {
+                        Toast.makeText(applicationContext,
+                                "Server   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is NetworkError) {
+                        Toast.makeText(applicationContext,
+                                "Network   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is ParseError) {
+                        Toast.makeText(applicationContext,
+                                "ParseError   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                    }
+                    otp_progressBarar!!.visibility = View.GONE
+                    otp_bottom_layout!!.visibility = View.VISIBLE
+                    // finish();
+                })
+                val requestQueue = Volley.newRequestQueue(this@TODOAddRetailer)
+                val socketTimeout = 300000 //90 seconds - change to what you want
+                val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+                jsObjRequest.retryPolicy = policy
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false)
+                requestQueue.cache.clear()
+                requestQueue.add(jsObjRequest)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                dialog!!.dismiss()
+            }
+        } catch (e: java.lang.Exception) {
+            // TODO: handle exception
+            Log.e("DATA", e.message)
+        }
+    }
+
+    fun submit_OTP(mobileno: String, otp: String, dialogdis: Dialog) {
+        try {
+            val domain = resources.getString(R.string.service_domain)
+            val url = domain + "retailers/verify_otp?mobile_no=" + URLEncoder.encode(mobileno, "UTF-8") +"&email="+Global_Data.GLOvel_USER_EMAIL+ "&otp=" + otp
+            Log.i("volley", "url: $url")
+            Log.i("volley", "mobileno: $mobileno")
+            Log.i("volley", "otp: $otp")
+            val jsObjRequest = JsonObjectRequest(url, null, Response.Listener { response ->
+
+                // JsonObjectRequest jsObjRequest = new JsonObjectRequest(domain+"/menus/registration?imei_no="+ URLEncoder.encode("911305401754123", "UTF-8"),null, new Response.Listener<JSONObject>() {
+                Log.i("volley", "response: $response")
+                try {
+                    var response_result = ""
+                    response_result = if (response.has("result")) {
+                        response.getString("result")
+                    } else {
+                        "data"
+                    }
+                    if (response_result.equals("Retailer Verified Successfully.", ignoreCase = true)) {
+
+//                        //List<Local_Data> conta = dbvoc.getAllMain();
+//                        val conta: List<Local_Data> = dbvoc.getSyncDate(user_name)
+//                        if (conta.size > 0) {
+//                            Log.d("Existing User", "Existing U")
+//                            val spf: SharedPreferences = this@LoginActivity.getSharedPreferences("SimpleLogic", 0)
+//                            val editor = spf.edit()
+//                            editor.putString("TCODE", "Yes")
+//                            editor.putString("FirstLogin", "Yes")
+//                            editor.commit()
+//                            val c = Calendar.getInstance()
+//                            val df = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+//                            val formattedDate = df.format(c.time)
+//                            dbvoc.update_user_createD(formattedDate, user_name)
+//                            timer!!.cancel()
+//                            val toast = Toast.makeText(this@TodoEditCustomer, response_result, Toast.LENGTH_LONG)
+//                            toast.setGravity(Gravity.CENTER, 0, 0)
+//                            toast.show()
+//                            dialogdis.dismiss()
+//                        } else {
+//                            Log.d("New User", "New U")
+//                            Log.d("Existing User", "Existing U")
+//                            timer!!.cancel()
+//                            getserviceData(user_name, dialogdis)
+//                        }
+                        timer!!.cancel()
+                        val toast = Toast.makeText(this@TODOAddRetailer, response_result, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        dialogdis.dismiss()
+                        //dialognew!!.dismiss()
+                    } else {
+                        otp_progressBarar!!.visibility = View.GONE
+                        otp_bottom_layout!!.visibility = View.VISIBLE
+                        val toast = Toast.makeText(this@TODOAddRetailer, response_result, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    otp_progressBarar!!.visibility = View.GONE
+                    otp_bottom_layout!!.visibility = View.VISIBLE
+                }
+            }, Response.ErrorListener { error ->
+                Log.i("volley", "error: $error")
+                // Toast.makeText(getApplicationContext(), "Some server error occur Please Contact it team.", Toast.LENGTH_LONG).show();
+                val toast = Toast.makeText(this@TODOAddRetailer, "Some server error occurred. Please Contact IT team.", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+                otp_progressBarar!!.visibility = View.GONE
+                otp_bottom_layout!!.visibility = View.VISIBLE
+            })
+            val requestQueue = Volley.newRequestQueue(this)
+            // queue.add(jsObjRequest);
+            jsObjRequest.setShouldCache(false)
+            val socketTimeout = 3000000 //3000 seconds - change to what you want
+            val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+            jsObjRequest.retryPolicy = policy
+            requestQueue.add(jsObjRequest)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            otp_progressBarar!!.visibility = View.GONE
+            otp_bottom_layout!!.visibility = View.VISIBLE
+        }
+    }
 }

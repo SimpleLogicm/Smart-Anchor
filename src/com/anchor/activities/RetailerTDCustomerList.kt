@@ -18,11 +18,8 @@ import android.view.*
 import android.view.View.OnTouchListener
 import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anchor.adapter.RCTDAdapter
@@ -62,7 +59,7 @@ class RetailerTDCustomerList : Activity() {
     var context: Context? = null
     var id = "";
     var coardcolor = "";
-    var myView: View? = null
+    var myView: RelativeLayout? = null
     var isUp = false
     var approved: String? = ""
     var rejected: String? = ""
@@ -115,6 +112,19 @@ class RetailerTDCustomerList : Activity() {
 //        for (cn in contacts2) {
 //            list_Cfilter.add(cn.getName())
 //            CfilterspinnerMap.put(cn.getName(), cn.getCode())
+//        }
+
+//        todo_filter1.setOnClickListener {
+//            val builder = AlertDialog.Builder(this@RetailerTDCustomerList)
+//            val viewGroup: ViewGroup = findViewById(android.R.id.content)
+//            val dialogView: View = LayoutInflater.from(this).inflate(R.layout.retailer_filter, viewGroup, false)
+//
+//            builder.setView(dialogView)
+//            val alertDialog = builder.create()
+//            alertDialog.getWindow()!!.getAttributes().windowAnimations = R.style.DialogTheme
+//            //alertDialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
+//            //alertDialog.getWindow()!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+//            alertDialog.show()
 //        }
 
         done_btn.setOnClickListener {
@@ -958,6 +968,9 @@ class RetailerTDCustomerList : Activity() {
 
     // slide the view from below itself to the current position
     fun slideUp(view: View) {
+//        rtocustomerlist.isClickable=false
+//        rtocustomerlist.visibility=View.INVISIBLE
+
         view.visibility = View.VISIBLE
         val animate = TranslateAnimation(
                 view.height.toFloat(),  // fromXDelta
@@ -971,6 +984,9 @@ class RetailerTDCustomerList : Activity() {
 
     // slide the view from its current position to below itself
     fun slideDown(view: View) {
+//        rtocustomerlist.isClickable=true
+//        rtocustomerlist.visibility=View.VISIBLE
+
         val animate = TranslateAnimation(
                 0F,  // fromXDelta
                 view.height.toFloat(),  // toXDelta
@@ -982,10 +998,22 @@ class RetailerTDCustomerList : Activity() {
     }
 
     fun onSlideViewButtonClick(view: View?) {
+        val builder = AlertDialog.Builder(this@RetailerTDCustomerList)
+        val alertDialog = builder.create()
         if (isUp) {
+            //alertDialog.dismiss()
             slideDown(myView!!)
             //todo_filter.setText("Slide up")
         } else {
+
+//            val viewGroup: ViewGroup = findViewById(android.R.id.content)
+//            val dialogView: View = LayoutInflater.from(this).inflate(R.layout.retailer_filter, viewGroup, false)
+//
+//            builder.setView(dialogView)
+//
+//            alertDialog.getWindow()!!.getAttributes().windowAnimations = R.style.DialogTheme
+//            alertDialog.show()
+
             slideUp(myView!!)
             //todo_filter.setText("Slide down")
         }

@@ -330,9 +330,6 @@ class TodoEditCustomer : Activity() {
                 }
             }
 
-
-
-
             if(coardcolor.equals("#D8AB1E"))
             {
                 id = "2"
@@ -472,6 +469,7 @@ class TodoEditCustomer : Activity() {
                 Global_Data.merge_retailer_code = ""
                 dialog.dismiss()
             }
+
 
             yesBtn.setOnClickListener {
 
@@ -973,6 +971,52 @@ class TodoEditCustomer : Activity() {
         buttontodocecancel.setOnClickListener {
             onBackPressed()
 
+        }
+
+        buttontodoedit.setOnClickListener {
+            todoe_shop_name.isEnabled = true
+            todoe_shop_name.isClickable = true
+
+            todoe_proprietor_name.isEnabled = true
+            todoe_proprietor_name.isClickable = true
+            todoe_mobile.isEnabled = true
+            todoe_mobile.isClickable = true
+            todoe_gst.isEnabled = true
+            todoe_gst.isClickable = true
+            todoe_aadhar.isEnabled = true
+            todoe_aadhar.isClickable = true
+            todoe_pan.isEnabled = true
+            todoe_pan.isClickable = true
+            todoe_address.isEnabled = true
+            todoe_address.isClickable = true
+            todoe_area.isEnabled = true
+            todoe_area.isClickable = true
+            todoe_landmark.isEnabled = true
+            todoe_landmark.isClickable = true
+            todoe_pincode.isEnabled = true
+            todoe_pincode.isClickable = true
+            locationimg.isEnabled = true
+            locationimg.isClickable = true
+            todoe_tsi_code.isEnabled = true
+            todoe_tsi_code.isClickable = true
+
+            todoe_state.isEnabled = true
+            todoe_state.isClickable = true
+            todo_dist.isEnabled = true
+            todo_dist.isClickable = true
+            todoe_city.isEnabled = true
+            todoe_city.isClickable = true
+            todoe_powerdealer.isEnabled = true
+            todoe_powerdealer.isClickable = true
+            todoe_iaqdealer.isEnabled = true
+            todoe_iaqdealer.isClickable = true
+            todoe_lightingdealer.isEnabled = true
+            todoe_lightingdealer.isClickable = true
+
+            val toast = Toast.makeText(context,
+                    "Fields available for edit", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
         }
 
         buttontodoceSave.setOnClickListener {
@@ -2730,7 +2774,7 @@ class TodoEditCustomer : Activity() {
                 val SINOBJECT = JSONObject()
 
                 SINOBJECT.put("email", Global_Data.GLOvel_USER_EMAIL)
-                SINOBJECT.put("mobile_no", mobileno)
+                SINOBJECT.put("retailer_code", code)
                 Log.d("user_dealer Service", SINOBJECT.toString())
                 jsObjRequest = JsonObjectRequest(Request.Method.POST, url, SINOBJECT, Response.Listener { response ->
                     Log.i("volle y", "response: $response")
@@ -2821,7 +2865,7 @@ class TodoEditCustomer : Activity() {
     fun submit_OTP(mobileno: String, otp: String, dialogdis: Dialog) {
         try {
             val domain = resources.getString(R.string.service_domain)
-            val url = domain + "retailers/verify_otp?mobile_no=" + URLEncoder.encode(mobileno, "UTF-8") +"&email="+Global_Data.GLOvel_USER_EMAIL+ "&otp=" + otp
+            val url = domain + "retailers/verify_otp?retailer_code=" + code +"&email="+Global_Data.GLOvel_USER_EMAIL+ "&otp=" + otp
             Log.i("volley", "url: $url")
             Log.i("volley", "mobileno: $mobileno")
             Log.i("volley", "otp: $otp")
@@ -2836,7 +2880,7 @@ class TodoEditCustomer : Activity() {
                     } else {
                         "data"
                     }
-                    if (response_result.equals("User Verified Successfully.", ignoreCase = true)) {
+                    if (response_result.equals("Retailer Verified Successfully.", ignoreCase = true)) {
 
 //                        //List<Local_Data> conta = dbvoc.getAllMain();
 //                        val conta: List<Local_Data> = dbvoc.getSyncDate(user_name)
@@ -2867,6 +2911,7 @@ class TodoEditCustomer : Activity() {
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
                         dialogdis.dismiss()
+                        dialognew!!.dismiss()
                     } else {
                         otp_progressBarar!!.visibility = View.GONE
                         otp_bottom_layout!!.visibility = View.VISIBLE

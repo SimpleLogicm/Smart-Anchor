@@ -73,8 +73,8 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
 
         if (com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("approved", ignoreCase = true)) {
             approvalStatus!!.setImageResource(R.drawable.approved)
-        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("incomplete", ignoreCase = true)) {
-            approvalStatus!!.setImageResource(R.drawable.incomplete)
+        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("partially_filled", ignoreCase = true)) {
+            approvalStatus!!.setImageResource(R.drawable.partialy_filled)
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("rejected", ignoreCase = true)) {
             approvalStatus!!.setImageResource(R.drawable.rejected)
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("pending", ignoreCase = true)) {
@@ -86,7 +86,6 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
         }else{
             GPSStatus!!.visibility=View.INVISIBLE
         }
-
 
         holder.rtcodo_container.setOnClickListener {
             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(holder.rt_id.text.toString())) {
