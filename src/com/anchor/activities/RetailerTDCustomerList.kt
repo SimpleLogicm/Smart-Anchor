@@ -74,11 +74,13 @@ class RetailerTDCustomerList : Activity() {
     var dbvoc = DataBaseHelper(this)
     var Retailer_List: MutableList<String> = ArrayList()
     var state_code = ""
+    var todo_rv: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reatilertdcustomerlist)
-
+//        todo_rv = findViewById(R.id.rtocustomerlist)
+//        todo_rv!!.visibility=View.INVISIBLE
         context = RetailerTDCustomerList@ this
         cd = ConnectionDetector(context)
 
@@ -969,8 +971,10 @@ class RetailerTDCustomerList : Activity() {
     // slide the view from below itself to the current position
     fun slideUp(view: View) {
 //        rtocustomerlist.isClickable=false
-//        rtocustomerlist.visibility=View.INVISIBLE
-
+        rtocustomerlist.visibility=View.GONE
+//        rtocustomerlist.setClickable(false)
+//        rtocustomerlist.setEnabled(false)
+        //rtocustomerlist.focusable=false
         view.visibility = View.VISIBLE
         val animate = TranslateAnimation(
                 view.height.toFloat(),  // fromXDelta
@@ -985,7 +989,9 @@ class RetailerTDCustomerList : Activity() {
     // slide the view from its current position to below itself
     fun slideDown(view: View) {
 //        rtocustomerlist.isClickable=true
-//        rtocustomerlist.visibility=View.VISIBLE
+        rtocustomerlist.visibility=View.VISIBLE
+//        rtocustomerlist.setClickable(true)
+//        rtocustomerlist.setEnabled(true)
 
         val animate = TranslateAnimation(
                 0F,  // fromXDelta

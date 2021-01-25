@@ -80,7 +80,7 @@
         android:id="@+id/my_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="#F0F0F0"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="150dp"
         android:orientation="vertical">
