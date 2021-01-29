@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_shopname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -44,6 +45,7 @@
         </EditText>
 
         <TextView
+            android:id="@+id/txt_mobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -125,6 +127,7 @@
         </EditText>
 
         <TextView
+            android:id="@+id/txt_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -171,6 +174,7 @@
         </EditText>
 
         <TextView
+            android:id="@+id/txt_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -187,6 +191,7 @@
 
         </Spinner>
         <TextView
+            android:id="@+id/txt_district"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -211,6 +216,7 @@
             android:visibility="gone"></ProgressBar>
 
         <TextView
+            android:id="@+id/txt_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -274,6 +280,7 @@
         </EditText>
 
         <TextView
+            android:id="@+id/txt_lightingdealer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -365,7 +372,7 @@
 
             <Button
                 android:id="@+id/buttontodocecancel"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#414042"
@@ -375,7 +382,7 @@
 
             <Button
                 android:id="@+id/buttontodoedit"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="#414042"
@@ -385,7 +392,7 @@
 
             <Button
                 android:id="@+id/buttontodoceSave"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
@@ -397,7 +404,7 @@
                 android:id="@+id/merge_icon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/merge">

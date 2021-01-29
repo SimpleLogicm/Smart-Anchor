@@ -14,6 +14,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
+import android.text.Html
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
@@ -117,7 +118,6 @@ class TODOAddRetailer : Activity() {
         todoe_gsta.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
         todoe_pana.setFilters(arrayOf<InputFilter>(InputFilter.AllCaps()))
 
-
         try {
             // id = intent.getStringExtra("id")
             // coardcolor = intent.getStringExtra("cardcolor")
@@ -127,6 +127,26 @@ class TODOAddRetailer : Activity() {
             e.printStackTrace()
         }
 
+        val shopName = "<font color=#FF73AACC>Shop Name </font> <font color=#cc0029>*</font>"
+        txt_shopname.setText(Html.fromHtml(shopName))
+
+        val mobile = "<font color=#FF73AACC>Mobile </font> <font color=#cc0029>*</font>"
+        todoe_mobile_h.setText(Html.fromHtml(mobile))
+
+        val address1 = "<font color=#FF73AACC>Shop No, Building, Company, Apartment </font> <font color=#cc0029>*</font>"
+        todoe_address_h.setText(Html.fromHtml(address1))
+
+        val state = "<font color=#FF73AACC>State </font> <font color=#cc0029>*</font>"
+        todoe_state_h.setText(Html.fromHtml(state))
+
+        val district = "<font color=#FF73AACC>District </font> <font color=#cc0029>*</font>"
+        todoe_dist_h.setText(Html.fromHtml(district))
+
+        val city_h = "<font color=#FF73AACC>City </font> <font color=#cc0029>*</font>"
+        todoe_city_h.setText(Html.fromHtml(city_h))
+
+        val giocoordinate_h = "<font color=#FF73AACC>Geo Coordinates </font> <font color=#cc0029>*</font>"
+        todoe_geocordinates_h.setText(Html.fromHtml(giocoordinate_h))
 
 //        btn_addretgenerateotp.setOnClickListener {
 //            showDialogs(todoe_mobilea!!.text.toString().trim())

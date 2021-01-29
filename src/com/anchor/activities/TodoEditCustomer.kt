@@ -14,6 +14,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
+import android.text.Html
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
@@ -31,6 +32,15 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import cpm.simplelogic.helper.CheckNullValue
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_address
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_dealer_container
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_lightingdealer
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_powerdealer
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_state
+import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_tsi_code
+import kotlinx.android.synthetic.main.todoadd_retailer.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -182,6 +192,27 @@ class TodoEditCustomer : Activity() {
             from_flag = intent.getStringExtra("from_flag")
 
             is_approved = intent.getStringExtra("is_approved")
+
+           val shopName = "<font color=#FF73AACC>Shop Name </font> <font color=#cc0029>*</font>"
+           txt_shopname.setText(Html.fromHtml(shopName))
+
+           val mobile = "<font color=#FF73AACC>Mobile </font> <font color=#cc0029>*</font>"
+           txt_mobile.setText(Html.fromHtml(mobile))
+
+           val address1 = "<font color=#FF73AACC>Shop No, Building, Company, Apartment </font> <font color=#cc0029>*</font>"
+           txt_address.setText(Html.fromHtml(address1))
+
+           val state = "<font color=#FF73AACC>State </font> <font color=#cc0029>*</font>"
+           txt_state.setText(Html.fromHtml(state))
+
+           val district = "<font color=#FF73AACC>District </font> <font color=#cc0029>*</font>"
+           txt_district.setText(Html.fromHtml(district))
+
+           val city_h = "<font color=#FF73AACC>City </font> <font color=#cc0029>*</font>"
+           txt_city.setText(Html.fromHtml(city_h))
+
+           val lightingdealer = "<font color=#FF73AACC>Lighting Dealer </font> <font color=#cc0029>*</font>"
+           txt_lightingdealer.setText(Html.fromHtml(lightingdealer))
 
             if(!shop_name.equals(""))
             {
@@ -443,7 +474,7 @@ class TodoEditCustomer : Activity() {
         }
 
         btn_generateotp.setOnClickListener {
-            showDialogs(mobile_no)
+            showDialogs(todoe_mobile.text.toString())
         }
 
         merge_icon.setOnClickListener {
@@ -2385,7 +2416,7 @@ class TodoEditCustomer : Activity() {
                     response_result = response.getString("message")
                     runOnUiThread {
 
-                        merge_icon.visibility = View.GONE
+                        //merge_icon.visibility = View.GONE
                         try {
                             dialog!!.dismiss()
                         }catch (e:Exception)
@@ -2407,7 +2438,7 @@ class TodoEditCustomer : Activity() {
                     //
                     if (retailers.length() <= 0) {
                         runOnUiThread {
-                            merge_icon.visibility = View.GONE
+                           // merge_icon.visibility = View.GONE
                             try {
                                 dialog!!.dismiss()
                             }catch (e:Exception)
@@ -2442,7 +2473,7 @@ class TodoEditCustomer : Activity() {
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("data_source_master_id")),
                                         "", "",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(""),
                                         coardcolor,"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("address_line2")),
-                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),"","","","",""))
+                                        Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject!!.getString("landmark")),"","","","","",""))
 
 
                             }

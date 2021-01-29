@@ -22,8 +22,7 @@ import java.text.DecimalFormat
 
 class RCTDAdapter(private val mContext: Context, private val rtododatalist: List<RCTOData>) : RecyclerView.Adapter<RCTDAdapter.MyViewHolder>() {
     var formatter = DecimalFormat("#,##,##,###.00")
-    var approvalStatus: ImageView? = null
-    var verifiedStatus: ImageView? = null
+
     var GPSStatus: TextView? = null
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var rtc_name: TextView
@@ -34,6 +33,11 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
         var rtc_mobile: ImageView
         var rtcodo_container: RelativeLayout
         var rtcodo_containercard: CardView
+        var approvedStatus: ImageView? = null
+        var verifiedStatus: ImageView? = null
+        var pendingForApprovalStatus: ImageView? = null
+        var partiallyFilledStatus: ImageView? = null
+        var rejectedStatus: ImageView? = null
 
         init {
             rtc_name = view.findViewById(R.id.rtc_name)
@@ -44,8 +48,11 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
             rtc_email_hidden = view.findViewById(R.id.rtc_email_hidden)
             rtcodo_container = view.findViewById(R.id.rtcodo_container)
             rtcodo_containercard = view.findViewById(R.id.rtcodo_containercard)
-            approvalStatus = view.findViewById(R.id.approval_status_icon)
             verifiedStatus = view.findViewById(R.id.verified_status_icon)
+            approvedStatus = view.findViewById(R.id.approved_icon)
+            pendingForApprovalStatus = view.findViewById(R.id.pendingforapproval_icon)
+            partiallyFilledStatus = view.findViewById(R.id.partiallyfilled_icon)
+            rejectedStatus = view.findViewById(R.id.rejected_icon)
             GPSStatus = view.findViewById(R.id.gps_status)
         }
     }
@@ -65,20 +72,41 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
         holder.rtc_email_hidden.text = data.email
         holder.rtcodo_containercard.setCardBackgroundColor(Color.parseColor(data.card_color_code))
 
-        if (data.is_approved.equals("true", ignoreCase = true)) {
-            verifiedStatus!!.setImageResource(R.drawable.verified_yes)
-        } else {
-           // verifiedStatus!!.setImageResource(R.drawable.verified_no)
+        if (com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.mobile_verified).equals("true")) {
+            holder.verifiedStatus!!.visibility=View.VISIBLE
+            //verifiedStatus!!.setImageResource(R.drawable.verified_yes)
+        }else{
+            holder.verifiedStatus!!.visibility=View.GONE
         }
+//        else {
+//           // verifiedStatus!!.setImageResource(R.drawable.verified_no)
+//        }
 
         if (com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("approved", ignoreCase = true)) {
-            approvalStatus!!.setImageResource(R.drawable.approved)
+            holder.approvedStatus!!.visibility=View.VISIBLE
+            holder.partiallyFilledStatus!!.visibility=View.GONE
+            holder.rejectedStatus!!.visibility=View.GONE
+            holder.pendingForApprovalStatus!!.visibility=View.GONE
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("partially_filled", ignoreCase = true)) {
-            approvalStatus!!.setImageResource(R.drawable.partialy_filled)
+            holder.approvedStatus!!.visibility=View.GONE
+            holder.partiallyFilledStatus!!.visibility=View.VISIBLE
+            holder.rejectedStatus!!.visibility=View.GONE
+            holder.pendingForApprovalStatus!!.visibility=View.GONE
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("rejected", ignoreCase = true)) {
-            approvalStatus!!.setImageResource(R.drawable.rejected)
-        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("pending", ignoreCase = true)) {
-            approvalStatus!!.setImageResource(R.drawable.pending_approval)
+            holder.approvedStatus!!.visibility=View.GONE
+            holder.partiallyFilledStatus!!.visibility=View.GONE
+            holder.rejectedStatus!!.visibility=View.VISIBLE
+            holder.pendingForApprovalStatus!!.visibility=View.GONE
+        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("pending_for_approval", ignoreCase = true)) {
+            holder.approvedStatus!!.visibility=View.GONE
+            holder.partiallyFilledStatus!!.visibility=View.GONE
+            holder.rejectedStatus!!.visibility=View.GONE
+            holder.pendingForApprovalStatus!!.visibility=View.VISIBLE
+        }else{
+            holder.approvedStatus!!.visibility=View.GONE
+            holder.partiallyFilledStatus!!.visibility=View.GONE
+            holder.rejectedStatus!!.visibility=View.GONE
+            holder.pendingForApprovalStatus!!.visibility=View.GONE
         }
 
         if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.latitude).equals("", ignoreCase = true) && com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.longitude).equals("", ignoreCase = true)) {

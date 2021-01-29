@@ -53,9 +53,35 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/approval_status_icon"
+        android:id="@+id/partiallyfilled_icon"
         android:layout_width="150dp"
         android:layout_height="30dp"
+        android:visibility="gone"
+        android:src="@drawable/partialy_filled"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:id="@+id/pendingforapproval_icon"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:visibility="gone"
+        android:src="@drawable/pending_approval"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:id="@+id/approved_icon"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:visibility="gone"
+        android:src="@drawable/approved"
+        android:layout_marginTop="5dp" />
+
+    <ImageView
+        android:id="@+id/rejected_icon"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:visibility="gone"
+        android:src="@drawable/rejected"
         android:layout_marginTop="5dp" />
 
     <TextView
@@ -77,6 +103,8 @@
         android:layout_alignRight="@+id/rtc_mobile"
         android:layout_marginRight="30dp"
         android:layout_marginTop="6dp"
+        android:visibility="gone"
+        android:src="@drawable/verified_yes"
         />
 
     <ImageView
