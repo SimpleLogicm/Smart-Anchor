@@ -128,7 +128,7 @@ class TODOAddRetailer : Activity() {
         }
 
         val shopName = "<font color=#FF73AACC>Shop Name </font> <font color=#cc0029>*</font>"
-        txt_shopname.setText(Html.fromHtml(shopName))
+        todoe_shop_name_h.setText(Html.fromHtml(shopName))
 
         val mobile = "<font color=#FF73AACC>Mobile </font> <font color=#cc0029>*</font>"
         todoe_mobile_h.setText(Html.fromHtml(mobile))
