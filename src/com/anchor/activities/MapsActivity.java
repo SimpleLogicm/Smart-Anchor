@@ -101,7 +101,6 @@ import static com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSp
 import static com.anchor.activities.Global_Data.AllresultSubDealer;
 import static com.anchor.activities.Global_Data.SubDealer_List;
 
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnInfoWindowClickListener, LocationListener {
     List<LatLng> locations;
     static int ab = 0;
@@ -334,7 +333,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         marker_rview.setAdapter(ca);
                         ca.notifyDataSetChanged();
 
-                        marker_rview.setVisibility(View.VISIBLE);
+                        if(Allresult.get(i).is_approved().equals("false"))
+                        {
+                            marker_rview.setVisibility(View.GONE);
+                        }else{
+                            marker_rview.setVisibility(View.VISIBLE);
+                        }
+                        //marker_rview.setVisibility(View.VISIBLE);
                         marker_rview.getLayoutManager().scrollToPosition(i);
 
                         Log.d("C IN", "C in" + Allresultsearch.size());
@@ -535,7 +540,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public boolean onMarkerClick(Marker marker) {
 
-                    marker_rview.setVisibility(View.VISIBLE);
+
                     String code = String.valueOf(marker.getTag());
                     Log.d("id", "code" + code);
 
@@ -550,6 +555,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 lati = Allresult.get(i).getLatitude();
                                 longi = Allresult.get(i).getLongitude();
+
+                                if(Allresult.get(i).is_approved().equals("false"))
+                                {
+                                    marker_rview.setVisibility(View.GONE);
+                                }else{
+                                    marker_rview.setVisibility(View.VISIBLE);
+                                }
 
                                 break;  // uncomment to get the first instance
                             }
@@ -1315,12 +1327,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("landmark")),full_address
                                         ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved")),"",""));
 
+//                                if(jsonObject.getString("is_approved").equals("true"))
+//                                {
+//                                    SubDealer_List.add(jsonObject.getString("shop_name"));
+//                                }
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
-
-
                             }
-
-
                         }
 
                         for (int i = 0; i < light_green_retailers.length(); i++) {
@@ -1422,7 +1434,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved")),"",""));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
-
+//                                if(jsonObject.getString("is_approved").equals("true"))
+//                                {
+//                                    SubDealer_List.add(jsonObject.getString("shop_name"));
+//                                }
 
                             }
 
@@ -1528,8 +1543,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         ,Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("district_id")),"",Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(jsonObject.getString("is_approved")),"",""));
 
                                 SubDealer_List.add(jsonObject.getString("shop_name"));
-
-
+//                                if(jsonObject.getString("is_approved").equals("true"))
+//                                {
+//                                    SubDealer_List.add(jsonObject.getString("shop_name"));
+//                                }
                             }
 
 

@@ -2416,7 +2416,7 @@ class TodoEditCustomer : Activity() {
                     response_result = response.getString("message")
                     runOnUiThread {
 
-                        //merge_icon.visibility = View.GONE
+                        merge_icon.visibility = View.GONE
                         try {
                             dialog!!.dismiss()
                         }catch (e:Exception)
@@ -2438,7 +2438,7 @@ class TodoEditCustomer : Activity() {
                     //
                     if (retailers.length() <= 0) {
                         runOnUiThread {
-                           // merge_icon.visibility = View.GONE
+                            merge_icon.visibility = View.GONE
                             try {
                                 dialog!!.dismiss()
                             }catch (e:Exception)

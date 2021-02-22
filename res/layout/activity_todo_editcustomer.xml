@@ -404,7 +404,7 @@
                 android:id="@+id/merge_icon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/merge">
