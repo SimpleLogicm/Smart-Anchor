@@ -2906,8 +2906,8 @@ class TodoEditCustomer : Activity() {
                 Log.i("volley", "response: $response")
                 try {
                     var response_result = ""
-                    response_result = if (response.has("result")) {
-                        response.getString("result")
+                    response_result = if (response.has("message")) {
+                        response.getString("message")
                     } else {
                         "data"
                     }
