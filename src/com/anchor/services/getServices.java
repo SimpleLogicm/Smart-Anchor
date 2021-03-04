@@ -30,6 +30,7 @@ import com.anchor.activities.Check_Null_Value;
 import com.anchor.activities.DataBaseHelper;
 import com.anchor.activities.Global_Data;
 import com.anchor.activities.Local_Data;
+import com.anchor.activities.LocationDisclosureActivity;
 import com.anchor.activities.LoginDataBaseAdapter;
 import com.anchor.activities.MainActivity;
 import com.anchor.activities.Order;
@@ -3202,7 +3203,7 @@ public class getServices {
                                 Toast.makeText(context, "items Sync Successfully.", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
 
-                                Intent intentn = new Intent(context, MainActivity.class);
+                                Intent intentn = new Intent(context, LocationDisclosureActivity.class);
                                 context.startActivity(intentn);
                                 //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                                 ((Activity) context).finish();
