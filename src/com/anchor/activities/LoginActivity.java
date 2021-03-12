@@ -160,7 +160,6 @@ public class LoginActivity extends Activity {
     CountDownTimer timer;
     PlayService_Location PlayServiceManager;
 
-
     @SuppressLint("InlinedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +167,6 @@ public class LoginActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
 
         FirebaseApp.initializeApp(this);
 
@@ -188,7 +186,6 @@ public class LoginActivity extends Activity {
         try
         {
             PlayServiceManager = new PlayService_Location(LoginActivity.this);
-
         }catch (Exception ex)
         {
             ex.printStackTrace();
@@ -259,7 +256,6 @@ public class LoginActivity extends Activity {
 
         requestGPSPermissionsigna();
 
-
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
         String strDate = sdf.format(c.getTime());
@@ -304,13 +300,15 @@ public class LoginActivity extends Activity {
 //		editText1.setText("Kartik");
 //		editText2.setText("Kartik4882263");
 
-        editText1.setText("Kartik");
-        editText2.setText("Kartik6021790");
+//        editText1.setText("Kartik");
+//        editText2.setText("Kartik6021790");
 
+        editText1.setText("Sujit");
+        editText2.setText("sujit123456");
 
+//      ZXZXXs
         SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
         SharedPreferences.Editor editor = spf.edit();
-
 
         // create a instance of SQLite Database
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
@@ -324,10 +322,6 @@ public class LoginActivity extends Activity {
             System.out.println("Local Values:-" + Global_Data.local_user + "," + Global_Data.local_pwd);
             //Toast.makeText(LoginActivity.this, "Login:"+Global_Data.local_user,Toast.LENGTH_SHORT).show();
         }
-
-
-
-
 
         editText2.setOnTouchListener(new View.OnTouchListener() {
 
@@ -402,11 +396,9 @@ public class LoginActivity extends Activity {
                 }
                 else
                 {
-
                     List<Local_Data> conta = dbvoc.getSyncDate(editText1.getText().toString().trim());
                     for (Local_Data cn1 : conta) {
                         current_date = cn1.getCur_date();
-
                     }
                     SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
                     String  TCODE = pref_devid.getString("TCODE", "");
@@ -424,8 +416,6 @@ public class LoginActivity extends Activity {
                             {
                                 // dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
                                 showDialogs(editText1.getText().toString().trim());
-
-
                             }
                             else
                             {
@@ -987,12 +977,9 @@ public class LoginActivity extends Activity {
     }
 
     private class LOGINOperation extends AsyncTask<String, Void, String> {
-
         @Override
         protected String doInBackground(String... response) {
-
             List<Local_Data> contacts2 = dbvoc.getUSERBY_Name(response[0]);
-
             if (contacts2.size() > 0) {
                 int emp_code_flag = 0;
                 for (Local_Data cn : contacts2) {

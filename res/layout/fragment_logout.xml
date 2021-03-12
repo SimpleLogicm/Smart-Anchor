@@ -25,6 +25,7 @@
         android:layout_above="@+id/main_bottomcard"
         android:layout_alignParentTop="true"
         android:fillViewport="true"
+
         android:orientation="vertical">
 
         <LinearLayout
@@ -315,10 +316,10 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="@string/EXPENSES"
+                        android:text="@string/REPORTS"
                         android:textColor="#111111"
                         android:textSize="16dp"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
 
                     <ImageView
                         android:id="@+id/expenses"
@@ -328,7 +329,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
                         android:src="@drawable/expenses"
-                        android:visibility="gone" />
+                        android:visibility="visible" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

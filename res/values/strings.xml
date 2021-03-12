@@ -2,16 +2,16 @@
 <resources>
 
     <!-- SIMPLE LOGIC UAT URL -->
-<!--        <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
+    <!--        <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
     <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>
 
     <!-- Anchor PRODUCTion NEW URL -->
-<!--        <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
+    <!--        <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
 
     <!--Sub Dealer PRODUCTION-->
-<!--        <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
+    <!--        <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
 
     <!--ANCHOR NEW SUB DEALER UAT-->
     <string name="service_domain_sub_dealer">http://subdealer.anchor-group.in/metal/api/v1/</string>
@@ -84,7 +84,10 @@
     <string name="VISIT_REPORT">VISIT REPORT</string>
     <string name="CALENDAR">CALENDAR</string>
     <string name="TARGET">TARGET</string>
+    <string name="DCR">DAILY CALL REPORT</string>
+    <string name="ATTENDANCE">ATTENDANCE</string>
     <string name="EXPENSES">EXPENSES</string>
+    <string name="REPORTS">REPORTS</string>
     <string name="PRICE_AND_STOCK">PRICE AND STOCK</string>
     <string name="MARKETING">MARKETING</string>
     <string name="SYNC">SYNC</string>
@@ -284,6 +287,8 @@
     <string name="see_details">See Details</string>
     <string name="select_date">Select Date</string>
     <string name="type">Type</string>
+    <string name="xlsx">XLSX</string>
+    <string name="pdf">PDF</string>
     <string name="value">Value</string>
     <string name="due_amount">Due Amount</string>
     <string name="due_date">Due Date</string>

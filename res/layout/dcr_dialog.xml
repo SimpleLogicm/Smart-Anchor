@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/pro_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_toLeftOf="@+id/dcr_cross"
+        android:textSize="@dimen/text_size_header"
+        android:text="Promotional Activity" />
+
+    <ImageView
+        android:id="@+id/dcr_cross"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dcr_cross"/>
+
+    <TextView
+        android:id="@+id/pro_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pro_header"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="20dp"
+        android:text="Promotional Type : 0" />
+
+    <TextView
+        android:id="@+id/pro_intime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pro_type"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="In Time : " />
+
+    <TextView
+        android:id="@+id/pro_outtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pro_intime"
+        android:textColor="@color/black"
+        android:layout_marginLeft="20dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="Out Time :" />
+
+    <Button
+        android:id="@+id/pro_click"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/pro_outtime"
+        android:text="@string/ok"
+        android:textAllCaps="false"
+        android:onClick="onClick"
+        android:background="@drawable/roundedbutton"
+        android:textColor="@drawable/white_color"
+        android:textSize="17sp" />
+
+
+</RelativeLayout>

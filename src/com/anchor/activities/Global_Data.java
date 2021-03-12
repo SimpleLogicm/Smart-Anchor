@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.anchor.model.RCTOData;
@@ -238,11 +239,26 @@ public class Global_Data {
     public static  Map<String, List<String>> map = new HashMap<String, List<String>>();
     public static LinkedHashMap<String, String> quastionmap = new LinkedHashMap<>();
 
+//    public static void hideSoftKeyboard(Activity activity) {
+//        InputMethodManager inputMethodManager =
+//                (InputMethodManager) activity.getSystemService(
+//                        Activity.INPUT_METHOD_SERVICE);
+//        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+//    }
+
     public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) activity.getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        View focusedView = activity.getCurrentFocus();
+        /*
+         * If no view is focused, an NPE will be thrown
+         *
+         * Maxim Dmitriev
+         */
+        if (focusedView != null) {
+            inputManager.hideSoftInputFromWindow(focusedView.getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 
     public static boolean isNetworkAvailable(Context context) {

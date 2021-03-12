@@ -559,7 +559,9 @@ public class Home extends Fragment implements OnChartValueSelectedListener, Rank
         expenses.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Expenses.class);
+//                Intent intent = new Intent(getActivity(), Expenses.class);
+//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), ReportsActivity.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 //getActivity().finish();
