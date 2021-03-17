@@ -562,7 +562,6 @@ public class NoOrderActivity extends BaseActivity {
             JsonObjectRequest jsObjRequest = null;
             try {
 
-
                 if (spinner1.getSelectedItem().toString().equalsIgnoreCase("Other")) {
                     Log.d("Server url", "Server url" + domain + "no_orders/save_no_orders?customer_id=" + Global_Data.GLOvel_CUSTOMER_ID + "&reason_name=" + Noorder_res + "&user_email=" + Global_Data.GLOvel_USER_EMAIL);
 
@@ -984,7 +983,31 @@ public class NoOrderActivity extends BaseActivity {
                                     }
                                 });
 
-                            } else {
+                            }else if (response_result.equalsIgnoreCase("No_Order reason received"))
+                            {
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        buttonnoOrderSave.setEnabled(true);
+                                        buttonnoOrderSave.setText("Submit");
+                                        buttonnoOrdercancel.setEnabled(true);
+
+                                        Toast.makeText(NoOrderActivity.this, "No Order Saved Successfully", Toast.LENGTH_LONG).show();
+                                        if (!Global_Data.Sub_Dealer_name.equalsIgnoreCase("")) {
+                                            Global_Data.Sub_Dealer_name = "";
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            finish();
+                                        }
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                            }
+                            else {
 
                                 runOnUiThread(new Runnable() {
                                     public void run() {
@@ -1003,16 +1026,9 @@ public class NoOrderActivity extends BaseActivity {
                                         {
                                             finish();
                                         }
-
-
-
                                         dialog.dismiss();
-
-
                                     }
                                 });
-
-
                             }
                         }
                     }, new Response.ErrorListener() {

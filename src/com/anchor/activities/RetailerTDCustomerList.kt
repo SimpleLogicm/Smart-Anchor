@@ -140,11 +140,11 @@ class RetailerTDCustomerList : Activity() {
             }
             if(checkbox_pending.isChecked)
             {
-                pending="pending"
+                pending="pending_for_approval"
             }
             if(checkbox_incomplete.isChecked)
             {
-                incomplete="incomplete"
+                incomplete="partially_filled"
             }
            // getTODOCustomerListData("")
             if (isUp) {

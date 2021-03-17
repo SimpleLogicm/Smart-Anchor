@@ -78,6 +78,14 @@ class ReportsActivity : Activity() {
             finish()
         }
 
+        lout_attendance.setOnClickListener {
+            val i = Intent(this@ReportsActivity, AttendanceActivity::class.java)
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            startActivity(i)
+            finish()
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

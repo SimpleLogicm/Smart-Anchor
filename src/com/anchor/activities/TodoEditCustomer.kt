@@ -2186,9 +2186,20 @@ class TodoEditCustomer : Activity() {
                 product_value_n.put("state_id", state_id)
                 product_value_n.put("district_id", dist_id)
                 product_value_n.put("city_id", city_id)
-                product_value_n.put("power_dealer", dpower_id)
-                product_value_n.put("iaq_dealer", diaq_id)
-                product_value_n.put("lighting_dealer", dlighting_id)
+
+                if(dpower_id?.length!! > 0)
+                {
+                    product_value_n.put("power_dealer", dpower_id)
+                }
+                if(diaq_id?.length!! > 0)
+                {
+                    product_value_n.put("iaq_dealer", diaq_id)
+                }
+                if(dlighting_id?.length!! > 0)
+                {
+                    product_value_n.put("lighting_dealer", dlighting_id)
+                }
+
                 product_value_n.put("shop_name", todoe_shop_name.text.toString())
                 product_value_n.put("proprietor_name", todoe_proprietor_name.text.toString())
                 product_value_n.put("mobile_no", todoe_mobile.text.toString())

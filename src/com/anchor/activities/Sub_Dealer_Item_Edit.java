@@ -257,9 +257,14 @@ public class Sub_Dealer_Item_Edit extends BaseActivity {
 
                     int SQMO_Validator = 0;
 
-                    if (editTextQuantity.length() != 0) {
-                        SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
+                    try{
+                        if (editTextQuantity.length() != 0) {
+                            SQMO_Validator = Integer.parseInt(editTextQuantity.getText().toString().trim()) % Integer.parseInt(Global_Data.item_SL);
+                        }
+                    } catch(NumberFormatException ex){ // handle your exception
+                         ex.printStackTrace();
                     }
+
 
 
                     if (editTextQuantity.length() == 0) {

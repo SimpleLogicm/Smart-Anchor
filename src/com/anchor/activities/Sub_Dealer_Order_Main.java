@@ -2382,8 +2382,6 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                             //	Log.d("States", "previous_orders" + previous_orders.toString());
                             Log.d("States", "previous_order_products" + previous_order_products.toString());
 
-
-
                             if (previous_order_products.length() <= 0) {
                                 progressDialog.dismiss();
                                 Toast toast = Toast.makeText(getApplicationContext(), "Previous order not found.", Toast.LENGTH_LONG);
@@ -2398,7 +2396,7 @@ public class Sub_Dealer_Order_Main extends Activity implements OnItemSelectedLis
                                     Global_Data.GLOvel_SUB_GORDER_ID = jsonObject.getString("order_number").trim();
                                     // Global_Data.Previous_Order_ServiceOrder_ID = jsonObject.getString("order_number").trim();
 
-                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_code"), " ", jsonObject.getString("product_name"));
+                                    loginDataBaseAdapter.insertSUb_OrderProducts("", "", jsonObject.getString("order_number"), "", "", "", "", "","", " ", "", jsonObject.getString("quantity"), jsonObject.getString("retail_price"), jsonObject.getString("mrp"), jsonObject.getString("total"), "", "", "", " ", jsonObject.getString("product_id"), " ", jsonObject.getString("product_name"));
 
 
                                 }

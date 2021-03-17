@@ -4112,6 +4112,7 @@ public class getServices {
                             JSONObject item = new JSONObject();
                             // item.put("order_number", cnp.get_category_code());
                             item.put("product_id", cnp.get_delivery_product_id());
+                            //item.put("product_id", cnp.getProductid());
                             item.put("total_qty", cnp.get_stocks_product_quantity());
                             item.put("MRP", cnp.getMRP());
                             item.put("amount", cnp.get_Claims_amount());

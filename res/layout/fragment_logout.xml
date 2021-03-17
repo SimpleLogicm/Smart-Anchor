@@ -25,7 +25,6 @@
         android:layout_above="@+id/main_bottomcard"
         android:layout_alignParentTop="true"
         android:fillViewport="true"
-
         android:orientation="vertical">
 
         <LinearLayout
@@ -34,9 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <LinearLayout
-
                 android:id="@+id/order_layout"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -304,6 +301,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="2dp"
                     android:layout_marginTop="2dp"
+                    android:visibility="visible"
                     android:layout_weight="1.20">
 
                     <TextView
@@ -823,7 +821,6 @@
         android:background="@drawable/cardback1"
         android:padding="5dp">
 
-
         <ImageView
             android:id="@+id/user_mm"
             android:layout_width="80dp"
@@ -832,10 +829,7 @@
             android:layout_marginLeft="5dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:visibility="gone"
-
-
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/rank_loading_message"

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AttendanceActivity">
+
+    <TextView
+        android:id="@+id/txtWelcomeUserDcr"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:background="#BDBDBD"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"></TextView>
+
+    <LinearLayout
+        android:id="@+id/invoice_header_container"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/txtWelcomeUser"
+        android:layout_marginRight="40dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:src="@drawable/date_range"
+
+            />
+
+        <EditText
+            android:id="@+id/dcr_from"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:hint="@string/From"
+            android:focusableInTouchMode="false"
+            android:inputType="none">
+
+        </EditText>
+
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/date_range"
+
+            />
+
+        <EditText
+            android:id="@+id/dcr_to"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:layout_marginLeft="5dp"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:hint="@string/to"
+            android:textColor="@color/black"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:inputType="none"
+            >
+
+        </EditText>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/sl_header_containerhh"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/iv_filter"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/dcr_filter"/>
+
+        <ImageView
+            android:id="@+id/iv_download"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_toRightOf="@+id/iv_filter"
+            android:src="@drawable/dcr_download"/>
+
+    </RelativeLayout>
+
+    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+        android:id="@+id/dcrreport_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:shimmer_demo_child_count="10"
+        app:shimmer_demo_grid_child_count="2"
+        app:shimmer_demo_layout="@layout/placeholder_item"
+        app:shimmer_demo_layout_manager_type="linear_vertical"
+        app:shimmer_demo_angle="0"
+        android:layout_below="@+id/invoice_header_container"
+        />
+
+</RelativeLayout>

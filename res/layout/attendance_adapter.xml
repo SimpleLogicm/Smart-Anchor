@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#F6F6F6"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="4.5">
+
+            <TextView
+                android:id="@+id/attendance_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:padding="1dp"
+                android:text="3-APR-2018"
+                android:layout_marginLeft="1dp"
+                android:textSize="@dimen/column_text_size"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:padding="1dp"
+                android:text="Credit Memo"
+                android:textSize="@dimen/column_text_size"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/attendance_in"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="456546456566"
+                android:padding="1dp"
+                android:textSize="@dimen/column_text_size"
+                android:layout_gravity="center"
+                android:textStyle="bold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/attendance_out"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.0"
+                android:gravity="center"
+                android:text="CH345435"
+                android:padding="1dp"
+                android:textSize="@dimen/column_text_size"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/btn_attendanceinfo"
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text="gfhgfh"
+                android:background="@drawable/attendance_info"
+                android:padding="10dp"
+                android:textSize="@dimen/column_text_size"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black" >
+            </ImageView>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
