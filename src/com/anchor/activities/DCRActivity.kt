@@ -4,10 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -163,7 +160,186 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             showPopupMenu(iv_download)
         }
 
+        isInternetPresent = cd!!.isConnectingToInternet
+
+        if (isInternetPresent){
+            getdata()
+
+        }else{
+            val toast = Toast.makeText(this,
+                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+            finish()
+        }
+
+
     }
+
+
+    private fun getdata() {
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
+//        val domain = resources.getString(R.string.service_domain)
+//        Log.i("volley", "domain: $domain")
+//        var url = domain+"retailers/get_statewise_cities?state_id="+state_code+"&email="+user_email
+//        Log.i("get_cities url", "user list url " +url)
+//        var jsObjRequest: StringRequest? = null
+//        jsObjRequest = StringRequest(url, Response.Listener { response ->
+//            Log.i("volley", "response: $response")
+//            final_response = response
+//            getstatewise_City().execute(response)
+//        },
+//                Response.ErrorListener { error ->
+//                    //dialog.dismiss()
+//
+//                    try {
+//                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+//                        val jsonObject = JSONObject(responseBody)
+//
+//                        var response_result = ""
+//                        if (jsonObject.has("message")) {
+//                            response_result = jsonObject.getString("message")
+//
+//                            todolist_progress_customer.visibility = View.GONE
+//                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+//                            toast.setGravity(Gravity.CENTER, 0, 0)
+//                            toast.show()
+//
+//                        }
+//                        else
+//                        {
+//                            if (error is TimeoutError || error is NoConnectionError) {
+//                                Toast.makeText(applicationContext,
+//                                        "Network Error",
+//                                        Toast.LENGTH_LONG).show()
+//                            } else if (error is AuthFailureError) {
+//                                Toast.makeText(applicationContext,
+//                                        "Server AuthFailureError  Error",
+//                                        Toast.LENGTH_LONG).show()
+//                            } else if (error is ServerError) {
+//                                Toast.makeText(applicationContext,
+//                                        "Server   Error",
+//                                        Toast.LENGTH_LONG).show()
+//                            } else if (error is NetworkError) {
+//                                Toast.makeText(applicationContext,
+//                                        "Network   Error",
+//                                        Toast.LENGTH_LONG).show()
+//                            } else if (error is ParseError) {
+//                                Toast.makeText(applicationContext,
+//                                        "ParseError   Error",
+//                                        Toast.LENGTH_LONG).show()
+//                            } else {
+//                                Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+//                            }
+//                        }
+//
+//                    } catch (e: JSONException) {
+//                        //Handle a malformed json response
+//                    }
+//                    todolist_progress_customer.visibility = View.GONE
+//
+//                })
+//        val requestQueue = Volley.newRequestQueue(applicationContext)
+//        val socketTimeout = 300000 //30 seconds - change to what you want
+//        val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+//        jsObjRequest.retryPolicy = policy
+//        // requestQueue.se
+//        //requestQueue.add(jsObjRequest);
+//        jsObjRequest.setShouldCache(false)
+//        requestQueue.cache.clear()
+//        requestQueue.add(jsObjRequest)
+
+    }
+
+//    public inner class getstatewise_City : AsyncTask<String?, Void?, String>() {
+//        override fun doInBackground(vararg p0: String?): String? {
+//            try {
+//                val response = JSONObject(final_response)
+//                if (response.has("message")) {
+//                    response_result = response.getString("message")
+//
+//                    runOnUiThread(Runnable {
+//                        todolist_progress_customer.visibility = View.GONE
+//                        //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
+//                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+//                    })
+//                }
+//                else {
+//                    val cities: JSONArray = response.getJSONArray("cities")
+//                    Log.i("volley", "response cities Length: " + cities.length())
+//                    Log.d("volley", "cities$cities")
+//
+//                    //list_CCity.clear()
+//                    //list_CCity.add("Select City")
+//                    //cityspinnerMap.clear()
+//
+//
+//
+//                    for (i in 0 until cities.length()) {
+//                        val jsonObject = cities.getJSONObject(i)
+//                        try {
+//                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
+//                                run {
+//                                    list_Cfilter.add(jsonObject.getString("name"))
+//                                    CfilterspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+//                                }
+//                            }
+//                        } catch (e: JSONException) {
+//                            e.printStackTrace()
+//                        }
+//                    }
+//
+//                    runOnUiThread(Runnable {
+//
+//                        adapter_Cfilter = ArrayAdapter<String>(context!!,
+//                                android.R.layout.simple_spinner_item, list_Cfilter)
+//
+//                        adapter_Cfilter!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//                        rtocustomerlist_filter.setAdapter(adapter_Cfilter)
+//
+//                    })
+//                    runOnUiThread(Runnable {
+//                        todolist_progress_customer.visibility = View.GONE
+//                    })
+//
+//                }
+//
+//            } catch (e: JSONException) {
+//                e.printStackTrace()
+//                runOnUiThread(Runnable {
+//                    todolist_progress_customer.visibility = View.GONE
+//                })
+//            }
+//            runOnUiThread(Runnable {
+//                todolist_progress_customer.visibility = View.GONE
+//            })
+//            return "Executed"
+//        }
+//
+//        override fun onPostExecute(result: String) {
+//            runOnUiThread(Runnable {
+//                todolist_progress_customer.visibility = View.GONE
+//            })
+//        }
+//
+//        override fun onPreExecute() {}
+//
+//    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

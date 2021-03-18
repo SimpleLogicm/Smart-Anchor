@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/promotionalactivitydetails"
+    android:layout_gravity="center_horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="300dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="@string/Promotional_Activity"
+                android:layout_weight="1.7"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_height="50dp">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/cancelbtn"
+                android:layout_width="0dp"
+                android:src="@drawable/crossbtn"
+                android:layout_weight="0.3"
+                android:layout_height="50dp">
+
+            </ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="Promotional Type:"
+                android:layout_weight="1.7"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_height="50dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/promotioanltype"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:text="0"
+                android:textSize="12dp"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="In Time:"
+                android:layout_weight="1.7"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_height="50dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/intime"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:text="0"
+                android:textSize="12dp"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="Out Time:"
+                android:layout_weight="1.7"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:layout_height="50dp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/outtime"
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:text="0"
+                android:textSize="12dp"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
