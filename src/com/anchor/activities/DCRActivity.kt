@@ -124,7 +124,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         dcrList.add(DCRModel("31-Jul-20", "375018", "Distributor", "0", "0", "Details", "Details"))
         dcrList.add(DCRModel("31-Jul-20", "375018", "Distributor", "0", "0", "Details", "Details"))
 
-        dcrAdapter = DCRAdapter(applicationContext, dcrList)
+        dcrAdapter = DCRAdapter(this, dcrList)
         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
         dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
         dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())

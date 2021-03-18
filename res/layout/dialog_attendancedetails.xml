@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/pro_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_toLeftOf="@+id/dcr_cross"
+        android:textSize="@dimen/text_size_header"
+        android:text="@string/Details" />
+
+    <ImageView
+        android:id="@+id/attendance_cross"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dcr_cross"/>
+
+    <TextView
+        android:id="@+id/txt_empcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pro_header"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="15dp"
+        android:text="Emp Code" />
+
+    <TextView
+        android:id="@+id/emp_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_empcode"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:text="321" />
+
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/emp_code"
+        android:background="#c3c3c3"
+        android:layout_marginTop="5dp"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/txt_firstname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator1"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="First Name" />
+
+    <TextView
+        android:id="@+id/txt_lastname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator1"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/txt_firstname"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="Last Name" />
+
+    <TextView
+        android:id="@+id/firstname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_firstname"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="Priya" />
+
+    <TextView
+        android:id="@+id/lastname"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_firstname"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/firstname"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="Jain" />
+
+    <View
+        android:id="@+id/separator2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/firstname"
+        android:background="#c3c3c3" />
+
+    <TextView
+        android:id="@+id/txt_intime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator2"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="In Time" />
+
+    <TextView
+        android:id="@+id/txt_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator2"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/firstname"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="@string/Addressn" />
+
+
+    <TextView
+        android:id="@+id/intime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_address"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="09:00" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_address"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/firstname"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="xyz address" />
+
+    <View
+        android:id="@+id/separator3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/address"
+        android:background="#c3c3c3" />
+
+    <TextView
+        android:id="@+id/txt_outtime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator3"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="Out Time" />
+
+    <TextView
+        android:id="@+id/txt_address1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separator3"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/firstname"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="@string/Addressn" />
+
+    <TextView
+        android:id="@+id/outtime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_address1"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="09:00" />
+
+    <TextView
+        android:id="@+id/address1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_address1"
+        android:textColor="@color/black"
+        android:layout_marginLeft="5dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/firstname"
+        android:textSize="@dimen/text_content_size"
+        android:layout_marginTop="10dp"
+        android:text="xyz address" />
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/pro_outtime"
+        android:src="@drawable/arr_left"/>
+
+
+</RelativeLayout>

@@ -1,11 +1,14 @@
 package com.anchor.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -14,7 +17,7 @@ import com.anchor.activities.R
 import com.anchor.model.AttendanceModel
 import java.text.DateFormatSymbols
 
-class AttendanceAdapter(private val mContext: Context, private val rtododatalist: List<AttendanceModel>) : RecyclerView.Adapter<AttendanceAdapter.MyViewHolder>() {
+class AttendanceAdapter(private val mContext: Activity, private val rtododatalist: List<AttendanceModel>) : RecyclerView.Adapter<AttendanceAdapter.MyViewHolder>() {
     private var listener: View.OnClickListener? = null
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var attendance_date: TextView
@@ -70,7 +73,7 @@ class AttendanceAdapter(private val mContext: Context, private val rtododatalist
         holder.user.text = data.user
         holder.attendance_in.text = data.attendance_in
         holder.attendance_out.text = data.attendance_out
-        holder.attendance_info.setOnClickListener(listener)
+        //holder.attendance_info.setOnClickListener(listener)
 //        holder.rtc_name.text = data.code +" - "+data.shop_name
 //        holder.rtc_address.text = data.full_address
 //        holder.rt_id.text = data.code
@@ -155,37 +158,32 @@ class AttendanceAdapter(private val mContext: Context, private val rtododatalist
 //            }
 //        }
 
-//        holder.attendance_info.setOnClickListener {
-//            val v: View? =null
-//            mContext?.setTheme(R.style.MyAlertDialogStyle)
-//            val builder = AlertDialog.Builder(v?.context)
-//            //set title for alert dialog
-//            builder.setTitle("df")
-//            //set message for alert dialog
-//            builder.setMessage("R.string.dialogMessage")
-//            builder.setIcon(android.R.drawable.ic_dialog_alert)
-//
-//            //performing positive action
-//            builder.setPositiveButton("Yes"){dialogInterface, which ->
-//                //Toast.makeText(applicationContext,"clicked yes",Toast.LENGTH_LONG).show()
-//            }
-//            //performing cancel action
-//            builder.setNeutralButton("Cancel"){dialogInterface , which ->
-//                //Toast.makeText(applicationContext,"clicked cancel\n operation cancel",Toast.LENGTH_LONG).show()
-//            }
-//            //performing negative action
-//            builder.setNegativeButton("No"){dialogInterface, which ->
-//                //Toast.makeText(applicationContext,"clicked No",Toast.LENGTH_LONG).show()
-//            }
-//            // Create the AlertDialog
-//            val alertDialog: AlertDialog = builder.create()
-//            // Set other dialog properties
-//            alertDialog.setCancelable(false)
-//            alertDialog.show()
-////            val toast = Toast.makeText(mContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
-////            toast.setGravity(Gravity.CENTER, 0, 0)
-////            toast.show()
+        holder.attendance_info.setOnClickListener {
+            val dialognew = Dialog(mContext)
+            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialognew.setCancelable(false)
+            dialognew.setContentView(R.layout.dialog_attendancedetails)
+
+            val empCode = dialognew.findViewById<TextView>(R.id.emp_code)
+            val firstName = dialognew.findViewById<TextView>(R.id.firstname)
+            val lastName = dialognew.findViewById<TextView>(R.id.lastname)
+            val inTime = dialognew.findViewById<TextView>(R.id.intime)
+            val inTimeAddress = dialognew.findViewById<TextView>(R.id.address)
+            val outTime = dialognew.findViewById<TextView>(R.id.outtime)
+            val OutTimeAddress = dialognew.findViewById<TextView>(R.id.address1)
+            val closeBtn = dialognew.findViewById<ImageView>(R.id.attendance_cross)
+
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
+//            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
 //        }
+//
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+//            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
+//        }
+
+            closeBtn.setOnClickListener { dialognew.dismiss() }
+            dialognew.show()
+        }
 
 //        holder.order_count_details.setOnClickListener {
 //            val dialognew = Dialog(mContext)
@@ -270,9 +268,9 @@ class AttendanceAdapter(private val mContext: Context, private val rtododatalist
         return rtododatalist.size
     }
 
-    fun setOnClickListener(listener: View.OnClickListener) {
-        this.listener = listener
-    }
+//    fun setOnClickListener(listener: View.OnClickListener) {
+//        this.listener = listener
+//    }
 
     fun getMonthForInt(num: Int): String {
         var month = "wrong"

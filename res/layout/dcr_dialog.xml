@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/dcr_cross"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/dcr_cross"/>
 
@@ -35,6 +35,14 @@
         android:layout_marginTop="20dp"
         android:text="Promotional Type : 0" />
 
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/pro_type"
+        android:background="#c3c3c3"
+        android:layout_marginTop="5dp"
+        android:layout_height="1dp"/>
+
     <TextView
         android:id="@+id/pro_intime"
         android:layout_width="match_parent"
@@ -45,6 +53,14 @@
         android:textSize="@dimen/text_content_size"
         android:layout_marginTop="10dp"
         android:text="In Time : " />
+
+    <View
+        android:id="@+id/separator2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/pro_intime"
+        android:background="#c3c3c3" />
 
     <TextView
         android:id="@+id/pro_outtime"
@@ -57,21 +73,14 @@
         android:layout_marginTop="10dp"
         android:text="Out Time :" />
 
-    <Button
-        android:id="@+id/pro_click"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_centerHorizontal="true"
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/pro_outtime"
-        android:text="@string/ok"
-        android:textAllCaps="false"
-        android:onClick="onClick"
-        android:background="@drawable/roundedbutton"
-        android:textColor="@drawable/white_color"
-        android:textSize="17sp" />
+        android:src="@drawable/arr_left"/>
 
 
 </RelativeLayout>

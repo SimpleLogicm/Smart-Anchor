@@ -1,6 +1,7 @@
 package com.anchor.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.anchor.activities.Global_Data
@@ -17,7 +19,7 @@ import java.text.DateFormatSymbols
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DCRAdapter(private val mContext: Context, private val rtododatalist: List<DCRModel>) : RecyclerView.Adapter<DCRAdapter.MyViewHolder>() {
+class DCRAdapter(private val mContext: Activity, private val rtododatalist: List<DCRModel>) : RecyclerView.Adapter<DCRAdapter.MyViewHolder>() {
 
      inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var dcr_date: TextView
@@ -157,83 +159,55 @@ class DCRAdapter(private val mContext: Context, private val rtododatalist: List<
 //
 //        }
 
-//        holder.order_count_details.setOnClickListener {
-//            val dialognew = Dialog(mContext)
-//            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//            dialognew.setCancelable(false)
-//            dialognew.setContentView(R.layout.dcr_dialog)
-//
-////            val pro_header = dialognew.findViewById<TextView>(R.id.pro_header)
-////            val pro_time = dialognew.findViewById<TextView>(R.id.pro_time)
-////            val pro_date = dialognew.findViewById<TextView>(R.id.pro_date)
-////            val pro_address = dialognew.findViewById<TextView>(R.id.pro_address)
-////            val pro_click = dialognew.findViewById<Button>(R.id.pro_click)
-////
-////
-////            val sdf = SimpleDateFormat("dd-MM-yyyy")
-////            val date = Date()
-////            // String daten = sdf.format(date);
-////            // String daten = sdf.format(date);
-////            val datenew = sdf.format(date)
-////
-////            val d = Date()
-////            val sdf_time = SimpleDateFormat("hh:mm a")
-////            val currentDateTimeString = sdf_time.format(d)
-//
-////        if (flag.equals("OUT", ignoreCase = true)) {
-////            pro_header.text = "OUT TIME"
-////        } else {
-////            pro_header.text = "IN TIME"
-////            outDateTime = ""
-////        }
-//
-////        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
-////            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
-////        }
-////
-////        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
-////            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
-////        }
-//
-//
-//            //inh.setPaintFlags(inh.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-//
-//
-////        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
-////            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
-////        }
-////
-////        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
-////            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
-////        }
-//
-//
-////            //inh.setPaintFlags(inh.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-////            if (com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.address)) {
-////                val str = Global_Data.address.trim { it <= ' ' }.replace("\n".toRegex(), " ")
-////                pro_address.text = "Address : $str"
-////            } else {
-////                pro_address.text = "Address Not Found."
-////            }
-////
-////            if (com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(datenew)) {
-////                try {
-////                    val timenewarray = datenew.split("-".toRegex()).toTypedArray()
-////                    val month: String = getMonthForInt(timenewarray[1].toInt() - 1)
-////                    pro_date.text = "Date : " + timenewarray[0] + " " + month + " " + timenewarray[2]
-////                } catch (ex: java.lang.Exception) {
-////                    ex.printStackTrace()
-////                }
-////            } else {
-////                pro_date.text = "Date Not Found."
-////            }
-////
-////            pro_time.text = "Time : $currentDateTimeString"
-////
-////            pro_click.setOnClickListener { dialognew.dismiss() }
-//
-//            dialognew.show()
+
+
+        holder.order_count_details.setOnClickListener {
+            val dialognew = Dialog(mContext)
+            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialognew.setCancelable(false)
+            dialognew.setContentView(R.layout.dcr_dialog)
+
+            val proType = dialognew.findViewById<TextView>(R.id.pro_type)
+            val proIntime = dialognew.findViewById<TextView>(R.id.pro_intime)
+            val proOuttime = dialognew.findViewById<TextView>(R.id.pro_outtime)
+            val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
+
+
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
+//            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
 //        }
+//
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+//            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
+//        }
+
+            closeBtn.setOnClickListener { dialognew.dismiss() }
+            dialognew.show()
+        }
+
+        holder.promotional_activity.setOnClickListener {
+            val dialognew = Dialog(mContext)
+            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialognew.setCancelable(false)
+            dialognew.setContentView(R.layout.dcr_dialog)
+
+            val proType = dialognew.findViewById<TextView>(R.id.pro_type)
+            val proIntime = dialognew.findViewById<TextView>(R.id.pro_intime)
+            val proOuttime = dialognew.findViewById<TextView>(R.id.pro_outtime)
+            val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
+
+
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
+//            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
+//        }
+//
+//        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LONGITUDE)) {
+//            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
+//        }
+
+            closeBtn.setOnClickListener { dialognew.dismiss() }
+            dialognew.show()
+        }
     }
 
     override fun getItemCount(): Int {
