@@ -1,14 +1,25 @@
 package com.anchor.activities
 
+import android.Manifest
 import android.app.Activity
-import android.app.Dialog
+import android.app.AlertDialog
+import android.app.ProgressDialog
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
-import android.view.*
-import android.widget.Button
+import android.os.Environment
+import android.os.Handler
+import android.os.Message
+import android.provider.Settings
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -17,9 +28,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anchor.adapter.DCRAdapter
 import com.anchor.model.DCRModel
+import com.anchor.webservice.ConnectionDetector
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.opencsv.CSVWriter
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.activity_d_c_r.*
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
 import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -32,6 +52,8 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
     var calendar: Calendar? = null
+    var cd: ConnectionDetector? = null
+    var isInternetPresent = false
     var Year:kotlin.Int = 0
     var Month:kotlin.Int = 0
     var Day:kotlin.Int = 0
@@ -39,6 +61,9 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_d_c_r)
+
+        cd = ConnectionDetector(this@DCRActivity)
+
 
         var user_name = ""
         if (!Global_Data.USER_FIRST_NAME.equals("null", ignoreCase = true)) {
@@ -250,19 +275,22 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         inflater.inflate(R.menu.menu_dcr, popup.menu)
         popup.setOnMenuItemClickListener(MyMenuItemClickListener())
         popup.show()
+
+
     }
 
     internal inner class MyMenuItemClickListener : PopupMenu.OnMenuItemClickListener {
         override fun onMenuItemClick(menuItem: MenuItem): Boolean {
             when (menuItem.itemId) {
                 R.id.action_xlsx -> {
-//                    status="resource"
-//                    isInternetPresent = cd!!.isConnectingToInternet
-//                    if (isInternetPresent) {
-//                        ExpenseGraphResult(status)
-//                    } else {
-//                        Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
-//                    }
+                //    status="resource"
+                    isInternetPresent = cd!!.isConnectingToInternet
+                    if (isInternetPresent) {
+                       // ExpenseGraphResult(status)
+                        requestStoragePermission()
+                    } else {
+                        Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
+                    }
                     return true
                 }
                 R.id.action_pdf -> {
@@ -278,6 +306,201 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             }
             return false
         }
+    }
+
+    private fun requestStoragePermission() {
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+
+
+                            try {
+                                exportEmailInCSV()
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            }
+
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog()
+                        }
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(p0: MutableList<com.karumi.dexter.listener.PermissionRequest>?, p1: PermissionToken?) {
+                        p1?.continuePermissionRequest()
+                    }
+
+
+                }).withErrorListener { error ->
+                    Toast.makeText(applicationContext, "Error occurred! $error", Toast.LENGTH_SHORT).show()
+//                    Global_Data.Custom_Toast(applicationContext, "Error occurred! $error","")
+                }
+                .onSameThread()
+                .check()
+    }
+
+
+    @Throws(IOException::class)
+    fun exportEmailInCSV() {
+        run {
+
+            val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+            val folder = File(path, "AnchorMetal")
+
+            if (!folder.exists()) {
+                folder.mkdir()
+            }
+
+            val `var` = false
+
+
+            println("" + `var`)
+
+
+
+            // val current = LocalDateTime.now()
+            val randomPIN = System.currentTimeMillis()
+            val PINString = randomPIN.toString()
+
+            val c = Calendar.getInstance()
+            val df = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            val formattedDate = df.format(c.time)
+
+            val dff = SimpleDateFormat("yyyy-MM-dd")
+            val formattedDatef = dff.format(c.time)
+
+
+
+            var  purchaseid =  PINString
+
+            val filename = folder.toString() + "/" +"DCRreportxls"+purchaseid  + ".csv"
+
+            // show waiting screen
+            val contentTitle = getString(R.string.app_name)
+            val progDailog = ProgressDialog.show(
+                    this@DCRActivity, contentTitle, "Generated...",
+                    true)//please wait
+            val handler = object : Handler() {
+                override fun handleMessage(msg: Message) {
+
+                    val yourFile = File(folder, "Expense"+purchaseid + ".csv")
+
+                    try {
+                        openFile(yourFile)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+
+                }
+            }
+
+            object : Thread() {
+                override fun run() {
+                    try {
+
+                        var writer: CSVWriter? = null
+                        // writer = CSVWriter(FileWriter(filename), ',')
+                        writer = CSVWriter(FileWriter(filename), ',')
+                        val entries = "Date#CC Code#Customer Type#Feedback#Cliams#Order Count Details#Promotional Activity".split("#") // array of your values
+                        writer!!.writeNext(entries.toTypedArray())
+
+
+                        if (dcrList.size > 0) {
+                            for (i in dcrList.indices) {
+                                val list_items = dcrList[i]
+
+                                val s = list_items.date + "#" + list_items.cc_code + "#" + list_items.customer_type + "#" + list_items.feedback + "#" + list_items.claim + "#" + list_items.order_count_details + "#"  + list_items.promotional_activity
+                                val entriesdata = s.split("#") // array of your values
+                                writer!!.writeNext(entriesdata.toTypedArray())
+
+                            }
+                        }
+
+
+                        writer!!.close()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                    handler.sendEmptyMessage(0)
+                    progDailog.dismiss()
+                }
+            }.start()
+
+        }
+
+    }
+
+    private fun openFile(url: File) {
+
+        try {
+
+            val uri = Uri.fromFile(url)
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            if (url.toString().contains(".doc") || url.toString().contains(".docx")) {
+                // Word document
+                intent.setDataAndType(uri, "application/msword")
+            } else if (url.toString().contains(".pdf")) {
+                // PDF file
+                intent.setDataAndType(uri, "application/pdf")
+            } else if (url.toString().contains(".ppt") || url.toString().contains(".pptx")) {
+                // Powerpoint file
+                intent.setDataAndType(uri, "application/vnd.ms-powerpoint")
+            } else if (url.toString().contains(".xls") || url.toString().contains(".xlsx")) {
+                // Excel file
+                intent.setDataAndType(uri, "application/vnd.ms-excel")
+
+            } else if (url.toString().contains(".txt")) {
+                // Text file
+                intent.setDataAndType(uri, "text/plain")
+            } else if (url.toString().contains(".mp4") || url.toString().contains(".AVI") || url.toString().contains(".FLV") || url.toString().contains(".WMV") || url.toString().contains(".MOV")) {
+                // Text file
+                intent.setDataAndType(uri, "video/mp4")
+
+            } else {
+                intent.setDataAndType(uri, "text/csv")
+            }
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(applicationContext, "No application found which can open the file", Toast.LENGTH_SHORT).show()
+//            Global_Data.Custom_Toast(applicationContext, "No application found which can open the file","")
+        }
+
+    }
+
+
+    private fun showSettingsDialog() {
+        val builder = AlertDialog.Builder(this@DCRActivity)
+        builder.setTitle("Need Permissions")
+        builder.setCancelable(false)
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.")
+        builder.setPositiveButton("GOTO SETTINGS", DialogInterface.OnClickListener { dialog, which ->
+            dialog.cancel()
+            openSettings()
+        })
+        builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+        builder.show()
+
+    }
+
+    private fun openSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", packageName, null)
+        intent.data = uri
+        startActivityForResult(intent, 101)
     }
 
 //   fun dcrDialog() {
