@@ -59,6 +59,10 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attendance)
 
+        context = AttendanceActivity@ this
+        cd = ConnectionDetector(context)
+
+
         var user_name = ""
         if (!Global_Data.USER_FIRST_NAME.equals("null", ignoreCase = true)) {
             user_name = Global_Data.USER_FIRST_NAME.trim { it <= ' ' }
@@ -299,16 +303,16 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         }
                     }
 
-                    attendanceAdapter = AttendanceAdapter(this@AttendanceActivity, attendanceModel)
-                    val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
-                    dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
-                    dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
-                    dcrreport_recycler_view?.setAdapter(attendanceAdapter)
 
 
-//                                        runOnUiThread(Runnable {
-//                        todolist_progress_customer.visibility = View.GONE
-//                    })
+                                        runOnUiThread(Runnable {
+                                            attendanceAdapter = AttendanceAdapter(this@AttendanceActivity, attendanceModel)
+                                            val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
+                                            dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
+                                            dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
+                                            dcrreport_recycler_view?.setAdapter(attendanceAdapter)
+
+                                        })
 
                 }
 
@@ -391,6 +395,21 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                 val s = CheckDates(dcr_from.text.toString(), date)
                 if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
                     dcr_to.setText(date)
+
+                    isInternetPresent = cd!!.isConnectingToInternet
+
+                    if (isInternetPresent){
+                        getdata()
+
+                    }else{
+                        val toast = Toast.makeText(this,
+                                "Internet Not Available. ", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        finish()
+                    }
+
+
 //                    recyclerView!!.showShimmerAdapter()
 //                    button.setEnabled(false)
 //                    button.setClickable(false)
