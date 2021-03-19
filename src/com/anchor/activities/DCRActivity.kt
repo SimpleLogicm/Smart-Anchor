@@ -567,7 +567,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             val handler = object : Handler() {
                 override fun handleMessage(msg: Message) {
 
-                    val yourFile = File(folder, "Expense"+purchaseid + ".csv")
+                    val yourFile = File(folder, "DCRreport"+purchaseid + ".csv")
 
                     try {
                         openFile(yourFile)
