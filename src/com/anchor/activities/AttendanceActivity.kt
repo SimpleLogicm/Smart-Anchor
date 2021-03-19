@@ -3,11 +3,14 @@ package com.anchor.activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.PopupMenu
@@ -16,13 +19,22 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anchor.activities.Global_Data.context
 import com.anchor.adapter.AttendanceAdapter
 import com.anchor.adapter.DCRAdapter
 import com.anchor.model.AttendanceModel
 import com.anchor.model.DCRModel
+import com.anchor.webservice.ConnectionDetector
+import com.android.volley.*
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.activity_attendance.*
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import java.nio.charset.StandardCharsets
 import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -31,6 +43,10 @@ import java.util.*
 class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
     private val recyclerView: ShimmerRecyclerView? = null
     var attendanceAdapter: AttendanceAdapter? = null
+    var cd: ConnectionDetector? = null
+    var final_response = ""
+    var response_result = ""
+    var isInternetPresent = false
     var attendanceModel: MutableList<AttendanceModel> = ArrayList()
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
@@ -97,16 +113,14 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
             ex.printStackTrace()
         }
 
-        attendanceModel.add(AttendanceModel("26-Nov-2020", "XYZ ABCDEF", "09:00", "09:00"))
-        attendanceModel.add(AttendanceModel("26-Nov-2020", "XYZ ABCDEF", "09:00", "09:00"))
-        attendanceModel.add(AttendanceModel("26-Nov-2020", "XYZ ABCDEF", "09:00", "09:00"))
-        attendanceModel.add(AttendanceModel("26-Nov-2020", "XYZ ABCDEF", "09:00", "09:00"))
-
-        attendanceAdapter = AttendanceAdapter(this, attendanceModel)
-        val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
-        dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
-        dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
-        dcrreport_recycler_view?.setAdapter(attendanceAdapter)
+//        attendanceModel.add(AttendanceModel("26-Nov-2020", "XYZ ABCDEF", "09:00", "09:00","",""))
+//
+//
+//        attendanceAdapter = AttendanceAdapter(this, attendanceModel)
+//        val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
+//        dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
+//        dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
+//        dcrreport_recycler_view?.setAdapter(attendanceAdapter)
 
 //        dcrreport_recycler_view?.showShimmerAdapter()
         // dcrreport_recycler_view?.hideShimmerAdapter()
@@ -116,7 +130,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         dcr_from.setOnClickListener {
             Global_Data.hideSoftKeyboard(this@AttendanceActivity)
             click_detect_flag = "from_date"
-            datePickerDialog = DatePickerDialog.newInstance(this@AttendanceActivity, Year, Month, Day)
+            datePickerDialog = DatePickerDialog.newInstance(this@AttendanceActivity, Day, Month, Year)
             datePickerDialog?.setThemeDark(false)
             datePickerDialog?.showYearPickerFirst(false)
             //datePickerDialog?.setYearRange(2017, Year)
@@ -128,7 +142,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         dcr_to.setOnClickListener {
             Global_Data.hideSoftKeyboard(this@AttendanceActivity)
             click_detect_flag = "to_date"
-            datePickerDialog = DatePickerDialog.newInstance(this, Year, Month, Day)
+            datePickerDialog = DatePickerDialog.newInstance(this, Day, Month, Year)
             datePickerDialog?.setThemeDark(false)
             //datePickerDialog?.setYearRange(2017, Year)
             datePickerDialog?.showYearPickerFirst(false)
@@ -141,9 +155,185 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
             showPopupMenu(iv_download)
         }
 
+        isInternetPresent = cd!!.isConnectingToInternet
+
+        if (isInternetPresent){
+            getdata()
+
+        }else{
+            val toast = Toast.makeText(this,
+                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+            finish()
+        }
+
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    private fun getdata() {
+
+        var user_email: String? = ""
+        val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+        try {
+            user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                sp.getString("USER_EMAIL", "")
+            } else {
+                Global_Data.GLOvel_USER_EMAIL
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+        }
+
+        val domain = resources.getString(R.string.service_domain)
+        Log.i("volley", "domain: $domain")
+        var url = domain+"reports/view_attendance?email="+user_email+"&from_date="+dcr_from.text.toString()+"&to_date="+dcr_to.text.toString()
+        Log.i("get_cities url", "user list url " +url)
+        var jsObjRequest: StringRequest? = null
+        jsObjRequest = StringRequest(url, Response.Listener { response ->
+            Log.i("volley", "response: $response")
+            final_response = response
+            getstatewise_City().execute(response)
+        },
+                Response.ErrorListener { error ->
+                    //dialog.dismiss()
+
+                    try {
+                        val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
+                        val jsonObject = JSONObject(responseBody)
+
+                        var response_result = ""
+                        if (jsonObject.has("message")) {
+                            response_result = jsonObject.getString("message")
+
+                          //  todolist_progress_customer.visibility = View.GONE
+                            val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+
+                        }
+                        else
+                        {
+                            if (error is TimeoutError || error is NoConnectionError) {
+                                Toast.makeText(applicationContext,
+                                        "Network Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is AuthFailureError) {
+                                Toast.makeText(applicationContext,
+                                        "Server AuthFailureError  Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ServerError) {
+                                Toast.makeText(applicationContext,
+                                        "Server   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is NetworkError) {
+                                Toast.makeText(applicationContext,
+                                        "Network   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else if (error is ParseError) {
+                                Toast.makeText(applicationContext,
+                                        "ParseError   Error",
+                                        Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+
+                    } catch (e: JSONException) {
+                        //Handle a malformed json response
+                    }
+                   // todolist_progress_customer.visibility = View.GONE
+
+                })
+        val requestQueue = Volley.newRequestQueue(applicationContext)
+        val socketTimeout = 300000 //30 seconds - change to what you want
+        val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        jsObjRequest.retryPolicy = policy
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        jsObjRequest.setShouldCache(false)
+        requestQueue.cache.clear()
+        requestQueue.add(jsObjRequest)
+
+    }
+
+       public inner class getstatewise_City : AsyncTask<String?, Void?, String>() {
+        override fun doInBackground(vararg p0: String?): String? {
+            try {
+                val response = JSONObject(final_response)
+                if (response.has("message")) {
+                    response_result = response.getString("message")
+
+                    runOnUiThread(Runnable {
+                     //   todolist_progress_customer.visibility = View.GONE
+                        //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
+                        val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    })
+                }
+                else {
+                    val cities: JSONArray = response.getJSONArray("data")
+                    Log.i("volley", "response cities Length: " + cities.length())
+                    Log.d("volley", "data$cities")
+
+                    //list_CCity.clear()
+                    //list_CCity.add("Select City")
+                    //cityspinnerMap.clear()
+                    attendanceModel.clear()
+
+
+                    for (i in 0 until cities.length()) {
+                        val jsonObject = cities.getJSONObject(i)
+                        try {
+                            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
+                                run {
+//                                    list_Cfilter.add(jsonObject.getString("name"))
+//                                    CfilterspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
+                                    attendanceModel.add(AttendanceModel(jsonObject.getString("date"), jsonObject.getString("firstname")+" "+jsonObject.getString("lastname"), jsonObject.getString("in_time"),jsonObject.getString("out_time"),jsonObject.getString("emp_code"),jsonObject.getString("punched_at_address")))
+
+                                }
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                    attendanceAdapter = AttendanceAdapter(this@AttendanceActivity, attendanceModel)
+                    val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
+                    dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
+                    dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
+                    dcrreport_recycler_view?.setAdapter(attendanceAdapter)
+
+
+//                                        runOnUiThread(Runnable {
+//                        todolist_progress_customer.visibility = View.GONE
+//                    })
+
+                }
+
+            } catch (e: JSONException) {
+                e.printStackTrace()
+                runOnUiThread(Runnable {
+                   // todolist_progress_customer.visibility = View.GONE
+                })
+            }
+            runOnUiThread(Runnable {
+             //   todolist_progress_customer.visibility = View.GONE
+            })
+            return "Executed"
+        }
+
+        override fun onPostExecute(result: String) {
+            runOnUiThread(Runnable {
+               // todolist_progress_customer.visibility = View.GONE
+            })
+        }
+
+        override fun onPreExecute() {}
+
+   }
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
