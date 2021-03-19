@@ -173,6 +173,14 @@ class AttendanceAdapter(private val mContext: Activity, private val rtododatalis
             val OutTimeAddress = dialognew.findViewById<TextView>(R.id.address1)
             val closeBtn = dialognew.findViewById<ImageView>(R.id.attendance_cross)
 
+            empCode.setText(data.empcode)
+            firstName.setText(data.firstname)
+            lastName.setText(data.lastname)
+            inTime.setText(data.attendance_in)
+            inTimeAddress.setText(data.punchadd)
+            outTime.setText(data.attendance_out)
+            OutTimeAddress.setText(data.punchadd)
+
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
 //        }

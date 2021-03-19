@@ -292,6 +292,13 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     runOnUiThread(Runnable {
                         if (cities.length()<=0){
                             Toast.makeText(this@AttendanceActivity,"No Data Found",Toast.LENGTH_SHORT).show()
+//                             Toast toast =
+//                                     var toast :Toast?=null
+//                             Toast.makeText(Customer_Service.this,"Please Select City",
+//                             Toast.LENGTH_SHORT);
+//                              toast.setGravity(Gravity.CENTER, 0, 0);
+//                              toast.show();
+
                         }
 
                     })
@@ -309,7 +316,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                                 run {
 //                                    list_Cfilter.add(jsonObject.getString("name"))
 //                                    CfilterspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
-                                    attendanceModel.add(AttendanceModel(jsonObject.getString("date"), jsonObject.getString("firstname")+" "+jsonObject.getString("lastname"), jsonObject.getString("in_time"),jsonObject.getString("out_time"),jsonObject.getString("emp_code"),jsonObject.getString("punched_at_address")))
+                                    attendanceModel.add(AttendanceModel(jsonObject.getString("date"), jsonObject.getString("firstname")+" "+jsonObject.getString("lastname"), jsonObject.getString("in_time"),jsonObject.getString("out_time"),jsonObject.getString("emp_code"),jsonObject.getString("punched_at_address"),jsonObject.getString("firstname"),jsonObject.getString("lastname")))
 
                                 }
                             }
