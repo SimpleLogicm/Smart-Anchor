@@ -2,7 +2,6 @@ package com.anchor.activities
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.*
 import android.graphics.Color
@@ -11,8 +10,10 @@ import android.net.Uri
 import android.os.*
 import android.provider.Settings
 import android.util.Log
-import android.view.*
-import android.widget.Button
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -21,11 +22,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anchor.activities.Global_Data.context
 import com.anchor.adapter.AttendanceAdapter
-import com.anchor.adapter.DCRAdapter
 import com.anchor.model.AttendanceModel
-import com.anchor.model.DCRModel
 import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView
@@ -47,7 +47,6 @@ import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.jar.Manifest
 
 class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
     private val recyclerView: ShimmerRecyclerView? = null
@@ -138,12 +137,101 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 //        dcrreport_recycler_view?.showShimmerAdapter()
         // dcrreport_recycler_view?.hideShimmerAdapter()
 
+//        ivdownload_attendance.setOnClickListener {
+//            getPdfData("")
+//        }
 
         // ConnectFTP();
         dcr_from.setOnClickListener {
             Global_Data.hideSoftKeyboard(this@AttendanceActivity)
             click_detect_flag = "from_date"
-            datePickerDialog = DatePickerDialog.newInstance(this@AttendanceActivity, Day, Month, Year)
+            val c = Calendar.getInstance()
+            val mYear = c[Calendar.YEAR]
+            val mMonth = c[Calendar.MONTH]
+            val mDay = c[Calendar.DAY_OF_MONTH]
+            //datePickerDialog = DatePickerDialog.newInstance(this@AttendanceActivity, mDay, mMonth, mYear)
+
+            datePickerDialog = DatePickerDialog.newInstance(DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                val mFormat = DecimalFormat("00")
+                val date = mFormat.format(java.lang.Double.valueOf(dayOfMonth.toDouble())) + "-" + mFormat.format(java.lang.Double.valueOf(monthOfYear + 1.toDouble())) + "-" + year
+
+                if (click_detect_flag.equals("from_date", ignoreCase = true)) {
+                    if (!dcr_to.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(date, dcr_to.text.toString())
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_from.setText(date)
+//                    button.setEnabled(false)
+//                    button.setClickable(false)
+//                    recyclerView!!.showShimmerAdapter()
+//                    cd = ConnectionDetector(applicationContext)
+//                    if (cd.isConnectedToInternet()) {
+//                        InvoicesList_Result()
+//                    } else {
+//                        recyclerView!!.showShimmerAdapter()
+//                        val toast = Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_LONG)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+//                    }
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_from.setText("")
+                            val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_from.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select To Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                } else if (click_detect_flag.equals("to_date", ignoreCase = true)) {
+                    if (!dcr_from.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(dcr_from.text.toString(), date)
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_to.setText(date)
+
+                            isInternetPresent = cd!!.isConnectingToInternet
+
+                            if (isInternetPresent){
+                                ViewAttendanceData()
+
+                            }else{
+                                val toast = Toast.makeText(this,
+                                        "Internet Not Available. ", Toast.LENGTH_SHORT)
+                                toast.setGravity(Gravity.CENTER, 0, 0)
+                                toast.show()
+                                finish()
+                            }
+
+
+//                    recyclerView!!.showShimmerAdapter()
+//                    button.setEnabled(false)
+//                    button.setClickable(false)
+//                    cd = ConnectionDetector(applicationContext)
+//                    if (cd.isConnectedToInternet()) {
+//                        InvoicesList_Result()
+//                    } else {
+//                        val toast = Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_LONG)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+//                    }
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_to.setText("")
+                            val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_to.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select From Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                }
+
+
+            }, mYear, mMonth, mDay)
+
             datePickerDialog?.setThemeDark(false)
             datePickerDialog?.showYearPickerFirst(false)
             //datePickerDialog?.setYearRange(2017, Year)
@@ -154,8 +242,94 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
         dcr_to.setOnClickListener {
             Global_Data.hideSoftKeyboard(this@AttendanceActivity)
+            val c = Calendar.getInstance()
+            val mYear = c[Calendar.YEAR]
+            val mMonth = c[Calendar.MONTH]
+            val mDay = c[Calendar.DAY_OF_MONTH]
             click_detect_flag = "to_date"
-            datePickerDialog = DatePickerDialog.newInstance(this, Day, Month, Year)
+            //datePickerDialog = DatePickerDialog.newInstance(this, mDay, mMonth, mYear)
+
+            datePickerDialog = DatePickerDialog.newInstance(DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                val mFormat = DecimalFormat("00")
+                val date = mFormat.format(java.lang.Double.valueOf(dayOfMonth.toDouble())) + "-" + mFormat.format(java.lang.Double.valueOf(monthOfYear + 1.toDouble())) + "-" + year
+
+                if (click_detect_flag.equals("from_date", ignoreCase = true)) {
+                    if (!dcr_to.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(date, dcr_to.text.toString())
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_from.setText(date)
+//                    button.setEnabled(false)
+//                    button.setClickable(false)
+//                    recyclerView!!.showShimmerAdapter()
+//                    cd = ConnectionDetector(applicationContext)
+//                    if (cd.isConnectedToInternet()) {
+//                        InvoicesList_Result()
+//                    } else {
+//                        recyclerView!!.showShimmerAdapter()
+//                        val toast = Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_LONG)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+//                    }
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_from.setText("")
+                            val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_from.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select To Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                } else if (click_detect_flag.equals("to_date", ignoreCase = true)) {
+                    if (!dcr_from.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(dcr_from.text.toString(), date)
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_to.setText(date)
+
+                            isInternetPresent = cd!!.isConnectingToInternet
+
+                            if (isInternetPresent){
+                                ViewAttendanceData()
+
+                            }else{
+                                val toast = Toast.makeText(this,
+                                        "Internet Not Available. ", Toast.LENGTH_SHORT)
+                                toast.setGravity(Gravity.CENTER, 0, 0)
+                                toast.show()
+                                finish()
+                            }
+
+
+//                    recyclerView!!.showShimmerAdapter()
+//                    button.setEnabled(false)
+//                    button.setClickable(false)
+//                    cd = ConnectionDetector(applicationContext)
+//                    if (cd.isConnectedToInternet()) {
+//                        InvoicesList_Result()
+//                    } else {
+//                        val toast = Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_LONG)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+//                    }
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_to.setText("")
+                            val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_to.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select From Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                }
+
+
+            }, mYear, mMonth, mDay)
+
             datePickerDialog?.setThemeDark(false)
             //datePickerDialog?.setYearRange(2017, Year)
             datePickerDialog?.showYearPickerFirst(false)
@@ -164,14 +338,14 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
             datePickerDialog?.show(fragmentManager, "Dealer App")
         }
 
-        iv_download.setOnClickListener {
-            showPopupMenu(iv_download)
+        ivdownload_attendance.setOnClickListener {
+            showPopupMenu(ivdownload_attendance)
         }
 
         isInternetPresent = cd!!.isConnectingToInternet
 
         if (isInternetPresent){
-            getdata()
+            ViewAttendanceData()
 
         }else{
             val toast = Toast.makeText(this,
@@ -184,7 +358,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
     }
 
-    private fun getdata() {
+    private fun ViewAttendanceData() {
 
         var user_email: String? = ""
         val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
@@ -206,11 +380,10 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         jsObjRequest = StringRequest(url, Response.Listener { response ->
             Log.i("volley", "response: $response")
             final_response = response
-            getstatewise_City().execute(response)
+            getAttendanceData().execute(response)
         },
                 Response.ErrorListener { error ->
                     //dialog.dismiss()
-
                     try {
                         val responseBody = String(error.networkResponse.data, StandardCharsets.UTF_8)
                         val jsonObject = JSONObject(responseBody)
@@ -218,12 +391,13 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         var response_result = ""
                         if (jsonObject.has("message")) {
                             response_result = jsonObject.getString("message")
-
+                            dcrreport_recycler_view.hideShimmerAdapter()
                           //  todolist_progress_customer.visibility = View.GONE
                             val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
-
+//                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
+//                            startActivity(i)
                         }
                         else
                         {
@@ -270,7 +444,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
     }
 
-       public inner class getstatewise_City : AsyncTask<String?, Void?, String>() {
+       public inner class getAttendanceData : AsyncTask<String?, Void?, String>() {
         override fun doInBackground(vararg p0: String?): String? {
             try {
                 val response = JSONObject(final_response)
@@ -283,6 +457,9 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
+                        dcrreport_recycler_view.hideShimmerAdapter()
+//                        val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
+//                        startActivity(i)
                     })
                 }
                 else {
@@ -291,24 +468,22 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     Log.d("volley", "data$cities")
                     runOnUiThread(Runnable {
                         if (cities.length()<=0){
-                            Toast.makeText(this@AttendanceActivity,"No Data Found",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AttendanceActivity,"Attendance not found.",Toast.LENGTH_SHORT).show()
+                            dcrreport_recycler_view.hideShimmerAdapter()
+//                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
+//                            startActivity(i)
 //                             Toast toast =
 //                                     var toast :Toast?=null
 //                             Toast.makeText(Customer_Service.this,"Please Select City",
 //                             Toast.LENGTH_SHORT);
 //                              toast.setGravity(Gravity.CENTER, 0, 0);
 //                              toast.show();
-
                         }
-
                     })
-
                     //list_CCity.clear()
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
                     attendanceModel.clear()
-
-
                     for (i in 0 until cities.length()) {
                         val jsonObject = cities.getJSONObject(i)
                         try {
@@ -317,16 +492,12 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 //                                    list_Cfilter.add(jsonObject.getString("name"))
 //                                    CfilterspinnerMap.put(jsonObject.getString("name"),jsonObject.getString("code"))
                                     attendanceModel.add(AttendanceModel(jsonObject.getString("date"), jsonObject.getString("firstname")+" "+jsonObject.getString("lastname"), jsonObject.getString("in_time"),jsonObject.getString("out_time"),jsonObject.getString("emp_code"),jsonObject.getString("punched_at_address"),jsonObject.getString("firstname"),jsonObject.getString("lastname")))
-
                                 }
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
                     }
-
-
-
                                         runOnUiThread(Runnable {
                                             attendanceAdapter = AttendanceAdapter(this@AttendanceActivity, attendanceModel)
                                             val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
@@ -421,7 +592,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     isInternetPresent = cd!!.isConnectingToInternet
 
                     if (isInternetPresent){
-                        getdata()
+                        ViewAttendanceData()
 
                     }else{
                         val toast = Toast.makeText(this,
@@ -500,13 +671,25 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     return true
                 }
                 R.id.action_pdf -> {
-//                    status="type"
-//                    isInternetPresent = cd!!.isConnectingToInternet
-//                    if (isInternetPresent) {
-//                        ExpenseGraphResult(status)
-//                    } else {
-//                        Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
-//                    }
+                    var user_email: String? = ""
+                    val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+                    try {
+                        user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                            sp.getString("USER_EMAIL", "")
+                        } else {
+                            Global_Data.GLOvel_USER_EMAIL
+                        }
+                    } catch (ex: java.lang.Exception) {
+                        ex.printStackTrace()
+                    }
+                    val domain = resources.getString(R.string.service_domain)
+                    var pdfurl = domain+"reports/view_attendance?email="+user_email+"&from="+"pdf"
+                    Log.i("pdfurl", "pdfurl" +pdfurl)
+
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
+                    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(browserIntent)
+
                     return true
                 }
             }
@@ -788,5 +971,83 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         startActivityForResult(intent, 101)
     }
 
+    fun getPdfData(url: String) {
+        try {
+            var jsObjRequest: JsonObjectRequest? = null
+            try {
+                val domain: String = getResources().getString(R.string.service_domain)
+
+                //Log.d("getUserData url", "getUserData url" + domain + "users/user_get_data?email="+email);
+                var pdfurl = "https://mumuatsmadms01.anchor-group.in/metal/api/v1/reports/view_attendance?email=kartik.dubey@simplelogic.in&from_date=1-01-2021&to_date=22-3-2021&from=pdf"
+//                pdfurl = if (Global_Data.LaunchManualStatus1.equalsIgnoreCase("Manual1")) {
+//                    domain + "manual/" + url + "/manual_details"
+//                } else {
+//                    domain + "new_launch/" + url + "/launch_pdf"
+//                }
+
+                //domain + "manual/" + url + "/manual_details"
+                jsObjRequest = object : JsonObjectRequest(pdfurl, null, Response.Listener { response ->
+                    Log.i("volley", "response: $response")
+                    Log.d("jV", "JV length" + response.length())
+                    try {
+                        var response_result = ""
+                        if (response.has("message")) {
+                            response_result = response.getString("message")
+                            Toast.makeText(this, "" + response_result, Toast.LENGTH_SHORT).show()
+                        } else {
+                            val pdfurl = response.getString("icon")
+                            val url = pdfurl
+                            val fileName = url.trim { it <= ' ' }.substring(url.trim { it <= ' ' }.lastIndexOf('/') + 1, url.trim { it <= ' ' }.length)
+                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
+                            browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(browserIntent)
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        // dialog.dismiss();
+                    }
+                }, Response.ErrorListener { error ->
+                    if (error is TimeoutError || error is NoConnectionError) {
+                        Toast.makeText(this,
+                                "your internet connection is not working, saving locally. Please sync when Internet is available",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is AuthFailureError) {
+                        Toast.makeText(this,
+                                "Server AuthFailureError  Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is ServerError) {
+                        Toast.makeText(this,
+                                "Server   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is NetworkError) {
+                        Toast.makeText(this,
+                                "your internet connection is not working, saving locally. Please sync when Internet is available",
+                                Toast.LENGTH_LONG).show()
+                    } else if (error is ParseError) {
+                        Toast.makeText(this,
+                                "ParseError   Error",
+                                Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
+                    }
+                }) {}
+                val requestQueue = Volley.newRequestQueue(this)
+                val socketTimeout = 150000 //90 seconds - change to what you want
+                val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+                jsObjRequest.setRetryPolicy(policy)
+                // requestQueue.se
+                //requestQueue.add(jsObjRequest);
+                jsObjRequest.setShouldCache(false)
+                requestQueue.cache.clear()
+                requestQueue.add(jsObjRequest)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                // dialog.dismiss();
+            }
+        } catch (e: java.lang.Exception) {
+            // TODO: handle exception
+            Log.e("DATA", e.message)
+        }
+    }
 
 }

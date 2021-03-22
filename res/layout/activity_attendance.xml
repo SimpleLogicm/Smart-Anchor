@@ -103,12 +103,13 @@
         <ImageView
             android:id="@+id/iv_filter"
             android:layout_width="30dp"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:src="@drawable/dcr_filter"/>
 
         <ImageView
-            android:id="@+id/iv_download"
+            android:id="@+id/ivdownload_attendance"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:visibility="visible"

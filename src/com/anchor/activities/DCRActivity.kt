@@ -13,6 +13,7 @@ import android.os.Environment
 import android.os.Handler
 import android.os.Message
 import android.provider.Settings
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -470,13 +471,24 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     return true
                 }
                 R.id.action_pdf -> {
-//                    status="type"
-//                    isInternetPresent = cd!!.isConnectingToInternet
-//                    if (isInternetPresent) {
-//                        ExpenseGraphResult(status)
-//                    } else {
-//                        Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
-//                    }
+                    var user_email: String? = ""
+                    val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+                    try {
+                        user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                            sp.getString("USER_EMAIL", "")
+                        } else {
+                            Global_Data.GLOvel_USER_EMAIL
+                        }
+                    } catch (ex: java.lang.Exception) {
+                        ex.printStackTrace()
+                    }
+                    val domain = resources.getString(R.string.service_domain)
+                    var pdfurl = domain+"reports/view_dcr_report?email="+user_email+"&from="+"pdf"
+                    Log.i("pdfurl", "pdfurl" +pdfurl)
+
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
+                    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(browserIntent)
                     return true
                 }
             }
