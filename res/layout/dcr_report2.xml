@@ -1,57 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/pro_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:padding="5dp"
         android:layout_toLeftOf="@+id/dcr_cross"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Order Count Details"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_header"
-        android:text="Promotional Activity" />
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/dcr_cross"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:src="@drawable/dcr_cross"/>
+        android:src="@drawable/dcr_cross" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
         android:id="@+id/pro_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/pro_header"
-        android:layout_height="wrap_content">
+
+        android:orientation="horizontal"
+
+        android:weightSum="2">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
             android:layout_marginTop="20dp"
-            android:text="Promotional Type :- " />
+            android:layout_weight="1"
+            android:text="Orde Takens:-"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_content_size" />
+
 
         <TextView
-            android:id="@+id/promotioanltype"
+            android:id="@+id/ordertakan"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
             android:layout_marginTop="20dp"
-            android:text="" />
+            android:layout_weight="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_content_size" />
 
 
     </LinearLayout>
@@ -60,40 +63,39 @@
     <View
         android:id="@+id/separator1"
         android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_below="@+id/pro_type"
-        android:background="#c3c3c3"
         android:layout_marginTop="5dp"
-        android:layout_height="1dp"/>
+        android:background="#c3c3c3" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
         android:id="@+id/pro_intime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/pro_type"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
             android:layout_marginTop="10dp"
-            android:text="In Time :- " />
+            android:layout_weight="1"
+            android:text="Return Order :-"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_content_size" />
 
         <TextView
-            android:id="@+id/intime"
+            android:id="@+id/returnorder"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
             android:layout_marginTop="10dp"
-            android:text="" />
-
+            android:layout_weight="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_content_size" />
 
     </LinearLayout>
 
@@ -102,39 +104,38 @@
         android:id="@+id/separator2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
         android:layout_below="@+id/pro_intime"
+        android:layout_marginTop="5dp"
         android:background="#c3c3c3" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:weightSum="2"
-        android:orientation="horizontal"
         android:id="@+id/pro_outtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/pro_intime"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
             android:layout_marginTop="10dp"
-            android:text="Out Time :- " />
+            android:text="No Order :-"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_content_size" />
 
         <TextView
-            android:id="@+id/outtime"
+            android:id="@+id/noorder"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
             android:layout_marginTop="10dp"
-            android:text="" />
-
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_content_size" />
 
     </LinearLayout>
 
@@ -143,10 +144,10 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:visibility="invisible"
-        android:layout_alignParentRight="true"
         android:layout_below="@+id/pro_outtime"
-        android:src="@drawable/arr_left"/>
+        android:layout_alignParentRight="true"
+        android:src="@drawable/arr_left"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

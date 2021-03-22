@@ -165,13 +165,18 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
             val dialognew = Dialog(mContext)
             dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialognew.setCancelable(false)
-            dialognew.setContentView(R.layout.dcr_dialog)
+            dialognew.setContentView(R.layout.dcr_report2)
 
-            val proType = dialognew.findViewById<TextView>(R.id.pro_type)
-            val proIntime = dialognew.findViewById<TextView>(R.id.pro_intime)
-            val proOuttime = dialognew.findViewById<TextView>(R.id.pro_outtime)
+            val ordertakan = dialognew.findViewById<TextView>(R.id.ordertakan)
+            val returnorder = dialognew.findViewById<TextView>(R.id.returnorder)
+            val noorder = dialognew.findViewById<TextView>(R.id.noorder)
             val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
 
+
+
+            ordertakan.setText(data.ordertaken)
+            returnorder.setText(data.returnorder)
+            noorder.setText(data.noorder)
 
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
@@ -191,12 +196,14 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
             dialognew.setCancelable(false)
             dialognew.setContentView(R.layout.dcr_dialog)
 
-            val proType = dialognew.findViewById<TextView>(R.id.pro_type)
-            val proIntime = dialognew.findViewById<TextView>(R.id.pro_intime)
-            val proOuttime = dialognew.findViewById<TextView>(R.id.pro_outtime)
+            val promotioanltype = dialognew.findViewById<TextView>(R.id.promotioanltype)
+            val intime = dialognew.findViewById<TextView>(R.id.intime)
+            val outtime = dialognew.findViewById<TextView>(R.id.outtime)
             val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
 
-
+            promotioanltype.setText(data.promotionalType)
+            intime.setText(data.Intime)
+            outtime.setText(data.Outtime)
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
 //        }

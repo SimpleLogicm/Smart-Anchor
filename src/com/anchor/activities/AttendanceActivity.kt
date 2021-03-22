@@ -683,7 +683,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         ex.printStackTrace()
                     }
                     val domain = resources.getString(R.string.service_domain)
-                    var pdfurl = domain+"reports/view_attendance?email="+user_email+"&from="+"pdf"
+                    var pdfurl = domain+"reports/view_attendance?email="+user_email+"&from_date="+dcr_from.text.toString()+"&to_date="+dcr_to.text.toString()+"&from="+"pdf"
                     Log.i("pdfurl", "pdfurl" +pdfurl)
 
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
