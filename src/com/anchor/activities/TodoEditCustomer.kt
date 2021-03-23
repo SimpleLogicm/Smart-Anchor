@@ -2426,7 +2426,6 @@ class TodoEditCustomer : Activity() {
                 if (response.has("message")) {
                     response_result = response.getString("message")
                     runOnUiThread {
-
                         merge_icon.visibility = View.GONE
                         try {
                             dialog!!.dismiss()

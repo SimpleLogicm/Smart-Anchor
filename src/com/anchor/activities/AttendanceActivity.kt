@@ -59,9 +59,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
     var calendar: Calendar? = null
-    var Year:kotlin.Int = 0
-    var Month:kotlin.Int = 0
-    var Day:kotlin.Int = 0
+
     //var dcrList: List<DCRModel> = ArrayList<DCRModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +67,6 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
         context = AttendanceActivity@ this
         cd = ConnectionDetector(context)
-
 
         var user_name = ""
         if (!Global_Data.USER_FIRST_NAME.equals("null", ignoreCase = true)) {

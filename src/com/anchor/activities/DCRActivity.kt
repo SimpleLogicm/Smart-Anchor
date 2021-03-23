@@ -60,9 +60,6 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
     var calendar: Calendar? = null
     var cd: ConnectionDetector? = null
     var isInternetPresent = false
-    var Year: kotlin.Int = 0
-    var Month: kotlin.Int = 0
-    var Day: kotlin.Int = 0
 
     //var dcrList: List<DCRModel> = ArrayList<DCRModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,7 +67,6 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         setContentView(R.layout.activity_d_c_r)
 
         cd = ConnectionDetector(this@DCRActivity)
-
 
         var user_name = ""
         if (!Global_Data.USER_FIRST_NAME.equals("null", ignoreCase = true)) {
@@ -138,7 +134,6 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         username.clear()
         username.add("Select User")
 
-
         spindcr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
@@ -172,7 +167,72 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         dcr_from.setOnClickListener {
             Global_Data.hideSoftKeyboard(this@DCRActivity)
             click_detect_flag = "from_date"
-            datePickerDialog = DatePickerDialog.newInstance(this@DCRActivity, Day, Month, Year)
+
+            val c = Calendar.getInstance()
+            val mYear = c[Calendar.YEAR]
+            val mMonth = c[Calendar.MONTH]
+            val mDay = c[Calendar.DAY_OF_MONTH]
+            //datePickerDialog = DatePickerDialog.newInstance(this@AttendanceActivity, mDay, mMonth, mYear)
+
+            datePickerDialog = DatePickerDialog.newInstance(DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                val mFormat = DecimalFormat("00")
+                val date = mFormat.format(java.lang.Double.valueOf(dayOfMonth.toDouble())) + "-" + mFormat.format(java.lang.Double.valueOf(monthOfYear + 1.toDouble())) + "-" + year
+
+                if (click_detect_flag.equals("from_date", ignoreCase = true)) {
+                    if (!dcr_to.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(date, dcr_to.text.toString())
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_from.setText(date)
+
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_from.setText("")
+                            val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_from.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select To Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                } else if (click_detect_flag.equals("to_date", ignoreCase = true)) {
+                    if (!dcr_from.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(dcr_from.text.toString(), date)
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_to.setText(date)
+
+                            isInternetPresent = cd!!.isConnectingToInternet
+
+                            if (isInternetPresent) {
+                                getdata()
+
+                            } else {
+                                val toast = Toast.makeText(this,
+                                        "Internet Not Available. ", Toast.LENGTH_SHORT)
+                                toast.setGravity(Gravity.CENTER, 0, 0)
+                                toast.show()
+                                finish()
+                            }
+
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_to.setText("")
+                            val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_to.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select From Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                }
+
+            }, mYear, mMonth, mDay)
+
+            //datePickerDialog = DatePickerDialog.newInstance(this@DCRActivity, Day, Month, Year)
             datePickerDialog?.setThemeDark(false)
             datePickerDialog?.showYearPickerFirst(false)
             // datePickerDialog?.setYearRange(2017, Year)
@@ -184,7 +244,67 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         dcr_to.setOnClickListener {
             Global_Data.hideSoftKeyboard(this@DCRActivity)
             click_detect_flag = "to_date"
-            datePickerDialog = DatePickerDialog.newInstance(this, Day, Month, Year)
+            val c = Calendar.getInstance()
+            val mYear = c[Calendar.YEAR]
+            val mMonth = c[Calendar.MONTH]
+            val mDay = c[Calendar.DAY_OF_MONTH]
+
+            datePickerDialog = DatePickerDialog.newInstance(DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                val mFormat = DecimalFormat("00")
+                val date = mFormat.format(java.lang.Double.valueOf(dayOfMonth.toDouble())) + "-" + mFormat.format(java.lang.Double.valueOf(monthOfYear + 1.toDouble())) + "-" + year
+
+                if (click_detect_flag.equals("from_date", ignoreCase = true)) {
+                    if (!dcr_to.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(date, dcr_to.text.toString())
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_from.setText(date)
+
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_from.setText("")
+                            val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_from.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select To Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                } else if (click_detect_flag.equals("to_date", ignoreCase = true)) {
+                    if (!dcr_from.text.toString().equals("", ignoreCase = true)) {
+                        val s = CheckDates(dcr_from.text.toString(), date)
+                        if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+                            dcr_to.setText(date)
+
+                            isInternetPresent = cd!!.isConnectingToInternet
+
+                            if (isInternetPresent) {
+                                getdata()
+
+                            } else {
+                                val toast = Toast.makeText(this,
+                                        "Internet Not Available. ", Toast.LENGTH_SHORT)
+                                toast.setGravity(Gravity.CENTER, 0, 0)
+                                toast.show()
+                                finish()
+                            }
+
+                        } else if (s.equals("t", ignoreCase = true)) {
+                            dcr_to.setText("")
+                            val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
+                            toast.setGravity(Gravity.CENTER, 0, 0)
+                            toast.show()
+                        }
+                    } else {
+                        dcr_to.setText(date)
+                        val toast = Toast.makeText(applicationContext, "Please Select From Date ", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                    }
+                }
+
+            }, mYear, mMonth, mDay)
             datePickerDialog?.setThemeDark(false)
             //datePickerDialog?.setYearRange(2017, Year)
             datePickerDialog?.showYearPickerFirst(false)
@@ -444,18 +564,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                 val s = CheckDates(date, dcr_to.text.toString())
                 if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
                     dcr_from.setText(date)
-//                    button.setEnabled(false)
-//                    button.setClickable(false)
-//                    recyclerView!!.showShimmerAdapter()
-//                    cd = ConnectionDetector(applicationContext)
-//                    if (cd.isConnectedToInternet()) {
-//                        InvoicesList_Result()
-//                    } else {
-//                        recyclerView!!.showShimmerAdapter()
-//                        val toast = Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_LONG)
-//                        toast.setGravity(Gravity.CENTER, 0, 0)
-//                        toast.show()
-//                    }
+
                 } else if (s.equals("t", ignoreCase = true)) {
                     dcr_from.setText("")
                     val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
@@ -487,18 +596,6 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         finish()
                     }
 
-
-//                    recyclerView!!.showShimmerAdapter()
-//                    button.setEnabled(false)
-//                    button.setClickable(false)
-//                    cd = ConnectionDetector(applicationContext)
-//                    if (cd.isConnectedToInternet()) {
-//                        InvoicesList_Result()
-//                    } else {
-//                        val toast = Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_LONG)
-//                        toast.setGravity(Gravity.CENTER, 0, 0)
-//                        toast.show()
-//                    }
                 } else if (s.equals("t", ignoreCase = true)) {
                     dcr_to.setText("")
                     val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
