@@ -134,6 +134,12 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         username.clear()
         username.add("Select User")
 
+        dataAdapterusername = ArrayAdapter<String>(
+                this@DCRActivity, R.layout.spinner_item, username!!)
+        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
+        spindcr.adapter = dataAdapterusername
+
+
         spindcr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
@@ -356,7 +362,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
 
         } else {
-            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + ""
+            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&user_name=" + "&to_date=" + dcr_to.text.toString()
 
         }
 
@@ -465,6 +471,8 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     })
 
                     dcrList.clear()
+                    username.clear()
+                    username.add("Select User")
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
 
@@ -676,7 +684,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
 
                     } else {
-                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + ""
+                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name="
 
                     }
 
