@@ -32,6 +32,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
             android:gravity="center"
@@ -48,6 +49,7 @@
             android:layout_gravity="center"
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:layout_marginTop="5dp"
             android:cursorVisible="false"
             android:focusable="false"
             android:hint="@string/From"
@@ -61,6 +63,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:src="@drawable/date_range"
@@ -69,6 +72,7 @@
 
         <EditText
             android:id="@+id/dcr_to"
+            android:layout_marginTop="5dp"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:gravity="center|left"
@@ -85,6 +89,16 @@
             >
 
         </EditText>
+
+
+        <Spinner
+            android:id="@+id/spindcr"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Spinner>
 
 
     </LinearLayout>

@@ -15,14 +15,11 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.PopupMenu
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anchor.activities.Global_Data.context
-import com.anchor.adapter.AttendanceAdapter
 import com.anchor.adapter.DCRAdapter
 import com.anchor.model.DCRModel
 import com.anchor.webservice.ConnectionDetector
@@ -36,12 +33,7 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.opencsv.CSVWriter
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
-import kotlinx.android.synthetic.main.activity_attendance.*
 import kotlinx.android.synthetic.main.activity_d_c_r.*
-import kotlinx.android.synthetic.main.activity_d_c_r.dcr_from
-import kotlinx.android.synthetic.main.activity_d_c_r.dcr_to
-import kotlinx.android.synthetic.main.activity_d_c_r.dcrreport_recycler_view
-import kotlinx.android.synthetic.main.activity_d_c_r.txtWelcomeUserDcr
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -60,14 +52,18 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
     var dcrList: MutableList<DCRModel> = ArrayList()
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
+    var item: String? = null
     var final_response = ""
     var response_result = ""
+    var dataAdapterusername: ArrayAdapter<String>? = null
+    private val username = ArrayList<String>()
     var calendar: Calendar? = null
     var cd: ConnectionDetector? = null
     var isInternetPresent = false
-    var Year:kotlin.Int = 0
-    var Month:kotlin.Int = 0
-    var Day:kotlin.Int = 0
+    var Year: kotlin.Int = 0
+    var Month: kotlin.Int = 0
+    var Day: kotlin.Int = 0
+
     //var dcrList: List<DCRModel> = ArrayList<DCRModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,6 +135,38 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
 //        dcrreport_recycler_view?.showShimmerAdapter()
         // dcrreport_recycler_view?.hideShimmerAdapter()
 
+        username.clear()
+        username.add("Select User")
+
+
+        spindcr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                item = parent.getItemAtPosition(position).toString()
+                if (!selectedItem.equals("Select User")) {
+
+                    isInternetPresent = cd!!.isConnectingToInternet
+
+                    if (isInternetPresent) {
+                        getdata()
+
+                    } else {
+                        val toast = Toast.makeText(this@DCRActivity,
+                                "Internet Not Available. ", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.CENTER, 0, 0)
+                        toast.show()
+                        finish()
+                    }
+
+
+                }
+            } // to close the onItemSelected
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
 
         // ConnectFTP();
         dcr_from.setOnClickListener {
@@ -147,7 +175,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             datePickerDialog = DatePickerDialog.newInstance(this@DCRActivity, Day, Month, Year)
             datePickerDialog?.setThemeDark(false)
             datePickerDialog?.showYearPickerFirst(false)
-           // datePickerDialog?.setYearRange(2017, Year)
+            // datePickerDialog?.setYearRange(2017, Year)
             datePickerDialog?.setAccentColor(Color.parseColor("#303F9F"))
             datePickerDialog?.setTitle("Select From Date")
             datePickerDialog?.show(fragmentManager, "Smart Anchor App")
@@ -171,10 +199,10 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
         isInternetPresent = cd!!.isConnectingToInternet
 
-        if (isInternetPresent){
+        if (isInternetPresent) {
             getdata()
 
-        }else{
+        } else {
             val toast = Toast.makeText(this,
                     "Internet Not Available. ", Toast.LENGTH_SHORT)
             toast.setGravity(Gravity.CENTER, 0, 0)
@@ -202,8 +230,17 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
         val domain = resources.getString(R.string.service_domain)
         Log.i("volley", "domain: $domain")
-        var url = domain+"reports/view_dcr_report?email="+user_email+"&from_date="+dcr_from.text.toString()+"&to_date="+dcr_to.text.toString()
-        Log.i("get_cities url", "user list url " +url)
+
+        var url: String? = null
+        if (!item.equals("Select User")) {
+            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
+
+        } else {
+            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + ""
+
+        }
+
+        Log.i("get_cities url", "user list url " + url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
             Log.i("volley", "response: $response")
@@ -226,9 +263,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
 
-                        }
-                        else
-                        {
+                        } else {
                             if (error is TimeoutError || error is NoConnectionError) {
                                 Toast.makeText(applicationContext,
                                         "Network Error",
@@ -289,18 +324,17 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
                     })
-                }
-                else {
+                } else {
 
                     val cities: JSONArray = response.getJSONArray("data")
                     Log.i("volley", "response cities Length: " + cities.length())
                     Log.d("volley", "cities$cities")
                     runOnUiThread(Runnable {
-                        if (cities.length()<=0){
-                            Toast.makeText(this@DCRActivity,"DCR not found.",Toast.LENGTH_SHORT).show()
+                        if (cities.length() <= 0) {
+                            Toast.makeText(this@DCRActivity, "DCR not found.", Toast.LENGTH_SHORT).show()
                             dcrreport_recycler_view.hideShimmerAdapter()
-//                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
-//                            startActivity(i)
+                            val i = Intent(this@DCRActivity, ReportsActivity::class.java)
+                            startActivity(i)
 //                             Toast toast =
 //                                     var toast :Toast?=null
 //                             Toast.makeText(Customer_Service.this,"Please Select City",
@@ -315,13 +349,16 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     //cityspinnerMap.clear()
 
 
-
                     for (i in 0 until cities.length()) {
                         val jsonObject = cities.getJSONObject(i)
                         try {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
                                 run {
-                                    dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"),jsonObject.getString("order_taken")))
+                                    jsonObject.getString("user_name")
+                                    username.add(jsonObject.getString("user_name"))
+                               //     val s: Set<String> = LinkedHashSet<String>(username)
+
+                                    dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"), jsonObject.getString("order_taken")))
 
                                 }
                             }
@@ -331,7 +368,16 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         }
                     }
 
+
+
                     runOnUiThread(Runnable {
+
+                        dataAdapterusername = ArrayAdapter<String>(
+                                this@DCRActivity, R.layout.spinner_item, username!!)
+                        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
+                        spindcr.adapter = dataAdapterusername
+
+
                         dcrAdapter = DCRAdapter(this@DCRActivity, dcrList)
                         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
                         dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
@@ -430,10 +476,10 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
                     isInternetPresent = cd!!.isConnectingToInternet
 
-                    if (isInternetPresent){
+                    if (isInternetPresent) {
                         getdata()
 
-                    }else{
+                    } else {
                         val toast = Toast.makeText(this,
                                 "Internet Not Available. ", Toast.LENGTH_SHORT)
                         toast.setGravity(Gravity.CENTER, 0, 0)
@@ -526,8 +572,20 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         ex.printStackTrace()
                     }
                     val domain = resources.getString(R.string.service_domain)
-                    var pdfurl = domain+"reports/view_dcr_report?email="+user_email+"&from_date="+dcr_from.text.toString()+"&to_date="+dcr_to.text.toString()+"&from="+"pdf"
-                    Log.i("pdfurl", "pdfurl" +pdfurl)
+
+                    var pdfurl :String?=null
+
+                    if (!item.equals("Select User")) {
+                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
+
+                    } else {
+                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + ""
+
+                    }
+
+
+              //      var pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&from=" + "pdf"
+                    Log.i("pdfurl", "pdfurl" + pdfurl)
 
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
                     browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -596,7 +654,6 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             println("" + `var`)
 
 
-
             // val current = LocalDateTime.now()
             val randomPIN = System.currentTimeMillis()
             val PINString = randomPIN.toString()
@@ -609,10 +666,9 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             val formattedDatef = dff.format(c.time)
 
 
+            var purchaseid = PINString
 
-            var  purchaseid =  PINString
-
-            val filename = folder.toString() + "/" +"DCRreportxls"+purchaseid  + ".csv"
+            val filename = folder.toString() + "/" + "DCRreportxls" + purchaseid + ".csv"
 
             // show waiting screen
             val contentTitle = getString(R.string.app_name)
@@ -622,7 +678,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             val handler = object : Handler() {
                 override fun handleMessage(msg: Message) {
 
-                    val yourFile = File(folder, "DCRreport"+purchaseid + ".csv")
+                    val yourFile = File(folder, "DCRreport" + purchaseid + ".csv")
 
                     try {
                         openFile(yourFile)
@@ -649,7 +705,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             for (i in dcrList.indices) {
                                 val list_items = dcrList[i]
 
-                                val s = list_items.date + "#" + list_items.cc_code + "#" + list_items.customer_type + "#" + list_items.feedback + "#" + list_items.claim + "#" + list_items.order_count_details + "#"  + list_items.promotional_activity
+                                val s = list_items.date + "#" + list_items.cc_code + "#" + list_items.customer_type + "#" + list_items.feedback + "#" + list_items.claim + "#" + list_items.order_count_details + "#" + list_items.promotional_activity
                                 val entriesdata = s.split("#") // array of your values
                                 writer!!.writeNext(entriesdata.toTypedArray())
 
