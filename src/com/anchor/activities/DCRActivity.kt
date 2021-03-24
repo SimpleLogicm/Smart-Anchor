@@ -46,7 +46,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
+class DCRActivity : Activity() {
     private val recyclerView: ShimmerRecyclerView? = null
     var dcrAdapter: DCRAdapter? = null
     var dcrList: MutableList<DCRModel> = ArrayList()
@@ -127,18 +127,21 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
 //        dcrList.add(DCRModel("31-Jul-20", "375018", "Distributor", "0", "0", "Details", "Details"))
 //        dcrList.add(DCRModel("31-Jul-20", "375018", "Distributor", "0", "0", "Details", "Details"))
 
-
 //        dcrreport_recycler_view?.showShimmerAdapter()
         // dcrreport_recycler_view?.hideShimmerAdapter()
 
-        username.clear()
+//        username.clear()
         username.add("Select User")
+
+        val hashSet = HashSet<String>()
+                        hashSet.addAll(username)
+                        username.clear()
+                        username.addAll(hashSet)
 
         dataAdapterusername = ArrayAdapter<String>(
                 this@DCRActivity, R.layout.spinner_item, username!!)
         dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
         spindcr.adapter = dataAdapterusername
-
 
         spindcr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -147,10 +150,8 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                 if (!selectedItem.equals("Select User")) {
 
                     isInternetPresent = cd!!.isConnectingToInternet
-
                     if (isInternetPresent) {
-                        getdata()
-
+                        getdata(item!!)
                     } else {
                         val toast = Toast.makeText(this@DCRActivity,
                                 "Internet Not Available. ", Toast.LENGTH_SHORT)
@@ -159,6 +160,20 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         finish()
                     }
 
+//                    val toast = Toast.makeText(this@DCRActivity,
+//                                "Internet Not Available. $item", Toast.LENGTH_SHORT)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+
+//                    val hashSet = HashSet<String>()
+//                        hashSet.addAll(username)
+//                        username.clear()
+//                        username.addAll(hashSet)
+//
+//                        dataAdapterusername = ArrayAdapter<String>(
+//                                this@DCRActivity, R.layout.spinner_item, username!!)
+//                        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
+//                        spindcr.adapter = dataAdapterusername
 
                 }
             } // to close the onItemSelected
@@ -212,7 +227,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             isInternetPresent = cd!!.isConnectingToInternet
 
                             if (isInternetPresent) {
-                                getdata()
+                                getdata("")
 
                             } else {
                                 val toast = Toast.makeText(this,
@@ -286,7 +301,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             isInternetPresent = cd!!.isConnectingToInternet
 
                             if (isInternetPresent) {
-                                getdata()
+                                getdata("")
 
                             } else {
                                 val toast = Toast.makeText(this,
@@ -326,7 +341,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         isInternetPresent = cd!!.isConnectingToInternet
 
         if (isInternetPresent) {
-            getdata()
+            getdata("")
 
         } else {
             val toast = Toast.makeText(this,
@@ -335,13 +350,9 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
             toast.show()
             finish()
         }
-
-
     }
 
-
-    private fun getdata() {
-
+    private fun getdata(items: String) {
         var user_email: String? = ""
         val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
         try {
@@ -358,20 +369,29 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         Log.i("volley", "domain: $domain")
 
         var url: String? = null
-        if (!item.equals("Select User")) {
-            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
+//        if (!item.equals("Select User")) {
+//            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
+//
+//        } else {
+//
+//        }
+        if(items.length>0)
+                {
+                    url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + items
 
-        } else {
+                }else{
             url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&user_name=" + "&to_date=" + dcr_to.text.toString()
-
         }
+
+
+
 
         Log.i("get_cities url", "user list url " + url)
         var jsObjRequest: StringRequest? = null
         jsObjRequest = StringRequest(url, Response.Listener { response ->
             Log.i("volley", "response: $response")
             final_response = response
-            getstatewise_City().execute(response)
+            getDcrData().execute(response)
         },
                 Response.ErrorListener { error ->
                     //dialog.dismiss()
@@ -434,7 +454,7 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
     }
 
-    public inner class getstatewise_City : AsyncTask<String?, Void?, String>() {
+    public inner class getDcrData : AsyncTask<String?, Void?, String>() {
         override fun doInBackground(vararg p0: String?): String? {
             try {
                 val response = JSONObject(final_response)
@@ -476,7 +496,6 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
 
-
                     for (i in 0 until cities.length()) {
                         val jsonObject = cities.getJSONObject(i)
                         try {
@@ -496,22 +515,23 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         }
                     }
 
-
-
                     runOnUiThread(Runnable {
-
-                        dataAdapterusername = ArrayAdapter<String>(
-                                this@DCRActivity, R.layout.spinner_item, username!!)
-                        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
-                        spindcr.adapter = dataAdapterusername
-
+                        val hashSet = HashSet<String>()
+                        hashSet.addAll(username)
+                        username.clear()
+                        username.addAll(hashSet)
+//
+//                        dataAdapterusername = ArrayAdapter<String>(
+//                                this@DCRActivity, R.layout.spinner_item, username!!)
+//                        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
+//                        spindcr.adapter = dataAdapterusername
 
                         dcrAdapter = DCRAdapter(this@DCRActivity, dcrList)
                         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
                         dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
                         dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
                         dcrreport_recycler_view?.setAdapter(dcrAdapter)
-
+                        dcrAdapter!!.notifyDataSetChanged()
                     })
 
                     runOnUiThread(Runnable {
@@ -563,61 +583,61 @@ class DCRActivity : Activity(), DatePickerDialog.OnDateSetListener {
         finish()
     }
 
-    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val mFormat = DecimalFormat("00")
-        val date = mFormat.format(java.lang.Double.valueOf(dayOfMonth.toDouble())) + "-" + mFormat.format(java.lang.Double.valueOf(monthOfYear + 1.toDouble())) + "-" + year
-
-        if (click_detect_flag.equals("from_date", ignoreCase = true)) {
-            if (!dcr_to.text.toString().equals("", ignoreCase = true)) {
-                val s = CheckDates(date, dcr_to.text.toString())
-                if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
-                    dcr_from.setText(date)
-
-                } else if (s.equals("t", ignoreCase = true)) {
-                    dcr_from.setText("")
-                    val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
-                }
-            } else {
-                dcr_from.setText(date)
-                val toast = Toast.makeText(applicationContext, "Please Select To Date ", Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-            }
-        } else if (click_detect_flag.equals("to_date", ignoreCase = true)) {
-            if (!dcr_from.text.toString().equals("", ignoreCase = true)) {
-                val s = CheckDates(dcr_from.text.toString(), date)
-                if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
-                    dcr_to.setText(date)
-
-                    isInternetPresent = cd!!.isConnectingToInternet
-
-                    if (isInternetPresent) {
-                        getdata()
-
-                    } else {
-                        val toast = Toast.makeText(this,
-                                "Internet Not Available. ", Toast.LENGTH_SHORT)
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.show()
-                        finish()
-                    }
-
-                } else if (s.equals("t", ignoreCase = true)) {
-                    dcr_to.setText("")
-                    val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
-                }
-            } else {
-                dcr_to.setText(date)
-                val toast = Toast.makeText(applicationContext, "Please Select From Date ", Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-            }
-        }
-    }
+//    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+//        val mFormat = DecimalFormat("00")
+//        val date = mFormat.format(java.lang.Double.valueOf(dayOfMonth.toDouble())) + "-" + mFormat.format(java.lang.Double.valueOf(monthOfYear + 1.toDouble())) + "-" + year
+//
+//        if (click_detect_flag.equals("from_date", ignoreCase = true)) {
+//            if (!dcr_to.text.toString().equals("", ignoreCase = true)) {
+//                val s = CheckDates(date, dcr_to.text.toString())
+//                if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+//                    dcr_from.setText(date)
+//
+//                } else if (s.equals("t", ignoreCase = true)) {
+//                    dcr_from.setText("")
+//                    val toast = Toast.makeText(applicationContext, "From Date should be less Than To Date ", Toast.LENGTH_LONG)
+//                    toast.setGravity(Gravity.CENTER, 0, 0)
+//                    toast.show()
+//                }
+//            } else {
+//                dcr_from.setText(date)
+//                val toast = Toast.makeText(applicationContext, "Please Select To Date ", Toast.LENGTH_LONG)
+//                toast.setGravity(Gravity.CENTER, 0, 0)
+//                toast.show()
+//            }
+//        } else if (click_detect_flag.equals("to_date", ignoreCase = true)) {
+//            if (!dcr_from.text.toString().equals("", ignoreCase = true)) {
+//                val s = CheckDates(dcr_from.text.toString(), date)
+//                if (s.equals("f", ignoreCase = true) || s.equals("a", ignoreCase = true)) {
+//                    dcr_to.setText(date)
+//
+//                    isInternetPresent = cd!!.isConnectingToInternet
+//
+//                    if (isInternetPresent) {
+//                        getdata()
+//
+//                    } else {
+//                        val toast = Toast.makeText(this,
+//                                "Internet Not Available. ", Toast.LENGTH_SHORT)
+//                        toast.setGravity(Gravity.CENTER, 0, 0)
+//                        toast.show()
+//                        finish()
+//                    }
+//
+//                } else if (s.equals("t", ignoreCase = true)) {
+//                    dcr_to.setText("")
+//                    val toast = Toast.makeText(applicationContext, "To Date should be Greater Than from Date ", Toast.LENGTH_LONG)
+//                    toast.setGravity(Gravity.CENTER, 0, 0)
+//                    toast.show()
+//                }
+//            } else {
+//                dcr_to.setText(date)
+//                val toast = Toast.makeText(applicationContext, "Please Select From Date ", Toast.LENGTH_LONG)
+//                toast.setGravity(Gravity.CENTER, 0, 0)
+//                toast.show()
+//            }
+//        }
+//    }
 
     fun CheckDates(from_date: String?, to_date: String?): String? {
         val dfDate = SimpleDateFormat("dd-MM-yyyy")
