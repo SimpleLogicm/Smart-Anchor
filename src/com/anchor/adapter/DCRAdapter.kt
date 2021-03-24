@@ -11,6 +11,7 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.anchor.activities.Global_Data
 import com.anchor.activities.R
@@ -162,21 +163,26 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 
 
         holder.order_count_details.setOnClickListener {
-            val dialognew = Dialog(mContext)
-            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialognew.setCancelable(false)
-            dialognew.setContentView(R.layout.dcr_report2)
-
-            val ordertakan = dialognew.findViewById<TextView>(R.id.ordertakan)
-            val returnorder = dialognew.findViewById<TextView>(R.id.returnorder)
-            val noorder = dialognew.findViewById<TextView>(R.id.noorder)
-            val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
+            if (data.ordertaken.length <= 0 && data.returnorder.length <= 0 && data.noorder.length <= 0 ){
+                Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
 
 
+            }else{
+                val dialognew = Dialog(mContext)
+                dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialognew.setCancelable(false)
+                dialognew.setContentView(R.layout.dcr_report2)
 
-            ordertakan.setText(data.ordertaken)
-            returnorder.setText(data.returnorder)
-            noorder.setText(data.noorder)
+                val ordertakan = dialognew.findViewById<TextView>(R.id.ordertakan)
+                val returnorder = dialognew.findViewById<TextView>(R.id.returnorder)
+                val noorder = dialognew.findViewById<TextView>(R.id.noorder)
+                val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
+
+
+
+                ordertakan.setText(data.ordertaken)
+                returnorder.setText(data.returnorder)
+                noorder.setText(data.noorder)
 
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
@@ -186,24 +192,40 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 //            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
 //        }
 
-            closeBtn.setOnClickListener { dialognew.dismiss() }
-            dialognew.show()
+                closeBtn.setOnClickListener { dialognew.dismiss() }
+                dialognew.show()
+            }
+
+
+
         }
 
         holder.promotional_activity.setOnClickListener {
-            val dialognew = Dialog(mContext)
-            dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialognew.setCancelable(false)
-            dialognew.setContentView(R.layout.dcr_dialog)
 
-            val promotioanltype = dialognew.findViewById<TextView>(R.id.promotioanltype)
-            val intime = dialognew.findViewById<TextView>(R.id.intime)
-            val outtime = dialognew.findViewById<TextView>(R.id.outtime)
-            val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
+            if (data.promotionalType.length <= 0 &&  data.Intime.length <= 0 && data.Outtime.length <= 0){
 
-            promotioanltype.setText(data.promotionalType)
-            intime.setText(data.Intime)
-            outtime.setText(data.Outtime)
+                Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
+
+            }else{
+                val dialognew = Dialog(mContext)
+                dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialognew.setCancelable(false)
+                dialognew.setContentView(R.layout.dcr_dialog)
+
+                val promotioanltype = dialognew.findViewById<TextView>(R.id.promotioanltype)
+                val intime = dialognew.findViewById<TextView>(R.id.intime)
+                val outtime = dialognew.findViewById<TextView>(R.id.outtime)
+                val closeBtn = dialognew.findViewById<ImageView>(R.id.dcr_cross)
+
+                promotioanltype.setText(data.promotionalType)
+                intime.setText(data.Intime)
+                outtime.setText(data.Outtime)
+
+                closeBtn.setOnClickListener { dialognew.dismiss() }
+                dialognew.show()
+            }
+
+
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
 //        }
@@ -212,8 +234,8 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 //            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
 //        }
 
-            closeBtn.setOnClickListener { dialognew.dismiss() }
-            dialognew.show()
+
+
         }
     }
 

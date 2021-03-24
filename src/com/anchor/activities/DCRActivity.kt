@@ -53,6 +53,7 @@ class DCRActivity : Activity() {
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
     var item: String? = null
+    var dialog: ProgressDialog? = null
     var final_response = ""
     var response_result = ""
     var dataAdapterusername: ArrayAdapter<String>? = null
@@ -134,9 +135,9 @@ class DCRActivity : Activity() {
         username.add("Select User")
 
         val hashSet = HashSet<String>()
-                        hashSet.addAll(username)
-                        username.clear()
-                        username.addAll(hashSet)
+        hashSet.addAll(username)
+        username.clear()
+        username.addAll(hashSet)
 
         dataAdapterusername = ArrayAdapter<String>(
                 this@DCRActivity, R.layout.spinner_item, username!!)
@@ -353,6 +354,10 @@ class DCRActivity : Activity() {
     }
 
     private fun getdata(items: String) {
+        dialog = ProgressDialog(this@DCRActivity)
+        dialog!!.setTitle("Smart Anchor")
+        dialog!!.setMessage("Please wait...")
+        dialog!!.show()
         var user_email: String? = ""
         val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
         try {
@@ -375,11 +380,10 @@ class DCRActivity : Activity() {
 //        } else {
 //
 //        }
-        if(items.length>0)
-                {
-                    url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + items
+        if (items.length > 0) {
+            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + items
 
-                }else{
+        } else {
             url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&user_name=" + "&to_date=" + dcr_to.text.toString()
         }
 
@@ -403,7 +407,7 @@ class DCRActivity : Activity() {
                         var response_result = ""
                         if (jsonObject.has("message")) {
                             response_result = jsonObject.getString("message")
-
+                            dialog!!.dismiss()
                             //  todolist_progress_customer.visibility = View.GONE
                             val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
                             toast.setGravity(Gravity.CENTER, 0, 0)
@@ -411,32 +415,47 @@ class DCRActivity : Activity() {
 
                         } else {
                             if (error is TimeoutError || error is NoConnectionError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Network Error",
                                         Toast.LENGTH_LONG).show()
+
                             } else if (error is AuthFailureError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Server AuthFailureError  Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is ServerError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Server   Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is NetworkError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Network   Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is ParseError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "ParseError   Error",
                                         Toast.LENGTH_LONG).show()
                             } else {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                             }
                         }
 
                     } catch (e: JSONException) {
                         //Handle a malformed json response
+                        dialog!!.dismiss()
+
                     }
                     //  todolist_progress_customer.visibility = View.GONE
 
@@ -462,6 +481,9 @@ class DCRActivity : Activity() {
                     response_result = response.getString("message")
 
                     runOnUiThread(Runnable {
+
+                        dialog!!.dismiss()
+
                         dcrreport_recycler_view.hideShimmerAdapter()
 
                         //  todolist_progress_customer.visibility = View.GONE
@@ -477,6 +499,8 @@ class DCRActivity : Activity() {
                     Log.d("volley", "cities$cities")
                     runOnUiThread(Runnable {
                         if (cities.length() <= 0) {
+                            dialog!!.dismiss()
+
                             Toast.makeText(this@DCRActivity, "DCR not found.", Toast.LENGTH_SHORT).show()
                             dcrreport_recycler_view.hideShimmerAdapter()
                             val i = Intent(this@DCRActivity, ReportsActivity::class.java)
@@ -503,7 +527,7 @@ class DCRActivity : Activity() {
                                 run {
                                     jsonObject.getString("user_name")
                                     username.add(jsonObject.getString("user_name"))
-                               //     val s: Set<String> = LinkedHashSet<String>(username)
+                                    //     val s: Set<String> = LinkedHashSet<String>(username)
 
                                     dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"), jsonObject.getString("order_taken")))
 
@@ -532,6 +556,8 @@ class DCRActivity : Activity() {
                         dcrreport_recycler_view?.setItemAnimator(DefaultItemAnimator())
                         dcrreport_recycler_view?.setAdapter(dcrAdapter)
                         dcrAdapter!!.notifyDataSetChanged()
+                        dialog!!.dismiss()
+
                     })
 
                     runOnUiThread(Runnable {
@@ -543,11 +569,15 @@ class DCRActivity : Activity() {
             } catch (e: JSONException) {
                 e.printStackTrace()
                 runOnUiThread(Runnable {
+                    dialog!!.dismiss()
+
                     // todolist_progress_customer.visibility = View.GONE
                 })
             }
             runOnUiThread(Runnable {
                 // todolist_progress_customer.visibility = View.GONE
+                dialog!!.dismiss()
+
             })
             return "Executed"
         }
@@ -555,6 +585,8 @@ class DCRActivity : Activity() {
         override fun onPostExecute(result: String) {
             runOnUiThread(Runnable {
                 // todolist_progress_customer.visibility = View.GONE
+                dialog!!.dismiss()
+
             })
         }
 
@@ -576,7 +608,7 @@ class DCRActivity : Activity() {
     override fun onBackPressed() {
         // TODO Auto-generated method stub
         //super.onBackPressed();
-        val i = Intent(this@DCRActivity, MainActivity::class.java)
+        val i = Intent(this@DCRActivity, ReportsActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         startActivity(i)
@@ -685,6 +717,7 @@ class DCRActivity : Activity() {
                 }
                 R.id.action_pdf -> {
 
+                    dialog!!.show()
                     var user_email: String? = ""
                     val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
                     try {
@@ -698,19 +731,21 @@ class DCRActivity : Activity() {
                     }
                     val domain = resources.getString(R.string.service_domain)
 
-                    var pdfurl :String?=null
+                    var pdfurl: String? = null
 
                     if (!item.equals("Select User")) {
-                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item
+                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item + "&from=pdf"
 
                     } else {
-                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name="
+                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=&from=pdf"
 
                     }
 
 
-              //      var pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&from=" + "pdf"
+                    //      var pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&from=" + "pdf"
                     Log.i("pdfurl", "pdfurl" + pdfurl)
+                    dialog!!.dismiss()
+
 
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
                     browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

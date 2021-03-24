@@ -54,6 +54,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
     var cd: ConnectionDetector? = null
     var final_response = ""
     var response_result = ""
+    var dialog: ProgressDialog? = null
     var isInternetPresent = false
     var attendanceModel: MutableList<AttendanceModel> = ArrayList()
     var datePickerDialog: DatePickerDialog? = null
@@ -356,6 +357,10 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun ViewAttendanceData() {
+        dialog = ProgressDialog(this@AttendanceActivity)
+        dialog!!.setTitle("Smart Anchor")
+        dialog!!.setMessage("Please wait...")
+        dialog!!.show()
 
         var user_email: String? = ""
         val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
@@ -387,6 +392,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
                         var response_result = ""
                         if (jsonObject.has("message")) {
+                            dialog!!.dismiss()
                             response_result = jsonObject.getString("message")
                             dcrreport_recycler_view.hideShimmerAdapter()
                           //  todolist_progress_customer.visibility = View.GONE
@@ -395,30 +401,43 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             toast.show()
 //                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
 //                            startActivity(i)
+
                         }
                         else
                         {
                             if (error is TimeoutError || error is NoConnectionError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Network Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is AuthFailureError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Server AuthFailureError  Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is ServerError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Server   Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is NetworkError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "Network   Error",
                                         Toast.LENGTH_LONG).show()
                             } else if (error is ParseError) {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext,
                                         "ParseError   Error",
                                         Toast.LENGTH_LONG).show()
                             } else {
+                                dialog!!.dismiss()
+
                                 Toast.makeText(applicationContext, error.message, Toast.LENGTH_LONG).show()
                             }
                         }
@@ -450,6 +469,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
                     runOnUiThread(Runnable {
                      //   todolist_progress_customer.visibility = View.GONE
+                        dialog!!.dismiss()
+
                         //Toast.makeText(Order.this, "Delivery Schedule Not Found.", Toast.LENGTH_LONG).show();
                         val toast = Toast.makeText(context, response_result, Toast.LENGTH_LONG)
                         toast.setGravity(Gravity.CENTER, 0, 0)
@@ -465,6 +486,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     Log.d("volley", "data$cities")
                     runOnUiThread(Runnable {
                         if (cities.length()<=0){
+                            dialog!!.dismiss()
+
                             Toast.makeText(this@AttendanceActivity,"Attendance not found.",Toast.LENGTH_SHORT).show()
                             dcrreport_recycler_view.hideShimmerAdapter()
 //                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
@@ -496,6 +519,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         }
                     }
                                         runOnUiThread(Runnable {
+                                            dialog!!.dismiss()
+
                                             attendanceAdapter = AttendanceAdapter(this@AttendanceActivity, attendanceModel)
                                             val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
                                             dcrreport_recycler_view?.setLayoutManager(mLayoutManager)
@@ -510,10 +535,14 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                 e.printStackTrace()
                 runOnUiThread(Runnable {
                    // todolist_progress_customer.visibility = View.GONE
+                    dialog!!.dismiss()
+
                 })
             }
             runOnUiThread(Runnable {
              //   todolist_progress_customer.visibility = View.GONE
+                dialog!!.dismiss()
+
             })
             return "Executed"
         }
@@ -521,6 +550,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         override fun onPostExecute(result: String) {
             runOnUiThread(Runnable {
                // todolist_progress_customer.visibility = View.GONE
+                dialog!!.dismiss()
+
             })
         }
 
@@ -540,7 +571,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
     override fun onBackPressed() {
         // TODO Auto-generated method stub
         //super.onBackPressed();
-        val i = Intent(this@AttendanceActivity, MainActivity::class.java)
+        val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         startActivity(i)
@@ -668,6 +699,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     return true
                 }
                 R.id.action_pdf -> {
+                    dialog!!.show()
                     var user_email: String? = ""
                     val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
                     try {
@@ -683,6 +715,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                     var pdfurl = domain+"reports/view_attendance?email="+user_email+"&from_date="+dcr_from.text.toString()+"&to_date="+dcr_to.text.toString()+"&from="+"pdf"
                     Log.i("pdfurl", "pdfurl" +pdfurl)
 
+                    dialog!!.dismiss()
                     val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(pdfurl))
                     browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(browserIntent)
