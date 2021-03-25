@@ -31,7 +31,7 @@
         android:layout_below="@+id/pro_header"
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/text_content_size"
+        android:textSize="16dp"
         android:layout_marginTop="15dp"
         android:text="Emp Code" />
 
@@ -42,7 +42,7 @@
         android:layout_below="@+id/txt_empcode"
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/text_content_size"
+        android:textSize="14sp"
         android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:text="321" />
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/emp_code"
         android:background="#c3c3c3"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_height="1dp"/>
 
     <TextView
@@ -62,8 +62,8 @@
         android:layout_below="@+id/separator1"
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
         android:text="First Name" />
 
     <TextView
@@ -74,8 +74,8 @@
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/txt_firstname"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
         android:text="Last Name" />
 
     <TextView
@@ -86,8 +86,8 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
         android:text="Priya" />
 
     <TextView
@@ -99,15 +99,15 @@
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/firstname"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="14dp"
+        android:layout_marginTop="5dp"
         android:text="Jain" />
 
     <View
         android:id="@+id/separator2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_below="@+id/firstname"
         android:background="#c3c3c3" />
 
@@ -118,8 +118,8 @@
         android:layout_below="@+id/separator2"
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
         android:text="In Time" />
 
     <TextView
@@ -130,8 +130,8 @@
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/firstname"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/Addressn" />
 
 
@@ -143,8 +143,8 @@
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
         android:text="09:00" />
 
     <TextView
@@ -156,15 +156,15 @@
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/firstname"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="14dp"
+        android:layout_marginTop="5dp"
         android:text="xyz address" />
 
     <View
         android:id="@+id/separator3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_below="@+id/address"
         android:background="#c3c3c3" />
 
@@ -175,8 +175,8 @@
         android:layout_below="@+id/separator3"
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
         android:text="Out Time" />
 
     <TextView
@@ -187,8 +187,8 @@
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/firstname"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="5dp"
         android:text="@string/Addressn" />
 
     <TextView
@@ -199,7 +199,7 @@
         android:textColor="@color/black"
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
-        android:textSize="@dimen/text_content_size"
+        android:textSize="14sp"
         android:layout_marginTop="10dp"
         android:text="09:00" />
 
@@ -212,8 +212,8 @@
         android:layout_marginLeft="5dp"
         android:textStyle="bold"
         android:layout_toRightOf="@+id/firstname"
-        android:textSize="@dimen/text_content_size"
-        android:layout_marginTop="10dp"
+        android:textSize="14dp"
+        android:layout_marginTop="5dp"
         android:text="xyz address" />
 
 

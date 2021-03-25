@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
+            android:textSize="16dp"
             android:layout_marginTop="20dp"
             android:text="Promotional Type :- " />
 
@@ -48,8 +48,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
+            android:textSize="14sp"
             android:layout_marginTop="20dp"
             android:text="" />
 
@@ -79,7 +78,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
+            android:textSize="16dp"
             android:layout_marginTop="10dp"
             android:text="In Time :- " />
 
@@ -89,8 +88,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
+            android:textSize="14sp"
             android:layout_marginTop="10dp"
             android:text="" />
 
@@ -120,7 +118,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
+            android:textSize="16dp"
             android:layout_marginTop="10dp"
             android:text="Out Time :- " />
 
@@ -130,8 +128,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"
-            android:textSize="@dimen/text_content_size"
+            android:textSize="14sp"
             android:layout_marginTop="10dp"
             android:text="" />
 
