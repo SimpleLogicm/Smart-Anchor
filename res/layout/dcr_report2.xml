@@ -40,7 +40,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="Orde Takens:-"
+            android:text="Order Taken:-"
             android:textColor="@color/black"
             android:textSize="@dimen/text_content_size" />
 

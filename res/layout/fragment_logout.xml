@@ -326,7 +326,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentRight="true"
-                        android:src="@drawable/expenses"
+                        android:src="@drawable/new_report"
                         android:visibility="visible" />
                 </RelativeLayout>
             </LinearLayout>
