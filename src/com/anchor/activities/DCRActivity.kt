@@ -558,6 +558,7 @@ class DCRActivity : Activity() {
                         dcrAdapter!!.notifyDataSetChanged()
                         dialog!!.dismiss()
 
+                        tv_daterange.setText(dcr_from.text.toString()+" : "+dcr_to.text.toString())
                     })
 
                     runOnUiThread(Runnable {
