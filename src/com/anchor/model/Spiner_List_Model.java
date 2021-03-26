@@ -18,10 +18,11 @@ public class Spiner_List_Model implements Serializable {
     String STOCK;
     String QUANTITY;
     String Name;
+    String smp_flag;
 
 
 
-    public Spiner_List_Model(String primary_category, String sub_category, String product_variant, String business_unit, String business_category,String code,String MRP,String RP,String SQ,String MQ,String STOCK,String QUANTITY,String Name) {
+    public Spiner_List_Model(String primary_category, String sub_category, String product_variant, String business_unit, String business_category,String code,String MRP,String RP,String SQ,String MQ,String STOCK,String QUANTITY,String Name,String smp_flag) {
         this.primary_category = primary_category;
         this.sub_category = sub_category;
         this.product_variant = product_variant;
@@ -35,6 +36,7 @@ public class Spiner_List_Model implements Serializable {
         this.STOCK = STOCK;
         this.QUANTITY = QUANTITY;
         this.Name = Name;
+        this.smp_flag = smp_flag;
 
 
     }
@@ -155,5 +157,13 @@ public class Spiner_List_Model implements Serializable {
 
     public void setBusiness_category(String business_category) {
         this.business_category = business_category;
+    }
+
+    public String getSmp_flag() {
+        return smp_flag;
+    }
+
+    public void setSmp_flag(String smp_flag) {
+        this.smp_flag = smp_flag;
     }
 }

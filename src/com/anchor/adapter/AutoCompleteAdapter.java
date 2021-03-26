@@ -84,6 +84,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> implements Filtera
                                 spiner_list_model.setProduct_variant(cnt1.getProduct_variant());
                                 spiner_list_model.setSub_category("");
                                 spiner_list_model.setCode(cnt1.getCode());
+                                spiner_list_model.setSmp_flag(cnt1.getSmp_flag());
                                 spiner_list_model.setSelected(false);
 
                                 Global_Data.spiner_list_modelList.add(spiner_list_model);

@@ -217,6 +217,18 @@
             android:text=""
             android:textSize="17dp"
             android:visibility="gone" />
+        <TextView
+            android:id="@+id/SMP_FLAG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.40"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text=""
+            android:textSize="17dp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

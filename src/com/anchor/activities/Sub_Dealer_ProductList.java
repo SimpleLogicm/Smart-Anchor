@@ -100,6 +100,8 @@ public class Sub_Dealer_ProductList extends Activity {
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
     static final String TAG_STOCK = "PRODUCT_STOCK";
+    static final String TAG_SMP_FLAG = "Smp_Flag";
+    static final String TAG_EDIT_CLICK = "Edit_Click";
     Button buttonPreviewAddMOre, buttonPreviewv, addmorenews;
     public static final int SIGNATURE_ACTIVITY = 1;
     AutoCompleteTextView Product_Variant;
@@ -257,6 +259,8 @@ public class Sub_Dealer_ProductList extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
+                            mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
+                            mapp.put(TAG_EDIT_CLICK, "false");
 
                             List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_SUBORDER_ID(Global_Data.GLOvel_SUB_GORDER_ID, cnt1.getCode());
 
@@ -582,6 +586,8 @@ public class Sub_Dealer_ProductList extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
+                            mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
+                            mapp.put(TAG_EDIT_CLICK, "false");
 
 
 
@@ -680,6 +686,8 @@ public class Sub_Dealer_ProductList extends Activity {
                                 mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                                 mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                                 mapp.put(TAG_STOCK, "");
+                                mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
+                                mapp.put(TAG_EDIT_CLICK, "false");
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                                 resultsvarient.add(cnt1.getProduct_variant());

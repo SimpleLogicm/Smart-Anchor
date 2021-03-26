@@ -101,6 +101,8 @@ public class ProductAll_Varients extends Activity {
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
     static final String TAG_STOCK = "PRODUCT_STOCK";
+    static final String TAG_SMP_FLAG = "Smp_Flag";
+    static final String TAG_EDIT_CLICK = "Edit_Click";
 
     ImageView imgView;
     static float totalPrice;
@@ -278,6 +280,8 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
+                            mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
+                            mapp.put(TAG_EDIT_CLICK, "false");
                             //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
 
@@ -678,6 +682,8 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                             mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                             mapp.put(TAG_STOCK, "");
+                            mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
+                            mapp.put(TAG_EDIT_CLICK, "false");
                             //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             // resultsvarient.add(cnt1.getProduct_variant());
@@ -766,6 +772,8 @@ public class ProductAll_Varients extends Activity {
                                 mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                                 mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                                 mapp.put(TAG_STOCK, "");
+                                mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
+                                mapp.put(TAG_EDIT_CLICK, "false");
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                                 // resultsvarient.add(cnt1.getProduct_variant());

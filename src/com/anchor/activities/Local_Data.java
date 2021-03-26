@@ -180,9 +180,18 @@ public class Local_Data {
     String ware_name;
     String sub_categ;
     String product_id;
+    String smp_flag;
 
     public String img_ordersign, name, punched_button, current_date_only;
     String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id,product_variant,shipment_pri,business_category,primary_category,emp_code,image_path,asset_code,business_unit_code_array,order_category_code_array;
+
+    public String getSmp_flag() {
+        return smp_flag;
+    }
+
+    public void setSmp_flag(String smp_flag) {
+        this.smp_flag = smp_flag;
+    }
 
     public String getProductid() {
         return product_id;

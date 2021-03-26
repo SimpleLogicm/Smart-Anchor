@@ -2970,7 +2970,7 @@ public class getServices {
                                     loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                             jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                             jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                            jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
+                                            jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"),jsonObject.getString("smp_flag"));
 
 
                                 }
@@ -2986,7 +2986,7 @@ public class getServices {
                                         loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                                 jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                                 jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                                jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"));
+                                                jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"),jsonObject.getString("smp_flag"));
                                     }
 
                                 }
@@ -2999,7 +2999,7 @@ public class getServices {
                                     JSONObject jsonObject = customers.getJSONObject(i);
                                     loginDataBaseAdapter.insertCustMaster(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
                                             jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("beat_id"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
-//
+
 
                                 }
                             } else {
@@ -3012,10 +3012,6 @@ public class getServices {
                                         loginDataBaseAdapter.insertCustMaster(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("shop_name"), jsonObject.getString("address"), jsonObject.getString("street"), jsonObject.getString("landmark"),
                                                 jsonObject.getString("pincode"), jsonObject.getString("landline_no"), jsonObject.getString("mobile_no"), jsonObject.getString("email"), jsonObject.getString("status"), jsonObject.getString("state_id"), jsonObject.getString("city_id"), jsonObject.getString("beat_id"), jsonObject.getString("vatin"), "", "", "", "", Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("business_unit_codes")), Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavaString(jsonObject.getString("order_category_codes")));
                                     }
-
-
-//
-
                                 }
                             }
 

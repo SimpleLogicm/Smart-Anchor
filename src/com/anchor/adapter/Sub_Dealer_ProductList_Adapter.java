@@ -5,10 +5,14 @@ package com.anchor.adapter;
  */
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +47,8 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
     static final String TAG_ITEM_SQ = "SQ";
     static final String TAG_ITEM_MQ = "MQ";
     static final String TAG_STOCK = "PRODUCT_STOCK";
+    static final String TAG_SMP_FLAG = "Smp_Flag";
+    static final String TAG_EDIT_CLICK = "Edit_Click";
     HashMap<String, String> getData = new HashMap<String, String>();
     private ArrayList<HashMap<String, String>> dataAray;
     HashMap<String, String> dataIthjem;
@@ -118,6 +124,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
             holder.PMQVALUE = convertView.findViewById(R.id.PMQVALUE);
             holder.PSTOCK = convertView.findViewById(R.id.PSTOCK);
             holder.quantity_error = convertView.findViewById(R.id.quantity_error);
+            holder.SMP_FLAG = convertView.findViewById(R.id.SMP_FLAG);
             // holder.rpvnew = (TextView) convertView.findViewById(R.id.rpvnew);
 
             convertView.setTag(holder);
@@ -165,12 +172,48 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
         holder.mWatcher2.setPosition(position);
         holder.mWatcher2.setActive(true);
 
-        //  holder.productquantity.setId(position);
 
-        //  holder.totalprice.setId(position);
+        holder.productquantity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
 
-//        //we need to update adapter once we finish with editing
+                    Log.d("VVVVVV","VVVVVV"+holder.SMP_FLAG.getText().toString());
+                    Log.d("VR","VR"+getData.get(TAG_EDIT_CLICK));
+                    if(holder.SMP_FLAG.getText().toString().equalsIgnoreCase("true") &&  getData.get(TAG_EDIT_CLICK).equalsIgnoreCase("false"))
+                    {
+                        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("Message");
+                        alertDialog.setMessage("You are Selecting Slow moving Item for which there is No Sales in Last 6 month.");
+                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
 
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                holder.SMP_FLAG.setText("false");
+
+                            }
+                        });
+
+                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel",new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                holder.totalprice.setText("");
+                                holder.quantity_error.setText("");
+                                //MutableWatcher1.
+                                // holder.productquantity.setText("");
+                                Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+                            }
+                        });
+
+                        alertDialog.show();
+                    }
+                } else {
+                    // Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         holder.productquantity.addTextChangedListener(new TextWatcher() {
             @Override
@@ -254,7 +297,7 @@ public class Sub_Dealer_ProductList_Adapter extends ArrayAdapter<HashMap<String,
     }
 
     static class ViewHolder {
-        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs,PSTOCK;
+        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs,PSTOCK,SMP_FLAG;
         TextView PSQ,PMQ,PSQVALUE,PMQVALUE,quantity_error;
         EditText productquantity;
         TextView totalprice,pcode_new;
