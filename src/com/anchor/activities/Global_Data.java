@@ -23,6 +23,8 @@ public class Global_Data {
     public static Context context = null;
     public static String rank_service_call_flag = "";
     public static String year_value = "";
+    //public static ArrayList usernameArray = new ArrayList();
+    public static List<String> usernameArray = new ArrayList<String>();
     public static String halfyear_value = "";
     public static String quartly_value = "";
     public static String monthly_value = "";

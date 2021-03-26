@@ -34,6 +34,9 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.opencsv.CSVWriter
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.activity_d_c_r.*
+import kotlinx.android.synthetic.main.activity_d_c_r.dcr_from
+import kotlinx.android.synthetic.main.activity_d_c_r.dcr_to
+import kotlinx.android.synthetic.main.activity_report_filter.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -52,7 +55,11 @@ class DCRActivity : Activity() {
     var dcrList: MutableList<DCRModel> = ArrayList()
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
+
     var item: String? = null
+    var DcrFrom: String? = null
+    var DcrTo: String? = null
+    var DcrUser: String? = null
     var dialog: ProgressDialog? = null
     var final_response = ""
     var response_result = ""
@@ -132,58 +139,62 @@ class DCRActivity : Activity() {
         // dcrreport_recycler_view?.hideShimmerAdapter()
 
 //        username.clear()
-        username.add("Select User")
+        //username.add("Select User")
 
-        val hashSet = HashSet<String>()
-        hashSet.addAll(username)
-        username.clear()
-        username.addAll(hashSet)
-
-        dataAdapterusername = ArrayAdapter<String>(
-                this@DCRActivity, R.layout.spinner_item, username!!)
-        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
-        spindcr.adapter = dataAdapterusername
-
-        spindcr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                item = parent.getItemAtPosition(position).toString()
-                if (!selectedItem.equals("Select User")) {
-
-                    isInternetPresent = cd!!.isConnectingToInternet
-                    if (isInternetPresent) {
-                        getdata(item!!)
-                    } else {
-                        val toast = Toast.makeText(this@DCRActivity,
-                                "Internet Not Available. ", Toast.LENGTH_SHORT)
-                        toast.setGravity(Gravity.CENTER, 0, 0)
-                        toast.show()
-                        finish()
-                    }
-
-//                    val toast = Toast.makeText(this@DCRActivity,
-//                                "Internet Not Available. $item", Toast.LENGTH_SHORT)
+//        val hashSet = HashSet<String>()
+//        hashSet.addAll(username)
+//        username.clear()
+//        username.addAll(hashSet)
+//
+//        dataAdapterusername = ArrayAdapter<String>(
+//                this@DCRActivity, R.layout.spinner_item, username!!)
+//        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
+//        spindcr.adapter = dataAdapterusername
+//
+//        spindcr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+//                val selectedItem = parent.getItemAtPosition(position).toString()
+//                item = parent.getItemAtPosition(position).toString()
+//                if (!selectedItem.equals("Select User")) {
+//
+//                    isInternetPresent = cd!!.isConnectingToInternet
+//                    if (isInternetPresent) {
+//                        getdata(item!!)
+//                    } else {
+//                        val toast = Toast.makeText(this@DCRActivity,
+//                                "Internet Not Available. ", Toast.LENGTH_SHORT)
 //                        toast.setGravity(Gravity.CENTER, 0, 0)
 //                        toast.show()
-
-//                    val hashSet = HashSet<String>()
-//                        hashSet.addAll(username)
-//                        username.clear()
-//                        username.addAll(hashSet)
+//                        finish()
+//                    }
 //
-//                        dataAdapterusername = ArrayAdapter<String>(
-//                                this@DCRActivity, R.layout.spinner_item, username!!)
-//                        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
-//                        spindcr.adapter = dataAdapterusername
+////                    val toast = Toast.makeText(this@DCRActivity,
+////                                "Internet Not Available. $item", Toast.LENGTH_SHORT)
+////                        toast.setGravity(Gravity.CENTER, 0, 0)
+////                        toast.show()
+//
+////                    val hashSet = HashSet<String>()
+////                        hashSet.addAll(username)
+////                        username.clear()
+////                        username.addAll(hashSet)
+////
+////                        dataAdapterusername = ArrayAdapter<String>(
+////                                this@DCRActivity, R.layout.spinner_item, username!!)
+////                        dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)
+////                        spindcr.adapter = dataAdapterusername
+//
+//                }
+//            } // to close the onItemSelected
+//
+//            override fun onNothingSelected(parent: AdapterView<*>) {
+//
+//            }
+//        }
 
-                }
-            } // to close the onItemSelected
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
+        iv_filter.setOnClickListener {
+            val i = Intent(this@DCRActivity, ReportFilterActivity::class.java)
+            startActivity(i)
         }
-
 
         // ConnectFTP();
         dcr_from.setOnClickListener {
@@ -228,7 +239,7 @@ class DCRActivity : Activity() {
                             isInternetPresent = cd!!.isConnectingToInternet
 
                             if (isInternetPresent) {
-                                getdata("")
+                                getdata("","","")
 
                             } else {
                                 val toast = Toast.makeText(this,
@@ -302,7 +313,7 @@ class DCRActivity : Activity() {
                             isInternetPresent = cd!!.isConnectingToInternet
 
                             if (isInternetPresent) {
-                                getdata("")
+                                getdata("","","")
 
                             } else {
                                 val toast = Toast.makeText(this,
@@ -342,7 +353,28 @@ class DCRActivity : Activity() {
         isInternetPresent = cd!!.isConnectingToInternet
 
         if (isInternetPresent) {
-            getdata("")
+//            var inten = Intent()
+            var bundle :Bundle ?=intent.extras
+           // val inten = getIntent();
+            //val myValue = inten.getStringExtra("key")
+            DcrFrom = bundle?.getString("DCR_FROMDATE")
+            DcrTo = bundle?.getString("DCR_TODATE")
+            DcrUser = bundle?.getString("DCR_USER")
+
+            if(bundle!=null)
+            {
+                getdata(DcrFrom!!,DcrTo!!,DcrUser!!)
+            }else{
+                getdata("","","")
+            }
+
+//            if (DcrFrom?.length!! >0 && DcrTo?.length!! >0 && DcrUser?.length!! >0)
+//            {
+//                getdata(DcrFrom,DcrTo,DcrUser)
+//            }else{
+//                getdata("","","")
+//            }
+
 
         } else {
             val toast = Toast.makeText(this,
@@ -353,7 +385,7 @@ class DCRActivity : Activity() {
         }
     }
 
-    private fun getdata(items: String) {
+    private fun getdata(fromdate: String, todate: String, dcruser: String) {
         dialog = ProgressDialog(this@DCRActivity)
         dialog!!.setTitle("Smart Anchor")
         dialog!!.setMessage("Please wait...")
@@ -380,11 +412,11 @@ class DCRActivity : Activity() {
 //        } else {
 //
 //        }
-        if (items.length > 0) {
-            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + items
+        if (dcruser.length > 0) {
+            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + fromdate + "&to_date=" + todate + "&user_name=" + dcruser
 
         } else {
-            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&user_name=" + "&to_date=" + dcr_to.text.toString()
+            url = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + "" + "&user_name=" + "&to_date=" + ""
         }
 
 
@@ -515,8 +547,8 @@ class DCRActivity : Activity() {
                     })
 
                     dcrList.clear()
-                    username.clear()
-                    username.add("Select User")
+                    Global_Data.usernameArray.clear()
+                    Global_Data.usernameArray.add("Select User")
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
 
@@ -526,7 +558,7 @@ class DCRActivity : Activity() {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
                                 run {
                                     jsonObject.getString("user_name")
-                                    username.add(jsonObject.getString("user_name"))
+                                    Global_Data.usernameArray.add(jsonObject.getString("user_name"))
                                     //     val s: Set<String> = LinkedHashSet<String>(username)
 
                                     dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"), jsonObject.getString("order_taken")))
@@ -540,10 +572,10 @@ class DCRActivity : Activity() {
                     }
 
                     runOnUiThread(Runnable {
-                        val hashSet = HashSet<String>()
-                        hashSet.addAll(username)
-                        username.clear()
-                        username.addAll(hashSet)
+//                        val hashSet = HashSet<String>()
+//                        hashSet.addAll(Global_Data.usernameArray)
+//                        username.clear()
+//                        username.addAll(hashSet)
 //
 //                        dataAdapterusername = ArrayAdapter<String>(
 //                                this@DCRActivity, R.layout.spinner_item, username!!)
@@ -558,7 +590,7 @@ class DCRActivity : Activity() {
                         dcrAdapter!!.notifyDataSetChanged()
                         dialog!!.dismiss()
 
-                        tv_daterange.setText(dcr_from.text.toString()+" : "+dcr_to.text.toString())
+                        tv_daterange.setText(DcrFrom+" : "+DcrTo)
                     })
 
                     runOnUiThread(Runnable {

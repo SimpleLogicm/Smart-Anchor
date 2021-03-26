@@ -33,7 +33,7 @@
             <ImageView
                 android:id="@+id/cancelbtn"
                 android:layout_width="0dp"
-                android:src="@drawable/crossbtn"
+                android:src="@drawable/dcr_cross"
                 android:layout_weight="0.3"
                 android:layout_height="50dp">
 

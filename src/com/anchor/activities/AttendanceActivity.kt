@@ -399,8 +399,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             val toast = Toast.makeText(context, response_result, Toast.LENGTH_SHORT)
                             toast.setGravity(Gravity.CENTER, 0, 0)
                             toast.show()
-//                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
-//                            startActivity(i)
+                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
+                            startActivity(i)
 
                         }
                         else
@@ -476,8 +476,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                         toast.setGravity(Gravity.CENTER, 0, 0)
                         toast.show()
                         dcrreport_recycler_view.hideShimmerAdapter()
-//                        val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
-//                        startActivity(i)
+                        val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
+                        startActivity(i)
                     })
                 }
                 else {
@@ -490,8 +490,8 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
 
                             Toast.makeText(this@AttendanceActivity,"Attendance not found.",Toast.LENGTH_SHORT).show()
                             dcrreport_recycler_view.hideShimmerAdapter()
-//                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
-//                            startActivity(i)
+                            val i = Intent(this@AttendanceActivity, ReportsActivity::class.java)
+                            startActivity(i)
 //                             Toast toast =
 //                                     var toast :Toast?=null
 //                             Toast.makeText(Customer_Service.this,"Please Select City",
