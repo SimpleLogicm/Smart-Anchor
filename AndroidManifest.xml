@@ -85,7 +85,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:allowBackup">
-<!--        <activity android:name=".AttendanceActivity"></activity>-->
+<!--        <activity android:name=".ReportFilterActivity"></activity>-->
+        <!-- <activity android:name=".AttendanceActivity"></activity> -->
         <!-- <activity android:name=".DCRActivity" /> -->
         <uses-library
             android:name="org.apache.http.legacy"
@@ -281,6 +282,12 @@
             android:name=".ReportsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ReportFilterActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
+
         <activity
             android:name=".Target"
             android:label="@string/app_name"
