@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Global_Data {
-
     public static Context context = null;
     public static String rank_service_call_flag = "";
     public static String year_value = "";
@@ -80,7 +79,7 @@ public class Global_Data {
     public static String target_quarter="";
     public static String target_grpby="";
     public static String SCHE_CODE="";
-
+    public static String syncStatus="";
 
     public static String AmountOutstanding="";
     public static String AmountOverdue="";

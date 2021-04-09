@@ -3199,10 +3199,20 @@ public class getServices {
                                 Toast.makeText(context, "items Sync Successfully.", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
 
-                                Intent intentn = new Intent(context, LocationDisclosureActivity.class);
-                                context.startActivity(intentn);
-                                //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                ((Activity) context).finish();
+                                if(Global_Data.syncStatus.length()>0)
+                                {
+                                    Intent intentn = new Intent(context, MainActivity.class);
+                                    context.startActivity(intentn);
+                                    //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    ((Activity) context).finish();
+                                    Global_Data.syncStatus="";
+                                }else{
+                                        Intent intentn = new Intent(context, LocationDisclosureActivity.class);
+                                        context.startActivity(intentn);
+                                        //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        ((Activity) context).finish();
+
+                                      }
 
                                 t_total = 0;
                                 achived_total = 0;

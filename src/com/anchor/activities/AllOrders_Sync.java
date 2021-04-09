@@ -164,7 +164,7 @@ public class AllOrders_Sync  extends Activity  {
 
                 if (Global_Data.isNetworkAvailable(AllOrders_Sync.this))
                 {
-
+                    Global_Data.syncStatus="yes";
                     getServices.sendRequestnew(AllOrders_Sync.this, "Please wait...");
                     //getServices.sendRequest(AllOrders_Sync.this);
                 }
