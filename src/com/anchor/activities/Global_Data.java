@@ -24,6 +24,7 @@ public class Global_Data {
     public static String year_value = "";
     //public static ArrayList usernameArray = new ArrayList();
     public static List<String> usernameArray = new ArrayList<String>();
+    public static List<String> datear = new ArrayList<String>();
     public static String halfyear_value = "";
     public static String quartly_value = "";
     public static String monthly_value = "";

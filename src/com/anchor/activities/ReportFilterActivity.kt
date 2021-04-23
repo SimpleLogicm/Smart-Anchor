@@ -90,11 +90,11 @@ class ReportFilterActivity : Activity() {
             ex.printStackTrace()
         }
 //        Global_Data.usernameArray.clear()
-        Global_Data.usernameArray.add("Select User")
 
         val hashSet = HashSet<String>()
         hashSet.addAll(Global_Data.usernameArray)
         Global_Data.usernameArray.clear()
+        Global_Data.usernameArray.add("Select User")
         Global_Data.usernameArray.addAll(hashSet)
 
         dataAdapterusername = ArrayAdapter<String>(this@ReportFilterActivity, R.layout.spinner_item, Global_Data.usernameArray!!)
@@ -109,7 +109,7 @@ class ReportFilterActivity : Activity() {
                 if (!selectedItem.equals("Select User")) {
                     item = parent.getItemAtPosition(position).toString()
                 }
-            } // to close the onItemSelected
+            } // to close the onItemSelected S
 
             override fun onNothingSelected(parent: AdapterView<*>) {
 
@@ -321,7 +321,7 @@ class ReportFilterActivity : Activity() {
     override fun onBackPressed() {
         // TODO Auto-generated method stub
         //super.onBackPressed();
-        val i = Intent(this@ReportFilterActivity, MainActivity::class.java)
+        val i = Intent(this@ReportFilterActivity, DCRActivity::class.java)
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         startActivity(i)

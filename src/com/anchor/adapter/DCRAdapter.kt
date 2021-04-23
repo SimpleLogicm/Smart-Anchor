@@ -163,7 +163,7 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 
 
         holder.order_count_details.setOnClickListener {
-            if (data.ordertaken.length <= 0 && data.returnorder.length <= 0 && data.noorder.length <= 0 ){
+            if (data.ordertaken.equals("0") || data.ordertaken.equals("") && data.returnorder.equals("0") || data.returnorder.equals("") && data.noorder.equals("0") || data.noorder.equals("") ){
                 Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
 
 
@@ -202,7 +202,7 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 
         holder.promotional_activity.setOnClickListener {
 
-            if (data.promotionalType.length <= 0 &&  data.Intime.length <= 0 && data.Outtime.length <= 0){
+            if (data.promotionalType.equals("0") || data.promotionalType.equals("") &&  data.Intime.equals("0") ||data.Intime.equals("") && data.Outtime.equals("0") || data.Outtime.equals("")){
 
                 Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
 

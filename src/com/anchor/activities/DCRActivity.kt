@@ -15,7 +15,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.ArrayAdapter
+import android.widget.PopupMenu
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +37,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.opencsv.CSVWriter
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.activity_d_c_r.*
-import kotlinx.android.synthetic.main.activity_d_c_r.dcr_from
-import kotlinx.android.synthetic.main.activity_d_c_r.dcr_to
-import kotlinx.android.synthetic.main.activity_report_filter.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -55,6 +55,8 @@ class DCRActivity : Activity() {
     var dcrList: MutableList<DCRModel> = ArrayList()
     var datePickerDialog: DatePickerDialog? = null
     var click_detect_flag = ""
+    var datestart =""
+    var dateend =""
 
     var item: String? = null
     var DcrFrom: String? = null
@@ -75,6 +77,11 @@ class DCRActivity : Activity() {
         setContentView(R.layout.activity_d_c_r)
 
         cd = ConnectionDetector(this@DCRActivity)
+
+
+        val builder: StrictMode.VmPolicy.Builder = StrictMode.VmPolicy.Builder()
+
+        StrictMode.setVmPolicy(builder.build())
 
         var user_name = ""
         if (!Global_Data.USER_FIRST_NAME.equals("null", ignoreCase = true)) {
@@ -548,7 +555,7 @@ class DCRActivity : Activity() {
 
                     dcrList.clear()
                     Global_Data.usernameArray.clear()
-                    Global_Data.usernameArray.add("Select User")
+          //          Global_Data.usernameArray.add("Select User")
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
 
@@ -559,7 +566,10 @@ class DCRActivity : Activity() {
                                 run {
                                     jsonObject.getString("user_name")
                                     Global_Data.usernameArray.add(jsonObject.getString("user_name"))
+                                    Global_Data.datear.add(jsonObject.getString("date"))
                                     //     val s: Set<String> = LinkedHashSet<String>(username)
+
+
 
                                     dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"), jsonObject.getString("order_taken")))
 
@@ -590,7 +600,21 @@ class DCRActivity : Activity() {
                         dcrAdapter!!.notifyDataSetChanged()
                         dialog!!.dismiss()
 
-                        tv_daterange.setText(DcrFrom+" : "+DcrTo)
+                        if(DcrFrom.equals(null) && DcrTo.equals(null) ){
+                            datestart= Global_Data.datear.get(0).toString()
+                          //  dateend= Global_Data.datear.get(0).toString()
+                            val e: String = Global_Data.datear.get(Global_Data.datear.size - 1)
+                            dateend=e
+
+
+                            tv_daterange.setText(datestart+" : "+dateend)
+
+                        }else{
+                            tv_daterange.setText(DcrFrom+" : "+DcrTo)
+
+                        }
+
+
                     })
 
                     runOnUiThread(Runnable {
@@ -871,7 +895,7 @@ class DCRActivity : Activity() {
             val handler = object : Handler() {
                 override fun handleMessage(msg: Message) {
 
-                    val yourFile = File(folder, "DCRreport" + purchaseid + ".csv")
+                    val yourFile = File(folder, "DCRreportxls" + purchaseid + ".csv")
 
                     try {
                         openFile(yourFile)
@@ -953,7 +977,13 @@ class DCRActivity : Activity() {
             }
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
+
+          //  FileUtils.openFile(mContext, File(dest))
+
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(applicationContext, "No application found which can open the file", Toast.LENGTH_SHORT).show()
 //            Global_Data.Custom_Toast(applicationContext, "No application found which can open the file","")

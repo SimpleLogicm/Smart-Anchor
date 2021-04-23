@@ -67,6 +67,11 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         setContentView(R.layout.activity_attendance)
 
         context = AttendanceActivity@ this
+
+        val builder: StrictMode.VmPolicy.Builder = StrictMode.VmPolicy.Builder()
+
+        StrictMode.setVmPolicy(builder.build())
+
         cd = ConnectionDetector(context)
 
         var user_name = ""
@@ -889,7 +894,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
             val handler = object : Handler() {
                 override fun handleMessage(msg: Message) {
 
-                    val yourFile = File(folder, "Attendancereport"+purchaseid + ".csv")
+                    val yourFile = File(folder, "Attendancereportxls"+purchaseid + ".csv")
 
                     try {
                         openFile(yourFile)
@@ -1076,7 +1081,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
             }
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
-            Log.e("DATA", e.message)
+            Log.e("DATA", e.message.toString())
         }
     }
 
