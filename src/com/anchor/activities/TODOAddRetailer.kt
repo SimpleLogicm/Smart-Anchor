@@ -29,6 +29,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import cpm.simplelogic.helper.CheckNullValue
+import cpm.simplelogic.helper.GPSTracker
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.*
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_city
 import kotlinx.android.synthetic.main.activity_todo_editcustomer.todoe_iaqdealer
@@ -50,6 +51,7 @@ import java.util.regex.Pattern
 
 
 class TODOAddRetailer : Activity() {
+    private var gpsTracker: GPSTracker? = null
     var dialognew: Dialog? = null
     var dialog: ProgressDialog? = null
     var sub_otp: EditText? = null
@@ -461,107 +463,128 @@ class TODOAddRetailer : Activity() {
         })
 
         todoe_geocordinatesa.setOnClickListener {
-            if (!todoe_address!!.text.toString().trim().equals(""))
-            {
-                if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
-                {
-                    var address = ""
-
-                    if (!todoe_address!!.text.toString().trim().equals(""))
-                    {
-                        address += " " +todoe_address!!.text.toString().trim()
-                    }
-
-                    if (!todoe_areaa!!.text.toString().trim().equals(""))
-                    {
-                        address += " " + todoe_areaa!!.text.toString().trim()
-                    }
-
-//                    if (!todoe_landmarka!!.text.toString().trim().equals(""))
+            gpsTracker = GPSTracker(this@TODOAddRetailer)
+            if (gpsTracker!!.canGetLocation()) {
+                latitude = gpsTracker!!.latitude.toString()
+                longitude = gpsTracker!!.longitude.toString()
+//                tvLatitude.setText(latitude.toString())
+//                tvLongitude.setText(longitude.toString())
+                todoe_geocordinatesa!!.setText(latitude.toString()+" , "+longitude.toString())
+            } else {
+                gpsTracker!!.showSettingsAlert()
+            }
+//            if (!todoe_address!!.text.toString().trim().equals(""))
+//            {
+//                if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
+//                {
+//                    var address = ""
+//
+//                    if (!todoe_address!!.text.toString().trim().equals(""))
 //                    {
-//                        address += " " + todoe_landmarka!!.text.toString().trim()
+//                        address += " " +todoe_address!!.text.toString().trim()
 //                    }
-
-                    if (!todoe_state!!.selectedItem.toString().equals("Select State"))
-                    {
-                        address += " " + todoe_state!!.selectedItem.toString().trim()
-                    }
-
-                    if (!todoe_city!!.selectedItem.toString().equals("Select City"))
-                    {
-                        address += " " + todoe_city!!.selectedItem.toString().trim()
-                    }
-
-                    if (!todoe_pincodea!!.text.toString().trim().equals(""))
-                    {
-                        address += " " + todoe_pincodea!!.text.toString().trim()
-                    }
-
-                    getCordinates(address)
-                }
-                else
-                {
-                    val toast = Toast.makeText(context,
-                            "Please Enter Address", Toast.LENGTH_SHORT)
-                    toast.setGravity(Gravity.CENTER, 0, 0)
-                    toast.show()
-                }
-            }
-            else
-            {
-                val toast = Toast.makeText(context,
-                        "Please Enter Address", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-            }
+//
+//                    if (!todoe_areaa!!.text.toString().trim().equals(""))
+//                    {
+//                        address += " " + todoe_areaa!!.text.toString().trim()
+//                    }
+//
+////                    if (!todoe_landmarka!!.text.toString().trim().equals(""))
+////                    {
+////                        address += " " + todoe_landmarka!!.text.toString().trim()
+////                    }
+//
+//                    if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+//                    {
+//                        address += " " + todoe_state!!.selectedItem.toString().trim()
+//                    }
+//
+//                    if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+//                    {
+//                        address += " " + todoe_city!!.selectedItem.toString().trim()
+//                    }
+//
+//                    if (!todoe_pincodea!!.text.toString().trim().equals(""))
+//                    {
+//                        address += " " + todoe_pincodea!!.text.toString().trim()
+//                    }
+//
+//                    getCordinates(address)
+//                }
+//                else
+//                {
+//                    val toast = Toast.makeText(context,
+//                            "Please Enter Address", Toast.LENGTH_SHORT)
+//                    toast.setGravity(Gravity.CENTER, 0, 0)
+//                    toast.show()
+//                }
+//            }
+//            else
+//            {
+//                val toast = Toast.makeText(context,
+//                        "Please Enter Address", Toast.LENGTH_SHORT)
+//                toast.setGravity(Gravity.CENTER, 0, 0)
+//                toast.show()
+//            }
 
         }
 
         locationimgadd.setOnClickListener {
 
-            if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
-            {
-                var address = ""
+            gpsTracker = GPSTracker(this@TODOAddRetailer)
+            if (gpsTracker!!.canGetLocation()) {
+                latitude = gpsTracker!!.latitude.toString()
+                longitude = gpsTracker!!.longitude.toString()
+//                tvLatitude.setText(latitude.toString())
+//                tvLongitude.setText(longitude.toString())
+                todoe_geocordinatesa!!.setText(latitude.toString()+" , "+longitude.toString())
+            } else {
+                gpsTracker!!.showSettingsAlert()
+            }
 
-                if (!todoe_address!!.text.toString().trim().equals(""))
-                {
-                    address += " " +todoe_address!!.text.toString().trim()
-                }
-
-                if (!todoe_areaa!!.text.toString().trim().equals(""))
-                {
-                    address += " " + todoe_areaa!!.text.toString().trim()
-                }
-
-//                if (!todoe_landmarka!!.text.toString().trim().equals(""))
+//            if (!todoe_address!!.text.toString().trim().equals("") || !todoe_areaa!!.text.toString().trim().equals(""))
+//            {
+//                var address = ""
+//
+//                if (!todoe_address!!.text.toString().trim().equals(""))
 //                {
-//                    address += " " + todoe_landmarka!!.text.toString().trim()
+//                    address += " " +todoe_address!!.text.toString().trim()
 //                }
-
-                if (!todoe_state!!.selectedItem.toString().equals("Select State"))
-                {
-                    address += " " + todoe_state!!.selectedItem.toString().trim()
-                }
-
-                if (!todoe_city!!.selectedItem.toString().equals("Select City"))
-                {
-                    address += " " + todoe_city!!.selectedItem.toString().trim()
-                }
-
-                if (!todoe_pincodea!!.text.toString().trim().equals(""))
-                {
-                    address += " " + todoe_pincodea!!.text.toString().trim()
-                }
-
-                getCordinates(address)
-            }
-            else
-            {
-                val toast = Toast.makeText(context,
-                        "Please Enter Address", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-            }
+//
+//                if (!todoe_areaa!!.text.toString().trim().equals(""))
+//                {
+//                    address += " " + todoe_areaa!!.text.toString().trim()
+//                }
+//
+////                if (!todoe_landmarka!!.text.toString().trim().equals(""))
+////                {
+////                    address += " " + todoe_landmarka!!.text.toString().trim()
+////                }
+//
+//                if (!todoe_state!!.selectedItem.toString().equals("Select State"))
+//                {
+//                    address += " " + todoe_state!!.selectedItem.toString().trim()
+//                }
+//
+//                if (!todoe_city!!.selectedItem.toString().equals("Select City"))
+//                {
+//                    address += " " + todoe_city!!.selectedItem.toString().trim()
+//                }
+//
+//                if (!todoe_pincodea!!.text.toString().trim().equals(""))
+//                {
+//                    address += " " + todoe_pincodea!!.text.toString().trim()
+//                }
+//
+//                getCordinates(address)
+//            }
+//            else
+//            {
+//                val toast = Toast.makeText(context,
+//                        "Please Enter Address", Toast.LENGTH_SHORT)
+//                toast.setGravity(Gravity.CENTER, 0, 0)
+//                toast.show()
+//            }
         }
 
         buttonnoadd_cancel.setOnClickListener {
