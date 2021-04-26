@@ -40,7 +40,6 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
             claim = view.findViewById(R.id.claim)
             order_count_details = view.findViewById(R.id.order_count_details)
             promotional_activity = view.findViewById(R.id.promotional_activity)
-
         }
     }
 
@@ -163,9 +162,16 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 
 
         holder.order_count_details.setOnClickListener {
-            if (data.ordertaken.equals("0") && data.ordertaken.equals("") && data.returnorder.equals("0") && data.returnorder.equals("") && data.noorder.equals("0") && data.noorder.equals("") ){
-                Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
+//            if (data.ordertaken.equals("0") || data.returnorder.equals("0") || data.noorder.equals("0")){
+//                Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
 
+            var ordertaken=data.ordertaken
+            var returnorder=data.returnorder
+            var noorder=data.noorder
+
+ if((ordertaken.equals("0")) && (returnorder.equals("0")) && (noorder.equals("0")))
+ {
+     Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
 
             }else{
                 val dialognew = Dialog(mContext)
@@ -184,6 +190,9 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
                 returnorder.setText(data.returnorder)
                 noorder.setText(data.noorder)
 
+     closeBtn.setOnClickListener { dialognew.dismiss() }
+     dialognew.show()
+
 //        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(Global_Data.GLOvel_LATITUDE)) {
 //            att_lat.setText("Latitude : " + Global_Data.GLOvel_LATITUDE);
 //        }
@@ -192,8 +201,7 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
 //            att_long.setText("Longitude : " + Global_Data.GLOvel_LONGITUDE);
 //        }
 
-                closeBtn.setOnClickListener { dialognew.dismiss() }
-                dialognew.show()
+                
             }
 
 
@@ -201,9 +209,13 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
         }
 
         holder.promotional_activity.setOnClickListener {
+            var promotionalType=data.promotionalType
+            var Intime=data.Intime
+            var Outtime=data.Outtime
 
-            if (data.promotionalType.equals("0") && data.promotionalType.equals("") &&  data.Intime.equals("0") &&data.Intime.equals("") && data.Outtime.equals("0") && data.Outtime.equals("")){
-
+           // if (data.promotionalType.equals("0") && data.promotionalType.equals("") &&  data.Intime.equals("0") &&data.Intime.equals("") && data.Outtime.equals("0") && data.Outtime.equals("")){
+            if((promotionalType.equals("")) && (Intime.equals("")) && (Outtime.equals("")))
+            {
                 Toast.makeText(mContext,"Record not available",Toast.LENGTH_SHORT).show()
 
             }else{

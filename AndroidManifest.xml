@@ -737,13 +737,13 @@
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
          <!-- Production -->
-         <meta-data
-         android:name="com.google.android.maps.v2.API_KEY"
-         android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />
+<!--         <meta-data-->
+<!--         android:name="com.google.android.maps.v2.API_KEY"-->
+<!--         android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
         <!-- debug -->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.maps.v2.API_KEY"-->
-<!--            android:value="AIzaSyCQiNuWCD99Pxsdzxq1eKA7Iat8ElwoqwQ" /> &lt;!&ndash; kartik webnew &ndash;&gt;-->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCQiNuWCD99Pxsdzxq1eKA7Iat8ElwoqwQ" /> <!-- kartik webnew -->
         <!-- <meta-data -->
         <!-- android:name="com.google.android.maps.v2.API_KEY" -->
         <!-- android:value="AIzaSyCVmQPKxFAFzarBGqhdIhVuPGLn-X3oAaQ" /> -->
