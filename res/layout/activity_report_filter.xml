@@ -71,34 +71,40 @@
 
     </Spinner>
 
-<Button
-    android:id="@+id/btn_ok"
-    android:layout_width="80dp"
-    android:layout_height="37dp"
-    android:layout_below="@+id/spindcr"
-    android:text="OK"
-    android:textSize="13dp"
-    android:textStyle="bold"
-    android:textColor="#ffffff"
-    android:layout_alignParentLeft="true"
-    android:background="#8D0704"
-    android:layout_marginLeft="210dp"
-    android:layout_marginTop="20dp"
-    />
-
-    <Button
-        android:id="@+id/btn_clear"
-        android:layout_width="80dp"
-        android:layout_height="37dp"
+    <LinearLayout
         android:layout_below="@+id/spindcr"
-        android:text="@string/Clear"
-        android:textSize="13dp"
-        android:layout_marginRight="210dp"
-        android:layout_alignParentRight="true"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:background="#8D0704"
-        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:text="OK"
+            android:textSize="13dp"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#8D0704"
+            android:layout_marginTop="20dp"
+            />
 
-        android:layout_centerInParent="true"/>
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="80dp"
+            android:layout_height="37dp"
+            android:layout_below="@+id/spindcr"
+            android:layout_margin="10dp"
+            android:text="@string/Clear"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#8D0704"
+            android:layout_marginTop="20dp"
+
+           />
+    </LinearLayout>
+
+
 </RelativeLayout>
