@@ -300,14 +300,14 @@ public class LoginActivity extends Activity {
 //		editText1.setText("Kartik");
 //		editText2.setText("Kartik4882263");
 
-        editText1.setText("Kartik");
-        editText2.setText("Kartik0542438");
+//        editText1.setText("Kartik");
+//        editText2.setText("Kartik0542438");
 
 //        editText1.setText("Sujit");
 //        editText2.setText("sujit123456");
 
-//        editText1.setText("Priya");
-//        editText2.setText("pass2010");
+        editText1.setText("Priya");
+        editText2.setText("pass2029");
 
 
 //      ZXZXXs

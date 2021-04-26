@@ -105,6 +105,7 @@ class ReportFilterActivity : Activity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 item = parent.getItemAtPosition(position).toString()
+                Global_Data.usernamefilter = item
 
                 if (!selectedItem.equals("Select User")) {
                     item = parent.getItemAtPosition(position).toString()
@@ -268,20 +269,20 @@ class ReportFilterActivity : Activity() {
 
         btn_ok.setOnClickListener {
 
-            if(dcr_from.text.toString().equals("")) {
+            if (dcr_from.text.toString().equals("")) {
                 val toast = Toast.makeText(applicationContext, "Please Select From Date", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0, 0)
                 toast.show()
-            }else if(dcr_to.text.toString().equals("")) {
+            } else if (dcr_to.text.toString().equals("")) {
                 val toast = Toast.makeText(applicationContext, "Please Select To Date", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0, 0)
                 toast.show()
-            }else if(item.toString().equals("Select User")){
+            } else if (item.toString().equals("Select User")) {
                 val toast = Toast.makeText(applicationContext, "Please Select User", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0, 0)
                 toast.show()
 
-            }else{
+            } else {
                 val intent = Intent(this@ReportFilterActivity, DCRActivity::class.java)
                 intent.putExtra("DCR_FROMDATE", dcr_from.text.toString())
                 intent.putExtra("DCR_TODATE", dcr_to.text.toString())

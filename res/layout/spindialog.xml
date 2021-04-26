@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/pro_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/dcr_cross"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="Select User"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_header"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/dcr_cross"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/dcr_cross" />
+
+
+    <Spinner
+        android:id="@+id/spindcr"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_below="@+id/pro_header"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+    </Spinner>
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/spindcr"
+        android:text="OK"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:background="#8D0704"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+
+
+</RelativeLayout>

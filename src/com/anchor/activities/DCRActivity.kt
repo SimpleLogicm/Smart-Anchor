@@ -3,6 +3,7 @@ package com.anchor.activities
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.*
 import android.graphics.Color
@@ -11,10 +12,7 @@ import android.net.Uri
 import android.os.*
 import android.provider.Settings
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import android.widget.TextView
@@ -57,7 +55,7 @@ class DCRActivity : Activity() {
     var click_detect_flag = ""
     var datestart =""
     var dateend =""
-
+    var bundle:Bundle?=null
     var item: String? = null
     var DcrFrom: String? = null
     var DcrTo: String? = null
@@ -200,6 +198,7 @@ class DCRActivity : Activity() {
 
         iv_filter.setOnClickListener {
             val i = Intent(this@DCRActivity, ReportFilterActivity::class.java)
+           // getdata("","","")
             startActivity(i)
         }
 
@@ -361,7 +360,7 @@ class DCRActivity : Activity() {
 
         if (isInternetPresent) {
 //            var inten = Intent()
-            var bundle :Bundle ?=intent.extras
+             bundle =intent.extras
            // val inten = getIntent();
             //val myValue = inten.getStringExtra("key")
             DcrFrom = bundle?.getString("DCR_FROMDATE")
@@ -534,6 +533,7 @@ class DCRActivity : Activity() {
                 } else {
 
                     val cities: JSONArray = response.getJSONArray("data")
+                    val userdetail: JSONArray = response.getJSONArray("user_details")
                     Log.i("volley", "response cities Length: " + cities.length())
                     Log.d("volley", "cities$cities")
                     runOnUiThread(Runnable {
@@ -559,14 +559,26 @@ class DCRActivity : Activity() {
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
 
+                    for (j in 0 until userdetail.length()){
+                        val jsonObjectnew = userdetail. getJSONObject(j)
+                        if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(userdetail.getString(j))){
+                            Global_Data.usernameArray.add(jsonObjectnew.getString("user_name"))
+
+                        }
+                    }
+
                     for (i in 0 until cities.length()) {
                         val jsonObject = cities.getJSONObject(i)
                         try {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
                                 run {
-                                    jsonObject.getString("user_name")
-                                    Global_Data.usernameArray.add(jsonObject.getString("user_name"))
-                                    Global_Data.datear.add(jsonObject.getString("date"))
+                                  //  jsonObject.getString("user_name")
+                                 //   Global_Data.usernameArray.add(jsonObject.getString("user_name"))
+                                //    Global_Data.datear.add(jsonObject.getString("date"))
+                                    datestart=jsonObject.getString("from_date")
+                                    dateend=jsonObject.getString("to_date")
+
+
                                     //     val s: Set<String> = LinkedHashSet<String>(username)
 
 
@@ -601,12 +613,10 @@ class DCRActivity : Activity() {
                         dialog!!.dismiss()
 
                         if(DcrFrom.equals(null) && DcrTo.equals(null) ){
-                            datestart= Global_Data.datear.get(0).toString()
-                          //  dateend= Global_Data.datear.get(0).toString()
-                            val e: String = Global_Data.datear.get(Global_Data.datear.size - 1)
-                            dateend=e
-
-
+//                            datestart= Global_Data.datear.get(0).toString()
+//                          //  dateend= Global_Data.datear.get(0).toString()
+//                            val e: String = Global_Data.datear.get(Global_Data.datear.size - 1)
+//                            dateend=e
                             tv_daterange.setText(datestart+" : "+dateend)
 
                         }else{
@@ -762,14 +772,57 @@ class DCRActivity : Activity() {
         override fun onMenuItemClick(menuItem: MenuItem): Boolean {
             when (menuItem.itemId) {
                 R.id.action_xlsx -> {
-                    //    status="resource"
-                    isInternetPresent = cd!!.isConnectingToInternet
-                    if (isInternetPresent) {
-                        // ExpenseGraphResult(status)
-                        requestStoragePermission()
-                    } else {
-                        Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
+//                    //    status="resource"
+//                    isInternetPresent = cd!!.isConnectingToInternet
+//                    if (isInternetPresent) {
+//                        // ExpenseGraphResult(status)
+//                        requestStoragePermission()
+//                    } else {
+//                        Toast.makeText(this@DCRActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
+//                    }
+
+                    dialog!!.show()
+                    var user_email: String? = ""
+                    val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+                    try {
+                        user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                            sp.getString("USER_EMAIL", "")
+                        } else {
+                            Global_Data.GLOvel_USER_EMAIL
+                        }
+                    } catch (ex: java.lang.Exception) {
+                        ex.printStackTrace()
                     }
+                    val domain = resources.getString(R.string.service_domain)
+
+                    var csvurl: String? = null
+
+                    if(bundle!=null)
+                    {
+                        if (!DcrUser.equals("Select User")) {
+                            csvurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + DcrFrom + "&to_date=" + DcrTo + "&user_name=" + DcrUser + "&from=csv"
+
+                        } else {
+                            var st=""
+                            csvurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + DcrFrom + "&to_date=" + DcrTo + "&user_name="+DcrUser+"&from=csv"
+
+                        }
+                    }else{
+                        csvurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + "" + "&to_date=" + "" + "&from=csv"+"&user_name="
+
+                    }
+
+
+
+
+                    //      var pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&from=" + "pdf"
+                    Log.i("csvurl", "csvurl" + csvurl)
+                    dialog!!.dismiss()
+
+
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(csvurl))
+                    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(browserIntent)
                     return true
                 }
                 R.id.action_pdf -> {
@@ -790,13 +843,31 @@ class DCRActivity : Activity() {
 
                     var pdfurl: String? = null
 
-                    if (!item.equals("Select User")) {
-                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item + "&from=pdf"
+                    if(bundle!=null)
+                    {
+                        if (!DcrUser.equals("Select User")) {
+                            pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + DcrFrom + "&to_date=" + DcrTo + "&user_name=" + DcrUser + "&from=pdf"
 
-                    } else {
-                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=&from=pdf"
+                        } else {
+                            var st=""
+                            pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + DcrFrom + "&to_date=" + DcrTo + "&user_name="+DcrUser+"&from=pdf"
+
+                        }
+                    }else{
+                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + "" + "&to_date=" + "" + "&from=pdf"+ "&user_name="
 
                     }
+
+
+
+//                    if (!item.equals("Select User")) {
+//                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name=" + item + "&from=pdf"
+//
+//                    } else {
+//                        var st=""
+//                        pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&user_name="+st+"&from=pdf"
+//
+//                    }
 
 
                     //      var pdfurl = domain + "reports/view_dcr_report?email=" + user_email + "&from_date=" + dcr_from.text.toString() + "&to_date=" + dcr_to.text.toString() + "&from=" + "pdf"

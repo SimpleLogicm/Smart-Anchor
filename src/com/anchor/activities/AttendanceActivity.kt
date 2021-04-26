@@ -694,13 +694,37 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
         override fun onMenuItemClick(menuItem: MenuItem): Boolean {
             when (menuItem.itemId) {
                 R.id.action_xlsx -> {
-                   isInternetPresent = cd!!.isConnectingToInternet
-                    if (isInternetPresent) {
-                       // ExpenseGraphResult(status)
-                        requestStoragePermission()
-                    } else {
-                        Toast.makeText(this@AttendanceActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
+//                   isInternetPresent = cd!!.isConnectingToInternet
+//                    if (isInternetPresent) {
+//                       // ExpenseGraphResult(status)
+//                        requestStoragePermission()
+//                    } else {
+//                        Toast.makeText(this@AttendanceActivity, "You don't have internet connection.", Toast.LENGTH_SHORT).show()
+//                    }
+
+                    dialog!!.show()
+                    var user_email: String? = ""
+                    val sp = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE)
+                    try {
+                        user_email = if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(sp.getString("USER_EMAIL", "").toString())) {
+                            sp.getString("USER_EMAIL", "")
+                        } else {
+                            Global_Data.GLOvel_USER_EMAIL
+                        }
+                    } catch (ex: java.lang.Exception) {
+                        ex.printStackTrace()
                     }
+                    val domain = resources.getString(R.string.service_domain)
+                    var csvurl = domain+"reports/view_attendance?email="+user_email+"&from_date="+dcr_from.text.toString()+"&to_date="+dcr_to.text.toString()+"&from="+"csv"
+                    Log.i("csvurl", "csvurl" +csvurl)
+
+                    dialog!!.dismiss()
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(csvurl))
+                    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(browserIntent)
+
+
+
                     return true
                 }
                 R.id.action_pdf -> {
