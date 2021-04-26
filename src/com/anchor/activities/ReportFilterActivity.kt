@@ -91,11 +91,10 @@ class ReportFilterActivity : Activity() {
         }
 //        Global_Data.usernameArray.clear()
 
-        val hashSet = HashSet<String>()
-        hashSet.addAll(Global_Data.usernameArray)
-        Global_Data.usernameArray.clear()
-        Global_Data.usernameArray.add("Select User")
-        Global_Data.usernameArray.addAll(hashSet)
+//        val hashSet = HashSet<String>()
+//        hashSet.addAll(Global_Data.usernameArray)
+//        Global_Data.usernameArray.clear()
+     //   Global_Data.usernameArray.addAll(hashSet)
 
         dataAdapterusername = ArrayAdapter<String>(this@ReportFilterActivity, R.layout.spinner_item, Global_Data.usernameArray!!)
         dataAdapterusername!!.setDropDownViewResource(R.layout.spinner_item)

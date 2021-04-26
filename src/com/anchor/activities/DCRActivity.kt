@@ -555,7 +555,9 @@ class DCRActivity : Activity() {
 
                     dcrList.clear()
                     Global_Data.usernameArray.clear()
-          //          Global_Data.usernameArray.add("Select User")
+                    Global_Data.usernameArray.add("Select User")
+
+                    //          Global_Data.usernameArray.add("Select User")
                     //list_CCity.add("Select City")
                     //cityspinnerMap.clear()
 
