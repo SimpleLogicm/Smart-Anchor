@@ -198,7 +198,7 @@
             android:gravity="center"
             android:padding="1dp"
             android:background="@color/ledger_header"
-            android:text="CC Code"
+            android:text="Shop name"
             android:textSize="@dimen/com_l_margin"
             android:layout_gravity="center"
             android:textStyle="bold"

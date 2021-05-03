@@ -22,6 +22,7 @@
         android:id="@+id/invoice_header_container"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="8dp"

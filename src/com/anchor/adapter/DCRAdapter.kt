@@ -52,7 +52,7 @@ class DCRAdapter(private val mContext: Activity, private val rtododatalist: List
     override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val data = rtododatalist[position]
         holder.dcr_date.text = data.date
-        holder.cc_code.text = data.cc_code
+        holder.cc_code.text = data.shop_name
         holder.customer_type.text = data.customer_type
         holder.feedback.text = data.feedback
 

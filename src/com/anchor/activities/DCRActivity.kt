@@ -585,7 +585,7 @@ class DCRActivity : Activity() {
 
 
 
-                                    dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"), jsonObject.getString("order_taken")))
+                                    dcrList.add(DCRModel(jsonObject.getString("date"), jsonObject.getString("code"), jsonObject.getString("customer_type"), jsonObject.getString("feedbacks"), jsonObject.getString("claims"), "Details", "Details", jsonObject.getString("promotional_type"), jsonObject.getString("in_time"), jsonObject.getString("out_time"), jsonObject.getString("return_orders"), jsonObject.getString("no_orders"), jsonObject.getString("order_taken"),jsonObject.getString("shop_name")))
 
                                 }
                             }
