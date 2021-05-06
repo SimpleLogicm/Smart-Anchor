@@ -217,8 +217,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled = true
-        versionCode 43
-        versionName "2.2.2"
+        versionCode 46
+        versionName "2.2.5"
         resConfigs "en"
     }
 
