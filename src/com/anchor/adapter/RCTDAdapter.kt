@@ -38,6 +38,7 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
         var pendingForApprovalStatus: ImageView? = null
         var partiallyFilledStatus: ImageView? = null
         var rejectedStatus: ImageView? = null
+        var incompleteStatus: ImageView? = null
 
         init {
             rtc_name = view.findViewById(R.id.rtc_name)
@@ -53,6 +54,7 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
             pendingForApprovalStatus = view.findViewById(R.id.pendingforapproval_icon)
             partiallyFilledStatus = view.findViewById(R.id.partiallyfilled_icon)
             rejectedStatus = view.findViewById(R.id.rejected_icon)
+            incompleteStatus = view.findViewById(R.id.incomplete_icon)
             GPSStatus = view.findViewById(R.id.gps_status)
         }
     }
@@ -87,26 +89,37 @@ class RCTDAdapter(private val mContext: Context, private val rtododatalist: List
             holder.partiallyFilledStatus!!.visibility=View.GONE
             holder.rejectedStatus!!.visibility=View.GONE
             holder.pendingForApprovalStatus!!.visibility=View.GONE
+            holder.incompleteStatus!!.visibility=View.GONE
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("partially_filled", ignoreCase = true)) {
             holder.approvedStatus!!.visibility=View.GONE
             holder.partiallyFilledStatus!!.visibility=View.VISIBLE
             holder.rejectedStatus!!.visibility=View.GONE
             holder.pendingForApprovalStatus!!.visibility=View.GONE
+            holder.incompleteStatus!!.visibility=View.GONE
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("rejected", ignoreCase = true)) {
             holder.approvedStatus!!.visibility=View.GONE
             holder.partiallyFilledStatus!!.visibility=View.GONE
             holder.rejectedStatus!!.visibility=View.VISIBLE
             holder.pendingForApprovalStatus!!.visibility=View.GONE
+            holder.incompleteStatus!!.visibility=View.GONE
         }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("pending_for_approval", ignoreCase = true)) {
             holder.approvedStatus!!.visibility=View.GONE
             holder.partiallyFilledStatus!!.visibility=View.GONE
             holder.rejectedStatus!!.visibility=View.GONE
             holder.pendingForApprovalStatus!!.visibility=View.VISIBLE
+            holder.incompleteStatus!!.visibility=View.GONE
+        }else if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.bucket_name).equals("incomplete", ignoreCase = true)) {
+            holder.approvedStatus!!.visibility=View.GONE
+            holder.partiallyFilledStatus!!.visibility=View.GONE
+            holder.rejectedStatus!!.visibility=View.GONE
+            holder.pendingForApprovalStatus!!.visibility=View.GONE
+            holder.incompleteStatus!!.visibility=View.VISIBLE
         }else{
             holder.approvedStatus!!.visibility=View.GONE
             holder.partiallyFilledStatus!!.visibility=View.GONE
             holder.rejectedStatus!!.visibility=View.GONE
             holder.pendingForApprovalStatus!!.visibility=View.GONE
+            holder.incompleteStatus!!.visibility=View.GONE
         }
 
         if(com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.latitude).equals("", ignoreCase = true) && com.anchor.activities.Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanewzpochecck(data.longitude).equals("", ignoreCase = true)) {

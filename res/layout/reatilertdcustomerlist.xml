@@ -150,6 +150,13 @@
                 android:layout_below="@+id/checkbox_pending"
                 android:text="Partially Filled" />
 
+            <CheckBox
+                android:id="@+id/checkbox_incomplete1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkbox_incomplete"
+                android:text="Incomplete" />
+
             <TextView
                 android:id="@+id/reset_btn"
                 android:layout_width="wrap_content"

@@ -65,6 +65,7 @@ class RetailerTDCustomerList : Activity() {
     var rejected: String? = ""
     var pending: String? = ""
     var incomplete: String? = ""
+    var incomplete1: String? = ""
     var list_Cfilter: MutableList<String> = ArrayList<String>()
     var CfilterspinnerMap = HashMap<String, String>()
     var city_id: String? = ""
@@ -146,6 +147,10 @@ class RetailerTDCustomerList : Activity() {
             {
                 incomplete="partially_filled"
             }
+            if(checkbox_incomplete1.isChecked)
+            {
+                incomplete1="incomplete"
+            }
            // getTODOCustomerListData("")
             if (isUp) {
                 slideDown(myView!!)
@@ -162,11 +167,13 @@ class RetailerTDCustomerList : Activity() {
         reset_btn.setOnClickListener {
             approved=""
             incomplete=""
+            incomplete1=""
             rejected=""
             pending=""
             Global_Data.filterValue=""
             checkbox_approved.isChecked=false
             checkbox_incomplete.isChecked=false
+            checkbox_incomplete1.isChecked=false
             checkbox_rejected.isChecked=false
             checkbox_pending.isChecked=false
         }
@@ -538,18 +545,34 @@ class RetailerTDCustomerList : Activity() {
         val domain = resources.getString(R.string.service_domain)
         var url = ""
 
-        if (approved!!.length>0 || rejected!!.length>0 || pending!!.length>0 || incomplete!!.length>0) {
+        if (approved!!.length>0 || rejected!!.length>0 || pending!!.length>0 || incomplete!!.length>0 || incomplete1!!.length>0) {
 
-            if(approved!!.length>0 && rejected!!.length>0 && pending!!.length>0 && incomplete!!.length>0)
+            if(approved!!.length>0 && rejected!!.length>0 && pending!!.length>0 && incomplete!!.length>0 && incomplete1!!.length>0)
             {
-                Global_Data.filterValue=approved+","+rejected+","+pending+","+incomplete
-            }else if(rejected!!.length>0 && pending!!.length>0 && incomplete!!.length>0)
+                Global_Data.filterValue=approved+","+rejected+","+pending+","+incomplete+","+incomplete1
+            }else if(rejected!!.length>0 && pending!!.length>0 && incomplete!!.length>0 && incomplete1!!.length>0)
             {
-                Global_Data.filterValue=rejected+","+pending+","+incomplete
+                Global_Data.filterValue=rejected+","+pending+","+incomplete+","+incomplete1
+            }else if(pending!!.length>0 && incomplete!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=pending+","+incomplete+","+incomplete1
+            }else if(incomplete!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=incomplete+","+incomplete1
             }else if(pending!!.length>0 && incomplete!!.length>0)
             {
                 Global_Data.filterValue=pending+","+incomplete
-            }else if(approved!!.length>0 && rejected!!.length>0)
+            }else if(pending!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=pending+","+incomplete1
+            }else if(approved!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+incomplete1
+            }else if(rejected!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=rejected+","+incomplete1
+            }
+            else if(approved!!.length>0 && rejected!!.length>0)
             {
                 Global_Data.filterValue=approved+","+rejected
             }else if(approved!!.length>0 && pending!!.length>0)
@@ -574,9 +597,19 @@ class RetailerTDCustomerList : Activity() {
             {
                 Global_Data.filterValue=approved+","+pending+","+incomplete
             }
+            else if(approved!!.length>0 && pending!!.length>0 && incomplete!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+pending+","+incomplete+","+incomplete1
+            }else if(approved!!.length>0 && pending!!.length>0 && incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=approved+","+pending+","+incomplete
+            }
             else if(incomplete!!.length>0)
             {
                 Global_Data.filterValue=incomplete
+            }else if(incomplete1!!.length>0)
+            {
+                Global_Data.filterValue=incomplete1
             }else if(pending!!.length>0)
             {
                 Global_Data.filterValue=pending
@@ -592,6 +625,7 @@ class RetailerTDCustomerList : Activity() {
             url = domain + "retailers/filtered_retailers?email=" + user_email + "&filters=" + Global_Data.filterValue
             approved=""
             incomplete=""
+            incomplete1=""
             rejected=""
             pending=""
             Global_Data.filterValue=""
