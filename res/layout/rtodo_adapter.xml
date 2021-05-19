@@ -47,7 +47,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center|left"
                     android:padding="@dimen/card_margin"
-                    android:text="PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE"
+                    android:text=" PRIMARY DATA : INCOMPLETE \n PRESENT MAPPING : INCOMPLETE"
                     android:textColor="@color/white"
                     android:textSize="15dp" />
 

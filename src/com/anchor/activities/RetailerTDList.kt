@@ -289,10 +289,10 @@ class RetailerTDList : Activity() {
 
                     Allresult.clear()
 
-                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), "PRIMARY DATA : INCOMPLETE \n PARENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20","pending","yes"))
-                    Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), "PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E","approved","no"))
-                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PARENT MAPPING : INCOMPLETE", "#28720D", "#3A921A","rejected","yes"))
-                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), "PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PARENT MAPPING : COMPLETE", "#1C4908", "#26600B","incomplete","no"))
+                    Allresult.add(RTODODATA("1", response.getString("red_list_count"), " PRIMARY DATA : INCOMPLETE \n PARENT MAPPING : INCOMPLETE", "#831A14", "#BB2B20","pending","yes"))
+                    Allresult.add(RTODODATA("2", response!!.getString("yellow_list_count"), " PRIMARY DATA : COMPLETE \n GPS : INCOMPLETE", "#BF9003", "#D8AB1E","approved","no"))
+                    Allresult.add(RTODODATA("3", response!!.getString("light_green_list_count"), " PRIMARY DATA : COMPLETE \n GPS : COMPLETE \n PARENT MAPPING : INCOMPLETE", "#28720D", "#3A921A","rejected","yes"))
+                    Allresult.add(RTODODATA("4", response!!.getString("dark_green_list_count"), " PRIMARY DATA : COMPLETE \n GPS : COMPLETE  \n PARENT MAPPING : COMPLETE", "#1C4908", "#26600B","incomplete","no"))
 
                     runOnUiThread {
 

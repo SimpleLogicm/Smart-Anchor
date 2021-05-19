@@ -58,6 +58,7 @@ class RetailerTDCustomerList : Activity() {
     var Allresultsearch: MutableList<RCTOData> = ArrayList()
     var context: Context? = null
     var id = "";
+    var filterCheck=""
     var coardcolor = "";
     var myView: RelativeLayout? = null
     var isUp = false
@@ -131,6 +132,20 @@ class RetailerTDCustomerList : Activity() {
 //        }
 
         done_btn.setOnClickListener {
+
+            if (id.equals("1")) {
+                filterCheck="red"
+            } else
+                if (id.equals("2")) {
+                    filterCheck="yellow"
+                } else
+                    if (id.equals("3")) {
+                        filterCheck="light_green"
+                    } else
+                        if (id.equals("4")) {
+                            filterCheck="dark_green"
+                        }
+
             if(checkbox_approved.isChecked)
             {
                 approved="approved"
@@ -622,7 +637,7 @@ class RetailerTDCustomerList : Activity() {
             }
 
 
-            url = domain + "retailers/filtered_retailers?email=" + user_email + "&filters=" + Global_Data.filterValue
+            url = domain + "retailers/filtered_retailers?email=" + user_email + "&filters=" + Global_Data.filterValue + "&to_do_list_title=" + filterCheck
             approved=""
             incomplete=""
             incomplete1=""
