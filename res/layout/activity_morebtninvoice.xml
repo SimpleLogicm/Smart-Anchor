@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Morebtninvoice">
+
+    <TextView
+        android:id="@+id/txtWelcomeUserDcr"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:background="#BDBDBD"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"></TextView>
+
+
+    <RelativeLayout
+        android:id="@+id/nll"
+        android:layout_above="@+id/nlle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtWelcomeUserDcr"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/invoice_no"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:inputType="textMultiLine"
+                android:scrollbars="none"
+                android:completionThreshold="1"
+                android:background="@drawable/rounded_corner_new"
+                android:imeOptions="actionDone"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:singleLine="true"
+                android:drawableRight="@drawable/search_icon"
+                android:textSize="15dp"
+                android:hint="Search Order no" >
+                <requestFocus />
+            </AutoCompleteTextView>
+
+
+            <AutoCompleteTextView
+                android:id="@+id/product"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:inputType="textMultiLine"
+                android:scrollbars="none"
+                android:completionThreshold="1"
+                android:background="@drawable/rounded_corner_new"
+                android:imeOptions="actionDone"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:singleLine="true"
+                android:drawableRight="@drawable/search_icon"
+                android:textSize="15dp"
+                android:hint="Search Product no" >
+                <requestFocus />
+            </AutoCompleteTextView>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_cornrer_white_bg"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile">
+
+                </ImageView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Shop Name"
+                        android:textColor="@color/black"
+                        android:textSize="12sp">
+
+                    </TextView>
+
+
+                    <TextView
+                        android:id="@+id/shopname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ABCDER"
+                        android:textColor="@color/black"
+                        android:textSize="14sp">
+
+                    </TextView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Contact"
+                                android:textColor="@color/black"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+
+                            <TextView
+                                android:id="@+id/contact_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="ABCDER"
+                                android:textColor="@color/black"
+                                android:textSize="14sp">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Invoice No."
+                                android:textColor="@color/black"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+
+                            <TextView
+                                android:id="@+id/Invoice_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="ABCDER"
+                                android:textColor="@color/black"
+                                android:textSize="14sp">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Date"
+                        android:textColor="@color/black"
+                        android:textSize="12sp">
+
+                    </TextView>
+
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ABCDER"
+                        android:textColor="@color/black"
+                        android:textSize="14sp">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:weightSum="5"
+                android:background="#3D3D3D"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Product"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Qty"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Unit Price"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Amount"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:text="Order No"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                android:layout_marginTop="10dp"
+                android:id="@+id/rv"
+                app:shimmer_demo_child_count="10"
+                app:shimmer_demo_grid_child_count="2"
+                app:shimmer_demo_layout="@layout/placeholder_item"
+                app:shimmer_demo_layout_manager_type="linear_vertical"
+                app:shimmer_demo_angle="0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
+
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/nlle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray">
+
+        </TextView>
+
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="Grand Total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:text="sshhssh"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray">
+
+        </TextView>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

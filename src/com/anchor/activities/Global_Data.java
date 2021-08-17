@@ -23,6 +23,8 @@ public class Global_Data {
     public static String rank_service_call_flag = "";
     public static String year_value = "";
     public static String usernamefilter="";
+    public static String scheame_name="";
+    public static String scheame_type="";
     //public static ArrayList usernameArray = new ArrayList();
     public static List<String> usernameArray = new ArrayList<String>();
     public static List<String> datear = new ArrayList<String>();

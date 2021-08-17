@@ -151,39 +151,39 @@ class TodoEditCustomer : Activity() {
 
        try {
             Global_Data.merge_retailer_code = ""
-            code = intent.getStringExtra("code")
-            shop_name = intent.getStringExtra("shop_name")
-            proprietor_name = intent.getStringExtra("proprietor_name")
-            address = intent.getStringExtra("address")
-            address_line2 = intent.getStringExtra("address_line2")
-            pincode = intent.getStringExtra("pincode")
-            landmark = intent.getStringExtra("landmark")
-            state_code = intent.getStringExtra("state_code")
-            city_code = intent.getStringExtra("city_code")
-            dist_code = intent.getStringExtra("district_id")
-            state_codeback = intent.getStringExtra("state_code")
-            city_codeback = intent.getStringExtra("city_code")
-            dist_codeback = intent.getStringExtra("district_id")
-            mobile_no = intent.getStringExtra("mobile_no")
-            email = intent.getStringExtra("email")
-            gst_no = intent.getStringExtra("gst_no")
-            aadhar_no = intent.getStringExtra("aadhar_no")
-            pan_no = intent.getStringExtra("pan_no")
-            latitudes = intent.getStringExtra("latitude")
-            longitudes = intent.getStringExtra("longitude")
-            power_dealer = intent.getStringExtra("power_dealer")
-            lighting_dealer = intent.getStringExtra("lighting_dealer")
-            iaq_dealer = intent.getStringExtra("iaq_dealer")
-            power_dealerback = intent.getStringExtra("power_dealer")
-            lighting_dealerback = intent.getStringExtra("lighting_dealer")
-            iaq_dealerback = intent.getStringExtra("iaq_dealer")
-            source_of_data = intent.getStringExtra("source_of_data")
-            tsi_code = intent.getStringExtra("tsi_code")
-            coardcolor = intent.getStringExtra("cardcolor")
+            code = intent.getStringExtra("code").toString()
+            shop_name = intent.getStringExtra("shop_name").toString()
+            proprietor_name = intent.getStringExtra("proprietor_name").toString()
+            address = intent.getStringExtra("address").toString()
+            address_line2 = intent.getStringExtra("address_line2").toString()
+            pincode = intent.getStringExtra("pincode").toString()
+            landmark = intent.getStringExtra("landmark").toString()
+            state_code = intent.getStringExtra("state_code").toString()
+            city_code = intent.getStringExtra("city_code").toString()
+            dist_code = intent.getStringExtra("district_id").toString()
+            state_codeback = intent.getStringExtra("state_code").toString()
+            city_codeback = intent.getStringExtra("city_code").toString()
+            dist_codeback = intent.getStringExtra("district_id").toString()
+            mobile_no = intent.getStringExtra("mobile_no").toString()
+            email = intent.getStringExtra("email").toString()
+            gst_no = intent.getStringExtra("gst_no").toString()
+            aadhar_no = intent.getStringExtra("aadhar_no").toString()
+            pan_no = intent.getStringExtra("pan_no").toString()
+            latitudes = intent.getStringExtra("latitude").toString()
+            longitudes = intent.getStringExtra("longitude").toString()
+            power_dealer = intent.getStringExtra("power_dealer").toString()
+            lighting_dealer = intent.getStringExtra("lighting_dealer").toString()
+            iaq_dealer = intent.getStringExtra("iaq_dealer").toString()
+            power_dealerback = intent.getStringExtra("power_dealer").toString()
+            lighting_dealerback = intent.getStringExtra("lighting_dealer").toString()
+            iaq_dealerback = intent.getStringExtra("iaq_dealer").toString()
+            source_of_data = intent.getStringExtra("source_of_data").toString()
+            tsi_code = intent.getStringExtra("tsi_code").toString()
+            coardcolor = intent.getStringExtra("cardcolor").toString()
 
-            from_flag = intent.getStringExtra("from_flag")
+            from_flag = intent.getStringExtra("from_flag").toString()
 
-            is_approved = intent.getStringExtra("is_approved")
+            is_approved = intent.getStringExtra("is_approved").toString()
 
            val shopName = "<font color=#FF73AACC>Shop Name </font> <font color=#cc0029>*</font>"
            txt_shopname.setText(Html.fromHtml(shopName))
@@ -2356,7 +2356,7 @@ class TodoEditCustomer : Activity() {
 
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
-            Log.e("DATA", e.message)
+            Log.e("DATA", e.message.toString())
         }
     }
 
@@ -2709,7 +2709,7 @@ class TodoEditCustomer : Activity() {
         } catch (e: java.lang.Exception) {
             progress_bar.visibility = View.GONE
             submit_button.visibility = View.VISIBLE
-            Log.e("DATA", e.message)
+            Log.e("DATA", e.message.toString())
         }
     }
 

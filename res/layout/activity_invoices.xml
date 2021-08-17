@@ -179,7 +179,7 @@
         android:orientation="horizontal"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:weightSum="7.0">
+        android:weightSum="8.0">
 
         <TextView
             android:layout_width="0dp"
@@ -280,6 +280,19 @@
             android:textColor="@color/black" >
         </TextView>
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="@string/MORE"
+            android:padding="1dp"
+            android:background="@color/ledger_header"
+            android:textSize="@dimen/com_l_margin"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/black" >
+        </TextView>
 
     </LinearLayout>
 

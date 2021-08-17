@@ -1,6 +1,7 @@
 package com.anchor.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.anchor.activities.Morebtninvoice;
 import com.anchor.activities.R;
 import com.anchor.model.Ledger_Model;
 import java.text.DecimalFormat;
@@ -25,7 +27,7 @@ public class Invoices_Adapter extends RecyclerView.Adapter<Invoices_Adapter.MyVi
     DecimalFormat formatter = new DecimalFormat("#,##,##,###.00");
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView n_date,n_ttype,n_invoice_no,n_pro_category,n_s_order,n_debit,n_credit;
+        public TextView n_date,n_ttype,n_invoice_no,n_pro_category,n_s_order,n_debit,n_credit,More;
 
         public MyViewHolder(View view) {
             super(view);
@@ -36,6 +38,7 @@ public class Invoices_Adapter extends RecyclerView.Adapter<Invoices_Adapter.MyVi
             n_s_order = view.findViewById(R.id.n_s_order);
             n_debit = view.findViewById(R.id.n_debit);
             n_credit = view.findViewById(R.id.n_credit);
+            More = view.findViewById(R.id.More);
 
 
         }
@@ -68,6 +71,18 @@ public class Invoices_Adapter extends RecyclerView.Adapter<Invoices_Adapter.MyVi
         holder.n_invoice_no.setText(ledger_model.getInvoice_No());
         holder.n_pro_category.setText(ledger_model.getCheque_No());
         holder.n_s_order.setText(ledger_model.getPerticulers());
+
+
+        holder.More.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(mContext, Morebtninvoice.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("invoice_no", holder.n_invoice_no.getText().toString());
+                mContext.startActivity(intent);
+            }
+        });
 
         if(!ledger_model.getDebit().equalsIgnoreCase(" "))
         {

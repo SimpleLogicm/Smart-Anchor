@@ -103,6 +103,7 @@ public class ProductAll_Varients extends Activity {
     static final String TAG_STOCK = "PRODUCT_STOCK";
     static final String TAG_SMP_FLAG = "Smp_Flag";
     static final String TAG_EDIT_CLICK = "Edit_Click";
+    static final String SCHEAME_CODE = "scheame_code";
 
     ImageView imgView;
     static float totalPrice;
@@ -242,6 +243,10 @@ public class ProductAll_Varients extends Activity {
                 try
                 {
 
+
+
+
+
                     List<Local_Data> cont1 = dbvoc.getSearchProduct_with_name(Product_Variant.getText().toString());
 //
 //                        cont1 = dbvoc.getProductvarientbyname(Global_Data.Search_business_unit_name,Global_Data.Search_Category_name,Global_Data.Search_BusinessCategory_name,Global_Data.Search_brand_name,Product_Variant.getText().toString());
@@ -282,8 +287,27 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_STOCK, "");
                             mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
                             mapp.put(TAG_EDIT_CLICK, "false");
+                            mapp.put(SCHEAME_CODE, cnt1.getscheame_code());
                             //   Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
+
+//                            List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(cnt1.getscheame_code());
+////results2.add("Select Variant");
+//                            for (Local_Data s : scheme_name) {
+//                                // Scheme_array.add(s.getSche_disname());
+//                                String  scheme_namen = s.getSche_disname();
+//                                Global_Data.scheame_name=s.getSche_name();
+//                                Global_Data.scheame_type=s.getSche_type();
+//                                mapp.put("scheame_name",s.getSche_name());
+//                                mapp.put("scheame_type",s.getSche_type());
+//                                mapp.put("scheame_description",s.getSche_discription());
+//                                mapp.put("scheame_displayname",s.getSche_disname());
+//                                mapp.put("scheame_qualifyquan",s.getQualifying_qty());
+//                                mapp.put("scheame_amount",s.getAmount());
+//
+//
+//
+//                            }
 
 
                             List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
@@ -684,9 +708,30 @@ public class ProductAll_Varients extends Activity {
                             mapp.put(TAG_STOCK, "");
                             mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
                             mapp.put(TAG_EDIT_CLICK, "false");
+                            mapp.put(SCHEAME_CODE, cnt1.getscheame_code());
+
                             //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                             // resultsvarient.add(cnt1.getProduct_variant());
+
+
+//                            List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(cnt1.getscheame_code());
+////results2.add("Select Variant");
+//                            for (Local_Data s : scheme_name) {
+//                                // Scheme_array.add(s.getSche_disname());
+//                              //  String  scheme_namen = s.getSche_disname();
+//
+//                                Global_Data.scheame_name=s.getSche_name();
+//                                Global_Data.scheame_type=s.getSche_type();
+//                                mapp.put("scheame_name",s.getSche_name());
+//                                mapp.put("scheame_type",s.getSche_type());
+//                                mapp.put("scheame_description",s.getSche_discription());
+//                                mapp.put("scheame_displayname",s.getSche_disname());
+//                                mapp.put("scheame_qualifyquan",s.getQualifying_qty());
+//                                mapp.put("scheame_amount",s.getAmount());
+//
+//
+//                            }
 
                             List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 
@@ -774,9 +819,28 @@ public class ProductAll_Varients extends Activity {
                                 mapp.put(TAG_STOCK, "");
                                 mapp.put(TAG_SMP_FLAG, cnt1.getSmp_flag());
                                 mapp.put(TAG_EDIT_CLICK, "false");
+                                mapp.put(SCHEAME_CODE, cnt1.getscheame_code());
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
 
                                 // resultsvarient.add(cnt1.getProduct_variant());
+
+//                                List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(cnt1.getscheame_code());
+////results2.add("Select Variant");
+//                                for (Local_Data s : scheme_name) {
+//                                    // Scheme_array.add(s.getSche_disname());
+//                                   // String  scheme_namen = s.getSche_disname();
+//                                    Global_Data.scheame_name=s.getSche_name();
+//                                    Global_Data.scheame_type=s.getSche_type();
+//                                    mapp.put("scheame_name",s.getSche_name());
+//                                    mapp.put("scheame_type",s.getSche_type());
+//                                    mapp.put("scheame_description",s.getSche_discription());
+//                                    mapp.put("scheame_displayname",s.getSche_disname());
+//                                    mapp.put("scheame_qualifyquan",s.getQualifying_qty());
+//                                    mapp.put("scheame_amount",s.getAmount());
+//
+//
+//
+//                                }
 
                                 List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 
@@ -856,7 +920,27 @@ public class ProductAll_Varients extends Activity {
                                 mapp.put(TAG_ITEM_SQ, cnt1.getSQ());
                                 mapp.put(TAG_ITEM_MQ, cnt1.getMQ());
                                 mapp.put(TAG_STOCK, "");
+                                mapp.put(SCHEAME_CODE, cnt1.getscheame_code());
                                 //  Log.d("ITEM_NUMBER N", "ITEM_NUMBER N" + cnt1.getCode());
+
+//                                List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(cnt1.getscheame_code());
+////results2.add("Select Variant");
+//                                for (Local_Data s : scheme_name) {
+//                                    // Scheme_array.add(s.getSche_disname());
+//                                    String  scheme_namen = s.getSche_disname();
+//                                    Global_Data.scheame_name=s.getSche_name();
+//                                    Global_Data.scheame_type=s.getSche_type();
+//                                    mapp.put("scheame_name",s.getSche_name());
+//                                    mapp.put("scheame_type",s.getSche_type());
+//                                    mapp.put("scheame_description",s.getSche_discription());
+//                                    mapp.put("scheame_displayname",s.getSche_disname());
+//                                    mapp.put("scheame_qualifyquan",s.getQualifying_qty());
+//                                    mapp.put("scheame_amount",s.getAmount());
+//
+//
+//
+//                                }
+//
 
                                 List<Local_Data> contactsn = dbvoc.GetOrder_Product_BY_ORDER_ID(Global_Data.GLObalOrder_id, cnt1.getCode());
 

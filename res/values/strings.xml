@@ -8,10 +8,10 @@
     <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>
 
     <!-- Anchor PRODUCTion NEW URL -->
-<!--            <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
+    <!--            <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
 
     <!--Sub Dealer PRODUCTION-->
-<!--            <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
+    <!--            <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
 
     <!--ANCHOR NEW SUB DEALER UAT-->
     <string name="service_domain_sub_dealer">http://subdealer.anchor-group.in/metal/api/v1/</string>
@@ -29,6 +29,18 @@
         <item>Array Item One</item>
         <item>Array Item Two</item>
         <item>Array Item Three</item>
+    </string-array>
+
+
+    <string-array name="Filterinvoice">
+        <item>Filter By </item>
+        <item>Date</item>
+        <item>Transaction</item>
+        <item>Referance</item>
+        <item>Products</item>
+        <item>Sales Order</item>
+        <item>Debit</item>
+        <item>Credit</item>
     </string-array>
 
     <string name="app_name">Smart Anchor</string>
@@ -181,6 +193,7 @@
     <string name="SUB_DEALER_ORDER">RETAILER ORDER</string>
     <string name="QUOTES">QUOTES</string>
     <string name="QUOTE_STATUS">QUOTE STATUS</string>
+    <string name="SCHEME_CIRCULER">SCHEME CIRCULER</string>
     <string name="SCHEDULE">SCHEDULE</string>
     <string name="CUSTOMER_PROFILE">CUSTOMER PROFILE</string>
     <string name="Order_Type">Order Type</string>

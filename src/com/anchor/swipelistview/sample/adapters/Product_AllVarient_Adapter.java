@@ -21,22 +21,34 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anchor.activities.Check_Null_Value;
 import com.anchor.activities.DataBaseHelper;
 import com.anchor.activities.Global_Data;
+import com.anchor.activities.Local_Data;
+import com.anchor.activities.NewOrderActivity;
 import com.anchor.activities.Order;
+import com.anchor.activities.ProductAll_Varients;
 import com.anchor.activities.R;
+import com.anchor.activities.Schemedetail;
 import com.anchor.model.Spiner_List_Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, String>> {
 
     public TextView tx;
+    String sch_name;
+    String productname;
+    String sch_description;
+    String sch_displayname;
+    String sch_qualify_quan;
+    String sch_amount;
     static Double sum = 0.0;
     customButtonListener customListner;
     ArrayList<String> list1 = new ArrayList<String>();
@@ -54,10 +66,12 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     static final String TAG_STOCK = "PRODUCT_STOCK";
     static final String TAG_SMP_FLAG = "Smp_Flag";
     static final String TAG_EDIT_CLICK = "Edit_Click";
+    static final String SCHEAME_CODE = "scheame_code";
     HashMap<String, String> getData = new HashMap<String, String>();
     private ArrayList<HashMap<String, String>> dataAray;
     HashMap<String, String> dataIthjem;
-    DataBaseHelper dbvoc;
+    DataBaseHelper dbvoc = new DataBaseHelper(getContext());
+
 
     public interface customButtonListener {
         void onButtonClickListner(int position, String value, View v);
@@ -70,7 +84,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     private Context context;
 
     public Product_AllVarient_Adapter(Context context, ArrayList<HashMap<String, String>> dataItem1, ArrayList<String> list1, ArrayList<String> list2) {
-        super(context, R.layout.all_varients_adapternew, dataItem1);
+        super(context, R.layout.new_productvarient_raw, dataItem1);
         this.dataAray = dataItem1;
         this.list1 = list1;
         this.list2 = list2;
@@ -109,7 +123,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
         final ViewHolder holder;
         if (convertView == null) {
             LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = li.inflate(R.layout.all_varients_adapternew, parent, false);
+            convertView = li.inflate(R.layout.new_productvarient_raw, parent, false);
             holder = new ViewHolder();
             holder.mWatcher1 = new MutableWatcher1();
             holder.mWatcher2 = new MutableWatcher2();
@@ -129,6 +143,8 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             holder.PSTOCK = convertView.findViewById(R.id.PSTOCK);
             holder.quantity_error = convertView.findViewById(R.id.quantity_error);
             holder.SMP_FLAG = convertView.findViewById(R.id.SMP_FLAG);
+            holder.schem_box = convertView.findViewById(R.id.schem_box);
+            holder.schemename = convertView.findViewById(R.id.schemename);
             // holder.rpvnew = (TextView) convertView.findViewById(R.id.rpvnew);
 
             convertView.setTag(holder);
@@ -149,7 +165,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
         holder.Productnamerpmrp.setText(getData.get(TAG_ITEMNAME));
         holder.pidp.setText(getData.get(TAG_ITEM_NUMBER));
-        holder.pcode_new.setText("CODE : "+getData.get(TAG_ITEM_NUMBER));
+        holder.pcode_new.setText("CODE : " + getData.get(TAG_ITEM_NUMBER));
         holder.mrpv.setText(getData.get(TAG_PRICE));
         holder.rpv.setText(getData.get(TAG_RP));
         holder.SMP_FLAG.setText(getData.get(TAG_SMP_FLAG));
@@ -159,10 +175,68 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
         holder.PSQ.setText("Minimum order qty : " + getData.get(TAG_ITEM_SQ));
         holder.PMQ.setText("MQ : " + getData.get(TAG_ITEM_MQ));
-      //  holder.PSTOCK.setText("Stock : " + getData.get(TAG_STOCK));
+        //  holder.PSTOCK.setText("Stock : " + getData.get(TAG_STOCK));
         holder.PSQVALUE.setText(getData.get(TAG_ITEM_SQ));
         holder.PMQVALUE.setText(getData.get(TAG_ITEM_MQ));
         //holder.rpvnew.setText("RP : " + getData.get(TAG_RP));
+
+
+        List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(getData.get(SCHEAME_CODE));
+//results2.add("Select Variant");
+        for (Local_Data s : scheme_name) {
+            // Scheme_array.add(s.getSche_disname());
+            //  String  scheme_namen = s.getSche_disname();
+
+//            Global_Data.scheame_name=s.getSche_name();
+//            Global_Data.scheame_type=s.getSche_type();
+//            mapp.put("scheame_name",s.getSche_name());
+//            mapp.put("scheame_type",s.getSche_type());
+//            mapp.put("scheame_description",s.getSche_discription());
+//            mapp.put("scheame_displayname",s.getSche_disname());
+//            mapp.put("scheame_qualifyquan",s.getQualifying_qty());
+//            mapp.put("scheame_amount",s.getAmount());
+
+
+            String chekscheame = s.getSche_discription();
+
+            if (chekscheame.equalsIgnoreCase("")) {
+
+                holder.schem_box.setVisibility(View.INVISIBLE);
+
+
+            } else {
+                holder.schem_box.setVisibility(View.VISIBLE);
+                holder.schemename.setText(s.getSche_type());
+                sch_name = s.getSche_type();
+                productname=s.getSche_name();
+                sch_description = s.getSche_discription();
+                sch_displayname = s.getSche_disname();
+                sch_qualify_quan = s.getQualifying_qty();
+                sch_amount = s.getAmount();
+
+
+            }
+
+
+        }
+
+        holder.schem_box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), Schemedetail.class);
+                Global_Data.scheame_type="product";
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("scheame_name", sch_name);
+                i.putExtra("product_name", productname);
+                i.putExtra("qualify_amount", sch_amount);
+                i.putExtra("qualify_quan", sch_qualify_quan);
+                i.putExtra("description",sch_description);
+                i.putExtra("foc", "NA");
+                i.putExtra("product_details", holder.Productnamerpmrp.getText().toString());
+                getContext().startActivity(i);
+            }
+        });
+
 
         holder.productquantity.setText(list1.get(position), TextView.BufferType.EDITABLE);
 
@@ -179,14 +253,13 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             public void onFocusChange(View view, boolean hasFocus) {
                 if (hasFocus) {
 
-                    Log.d("VVVVVV","VVVVVV"+holder.SMP_FLAG.getText().toString());
-                    Log.d("VR","VR"+getData.get(TAG_EDIT_CLICK));
-                    if(holder.SMP_FLAG.getText().toString().equalsIgnoreCase("true") &&  getData.get(TAG_EDIT_CLICK).equalsIgnoreCase("false"))
-                    {
+                    Log.d("VVVVVV", "VVVVVV" + holder.SMP_FLAG.getText().toString());
+                    Log.d("VR", "VR" + getData.get(TAG_EDIT_CLICK));
+                    if (holder.SMP_FLAG.getText().toString().equalsIgnoreCase("true") && getData.get(TAG_EDIT_CLICK).equalsIgnoreCase("false")) {
                         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                         alertDialog.setTitle("Message");
                         alertDialog.setMessage("You are Selecting Slow moving Item for which there is No Sales in Last 6 month.");
-                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok",new DialogInterface.OnClickListener() {
+                        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -195,7 +268,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                             }
                         });
 
-                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel",new DialogInterface.OnClickListener() {
+                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -204,14 +277,14 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                                 holder.quantity_error.setText("");
                                 //MutableWatcher1.
                                 // holder.productquantity.setText("");
-                                Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
+                                Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), "");
                             }
                         });
 
                         alertDialog.show();
                     }
                 } else {
-                   // Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(getApplicationContext(), "Lost the focus", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -232,64 +305,54 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
             public void afterTextChanged(Editable s) {
 
 
-                    HashMap<String, String> edit = new HashMap<>();
+                HashMap<String, String> edit = new HashMap<>();
 
-                    if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.rpv.getText().toString()) && Integer.parseInt(String.valueOf(s))>0) {
-                        edit.put("string", s.toString());
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.productquantity.getText().toString()) && Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJavanew(holder.rpv.getText().toString()) && Integer.parseInt(String.valueOf(s)) > 0) {
+                    edit.put("string", s.toString());
 
-                        try
-                        {
-                            int SQMO_Validator = Integer.parseInt(holder.productquantity.getText().toString())%Integer.parseInt(holder.PSQVALUE.getText().toString());
-                            if(SQMO_Validator == 0)
-                            {
-                                Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.rpv.getText().toString());
-                                holder.totalprice.setText("PRICE : " + value);
+                    try {
+                        int SQMO_Validator = Integer.parseInt(holder.productquantity.getText().toString()) % Integer.parseInt(holder.PSQVALUE.getText().toString());
+                        if (SQMO_Validator == 0) {
+                            Double value = Double.valueOf(holder.productquantity.getText().toString()) * Double.valueOf(holder.rpv.getText().toString());
+                            holder.totalprice.setText("PRICE : " + value);
+                            holder.quantity_error.setText("");
+                            Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() + "pq" + value + "pprice" + holder.Productnamerpmrp.getText().toString() + "pmrp" + holder.mrpv.getText().toString() + "prp" + holder.rpv.getText().toString());
+
+                        } else {
+                            if (holder.productquantity.getText().toString().trim().equalsIgnoreCase("") || holder.productquantity.getText().toString().equalsIgnoreCase("0")) {
+                                holder.totalprice.setText("");
                                 holder.quantity_error.setText("");
-                                Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), s.toString() +"pq" + value +"pprice"+holder.Productnamerpmrp.getText().toString()+"pmrp"+holder.mrpv.getText().toString()+"prp"+holder.rpv.getText().toString());
-
-                            }
-                            else
-                            {
-                                if(holder.productquantity.getText().toString().trim().equalsIgnoreCase("") || holder.productquantity.getText().toString().equalsIgnoreCase("0"))
-                                {
-                                    holder.totalprice.setText("");
-                                    holder.quantity_error.setText("");
-                                }
-                                else
-                                {
+                            } else {
 
 
-                                    holder.totalprice.setText("");
-                                    holder.quantity_error.setText("Entered Value Not A Multiple Of Item Minimum Order Quantity.");
-                                }
-
-                                Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
-
-
-                                //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
+                                holder.totalprice.setText("");
+                                holder.quantity_error.setText("Entered Value Not A Multiple Of Item Minimum Order Quantity.");
                             }
 
+                            Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), "");
 
-                        }catch (Exception exception){
-                            exception.printStackTrace();
+
+                            //  Toast.makeText(context, "Enter Value Not A Multiple Of Item SQ Value.", Toast.LENGTH_LONG).show();
                         }
 
 
-                        // Global_Data.itemmap.put(holder.pidp.getText().toString(),)
-
-                        // sum += value;
-                        //  ProductAll_Varients.txttotalPreview.setText("Total "+sum);
-                        //ProductAll_Varients.updateSum(sum);
-                    } else {
-                        holder.totalprice.setText("");
-                        holder.quantity_error.setText("");
-                        Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(),"");
-
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
+
+
+                    // Global_Data.itemmap.put(holder.pidp.getText().toString(),)
+
+                    // sum += value;
+                    //  ProductAll_Varients.txttotalPreview.setText("Total "+sum);
+                    //ProductAll_Varients.updateSum(sum);
+                } else {
+                    holder.totalprice.setText("");
+                    holder.quantity_error.setText("");
+                    Global_Data.Order_hashmap.put(position + "&" + holder.pidp.getText().toString(), "");
+
                 }
-
-
-
+            }
 
 
         });
@@ -300,12 +363,13 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     }
 
     static class ViewHolder {
-        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew,mrpvs,PSTOCK,SMP_FLAG;
-        TextView PSQ,PMQ,PSQVALUE,PMQVALUE,quantity_error;
+        TextView Productnamerpmrp, pidp, mrpv, rpv, mrpvnew, rpvnew, mrpvs, PSTOCK, SMP_FLAG;
+        TextView PSQ, PMQ, PSQVALUE, PMQVALUE, quantity_error;
         EditText productquantity;
-        TextView totalprice,pcode_new;
+        TextView totalprice, pcode_new, schemename;
         public MutableWatcher1 mWatcher1;
         public MutableWatcher2 mWatcher2;
+        LinearLayout schem_box;
 
 
     }

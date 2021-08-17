@@ -33,6 +33,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/newProduct_varient"
         android:layout_weight="1.0"
+        android:padding="10dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="5dp"
         android:layout_above="@+id/exampllist" />

@@ -2970,7 +2970,7 @@ public class getServices {
                                     loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                             jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                             jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                            jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"),jsonObject.getString("smp_flag"));
+                                            jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"),jsonObject.getString("smp_flag"),jsonObject.getString("code"));
 
 
                                 }
@@ -2986,7 +2986,8 @@ public class getServices {
                                         loginDataBaseAdapter.insertEntryITEM_MASTER(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("primary_category"),
                                                 jsonObject.getString("sub_category"), jsonObject.getString("product_variant"), jsonObject.getString("retail_price"),
                                                 jsonObject.getString("mrp"), jsonObject.getString("qualifying_qty"),
-                                                jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"),jsonObject.getString("smp_flag"));
+                                                jsonObject.getString("free_qty"), jsonObject.getString("status"), jsonObject.getString("business_unit"), jsonObject.getString("business_category"), jsonObject.getString("standard_qty"), jsonObject.getString("master_qty"),jsonObject.getString("smp_flag"),jsonObject.getString("code"));
+
                                     }
 
                                 }
@@ -3239,6 +3240,7 @@ public class getServices {
 
                 // dialog.dismiss();
             } catch (JSONException e) {
+                e.printStackTrace();
                 e.printStackTrace();
                 //  finish();
                 dialog.dismiss();

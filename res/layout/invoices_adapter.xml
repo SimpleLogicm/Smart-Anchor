@@ -12,7 +12,7 @@
         android:layout_height="70dp"
         android:orientation="horizontal"
         android:background="@color/light_greynew"
-        android:weightSum="7.0">
+        android:weightSum="8.0">
 
         <TextView
             android:id="@+id/n_date"
@@ -122,6 +122,24 @@
             android:textStyle="bold"
             android:textColor="@color/black" >
         </TextView>
+
+
+        <TextView
+            android:id="@+id/More"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="@string/MORE"
+            android:layout_marginLeft="1dp"
+            android:background="@color/white"
+            android:textSize="@dimen/column_text_size"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#3F51B5" >
+        </TextView>
+
     </LinearLayout>
 
 </RelativeLayout>

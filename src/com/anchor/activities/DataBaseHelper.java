@@ -6756,7 +6756,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // Select All Query
         //String selectQuery = "SELECT sub_category FROM " + TABLE_ITEM_MASTER + "";
         //String selectQuery = "SELECT mrp FROM " + TABLE_ITEM_MASTER + " WHERE product_variant = " + categ ;
-        String selectQuery = "SELECT code,name,type,description,display_name FROM " + TABLE_ITEM_SCHEME_NEW + " WHERE product_id" + " ='" + product_code + "'";
+        String selectQuery = "SELECT code,name,type,description,display_name,qualifying_qty,amount FROM " + TABLE_ITEM_SCHEME_NEW + " WHERE product_id" + " ='" + product_code + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -6771,6 +6771,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     contact.setSche_type(cursor.getString(2));
                     contact.setSche_discription(cursor.getString(3));
                     contact.setSche_disname(cursor.getString(4));
+                    contact.setQualifying_qty(cursor.getString(5));
+                    contact.setAmount(cursor.getString(6));
+//                    contact.setSch_created_at(cursor.getString(7));
+//                    contact.setModified_by(cursor.getString(8));
+//                    contact.setSch_updated_at(cursor.getString(9));
 
                     // Adding contact to list
                     contactList14.add(contact);
@@ -9417,7 +9422,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq,smp_flag FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY product_variant limit 200",
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq,smp_flag,scheame_code FROM item_master WHERE b_unit = ? AND primary_category = ? AND b_business_c = ? AND sub_category = ? GROUP BY product_variant limit 200",
                 new String[]{business_unit, primary_category, business_category, sub_category});
 
 
@@ -9438,6 +9443,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     contact.setSQ(cursor.getString(9));
                     contact.setMQ(cursor.getString(10));
                     contact.setSmp_flag(cursor.getString(11));
+                    contact.setscheame_code(cursor.getString(12));
                     //contact.set_stocks_product_name(cursor.getString(11));
                     // Adding contact to list
                     contactList14.add(contact);
@@ -9505,7 +9511,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq FROM item_master WHERE code IN ?  GROUP BY product_variant",
 //                new String[]{Product_varient_code});
 
-        Cursor cursor = db.query("item_master", new String[]{"retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq,smp_flag"}, "code in(" + Product_varient_codes_list + ")", null, "product_variant", null, "product_variant");
+        Cursor cursor = db.query("item_master", new String[]{"retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq,smp_flag,scheame_code"}, "code in(" + Product_varient_codes_list + ")", null, "product_variant", null, "product_variant");
 
         // looping through all rows and adding to list
         try {
@@ -9524,6 +9530,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     contact.setSQ(cursor.getString(9));
                     contact.setMQ(cursor.getString(10));
                     contact.setSmp_flag(cursor.getString(11));
+                    contact.setscheame_code(cursor.getString(12));
                     //  contact.set_stocks_product_name(cursor.getString(11));
                     // Adding contact to list
                     contactList14.add(contact);
@@ -9546,7 +9553,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         //Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq,smp_flag FROM item_master WHERE product_variant = ? GROUP BY product_variant",
+        Cursor cursor = db.rawQuery("select retail_price, mrp, qualifying_qty, free_qty, name,code,primary_category,sub_category,product_variant,sq,mq,smp_flag,scheame_code FROM item_master WHERE product_variant = ? GROUP BY product_variant",
                 new String[]{Product_varient});
 
         // looping through all rows and adding to list
@@ -9566,6 +9573,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     contact.setSQ(cursor.getString(9));
                     contact.setMQ(cursor.getString(10));
                     contact.setSmp_flag(cursor.getString(11));
+                    contact.setscheame_code(cursor.getString(12));
                     // contact.set_stocks_product_name(cursor.getString(11));
                     // Adding contact to list
                     contactList14.add(contact);

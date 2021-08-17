@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -22,6 +24,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
@@ -55,13 +58,21 @@ import android.widget.Toast;
 
 import com.anchor.adapter.AutoSuggestAdapter;
 import com.anchor.helper.MyPeriodicwork;
+import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -83,7 +94,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -95,6 +109,7 @@ public class Order extends Activity implements OnItemSelectedListener {
     LinearLayout tabLayout;
     String city_name = "";
     TextView schedule_txt;
+    static String final_response = "";
     TextView mTitleTextView;
     String beat_name = "";
     private int drop_value = 0;
@@ -204,6 +219,9 @@ public class Order extends Activity implements OnItemSelectedListener {
         oamount_overdue = findViewById(R.id.oamount_overdue);
         customer_MObile = findViewById(R.id.customer_MObile);
         schedule_txt = findViewById(R.id.textView1sf);
+
+        getcreditdata();
+
 
         // for label change
         SharedPreferences spf6 = this.getSharedPreferences("SimpleLogic", 0);
@@ -2535,6 +2553,275 @@ public class Order extends Activity implements OnItemSelectedListener {
         }
     }
 
+    public void getcreditdata(){
+        SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
+        //String device_id = sp.getString("devid", "");
+
+        loginDataBaseAdapter = new LoginDataBaseAdapter(Order.this);
+        loginDataBaseAdapter = loginDataBaseAdapter.open();
+        dialog = new ProgressDialog(Order.this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+
+                    dialog.setMessage("Please Wait Credit Data Sync...");
+
+
+        dialog.setTitle("Smart Anchor App");
+        dialog.setCancelable(false);
+        dialog.show();
+
+
+        PackageInfo pInfo = null;
+        String version = "";
+        try {
+            pInfo = Order.this.getPackageManager().getPackageInfo(Order.this.getPackageName(), 0);
+            version = pInfo.versionName;
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            //textViewVersion.setText("Mobile Sales App, v. 1.3.1");
+        }
+
+        String user_email = "";
+
+        try {
+            if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(sp.getString("USER_EMAIL", "")))) {
+                user_email = sp.getString("USER_EMAIL", "");
+            } else {
+                user_email = Global_Data.GLOvel_USER_EMAIL;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        String domain="";
+
+        domain = Order.this.getResources().getString(R.string.service_domain);
+
+        // Global_Val global_Val = new Global_Val();
+//        if(URL.equalsIgnoreCase(null) || URL.equalsIgnoreCase("null") || URL.equalsIgnoreCase("") || URL.equalsIgnoreCase(" ")) {
+//            domain = context.getResources().getString(R.string.service_domain);
+//        }
+//        else
+//        {
+//            domain = URL.toString();
+//        }
+
+        Log.d("Server url", "Server url" + domain + "menus/sync_masters?imei_no=" + ""+"&app_version="+version+"&email=" + user_email);
+        StringRequest stringRequest = null;
+        stringRequest = new StringRequest(domain + "menus/sync_masters?imei_no=" + ""+"&app_version="+version+"&email=" + user_email,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("jV", "JV length" + response.length());
+                        final_response = response;
+                        final Context context = Order.this;
+                     //  new Order.LongOperation().execute(response);
+
+
+                        try {
+                            List<Local_Data> checkproducts = dbvoc.HSS_DescriptionITEM();
+                            //List<Local_Data> checkstates= dbvoc.getAllList_CodeS();
+                            // List<Local_Data> checkcity= dbvoc.getAllCity_CODE();
+                            // List<Local_Data> checkbeat= dbvoc.getAllBeats();
+                            List<Local_Data> checkcustomer = dbvoc.checkCustomer_CODE();
+                            List<Local_Data> checkcredit_profile = dbvoc.getCreditprofileData();
+
+
+                            final Calendar c = Calendar.getInstance();
+                            JSONObject json = new JSONObject(final_response);
+                            try {
+
+                                String response_result = "";
+                                if (json.has("result")) {
+                                    response_result = json.getString("result");
+                                } else {
+                                    response_result = "data";
+                                }
+
+
+
+
+
+
+
+
+
+
+
+                                if (response_result.equalsIgnoreCase("Data is up to date.")) {
+                                    //activity = context;
+
+                                    final String finalResponse_result = response_result;
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            Toast.makeText(context.getApplicationContext(), finalResponse_result, Toast.LENGTH_LONG).show();
+                                            dialog.dismiss();
+                                            // getTargetDataservice(context);
+                                        }
+                                    });
+                                } else if (response_result.equalsIgnoreCase("Device not registered")) {
+
+                                    final String finalResponse_result1 = response_result;
+                                    ((Activity) context).runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            Toast.makeText(context.getApplicationContext(), finalResponse_result1, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                                    // Toast.makeText(context.getApplicationContext(), response_result, Toast.LENGTH_LONG).show();
+
+                                } else {
+
+
+
+                                    JSONArray credit_profile = json.getJSONArray("credit_profiles");
+
+                                    Log.d("credit_profile", "credit_profile" + credit_profile.toString());
+
+
+                                    // List<Local_Data> checkproducts =  dbvoc.HSS_DescriptionITEM();
+                                    // List<Local_Data> checkproducts =  dbvoc.HSS_DescriptionITEM();
+
+                                    try {
+
+
+
+
+                                        /* IDS column used for BU Head */
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        Log.d("credit", "credit" + checkcredit_profile.size());
+                                        Log.d("credit L", "credit L" + credit_profile.length());
+                                        if (checkcredit_profile.size() <= 0) {
+
+                                            for (int i = 0; i < credit_profile.length(); i++) {
+
+                                                JSONObject jsonObject = credit_profile.getJSONObject(i);
+
+                                                loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_id"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+
+
+                                            }
+
+                                        } else {
+
+                                            for (int i = 0; i < credit_profile.length(); i++) {
+
+                                                JSONObject jsonObject = credit_profile.getJSONObject(i);
+
+                                                try {
+                                                    dbvoc.getDeleteCtredit_Profile(jsonObject.getString("customer_id"), jsonObject.getString("business_unit"));
+//                                    dbvoc.updateshop_details_Did(jsonObject.getString("customer_code"), jsonObject.getString("business_unit"), "", jsonObject.getString("customer_code"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"));
+
+                                                    loginDataBaseAdapter.insert_credit_profile("", jsonObject.getString("customer_id"), jsonObject.getString("customer_id"), "", "", "", "", jsonObject.getString("credit_limit"), jsonObject.getString("amount_outstanding"), jsonObject.getString("amount_overdue"), jsonObject.getString("business_unit"));
+
+                                                } catch (Exception ex) {
+                                                    ex.printStackTrace();
+                                                }
+
+
+                                            }
+
+                                        }
+
+
+
+                                    } finally {
+                                        // database.endTransaction();
+                                    }
+
+
+                                    // Global_Val.STOCK_SERVICE_FLAG = "";
+                                    //dialog.dismiss();
+                                    //finish();
+
+                                }
+
+                                //  finish();
+                                // }
+
+                                // output.setText(data);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                dialog.dismiss();
+                            }
+
+
+                            // dialog.dismiss();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            //  finish();
+                            dialog.dismiss();
+                        }
+                        dialog.dismiss();
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        dialog.dismiss();
+                        //Toast.makeText(GetData.this, error.getMessage(), Toast.LENGTH_LONG).show();
+
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                            Toast.makeText(Order.this,
+                                    "Network Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(Order.this,
+                                    "Server AuthFailureError  Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ServerError) {
+                            Toast.makeText(Order.this,
+                                    "Server   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof NetworkError) {
+                            Toast.makeText(Order.this,
+                                    "Network   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(Order.this,
+                                    "ParseError   Error",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(Order.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        dialog.dismiss();
+
+                        Intent intentn = new Intent(Order.this, MainActivity.class);
+                        Order.this.startActivity(intentn);
+                        //((Activity) context).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        ((Activity) Order.this).finish();
+                        // finish();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(Order.this);
+        int socketTimeout = 300000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        // requestQueue.se
+        //requestQueue.add(jsObjRequest);
+        stringRequest.setShouldCache(false);
+        requestQueue.getCache().clear();
+        requestQueue.add(stringRequest);
+    }
+
+
+
+
+
     public void getScheduleData() {
         SharedPreferences sp = getSharedPreferences("SimpleLogic", MODE_PRIVATE);
         //String device_id = sp.getString("devid", "");
@@ -2930,4 +3217,8 @@ public class Order extends Activity implements OnItemSelectedListener {
         intent.setData(uri);
         startActivityForResult(intent, 101);
     }
+
+
+
+
 }

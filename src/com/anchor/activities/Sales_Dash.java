@@ -18,12 +18,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.TextView;
 
+import com.anchor.services.getServices;
 import com.anchor.webservice.ConnectionDetector;
 //how to give voice for icon when swipe in android
 public class Sales_Dash extends Activity implements OnItemSelectedListener{
 	//Button retail_sales, institute_sales;
 	ImageView retail_sales, institute_sales,customer_services,quote_status,schedule_listn,C_profile,outstandingBtn,schemeBtn,otherInfoBtn,sub_delaer_order,pro_activity_click;
-	ImageView C_todo_list;
+	ImageView C_todo_list,Schemecircultion;
 	ConnectionDetector cd;
 	Boolean isInternetPresent = false;
 	TextView schedule_txt,textView1sf;
@@ -46,6 +47,7 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 		outstandingBtn = findViewById(R.id.outstanding_btn);
 		schemeBtn = findViewById(R.id.scheme_btn);
 		otherInfoBtn = findViewById(R.id.otherinfo_btn);
+		Schemecircultion = findViewById(R.id.Schemecircultion);
 		sub_delaer_order = findViewById(R.id.sub_delaer_order);
 		pro_activity_click = findViewById(R.id.pro_activity_click);
 		C_todo_list = findViewById(R.id.C_todo_list);
@@ -80,9 +82,12 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 			public void onClick(View v) {
 				Global_Data.CUSTOMER_SERVICE_FLAG = "" ;
 				Global_Data.sales_btnstring="Secondary Sales / Retail Sales";
+
 				Intent intent = new Intent(getApplicationContext(), Order.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+			//	getServices.sendRequestnew(Sales_Dash.this, "Please wait for download customer credit information...");
+
 			}
 		});
 
@@ -248,6 +253,28 @@ public class Sales_Dash extends Activity implements OnItemSelectedListener{
 					toast.setGravity(Gravity.CENTER, 0, 0);
 					toast.show();
 				}
+			}
+		});
+
+		Schemecircultion.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				isInternetPresent = cd.isConnectingToInternet();
+				if (isInternetPresent)
+				{
+					Intent a = new Intent(Sales_Dash.this,Schemecirculer.class);
+					startActivity(a);
+					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+					//finish();
+				}
+				else
+				{
+					Toast toast = Toast.makeText(getApplicationContext(),"You don't have internet connection.",Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.CENTER, 0, 0);
+					toast.show();
+				}
+
+
 			}
 		});
 

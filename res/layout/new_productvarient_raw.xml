@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:id="@+id/layoutnew"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Productnamerpmrp"
+                android:background="@color/grey_secondry"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="gagsavgasv"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                >
+
+            </TextView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:visibility="invisible"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/pcode_new"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Code:"
+                    android:layout_weight="1"
+                    android:textSize="12sp">
+
+
+                </TextView>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/warehouse"
+                    android:layout_weight="0.1">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/warehuse"
+                    android:layout_width="0dp"
+                    android:text="NA"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:textSize="12sp">
+
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/PSQ"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Minimum Qantity:"
+                    android:layout_weight="1"
+                    android:textSize="12sp">
+
+
+                </TextView>
+
+
+                <TextView
+                    android:id="@+id/mrpvnew"
+                    android:layout_width="0dp"
+                    android:text="MRP"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:textSize="12sp">
+
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/PMQ"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="MQ:"
+                    android:layout_weight="1"
+                    android:textSize="12sp">
+
+
+                </TextView>
+
+
+
+
+                <TextView
+                    android:id="@+id/mrpvs"
+                    android:layout_width="0dp"
+                    android:text="DLP"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:textSize="12sp">
+
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/totalpricep"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/quantity_error"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:textColor="#ea0707"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/mrpv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/pidp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/rpv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/PSQVALUE"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/PMQVALUE"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/SMP_FLAG"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:textSize="12dp"
+                    >
+
+                </TextView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/schem_box"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:visibility="invisible"
+                    android:layout_height="30dp"
+                    android:background="@drawable/redboxbackscheme"
+                    android:orientation="horizontal"
+
+
+
+                    >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/free"
+                        android:layout_height="20dp">
+
+                    </ImageView>
+
+
+
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/schemename"
+                        android:layout_gravity="center"
+                        android:text="NA"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+
+
+
+                    >
+
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/productquantityp"
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:hint="@string/ENTER_QUANTITY"
+                    android:background="@drawable/squareedittext"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:textSize="12sp">
+
+
+                </EditText>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/PSTOCK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/PMQ"
+            android:layout_alignParentLeft="true"
+            android:text="@string/stock"
+            android:textSize="12dp" />
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
