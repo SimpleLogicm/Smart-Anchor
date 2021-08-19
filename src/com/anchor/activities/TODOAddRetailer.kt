@@ -1048,7 +1048,7 @@ class TODOAddRetailer : Activity() {
 
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
-            Log.e("DATA", e.message)
+            Log.e("DATA", e.message.toString())
         }
     }
 
@@ -1170,7 +1170,7 @@ class TODOAddRetailer : Activity() {
 
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
-            Log.e("DATA", e.message)
+            Log.e("DATA", e.message.toString())
         }
     }
 
@@ -2046,7 +2046,7 @@ class TODOAddRetailer : Activity() {
             }
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
-            Log.e("DATA", e.message)
+            Log.e("DATA", e.message.toString())
         }
     }
 

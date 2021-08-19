@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_attendance.*
 import kotlinx.android.synthetic.main.activity_attendance.txtWelcomeUserDcr
@@ -38,8 +39,26 @@ class Schemedetail : Activity() {
         val descriptionn: String = intent.getStringExtra("description").toString()
         val focn: String = intent.getStringExtra("foc").toString()
         val product_details: String = intent.getStringExtra("product_details").toString()
+        val discount_in_dp_amount: String = intent.getStringExtra("discount_in_dp_amount").toString()
+        val discount_in_dp_percent: String = intent.getStringExtra("discount_in_dp_percent").toString()
+        val foc_qan: String = intent.getStringExtra("foc_qan").toString()
 
 
+        if (focn.equals("FOC")){
+            focprodde.visibility=View.VISIBLE
+            focquanll.visibility=View.VISIBLE
+
+
+        }else if (focn.equals("DISCOUNT")){
+            dis_percenrll.visibility=View.VISIBLE
+            dis_amountll.visibility=View.VISIBLE
+        }
+
+
+
+        discountpercent.setText(discount_in_dp_percent)
+        discountamount.setText(discount_in_dp_amount)
+        foc_qty.setText(foc_qan)
         schemename.setText(scheame_name)
         productname.setText(product_name)
         amount.setText(qualify_amount)

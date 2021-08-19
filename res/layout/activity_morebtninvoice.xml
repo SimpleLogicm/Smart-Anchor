@@ -19,6 +19,8 @@
         android:textSize="15sp"></TextView>
 
 
+
+
     <RelativeLayout
         android:id="@+id/nll"
         android:layout_above="@+id/nlle"
@@ -33,45 +35,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <AutoCompleteTextView
-                android:id="@+id/invoice_no"
-                android:layout_width="match_parent"
-                android:layout_gravity="center"
-                android:inputType="textMultiLine"
-                android:scrollbars="none"
-                android:completionThreshold="1"
-                android:background="@drawable/rounded_corner_new"
-                android:imeOptions="actionDone"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:singleLine="true"
-                android:drawableRight="@drawable/search_icon"
-                android:textSize="15dp"
-                android:hint="Search Order no" >
-                <requestFocus />
-            </AutoCompleteTextView>
-
-
-            <AutoCompleteTextView
-                android:id="@+id/product"
-                android:layout_width="match_parent"
-                android:layout_gravity="center"
-                android:inputType="textMultiLine"
-                android:scrollbars="none"
-                android:completionThreshold="1"
-                android:background="@drawable/rounded_corner_new"
-                android:imeOptions="actionDone"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:ems="10"
-                android:singleLine="true"
-                android:drawableRight="@drawable/search_icon"
-                android:textSize="15dp"
-                android:hint="Search Product no" >
-                <requestFocus />
-            </AutoCompleteTextView>
+            <ImageView
+                android:id="@+id/todo_filter"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/td_Retailer_search"
+                android:layout_marginRight="10dp"
+                android:onClick="onSlideViewButtonClick"
+                android:src="@drawable/todo_filter"/>
 
 
 
@@ -354,5 +327,137 @@
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/my_view"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F0F0F0"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp">
+
+
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlout_abc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/abc_ticketdetails1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+
+                        android:clickable="true"
+                        android:visibility="visible"
+                        android:gravity="left|center"
+                        android:paddingRight="10dp"
+                        android:text="Filter By"
+                        android:textColor="#306FA2"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/invoice_no"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="none"
+                    android:completionThreshold="1"
+                    android:background="@drawable/rounded_corner_new"
+                    android:imeOptions="actionDone"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:singleLine="true"
+                    android:drawableRight="@drawable/search_icon"
+                    android:textSize="15dp"
+                    android:hint="Search Order no" >
+                    <requestFocus />
+                </AutoCompleteTextView>
+
+
+                <AutoCompleteTextView
+                    android:layout_below="@+id/invoice_no"
+                    android:id="@+id/product"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="none"
+                    android:completionThreshold="1"
+                    android:background="@drawable/rounded_corner_new"
+                    android:imeOptions="actionDone"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:singleLine="true"
+                    android:drawableRight="@drawable/search_icon"
+                    android:textSize="15dp"
+                    android:hint="Search Product no" >
+                    <requestFocus />
+                </AutoCompleteTextView>
+
+            </LinearLayout>
+
+
+
+
+
+            <TextView
+                android:id="@+id/reset_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Reset"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#306FA2"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/ll"
+                />
+
+            <TextView
+                android:id="@+id/done_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done"
+                android:textStyle="bold"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#306FA2"
+                android:textSize="16dp"
+                android:layout_toRightOf="@+id/reset_btn"
+                android:layout_below="@+id/ll"
+                />
+
+<!--            <ProgressBar-->
+<!--                android:id="@+id/filter_progressBars"-->
+<!--                style="?android:attr/progressBarStyle"-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:indeterminateDrawable="@drawable/progress"-->
+<!--                android:visibility="gone"></ProgressBar>-->
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

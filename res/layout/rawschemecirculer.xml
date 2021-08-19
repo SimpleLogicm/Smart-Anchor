@@ -6,7 +6,7 @@
     android:gravity="center"
     android:id="@+id/main"
     android:layout_marginTop="10dp"
-    android:weightSum="3">
+    android:weightSum="4">
 
 
     <TextView
@@ -34,6 +34,18 @@
         android:textColor="@color/black"
         android:id="@+id/date"
         android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:id="@+id/details"
+        android:layout_width="0dp"
+        android:text="@string/Details"
         android:layout_weight="1"
         android:gravity="center"
         android:layout_height="wrap_content">

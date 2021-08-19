@@ -123,7 +123,7 @@ class Schemecirculer : Activity() {
             filterlist = ArrayList<Schemecirculermodel>()
 
             for (i in 0 until list!!.size) {
-                if (list!!.get(i).display_name.equals(text)) {
+                if (list!!.get(i).productname.equals(text)) {
                     filterlist!!.add(Schemecirculermodel(list!!.get(i).date,
                             list!!.get(i).schemename,
                             list!!.get(i).productname,
@@ -142,6 +142,8 @@ class Schemecirculer : Activity() {
             dcrreport_recycler_view!!.itemAnimator = DefaultItemAnimator()
             dcrreport_recycler_view!!.adapter = schemecirculeradaptor
             adapter.notifyDataSetChanged()
+
+            autoCompleteTextView1.setText("")
 
         })
 
@@ -350,7 +352,7 @@ class Schemecirculer : Activity() {
                                         ))
 
 
-                                        list_product_name!!.add(jsonObject.getString("display_name"))
+                                        list_product_name!!.add(jsonObject.getString("product"))
                                     }
                                     runOnUiThread(Runnable {
                                         dialog!!.dismiss()

@@ -19,228 +19,348 @@
         android:textSize="15sp"></TextView>
 
 
-<RelativeLayout
-    android:layout_below="@+id/txtWelcomeUserDcr"
-    android:layout_width="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_height="match_parent">
-
-
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginTop="110dp"
         android:layout_height="match_parent">
-
-
-
-
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
+            android:layout_below="@+id/txtWelcomeUserDcr"
             android:layout_width="match_parent"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="20dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_margin="10dp"
+            android:layout_marginTop="20dp"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_margin="10dp"
-                android:layout_marginTop="30dp"
-                android:visibility="visible"
-                android:layout_below="@+id/txtWelcomeUserDcr"
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_marginTop="110dp"
                 android:layout_height="match_parent">
 
 
 
-                <TextView
-                    android:id="@+id/schemename"
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:textSize="16sp"
-                    android:text="Scheme Name"
-                    android:backgroundTint="#8A0808"
-                    android:background="@drawable/rounded_corner_new"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginTop="30dp"
-                    android:layout_height="40dp">
-
-                </TextView>
-
-
-                <LinearLayout
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="match_parent"
-                    android:background="@drawable/bottom_rounded_corner"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_marginTop="20sp"
-                        android:id="@+id/productname"
-                        android:textColor="@color/black"
-                        android:text="Acvhgj"
-                        android:layout_width="match_parent"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="@color/white"
+                    android:layout_margin="10dp"
+                    android:layout_height="match_parent">
 
                     <LinearLayout
-                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        android:layout_marginTop="30dp"
+                        android:visibility="visible"
+                        android:layout_below="@+id/txtWelcomeUserDcr"
                         android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
+
+
 
                         <TextView
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:text="Qualify Amount:"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                        </TextView>
-
-                        <TextView
-                            android:id="@+id/amount"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:gravity="right"
-                            android:text="shsh"
+                            android:id="@+id/schemename"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:textSize="16sp"
+                            android:text="Scheme Name"
+                            android:backgroundTint="#8A0808"
+                            android:background="@drawable/rounded_corner_new"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_marginTop="30dp"
+                            android:layout_height="40dp">
 
                         </TextView>
+
+
+                        <LinearLayout
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:paddingBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/bottom_rounded_corner"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_marginTop="20sp"
+                                android:id="@+id/productname"
+                                android:textColor="@color/black"
+                                android:text="Acvhgj"
+                                android:layout_width="match_parent"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:text="Qualify Amount:"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/amount"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    android:gravity="right"
+                                    android:text="shsh"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:text="Qualify Qty:"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/qty"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    android:gravity="right"
+                                    android:text="h"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:text="Description:"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/description"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+
+                            <TextView
+                                android:id="@+id/foc"
+                                android:layout_marginTop="20sp"
+                                android:textColor="@color/black"
+                                android:text="FOC"
+                                android:layout_width="match_parent"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/focprodde"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:text="FOC Product Detail:"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/productdetails"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="right"
+                                    android:text="h"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/focquanll"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:text="FOC Qty:"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/foc_qty"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="right"
+                                    android:text="h"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/dis_percenrll"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:text="Discount In Percent:"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/discountpercent"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    android:gravity="right"
+                                    android:text="shsh"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:visibility="gone"
+                                android:id="@+id/dis_amountll"
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    android:text="Discount In Amount:"
+                                    android:textStyle="bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                                <TextView
+                                    android:id="@+id/discountamount"
+                                    android:textColor="@color/black"
+                                    android:textSize="12sp"
+                                    android:gravity="right"
+                                    android:text="h"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                </TextView>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+
+                        <Button
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/close"
+                            android:text="Close"
+                            android:textColor="@color/white"
+                            android:backgroundTint="#8A0808"
+                            android:background="@drawable/rounded_corner_new"
+                            android:layout_margin="20sp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content">
+
+                        </Button>
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:text="Qualify Qty:"
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                        </TextView>
-
-                        <TextView
-                            android:id="@+id/qty"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:gravity="right"
-                            android:text="h"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textColor="@color/black"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="Description:"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                        </TextView>
-
-                        <TextView
-                            android:id="@+id/description"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp">
-
-                        </TextView>
-
-                    </LinearLayout>
 
 
 
-                    <TextView
-                        android:id="@+id/foc"
-                        android:layout_marginTop="20sp"
-                        android:textColor="@color/black"
-                        android:text="FOC"
-                        android:layout_width="match_parent"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
+                </androidx.cardview.widget.CardView>
 
 
-                    <TextView
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/productdetails"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="150dp"
+                android:src="@drawable/free"
+                android:background="@drawable/rounded_corner"
+                android:layout_centerHorizontal="true"
+                android:layout_height="150dp">
 
-                    </TextView>
-
-
-                </LinearLayout>
+            </ImageView>
 
 
+        </RelativeLayout>
 
+    </ScrollView>
 
-                <Button
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/close"
-                    android:text="Close"
-                    android:textColor="@color/white"
-                    android:backgroundTint="#8A0808"
-                    android:background="@drawable/rounded_corner_new"
-                    android:layout_margin="20sp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content">
-
-                </Button>
-
-            </LinearLayout>
-
-
-
-
-        </androidx.cardview.widget.CardView>
-
-
-    </RelativeLayout>
-    <ImageView
-        android:layout_width="150dp"
-        android:src="@drawable/free"
-        android:background="@drawable/rounded_corner"
-        android:layout_centerHorizontal="true"
-        android:layout_height="150dp">
-
-    </ImageView>
-
-
-</RelativeLayout>
 
 
 

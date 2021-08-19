@@ -1,6 +1,7 @@
 package com.anchor.activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,7 +12,8 @@ import android.os.StrictMode
 import android.util.Log
 import android.view.*
 import android.view.View.OnTouchListener
-import android.view.inputmethod.InputMethodManager
+import android.view.animation.TranslateAnimation
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -20,24 +22,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anchor.App.AppController
 import com.anchor.adapter.AutoSuggestAdapter
 import com.anchor.adapter.Morebtninvoiceadaptor
+import com.anchor.adapter.Schemecirculeradaptor
 import com.anchor.model.Morebuttoninvoicemodel
+import com.anchor.model.Schemecirculermodel
 import com.anchor.webservice.ConnectionDetector
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.youtube.player.internal.l
 import kotlinx.android.synthetic.main.activity_attendance.*
+import kotlinx.android.synthetic.main.activity_attendance.dcrreport_recycler_view
 import kotlinx.android.synthetic.main.activity_attendance.txtWelcomeUserDcr
 import kotlinx.android.synthetic.main.activity_morebtninvoice.*
+import kotlinx.android.synthetic.main.activity_schemecirculer.*
+import kotlinx.android.synthetic.main.reatilertdcustomerlist.*
 import org.json.JSONException
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.MutableList
-import kotlin.collections.Set
-import kotlin.collections.toList
-import kotlin.collections.toSet
 
 
 class Morebtninvoice : Activity() {
@@ -47,18 +50,207 @@ class Morebtninvoice : Activity() {
     var final_response = ""
     var invoicesnumber = java.util.ArrayList<String>()
     var itemnumber = java.util.ArrayList<String>()
-
+    var myView: RelativeLayout? = null
+    var done_btn: TextView? = null
+    var reset_btn: TextView? = null
+    var toatamount = ArrayList<Double>()
     var response_result = ""
     var dialog: ProgressDialog? = null
     var isInternetPresent = false
+    var isUp = false
+    var list_product_name: ArrayList<String>? = null
+    var list_ordor_no: ArrayList<String>? = null
+    var new_list_ordor_no: ArrayList<String>? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_morebtninvoice)
 
-        Global_Data.context = Morebtninvoice@ this
+        toatamount.clear()
 
+        list_product_name = ArrayList<String>()
+        list_ordor_no = ArrayList<String>()
+        new_list_ordor_no = ArrayList<String>()
+
+        list_ordor_no!!.clear()
+        list_product_name!!.clear()
+        list_product_name!!.clear()
+
+
+        Global_Data.context = Morebtninvoice@ this
+        myView = findViewById(R.id.my_view)
+        done_btn = findViewById(R.id.done_btn)
+        reset_btn = findViewById(R.id.reset_btn)
+        myView!!.setVisibility(View.INVISIBLE);
+        // myButton.setText("Slide up");
+        isUp = false;
+
+
+
+
+        done_btn!!.setOnClickListener {
+
+            toatamount.clear()
+            var text = invoice_no.text.toString()
+
+            var text2 = product.text.toString()
+
+            if (text.equals("")) {
+                var filterorder: ArrayList<Morebuttoninvoicemodel>? = null
+                filterorder = ArrayList<Morebuttoninvoicemodel>()
+
+
+                for (i in 0 until list!!.size) {
+                    if (list!!.get(i).product.equals(text2)) {
+                        filterorder!!.add(Morebuttoninvoicemodel(list!!.get(i).product,
+                                list!!.get(i).quan,
+                                list!!.get(i).unitprice,
+                                list!!.get(i).amount, list.get(i).orderno))
+                        //   list!!.get(i).
+
+                        toatamount.add(list!!.get(i).amount.toDouble())
+
+                    }
+
+                }
+
+                val grandtt = toatamount.sum()
+
+                total.setText(grandtt.toString())
+
+
+
+
+                adaptor = Morebtninvoiceadaptor(this, filterorder as java.util.ArrayList<Morebuttoninvoicemodel>)
+
+                val mLayoutManager = LinearLayoutManager(this)
+                rv!!.layoutManager = mLayoutManager
+                rv!!.itemAnimator = DefaultItemAnimator()
+                rv!!.adapter = adaptor
+                //  adapterauto.notifyDataSetChanged()
+                product.setText("")
+                invoice_no.setText("")
+
+                // autoCompleteTextView1.setText("")
+
+            } else if (text2.equals("")) {
+                var filterorder: ArrayList<Morebuttoninvoicemodel>? = null
+                filterorder = ArrayList<Morebuttoninvoicemodel>()
+
+
+
+                for (i in 0 until list!!.size) {
+                    if (list!!.get(i).orderno.equals(text)) {
+                        filterorder!!.add(Morebuttoninvoicemodel(list!!.get(i).product,
+                                list!!.get(i).quan,
+                                list!!.get(i).unitprice,
+                                list!!.get(i).amount, list.get(i).orderno))
+                        //   list!!.get(i).
+                        toatamount.add(list!!.get(i).amount.toDouble())
+
+
+                    }
+
+                }
+
+                val grandtt = toatamount.sum()
+
+                total.setText(grandtt.toString())
+
+                adaptor = Morebtninvoiceadaptor(this, filterorder as java.util.ArrayList<Morebuttoninvoicemodel>)
+
+                val mLayoutManager = LinearLayoutManager(this)
+                rv!!.layoutManager = mLayoutManager
+                rv!!.itemAnimator = DefaultItemAnimator()
+                rv!!.adapter = adaptor
+                //  adapterauto.notifyDataSetChanged()
+                product.setText("")
+                invoice_no.setText("")
+
+                //autoCompleteTextView1.setText("")
+            } else if (text2.length > 0 && text.length > 0) {
+
+                var filterorder: ArrayList<Morebuttoninvoicemodel>? = null
+                filterorder = ArrayList<Morebuttoninvoicemodel>()
+                list_product_name!!.clear()
+
+                for (i in 0 until list!!.size) {
+                    if (list!!.get(i).orderno.equals(text) && list!!.get(i).product.equals(text2)) {
+                        filterorder!!.add(Morebuttoninvoicemodel(list!!.get(i).product,
+                                list!!.get(i).quan,
+                                list!!.get(i).unitprice,
+                                list!!.get(i).amount, list.get(i).orderno))
+                        //   list!!.get(i).
+                        toatamount.add(list!!.get(i).amount.toDouble())
+                        //  list_product_name!!.add(list!!.get(i).product)
+
+                    }
+
+                }
+
+                val grandtt = toatamount.sum()
+
+                total.setText(grandtt.toString())
+
+                adaptor = Morebtninvoiceadaptor(this, filterorder as java.util.ArrayList<Morebuttoninvoicemodel>)
+
+                val mLayoutManager = LinearLayoutManager(this)
+                rv!!.layoutManager = mLayoutManager
+                rv!!.itemAnimator = DefaultItemAnimator()
+                rv!!.adapter = adaptor
+                //  adapterauto.notifyDataSetChanged()
+
+                product.setText("")
+                invoice_no.setText("")
+
+
+            }
+
+
+
+
+
+            if (isUp) {
+                slideDown(myView!!)
+                //todo_filter.setText("Slide up")
+            } else {
+                slideUp(myView!!)
+                //todo_filter.setText("Slide down")
+            }
+            isUp = !isUp
+
+        }
+
+        reset_btn!!.setOnClickListener {
+
+            isInternetPresent = cd!!.isConnectingToInternet
+
+            if (isInternetPresent) {
+                val ss: String = intent.getStringExtra("invoice_no").toString()
+
+                ViewinvoiceData(ss, "", "")
+
+            } else {
+                val toast = Toast.makeText(this,
+                        "Internet Not Available. ", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER, 0, 0)
+                toast.show()
+                finish()
+            }
+
+
+
+            if (isUp) {
+                slideDown(myView!!)
+                //todo_filter.setText("Slide up")
+            } else {
+                slideUp(myView!!)
+                //todo_filter.setText("Slide down")
+            }
+            isUp = !isUp
+
+        }
 
         val builder: StrictMode.VmPolicy.Builder = StrictMode.VmPolicy.Builder()
 
@@ -67,7 +259,7 @@ class Morebtninvoice : Activity() {
         cd = ConnectionDetector(Global_Data.context)
 
 
-        val adapterauto = AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, invoicesnumber)
+        val adapterauto = AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_ordor_no)
 
 
         invoice_no.setThreshold(1) // will start working from
@@ -85,12 +277,12 @@ class Morebtninvoice : Activity() {
             val DRAWABLE_BOTTOM = 3
             if (event.action == MotionEvent.ACTION_UP) {
                 if (event.rawX >= invoice_no.getRight() - invoice_no.getCompoundDrawables().get(DRAWABLE_RIGHT).getBounds().width()) {
-                    val view: View = this@Morebtninvoice.getCurrentFocus()!!
-                    if (view != null) {
-                        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(view.windowToken, 0)
-                    }
-                    //autoCompleteTextView1.setText("");
+//                    val view: View = this@Morebtninvoice.currentFocus!!
+//                    if (view != null) {
+//                        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//                        imm.hideSoftInputFromWindow(view.windowToken, 0)
+//                    }
+//                    //autoCompleteTextView1.setText("");
                     invoice_no.showDropDown()
                     return@OnTouchListener true
                 }
@@ -100,32 +292,33 @@ class Morebtninvoice : Activity() {
 
 
         invoice_no.setOnItemClickListener { parent, view, position, id ->
-
-            isInternetPresent = cd!!.isConnectingToInternet
-
-            if (isInternetPresent) {
-                val ss: String = intent.getStringExtra("invoice_no").toString()
-                val order_no: String = invoice_no.text.toString()
-
-                Viewitemno(ss, order_no)
+            var text = invoice_no.text.toString()
+            list_product_name!!.clear()
+            var filterorder: ArrayList<Morebuttoninvoicemodel>? = null
+            filterorder = ArrayList<Morebuttoninvoicemodel>()
 
 
-            //   ViewinvoiceData(ss, order_no, "")
 
+            for (i in 0 until list!!.size) {
+                if (list!!.get(i).orderno.equals(text)) {
+                    filterorder!!.add(Morebuttoninvoicemodel(list!!.get(i).product,
+                            list!!.get(i).quan,
+                            list!!.get(i).unitprice,
+                            list!!.get(i).amount, list.get(i).orderno))
+                    //   list!!.get(i).
+                    // toatamount.add(list!!.get(i).amount.toDouble())
 
-            } else {
-                val toast = Toast.makeText(this,
-                        "Internet Not Available. ", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-                finish()
+                    list_product_name!!.add(list!!.get(i).product)
+
+                }
+
             }
 
 
         }
 
 
-        val adapterauto2 = AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, itemnumber)
+        val adapterauto2 = AutoSuggestAdapter(this, android.R.layout.simple_spinner_dropdown_item, list_product_name)
 
 
         product.setThreshold(1) // will start working from
@@ -143,11 +336,11 @@ class Morebtninvoice : Activity() {
             val DRAWABLE_BOTTOM = 3
             if (event.action == MotionEvent.ACTION_UP) {
                 if (event.rawX >= product.getRight() - product.getCompoundDrawables().get(DRAWABLE_RIGHT).getBounds().width()) {
-                    val view: View = this@Morebtninvoice.getCurrentFocus()!!
-                    if (view != null) {
-                        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(view.windowToken, 0)
-                    }
+//                    val view: View = this@Morebtninvoice.getCurrentFocus()!!
+//                    if (view != null) {
+//                        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//                        imm.hideSoftInputFromWindow(view.windowToken, 0)
+//                    }
                     //autoCompleteTextView1.setText("");
                     product.showDropDown()
                     return@OnTouchListener true
@@ -157,30 +350,29 @@ class Morebtninvoice : Activity() {
         })
 
 
-
-        product.setOnItemClickListener { parent, view, position, id ->
-
-
-            isInternetPresent = cd!!.isConnectingToInternet
-
-            if (isInternetPresent) {
-                val ss: String = intent.getStringExtra("invoice_no").toString()
-                val order_no: String = invoice_no.text.toString()
-                val itemno: String = product.text.toString()
-
-
-                ViewinvoiceData(ss, order_no, itemno)
-
-            } else {
-                val toast = Toast.makeText(this,
-                        "Internet Not Available. ", Toast.LENGTH_SHORT)
-                toast.setGravity(Gravity.CENTER, 0, 0)
-                toast.show()
-                finish()
-            }
-
-
-        }
+//        product.setOnItemClickListener { parent, view, position, id ->
+//
+//
+//            isInternetPresent = cd!!.isConnectingToInternet
+//
+//            if (isInternetPresent) {
+//                val ss: String = intent.getStringExtra("invoice_no").toString()
+//                val order_no: String = invoice_no.text.toString()
+//                val itemno: String = product.text.toString()
+//
+//
+//             //   ViewinvoiceData(ss, order_no, itemno)
+//
+//            } else {
+//                val toast = Toast.makeText(this,
+//                        "Internet Not Available. ", Toast.LENGTH_SHORT)
+//                toast.setGravity(Gravity.CENTER, 0, 0)
+//                toast.show()
+//                finish()
+//            }
+//
+//
+//        }
 
 
         var user_name = ""
@@ -198,7 +390,7 @@ class Morebtninvoice : Activity() {
         if (isInternetPresent) {
             val ss: String = intent.getStringExtra("invoice_no").toString()
 
-            Orderno(ss)
+            //  Orderno(ss)
 
         } else {
             val toast = Toast.makeText(this,
@@ -631,6 +823,8 @@ class Morebtninvoice : Activity() {
                                 Log.i("volley", "response visits Length: " + summaryData.length())
                                 Log.d("users", "visite_schedules$summaryData")
                                 list?.clear()
+                                toatamount.clear()
+
                                 if (summaryData.length() > 0) {
 
                                     // list = java.util.ArrayList<Morebuttoninvoicemodel>()
@@ -640,12 +834,37 @@ class Morebtninvoice : Activity() {
                                         contact_no.setText(jsonObject.getString("contact"))
                                         date.setText(jsonObject.getString("txn_date"))
                                         Invoice_no.setText(jsonObject.getString("invoice_no"))
-                                        total.setText(jsonObject.getString("grand_total"))
-
+                                        // total.setText(jsonObject.getString("grand_total"))
+                                        toatamount.add(jsonObject.getString("amount").toDouble())
                                         list!!.add(Morebuttoninvoicemodel(jsonObject.getString("product"), jsonObject.getString("qty"), jsonObject.getString("unit_price"), jsonObject.getString("amount"), jsonObject.getString("order_number")))
+
+                                        list_product_name!!.add(jsonObject.getString("product"))
+
+                                        if (!list_ordor_no!!.contains(jsonObject.getString("order_number"))) {
+
+                                            list_ordor_no!!.add(jsonObject.getString("order_number"))
+
+                                        }
+
+
                                     }
                                     runOnUiThread(Runnable {
+
+
+                                        //      var s: ArrayList<String> = LinkedHashSet<String>(list_ordor_no)
+
+                                        //   new_list_ordor_no!!.add(s.toString())
+
                                         dialog!!.dismiss()
+                                        //val sumd: Int = MathUtils.sum(toatamount)
+                                        val grandtt = toatamount.sum()
+
+                                        total.setText(grandtt.toString())
+
+
+//                                        val doublesSum: Double = toatamount.stream()
+//                                                .mapToDouble(java.lang.Double::doubleValue)
+//                                                .sum()
 
                                         adaptor = Morebtninvoiceadaptor(this@Morebtninvoice, list)
                                         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(applicationContext)
@@ -743,6 +962,83 @@ class Morebtninvoice : Activity() {
         }
         return super.onOptionsItemSelected(item)
 
+    }
+
+
+    fun slideUp(view: View) {
+//        rtocustomerlist.isClickable=false
+        //  rtocustomerlist.visibility=View.GONE
+//        rtocustomerlist.setClickable(false)
+//        rtocustomerlist.setEnabled(false)
+        //rtocustomerlist.focusable=false
+        view.visibility = View.VISIBLE
+        val animate = TranslateAnimation(
+                view.height.toFloat(),  // fromXDelta
+                0F,  // toXDelta
+                0F,  // fromYDelta
+                0F) // toYDelta
+        animate.setDuration(500)
+        animate.setFillAfter(true)
+        view.startAnimation(animate)
+    }
+
+    // slide the view from its current position to below itself
+    fun slideDown(view: View) {
+//        rtocustomerlist.isClickable=true
+        //   rtocustomerlist.visibility=View.VISIBLE
+//        rtocustomerlist.setClickable(true)
+//        rtocustomerlist.setEnabled(true)
+
+        val animate = TranslateAnimation(
+                0F,  // fromXDelta
+                view.height.toFloat(),  // toXDelta
+                0F,  // fromYDelta
+                0F) // toYDelta
+        animate.setDuration(500)
+        animate.setFillAfter(true)
+        view.startAnimation(animate)
+    }
+
+    fun onSlideViewButtonClick(view: View) {
+
+        isInternetPresent = cd!!.isConnectingToInternet
+
+        if (isInternetPresent) {
+            val ss: String = intent.getStringExtra("invoice_no").toString()
+
+            ViewinvoiceData(ss, "", "")
+
+        } else {
+            val toast = Toast.makeText(this,
+                    "Internet Not Available. ", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+            finish()
+        }
+
+
+
+
+        val builder = AlertDialog.Builder(this@Morebtninvoice)
+        val alertDialog = builder.create()
+        if (isUp) {
+            //alertDialog.dismiss()
+            slideDown(myView!!)
+            //todo_filter.setText("Slide up")
+        } else {
+
+//            val viewGroup: ViewGroup = findViewById(android.R.id.content)
+//            val dialogView: View = LayoutInflater.from(this).inflate(R.layout.retailer_filter, viewGroup, false)
+//
+//            builder.setView(dialogView)
+//
+//            alertDialog.getWindow()!!.getAttributes().windowAnimations = R.style.DialogTheme
+//            alertDialog.show()
+
+            slideUp(myView!!)
+            //todo_filter.setText("Slide down")
+        }
+        isUp = !isUp
     }
 
 
