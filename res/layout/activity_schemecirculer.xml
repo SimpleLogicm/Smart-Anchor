@@ -49,7 +49,7 @@
             android:drawableRight="@drawable/search_icon"
             android:textSize="15dp"
             android:hint="Search Product" >
-            <requestFocus />
+
         </AutoCompleteTextView>
 
 
@@ -198,7 +198,7 @@
                     android:textSize="14sp"
                     android:layout_width="0dp"
                     android:gravity="center"
-                    android:text="Valid till"
+                    android:text="Valid Till"
                     android:textColor="@color/white"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">

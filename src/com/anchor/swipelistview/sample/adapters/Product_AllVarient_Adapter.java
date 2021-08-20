@@ -49,6 +49,18 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
     String sch_displayname;
     String sch_qualify_quan;
     String sch_amount;
+
+    String scheame_name;
+    String product_name;
+    String qualify_amouont;
+    String qualify_quan;
+    String description;
+    String discount_in_dp_amount;
+    String discount_in_dp_percent;
+    String foc_qan;
+    String product_details;
+    String is_discount_scheme;
+
     static Double sum = 0.0;
     customButtonListener customListner;
     ArrayList<String> list1 = new ArrayList<String>();
@@ -182,19 +194,7 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
 
         List<Local_Data> scheme_name = dbvoc.getProductscheme_Name(getData.get(SCHEAME_CODE));
-//results2.add("Select Variant");
         for (Local_Data s : scheme_name) {
-            // Scheme_array.add(s.getSche_disname());
-            //  String  scheme_namen = s.getSche_disname();
-
-//            Global_Data.scheame_name=s.getSche_name();
-//            Global_Data.scheame_type=s.getSche_type();
-//            mapp.put("scheame_name",s.getSche_name());
-//            mapp.put("scheame_type",s.getSche_type());
-//            mapp.put("scheame_description",s.getSche_discription());
-//            mapp.put("scheame_displayname",s.getSche_disname());
-//            mapp.put("scheame_qualifyquan",s.getQualifying_qty());
-//            mapp.put("scheame_amount",s.getAmount());
 
 
             String chekscheame = s.getSche_discription();
@@ -206,13 +206,25 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
 
             } else {
                 holder.schem_box.setVisibility(View.VISIBLE);
-                holder.schemename.setText(s.getSche_type());
+                holder.schemename.setText(s.getSche_disname());
                 sch_name = s.getSche_type();
                 productname=s.getSche_name();
                 sch_description = s.getSche_discription();
                 sch_displayname = s.getSche_disname();
                 sch_qualify_quan = s.getQualifying_qty();
                 sch_amount = s.getAmount();
+
+                scheame_name = s.getSche_disname();
+                product_name= s.getProduct_schm();
+                qualify_amouont=s.getAmount();
+                qualify_quan= s.getQualifying_qty();
+                description = s.getSche_discription();
+                discount_in_dp_amount= s.getDiscount_in_dp_amount();
+                discount_in_dp_percent= s.getDiscount_in_dp_percent();
+                foc_qan= s.getFoc_qty();
+                product_details= s.getProduct_schm();
+                is_discount_scheme= s.getIs_discount_scheme();
+
 
 
             }
@@ -226,14 +238,41 @@ public class Product_AllVarient_Adapter extends ArrayAdapter<HashMap<String, Str
                 Intent i = new Intent(getContext(), Schemedetail.class);
                 Global_Data.scheame_type="product";
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                i.putExtra("scheame_name", sch_name);
-                i.putExtra("product_name", productname);
-                i.putExtra("qualify_amount", sch_amount);
-                i.putExtra("qualify_quan", sch_qualify_quan);
-                i.putExtra("description",sch_description);
-                i.putExtra("foc", "NA");
-                i.putExtra("product_details", holder.Productnamerpmrp.getText().toString());
+                i.putExtra("scheame_name", scheame_name);
+                i.putExtra("product_name", product_name);
+                i.putExtra("qualify_amount", qualify_amouont);
+                i.putExtra("qualify_quan", qualify_quan);
+
+                if (description.equals("")){
+                    i.putExtra("description","NA");
+                }else {
+                    i.putExtra("description",description);
+                }
+
+                 if (is_discount_scheme .equals("true")){
+                     i.putExtra("foc", "DISCOUNT");
+                 }else {
+                     i.putExtra("foc", "FOC");
+                 }
+
+                i.putExtra("discount_in_dp_amount",discount_in_dp_amount);
+                i.putExtra("discount_in_dp_percent",discount_in_dp_percent);
+                i.putExtra("foc_qan",foc_qan);
+
+                i.putExtra("product_details", product_details);
                 getContext().startActivity(i);
+
+                Log.d("Android","scheame_name "+scheame_name);
+                Log.d("Android","product_name "+product_name);
+                Log.d("Android","qualify_amount "+qualify_amouont);
+                Log.d("Android","qualify_quan "+qualify_quan);
+                Log.d("Android","description "+description);
+                Log.d("Android","is_discount_scheme "+is_discount_scheme);
+                Log.d("Android","discount_in_dp_amount "+discount_in_dp_amount);
+                Log.d("Android","discount_in_dp_percent "+discount_in_dp_percent);
+                Log.d("Android","foc_qan "+foc_qan);
+                Log.d("Android","product_details "+product_details);
+
             }
         });
 

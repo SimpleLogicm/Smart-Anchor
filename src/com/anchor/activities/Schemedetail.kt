@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -42,6 +43,9 @@ class Schemedetail : Activity() {
         val discount_in_dp_amount: String = intent.getStringExtra("discount_in_dp_amount").toString()
         val discount_in_dp_percent: String = intent.getStringExtra("discount_in_dp_percent").toString()
         val foc_qan: String = intent.getStringExtra("foc_qan").toString()
+
+
+        Log.d("Android", "focnsc $focn")
 
 
         if (focn.equals("FOC")){

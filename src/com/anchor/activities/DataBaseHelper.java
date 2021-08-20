@@ -6756,7 +6756,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // Select All Query
         //String selectQuery = "SELECT sub_category FROM " + TABLE_ITEM_MASTER + "";
         //String selectQuery = "SELECT mrp FROM " + TABLE_ITEM_MASTER + " WHERE product_variant = " + categ ;
-        String selectQuery = "SELECT code,name,type,description,display_name,qualifying_qty,amount FROM " + TABLE_ITEM_SCHEME_NEW + " WHERE product_id" + " ='" + product_code + "'";
+        String selectQuery = "SELECT code,name,type,description,display_name,qualifying_qty,amount,foc_product_id,foc_product_code,is_discount_scheme,discount_in_dp_percent,discount_in_dp_amount,foc_qty,valid_till_date,status,product,created_at FROM " + TABLE_ITEM_SCHEME_NEW + " WHERE product_id" + " ='" + product_code + "'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -6773,6 +6773,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     contact.setSche_disname(cursor.getString(4));
                     contact.setQualifying_qty(cursor.getString(5));
                     contact.setAmount(cursor.getString(6));
+                    contact.setFoc_product_id(cursor.getString(7));
+                    contact.setFoc_product_code(cursor.getString(8));
+                    contact.setIs_discount_scheme(cursor.getString(9));
+                    contact.setDiscount_in_dp_percent(cursor.getString(10));
+                    contact.setDiscount_in_dp_amount(cursor.getString(11));
+                    contact.setFoc_qty(cursor.getString(12));
+                    contact.setValid_till_date(cursor.getString(13));
+                    contact.setStatus(cursor.getString(14));
+                    contact.setProduct_schm(cursor.getString(15));
+                    contact.setCreated_at(cursor.getString(16));
+                //    contact.setValid_till_date(cursor.getString(13));
 //                    contact.setSch_created_at(cursor.getString(7));
 //                    contact.setModified_by(cursor.getString(8));
 //                    contact.setSch_updated_at(cursor.getString(9));

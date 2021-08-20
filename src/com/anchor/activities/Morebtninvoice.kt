@@ -53,7 +53,7 @@ class Morebtninvoice : Activity() {
     var myView: RelativeLayout? = null
     var done_btn: TextView? = null
     var reset_btn: TextView? = null
-    var toatamount = ArrayList<Double>()
+    var toatamount = ArrayList<Float>()
     var response_result = ""
     var dialog: ProgressDialog? = null
     var isInternetPresent = false
@@ -109,7 +109,7 @@ class Morebtninvoice : Activity() {
                                 list!!.get(i).amount, list.get(i).orderno))
                         //   list!!.get(i).
 
-                        toatamount.add(list!!.get(i).amount.toDouble())
+                        toatamount.add(list!!.get(i).amount.toFloat())
 
                     }
 
@@ -147,7 +147,7 @@ class Morebtninvoice : Activity() {
                                 list!!.get(i).unitprice,
                                 list!!.get(i).amount, list.get(i).orderno))
                         //   list!!.get(i).
-                        toatamount.add(list!!.get(i).amount.toDouble())
+                        toatamount.add(list!!.get(i).amount.toFloat())
 
 
                     }
@@ -182,7 +182,7 @@ class Morebtninvoice : Activity() {
                                 list!!.get(i).unitprice,
                                 list!!.get(i).amount, list.get(i).orderno))
                         //   list!!.get(i).
-                        toatamount.add(list!!.get(i).amount.toDouble())
+                        toatamount.add(list!!.get(i).amount.toFloat())
                         //  list_product_name!!.add(list!!.get(i).product)
 
                     }
@@ -835,7 +835,7 @@ class Morebtninvoice : Activity() {
                                         date.setText(jsonObject.getString("txn_date"))
                                         Invoice_no.setText(jsonObject.getString("invoice_no"))
                                         // total.setText(jsonObject.getString("grand_total"))
-                                        toatamount.add(jsonObject.getString("amount").toDouble())
+                                        toatamount.add(jsonObject.getString("amount").toFloat())
                                         list!!.add(Morebuttoninvoicemodel(jsonObject.getString("product"), jsonObject.getString("qty"), jsonObject.getString("unit_price"), jsonObject.getString("amount"), jsonObject.getString("order_number")))
 
                                         list_product_name!!.add(jsonObject.getString("product"))

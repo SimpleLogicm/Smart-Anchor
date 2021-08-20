@@ -252,7 +252,7 @@ class Schemecirculer : Activity() {
             val mCustomView = mInflater.inflate(R.layout.action_bar, null)
             mCustomView.setBackgroundDrawable(ColorDrawable(Color.parseColor("#910505")))
             val mTitleTextView = mCustomView.findViewById<TextView>(R.id.screenname)
-            mTitleTextView.text = "SCHEME CIRCULATION"
+            mTitleTextView.text = "SCHEME CIRCULAR"
             val todaysTarget = mCustomView.findViewById<TextView>(R.id.todaysTarget)
             val sp: SharedPreferences = this@Schemecirculer.getSharedPreferences("SimpleLogic", 0)
 
@@ -326,7 +326,11 @@ class Schemecirculer : Activity() {
                                 // Global_Data.Custom_Toast(this, resources.getString(R.string.Sorry_No_Record_Found), "Yes")
                                 //finish().toString()
                                 //finish()
-                                onBackPressed()
+                             //   onBackPressed()
+
+                                val i = Intent(this@Schemecirculer, Schemecirculer::class.java)
+                                startActivity(i)
+
 
                             } else {
 
@@ -352,7 +356,10 @@ class Schemecirculer : Activity() {
                                         ))
 
 
-                                        list_product_name!!.add(jsonObject.getString("product"))
+                                        if (!list_product_name!!.contains(jsonObject.getString("product"))){
+                                            list_product_name!!.add(jsonObject.getString("product"))
+
+                                        }
                                     }
                                     runOnUiThread(Runnable {
                                         dialog!!.dismiss()

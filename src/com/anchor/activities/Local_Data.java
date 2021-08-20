@@ -182,6 +182,108 @@ public class Local_Data {
     String product_id;
     String smp_flag;
     String scheame_code;
+    
+    
+    
+    String foc_product_id;
+    String foc_product_code;
+    String is_discount_scheme;
+    String discount_in_dp_percent;
+    String discount_in_dp_amount;
+    String foc_qty;
+    String valid_till_date;
+    String status;
+    String product_schm;
+
+    public String getB_unit() {
+        return b_unit;
+    }
+
+    public void setB_unit(String b_unit) {
+        this.b_unit = b_unit;
+    }
+
+    public String getFoc_product_id() {
+        return foc_product_id;
+    }
+
+    public void setFoc_product_id(String foc_product_id) {
+        this.foc_product_id = foc_product_id;
+    }
+
+    public String getFoc_product_code() {
+        return foc_product_code;
+    }
+
+    public void setFoc_product_code(String foc_product_code) {
+        this.foc_product_code = foc_product_code;
+    }
+
+    public String getIs_discount_scheme() {
+        return is_discount_scheme;
+    }
+
+    public void setIs_discount_scheme(String is_discount_scheme) {
+        this.is_discount_scheme = is_discount_scheme;
+    }
+
+    public String getDiscount_in_dp_percent() {
+        return discount_in_dp_percent;
+    }
+
+    public void setDiscount_in_dp_percent(String discount_in_dp_percent) {
+        this.discount_in_dp_percent = discount_in_dp_percent;
+    }
+
+    public String getDiscount_in_dp_amount() {
+        return discount_in_dp_amount;
+    }
+
+    public void setDiscount_in_dp_amount(String discount_in_dp_amount) {
+        this.discount_in_dp_amount = discount_in_dp_amount;
+    }
+
+    public String getFoc_qty() {
+        return foc_qty;
+    }
+
+    public void setFoc_qty(String foc_qty) {
+        this.foc_qty = foc_qty;
+    }
+
+    public String getValid_till_date() {
+        return valid_till_date;
+    }
+
+    public void setValid_till_date(String valid_till_date) {
+        this.valid_till_date = valid_till_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getProduct_schm() {
+        return product_schm;
+    }
+
+    public void setProduct_schm(String product_schm) {
+        this.product_schm = product_schm;
+    }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    String created_at;
 
     public String img_ordersign, name, punched_button, current_date_only;
     String order_type_name, punched_at_longitude, punched_at_latitude, punched_on, User_id, product_variant, shipment_pri, business_category, primary_category, emp_code, image_path, asset_code, business_unit_code_array, order_category_code_array;
@@ -199,6 +301,9 @@ public class Local_Data {
     public  void setscheame_code( String scheame_code){
         this.scheame_code= scheame_code;
     }
+
+
+
 
 
 

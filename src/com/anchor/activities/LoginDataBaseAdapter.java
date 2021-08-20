@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class LoginDataBaseAdapter {
     static final String DATABASE_NAME = "simple_logic.db";
@@ -249,7 +250,8 @@ public class LoginDataBaseAdapter {
 
     static final String DATABASE_CREATE_ITEMSCHEME_NEW = "CREATE TABLE IF NOT EXISTS " + "scheme_new" +
             "( " + "ID" + " integer primary key autoincrement," + "code text, type text, name text, description text, display_name text, " +
-            "product_id text, qualifying_qty text, amount text, foc_product_id text, created_by text, modified_by text, created_at text, updated_at text, sid text, project_id text);";
+            "product_id text, qualifying_qty text, amount text, foc_product_code text, foc_product_id text, is_discount_scheme text, discount_in_dp_percent text," +
+            " discount_in_dp_amount text, foc_qty text, valid_till_date text,status text,created_at text,product text);";
 
     static final String DATABASE_CREATE_L1_CONTACT = "CREATE TABLE IF NOT EXISTS " + "L1_Contact" +
             "( " + "ID" + " integer primary key autoincrement," + "project_id text, Title text, Heading text, Sub_Heading text, " +
@@ -3163,7 +3165,11 @@ public class LoginDataBaseAdapter {
     }
 
 
-    public void insert_itemSchemenew(String code, String name, String type, String description, String display_name, String product_id, String qualifying_qty, String amount, String foc_product_id, String created_by, String modified_by, String created_at, String updated_at, String sid, String project_id) {
+    public void insert_itemSchemenew(String code, String name, String type, String description, String display_name, String product_id,
+                                     String qualifying_qty, String amount, String foc_product_id,
+                                     String foc_product_code,String is_discount_scheme,String discount_in_dp_percent, String discount_in_dp_amount,
+                                     String foc_qty,String valid_till_date, String status, String product,
+                                     String created_by, String modified_by, String created_at, String updated_at, String sid, String project_id) {
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("code", code);
@@ -3175,16 +3181,28 @@ public class LoginDataBaseAdapter {
         newValues.put("qualifying_qty", qualifying_qty);
         newValues.put("amount", amount);
         newValues.put("foc_product_id", foc_product_id);
-        newValues.put("created_by", created_by);
-        newValues.put("modified_by", modified_by);
+        newValues.put("foc_product_code", foc_product_code);
+        newValues.put("is_discount_scheme", is_discount_scheme);
+        newValues.put("discount_in_dp_percent", discount_in_dp_percent);
+        newValues.put("discount_in_dp_amount", discount_in_dp_amount);
+        newValues.put("foc_qty", foc_qty);
+        newValues.put("valid_till_date", valid_till_date);
+        newValues.put("status", status);
+        newValues.put("product", product);
+       // newValues.put("created_by", created_by);
+//        newValues.put("modified_by", modified_by);
         newValues.put("created_at", created_at);
-        newValues.put("updated_at", updated_at);
-        newValues.put("sid", sid);
-        newValues.put("project_id", project_id);
+      //  newValues.put("updated_at", updated_at);
+       // newValues.put("sid", sid);
+      //  newValues.put("project_id", project_id);
 
         // Insert the row into your table
         db.insert("scheme_new", null, newValues);
+        Log.d("scheme_new", "scheme_new " + newValues);
+
     }
+
+
 
     public void insert_credit_profile(String project_id, String customer_id, String retailer_id, String created_by, String created_at, String updated_at, String code, String credit_limit, String amount_outstanding, String amount_overdue, String business_unit) {
         ContentValues newValues = new ContentValues();

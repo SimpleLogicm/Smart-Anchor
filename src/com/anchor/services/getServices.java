@@ -2948,7 +2948,7 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = schemes.getJSONObject(i);
-                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("qualify_amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
+                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("qualify_amount"), jsonObject.getString("foc_product_id"), jsonObject.getString("foc_product_code"), jsonObject.getString("is_discount_scheme"), jsonObject.getString("discount_in_dp_percent"), jsonObject.getString("discount_in_dp_amount"), jsonObject.getString("foc_qty"), jsonObject.getString("valid_till_date"),jsonObject.getString("status"),jsonObject.getString("product"),jsonObject.getString("created_at"),jsonObject.getString("created_at"),jsonObject.getString("created_at"),jsonObject.getString("created_at"),jsonObject.getString("id"),jsonObject.getString("product_id"));
 
                             }
 
