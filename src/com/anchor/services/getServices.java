@@ -2948,7 +2948,7 @@ public class getServices {
                                 //dbvoc.getDeleteTable("scheme_new");
 
                                 JSONObject jsonObject = schemes.getJSONObject(i);
-                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
+                                loginDataBaseAdapter.insert_itemSchemenew(jsonObject.getString("id"), jsonObject.getString("name"), jsonObject.getString("scheme_type"), jsonObject.getString("description"), jsonObject.getString("display_name"), jsonObject.getString("product_code"), jsonObject.getString("qualifying_quantity"), jsonObject.getString("qualify_amount"), jsonObject.getString("foc_product_code"), "", "", "", "", "", "");
 
                             }
 
