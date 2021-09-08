@@ -376,6 +376,7 @@
                     android:focusable="true"
                     android:clickable="true"
                     android:hint="@string/ENTER_QUANTITY"
+                    android:inputType="number"
                     android:background="@drawable/squareedittext"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"

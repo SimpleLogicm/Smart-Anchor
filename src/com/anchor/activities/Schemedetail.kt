@@ -53,11 +53,35 @@ class Schemedetail : Activity() {
             focquanll.visibility=View.VISIBLE
 
 
-        }else if (focn.equals("DISCOUNT")){
-            dis_percenrll.visibility=View.VISIBLE
-            dis_amountll.visibility=View.VISIBLE
+        }
+//        if (discount_in_dp_percent.equals("0") || discount_in_dp_percent.equals("0.0") || discount_in_dp_percent.equals("null") ){
+//            dis_percenrll.visibility=View.GONE
+//
+//        }else if (discount_in_dp_amount.equals("0") || discount_in_dp_amount.equals("0.0") || discount_in_dp_amount.equals("null")){
+//            dis_amountll.visibility=View.GONE
+//        }
+
+
+        if(discount_in_dp_percent.equals("0")){
+            dis_percenrll.visibility=View.GONE
+
+        }else if(discount_in_dp_percent.equals("0.0")){
+            dis_percenrll.visibility=View.GONE
+
+        }else if (discount_in_dp_percent.equals("null")){
+            dis_percenrll.visibility=View.GONE
+
         }
 
+        if (discount_in_dp_amount.equals("0")){
+            dis_amountll.visibility=View.GONE
+        }else if(discount_in_dp_amount.equals("0.0")){
+            dis_amountll.visibility=View.GONE
+
+        }else if (discount_in_dp_amount.equals("null")){
+            dis_amountll.visibility=View.GONE
+
+        }
 
 
         discountpercent.setText(discount_in_dp_percent)

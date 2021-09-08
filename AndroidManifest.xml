@@ -743,13 +743,13 @@
             <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
         -->
         <!-- Production -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" /> -->
+<!--         <meta-data-->
+<!--         android:name="com.google.android.maps.v2.API_KEY"-->
+<!--         android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" />-->
         <!-- debug -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyCQiNuWCD99Pxsdzxq1eKA7Iat8ElwoqwQ" /> &lt;!&ndash; kartik webnew &ndash;&gt; -->
+<!--         <meta-data-->
+<!--         android:name="com.google.android.maps.v2.API_KEY"-->
+<!--         android:value="AIzaSyCQiNuWCD99Pxsdzxq1eKA7Iat8ElwoqwQ" /> &lt;!&ndash; kartik webnew &ndash;&gt;-->
         <!-- <meta-data -->
         <!-- android:name="com.google.android.maps.v2.API_KEY" -->
         <!-- android:value="AIzaSyCVmQPKxFAFzarBGqhdIhVuPGLn-X3oAaQ" /> -->
@@ -765,10 +765,19 @@
         <!-- <meta-data -->
         <!-- android:name="com.google.android.maps.v2.API_KEY" -->
         <!-- android:value="AIzaSyCwG6XZPN4KhKkwKvK0rnXH12G5RWgyDpc" /> -->
-        <!-- Kartik Laptop -->
+
+
+<!--        GooglePlay-->
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCUQun-o2aWvFRyU73jo9wYIvhaI58IuXk" />
+                    android:name="com.google.android.maps.v2.API_KEY"
+                    android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" />
+
+
+
+        <!-- Kartik Laptop -->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.maps.v2.API_KEY"-->
+<!--            android:value="AIzaSyCUQun-o2aWvFRyU73jo9wYIvhaI58IuXk" />-->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> <!-- Defining our FirebaseMessagingService -->

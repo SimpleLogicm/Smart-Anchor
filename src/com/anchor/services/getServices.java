@@ -3234,6 +3234,8 @@ public class getServices {
                     // output.setText(data);
                 } catch (JSONException e) {
                     e.printStackTrace();
+
+                    Log.i("msg","msg "+e.toString());
                     dialog.dismiss();
                 }
 
@@ -3242,6 +3244,9 @@ public class getServices {
             } catch (JSONException e) {
                 e.printStackTrace();
                 e.printStackTrace();
+
+                Log.i("msg","msg "+e.toString());
+
                 //  finish();
                 dialog.dismiss();
             }

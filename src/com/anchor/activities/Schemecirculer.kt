@@ -326,10 +326,11 @@ class Schemecirculer : Activity() {
                                 // Global_Data.Custom_Toast(this, resources.getString(R.string.Sorry_No_Record_Found), "Yes")
                                 //finish().toString()
                                 //finish()
-                             //   onBackPressed()
+                                onBackPressed()
 
-                                val i = Intent(this@Schemecirculer, Schemecirculer::class.java)
-                                startActivity(i)
+//                                val i = Intent(this@Schemecirculer, Schemecirculer::class.java)
+//                                startActivity(i)
+//                                finish()
 
 
                             } else {

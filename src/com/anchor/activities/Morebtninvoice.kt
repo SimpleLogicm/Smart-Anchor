@@ -838,7 +838,14 @@ class Morebtninvoice : Activity() {
                                         toatamount.add(jsonObject.getString("amount").toFloat())
                                         list!!.add(Morebuttoninvoicemodel(jsonObject.getString("product"), jsonObject.getString("qty"), jsonObject.getString("unit_price"), jsonObject.getString("amount"), jsonObject.getString("order_number")))
 
-                                        list_product_name!!.add(jsonObject.getString("product"))
+
+                                        if (!list_product_name!!.contains(jsonObject.getString("product"))){
+                                            list_product_name!!.add(jsonObject.getString("product"))
+
+                                        }
+
+
+
 
                                         if (!list_ordor_no!!.contains(jsonObject.getString("order_number"))) {
 
