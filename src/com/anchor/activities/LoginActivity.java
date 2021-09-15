@@ -297,8 +297,10 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Amolfsp ");
 //        editText2.setText("amol12345");
 
-//		editText1.setText("Kartik");
+//		editText1.setText("dharmendra");
 //		editText2.setText("Kartik4882263");
+
+
 
         editText1.setText("Kartik");
         editText2.setText("Kartik0542438");
