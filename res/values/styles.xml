@@ -76,4 +76,11 @@
         <item name="android:textColor">@null</item>
         <item name="android:textSize">@null</item> </style>
 
+
+    <style name="HashtagView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
 </resources>

@@ -78,12 +78,18 @@ class RetailerTDCustomerList : Activity() {
     var state_code = ""
     var todo_rv: RecyclerView? = null
 
+    var radio_basic: RadioButton? = null
+    var radio_advance: RadioButton? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reatilertdcustomerlist)
 //        todo_rv = findViewById(R.id.rtocustomerlist)
 //        todo_rv!!.visibility=View.INVISIBLE
+        radio_basic = findViewById(R.id.radio_basic)
+        radio_advance = findViewById(R.id.radio_advance)
         context = RetailerTDCustomerList@ this
+
         cd = ConnectionDetector(context)
 
         try {
@@ -112,6 +118,8 @@ class RetailerTDCustomerList : Activity() {
         list_Cfilter.clear()
         CfilterspinnerMap.clear()
         list_Cfilter.add("Self")
+
+
 //        val contacts2 = dbvoc.getAllCityOrderbyname()
 //        for (cn in contacts2) {
 //            list_Cfilter.add(cn.getName())
@@ -130,6 +138,36 @@ class RetailerTDCustomerList : Activity() {
 //            //alertDialog.getWindow()!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 //            alertDialog.show()
 //        }
+
+        radio_basic!!.setOnClickListener {
+            //Toast.makeText(applicationContext, "Work in progress", Toast.LENGTH_SHORT).show()
+
+            val builder = AlertDialog.Builder(this@RetailerTDCustomerList)
+            val alertDialog = builder.create()
+            if (isUp) {
+                //alertDialog.dismiss()
+                slideDown(myView!!)
+                //todo_filter.setText("Slide up")
+            } else {
+
+
+
+                slideUp(myView!!)
+                //todo_filter.setText("Slide down")
+            }
+            isUp = !isUp
+
+//            intent = Intent(applicationContext, BasicActivity::class.java)
+//            startActivity(intent)
+        }
+
+        radio_advance!!.setOnClickListener {
+            intent = Intent(applicationContext, AdvanceActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
 
         done_btn.setOnClickListener {
 

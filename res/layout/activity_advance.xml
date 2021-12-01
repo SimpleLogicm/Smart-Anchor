@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".AdvanceActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="Filter"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"></TextView>
+
+        <RadioGroup
+            android:id="@+id/custom_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <RadioButton
+                android:id="@+id/radio_basic"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/radio_states_light_brown"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Basic"
+                android:textColor="@drawable/radio_text"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radio_advance"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_states_light_brown"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Advance"
+                android:textColor="@drawable/radio_text"
+                android:textSize="16sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_advance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_child"
+        android:layout_margin="15dp"
+        android:visibility="visible"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarThumbVertical="@null">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linear_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="State"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <RelativeLayout
+                        android:id="@+id/rel_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:text="Select State"
+                            android:textColor="@color/black"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_expand" />
+                    </RelativeLayout>
+
+                    <AutoCompleteTextView
+                        android:id="@+id/Product_Variant_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/layout_border"
+                        android:completionThreshold="1"
+                        android:drawableRight="@drawable/search_icon"
+                        android:ems="10"
+                        android:hint="Search States"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="15sp"
+                        android:visibility="gone">
+
+                        <requestFocus />
+                    </AutoCompleteTextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/spinner_recycleview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/Product_Variant_search"
+                        android:layout_margin="5dp"
+                        android:scrollbars="vertical"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/list_ok"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="20dp"
+                        android:background="@drawable/txt_dealer_type_fill_border"
+                        android:text="Done"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:visibility="gone">
+
+                    </Button>
+
+                    <com.anchor.util.TagContainerLayout
+                        android:id="@+id/txt_state_tag"
+                        style="@style/HashtagView"
+                        android:layout_marginBottom="0dp"
+                        android:padding="10dp"
+                        android:paddingBottom="0dp"
+                        app:container_background_color="#00000000"
+                        app:container_border_radius="0dp"
+                        app:container_gravity="center"
+                        app:horizontal_interval="10dp"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:tagBackground="@drawable/txt_dealer_type_fill_border"
+                        app:tagDrawableRight="@drawable/x"
+                        app:tag_border_width="1dp"
+                        app:tag_clickable="true"
+                        app:tag_corner_radius="2dp"
+                        app:tag_horizontal_padding="20dp"
+                        app:tag_padding="15dp"
+                        app:tag_text_color="@color/white"
+                        app:tag_text_size="12sp"
+                        app:tag_theme="none"
+                        android:visibility="gone"
+                        app:tag_vertical_padding="8dp"
+                        app:vertical_interval="10dp">
+
+                    </com.anchor.util.TagContainerLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border"
+                        android:visibility="gone">
+
+
+                        <Spinner
+                            android:id="@+id/state_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@null"
+                            android:entries="@array/state"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_expand" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_district"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="District"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border">
+
+
+                        <Spinner
+                            android:id="@+id/district_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@null"
+                            android:entries="@array/district"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_expand" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="City"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border">
+
+
+                        <Spinner
+                            android:id="@+id/city_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@null"
+                            android:entries="@array/city"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_expand" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_retailer_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Retailer Name"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border">
+
+
+                        <Spinner
+                            android:id="@+id/retailer_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@null"
+                            android:entries="@array/retailer"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_expand" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Mobile Number"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_aadhaar_card_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Aadhaar Card Number"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_aadhar_card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border"
+                        android:inputType="number"
+                        android:maxLength="12"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_pancard_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="PAN Card Number"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_pan_card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border"
+                        android:inputType="text"
+                        android:maxLength="10"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_gst_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="GST Number"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <EditText
+                        android:id="@+id/edt_gst_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border"
+                        android:inputType="text"
+                        android:maxLength="10"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_dealer_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Dealer Type"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_iaq"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/txt_dealer_type_fill_border"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="IAQ"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_lighting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/txt_dealer_type_border"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Lighting"
+                            android:textColor="#5d5d5d"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_power"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/txt_dealer_type_border"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Power"
+                            android:textColor="#5d5d5d"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_dealer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Dealer"
+                        android:textColor="#373737"
+                        android:textSize="16sp"
+                        android:textStyle="bold"></TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/layout_border">
+
+
+                        <Spinner
+                            android:id="@+id/dealer_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_gravity="center"
+                            android:background="@null"
+                            android:entries="@array/dealer"
+                            android:focusable="true"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_arrow_expand" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_apply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/txt_dealer_type_fill_border"
+                        android:text="Apply"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="18sp">
+                    </Button>
+
+                    <Button
+                        android:id="@+id/btn_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/txt_dealer_type_fill_border"
+                        android:text="Clear"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="18sp">
+                    </Button>
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

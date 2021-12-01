@@ -31,8 +31,7 @@
         android:layout_marginTop="5dp"
         android:hint="@string/Username"
         android:inputType="textPersonName"
-        android:paddingTop="15dp" >
-    </EditText>
+        android:paddingTop="15dp"></EditText>
 
     <EditText
         android:id="@+id/editText2"

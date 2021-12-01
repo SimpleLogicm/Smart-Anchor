@@ -1,6 +1,9 @@
 package com.anchor.activities;
 
 public class Local_Data {
+    public boolean isSelected;
+
+
     String cust_email;
     int version_code;
     String b_unit;
@@ -2519,5 +2522,12 @@ public class Local_Data {
         this.cust_email = cemail;
     }
 
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
 }

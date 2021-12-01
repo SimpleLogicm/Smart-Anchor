@@ -9,7 +9,7 @@
 
     <!-- Anchor PRODUCTion NEW URL -->
 
-<!--    <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
+    <!--    <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
 
     <!--Sub Dealer PRODUCTION-->
     <!--            <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->
@@ -25,6 +25,21 @@
         <item>Array Item Two</item>
         <item>Array Item Three</item>
     </string-array>
+
+    <string-array name="district">
+        <item>Select District</item>
+        <item>Array Mumbai</item>
+        <item>Array Thane</item>
+        <item>Array Kalyan</item>
+    </string-array>
+
+    <string-array name="retailer">
+        <item>Retailer A</item>
+        <item>Retailer B</item>
+        <item>Retailer C</item>
+        <item>Retailer D</item>
+    </string-array>
+
     <string-array name="city">
         <item>Array City</item>
         <item>Array Item One</item>
@@ -32,6 +47,12 @@
         <item>Array Item Three</item>
     </string-array>
 
+    <string-array name="dealer">
+        <item>Select Dealer</item>
+        <item>Dealer A</item>
+        <item>Dealer B</item>
+        <item>Dealer C</item>
+    </string-array>
 
     <string-array name="Filterinvoice">
         <item>Filter By </item>

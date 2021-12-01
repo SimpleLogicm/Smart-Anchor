@@ -137,6 +137,9 @@ public class SplashScreenActivity extends Activity {
 				public void run() {
 					finish();
 
+					//Intent i=new Intent(getApplicationContext(), AdvanceActivity.class);
+					//startActivity(i);
+
 					Intent i=new Intent(getApplicationContext(), LoginActivity.class);
 					i.putExtra("splash", "splash");
 					overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

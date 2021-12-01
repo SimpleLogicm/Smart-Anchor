@@ -246,16 +246,16 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginBottom="10dp"
         android:gravity="bottom"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:visibility="gone"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/buttonAddMOre"
@@ -270,9 +270,9 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
                 android:text="@string/Preview_Order"
-                android:textColor="#FFFFFF"
-                android:layout_marginLeft="5dp" />
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 
