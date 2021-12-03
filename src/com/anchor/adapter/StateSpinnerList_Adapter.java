@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anchor.activities.Local_Data;
 import com.anchor.activities.R;
 import com.anchor.model.Spiner_List_Model;
+import com.anchor.model.StateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,10 @@ import java.util.List;
 public class StateSpinnerList_Adapter extends
         RecyclerView.Adapter<StateSpinnerList_Adapter.ViewHolder> {
 
-    private ArrayList<Local_Data> stList ;
+    private List<StateModel> stList ;
     Context mcontext;
 
-    public StateSpinnerList_Adapter(Context mcontext, ArrayList<Local_Data> stList) {
+    public StateSpinnerList_Adapter(Context mcontext, List<StateModel> stList) {
 //        if (itemsData != null)
 //            stList.addAll(itemsData);
 //        this.mcontext = context;
@@ -74,7 +75,7 @@ public class StateSpinnerList_Adapter extends
 
 //        viewHolder.chkSelected.setText("Checkbox " + position);
 //        viewHolder.chkSelected.setChecked(stList.get(position).isSelected());
-        viewHolder.tvName.setText(stList.get(position).getStateName());
+        viewHolder.tvName.setText(stList.get(position).getName());
         viewHolder.chkSelected.setTag(position);
 
         viewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,7 @@ public class StateSpinnerList_Adapter extends
             public void onClick(View v) {
 
                 Integer pos = (Integer) viewHolder.chkSelected.getTag();
-                Toast.makeText(mcontext, stList.get(pos).getStateName() + " clicked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mcontext, stList.get(pos).getName() + " clicked!", Toast.LENGTH_SHORT).show();
 
                 if (stList.get(pos).isSelected()) {
                     stList.get(pos).setSelected(false);
@@ -102,7 +103,7 @@ public class StateSpinnerList_Adapter extends
         return stList.size();
     }
 
-    public ArrayList<Local_Data> getList() {
+    public List<StateModel> getList() {
         return stList;
     }
 
@@ -128,7 +129,7 @@ public class StateSpinnerList_Adapter extends
     }
 
     // method to access in activity after updating selection
-    public List<Local_Data> getSpiner_List_Modelist() {
+    public List<StateModel> getSpiner_List_Modelist() {
         return stList;
     }
 
