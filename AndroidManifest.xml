@@ -734,49 +734,21 @@
             android:name="cpm.simplelogic.helper.DataProvider_Customers"
             android:authorities="cpm.simplelogic.helper.ContentProviderData_Customers"
             android:exported="true" />
-        <!--
-         <service android:name=".LocationService" />
 
-                <receiver android:name="SendLocation">
-              <intent-filter>
-		        <action android:name="android.intent.action.BOOT_COMPLETED">
-		        </action>
-		     </intent-filter>
-
-         </receiver>
-
-            <service android:name="com.simplelogic.service.LocationServices" android:enabled="true"></service>
-        -->
         <!-- Production -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyDgJeUjxonciJgzLnzRs_R-Cud4yR4khFc" /> -->
+         <meta-data
+         android:name="com.google.android.maps.v2.API_KEY"
+         android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" />
         <!-- debug -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyCQiNuWCD99Pxsdzxq1eKA7Iat8ElwoqwQ" /> &lt;!&ndash; kartik webnew &ndash;&gt; -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyCVmQPKxFAFzarBGqhdIhVuPGLn-X3oAaQ" /> -->
-        <!-- UAT -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyBMkkJmnBQPEZXIU3UiTprkTLxFS7zz5oU" /> -->
-        <!-- UAT FOR MACBBOK -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyCZ0V_EyLti7MktVyiirh757xc1Uzwtb68" /> -->
-        <!-- UAT FOR Vinod MACBBOK -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyCwG6XZPN4KhKkwKvK0rnXH12G5RWgyDpc" /> -->
+<!--         <meta-data-->
+<!--         android:name="com.google.android.maps.v2.API_KEY"-->
+<!--         android:value="AIzaSyAfJm3dJKZ3H63cP89n4o1SX5KY5TBYU2I" /> &lt;!&ndash; kartik webnew &ndash;&gt;-->
+
         <!-- GooglePlay -->
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" /> <!-- Kartik Laptop -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
-        <!-- android:value="AIzaSyCUQun-o2aWvFRyU73jo9wYIvhaI58IuXk" /> -->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.maps.v2.API_KEY"-->
+<!--            android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" /> &lt;!&ndash; Kartik Laptop &ndash;&gt;-->
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> <!-- Defining our FirebaseMessagingService -->

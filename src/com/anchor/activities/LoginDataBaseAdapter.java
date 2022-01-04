@@ -327,7 +327,7 @@ public class LoginDataBaseAdapter {
             "( " + "ID" + " integer primary key autoincrement," + "code text, name text, description text, status text, created_at text, created_by text, updated_at text, updated_by text);";
 
     static final String DATABASE_CREATE_TABLE_PROMOTION_ACTIVITY = "CREATE TABLE IF NOT EXISTS " + "promotion_activity" +
-            "( " + "ID" + " integer primary key autoincrement," + "email text, event_id text, meet_in text, meet_out text,description text,in_latitude text,in_longitude,in_address text,out_latitude text,out_longitude,out_address text, created_at text, created_by text, updated_at text, updated_by text,image_url text);";
+            "( " + "ID" + " integer primary key autoincrement," + "email text, event_id text, meet_in text, meet_out text,description text,description1 text,description2 text,in_latitude text,in_longitude,in_address text,out_latitude text,out_longitude,out_address text, created_at text, created_by text, updated_at text, updated_by text,image_url text);";
 
     static final String DATABASE_CREATE_SUB_ORDERS = "CREATE TABLE IF NOT EXISTS " + "sub_orders" +
             "( " + "ID" + " integer primary key autoincrement," + "project_id text,order_id text, user_email text, sub_dealer_code text, sub_dealer_mobile text, sub_dealer_email text, dealer_id text, booked_at text, sub_dealer_shop_name text,latitude text,longitude text,order_type_code text,need_by_date text,shipment_pr_code text,name text,remarks text,signature text,image text,Ext_column1 text,Ext_column2 text,Ext_column3 text,Ext_column4 text " + ");";
@@ -3426,7 +3426,7 @@ public class LoginDataBaseAdapter {
     }
 
 
-    public void insert_promotion_activity_table_data(String email, String event_id, String meet_in, String meet_out, String description, String in_latitude, String in_longitude, String in_address, String out_latitude, String out_longitude, String out_address, String created_at, String created_by, String updated_at, String updated_by,String image_url) {
+    public void insert_promotion_activity_table_data(String email, String event_id, String meet_in, String meet_out, String description,String description1,String description2, String in_latitude, String in_longitude, String in_address, String out_latitude, String out_longitude, String out_address, String created_at, String created_by, String updated_at, String updated_by,String image_url) {
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("email", email);
@@ -3434,6 +3434,8 @@ public class LoginDataBaseAdapter {
         newValues.put("meet_in", meet_in);
         newValues.put("meet_out", meet_out);
         newValues.put("description", description);
+        newValues.put("description1", description1);
+        newValues.put("description2", description2);
         newValues.put("in_latitude", in_latitude);
         newValues.put("in_longitude", in_longitude);
         newValues.put("in_address", in_address);

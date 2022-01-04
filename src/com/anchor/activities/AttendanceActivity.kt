@@ -499,7 +499,7 @@ class AttendanceActivity : Activity(), DatePickerDialog.OnDateSetListener {
                             startActivity(i)
 //                             Toast toast =
 //                                     var toast :Toast?=null
-//                             Toast.makeText(Customer_Service.this,"Please Select City",
+//                             Toast.makeText(Customer_Service.this,"Please Select City"    ,
 //                             Toast.LENGTH_SHORT);
 //                              toast.setGravity(Gravity.CENTER, 0, 0);
 //                              toast.show();

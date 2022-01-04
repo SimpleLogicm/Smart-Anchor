@@ -80,6 +80,7 @@ class RetailerTDCustomerList : Activity() {
 
     var radio_basic: RadioButton? = null
     var radio_advance: RadioButton? = null
+    var todo_filter: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,13 +89,14 @@ class RetailerTDCustomerList : Activity() {
 //        todo_rv!!.visibility=View.INVISIBLE
         radio_basic = findViewById(R.id.radio_basic)
         radio_advance = findViewById(R.id.radio_advance)
+        todo_filter = findViewById(R.id.todo_filter)
         context = RetailerTDCustomerList@ this
 
         cd = ConnectionDetector(context)
 
         try {
-            id = intent.getStringExtra("id")
-            coardcolor = intent.getStringExtra("cardcolor")
+            id = intent.getStringExtra("id").toString()
+            coardcolor = intent.getStringExtra("cardcolor").toString()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -139,7 +141,7 @@ class RetailerTDCustomerList : Activity() {
 //            alertDialog.show()
 //        }
 
-        radio_basic!!.setOnClickListener {
+        todo_filter!!.setOnClickListener {
             //Toast.makeText(applicationContext, "Work in progress", Toast.LENGTH_SHORT).show()
 
             val builder = AlertDialog.Builder(this@RetailerTDCustomerList)
@@ -161,12 +163,12 @@ class RetailerTDCustomerList : Activity() {
 //            startActivity(intent)
         }
 
-        radio_advance!!.setOnClickListener {
-            intent = Intent(applicationContext, AdvanceActivity::class.java)
-            startActivity(intent)
-
-        }
-
+//        radio_advance!!.setOnClickListener {
+//            intent = Intent(applicationContext, AdvanceActivity::class.java)
+//            startActivity(intent)
+//
+//        }
+//
 
 
         done_btn.setOnClickListener {

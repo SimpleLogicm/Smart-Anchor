@@ -263,7 +263,7 @@ class RetailerTDList : Activity() {
 
                 })
         val requestQueue = Volley.newRequestQueue(applicationContext)
-        val socketTimeout = 300000 //30 seconds - change to what you want
+        val socketTimeout = 600000 //60 seconds - change to what you want
         val policy: RetryPolicy = DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
         jsObjRequest.retryPolicy = policy
         jsObjRequest.setShouldCache(false)

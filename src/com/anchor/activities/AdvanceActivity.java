@@ -79,10 +79,10 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
 
     ArrayList<Local_Data> snlist = new ArrayList<>();
     private List<String> selectedData;
-    ArrayList<String>StateName;
+    ArrayList<String> StateName;
 
     private int drop_value = 0;
-    String S_ID = "",State_Id,State_Code,State_name;
+    String S_ID = "", State_Id, State_Code, State_name;
     CardView card_view_advance;
     RadioButton radio_basic, radio_advance;
 
@@ -95,9 +95,10 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
     List<StateModel> products;
     private RequestQueue requestQueue;
 
-    List<StateModel> stateList=new ArrayList<>();
+    List<StateModel> stateList = new ArrayList<>();
     String localData;
     int i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +174,7 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
                 mTagContainer.setVisibility(View.GONE);
                 list_ok.setVisibility(View.VISIBLE);
                 spinner_recycleview.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -199,7 +201,7 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
             @Override
             public void onClick(View v) {
                 list = new ArrayList<>();
-                for ( i = 0; i < spinner_list_adapter.getList().size(); i++) {
+                for (i = 0; i < spinner_list_adapter.getList().size(); i++) {
                     if (spinner_list_adapter.getList().get(i).isSelected()) {
 
                         localData = spinner_list_adapter.getList().get(i).getName();
@@ -257,24 +259,23 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
 
                     } else {
 
-                               //onTagClick(i, localData);
-                                // mTagContainer.setVisibility(View.VISIBLE);
-                                card_view_advance.setVisibility(View.VISIBLE);
-                                rel_state.setVisibility(View.VISIBLE);
-                                linear_district.setVisibility(View.VISIBLE);
-                                linear_city.setVisibility(View.VISIBLE);
-                                linear_retailer_name.setVisibility(View.VISIBLE);
-                                linear_mobile_no.setVisibility(View.VISIBLE);
-                                linear_aadhaar_card_no.setVisibility(View.VISIBLE);
-                                linear_pancard_no.setVisibility(View.VISIBLE);
-                                linear_gst_no.setVisibility(View.VISIBLE);
-                                linear_dealer_type.setVisibility(View.VISIBLE);
-                                linear_dealer.setVisibility(View.VISIBLE);
-                                linear_button.setVisibility(View.VISIBLE);
-                                list_ok.setVisibility(View.GONE);
-                                spinner_recycleview.setVisibility(View.GONE);
-                            }
-
+                        //onTagClick(i, localData);
+                        // mTagContainer.setVisibility(View.VISIBLE);
+                        card_view_advance.setVisibility(View.VISIBLE);
+                        rel_state.setVisibility(View.VISIBLE);
+                        linear_district.setVisibility(View.VISIBLE);
+                        linear_city.setVisibility(View.VISIBLE);
+                        linear_retailer_name.setVisibility(View.VISIBLE);
+                        linear_mobile_no.setVisibility(View.VISIBLE);
+                        linear_aadhaar_card_no.setVisibility(View.VISIBLE);
+                        linear_pancard_no.setVisibility(View.VISIBLE);
+                        linear_gst_no.setVisibility(View.VISIBLE);
+                        linear_dealer_type.setVisibility(View.VISIBLE);
+                        linear_dealer.setVisibility(View.VISIBLE);
+                        linear_button.setVisibility(View.VISIBLE);
+                        list_ok.setVisibility(View.GONE);
+                        spinner_recycleview.setVisibility(View.GONE);
+                    }
 
 
                 }
@@ -318,9 +319,6 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
         retailer_spinner.setOnItemSelectedListener(this);
 
 
-
-
-
     }
 
     public void getStateName() {
@@ -339,7 +337,7 @@ public class AdvanceActivity extends Activity implements AdapterView.OnItemSelec
                         State_name = stats.getString("name");
 
                         stateList.add(new StateModel(stats.getString("id"),
-                                stats.getString("code"),stats.getString("name")));
+                                stats.getString("code"), stats.getString("name")));
                     }
                     spinner_recycleview.setLayoutManager(new LinearLayoutManager(AdvanceActivity.this));
                     spinner_list_adapter = new StateSpinnerList_Adapter(AdvanceActivity.this, stateList);

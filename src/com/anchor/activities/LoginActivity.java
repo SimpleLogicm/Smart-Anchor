@@ -1,4 +1,4 @@
-package com.anchor.activities;
+ package com.anchor.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -298,15 +298,18 @@ public class LoginActivity extends Activity {
 //        editText2.setText("amol12345");
 
 //		editText1.setText("dharmendra");
-//		editText2.setText("Kartik4882263");
+//		editText2.setText("Kartik4882263");                                                                                                                                                                                             
 
+//        editText1.setText("Tejashree");
+//		editText2.setText("Tejashree0061754");
 
+            editText1.setText("Kartik");
+//        editText2.setText("Kartik3649386"); //uat pass
 
-        editText1.setText("Kartik");
-        editText2.setText("Kartik0542438");
+        editText2.setText("Kartik6537219");//prodpass
 
 //        editText1.setText("Dhar");
-//        editText2.setText("Dharmendra2054564");
+//        editText2.setText("Dharmendra2054564" );
 
 //        editText1.setText("Sujit");
 //        editText2.setText("sujit123456");
@@ -1678,6 +1681,8 @@ public class LoginActivity extends Activity {
 
                 Log.d("user_dealer Service", SINOBJECT.toString());
 
+
+
                 jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, SINOBJECT, new com.android.volley.Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -1773,7 +1778,6 @@ public class LoginActivity extends Activity {
 
 
                 RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
-
                 int socketTimeout = 300000;//90 seconds - change to what you want
                 RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
                 jsObjRequest.setRetryPolicy(policy);

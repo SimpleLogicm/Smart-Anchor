@@ -324,7 +324,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Promotional_Model> getPromotional_Activity() {
         List<Promotional_Model> contactList1 = new ArrayList<Promotional_Model>();
         // Select All Query
-        String selectQuery1 = "SELECT email,event_id,meet_in,meet_out,description,in_latitude,in_longitude,in_address,image_url FROM promotion_activity";
+        String selectQuery1 = "SELECT email,event_id,meet_in,meet_out,description,description1,description2,in_latitude,in_longitude,in_address,image_url FROM promotion_activity";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery1, null);
@@ -339,10 +339,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     promotional_model.setMeet_in(cursor.getString(2));
                     promotional_model.setMeet_out(cursor.getString(3));
                     promotional_model.setDescription(cursor.getString(4));
-                    promotional_model.setLatitude(cursor.getString(5));
-                    promotional_model.setLongitude(cursor.getString(6));
-                    promotional_model.setAddress(cursor.getString(7));
-                    promotional_model.setImage_url(cursor.getString(8));
+                    promotional_model.setDescription1(cursor.getString(5));
+                    promotional_model.setDescription2(cursor.getString(6));
+                    promotional_model.setLatitude(cursor.getString(7));
+                    promotional_model.setLongitude(cursor.getString(8));
+                    promotional_model.setAddress(cursor.getString(9));
+                    promotional_model.setImage_url(cursor.getString(10));
 
 
                     // Adding contact to list

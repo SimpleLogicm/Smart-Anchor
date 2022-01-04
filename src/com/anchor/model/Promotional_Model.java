@@ -9,10 +9,28 @@ public class Promotional_Model implements Serializable {
     private String meet_in;
     private String meet_out;
     private String description;
+    private String description1;
+    private String description2;
     private String latitude;
     private String longitude;
     private String address;
     private String image_url;
+
+    public String getDescription1() {
+        return description1;
+    }
+
+    public void setDescription1(String description1) {
+        this.description1 = description1;
+    }
+
+    public String getDescription2() {
+        return description2;
+    }
+
+    public void setDescription2(String description2) {
+        this.description2 = description2;
+    }
 
     public String getImage_url() {
         return image_url;

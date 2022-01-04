@@ -5,11 +5,11 @@
     <!--        <string name="service_domain">http://150.242.140.105:8006/metal/api/v1/</string>-->
 
     <!-- Anchor UAT NEW URL -->
-    <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>
+<!--    <string name="service_domain">https://mumuatsmadms01.anchor-group.in/metal/api/v1/</string>-->
 
     <!-- Anchor PRODUCTion NEW URL -->
 
-    <!--    <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>-->
+        <string name="service_domain">https://ecart.anchor-group.in/metal/api/v1/</string>
 
     <!--Sub Dealer PRODUCTION-->
     <!--            <string name="service_domain_sub_dealer">http://125.22.54.139:8002/metal/api/v1/</string>-->

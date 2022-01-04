@@ -133,7 +133,7 @@ public class Promotion_Activity extends Activity {
     Spinner List_Of_Event_Spinner;
     Button ss_submit, ss_Reset;
     ImageView events_pick;
-    EditText pro_edit;
+    EditText pro_edit,edit1,edit2;
     ImageView in, out;
     RelativeLayout rlbtn;
     GPSTracker gps;
@@ -160,6 +160,8 @@ public class Promotion_Activity extends Activity {
         rlbtn = findViewById(R.id.rlbtn);
 
         pro_edit = findViewById(R.id.pro_edit);
+        edit1 = findViewById(R.id.edit1);
+        edit2 = findViewById(R.id.edit2);
         intime = findViewById(R.id.intime);
         indate = findViewById(R.id.indate);
         outtime = findViewById(R.id.outtime);
@@ -445,7 +447,24 @@ public class Promotion_Activity extends Activity {
                         toast.show();
 
 
-                    } else {
+                    } else if(pro_edit.getText().toString().length()==0){
+
+                        Toast toast = Toast.makeText(Promotion_Activity.this, "Please Enter Name",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }else if(edit1.getText().toString().length()==0){
+                        Toast toast = Toast.makeText(Promotion_Activity.this, "Please Enter Visit Brief",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }else if (edit2.getText().toString().length()==0){
+                        Toast toast = Toast.makeText(Promotion_Activity.this, "Please Enter Next Action Plan",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+                    else {
                         AlertDialog alertDialog = new AlertDialog.Builder(Promotion_Activity.this).create();
                         alertDialog.setTitle("Confirmation");
                         alertDialog.setMessage("Sure do you wish to submit the Promotional Activity ?");
@@ -506,6 +525,9 @@ public class Promotion_Activity extends Activity {
                         intime.setText("");
                         indate.setText("");
                         pro_edit.setText("");
+                        edit1.setText("");
+                        edit2.setText("");
+
                         List_Of_Event_Spinner.setSelection(0);
                         events_pick.setImageResource(R.drawable.vector_camera_icon);
                         in.setVisibility(View.INVISIBLE);
@@ -655,7 +677,7 @@ public class Promotion_Activity extends Activity {
                 ex.printStackTrace();
             }
 
-            loginDataBaseAdapter.insert_promotion_activity_table_data(Global_Data.GLOvel_USER_EMAIL, List_Of_Event_Spinner.getSelectedItem().toString(), inDateTime, outDateTime, pro_edit.getText().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.address, "", "", "", "", "", "", "",mCurrentPhotoPath);
+            loginDataBaseAdapter.insert_promotion_activity_table_data(Global_Data.GLOvel_USER_EMAIL, List_Of_Event_Spinner.getSelectedItem().toString(), inDateTime, outDateTime, pro_edit.getText().toString(), edit1.getText().toString(), edit2.getText().toString(), Global_Data.GLOvel_LATITUDE, Global_Data.GLOvel_LONGITUDE, Global_Data.address, "", "", "", "", "", "", "",mCurrentPhotoPath);
 
             local_notification();
         }
@@ -1742,6 +1764,8 @@ public class Promotion_Activity extends Activity {
                 multipart.addFormField("meet_in", inDateTime);
                 multipart.addFormField("meet_out", outDateTime);
                 multipart.addFormField("description", pro_edit.getText().toString());
+                multipart.addFormField("description1", edit1.getText().toString());
+                multipart.addFormField("description2", edit2.getText().toString());
                 multipart.addFormField("latitude", Global_Data.GLOvel_LATITUDE);
                 multipart.addFormField("longitude", Global_Data.GLOvel_LONGITUDE);
                 multipart.addFormField("address", Global_Data.address);
@@ -1784,6 +1808,8 @@ public class Promotion_Activity extends Activity {
                                     intime.setText("");
                                     indate.setText("");
                                     pro_edit.setText("");
+                                    edit1.setText("");
+                                    edit2.setText("");
                                     List_Of_Event_Spinner.setSelection(0);
                                     events_pick.setImageResource(R.drawable.vector_camera_icon);
                                     in.setVisibility(View.INVISIBLE);
@@ -1817,6 +1843,8 @@ public class Promotion_Activity extends Activity {
                                     intime.setText("");
                                     indate.setText("");
                                     pro_edit.setText("");
+                                    edit1.setText("");
+                                    edit2.setText("");
                                     List_Of_Event_Spinner.setSelection(0);
                                     events_pick.setImageResource(R.drawable.vector_camera_icon);
                                     in.setVisibility(View.INVISIBLE);
@@ -1980,6 +2008,17 @@ public class Promotion_Activity extends Activity {
                 if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getDescription()))) {
 
                     pro_edit.setText(cn.getDescription());
+
+                }
+
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getDescription1()))) {
+
+                    edit1.setText(cn.getDescription1());
+
+                }
+                if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(String.valueOf(cn.getDescription2()))) {
+
+                    edit2.setText(cn.getDescription2());
 
                 }
 
