@@ -19,10 +19,32 @@
         android:layout_marginBottom="5dp"
         />
 
+    <EditText
+        android:id="@+id/textserach"
+        android:layout_below="@+id/rtocustomerlist_filter"
+        android:layout_width="match_parent"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:drawableRight="@drawable/search_icon"
+        android:textSize="15dp"
+        android:hint="@string/Search_Subdealer" >
+
+    </EditText>
+
     <AutoCompleteTextView
         android:id="@+id/td_Retailer_search"
         android:layout_below="@+id/rtocustomerlist_filter"
         android:layout_width="match_parent"
+         android:visibility="gone"
         android:layout_gravity="center"
         android:inputType="textMultiLine"
         android:scrollbars="none"
@@ -50,7 +72,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/td_Retailer_search"
+        android:layout_below="@+id/textserach"
         android:layout_marginRight="10dp"
         android:onClick="onSlideViewButtonClick"
         android:src="@drawable/todo_filter"/>
@@ -74,6 +96,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"
+        android:layout_above="@+id/btns"
         android:clipToPadding="false" />
 
     <RelativeLayout
@@ -195,6 +218,37 @@
                 android:visibility="gone"></ProgressBar>
 
         </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btns"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:id="@+id/backbtn"
+            android:visibility="visible"
+            android:layout_width="60dp"
+            android:background="@drawable/backarrr"
+            android:layout_height="match_parent">
+
+        </ImageView>
+        <ImageView
+            android:id="@+id/nextbtn"
+            android:layout_width="60dp"
+            android:background="@drawable/nextarr"
+            android:visibility="visible"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+        </ImageView>
 
     </RelativeLayout>
 

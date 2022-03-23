@@ -321,7 +321,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     // Getting All Local_Data
-    public List<Promotional_Model> getPromotional_Activity() {
+    public List<Promotional_Model>getPromotional_Activity() {
         List<Promotional_Model> contactList1 = new ArrayList<Promotional_Model>();
         // Select All Query
         String selectQuery1 = "SELECT email,event_id,meet_in,meet_out,description,description1,description2,in_latitude,in_longitude,in_address,image_url FROM promotion_activity";

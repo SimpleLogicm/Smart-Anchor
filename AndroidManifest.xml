@@ -736,13 +736,14 @@
             android:exported="true" />
 
         <!-- Production -->
-         <meta-data
-         android:name="com.google.android.maps.v2.API_KEY"
-         android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" />
-        <!-- debug -->
 <!--         <meta-data-->
 <!--         android:name="com.google.android.maps.v2.API_KEY"-->
-<!--         android:value="AIzaSyAfJm3dJKZ3H63cP89n4o1SX5KY5TBYU2I" /> &lt;!&ndash; kartik webnew &ndash;&gt;-->
+<!--         android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" />-->
+
+        <!-- debug -->
+         <meta-data
+         android:name="com.google.android.maps.v2.API_KEY"
+         android:value="AIzaSyAfJm3dJKZ3H63cP89n4o1SX5KY5TBYU2I" /> <!-- kartik webnew -->
 
         <!-- GooglePlay -->
 <!--        <meta-data-->

@@ -198,7 +198,7 @@ class DCRActivity : Activity() {
 
         iv_filter.setOnClickListener {
             val i = Intent(this@DCRActivity, ReportFilterActivity::class.java)
-           // getdata("","","")
+            // getdata("","","")
             startActivity(i)
         }
 
@@ -360,8 +360,8 @@ class DCRActivity : Activity() {
 
         if (isInternetPresent) {
 //            var inten = Intent()
-             bundle =intent.extras
-           // val inten = getIntent();
+            bundle =intent.extras
+            // val inten = getIntent();
             //val myValue = inten.getStringExtra("key")
             DcrFrom = bundle?.getString("DCR_FROMDATE")
             DcrTo = bundle?.getString("DCR_TODATE")
@@ -574,9 +574,9 @@ class DCRActivity : Activity() {
                         try {
                             if (Check_Null_Value.isNotNullNotEmptyNotWhiteSpaceOnlyByJava(cities.getString(i))) {
                                 run {
-                                  //  jsonObject.getString("user_name")
-                                 //   Global_Data.usernameArray.add(jsonObject.getString("user_name"))
-                                //    Global_Data.datear.add(jsonObject.getString("date"))
+                                    //  jsonObject.getString("user_name")
+                                    //   Global_Data.usernameArray.add(jsonObject.getString("user_name"))
+                                    //    Global_Data.datear.add(jsonObject.getString("date"))
                                     datestart=jsonObject.getString("from_date")
                                     dateend=jsonObject.getString("to_date")
 
@@ -1055,7 +1055,7 @@ class DCRActivity : Activity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
 
-          //  FileUtils.openFile(mContext, File(dest))
+            //  FileUtils.openFile(mContext, File(dest))
 
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(applicationContext, "No application found which can open the file", Toast.LENGTH_SHORT).show()
