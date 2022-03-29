@@ -303,9 +303,14 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Tejashree");
 //		editText2.setText("Tejashree0061754");
 //
-        editText1.setText("Kartik");
-        editText2.setText("Kartik3649386"); //uat pass
+       // editText1.setText("Kartik");
+      //  editText2.setText("Kartik3649386"); //uat pass
      //   editText2.setText("Kartik6537219");//prodpass
+
+
+
+        editText1.setText("Dhar");
+        editText2.setText("Dharmendra2666249");// for UAT
 
 //        editText1.setText("Dhar");
 //        editText2.setText("Dharmendra2054564" );
