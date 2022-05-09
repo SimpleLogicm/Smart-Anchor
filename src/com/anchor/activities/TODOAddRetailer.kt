@@ -1,4 +1,4 @@
-package com.anchor.activities
+ package com.anchor.activities
 
 import android.app.Activity
 import android.app.AlertDialog

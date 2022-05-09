@@ -745,7 +745,7 @@
          android:name="com.google.android.maps.v2.API_KEY"
          android:value="AIzaSyAfJm3dJKZ3H63cP89n4o1SX5KY5TBYU2I" /> <!-- kartik webnew -->
 
-        <!-- GooglePlay -->
+        <!-- GooglePlay  dont use -->
 <!--        <meta-data-->
 <!--            android:name="com.google.android.maps.v2.API_KEY"-->
 <!--            android:value="AIzaSyD0SmpAfqqidnRjeMfmxWnD179FWg6LiQw" /> &lt;!&ndash; Kartik Laptop &ndash;&gt;-->

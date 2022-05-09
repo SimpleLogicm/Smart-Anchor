@@ -2915,7 +2915,7 @@ class TodoEditCustomer : Activity() {
             }
         } catch (e: java.lang.Exception) {
             // TODO: handle exception
-            Log.e("DATA", e.message)
+            e.message?.let { Log.e("DATA", it) }
         }
     }
 
