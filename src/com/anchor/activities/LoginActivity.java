@@ -11,7 +11,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -26,11 +25,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.Settings;
-
-import androidx.annotation.Nullable;
 import androidx.multidex.MultiDex;
 import androidx.core.content.ContextCompat;
-
 import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.util.Base64;
@@ -72,12 +68,6 @@ import com.github.javiersantos.appupdater.AppUpdaterUtils;
 import com.github.javiersantos.appupdater.enums.AppUpdaterError;
 import com.github.javiersantos.appupdater.objects.Update;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.InstallStateUpdatedListener;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -119,13 +109,10 @@ import cpm.simplelogic.helper.CheckNullValue;
 import cpm.simplelogic.helper.GPSTracker;
 
 public class LoginActivity extends Activity {
-    private AppUpdateManager appUpdateManager;
-    private static final int RC_APP_UPDATE = 100;
-    private InstallStateUpdatedListener installStateUpdatedListener;
     ProgressDialog progress;
     private Bitmap bitmap = null;
     Handler h;
-    String abc = "";
+    String abc="";
     public static final String Code = "codeKey";
     String devid, usr_name, pwd, usr_email;
     ArrayList<HashMap<String, String>> arraylist1, arraylist2;
@@ -157,7 +144,7 @@ public class LoginActivity extends Activity {
     public static String CHANNEL_ID = "SmartAnchor";
     String CHANNEL_NAME = "SmartAnchor";
     String CHANNEL_DESC = "Anchor App";
-    private int passwordNotVisible = 1;
+    private int passwordNotVisible=1;
     static int otp_hit = 0;
     Dialog dialognew;
 
@@ -165,10 +152,10 @@ public class LoginActivity extends Activity {
     String otp_verify_time_flag = "";
     HashMap<String, Integer> otp_hit_validator = new HashMap<String, Integer>();
 
-    Button otp_submit, otp_Resend, otp_Cancel;
+    Button otp_submit,otp_Resend,otp_Cancel;
     ProgressBar otp_progressBarar;
     LinearLayout otp_bottom_layout;
-    EditText sub_otp, otp_user_name;
+    EditText sub_otp,otp_user_name;
     TextView otp_time_remaining;
     CountDownTimer timer;
     PlayService_Location PlayServiceManager;
@@ -196,21 +183,13 @@ public class LoginActivity extends Activity {
             }
         });
 
-        try {
+        try
+        {
             PlayServiceManager = new PlayService_Location(LoginActivity.this);
-        } catch (Exception ex) {
+        }catch (Exception ex)
+        {
             ex.printStackTrace();
         }
-
-        //Auto_app _upadte
-        appUpdateManager = AppUpdateManagerFactory.create(this);
-
-        checkforupade();
-
-
-
-        /////
-
 
         //creating notification channel if android version is greater than or equals to oreo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -319,7 +298,7 @@ public class LoginActivity extends Activity {
 //        editText2.setText("amol12345");
 
 //		editText1.setText("dharmendra");
-//		editText2.setText("Kartik4882263");                                                                                                                                                                                             
+//		editText2.setText("Kartik4882263");
 
 //        editText1.setText("Tejashree");
 //		editText2.setText("Tejashree0061754");
@@ -327,6 +306,8 @@ public class LoginActivity extends Activity {
 //        editText1.setText("Kartik");
 //        editText2.setText("Kartik3649386"); //uat pass
 //         editText2.setText("Kartik6537219");//prodpass
+
+
 
 
 //
@@ -367,8 +348,8 @@ public class LoginActivity extends Activity {
                 final int DRAWABLE_RIGHT = 2;
                 final int DRAWABLE_BOTTOM = 3;
 
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (editText2.getRight() - editText2.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (editText2.getRight() - editText2.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                         View view = LoginActivity.this.getCurrentFocus();
                         if (view != null) {
@@ -377,12 +358,12 @@ public class LoginActivity extends Activity {
                         }
                         //autoCompleteTextView1.setText("");
                         if (passwordNotVisible == 1) {
-                            editText2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_visibility_black_24dp), null);
+                            editText2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_visibility_black_24dp), null);
                             editText2.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                             passwordNotVisible = 0;
 
                         } else {
-                            editText2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_visibility_off_black_24dp), null);
+                            editText2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_visibility_off_black_24dp), null);
                             editText2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                             passwordNotVisible = 1;
 
@@ -428,13 +409,15 @@ public class LoginActivity extends Activity {
                     Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else {
+                }
+                else
+                {
                     List<Local_Data> conta = dbvoc.getSyncDate(editText1.getText().toString().trim());
                     for (Local_Data cn1 : conta) {
                         current_date = cn1.getCur_date();
                     }
                     SharedPreferences pref_devid = getSharedPreferences("SimpleLogic", Context.MODE_PRIVATE);
-                    String TCODE = pref_devid.getString("TCODE", "");
+                    String  TCODE = pref_devid.getString("TCODE", "");
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
                     String formattedDate = df.format(c.getTime());
@@ -445,16 +428,21 @@ public class LoginActivity extends Activity {
                         try {
                             date1 = sdf.parse(current_date);
                             Date to_ddd = df.parse(formattedDate);
-                            if (to_ddd.compareTo(date1) > 0) {
+                            if (to_ddd.compareTo(date1) > 0)
+                            {
                                 // dbvoc.update_user_createDate(formattedDate, Global_Data.GLOvel_USER_EMAIL);
                                 showDialogs(editText1.getText().toString().trim());
-                            } else {
+                            }
+                            else
+                            {
                                 requestGPSPermissionsignlogin();
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                    } else {
+                    }
+                    else
+                    {
 
                         //dbvoc.update_user_createD(formattedDate, Global_Data.GLOvel_USER_EMAIL);
                         showDialogs(editText1.getText().toString().trim());
@@ -464,24 +452,6 @@ public class LoginActivity extends Activity {
 
             }
         });
-    }
-
-    private void checkforupade() {
-        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new com.google.android.play.core.tasks.OnSuccessListener<AppUpdateInfo>() {
-            @Override
-            public void onSuccess(AppUpdateInfo result) {
-                if (result.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, LoginActivity.this, RC_APP_UPDATE);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
-                        Log.i("msg", "msg " + e.toString());
-                    }
-
-                }
-            }
-        });
-
     }
 
     //Check internet connection
@@ -726,7 +696,7 @@ public class LoginActivity extends Activity {
             // TODO Auto-generated method stub
             try {
 				/*HttpClient httpclient = new DefaultHttpClient();
-				 
+
 				HttpResponse response = httpclient.execute(new HttpGet("http://114.143.196.137/MS/XML/user.xml"));
 	             HttpEntity entity = response.getEntity();
 				 String responseString = EntityUtils.toString(entity, "UTF-8");
@@ -740,7 +710,7 @@ public class LoginActivity extends Activity {
 						registredUser=u;
 						break;
 					}
-					
+
 				}*/
 
                 registredUser = new User("1", 1, "02/02/2014", "911305401754123", "kirti.k@simplelogic.in",
@@ -772,6 +742,9 @@ public class LoginActivity extends Activity {
     }
 
 
+
+
+
     @Override
     protected void onResume() {
         // TODO Auto-generated method stub
@@ -785,20 +758,9 @@ public class LoginActivity extends Activity {
 //        appUpdater.start();
 
 
-        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new com.google.android.play.core.tasks.OnSuccessListener<AppUpdateInfo>() {
-            @Override
-            public void onSuccess(AppUpdateInfo result) {
 
-                if (result.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(result, AppUpdateType.IMMEDIATE, LoginActivity.this, RC_APP_UPDATE);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
-                    }
 
-                }
-            }
-        });
+
 
 
 //
@@ -867,6 +829,11 @@ public class LoginActivity extends Activity {
 //
 
 
+
+
+
+
+
         // Reading all
 //        List<Local_Data> contacts = dbvoc.getAllMain();
 //        for (Local_Data cn : contacts) {
@@ -879,7 +846,6 @@ public class LoginActivity extends Activity {
 //
 //        }
     }
-
 
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
@@ -910,7 +876,7 @@ public class LoginActivity extends Activity {
             //final String Device_id = pref_devid.getString("devid", "");
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "menus/registration?user_name=" + URLEncoder.encode(user_name, "UTF-8");
+            String url = domain+ "menus/registration?user_name=" + URLEncoder.encode(user_name, "UTF-8");
 
             Log.i("volley", "url: " + url);
             Log.i("volley", "user_name: " + user_name);
@@ -969,6 +935,7 @@ public class LoginActivity extends Activity {
                                             jsonObject.getString("first_name"), jsonObject.getString("last_name"), "", "", "", "", "",
                                             "", "", "", jsonObject.getString("address"), "", "", jsonObject.getString("BU_heads"), "", "", jsonObject.getString("emp_code"));
                                 }
+
 
 
                                 SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
@@ -1407,6 +1374,7 @@ public class LoginActivity extends Activity {
     }
 
 
+
     private void requestGPSPermissionsigna() {
 
         Dexter.withActivity(this)
@@ -1454,7 +1422,7 @@ public class LoginActivity extends Activity {
                 .check();
     }
 
-    private void requestGPSPermissionsignlogin() {
+    private void   requestGPSPermissionsignlogin() {
 
         Dexter.withActivity(this)
                 .withPermissions(
@@ -1558,6 +1526,7 @@ public class LoginActivity extends Activity {
     }
 
 
+
     public void showDialogs(String user_name) {
         dialognew = new Dialog(LoginActivity.this);
         dialognew.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -1615,9 +1584,12 @@ public class LoginActivity extends Activity {
                         sub_otp.setVisibility(View.GONE);
                         sub_otp.setText("");
                         otp_verify_time_flag = "";
-                    } else {
+                    }
+                    else
+                    {
                         otp_verify_time_flag = "";
                     }
+
 
 
                 }
@@ -1635,7 +1607,9 @@ public class LoginActivity extends Activity {
                     Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else {
+                }
+                else
+                {
                     otp_progressBarar.setVisibility(View.VISIBLE);
                     otp_bottom_layout.setVisibility(View.GONE);
 
@@ -1668,11 +1642,15 @@ public class LoginActivity extends Activity {
                     Toast toast = Toast.makeText(LoginActivity.this, "Please Enter UserName", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else if (CheckNullValue.findNullValue(sub_otp.getText().toString().trim()) == true) {
+                }
+                else
+                if (CheckNullValue.findNullValue(sub_otp.getText().toString().trim()) == true) {
                     Toast toast = Toast.makeText(LoginActivity.this, "Please Enter OTP", Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
-                } else {
+                }
+                else
+                {
                     otp_progressBarar.setVisibility(View.VISIBLE);
                     otp_bottom_layout.setVisibility(View.GONE);
 
@@ -1683,7 +1661,7 @@ public class LoginActivity extends Activity {
                     editor.commit();
 
 
-                    submit_OTP(otp_user_name.getText().toString(), sub_otp.getText().toString(), dialognew);
+                    submit_OTP(otp_user_name.getText().toString(), sub_otp.getText().toString(),dialognew);
                 }
 
 
@@ -1714,7 +1692,7 @@ public class LoginActivity extends Activity {
 
 
                 String domain = getResources().getString(R.string.service_domain);
-                String url = domain + "menus/generate_otp";
+                String url = domain+"menus/generate_otp";
 
                 Log.d("Server url", "Server url" + url);
 
@@ -1723,6 +1701,7 @@ public class LoginActivity extends Activity {
                 SINOBJECT.put("user_name", User_Name);
 
                 Log.d("user_dealer Service", SINOBJECT.toString());
+
 
 
                 jsObjRequest = new JsonObjectRequest(Request.Method.POST, url, SINOBJECT, new com.android.volley.Response.Listener<JSONObject>() {
@@ -1778,6 +1757,9 @@ public class LoginActivity extends Activity {
                             otp_progressBarar.setVisibility(View.GONE);
                             otp_bottom_layout.setVisibility(View.VISIBLE);
                         }
+
+
+
 
 
                     }
@@ -1842,7 +1824,7 @@ public class LoginActivity extends Activity {
         try {
 
             String domain = getResources().getString(R.string.service_domain);
-            String url = domain + "menus/verify_otp?user_name=" + URLEncoder.encode(user_name, "UTF-8") + "&otp=" + otp;
+            String url = domain+"menus/verify_otp?user_name=" + URLEncoder.encode(user_name, "UTF-8")+"&otp="+otp;
             Log.i("volley", "url: " + url);
             Log.i("volley", "user_name: " + user_name);
             Log.i("volley", "otp: " + otp);
@@ -1868,8 +1850,9 @@ public class LoginActivity extends Activity {
                             //List<Local_Data> conta = dbvoc.getAllMain();
                             List<Local_Data> conta = dbvoc.getSyncDate(user_name);
 
-                            if (conta.size() > 0) {
-                                Log.d("Existing User", "Existing U");
+                            if(conta.size() > 0)
+                            {
+                                Log.d("Existing User","Existing U");
                                 SharedPreferences spf = LoginActivity.this.getSharedPreferences("SimpleLogic", 0);
                                 SharedPreferences.Editor editor = spf.edit();
                                 editor.putString("TCODE", "Yes");
@@ -1884,21 +1867,26 @@ public class LoginActivity extends Activity {
                                 timer.cancel();
 
 
+
                                 Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
                                 dialogdis.dismiss();
 
 
-                            } else {
-                                Log.d("New User", "New U");
-                                Log.d("Existing User", "Existing U");
+
+                            }
+                            else
+                            {
+                                Log.d("New User","New U");
+                                Log.d("Existing User","Existing U");
                                 timer.cancel();
                                 getserviceData(user_name, dialogdis);
                             }
 
 
-                        } else {
+                        }
+                        else {
                             otp_progressBarar.setVisibility(View.GONE);
                             otp_bottom_layout.setVisibility(View.VISIBLE);
                             Toast toast = Toast.makeText(LoginActivity.this, response_result, Toast.LENGTH_LONG);
@@ -1914,6 +1902,7 @@ public class LoginActivity extends Activity {
                         otp_bottom_layout.setVisibility(View.VISIBLE);
 
                     }
+
 
 
                 }
@@ -1947,27 +1936,7 @@ public class LoginActivity extends Activity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if (requestCode == RC_APP_UPDATE && resultCode != RESULT_OK) {
-            Toast.makeText(this, "Can't Cancel", Toast.LENGTH_LONG).show();
-
-            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-            try {
-               // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                checkforupade();
-//               startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-            } catch (android.content.ActivityNotFoundException anfe) {
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void unregisterInstallStateUpdListener() {
-        if (appUpdateManager != null && installStateUpdatedListener != null)
-            appUpdateManager.unregisterListener(installStateUpdatedListener);
-    }
 
 
 }
